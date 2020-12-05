@@ -1,0 +1,19 @@
+{
+  "name": "skolplattformen-app",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "author": "Christian Landgren <christian@landgren.nu>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

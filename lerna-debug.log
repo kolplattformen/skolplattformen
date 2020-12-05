@@ -1,0 +1,20 @@
+0 silly argv { _: [ 'create' ],
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': 'lerna',
+0 silly argv   name: 'app' }
+1 notice cli v3.22.1
+2 verbose rootPath /Users/cln/src/skolplattformen
+3 warn ENOREMOTE No git remote found, skipping repository property
+4 error Error: canceled
+4 error     at Interface.<anonymous> (/Users/cln/.nvm/versions/node/v10.11.0/lib/node_modules/lerna/node_modules/read/lib/read.js:66:13)
+4 error     at Interface.emit (events.js:182:13)
+4 error     at Interface._ttyWrite (readline.js:783:16)
+4 error     at ReadStream.onkeypress (readline.js:168:10)
+4 error     at ReadStream.emit (events.js:182:13)
+4 error     at emitKeys (internal/readline.js:424:14)
+4 error     at emitKeys.next (<anonymous>)
+4 error     at ReadStream.onData (readline.js:1022:36)
+4 error     at ReadStream.emit (events.js:182:13)
+4 error     at addChunk (_stream_readable.js:283:12)
+4 error     at readableAddChunk (_stream_readable.js:264:11)
+4 error     at ReadStream.Readable.push (_stream_readable.js:219:10)
