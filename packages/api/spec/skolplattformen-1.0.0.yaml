@@ -11,15 +11,38 @@ info:
     # Introduction
     This API is a wrapper on top of the SOA layer behind **Skolplattformen** which is the mandatory platform for schools in Stockholm Stad. 
     
+    # Get Started
+    Generate code examples from the OpenAPI yaml (press Download above) or use this as a start:
+    ```
+        const socialSecurityNumber = '121212121212'
+        const baseUrl = 'https://skolplattformen-api.snowflake.cash'
+        const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
+        
+        // Now start BankID and authorize, when you do - your jwt token will be ready
+        const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`).then(res => res.json())
+        const headers = {authorization: 'Bearer ' + jwt}
+
+        // Use the jwt token as bearer token in your requests
+        const children = await fetch(`${baseUrl}/children`, {headers}).then(res => res.json())
+
+        // Get some details
+        const childId = children[0].id
+        const child = await fetch(`${baseUrl}/children/${childId}`, {headers}).then(res => res.json())
+        const news = await fetch(`${baseUrl}/children/${childId}/news`, {headers}).then(res => res.json())
+        const calendar = await fetch(`${baseUrl}/children/${childId}/calendar`, {headers}).then(res => res.json())
+
+    ```
+
     # Disclaimers
     I have no affiliate with the Stockholm Stad organisation or any part of any development team for the city. Therefore things may change and suddenly stop working and I have no way of knowing or even a way of contacting you. My motivation for creating this API is purely for personal reasons. I want to develop apps for my own use and have no interest to go deep in the underlying SDK every day so I'm using this API as a way of creating a little bit of sanity and conform the sometimes swinglish structure into something a little bit more consistant. 
     
     **Please let me know if you find anything useful and I'll add it**. /Hopefully I can find a reasonable way to release this sourcecode as open source soon./
 
+
     
   contact:
     name: Christian Landgren
-    email: christian@landgren.nu
+    email: christian.landgren@iteam.se
     url: https://github.com/irony
   x-logo:
     url: '/logo.png'
@@ -118,6 +141,8 @@ paths:
   /children/{childId}/news:
     get:
       summary: News
+      operationId: getNews
+
       description: Get list of news items for this child
       tags:
         - Children
@@ -139,6 +164,8 @@ paths:
   /children/{childId}/calendar:
     get:
       summary: Calendar
+      operationId: getCalendar
+
       description: Get list of calendar events
       security:
         - bearerAuth: []
@@ -161,6 +188,8 @@ paths:
   /children/{childId}/notifications:
     get:
       summary: Notifications
+      operationId: getNotifications
+
       description: Get list of notifications for this child
       security:
         - bearerAuth: []
@@ -179,6 +208,8 @@ paths:
   /children/{childId}/menu:
     get:
       summary: Lunch Menu
+      operationId: getMenu
+
       description: Get list of news items for this child
       security:
         - bearerAuth: []
@@ -197,6 +228,8 @@ paths:
   /children/{childId}/schedule:
     get:
       summary: Schedule
+      operationId: getSchedule
+
       description: Get list of news items for this child
       security:
         - bearerAuth: []
@@ -212,8 +245,6 @@ paths:
       responses:
         '200':
           description: OK
-  
-
 components:
   schemas:
   

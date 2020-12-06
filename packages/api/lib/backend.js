@@ -62,10 +62,10 @@ module.exports = {
   login,
   waitForToken,
   getChildren,
+  getChildById,
   getNews,
   getCalendar,
   getNotifications,
   getMenu,
-  getSchedule,
-  getChildById
+  getSchedule
 }

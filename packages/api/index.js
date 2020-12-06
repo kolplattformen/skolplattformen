@@ -36,28 +36,53 @@ api.register({
     const token = await backend.login(c.request.query.socialSecurityNumber)
     return res.status(200).json(token)
   },
-
   waitForToken: async (c, req, res) => {
     const order = c.request.params.order
     const cookie = await backend.waitForToken({order})
     const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET || 'secret')
     return res.status(200).json(jwtToken)
   },
-
   getChildren: async (c, req, res) => {
     const cookie = c.security.bearerAuth
     const children = await backend.getChildren(cookie)
     return res.status(200).json(children)
   },
-
   getChildById: async (c, req, res) => {
     const cookie = c.security.bearerAuth
     const childId = c.request.params.order
     const child = await backend.getChildById(childId, cookie)
     return res.status(200).json(child)
   },
-
-
+  getNews: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const childId = c.request.params.order
+    const news = await backend.getNews(childId, cookie)
+    return res.status(200).json(news)
+  },
+  getCalendar: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const childId = c.request.params.order
+    const calendar = await backend.getCalendar(childId, cookie)
+    return res.status(200).json(calendar)
+  },
+  getNotifications: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const childId = c.request.params.order
+    const notifications = await backend.getNotifications(childId, cookie)
+    return res.status(200).json(notifications)
+  },
+  getMenu: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const childId = c.request.params.order
+    const menu = await backend.getMenu(childId, cookie)
+    return res.status(200).json(menu)
+  },
+  getSchedule: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const childId = c.request.params.order
+    const schedule = await backend.getSchedule(childId, cookie)
+    return res.status(200).json(schedule)
+  }
   
 })
 

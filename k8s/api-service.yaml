@@ -49,4 +49,4 @@ spec:
       paths:
       - backend:
           serviceName: skolplattformen-api
-          servicePort: 8000
+          servicePort: 9000
