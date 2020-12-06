@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: skolplattformen
+build:
+  artifacts:
+  - image: irony/skolplattformen-api
+    context: packages/api
+    sync:
+      infer:
+      - 'packages/api/**/*.js'
+deploy:
+  kubectl:
+    manifests:
+    - k8s/api-service.yaml

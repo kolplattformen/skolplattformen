@@ -1,0 +1,330 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://api.skolplattformen.nu/
+info:
+  version: "1.0.0"
+  title: $kolplattformen API
+  description: |
+    This is a first try to extract a usable API based on the expensive SOA crap that is called Skolplattformen in Stockholm
+
+    # Introduction
+    This API is a wrapper on top of the SOA layer behind **Skolplattformen** which is the mandatory platform for schools in Stockholm Stad. 
+    
+    # Disclaimers
+    I have no affiliate with the Stockholm Stad organisation or any part of any development team for the city. Therefore things may change and suddenly stop working and I have no way of knowing or even a way of contacting you. My motivation for creating this API is purely for personal reasons. I want to develop apps for my own use and have no interest to go deep in the underlying SDK every day so I'm using this API as a way of creating a little bit of sanity and conform the sometimes swinglish structure into something a little bit more consistant. 
+    
+    **Please let me know if you find anything useful and I'll add it**. /Hopefully I can find a reasonable way to release this sourcecode as open source soon./
+
+    
+  contact:
+    name: Christian Landgren
+    email: christian@landgren.nu
+    url: https://github.com/irony
+  x-logo:
+    url: '/logo.png'
+    altText: $kolplattformen
+
+
+
+paths:
+  /login:
+    post:
+      summary: Login
+      operationId: login
+      description: Get auth cookie for BankID login. This endpoint will initiate a login and require the user to login through BankID. When finished you will recieve a token that can be sent to the status endpoint to recieve a jwt token when authorized through BankID.
+      tags:
+        - Login
+      parameters:
+        - name: socialSecurityNumber
+          in: query
+          description: Swedish social security number connected to BankID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Auth"
+  /login/{order}/jwt:
+    get:
+      summary: Wait for Jwt token
+      operationId: waitForToken
+      description: Recieve the status of the order token after the user has approved the authorization request in the BankID app, this endpoint will return a jwt token that can be used for the subsequential requests. This request will wait up until two minutes for a response.
+      tags:
+        - Login
+      parameters:
+        - name: order
+          in: path
+          description: Order token received from the /login endpoint 
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthToken"
+        '408':
+          description: Timeout
+  /children:
+    get:
+      operationId: getChildren
+      summary: List Children
+      security:
+        - bearerAuth: []
+      description: >-
+        Receive a list of children available through the API to the logged in user
+        Important to only show children you are eligble to see :)
+      tags:
+        - Children
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Children"
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /children/{childId}:
+     get:
+      operationId: getChildById
+      summary: Child
+      description: Get all info for this this child
+      security:
+      - bearerAuth: []
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChildAll"
+  /children/{childId}/news:
+    get:
+      summary: News
+      description: Get list of news items for this child
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/News"
+          
+  /children/{childId}/calendar:
+    get:
+      summary: Calendar
+      description: Get list of calendar events
+      security:
+        - bearerAuth: []
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Calendar"
+  /children/{childId}/notifications:
+    get:
+      summary: Notifications
+      description: Get list of notifications for this child
+      security:
+        - bearerAuth: []
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /children/{childId}/menu:
+    get:
+      summary: Lunch Menu
+      description: Get list of news items for this child
+      security:
+        - bearerAuth: []
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /children/{childId}/schedule:
+    get:
+      summary: Schedule
+      description: Get list of news items for this child
+      security:
+        - bearerAuth: []
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  
+
+components:
+  schemas:
+  
+    Auth:
+      type: object
+      properties:
+        token:
+          type: string
+        order:
+          type: string
+          
+    AuthToken:
+      type: object
+      description: "A JWT token that should be used for authorizing requests"
+      properties:
+        jwt:
+          type: string
+
+    News:
+      type: array
+      items:
+        $ref: "#/components/schemas/NewsItem"
+    
+    NewsItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        header:
+          type: string
+          example: "Nya direktiv från folkhälsomyndigheten"
+        intro:
+          type: string
+          example: "Nedan följer viktig information till dig som förälder med barn"
+        body:
+          type: string
+          example: "Hej\n\nNedan följer viktig information t..."
+        imageUrl:
+          type: string
+      description: "A news item from the school, for example a weekly news letter"
+      
+    Calendar:
+      type: array
+      items:
+        $ref: "#/components/schemas/CalendarItem"
+
+    CalendarItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+          example: "Tidig stängning"
+        description:
+          type: string
+          example: "På torsdag stänger vi 15:45 på grund av Lucia"
+        location:
+          type: string
+          example: ""
+        startDate:
+          type: string
+          example: "2020-12-13"
+        endDate:
+          type: string
+          example: "2020-12-13"
+        allDay:
+          type: boolean
+          example: true
+    ChildAll:
+      type: object
+      properties:
+        child:
+          $ref: "#/components/schemas/Child"
+        news:
+          $ref: "#/components/schemas/News"
+        calendar:
+          $ref: "#/components/schemas/Calendar"
+    Children:
+      type: array
+      items:
+        $ref: "#/components/schemas/Child"
+    Child:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name: 
+          type: string
+          example: "Kalle Svensson (elev)"
+        status:
+          type: string
+          description: F - förskola, GR - grundskola?
+          example: "F;GR"
+        schoolId:
+          type: string
+          example: "133372F4-AF59-613D-1636-543EC3652111"
+  responses:
+    UnauthorizedError: 
+      description: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        This API uses JWT tokens to authorize requests. To recieve a JWT token you have to 
+        1. Initiate a login session through the [/login](/login) endpoint. This will trigger a BankID login. 
+        2. After this you can query the /login/{order}/jwt endpoint which will return a JWT token when the user has finished authorizing the request in their BankID app.
+
+        The token contains a session cookie which will expire. If you receive an error message when using the expired token, please repeat the process.
