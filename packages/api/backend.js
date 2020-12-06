@@ -50,8 +50,8 @@ const loginStatus = (order) => fetch(urls.checkStatus(order))
 
   const getChildren = () => fetchJson(urls.children)
   const getNews = childId => fetchJson(urls.news(childId))
-    .then(news => news.NewsItems.map(({body,preamble: intro, header, bannerImageUrl: imageUrl, pubDateSE: published, modDateSE: modified}) => 
-      ({header, intro, body: h2m(body), modified, published, image: urls.image(imageUrl) })))
+    .then(news => news.newsItems.map(({body, preamble: intro, header, bannerImageUrl: imageUrl, pubDateSE: published, modDateSE: modified}) => 
+      ({header, intro, body: h2m(body), modified, published, imageUrl: urls.image(imageUrl) })))
     .catch(err => ({err}))
 
   const getCalendar = childId => fetchJson(urls.calendar(childId)).catch(err => ({err}))
