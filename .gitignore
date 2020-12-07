@@ -1,3 +1,5 @@
 node_modules
 .vscode
 output.json
+.DS_Store
+Pods

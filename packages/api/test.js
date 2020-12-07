@@ -22,10 +22,14 @@ const test = async () => {
   // login with BankID
   const jwt = await fetch(`http://localhost:9000/login/${token.order}/jwt`).then(res => res.json())
   const headers = {authorization: 'Bearer ' + jwt}
-  const children = await fetch(`http://localhost:9000/children`, {headers}).then(res => res.json())
-  const child = await fetch(`http://localhost:9000/child/${children[0].id}`, {headers}).then(res => res.json())
 
-  console.log('children', JSON.stringify(children, null, 2), JSON.stringify(child, null, 2))
+  const children = await fetch(`http://localhost:9000/children`, {headers}).then(res => res.json())
+
+  const data = await Promise.all(children.map(async child => ({
+    ...child,
+    ...await fetch(`http://localhost:9000/children/${child.id}`, {headers}).then(res => res.json())
+  })))
+  console.log(JSON.stringify(data, null, 2))
 }
 
 

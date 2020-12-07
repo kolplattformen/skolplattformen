@@ -3,7 +3,10 @@ const fetch = require('fetch-cookie/node-fetch')(nodeFetch)
 const moment = require('moment')
 const camel = require('camelcase-keys')
 const h2m = require('h2m')
+const {htmlDecode} = require('js-htmlencode')
 const urls = require('./urls')
+
+const download = (url, cookie) => fetch(url, {headers: {cookie}})
 
 const fetchJson = (url, cookie) => {
   return fetch(url, {headers: {cookie}})
@@ -33,7 +36,7 @@ const waitForToken = async ({order}, tries = 60) => {
 const getChildren = (cookie) => fetchJson(urls.children, cookie).then(children => children.map(({name, id, status, schoolId}) => ({name, id, status, schoolId})))
 const getNews = (childId, cookie) => fetchJson(urls.news(childId), cookie)
   .then(news => news.newsItems.map(({body, preamble: intro, header, bannerImageUrl: imageUrl, pubDateSE: published, modDateSE: modified}) => 
-    ({header, intro, body: h2m(body), modified, published, imageUrl: urls.image(imageUrl) })))
+    ({header, intro, body: htmlDecode(h2m(body)), modified, published, imageUrl: urls.image(imageUrl) })))
   .catch(err => ({err}))
 
 const getCalendar = (childId, cookie) => fetchJson(urls.calendar(childId), cookie)
@@ -67,5 +70,6 @@ module.exports = {
   getCalendar,
   getNotifications,
   getMenu,
-  getSchedule
+  getSchedule,
+  download
 }

@@ -245,6 +245,29 @@ paths:
       responses:
         '200':
           description: OK
+  /download/:
+    get:
+      summary: Download
+      operationId: download
+
+      description: Download content from an url using the jwt token
+      security:
+        - bearerAuth: []
+      tags:
+        - Utility
+      parameters:
+        - name: url
+          in: query
+          description: URL to download
+          example: /vardnadshavare/content/img.jpg
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
 components:
   schemas:
   

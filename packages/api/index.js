@@ -44,14 +44,22 @@ api.register({
   },
   getChildren: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const children = await backend.getChildren(cookie)
-    return res.status(200).json(children)
+    try {
+      const children = await backend.getChildren(cookie)
+      return res.status(200).json(children)
+    } catch (err) {
+      return res.status(500).json(err)
+    }
   },
   getChildById: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
-    const child = await backend.getChildById(childId, cookie)
-    return res.status(200).json(child)
+    const childId = c.request.params.childId
+    try {
+      const child = await backend.getChildById(childId, cookie)
+      return res.status(200).json(child)
+    } catch (err) {
+      return res.status(500).json(err)
+    }
   },
   getNews: async (c, req, res) => {
     const cookie = c.security.bearerAuth
@@ -82,6 +90,12 @@ api.register({
     const childId = c.request.params.order
     const schedule = await backend.getSchedule(childId, cookie)
     return res.status(200).json(schedule)
+  },
+  download: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const url = c.request.query.url
+    const stream = await backend.download(url, cookie)
+    stream.body.pipe(res.body)
   }
   
 })

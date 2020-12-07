@@ -1,0 +1,6 @@
+module Pods_Skolplattformen {
+  umbrella header "Pods-Skolplattformen-umbrella.h"
+
+  export *
+  module * { export * }
+}

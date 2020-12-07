@@ -6,9 +6,11 @@
   "dependencies": {
     "camelcase-keys": "^6.2.2",
     "cookie": "^0.4.1",
+    "decode-html": "^2.0.0",
     "express": "^4.17.1",
     "fetch-cookie": "^0.11.0",
     "h2m": "^0.7.0",
+    "js-htmlencode": "^0.3.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
