@@ -33,12 +33,16 @@ info:
 
     ```
 
+    # Open source
+    This project is provided AS IS and is provided free as open source. If you want to participate and add more features to this api. Please find at the repository here:
+    [https://github.com/kolplattformen/api](https://github.com/kolplattformen/api)
+
+    # Privacy considerations
+    This API encodes the cookies recieved from the backend servers as JWT tokens and send them encrypted to the client. Neither cookies or tokens are stored on the server.
+
     # Disclaimers
     I have no affiliate with the Stockholm Stad organisation or any part of any development team for the city. Therefore things may change and suddenly stop working and I have no way of knowing or even a way of contacting you. My motivation for creating this API is purely for personal reasons. I want to develop apps for my own use and have no interest to go deep in the underlying SDK every day so I'm using this API as a way of creating a little bit of sanity and conform the sometimes swinglish structure into something a little bit more consistant. 
     
-    **Please let me know if you find anything useful and I'll add it**. /Hopefully I can find a reasonable way to release this sourcecode as open source soon./
-
-
     
   contact:
     name: Christian Landgren
