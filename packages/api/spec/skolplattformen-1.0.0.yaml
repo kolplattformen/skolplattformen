@@ -205,6 +205,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Notifications"
   /children/{childId}/menu:
     get:
       summary: Lunch Menu
@@ -348,6 +352,39 @@ components:
           $ref: "#/components/schemas/News"
         calendar:
           $ref: "#/components/schemas/Calendar"
+        notifications:
+          $ref: "#/components/schemas/Notifications"
+          
+    Notifications:
+        type: array
+        items:
+          $ref: "#/components/schemas/Notification"
+    Notification:
+        type: object
+        properties:
+          id: 
+            type: string
+            example: "133869-e254-487a-ac4a-2ab6e5dabeec"
+          sender.name:
+            type: string
+            example: "Elevdokumentation"
+          dateCreated:
+            type: string
+            example: "2020-12-10T14:31:29.966Z"
+          message: 
+            type: string
+            example: "Nu kan du ta del av ditt barns dokumentation av utvecklingssamtal"
+          url:
+            type: string
+            example:  "https://elevdokumentation.stockholm.se/mvvm/loa3/conference/guardian/student/802003_sthlm/documents/38383838-1111-4f3a-b022-94d24ed72b31"
+            description: "URL with the actual message as a webpage. Needs separate login. TODO: Investigate how to solve this somehow"
+          category:
+            type: string
+            example: "Lärlogg"
+          messageType: 
+            type: string
+            example: "avisering"
+
     Children:
       type: array
       items:
@@ -356,8 +393,10 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
+        sdsId:
+          type: string
+          description: Special ID used to access certain subsystems
         name: 
           type: string
           example: "Kalle Svensson (elev)"
