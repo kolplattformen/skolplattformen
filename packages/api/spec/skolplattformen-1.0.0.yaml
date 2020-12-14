@@ -185,7 +185,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Calendar"
-  /children/{childId}/notifications:
+  /children/{childSdsId}/notifications:
     get:
       summary: Notifications
       operationId: getNotifications
@@ -196,9 +196,9 @@ paths:
       tags:
         - Children
       parameters:
-        - name: childId
+        - name: childSdsId
           in: path
-          description: Child Id (received from /children)
+          description: Child sdsId (received from /children) (this is a separate id than childId for some reason, probably a subsystem)
           required: true
           schema:
             type: string
@@ -225,7 +225,7 @@ paths:
       responses:
         '200':
           description: OK
-  /children/{childId}/schedule:
+  /children/{childSdsId}/schedule:
     get:
       summary: Schedule
       operationId: getSchedule
@@ -236,9 +236,9 @@ paths:
       tags:
         - Children
       parameters:
-        - name: childId
+        - name: childSdsId
           in: path
-          description: Child Id (received from /children)
+          description: Child SdsId (received from /children) (this is a separate id than childId for some reason, probably a subsystem)
           required: true
           schema:
             type: string

@@ -32,7 +32,7 @@ const waitForToken = async ({order}, tries = 60) => {
   return pause(1000).then(() => waitForToken({order}, tries--))
 }
 
-const getChildren = (cookie) => fetchJson(urls.children, cookie).then(children => children.map(({name, id, status, schoolId}) => ({name, id, status, schoolId})))
+const getChildren = (cookie) => fetchJson(urls.children, cookie).then(children => children.map(({name, id, sdsId, status, schoolId}) => ({name, id, sdsId, status, schoolId})))
 const getNews = (childId, cookie) => fetchJson(urls.news(childId), cookie)
   .then(news => news.newsItems.map(({body, preamble: intro, header, bannerImageUrl: imageUrl, pubDateSE: published, modDateSE: modified}) => 
     ({header, intro, body: htmlDecode(h2m(body)), modified, published, imageUrl: urls.image(imageUrl) })))
@@ -42,9 +42,13 @@ const getCalendar = (childId, cookie) => fetchJson(urls.calendar(childId), cooki
   .then(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay}) => ({title, id, description, location, startDate, endDate, allDay}))
   .catch(err => ({err}))
 
-const getNotifications = (childId, cookie) => fetchJson(urls.notifications(childId), cookie).catch(err => ({err}))
+const getNotifications = (childId, cookie) => fetchJson(urls.notifications(childId), cookie)
+  .then(json => console.log('json', json) || json)
+  .then(notifications => notifications.map(({notificationMessage: {messages: {message: {messageid: id, messagetext: message, messagetime: dateCreated, linkbackurl: url, sender, category, messagetype: {type: messageType}}} = {}}}) => ({id, sender, dateCreated: moment(dateCreated).toISOString(), message, url, category, messageType})))
+  .catch(err => console.error(err) || {err})
+  
 const getMenu = (childId, cookie) => fetchJson(urls.menu(childId), cookie).catch(err => ({err}))
-const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment().startOf('day').toISOString(), moment().endOf('day').toISOString()), cookie)
+const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment().startOf('day').toISOString(), moment().endOf('day').toISOString()), cookie).catch(err => ({err}))
 
 const getChildById = async (childId, cookie) => {
   const children = await getChildren()
@@ -52,9 +56,9 @@ const getChildById = async (childId, cookie) => {
   const [news, calendar, notifications, menu, schedule] = await Promise.all([
     getNews(childId, cookie), 
     getCalendar(childId, cookie), 
-    getNotifications(childId, cookie), 
-    getMenu(childId, cookie), 
-    getSchedule(childId, cookie)])
+    getNotifications(child.sdsId, cookie), 
+    getMenu(child.id, cookie), 
+    getSchedule(child.sdsId, cookie)])
 
   return {child, news, calendar, notifications, menu, schedule}
 }
