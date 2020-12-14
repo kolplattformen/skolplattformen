@@ -29,6 +29,12 @@ spec:
         image: irony/skolplattformen-api
         ports:
         - containerPort: 9000
+        env:
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: JWT_SECRET
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -41,10 +47,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - skolplattformen-api.snowflake.cash
+    - api.skolplattformen.org
     secretName: skolplattformen-api-prod-tls
   rules:
-  - host: skolplattformen-api.snowflake.cash
+  - host: api.skolplattformen.org
     http:
       paths:
       - backend:

@@ -12,4 +12,5 @@ build:
 deploy:
   kubectl:
     manifests:
+    - k8s/secrets.yaml
     - k8s/api-service.yaml

@@ -3,3 +3,4 @@ node_modules
 output.json
 .DS_Store
 Pods
+secrets.yaml

@@ -32,7 +32,7 @@ api.registerSecurityHandler('bearerAuth', (c, req, res) => {
 // register operation handlers
 api.register({
   login: async (c, req, res) => {
-    console.log('token', c.request.query)
+    console.log('login initiated')
     const token = await backend.login(c.request.query.socialSecurityNumber)
     return res.status(200).json(token)
   },
@@ -40,6 +40,7 @@ api.register({
     const order = c.request.params.order
     const cookie = await backend.waitForToken({order})
     const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET || 'secret')
+    console.log('login succeeded')
     return res.status(200).json(jwtToken)
   },
   getChildren: async (c, req, res) => {

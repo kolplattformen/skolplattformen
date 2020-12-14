@@ -21,8 +21,7 @@ const pause = ms => new Promise((resolve) => setTimeout(resolve, ms))
 const login = async (socialSecurityNumber) => {
   const url = urls.login(socialSecurityNumber)
   const token = await fetch(url).then(res => res.ok ? res.json() : Promise.reject(res.statusText))
-
-  console.log('got tokens', token)
+  console.log('login started')
   return token
 }
 

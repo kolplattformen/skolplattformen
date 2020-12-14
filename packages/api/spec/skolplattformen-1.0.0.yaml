@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers:
   - description: SwaggerHub API Auto Mocking
-    url: https://api.skolplattformen.nu/
+    url: https://api.skolplattformen.org/
 info:
   version: "1.0.0"
   title: $kolplattformen API
@@ -15,7 +15,7 @@ info:
     Generate code examples from the OpenAPI yaml (press Download above) or use this as a start:
     ```
         const socialSecurityNumber = '121212121212'
-        const baseUrl = 'https://skolplattformen-api.snowflake.cash'
+        const baseUrl = 'https://api.skolplattformen.org'
         const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
         
         // Now start BankID and authorize, when you do - your jwt token will be ready
