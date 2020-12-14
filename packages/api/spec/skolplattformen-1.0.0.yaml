@@ -284,8 +284,10 @@ components:
       properties:
         token:
           type: string
+          format: uuid
         order:
           type: string
+          format: uuid
           
     AuthToken:
       type: object
