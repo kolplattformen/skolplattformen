@@ -43,7 +43,6 @@ const getCalendar = (childId, cookie) => fetchJson(urls.calendar(childId), cooki
   .catch(err => ({err}))
 
 const getNotifications = (childId, cookie) => fetchJson(urls.notifications(childId), cookie)
-  .then(json => console.log('json', json) || json)
   .then(notifications => notifications.map(({notificationMessage: {messages: {message: {messageid: id, messagetext: message, messagetime: dateCreated, linkbackurl: url, sender, category, messagetype: {type: messageType}}} = {}}}) => ({id, sender, dateCreated: moment(dateCreated).toISOString(), message, url, category, messageType})))
   .catch(err => console.error(err) || {err})
   
