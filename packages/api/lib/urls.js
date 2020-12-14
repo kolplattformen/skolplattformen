@@ -10,7 +10,7 @@ const urls = {
   news: childId => `${baseUrl}/vardnadshavare/inloggad2/News/GetNewsOverview?childId=${childId}`,
   image: url => `${baseUrl}/vardnadshavare/inloggad2/NewsBanner?url=${url}`,
   notifications: childId => `${baseUrl}/vardnadshavare/inloggad2/Overview/GetNotification?childId=${childId}`,
-  menu: childId => `${baseUrl}/vardnadshavare/inloggad2/Matsedel/GetMatsedelChoice?childId=${childId}`,
+  menu: childId => `${baseUrl}/vardnadshavare/inloggad2/Matsedel/GetMatsedelRSS?childId=${childId}`,
   schedule: (childId, fromDate, endDate) => `${baseUrl}/vardnadshavare/inloggad2/Calender/GetSchema?childId=${childId}&startDate=${fromDate}&endDate=${endDate}`
 }
 

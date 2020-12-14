@@ -6,10 +6,11 @@ const h2m = require('h2m')
 const {htmlDecode} = require('js-htmlencode')
 const urls = require('./urls')
 
-const download = (url, cookie) => fetch(url, {headers: {cookie}})
+const download = (url, cookie) => fetch(url, {headers: {cookie, 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.87 Safari/537.36'}})
 
 const fetchJson = (url, cookie) => {
   return fetch(url, {headers: {cookie}})
+  .then(res => console.log('fetching', res.url) || res)
   .then(res => res.ok ? res : Promise.reject(res.statusText))
   .then(res => res.json())
   // convert to camelCase
@@ -39,7 +40,7 @@ const getNews = (childId, cookie) => fetchJson(urls.news(childId), cookie)
   .catch(err => ({err}))
 
 const getCalendar = (childId, cookie) => fetchJson(urls.calendar(childId), cookie)
-  .then(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay}) => ({title, id, description, location, startDate, endDate, allDay}))
+  .then(calendar => calendar.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay}) => ({title, id, description, location, startDate, endDate, allDay})))
   .catch(err => ({err}))
 
 const getNotifications = (childId, cookie) => fetchJson(urls.notifications(childId), cookie)
@@ -47,17 +48,19 @@ const getNotifications = (childId, cookie) => fetchJson(urls.notifications(child
   .catch(err => console.error(err) || {err})
   
 const getMenu = (childId, cookie) => fetchJson(urls.menu(childId), cookie).catch(err => ({err}))
-const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment().startOf('day').toISOString(), moment().endOf('day').toISOString()), cookie).catch(err => ({err}))
+const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment().format('YYYY-MM-DD'), moment().add(7, 'days').format('YYYY-MM-DD')), cookie)
+  .then(schedule => schedule.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay, mentor}) => ({title, id, description, location, startDate, endDate, allDay, mentor})))
+  .catch(err => ({err}))
 
 const getChildById = async (childId, cookie) => {
   const children = await getChildren()
   const child = children.find(c => c.id == childId)
-  const [news, calendar, notifications, menu, schedule] = await Promise.all([
-    getNews(childId, cookie), 
-    getCalendar(childId, cookie), 
-    getNotifications(child.sdsId, cookie), 
-    getMenu(child.id, cookie), 
-    getSchedule(child.sdsId, cookie)])
+  const [news, calendar, notifications, menu, schedule] = [
+    await getNews(childId, cookie), 
+    await getCalendar(childId, cookie), 
+    await getNotifications(child.sdsId, cookie), 
+    await getMenu(child.id, cookie), 
+    await getSchedule(child.id, cookie)]
 
   return {child, news, calendar, notifications, menu, schedule}
 }

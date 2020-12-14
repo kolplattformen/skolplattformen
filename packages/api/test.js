@@ -29,6 +29,12 @@ const test = async () => {
     ...child,
     ...await fetch(`http://localhost:9000/children/${child.id}`, {headers}).then(res => res.json())
   })))
+
+  data.map(async child => ({
+    ...child,
+    messages: await Promise.all(child.notifications.map((notification) => fetch(notification.url, {headers}).then(res => res.text())))
+  }))
+  
   console.log(JSON.stringify(data, null, 2))
 }
 
