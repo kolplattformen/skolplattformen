@@ -299,8 +299,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
         header:
           type: string
           example: "Nya direktiv från folkhälsomyndigheten"
@@ -310,6 +310,12 @@ components:
         body:
           type: string
           example: "Hej\n\nNedan följer viktig information t..."
+        published:
+          type: string
+          example: "2020-12-24T14:00:00.966Z"
+        modified:
+          type: string
+          example: "2020-12-24T14:00:00.966Z"
         imageUrl:
           type: string
       description: "A news item from the school, for example a weekly news letter"
@@ -336,9 +342,11 @@ components:
           example: ""
         startDate:
           type: string
+          format: date
           example: "2020-12-13"
         endDate:
           type: string
+          format: date
           example: "2020-12-13"
         allDay:
           type: boolean
@@ -364,12 +372,14 @@ components:
         properties:
           id: 
             type: string
+            format: uuid
             example: "133869-e254-487a-ac4a-2ab6e5dabeec"
           sender.name:
             type: string
             example: "Elevdokumentation"
           dateCreated:
             type: string
+            format: date-time
             example: "2020-12-10T14:31:29.966Z"
           message: 
             type: string
@@ -394,8 +404,10 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         sdsId:
           type: string
+          format: uuid
           description: Special ID used to access certain subsystems
         name: 
           type: string
@@ -406,6 +418,7 @@ components:
           example: "F;GR"
         schoolId:
           type: string
+          format: uuid
           example: "133372F4-AF59-613D-1636-543EC3652111"
   responses:
     UnauthorizedError: 
