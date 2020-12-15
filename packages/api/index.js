@@ -64,37 +64,37 @@ api.register({
   },
   getNews: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
+    const childId = c.request.params.childId
     const news = await backend.getNews(childId, cookie)
     return res.status(200).json(news)
   },
   getCalendar: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
+    const childId = c.request.params.childId
     const calendar = await backend.getCalendar(childId, cookie)
     return res.status(200).json(calendar)
   },
   getNotifications: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
+    const childId = c.request.params.childSdsId
     const notifications = await backend.getNotifications(childId, cookie)
     return res.status(200).json(notifications)
   },
   getMenu: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
+    const childId = c.request.params.childId
     const menu = await backend.getMenu(childId, cookie)
     return res.status(200).json(menu)
   },
   getSchedule: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
+    const childId = c.request.params.childSdsId
     const schedule = await backend.getSchedule(childId, cookie)
     return res.status(200).json(schedule)
   },
   getClassmates: async (c, req, res) => {
     const cookie = c.security.bearerAuth
-    const childId = c.request.params.order
+    const childId = c.request.params.childSdsId
     const classmates = await backend.getClassmates(childId, cookie)
     return res.status(200).json(classmates)
   },

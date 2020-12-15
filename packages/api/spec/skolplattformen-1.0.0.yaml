@@ -241,7 +241,7 @@ paths:
       summary: Lunch Menu
       operationId: getMenu
 
-      description: Get list of news items for this child
+      description: Get food menu for the week for this child
       security:
         - bearerAuth: []
       tags:

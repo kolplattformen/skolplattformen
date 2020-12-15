@@ -10,7 +10,7 @@ const download = (url, cookie) => fetch(url, {headers: {cookie, 'user-agent': 'M
 
 const fetchJson = (url, cookie) => {
   return fetch(url, {headers: {cookie}})
-  .then(res => console.log('fetching', res.url) || res)
+  //.then(res => console.log('fetching', res.url) || res)
   .then(res => res.ok ? res : Promise.reject(res.statusText))
   .then(res => res.json())
   // convert to camelCase
@@ -53,8 +53,8 @@ const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment
   .catch(err => ({err}))
 
 const getClassmates = (childId, cookie) => fetchJson(urls.classmates(childId), cookie)
-.then(classmates => classmates.map(({sisId, firstname, lastname, location, guardians, className}) => ({sisId, firstname, lastname, location, guardians, className})))
-.catch(err => ({err}))
+  .then(classmates => classmates.map(({sisId, firstname, lastname, location, guardians = [], className}) => ({sisId, firstname, lastname, location, guardians: guardians.map(({emailhome: email, firstname, lastname, telmobile: mobile, address}) => ({email, firstname, lastname, mobile, address})), className})))
+  .catch(err => ({err}))
 
 const getChildById = async (childId, cookie) => {
   const children = await getChildren()

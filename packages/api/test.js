@@ -24,17 +24,16 @@ const test = async () => {
   const headers = {authorization: 'Bearer ' + jwt}
 
   const children = await fetch(`http://localhost:9000/children`, {headers}).then(res => res.json())
-
   const data = await Promise.all(children.map(async child => ({
     ...child,
-    ...await fetch(`http://localhost:9000/children/${child.id}`, {headers}).then(res => res.json())
+    classmates: await fetch(`http://localhost:9000/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
+    news: await fetch(`http://localhost:9000/children/${child.id}/news`, {headers}).then(res => res.json()),
+    calendar: await fetch(`http://localhost:9000/children/${child.id}/calendar`, {headers}).then(res => res.json()),
+    schedule: await fetch(`http://localhost:9000/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
+    menu: await fetch(`http://localhost:9000/children/${child.id}/menu`, {headers}).then(res => res.json()),
+    notifications: await fetch(`http://localhost:9000/children/${child.sdsId}/notifications`, {headers}).then(res => res.json()),
   })))
 
-  data.map(async child => ({
-    ...child,
-    messages: await Promise.all(child.notifications.map((notification) => fetch(notification.url, {headers}).then(res => res.text())))
-  }))
-  
   console.log(JSON.stringify(data, null, 2))
 }
 
