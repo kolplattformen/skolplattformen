@@ -413,24 +413,29 @@ components:
             type: string
             example: "Svensson"
           guardians:
-            type: object
-            properties:
-              email:
-                type: string
-                format: email
-                example: allan@svensson.se
-              firstname:
-                type: string
-                example: Allan
-              lastname:
-                type: string
-                example: Svensson
-              mobile:
-                type: string
-                example: 070-13372121
-              address:
-                type: string
-                example: Vallebyvägen 13b, lgh 223A
+            type: array
+            items:
+              $ref: "#/components/schemas/Guardian"
+    
+    Guardian:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+            example: allan@svensson.se
+          firstname:
+            type: string
+            example: Allan
+          lastname:
+            type: string
+            example: Svensson
+          mobile:
+            type: string
+            example: 070-13372121
+          address:
+            type: string
+            example: Vallebyvägen 13b, lgh 223A
 
     Notifications:
         type: array
