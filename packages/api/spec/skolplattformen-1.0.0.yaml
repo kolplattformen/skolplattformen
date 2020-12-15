@@ -199,9 +199,9 @@ paths:
       tags:
         - Children
       parameters:
-        - name: childId
+        - name: childSdsId
           in: path
-          description: Child Id (received from /children)
+          description: Child SdsId (received from /children)
           required: true
           schema:
             type: string
@@ -414,6 +414,23 @@ components:
             example: "Svensson"
           guardians:
             type: object
+            properties:
+              email:
+                type: string
+                format: email
+                example: allan@svensson.se
+              firstname:
+                type: string
+                example: Allan
+              lastname:
+                type: string
+                example: Svensson
+              mobile:
+                type: string
+                example: 070-13372121
+              address:
+                type: string
+                example: Vallebyvägen 13b, lgh 223A
 
     Notifications:
         type: array
