@@ -92,6 +92,12 @@ api.register({
     const schedule = await backend.getSchedule(childId, cookie)
     return res.status(200).json(schedule)
   },
+  getClassmates: async (c, req, res) => {
+    const cookie = c.security.bearerAuth
+    const childId = c.request.params.order
+    const classmates = await backend.getClassmates(childId, cookie)
+    return res.status(200).json(classmates)
+  },
   download: async (c, req, res) => {
     const cookie = c.security.bearerAuth
     const url = c.request.query.url

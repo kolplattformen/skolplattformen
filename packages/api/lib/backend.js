@@ -52,6 +52,10 @@ const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment
   .then(schedule => schedule.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay, mentor}) => ({title, id, description, location, startDate, endDate, allDay, mentor})))
   .catch(err => ({err}))
 
+const getClassmates = (childId, cookie) => fetchJson(urls.classmates(childId), cookie)
+.then(classmates => classmates.map(({sisId, firstname, lastname, location, guardians, className}) => ({sisId, firstname, lastname, location, guardians, className})))
+.catch(err => ({err}))
+
 const getChildById = async (childId, cookie) => {
   const children = await getChildren()
   const child = children.find(c => c.id == childId)
@@ -76,5 +80,6 @@ module.exports = {
   getNotifications,
   getMenu,
   getSchedule,
+  getClassmates,
   download
 }

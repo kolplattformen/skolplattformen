@@ -1,10 +1,11 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Card, List, Text } from '@ui-kitten/components';
-import Markdown from 'react-native-markdown-display';
- 
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Card, List, Text } from '@ui-kitten/components'
+import Markdown from 'react-native-markdown-display'
+import { Image } from 'react-native-svg'
 
-export const NewsList = ({news: data}) => {
+
+export const NewsList = ({news}) => {
 
   const renderItemHeader = (headerProps, info) => (
     <View {...headerProps} style={styles.header}>
@@ -12,13 +13,13 @@ export const NewsList = ({news: data}) => {
         {info.item.header}
       </Text>
     </View>
-  );
+  )
 
   const renderItemFooter = (footerProps, info) => (
     <Text {...footerProps}>
       Publicerad i Skolplattformen
     </Text>
-  );
+  )
 
   const renderItem = (info) => (
     <Card
@@ -26,30 +27,26 @@ export const NewsList = ({news: data}) => {
       status='basic'
       header={headerProps => renderItemHeader(headerProps, info)}
       footer={footerProps => renderItemFooter(footerProps, info)}>
-      <Markdown style={{
-        body: {color: 'white', fontSize: 15},
-        heading1: {color: 'white'},
-      }}>
+      <Markdown style={{ body: {color: 'black', fontSize: 15}, heading1: {color: 'black'} }}>
         {decodeURIComponent(info.item.body)}
       </Markdown>
     </Card>
-  );
+  )
 
   return (
     <List
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
-      data={data}
-      renderItem={renderItem}
-    />
-  );
-};
+      data={news}
+      renderItem={renderItem} />
+  )
+}
 
 const styles = StyleSheet.create({
-  header:{
+  header: {
     backgroundColor: '#fff',
     minHeight: 30,
-    padding: 3
+    padding: 25
   },
   headerText: {
     color: '#000'
@@ -58,12 +55,12 @@ const styles = StyleSheet.create({
     maxHeight: '100%'
   },
   contentContainer: {
-    paddingVertical: 4,
+    paddingVertical: 4
   },
   item: {
-    marginVertical: 4,
+    marginVertical: 4
   },
   footer: {
-    backgroundColor: '#000',
+    backgroundColor: '#000'
   }
-});
+})

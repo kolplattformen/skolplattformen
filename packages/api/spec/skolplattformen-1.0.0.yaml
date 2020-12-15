@@ -189,6 +189,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Calendar"
+  /children/{childSdsId}/classmates:
+    get:
+      summary: Classmates
+      operationId: getClassmates
+      description: Get list of class mates and guardians in this childs class
+      security:
+        - bearerAuth: []
+      tags:
+        - Children
+      parameters:
+        - name: childId
+          in: path
+          description: Child Id (received from /children)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classmates"
   /children/{childSdsId}/notifications:
     get:
       summary: Notifications
@@ -369,6 +392,29 @@ components:
         notifications:
           $ref: "#/components/schemas/Notifications"
           
+    Classmates:
+        type: array
+        items:
+          $ref: "#/components/schemas/Classmate"
+    Classmate:
+        type: object
+        properties:
+          sisId:
+            type: string
+            format: uuid
+          className:
+            type: string
+            description: The name of the class of this classmate
+            example: "8C"
+          firstname:
+            type: string
+            example: "Max"
+          lastname: 
+            type: string
+            example: "Svensson"
+          guardians:
+            type: object
+
     Notifications:
         type: array
         items:

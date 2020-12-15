@@ -3,17 +3,26 @@ import { StyleSheet } from 'react-native';
 import { Layout, Text, ViewPager, Button, Icon } from '@ui-kitten/components';
 import { NewsList } from './newsList.component'
 import { Calendar } from './calendar.component'
+import { ChildTopNavigation } from './childTopNavigation.component';
+import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
+const SelectCategory = ({child}) => {
+
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  return (
+    <BottomNavigation
+      selectedIndex={selectedIndex}
+      onSelect={index => setSelectedIndex(index)}>
+      <BottomNavigationTab title='Nyheter'/>
+      <BottomNavigationTab title='Kalender'/>
+      <BottomNavigationTab title='Klassen'/>
+    </BottomNavigation>
+  );
+};
 export const ChildList = ({children}) => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const renderShakeIcon = (props) => (
-    <Icon
-      {...props}
-      animation='shake'
-      name='shake'
-    />
-  )
 
   return (
     <ViewPager
@@ -24,14 +33,11 @@ export const ChildList = ({children}) => {
         key={child.id}
         style={{...styles.tab}}
         level='2'>
-          <Text category='h5'>{ child.name}</Text>
-          <Button
-            appearance='ghost'
-            style={styles.button}
-            accessoryRight={renderShakeIcon}>
-            Sjukanmälan
-          </Button>
+          <ChildTopNavigation child={child}></ChildTopNavigation>
+          <SelectCategory>
+          </SelectCategory>
           <NewsList news={child.news} />
+          <Calendar calendar={[...child.calendar, ...child.schedule] }></Calendar>
         </Layout>
       )}
     </ViewPager>
@@ -45,9 +51,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
-    flex: 1,
-    marginVertical: 10,
-    backgroundColor: "#FEF2DC"
-  }
 });

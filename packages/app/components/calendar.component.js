@@ -1,24 +1,35 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Card, List, Text } from '@ui-kitten/components';
-import CalendarStrip from 'react-native-calendar-strip';
+import { StyleSheet } from 'react-native';
+import { Divider, List, ListItem, Icon, Text} from '@ui-kitten/components';
 
 export const Calendar = ({calendar}) => {
+
+  const renderItemIcon = (props) => (
+    <Icon {...props} name='calendar-outline'/>
+  );
+
+  const renderItem = ({ item }) => (
+    <ListItem
+      title={`${item.title}`}
+      description={`${item.startDate}`}
+      accessoryLeft={renderItemIcon}
+    />
+  );
+
+
   return (
-    <View style={styles.container}>
-      <CalendarStrip
-        scrollable
-        style={{height:150, paddingTop: 20, paddingBottom: 10}}
-        calendarColor={'#3343CE'}
-        calendarHeaderStyle={{color: 'white'}}
-        dateNumberStyle={{color: 'white'}}
-        dateNameStyle={{color: 'white'}}
-        iconContainer={{flex: 0.1}}
-      />
-  </View>
+    <List
+      style={styles.container}
+      data={calendar}
+      ItemSeparatorComponent={Divider}
+      renderItem={renderItem}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, height: 100 }
+  container: {
+    maxHeight: 200,
+    width: "100%"
+  },
 });
