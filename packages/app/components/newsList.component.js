@@ -44,21 +44,13 @@ export const NewsList = ({news}) => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#fff',
+    backgroundColor: '#eeeeef',
     minHeight: 30,
     padding: 25
   },
-  headerText: {
-    color: '#000'
-  },
-  container: {
-    maxHeight: '100%'
-  },
-  contentContainer: {
-    paddingVertical: 4
-  },
   item: {
-    marginVertical: 4
+    marginVertical: 10,
+    marginRight: 10
   },
   footer: {
     backgroundColor: '#000'

@@ -15,8 +15,8 @@ import {AppNavigator} from './components/tabs.component'
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack}/>
-    <ApplicationProvider {...eva} theme={{...eva.light, customization}}>
-      <ChildList children={children} />
+    <ApplicationProvider {...eva} theme={{...eva.light, ...customization}}>
+      <AppNavigator child={children[1]}/>
     </ApplicationProvider>
   </>
 )
