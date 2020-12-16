@@ -1,11 +1,19 @@
 # `app`
 
-> TODO: description
+This is a demo app for using the API
 
 ## Usage
 
-```
-const app = require('app');
+Clone the repo and make sure you have react-native installed:
 
-// TODO: DEMONSTRATE API
-```
+    npm i -g react-native
+
+To run the app in a simulator:
+
+    react-native run-ios
+
+## TODO:
+  [ ] Välj barn
+  [ ] Login
+  [ ] Anmäl frånvaro
+  [ ] Settings

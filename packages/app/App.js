@@ -9,7 +9,6 @@ import * as eva from '@eva-design/eva';
 import customization from './design/customization.json';
 import children from './output.json';
 
-import {ChildList} from './components/childList.component'
 import {AppNavigator} from './components/tabs.component'
 
 export default () => (
