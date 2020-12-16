@@ -17,14 +17,18 @@
     "openapi-backend": "^3.6.3"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.19",
     "eslint": "^7.14.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-promise": "^4.2.1",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC"

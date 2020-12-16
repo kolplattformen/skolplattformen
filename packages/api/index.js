@@ -2,6 +2,8 @@ const OpenAPIBackend = require('openapi-backend').default
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const backend = require('./lib/backend')
+const { deconstruct } = require('./lib/credentials')
+const { inspect } = require('util')
 
 const app = express()
 app.use(express.json())
@@ -21,30 +23,38 @@ api.register({
 
 // register security handler for jwt auth
 api.registerSecurityHandler('bearerAuth', (c, req, res) => {
-  const authHeader = c.request.headers['authorization']
-  if (!authHeader) {
+  const { authorization } = deconstruct(c)
+  if (!authorization) {
     throw new Error('Missing authorization header')
   }
-  const token = authHeader.replace('Bearer ', '')
-  return jwt.verify(token, process.env.JWT_SECRET || 'secret')
+  return jwt.verify(authorization, process.env.JWT_SECRET || 'secret')
 })
 
 // register operation handlers
 api.register({
   login: async (c, req, res) => {
-    console.log('login initiated')
-    const token = await backend.login(c.request.query.socialSecurityNumber)
-    return res.status(200).json(token)
+    try {
+      console.log('login initiated')
+      const { socialSecurityNumber } = deconstruct(c)
+      const token = await backend.login(socialSecurityNumber)
+      return res.status(200).json(token)
+    } catch (err) {
+      return res.status(500).json({ message: err.message, stack: err.stack })
+    }
   },
   waitForToken: async (c, req, res) => {
-    const order = c.request.params.order
+    console.log('wait for token')
+    const { order } = deconstruct(c)
+
     const cookie = await backend.waitForToken({order})
     const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET || 'secret')
     console.log('login succeeded')
     return res.status(200).json(jwtToken)
   },
   getChildren: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
+    console.log('get children')
+    const { cookie } = deconstruct(c)
+
     try {
       const children = await backend.getChildren(cookie)
       return res.status(200).json(children)
@@ -53,8 +63,7 @@ api.register({
     }
   },
   getChildById: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childId
+    const { cookie, childId } = deconstruct(c)
     try {
       const child = await backend.getChildById(childId, cookie)
       return res.status(200).json(child)
@@ -63,44 +72,37 @@ api.register({
     }
   },
   getNews: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childId
+    const { cookie, childId } = deconstruct(c)
     const news = await backend.getNews(childId, cookie)
     return res.status(200).json(news)
   },
   getCalendar: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childId
+    const { cookie, childId } = deconstruct(c)
     const calendar = await backend.getCalendar(childId, cookie)
     return res.status(200).json(calendar)
   },
   getNotifications: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childSdsId
-    const notifications = await backend.getNotifications(childId, cookie)
+    const { cookie, childSdsId } = deconstruct(c)
+    const notifications = await backend.getNotifications(childSdsId, cookie)
     return res.status(200).json(notifications)
   },
   getMenu: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childId
+    const { cookie, childId } = deconstruct(c)
     const menu = await backend.getMenu(childId, cookie)
     return res.status(200).json(menu)
   },
   getSchedule: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childSdsId
-    const schedule = await backend.getSchedule(childId, cookie)
+    const { cookie, childSdsId } = deconstruct(c)
+    const schedule = await backend.getSchedule(childSdsId, cookie)
     return res.status(200).json(schedule)
   },
   getClassmates: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const childId = c.request.params.childSdsId
-    const classmates = await backend.getClassmates(childId, cookie)
+    const { cookie, childSdsId } = deconstruct(c)
+    const classmates = await backend.getClassmates(childSdsId, cookie)
     return res.status(200).json(classmates)
   },
   download: async (c, req, res) => {
-    const cookie = c.security.bearerAuth
-    const url = c.request.query.url
+    const { cookie, url } = deconstruct(c)
     const stream = await backend.download(url, cookie)
     stream.body.pipe(res.body)
   }
