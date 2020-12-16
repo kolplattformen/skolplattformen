@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
-import { TabBar, Tab, TabView, Layout, Text, Icon } from '@ui-kitten/components'
+import { TabBar, TopNavigation, TopNavigationAction, Tab, TabView, Layout, Text, Divider, Icon } from '@ui-kitten/components'
 import { NewsList } from './newsList.component'
 import { Calendar } from './calendar.component'
 import { Classmates } from './classmates.component'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import moment from 'moment'
 
-export const AppNavigator = ({child}) => {
+export const Child = ({route, navigation}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const { child } = route.params;
 
   const NewsIcon = (props) => (
     <Icon {...props} name='activity-outline'/>
@@ -24,9 +25,21 @@ export const AppNavigator = ({child}) => {
   const SettingsIcon = (props) => (
     <Icon {...props} name='options-2-outline'/>
   )
+
+  const BackIcon = (props) => (
+    <Icon {...props} name='arrow-back' />
+  )
+  const BackAction = () => (
+    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  )
   
+  const navigateBack = () => {
+    navigation.goBack()
+  }
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <TopNavigation title={ child.name} alignment='center' accessoryLeft={BackAction} />
       <TabView selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
@@ -35,7 +48,7 @@ export const AppNavigator = ({child}) => {
         </Tab>
         <Tab title="Schema" icon={CalendarIcon}>
           <Layout style={styles.tabContainer}>
-            <Calendar calendar={[...child.calendar, ...child.schedule].filter(a => moment(a.startDate).isAfter(moment().startOf('day')) ) }></Calendar>
+            <Calendar calendar={[...child.calendar = [], ...child.schedule = []].filter(a => moment(a.startDate).isAfter(moment().startOf('day')) ) }></Calendar>
           </Layout>
         </Tab>
         <Tab title="Klassen" icon={ClassIcon}>
@@ -54,6 +67,7 @@ export const AppNavigator = ({child}) => {
           </Layout>
         </Tab>
       </TabView>
+      
     </SafeAreaView>
   )
 }

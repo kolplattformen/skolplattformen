@@ -27,10 +27,10 @@ export const ContactMenu = ({contact}) => {
       onBackdropPress={() => setVisible(false)}>
       {contact.guardians.map((parent, i) =>
         <MenuGroup key={i} title={`${parent.firstname} ${parent.lastname}`}>
-          <MenuItem accessoryLeft={CallIcon} disabled={!parent.mobile} title={`Ring`} onPress={e => Linking.openURL(`tel:${parent.mobile}`)}/>
-          <MenuItem accessoryLeft={SMSIcon} title={`SMS`} onPress={e => Linking.openURL(`sms:${parent.mobile}`)}/> 
-          <MenuItem accessoryLeft={EmailIcon} title={`Maila`} onPress={e => Linking.openURL(`mailto:${parent.email}`)}/> 
-          <MenuItem accessoryLeft={MapIcon} title={`Hem`} onPress={e => Linking.openURL(`http://maps.apple.com/?daddr=${parent.address}`)}/>
+          <MenuItem accessoryLeft={CallIcon} visible={!parent.mobile} title={`Ring`} onPress={e => Linking.openURL(`tel:${parent.mobile}`)}/>
+          <MenuItem accessoryLeft={SMSIcon} visible={!parent.mobile} title={`SMS`} onPress={e => Linking.openURL(`sms:${parent.mobile}`)}/> 
+          <MenuItem accessoryLeft={EmailIcon} visible={!parent.email} title={`Maila`} onPress={e => Linking.openURL(`mailto:${parent.email}`)}/> 
+          <MenuItem accessoryLeft={MapIcon} visible={!parent.address} title={`Hem`} onPress={e => Linking.openURL(`http://maps.apple.com/?daddr=${parent.address}`)}/>
         </MenuGroup>
       )}
     </OverflowMenu>
