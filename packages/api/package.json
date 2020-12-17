@@ -30,7 +30,7 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "dev": "LOG_REQUESTS=true nodemon",
+    "dev": "nodemon",
     "test": "jest"
   },
   "author": "",
