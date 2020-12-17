@@ -32,7 +32,7 @@ api.registerSecurityHandler('bearerAuth', (c, req, res) => {
 // register operation handlers
 api.register({
   login: async (c, req, res) => {
-    console.log('login initiated')
+    console.log('login initiated', c.request.query.socialSecurityNumber)
     const token = await backend.login(c.request.query.socialSecurityNumber)
     return res.status(200).json(token)
   },

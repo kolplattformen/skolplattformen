@@ -40,7 +40,7 @@ const getNews = (childId, cookie) => fetchJson(urls.news(childId), cookie)
   .catch(err => ({err}))
 
 const getCalendar = (childId, cookie) => fetchJson(urls.calendar(childId), cookie)
-  .then(calendar => calendar.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay}) => ({title, id, description, location, startDate, endDate, allDay})))
+  .then(calendar => calendar.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay}) => ({title, id, description, location, startDate: moment(startDate, 'YYYY-MM-DD hh:mm').toISOString(), endDate: moment(endDate, 'YYYY-MM-DD hh:mm').toISOString(), allDay})))
   .catch(err => ({err}))
 
 const getNotifications = (childId, cookie) => fetchJson(urls.notifications(childId), cookie)
@@ -49,7 +49,7 @@ const getNotifications = (childId, cookie) => fetchJson(urls.notifications(child
   
 const getMenu = (childId, cookie) => fetchJson(urls.menu(childId), cookie).catch(err => ({err}))
 const getSchedule = (childId, cookie) => fetchJson(urls.schedule(childId, moment().format('YYYY-MM-DD'), moment().add(7, 'days').format('YYYY-MM-DD')), cookie)
-  .then(schedule => schedule.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay, mentor}) => ({title, id, description, location, startDate, endDate, allDay, mentor})))
+  .then(schedule => schedule.map(({title, id, description, location, longEventDateTime: startDate, longEndDateTime: endDate, allDayEvent: allDay, mentor}) => ({title, id, description, location, startDate: moment(startDate, 'YYYY-MM-DD hh:mm').toISOString(), endDate: moment(endDate, 'YYYY-MM-DD hh:mm').toISOString(), allDay, mentor})))
   .catch(err => ({err}))
 
 const getClassmates = (childId, cookie) => fetchJson(urls.classmates(childId), cookie)
