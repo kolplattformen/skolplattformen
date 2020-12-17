@@ -1,9 +1,7 @@
 const OpenAPIBackend = require('openapi-backend').default
 const express = require('express')
-const jwt = require('jsonwebtoken')
 const backend = require('./lib/backend')
-const { deconstruct } = require('./lib/credentials')
-const { inspect } = require('util')
+const { deconstruct, verifyToken, createToken } = require('./lib/credentials')
 
 const app = express()
 app.use(express.json())
@@ -23,11 +21,13 @@ api.register({
 
 // register security handler for jwt auth
 api.registerSecurityHandler('bearerAuth', (c, req, res) => {
-  const { authorization } = deconstruct(c)
-  if (!authorization) {
-    throw new Error('Missing authorization header')
+  try {
+    const { cookie } = verifyToken(c)
+    return cookie
+  } catch (err) {
+    const {message, stack} = err
+    res.status(500).json({message, stack})
   }
-  return jwt.verify(authorization, process.env.JWT_SECRET || 'secret')
 })
 
 // register operation handlers
@@ -47,9 +47,9 @@ api.register({
     const { order } = deconstruct(c)
 
     const cookie = await backend.waitForToken({order})
-    const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET || 'secret')
+    const token = createToken(cookie)
     console.log('login succeeded')
-    return res.status(200).json(jwtToken)
+    return res.status(200).json({token})
   },
   getChildren: async (c, req, res) => {
     console.log('get children')

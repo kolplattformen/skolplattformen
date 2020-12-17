@@ -10,6 +10,7 @@
     "express": "^4.17.1",
     "fetch-cookie": "^0.11.0",
     "h2m": "^0.7.0",
+    "http-errors": "^1.8.0",
     "js-htmlencode": "^0.3.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
@@ -18,6 +19,8 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node-fetch": "^2.5.7",
     "eslint": "^7.14.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
@@ -27,7 +30,7 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "LOG_REQUESTS=true nodemon",
     "test": "jest"
   },
   "author": "",

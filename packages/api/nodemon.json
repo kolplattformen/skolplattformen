@@ -1,0 +1,4 @@
+{
+  "verbose": false,
+  "ignore": ["*.test.js", "fixtures/*", "requests/*"]
+}
