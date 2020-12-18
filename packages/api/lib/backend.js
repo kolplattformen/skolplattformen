@@ -79,7 +79,6 @@ const getCalendar = async (childId, cookie) => {
       endDate: moment(endDate, 'YYYY-MM-DD hh:mm').toISOString(),
       allDay
     }))
-  }
 }
 
 const getNotifications = async (childId, cookie) => {
