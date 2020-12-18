@@ -126,7 +126,9 @@ export const Children = ({ navigation }) => {
           contentContainerStyle={styles.contentContainer}
           data={children}
           renderItem={renderItem} />
-          : <Text category="c1">Laddar...</Text>}
+          : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <Text category='h1'>Laddar...</Text>
+            </Layout>}
       </Layout>
     </SafeAreaView>
   )
@@ -142,7 +144,9 @@ const styles = StyleSheet.create({
     margin: 10
   },
   itemDescription: {
-    zIndex: 1,
+    marginVertical: 16
+  },
+  loading: {
     marginVertical: 16
   },
   itemFooter: {

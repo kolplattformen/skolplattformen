@@ -20,16 +20,14 @@ export const Login = ({ navigation }) => {
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
-    if (jwt) navigateDetails([])
-
-    //setHasBankId(Linking.canOpenUrl('bankid://'))
+    // setHasBankId(Linking.canOpenUrl('bankid://'))
   }, [socialSecurityNumber])
 
   useEffect(() => {
     setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
   }, [])
 
-  const navigateDetails = (children) => {
+  const navigateToChildren = (children) => {
     console.log('continuing..')
     navigation.navigate('Children', {children});
   };
@@ -67,28 +65,14 @@ export const Login = ({ navigation }) => {
 
       console.log('got token', token)
       if (hasBankId) Linking.openURL(`bankid:///?autostarttoken=${token.token}`)
-      const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.json())
+      const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
       console.log('got jwt', jwt)
       await setJwt(jwt)
-      console.log('requesting children...')
       setVisible(false)
-      if (jwt) return navigateDetails([])
-   } catch (err) {
+      if (jwt) return navigateToChildren([])
+  } catch (err) {
       console.error(err)
-      setError(err.message)
-    }
-  }
-
-  // TODO - move this logic to other file than login...
-  const getChildren = async (jwt) => {
-    const headers = {authorization: 'Bearer ' + jwt}
-    try {
-      console.log('requesting children...', {headers})
-      const children = await fetch(`${baseUrl}/children`, {headers}).then(res => res.json())
-      console.log('got children', children)
-      return children
-    } catch (err) {
-      setError(children.err)
+      setError(err.message || err)
     }
   }
 
@@ -100,29 +84,45 @@ export const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 20}}>
-      <Text category="h3">Vårdnadshavare</Text>
-        <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
-          accessoryLeft = {PersonIcon}
-          caption={error && error.message || ''}
-          onChangeText = {text => handleInput(text)}
-          placeholder="Ditt personnr (12 siffror)"/>
-        <Button onPress={startLogin} style={{marginTop: 7, width: "100%"}} 
-          appearence='ghost' 
-          disabled={!valid}
-          status='primary'
-          accessoryRight={SecureIcon}
-          size='medium'>
-          Öppna BankID
+      {jwt ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 20}}>
+        <Text category="h3">{socialSecurityNumber}</Text>
+        <Button 
+          onPress={() => logout()}>
+          Logga ut
+        </Button>
+
+        <Button
+          status="success"
+          accessoryRight = {CheckIcon}
+          onPress={() => navigateToChildren()}>
+          Fortsätt
         </Button>
       </Layout>
-      <Modal
+      : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 20}}>
+            <Text category="h3">Vårdnadshavare</Text>
+            <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
+              accessoryLeft = {PersonIcon}
+              caption={error && error.message || ''}
+              onChangeText = {text => handleInput(text)}
+              placeholder="Ditt personnr (10 eller 12 siffror)"/>
+            <Button onPress={startLogin} style={{marginTop: 7, width: "100%"}} 
+              appearence='ghost' 
+              disabled={!valid}
+              status='primary'
+              accessoryRight={SecureIcon}
+              size='medium'>
+              Öppna BankID
+            </Button>
+          </Layout>
+        }
+        <Modal
         visible={visible}
         style={styles.modal}
         backdropStyle={styles.backdrop}
         onBackdropPress={() => setVisible(false)}>
         <Card disabled={true}>
           {hasBankId ? <Text style={{margin: 10}}>Öppnar BankID. Växla tillbaka till denna app sen.</Text> : <Text style={{margin: 10}}>Väntar på BankID...</Text>}
+          
           <Button 
             visible={!jwt}
             onPress={() => setVisible(false)}>

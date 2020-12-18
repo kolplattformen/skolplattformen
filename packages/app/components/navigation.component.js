@@ -4,21 +4,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Login } from './login.component';
 import { Children } from './children.component';
 import { Child } from './child.component';
-import { DetailsScreen } from './details.component';
+import { NewsItem } from './newsItem.component';
 
 const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode='none'>
-  <Screen name='Login' component={Login}/>
-  <Screen name='Children' component={Children}/>
-  <Screen name='Child' component={Child}/>
-  <Screen name='Details' component={DetailsScreen}/>
+    <Screen name='Login' component={Login}/>
+    <Screen name='Children' component={Children}/>
+    <Screen name='Child' component={Child}/>
+    <Screen name='NewsItem' component={NewsItem}/>
   
   </Navigator>
 );
 
-export const AppNavigator = (children) => (
+export const AppNavigator = () => (
   <NavigationContainer>
     <HomeNavigator/>
   </NavigationContainer>
