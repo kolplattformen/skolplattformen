@@ -1,5 +1,4 @@
 const moment = require('moment')
-const camel = require('camelcase-keys')
 const h2m = require('h2m')
 const {htmlDecode} = require('js-htmlencode')
 const urls = require('./urls')
@@ -76,11 +75,12 @@ const getCalendar = async (childId, cookie) => {
       id,
       description,
       location,
-      startDate,
-      endDate,
+      startDate: moment(startDate, 'YYYY-MM-DD hh:mm').toISOString(),
+      endDate: moment(endDate, 'YYYY-MM-DD hh:mm').toISOString(),
       allDay
     }))
   }
+}
 
 const getNotifications = async (childId, cookie) => {
   const url = urls.notifications(childId)
@@ -141,8 +141,8 @@ const getSchedule = async (childId, cookie) => {
       id,
       description,
       location,
-      startDate,
-      endDate,
+      startDate: moment(startDate, 'YYYY-MM-DD hh:mm').toISOString(),
+      endDate: moment(endDate, 'YYYY-MM-DD hh:mm').toISOString(),
       allDay,
       mentor
     }))

@@ -39,7 +39,7 @@ api.register({
       const token = await backend.login(socialSecurityNumber)
       return res.status(200).json(token)
     } catch (err) {
-      return res.status(500).json({ message: err.message, stack: err.stack })
+      return res.status(err.status || 500).json({ message: err.message, stack: err.stack })
     }
   },
   waitForToken: async (c, req, res) => {

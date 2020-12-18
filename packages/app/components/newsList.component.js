@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Card, List, Text } from '@ui-kitten/components'
+import { Card, List, Text, Layout } from '@ui-kitten/components'
 import Markdown from 'react-native-markdown-display'
 import { Image } from 'react-native-svg'
 
@@ -8,25 +8,16 @@ import { Image } from 'react-native-svg'
 export const NewsList = ({news}) => {
 
   const renderItemHeader = (headerProps, info) => (
-    <View {...headerProps} style={styles.header}>
-      <Text category='h6' style={styles.headerText}>
-        {info.item.header}
-      </Text>
+    <View {...headerProps} >
+      <Text category='h6'>{info.item.header}</Text>
+      <Text category='s1'>By Wikipedia</Text>
     </View>
-  )
-
-  const renderItemFooter = (footerProps, info) => (
-    <Text {...footerProps}>
-      Publicerad i Skolplattformen
-    </Text>
   )
 
   const renderItem = (info) => (
     <Card
-      style={styles.item}
-      status='basic'
-      header={headerProps => renderItemHeader(headerProps, info)}
-      footer={footerProps => renderItemFooter(footerProps, info)}>
+      style={styles.card}
+      header={headerProps => renderItemHeader(headerProps, info)}>
       <Markdown style={{ body: {color: 'black', fontSize: 15}, heading1: {color: 'black'} }}>
         {decodeURIComponent(info.item.body)}
       </Markdown>
@@ -34,33 +25,24 @@ export const NewsList = ({news}) => {
   )
 
   return (
-    <List
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-      data={news}
-      renderItem={renderItem} />
+    <Layout style={styles.topContainer} level='1'>
+      <List
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        data={news}
+        renderItem={renderItem} />
+    </Layout>
   )
 }
 
+
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: '#fff',
-    minHeight: 30,
-    padding: 25
+  topContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  headerText: {
-    color: '#000'
+  card: {
+    flex: 1,
+    margin: 2,
   },
-  container: {
-    maxHeight: '100%'
-  },
-  contentContainer: {
-    paddingVertical: 4
-  },
-  item: {
-    marginVertical: 4
-  },
-  footer: {
-    backgroundColor: '#000'
-  }
-})
+});
