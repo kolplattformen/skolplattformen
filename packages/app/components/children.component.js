@@ -1,4 +1,4 @@
-import React, {useState, useCallback } from 'react'
+import React, {useState, useCallback, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
@@ -30,21 +30,23 @@ export const Children = ({ navigation }) => {
   const headers = {authorization: 'Bearer ' + jwt}
   const [children, setChildren] = useState([])
 
-  useFocusEffect(useCallback(() => {
-      fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => setChildren(children))
+  useEffect(useCallback(() => {
+    fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
+      // TODO: performance
+      Promise.all(children.map(async child => ({
+        ...child,
+        classmates: await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
+        news: await fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()),
+        calendar: await fetch(`${baseUrl}/children/${child.id}/calendar`, {headers}).then(res => res.json()),
+        schedule: await fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
+        menu: await fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()),
+        notifications: await fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json())
+      }))).then(children => setChildren(children))
+    })
 
-      return () => {
-        console.log('when?')
-      }
-
-    /*children.map(child => {
-      fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()).then(classmates => child.classmates = classmates)
-      fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()).then(news => child.news = news)
-      fetch(`${baseUrl}/children/${child.id}/calendar`, {headers}).then(res => res.json()).then(calendar => child.calendar = calendar)
-      fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()).then(schedule => child.schedule = schedule)
-      fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()).then(menu => child.menu = menu)
-      fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json()).then(notifications => child.notifications = notifications)
-    })*/
+    return () => {
+      console.log('when?')
+    }
   }, [jwt]))
 
   const abbrevations = {
@@ -70,7 +72,7 @@ export const Children = ({ navigation }) => {
         {info.item.name.split('(')[0]}
       </Text>
       <Text category='s1'>
-        {`${info.item.status.split('').map(status => abbrevations[status] || status).join(', ')}`}
+        {`${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
       </Text>
     </View>
   )

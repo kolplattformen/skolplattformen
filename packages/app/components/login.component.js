@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 
 import {Linking} from 'react-native'
-import { Button, Icon, Modal, Card, Text, Image, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components';
+import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components';
 import Personnummer from 'personnummer'
 import useAsyncStorage from '@rnhooks/async-storage';
 
 const baseUrl = 'https://api.skolplattformen.org'
-const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska'] // TODO: add moare
+const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
 export const Login = ({ navigation }) => {
   const [visible, setVisible] = React.useState(false);
@@ -19,11 +18,16 @@ export const Login = ({ navigation }) => {
   const [socialSecurityNumber, setSocialSecurityNumber, clearSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
   const [jwt, setJwt, clearJwt] = useAsyncStorage('@jwt')
 
-  useFocusEffect(() => {
-    setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
+  useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
+    if (jwt) navigateDetails([])
+
     //setHasBankId(Linking.canOpenUrl('bankid://'))
   }, [socialSecurityNumber])
+
+  useEffect(() => {
+    setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
+  }, [])
 
   const navigateDetails = (children) => {
     console.log('continuing..')
@@ -56,8 +60,7 @@ export const Login = ({ navigation }) => {
   }
 
   const startLogin = async () => {
-      if (jwt) return navigateDetails([])
-    /*setVisible(true)
+    setVisible(true)
     try {
       console.log('requesting login for', socialSecurityNumber)
       const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
@@ -68,12 +71,12 @@ export const Login = ({ navigation }) => {
       console.log('got jwt', jwt)
       await setJwt(jwt)
       console.log('requesting children...')
-      const children = await getChildren(jwt)
-      console.log('navigating to details...', children)
-    } catch (err) {
+      setVisible(false)
+      if (jwt) return navigateDetails([])
+   } catch (err) {
       console.error(err)
       setError(err.message)
-    }*/
+    }
   }
 
   // TODO - move this logic to other file than login...
@@ -97,9 +100,8 @@ export const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
-
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 20}}>
-        <Text category="h3">Vårdnadshavare</Text>
+      <Text category="h3">Vårdnadshavare</Text>
         <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
           accessoryLeft = {PersonIcon}
           caption={error && error.message || ''}
@@ -125,21 +127,6 @@ export const Login = ({ navigation }) => {
             visible={!jwt}
             onPress={() => setVisible(false)}>
             Avbryt
-          </Button>
-          <Button onPress={logout} style={{marginTop: 7}} 
-            disabled={!jwt}
-            status='danger'
-            
-            accessoryLeft={LogoutIcon}
-            size='medium'>
-            Logga ut
-          </Button>
-          <Button onPress={navigateDetails} style={{marginTop: 7}} 
-            disabled={!jwt}
-            status='success'
-            accessoryRight={CheckIcon}
-            size='medium'>
-            Fortsätt
           </Button>
         </Card>
       </Modal>
