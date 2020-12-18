@@ -12,7 +12,8 @@ To run the app in a simulator:
 
     react-native run-ios
 
-## TODO:
+## TODO
+
   [ ] Välj barn
   [ ] Login
   [ ] Anmäl frånvaro
