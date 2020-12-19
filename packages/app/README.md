@@ -14,7 +14,7 @@ To run the app in a simulator:
 
 ## TODO
 
-  [ ] Välj barn
-  [ ] Login
+  [x] Välj barn
+  [x] Login
   [ ] Anmäl frånvaro
   [ ] Settings

@@ -1,9 +1,9 @@
 import React, {useState, useCallback, useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
 import moment from 'moment'
-import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar } from '@ui-kitten/components'
+import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
 import useAsyncStorage from '@rnhooks/async-storage'
 
@@ -33,6 +33,7 @@ export const Children = ({ navigation }) => {
   useEffect(useCallback(() => {
     fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
       // TODO: performance
+      console.log('fetch children', children)
       Promise.all((children || [] ).map(async child => ({
         ...child,
         classmates: await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
@@ -67,13 +68,18 @@ export const Children = ({ navigation }) => {
   )
 
   const Header = (props, info) => (
-    <View {...props}>
-      <Text category='h6'>
-        {info.item.name.split('(')[0]}
-      </Text>
-      <Text category='s1'>
-        {`${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
-      </Text>
+    <View {...props} style={{flexDirection: 'row', backgroundColor: '#FFf8f6'}}>
+      <View style={{margin: 20}}>
+        <Avatar source={require('../assets/avatar.png')} />
+      </View>
+      <View style={{margin: 20}}>
+        <Text category='h6'>
+          {info.item.name.split('(')[0]}
+        </Text>
+        <Text category='s1'>
+          {`${(info.item.classmates || [])[0].className} ${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
+        </Text>
+      </View>
     </View>
   )
 
@@ -117,7 +123,7 @@ export const Children = ({ navigation }) => {
   )
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
       <Divider/>
       <Layout style={{ flex: 1}} level='1'>
@@ -127,6 +133,8 @@ export const Children = ({ navigation }) => {
           data={children}
           renderItem={renderItem} />
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <Image source={require('../assets/undraw_teaching_f1cm.png')} style={{height: 400, width: '100%'}}></Image>
+              <Spinner size='large'/>
               <Text category='h1'>Laddar...</Text>
             </Layout>}
       </Layout>
