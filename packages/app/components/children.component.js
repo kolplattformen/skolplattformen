@@ -33,7 +33,7 @@ export const Children = ({ navigation }) => {
   useEffect(useCallback(() => {
     fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
       // TODO: performance
-      Promise.all(children.map(async child => ({
+      Promise.all((children || [] ).map(async child => ({
         ...child,
         classmates: await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
         news: await fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()),
@@ -41,7 +41,7 @@ export const Children = ({ navigation }) => {
         schedule: await fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
         menu: await fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()),
         notifications: await fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json())
-      }))).then(children => setChildren(children))
+      }))).then(children => console.log(children) || setChildren(children))
     })
 
     return () => {

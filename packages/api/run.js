@@ -20,10 +20,12 @@ const test = async () => {
 
   const token = await fetch(`http://localhost:9000/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
   // login with BankID
-  const jwt = await fetch(`http://localhost:9000/login/${token.order}/jwt`).then(res => res.json())
+  const {token: jwt} = await fetch(`http://localhost:9000/login/${token.order}/jwt`).then(res => res.json())
+  console.log('got jwt', jwt)
   const headers = {authorization: 'Bearer ' + jwt}
 
   const children = await fetch(`http://localhost:9000/children`, {headers}).then(res => res.json())
+  console.log('children', children)
   const data = await Promise.all(children.map(async child => ({
     ...child,
     classmates: await fetch(`http://localhost:9000/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),

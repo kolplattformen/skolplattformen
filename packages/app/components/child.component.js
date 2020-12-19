@@ -38,8 +38,8 @@ export const Child = ({route, navigation}) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <TopNavigation title={ child.name} alignment='center' accessoryLeft={BackAction} />
+    <SafeAreaView style={{ flex: 1 }} style={styles.topBar}>
+      <TopNavigation title={ child.name} alignment='center' accessoryLeft={BackAction} style={styles.topBar}/>
       <TabView selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
@@ -73,6 +73,10 @@ export const Child = ({route, navigation}) => {
 }
 
 const styles = StyleSheet.create({
+
+  topBar: {
+    backgroundColor: "#fff"
+  },
   tabContainer: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',

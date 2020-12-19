@@ -149,7 +149,7 @@ const getSchedule = async (childId, cookie) => {
 
 const getClassmates = async (childId, cookie) => {
   const url = urls.classmates(childId)
-  const classMates = await fetchJson(url, cookie)
+  const classmates = await fetchJson(url, cookie)
   
   return classmates
     .map(({

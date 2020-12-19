@@ -65,7 +65,7 @@ export const Login = ({ navigation }) => {
 
       console.log('got token', token)
       if (hasBankId) Linking.openURL(`bankid:///?autostarttoken=${token.token}`)
-      const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
+      const {token: jwt} = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
       console.log('got jwt', jwt)
       await setJwt(jwt)
       setVisible(false)

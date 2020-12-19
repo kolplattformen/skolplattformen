@@ -49,11 +49,10 @@ api.register({
     try {
       const cookie = await backend.waitForToken({order})
       const token = createToken(cookie)
+      return res.status(200).json({token})
     } catch (err) {
       return res.status(500).json({err})
     }
-  console.log('login succeeded')
-    return res.status(200).json({token})
   },
   getChildren: async (c, req, res) => {
     console.log('get children')
