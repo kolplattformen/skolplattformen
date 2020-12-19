@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
 import moment from 'moment'
