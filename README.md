@@ -31,7 +31,7 @@ If you are offended by this initiative, please don't - we come in peas.
 
 # Contributors
 - Christian Landgren, Iteam
-- You?
+- Johan Öbrink
 
 
 ## License
