@@ -1,0 +1,29 @@
+{
+  "name": "@skolplattformen/embedded-api",
+  "version": "0.0.0",
+  "description": "Since the proxy was blocked (and also deemed a bad idea by some), this is a reboot of the API running in process in the app(s).",
+  "main": "./dist",
+  "repository": "git@github.com:kolplattformen/embedded-api.git",
+  "author": "Johan Öbrink <johan.obrink@gmail.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/jest": "^26.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "typescript": "^4.1.3"
+  }
+}
