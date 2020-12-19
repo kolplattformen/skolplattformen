@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-
-import {Linking} from 'react-native'
+import { SafeAreaView, StyleSheet, Image, Linking } from 'react-native';
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components';
 import Personnummer from 'personnummer'
 import useAsyncStorage from '@rnhooks/async-storage';
@@ -20,7 +18,7 @@ export const Login = ({ navigation }) => {
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
-    // setHasBankId(Linking.canOpenUrl('bankid://'))
+    //setHasBankId(Linking.canOpenURL('bankid://'))
   }, [socialSecurityNumber])
 
   useEffect(() => {
@@ -64,10 +62,9 @@ export const Login = ({ navigation }) => {
       const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
 
       console.log('got token', token)
-      if (hasBankId) Linking.openURL(`bankid:///?autostarttoken=${token.token}`)
-      const {token: jwt} = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
-      console.log('got jwt', jwt)
-      await setJwt(jwt)
+      try {if (hasBankId) Linking.openURL(`bankid:///?autostarttoken=${token.token}`)} catch(err){ setHasBankId(false)}
+      const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
+      await setJwt(jwt.token || jwt)
       setVisible(false)
       if (jwt) return navigateToChildren([])
   } catch (err) {
@@ -82,24 +79,33 @@ export const Login = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
-      {jwt ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 20}}>
-        <Text category="h3">{socialSecurityNumber}</Text>
-        <Button 
-          onPress={() => logout()}>
-          Logga ut
-        </Button>
+      {jwt ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20}}>
 
+        <Image source={require('../assets/undraw_studying_s3l7.png')} style={{height: 400, width: '100%'}}></Image>
+        <Text category="h3">{socialSecurityNumber}</Text>
         <Button
           status="success"
+          size="medium"
+          style={{marginTop: 10, width: 200}}
           accessoryRight = {CheckIcon}
           onPress={() => navigateToChildren()}>
           Fortsätt
         </Button>
+        <Button 
+          onPress={() => logout()}
+          accessoryRight={LogoutIcon}
+          style={{marginTop: 10, width: 200}}
+          size="medium">
+          Logga ut
+        </Button>
+
+       
       </Layout>
-      : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', padding: 20}}>
-            <Text category="h3">Vårdnadshavare</Text>
+      : <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 20}}>
+          <Image source={require('../assets/undraw_back_to_school_inwc.png')} style={{height: 400, width: '100%'}}></Image>
+          <Text category="h3">Vårdnadshavare</Text>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
               accessoryLeft = {PersonIcon}
               caption={error && error.message || ''}
