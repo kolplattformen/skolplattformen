@@ -1,26 +1,26 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Card, List, Text, Layout } from '@ui-kitten/components'
-import Markdown from 'react-native-markdown-display'
 import { Image } from 'react-native-svg'
+import { NavigationContainer } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 
 
 export const NewsList = ({news}) => {
+  const navigation = useNavigation()
 
   const renderItemHeader = (headerProps, info) => (
     <View {...headerProps} >
       <Text category='h6'>{info.item.header}</Text>
-      <Text category='s1'>By Wikipedia</Text>
+      <Text category='s1'>Publicerad på Skolplattformen</Text>
     </View>
   )
 
   const renderItem = (info) => (
     <Card
       style={styles.card}
+      onPress={() => navigation.navigate('NewsItem', {newsItem: info.item})}
       header={headerProps => renderItemHeader(headerProps, info)}>
-      <Markdown style={{ body: {color: 'black', fontSize: 15}, heading1: {color: 'black'} }}>
-        {decodeURIComponent(info.item.body)}
-      </Markdown>
     </Card>
   )
 

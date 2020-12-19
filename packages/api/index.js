@@ -46,10 +46,13 @@ api.register({
     console.log('wait for token')
     const { order } = deconstruct(c)
 
-    const cookie = await backend.waitForToken({order})
-    const token = createToken(cookie)
-    console.log('login succeeded')
-    return res.status(200).json({token})
+    try {
+      const cookie = await backend.waitForToken({order})
+      const token = createToken(cookie)
+      return res.status(200).json({token})
+    } catch (err) {
+      return res.status(500).json({err})
+    }
   },
   getChildren: async (c, req, res) => {
     console.log('get children')
