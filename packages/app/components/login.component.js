@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 import { SafeAreaView, StyleSheet, Image, Linking } from 'react-native';
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components';
 import Personnummer from 'personnummer'
@@ -18,7 +19,8 @@ export const Login = ({ navigation }) => {
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
-    //setHasBankId(Linking.canOpenURL('bankid://'))
+    const url = Platform.OS == 'ios' ? 'https://app.bankid.com/' : 'bankid:///';
+    setHasBankId(Linking.canOpenURL(url))
   }, [socialSecurityNumber])
 
   useEffect(() => {
@@ -62,7 +64,9 @@ export const Login = ({ navigation }) => {
       const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
 
       console.log('got token', token)
-      try {if (hasBankId) Linking.openURL(`bankid:///?autostarttoken=${token.token}`)} catch(err){ setHasBankId(false)}
+      const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null` : `bankid:///?autostarttoken=${token.token}&redirect=null`  
+      console.log(`Open BankID: ${bankIdUrl}`)
+      try {if (hasBankId) Linking.openURL(bankIdUrl)} catch(err){ setHasBankId(false)}
       const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
       await setJwt(jwt.token || jwt)
       setVisible(false)
