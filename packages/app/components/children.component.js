@@ -1,6 +1,5 @@
-import React, {useState, useMemo, useCallback } from 'react'
+import React, {useState, useMemo, useCallback, useEffect } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
-import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
 import useFetch from 'use-http'
 import moment from 'moment'
@@ -26,31 +25,33 @@ const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
 
-export const Children = ({ navigation }) => {
+export const Children = ({navigation}) => {
   const [jwt, setJwt, clearJwt] = useAsyncStorage('@jwt')
-  const { loading, error, data: children = [] } = useFetch(`${baseUrl}/children/`, [jwt])
+  const { loading, get, error, data: children = [] } = useFetch(`/children/`, [jwt])
+  useEffect(() => {
+    if (!children.length) return
+    console.log('filling data for ', children)
+    children.map(async child => {
+      child.classmates = await get(`/children/${child.sdsId}/classmates`)
+      child.news = await get(`/children/${child.id}/news`)
+      child.calendar = await get(`/children/${child.id}/calendar`)
+      child.schedule = await get(`/children/${child.sdsId}/schedule`)
+      child.menu = await get(`/children/${child.id}/menu`)
+      child.notifications = await get(`/children/${child.sdsId}/notifications`)
+    })
+  }, [children])
 
   if (error) {
-    console.log('headers', headers)
+    console.log('error', error, children)
     navigation.navigate('Login')
   }
-  console.log('children', children, {error})
-  /*const children = useCallback(useMemo(async () => {
-    if (!jwt) return []
-    return fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
-      // TODO: performance
-      console.log('fetch children', children)
-      return Promise.all((children || [] ).map(async child => ({
-        ...child,
-        classmates: [], //await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
-        news: [], //await fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()),
-        calendar: [], //await fetch(`${baseUrl}/children/${child.id}/calendar`, {headers}).then(res => res.json()),
-        schedule: [], //await fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
-        menu: [], //await fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()),
-        notifications: [], //await fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json())
-      })))
-    })
-  }, [jwt]));*/
+  return <ChildrenView navigation={navigation} children={children}></ChildrenView>
+}
+
+
+export const ChildrenView = ({ navigation, children }) => {
+
+  
 
   const abbrevations = {
     G: 'Gymnasiet', // ? i'm guessing here
@@ -79,7 +80,7 @@ export const Children = ({ navigation }) => {
           {info.item.name.split('(')[0]}
         </Text>
         <Text category='s1'>
-          {`${(info.item.classmates || [])[0].className} ${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
+          {info.item.classmates ? `${(info.item.classmates || [])[0].className} ${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}` : ''}
         </Text>
       </View>
     </View>
@@ -111,8 +112,8 @@ export const Children = ({ navigation }) => {
     </View>
   )
 
-  const renderItem = (info) => (
-    <Card
+  const renderItem = (info) => {
+    return <Card
       style={styles.card}
       header={headerProps => Header(headerProps, info)}
       footer={footerProps => Footer(footerProps, info)}
@@ -122,7 +123,7 @@ export const Children = ({ navigation }) => {
                                        </Text>
        )}
     </Card>
-  )
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
