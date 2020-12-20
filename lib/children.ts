@@ -1,5 +1,7 @@
 import routes from './routes'
-import { CalendarItem, Child, Fetch, RequestInit } from './types'
+import {
+  CalendarItem, Child, Fetch, RequestInit,
+} from './types'
 import { etjanst, child, calendarItem } from './parse'
 
 export const list = (fetch: Fetch, init?: RequestInit) => async (): Promise<Child[]> => {

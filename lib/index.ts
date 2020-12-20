@@ -2,7 +2,9 @@ import { EventEmitter } from 'events'
 import {
   checkStatus, getSessionCookie, login, LoginStatus,
 } from './login'
-import { CalendarItem, Child, Fetch, RequestInit } from './types'
+import {
+  CalendarItem, Child, Fetch, RequestInit,
+} from './types'
 import { calendar, list } from './children'
 
 class Api extends EventEmitter {

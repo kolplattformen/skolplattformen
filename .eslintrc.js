@@ -14,5 +14,6 @@ module.exports = {
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     // '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/semi': [2, 'never'],
+    'max-len': ['error', { code: 120, 'ignoreUrls': true }]
   },
 }
