@@ -1,15 +1,18 @@
-import axios, { AxiosInstance } from 'axios'
-import { login, checkStatus, getCookie } from './login'
-
-jest.mock('axios')
-
-let client: jest.Mocked<AxiosInstance>
+import { login, checkStatus, getSessionCookie } from './login'
+import { Fetch, Headers, Response } from './types'
 
 describe('login', () => {
+  let fetch: jest.Mocked<Fetch >
+  let response: jest.Mocked<Response>
+  let headers: jest.Mocked<Headers>
   beforeEach(() => {
-    client = axios.create() as jest.Mocked<AxiosInstance>
-    client.get.mockReset()
-    client.post.mockReset()
+    headers = { get: jest.fn() }
+    response = {
+      json: jest.fn(),
+      text: jest.fn(),
+      headers,
+    }
+    fetch = jest.fn().mockResolvedValue(response)
   })
   describe('#login', () => {
     it('returns the correct result', async () => {
@@ -19,8 +22,8 @@ describe('login', () => {
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
 
-      client.post.mockResolvedValue({ data })
-      const result = await login(client)(personalNumber)
+      response.json.mockResolvedValue(data)
+      const result = await login(fetch)(personalNumber)
 
       expect(result).toEqual({ order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663' })
     })
@@ -29,34 +32,30 @@ describe('login', () => {
     const ticket = { order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663' }
 
     it('emits PENDING', (done) => {
-      client.get.mockResolvedValue({ data: 'PENDING' })
+      response.text.mockResolvedValue('PENDING')
 
-      const check = checkStatus(client)(ticket)
+      const check = checkStatus(fetch)(ticket)
       check.on('PENDING', async () => {
         await check.cancel()
         done()
       })
     })
     it('retries on PENDING', (done) => {
-      client.get.mockResolvedValueOnce({ data: 'PENDING' })
-      client.get.mockResolvedValueOnce({ data: 'OK' })
+      response.text.mockResolvedValueOnce('PENDING')
+      response.text.mockResolvedValueOnce('OK')
 
-      const check = checkStatus(client)(ticket)
+      const check = checkStatus(fetch)(ticket)
       check.on('OK', () => {
-        expect(client.get).toHaveBeenCalledTimes(2)
+        expect(fetch).toHaveBeenCalledTimes(2)
         done()
       })
     })
   })
-  describe('#getCookie', () => {
-    it('sets cookie as client interceptor', async () => {
-      client.get.mockResolvedValue({
-        headers: {
-          'set-cookie': 'cookie',
-        },
-      })
+  describe('#getSessionCookie', () => {
+    it('returns session cookie', async () => {
+      headers.get.mockReturnValue('cookie')
 
-      const cookie = await getCookie(client)()
+      const cookie = await getSessionCookie(fetch)()
 
       expect(cookie).toEqual('cookie')
     })

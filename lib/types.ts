@@ -1,18 +1,25 @@
-export interface AuthTicket {
-  order: string
+export interface RequestInit {
+  headers?: any
+  method?: string
+  body?: string
 }
 
-/**
- * <p>A JWT token that should be used for authorizing requests</p>
- * @export
- * @interface AuthToken
- */
-export interface AuthToken {
-  /**
-   * @type {string}
-   * @memberof AuthToken
-   */
-  token: string;
+export interface Headers {
+  get(name: string): string | null
+}
+
+export interface Response {
+  headers: Headers
+  text: () => Promise<string>
+  json: () => Promise<any>
+}
+
+export interface Fetch {
+  (url: string, init?: RequestInit): Promise<Response>
+}
+
+export interface AuthTicket {
+  order: string
 }
 
 /**
@@ -20,40 +27,12 @@ export interface AuthToken {
  * @interface CalendarItem
  */
 export interface CalendarItem {
-  /**
-   * @type {number}
-   * @memberof CalendarItem
-   */
   id?: number;
-  /**
-   * @type {string}
-   * @memberof CalendarItem
-   */
   title?: string;
-  /**
-   * @type {string}
-   * @memberof CalendarItem
-   */
   description?: string;
-  /**
-   * @type {string}
-   * @memberof CalendarItem
-   */
   location?: string;
-  /**
-   * @type {Date}
-   * @memberof CalendarItem
-   */
   startDate?: string;
-  /**
-   * @type {Date}
-   * @memberof CalendarItem
-   */
   endDate?: string;
-  /**
-   * @type {boolean}
-   * @memberof CalendarItem
-   */
   allDay?: boolean;
 }
 
@@ -62,10 +41,6 @@ export interface CalendarItem {
  * @interface Child
  */
 export interface Child {
-  /**
-   * @type {string}
-   * @memberof Child
-   */
   id?: string;
   /**
    * <p>Special ID used to access certain subsystems</p>
@@ -73,10 +48,6 @@ export interface Child {
    * @memberof Child
    */
   sdsId?: string;
-  /**
-   * @type {string}
-   * @memberof Child
-   */
   name?: string;
   /**
    * <p>F - förskola, GR - grundskola?</p>
@@ -84,38 +55,7 @@ export interface Child {
    * @memberof Child
    */
   status?: string;
-  /**
-   * @type {string}
-   * @memberof Child
-   */
   schoolId?: string;
-}
-
-/**
- * @export
- * @interface ChildAll
- */
-export interface ChildAll {
-  /**
-   * @type {Child}
-   * @memberof ChildAll
-   */
-  child?: Child;
-  /**
-   * @type {NewsItem[]}
-   * @memberof ChildAll
-   */
-  news?: NewsItem[];
-  /**
-   * @type {CalendarItem[]}
-   * @memberof ChildAll
-   */
-  calendar?: CalendarItem[];
-  /**
-   * @type {Notification[]}
-   * @memberof ChildAll
-   */
-  notifications?: Notification[];
 }
 
 /**
@@ -123,10 +63,6 @@ export interface ChildAll {
  * @interface Classmate
  */
 export interface Classmate {
-  /**
-   * @type {string}
-   * @memberof Classmate
-   */
   sisId?: string;
   /**
    * <p>The name of the class of this classmate</p>
@@ -134,20 +70,8 @@ export interface Classmate {
    * @memberof Classmate
    */
   className?: string;
-  /**
-   * @type {string}
-   * @memberof Classmate
-   */
   firstname?: string;
-  /**
-   * @type {string}
-   * @memberof Classmate
-   */
   lastname?: string;
-  /**
-   * @type {Guardian[]}
-   * @memberof Classmate
-   */
   guardians?: Guardian[];
 }
 
@@ -156,30 +80,10 @@ export interface Classmate {
  * @interface Guardian
  */
 export interface Guardian {
-  /**
-   * @type {string}
-   * @memberof Guardian
-   */
   email?: string;
-  /**
-   * @type {string}
-   * @memberof Guardian
-   */
   firstname?: string;
-  /**
-   * @type {string}
-   * @memberof Guardian
-   */
   lastname?: string;
-  /**
-   * @type {string}
-   * @memberof Guardian
-   */
   mobile?: string;
-  /**
-   * @type {string}
-   * @memberof Guardian
-   */
   address?: string;
 }
 
@@ -189,40 +93,12 @@ export interface Guardian {
  * @interface NewsItem
  */
 export interface NewsItem {
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   id?: string;
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   header?: string;
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   intro?: string;
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   body?: string;
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   published?: string;
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   modified?: string;
-  /**
-   * @type {string}
-   * @memberof NewsItem
-   */
   imageUrl?: string;
 }
 
@@ -231,27 +107,11 @@ export interface NewsItem {
  * @interface Notification
  */
 export interface Notification {
-  /**
-   * @type {string}
-   * @memberof Notification
-   */
   id?: string;
-  /**
-   * @type {string}
-   * @memberof Notification
-   */
   sender?: {
     name?: string;
   };
-  /**
-   * @type {Date}
-   * @memberof Notification
-   */
   dateCreated?: string;
-  /**
-   * @type {string}
-   * @memberof Notification
-   */
   message?: string;
   /**
    * <p>
@@ -262,14 +122,6 @@ export interface Notification {
    * @memberof Notification
    */
   url?: string;
-  /**
-   * @type {string}
-   * @memberof Notification
-   */
   category?: string;
-  /**
-   * @type {string}
-   * @memberof Notification
-   */
   messageType?: string;
 }

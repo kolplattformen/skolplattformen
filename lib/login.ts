@@ -1,12 +1,12 @@
 import { EventEmitter } from 'events'
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 import routes from './routes'
-import { AuthTicket } from './types'
+import { AuthTicket, Fetch } from './types'
 
-export const login = (client: AxiosInstance) => async (personalNumber: string): Promise<AuthTicket> => {
+export const login = (fetch: Fetch) => async (personalNumber: string): Promise<AuthTicket> => {
   const url = routes.login(personalNumber)
-  const result = await client.get<AuthTicket>(url)
-  return { order: result.data.order }
+  const response = await fetch(url)
+  const { order } = await response.json()
+  return { order }
 }
 
 /*
@@ -21,21 +21,22 @@ export enum LoginEvent {
 export class LoginStatus extends EventEmitter {
   private url: string
 
-  private client: AxiosInstance
+  private fetch: Fetch
 
   private cancelled: boolean = false
 
-  constructor(client: AxiosInstance, url: string) {
+  constructor(fetch: Fetch, url: string) {
     super()
-    this.client = client
+    this.fetch = fetch
     this.url = url
     this.check()
   }
 
   async check() {
-    const status = await this.client.get<string>(this.url)
-    this.emit(status.data)
-    if (!this.cancelled && status.data !== 'OK' && status.data !== 'ERROR!') {
+    const response = await this.fetch(this.url)
+    const status = await response.text()
+    this.emit(status)
+    if (!this.cancelled && status !== 'OK' && status !== 'ERROR!') {
       setTimeout(() => this.check(), 1000)
     }
   }
@@ -45,43 +46,13 @@ export class LoginStatus extends EventEmitter {
   }
 }
 
-export const checkStatus = (client: AxiosInstance) => (ticket: AuthTicket): LoginStatus => {
+export const checkStatus = (fetch: Fetch) => (ticket: AuthTicket): LoginStatus => {
   const url = routes.loginStatus(ticket.order)
-  return new LoginStatus(client, url)
+  return new LoginStatus(fetch, url)
 }
 
-const parseCookies = (newCookies: string[]): any => {
-  return newCookies
-    .map((c) => c.split('=')).map(([key, val]) => ({[key]: val}))
-    .reduce((obj1, obj2) => ({...obj1, ...obj2}))
-}
-
-export const getCookies = (client: AxiosInstance) => async (url = routes.loginCookie, cookies = {}): Promise<any> => {
-  try {
-    const response = await client.get(url)
-    if (response.headers['set-cookie']) {
-      cookies = {
-        ...cookies,
-        ...parseCookies(response.headers['set-cookie'])
-      }
-    }
-    return cookies
-  } catch (err) {
-    const { response } = err as AxiosError
-    if (response?.status === 302) {
-      if (response.headers['set-cookie']) {
-        cookies = {
-          ...cookies,
-          ...parseCookies(response.headers['set-cookie'])
-        }
-      }
-      if (response.headers.location) {
-        return getCookies(client)(response.headers.location, cookies)
-      } else {
-        return cookies
-      }
-    } else {
-      throw err
-    }
-  }
+export const getSessionCookie = (fetch: Fetch) => async (): Promise<string> => {
+  const url = routes.loginCookie
+  const response = await fetch(url)
+  return response.headers.get('set-cookie') || ''
 }
