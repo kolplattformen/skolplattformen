@@ -28,10 +28,10 @@ const PeopleIcon = (style) => (
 
 export const Children = ({ navigation }) => {
   const [jwt, setJwt, clearJwt] = useAsyncStorage('@jwt')
-  const headers = {authorization: 'Bearer ' + jwt}
-  const { loading, error, data: children = [] } = useFetch(`${baseUrl}/children/`, {headers}, [jwt])
+  const { loading, error, data: children = [] } = useFetch(`${baseUrl}/children/`, [jwt])
 
   if (error) {
+    console.log('headers', headers)
     navigation.navigate('Login')
   }
   console.log('children', children, {error})

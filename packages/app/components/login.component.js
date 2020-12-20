@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { Platform } from 'react-native';
-import { SafeAreaView, StyleSheet, Image, Linking } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingView, View } from 'react-native';
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components';
 import Personnummer from 'personnummer'
 import useAsyncStorage from '@rnhooks/async-storage';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const baseUrl = 'https://api.skolplattformen.org'
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
@@ -87,7 +88,7 @@ export const Login = ({ navigation }) => {
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
       {jwt ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20}}>
 
-        <Image source={require('../assets/undraw_studying_s3l7.png')} style={{height: 400, width: '100%'}}></Image>
+        <Image source={require('../assets/undraw_studying_s3l7.png')} style={{maxHeight: 200, width: '100%'}}></Image>
         <Text category="h3">{socialSecurityNumber}</Text>
         <Button
           status="success"
@@ -107,24 +108,27 @@ export const Login = ({ navigation }) => {
 
        
       </Layout>
-      : <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 20}}>
-          <Image source={require('../assets/undraw_back_to_school_inwc.png')} style={{height: 400, width: '100%'}}></Image>
+    : <KeyboardAvoidingView behaviour="height">
+      <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
+          <Image source={require('../assets/undraw_back_to_school_inwc.png')} style={{height: 230, top: 0, width: '100%'}}></Image>
           <Text category="h3">Vårdnadshavare</Text>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
+            style={{minHeight:65}}
               accessoryLeft = {PersonIcon}
               caption={error && error.message || ''}
               onChangeText = {text => handleInput(text)}
               placeholder="Ditt personnr (10 eller 12 siffror)"/>
-            <Button onPress={startLogin} style={{marginTop: 7, width: "100%"}} 
-              appearence='ghost' 
-              disabled={!valid}
-              status='primary'
-              accessoryRight={SecureIcon}
-              size='medium'>
-              Öppna BankID
-            </Button>
-          </Layout>
-        }
+          <Button onPress={startLogin} style={{marginTop: 7, width: "100%"}} 
+            appearence='ghost' 
+            disabled={!valid}
+            status='primary'
+            accessoryRight={SecureIcon}
+            size='medium'>
+            Öppna BankID
+          </Button>
+        </Layout>
+      </KeyboardAvoidingView>
+    }
         <Modal
         visible={visible}
         style={styles.modal}
