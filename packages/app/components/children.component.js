@@ -1,7 +1,8 @@
-import React, {useState, useCallback, useEffect } from 'react'
+import React, {useState, useMemo, useCallback } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
+import useFetch from 'use-http'
 import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
@@ -28,27 +29,28 @@ const PeopleIcon = (style) => (
 export const Children = ({ navigation }) => {
   const [jwt, setJwt, clearJwt] = useAsyncStorage('@jwt')
   const headers = {authorization: 'Bearer ' + jwt}
-  const [children, setChildren] = useState([])
+  const { loading, error, data: children = [] } = useFetch(`${baseUrl}/children/`, {headers}, [jwt])
 
-  useEffect(useCallback(() => {
-    fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
+  if (error) {
+    navigation.navigate('Login')
+  }
+  console.log('children', children, {error})
+  /*const children = useCallback(useMemo(async () => {
+    if (!jwt) return []
+    return fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
       // TODO: performance
       console.log('fetch children', children)
-      Promise.all((children || [] ).map(async child => ({
+      return Promise.all((children || [] ).map(async child => ({
         ...child,
-        classmates: await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
-        news: await fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()),
-        calendar: await fetch(`${baseUrl}/children/${child.id}/calendar`, {headers}).then(res => res.json()),
-        schedule: await fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
-        menu: await fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()),
-        notifications: await fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json())
-      }))).then(children => console.log(children) || setChildren(children))
+        classmates: [], //await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
+        news: [], //await fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()),
+        calendar: [], //await fetch(`${baseUrl}/children/${child.id}/calendar`, {headers}).then(res => res.json()),
+        schedule: [], //await fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
+        menu: [], //await fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()),
+        notifications: [], //await fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json())
+      })))
     })
-
-    return () => {
-      console.log('when?')
-    }
-  }, [jwt]))
+  }, [jwt]));*/
 
   const abbrevations = {
     G: 'Gymnasiet', // ? i'm guessing here
@@ -134,8 +136,10 @@ export const Children = ({ navigation }) => {
           renderItem={renderItem} />
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <Image source={require('../assets/undraw_teaching_f1cm.png')} style={{height: 400, width: '100%'}}></Image>
-              <Spinner size='large'/>
-              <Text category='h1'>Laddar...</Text>
+              <View style={{flexDirection: 'row'}}>
+                <Spinner size='large'/>
+                <Text category='h1' style={{marginLeft: 10, marginTop: -7}}>Laddar...</Text>
+              </View>
             </Layout>}
       </Layout>
     </SafeAreaView>
