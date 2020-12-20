@@ -1,4 +1,4 @@
-package com.skolplattformen;
+package se.kolplattformen.app;
 
 import android.app.Application;
 import android.content.Context;

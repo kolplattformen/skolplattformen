@@ -1,4 +1,4 @@
-package com.skolplattformen;
+package se.kolplattformen.app;
 
 import com.facebook.react.ReactActivity;
 
