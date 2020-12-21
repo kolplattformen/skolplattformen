@@ -48,7 +48,7 @@ export const Child = ({route, navigation}) => {
         </Tab>
         <Tab title="Schema" icon={CalendarIcon}>
           <Layout style={styles.tabContainer}>
-            <Calendar calendar={[...child.calendar = [], ...child.schedule = []].filter(a => moment(a.startDate).isAfter(moment().startOf('day')) ) }></Calendar>
+            <Calendar calendar={[...child.calendar, ...child.schedule].filter(a => moment(a.startDate).isAfter(moment().startOf('day')) ) }></Calendar>
           </Layout>
         </Tab>
         <Tab title="Klassen" icon={ClassIcon}>
@@ -63,6 +63,9 @@ export const Child = ({route, navigation}) => {
           <Layout style={styles.tabContainer}>
             <Text category='h5'>
               Inställningar
+            </Text>
+            <Text category='c2'>
+              Här kommer du kunna sjukanmäla och göra andra bra grejer...
             </Text>
           </Layout>
         </Tab>

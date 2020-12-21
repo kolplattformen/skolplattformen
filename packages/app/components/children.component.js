@@ -35,12 +35,12 @@ export const Children = ({navigation}) => {
       try {
         const children = await api.getChildren()
         console.log('got children', children)
-        setChildren(children)
+        //setChildren(children) 
 
         //TODO: lazy load these 
         const fullChildren = await Promise.all(children.map(async child => ({
           ...child,
-          news: await api.getNews(child).then(({items}) => items),
+          news: await api.getNews(child),
           calendar: await api.getCalendar(child),
           classmates: await api.getClassmates(child),
           schedule: await api.getSchedule(child, moment().startOf('day'), moment().add(7,'days').endOf('day')),
@@ -85,7 +85,7 @@ export const ChildrenView = ({ navigation, children }) => {
   )
 
   const Header = (props, info) => (
-    <View {...props} style={{flexDirection: 'row', backgroundColor: '#FFf8f6'}}>
+    <View {...props} style={{flexDirection: 'row', backgroundColor: '#FFD8D6'}}>
       <View style={{margin: 20}}>
         <Avatar source={require('../assets/avatar.png')} />
       </View>
@@ -94,7 +94,7 @@ export const ChildrenView = ({ navigation, children }) => {
           {info.item.name?.split('(')[0]}
         </Text>
         <Text category='s1'>
-          {info.item.classmates ? `${(info.item.classmates || [])[0].className} ${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}` : ''}
+          {info.item.classmates ? `${(info.item.classmates || [])[0].className}` : `${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
         </Text>
       </View>
     </View>
@@ -132,8 +132,9 @@ export const ChildrenView = ({ navigation, children }) => {
       header={headerProps => Header(headerProps, info)}
       footer={footerProps => Footer(footerProps, info)}
       onPress={() => navigateChild(info.item)}>
-      {(info.item.menu || []).map((menu, i) => <Text appearance='hint' category='c1' key={i}>
-                                         {`${menu.title.split(' -')[0]} - ${menu.description.split('<br/>')[0]}`}
+      
+      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => <Text appearance='hint' category='c1' key={i}>
+                                         {`${calendarItem.title}`}
                                        </Text>
        )}
     </Card>

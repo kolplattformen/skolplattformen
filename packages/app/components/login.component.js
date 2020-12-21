@@ -88,7 +88,7 @@ export const Login = ({ navigation }) => {
     loginStatus.on("OK", async () => {
       setLoggedIn(true)
       navigateToChildren()
-      setCookie(api.session.headers.Coookie)
+      setCookie(api.getSessionCookie())
       setVisible(false)
     })
   }
@@ -103,27 +103,28 @@ export const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
-      {loggedIn ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20}}>
+      {loggedIn ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
-        <Image source={require('../assets/undraw_studying_s3l7.png')} style={{maxHeight: 200, width: '100%'}}></Image>
-        <Text category="h3">{socialSecurityNumber}</Text>
-        <Button
-          status="success"
-          size="medium"
-          style={{marginTop: 10, width: 200}}
-          accessoryRight = {CheckIcon}
-          onPress={() => navigateToChildren()}>
-          Fortsätt
-        </Button>
-        <Button 
-          onPress={() => logout()}
-          accessoryRight={LogoutIcon}
-          style={{marginTop: 10, width: 200}}
-          size="medium">
-          Logga ut
-        </Button>
-
-       
+        <Image source={require('../assets/man.png')} style={{maxHeight: 300, width: '100%' }}></Image>
+        <View style={{ margin: 30, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1}}>
+          <Text category="h4">{socialSecurityNumber}</Text>
+          <Text>Hurra, du är redan inloggad!</Text>
+          <Button
+            status="success"
+            size="medium"
+            style={{marginTop: 10, width: 200}}
+            accessoryRight = {CheckIcon}
+            onPress={() => navigateToChildren()}>
+            Fortsätt
+          </Button>
+          <Button 
+            onPress={() => logout()}
+            accessoryRight={LogoutIcon}
+            style={{marginTop: 10, width: 200}}
+            size="medium">
+            Logga ut
+          </Button>
+        </View>
       </Layout>
     : <KeyboardAvoidingView behaviour="height">
       <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
@@ -152,7 +153,7 @@ export const Login = ({ navigation }) => {
         backdropStyle={styles.backdrop}
         onBackdropPress={() => setVisible(false)}>
         <Card disabled={true}>
-          {hasBankId ? <Text style={{margin: 10}}>Öppnar BankID. Växla tillbaka till denna app sen.</Text> : <Text style={{margin: 10}}>Väntar på BankID...</Text>}
+          {hasBankId ? <Text style={{margin: 10}}>Öppnar BankID. Växla tillbaka till hit sen.</Text> : <Text style={{margin: 10}}>Väntar på BankID...</Text>}
           
           <Button 
             visible={!loggedIn}
