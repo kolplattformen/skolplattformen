@@ -60,15 +60,14 @@ export const Login = ({ navigation }) => {
   const startLogin = async () => {
     setVisible(true)
     try {
-      console.log('requesting login for', socialSecurityNumber)
       const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
 
-      console.log('got token', token)
       const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null` : `bankid:///?autostarttoken=${token.token}&redirect=null`  
-      console.log(`Open BankID: ${bankIdUrl}`)
       try {if (hasBankId) Linking.openURL(bankIdUrl)} catch(err){ setHasBankId(false)}
+
       const jwt = await fetch(`${baseUrl}/login/${token.order}/jwt`, {timeoutInterval: 60000}).then(res => res.ok ? res : Promise.reject(res.json())).then(res => res.json())
       await setJwt(jwt.token || jwt)
+      
       setVisible(false)
       if (jwt) return navigateToChildren([])
   } catch (err) {
