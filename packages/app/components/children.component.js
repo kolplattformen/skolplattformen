@@ -1,13 +1,14 @@
-import React, {useState, useCallback, useEffect } from 'react'
+import React, {useState, useMemo, useCallback, useEffect } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
-import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
+import useFetch from 'use-http'
 import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
 import useAsyncStorage from '@rnhooks/async-storage'
+import {api} from '../lib/backend'
 
-const baseUrl = 'https://api.skolplattformen.org'
+const colors = ['#F2FDD3', '#CEFEF1', '#FEF2DC', '#FEE2E3', '#CB4D93']
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -25,30 +26,49 @@ const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
 
-export const Children = ({ navigation }) => {
-  const [jwt, setJwt, clearJwt] = useAsyncStorage('@jwt')
-  const headers = {authorization: 'Bearer ' + jwt}
-  const [children, setChildren] = useState([])
+export const Children = ({navigation}) => {
+  const [savedChildren, setSavedChildren, clearSavedChildren] = useAsyncStorage('@children', '[]')
+  const [children, setChildren] = useState(JSON.parse(savedChildren) || []) 
 
-  useEffect(useCallback(() => {
-    fetch(`${baseUrl}/children/`, {headers}).then(res => res.json()).then(children => {
-      // TODO: performance
-      console.log('fetch children', children)
-      Promise.all((children || [] ).map(async child => ({
-        ...child,
-        classmates: await fetch(`${baseUrl}/children/${child.sdsId}/classmates`, {headers}).then(res => res.json()),
-        news: await fetch(`${baseUrl}/children/${child.id}/news`, {headers}).then(res => res.json()),
-        calendar: await fetch(`${baseUrl}/children/${child.id}/calendar`, {headers}).then(res => res.json()),
-        schedule: await fetch(`${baseUrl}/children/${child.sdsId}/schedule`, {headers}).then(res => res.json()),
-        menu: await fetch(`${baseUrl}/children/${child.id}/menu`, {headers}).then(res => res.json()),
-        notifications: await fetch(`${baseUrl}/children/${child.sdsId}/notifications`, {headers}).then(res => res.json())
-      }))).then(children => console.log(children) || setChildren(children))
-    })
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const children = await api.getChildren()
 
-    return () => {
-      console.log('when?')
+        if (!children.length) {
+          return navigation.navigate('Login', {error: 'Hittar inga barn med det personnumret'})
+        }
+        console.log('got children', children)
+        //setChildren(children) 
+
+        //TODO: lazy load these 
+        const fullChildren = await Promise.all(children.map(async child => ({
+          ...child,
+          news: await api.getNews(child),
+          calendar: await api.getCalendar(child),
+          classmates: await api.getClassmates(child),
+          schedule: await api.getSchedule(child, moment().startOf('day'), moment().add(7,'days').endOf('day')),
+          menu: await api.getMenu(child),
+          notifications:  await api.getNotifications(child),
+        })))
+        console.log('full', fullChildren)
+        setChildren(fullChildren)
+        setSavedChildren(JSON.stringify(savedChildren))
+  
+      } catch (err) {
+        navigation.navigate('Login', {error: 'Fel uppstod, försök igen'})
+      }
     }
-  }, [jwt]))
+    load()
+  }, [])
+
+  return <ChildrenView navigation={navigation} children={children}></ChildrenView>
+}
+
+
+export const ChildrenView = ({ navigation, children }) => {
+
+  
 
   const abbrevations = {
     G: 'Gymnasiet', // ? i'm guessing here
@@ -59,25 +79,25 @@ export const Children = ({ navigation }) => {
     navigation.goBack()
   }
 
-  const navigateChild = (child) => {
-    navigation.navigate('Child', {child})
+  const navigateChild = (child, color) => {
+    navigation.navigate('Child', {child, color})
   }
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   )
 
-  const Header = (props, info) => (
-    <View {...props} style={{flexDirection: 'row', backgroundColor: '#FFf8f6'}}>
+  const Header = (props, info, i) => (
+    <View {...props} style={{flexDirection: 'row', backgroundColor: colors[i % colors.length]}}>
       <View style={{margin: 20}}>
-        <Avatar source={require('../assets/avatar.png')} />
+        <Avatar source={require('../assets/avatar.png')}  />
       </View>
       <View style={{margin: 20}}>
         <Text category='h6'>
-          {info.item.name.split('(')[0]}
+          {info.item.name?.split('(')[0]}
         </Text>
         <Text category='s1'>
-          {`${(info.item.classmates || [])[0].className} ${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
+          {info.item.classmates ? `${(info.item.classmates || [])[0].className}` : `${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
         </Text>
       </View>
     </View>
@@ -90,43 +110,44 @@ export const Children = ({ navigation }) => {
         status='control'
         size='small'
         accessoryLeft={NotificationIcon}>
-        {`${(info.item.news || []).length}`}
+        {`${(info.item.news || []).length}`} nyheter
       </Button>
       <Button
         style={styles.iconButton}
         status='control'
         size='small'
         accessoryLeft={CalendarIcon}>
-        {`${(info.item.notifications || []).filter(c => moment(c.startDate).isSame('day') ).length}`}
+        {`${(info.item.notifications || []).filter(c => moment(c.startDate).isSame('day') ).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}
         status='control'
         size='small'
         accessoryLeft={PeopleIcon}>
-        {`${(info.item.classmates || []).length} i klassen`}
+        {`${(info.item.classmates || []).length} elever`}
       </Button>
     </View>
   )
 
-  const renderItem = (info) => (
-    <Card
-      style={styles.card}
-      header={headerProps => Header(headerProps, info)}
+  const renderItem = (info) => {
+    return <Card
+      style={{...styles.card, backgroundColor: colors[info.index % colors.length]}}
+      header={headerProps => Header(headerProps, info, info.index)}
       footer={footerProps => Footer(footerProps, info)}
-      onPress={() => navigateChild(info.item)}>
-      {(info.item.menu || []).map((menu, i) => <Text appearance='hint' category='c1' key={i}>
-                                         {`${menu.title.split(' -')[0]} - ${menu.description.split('<br/>')[0]}`}
+      onPress={() => navigateChild(info.item, colors[info.index % colors.length])}>
+      
+      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => <Text appearance='hint' category='c1' key={i}>
+                                         {`${calendarItem.title}`}
                                        </Text>
        )}
     </Card>
-  )
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
       <Divider/>
-      <Layout style={{ flex: 1}} level='1'>
+      <Layout style={{ flex: 1 }} level='1'>
         {children.length ? <List
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
@@ -134,8 +155,10 @@ export const Children = ({ navigation }) => {
           renderItem={renderItem} />
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <Image source={require('../assets/undraw_teaching_f1cm.png')} style={{height: 400, width: '100%'}}></Image>
-              <Spinner size='large'/>
-              <Text category='h1'>Laddar...</Text>
+              <View style={{flexDirection: 'row'}}>
+                <Spinner size='large'/>
+                <Text category='h1' style={{marginLeft: 10, marginTop: -7}}>Laddar...</Text>
+              </View>
             </Layout>}
       </Layout>
     </SafeAreaView>
@@ -159,7 +182,9 @@ const styles = StyleSheet.create({
   },
   itemFooter: {
     flexDirection: 'row',
-    paddingHorizontal: 12
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5
   },
   iconButton: {
     paddingHorizontal: 0

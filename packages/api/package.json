@@ -13,6 +13,7 @@
     "http-errors": "^1.8.0",
     "js-htmlencode": "^0.3.0",
     "jsonwebtoken": "^8.5.1",
+    "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
     "openapi-backend": "^3.6.3"
