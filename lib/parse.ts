@@ -2,7 +2,7 @@ import * as moment from 'moment'
 import * as h2m from 'h2m'
 import { htmlDecode } from 'js-htmlencode'
 import {
-  CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem,
+  CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem, User,
 } from './types'
 
 const camel = require('camelcase-keys')
@@ -19,6 +19,17 @@ export const etjanst = (response: EtjanstResponse): any | any[] => {
   }
   return camel(response.Data, { deep: true })
 }
+
+export const user = ({
+  socialSecurityNumber, isAuthenticated, userFirstName, userLastName, userEmail, notificationId,
+}: any): User => ({
+  personalNumber: socialSecurityNumber,
+  firstName: userFirstName,
+  lastName: userLastName,
+  email: userEmail,
+  isAuthenticated,
+  notificationId,
+})
 
 export const child = ({
   id, sdsId, name, status, schoolId,

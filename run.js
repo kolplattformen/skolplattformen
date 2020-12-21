@@ -28,8 +28,12 @@ async function run() {
     api.on('login', async () => {
       console.log('Logged in')
 
-      console.log('children')
-      const children = await api.getChildren()
+      console.log('user')
+      const user = await api.getUser()
+      console.log(user)
+
+      // console.log('children')
+      // const children = await api.getChildren()
       // console.log(children)
 
       // console.log('calendar')
@@ -48,9 +52,9 @@ async function run() {
       // const news = await api.getNews(children[0])
       // console.log(news)
 
-      console.log('menu')
-      const menu = await api.getMenu(children[0])
-      console.log(menu)
+      // console.log('menu')
+      // const menu = await api.getMenu(children[0])
+      // console.log(menu)
 
       await api.logout()
     })

@@ -10,6 +10,7 @@ import {
   calendar, classmates, list, menu, schedule,
 } from './children'
 import { news, News } from './news'
+import { user } from './user'
 
 interface AsyncishFunction { (): void | Promise<void> }
 
@@ -47,6 +48,11 @@ export class Api extends EventEmitter {
       this.setSessionCookie(sessionCookie)
     })
     return loginStatus
+  }
+
+  async getUser(): Promise<any> {
+    const data = await user(this.fetch, this.session)()
+    return data
   }
 
   async getChildren(): Promise<Child[]> {

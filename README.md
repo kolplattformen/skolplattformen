@@ -65,6 +65,9 @@ loginStatus.on("OK", () =>
 ### Loading data
 
 ```javascript
+// Get current user
+const user = await api.getUser();
+
 // List children
 const children = await api.getChildren();
 

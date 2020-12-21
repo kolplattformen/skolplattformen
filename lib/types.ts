@@ -142,3 +142,12 @@ export interface MenuItem {
   title: string
   description: string
 }
+
+export interface User {
+  personalNumber: string
+  isAuthenticated: boolean
+  firstName: string
+  lastName: string
+  email: string | null
+  notificationId: string
+}

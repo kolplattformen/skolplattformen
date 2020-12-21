@@ -1,6 +1,6 @@
 import * as moment from 'moment'
 import {
-  etjanst, newsItem, EtjanstResponse, child, calendarItem, classmate, scheduleItem, menuItem,
+  etjanst, newsItem, EtjanstResponse, child, calendarItem, classmate, scheduleItem, menuItem, user,
 } from "./parse"
 import { NewsItem } from "./types"
 
@@ -304,6 +304,29 @@ describe('parse', () => {
           title: 'Måndag - Vecka 52',
           description: 'Körrfärsrätt .\nVeg färs'
         }])
+      })
+    })
+    describe('user', () => {
+      let userResponse: any
+      beforeEach(() => {
+        userResponse = {
+          socialSecurityNumber: '197106171635',
+          isAuthenticated: true,
+          userFirstName: 'Per-Ola',
+          userLastName: 'Assarsson',
+          userEmail: 'per-ola.assarsson@dodgit.com',
+          notificationId: 'B026594053D44299AB64ED81990B49C04D32F635C9A3454A84030439BFDDEF04'
+        }
+      })
+      it('parses user correctly', () => {
+        expect(user(userResponse)).toEqual({
+          personalNumber: '197106171635',
+          firstName: 'Per-Ola',
+          lastName: 'Assarsson',
+          email: 'per-ola.assarsson@dodgit.com',
+          isAuthenticated: true,
+          notificationId: 'B026594053D44299AB64ED81990B49C04D32F635C9A3454A84030439BFDDEF04',
+        })
       })
     })
   })
