@@ -5,8 +5,8 @@ import { AuthTicket, Fetch } from './types'
 export const login = (fetch: Fetch) => async (personalNumber: string): Promise<AuthTicket> => {
   const url = routes.login(personalNumber)
   const response = await fetch(url)
-  const { order } = await response.json()
-  return { order }
+  const { order, token } = await response.json()
+  return { order, token }
 }
 
 /*
@@ -19,16 +19,19 @@ export enum LoginEvent {
 */
 
 export class LoginStatus extends EventEmitter {
+  public token: string
+
   private url: string
 
   private fetch: Fetch
 
   private cancelled: boolean = false
 
-  constructor(fetch: Fetch, url: string) {
+  constructor(fetch: Fetch, url: string, token: string) {
     super()
     this.fetch = fetch
     this.url = url
+    this.token = token
     this.check()
   }
 
@@ -48,7 +51,7 @@ export class LoginStatus extends EventEmitter {
 
 export const checkStatus = (fetch: Fetch) => (ticket: AuthTicket): LoginStatus => {
   const url = routes.loginStatus(ticket.order)
-  return new LoginStatus(fetch, url)
+  return new LoginStatus(fetch, url, ticket.token)
 }
 
 export const getSessionCookie = (fetch: Fetch) => async (): Promise<string> => {
