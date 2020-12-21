@@ -20,6 +20,7 @@ export interface Fetch {
 
 export interface AuthTicket {
   order: string
+  token: string
 }
 
 /**

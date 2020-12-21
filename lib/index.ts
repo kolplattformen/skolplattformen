@@ -7,14 +7,32 @@ import {
 } from './types'
 import { calendar, list } from './children'
 
-class Api extends EventEmitter {
+interface AsyncishFunction { (): void | Promise<void> }
+
+export class Api extends EventEmitter {
   private fetch: Fetch
 
   private session?: RequestInit
 
-  constructor(fetch: Fetch) {
+  private clearCookies: AsyncishFunction
+
+  public isLoggedIn: boolean = false
+
+  constructor(fetch: Fetch, clearCookies: AsyncishFunction) {
     super()
     this.fetch = fetch
+    this.clearCookies = clearCookies
+  }
+
+  setSessionCookie(cookie: string) {
+    this.session = {
+      headers: {
+        Cookie: cookie,
+      },
+    }
+
+    this.isLoggedIn = true
+    this.emit('login')
   }
 
   async login(personalNumber: string): Promise<LoginStatus> {
@@ -22,9 +40,7 @@ class Api extends EventEmitter {
     const loginStatus = checkStatus(this.fetch)(ticket)
     loginStatus.on('OK', async () => {
       const sessionCookie = await getSessionCookie(this.fetch)()
-      this.session = { headers: { Cookie: sessionCookie } }
-
-      this.emit('login')
+      this.setSessionCookie(sessionCookie)
     })
     return loginStatus
   }
@@ -38,8 +54,15 @@ class Api extends EventEmitter {
     const data = await calendar(this.fetch, this.session)(childId)
     return data
   }
+
+  async logout() {
+    this.session = undefined
+    await this.clearCookies()
+    this.isLoggedIn = false
+    this.emit('logout')
+  }
 }
 
-export default function init(fetch: Fetch) {
-  return new Api(fetch)
+export default function init(fetch: Fetch, clearCookies: AsyncishFunction): Api {
+  return new Api(fetch, clearCookies)
 }
