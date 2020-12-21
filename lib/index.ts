@@ -3,9 +3,9 @@ import {
   checkStatus, getSessionCookie, login, LoginStatus,
 } from './login'
 import {
-  CalendarItem, Child, Fetch, RequestInit,
+  CalendarItem, Child, Classmate, Fetch, RequestInit,
 } from './types'
-import { calendar, list } from './children'
+import { calendar, classmates, list } from './children'
 
 interface AsyncishFunction { (): void | Promise<void> }
 
@@ -52,6 +52,11 @@ export class Api extends EventEmitter {
 
   async getCalendar(childId: string): Promise<CalendarItem[]> {
     const data = await calendar(this.fetch, this.session)(childId)
+    return data
+  }
+
+  async getClassmates(childId: string): Promise<Classmate[]> {
+    const data = await classmates(this.fetch, this.session)(childId)
     return data
   }
 
