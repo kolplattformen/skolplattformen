@@ -1,6 +1,6 @@
 {
   "name": "@skolplattformen/embedded-api",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Since the proxy was blocked (and also deemed a bad idea by some), this is a reboot of the API running in process in the app(s).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
