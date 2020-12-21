@@ -69,11 +69,8 @@ export const Login = ({ navigation, route }) => {
   }
 
   const openBankId = (token) => {
-    const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token}&redirect=null` : `bankid:///?autostarttoken=${token}&redirect=null`  
     try {
-      const token = await fetch(`${baseUrl}/login?socialSecurityNumber=${socialSecurityNumber}`, {method: 'POST'}).then(res => res.json())
       const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null` : `bankid:///?autostarttoken=${token.token}&redirect=null`  
-      try {if (hasBankId) Linking.openURL(bankIdUrl)} catch(err){ setHasBankId(false)}
       Linking.openURL(bankIdUrl)
     } catch(err){ 
       setHasBankId(false)
