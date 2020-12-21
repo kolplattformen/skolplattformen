@@ -4,7 +4,7 @@ import {
   CalendarItem, Child, Classmate, Fetch, RequestInit,
 } from './types'
 import {
-  etjanst, child, calendarItem, classmate,
+  etjanst, child, calendarItem, classmate, notification,
 } from './parse'
 
 export const list = (fetch: Fetch, init?: RequestInit) => async (): Promise<Child[]> => {
@@ -41,6 +41,12 @@ export const menu = (fetch: Fetch, init?: RequestInit) => async (childId: string
   const url = routes.menu(childId)
   const response = await fetch(url, init)
   const data = await response.json()
-  console.log(data)
   return etjanst(data)
+}
+
+export const notifications = (fetch: Fetch, init?: RequestInit) => async (childId: string): Promise<Notification[]> => {
+  const url = routes.notifications(childId)
+  const response = await fetch(url, init)
+  const data = await response.json()
+  return etjanst(data).map(notification)
 }

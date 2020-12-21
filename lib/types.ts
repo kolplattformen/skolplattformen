@@ -105,12 +105,10 @@ export interface NewsItem {
  * @interface Notification
  */
 export interface Notification {
-  id?: string;
-  sender?: {
-    name?: string;
-  };
-  dateCreated?: string;
-  message?: string;
+  id: string
+  sender: string
+  dateCreated: Moment
+  message: string
   /**
    * <p>
    *  URL with the actual message as a webpage. Needs separate login.
@@ -119,9 +117,9 @@ export interface Notification {
    * @type {string}
    * @memberof Notification
    */
-  url?: string;
-  category?: string;
-  messageType?: string;
+  url: string
+  category: string | null
+  type: string
 }
 
 /**

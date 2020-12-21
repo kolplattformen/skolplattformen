@@ -2,7 +2,7 @@ import * as moment from 'moment'
 import * as h2m from 'h2m'
 import { htmlDecode } from 'js-htmlencode'
 import {
-  CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem, User,
+  CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem, User, Notification,
 } from './types'
 
 const camel = require('camelcase-keys')
@@ -98,4 +98,34 @@ export const menuItem = ({
 }: any): MenuItem => ({
   title,
   description: htmlDecode(h2m(description)),
+})
+
+export const notification = ({
+  notification: {
+    messageid,
+    dateCreated,
+  },
+  notificationMessage: {
+    messages: {
+      message: {
+        category,
+        messagetext,
+        linkbackurl,
+        messagetype: {
+          type,
+        },
+        sender: {
+          name,
+        },
+      },
+    },
+  },
+}: any): Notification => ({
+  id: messageid,
+  message: messagetext,
+  sender: name,
+  url: linkbackurl,
+  dateCreated: moment(new Date(dateCreated)),
+  category,
+  type,
 })

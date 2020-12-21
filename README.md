@@ -87,6 +87,9 @@ const news = await api.getNews(children[0])
 
 // Get menu
 const menu = await api.getMenu(children[0])
+
+// Get notifications
+const notifications = await api.getNotifications(children[0])
 ```
 
 ### Setting session cookie

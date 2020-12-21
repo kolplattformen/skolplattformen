@@ -7,7 +7,7 @@ import {
   CalendarItem, Child, Classmate, Fetch, MenuItem, RequestInit,
 } from './types'
 import {
-  calendar, classmates, list, menu, schedule,
+  calendar, classmates, list, menu, notifications, schedule,
 } from './children'
 import { news, News } from './news'
 import { user } from './user'
@@ -82,6 +82,11 @@ export class Api extends EventEmitter {
 
   async getMenu(child: Child): Promise<MenuItem[]> {
     const data = await menu(this.fetch, this.session)(child.id)
+    return data
+  }
+
+  async getNotifications(child: Child): Promise<Notification[]> {
+    const data = notifications(this.fetch, this.session)(child.sdsId)
     return data
   }
 
