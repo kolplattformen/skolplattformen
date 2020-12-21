@@ -52,8 +52,8 @@ export const Children = ({navigation}) => {
         setSavedChildren(JSON.stringify(savedChildren))
   
       } catch (err) {
+        navigation.navigate('Login', {error: 'Fel uppstod, försök igen'})
         console.error('error when loading data', err)
-        navigation.navigate('Login')
       }
     }
     load()

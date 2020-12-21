@@ -10,7 +10,7 @@ import {api} from '../lib/backend'
 const baseUrl = 'https://api.skolplattformen.org'
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
-export const Login = ({ navigation }) => {
+export const Login = ({ navigation, route }) => {
   const [visible, setVisible] = React.useState(false)
   const [valid, setValid] = React.useState(false)
   const [loggedIn, setLoggedIn] = React.useState(false)
@@ -24,6 +24,8 @@ export const Login = ({ navigation }) => {
     setValid(Personnummer.valid(socialSecurityNumber))
     const url = Platform.OS == 'ios' ? 'https://app.bankid.com/' : 'bankid:///'
     setHasBankId(Linking.canOpenURL(url))
+    if (route.params?.error) setError(route.params.error)
+    console.log('effect')
     if (cookie) {
       console.log('cookie', cookie)
       api.setSessionCookie(cookie)
@@ -88,7 +90,9 @@ export const Login = ({ navigation }) => {
     loginStatus.on("OK", async () => {
       setLoggedIn(true)
       navigateToChildren()
-      setCookie(api.getSessionCookie())
+      const session = api.getSessionCookie()
+      console.log('session', session)
+      setCookie(session)
       setVisible(false)
     })
   }
@@ -131,7 +135,7 @@ export const Login = ({ navigation }) => {
           <Image source={require('../assets/undraw_back_to_school_inwc.png')} style={{height: 230, top: 0, width: '100%'}}></Image>
           <Text category="h3">Vårdnadshavare</Text>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
-            style={{minHeight:65}}
+            style={{minHeight:70}}
               accessoryLeft = {PersonIcon}
               caption={error && error.message || ''}
               onChangeText = {text => handleInput(text)}
