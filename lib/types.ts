@@ -14,6 +14,7 @@ export interface Response {
   headers: Headers
   text: () => Promise<string>
   json: () => Promise<any>
+  blob: () => Promise<Blob>
 }
 
 export interface Fetch {

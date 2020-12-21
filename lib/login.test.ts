@@ -10,6 +10,7 @@ describe('login', () => {
     response = {
       json: jest.fn(),
       text: jest.fn(),
+      blob: jest.fn(),
       headers,
     }
     fetch = jest.fn().mockResolvedValue(response)

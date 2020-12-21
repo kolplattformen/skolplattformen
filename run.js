@@ -48,17 +48,24 @@ async function run() {
       // const schedule = await api.getSchedule(children[0], moment().subtract(1, 'week'), moment())
       // console.log(schedule)
 
-      // console.log('news')
-      // const news = await api.getNews(children[0])
-      // console.log(news)
+      console.log('news')
+      const news = await api.getNews(children[0])
+      console.log(news)
+
+      console.log('image')
+      const blob = await api.getImage(news.items[0].imageUrl)
+      console.log(blob)
+
+      // const arrayBuffer = await blob.arrayBuffer()
+      // console.log(`data:${blob.type};base64,${Buffer.from(arrayBuffer).toString('base64')}`)
 
       // console.log('menu')
       // const menu = await api.getMenu(children[0])
       // console.log(menu)
 
-      console.log('notifications')
-      const notifications = await api.getNotifications(children[0])
-      console.log(notifications)
+      // console.log('notifications')
+      // const notifications = await api.getNotifications(children[0])
+      // console.log(notifications)
 
       await api.logout()
     })

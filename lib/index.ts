@@ -11,6 +11,7 @@ import {
 } from './children'
 import { news, News } from './news'
 import { user } from './user'
+import { image } from './image'
 
 interface AsyncishFunction { (): void | Promise<void> }
 
@@ -87,6 +88,11 @@ export class Api extends EventEmitter {
 
   async getNotifications(child: Child): Promise<Notification[]> {
     const data = notifications(this.fetch, this.session)(child.sdsId)
+    return data
+  }
+
+  async getImage(imageUrl: string): Promise<Blob> {
+    const data = await image(this.fetch, this.session)(imageUrl)
     return data
   }
 
