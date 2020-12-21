@@ -36,3 +36,11 @@ export const schedule = (fetch: Fetch, init?: RequestInit) => (
     return etjanst(data)
   }
 )
+
+export const menu = (fetch: Fetch, init?: RequestInit) => async (childId: string): Promise<any> => {
+  const url = routes.menu(childId)
+  const response = await fetch(url, init)
+  const data = await response.json()
+  console.log(data)
+  return etjanst(data)
+}

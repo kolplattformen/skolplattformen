@@ -2,7 +2,7 @@ import * as moment from 'moment'
 import * as h2m from 'h2m'
 import { htmlDecode } from 'js-htmlencode'
 import {
-  CalendarItem, Child, Classmate, Guardian, NewsItem, ScheduleItem,
+  CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem,
 } from './types'
 
 const camel = require('camelcase-keys')
@@ -80,4 +80,11 @@ export const scheduleItem = ({
   startDate: moment(new Date(longEventDateTime)),
   endDate: moment(new Date(longEndDateTime)),
   oneDayEvent: isSameDay,
+})
+
+export const menuItem = ({
+  title, description,
+}: any): MenuItem => ({
+  title,
+  description: htmlDecode(h2m(description)),
 })

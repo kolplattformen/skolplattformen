@@ -1,6 +1,6 @@
 import * as moment from 'moment'
 import {
-  etjanst, newsItem, EtjanstResponse, child, calendarItem, classmate, scheduleItem,
+  etjanst, newsItem, EtjanstResponse, child, calendarItem, classmate, scheduleItem, menuItem,
 } from "./parse"
 import { NewsItem } from "./types"
 
@@ -284,6 +284,26 @@ describe('parse', () => {
         const expected = 'Hej,  Nu är problemet löst! Alla betyg syns som de ska.  God jul!'
         const trimmed = (item.body || '').split('\n').map(t => t.trim()).join(' ')
         expect(trimmed).toEqual(expected)
+      })
+    })
+    describe('menu', () => {
+      beforeEach(() => {
+        response = {
+          Success: true,
+          Error: null,
+          Data: [
+            {
+              Title: 'Måndag - Vecka 52',
+              Description: 'Körrfärsrätt .<br/>Veg färs'
+            },
+          ],
+        }
+      })
+      it('parses menu correctly', () => {
+        expect(etjanst(response).map(menuItem)).toEqual([{
+          title: 'Måndag - Vecka 52',
+          description: 'Körrfärsrätt .\nVeg färs'
+        }])
       })
     })
   })

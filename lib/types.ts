@@ -137,3 +137,8 @@ export interface ScheduleItem {
   oneDayEvent: boolean
   allDayEvent: boolean
 }
+
+export interface MenuItem {
+  title: string
+  description: string
+}

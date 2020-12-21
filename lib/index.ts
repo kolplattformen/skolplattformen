@@ -4,10 +4,10 @@ import {
   checkStatus, getSessionCookie, login, LoginStatus,
 } from './login'
 import {
-  CalendarItem, Child, Classmate, Fetch, RequestInit,
+  CalendarItem, Child, Classmate, Fetch, MenuItem, RequestInit,
 } from './types'
 import {
-  calendar, classmates, list, schedule,
+  calendar, classmates, list, menu, schedule,
 } from './children'
 import { news, News } from './news'
 
@@ -71,6 +71,11 @@ export class Api extends EventEmitter {
 
   async getNews(child: Child): Promise<News> {
     const data = await news(this.fetch, this.session)(child.id)
+    return data
+  }
+
+  async getMenu(child: Child): Promise<MenuItem[]> {
+    const data = await menu(this.fetch, this.session)(child.id)
     return data
   }
 

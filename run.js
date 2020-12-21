@@ -1,5 +1,4 @@
 const moment = require('moment')
-const { inspect } = require('util')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
@@ -31,23 +30,27 @@ async function run() {
 
       console.log('children')
       const children = await api.getChildren()
-      console.log(inspect(children, false, 10, true))
+      // console.log(children)
 
-      console.log('calendar')
-      const calendar = await api.getCalendar(children[0])
-      console.log(inspect(calendar, false, 10, true))
+      // console.log('calendar')
+      // const calendar = await api.getCalendar(children[0])
+      // console.log(calendar)
 
-      console.log('classmates')
-      const classmates = await api.getClassmates(children[0])
-      console.log(inspect(classmates, false, 10, true))
+      // console.log('classmates')
+      // const classmates = await api.getClassmates(children[0])
+      // console.log(classmates)
 
-      console.log('schedule')
-      const schedule = await api.getSchedule(children[0], moment().subtract(1, 'week'), moment())
-      console.log(inspect(schedule, false, 10, true))
+      // console.log('schedule')
+      // const schedule = await api.getSchedule(children[0], moment().subtract(1, 'week'), moment())
+      // console.log(schedule)
 
-      console.log('news')
-      const news = await api.getNews(children[0])
-      console.log(inspect(news, false, 10, true))
+      // console.log('news')
+      // const news = await api.getNews(children[0])
+      // console.log(news)
+
+      console.log('menu')
+      const menu = await api.getMenu(children[0])
+      console.log(menu)
 
       await api.logout()
     })
