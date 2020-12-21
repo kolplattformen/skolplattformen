@@ -34,6 +34,10 @@ export const Children = ({navigation}) => {
     const load = async () => {
       try {
         const children = await api.getChildren()
+
+        if (!children.length) {
+          return navigation.navigate('Login', {error: 'Hittar inga barn med det personnumret'})
+        }
         console.log('got children', children)
         //setChildren(children) 
 
