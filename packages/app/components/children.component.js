@@ -8,7 +8,7 @@ import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction
 import useAsyncStorage from '@rnhooks/async-storage'
 import {api} from '../lib/backend'
 
-const baseUrl = 'https://api.skolplattformen.org'
+const colors = ['#F2FDD3', '#CEFEF1', '#FEF2DC', '#FEE2E3', '#CB4D93']
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -57,7 +57,6 @@ export const Children = ({navigation}) => {
   
       } catch (err) {
         navigation.navigate('Login', {error: 'Fel uppstod, försök igen'})
-        console.error('error when loading data', err)
       }
     }
     load()
@@ -80,18 +79,18 @@ export const ChildrenView = ({ navigation, children }) => {
     navigation.goBack()
   }
 
-  const navigateChild = (child) => {
-    navigation.navigate('Child', {child})
+  const navigateChild = (child, color) => {
+    navigation.navigate('Child', {child, color})
   }
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   )
 
-  const Header = (props, info) => (
-    <View {...props} style={{flexDirection: 'row', backgroundColor: '#FFD8D6'}}>
+  const Header = (props, info, i) => (
+    <View {...props} style={{flexDirection: 'row', backgroundColor: colors[i % colors.length]}}>
       <View style={{margin: 20}}>
-        <Avatar source={require('../assets/avatar.png')} />
+        <Avatar source={require('../assets/avatar.png')}  />
       </View>
       <View style={{margin: 20}}>
         <Text category='h6'>
@@ -111,7 +110,7 @@ export const ChildrenView = ({ navigation, children }) => {
         status='control'
         size='small'
         accessoryLeft={NotificationIcon}>
-        {`${(info.item.news || []).length}`}
+        {`${(info.item.news || []).length}`} nyheter
       </Button>
       <Button
         style={styles.iconButton}
@@ -125,17 +124,17 @@ export const ChildrenView = ({ navigation, children }) => {
         status='control'
         size='small'
         accessoryLeft={PeopleIcon}>
-        {`${(info.item.classmates || []).length} i klassen`}
+        {`${(info.item.classmates || []).length} elever`}
       </Button>
     </View>
   )
 
   const renderItem = (info) => {
     return <Card
-      style={styles.card}
-      header={headerProps => Header(headerProps, info)}
+      style={{...styles.card, backgroundColor: colors[info.index % colors.length]}}
+      header={headerProps => Header(headerProps, info, info.index)}
       footer={footerProps => Footer(footerProps, info)}
-      onPress={() => navigateChild(info.item)}>
+      onPress={() => navigateChild(info.item, colors[info.index % colors.length])}>
       
       {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => <Text appearance='hint' category='c1' key={i}>
                                          {`${calendarItem.title}`}
@@ -148,7 +147,7 @@ export const ChildrenView = ({ navigation, children }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
       <Divider/>
-      <Layout style={{ flex: 1}} level='1'>
+      <Layout style={{ flex: 1 }} level='1'>
         {children.length ? <List
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
@@ -183,7 +182,9 @@ const styles = StyleSheet.create({
   },
   itemFooter: {
     flexDirection: 'row',
-    paddingHorizontal: 12
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5
   },
   iconButton: {
     paddingHorizontal: 0

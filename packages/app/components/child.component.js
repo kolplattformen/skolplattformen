@@ -9,7 +9,7 @@ import moment from 'moment'
 
 export const Child = ({route, navigation}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
-  const { child } = route.params;
+  const { child, color } = route.params;
 
   const NewsIcon = (props) => (
     <Icon {...props} name='activity-outline'/>
@@ -38,9 +38,9 @@ export const Child = ({route, navigation}) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }} style={styles.topBar}>
-      <TopNavigation title={ child.name} alignment='center' accessoryLeft={BackAction} style={styles.topBar}/>
-      <TabView selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
+    <SafeAreaView style={{ flex: 1 }} style={{...styles.topBar, color: color}}>
+      <TopNavigation title={ child.name} alignment='center' accessoryLeft={BackAction}  style={{...styles.topBar, color: color}}/>
+      <TabView selectedIndex={selectedIndex} tabBarStyle={{color}} indicatorStyle={{backgroundColor: color, color}} onSelect={index => setSelectedIndex(index)}>
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
             <NewsList news={child.news} />

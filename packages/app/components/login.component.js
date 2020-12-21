@@ -112,14 +112,14 @@ export const Login = ({ navigation, route }) => {
         <Image source={require('../assets/man.png')} style={{maxHeight: 300, width: '100%' }}></Image>
         <View style={{ margin: 30, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1}}>
           <Text category="h4">{socialSecurityNumber}</Text>
-          <Text>Hurra, du är redan inloggad!</Text>
+          <Text>{error ? error : 'Hurra, du är inloggad!'}</Text>
           <Button
             status="success"
             size="medium"
             style={{marginTop: 10, width: 200}}
             accessoryRight = {CheckIcon}
             onPress={() => navigateToChildren()}>
-            Fortsätt
+            {error ? 'Försök igen' : 'Fortsätt'}
           </Button>
           <Button 
             onPress={() => logout()}
@@ -130,9 +130,10 @@ export const Login = ({ navigation, route }) => {
           </Button>
         </View>
       </Layout>
-    : <KeyboardAvoidingView behaviour="height">
-      <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
-          <Image source={require('../assets/undraw_back_to_school_inwc.png')} style={{height: 230, top: 0, width: '100%'}}></Image>
+    : <KeyboardAvoidingView>
+      <Layout style={{ flex: 1 }}>
+        <Image source={require('../assets/children.jpg')} style={{height: 280, width: '90%'}}></Image>
+        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
           <Text category="h3">Vårdnadshavare</Text>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
             style={{minHeight:70}}
@@ -140,7 +141,7 @@ export const Login = ({ navigation, route }) => {
               caption={error && error.message || ''}
               onChangeText = {text => handleInput(text)}
               placeholder="Ditt personnr (10 eller 12 siffror)"/>
-          <Button onPress={startLogin} style={{marginTop: 7, width: "100%"}} 
+          <Button onPress={startLogin} style={{width: "100%"}} 
             appearence='ghost' 
             disabled={!valid}
             status='primary'
@@ -148,6 +149,7 @@ export const Login = ({ navigation, route }) => {
             size='medium'>
             Öppna BankID
           </Button>
+        </View>
         </Layout>
       </KeyboardAvoidingView>
     }
