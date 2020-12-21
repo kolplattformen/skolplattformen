@@ -26,11 +26,12 @@ api.on("login", () => {
 });
 
 const loginStatus = await api.login("YYYYMMDDXXXX");
-loginStatus.on("PENDING", console.log("BankID app not yet opened"));
-loginStatus.on("USER_SIGN", console.log("BankID app is open"));
-loginStatus.on("ERROR", console.log("Something went wrong"));
-loginStatus.on(
-  "OK",
+window.open(`https://app.bankid.com/?autostarttoken=${loginStatus.token}&redirect=null`);
+
+loginStatus.on("PENDING", () => console.log("BankID app not yet opened"));
+loginStatus.on("USER_SIGN", () => console.log("BankID app is open"));
+loginStatus.on("ERROR", () => console.log("Something went wrong"));
+loginStatus.on("OK", () => 
   console.log("BankID sign successful. Session will be established.")
 );
 ```
