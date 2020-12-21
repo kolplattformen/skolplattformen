@@ -28,6 +28,8 @@ async function run() {
     api.on('login', async () => {
       console.log('Logged in')
 
+      console.log(api.getSessionCookie())
+
       // console.log('user')
       // const user = await api.getUser()
       // console.log(user)
@@ -52,9 +54,9 @@ async function run() {
       const news = await api.getNews(children[0])
       console.log(news)
 
-      console.log('image')
-      const blob = await api.getImage(news.items[0].imageUrl)
-      console.log(blob)
+      // console.log('image')
+      // const blob = await api.getImage(news[0].imageUrl)
+      // console.log(blob)
 
       // const arrayBuffer = await blob.arrayBuffer()
       // console.log(`data:${blob.type};base64,${Buffer.from(arrayBuffer).toString('base64')}`)

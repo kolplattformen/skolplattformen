@@ -4,12 +4,12 @@ import {
   checkStatus, getSessionCookie, login, LoginStatus,
 } from './login'
 import {
-  CalendarItem, Child, Classmate, Fetch, MenuItem, RequestInit,
+  CalendarItem, Child, Classmate, Fetch, MenuItem, NewsItem, RequestInit,
 } from './types'
 import {
   calendar, classmates, list, menu, notifications, schedule,
 } from './children'
-import { news, News } from './news'
+import { news } from './news'
 import { user } from './user'
 import { image } from './image'
 
@@ -28,6 +28,10 @@ export class Api extends EventEmitter {
     super()
     this.fetch = fetch
     this.clearCookies = clearCookies
+  }
+
+  getSessionCookie() {
+    return this.session?.headers?.Cookie
   }
 
   setSessionCookie(cookie: string) {
@@ -76,7 +80,7 @@ export class Api extends EventEmitter {
     return data
   }
 
-  async getNews(child: Child): Promise<News> {
+  async getNews(child: Child): Promise<NewsItem[]> {
     const data = await news(this.fetch, this.session)(child.id)
     return data
   }

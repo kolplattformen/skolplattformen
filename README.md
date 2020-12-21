@@ -42,6 +42,7 @@ const api = init(fetch, () => cookieJar.removeAllCookies());
 api.on("login", async () => {
   // do stuff
   console.log(api.isLoggedIn) // true
+  console.log(api.getSessionCookie) // session cookie if you want to save it
   await api.logout()
 });
 api.on('logout', () => {
@@ -90,6 +91,10 @@ const menu = await api.getMenu(children[0])
 
 // Get notifications
 const notifications = await api.getNotifications(children[0])
+
+// Get image
+const blob = await api.getImage(news[0].imageUrl)
+const src = URL.createObjectURL(blob)
 ```
 
 ### Setting session cookie
