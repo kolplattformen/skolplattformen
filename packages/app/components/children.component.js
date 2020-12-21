@@ -40,12 +40,14 @@ export const Children = ({navigation}) => {
         //TODO: lazy load these 
         const fullChildren = await Promise.all(children.map(async child => ({
           ...child,
-          //news: await api.getNews(),
-          calendar: await api.getCalendar(child.id),
-          //schedule: await api.getSchedule(),
-          //menu: await api.getMenu(),
-          //notifications:  await api.getNotifications(),
+          news: await api.getNews(child).then(({items}) => items),
+          calendar: await api.getCalendar(child),
+          classmates: await api.getClassmates(child),
+          schedule: await api.getSchedule(child, moment().startOf('day'), moment().add(7,'days').endOf('day')),
+          menu: await api.getMenu(child),
+          notifications:  await api.getNotifications(child),
         })))
+        console.log('full', fullChildren)
         setChildren(fullChildren)
         setSavedChildren(JSON.stringify(savedChildren))
   
@@ -112,7 +114,7 @@ export const ChildrenView = ({ navigation, children }) => {
         status='control'
         size='small'
         accessoryLeft={CalendarIcon}>
-        {`${(info.item.notifications || []).filter(c => moment(c.startDate).isSame('day') ).length}`}
+        {`${(info.item.notifications || []).filter(c => moment(c.startDate).isSame('day') ).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}

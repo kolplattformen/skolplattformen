@@ -18,12 +18,19 @@ export const Login = ({ navigation }) => {
   const [error, setError] = React.useState(null)
   const [hasBankId, setHasBankId] = React.useState(false)
   const [socialSecurityNumber, setSocialSecurityNumber, clearSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
+  const [cookie, setCookie, clearCookie] = useAsyncStorage('@cookie')
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
     const url = Platform.OS == 'ios' ? 'https://app.bankid.com/' : 'bankid:///'
     setHasBankId(Linking.canOpenURL(url))
-  }, [socialSecurityNumber])
+    if (cookie) {
+      console.log('cookie', cookie)
+      api.setSessionCookie(cookie)
+      setLoggedIn(true)
+      navigateToChildren()
+    }
+  }, [socialSecurityNumber, cookie])
 
   useEffect(() => {
     setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
@@ -81,6 +88,7 @@ export const Login = ({ navigation }) => {
     loginStatus.on("OK", async () => {
       setLoggedIn(true)
       navigateToChildren()
+      setCookie(api.session.headers.Coookie)
       setVisible(false)
     })
   }
@@ -88,6 +96,7 @@ export const Login = ({ navigation }) => {
   const logout = async () => {
     setVisible(false)
     setLoggedIn(false)
+    clearCookie()
     api.logout()
   }
 
