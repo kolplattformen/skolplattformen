@@ -69,7 +69,18 @@ loginStatus.on("OK", () =>
 const children = await api.getChildren();
 
 // Get calendar
-const calendar = await api.getCalendar(children[0].id);
+const calendar = await api.getCalendar(children[0]);
+
+// Get classmates
+const classmates = await api.getClassmates(children[0]);
+
+// Get schedule
+const from = moment().subtract(1, 'week')
+const to = moment()
+const schedule = await api.getSchedule(children[0], from, to)
+
+// Get news
+const news = await api.getNews(children[0])
 ```
 
 ### Setting session cookie
