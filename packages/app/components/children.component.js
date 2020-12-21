@@ -6,6 +6,7 @@ import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
 import useAsyncStorage from '@rnhooks/async-storage'
+import {api} from '../lib/backend'
 
 const baseUrl = 'https://api.skolplattformen.org'
 
@@ -26,25 +27,36 @@ const PeopleIcon = (style) => (
 )
 
 export const Children = ({navigation}) => {
-  const [jwt, setJwt, clearJwt] = useAsyncStorage('@jwt')
-  const { loading, get, error, data: children = [] } = useFetch(`/children/`, [jwt])
-  useEffect(() => {
-    if (!children.length) return
-    console.log('filling data for ', children)
-    children.map(async child => {
-      child.classmates = await get(`/children/${child.sdsId}/classmates`)
-      child.news = await get(`/children/${child.id}/news`)
-      child.calendar = await get(`/children/${child.id}/calendar`)
-      child.schedule = await get(`/children/${child.sdsId}/schedule`)
-      child.menu = await get(`/children/${child.id}/menu`)
-      child.notifications = await get(`/children/${child.sdsId}/notifications`)
-    })
-  }, [children])
+  const [savedChildren, setSavedChildren, clearSavedChildren] = useAsyncStorage('@children', '[]')
+  const [children, setChildren] = useState(JSON.parse(savedChildren) || []) 
 
-  if (error) {
-    console.log('error', error, children)
-    navigation.navigate('Login')
-  }
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const children = await api.getChildren()
+        console.log('got children', children)
+        setChildren(children)
+
+        //TODO: lazy load these 
+        const fullChildren = await Promise.all(children.map(async child => ({
+          ...child,
+          //news: await api.getNews(),
+          calendar: await api.getCalendar(child.id),
+          //schedule: await api.getSchedule(),
+          //menu: await api.getMenu(),
+          //notifications:  await api.getNotifications(),
+        })))
+        setChildren(fullChildren)
+        setSavedChildren(JSON.stringify(savedChildren))
+  
+      } catch (err) {
+        console.error('error when loading data', err)
+        navigation.navigate('Login')
+      }
+    }
+    load()
+  }, [])
+
   return <ChildrenView navigation={navigation} children={children}></ChildrenView>
 }
 
@@ -77,7 +89,7 @@ export const ChildrenView = ({ navigation, children }) => {
       </View>
       <View style={{margin: 20}}>
         <Text category='h6'>
-          {info.item.name.split('(')[0]}
+          {info.item.name?.split('(')[0]}
         </Text>
         <Text category='s1'>
           {info.item.classmates ? `${(info.item.classmates || [])[0].className} ${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}` : ''}
