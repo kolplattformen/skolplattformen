@@ -35,6 +35,9 @@
   },
   "dependencies": {
     "camelcase-keys": "^6.2.2",
-    "events": "^3.2.0"
+    "events": "^3.2.0",
+    "h2m": "^0.7.0",
+    "js-htmlencode": "^0.3.0",
+    "moment": "^2.29.1"
   }
 }

@@ -1,3 +1,4 @@
+import { Moment } from 'moment'
 import { EventEmitter } from 'events'
 import {
   checkStatus, getSessionCookie, login, LoginStatus,
@@ -5,7 +6,10 @@ import {
 import {
   CalendarItem, Child, Classmate, Fetch, RequestInit,
 } from './types'
-import { calendar, classmates, list } from './children'
+import {
+  calendar, classmates, list, schedule,
+} from './children'
+import { news, News } from './news'
 
 interface AsyncishFunction { (): void | Promise<void> }
 
@@ -50,13 +54,23 @@ export class Api extends EventEmitter {
     return data
   }
 
-  async getCalendar(childId: string): Promise<CalendarItem[]> {
-    const data = await calendar(this.fetch, this.session)(childId)
+  async getCalendar(child: Child): Promise<CalendarItem[]> {
+    const data = await calendar(this.fetch, this.session)(child.id)
     return data
   }
 
-  async getClassmates(childId: string): Promise<Classmate[]> {
-    const data = await classmates(this.fetch, this.session)(childId)
+  async getClassmates(child: Child): Promise<Classmate[]> {
+    const data = await classmates(this.fetch, this.session)(child.sdsId)
+    return data
+  }
+
+  async getSchedule(child: Child, from: Moment, to: Moment): Promise<any> {
+    const data = await schedule(this.fetch, this.session)(child.sdsId, from, to)
+    return data
+  }
+
+  async getNews(child: Child): Promise<News> {
+    const data = await news(this.fetch, this.session)(child.id)
     return data
   }
 

@@ -1,3 +1,5 @@
+import { Moment } from 'moment'
+
 export interface RequestInit {
   headers?: any
   method?: string
@@ -28,12 +30,12 @@ export interface AuthTicket {
  * @interface CalendarItem
  */
 export interface CalendarItem {
-  id?: number;
-  title?: string;
+  id: number;
+  title: string;
   description?: string;
   location?: string;
-  startDate?: string;
-  endDate?: string;
+  startDate?: Moment;
+  endDate?: Moment;
   allDay?: boolean;
 }
 
@@ -42,14 +44,14 @@ export interface CalendarItem {
  * @interface Child
  */
 export interface Child {
-  id?: string;
+  id: string;
   /**
    * <p>Special ID used to access certain subsystems</p>
    * @type {string}
    * @memberof Child
    */
-  sdsId?: string;
-  name?: string;
+  sdsId: string;
+  name: string;
   /**
    * <p>F - förskola, GR - grundskola?</p>
    * @type {string}
@@ -64,16 +66,11 @@ export interface Child {
  * @interface Classmate
  */
 export interface Classmate {
-  sisId?: string;
-  /**
-   * <p>The name of the class of this classmate</p>
-   * @type {string}
-   * @memberof Classmate
-   */
+  sisId: string;
   className?: string;
-  firstname?: string;
-  lastname?: string;
-  guardians?: Guardian[];
+  firstname: string;
+  lastname: string;
+  guardians: Guardian[];
 }
 
 /**
@@ -82,8 +79,8 @@ export interface Classmate {
  */
 export interface Guardian {
   email?: string;
-  firstname?: string;
-  lastname?: string;
+  firstname: string;
+  lastname: string;
   mobile?: string;
   address?: string;
 }
@@ -98,8 +95,8 @@ export interface NewsItem {
   header?: string;
   intro?: string;
   body?: string;
-  published?: string;
-  modified?: string;
+  published: Moment;
+  modified?: Moment;
   imageUrl?: string;
 }
 
@@ -125,4 +122,18 @@ export interface Notification {
   url?: string;
   category?: string;
   messageType?: string;
+}
+
+/**
+ * @export
+ * @interface ScheduleItem
+ */
+export interface ScheduleItem {
+  title: string
+  description?: string
+  location?: string
+  startDate: Moment
+  endDate: Moment
+  oneDayEvent: boolean
+  allDayEvent: boolean
 }
