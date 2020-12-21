@@ -14,7 +14,9 @@
   "scripts": {
     "lint": "eslint 'lib/**/*.{js,ts}' --quiet --fix",
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "yarn build",
+    "publish-package": "npm publish --access public"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
