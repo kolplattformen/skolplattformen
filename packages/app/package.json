@@ -44,6 +44,7 @@
     "@react-native-community/eslint-config": "^1.0.0",
     "@ui-kitten/metro-config": "5.0.0",
     "babel-jest": "^24.9.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.58.0",
