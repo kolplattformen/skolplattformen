@@ -4,7 +4,7 @@ import {
   CalendarItem, Child, Classmate, Fetch, RequestInit,
 } from './types'
 import {
-  etjanst, child, calendarItem,
+  etjanst, child, calendarItem, classmate,
 } from './parse'
 
 export const list = (fetch: Fetch, init?: RequestInit) => async (): Promise<Child[]> => {
@@ -25,7 +25,7 @@ export const classmates = (fetch: Fetch, init?: RequestInit) => async (childId: 
   const url = routes.classmates(childId)
   const response = await fetch(url, init)
   const data = await response.json()
-  return etjanst(data)
+  return etjanst(data).map(classmate)
 }
 
 export const schedule = (fetch: Fetch, init?: RequestInit) => (
