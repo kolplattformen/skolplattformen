@@ -130,7 +130,7 @@ export const Login = ({ navigation, route }) => {
       </Layout>
     : <KeyboardAvoidingView>
       <Layout style={{ flex: 1 }}>
-        <Image source={require('../assets/children.jpg')} style={{height: 280, width: '90%'}}></Image>
+        <Image source={require('../assets/children.png')} style={{height: 270, width: '100%'}}></Image>
         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
           <Text category="h3">Vårdnadshavare</Text>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
