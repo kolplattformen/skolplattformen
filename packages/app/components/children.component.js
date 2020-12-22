@@ -1,8 +1,6 @@
 import React, {useState, useMemo, useCallback, useEffect } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
-import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
-import useFetch from 'use-http'
 import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
@@ -38,11 +36,12 @@ const fake = fullChildren => fullChildren.map(child => ({
 export const Children = ({navigation}) => {
   const [children, setChildren] = useAsyncStorage('@children', [])
 
-  useFocusEffect(() => {
+  useEffect(() => {
     const load = async () => {
       try {
         const childrenList = children?.length || await api.getChildren()
         if (!childrenList.length) {
+          console.log('no children found')
           return navigation.navigate('Login', {error: 'Hittar inga barn med det personnumret'})
         }
 
@@ -56,7 +55,7 @@ export const Children = ({navigation}) => {
       }
     }
     if (api.isLoggedIn) load()
-  }, [])
+  }, [api.isLoggedIn])
 
   return <ChildrenView navigation={navigation} children={children}></ChildrenView>
 }
@@ -148,11 +147,13 @@ export const ChildrenView = ({ navigation, children, eva }) => {
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction}  />
       <Divider/>
       <Layout style={{ flex: 1 }} level='1'>
-        {children.length ? <List
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-          data={children}
-          renderItem={renderItem} />
+        {children.length ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
+            <List
+            style={styles.container}
+            contentContainerStyle={styles.contentContainer}
+            data={children}
+            renderItem={renderItem} />
+          </Layout>
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <Image source={require('../assets/undraw_teaching_f1cm.png')} style={{height: 400, width: '100%'}}></Image>
               <View style={{flexDirection: 'row'}}>
@@ -160,6 +161,7 @@ export const ChildrenView = ({ navigation, children, eva }) => {
                 <Text category='h1' style={{marginLeft: 10, marginTop: -7}}>Laddar...</Text>
               </View>
             </Layout>}
+
       </Layout>
     </SafeAreaView>
   )

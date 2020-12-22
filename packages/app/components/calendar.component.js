@@ -1,13 +1,12 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Divider, List, ListItem, Icon, Text} from '@ui-kitten/components';
+import { StyleSheet, Image, View } from 'react-native';
+import { Divider, List, ListItem, Icon, Text, Layout} from '@ui-kitten/components';
 import moment from 'moment'
 import 'moment/locale/sv'  // without this line it didn't work
 moment.locale('sv')
 
 export const Calendar = ({calendar}) => {
 
-  const parseMoment = (date) => moment(date, 'YYYY-MM-DD hh:mm')
 
   const renderItemIcon = (startDate, endDate) => 
     (props) => <Icon {...props} fill={parseMoment(startDate).isBefore() && parseMoment(endDate).isAfter() ? '#33f' : '#333'} name={parseMoment(endDate || startDate).isBefore() ? 'calendar' : 'calendar-outline'}/>
@@ -20,16 +19,22 @@ export const Calendar = ({calendar}) => {
     />
   );
 
+  calendar.length = 0
 
-  return (
+  return (!calendar.length ?
+    <View style={{flex: 1}}>
+      <Image source={require('../assets/girls.png')} style={{height: 200, width: '100%'}}></Image>
+      <Text category="h5">Det ser lite tomt ut i kalendern</Text>
+    </View>
+      :
     <List
       style={styles.container}
       data={calendar.sort((a, b) => b.startDate < a.startDate)}
       ItemSeparatorComponent={Divider}
       renderItem={renderItem}
     />
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
