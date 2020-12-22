@@ -23,7 +23,6 @@ export const NewsItem = ({ navigation, route }) => {
       <Text category='h3'>
         {newsItem.header}
       </Text>
-      <Image source={newsItem.ImageUrl}></Image>
     </View>
   )
 
