@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Divider, List, ListItem, Icon, Text} from '@ui-kitten/components';
 import moment from 'moment'
-import 'moment/locale/se'  // without this line it didn't work
-moment.locale('se')
+import 'moment/locale/sv'  // without this line it didn't work
+moment.locale('sv')
 
 export const Calendar = ({calendar}) => {
 
