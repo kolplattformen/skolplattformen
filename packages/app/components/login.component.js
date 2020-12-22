@@ -69,9 +69,8 @@ export const Login = ({ navigation, route }) => {
   }
 
   const openBankId = (token) => {
-    const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token}&redirect=null` : `bankid:///?autostarttoken=${token}&redirect=null`  
-    console.log(`Open BankID: ${bankIdUrl}`)
     try {
+      const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null` : `bankid:///?autostarttoken=${token.token}&redirect=null`  
       Linking.openURL(bankIdUrl)
     } catch(err){ 
       setHasBankId(false)
@@ -91,7 +90,6 @@ export const Login = ({ navigation, route }) => {
       setLoggedIn(true)
       navigateToChildren()
       const session = api.getSessionCookie()
-      console.log('session', session)
       setCookie(session)
       setVisible(false)
     })
@@ -132,7 +130,7 @@ export const Login = ({ navigation, route }) => {
       </Layout>
     : <KeyboardAvoidingView>
       <Layout style={{ flex: 1 }}>
-        <Image source={require('../assets/children.jpg')} style={{height: 280, width: '90%'}}></Image>
+        <Image source={require('../assets/children.png')} style={{height: 270, width: '100%'}}></Image>
         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
           <Text category="h3">Vårdnadshavare</Text>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
