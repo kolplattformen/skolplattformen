@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
-import { TabBar, TopNavigation, TopNavigationAction, Tab, TabView, Layout, Text, Divider, Icon } from '@ui-kitten/components'
+import { TabBar, TopNavigation, TopNavigationAction, Tab, TabView, OverflowMenu, MenuItem, Layout, Text, Divider, Icon } from '@ui-kitten/components'
 import { NewsList } from './newsList.component'
 import { Calendar } from './calendar.component'
 import { Classmates } from './classmates.component'
@@ -10,6 +10,7 @@ import moment from 'moment'
 export const Child = ({route, navigation}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const { child, color } = route.params;
+  const [menuVisible, setMenuVisible] = React.useState(false);
 
   const NewsIcon = (props) => (
     <Icon {...props} name='activity-outline'/>
@@ -22,13 +23,20 @@ export const Child = ({route, navigation}) => {
     <Icon {...props} name='people-outline'/>
   )
 
+  const EditIcon = (props) => (
+    <Icon {...props} name='edit'/>
+  )
   const SettingsIcon = (props) => (
     <Icon {...props} name='options-2-outline'/>
   )
-
   const BackIcon = (props) => (
     <Icon {...props} name='arrow-back' />
   )
+
+  const MenuIcon = (props) => (
+    <Icon {...props} name='more-vertical'/>
+  )
+
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   )
@@ -37,10 +45,36 @@ export const Child = ({route, navigation}) => {
     navigation.goBack()
   }
 
+
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  }
+
+  const renderMenuAction = () => (
+    <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
+  )
+
+  const renderRightActions = () => (
+    <React.Fragment>
+      <OverflowMenu
+        anchor={renderMenuAction}
+        visible={menuVisible}
+        backdropStyle={styles.backdrop}
+        onBackdropPress={toggleMenu}>
+        <MenuItem accessoryLeft={SettingsIcon} title='Anmäl frånvaro'/>
+      </OverflowMenu>
+    </React.Fragment>
+  );
+
   return (
     <SafeAreaView style={{ flex: 1 }} style={{...styles.topBar, color: color}}>
-      <TopNavigation title={ child.name} alignment='center' accessoryLeft={BackAction}  style={{...styles.topBar, color: color}}/>
-      <TabView selectedIndex={selectedIndex} tabBarStyle={{color}} indicatorStyle={{backgroundColor: color, color}} onSelect={index => setSelectedIndex(index)}>
+      <TopNavigation title={ child.name} 
+        alignment='center' 
+        accessoryLeft={BackAction}
+        accessoryRight={renderRightActions}
+        style={styles.topBar}/>
+      <TabView selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
             <NewsList news={child.news} />
@@ -59,16 +93,6 @@ export const Child = ({route, navigation}) => {
             <Classmates classmates={child.classmates}/>
           </Layout>
         </Tab>
-        <Tab title="Inställningar" icon={SettingsIcon}>
-          <Layout style={styles.tabContainer}>
-            <Text category='h5'>
-              Inställningar
-            </Text>
-            <Text category='c2'>
-              Här kommer du kunna sjukanmäla och göra andra bra grejer...
-            </Text>
-          </Layout>
-        </Tab>
       </TabView>
       
     </SafeAreaView>
@@ -83,8 +107,11 @@ const styles = StyleSheet.create({
   tabContainer: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    paddingTop: 5,
+    paddingTop: 10,
     paddingLeft: 10,
     flexDirection: 'column'
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 })

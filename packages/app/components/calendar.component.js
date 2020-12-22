@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Divider, List, ListItem, Icon, Text} from '@ui-kitten/components';
 import moment from 'moment'
+import 'moment/locale/se'  // without this line it didn't work
+moment.locale('se')
 
 export const Calendar = ({calendar}) => {
 
@@ -13,7 +15,7 @@ export const Calendar = ({calendar}) => {
   const renderItem = ({ item }) => (
     <ListItem
       title={`${item.title}`}
-      description={`${moment(item.startDate).calendar()}`}
+      description={`${moment(item.startDate).locale('sv').calendar()}`}
       accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
     />
   );

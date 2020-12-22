@@ -45,4 +45,8 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 2,
   },
+  contentContainer: {
+    backgroundColor: 'transparent',
+    paddingRight: 10
+  }
 });

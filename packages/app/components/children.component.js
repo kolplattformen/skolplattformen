@@ -8,7 +8,7 @@ import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction
 import useAsyncStorage from '@rnhooks/async-storage'
 import {api} from '../lib/backend'
 
-const colors = ['#F2FDD3', '#CEFEF1', '#FEF2DC', '#FEE2E3', '#CB4D93']
+const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -66,7 +66,7 @@ export const Children = ({navigation}) => {
 }
 
 
-export const ChildrenView = ({ navigation, children }) => {
+export const ChildrenView = ({ navigation, children, eva }) => {
 
   
 
@@ -88,9 +88,9 @@ export const ChildrenView = ({ navigation, children }) => {
   )
 
   const Header = (props, info, i) => (
-    <View {...props} style={{flexDirection: 'row', backgroundColor: colors[i % colors.length]}}>
+    <View {...props} style={{flexDirection: 'row'}}>
       <View style={{margin: 20}}>
-        <Avatar source={require('../assets/avatar.png')}  />
+        <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
       <View style={{margin: 20}}>
         <Text category='h6'>
@@ -130,15 +130,19 @@ export const ChildrenView = ({ navigation, children }) => {
   )
 
   const renderItem = (info) => {
+    const color = colors[info.index % colors.length]
     return <Card
-      style={{...styles.card, backgroundColor: colors[info.index % colors.length]}}
+      style={{...styles.card}}
+      appearance="filled"
+      status={color}
       header={headerProps => Header(headerProps, info, info.index)}
       footer={footerProps => Footer(footerProps, info)}
-      onPress={() => navigateChild(info.item, colors[info.index % colors.length])}>
+      onPress={() => navigateChild(info.item, color)}>
       
-      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => <Text appearance='hint' category='c1' key={i}>
-                                         {`${calendarItem.title}`}
-                                       </Text>
+      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => 
+        <Text appearance='hint' category='c1' key={i}>
+          {`${calendarItem.title}`}
+        </Text>
        )}
     </Card>
   }
