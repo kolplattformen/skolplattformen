@@ -1,5 +1,6 @@
 import React, {useState, useMemo, useCallback, useEffect } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
 import useFetch from 'use-http'
 import moment from 'moment'
@@ -37,7 +38,7 @@ const fake = fullChildren => fullChildren.map(child => ({
 export const Children = ({navigation}) => {
   const [children, setChildren] = useAsyncStorage('@children', [])
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const load = async () => {
       try {
         const childrenList = children?.length || await api.getChildren()

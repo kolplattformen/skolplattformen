@@ -22,16 +22,6 @@ export const Login = ({ navigation, route }) => {
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
-    const url = Platform.OS == 'ios' ? 'https://app.bankid.com/' : 'bankid:///'
-    setHasBankId(Linking.canOpenURL(url))
-    if (route.params?.error) setError(route.params.error)
-    console.log('effect')
-    if (cookie) {
-      console.log('cookie', cookie)
-      api.setSessionCookie(cookie)
-      setLoggedIn(true)
-      navigateToChildren()
-    }
   }, [socialSecurityNumber, cookie])
 
   useEffect(() => {
@@ -88,9 +78,9 @@ export const Login = ({ navigation, route }) => {
     loginStatus.on("ERROR", () => setError('Inloggningen misslyckades, försök igen!') && setVisible(false))
     loginStatus.on("OK", async () => {
       setLoggedIn(true)
-      navigateToChildren()
       const session = api.getSessionCookie()
       setCookie(session)
+      navigateToChildren()
       setVisible(false)
     })
   }
