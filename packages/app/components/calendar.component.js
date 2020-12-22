@@ -9,7 +9,7 @@ export const Calendar = ({calendar}) => {
 
 
   const renderItemIcon = (startDate, endDate) => 
-    (props) => <Icon {...props} fill={parseMoment(startDate).isBefore() && parseMoment(endDate).isAfter() ? '#33f' : '#333'} name={parseMoment(endDate || startDate).isBefore() ? 'calendar' : 'calendar-outline'}/>
+    (props) => <Icon {...props} fill={moment(startDate).isBefore() && moment(endDate).isAfter() ? '#33f' : '#333'} name={moment(endDate || startDate).isBefore() ? 'calendar' : 'calendar-outline'}/>
 
   const renderItem = ({ item }) => (
     <ListItem
@@ -17,9 +17,7 @@ export const Calendar = ({calendar}) => {
       description={`${moment(item.startDate).locale('sv').calendar()}`}
       accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
     />
-  );
-
-  calendar.length = 0
+  )
 
   return (!calendar.length ?
     <View style={{flex: 1}}>

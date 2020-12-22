@@ -6,8 +6,6 @@ import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction
 // import children from '../output.json'
 import {useAsyncStorage} from 'use-async-storage'
 import {api, loadChildrenDetails} from '../lib/backend'
-import faker from 'faker'
-faker.locale = 'sv'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -26,12 +24,6 @@ const CalendarIcon = (style) => (
 const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
-
-const fake = fullChildren => fullChildren.map(child => ({
-  ...child,
-  name: faker.fake('{{name.firstName}} {{name.lastName}} (elev)'),
-  classmates: child.classmates.map(classmate => ({...classmate, ...faker.helper.createCard()}))
-}))
 
 export const Children = ({navigation}) => {
   const [children, setChildren] = useAsyncStorage('@children', [])
@@ -155,9 +147,9 @@ export const ChildrenView = ({ navigation, children, eva }) => {
             renderItem={renderItem} />
           </Layout>
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <Image source={require('../assets/undraw_teaching_f1cm.png')} style={{height: 400, width: '100%'}}></Image>
+              <Image source={require('../assets/girls.png')} style={{height: 400, width: '100%'}}></Image>
               <View style={{flexDirection: 'row'}}>
-                <Spinner size='large'/>
+                <Spinner size='large' status="warning"/>
                 <Text category='h1' style={{marginLeft: 10, marginTop: -7}}>Laddar...</Text>
               </View>
             </Layout>}
