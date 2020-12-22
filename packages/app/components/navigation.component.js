@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import useAsyncStorage from '@rnhooks/async-storage'
+import { useAsyncStorage } from 'use-async-storage'
 import { Login } from './login.component'
 import { Children } from './children.component'
 import { Child } from './child.component'

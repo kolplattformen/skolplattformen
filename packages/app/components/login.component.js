@@ -3,7 +3,7 @@ import { Platform } from 'react-native'
 import { SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingView, View } from 'react-native'
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import useAsyncStorage from '@rnhooks/async-storage'
+import {useAsyncStorage} from 'use-async-storage'
 import { ScrollView } from 'react-native-gesture-handler'
 import {api} from '../lib/backend'
 
@@ -17,7 +17,7 @@ export const Login = ({ navigation, route }) => {
   const [argument, setArgument] = React.useState('öppna')
   const [error, setError] = React.useState(null)
   const [hasBankId, setHasBankId] = React.useState(false)
-  const [socialSecurityNumber, setSocialSecurityNumber, clearSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
+  const [socialSecurityNumber, setSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
   const [cookie, setCookie, clearCookie] = useAsyncStorage('@cookie')
 
   useEffect(() => {
@@ -107,8 +107,8 @@ export const Login = ({ navigation, route }) => {
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
       {loggedIn ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
-        <Image source={require('../assets/man.png')} style={{maxHeight: 300, width: '100%' }}></Image>
-        <View style={{ margin: 30, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1}}>
+        <Image source={require('../assets/man.png')} style={{maxHeight: 300, width: '100%', borderBottomWidth:1 }}></Image>
+        <View style={{ marginTop: 80, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1}}>
           <Text category="h4">{socialSecurityNumber}</Text>
           <Text>{error ? error : 'Hurra, du är inloggad!'}</Text>
           <Button
@@ -136,6 +136,7 @@ export const Login = ({ navigation, route }) => {
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
             style={{minHeight:70}}
               accessoryLeft = {PersonIcon}
+              keyboardType='numeric'
               caption={error && error.message || ''}
               onChangeText = {text => handleInput(text)}
               placeholder="Ditt personnr (10 eller 12 siffror)"/>

@@ -5,8 +5,10 @@ import useFetch from 'use-http'
 import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
-import useAsyncStorage from '@rnhooks/async-storage'
-import {api} from '../lib/backend'
+import {useAsyncStorage} from 'use-async-storage'
+import {api, loadChildrenDetails} from '../lib/backend'
+import faker from 'faker'
+faker.locale = 'sv'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -26,40 +28,33 @@ const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
 
+const fake = fullChildren => fullChildren.map(child => ({
+  ...child,
+  name: faker.fake('{{name.firstName}} {{name.lastName}} (elev)'),
+  classmates: child.classmates.map(classmate => ({...classmate, ...faker.helper.createCard()}))
+}))
+
 export const Children = ({navigation}) => {
-  const [savedChildren, setSavedChildren, clearSavedChildren] = useAsyncStorage('@children', '[]')
-  const [children, setChildren] = useState(JSON.parse(savedChildren) || []) 
+  const [children, setChildren] = useAsyncStorage('@children', [])
 
   useEffect(() => {
     const load = async () => {
       try {
-        const children = await api.getChildren()
-
-        if (!children.length) {
+        const childrenList = children?.length || await api.getChildren()
+        if (!childrenList.length) {
           return navigation.navigate('Login', {error: 'Hittar inga barn med det personnumret'})
         }
-        console.log('got children', children)
-        //setChildren(children) 
 
-        //TODO: lazy load these 
-        const fullChildren = await Promise.all(children.map(async child => ({
-          ...child,
-          news: await api.getNews(child),
-          calendar: await api.getCalendar(child),
-          classmates: await api.getClassmates(child),
-          schedule: await api.getSchedule(child, moment().startOf('day'), moment().add(7,'days').endOf('day')),
-          menu: await api.getMenu(child),
-          notifications:  await api.getNotifications(child),
-        })))
-        console.log('full', fullChildren)
+        // Update the list with all details we get the most often updated info first
+        const fullChildren = await loadChildrenDetails(childrenList, {calendar: true, schedule: true, news: true, menu:true, notifications: true, classmates: true})
         setChildren(fullChildren)
-        setSavedChildren(JSON.stringify(savedChildren))
   
       } catch (err) {
+        console.log('err', err)
         navigation.navigate('Login', {error: 'Fel uppstod, försök igen'})
       }
     }
-    load()
+    if (api.isLoggedIn) load()
   }, [])
 
   return <ChildrenView navigation={navigation} children={children}></ChildrenView>
@@ -149,7 +144,7 @@ export const ChildrenView = ({ navigation, children, eva }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
+      <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction}  />
       <Divider/>
       <Layout style={{ flex: 1 }} level='1'>
         {children.length ? <List
