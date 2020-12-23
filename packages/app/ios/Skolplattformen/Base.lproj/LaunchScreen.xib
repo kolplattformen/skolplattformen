@@ -13,29 +13,28 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_launcher-playstore" id="AD3-Uy-RPP">
-                    <rect key="frame" x="49.156626506024054" y="235" width="291.00000000000011" height="270.00000000000006"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skolplattformen" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="0.0" y="100" width="390" height="43"/>
+                    <rect key="frame" x="60.666666666666657" y="100" width="268.66666666666674" height="43"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                    <color key="textColor" red="0.99999552970000005" green="1" blue="0.99607855079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appstore" id="bMh-M1-Kl4">
+                    <rect key="frame" x="45" y="192" width="300" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.019342456009999998" green="0.42363536359999998" blue="0.74905878309999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" red="0.99999552970000005" green="1" blue="0.99607855079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="AD3-Uy-RPP" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="92" id="Enz-w3-qGu"/>
-                <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="bHX-Nr-atg"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="e34-cY-Leb"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="msO-ON-KBD"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ddS-XM-xPo"/>
+                <constraint firstItem="bMh-M1-Kl4" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="49" id="juP-om-veb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <point key="canvasLocation" x="546.15384615384619" y="454.9763033175355"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_launcher-playstore" width="512" height="512"/>
+        <image name="appstore" width="1024" height="1024"/>
     </resources>
 </document>
