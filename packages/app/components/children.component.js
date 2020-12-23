@@ -1,14 +1,13 @@
 import React, {useState, useMemo, useCallback, useEffect } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { SafeAreaView } from 'react-native'
-import useFetch from 'use-http'
 import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 // import children from '../output.json'
-import useAsyncStorage from '@rnhooks/async-storage'
-import {api} from '../lib/backend'
+import {useAsyncStorage} from 'use-async-storage'
+import {api, loadChildrenDetails} from '../lib/backend'
 
-const colors = ['#F2FDD3', '#CEFEF1', '#FEF2DC', '#FEE2E3', '#CB4D93']
+const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -27,46 +26,34 @@ const PeopleIcon = (style) => (
 )
 
 export const Children = ({navigation}) => {
-  const [savedChildren, setSavedChildren, clearSavedChildren] = useAsyncStorage('@children', '[]')
-  const [children, setChildren] = useState(JSON.parse(savedChildren) || []) 
+  const [children, setChildren] = useAsyncStorage('@children', [])
 
   useEffect(() => {
     const load = async () => {
       try {
-        const children = await api.getChildren()
-
-        if (!children.length) {
+        const childrenList = children?.length || await api.getChildren()
+        if (!childrenList?.length) {
+          console.log('no children found')
           return navigation.navigate('Login', {error: 'Hittar inga barn med det personnumret'})
         }
-        console.log('got children', children)
-        //setChildren(children) 
 
-        //TODO: lazy load these 
-        const fullChildren = await Promise.all(children.map(async child => ({
-          ...child,
-          news: await api.getNews(child),
-          calendar: await api.getCalendar(child),
-          classmates: await api.getClassmates(child),
-          schedule: await api.getSchedule(child, moment().startOf('day'), moment().add(7,'days').endOf('day')),
-          menu: await api.getMenu(child),
-          notifications:  await api.getNotifications(child),
-        })))
-        console.log('full', fullChildren)
+        // Update the list with all details we get the most often updated info first
+        const fullChildren = await loadChildrenDetails(childrenList, {calendar: true, schedule: true, news: true, menu:true, notifications: true, classmates: true})
         setChildren(fullChildren)
-        setSavedChildren(JSON.stringify(savedChildren))
   
       } catch (err) {
+        console.log('err', err)
         navigation.navigate('Login', {error: 'Fel uppstod, försök igen'})
       }
     }
-    load()
-  }, [])
+    if (api.isLoggedIn) load()
+  }, [api.isLoggedIn])
 
   return <ChildrenView navigation={navigation} children={children}></ChildrenView>
 }
 
 
-export const ChildrenView = ({ navigation, children }) => {
+export const ChildrenView = ({ navigation, children, eva }) => {
 
   
 
@@ -88,9 +75,9 @@ export const ChildrenView = ({ navigation, children }) => {
   )
 
   const Header = (props, info, i) => (
-    <View {...props} style={{flexDirection: 'row', backgroundColor: colors[i % colors.length]}}>
+    <View {...props} style={{flexDirection: 'row'}}>
       <View style={{margin: 20}}>
-        <Avatar source={require('../assets/avatar.png')}  />
+        <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
       <View style={{margin: 20}}>
         <Text category='h6'>
@@ -117,7 +104,7 @@ export const ChildrenView = ({ navigation, children }) => {
         status='control'
         size='small'
         accessoryLeft={CalendarIcon}>
-        {`${(info.item.notifications || []).filter(c => moment(c.startDate).isSame('day') ).length} idag`}
+        {`${(info.item.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day') ).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}
@@ -130,36 +117,43 @@ export const ChildrenView = ({ navigation, children }) => {
   )
 
   const renderItem = (info) => {
+    const color = colors[info.index % colors.length]
     return <Card
-      style={{...styles.card, backgroundColor: colors[info.index % colors.length]}}
+      style={{...styles.card}}
+      appearance="filled"
+      status={color}
       header={headerProps => Header(headerProps, info, info.index)}
       footer={footerProps => Footer(footerProps, info)}
-      onPress={() => navigateChild(info.item, colors[info.index % colors.length])}>
+      onPress={() => navigateChild(info.item, color)}>
       
-      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => <Text appearance='hint' category='c1' key={i}>
-                                         {`${calendarItem.title}`}
-                                       </Text>
+      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate, 'YYYY-MM-DD hh:mm').isSame('day'))).map((calendarItem, i) => 
+        <Text appearance='hint' category='c1' key={i}>
+          {`${calendarItem.title}`}
+        </Text>
        )}
     </Card>
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'transparent'}}>
+      <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction}  />
       <Divider/>
       <Layout style={{ flex: 1 }} level='1'>
-        {children.length ? <List
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-          data={children}
-          renderItem={renderItem} />
+        {children?.length ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
+            <List
+            style={styles.container}
+            contentContainerStyle={styles.contentContainer}
+            data={children}
+            renderItem={renderItem} />
+          </Layout>
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <Image source={require('../assets/undraw_teaching_f1cm.png')} style={{height: 400, width: '100%'}}></Image>
+              <Image source={require('../assets/girls.png')} style={{height: 400, width: '100%'}}></Image>
               <View style={{flexDirection: 'row'}}>
-                <Spinner size='large'/>
+                <Spinner size='large' status="warning"/>
                 <Text category='h1' style={{marginLeft: 10, marginTop: -7}}>Laddar...</Text>
               </View>
             </Layout>}
+
       </Layout>
     </SafeAreaView>
   )

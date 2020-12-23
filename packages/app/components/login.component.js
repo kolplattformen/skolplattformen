@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Platform } from 'react-native'
-import { SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingView, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingView, TouchableOpacity, View } from 'react-native'
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import useAsyncStorage from '@rnhooks/async-storage'
+import {useAsyncStorage} from 'use-async-storage'
 import { ScrollView } from 'react-native-gesture-handler'
 import {api} from '../lib/backend'
 
@@ -17,21 +17,11 @@ export const Login = ({ navigation, route }) => {
   const [argument, setArgument] = React.useState('öppna')
   const [error, setError] = React.useState(null)
   const [hasBankId, setHasBankId] = React.useState(false)
-  const [socialSecurityNumber, setSocialSecurityNumber, clearSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
+  const [socialSecurityNumber, setSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
   const [cookie, setCookie, clearCookie] = useAsyncStorage('@cookie')
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
-    const url = Platform.OS == 'ios' ? 'https://app.bankid.com/' : 'bankid:///'
-    setHasBankId(Linking.canOpenURL(url))
-    if (route.params?.error) setError(route.params.error)
-    console.log('effect')
-    if (cookie) {
-      console.log('cookie', cookie)
-      api.setSessionCookie(cookie)
-      setLoggedIn(true)
-      navigateToChildren()
-    }
   }, [socialSecurityNumber, cookie])
 
   useEffect(() => {
@@ -88,9 +78,9 @@ export const Login = ({ navigation, route }) => {
     loginStatus.on("ERROR", () => setError('Inloggningen misslyckades, försök igen!') && setVisible(false))
     loginStatus.on("OK", async () => {
       setLoggedIn(true)
-      navigateToChildren()
       const session = api.getSessionCookie()
       setCookie(session)
+      navigateToChildren()
       setVisible(false)
     })
   }
@@ -107,8 +97,8 @@ export const Login = ({ navigation, route }) => {
       <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center'/>
       {loggedIn ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
-        <Image source={require('../assets/man.png')} style={{maxHeight: 300, width: '100%' }}></Image>
-        <View style={{ margin: 30, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1}}>
+        <Image source={require('../assets/man.png')} style={{maxHeight: 300, width: '100%', borderBottomWidth:1 }}></Image>
+        <View style={{ marginTop: 80, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1}}>
           <Text category="h4">{socialSecurityNumber}</Text>
           <Text>{error ? error : 'Hurra, du är inloggad!'}</Text>
           <Button
@@ -129,25 +119,30 @@ export const Login = ({ navigation, route }) => {
         </View>
       </Layout>
     : <KeyboardAvoidingView>
-      <Layout style={{ flex: 1 }}>
-        <Image source={require('../assets/children.png')} style={{height: 270, width: '100%'}}></Image>
-        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
-          <Text category="h3">Vårdnadshavare</Text>
+        <Layout style={{ flex: 1 }}>
+          { 
+            // hidden easter egg, just touch the image to login without bankId if you still have a valid token
+          }
+          <TouchableOpacity onPress={navigateToChildren} style={{height: 320}}> 
+            <Image source={require('../assets/boys.png')} style={{height: 320, marginTop: -20, marginLeft: -10, width: '110%'}}></Image>
+          </TouchableOpacity>
+          <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
             <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
-            style={{minHeight:70}}
-              accessoryLeft = {PersonIcon}
-              caption={error && error.message || ''}
-              onChangeText = {text => handleInput(text)}
-              placeholder="Ditt personnr (10 eller 12 siffror)"/>
-          <Button onPress={startLogin} style={{width: "100%"}} 
-            appearence='ghost' 
-            disabled={!valid}
-            status='primary'
-            accessoryRight={SecureIcon}
-            size='medium'>
-            Öppna BankID
-          </Button>
-        </View>
+              style={{minHeight:70}}
+                accessoryLeft = {PersonIcon}
+                keyboardType='numeric'
+                caption={error && error.message || ''}
+                onChangeText = {text => handleInput(text)}
+                placeholder="Ditt personnr (10 eller 12 siffror)"/>
+            <Button onPress={startLogin} style={{width: "100%"}} 
+              appearence='ghost' 
+              disabled={!valid}
+              status='primary'
+              accessoryRight={SecureIcon}
+              size='medium'>
+              Öppna BankID
+            </Button>
+          </View>
         </Layout>
       </KeyboardAvoidingView>
     }
@@ -157,7 +152,7 @@ export const Login = ({ navigation, route }) => {
         backdropStyle={styles.backdrop}
         onBackdropPress={() => setVisible(false)}>
         <Card disabled={true}>
-          {hasBankId ? <Text style={{margin: 10}}>Öppnar BankID. Växla tillbaka till hit sen.</Text> : <Text style={{margin: 10}}>Väntar på BankID...</Text>}
+          {hasBankId ? <Text style={{margin: 10}}>Öppnar BankID. Växla tillbaka hit sen.</Text> : <Text style={{margin: 10}}>Väntar på BankID...</Text>}
           
           <Button 
             visible={!loggedIn}

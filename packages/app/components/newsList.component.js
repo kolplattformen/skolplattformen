@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { SafeAreaView, StyleSheet, View, Image } from 'react-native'
 import { Card, List, Text, Layout } from '@ui-kitten/components'
-import { Image } from 'react-native-svg'
 import { NavigationContainer } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -21,28 +20,27 @@ export const NewsList = ({news}) => {
       style={styles.card}
       onPress={() => navigation.navigate('NewsItem', {newsItem: info.item})}
       header={headerProps => renderItemHeader(headerProps, info)}>
+        <Image source={{ uri: `https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=${info.item.imageUrl}`}} style={{height: 300}}></Image>
     </Card>
   )
 
   return (
-    <Layout style={styles.topContainer} level='1'>
-      <List
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        data={news}
-        renderItem={renderItem} />
-    </Layout>
+    <List
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      data={news}
+      renderItem={renderItem} />
   )
 }
 
 
 const styles = StyleSheet.create({
-  topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   card: {
     flex: 1,
     margin: 2,
   },
+  contentContainer: {
+    paddingRight: 10,
+    paddingBottom: 330
+  }
 });
