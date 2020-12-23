@@ -119,26 +119,32 @@ export const Login = ({ navigation, route }) => {
         </View>
       </Layout>
     : <KeyboardAvoidingView>
-      <Layout style={{ flex: 1 }}>
-        <Image source={require('../assets/boys.png')} style={{height: 350, marginLeft: -20, width: '120%'}}></Image>
-        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
-          <Text category="h3">Vårdnadshavare</Text>
-            <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
-            style={{minHeight:70}}
-              accessoryLeft = {PersonIcon}
-              keyboardType='numeric'
-              caption={error && error.message || ''}
-              onChangeText = {text => handleInput(text)}
-              placeholder="Ditt personnr (10 eller 12 siffror)"/>
-          <Button onPress={startLogin} style={{width: "100%"}} 
-            appearence='ghost' 
-            disabled={!valid}
-            status='primary'
-            accessoryRight={SecureIcon}
-            size='medium'>
-            Öppna BankID
-          </Button>
-        </View>
+        <Layout style={{ flex: 1 }}>
+          <Image source={require('../assets/boys.png')} style={{height: 320, marginTop: -20, marginLeft: -10, width: '110%'}}></Image>
+          <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
+            <Text category="h3">Vårdnadshavare</Text>
+              <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
+              style={{minHeight:70}}
+                accessoryLeft = {PersonIcon}
+                keyboardType='numeric'
+                caption={error && error.message || ''}
+                onChangeText = {text => handleInput(text)}
+                placeholder="Ditt personnr (10 eller 12 siffror)"/>
+            <Button onPress={startLogin} style={{width: "100%"}} 
+              appearence='ghost' 
+              disabled={!valid}
+              status='primary'
+              accessoryRight={SecureIcon}
+              size='medium'>
+              Öppna BankID
+            </Button>
+
+            <Button onPress={navigateToChildren}
+              appearence='ghost' 
+              size='tiny'>
+              Hoppa över
+            </Button>
+          </View>
         </Layout>
       </KeyboardAvoidingView>
     }

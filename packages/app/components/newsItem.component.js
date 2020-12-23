@@ -23,8 +23,23 @@ export const NewsItem = ({ navigation, route }) => {
       <Text category='h3'>
         {newsItem.header}
       </Text>
+      <Image source={{ uri: `https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=${newsItem.imageUrl}`}} style={{width: '100%', minHeight: 300}}></Image>
     </View>
   )
+  
+  const rules = {
+    image: (
+      node,
+      children,
+      parent,
+      styles,
+      allowedImageHandlers,
+      defaultImageHandler,
+    ) => {
+      const {src, alt} = node.attributes;
+      return <Image source={{uri : `https://elevstockholm.sharepoint.com${src}`}} style={{width: '100%', minHeight: 300}}></Image>
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }} >
@@ -34,7 +49,7 @@ export const NewsItem = ({ navigation, route }) => {
       <Layout style={styles.topContainer} level='1'>
         <ScrollView>
           <Card style={styles.card} header={headerProps => renderItemHeader(headerProps, newsItem)}>
-            <Markdown style={{ body: {color: 'black'}, heading1: {color: 'black'} }}>
+            <Markdown rules={rules} style={{ body: {color: 'black', fontSize: 17, lineHeight: 23}, heading1: {color: 'black'} }}>
               {decodeURIComponent(newsItem.body)}
             </Markdown>
           </Card>

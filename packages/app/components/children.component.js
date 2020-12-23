@@ -32,7 +32,7 @@ export const Children = ({navigation}) => {
     const load = async () => {
       try {
         const childrenList = children?.length || await api.getChildren()
-        if (!childrenList.length) {
+        if (!childrenList?.length) {
           console.log('no children found')
           return navigation.navigate('Login', {error: 'Hittar inga barn med det personnumret'})
         }
@@ -104,7 +104,7 @@ export const ChildrenView = ({ navigation, children, eva }) => {
         status='control'
         size='small'
         accessoryLeft={CalendarIcon}>
-        {`${(info.item.notifications || []).filter(c => moment(c.startDate).isSame('day') ).length} idag`}
+        {`${(info.item.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day') ).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}
@@ -126,7 +126,7 @@ export const ChildrenView = ({ navigation, children, eva }) => {
       footer={footerProps => Footer(footerProps, info)}
       onPress={() => navigateChild(info.item, color)}>
       
-      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) => 
+      {([...info.item.calendar, ...info.item.schedule].filter(a => moment(a.startDate, 'YYYY-MM-DD hh:mm').isSame('day'))).map((calendarItem, i) => 
         <Text appearance='hint' category='c1' key={i}>
           {`${calendarItem.title}`}
         </Text>
@@ -135,11 +135,11 @@ export const ChildrenView = ({ navigation, children, eva }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'transparent'}}>
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction}  />
       <Divider/>
       <Layout style={{ flex: 1 }} level='1'>
-        {children.length ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
+        {children?.length ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
             <List
             style={styles.container}
             contentContainerStyle={styles.contentContainer}

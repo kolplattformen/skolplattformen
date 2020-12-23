@@ -19,7 +19,7 @@ export const Calendar = ({calendar}) => {
     />
   )
 
-  return (!calendar.length ?
+  return (!calendar?.length ?
     <View style={{flex: 1}}>
       <Image source={require('../assets/girls.png')} style={{height: 200, width: '100%'}}></Image>
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>

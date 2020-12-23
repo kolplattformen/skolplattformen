@@ -88,7 +88,7 @@ export const Child = ({route, navigation}) => {
         <Tab title="Klassen" icon={ClassIcon}>
           <Layout style={styles.tabContainer}>
             <Text category='h5'>
-              Klass {child.classmates.length ? child.classmates[0].className : ''}
+              Klass {child.classmates?.length ? child.classmates[0].className : ''}
             </Text>
             <Classmates classmates={child.classmates}/>
           </Layout>
