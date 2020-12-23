@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Platform } from 'react-native'
-import { SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingView, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingView, TouchableOpacity, View } from 'react-native'
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import {useAsyncStorage} from 'use-async-storage'
@@ -120,10 +120,14 @@ export const Login = ({ navigation, route }) => {
       </Layout>
     : <KeyboardAvoidingView>
         <Layout style={{ flex: 1 }}>
-          <Image source={require('../assets/boys.png')} style={{height: 320, marginTop: -20, marginLeft: -10, width: '110%'}}></Image>
+          { 
+            // hidden easter egg, just touch the image to login without bankId if you still have a valid token
+          }
+          <TouchableOpacity onPress={navigateToChildren} style={{height: 320}}> 
+            <Image source={require('../assets/boys.png')} style={{height: 320, marginTop: -20, marginLeft: -10, width: '110%'}}></Image>
+          </TouchableOpacity>
           <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20}}>
-            <Text category="h3">Vårdnadshavare</Text>
-              <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
+            <Input label='Personnummer' autoFocus={true} value={socialSecurityNumber}
               style={{minHeight:70}}
                 accessoryLeft = {PersonIcon}
                 keyboardType='numeric'
@@ -137,12 +141,6 @@ export const Login = ({ navigation, route }) => {
               accessoryRight={SecureIcon}
               size='medium'>
               Öppna BankID
-            </Button>
-
-            <Button onPress={navigateToChildren}
-              appearence='ghost' 
-              size='tiny'>
-              Hoppa över
             </Button>
           </View>
         </Layout>

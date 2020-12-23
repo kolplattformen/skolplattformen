@@ -82,7 +82,7 @@ export const Child = ({route, navigation}) => {
         </Tab>
         <Tab title="Schema" icon={CalendarIcon}>
           <Layout style={styles.tabContainer}>
-            <Calendar calendar={[...child.calendar, ...child.schedule].filter(a => moment(a.startDate).isAfter(moment().startOf('day')) ) }></Calendar>
+            <Calendar calendar={[...child.calendar, ...child.schedule].filter(a => moment(a.startDate, 'YYYY-MM-DD hh:mm').isAfter(moment().startOf('day')) ) }></Calendar>
           </Layout>
         </Tab>
         <Tab title="Klassen" icon={ClassIcon}>

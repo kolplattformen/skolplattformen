@@ -18,7 +18,7 @@ export const Calendar = ({calendar}) => {
       accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
     />
   )
-
+  
   return (!calendar?.length ?
     <View style={{flex: 1}}>
       <Image source={require('../assets/girls.png')} style={{height: 200, width: '100%'}}></Image>
