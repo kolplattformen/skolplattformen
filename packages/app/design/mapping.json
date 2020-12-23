@@ -1,0 +1,22 @@
+{
+  "strict": {
+    "border-radius": 50
+  },
+  "components": {
+    "Button": {
+      "meta": {},
+      "appearances": {
+        "filled": {
+          "mapping": {},
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "backgroundColor": "blue"
+              }
+            }
+          } 
+        }
+      }
+    }
+  }
+}
