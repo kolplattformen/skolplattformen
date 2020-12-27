@@ -36,11 +36,10 @@ export const Children = ({ navigation }) => {
           console.log('no children found', await api.getChildren())
           return navigation.navigate('Login', { error: 'Hittar inga barn för det personnumret' })
         }
-        await setChildren(childrenList)
 
         childrenList.forEach(async (child, i) => {
           let result
-          let updatedChild
+          let updatedChild // keep a reference to the latest updated information so we don't patch an old object
           const iter = fillChild(child)
           while (!result?.done) {
             result = await iter.next() // get updated values for every updated property
