@@ -28,7 +28,6 @@ const PeopleIcon = (style) => (
 export const Children = ({ navigation }) => {
   const [children, setChildren] = useAsyncStorage('@children', [])
   const [cookie] = useAsyncStorage('@cookie')
-
   useEffect(() => {
     const load = async () => {
       try {
@@ -37,6 +36,8 @@ export const Children = ({ navigation }) => {
           console.log('no children found', await api.getChildren())
           return navigation.navigate('Login', { error: 'Hittar inga barn för det personnumret' })
         }
+        await setChildren(childrenList)
+
         childrenList.forEach(async (child, i) => {
           let result
           let updatedChild
@@ -46,7 +47,7 @@ export const Children = ({ navigation }) => {
             if (result.done) break
             const updated = await result.value
             childrenList[i] = updatedChild = { ...updatedChild, ...updated }
-            await setChildren(childrenList)
+            await setChildren(childrenList) // update after each new information we get. Might be too much?
           }
         })
       } catch (err) {

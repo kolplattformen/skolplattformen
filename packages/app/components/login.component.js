@@ -18,7 +18,8 @@ export const Login = ({ navigation, route }) => {
   const [error, setError] = React.useState(null)
   const [hasBankId, setHasBankId] = React.useState(false)
   const [socialSecurityNumber, setSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
-  const [cookie, setCookie, clearCookie] = useAsyncStorage('@cookie')
+  const [cookie, setCookie] = useAsyncStorage('@cookie')
+  const [children, setChildren] = useAsyncStorage('@children', [])
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
@@ -88,7 +89,8 @@ export const Login = ({ navigation, route }) => {
   const logout = async () => {
     setVisible(false)
     setLoggedIn(false)
-    clearCookie()
+    setChildren(null)
+    setCookie(null)
     api.logout()
   }
 
