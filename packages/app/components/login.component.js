@@ -71,7 +71,6 @@ export const Login = ({ navigation, route }) => {
 
   const startLogin = async () => {
     setVisible(true)
-    console.log('requesting login for', socialSecurityNumber)
     const loginStatus = await api.login(socialSecurityNumber)
     openBankId(loginStatus.token) // TODO: verify this solution after issue https://github.com/kolplattformen/embedded-api/issues/3 is resolved
     loginStatus.on('PENDING', () => console.log('BankID app not yet opened'))
