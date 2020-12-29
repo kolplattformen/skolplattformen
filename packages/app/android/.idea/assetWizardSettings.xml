@@ -80,7 +80,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Downloads/SpAppIcons/playstore.png" />
+                                                <entry key="imagePath" value="$PROJECT_DIR$/../skolplattformen-logga-original.png" />
                                                 <entry key="scalingPercent" value="70" />
                                               </map>
                                             </option>
@@ -114,7 +114,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="f5f5f6" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                       <entry key="legacyIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
