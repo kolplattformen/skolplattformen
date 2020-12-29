@@ -23,10 +23,10 @@ export const NewsItem = ({ navigation, route }) => {
       <Text category='h3'>
         {newsItem.header}
       </Text>
-      <Image source={{ uri: `https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=${newsItem.imageUrl}`}} style={{width: '100%', minHeight: 300}}></Image>
+      <Image source={{ uri: `https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=${newsItem.imageUrl}` }} style={styles.image} />
     </View>
   )
-  
+
   const rules = {
     image: (
       node,
@@ -34,22 +34,22 @@ export const NewsItem = ({ navigation, route }) => {
       parent,
       styles,
       allowedImageHandlers,
-      defaultImageHandler,
+      defaultImageHandler
     ) => {
-      const {src, alt} = node.attributes;
-      return <Image source={{uri : `https://elevstockholm.sharepoint.com${src}`}} style={{width: '100%', minHeight: 300}}></Image>
+      const { src } = node.attributes
+      return <Image key={src} source={{ uri: `https://elevstockholm.sharepoint.com${src}` }} style={{ width: '100%', minHeight: 300 }} />
     }
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }} >
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title='Nyhet från Skolplattformen' alignment='center' accessoryLeft={BackAction} />
-      <Divider/>
-      
+      <Divider />
+
       <Layout style={styles.topContainer} level='1'>
         <ScrollView>
           <Card style={styles.card} header={headerProps => renderItemHeader(headerProps, newsItem)}>
-            <Markdown rules={rules} style={{ body: {color: 'black', fontSize: 17, lineHeight: 23}, heading1: {color: 'black'} }}>
+            <Markdown rules={rules} style={{ body: { color: 'black', fontSize: 17, lineHeight: 23 }, heading1: { color: 'black' } }}>
               {decodeURIComponent(newsItem.body)}
             </Markdown>
           </Card>
@@ -67,5 +67,9 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 2
+  },
+  image: {
+    width: '100%',
+    minHeight: 300
   }
 })

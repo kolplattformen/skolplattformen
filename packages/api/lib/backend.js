@@ -1,6 +1,6 @@
 const moment = require('moment')
 const h2m = require('h2m')
-const {htmlDecode} = require('js-htmlencode')
+const { htmlDecode } = require('js-htmlencode')
 const urls = require('./urls')
 
 const { fetchJson, fetchText, fetchRaw } = require('./fetch')
@@ -16,7 +16,7 @@ const login = async (socialSecurityNumber) => {
   return token
 }
 
-const waitForToken = async ({order}, tries = 60) => {
+const waitForToken = async ({ order }, tries = 60) => {
   if (!tries) return Promise.reject('Timeout')
   const status = await fetchText(urls.checkStatus(order))
   if (status === 'OK') {
@@ -25,18 +25,18 @@ const waitForToken = async ({order}, tries = 60) => {
   } else {
     await pause(1000)
     console.log('retry', tries)
-    return await waitForToken({order}, tries--)
+    return await waitForToken({ order }, tries--)
   }
 }
 
 const getChildren = async (cookie) => {
   const children = await fetchJson(urls.children, cookie)
   return children
-    .map(({name, id, sdsId, status, schoolId}) =>
-      ({name, id, sdsId, status, schoolId}))
+    .map(({ name, id, sdsId, status, schoolId }) =>
+      ({ name, id, sdsId, status, schoolId }))
 }
 
-const getNews = async(childId, cookie) => {
+const getNews = async (childId, cookie) => {
   const news = await fetchJson(urls.news(childId), cookie)
   return news
     .newsItems
@@ -60,7 +60,7 @@ const getNews = async(childId, cookie) => {
 const getCalendar = async (childId, cookie) => {
   const url = urls.calendar(childId)
   const calendar = await fetchJson(url, cookie)
-  
+
   return calendar
     .map(({
       title,
@@ -84,7 +84,7 @@ const getCalendar = async (childId, cookie) => {
 const getNotifications = async (childId, cookie) => {
   const url = urls.notifications(childId)
   const notifications = await fetchJson(url, cookie)
-  
+
   return notifications
     .map(({
       notificationMessage: {
@@ -124,7 +124,7 @@ const getSchedule = async (childId, cookie) => {
   const to = moment().add(7, 'days').format('YYYY-MM-DD')
   const url = urls.schedule(childId, from, to)
   const schedule = await fetchJson(url, cookie)
-  
+
   return schedule
     .map(({
       title,
@@ -150,7 +150,7 @@ const getSchedule = async (childId, cookie) => {
 const getClassmates = async (childId, cookie) => {
   const url = urls.classmates(childId)
   const classmates = await fetchJson(url, cookie)
-  
+
   return classmates
     .map(({
       sisId,
@@ -191,10 +191,10 @@ const getChildById = async (childId, cookie) => {
     menu,
     schedule
   ] = [
-    await getNews(childId, cookie), 
-    await getCalendar(childId, cookie), 
-    await getNotifications(child.sdsId, cookie), 
-    await getMenu(child.id, cookie), 
+    await getNews(childId, cookie),
+    await getCalendar(childId, cookie),
+    await getNotifications(child.sdsId, cookie),
+    await getMenu(child.id, cookie),
     await getSchedule(child.id, cookie)
   ]
 
