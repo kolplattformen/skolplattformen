@@ -76,7 +76,9 @@ export const Login = ({ navigation, route }) => {
     loginStatus.on('PENDING', () => console.log('BankID app not yet opened'))
     loginStatus.on('USER_SIGN', () => console.log('BankID app is open'))
     loginStatus.on('ERROR', () => setError('Inloggningen misslyckades, försök igen!') && setVisible(false))
-    loginStatus.on('OK', async () => {
+    loginStatus.on('OK', async () => console.log('BankID ok'))
+
+    api.on('login', async () => {
       setLoggedIn(true)
       const session = api.getSessionCookie()
       setCookie(session)
@@ -120,12 +122,12 @@ export const Login = ({ navigation, route }) => {
               Logga ut
             </Button>
           </View>
-          </Layout>
+        </Layout>
         : <KeyboardAvoidingView>
           <Layout style={{ flex: 1 }}>
             {
-            // hidden easter egg, just touch the image to login without bankId if you still have a valid token
-          }
+              // hidden easter egg, just touch the image to login without bankId if you still have a valid token
+            }
             <TouchableOpacity onPress={navigateToChildren} style={{ height: 320 }}>
               <Image source={require('../assets/boys.png')} style={{ height: 320, marginTop: -20, marginLeft: -10, width: '110%' }} />
             </TouchableOpacity>
@@ -151,7 +153,7 @@ export const Login = ({ navigation, route }) => {
               </Button>
             </View>
           </Layout>
-          </KeyboardAvoidingView>}
+        </KeyboardAvoidingView>}
       <Modal
         visible={visible}
         style={styles.modal}
