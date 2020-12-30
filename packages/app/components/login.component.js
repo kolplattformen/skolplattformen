@@ -11,7 +11,7 @@ const baseUrl = 'https://api.skolplattformen.org'
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
 export const Login = ({ navigation, route }) => {
-  const [visible, setVisible] = React.useState(false)
+  const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [argument, setArgument] = React.useState('öppna')
@@ -70,25 +70,25 @@ export const Login = ({ navigation, route }) => {
   }
 
   const startLogin = async () => {
-    setVisible(true)
+    showModal(true)
     const loginStatus = await api.login(socialSecurityNumber)
     openBankId(loginStatus.token) // TODO: verify this solution after issue https://github.com/kolplattformen/embedded-api/issues/3 is resolved
     loginStatus.on('PENDING', () => console.log('BankID app not yet opened'))
     loginStatus.on('USER_SIGN', () => console.log('BankID app is open'))
-    loginStatus.on('ERROR', () => setError('Inloggningen misslyckades, försök igen!') && setVisible(false))
+    loginStatus.on('ERROR', () => setError('Inloggningen misslyckades, försök igen!') && showModal(false))
     loginStatus.on('OK', async () => console.log('BankID ok'))
 
     api.on('login', async () => {
       setLoggedIn(true)
       const session = api.getSessionCookie()
       setCookie(session)
+      showModal(false)
       navigateToChildren()
-      setVisible(false)
     })
   }
 
   const logout = async () => {
-    setVisible(false)
+    showModal(false)
     setLoggedIn(false)
     setChildren(null)
     setCookie(null)
@@ -137,7 +137,7 @@ export const Login = ({ navigation, route }) => {
                 style={{ minHeight: 70 }}
                 accessoryLeft={PersonIcon}
                 keyboardType='numeric'
-                caption={error && error.message || ''}
+                caption={(error?.message || '')}
                 onChangeText={text => handleInput(text)}
                 placeholder='Ditt personnr (10 eller 12 siffror)'
               />
@@ -158,14 +158,14 @@ export const Login = ({ navigation, route }) => {
         visible={visible}
         style={styles.modal}
         backdropStyle={styles.backdrop}
-        onBackdropPress={() => setVisible(false)}
+        onBackdropPress={() => showModal(false)}
       >
         <Card disabled>
           {hasBankId ? <Text style={{ margin: 10 }}>Öppnar BankID. Växla tillbaka hit sen.</Text> : <Text style={{ margin: 10 }}>Väntar på BankID...</Text>}
 
           <Button
             visible={!loggedIn}
-            onPress={() => setVisible(false)}
+            onPress={() => showModal(false)}
           >
             Avbryt
           </Button>

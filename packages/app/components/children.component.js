@@ -29,6 +29,7 @@ export const Children = ({ navigation }) => {
   const [children, setChildren] = useAsyncStorage('@children', [])
   const [cookie] = useAsyncStorage('@cookie')
   useEffect(() => {
+    let abort = false
     const load = async () => {
       try {
         const childrenList = (children?.length && children) || await api.getChildren()
@@ -39,13 +40,13 @@ export const Children = ({ navigation }) => {
 
         childrenList.forEach(async (child, i) => {
           let result
-          let updatedChild // keep a reference to the latest updated information so we don't patch an old object
+          let updatedChild = child // keep a reference to the latest updated information so we don't patch an old object
+          child.loading = true
           const iter = fillChild(child)
-          while (!result?.done) {
+          while (!abort && !result?.done) {
             result = await iter.next() // get updated values for every updated property
-            if (result.done) break
             const updated = await result.value
-            childrenList[i] = updatedChild = { ...updatedChild, ...updated }
+            childrenList[i] = updatedChild = { ...updatedChild, ...updated, loading: !result.done, updated: moment() }
             await setChildren(childrenList) // update after each new information we get. Might be too much?
           }
         })
@@ -55,6 +56,7 @@ export const Children = ({ navigation }) => {
       }
     }
     if (cookie) load()
+    return () => abort = true
   }, [cookie])
   return <ChildrenView navigation={navigation} childList={children} />
 }
@@ -84,10 +86,10 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
       </View>
       <View style={{ margin: 20 }}>
         <Text category='h6'>
-          {info.item.name?.split('(')[0]}
+          {info.item?.name?.split('(')[0]}
         </Text>
         <Text category='s1'>
-          {info.item.classmates ? `${(info.item.classmates || [])[0].className}` : `${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
+          {info.item?.classmates ? `${(info.item?.classmates || [])[0].className}` : `${info.item?.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
         </Text>
       </View>
     </View>
@@ -101,7 +103,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={NotificationIcon}
       >
-        {`${(info.item.news || []).length}`} nyheter
+        {`${(info.item?.news || []).length}`} nyheter
       </Button>
       <Button
         style={styles.iconButton}
@@ -109,7 +111,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={CalendarIcon}
       >
-        {`${(info.item.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day')).length} idag`}
+        {`${(info.item?.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day')).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}
@@ -117,8 +119,11 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={PeopleIcon}
       >
-        {`${(info.item.classmates || []).length} elever`}
+        {`${(info.item?.classmates || []).length} elever`}
       </Button>
+      <Text>{info.item?.loading}</Text>
+      <Text>{info.item?.updated}</Text>
+      {info.item?.loading ? <Spinner /> : <Text category='c2'>{info.item?.updated?.calendar()}</Text>}
     </View>
   )
 
@@ -134,7 +139,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         onPress={() => navigateChild(info.item, color)}
       >
 
-        {([...info.item.calendar ?? [], ...info.item.schedule ?? []].filter(a => moment(a.startDate, 'YYYY-MM-DD hh:mm').isSame('day'))).map((calendarItem, i) =>
+        {([...info.item?.calendar ?? [], ...info.item?.schedule ?? []].filter(a => moment(a.startDate, 'YYYY-MM-DD hh:mm').isSame('day'))).map((calendarItem, i) =>
           <Text appearance='hint' category='c1' key={i}>
             {`${calendarItem.title}`}
           </Text>

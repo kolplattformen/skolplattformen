@@ -20,6 +20,8 @@ const HomeNavigator = () => (
 
 export const AppNavigator = () => {
   return <NavigationContainer>
+    <StatusBar />
+
     <HomeNavigator/>
   </NavigationContainer>
 }
