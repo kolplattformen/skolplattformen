@@ -1,20 +1,9 @@
 import * as moment from 'moment'
-import {
-  etjanst,
-  newsItem,
-  EtjanstResponse,
-  child,
-  calendarItem,
-  classmate,
-  scheduleItem,
-  menuItem,
-  user,
-  notification,
-} from "./parse"
+import * as parse from "./parse"
 import { NewsItem } from "./types"
 
 describe('parse', () => {
-  let response: EtjanstResponse
+  let response: parse.EtjanstResponse
   describe('etjanst', () => {
     beforeEach(() => {
       response = {
@@ -28,15 +17,15 @@ describe('parse', () => {
       }
     })
     it('returns data on success', () => {
-      expect(etjanst(response)).toBeInstanceOf(Array)
+      expect(parse.etjanst(response)).toBeInstanceOf(Array)
     })
     it('throws error on Error', () => {
       response.Success = false
       response.Error = 'b0rk'
-      expect(() => etjanst(response)).toThrowError('b0rk')
+      expect(() => parse.etjanst(response)).toThrowError('b0rk')
     })
     it('camelCases data keys', () => {
-      const parsed = etjanst(response)
+      const parsed = parse.etjanst(response)
       expect(parsed[0].name).toEqual(response.Data[0].Name)
     })
     describe('children', () => {
@@ -66,7 +55,7 @@ describe('parse', () => {
         }
       })
       it('parses children correctly', () => {
-        expect(etjanst(response).map(child)).toEqual([{
+        expect(parse.children(response)).toEqual([{
           name: 'Some name',
           id: '42C3997E-D772-423F-9290-6FEEB3CB2DA7',
           sdsId: '786E3393-F044-4660-9105-B444DEB289AA',
@@ -105,7 +94,7 @@ describe('parse', () => {
         }
       })
       it('parses calendar correctly', () => {
-        expect(etjanst(response).map(calendarItem)).toEqual([{
+        expect(parse.calendar(response)).toEqual([{
           id: 29,
           location: null,
           title: 'Jullov',
@@ -165,7 +154,7 @@ describe('parse', () => {
         }
       })
       it('parses class mates correctly', () => {
-        expect(etjanst(response).map(classmate)).toEqual([{
+        expect(parse.classmates(response)).toEqual([{
           sisId: '22F0CFC7-09C7-45DC-9388-AE9A9EA1356B',
           firstname: 'Bo',
           lastname: 'Burström',
@@ -212,7 +201,7 @@ describe('parse', () => {
         }
       })
       it('parses schedule correctly', () => {
-        expect(etjanst(response).map(scheduleItem)).toEqual([{
+        expect(parse.schedule(response)).toEqual([{
           title: 'Canceled: Julavslutning 8C',
           description: 'Nåt kul',
           location: 'Lakritskolan',
@@ -278,7 +267,7 @@ describe('parse', () => {
         }
       })
       it('parses news items (except body) correctly', () => {
-        const [item]: [NewsItem] = etjanst(response).newsItems.map(newsItem)
+        const [item] = parse.news(response)
 
         expect(item.id).toEqual('news id')
         expect(item.header).toEqual('Problemet med att se betyg i bild, slöjd och teknik löst!')
@@ -288,7 +277,7 @@ describe('parse', () => {
         expect(item.published).toEqual(moment(new Date('18 december 2020 16:15')))
       })
       it('parses body correctly', () => {
-        const [item]: [NewsItem] = etjanst(response).newsItems.map(newsItem)
+        const [item] = parse.news(response)
 
         const expected = 'Hej,  Nu är problemet löst! Alla betyg syns som de ska.  God jul!'
         const trimmed = (item.body || '').split('\n').map(t => t.trim()).join(' ')
@@ -309,7 +298,7 @@ describe('parse', () => {
         }
       })
       it('parses menu correctly', () => {
-        expect(etjanst(response).map(menuItem)).toEqual([{
+        expect(parse.menu(response)).toEqual([{
           title: 'Måndag - Vecka 52',
           description: 'Körrfärsrätt .\nVeg färs'
         }])
@@ -328,7 +317,7 @@ describe('parse', () => {
         }
       })
       it('parses user correctly', () => {
-        expect(user(userResponse)).toEqual({
+        expect(parse.user(userResponse)).toEqual({
           personalNumber: '197106171635',
           firstName: 'Per-Ola',
           lastName: 'Assarsson',
@@ -382,7 +371,7 @@ describe('parse', () => {
         }
       })
       it('parses notifications correctly', () => {
-        expect(etjanst(response).map(notification)).toEqual([{
+        expect(parse.notifications(response)).toEqual([{
           id: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
           message: 'Betygen är publicerade.',
           sender: 'Elevdokumentation',

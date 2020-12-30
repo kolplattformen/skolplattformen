@@ -36,6 +36,7 @@ export const child = ({
 }: any): Child => ({
   id, sdsId, name, status, schoolId,
 })
+export const children = (data: any): Child[] => etjanst(data).map(child)
 
 export const guardian = ({
   emailhome, firstname, lastname, address, telmobile,
@@ -56,6 +57,7 @@ export const classmate = ({
   className,
   guardians: guardians.map(guardian),
 })
+export const classmates = (data: any): Classmate[] => etjanst(data).map(classmate)
 
 export const calendarItem = ({
   id, title, description, location, longEventDateTime, longEndDateTime, allDayEvent,
@@ -68,6 +70,7 @@ export const calendarItem = ({
   startDate: longEventDateTime ? moment(new Date(longEventDateTime)) : undefined,
   endDate: longEndDateTime ? moment(new Date(longEndDateTime)) : undefined,
 })
+export const calendar = (data: any): CalendarItem[] => etjanst(data).map(calendarItem)
 
 export const newsItem = ({
   newsId, header, preamble, body, bannerImageUrl, pubDateSe, modDateSe,
@@ -80,6 +83,7 @@ export const newsItem = ({
   published: moment(new Date(pubDateSe)),
   modified: moment(new Date(modDateSe)),
 })
+export const news = (data: any): NewsItem[] => etjanst(data).newsItems.map(newsItem)
 
 export const scheduleItem = ({
   title, description, location, longEventDateTime, longEndDateTime, isSameDay, allDayEvent,
@@ -92,6 +96,7 @@ export const scheduleItem = ({
   endDate: moment(new Date(longEndDateTime)),
   oneDayEvent: isSameDay,
 })
+export const schedule = (data: any): ScheduleItem[] => etjanst(data).map(scheduleItem)
 
 export const menuItem = ({
   title, description,
@@ -99,6 +104,7 @@ export const menuItem = ({
   title,
   description: htmlDecode(h2m(description)),
 })
+export const menu = (data: any): MenuItem[] => etjanst(data).map(menuItem)
 
 export const notification = ({
   notification: {
@@ -129,3 +135,4 @@ export const notification = ({
   category,
   type,
 })
+export const notifications = (data: any): Notification[] => etjanst(data).map(notification)

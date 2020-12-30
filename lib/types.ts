@@ -1,5 +1,7 @@
 import { Moment } from 'moment'
 
+export interface AsyncishFunction { (): void | Promise<void> }
+
 export interface RequestInit {
   headers?: any
   method?: string
@@ -12,6 +14,9 @@ export interface Headers {
 
 export interface Response {
   headers: Headers
+  ok: boolean
+  status: number
+  statusText: string
   text: () => Promise<string>
   json: () => Promise<any>
   blob: () => Promise<Blob>
