@@ -55,6 +55,8 @@ target 'Skolplattformen' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
+  pod 'react-native-cookies', :path => '../node_modules/@react-native-community/cookies'
+
   target 'SkolplattformenTests' do
     inherit! :complete
     # Pods for testing

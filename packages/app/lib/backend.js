@@ -1,5 +1,8 @@
 import init from '@skolplattformen/embedded-api'
-export const api = init(fetch) // keep a static version of this object so we can keep the session alive
+import CookieManager from '@react-native-community/cookies'
+
+// keep a static version of this object so we can keep the session alive
+export const api = init(fetch, () => CookieManager.clearAll())
 
 export function * fillChild (child) {
   console.log(`loading notifications for ${child.name}...`)
