@@ -45,7 +45,6 @@ export const Children = ({ navigation }) => {
           while (!result?.done) {
             result = await iter.next() // get updated values for every updated property
             const updated = await result.value
-            console.log('updated', updated)
             childrenList[i] = updatedChild = { ...updatedChild, ...updated, loading: !result.done, updated: moment() }
             setChildren(childrenList)
           }
@@ -53,7 +52,7 @@ export const Children = ({ navigation }) => {
         })))
         await setCache(childrenList)
         setChildren(childrenList)
-        console.log('done all')
+        console.log('done loading children')
       } catch (err) {
         console.log('err', err)
         navigation.navigate('Login', { error: 'Fel uppstod, försök igen' })
@@ -114,7 +113,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={CalendarIcon}
       >
-        {`${(info.item?.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day')).length} idag`}
+        {`${(info.item?.notifications || []).filter(c => c.startDate?.isSame('day')).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}
@@ -124,7 +123,6 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
       >
         {`${(info.item?.classmates || []).length} elever`}
       </Button>
-      <Text>{info.item?.loading ? 'loading' : 'done'}</Text>
       {info.item?.loading ? <Spinner /> : null}
     </View>
   )
@@ -141,7 +139,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         onPress={() => navigateChild(info.item, color)}
       >
 
-        {([...info.item?.calendar ?? [], ...info.item?.schedule ?? []].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) =>
+        {([...info.item?.calendar ?? [], ...info.item?.schedule ?? []].filter(a => a.startDate?.isSame('day'))).map((calendarItem, i) =>
           <Text appearance='hint' category='c1' key={i}>
             {`${calendarItem.title}`}
           </Text>
