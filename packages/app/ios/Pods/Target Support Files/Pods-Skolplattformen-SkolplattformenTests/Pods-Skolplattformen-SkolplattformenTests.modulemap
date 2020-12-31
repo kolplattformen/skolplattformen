@@ -1,6 +1,0 @@
-module Pods_Skolplattformen_SkolplattformenTests {
-  umbrella header "Pods-Skolplattformen-SkolplattformenTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

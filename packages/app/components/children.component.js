@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
 
 import moment from 'moment'
@@ -26,7 +26,8 @@ const PeopleIcon = (style) => (
 )
 
 export const Children = ({ navigation }) => {
-  const [children, setChildren] = useAsyncStorage('@children', [])
+  const [cache, setCache] = useAsyncStorage('@children', [])
+  const [children, setChildren] = useState(cache)
   const [cookie] = useAsyncStorage('@cookie')
   useEffect(() => {
     const load = async () => {
@@ -37,18 +38,22 @@ export const Children = ({ navigation }) => {
           return navigation.navigate('Login', { error: 'Hittar inga barn för det personnumret' })
         }
 
-        childrenList.forEach(async (child, i) => {
+        await (Promise.all(childrenList.map(async (child, i) => {
           let result
-          let updatedChild // keep a reference to the latest updated information so we don't patch an old object
+          let updatedChild = { ...child, news: [], loading: true, updated: null } // keep a reference to the latest updated information so we don't patch an old object
           const iter = fillChild(child)
           while (!result?.done) {
             result = await iter.next() // get updated values for every updated property
-            if (result.done) break
             const updated = await result.value
-            childrenList[i] = updatedChild = { ...updatedChild, ...updated }
-            await setChildren(childrenList) // update after each new information we get. Might be too much?
+            console.log('updated', updated)
+            childrenList[i] = updatedChild = { ...updatedChild, ...updated, loading: !result.done, updated: moment() }
+            setChildren(childrenList)
           }
-        })
+          console.log('done', child.name)
+        })))
+        await setCache(childrenList)
+        setChildren(childrenList)
+        console.log('done all')
       } catch (err) {
         console.log('err', err)
         navigation.navigate('Login', { error: 'Fel uppstod, försök igen' })
@@ -84,10 +89,10 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
       </View>
       <View style={{ margin: 20 }}>
         <Text category='h6'>
-          {info.item.name?.split('(')[0]}
+          {info.item?.name?.split('(')[0]}
         </Text>
         <Text category='s1'>
-          {info.item.classmates ? `${(info.item.classmates || [])[0].className}` : `${info.item.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
+          {info.item?.classmates ? `${(info.item?.classmates || [])[0].className}` : `${info.item?.status.split(';').map(status => abbrevations[status] || status).join(', ')}`}
         </Text>
       </View>
     </View>
@@ -101,7 +106,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={NotificationIcon}
       >
-        {`${(info.item.news || []).length}`} nyheter
+        {`${(info.item?.news || []).length}`} nyheter
       </Button>
       <Button
         style={styles.iconButton}
@@ -109,7 +114,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={CalendarIcon}
       >
-        {`${(info.item.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day')).length} idag`}
+        {`${(info.item?.notifications || []).filter(c => moment(c.startDate, 'YYYY-MM-DD hh:mm').isSame('day')).length} idag`}
       </Button>
       <Button
         style={styles.iconButton}
@@ -117,8 +122,10 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         size='small'
         accessoryLeft={PeopleIcon}
       >
-        {`${(info.item.classmates || []).length} elever`}
+        {`${(info.item?.classmates || []).length} elever`}
       </Button>
+      <Text>{info.item?.loading ? 'loading' : 'done'}</Text>
+      {info.item?.loading ? <Spinner /> : null}
     </View>
   )
 
@@ -134,7 +141,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
         onPress={() => navigateChild(info.item, color)}
       >
 
-        {([...info.item.calendar ?? [], ...info.item.schedule ?? []].filter(a => moment(a.startDate, 'YYYY-MM-DD hh:mm').isSame('day'))).map((calendarItem, i) =>
+        {([...info.item?.calendar ?? [], ...info.item?.schedule ?? []].filter(a => moment(a.startDate).isSame('day'))).map((calendarItem, i) =>
           <Text appearance='hint' category='c1' key={i}>
             {`${calendarItem.title}`}
           </Text>
@@ -157,14 +164,14 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
               data={childList}
               renderItem={renderItem}
             />
-          </Layout>
+            </Layout>
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Image source={require('../assets/girls.png')} style={{ height: 400, width: '100%' }} />
             <View style={{ flexDirection: 'row' }}>
               <Spinner size='large' status='warning' />
               <Text category='h1' style={{ marginLeft: 10, marginTop: -7 }}>Laddar...</Text>
             </View>
-          </Layout>
+            </Layout>
         }
 
       </Layout>
