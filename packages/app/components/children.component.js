@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
-
-import moment from 'moment'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
-// import children from '../output.json'
-import { useAsyncStorage } from 'use-async-storage'
-import { api, fillChild } from '../lib/backend'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -24,44 +19,6 @@ const CalendarIcon = (style) => (
 const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
-
-export const Children = ({ navigation }) => {
-  const [cache, setCache] = useAsyncStorage('@children', [])
-  const [children, setChildren] = useState(cache)
-  const [cookie] = useAsyncStorage('@cookie')
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const childrenList = (children?.length && children) || await api.getChildren()
-        if (!childrenList?.length) {
-          console.log('no children found', await api.getChildren())
-          return navigation.navigate('Login', { error: 'Hittar inga barn för det personnumret' })
-        }
-
-        await (Promise.all(childrenList.map(async (child, i) => {
-          let result
-          let updatedChild = { ...child, news: [], loading: true, updated: null } // keep a reference to the latest updated information so we don't patch an old object
-          const iter = fillChild(child)
-          while (!result?.done) {
-            result = await iter.next() // get updated values for every updated property
-            const updated = await result.value
-            childrenList[i] = updatedChild = { ...updatedChild, ...updated, loading: !result.done, updated: moment() }
-            setChildren(childrenList)
-          }
-          console.log('done', child.name)
-        })))
-        await setCache(childrenList)
-        setChildren(childrenList)
-        console.log('done loading children')
-      } catch (err) {
-        console.log('err', err)
-        navigation.navigate('Login', { error: 'Fel uppstod, försök igen' })
-      }
-    }
-    if (cookie) load()
-  }, [cookie])
-  return <ChildrenView navigation={navigation} childList={children} />
-}
 
 export const ChildrenView = ({ navigation, childList, eva }) => {
   const abbrevations = {
@@ -162,14 +119,14 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
               data={childList}
               renderItem={renderItem}
             />
-            </Layout>
+          </Layout>
           : <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Image source={require('../assets/girls.png')} style={{ height: 400, width: '100%' }} />
             <View style={{ flexDirection: 'row' }}>
               <Spinner size='large' status='warning' />
               <Text category='h1' style={{ marginLeft: 10, marginTop: -7 }}>Laddar...</Text>
             </View>
-            </Layout>
+          </Layout>
         }
 
       </Layout>
