@@ -4,10 +4,8 @@ import { Platform, SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingVie
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import { useAsyncStorage } from 'use-async-storage'
-import { ScrollView } from 'react-native-gesture-handler'
 import { api } from '../lib/backend'
 
-const baseUrl = 'https://api.skolplattformen.org'
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
 export const Login = ({ navigation, route }) => {
@@ -19,7 +17,7 @@ export const Login = ({ navigation, route }) => {
   const [hasBankId, setHasBankId] = React.useState(false)
   const [socialSecurityNumber, setSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
   const [cookie, setCookie] = useAsyncStorage('@cookie')
-  const [children, setChildren] = useAsyncStorage('@children', [])
+  const [_, setChildren] = useAsyncStorage('@children', [])
 
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))

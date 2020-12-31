@@ -20,7 +20,7 @@ const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
 
-export const ChildrenView = ({ navigation, childList, eva }) => {
+export const ChildrenView = ({ navigation, childList }) => {
   const abbrevations = {
     G: 'Gymnasiet', // ? i'm guessing here
     GR: 'Grundskolan',
@@ -106,7 +106,7 @@ export const ChildrenView = ({ navigation, childList, eva }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'transparent' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
       <Divider />
       <Layout style={{ flex: 1 }} level='1'>

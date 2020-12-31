@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { useAsyncStorage } from 'use-async-storage'
 import { api, fillChild } from '../lib/backend'
-import { ChildrenView } from './children.component'
+import { ChildrenView } from './childrenView.component'
 
 export const ChildrenLoader = ({ navigation }) => {
   const [cache, setCache] = useAsyncStorage('@children', [])
