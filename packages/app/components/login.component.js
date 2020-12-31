@@ -92,7 +92,11 @@ export const Login = ({ navigation, route }) => {
     setLoggedIn(false)
     setChildren(null)
     setCookie(null)
-    api.logout()
+    try {
+      api.logout()
+    } catch (err) {
+      setError('fel uppdatod vid utloggning')
+    }
   }
 
   return (
