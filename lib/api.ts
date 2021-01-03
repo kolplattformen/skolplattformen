@@ -1,4 +1,4 @@
-import { Moment } from 'moment'
+import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
 import {
   checkStatus, LoginStatusChecker,
@@ -95,8 +95,8 @@ export class Api extends EventEmitter {
     return parse.classmates(data)
   }
 
-  async getSchedule(child: Child, from: Moment, to: Moment): Promise<ScheduleItem[]> {
-    const url = routes.schedule(child.sdsId, from.format('YYYY-MM-DD'), to.format('YYYY-MM-DD'))
+  async getSchedule(child: Child, from: DateTime, to: DateTime): Promise<ScheduleItem[]> {
+    const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
     const response = await this.fetch('schedule', url, this.session)
     const data = await response.json()
     return parse.schedule(data)

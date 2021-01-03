@@ -1,4 +1,4 @@
-const moment = require('moment')
+const { DateTime } = require('luxon')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
@@ -71,15 +71,15 @@ async function run() {
       // console.log(classmates)
 
       console.log('schedule')
-      const schedule = await api.getSchedule(children[0], moment().subtract(1, 'week'), moment())
+      const schedule = await api.getSchedule(children[0], DateTime.local(), DateTime.local().plus({ week: 1 }))
       // console.log(schedule)
 
       console.log('news')
       const news = await api.getNews(children[0])
       // console.log(news)
 
-      console.log('image')
-      const blob = await api.getImage(news[0].imageUrl)
+      // console.log('image')
+      // const blob = await api.getImage(news[0].imageUrl)
       // console.log(blob)
 
       // const arrayBuffer = await blob.arrayBuffer()
