@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
+import { useChildList } from '@skolplattformen/react-native-embedded-api'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
@@ -20,7 +21,9 @@ const PeopleIcon = (style) => (
   <Icon {...style} name='people-outline' />
 )
 
-export const ChildrenView = ({ navigation, childList }) => {
+export const Children = ({ navigation }) => {
+  const { childList, status, error, reload } = useChildList()
+  
   const abbrevations = {
     G: 'Gymnasiet', // ? i'm guessing here
     GR: 'Grundskolan',
@@ -110,9 +113,7 @@ export const ChildrenView = ({ navigation, childList }) => {
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
       <Divider />
       <Layout style={{ flex: 1 }} level='1'>
-        {
-        childList?.length
-          ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
+        { loading ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
             <List
               style={styles.container}
               contentContainerStyle={styles.contentContainer}

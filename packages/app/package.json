@@ -19,6 +19,7 @@
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "@skolplattformen/embedded-api": "^0.10.0",
+    "@skolplattformen/react-native-embedded-api": "^0.2.0",
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
     "buffer": "^6.0.3",
