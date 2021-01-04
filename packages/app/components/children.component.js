@@ -23,6 +23,7 @@ const PeopleIcon = (style) => (
 
 export const Children = ({ navigation }) => {
   const { childList, status, error, reload } = useChildList()
+  console.log('status', status, error)
   
   const abbrevations = {
     G: 'Gymnasiet', // ? i'm guessing here
@@ -113,7 +114,7 @@ export const Children = ({ navigation }) => {
       <TopNavigation title='Dina barn' alignment='center' accessoryLeft={BackAction} />
       <Divider />
       <Layout style={{ flex: 1 }} level='1'>
-        { loading ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
+        { status === 'loading' ? <Layout style={{ flex: 1, justifyContent: 'space-between' }}>
             <List
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
