@@ -26,12 +26,12 @@ export const Login = ({ navigation, route }) => {
     setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
   }, [])
 
-  /*on('login', async () => {
+  on('login', async () => {
     setLoggedIn(true)
     showModal(false)
     navigateToChildren()
   })
-*/
+
   /* Helpers */
   const handleInput = (text) => {
     const isValid = Personnummer.valid(text)
