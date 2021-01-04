@@ -23,6 +23,7 @@
     "@ui-kitten/eva-icons": "5.0.0",
     "buffer": "^6.0.3",
     "faker": "^5.1.0",
+    "luxon": "^1.25.0",
     "personnummer": "^3.1.1",
     "react": "16.11.0",
     "react-native": "0.62.2",
