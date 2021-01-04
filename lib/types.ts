@@ -146,10 +146,10 @@ export interface MenuItem {
 }
 
 export interface User {
-  personalNumber: string
-  isAuthenticated: boolean
-  firstName: string
-  lastName: string
-  email: string | null
-  notificationId: string
+  personalNumber?: string
+  isAuthenticated?: boolean
+  firstName?: string
+  lastName?: string
+  email?: string | null
+  notificationId?: string
 }

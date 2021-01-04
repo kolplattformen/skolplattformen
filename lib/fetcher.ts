@@ -10,7 +10,7 @@ export interface CallInfo extends RequestInit {
 }
 
 export interface FetcherOptions {
-  record?: (info: CallInfo, data: string | Blob | Buffer | ArrayBuffer) => Promise<void>
+  record?: (info: CallInfo, data: string | Blob | ArrayBuffer | any) => Promise<void>
 }
 
 export interface Fetcher {
@@ -18,7 +18,7 @@ export interface Fetcher {
 }
 
 export interface Recorder {
-  (info: CallInfo, data: string | Blob | Buffer | ArrayBuffer): Promise<void>
+  (info: CallInfo, data: string | Blob | ArrayBuffer | any): Promise<void>
 }
 
 const record = async (
@@ -28,7 +28,7 @@ const record = async (
   type: string,
   options: FetcherOptions,
   response: Response,
-  data: string | Buffer | ArrayBuffer | Blob,
+  data: string | ArrayBuffer | Blob | any,
 ): Promise<void> => {
   if (!options.record) {
     return
