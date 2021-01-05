@@ -132,8 +132,8 @@ android {
         applicationId "se.kolplattformen.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 21
-        versionName "0.0.2"
+        versionCode 30
+        versionName "0.0.3"
     }
     splits {
         abi {

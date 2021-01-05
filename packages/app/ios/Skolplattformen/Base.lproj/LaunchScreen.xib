@@ -24,7 +24,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <color key="tintColor" red="0.99999552970000005" green="1" blue="0.99607855079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ddS-XM-xPo"/>
@@ -35,6 +35,6 @@
         </view>
     </objects>
     <resources>
-        <image name="appstore" width="1024" height="1024"/>
+        <image name="appstore" width="1210" height="1182"/>
     </resources>
 </document>
