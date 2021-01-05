@@ -18,7 +18,6 @@ describe('fetcher', () => {
       statusText: 'ok',
       json: jest.fn(),
       text: jest.fn(),
-      blob: jest.fn(),
       headers,
     }
     fetch = jest.fn().mockResolvedValue(response)
@@ -43,15 +42,6 @@ describe('fetcher', () => {
 
     const res = await fetcher('foo', '/')
     const result = await res.text()
-
-    expect(result).toEqual(data)
-  })
-  it('blob returns the result', async () => {
-    const data = new Blob()
-    response.blob.mockResolvedValue(data)
-
-    const res = await fetcher('foo', '/')
-    const result = await res.blob()
 
     expect(result).toEqual(data)
   })
@@ -88,16 +78,6 @@ describe('fetcher', () => {
 
       const expectedData = 'Hello'
       expect(recorder).toHaveBeenCalledWith(expectedInfo, expectedData)
-    })
-    it('records with the correct parameters for blob', async () => {
-      const data = new Blob('Hello')
-      response.blob.mockResolvedValue(data)
-
-      await (await fetcher('foo', '/')).blob()
-
-      expectedInfo.type = 'blob'
-
-      expect(recorder).toHaveBeenCalledWith(expectedInfo, data)
     })
   })
 })

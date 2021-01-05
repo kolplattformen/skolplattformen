@@ -123,12 +123,6 @@ export class Api extends EventEmitter {
     return parse.notifications(data)
   }
 
-  async getImage(imageUrl: string): Promise<Blob> {
-    const response = await this.fetch('image', imageUrl, this.session)
-    const data = await response.blob()
-    return data
-  }
-
   async logout() {
     this.session = undefined
     await this.clearCookies()

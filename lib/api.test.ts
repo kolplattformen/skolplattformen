@@ -12,7 +12,6 @@ describe('api', () => {
     response = {
       json: jest.fn(),
       text: jest.fn(),
-      blob: jest.fn(),
       ok: true,
       status: 200,
       statusText: 'ok',

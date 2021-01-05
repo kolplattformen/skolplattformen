@@ -78,13 +78,6 @@ async function run() {
       const news = await api.getNews(children[0])
       // console.log(news)
 
-      // console.log('image')
-      // const blob = await api.getImage(news[0].imageUrl)
-      // console.log(blob)
-
-      // const arrayBuffer = await blob.arrayBuffer()
-      // console.log(`data:${blob.type};base64,${Buffer.from(arrayBuffer).toString('base64')}`)
-
       console.log('menu')
       const menu = await api.getMenu(children[0])
       // console.log(menu)

@@ -17,7 +17,6 @@ export interface Response {
   statusText: string
   text: () => Promise<string>
   json: () => Promise<any>
-  blob: () => Promise<Blob>
 }
 
 export interface Fetch {
@@ -102,6 +101,7 @@ export interface NewsItem {
   published: string
   modified?: string
   imageUrl?: string
+  fullImageUrl?: string
 }
 
 /**

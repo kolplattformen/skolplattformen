@@ -67,7 +67,6 @@ export default function wrap(fetch: Fetch, options: FetcherOptions = {}): Fetche
     }
     wrapMethod(response, 'json')
     wrapMethod(response, 'text')
-    wrapMethod(response, 'blob')
 
     return response
   }
