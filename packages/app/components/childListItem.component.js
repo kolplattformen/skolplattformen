@@ -2,11 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
 import { DateTime } from 'luxon'
 import { useNotifications, useNews, useClassmates, useCalendar, useSchedule } from '@skolplattformen/react-native-embedded-api'
-import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
-
-const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back' />
-)
+import { Button, Icon, Text, Card, Avatar } from '@ui-kitten/components'
 
 const NotificationIcon = (style) => (
   <Icon {...style} name='activity-outline' />
@@ -21,18 +17,14 @@ const PeopleIcon = (style) => (
 )
 
 export const ChildListItem = ({ navigation, child, color }) => {
-  const { data: notifications } = useNotifications(child)
-  const { data: news } = useNews(child)
-  const { data: classmates } = useClassmates(child)
-  const { data: calendar } = useCalendar(child)
-  const { data: schedule } = useSchedule(child, DateTime.local(), DateTime.local().plus({days: 7}))
-
-  const navigateChild = (child, color) => {
-    navigation.navigate('Child', { child, color })
-  }
+  const { data: notifications, status: notificationsStatus } = useNotifications(child)
+  const { data: news, status: newsStatus } = useNews(child)
+  const { data: classmates, status: classmatesStatus } = useClassmates(child)
+  const { data: calendar, status: calendarStatus } = useCalendar(child)
+  const { data: schedule, status: scheduleStatus } = useSchedule(child, DateTime.local(), DateTime.local().plus({ days: 7 }))
 
   const getClassName = () => {
-    
+
     // hack: we can find the class name (ex. 8C) from the classmates. let's pick the first one and select theirs class
     if (classmates.length > 0) return classmates[0].className
 
@@ -64,7 +56,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
   const Footer = (props, info) => (
     <View style={styles.itemFooter}>
       <Button
-        style={styles.iconButton}
+        style={styles[notificationsStatus]}
         status='control'
         size='small'
         accessoryLeft={NotificationIcon}
@@ -72,15 +64,15 @@ export const ChildListItem = ({ navigation, child, color }) => {
         {`${(news || []).length}`} nyheter
       </Button>
       <Button
-        style={styles.iconButton}
+        style={styles[calendarStatus]}
         status='control'
         size='small'
         accessoryLeft={CalendarIcon}
       >
-        {`${(notifications || []).length}`} 
+        {`${(notifications || []).length}`}
       </Button>
       <Button
-        style={styles.iconButton}
+        style={styles[classmatesStatus]}
         status='control'
         size='small'
         accessoryLeft={PeopleIcon}
@@ -97,10 +89,10 @@ export const ChildListItem = ({ navigation, child, color }) => {
       status={color}
       header={Header}
       footer={Footer}
-      onPress={() => navigateChild(child, color)}
+      onPress={() => navigation.navigate('Child', { child, color })}
     >
       {([calendar ?? [], schedule ?? []].filter(a => a.startDate?.isSame('day'))).map((calendarItem, i) =>
-        <Text appearance='hint' category='c1' key={i}>
+        <Text appearance='hint' category='c1' key={i} style={{ textColor: styles.loaded(notificationsStatus) }}>
           {`${calendarItem.title}`}
         </Text>
       )}
@@ -111,15 +103,24 @@ export const ChildListItem = ({ navigation, child, color }) => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    margin: 10
+    margin: 10,
   },
   itemFooter: {
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 5
+    borderRadius: 5,
+    margin: 0
   },
-  iconButton: {
-    paddingHorizontal: 0
+  loaded: {
+    paddingHorizontal: 0,
+    color: '#000'
+  },
+  loading: {
+    paddingHorizontal: 0,
+    color: '#555'
+  }, error: {
+    paddingHorizontal: 0,
+    color: '#500'
   }
 })

@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
   },
   childList: { 
     flex: 1, 
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start'
   }
 })

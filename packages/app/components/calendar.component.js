@@ -1,18 +1,16 @@
 import React from 'react'
 import { StyleSheet, Image, View } from 'react-native'
 import { Divider, List, ListItem, Icon, Text, Layout } from '@ui-kitten/components'
-import moment from 'moment'
-import 'moment/locale/sv' // without this line it didn't work
-moment.locale('sv')
+import { DateTime } from 'luxon'
 
 export const Calendar = ({ calendar }) => {
   const renderItemIcon = (startDate, endDate) =>
-    (props) => <Icon {...props} fill={startDate?.isBefore() && endDate?.isAfter() ? '#33f' : '#333'} name={(endDate || startDate).isBefore() ? 'calendar' : 'calendar-outline'} />
+    (props) => <Icon {...props} name={'calendar'} />
 
   const renderItem = ({ item }) => (
     <ListItem
       title={`${item.title}`}
-      description={`${item.startDate?.locale('sv').calendar()}`}
+      description={`${item.startDate}`}
       accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
     />
   )

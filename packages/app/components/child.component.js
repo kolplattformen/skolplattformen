@@ -1,15 +1,21 @@
 import React from 'react'
 import { StyleSheet } from 'react-native';
 import { TabBar, TopNavigation, TopNavigationAction, Tab, TabView, OverflowMenu, MenuItem, Layout, Text, Divider, Icon } from '@ui-kitten/components'
+import { DateTime } from 'luxon'
 import { NewsList } from './newsList.component'
 import { Calendar } from './calendar.component'
 import { Classmates } from './classmates.component'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import moment from 'moment'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNotifications, useNews, useClassmates, useCalendar, useSchedule } from '@skolplattformen/react-native-embedded-api'
 
 export const Child = ({ route, navigation }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const { child, color } = route.params;
+  const { data: notifications, status: notificationsStatus } = useNotifications(child)
+  const { data: news, status: newsStatus } = useNews(child)
+  const { data: classmates, status: classmatesStatus } = useClassmates(child)
+  const { data: calendar, status: calendarStatus } = useCalendar(child)
+  const { data: schedule, status: scheduleStatus } = useSchedule(child, DateTime.local(), DateTime.local().plus({ days: 7 }))
   const [menuVisible, setMenuVisible] = React.useState(false);
 
   const NewsIcon = (props) => (
@@ -69,7 +75,7 @@ export const Child = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }} style={{ ...styles.topBar, color: color }}>
-      <TopNavigation title={child.name}
+      <TopNavigation title={child.name.split('(')[0]}
         alignment='center'
         accessoryLeft={BackAction}
         accessoryRight={renderRightActions}
@@ -77,20 +83,20 @@ export const Child = ({ route, navigation }) => {
       <TabView selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
-            <NewsList news={child.news} />
+            <NewsList news={news} />
           </Layout>
         </Tab>
         <Tab title="Schema" icon={CalendarIcon}>
           <Layout style={styles.tabContainer}>
-            <Calendar calendar={[...child.calendar, ...child.schedule].filter(a => a.startDate && moment(a.startDate, 'YYYY-MM-DD hh:mm').isAfter(moment().startOf('day')))}></Calendar>
+            <Calendar calendar={[...calendar ?? [], ...schedule ?? []]}></Calendar>
           </Layout>
         </Tab>
         <Tab title="Klassen" icon={ClassIcon}>
           <Layout style={styles.tabContainer}>
             <Text category='h5'>
-              Klass {child.classmates?.length ? child.classmates[0].className : ''}
+              Klass {classmates?.length ? classmates[0].className : ''}
             </Text>
-            <Classmates classmates={child.classmates} />
+            <Classmates classmates={classmates} />
           </Layout>
         </Tab>
       </TabView>
