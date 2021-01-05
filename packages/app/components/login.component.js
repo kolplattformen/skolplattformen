@@ -4,49 +4,35 @@ import { Platform, SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingVie
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import { useAsyncStorage } from 'use-async-storage'
-import { ScrollView } from 'react-native-gesture-handler'
-import { api } from '../lib/backend'
+import { useApi } from '@skolplattformen/react-native-embedded-api'
 
-const baseUrl = 'https://api.skolplattformen.org'
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
 export const Login = ({ navigation, route }) => {
+  const { login, logout, on } = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [argument, setArgument] = React.useState('öppna')
   const [error, setError] = React.useState(null)
-  const [hasBankId, setHasBankId] = React.useState(false)
   const [socialSecurityNumber, setSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
-  const [cookie, setCookie] = useAsyncStorage('@cookie')
-  const [children, setChildren] = useAsyncStorage('@children', [])
 
+  /* Initial load functions */
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
-  }, [socialSecurityNumber, cookie])
+  }, [socialSecurityNumber])
 
   useEffect(() => {
     setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
   }, [])
 
-  const navigateToChildren = () => {
-    console.log('continuing..')
-    navigation.navigate('Children')
-  }
+  on('login', async () => {
+    setLoggedIn(true)
+    showModal(false)
+    navigateToChildren()
+  })
 
-  const SecureIcon = (style) => (
-    <Icon {...style} name='keypad-outline' />
-  )
-  const CheckIcon = (style) => (
-    <Icon {...style} name='checkmark-outline' />
-  )
-  const LogoutIcon = (style) => (
-    <Icon {...style} name='close-outline' />
-  )
-  const PersonIcon = (style) => (
-    <Icon {...style} name='person-outline' />
-  )
-
+  /* Helpers */
   const handleInput = (text) => {
     const isValid = Personnummer.valid(text)
     setValid(isValid)
@@ -64,40 +50,48 @@ export const Login = ({ navigation, route }) => {
       const bankIdUrl = Platform.OS === 'ios' ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null` : `bankid:///?autostarttoken=${token.token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
-      setHasBankId(false)
       setError('Öppna BankID manuellt')
     }
   }
 
-  const startLogin = async () => {
-    showModal(true)
-    const loginStatus = await api.login(socialSecurityNumber)
-    openBankId(loginStatus.token) // TODO: verify this solution after issue https://github.com/kolplattformen/embedded-api/issues/3 is resolved
-    loginStatus.on('PENDING', () => console.log('BankID app not yet opened'))
-    loginStatus.on('USER_SIGN', () => console.log('BankID app is open'))
-    loginStatus.on('ERROR', () => setError('Inloggningen misslyckades, försök igen!') && showModal(false))
-    loginStatus.on('OK', async () => console.log('BankID ok'))
-
-    api.on('login', async () => {
-      setLoggedIn(true)
-      const session = api.getSessionCookie()
-      setCookie(session)
-      showModal(false)
-      navigateToChildren()
-    })
+  /* Navigation actions */
+  const navigateToChildren = () => {
+    navigation.navigate('Children')
   }
 
-  const logout = async () => {
+  const startLogin = async () => {
+    showModal(true)
+    const status = await login(socialSecurityNumber)
+    openBankId(status.token) // TODO: verify this solution after issue https://github.com/kolplattformen/embedded-api/issues/3 is resolved
+    status.on('PENDING', () => console.log('BankID app not yet opened'))
+    status.on('USER_SIGN', () => console.log('BankID app is open'))
+    status.on('ERROR', () => setError('Inloggningen misslyckades, försök igen!') && showModal(false))
+    status.on('OK', () => console.log('BankID ok'))
+  }
+
+  const startLogout = async () => {
     showModal(false)
     setLoggedIn(false)
-    setChildren(null)
-    setCookie(null)
     try {
-      api.logout()
+      logout()
     } catch (err) {
       setError('fel uppdatod vid utloggning')
     }
   }
+
+  /* Icons */
+  const SecureIcon = (style) => (
+    <Icon {...style} name='keypad-outline' />
+  )
+  const CheckIcon = (style) => (
+    <Icon {...style} name='checkmark-outline' />
+  )
+  const LogoutIcon = (style) => (
+    <Icon {...style} name='close-outline' />
+  )
+  const PersonIcon = (style) => (
+    <Icon {...style} name='person-outline' />
+  )
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -118,7 +112,7 @@ export const Login = ({ navigation, route }) => {
               {error ? 'Försök igen' : 'Fortsätt'}
             </Button>
             <Button
-              onPress={() => logout()}
+              onPress={() => startLogout()}
               accessoryRight={LogoutIcon}
               style={{ marginTop: 10, width: 200 }}
               size='medium'
@@ -165,7 +159,7 @@ export const Login = ({ navigation, route }) => {
         onBackdropPress={() => showModal(false)}
       >
         <Card disabled>
-          {hasBankId ? <Text style={{ margin: 10 }}>Öppnar BankID. Växla tillbaka hit sen.</Text> : <Text style={{ margin: 10 }}>Väntar på BankID...</Text>}
+          <Text style={{ margin: 10 }}>Väntar på BankID...</Text>
 
           <Button
             visible={!loggedIn}
