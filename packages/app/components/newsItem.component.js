@@ -2,6 +2,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, View, ScrollView, Image } from 'react-native'
 import { Card, Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components'
 import Markdown from 'react-native-markdown-display'
+import { useApi } from '@skolplattformen/react-native-embedded-api'
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -9,6 +10,7 @@ const BackIcon = (props) => (
 
 export const NewsItem = ({ navigation, route }) => {
   const { newsItem } = route.params
+  const { cookie } = useApi()
 
   const navigateBack = () => {
     navigation.goBack()
@@ -23,7 +25,12 @@ export const NewsItem = ({ navigation, route }) => {
       <Text category='h3'>
         {newsItem.header}
       </Text>
-      <Image source={{ uri: `https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=${newsItem.imageUrl}` }} style={styles.image} />
+      <Image
+        source={{
+          uri: newsItem.fullImageUrl,
+          headers: { cookie },
+        }}
+        style={styles.image} />
     </View>
   )
 
