@@ -26,7 +26,11 @@ export const Children = ({ navigation }) => {
         {status === 'loaded' ?
           <Layout style={styles.childList}>
             {childList.map((child, i) => (
-              <ChildListItem child={child} color={colors[i % colors.length]} navigation={navigation} />
+              <ChildListItem
+                key={child.id}
+                child={child}
+                color={colors[i % colors.length]}
+                navigation={navigation} />
             ))}
           </Layout>
           : <Layout style={styles.loading}>
@@ -48,13 +52,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
-  loading: { 
-    flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center' 
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  childList: { 
-    flex: 1, 
+  childList: {
+    flex: 1,
     justifyContent: 'flex-start'
   }
 })
