@@ -79,8 +79,10 @@ const calendar = await api.getCalendar(children[0]);
 const classmates = await api.getClassmates(children[0]);
 
 // Get schedule
-const from = moment().subtract(1, 'week')
-const to = moment()
+import { DateTime } from 'luxon'
+
+const from = DateTime.local()
+const to = DateTime.local().plus({ week: 1 })
 const schedule = await api.getSchedule(children[0], from, to)
 
 // Get news
@@ -91,10 +93,6 @@ const menu = await api.getMenu(children[0])
 
 // Get notifications
 const notifications = await api.getNotifications(children[0])
-
-// Get image
-const blob = await api.getImage(news[0].imageUrl)
-const src = URL.createObjectURL(blob)
 ```
 
 ### Setting session cookie
