@@ -94,42 +94,44 @@ export const Login = ({ navigation, route }) => {
   )
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center' />
-      {loggedIn
-        ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../assets/man.png')} style={{ maxHeight: 300, width: '100%', borderBottomWidth: 1 }} />
-          <View style={{ marginTop: 80, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1 }}>
-            <Text category='h4'>{socialSecurityNumber}</Text>
-            <Text>{error || 'Hurra, du är inloggad!'}</Text>
-            <Button
-              status='success'
-              size='medium'
-              style={{ marginTop: 10, width: 200 }}
-              accessoryRight={CheckIcon}
-              onPress={() => navigateToChildren()}
-            >
-              {error ? 'Försök igen' : 'Fortsätt'}
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+        {loggedIn
+          ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center' />
+            <Image source={require('../assets/man.png')} style={{ maxHeight: 300, width: '100%', borderBottomWidth: 1 }} />
+            <View style={{ marginTop: 80, justifyContent: 'flex-start', alignItems: 'flex-start', flex: 1 }}>
+              <Text category='h4'>{socialSecurityNumber}</Text>
+              <Text>{error || 'Hurra, du är inloggad!'}</Text>
+              <Button
+                status='success'
+                size='medium'
+                style={{ marginTop: 10, width: 200 }}
+                accessoryRight={CheckIcon}
+                onPress={() => navigateToChildren()}
+              >
+                {error ? 'Försök igen' : 'Fortsätt'}
+              </Button>
+              <Button
+                onPress={() => startLogout()}
+                accessoryRight={LogoutIcon}
+                style={{ marginTop: 10, width: 200 }}
+                size='medium'
+              >
+                Logga ut
             </Button>
-            <Button
-              onPress={() => startLogout()}
-              accessoryRight={LogoutIcon}
-              style={{ marginTop: 10, width: 200 }}
-              size='medium'
-            >
-              Logga ut
-            </Button>
-          </View>
-        </Layout>
-        : <KeyboardAvoidingView>
-          <Layout style={{ flex: 1 }}>
+            </View>
+          </Layout>
+          :
+          <Layout style={{ flex: 1, padding: 24 }}>
+            <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center' />
             {
               // hidden easter egg, just touch the image to login without bankId if you still have a valid token
             }
-            <TouchableOpacity onPress={navigateToChildren} style={{ height: 320 }}>
+            <TouchableOpacity onPress={navigateToChildren} >
               <Image source={require('../assets/boys.png')} style={{ height: 320, marginTop: -20, marginLeft: -10, width: '110%' }} />
             </TouchableOpacity>
-            <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', paddingHorizontal: 20 }}>
+            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-start', paddingHorizontal: 20, paddingBottom: 72 }}>
               <Input
                 label='Personnummer' autoFocus value={socialSecurityNumber}
                 style={{ minHeight: 70 }}
@@ -151,25 +153,26 @@ export const Login = ({ navigation, route }) => {
               </Button>
             </View>
           </Layout>
-        </KeyboardAvoidingView>}
-      <Modal
-        visible={visible}
-        style={styles.modal}
-        backdropStyle={styles.backdrop}
-        onBackdropPress={() => showModal(false)}
-      >
-        <Card disabled>
-          <Text style={{ margin: 10 }}>Väntar på BankID...</Text>
+        }
+        <Modal
+          visible={visible}
+          style={styles.modal}
+          backdropStyle={styles.backdrop}
+          onBackdropPress={() => showModal(false)}
+        >
+          <Card disabled>
+            <Text style={{ margin: 10 }}>Väntar på BankID...</Text>
 
-          <Button
-            visible={!loggedIn}
-            onPress={() => showModal(false)}
-          >
-            Avbryt
+            <Button
+              visible={!loggedIn}
+              onPress={() => showModal(false)}
+            >
+              Avbryt
           </Button>
-        </Card>
-      </Modal>
-    </SafeAreaView>
+          </Card>
+        </Modal>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
