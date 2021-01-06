@@ -105,6 +105,13 @@ const sessionCookie = "some value";
 api.setSessionCookie(sessionCookie); // will trigger `on('login')` event and set `.isLoggedIn = true`
 ```
 
+### Fake user
+
+Login with personal number "12121212121212" and api will be put into fake mode.
+Static data will be returned and no calls to backend will be made.
+
+The `LoginStatusChecker` returned by the login method will have `.token` set to "fake".
+
 ## Try it out
 
 1. Clone and enter repo: `git clone git@github.com:kolplattformen/embedded-api.git && cd embedded-api`

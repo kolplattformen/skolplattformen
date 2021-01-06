@@ -21,6 +21,22 @@ import * as routes from './routes'
 import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 
+interface FakeData {
+  user: User
+  children: Child[]
+  data: {
+    [id: string]: {
+      classmates: Classmate[],
+      news: NewsItem[],
+      calendar: CalendarItem[],
+      schedule: ScheduleItem[],
+      menu: MenuItem[],
+      notifications: Notification[],
+    }
+  }
+}
+const fakeData: FakeData = require('./output.json')
+
 export class Api extends EventEmitter {
   private fetch: Fetcher
 
@@ -29,6 +45,8 @@ export class Api extends EventEmitter {
   private clearCookies: AsyncishFunction
 
   public isLoggedIn: boolean = false
+
+  public isFake: boolean = false
 
   constructor(fetch: Fetch, clearCookies: AsyncishFunction, options?: FetcherOptions) {
     super()
@@ -52,6 +70,10 @@ export class Api extends EventEmitter {
   }
 
   async login(personalNumber: string): Promise<LoginStatusChecker> {
+    if (personalNumber === '121212121212') return this.fakeMode()
+
+    this.isFake = false
+
     const ticketUrl = routes.login(personalNumber)
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
     const ticket: AuthTicket = await ticketResponse.json()
@@ -67,7 +89,22 @@ export class Api extends EventEmitter {
     return status
   }
 
+  async fakeMode(): Promise<LoginStatusChecker> {
+    this.isFake = true
+
+    setTimeout(() => {
+      this.isLoggedIn = true
+      this.emit('login')
+    }, 50)
+
+    const emitter: any = new EventEmitter()
+    emitter.token = 'fake'
+    return emitter
+  }
+
   async getUser(): Promise<User> {
+    if (this.isFake) return fakeData.user
+
     const url = routes.user
     const response = await this.fetch('user', url, this.session)
     const data = await response.json()
@@ -75,6 +112,8 @@ export class Api extends EventEmitter {
   }
 
   async getChildren(): Promise<Child[]> {
+    if (this.isFake) return fakeData.children
+
     const url = routes.children
     const response = await this.fetch('children', url, this.session)
     const data = await response.json()
@@ -82,6 +121,8 @@ export class Api extends EventEmitter {
   }
 
   async getCalendar(child: Child): Promise<CalendarItem[]> {
+    if (this.isFake) return fakeData.data[child.id].calendar
+
     const url = routes.calendar(child.id)
     const response = await this.fetch('calendar', url, this.session)
     const data = await response.json()
@@ -89,6 +130,8 @@ export class Api extends EventEmitter {
   }
 
   async getClassmates(child: Child): Promise<Classmate[]> {
+    if (this.isFake) return fakeData.data[child.id].classmates
+
     const url = routes.classmates(child.sdsId)
     const response = await this.fetch('classmates', url, this.session)
     const data = await response.json()
@@ -96,6 +139,8 @@ export class Api extends EventEmitter {
   }
 
   async getSchedule(child: Child, from: DateTime, to: DateTime): Promise<ScheduleItem[]> {
+    if (this.isFake) return fakeData.data[child.id].schedule
+
     const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
     const response = await this.fetch('schedule', url, this.session)
     const data = await response.json()
@@ -103,6 +148,8 @@ export class Api extends EventEmitter {
   }
 
   async getNews(child: Child): Promise<NewsItem[]> {
+    if (this.isFake) return fakeData.data[child.id].news
+
     const url = routes.news(child.id)
     const response = await this.fetch('news', url, this.session)
     const data = await response.json()
@@ -110,6 +157,8 @@ export class Api extends EventEmitter {
   }
 
   async getMenu(child: Child): Promise<MenuItem[]> {
+    if (this.isFake) return fakeData.data[child.id].menu
+
     const url = routes.menu(child.id)
     const response = await this.fetch('menu', url, this.session)
     const data = await response.json()
@@ -117,6 +166,8 @@ export class Api extends EventEmitter {
   }
 
   async getNotifications(child: Child): Promise<Notification[]> {
+    if (this.isFake) return fakeData.data[child.id].notifications
+
     const url = routes.notifications(child.sdsId)
     const response = await this.fetch('notifications', url, this.session)
     const data = await response.json()
@@ -124,6 +175,7 @@ export class Api extends EventEmitter {
   }
 
   async logout() {
+    this.isFake = false
     this.session = undefined
     await this.clearCookies()
     this.isLoggedIn = false

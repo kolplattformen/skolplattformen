@@ -22,7 +22,7 @@ describe('api', () => {
     api = new Api(fetch, clearCookies)
   })
   describe('#login', () => {
-    it('rexposes token', async () => {
+    it('exposes token', async () => {
       const data = {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
@@ -101,6 +101,30 @@ describe('api', () => {
       api.isLoggedIn = true
       await api.logout()
       expect(api.isLoggedIn).toBe(false)
+    })
+  })
+  describe('fake', () => {
+    it('delivers fake data', async (done) => {
+      const status = await api.login('121212121212')
+      expect(status.token).toEqual('fake')
+
+      api.on('login', async () => {
+        const user = await api.getUser()
+        expect(user).toEqual({
+          firstName: 'Namn',
+          lastName: 'Namnsson'
+        })
+
+        const children = await api.getChildren()
+        expect(children).toHaveLength(2)
+
+        const calendar1 = await api.getCalendar(children[0])
+        expect(calendar1).toHaveLength(20)
+        const calendar2 = await api.getCalendar(children[1])
+        expect(calendar2).toHaveLength(18)
+
+        done()
+      })
     })
   })
 })
