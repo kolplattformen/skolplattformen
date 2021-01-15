@@ -18,6 +18,8 @@ jobs:
           node-version: 14
       - name: Install dependencies
         run: yarn install --immutable --silent --non-interactive 2> >(grep -v warning 1>&2)
+      - name: Build
+        run: yarn build
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
