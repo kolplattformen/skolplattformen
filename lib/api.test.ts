@@ -104,10 +104,19 @@ describe('api', () => {
     })
   })
   describe('fake', () => {
-    it('delivers fake data', async (done) => {
-      const status = await api.login('121212121212')
+    it('sets fake mode for the correct pnr:s', async () => {
+      let status
+
+      status = await api.login('121212121212')
       expect(status.token).toEqual('fake')
 
+      status = await api.login('201212121212')
+      expect(status.token).toEqual('fake')
+
+      status = await api.login('1212121212')
+      expect(status.token).toEqual('fake')
+    })
+    it('delivers fake data', async (done) => {
       api.on('login', async () => {
         const user = await api.getUser()
         expect(user).toEqual({
@@ -125,6 +134,7 @@ describe('api', () => {
 
         done()
       })
+      await api.login('121212121212')
     })
   })
 })

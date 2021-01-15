@@ -55,7 +55,7 @@ export class Api extends EventEmitter {
   }
 
   async login(personalNumber: string): Promise<LoginStatusChecker> {
-    if (personalNumber === '121212121212') return this.fakeMode()
+    if (personalNumber.endsWith('1212121212')) return this.fakeMode()
 
     this.isFake = false
 
