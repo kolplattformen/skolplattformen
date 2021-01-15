@@ -9,7 +9,7 @@ import { useApi } from '@skolplattformen/react-native-embedded-api'
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
 export const Login = ({ navigation, route }) => {
-  const { login, logout, on } = useApi()
+  const { login, logout, on, off } = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
   const [loggedIn, setLoggedIn] = React.useState(false)
@@ -22,15 +22,18 @@ export const Login = ({ navigation, route }) => {
     setValid(Personnummer.valid(socialSecurityNumber))
   }, [socialSecurityNumber])
 
-  useEffect(() => {
-    setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
-  }, [])
-
-  on('login', async () => {
+  const loginHandler = async () => {
     setLoggedIn(true)
     showModal(false)
     navigateToChildren()
-  })
+  }
+
+  useEffect(() => {
+    setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
+    on('login', loginHandler)
+
+    return () => off('login', loginHandler)
+  }, [])
 
   /* Helpers */
   const handleInput = (text) => {
@@ -62,7 +65,9 @@ export const Login = ({ navigation, route }) => {
   const startLogin = async () => {
     showModal(true)
     const status = await login(socialSecurityNumber)
-    openBankId(status.token) // TODO: verify this solution after issue https://github.com/kolplattformen/embedded-api/issues/3 is resolved
+    if (status.token !== 'fake') {
+      openBankId(status.token)
+    }
     status.on('PENDING', () => console.log('BankID app not yet opened'))
     status.on('USER_SIGN', () => console.log('BankID app is open'))
     status.on('ERROR', () => setError('Inloggningen misslyckades, försök igen!') && showModal(false))
