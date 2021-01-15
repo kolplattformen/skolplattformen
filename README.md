@@ -107,7 +107,8 @@ api.setSessionCookie(sessionCookie); // will trigger `on('login')` event and set
 
 ### Fake user
 
-Login with personal number "12121212121212" and api will be put into fake mode.
+Login with personal number `12121212121212`, `201212121212` or `1212121212` and
+api will be put into fake mode.
 Static data will be returned and no calls to backend will be made.
 
 The `LoginStatusChecker` returned by the login method will have `.token` set to "fake".
