@@ -85,6 +85,34 @@ describe('api', () => {
         done()
       })
     })
+    it('remembers used personal number', async () => {
+      const data = {
+        token: '9462cf77-bde9-4029-bb41-e599f3094613',
+        order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
+      }
+      response.json.mockResolvedValue(data)
+
+      const personalNumber = 'my personal number'
+      await api.login(personalNumber)
+
+      expect(api.getPersonalNumber()).toEqual(personalNumber)
+    })
+    it('forgets used personal number if sign in is unsuccessful', async (done) => {
+      const data = {
+        token: '9462cf77-bde9-4029-bb41-e599f3094613',
+        order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
+      }
+      response.json.mockResolvedValue(data)
+      response.text.mockResolvedValueOnce('ERROR')
+
+      const personalNumber = 'my personal number'
+      const status = await api.login(personalNumber)
+
+      status.on('ERROR', () => {
+        expect(api.getPersonalNumber()).toEqual(undefined)
+        done()
+      })
+    })
   })
   describe('#logout', () => {
     it('clears cookies', async () => {
@@ -101,6 +129,21 @@ describe('api', () => {
       api.isLoggedIn = true
       await api.logout()
       expect(api.isLoggedIn).toBe(false)
+    })
+    it('forgets personalNumber', async () => {
+      const data = {
+        token: '9462cf77-bde9-4029-bb41-e599f3094613',
+        order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
+      }
+      response.json.mockResolvedValue(data)
+
+      const pnr = 'my personal number'
+      await api.login(pnr)
+      api.isLoggedIn = true
+
+      await api.logout()
+
+      expect(api.getPersonalNumber()).toEqual(undefined)
     })
   })
   describe('fake', () => {

@@ -25,6 +25,8 @@ import * as fake from './fakeData'
 export class Api extends EventEmitter {
   private fetch: Fetcher
 
+  private personalNumber?: string
+
   private session?: RequestInit
 
   private clearCookies: AsyncishFunction
@@ -37,6 +39,10 @@ export class Api extends EventEmitter {
     super()
     this.fetch = wrap(fetch, options)
     this.clearCookies = clearCookies
+  }
+
+  getPersonalNumber() {
+    return this.personalNumber
   }
 
   getSessionCookie() {
@@ -63,6 +69,9 @@ export class Api extends EventEmitter {
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
     const ticket: AuthTicket = await ticketResponse.json()
 
+    // login was initiated - store personal number
+    this.personalNumber = personalNumber
+
     const status = checkStatus(this.fetch, ticket)
     status.on('OK', async () => {
       const cookieUrl = routes.loginCookie
@@ -70,6 +79,7 @@ export class Api extends EventEmitter {
       const cookie = cookieResponse.headers.get('set-cookie') || ''
       this.setSessionCookie(cookie)
     })
+    status.on('ERROR', () => { this.personalNumber = undefined })
 
     return status
   }
@@ -162,8 +172,9 @@ export class Api extends EventEmitter {
   async logout() {
     this.isFake = false
     this.session = undefined
-    await this.clearCookies()
+    this.personalNumber = undefined
     this.isLoggedIn = false
+    try { await this.clearCookies() } catch (_) { /* do nothing */ }
     this.emit('logout')
   }
 }
