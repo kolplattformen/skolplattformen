@@ -98,7 +98,9 @@ export const Child = ({ route, navigation }) => {
         accessoryLeft={BackAction}
         accessoryRight={renderRightActions}
         style={styles.topBar} />
-      <TabView selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
+      <TabView
+        selectedIndex={selectedIndex}
+        onSelect={index => setSelectedIndex(index)}>
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
             <NewsList news={news} />
@@ -134,11 +136,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   tabContainer: {
+    flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     paddingTop: 10,
     paddingLeft: 10,
-    flexDirection: 'column'
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

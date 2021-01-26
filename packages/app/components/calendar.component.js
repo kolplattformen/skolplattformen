@@ -19,19 +19,20 @@ export const Calendar = ({ calendar }) => {
     ? <View style={{ flex: 1 }}>
       <Image source={require('../assets/girls.png')} style={{ height: 200, width: '100%' }} />
       <Text category='h5'>Det ser lite tomt ut i kalendern</Text>
-      </View>
+    </View>
     : <List
-        style={styles.container}
-        data={calendar.sort((a, b) => b.startDate < a.startDate)}
-        ItemSeparatorComponent={Divider}
-        renderItem={renderItem}
-      />
+      style={styles.container}
+      data={calendar.sort((a, b) => b.startDate < a.startDate)}
+      ItemSeparatorComponent={Divider}
+      renderItem={renderItem}
+    />
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%'
+    width: '100%',
+    paddingBottom: 330,
   },
   ongoing: {
     color: 'red'
