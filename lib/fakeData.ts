@@ -458,58 +458,48 @@ const data: any = {
     notifications: [
       {
         id: '9025f9-a1e685-d7c4668f09-e14bc5-0ab',
-        sender: {
-          name: 'Elevdokumentation',
-        },
+        sender: 'Elevdokumentation',
         dateCreated: '2020-12-10T14:31:29.966Z',
         message: 'Nu kan du ta del av ditt barns dokumentation av utvecklingssamtal',
         url: 'http://layne.nu/a35b0b8/43ca4a16f95c3d8a0987ccef2838d95264352cdd',
         category: null,
-        messageType: 'webnotify',
+        type: 'webnotify',
       },
       {
         id: 'bfe19b-766db3-b38d99d321-bbed3d-506',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-11-16T13:24:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'https://josue.com/659e2e7/b4604db78a448292af2d4af9028bcf67d80c7021',
         category: 'Lärlogg',
-        messageType: 'avisering',
+        type: 'avisering',
       },
       {
         id: 'a24061-1c9a4e-83dc479d7c-f44fe9-376',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-06-10T12:18:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
         url: 'http://bria.nu/5bb906f/88c1dd9cbbe598ec69b5f902198efb59bd5d015d',
         category: 'Bedömning',
-        messageType: 'avisering',
+        type: 'avisering',
       },
       {
         id: '79d65c-1f8240-35c94296ec-9f4bdc-cea',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-03-24T14:28:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
         url: 'http://cassandra.org/3c28231/65fa852717e4c931a3107064391190120e80cc56',
         category: 'Bedömning',
-        messageType: 'avisering',
+        type: 'avisering',
       },
       {
         id: '9c5b7b-52c16d-b9fc2e8248-e4de76-279',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-03-24T13:48:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
         url: 'http://hertha.info/50fa408/351d255720333f71d0e6c683d3ff17078e489040',
         category: 'Bedömning',
-        messageType: 'avisering',
+        type: 'avisering',
       },
     ],
   },
@@ -942,9 +932,7 @@ const data: any = {
     notifications: [
       {
         id: 'e1b5bc-597fa8-5511794939-3614e1-615',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-12-02T14:02:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'http://cara.info/97c9019/67e172bb51f54b19cf0a50561a0fa91596f27f0d',
@@ -953,9 +941,7 @@ const data: any = {
       },
       {
         id: '7dbc20-bfa1ac-e20171b865-82c1f7-f3c',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-12-01T12:43:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'http://cary.org/00b8613/8d36d0d2ac0e3314610a46c759421252383b33aa',
@@ -964,9 +950,7 @@ const data: any = {
       },
       {
         id: 'a6829b-ecf912-b71582e8fb-b6dc14-f60',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-11-24T13:34:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'https://nikko.org/10b0505/21aac7b3c8362f602b47c796f2398b029eb41909',
@@ -975,9 +959,7 @@ const data: any = {
       },
       {
         id: '3cedb4-767d24-8ccd6ac3ac-c05cb7-a3a',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-11-16T13:24:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'http://abdiel.info/4352db7/708f3c9470208db9da2066548626a0f6288bb0f6',
@@ -986,9 +968,7 @@ const data: any = {
       },
       {
         id: '6ace13-5f99da-d1d50ac7a6-4a6108-d8e',
-        sender: {
-          name: 'Planering och Bedömning',
-        },
+        sender: 'Planering och Bedömning',
         dateCreated: '2020-11-12T13:27:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'http://osborne.org/165fae9/cbc54659b103fe071a3b9ae4bd91fe4247fa0b9b',

@@ -113,14 +113,6 @@ export interface Notification {
   sender: string
   dateCreated: string
   message: string
-  /**
-   * <p>
-   *  URL with the actual message as a webpage. Needs separate login.
-   * TODO: Investigate how to solve this somehow
-   * </p>
-   * @type {string}
-   * @memberof Notification
-   */
   url: string
   category: string | null
   type: string
