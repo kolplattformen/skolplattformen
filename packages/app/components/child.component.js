@@ -1,34 +1,52 @@
 import React from 'react'
-import { StyleSheet } from 'react-native';
-import { TabBar, TopNavigation, TopNavigationAction, Tab, TabView, OverflowMenu, MenuItem, Layout, Text, Divider, Icon } from '@ui-kitten/components'
+import { StyleSheet } from 'react-native'
+import {
+  TopNavigation,
+  TopNavigationAction,
+  Tab,
+  TabView,
+  OverflowMenu,
+  MenuItem,
+  Layout,
+  Text,
+  Icon,
+} from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 import { NewsList } from './newsList.component'
 import { Calendar } from './calendar.component'
 import { Classmates } from './classmates.component'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNotifications, useNews, useClassmates, useCalendar, useSchedule } from '@skolplattformen/react-native-embedded-api'
+import { NotificationsList } from './notificationsList.component'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import {
+  useNotifications,
+  useNews,
+  useClassmates,
+  useCalendar,
+  useSchedule,
+} from '@skolplattformen/react-native-embedded-api'
 
 export const Child = ({ route, navigation }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
-  const { child, color } = route.params;
+  const { child, color } = route.params
   const { data: notifications, status: notificationsStatus } = useNotifications(child)
   const { data: news, status: newsStatus } = useNews(child)
   const { data: classmates, status: classmatesStatus } = useClassmates(child)
   const { data: calendar, status: calendarStatus } = useCalendar(child)
   const { data: schedule, status: scheduleStatus } = useSchedule(child, DateTime.local(), DateTime.local().plus({ days: 7 }))
-  const [menuVisible, setMenuVisible] = React.useState(false);
+  const [menuVisible, setMenuVisible] = React.useState(false)
 
   const NewsIcon = (props) => (
     <Icon {...props} name='activity-outline' />
   )
+  const NotificationsIcon = (props) => (
+    <Icon {...props} name='alert-circle-outline' />
+  )
   const CalendarIcon = (props) => (
     <Icon {...props} name='calendar-outline' />
   )
-
   const ClassIcon = (props) => (
     <Icon {...props} name='people-outline' />
   )
-
   const EditIcon = (props) => (
     <Icon {...props} name='edit' />
   )
@@ -54,7 +72,7 @@ export const Child = ({ route, navigation }) => {
 
 
   const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
+    setMenuVisible(!menuVisible)
   }
 
   const renderMenuAction = () => (
@@ -71,7 +89,7 @@ export const Child = ({ route, navigation }) => {
         <MenuItem accessoryLeft={SettingsIcon} title='Anmäl frånvaro' />
       </OverflowMenu>
     </React.Fragment>
-  );
+  )
 
   return (
     <SafeAreaView style={{ flex: 1 }} style={{ ...styles.topBar, color: color }}>
@@ -84,6 +102,11 @@ export const Child = ({ route, navigation }) => {
         <Tab title="Nyheter" icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
             <NewsList news={news} />
+          </Layout>
+        </Tab>
+        <Tab title="Notifieringar" icon={NotificationsIcon}>
+          <Layout style={styles.tabContainer}>
+            <NotificationsList notifications={notifications} status={notificationsStatus} />
           </Layout>
         </Tab>
         <Tab title="Schema" icon={CalendarIcon}>
