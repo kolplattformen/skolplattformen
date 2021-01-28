@@ -80,13 +80,15 @@ export const calendar = (data: any): CalendarItem[] => etjanst(data).map(calenda
 
 const IMAGE_HOST = 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
 export const newsItem = ({
-  newsId, header, preamble, body, bannerImageUrl, pubDateSe, modDateSe,
+  newsId, header, preamble, body, bannerImageUrl, pubDateSe, modDateSe, authorDisplayName, altText,
 }: any): NewsItem => ({
   header,
   id: newsId,
+  author: authorDisplayName,
   intro: preamble,
   imageUrl: bannerImageUrl,
   fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
+  imageAltText: altText,
   body: htmlDecode(h2m(body)),
   published: DateTime.fromFormat(pubDateSe, 'dd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
   modified: DateTime.fromFormat(modDateSe, 'dd LLLL yyyy HH:mm', dateTimeOptions).toISO(),

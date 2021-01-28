@@ -94,7 +94,8 @@ export interface Guardian {
  * @interface NewsItem
  */
 export interface NewsItem {
-  id?: string
+  id: string
+  author?: string
   header?: string
   intro?: string
   body?: string
@@ -102,6 +103,7 @@ export interface NewsItem {
   modified?: string
   imageUrl?: string
   fullImageUrl?: string
+  imageAltText: string
 }
 
 /**

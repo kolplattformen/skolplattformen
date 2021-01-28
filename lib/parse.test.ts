@@ -268,9 +268,11 @@ describe('parse', () => {
         const [item] = parse.news(response)
 
         expect(item.id).toEqual('news id')
+        expect(item.author).toEqual('Eva-Lotta Rönnberg')
         expect(item.header).toEqual('Problemet med att se betyg i bild, slöjd och teknik löst!')
         expect(item.imageUrl).toEqual('A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
         expect(item.fullImageUrl).toEqual('https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
+        expect(item.imageAltText).toEqual('Nyhetsbild. Bildtext ej tillgänglig.')
         expect(item.intro).toEqual('Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...')
         expect(item.modified).toEqual('2020-12-18T16:18:00.000+01:00')
         expect(item.published).toEqual('2020-12-18T16:15:00.000+01:00')

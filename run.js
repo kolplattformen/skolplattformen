@@ -54,36 +54,36 @@ async function run() {
 
       console.log(api.getSessionCookie())
 
-      console.log('user')
-      const user = await api.getUser()
+      // console.log('user')
+      // const user = await api.getUser()
       // console.log(user)
 
       console.log('children')
       const children = await api.getChildren()
       // console.log(children)
 
-      console.log('calendar')
-      const calendar = await api.getCalendar(children[0])
+      // console.log('calendar')
+      // const calendar = await api.getCalendar(children[0])
       // console.log(calendar)
 
-      console.log('classmates')
-      const classmates = await api.getClassmates(children[0])
+      // console.log('classmates')
+      // const classmates = await api.getClassmates(children[0])
       // console.log(classmates)
 
-      console.log('schedule')
-      const schedule = await api.getSchedule(children[0], DateTime.local(), DateTime.local().plus({ week: 1 }))
+      // console.log('schedule')
+      // const schedule = await api.getSchedule(children[0], DateTime.local(), DateTime.local().plus({ week: 1 }))
       // console.log(schedule)
 
       console.log('news')
       const news = await api.getNews(children[0])
-      // console.log(news)
+      console.log(news)
 
-      console.log('menu')
-      const menu = await api.getMenu(children[0])
+      // console.log('menu')
+      // const menu = await api.getMenu(children[0])
       // console.log(menu)
 
-      console.log('notifications')
-      const notifications = await api.getNotifications(children[0])
+      // console.log('notifications')
+      // const notifications = await api.getNotifications(children[0])
       // console.log(notifications)
 
       await api.logout()
