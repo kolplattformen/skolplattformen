@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingTop: 10,
     paddingLeft: 10,
+    paddingBottom: 350
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

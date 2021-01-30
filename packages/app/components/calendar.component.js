@@ -41,8 +41,7 @@ export const Calendar = ({ calendar }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    paddingBottom: 330,
+    width: '100%'
   },
   ongoing: {
     color: 'red'

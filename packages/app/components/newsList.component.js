@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignItems: 'stretch',
-    paddingRight: 10,
-    paddingBottom: 330
+    paddingRight: 10
   }
 })
