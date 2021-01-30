@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: skolplattformen-ghost
+  name: skolplattformen-ghost
+  namespace: skolplattformen
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: skolplattformen-ghost
+      release: skolplattformen-ghost
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: skolplattformen-ghost
+    spec:
+      containers:
+      - env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        - name: MARIADB_HOST
+          value: skolplattformen-ghost-mariadb
+        - name: MARIADB_PORT_NUMBER
+          value: "3306"
+        - name: GHOST_DATABASE_NAME
+          value: bitnami_ghost
+        - name: GHOST_DATABASE_USER
+          value: bn_ghost
+        - name: GHOST_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mariadb-password
+              name: skolplattformen-ghost-mariadb
+        - name: GHOST_HOST
+          value: vrmeet.io/
+        - name: GHOST_PROTOCOL
+          value: http
+        - name: GHOST_PORT_NUMBER
+          value: "80"
+        - name: GHOST_USERNAME
+          value: christian@landgren.nu
+        - name: GHOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: ghost-password
+              name: skolplattformen-ghost
+        - name: GHOST_EMAIL
+          value: christian@landgren.nu
+        - name: BLOG_TITLE
+          value: User's Blog
+        image: docker.io/bitnami/ghost:3.12.1-debian-10-r0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: vrmeet.io/
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: skolplattformen-ghost
+        ports:
+        - containerPort: 2368
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: vrmeet.io/
+            path: /
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          requests:
+            cpu: 300m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /bitnami/ghost
+          name: ghost-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: ghost-data
+        persistentVolumeClaim:
+          claimName: skolplattformen-ghost
