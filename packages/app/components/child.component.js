@@ -117,7 +117,7 @@ export const Child = ({ route, navigation }) => {
             <NotificationsList notifications={notifications} status={notificationsStatus} />
           </Layout>
         </Tab>
-        <Tab title="Schema" icon={CalendarIcon}>
+        <Tab title="Kalender" icon={CalendarIcon}>
           <Layout style={styles.tabContainer}>
             <Calendar calendar={[...calendar ?? [], ...schedule ?? []]}></Calendar>
           </Layout>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
 import { DateTime } from 'luxon'
+import moment from 'moment'
 import { useNotifications, useNews, useClassmates, useCalendar, useMenu, useSchedule } from '@skolplattformen/react-native-embedded-api'
 import { Button, Icon, Text, Card, Avatar } from '@ui-kitten/components'
 
@@ -109,15 +110,15 @@ export const ChildListItem = ({ navigation, child, color }) => {
       footer={Footer}
       onPress={() => navigation.navigate('Child', { child, color })}
     >
-      {([calendar ?? [], schedule ?? []].filter(a => a.startDate?.isSame('day'))).map((calendarItem, i) =>
+      {([...(calendar ?? []), ...(schedule ?? [])].filter(a => moment(a.startDate).isSame('week')).slice(0, 3).map((calendarItem, i) =>
         <Text appearance='hint' category='c1' key={i} style={{ textColor: styles.loaded(notificationsStatus) }}>
           {`${calendarItem.title}`}
         </Text>
-      )}
+      ))}
 
-      {menu.map((day, i) =>
+      {notifications.filter(n => moment(n).isSame('week')).map((notification, i) =>
         <Text appearance='hint' category='c1' key={i}>
-          {`${day.title.split('-')[0]} - ${day.description.split('<br/>').join(' ')}`}
+          {`${notification.message}`}
         </Text>
       )}
     </Card>
