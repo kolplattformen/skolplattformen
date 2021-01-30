@@ -15,7 +15,8 @@ export const Login = ({ navigation, route }) => {
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [argument, setArgument] = React.useState('öppna')
   const [error, setError] = React.useState(null)
-  const [socialSecurityNumber, setSocialSecurityNumber] = useAsyncStorage('@socialSecurityNumber')
+  const [socialSecurityNumberCache, setSocialSecurityNumberCache] = useAsyncStorage('@socialSecurityNumber')
+  const [socialSecurityNumber, setSocialSecurityNumber] = React.useState(socialSecurityNumberCache)
 
   /* Initial load functions */
   useEffect(() => {
@@ -43,6 +44,7 @@ export const Login = ({ navigation, route }) => {
     if (isValid) {
       const parsedInput = Personnummer.parse(text).format(true)
       setSocialSecurityNumber(parsedInput)
+      setSocialSecurityNumberCache(parsedInput)
     } else {
       setSocialSecurityNumber(text)
     }

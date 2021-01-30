@@ -4,16 +4,20 @@ import { DateTime } from 'luxon'
 import { useNotifications, useNews, useClassmates, useCalendar, useSchedule } from '@skolplattformen/react-native-embedded-api'
 import { Button, Icon, Text, Card, Avatar } from '@ui-kitten/components'
 
-const NotificationIcon = (style) => (
-  <Icon {...style} name='activity-outline' />
+const NotificationsIcon = (props) => (
+  <Icon {...props} name='alert-circle-outline' />
 )
 
-const CalendarIcon = (style) => (
-  <Icon {...style} name='calendar-outline' />
+const NewsIcon = (props) => (
+  <Icon {...props} name='activity-outline' />
 )
 
-const PeopleIcon = (style) => (
-  <Icon {...style} name='people-outline' />
+const CalendarIcon = (props) => (
+  <Icon {...props} name='calendar-outline' />
+)
+
+const PeopleIcon = (props) => (
+  <Icon {...props} name='people-outline' />
 )
 
 export const ChildListItem = ({ navigation, child, color }) => {
@@ -56,15 +60,23 @@ export const ChildListItem = ({ navigation, child, color }) => {
   const Footer = (props, info) => (
     <View style={styles.itemFooter}>
       <Button
-        style={styles[notificationsStatus]}
+        style={[styles.item, styles[newsStatus]]}
         status='control'
         size='small'
-        accessoryLeft={NotificationIcon}
+        accessoryLeft={NewsIcon}
       >
-        {`${(news || []).length}`} nyheter
+        {`${(news || []).length}`}
       </Button>
       <Button
-        style={styles[calendarStatus]}
+        style={[styles.item, styles[notificationsStatus]]}
+        status='control'
+        size='small'
+        accessoryLeft={NotificationsIcon}
+      >
+        {`${(notifications || []).length}`}
+      </Button>
+      <Button
+        style={[styles.item, styles[calendarStatus]]}
         status='control'
         size='small'
         accessoryLeft={CalendarIcon}
@@ -72,12 +84,12 @@ export const ChildListItem = ({ navigation, child, color }) => {
         {`${(notifications || []).length}`}
       </Button>
       <Button
-        style={styles[classmatesStatus]}
+        style={[styles.item, styles[classmatesStatus]]}
         status='control'
         size='small'
         accessoryLeft={PeopleIcon}
       >
-        {`${(classmates || []).length} elever`}
+        {`${(classmates || []).length}`}
       </Button>
     </View>
   )
@@ -107,20 +119,22 @@ const styles = StyleSheet.create({
   },
   itemFooter: {
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    justifyContent: 'space-evenly',
+    paddingHorizontal: 5,
     paddingVertical: 5,
     borderRadius: 5,
     margin: 0
   },
-  loaded: {
+  item: {
     paddingHorizontal: 0,
+  },
+  loaded: {
     color: '#000'
   },
   loading: {
-    paddingHorizontal: 0,
     color: '#555'
-  }, error: {
-    paddingHorizontal: 0,
+  },
+  error: {
     color: '#500'
   }
 })
