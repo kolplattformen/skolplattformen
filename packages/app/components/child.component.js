@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Linking } from 'react-native'
 import {
   TopNavigation,
   TopNavigationAction,
@@ -26,8 +26,8 @@ import {
 } from '@skolplattformen/react-native-embedded-api'
 
 export const Child = ({ route, navigation }) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
-  const { child, color } = route.params
+  const { child, color, selectedTab } = route.params
+  const [selectedIndex, setSelectedIndex] = React.useState(selectedTab || 0)
   const { data: notifications, status: notificationsStatus } = useNotifications(child)
   const { data: news, status: newsStatus } = useNews(child)
   const { data: classmates, status: classmatesStatus } = useClassmates(child)
@@ -79,14 +79,20 @@ export const Child = ({ route, navigation }) => {
     <TopNavigationAction icon={MenuIcon} onPress={toggleMenu} />
   )
 
-  const renderRightActions = () => (
+  const openSms = (child) => {
+    console.log('child', child)
+    Linking.openURL(`sms:+46730121740&body=${child.pnr}`)
+  }
+
+  const renderRightActions = (child) => () => (
     <React.Fragment>
       <OverflowMenu
         anchor={renderMenuAction}
         visible={menuVisible}
         backdropStyle={styles.backdrop}
         onBackdropPress={toggleMenu}>
-        <MenuItem accessoryLeft={SettingsIcon} title='Anmäl frånvaro' />
+      
+        <MenuItem accessoryLeft={SettingsIcon} title='Anmäl frånvaro' onPress={() => openSms(child)} />
       </OverflowMenu>
     </React.Fragment>
   )
@@ -96,7 +102,7 @@ export const Child = ({ route, navigation }) => {
       <TopNavigation title={child.name.split('(')[0]}
         alignment='center'
         accessoryLeft={BackAction}
-        accessoryRight={renderRightActions}
+        // accessoryRight={renderRightActions(child)}
         style={styles.topBar} />
       <TabView
         selectedIndex={selectedIndex}
