@@ -61,15 +61,13 @@ const Banner = () => {
 
                 <h1>Skolplattformen.org är det öppna alternativet</h1>
                 <p>
-                  Excepteur sint occaecat cupidatat non proident sunt in culpa
-                  qui officia deserunt mollit lorem ipsum anim id est laborum
-                  perspiciatis unde.
+                  Det här är en helt ny typ av app som hämtar information från Skolplattformen och visar den på ett enklare och snabbare sätt. 
                 </p>
                 <a href="#" className="btn">
-                  Download App
+                  App Store
                 </a>
                 <a href="#" className="btn">
-                  Discover More
+                  Mer info
                 </a>
               </div>
             </Col>

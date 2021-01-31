@@ -10,16 +10,16 @@ const FUNFACTS_DATA = [
     title: "Kostade orginalet"
   },
   {
-    count: "6389",
-    title: "Negativa kommentarer"
-  },
-  {
-    count: "3",
-    title: "5 stjärniga reviews"
-  },
-  {
     count: "7",
-    title: "År att utveckla"
+    title: "år att utveckla"
+  },
+  {
+    count: "10",
+    title: "kronor kostar vår app"
+  },
+  {
+    count: "5",
+    title: "veckors utveckling"
   }
 ];
 

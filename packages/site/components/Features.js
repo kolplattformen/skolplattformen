@@ -33,7 +33,7 @@ const FEATURES_DATA = [
     image: img4
   },
   {
-    title: "Stödjer fler skolsystem",
+    title: "Kan byggas ut till fler skolsystem",
     text:
       "Just nu stöds bara Stockholm Stads skolplattform men med din hjälp kan fler skolplattformar integreras så att du slipper logga in i flera appar om du har barn i olika skolor.",
     image: img3
