@@ -27,6 +27,7 @@ const HomePage = () => {
       <CtaTwo />
       <CtaThree />
       <AppShots />
+      <Pricing />
       <Testimonials />
       <Footer />
     </Layout>

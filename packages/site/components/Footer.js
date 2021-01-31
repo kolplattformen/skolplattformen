@@ -155,7 +155,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="footer-text text-center">
-          <p>© copyright 2019 by Layerdrops.com</p>
+          <p>© copyright 2021 by not free beer HB</p>
         </div>
       </div>
     </footer>

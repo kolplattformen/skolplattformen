@@ -65,28 +65,8 @@ const NavLinks = () => {
           offset={-70}
           duration={500}
         >
-          Kostnader
+          Vad kostar det?
         </ScrollLink>
-      </li>
-      <li className="dropdown">
-        <Link href="/news">
-          <>
-            <a>Nyheter</a>
-            <i className="fa fa-angle-down" onClick={handleDropdownStatus}></i>
-          </>
-        </Link>
-        <ul className="dropdown-list">
-          <li>
-            <Link href="/news">
-              <a>News</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/news-details">
-              <a>News Details</a>
-            </Link>
-          </li>
-        </ul>
       </li>
     </ul>
   );

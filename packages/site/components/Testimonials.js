@@ -3,7 +3,7 @@ import SwiperCore, { Autoplay, Thumbs, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import img1 from "../assets/img/wass.png";
-import img2 from "../assets/img/feature/author2.png";
+import img2 from "../assets/img/karin.jpg";
 import img3 from "../assets/img/feature/author1.png";
 
 SwiperCore.use([Autoplay, Thumbs, Navigation]);
@@ -75,20 +75,16 @@ const Testimonials = () => {
               >
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    This is due to their excellent service, competitive
-                    <br /> pricing and customer support. It’s throughly
-                    <br /> refresing to get such a personal touch.
+                    "Det känns bra att mänskligheten nu befrias från upphandlingshaveriets bojor. Framtiden är här! Och den kostade nästan ingenting. Öppen data är kärlek."
                   </h4>
-                  <p>Shirley Smith</p>
+                  <p>Fredrik Wass, förälder</p>
                 </SwiperSlide>
 
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    This is due to their excellent service, competitive
-                    <br /> pricing and customer support. It’s throughly
-                    <br /> refresing to get such a personal touch.
+                  "Oftast när jag behöver kolla upp något är jag stressad och på språng. Om det tar tid att logga in och leta så struntar jag till sist i det."
                   </h4>
-                  <p>Shirley Smith</p>
+                  <p>Karin Nygårds, lärare och förälder</p>
                 </SwiperSlide>
                 <SwiperSlide className="single-author-comment">
                   <h4>
