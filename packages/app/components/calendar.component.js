@@ -2,6 +2,16 @@ import React from 'react'
 import { StyleSheet, Image, View } from 'react-native'
 import { Divider, List, ListItem, Icon, Text, Layout } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
+import moment from 'moment'
+import 'moment/locale/sv'
+
+moment.locale('sv')
+
+// is not as versatile as moment.calendar()
+const displayDate = (date) => DateTime
+.fromISO(date)
+.toRelative({ locale: 'sv', style: 'long' })
+
 
 export const Calendar = ({ calendar }) => {
   const renderItemIcon = (startDate, endDate) =>
@@ -10,7 +20,7 @@ export const Calendar = ({ calendar }) => {
   const renderItem = ({ item }) => (
     <ListItem
       title={`${item.title}`}
-      description={`${item.startDate}`}
+      description={`${moment(item.startDate).calendar()}`}
       accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
     />
   )
@@ -31,8 +41,7 @@ export const Calendar = ({ calendar }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    paddingBottom: 330,
+    width: '100%'
   },
   ongoing: {
     color: 'red'
