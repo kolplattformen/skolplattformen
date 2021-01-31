@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nconst SectionTitle = props => {\n  return __jsx(\"div\", {\n    className: \"section-title text-center\"\n  }, __jsx(\"h2\", null, props.title), __jsx(\"p\", null, props.text));\n};\n\nexport default SectionTitle;","map":null,"metadata":{},"sourceType":"module"}

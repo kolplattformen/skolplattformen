@@ -1,0 +1,25 @@
+{
+  "name": "jironis-react-next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "next": "9.3.2",
+    "next-images": "^1.4.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-countup": "^4.3.3",
+    "react-dom": "^16.13.1",
+    "react-id-swiper": "^4.0.0",
+    "react-modal-video": "^1.2.3",
+    "react-scroll": "^1.8.0",
+    "react-visibility-sensor": "^5.1.1",
+    "swiper": "^6.0.4"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
