@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavLinks from "./NavLinks";
 
-import headerLogo from "../assets/img/logo2.png";
+import headerLogo from "../assets/img/logo.png";
 import headerLogoSticky from "../assets/img/logo.png";
 
 const HeaderHome = (props) => {
@@ -86,7 +86,7 @@ const HeaderHome = (props) => {
               </div>
               <div className="col-lg-3 col-md-4 col-sm-5 d-md-block d-none">
                 <div className="urgent-call text-right">
-                  <a href="#" className="btn">
+                  <a href="#" className="btn" onclick="alert('Håll ut! Appen kommer snart på App Store och Google Play')">
                     Ladda ner
                   </a>
                 </div>

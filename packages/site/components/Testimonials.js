@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import img1 from "../assets/img/wass.png";
 import img2 from "../assets/img/karin.jpg";
-import img3 from "../assets/img/feature/author1.png";
+import img3 from "../assets/img/per.jpg";
 
 SwiperCore.use([Autoplay, Thumbs, Navigation]);
 
@@ -88,11 +88,9 @@ const Testimonials = () => {
                 </SwiperSlide>
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    This is due to their excellent service, competitive
-                    <br /> pricing and customer support. It’s throughly
-                    <br /> refresing to get such a personal touch.
+                    Christian Landgren la upp en bild på sin ”Skrota Skolplattformen”-keps, det fick mig att dra igång en Facebook-grupp som utvecklades till ett slags hackathon där Christian och några gjorde en app av Skolplattformen, så som den borde vara. Så nu behövs inte den där kepsen längre, här är appen.
                   </h4>
-                  <p>Shirley Smith</p>
+                  <p>Per Strömbeck, förälder</p>
                 </SwiperSlide>
               </Swiper>
               <div className="testimonial-author-comment-nav">

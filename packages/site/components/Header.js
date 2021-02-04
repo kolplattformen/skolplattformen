@@ -78,7 +78,7 @@ const HeaderHome = (props) => {
               </div>
               <div className="col-lg-3 col-md-4 col-sm-5 d-md-block d-none">
                 <div className="urgent-call text-right">
-                  <a href="#" className="btn">
+                  <a href="#" className="btn" onclick="alert('Håll ut! Appen kommer snart på App Store och Google Play')">
                     Ladda ner
                   </a>
                 </div>

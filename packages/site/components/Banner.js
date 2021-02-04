@@ -59,9 +59,16 @@ const Banner = () => {
                   </div>
                 </div>
 
-                <h1>Skolplattformen.org är det öppna alternativet</h1>
+                <h1>Föräldrar hinner inte strula</h1>
                 <p>
-                  Det här är en helt ny typ av app som hämtar information från Skolplattformen och visar den på ett enklare och snabbare sätt. 
+                  Oavsett om du har tre eller sju barn - det är mycket att hålla reda på. Stövlarna. Frånvaruanmälan nummer 17 i februari. Vad vikarien heter den här veckan. 
+                  
+                  En dåligt fungerande Skolplattform som äter tid och ork? Det finns inte plats för det. Så vi har byggt en bättre. 
+                  
+                  Med all information du behöver som förälder. Snabbare och framförallt - mycket mindre krångel. 
+                </p>
+                <p>
+                  <b>Appen är klar och kommer att dyka upp på App Store och Google Play Store vilken dag som helst.</b>
                 </p>
                 <a href="#" className="btn">
                   App Store
