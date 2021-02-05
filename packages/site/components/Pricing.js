@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 
 const Pricing = () => {
-  const [pricing, setPricing] = useState(false)
-  const handleClick = (e) => {
-    e.preventDefault()
-    setPricing(!pricing)
-  }
+  const [pricing] = useState(false)
+
   return (
     <section className="pb-90" id="pricing">
       <div className="container">

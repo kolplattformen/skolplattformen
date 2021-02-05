@@ -1,8 +1,6 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-
+import { Col, Container, Row } from 'react-bootstrap'
 import img1 from '../assets/img/boys.png'
-import img2 from '../assets/img/icons/goal.svg'
 
 const CtaTwo = () => {
   return (

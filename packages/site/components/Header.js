@@ -81,7 +81,7 @@ const HeaderHome = (props) => {
                   <a
                     href="#"
                     className="btn"
-                    onclick="alert('Håll ut! Appen kommer snart på App Store och Google Play')"
+                    onClick="alert('Håll ut! Appen kommer snart på App Store och Google Play')"
                   >
                     Ladda ner
                   </a>

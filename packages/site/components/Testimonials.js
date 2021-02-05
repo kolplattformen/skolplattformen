@@ -79,41 +79,42 @@ const Testimonials = () => {
               >
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    "Det känns bra att mänskligheten nu befrias från
+                    &ldquo;Det känns bra att mänskligheten nu befrias från
                     upphandlingshaveriets bojor. Framtiden är här! Och den
-                    kostade nästan ingenting. Öppen data är kärlek."
+                    kostade nästan ingenting. Öppen data är kärlek.&rdquo;
                   </h4>
                   <p>Fredrik Wass, förälder</p>
                 </SwiperSlide>
 
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    "Oftast när jag behöver kolla upp något är jag stressad och
-                    på språng. Om det tar tid att logga in och leta så struntar
-                    jag till sist i det."
+                    &ldquo;Oftast när jag behöver kolla upp något är jag
+                    stressad och på språng. Om det tar tid att logga in och leta
+                    så struntar jag till sist i det.&rdquo;
                   </h4>
                   <p>Karin Nygårds, lärare och förälder</p>
                 </SwiperSlide>
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    Christian Landgren la upp en bild på sin ”Skrota
+                    &ldquo;Christian Landgren la upp en bild på sin ”Skrota
                     Skolplattformen”-keps, det fick mig att dra igång en
                     Facebook-grupp som utvecklades till ett slags hackathon där
                     Christian och några gjorde en app av Skolplattformen, så som
                     den borde vara. Så nu behövs inte den där kepsen längre, här
-                    är appen.
+                    är appen.&rdquo;
                   </h4>
                   <p>Per Strömbeck, förälder</p>
                 </SwiperSlide>
 
                 <SwiperSlide className="single-author-comment">
                   <h4>
-                    Digitala lösningar inom skolan är som på många andra områden
-                    inom det offentliga varken användarvänliga eller effektiva.
-                    Med öppen källkod och öppen data kan vi få snabbare och
-                    billigare få till bättre lösningar. Och dessutom öka insynen
-                    i hur systemen som formar vår vardag fungerar. Öppna
-                    Skolplattformen är ett bra exempel på detta!
+                    &ldquo;Digitala lösningar inom skolan är som på många andra
+                    områden inom det offentliga varken användarvänliga eller
+                    effektiva. Med öppen källkod och öppen data kan vi få
+                    snabbare och billigare få till bättre lösningar. Och
+                    dessutom öka insynen i hur systemen som formar vår vardag
+                    fungerar. Öppna Skolplattformen är ett bra exempel på
+                    detta!&rdquo;
                   </h4>
                   <p>Niels PaarupPetersen, Riksdagsledamot C</p>
                 </SwiperSlide>

@@ -58,9 +58,9 @@ const HeaderHome = (props) => {
               <div className="col-xl-3 col-lg-3 col-md-4 col-6">
                 <div className="logo">
                   <a href="/">
-                    <img class="main-logo2" src={headerLogo} alt="jironis" />
+                    <img className="main-logo2" src={headerLogo} alt="jironis" />
                     <img
-                      class="sticky-logo"
+                      className="sticky-logo"
                       src={headerLogoSticky}
                       alt="jironis"
                     />
@@ -89,7 +89,7 @@ const HeaderHome = (props) => {
                   <a
                     href="#"
                     className="btn"
-                    onclick="alert('Håll ut! Appen kommer snart på App Store och Google Play')"
+                    onClick="alert('Håll ut! Appen kommer snart på App Store och Google Play')"
                   >
                     Ladda ner
                   </a>

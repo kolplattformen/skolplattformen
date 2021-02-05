@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll'
+import React from 'react'
+import { Link as ScrollLink } from 'react-scroll'
 
 const NavLinks = () => {
   // const [dropdownStatus, setDropdownStatus] = useState(false);
