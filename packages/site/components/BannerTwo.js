@@ -1,15 +1,15 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
-import shape1 from "../assets/img/banner/shaps1.png";
-import shape2 from "../assets/img/banner/shaps2.png";
-import shape3 from "../assets/img/banner/shaps3.png";
-import shape4 from "../assets/img/banner/shaps4.png";
-import shape5 from "../assets/img/banner/shaps5.png";
-import shape6 from "../assets/img/banner/shaps6.png";
-import shape7 from "../assets/img/banner/shaps7.png";
+import shape1 from '../assets/img/banner/shaps1.png'
+import shape2 from '../assets/img/banner/shaps2.png'
+import shape3 from '../assets/img/banner/shaps3.png'
+import shape4 from '../assets/img/banner/shaps4.png'
+import shape5 from '../assets/img/banner/shaps5.png'
+import shape6 from '../assets/img/banner/shaps6.png'
+import shape7 from '../assets/img/banner/shaps7.png'
 
-import bannerMoc from "../assets/img/banner/mockup.png";
+import bannerMoc from '../assets/img/banner/mockup.png'
 
 const BannerTwo = () => {
   return (
@@ -21,7 +21,11 @@ const BannerTwo = () => {
               <div className="banner-text-inner">
                 <h1>Välkommen till den öppna skolplattformen</h1>
                 <p>
-                  Vi tröttnade på att vänta på att Skolplattformen skulle bli användbar så vi tog saken i egna händer och byggde en egen. Appen hämtar samma information som på den gamla Skolplattformen men visar den på ett snabbare och lättare sätt.
+                  Vi tröttnade på att vänta på att Skolplattformen skulle bli
+                  användbar så vi tog saken i egna händer och byggde en egen.
+                  Appen hämtar samma information som på den gamla
+                  Skolplattformen men visar den på ett snabbare och lättare
+                  sätt.
                 </p>
                 <a href="#" className="btn">
                   App Store
@@ -51,7 +55,7 @@ const BannerTwo = () => {
         </Container>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BannerTwo;
+export default BannerTwo

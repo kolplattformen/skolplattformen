@@ -1,17 +1,17 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import SwiperCore, { Pagination, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import SwiperCore, { Pagination, Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-SwiperCore.use([Pagination, Autoplay]);
+SwiperCore.use([Pagination, Autoplay])
 
-import SectionTitle from "./SectionTitle";
+import SectionTitle from './SectionTitle'
 
-import img1 from "../assets/img/feature/app-img.png";
-import img2 from "../assets/img/feature/app-img2.png";
-import img3 from "../assets/img/feature/app-img3.png";
-import img4 from "../assets/img/feature/app-img4.png";
-import img5 from "../assets/img/feature/app-img5.png";
+import img1 from '../assets/img/feature/app-img.png'
+import img2 from '../assets/img/feature/app-img2.png'
+import img3 from '../assets/img/feature/app-img3.png'
+import img4 from '../assets/img/feature/app-img4.png'
+import img5 from '../assets/img/feature/app-img5.png'
 
 const AppShots = () => {
   const swiperParams = {
@@ -19,34 +19,34 @@ const AppShots = () => {
     spaceBetween: 30,
     autoplay: {
       delay: 3000,
-      disableOnInteraction: false
+      disableOnInteraction: false,
     },
     pagination: {
-      el: "#appshot-paginations",
-      type: "bullets",
-      clickable: "true"
+      el: '#appshot-paginations',
+      type: 'bullets',
+      clickable: 'true',
     },
     slidesPerView: 5,
     // Responsive breakpoints
     breakpoints: {
       0: {
         slidesPerGroup: 2,
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       767: {
         slidesPerGroup: 3,
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       991: {
         slidesPerGroup: 2,
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       1499: {
         slidesPerGroup: 5,
-        slidesPerView: 5
-      }
-    }
-  };
+        slidesPerView: 5,
+      },
+    },
+  }
   return (
     <section className="pt-120 pb-155 app-shot-one" id="app">
       <Container>
@@ -170,7 +170,7 @@ const AppShots = () => {
         </div>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default AppShots;
+export default AppShots

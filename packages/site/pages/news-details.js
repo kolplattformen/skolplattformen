@@ -1,18 +1,18 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Link from "next/link";
-import Layout from "../components/Layout";
-import HeaderTwo from "../components/HeaderTwo";
-import MobileMenu from "../components/MobileMenu";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import Link from 'next/link'
+import Layout from '../components/Layout'
+import HeaderTwo from '../components/HeaderTwo'
+import MobileMenu from '../components/MobileMenu'
 
-import PageBanner from "../components/PageBanner";
-import Sidebar from "../components/Sidebar";
-import Footer from "../components/Footer";
+import PageBanner from '../components/PageBanner'
+import Sidebar from '../components/Sidebar'
+import Footer from '../components/Footer'
 
-import img1 from "../assets/img/blog/list1.png";
-import authorImage from "../assets/img/blog/blog-author.png";
-import commentAuthor1 from "../assets/img/blog/comment-author.png";
-import commentAuthor2 from "../assets/img/blog/comment-author2.png";
+import img1 from '../assets/img/blog/list1.png'
+import authorImage from '../assets/img/blog/blog-author.png'
+import commentAuthor1 from '../assets/img/blog/comment-author.png'
+import commentAuthor2 from '../assets/img/blog/comment-author2.png'
 
 const NewsDetails = () => {
   return (
@@ -229,7 +229,7 @@ const NewsDetails = () => {
       </section>
       <Footer />
     </Layout>
-  );
-};
+  )
+}
 
-export default NewsDetails;
+export default NewsDetails

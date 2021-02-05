@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const SectionTitle = (props) => {
   return (
@@ -6,7 +6,7 @@ const SectionTitle = (props) => {
       <h2>{props.title}</h2>
       <p>{props.text}</p>
     </div>
-  );
-};
+  )
+}
 
-export default SectionTitle;
+export default SectionTitle

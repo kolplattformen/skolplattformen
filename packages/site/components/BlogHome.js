@@ -1,51 +1,51 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
-import BlogPost from "./BlogPost";
-import SectionTitle from "./SectionTitle";
+import BlogPost from './BlogPost'
+import SectionTitle from './SectionTitle'
 
-import img1 from "../assets/img/blog/blog1.png";
-import img2 from "../assets/img/blog/blog2.png";
-import img3 from "../assets/img/blog/blog3.png";
+import img1 from '../assets/img/blog/blog1.png'
+import img2 from '../assets/img/blog/blog2.png'
+import img3 from '../assets/img/blog/blog3.png'
 
 const BLOG_HOME_DATA = [
   {
-    title: "Pre and Post Launch Mobile App Marketing Pitfalls to Avoid",
+    title: 'Pre and Post Launch Mobile App Marketing Pitfalls to Avoid',
     content:
-      "There are many variations of passages of available but majority have alteration in some by inject humour or random words.",
-    link: "/news-details",
-    date: "30",
-    month: "Sep",
-    author: "Admin",
-    commentCount: "2",
+      'There are many variations of passages of available but majority have alteration in some by inject humour or random words.',
+    link: '/news-details',
+    date: '30',
+    month: 'Sep',
+    author: 'Admin',
+    commentCount: '2',
     image: img1,
-    btnClass: "blog-btn"
+    btnClass: 'blog-btn',
   },
   {
-    title: "Pre and Post Launch Mobile App Marketing Pitfalls to Avoid",
+    title: 'Pre and Post Launch Mobile App Marketing Pitfalls to Avoid',
     content:
-      "There are many variations of passages of available but majority have alteration in some by inject humour or random words.",
-    link: "/news-details",
-    date: "30",
-    month: "Sep",
-    author: "Admin",
-    commentCount: "2",
+      'There are many variations of passages of available but majority have alteration in some by inject humour or random words.',
+    link: '/news-details',
+    date: '30',
+    month: 'Sep',
+    author: 'Admin',
+    commentCount: '2',
     image: img2,
-    btnClass: "blog-btn"
+    btnClass: 'blog-btn',
   },
   {
-    title: "Pre and Post Launch Mobile App Marketing Pitfalls to Avoid",
+    title: 'Pre and Post Launch Mobile App Marketing Pitfalls to Avoid',
     content:
-      "There are many variations of passages of available but majority have alteration in some by inject humour or random words.",
-    link: "/news-details",
-    date: "30",
-    month: "Sep",
-    author: "Admin",
-    commentCount: "2",
+      'There are many variations of passages of available but majority have alteration in some by inject humour or random words.',
+    link: '/news-details',
+    date: '30',
+    month: 'Sep',
+    author: 'Admin',
+    commentCount: '2',
     image: img3,
-    btnClass: "blog-btn"
-  }
-];
+    btnClass: 'blog-btn',
+  },
+]
 
 const BlogHome = () => {
   return (
@@ -78,7 +78,7 @@ const BlogHome = () => {
         </Row>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default BlogHome;
+export default BlogHome

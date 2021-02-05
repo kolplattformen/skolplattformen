@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import ModalVideo from "react-modal-video";
+import React, { useState } from 'react'
+import ModalVideo from 'react-modal-video'
 
 const Video = () => {
   const [open, setOpen] = useState({
-    isOpen: false
-  });
+    isOpen: false,
+  })
   const openModal = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setOpen({
-      isOpen: true
-    });
-  };
+      isOpen: true,
+    })
+  }
   return (
     <section className="app-video">
       <ModalVideo
@@ -25,7 +25,7 @@ const Video = () => {
             <div className="theme-video-wrap">
               <span
                 onClick={openModal}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
                 className="video-btn"
                 data-popup="video"
               >
@@ -36,7 +36,7 @@ const Video = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Video;
+export default Video

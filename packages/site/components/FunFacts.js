@@ -1,38 +1,38 @@
-import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
-import CountUp from "react-countup";
-import VisibilitySensor from "react-visibility-sensor";
+import CountUp from 'react-countup'
+import VisibilitySensor from 'react-visibility-sensor'
 
 const FUNFACTS_DATA = [
   {
-    count: "1000000000",
-    title: "kronor kostade orginalet"
+    count: '1000000000',
+    title: 'kronor kostade orginalet',
   },
   {
-    count: "7",
-    title: "år att utveckla"
+    count: '7',
+    title: 'år att utveckla',
   },
   {
-    count: "10",
-    title: "kronor kostar vår app :)"
+    count: '10',
+    title: 'kronor kostar vår app :)',
   },
   {
-    count: "5",
-    title: "veckors utveckling"
-  }
-];
+    count: '5',
+    title: 'veckors utveckling',
+  },
+]
 
 const FunFacts = () => {
   const [counter, setCounter] = useState({
-    startCounter: false
-  });
+    startCounter: false,
+  })
 
   const onVisibilityChange = (isVisible) => {
     if (isVisible) {
-      setCounter({ startCounter: true });
+      setCounter({ startCounter: true })
     }
-  };
+  }
   return (
     <section className="border-top pt-120 pb-80">
       <Container>
@@ -56,7 +56,7 @@ const FunFacts = () => {
         </Row>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default FunFacts;
+export default FunFacts

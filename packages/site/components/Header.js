@@ -1,53 +1,53 @@
-import React, { useState, useEffect } from "react";
-import NavLinks from "./NavLinks";
+import React, { useState, useEffect } from 'react'
+import NavLinks from './NavLinks'
 
-import headerLogo from "../assets/img/logo.png";
+import headerLogo from '../assets/img/logo.png'
 
 const HeaderHome = (props) => {
-  const [sticky, setSticky] = useState(false);
+  const [sticky, setSticky] = useState(false)
 
   const handleScroll = () => {
     if (window.scrollY > 70) {
-      setSticky(true);
+      setSticky(true)
     } else if (window.scrollY < 70) {
-      setSticky(false);
+      setSticky(false)
     }
-  };
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    mobileMenu();
+    window.addEventListener('scroll', handleScroll)
+    mobileMenu()
     return () => {
-      mobileMenu();
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
+      mobileMenu()
+      window.removeEventListener('scroll', handleScroll)
+    }
+  })
 
   const mobileMenu = () => {
     document
-      .querySelector(".side-menu__toggler")
-      .addEventListener("click", function (e) {
-        document.querySelector(".side-menu__block").classList.toggle("active");
-        e.preventDefault();
-      });
+      .querySelector('.side-menu__toggler')
+      .addEventListener('click', function (e) {
+        document.querySelector('.side-menu__block').classList.toggle('active')
+        e.preventDefault()
+      })
 
     //Close Mobile Menu
     let sideMenuCloser = document.querySelectorAll(
-      ".side-menu__close-btn, .side-menu__block-overlay"
-    );
+      '.side-menu__close-btn, .side-menu__block-overlay'
+    )
 
     sideMenuCloser.forEach((sideMenuCloserBtn) => {
-      sideMenuCloserBtn.addEventListener("click", function (e) {
-        document.querySelector(".side-menu__block").classList.remove("active");
-        e.preventDefault();
-      });
-    });
-  };
+      sideMenuCloserBtn.addEventListener('click', function (e) {
+        document.querySelector('.side-menu__block').classList.remove('active')
+        e.preventDefault()
+      })
+    })
+  }
 
   return (
     <header className={`header ${props.extraClassName}`}>
       <div
-        className={`main-header ${sticky === true ? "sticky fadeInDown" : " "}`}
+        className={`main-header ${sticky === true ? 'sticky fadeInDown' : ' '}`}
       >
         <div className="main-menu-wrap">
           <div className="container">
@@ -78,7 +78,11 @@ const HeaderHome = (props) => {
               </div>
               <div className="col-lg-3 col-md-4 col-sm-5 d-md-block d-none">
                 <div className="urgent-call text-right">
-                  <a href="#" className="btn" onclick="alert('Håll ut! Appen kommer snart på App Store och Google Play')">
+                  <a
+                    href="#"
+                    className="btn"
+                    onClick="alert('Håll ut! Appen kommer snart på App Store och Google Play')"
+                  >
                     Ladda ner
                   </a>
                 </div>
@@ -88,7 +92,7 @@ const HeaderHome = (props) => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default HeaderHome;
+export default HeaderHome
