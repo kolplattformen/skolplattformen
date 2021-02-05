@@ -62,7 +62,7 @@ const Banner = () => {
                 <h1>Öppna Skolplattformen</h1>
                 <p>
                   Oavsett om du har tre eller sju barn - det är mycket att hålla
-                  reda på. Stövlarna. Frånvaruanmälan nummer 17 i februari. Vad
+                  reda på. Stövlarna. Frånvaroanmälan nummer 17 i februari. Vad
                   vikarien heter den här veckan. En dåligt fungerande
                   Skolplattform som äter tid och ork? Det finns inte plats för
                   det. Så vi har byggt en bättre. Med all information du behöver

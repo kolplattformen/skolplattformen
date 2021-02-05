@@ -17,7 +17,7 @@ const CtaTwo = () => {
               <h2>Lika säkert</h2>
               <p>
                 Ingen information om dina barn skickas till oss, all
-                kommunikatoin går direkt mellan din telefon och Skolplattformens
+                kommunikation går direkt mellan din telefon och Skolplattformens
                 servrar. Du loggar in med BankID som vanligt.
               </p>
               <a href="#" className="btn">
