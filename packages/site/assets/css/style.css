@@ -988,6 +988,10 @@ label input[type="radio"] {
   transform: translateY(-50%);
 }
 
+.logo img {
+  max-height: 100px;
+}
+
 .logo .sticky-logo {
   display: none;
 }

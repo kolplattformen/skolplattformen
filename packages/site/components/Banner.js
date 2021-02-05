@@ -59,7 +59,7 @@ const Banner = () => {
                   </div>
                 </div>
 
-                <h1>Föräldrar hinner inte strula</h1>
+                <h1>Öppna Skolplattformen</h1>
                 <p>
                   Oavsett om du har tre eller sju barn - det är mycket att hålla reda på. Stövlarna. Frånvaruanmälan nummer 17 i februari. Vad vikarien heter den här veckan. 
                   

@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import img1 from "../assets/img/wass.png";
 import img2 from "../assets/img/karin.jpg";
 import img3 from "../assets/img/per.jpg";
+import img4 from "../assets/img/niels.jpg";
 
 SwiperCore.use([Autoplay, Thumbs, Navigation]);
 
@@ -63,6 +64,9 @@ const Testimonials = () => {
                   <SwiperSlide className="single-author-imge">
                     <img src={img3} alt="" />
                   </SwiperSlide>
+                  <SwiperSlide className="single-author-imge">
+                    <img src={img4} alt="" />
+                  </SwiperSlide>
                 </Swiper>
               </div>
             </div>
@@ -92,6 +96,15 @@ const Testimonials = () => {
                   </h4>
                   <p>Per Strömbeck, förälder</p>
                 </SwiperSlide>
+
+                <SwiperSlide className="single-author-comment">
+                  <h4>
+                    Digitala lösningar inom skolan är som på många andra områden inom det offentliga varken användarvänliga eller effektiva. Med öppen källkod och öppen data kan vi få snabbare och billigare få till bättre lösningar. Och dessutom öka insynen i hur systemen som formar vår vardag fungerar. Öppna Skolplattformen är ett bra exempel på detta!
+                  </h4>
+                  <p>Niels PaarupPetersen, Riksdagsledamot C</p>
+                </SwiperSlide>
+
+
               </Swiper>
               <div className="testimonial-author-comment-nav">
                 <button id="testi-swiper-button-prev">
