@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { formatPrice } from '../utils/intl'
 
 const Pricing = () => {
   const [pricing] = useState(false)
@@ -13,8 +14,8 @@ const Pricing = () => {
               <p>
                 Vi som bygger appen vill gärna fortsätta vidareutveckla den och
                 även ha möjlighet att ge ersättning till de som hjälper till.
-                Därför kostar det 10kr att ladda ner appen. Det är en
-                engångskostnad och hjälper oss att göra appen bättre.
+                Därför kostar det {formatPrice(10)} att ladda ner appen. Det är
+                en engångskostnad och hjälper oss att göra appen bättre.
               </p>
             </div>
           </div>
@@ -29,7 +30,7 @@ const Pricing = () => {
                       <div className="single-price-plan text-center">
                         <div className="single-price-top">
                           <h4>Engångskostnad</h4>
-                          <span>10kr</span>
+                          <span>{formatPrice(10)}</span>
                         </div>
                         <div className="single-price-body">
                           <div className="price-list">
@@ -41,7 +42,7 @@ const Pricing = () => {
                                     aria-hidden="true"
                                   ></i>
                                 </span>
-                                BankID inloggning
+                                BankID-inloggning
                               </li>
                               <li>
                                 <span>
