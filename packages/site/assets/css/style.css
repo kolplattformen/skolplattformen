@@ -1236,6 +1236,10 @@ label input[type="radio"] {
   }
 }
 
+.banner-shape-wrap {
+  user-select: none;
+}
+
 .banner-shape-inner .shape {
   position: absolute;
   -webkit-animation-duration: 3s;
