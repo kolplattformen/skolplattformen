@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll'
 
 const NavLinks = () => {
   // const [dropdownStatus, setDropdownStatus] = useState(false);
   const handleDropdownStatus = (e) => {
     // setDropdownStatus(!dropdownStatus);
-    let clickedItem = e.currentTarget.parentNode;
-    clickedItem.querySelector(".dropdown-list").classList.toggle("show");
-  };
+    let clickedItem = e.currentTarget.parentNode
+    clickedItem.querySelector('.dropdown-list').classList.toggle('show')
+  }
   return (
     <ul className="main-nav__navigation-box">
       <li className="dropdown">
@@ -69,7 +69,7 @@ const NavLinks = () => {
         </ScrollLink>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default NavLinks;
+export default NavLinks

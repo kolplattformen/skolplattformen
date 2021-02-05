@@ -1,15 +1,15 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
-import shape1 from "../assets/img/banner/shaps1.png";
-import shape2 from "../assets/img/banner/shaps2.png";
-import shape3 from "../assets/img/banner/shaps3.png";
-import shape4 from "../assets/img/banner/shaps4.png";
-import shape5 from "../assets/img/banner/shaps5.png";
-import shape6 from "../assets/img/banner/shaps6.png";
-import shape7 from "../assets/img/banner/shaps7.png";
+import shape1 from '../assets/img/banner/shaps1.png'
+import shape2 from '../assets/img/banner/shaps2.png'
+import shape3 from '../assets/img/banner/shaps3.png'
+import shape4 from '../assets/img/banner/shaps4.png'
+import shape5 from '../assets/img/banner/shaps5.png'
+import shape6 from '../assets/img/banner/shaps6.png'
+import shape7 from '../assets/img/banner/shaps7.png'
 
-import bannerMoc from "../assets/img/banner/mockup.png";
+import bannerMoc from '../assets/img/banner/mockup.png'
 
 const Banner = () => {
   return (
@@ -61,14 +61,19 @@ const Banner = () => {
 
                 <h1>Öppna Skolplattformen</h1>
                 <p>
-                  Oavsett om du har tre eller sju barn - det är mycket att hålla reda på. Stövlarna. Frånvaruanmälan nummer 17 i februari. Vad vikarien heter den här veckan. 
-                  
-                  En dåligt fungerande Skolplattform som äter tid och ork? Det finns inte plats för det. Så vi har byggt en bättre. 
-                  
-                  Med all information du behöver som förälder. Snabbare och framförallt - mycket mindre krångel. 
+                  Oavsett om du har tre eller sju barn - det är mycket att hålla
+                  reda på. Stövlarna. Frånvaruanmälan nummer 17 i februari. Vad
+                  vikarien heter den här veckan. En dåligt fungerande
+                  Skolplattform som äter tid och ork? Det finns inte plats för
+                  det. Så vi har byggt en bättre. Med all information du behöver
+                  som förälder. Snabbare och framförallt - mycket mindre
+                  krångel.
                 </p>
                 <p>
-                  <b>Appen är klar och kommer att dyka upp på App Store och Google Play Store vilken dag som helst.</b>
+                  <b>
+                    Appen är klar och kommer att dyka upp på App Store och
+                    Google Play Store vilken dag som helst.
+                  </b>
                 </p>
                 <a href="#" className="btn">
                   App Store
@@ -87,7 +92,7 @@ const Banner = () => {
         </Container>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

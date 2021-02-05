@@ -1,5 +1,5 @@
-import React from "react";
-import NavLinks from "./NavLinks";
+import React from 'react'
+import NavLinks from './NavLinks'
 
 const MobileMenu = () => {
   return (
@@ -21,10 +21,14 @@ const MobileMenu = () => {
         <div className="side-menu__sep"></div>
         <div className="side-menu__content">
           <p>
-            Skolplattformen.org är en öppen programvara som byggs av frustrerade föräldrar. Hjälp till du också. Kontakta oss nedan:
+            Skolplattformen.org är en öppen programvara som byggs av frustrerade
+            föräldrar. Hjälp till du också. Kontakta oss nedan:
           </p>
           <p>
-            <a href="mailto:info@skolplattformen.org">info@skolplattformen.org</a> <br />
+            <a href="mailto:info@skolplattformen.org">
+              info@skolplattformen.org
+            </a>{' '}
+            <br />
             <a href="tel:+46707755831">+46 70 775 58 31</a>
           </p>
           <div className="side-menu__social">
@@ -44,7 +48,7 @@ const MobileMenu = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MobileMenu;
+export default MobileMenu

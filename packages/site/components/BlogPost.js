@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react'
+import Link from 'next/link'
 
 const BlogPost = (props) => {
   return (
@@ -49,7 +49,7 @@ const BlogPost = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BlogPost;
+export default BlogPost

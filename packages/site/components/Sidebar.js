@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 
-import postImg1 from "../assets/img/blog/latest-blog1.png";
-import postImg2 from "../assets/img/blog/latest-blog2.png";
-import postImg3 from "../assets/img/blog/latest-blog3.png";
+import postImg1 from '../assets/img/blog/latest-blog1.png'
+import postImg2 from '../assets/img/blog/latest-blog2.png'
+import postImg3 from '../assets/img/blog/latest-blog3.png'
 
 const Sidebar = () => {
   return (
@@ -110,7 +110,7 @@ const Sidebar = () => {
         </div>
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

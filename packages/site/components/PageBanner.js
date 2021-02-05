@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const PageBanner = (props) => {
   return (
@@ -21,7 +21,7 @@ const PageBanner = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PageBanner;
+export default PageBanner

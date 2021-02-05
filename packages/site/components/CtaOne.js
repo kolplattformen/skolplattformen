@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const CtaOne = () => {
   return (
@@ -10,11 +10,9 @@ const CtaOne = () => {
             <div className="download-app-inner text-center">
               <h2 className="h1">
                 Ladda ner appen idag &<br />
-                spara flera minuter varje dag 
+                spara flera minuter varje dag
               </h2>
-              <h3>
-               Du kommer inte att ångra dig.
-              </h3>
+              <h3>Du kommer inte att ångra dig.</h3>
               <a href="#" className="btn">
                 App Store
               </a>
@@ -23,7 +21,7 @@ const CtaOne = () => {
         </Row>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default CtaOne;
+export default CtaOne

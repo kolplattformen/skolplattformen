@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const Pricing = () => {
-  const [pricing, setPricing] = useState(false);
+  const [pricing, setPricing] = useState(false)
   const handleClick = (e) => {
-    e.preventDefault();
-    setPricing(!pricing);
-  };
+    e.preventDefault()
+    setPricing(!pricing)
+  }
   return (
     <section className="pb-90" id="pricing">
       <div className="container">
@@ -14,7 +14,10 @@ const Pricing = () => {
             <div className="section-title text-center">
               <h2>Vad kostar det och varför är det inte gratis?</h2>
               <p>
-                Vi som bygger appen vill gärna fortsätta vidareutveckla den och även ha möjlighet att ge ersättning till de som hjälper till. Därför kostar det 10kr att ladda ner appen. Det är en engångskostnad och hjälper oss att göra appen bättre.
+                Vi som bygger appen vill gärna fortsätta vidareutveckla den och
+                även ha möjlighet att ge ersättning till de som hjälper till.
+                Därför kostar det 10kr att ladda ner appen. Det är en
+                engångskostnad och hjälper oss att göra appen bättre.
               </p>
             </div>
           </div>
@@ -296,7 +299,7 @@ const Pricing = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Pricing;
+export default Pricing

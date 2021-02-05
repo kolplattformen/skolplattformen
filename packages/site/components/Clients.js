@@ -1,36 +1,36 @@
-import React from "react";
-import SwiperCore, { Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from 'react'
+import SwiperCore, { Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-SwiperCore.use([Autoplay]);
+SwiperCore.use([Autoplay])
 
-import img1 from "../assets/img/partner2.png";
+import img1 from '../assets/img/partner2.png'
 
 const Clients = () => {
   const params = {
     spaceBetween: 100,
     loop: true,
     autoplay: {
-      delay: 3000
+      delay: 3000,
     },
     breakpoints: {
       0: {
         slidesPerView: 1,
-        spaceBetween: 0
+        spaceBetween: 0,
       },
       500: {
         spaceBetween: 50,
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       768: {
         spaceBetween: 50,
-        slidesPerView: 4
+        slidesPerView: 4,
       },
       992: {
-        slidesPerView: 5
-      }
-    }
-  };
+        slidesPerView: 5,
+      },
+    },
+  }
   return (
     <section className="pt-120 pb-120">
       <div className="container">
@@ -77,7 +77,7 @@ const Clients = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Clients;
+export default Clients

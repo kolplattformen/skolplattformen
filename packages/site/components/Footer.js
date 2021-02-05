@@ -1,6 +1,6 @@
-import React from "react";
-import footerBg from "../assets/img/footer-bg.png";
-import footerLogo from "../assets/img/logo.png";
+import React from 'react'
+import footerBg from '../assets/img/footer-bg.png'
+import footerLogo from '../assets/img/logo.png'
 
 const Footer = () => {
   return (
@@ -19,8 +19,12 @@ const Footer = () => {
                   </a>
                 </div>
                 <p>
-                  Skolplattformen utvecklas av föräldrar för föräldrar. Vill du hjälpa till? Kom till vår <a href="https://github.com/kolplattformen">Github</a>, där finns all källkod och även uppgifter att ta tag i, vi behöver hjälp med allt från illustrationer, UX, Design och programmering. Vi har även en Discord där vi hjälps åt.
-                  
+                  Skolplattformen utvecklas av föräldrar för föräldrar. Vill du
+                  hjälpa till? Kom till vår{' '}
+                  <a href="https://github.com/kolplattformen">Github</a>, där
+                  finns all källkod och även uppgifter att ta tag i, vi behöver
+                  hjälp med allt från illustrationer, UX, Design och
+                  programmering. Vi har även en Discord där vi hjälps åt.
                 </p>
 
                 <div className="footer-social-area">
@@ -62,21 +66,26 @@ const Footer = () => {
                       <span>
                         <i className="fa  fa-twitter"></i>
                       </span>
-                      <a href="https://twitter.com/@landgren">Christian Landgren</a>
+                      <a href="https://twitter.com/@landgren">
+                        Christian Landgren
+                      </a>
                     </li>
                     <li>
                       <span>
                         <i className="fa  fa-twitter"></i>
                       </span>
-                      <a href="https://twitter.com/@erikhellman">Erik Hellman</a>
+                      <a href="https://twitter.com/@erikhellman">
+                        Erik Hellman
+                      </a>
                     </li>
                     <li>
                       <span>
                         <i className="fa  fa-twitter"></i>
                       </span>
-                      <a href="https://twitter.com/@johanobrink">Johan Öbrink</a>
+                      <a href="https://twitter.com/@johanobrink">
+                        Johan Öbrink
+                      </a>
                     </li>
-                   
                   </ul>
                 </div>
               </div>
@@ -159,7 +168,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

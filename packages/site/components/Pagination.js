@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Pagination = () => {
   return (
@@ -26,7 +26,7 @@ const Pagination = () => {
         </a>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

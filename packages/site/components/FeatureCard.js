@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const FeatureCard = (props) => {
   return (
@@ -9,7 +9,7 @@ const FeatureCard = (props) => {
       <h5>{props.title}</h5>
       <p>{props.text}</p>
     </div>
-  );
-};
+  )
+}
 
-export default FeatureCard;
+export default FeatureCard
