@@ -12,8 +12,7 @@ import { EntityName, EntityReducer, EntityState } from './types'
 
 const createReducer = <T>(entity: EntityName): EntityReducer<T> => {
   const reducer: EntityReducer<T> = (state = {}, action) => {
-    if (action.entity !== entity || !action.extra)
-      return state
+    if (action.entity !== entity || !action.extra) return state
     const key = action.extra?.key
 
     const node = state[key] || {
@@ -36,12 +35,14 @@ const createReducer = <T>(entity: EntityName): EntityReducer<T> => {
           data: action.data || node.data,
           status: 'loaded',
         }
+        break
       }
       case 'RESULT_FROM_CACHE': {
         newNode = {
           ...node,
           data: action.data || node.data,
         }
+        break
       }
       default: {
         newNode = { ...node }

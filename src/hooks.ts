@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Api, CalendarItem, Child, Classmate, MenuItem, NewsItem, Notification, ScheduleItem, User } from '@skolplattformen/embedded-api'
+import {
+  Api,
+  CalendarItem,
+  Child,
+  Classmate,
+  MenuItem,
+  NewsItem,
+  Notification,
+  ScheduleItem,
+  User,
+} from '@skolplattformen/embedded-api'
 import {
   ApiCall,
   EntityHookResult,
   EntityMap,
   EntityName,
   EntityStoreRootState,
-  ExtraActionProps
+  ExtraActionProps,
 } from './types'
 import { useApi } from './context'
 import { loadAction } from './actions'
@@ -57,7 +67,9 @@ const hook = <T>(
 
   const listener = () => {
     const newState = select(store.getState() as EntityStoreRootState)
-    if (newState.status !== state.status || newState.data !== state.data || newState.error !== state.error) {
+    if (newState.status !== state.status
+      || newState.data !== state.data
+      || newState.error !== state.error) {
       setState(newState)
     }
   }
@@ -65,7 +77,7 @@ const hook = <T>(
 
   return {
     ...state,
-    reload: () => load(true)
+    reload: () => load(true),
   }
 }
 
@@ -73,7 +85,7 @@ export const useChildList = () => hook<Child[]>(
   'CHILDREN',
   'children',
   [],
-  (store) => store.children,
+  (s) => s.children,
   (api) => () => api.getChildren(),
 )
 
@@ -81,7 +93,7 @@ export const useCalendar = (child: Child) => hook<CalendarItem[]>(
   'CALENDAR',
   `calendar_${child.id}`,
   [],
-  (store) => store.calendar,
+  (s) => s.calendar,
   (api) => () => api.getCalendar(child),
 )
 
@@ -89,7 +101,7 @@ export const useClassmates = (child: Child) => hook<Classmate[]>(
   'CLASSMATES',
   `classmates_${child.id}`,
   [],
-  (store) => store.classmates,
+  (s) => s.classmates,
   (api) => () => api.getClassmates(child),
 )
 
@@ -97,7 +109,7 @@ export const useMenu = (child: Child) => hook<MenuItem[]>(
   'MENU',
   `menu_${child.id}`,
   [],
-  (store) => store.menu,
+  (s) => s.menu,
   (api) => () => api.getMenu(child),
 )
 
@@ -105,7 +117,7 @@ export const useNews = (child: Child) => hook<NewsItem[]>(
   'NEWS',
   `news_${child.id}`,
   [],
-  (store) => store.news,
+  (s) => s.news,
   (api) => () => api.getNews(child),
 )
 
@@ -113,7 +125,7 @@ export const useNotifications = (child: Child) => hook<Notification[]>(
   'NOTIFICATIONS',
   `notifications_${child.id}`,
   [],
-  (store) => store.notifications,
+  (s) => s.notifications,
   (api) => () => api.getNotifications(child),
 )
 
@@ -121,7 +133,7 @@ export const useSchedule = (child: Child, from: string, to: string) => hook<Sche
   'SCHEDULE',
   `schedule_${child.id}_${from}_${to}`,
   [],
-  (store) => store.schedule,
+  (s) => s.schedule,
   (api) => () => api.getSchedule(child, from, to),
 )
 
@@ -129,6 +141,6 @@ export const useUser = () => hook<User>(
   'USER',
   'user',
   {},
-  (store) => store.user,
+  (s) => s.user,
   (api) => () => api.getUser(),
 )

@@ -10,7 +10,6 @@ import {
   schedule,
   user,
 } from './reducers'
-import { EntityAction } from './types'
 
 const appReducer = combineReducers({
   calendar,
@@ -22,8 +21,9 @@ const appReducer = combineReducers({
   schedule,
   user,
 })
-const rootReducer = (state: unknown, action: EntityAction<any>) => {
+const rootReducer: typeof appReducer = (state, action) => {
   if (action.type === 'CLEAR') {
+    // eslint-disable-next-line no-param-reassign
     state = undefined
   }
   return appReducer(state, action)

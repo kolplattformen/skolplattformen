@@ -7,7 +7,7 @@ import {
   MenuItem,
   NewsItem,
   Notification,
-  ScheduleItem
+  ScheduleItem,
 } from '@skolplattformen/embedded-api'
 import { Action, Reducer } from 'redux'
 
@@ -37,14 +37,14 @@ export interface ExtraActionProps<T> {
 }
 export type EntityActionType = 'GET_FROM_API' | 'RESULT_FROM_API' | 'GET_FROM_CACHE' | 'RESULT_FROM_CACHE' | 'STORE_IN_CACHE' | 'CLEAR'
 export type EntityName = 'USER'
-  | 'CHILDREN'
-  | 'CALENDAR'
-  | 'CLASSMATES'
-  | 'MENU'
-  | 'NEWS'
-  | 'NOTIFICATIONS'
-  | 'SCHEDULE'
-  | 'ALL'
+| 'CHILDREN'
+| 'CALENDAR'
+| 'CLASSMATES'
+| 'MENU'
+| 'NEWS'
+| 'NOTIFICATIONS'
+| 'SCHEDULE'
+| 'ALL'
 export interface EntityAction<T> extends Action<EntityActionType> {
   entity: EntityName
   data?: T
