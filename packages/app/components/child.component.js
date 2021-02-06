@@ -23,7 +23,7 @@ import {
   useClassmates,
   useCalendar,
   useSchedule,
-} from '@skolplattformen/react-native-embedded-api'
+} from '@skolplattformen/api-hooks'
 
 export const Child = ({ route, navigation }) => {
   const { child, color, selectedTab } = route.params
@@ -91,7 +91,7 @@ export const Child = ({ route, navigation }) => {
         visible={menuVisible}
         backdropStyle={styles.backdrop}
         onBackdropPress={toggleMenu}>
-      
+
         <MenuItem accessoryLeft={SettingsIcon} title='Anmäl frånvaro' onPress={() => openSms(child)} />
       </OverflowMenu>
     </React.Fragment>

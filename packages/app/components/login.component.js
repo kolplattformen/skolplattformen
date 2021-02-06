@@ -4,15 +4,14 @@ import { Platform, SafeAreaView, StyleSheet, Image, Linking, KeyboardAvoidingVie
 import { Button, Icon, Modal, Card, Text, ImageBackground, Divider, Layout, TopNavigation, Input } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import { useAsyncStorage } from 'use-async-storage'
-import { useApi } from '@skolplattformen/react-native-embedded-api'
+import { useApi } from '@skolplattformen/api-hooks'
 
 const funArguments = ['öppna', 'roliga', 'fungerande', 'billiga', 'snabba', 'fria', 'efterlängtade', 'coolare', 'första', 'upplysta', 'hemmagjorda', 'bättre', 'rebelliska', 'enkla', 'operfekta', 'fantastiska', 'agila'] // TODO: add moare
 
 export const Login = ({ navigation, route }) => {
-  const { login, logout, on, off } = useApi()
+  const { api, isLoggedIn } = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
-  const [loggedIn, setLoggedIn] = React.useState(false)
   const [argument, setArgument] = React.useState('öppna')
   const [error, setError] = React.useState(null)
   const [socialSecurityNumberCache, setSocialSecurityNumberCache] = useAsyncStorage('@socialSecurityNumber')
@@ -24,16 +23,15 @@ export const Login = ({ navigation, route }) => {
   }, [socialSecurityNumber])
 
   const loginHandler = async () => {
-    setLoggedIn(true)
     showModal(false)
     navigateToChildren()
   }
 
   useEffect(() => {
     setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
-    on('login', loginHandler)
+    api.on('login', loginHandler)
 
-    return () => off('login', loginHandler)
+    return () => api.off('login', loginHandler)
   }, [])
 
   /* Helpers */
@@ -66,7 +64,7 @@ export const Login = ({ navigation, route }) => {
 
   const startLogin = async () => {
     showModal(true)
-    const status = await login(socialSecurityNumber)
+    const status = await api.login(socialSecurityNumber)
     if (status.token !== 'fake') {
       openBankId(status.token)
     }
@@ -78,9 +76,8 @@ export const Login = ({ navigation, route }) => {
 
   const startLogout = async () => {
     showModal(false)
-    setLoggedIn(false)
     try {
-      logout()
+      api.logout()
     } catch (err) {
       setError('fel uppdatod vid utloggning')
     }
@@ -103,7 +100,7 @@ export const Login = ({ navigation, route }) => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-        {loggedIn
+        {isLoggedIn
           ? <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <TopNavigation title={`Skolplattformen.org - det ${argument} alternativet`} alignment='center' />
             <Image source={require('../assets/man.png')} style={{ maxHeight: 300, width: '100%', borderBottomWidth: 1 }} />
@@ -171,7 +168,7 @@ export const Login = ({ navigation, route }) => {
             <Text style={{ margin: 10 }}>Väntar på BankID...</Text>
 
             <Button
-              visible={!loggedIn}
+              visible={!isLoggedIn}
               onPress={() => showModal(false)}
             >
               Avbryt

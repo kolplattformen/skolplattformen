@@ -1,4 +1,4 @@
-import { useApi } from '@skolplattformen/react-native-embedded-api'
+import { useApi } from '@skolplattformen/api-hooks'
 import { Icon, Text } from '@ui-kitten/components'
 import React from 'react'
 import { Modal, StyleSheet, View } from 'react-native'
@@ -8,7 +8,8 @@ import { WebView } from 'react-native-webview'
 import URI from 'jsuri'
 
 export const ModalWebView = ({ url, onClose }) => {
-  const { cookie } = useApi()
+  const { api } = useApi()
+  const cookie = api.getSessionCookie()
   const uri = new URI(url)
   return (
     <Modal>

@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, View, ScrollView, Image } from 'react-native'
 import { Card, Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components'
 import Markdown from 'react-native-markdown-display'
-import { useApi } from '@skolplattformen/react-native-embedded-api'
+import { useApi } from '@skolplattformen/api-hooks'
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back' />
@@ -10,7 +10,8 @@ const BackIcon = (props) => (
 
 export const NewsItem = ({ navigation, route }) => {
   const { newsItem } = route.params
-  const { cookie } = useApi()
+  const { api } = useApi()
+  const cookie = api.getSessionCookie()
 
   const navigateBack = () => {
     navigation.goBack()

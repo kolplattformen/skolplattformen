@@ -1,12 +1,13 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { useApi } from '@skolplattformen/react-native-embedded-api'
+import { useApi } from '@skolplattformen/api-hooks'
 import { Card, Text } from '@ui-kitten/components'
 import { StyleSheet, View, Image } from 'react-native'
 
 export const NewsListItem = ({ item }) => {
   const navigation = useNavigation()
-  const { cookie } = useApi()
+  const { api } = useApi()
+  const cookie = api.getSessionCookie()
 
   return (
     <Card

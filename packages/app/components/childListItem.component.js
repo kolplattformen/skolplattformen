@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
 import { DateTime } from 'luxon'
 import moment from 'moment'
-import { useNotifications, useNews, useClassmates, useCalendar, useMenu, useSchedule } from '@skolplattformen/react-native-embedded-api'
+import { useNotifications, useNews, useClassmates, useCalendar, useMenu, useSchedule } from '@skolplattformen/api-hooks'
 import { Button, Icon, Text, Card, Avatar } from '@ui-kitten/components'
 
 const NotificationsIcon = (props) => (

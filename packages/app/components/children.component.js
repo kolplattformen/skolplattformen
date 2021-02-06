@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
-import { useChildList } from '@skolplattformen/react-native-embedded-api'
+import { useChildList } from '@skolplattformen/api-hooks'
 import { Divider, Button, Icon, Layout, Text, TopNavigation, TopNavigationAction, List, Card, Avatar, Spinner } from '@ui-kitten/components'
 import { ChildListItem } from './childListItem.component'
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
