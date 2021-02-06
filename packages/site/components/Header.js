@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavLinks from './NavLinks'
+import Link from 'next/link'
 
 import headerLogo from '../assets/img/logo.png'
 
@@ -54,9 +55,11 @@ const HeaderHome = (props) => {
             <div className="row align-items-center">
               <div className="col-xl-3 col-lg-3 col-md-4 col-6">
                 <div className="logo">
-                  <a href="/">
-                    <img src={headerLogo} alt="Skolplattformen" />
-                  </a>
+                  <Link href="/">
+                    <a>
+                      <img src={headerLogo} alt="Skolplattformen" />
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-xl-6 col-lg-6 col-md-4 col-6 menu-button">
@@ -81,7 +84,11 @@ const HeaderHome = (props) => {
                   <a
                     href="#"
                     className="btn"
-                    onClick="alert('Håll ut! Appen kommer snart på App Store och Google Play')"
+                    onClick={() =>
+                      alert(
+                        'Håll ut! Appen kommer snart på App Store och Google Play'
+                      )
+                    }
                   >
                     Ladda ner
                   </a>
