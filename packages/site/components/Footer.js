@@ -93,7 +93,7 @@ const Footer = () => {
             <div className="col-lg-3 col-sm-6">
               <div className="footer-widget">
                 <div className="widget-header">
-                  <h5>Extra Links</h5>
+                  <h5>Länkar</h5>
                 </div>
               </div>
 
@@ -102,40 +102,12 @@ const Footer = () => {
                   <div className="link-left">
                     <ul>
                       <li>
-                        <a href="#">About</a>
-                      </li>
-                      <li>
-                        <a href="#">Our Team</a>
-                      </li>
-                      <li>
-                        <a href="#">Features</a>
-                      </li>
-                      <li>
-                        <a href="#">Blog</a>
-                      </li>
-                      <li>
-                        <a href="#">How It Works</a>
+                        <a href="/privacy">Integritetspolicy</a>
                       </li>
                     </ul>
                   </div>
                   <div className="link-right">
-                    <ul>
-                      <li>
-                        <a href="#">Help</a>
-                      </li>
-                      <li>
-                        <a href="#">Support</a>
-                      </li>
-                      <li>
-                        <a href="#">Clients</a>
-                      </li>
-                      <li>
-                        <a href="#">Blog</a>
-                      </li>
-                      <li>
-                        <a href="#">Contact</a>
-                      </li>
-                    </ul>
+
                   </div>
                 </div>
               </div>
@@ -164,7 +136,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="footer-text text-center">
-          <p>© copyright 2021 by not free beer HB</p>
+          <p>© copyright 2021 by Not free beer HB</p>
         </div>
       </div>
     </footer>
