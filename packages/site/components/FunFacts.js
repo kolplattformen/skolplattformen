@@ -7,7 +7,7 @@ import VisibilitySensor from 'react-visibility-sensor'
 const FUNFACTS_DATA = [
   {
     count: '1000000000',
-    title: 'kronor kostade orginalet',
+    title: 'kronor kostade originalet',
   },
   {
     count: '7',
