@@ -6,26 +6,26 @@ import store from './store'
 import init from './__mocks__/@skolplattformen/embedded-api'
 import createStorage from './__mocks__/AsyncStorage'
 
-const pause = (ms = 0) => new Promise(r => setTimeout(r, ms))
+const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
 describe('useCalendar(child)', () => {
   let api
   let storage
-  let result
+  let response
   let child
   const wrapper = ({ children }) => (
     <ApiProvider api={api} storage={storage}>{children}</ApiProvider>
   )
   beforeEach(() => {
-    result = [{ id: 1 }]
+    response = [{ id: 1 }]
     api = init()
     api.getCalendar.mockImplementation(() => (
       new Promise((res) => {
-        setTimeout(() => res(result), 50)
+        setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      calendar_10: [{ id: 2 }]
+      calendar_10: [{ id: 2 }],
     }, 2)
     child = { id: 10 }
   })
@@ -69,7 +69,7 @@ describe('useCalendar(child)', () => {
       expect(result.current.status).toEqual('loaded')
     })
   })
-  it('calls cache', async () => {
+  it('retrieves data from cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
       const { result, waitForNextUpdate } = renderHook(() => useCalendar(child), { wrapper })
@@ -78,6 +78,18 @@ describe('useCalendar(child)', () => {
       await waitForNextUpdate()
 
       expect(result.current.data).toEqual([{ id: 2 }])
+    })
+  })
+  it('works when cache is empty', async () => {
+    storage.clear()
+    await act(async () => {
+      api.isLoggedIn = true
+      const { result, waitForNextUpdate } = renderHook(() => useCalendar(child), { wrapper })
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.data).toEqual([{ id: 1 }])
     })
   })
   it('updates status to loading', async () => {
@@ -115,7 +127,7 @@ describe('useCalendar(child)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['calendar_10']).toEqual('[{"id":1}]')
+      expect(storage.cache.calendar_10).toEqual('[{"id":1}]')
     })
   })
   it('does not store in cache if fake', async () => {
@@ -130,7 +142,7 @@ describe('useCalendar(child)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['calendar_10']).toEqual('[{"id":2}]')
+      expect(storage.cache.calendar_10).toEqual('[{"id":2}]')
     })
   })
 })

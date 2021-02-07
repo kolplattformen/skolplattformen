@@ -13,5 +13,10 @@ export default (init = {}, delay = 0) => {
     await pause(delay)
     cache[key] = val
   }
-  return { getItem, setItem, cache }
+  const clear = () => {
+    Object.keys(cache).forEach((key) => { cache[key] = undefined })
+  }
+  return {
+    getItem, setItem, cache, clear,
+  }
 }
