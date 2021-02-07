@@ -116,7 +116,7 @@ const Testimonials = () => {
                     fungerar. Öppna Skolplattformen är ett bra exempel på
                     detta!&rdquo;
                   </h4>
-                  <p>Niels PaarupPetersen, Riksdagsledamot C</p>
+                  <p>Niels Paarup-Petersen, Riksdagsledamot C</p>
                 </SwiperSlide>
               </Swiper>
               <div className="testimonial-author-comment-nav">
