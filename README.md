@@ -21,7 +21,7 @@ We want this project to become a citizen movement. Every time you find something
 If you don't know how to program and still want to contribute we encourage you to file an Issue or help us an any other way. Please find the Issues tab above to see other issues or file one yourselves. We are super duper happy for both issues and PR:s and will try to answer all of them as soon as humanly possible.
 
 ## Money
-We are both an open source project and still charge money for our app. Isn't this contradicting? No. Open doesn't mean free. We want to be able to sustainably continue to work with maintaining this project which means someone needs to pay for the time spend on that. Our long term goal is to reach to a point when you are contributing in any substantially way you will be reinbursed for the work.
+We are both an open source project and still charge money for our app. Isn't this contradicting? No. Open doesn't mean free. We want to be able to sustainably continue to work with maintaining this project which means someone needs to pay for the köttbullar to the kids. Our goal is to be able to reinburse all contributions to the project.
 
 ## Disclaimer
 This initiative is started by frustrated parents and we have no affiliation with Stockholm Stad. We just want to find and read our newsletters a little bit easier and register sick-leave more convenient.
