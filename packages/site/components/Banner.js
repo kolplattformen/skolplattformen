@@ -61,12 +61,12 @@ const Banner = () => {
 
                 <h1>Öppna Skolplattformen</h1>
                 <p>
-                  Oavsett om du har tre eller sju barn - det är mycket att hålla
-                  reda på. Stövlarna. Frånvaroanmälan nummer 17 i februari. Vad
-                  vikarien heter den här veckan. En dåligt fungerande
+                  Oavsett om du har tre eller sju barn – det är mycket att hålla
+                  reda på. Frånvaroanmälan nummer 17 i februari. Vad
+                  vikarien heter den här veckan. Gympakläderna. En dåligt fungerande
                   Skolplattform som äter tid och ork? Det finns inte plats för
                   det. Så vi har byggt en bättre. Med all information du behöver
-                  som förälder. Snabbare och framförallt - mycket mindre
+                  som förälder. Snabbare och framförallt – mycket mindre
                   krångel.
                 </p>
                 <p>

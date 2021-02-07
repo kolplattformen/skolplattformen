@@ -111,7 +111,7 @@ const Banner = () => {
                   slutänden hänvisad till att lita på säkerheten i det systemet. I fall då vi, i arbetet
                   med att bygga denna app, har upptäckt potentiella svagheter i Skolplattformen har vi
                   vidtagit steg för att rapportera detta på ett ansvarsfullt sätt. Detta kommer vi göra
-                  även fortsättningsvis. Kom ihåg att elektronisk lagring och överföring ver Internet
+                  även fortsättningsvis. Kom ihåg att elektronisk lagring och överföring över Internet
                   aldrig kan garanteras vara 100% säker.
                 </p>
                 <h3>Integritet för barn</h3>
@@ -120,7 +120,7 @@ const Banner = () => {
                   ålder skickar vi ingen information vidare från din enhet. Den information du får
                   tillgång via appen är samma som du når via Skolplattformen.
                 </p>
-                <h3>FÖrändringar av integritetspolicyn</h3>
+                <h3>Förändringar av integritetspolicyn</h3>
                 <p>
                   Denna integritetspolicy kan komma att uppdateras. Eftersom vi inte samlar in någon
                   information om våra användare kan vi tyvärr inte kontakta dig om så sker. Vi kommer
