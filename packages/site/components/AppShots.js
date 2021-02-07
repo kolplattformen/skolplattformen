@@ -48,7 +48,7 @@ const AppShots = () => {
     },
   }
   return (
-    <section className="pt-120 pb-155 app-shot-one" id="app">
+    <section className="pt-120 pb-155 app-shot-one" id="screenshots">
       <Container>
         <Row className="justify-content-center">
           <Col md={12} lg={8}>

@@ -4,17 +4,19 @@ import { formatPrice } from '../utils/intl'
 const Pricing = () => {
   const [pricing] = useState(false)
 
+  const price = 12
+
   return (
-    <section className="pb-90" id="pricing">
+    <section className="pb-90" id="vad-kostar-det">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-md-12 col-lg-8">
+          <div className="col-md-12 col-lg-12">
             <div className="section-title text-center">
               <h2>Vad kostar det och varför är det inte gratis?</h2>
               <p>
                 Vi som bygger appen vill gärna fortsätta vidareutveckla den och
                 även ha möjlighet att ge ersättning till de som hjälper till.
-                Därför kostar det {formatPrice(10)} att ladda ner appen. Det är
+                Därför kostar det {formatPrice(price)} att ladda ner appen. Det är
                 en engångskostnad och hjälper oss att göra appen bättre.
               </p>
             </div>
@@ -30,7 +32,7 @@ const Pricing = () => {
                       <div className="single-price-plan text-center">
                         <div className="single-price-top">
                           <h4>Engångskostnad</h4>
-                          <span>{formatPrice(10)}</span>
+                          <span>{formatPrice(price)}</span>
                         </div>
                         <div className="single-price-body">
                           <div className="price-list">

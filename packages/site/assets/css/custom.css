@@ -2,3 +2,9 @@
     Custom Stylesheet (Any custom styling you want to apply should be defined here).
 ====================================================================================*/
 
+.contrast {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: -25px;
+    padding: 25px;
+    border-radius: 50px;
+}
