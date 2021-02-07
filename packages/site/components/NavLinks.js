@@ -18,18 +18,6 @@ const NavLinks = () => {
             <i className="fa fa-angle-down" onClick={handleDropdownStatus}></i>
           </>
         </Link>
-        <ul className="dropdown-list">
-          <li>
-            <Link href="/">
-              <a>Home One</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/index-2">
-              <a>Home Two</a>
-            </Link>
-          </li>
-        </ul>
       </li>
       <li>
         <ScrollLink
@@ -39,6 +27,7 @@ const NavLinks = () => {
           smooth={true}
           offset={-70}
           duration={500}
+          href="/"
         >
           Funktioner
         </ScrollLink>
@@ -52,6 +41,7 @@ const NavLinks = () => {
           smooth={true}
           offset={-70}
           duration={500}
+          href="/"
         >
           Screenshots
         </ScrollLink>
@@ -64,6 +54,7 @@ const NavLinks = () => {
           smooth={true}
           offset={-70}
           duration={500}
+          href="/"
         >
           Vad kostar det?
         </ScrollLink>

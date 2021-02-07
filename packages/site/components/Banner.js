@@ -75,12 +75,19 @@ const Banner = () => {
                     Google Play Store vilken dag som helst.
                   </b>
                 </p>
-                <a href="#" className="btn">
-                  App Store
-                </a>
-                <a href="#" className="btn">
-                  Mer info
-                </a>
+                <p>
+                  <a href="#" className="btn">
+                    App Store
+                  </a>
+                  <a href="#" className="btn">
+                    Google Play Store
+                  </a>
+                </p>
+                <p>
+                  <a href="privacy" className="btn">
+                    Integritetspolicy
+                  </a>
+                </p>
               </div>
             </Col>
             <Col md={4} lg={5} className="  offset-lg-1  offse-xl-2">
