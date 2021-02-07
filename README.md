@@ -1,6 +1,6 @@
-# $kolplattformen.org monorepo
+# Skolplattformen.org monorepo
 
-This is a try to reverse engineer Skolplattformens backend to a more consistant and secure experience for developers to create apps that can help parents, kids and teachers to be more productive.
+This is a try to reverse engineer Skolplattformen and create a more fast, consistant and secure experience for the users of Skolplattformen.
 
 ## Embedded API
 We previously were testing having a proxy for the API. That was a bad idea, even if we werent saving any information on our side it still was an extra complexity so we encapsulated our API into its own npm package so the app still could be lightweight and not have to worry about the complex nature of the official API. 
