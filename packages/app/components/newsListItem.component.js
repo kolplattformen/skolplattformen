@@ -1,26 +1,27 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { useApi } from '@skolplattformen/react-native-embedded-api'
-import { Card, Text } from '@ui-kitten/components'
-import { StyleSheet, View, Image } from 'react-native'
+import {useNavigation} from '@react-navigation/native'
+import {useApi} from '@skolplattformen/api-hooks'
+import {Card, Text} from '@ui-kitten/components'
+import {StyleSheet, View, Image} from 'react-native'
 
-export const NewsListItem = ({ item }) => {
+export const NewsListItem = ({item}) => {
   const navigation = useNavigation()
-  const { cookie } = useApi()
+  const {api} = useApi()
+  const cookie = api.getSessionCookie()
 
   return (
     <Card
       style={styles.card}
-      onPress={() => navigation.navigate('NewsItem', { newsItem: item })}
+      onPress={() => navigation.navigate('NewsItem', {newsItem: item})}
       header={(headerProps) => (
-        <View {...headerProps} >
-          <Text category='h6'>{item.header}</Text>
-          <Text category='s1'>Publicerad på Skolplattformen</Text>
+        <View {...headerProps}>
+          <Text category="h6">{item.header}</Text>
+          <Text category="s1">Publicerad på Skolplattformen</Text>
         </View>
       )}>
       <Image
-        source={{ uri: item.fullImageUrl, headers: { cookie } }}
-        style={{ height: 300 }}
+        source={{uri: item.fullImageUrl, headers: {cookie}}}
+        style={{height: 300}}
       />
     </Card>
   )

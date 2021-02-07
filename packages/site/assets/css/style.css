@@ -1237,7 +1237,7 @@ label input[type="radio"] {
 }
 
 .banner-shape-wrap {
-  pointer-events: none;
+  user-select: none;
 }
 
 .banner-shape-inner .shape {
@@ -1269,6 +1269,7 @@ label input[type="radio"] {
 .banner-shape-inner .shape5 {
   top: 43%;
   left: 49%;
+  z-index: -1;
 }
 
 .banner-shape-inner .shape6 {
@@ -3430,5 +3431,14 @@ h1 span {
   .side-menu__social a {
     width: 45px;
     height: 45px;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .rotate-2d,
+  .rotate2d,
+  .rotate3d,
+  .banner-image {
+    animation: none;
   }
 }
