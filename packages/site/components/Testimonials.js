@@ -19,14 +19,14 @@ const Testimonials = () => {
       prevEl: '#testi-swiper-button-prev',
     },
     autoplay: {
-      delay: 3000,
+      delay: 10000,
     },
   }
   const thumbnailsParam = {
     slidesPerView: 3,
     spaceBetween: 20,
     autoplay: {
-      delay: 3000,
+      delay: 10000,
     },
     breakpoints: {
       0: {
