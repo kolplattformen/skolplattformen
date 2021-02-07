@@ -127,7 +127,6 @@ describe('useMenu(child)', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache.menu_10).toEqual('[{"id":2}]')

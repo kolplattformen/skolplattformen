@@ -139,7 +139,6 @@ describe('useCalendar(child)', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache.calendar_10).toEqual('[{"id":2}]')

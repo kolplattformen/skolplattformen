@@ -51,12 +51,13 @@ const hook = <T>(
         defaultValue,
         apiCall: apiCaller(api),
       }
-      // Only get from cache first time
-      if (state.status === 'pending') {
-        extra.getFromCache = () => storage.getItem(key)
-      }
-      // Only save real data to cache
+
+      // Only use cache when not in fake mode
       if (!api.isFake) {
+        // Only get from cache first time
+        if (state.status === 'pending') {
+          extra.getFromCache = () => storage.getItem(key)
+        }
         extra.saveToCache = (value: string) => storage.setItem(key, value)
       }
       const action = loadAction<T>(entityName, extra)

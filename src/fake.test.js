@@ -27,6 +27,23 @@ describe('hooks with fake data', () => {
 
     storage = createStorage({})
   })
+  it('does not use cache', async () => {
+    storage.cache.user = JSON.stringify({ user: 'cached' })
+    await act(async () => {
+      const {
+        result,
+        waitForNextUpdate,
+      } = renderHook(() => useUser(), { wrapper })
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.data).toEqual({
+        firstName: 'Namn',
+        lastName: 'Namnsson',
+      })
+    })
+  })
   it('returns user', async () => {
     await act(async () => {
       const {

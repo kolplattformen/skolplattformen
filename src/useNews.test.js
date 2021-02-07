@@ -127,7 +127,6 @@ describe('useNews(child)', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache.news_10).toEqual('[{"id":2}]')

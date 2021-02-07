@@ -125,7 +125,6 @@ describe('useChildList()', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache.children).toEqual('[{"id":2}]')

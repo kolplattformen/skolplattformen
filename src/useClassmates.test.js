@@ -127,7 +127,6 @@ describe('useClassmates(child)', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache.classmates_10).toEqual('[{"id":2}]')

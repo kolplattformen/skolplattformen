@@ -131,7 +131,6 @@ describe('useSchedule(child, from, to)', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache['schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":2}]')

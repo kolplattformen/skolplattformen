@@ -127,7 +127,6 @@ describe('useNotifications(child)', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
       await pause(20)
 
       expect(storage.cache.notifications_10).toEqual('[{"id":2}]')
