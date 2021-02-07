@@ -7,7 +7,7 @@ const Pricing = () => {
   const price = 12
 
   return (
-    <section className="pb-90" id="pricing">
+    <section className="pb-90" id="vad-kostar-det">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-12 col-lg-12">

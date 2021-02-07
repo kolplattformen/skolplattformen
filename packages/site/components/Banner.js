@@ -84,7 +84,7 @@ const Banner = () => {
                   </a>
                 </p>
                 <p>
-                  <a href="privacy" className="btn">
+                  <a href="/integritet" className="btn">
                     Integritetspolicy
                   </a>
                 </p>

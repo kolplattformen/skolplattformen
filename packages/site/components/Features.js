@@ -86,7 +86,7 @@ const Features = () => {
     },
   }
   return (
-    <section className="pb-110" id="features">
+    <section className="pb-110" id="funktioner">
       <Container>
         <Row className="justify-content-center">
           <Col md={12} lg={8}>

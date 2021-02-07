@@ -102,7 +102,7 @@ const Footer = () => {
                   <div className="link-left">
                     <ul>
                       <li>
-                        <a href="/privacy">Integritetspolicy</a>
+                        <a href="/integritet">Integritetspolicy</a>
                       </li>
                     </ul>
                   </div>
