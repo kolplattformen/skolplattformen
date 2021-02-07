@@ -1346,6 +1346,20 @@ label input[type="radio"] {
 .main-header.sticky {
   padding: 15px 0;
 }
+
+.app-store-buttons {
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+}
+img.appstore {
+  height: 60px;
+  width: auto;
+}
+img.playstore {
+  height: 87px;
+  width: auto;
+}
 /*==============================================
     05: Feature area
 ==============================================*/

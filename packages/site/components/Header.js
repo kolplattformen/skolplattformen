@@ -62,7 +62,7 @@ const HeaderHome = (props) => {
                   </Link>
                 </div>
               </div>
-              <div className="col-xl-6 col-lg-6 col-md-4 col-6 menu-button">
+              <div className="col-xl-9 col-lg-9 col-md-8 col-6 menu-button">
                 <div className="menu--inner-area clearfix">
                   <div className="menu-wraper">
                     <nav>
@@ -77,21 +77,6 @@ const HeaderHome = (props) => {
                       </div>
                     </nav>
                   </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-5 d-md-block d-none">
-                <div className="urgent-call text-right">
-                  <a
-                    href="#"
-                    className="btn"
-                    onClick={() =>
-                      alert(
-                        'Håll ut! Appen kommer snart på App Store och Google Play'
-                      )
-                    }
-                  >
-                    Ladda ner
-                  </a>
                 </div>
               </div>
             </div>
