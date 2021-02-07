@@ -6,25 +6,25 @@ import store from './store'
 import init from './__mocks__/@skolplattformen/embedded-api'
 import createStorage from './__mocks__/AsyncStorage'
 
-const pause = (ms = 0) => new Promise(r => setTimeout(r, ms))
+const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
 describe('useUser()', () => {
   let api
   let storage
-  let result
+  let response
   const wrapper = ({ children }) => (
     <ApiProvider api={api} storage={storage}>{children}</ApiProvider>
   )
   beforeEach(() => {
-    result = { id: 1 }
+    response = { id: 1 }
     api = init()
     api.getUser.mockImplementation(() => (
       new Promise((res) => {
-        setTimeout(() => res(result), 50)
+        setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      user: { id: 2 }
+      user: { id: 2 },
     }, 2)
   })
   afterEach(async () => {
@@ -113,7 +113,7 @@ describe('useUser()', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['user']).toEqual('{"id":1}')
+      expect(storage.cache.user).toEqual('{"id":1}')
     })
   })
   it('does not store in cache if fake', async () => {
@@ -128,7 +128,7 @@ describe('useUser()', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['user']).toEqual('{"id":2}')
+      expect(storage.cache.user).toEqual('{"id":2}')
     })
   })
 })

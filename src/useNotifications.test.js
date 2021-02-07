@@ -6,26 +6,26 @@ import store from './store'
 import init from './__mocks__/@skolplattformen/embedded-api'
 import createStorage from './__mocks__/AsyncStorage'
 
-const pause = (ms = 0) => new Promise(r => setTimeout(r, ms))
+const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
 describe('useNotifications(child)', () => {
   let api
   let storage
-  let result
+  let response
   let child
   const wrapper = ({ children }) => (
     <ApiProvider api={api} storage={storage}>{children}</ApiProvider>
   )
   beforeEach(() => {
-    result = [{ id: 1 }]
+    response = [{ id: 1 }]
     api = init()
     api.getNotifications.mockImplementation(() => (
       new Promise((res) => {
-        setTimeout(() => res(result), 50)
+        setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      notifications_10: [{ id: 2 }]
+      notifications_10: [{ id: 2 }],
     }, 2)
     child = { id: 10 }
   })
@@ -115,7 +115,7 @@ describe('useNotifications(child)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['notifications_10']).toEqual('[{"id":1}]')
+      expect(storage.cache.notifications_10).toEqual('[{"id":1}]')
     })
   })
   it('does not store in cache if fake', async () => {
@@ -130,7 +130,7 @@ describe('useNotifications(child)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['notifications_10']).toEqual('[{"id":2}]')
+      expect(storage.cache.notifications_10).toEqual('[{"id":2}]')
     })
   })
 })

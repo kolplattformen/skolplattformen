@@ -6,12 +6,12 @@ import store from './store'
 import init from './__mocks__/@skolplattformen/embedded-api'
 import createStorage from './__mocks__/AsyncStorage'
 
-const pause = (ms = 0) => new Promise(r => setTimeout(r, ms))
+const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
 describe('useSchedule(child, from, to)', () => {
   let api
   let storage
-  let result
+  let response
   let child
   let from
   let to
@@ -19,15 +19,15 @@ describe('useSchedule(child, from, to)', () => {
     <ApiProvider api={api} storage={storage}>{children}</ApiProvider>
   )
   beforeEach(() => {
-    result = [{ id: 1 }]
+    response = [{ id: 1 }]
     api = init()
     api.getSchedule.mockImplementation(() => (
       new Promise((res) => {
-        setTimeout(() => res(result), 50)
+        setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      'schedule_10_2021-01-01_2021-01-08': [{ id: 2 }]
+      'schedule_10_2021-01-01_2021-01-08': [{ id: 2 }],
     }, 2)
     child = { id: 10 }
     from = '2021-01-01'
