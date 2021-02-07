@@ -82,8 +82,8 @@ const Banner = () => {
                   </b>
                 </p>
                 <p className="app-store-buttons">
-                  <a onClick={coolIt}><img src={appstore} className="appstore" /></a>
-                  <a onClick={coolIt}><img src={playstore} className="playstore" /></a>
+                  <a onClick={coolIt}><img src={appstore} className="appstore ios disabled" /></a>
+                  <a onClick={coolIt}><img src={playstore} className="appstore android disabled" /></a>
                 </p>
                 <p>
                   <a href="/integritet" className="btn">

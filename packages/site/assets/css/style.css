@@ -1353,12 +1353,16 @@ label input[type="radio"] {
   align-items: center;
 }
 img.appstore {
-  height: 60px;
   width: auto;
 }
-img.playstore {
+img.appstore.ios {
+  height: 60px;
+}
+img.appstore.android {
   height: 87px;
-  width: auto;
+}
+img.disabled {
+  opacity: 0.6;
 }
 /*==============================================
     05: Feature area
