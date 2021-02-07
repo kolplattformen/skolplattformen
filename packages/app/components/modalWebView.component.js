@@ -1,14 +1,15 @@
-import { useApi } from '@skolplattformen/react-native-embedded-api'
-import { Icon, Text } from '@ui-kitten/components'
+import {useApi} from '@skolplattformen/api-hooks'
+import {Icon, Text} from '@ui-kitten/components'
 import React from 'react'
-import { Modal, StyleSheet, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { WebView } from 'react-native-webview'
+import {Modal, StyleSheet, View} from 'react-native'
+import {TouchableOpacity} from 'react-native-gesture-handler'
+import {SafeAreaView} from 'react-native-safe-area-context'
+import {WebView} from 'react-native-webview'
 import URI from 'jsuri'
 
-export const ModalWebView = ({ url, onClose }) => {
-  const { cookie } = useApi()
+export const ModalWebView = ({url, onClose}) => {
+  const {api} = useApi()
+  const cookie = api.getSessionCookie()
   const uri = new URI(url)
   return (
     <Modal>
@@ -17,16 +18,14 @@ export const ModalWebView = ({ url, onClose }) => {
           <View style={styles.header}>
             <Text category="s1">{uri.host()}</Text>
             <TouchableOpacity onPress={onClose}>
-              <Icon
-                name='close-circle'
-                style={styles.icon}
-                fill="#333333" />
+              <Icon name="close-circle" style={styles.icon} fill="#333333" />
             </TouchableOpacity>
           </View>
         </View>
         <WebView
           style={styles.webview}
-          source={{ uri: url, headers: { cookie } }} />
+          source={{uri: url, headers: {cookie}}}
+        />
       </SafeAreaView>
     </Modal>
   )
@@ -34,7 +33,7 @@ export const ModalWebView = ({ url, onClose }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   headerWrapper: {
     backgroundColor: '#333333',
@@ -53,6 +52,5 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  webview: {
-  },
+  webview: {},
 })

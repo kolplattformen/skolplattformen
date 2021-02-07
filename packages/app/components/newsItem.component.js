@@ -1,16 +1,23 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet, View, ScrollView, Image } from 'react-native'
-import { Card, Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components'
+import {SafeAreaView, StyleSheet, View, ScrollView, Image} from 'react-native'
+import {
+  Card,
+  Divider,
+  Icon,
+  Layout,
+  Text,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components'
 import Markdown from 'react-native-markdown-display'
-import { useApi } from '@skolplattformen/react-native-embedded-api'
+import {useApi} from '@skolplattformen/api-hooks'
 
-const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back' />
-)
+const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
-export const NewsItem = ({ navigation, route }) => {
-  const { newsItem } = route.params
-  const { cookie } = useApi()
+export const NewsItem = ({navigation, route}) => {
+  const {newsItem} = route.params
+  const {api} = useApi()
+  const cookie = api.getSessionCookie()
 
   const navigateBack = () => {
     navigation.goBack()
@@ -22,15 +29,14 @@ export const NewsItem = ({ navigation, route }) => {
 
   const renderItemHeader = (headerProps, newsItem) => (
     <View {...headerProps}>
-      <Text category='h3'>
-        {newsItem.header}
-      </Text>
+      <Text category="h3">{newsItem.header}</Text>
       <Image
         source={{
           uri: newsItem.fullImageUrl,
-          headers: { cookie },
+          headers: {cookie},
         }}
-        style={styles.image} />
+        style={styles.image}
+      />
     </View>
   )
 
@@ -41,22 +47,39 @@ export const NewsItem = ({ navigation, route }) => {
       parent,
       styles,
       allowedImageHandlers,
-      defaultImageHandler
+      defaultImageHandler,
     ) => {
-      const { src } = node.attributes
-      return <Image key={src} source={{ uri: `https://elevstockholm.sharepoint.com${src}` }} style={{ width: '100%', minHeight: 300 }} />
-    }
+      const {src} = node.attributes
+      return (
+        <Image
+          key={src}
+          source={{uri: `https://elevstockholm.sharepoint.com${src}`}}
+          style={{width: '100%', minHeight: 300}}
+        />
+      )
+    },
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <TopNavigation title='Nyhet från Skolplattformen' alignment='center' accessoryLeft={BackAction} />
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <TopNavigation
+        title="Nyhet från Skolplattformen"
+        alignment="center"
+        accessoryLeft={BackAction}
+      />
       <Divider />
 
-      <Layout style={styles.topContainer} level='1'>
+      <Layout style={styles.topContainer} level="1">
         <ScrollView>
-          <Card style={styles.card} header={headerProps => renderItemHeader(headerProps, newsItem)}>
-            <Markdown rules={rules} style={{ body: { color: 'black', fontSize: 17, lineHeight: 23 }, heading1: { color: 'black' } }}>
+          <Card
+            style={styles.card}
+            header={(headerProps) => renderItemHeader(headerProps, newsItem)}>
+            <Markdown
+              rules={rules}
+              style={{
+                body: {color: 'black', fontSize: 17, lineHeight: 23},
+                heading1: {color: 'black'},
+              }}>
               {decodeURIComponent(newsItem.body)}
             </Markdown>
           </Card>
@@ -69,14 +92,14 @@ export const NewsItem = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   topContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   card: {
     flex: 1,
-    margin: 2
+    margin: 2,
   },
   image: {
     width: '100%',
-    minHeight: 300
-  }
+    minHeight: 300,
+  },
 })
