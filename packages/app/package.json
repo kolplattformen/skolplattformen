@@ -16,7 +16,8 @@
     "@react-native-async-storage/async-storage": "1.13.4",
     "@react-native-community/cookies": "5.0.1",
     "@react-native-community/masked-view": "0.1.10",
-    "@react-native-firebase/app": "^10.6.4",
+    "@react-native-firebase/app": "10.6.4",
+    "@react-native-firebase/crashlytics": "10.6.4",
     "@react-navigation/material-top-tabs": "5.3.13",
     "@react-navigation/native": "5.9.2",
     "@react-navigation/stack": "5.14.2",
@@ -24,6 +25,7 @@
     "@skolplattformen/embedded-api": "0.20.0",
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
+    "add": "2.0.6",
     "buffer": "6.0.3",
     "faker": "5.3.1",
     "jsuri": "1.3.1",
@@ -42,7 +44,8 @@
     "react-native-svg-transformer": "0.14.3",
     "react-native-tab-view": "2.15.2",
     "react-native-webview": "11.2.1",
-    "use-async-storage": "1.2.0"
+    "use-async-storage": "1.2.0",
+    "yarn": "1.22.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
