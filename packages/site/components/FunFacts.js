@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-
+import React from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import CountUp from 'react-countup'
 import VisibilitySensor from 'react-visibility-sensor'
 
@@ -24,7 +23,7 @@ const FUNFACTS_DATA = [
 ]
 
 const FunFacts = () => {
-  const [counter, setCounter] = useState({
+  const [counter, setCounter] = React.useState({
     startCounter: false,
   })
 
@@ -33,6 +32,7 @@ const FunFacts = () => {
       setCounter({ startCounter: true })
     }
   }
+
   return (
     <section className="border-top pt-120 pb-80">
       <Container>

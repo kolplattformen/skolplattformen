@@ -1,17 +1,14 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import SwiperCore, { Pagination, Autoplay } from 'swiper'
+import { Col, Container, Row } from 'react-bootstrap'
+import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-SwiperCore.use([Pagination, Autoplay])
-
-import SectionTitle from './SectionTitle'
-
 import img1 from '../assets/img/feature/app-img.png'
 import img2 from '../assets/img/feature/app-img2.png'
 import img3 from '../assets/img/feature/app-img3.png'
 import img4 from '../assets/img/feature/app-img4.png'
 import img5 from '../assets/img/feature/app-img5.png'
+import SectionTitle from './SectionTitle'
+
+SwiperCore.use([Pagination, Autoplay])
 
 const AppShots = () => {
   const swiperParams = {
@@ -47,6 +44,7 @@ const AppShots = () => {
       },
     },
   }
+
   return (
     <section className="pt-120 pb-155 app-shot-one" id="screenshots">
       <Container>

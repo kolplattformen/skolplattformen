@@ -1,6 +1,6 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-
+import Link from 'next/link'
+import { Col, Container, Row } from 'react-bootstrap'
+import bannerMoc from '../assets/img/banner/mockup.png'
 import shape1 from '../assets/img/banner/shaps1.png'
 import shape2 from '../assets/img/banner/shaps2.png'
 import shape3 from '../assets/img/banner/shaps3.png'
@@ -68,8 +68,8 @@ const Banner = () => {
                 <h1>Öppna Skolplattformen</h1>
                 <p>
                   Oavsett om du har tre eller sju barn – det är mycket att hålla
-                  reda på. Frånvaroanmälan nummer 17 i februari. Vad
-                  vikarien heter den här veckan. Gympakläderna. En dåligt fungerande
+                  reda på. Frånvaroanmälan nummer 17 i februari. Vad vikarien
+                  heter den här veckan. Gympakläderna. En dåligt fungerande
                   Skolplattform som äter tid och ork? Det finns inte plats för
                   det. Så vi har byggt en bättre. Med all information du behöver
                   som förälder. Snabbare och framförallt – mycket mindre
@@ -86,9 +86,9 @@ const Banner = () => {
                   <a onClick={coolIt}><img src={playstore} className="appstore android disabled" /></a>
                 </p>
                 <p>
-                  <a href="/integritet" className="btn">
-                    Integritetspolicy
-                  </a>
+                  <Link href="/integritet">
+                    <a className="btn">Integritetspolicy</a>
+                  </Link>
                 </p>
               </div>
             </Col>

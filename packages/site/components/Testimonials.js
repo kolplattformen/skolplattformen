@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import SwiperCore, { Autoplay, Thumbs, Navigation } from 'swiper'
+import React from 'react'
+import SwiperCore, { Autoplay, Navigation, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-import img1 from '../assets/img/wass.png'
 import img2 from '../assets/img/karin.jpg'
-import img3 from '../assets/img/per.jpg'
 import img4 from '../assets/img/niels.jpg'
+import img3 from '../assets/img/per.jpg'
+import img1 from '../assets/img/wass.png'
 
 SwiperCore.use([Autoplay, Thumbs, Navigation])
 
 const Testimonials = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [thumbsSwiper, setThumbsSwiper] = React.useState(null)
   const testimmonialsParams = {
     slidesPerView: 1,
     spaceBetween: 0,
@@ -22,6 +21,7 @@ const Testimonials = () => {
       delay: 10000,
     },
   }
+
   const thumbnailsParam = {
     slidesPerView: 3,
     spaceBetween: 20,
@@ -43,6 +43,7 @@ const Testimonials = () => {
       },
     },
   }
+
   return (
     <section className="pt-120 pb-110 bg-2">
       <div className="container">
