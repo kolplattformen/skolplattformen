@@ -8,6 +8,12 @@ import shape4 from '../assets/img/banner/shaps4.png'
 import shape5 from '../assets/img/banner/shaps5.png'
 import shape6 from '../assets/img/banner/shaps6.png'
 import shape7 from '../assets/img/banner/shaps7.png'
+import appstore from '../assets/img/appstore.svg'
+import playstore from '../assets/img/playstore.png'
+
+const coolIt = () => {
+  alert('Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊')
+}
 
 const Banner = () => {
   return (
@@ -73,13 +79,9 @@ const Banner = () => {
                     Google Play Store vilken dag som helst.
                   </b>
                 </p>
-                <p>
-                  <a href="#" className="btn">
-                    App Store
-                  </a>
-                  <a href="#" className="btn">
-                    Google Play Store
-                  </a>
+                <p className="app-store-buttons">
+                  <a onClick={coolIt}><img src={appstore} className="appstore ios disabled" /></a>
+                  <a onClick={coolIt}><img src={playstore} className="appstore android disabled" /></a>
                 </p>
                 <p>
                   <Link href="/integritet">
