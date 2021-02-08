@@ -136,6 +136,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 100
         versionName "1.0.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -194,6 +195,8 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation platform('com.google.firebase:firebase-bom:26.4.0')
 
