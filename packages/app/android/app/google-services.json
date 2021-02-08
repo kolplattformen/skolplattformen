@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "262241100868",
+    "project_id": "skolplattformen-3a832",
+    "storage_bucket": "skolplattformen-3a832.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262241100868:android:2b3f5cf3970c6bb5000811",
+        "android_client_info": {
+          "package_name": "org.skolplattformen.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262241100868-vqeiaumqlqh77uf7rfa6kp3astj3jfmt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ugO7ufKDKSxBsb0pdCxLbBPxU29tYic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262241100868-vqeiaumqlqh77uf7rfa6kp3astj3jfmt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "262241100868-4ukuo43bm2blt3addu87j5tom0vla2is.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.kolplattformen.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
