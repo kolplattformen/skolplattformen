@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Col, Container, Row } from 'react-bootstrap'
 import bannerMoc from '../assets/img/banner/mockup.png'
 import shape1 from '../assets/img/banner/shaps1.png'
@@ -81,9 +82,9 @@ const Banner = () => {
                   </a>
                 </p>
                 <p>
-                  <a href="/integritet" className="btn">
-                    Integritetspolicy
-                  </a>
+                  <Link href="/integritet">
+                    <a className="btn">Integritetspolicy</a>
+                  </Link>
                 </p>
               </div>
             </Col>
