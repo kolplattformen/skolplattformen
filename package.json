@@ -6,6 +6,6 @@
   },
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
-    "test": "lerna run test --stream"
+    "test": "npx lerna run test --stream"
   }
 }
