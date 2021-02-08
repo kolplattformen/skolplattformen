@@ -12,7 +12,9 @@ import appstore from '../assets/img/appstore.svg'
 import playstore from '../assets/img/playstore.png'
 
 const coolIt = () => {
-  alert('Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊')
+  alert(
+    'Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊'
+  )
 }
 
 const Banner = () => {
@@ -80,8 +82,20 @@ const Banner = () => {
                   </b>
                 </p>
                 <p className="app-store-buttons">
-                  <a onClick={coolIt}><img src={appstore} className="appstore ios disabled" /></a>
-                  <a onClick={coolIt}><img src={playstore} className="appstore android disabled" /></a>
+                  <a onClick={coolIt}>
+                    <img
+                      alt="Ladda ner i App Store"
+                      src={appstore}
+                      className="appstore ios disabled"
+                    />
+                  </a>
+                  <a onClick={coolIt}>
+                    <img
+                      alt="Ladda ner i Google Play Store"
+                      src={playstore}
+                      className="appstore android disabled"
+                    />
+                  </a>
                 </p>
                 <p>
                   <Link href="/integritet">
