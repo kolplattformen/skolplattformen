@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import Image from 'next/image'
 import img1 from '../assets/img/feature/app-img.png'
 import img2 from '../assets/img/feature/app-img2.png'
 import img3 from '../assets/img/feature/app-img3.png'
@@ -62,102 +63,102 @@ const AppShots = () => {
           <Swiper className="app-carousel" {...swiperParams}>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img1} alt="" />
+                <Image width="300" height="649" src={img1} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img2} alt="" />
+                <Image width="300" height="649" src={img2} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img3} alt="" />
+                <Image width="300" height="649" src={img3} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img4} alt="" />
+                <Image width="300" height="649" src={img4} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img5} alt="" />
+                <Image width="300" height="649" src={img5} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img1} alt="" />
+                <Image width="300" height="649" src={img1} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img2} alt="" />
+                <Image width="300" height="649" src={img2} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img3} alt="" />
+                <Image width="300" height="649" src={img3} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img4} alt="" />
+                <Image width="300" height="649" src={img4} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img5} alt="" />
+                <Image width="300" height="649" src={img5} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img1} alt="" />
+                <Image width="300" height="649" src={img1} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img2} alt="" />
+                <Image width="300" height="649" src={img2} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img3} alt="" />
+                <Image width="300" height="649" src={img3} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img4} alt="" />
+                <Image width="300" height="649" src={img4} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img5} alt="" />
+                <Image width="300" height="649" src={img5} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img1} alt="" />
+                <Image width="300" height="649" src={img1} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img2} alt="" />
+                <Image width="300" height="649" src={img2} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img3} alt="" />
+                <Image width="300" height="649" src={img3} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img4} alt="" />
+                <Image width="300" height="649" src={img4} alt="" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="single-app-image">
-                <img src={img5} alt="" />
+                <Image width="300" height="649" src={img5} alt="" />
               </div>
             </SwiperSlide>
           </Swiper>
