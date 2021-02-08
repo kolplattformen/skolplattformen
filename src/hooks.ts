@@ -39,7 +39,9 @@ const hook = <T>(
     const state = stateMap[key] || { status: 'pending', data: defaultValue }
     return state
   }
-  const { api, storage, isLoggedIn } = useApi()
+  const {
+    api, isLoggedIn, reporter, storage,
+  } = useApi()
   const initialState = select(store.getState() as EntityStoreRootState)
   const [state, setState] = useState(initialState)
   const dispatch = useDispatch()
@@ -50,6 +52,7 @@ const hook = <T>(
         key,
         defaultValue,
         apiCall: apiCaller(api),
+        retries: 0,
       }
 
       // Only use cache when not in fake mode
@@ -72,6 +75,11 @@ const hook = <T>(
       || newState.data !== state.data
       || newState.error !== state.error) {
       setState(newState)
+
+      if (newState.error) {
+        const description = `Error getting ${entityName} from API`
+        reporter.error(newState.error, description)
+      }
     }
   }
   useEffect(() => store.subscribe(listener), [])

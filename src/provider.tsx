@@ -7,10 +7,20 @@ import React, {
 import { Provider } from 'react-redux'
 import { ApiContext } from './context'
 import store from './store'
-import { AsyncStorage, IApiContext } from './types'
+import { AsyncStorage, IApiContext, Reporter } from './types'
 
-type TApiProvider = FC<PropsWithChildren<{ api: Api, storage: AsyncStorage }>>
-export const ApiProvider: TApiProvider = ({ children, api, storage }) => {
+type TApiProvider = FC<PropsWithChildren<{
+  api: Api,
+  storage: AsyncStorage,
+  reporter?: Reporter
+}>>
+const noopReporter: Reporter = {
+  log: () => { },
+  error: () => { },
+}
+export const ApiProvider: TApiProvider = ({
+  children, api, storage, reporter = noopReporter,
+}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(api.isLoggedIn)
   const [isFake, setIsFake] = useState(api.isFake)
 
@@ -19,6 +29,7 @@ export const ApiProvider: TApiProvider = ({ children, api, storage }) => {
     storage,
     isLoggedIn,
     isFake,
+    reporter,
   }
 
   useEffect(() => {

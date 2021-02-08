@@ -23,11 +23,16 @@ import init from '@skolplattformen/embedded-api'
 import { CookieManager } from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RootComponent } from './components/root'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const api = init(fetch, () => CookieManager.clearAll())
+const reporter = {
+  log: (message) => crashlytics().log(message),
+  error: (error, label) => crashlytics().recordError(error, label),
+}
 
 export default () => (
-  <ApiProvider api={api} storage={AsyncStorage}>
+  <ApiProvider api={api} reporter={reporter} storage={AsyncStorage}>
     <RootComponent />
   </ApiProvider>
 )

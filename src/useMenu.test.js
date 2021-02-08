@@ -5,6 +5,7 @@ import { useMenu } from './hooks'
 import store from './store'
 import init from './__mocks__/@skolplattformen/embedded-api'
 import createStorage from './__mocks__/AsyncStorage'
+import reporter from './__mocks__/reporter'
 
 const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
@@ -14,7 +15,13 @@ describe('useMenu(child)', () => {
   let response
   let child
   const wrapper = ({ children }) => (
-    <ApiProvider api={api} storage={storage}>{children}</ApiProvider>
+    <ApiProvider
+      api={api}
+      storage={storage}
+      reporter={reporter}
+    >
+      {children}
+    </ApiProvider>
   )
   beforeEach(() => {
     response = [{ id: 1 }]
@@ -130,6 +137,78 @@ describe('useMenu(child)', () => {
       await pause(20)
 
       expect(storage.cache.menu_10).toEqual('[{"id":2}]')
+    })
+  })
+  it('retries if api fails', async () => {
+    await act(async () => {
+      api.isLoggedIn = true
+      const error = new Error('fail')
+      api.getMenu.mockRejectedValueOnce(error)
+
+      const { result, waitForNextUpdate } = renderHook(() => useMenu(child), { wrapper })
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.error).toEqual(error)
+      expect(result.current.status).toEqual('loading')
+      expect(result.current.data).toEqual([{ id: 2 }])
+
+      jest.advanceTimersToNextTimer()
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.status).toEqual('loaded')
+      expect(result.current.data).toEqual([{ id: 1 }])
+    })
+  })
+  it('gives up after 3 retries', async () => {
+    await act(async () => {
+      api.isLoggedIn = true
+      const error = new Error('fail')
+      api.getMenu.mockRejectedValueOnce(error)
+      api.getMenu.mockRejectedValueOnce(error)
+      api.getMenu.mockRejectedValueOnce(error)
+
+      const { result, waitForNextUpdate } = renderHook(() => useMenu(child), { wrapper })
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.error).toEqual(error)
+      expect(result.current.status).toEqual('loading')
+      expect(result.current.data).toEqual([{ id: 2 }])
+
+      jest.advanceTimersToNextTimer()
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.error).toEqual(error)
+      expect(result.current.status).toEqual('error')
+      expect(result.current.data).toEqual([{ id: 2 }])
+    })
+  })
+  it('reports if api fails', async () => {
+    await act(async () => {
+      api.isLoggedIn = true
+      const error = new Error('fail')
+      api.getMenu.mockRejectedValueOnce(error)
+
+      const { result, waitForNextUpdate } = renderHook(() => useMenu(child), { wrapper })
+
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+      await waitForNextUpdate()
+
+      expect(result.current.error).toEqual(error)
+
+      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting MENU from API')
     })
   })
 })

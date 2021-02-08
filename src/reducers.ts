@@ -37,6 +37,14 @@ const createReducer = <T>(entity: EntityName): EntityReducer<T> => {
         }
         break
       }
+      case 'API_ERROR': {
+        newNode = {
+          ...node,
+          status: action.extra.retries < 3 ? node.status : 'error',
+          error: action.error,
+        }
+        break
+      }
       case 'RESULT_FROM_CACHE': {
         newNode = {
           ...node,

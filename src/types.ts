@@ -11,11 +11,17 @@ import {
 } from '@skolplattformen/embedded-api'
 import { Action, Reducer } from 'redux'
 
+export interface Reporter {
+  log: (message: string) => void
+  error: (error: Error, label?: string) => void
+}
+
 export interface IApiContext {
   api: Api
   storage: AsyncStorage
   isLoggedIn: boolean
   isFake: boolean
+  reporter: Reporter
 }
 
 export type EntityStatus = 'pending' | 'loading' | 'loaded' | 'error'
@@ -30,21 +36,28 @@ export interface ApiCall<T> {
 }
 export interface ExtraActionProps<T> {
   apiCall: ApiCall<T>
+  retries: number
   key: string
   defaultValue: T
   getFromCache?: () => Promise<string | null>
   saveToCache?: (value: string) => Promise<void>
 }
-export type EntityActionType = 'GET_FROM_API' | 'RESULT_FROM_API' | 'GET_FROM_CACHE' | 'RESULT_FROM_CACHE' | 'STORE_IN_CACHE' | 'CLEAR'
+export type EntityActionType = 'GET_FROM_API'
+  | 'RESULT_FROM_API'
+  | 'API_ERROR'
+  | 'GET_FROM_CACHE'
+  | 'RESULT_FROM_CACHE'
+  | 'STORE_IN_CACHE'
+  | 'CLEAR'
 export type EntityName = 'USER'
-| 'CHILDREN'
-| 'CALENDAR'
-| 'CLASSMATES'
-| 'MENU'
-| 'NEWS'
-| 'NOTIFICATIONS'
-| 'SCHEDULE'
-| 'ALL'
+  | 'CHILDREN'
+  | 'CALENDAR'
+  | 'CLASSMATES'
+  | 'MENU'
+  | 'NEWS'
+  | 'NOTIFICATIONS'
+  | 'SCHEDULE'
+  | 'ALL'
 export interface EntityAction<T> extends Action<EntityActionType> {
   entity: EntityName
   data?: T
