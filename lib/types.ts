@@ -103,7 +103,7 @@ export interface NewsItem {
   modified?: string
   imageUrl?: string
   fullImageUrl?: string
-  imageAltText: string
+  imageAltText?: string
 }
 
 /**

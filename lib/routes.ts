@@ -24,6 +24,10 @@ export const news = (childId: string) => (
   `https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsOverview?childId=${childId}`
 )
 
+export const newsDetails = (childId: string, newsId: string) => (
+  `https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArticle?newsItemId=${newsId}&childId=${childId}`
+)
+
 export const image = (url: string) => (
   `https://etjanst.stockholm.se/vardnadshavare/inloggad2/NewsBanner?url=${url}`
 )
