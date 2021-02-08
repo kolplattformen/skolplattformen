@@ -20,6 +20,7 @@ const Layout = (props) => {
       window.removeEventListener('scroll', handleScrollTop)
     }
   })
+
   return (
     <div>
       <Head>

@@ -47,6 +47,7 @@ const AppShots = () => {
       },
     },
   }
+
   return (
     <section className="pt-120 pb-155 app-shot-one" id="screenshots">
       <Container>

@@ -85,6 +85,7 @@ const Features = () => {
       },
     },
   }
+
   return (
     <section className="pb-110" id="funktioner">
       <Container>

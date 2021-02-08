@@ -33,6 +33,7 @@ const FunFacts = () => {
       setCounter({ startCounter: true })
     }
   }
+
   return (
     <section className="border-top pt-120 pb-80">
       <Container>
