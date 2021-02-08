@@ -1,5 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap'
+import Image from 'next/image'
 import img1 from '../assets/img/boys.png'
+
 
 const CtaTwo = () => {
   return (
@@ -8,7 +10,7 @@ const CtaTwo = () => {
         <Row>
           <Col lg={7} sm={7}>
             <div className="user-interact-image">
-              <img src={img1} alt="" />
+              <Image src={img1} width="668" height="500" alt="" />
             </div>
           </Col>
           <Col lg={5} sm={5}>

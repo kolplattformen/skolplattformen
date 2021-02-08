@@ -1,4 +1,5 @@
 import { Col, Container, Row } from 'react-bootstrap'
+import Image from 'next/image'
 import img2 from '../assets/img/girls.png'
 
 const CtaThree = () => {
@@ -22,7 +23,7 @@ const CtaThree = () => {
           </Col>
           <Col lg={7} sm={7}>
             <div className="user-interact-image type2">
-              <img src={img2} alt="" />
+              <Image src={img2} alt="" width="668" height="500" />
             </div>
           </Col>
         </Row>
