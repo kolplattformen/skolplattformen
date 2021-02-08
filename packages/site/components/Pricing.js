@@ -16,8 +16,8 @@ const Pricing = () => {
               <p>
                 Vi som bygger appen vill gärna fortsätta vidareutveckla den och
                 även ha möjlighet att ge ersättning till de som hjälper till.
-                Därför kostar det {formatPrice(price)} att ladda ner appen. Det är
-                en engångskostnad och hjälper oss att göra appen bättre.
+                Därför kostar det {formatPrice(price)} att ladda ner appen. Det
+                är en engångskostnad och hjälper oss att göra appen bättre.
               </p>
             </div>
           </div>

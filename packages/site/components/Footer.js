@@ -1,4 +1,3 @@
-import React from 'react'
 import footerBg from '../assets/img/footer-bg.png'
 import footerLogo from '../assets/img/logo.png'
 
@@ -106,9 +105,7 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="link-right">
-
-                  </div>
+                  <div className="link-right"></div>
                 </div>
               </div>
             </div>
