@@ -2,6 +2,12 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Header from '../Header'
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn().mockReturnValue({
+    pathname: '',
+  }),
+}))
+
 const setup = (customProps = {}) => {
   const props = {
     ...customProps,
