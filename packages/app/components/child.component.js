@@ -57,6 +57,12 @@ export const Child = ({route, navigation}) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   )
 
+  const TabTitle = ({style, children}) => (
+    <Text adjustsFontSizeToFit numberOfLines={1} style={style}>
+      {children}
+    </Text>
+  )
+
   const navigateBack = () => {
     navigation.goBack()
   }
@@ -102,12 +108,16 @@ export const Child = ({route, navigation}) => {
       <TabView
         selectedIndex={selectedIndex}
         onSelect={(index) => setSelectedIndex(index)}>
-        <Tab title="Nyheter" icon={NewsIcon}>
+        <Tab
+          title={(props) => <TabTitle {...props}>Nyheter</TabTitle>}
+          icon={NewsIcon}>
           <Layout style={styles.tabContainer}>
             <NewsList news={news} />
           </Layout>
         </Tab>
-        <Tab title="Notifieringar" icon={NotificationsIcon}>
+        <Tab
+          title={(props) => <TabTitle {...props}>Notifieringar</TabTitle>}
+          icon={NotificationsIcon}>
           <Layout style={styles.tabContainer}>
             <NotificationsList
               notifications={notifications}
@@ -115,12 +125,16 @@ export const Child = ({route, navigation}) => {
             />
           </Layout>
         </Tab>
-        <Tab title="Kalender" icon={CalendarIcon}>
+        <Tab
+          title={(props) => <TabTitle {...props}>Kalender</TabTitle>}
+          icon={CalendarIcon}>
           <Layout style={styles.tabContainer}>
             <Calendar calendar={[...(calendar ?? []), ...(schedule ?? [])]} />
           </Layout>
         </Tab>
-        <Tab title="Klassen" icon={ClassIcon}>
+        <Tab
+          title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
+          icon={ClassIcon}>
           <Layout style={styles.tabContainer}>
             <Text category="h5">
               Klass {classmates?.length ? classmates[0].className : ''}
