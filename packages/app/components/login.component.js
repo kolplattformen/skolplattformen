@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import {
   Platform,
   SafeAreaView,
@@ -23,8 +23,9 @@ import {
   Input,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import {useAsyncStorage} from 'use-async-storage'
-import {useApi} from '@skolplattformen/api-hooks'
+import { useAsyncStorage } from 'use-async-storage'
+import { useApi } from '@skolplattformen/api-hooks'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const funArguments = [
   'öppna',
@@ -46,8 +47,8 @@ const funArguments = [
   'agila',
 ] // TODO: add moare
 
-export const Login = ({navigation, route}) => {
-  const {api, isLoggedIn} = useApi()
+export const Login = ({ navigation, route }) => {
+  const { api, isLoggedIn } = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
   const [argument, setArgument] = React.useState('öppna')
@@ -66,6 +67,7 @@ export const Login = ({navigation, route}) => {
   }, [socialSecurityNumber])
 
   const loginHandler = async () => {
+    crashlytics().log('Logged in')
     showModal(false)
     navigateToChildren()
   }
@@ -128,7 +130,9 @@ export const Login = ({navigation, route}) => {
     showModal(false)
     try {
       api.logout()
+      crashlytics().log('Logged in')
     } catch (err) {
+      crashlytics().recordError(err, 'Logout error')
       setError('fel uppdatod vid utloggning')
     }
   }
@@ -142,18 +146,18 @@ export const Login = ({navigation, route}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}>
-      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         {isLoggedIn ? (
           <Layout
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <TopNavigation
               title={`Skolplattformen.org - det ${argument} alternativet`}
               alignment="center"
             />
             <Image
               source={require('../assets/man.png')}
-              style={{maxHeight: 300, width: '100%', borderBottomWidth: 1}}
+              style={{ maxHeight: 300, width: '100%', borderBottomWidth: 1 }}
             />
             <View
               style={{
@@ -167,7 +171,7 @@ export const Login = ({navigation, route}) => {
               <Button
                 status="success"
                 size="medium"
-                style={{marginTop: 10, width: 200}}
+                style={{ marginTop: 10, width: 200 }}
                 accessoryRight={CheckIcon}
                 onPress={() => navigateToChildren()}>
                 {error ? 'Försök igen' : 'Fortsätt'}
@@ -175,71 +179,71 @@ export const Login = ({navigation, route}) => {
               <Button
                 onPress={() => startLogout()}
                 accessoryRight={LogoutIcon}
-                style={{marginTop: 10, width: 200}}
+                style={{ marginTop: 10, width: 200 }}
                 size="medium">
                 Logga ut
               </Button>
             </View>
           </Layout>
         ) : (
-          <Layout style={{flex: 1, padding: 24}}>
-            <TopNavigation
-              title={`Skolplattformen.org - det ${argument} alternativet`}
-              alignment="center"
-            />
-            {
-              // hidden easter egg, just touch the image to login without bankId if you still have a valid token
-            }
-            <TouchableOpacity onPress={navigateToChildren}>
-              <Image
-                source={require('../assets/boys.png')}
+            <Layout style={{ flex: 1, padding: 24 }}>
+              <TopNavigation
+                title={`Skolplattformen.org - det ${argument} alternativet`}
+                alignment="center"
+              />
+              {
+                // hidden easter egg, just touch the image to login without bankId if you still have a valid token
+              }
+              <TouchableOpacity onPress={navigateToChildren}>
+                <Image
+                  source={require('../assets/boys.png')}
+                  style={{
+                    height: 320,
+                    marginTop: -20,
+                    marginLeft: -10,
+                    width: '110%',
+                  }}
+                />
+              </TouchableOpacity>
+              <View
                 style={{
-                  height: 320,
-                  marginTop: -20,
-                  marginLeft: -10,
-                  width: '110%',
-                }}
-              />
-            </TouchableOpacity>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'flex-end',
-                alignItems: 'flex-start',
-                paddingHorizontal: 20,
-                paddingBottom: 72,
-              }}>
-              <Input
-                label="Personnummer"
-                autoFocus
-                value={socialSecurityNumber}
-                style={{minHeight: 70}}
-                accessoryLeft={PersonIcon}
-                keyboardType="numeric"
-                caption={error?.message || ''}
-                onChangeText={(text) => handleInput(text)}
-                placeholder="Ditt personnr (10 eller 12 siffror)"
-              />
-              <Button
-                onPress={startLogin}
-                style={{width: '100%'}}
-                appearence="ghost"
-                disabled={!valid}
-                status="primary"
-                accessoryRight={SecureIcon}
-                size="medium">
-                Öppna BankID
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-start',
+                  paddingHorizontal: 20,
+                  paddingBottom: 72,
+                }}>
+                <Input
+                  label="Personnummer"
+                  autoFocus
+                  value={socialSecurityNumber}
+                  style={{ minHeight: 70 }}
+                  accessoryLeft={PersonIcon}
+                  keyboardType="numeric"
+                  caption={error?.message || ''}
+                  onChangeText={(text) => handleInput(text)}
+                  placeholder="Ditt personnr (10 eller 12 siffror)"
+                />
+                <Button
+                  onPress={startLogin}
+                  style={{ width: '100%' }}
+                  appearence="ghost"
+                  disabled={!valid}
+                  status="primary"
+                  accessoryRight={SecureIcon}
+                  size="medium">
+                  Öppna BankID
               </Button>
-            </View>
-          </Layout>
-        )}
+              </View>
+            </Layout>
+          )}
         <Modal
           visible={visible}
           style={styles.modal}
           backdropStyle={styles.backdrop}
           onBackdropPress={() => showModal(false)}>
           <Card disabled>
-            <Text style={{margin: 10}}>Väntar på BankID...</Text>
+            <Text style={{ margin: 10 }}>Väntar på BankID...</Text>
 
             <Button visible={!isLoggedIn} onPress={() => showModal(false)}>
               Avbryt

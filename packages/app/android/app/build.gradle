@@ -199,6 +199,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation platform('com.google.firebase:firebase-bom:26.4.0')
+    implementation 'com.google.firebase:firebase-analytics'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
