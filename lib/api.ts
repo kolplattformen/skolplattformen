@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
 import {
-  checkStatus, LoginStatusChecker,
+  checkStatus,
+  LoginStatusChecker,
 } from './loginStatus'
 import {
   AsyncishFunction,
