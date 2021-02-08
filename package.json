@@ -6,8 +6,5 @@
   },
   "scripts": {
     "test": "lerna run test --stream"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  }
 }
