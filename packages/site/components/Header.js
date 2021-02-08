@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import NavLinks from './NavLinks'
 import Link from 'next/link'
-
+import React from 'react'
 import headerLogo from '../assets/img/logo.png'
+import NavLinks from './NavLinks'
 
 const HeaderHome = (props) => {
-  const [sticky, setSticky] = useState(false)
+  const [sticky, setSticky] = React.useState(false)
 
   const handleScroll = () => {
     if (window.scrollY > 70) {
@@ -15,7 +14,7 @@ const HeaderHome = (props) => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     mobileMenu()
     return () => {

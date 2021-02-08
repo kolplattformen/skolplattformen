@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 import favImg from '../assets/img/favicon.png'
 
 const Layout = (props) => {
-  const [scrollTop, setScrollTop] = useState(false)
+  const [scrollTop, setScrollTop] = React.useState(false)
 
   const handleScrollTop = () => {
     if (window.scrollY > 70) {
@@ -14,7 +14,7 @@ const Layout = (props) => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('scroll', handleScrollTop)
     return () => {
       window.removeEventListener('scroll', handleScrollTop)

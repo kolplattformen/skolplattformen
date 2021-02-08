@@ -1,6 +1,4 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-
+import { Col, Container, Row } from 'react-bootstrap'
 import shape1 from '../assets/img/banner/shaps1.png'
 import shape2 from '../assets/img/banner/shaps2.png'
 import shape3 from '../assets/img/banner/shaps3.png'

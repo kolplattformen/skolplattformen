@@ -1,17 +1,14 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import SwiperCore, { Pagination, Autoplay } from 'swiper'
+import { Col, Container, Row } from 'react-bootstrap'
+import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-SwiperCore.use([Pagination, Autoplay])
-
-import SectionTitle from './SectionTitle'
-import FeatureCard from './FeatureCard'
-
+import img4 from '../assets/img/icons/goal.svg'
+import img3 from '../assets/img/icons/planning.svg'
 import img1 from '../assets/img/icons/project-management.svg'
 import img2 from '../assets/img/icons/solution.svg'
-import img3 from '../assets/img/icons/planning.svg'
-import img4 from '../assets/img/icons/goal.svg'
+import FeatureCard from './FeatureCard'
+import SectionTitle from './SectionTitle'
+
+SwiperCore.use([Pagination, Autoplay])
 
 const FEATURES_DATA = [
   {

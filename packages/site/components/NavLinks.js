@@ -1,6 +1,5 @@
 import NavLink from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 
 const NavLinks = () => {
@@ -11,6 +10,7 @@ const NavLinks = () => {
     if (hashIndex < 0) return href
     return href.substring(0, hashIndex)
   }
+
   const Link = ({ href, to, children }) =>
     path(href) === pathname ? (
       <ScrollLink
