@@ -33,12 +33,12 @@ This initiative is started by frustrated parents and we have no affiliation with
 If you are offended by this initiative, please don't - we come in peas.
 
 # Contributors
-- Christian Landgren
-- Johan Öbrink
-- Erik Hellman
-- Rickard Laurin
-- You?
 
+- [Christian Landgren](https://github.com/irony)
+- [Johan Öbrink](https://github.com/JohanObrink)
+- [Erik Hellman](https://github.com/ErikHellman)
+- [Rickard Natt och Dag](https://github.com/believer)
+- You?
 
 ## License
 
