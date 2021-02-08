@@ -8,6 +8,7 @@ import shape4 from '../assets/img/banner/shaps4.png'
 import shape5 from '../assets/img/banner/shaps5.png'
 import shape6 from '../assets/img/banner/shaps6.png'
 import shape7 from '../assets/img/banner/shaps7.png'
+import Image from 'next/image'
 import appstore from '../assets/img/appstore.svg'
 import playstore from '../assets/img/playstore.png'
 
@@ -106,7 +107,7 @@ const Banner = () => {
             </Col>
             <Col md={4} lg={5} className="  offset-lg-1  offse-xl-2">
               <div className="banner-image">
-                <img src={bannerMoc} alt="" />
+                <Image src={bannerMoc} width="300" height="584" alt="" />
               </div>
             </Col>
           </Row>
