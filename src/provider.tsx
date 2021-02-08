@@ -7,7 +7,7 @@ import React, {
 import { Provider } from 'react-redux'
 import { ApiContext } from './context'
 import store from './store'
-import { AsyncStorage, IApiContext, Reporter } from './types'
+import { AsyncStorage, EntityAction, IApiContext, Reporter } from './types'
 
 type TApiProvider = FC<PropsWithChildren<{
   api: Api,
@@ -36,6 +36,10 @@ export const ApiProvider: TApiProvider = ({
     const handler = () => {
       setIsLoggedIn(api.isLoggedIn)
       setIsFake(api.isFake)
+
+      if (!api.isLoggedIn) {
+        store.dispatch({ type: 'CLEAR', entity: 'ALL' })
+      }
     }
 
     api.on('login', handler)
