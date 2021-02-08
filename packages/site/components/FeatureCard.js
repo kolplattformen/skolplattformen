@@ -1,5 +1,3 @@
-import React from 'react'
-
 const FeatureCard = (props) => {
   return (
     <div className="single-feature-inner text-center">
