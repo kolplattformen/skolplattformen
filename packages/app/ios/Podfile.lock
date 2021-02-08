@@ -13,6 +13,9 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.63.4)
   - Firebase/CoreOnly (7.5.0):
     - FirebaseCore (= 7.5.0)
+  - Firebase/Crashlytics (7.5.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 7.5.0)
   - FirebaseCore (7.5.0):
     - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
@@ -22,6 +25,17 @@ PODS:
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
     - nanopb (~> 2.30907.0)
+  - FirebaseCrashlytics (7.5.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleDataTransport (~> 8.0)
+    - nanopb (~> 2.30907.0)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstallations (7.5.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+    - PromisesObjC (~> 1.2)
   - Flipper (0.54.0):
     - Flipper-Folly (~> 2.2)
     - Flipper-RSocket (~> 1.1)
@@ -84,6 +98,8 @@ PODS:
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/Logger (7.2.2):
     - GoogleUtilities/Environment
+  - GoogleUtilities/UserDefaults (7.2.2):
+    - GoogleUtilities/Logger
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
     - nanopb/encode (= 2.30907.0)
@@ -332,6 +348,10 @@ PODS:
   - RNFBApp (10.6.4):
     - Firebase/CoreOnly (~> 7.5.0)
     - React-Core
+  - RNFBCrashlytics (10.6.4):
+    - Firebase/Crashlytics (~> 7.5.0)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (1.9.0):
     - React-Core
   - RNReanimated (1.13.2):
@@ -397,6 +417,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -411,6 +432,8 @@ SPEC REPOS:
     - Firebase
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
+    - FirebaseInstallations
     - Flipper
     - Flipper-DoubleConversion
     - Flipper-Folly
@@ -488,6 +511,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNFBCrashlytics:
+    :path: "../node_modules/@react-native-firebase/crashlytics"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -509,6 +534,8 @@ SPEC CHECKSUMS:
   Firebase: fd5e4d2b756292c6e7ee6faac1eb320225d6e97e
   FirebaseCore: 06a2b68af8901f2244eb989419eb89edc3789b4d
   FirebaseCoreDiagnostics: 35685db68b11fe7d19d2d8b557fd7e3a56ac81cc
+  FirebaseCrashlytics: 4d77da03c81dedc92cccbefc758f968dccf64b30
+  FirebaseInstallations: a46ae59915f0931e18814164849cd0354bea24ed
   Flipper: be611d4b742d8c87fbae2ca5f44603a02539e365
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: e4493b013c02d9347d5e0cb4d128680239f6c78a
@@ -549,6 +576,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 44539979e1f234262d64d3ce86ec21cceb1b2c5e
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: 6664dfccd0c93a194767e1c64af14a08074a087d
+  RNFBCrashlytics: d4d95997c9a7bbb89d64d6bc2ed9a778166d4760
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
