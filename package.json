@@ -5,6 +5,7 @@
     "lerna": "^3.22.1"
   },
   "scripts": {
+    "bootstrap": "npx lerna bootstrap",
     "test": "lerna run test --stream"
   }
 }
