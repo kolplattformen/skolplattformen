@@ -11,8 +11,6 @@ import shape7 from '../assets/img/banner/shaps7.png'
 import appstore from '../assets/img/appstore.svg'
 import playstore from '../assets/img/playstore.png'
 
-import bannerMoc from '../assets/img/banner/mockup.png'
-
 const coolIt = () => {
   alert('Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊')
 }
