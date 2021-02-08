@@ -13,13 +13,17 @@ import crashlytics from '@react-native-firebase/crashlytics'
 const api = init(fetch, () => {
   CookieManager.clearAll()
 })
+const reporter = {
+  log: (message) => crashlytics().log(message),
+  error: (error, label) => crashlytics().recordError(error, label),
+}
 
 export default () => {
   useEffect(() => {
     crashlytics().log('App mounted')
   }, [])
   return (
-    <ApiProvider api={api} storage={AsyncStorage}>
+    <ApiProvider api={api} reporter={reporter} storage={AsyncStorage}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{ ...eva.light, ...customization }}>
         <AppNavigator />
