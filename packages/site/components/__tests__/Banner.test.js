@@ -41,3 +41,11 @@ test('renders a link to integrity policy', () => {
     screen.getByRole('link', { name: /integritetspolicy/i })
   ).toHaveAttribute('href', '/integritet')
 })
+
+test('renders a link to q&a ', () => {
+  setup()
+
+  expect(
+    screen.getByRole('link', { name: /Frågor och svar/i })
+  ).toHaveAttribute('href', '/qa')
+})
