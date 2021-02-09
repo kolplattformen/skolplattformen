@@ -36,7 +36,6 @@ const FunFacts = () => {
   return (
     <section className="border-top pt-120 pb-80">
       <Container>
-        <h3>Inte helt rättvisa jämförelser</h3>
         <Row>
           {FUNFACTS_DATA.map((funfact, index) => (
             <Col md={3} sm={6} key={`funfact-post-${index}`}>
