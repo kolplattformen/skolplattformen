@@ -59,6 +59,7 @@ export const Login = ({navigation, route}) => {
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState(
     socialSecurityNumberCache,
   )
+  const isFemale = Personnummer.parse(socialSecurityNumberCache).isFemale()
 
   /* Initial load functions */
   useEffect(() => {
@@ -158,6 +159,17 @@ export const Login = ({navigation, route}) => {
               style={{color: '#9CA3AF', marginTop: 4, marginBottom: 20}}>
               Det {argument} alternativet
             </Text>
+            {isFemale ? (
+              <Image
+                source={require('../assets/kvinna.png')}
+                style={{maxHeight: 300, width: '100%'}}
+              />
+            ) : (
+              <Image
+                source={require('../assets/man.png')}
+                style={{maxHeight: 300, width: '100%', borderBottomWidth: 1}}
+              />
+            )}
             <View
               style={{
                 marginTop: 80,
