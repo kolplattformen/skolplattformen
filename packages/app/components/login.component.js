@@ -193,11 +193,28 @@ export const Login = ({navigation}) => {
             </View>
           </Layout>
         ) : (
-          <Layout style={{flex: 1, padding: 24}}>
-            <Text>Skolplattformen.org - det {argument} alternativet</Text>
+          <Layout
+            style={{
+              flex: 1,
+              padding: 24,
+              justifyContent: 'center',
+            }}>
             {
               // hidden easter egg, just touch the image to login without bankId if you still have a valid token
             }
+            <Text category="h2" style={{textAlign: 'center'}}>
+              Skolplattformen.org
+            </Text>
+            <Text
+              category="h6"
+              style={{
+                color: '#9CA3AF',
+                marginTop: 4,
+                marginBottom: 32,
+                textAlign: 'center',
+              }}>
+              Det {argument} alternativet
+            </Text>
             <TouchableOpacity onPress={navigateToChildren}>
               <Image
                 source={require('../assets/boys.png')}
@@ -211,11 +228,11 @@ export const Login = ({navigation}) => {
             </TouchableOpacity>
             <View
               style={{
-                flex: 1,
                 justifyContent: 'flex-end',
                 alignItems: 'flex-start',
                 paddingHorizontal: 20,
                 paddingBottom: 72,
+                marginTop: 48,
               }}>
               <Input
                 label="Personnummer"
