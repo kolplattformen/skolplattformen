@@ -302,7 +302,7 @@ describe('parse', () => {
               "PublicationDate": "/Date(1612445471000)/",
               "PubDateSE": "4 februari 2021 14:31",
               "ModifiedDate": "/Date(1612445852000)/",
-              "ModDateSE": "4 februari 2021 14:37",
+              "ModDateSE": "14 februari 2021 14:37",
               "Source": "Södra Ängby skola",
               "Preamble": "Kära vårdnadshavare!I helgen är det avlusningsdagar!",
               "BannerImageUrl": "123123.jpeg",
@@ -349,8 +349,8 @@ describe('parse', () => {
       expect(item.header).toEqual('Avlusningsdagarna 5-7 februari 2021')
       expect(item.imageUrl).toEqual('123123.jpeg')
       expect(item.intro).toEqual('Kära vårdnadshavare!I helgen är det avlusningsdagar!')
-      expect(item.modified).toEqual(new Date('4 februari 2021 14:37').toISOString())
-      expect(item.published).toEqual(new Date('4 februari 2021 14:31').toISOString())
+      expect(item.published).toEqual('2021-02-04T14:31:00.000+01:00')
+      expect(item.modified).toEqual('2021-02-14T14:37:00.000+01:00')
       expect(item.author).toEqual('Tieto Evry')
     })
     it('parses body correctly', () => {
@@ -454,7 +454,7 @@ describe('parse', () => {
         message: 'Betygen är publicerade.',
         sender: 'Elevdokumentation',
         url: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
-        dateCreated: new Date('2020-12-18T15:59:46.34').toISOString(),
+        dateCreated: '2020-12-18T15:59:46.340+01:00',
         category: null,
         type: 'webnotify',
       }])
