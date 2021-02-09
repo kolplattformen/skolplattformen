@@ -171,8 +171,9 @@ export const Login = ({navigation}) => {
               style={{
                 marginTop: 32,
               }}>
-              <Text category="h4">{socialSecurityNumber}</Text>
-              <Text style={{textAlign: 'center', marginBottom: 20}}>
+              <Text category="h5">{socialSecurityNumber}</Text>
+              <Text
+                style={{textAlign: 'center', marginBottom: 20, marginTop: 10}}>
                 {error || 'Hurra, du är inloggad!'}
               </Text>
               <Button
