@@ -16,7 +16,7 @@ export const NewsListItem = ({item}) => {
       header={(headerProps) => (
         <View {...headerProps}>
           <Text category="h6">{item.header}</Text>
-          <Text category="s1">Publicerad på Skolplattformen</Text>
+          <Text category="s1">Skolplattformen</Text>
         </View>
       )}>
       <Image
