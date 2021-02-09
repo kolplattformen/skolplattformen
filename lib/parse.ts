@@ -85,6 +85,20 @@ export const newsItem = ({
 })
 export const news = (data: any): NewsItem[] => etjanst(data).newsItems.map(newsItem)
 
+export const newsItemDetailsMapper = ({
+  newsId, header, preamble, body, bannerImageUrl, pubDateSe, modDateSe, authorDisplayName
+}: any): NewsItem => ({
+  header,
+  id: newsId,
+  intro: preamble,
+  imageUrl: bannerImageUrl,
+  body: htmlDecode(h2m(body)),
+  published: moment(new Date(pubDateSe)),
+  modified: moment(new Date(modDateSe)),
+  author: authorDisplayName
+})
+export const newsItemDetails = (data: any): NewsItem => newsItemDetailsMapper(etjanst(data).currentNewsItem)
+
 export const scheduleItem = ({
   title, description, location, longEventDateTime, longEndDateTime, isSameDay, allDayEvent,
 }: any): ScheduleItem => ({

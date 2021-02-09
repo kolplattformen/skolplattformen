@@ -109,6 +109,13 @@ export class Api extends EventEmitter {
     return parse.news(data)
   }
 
+  async getNewsItem(child: Child, newsId: string): Promise<NewsItem[]> {
+    const url = routes.newsItem(child.id, newsId)
+    const response = await this.fetch('newsItem', url, this.session)
+    const data = await response.json()
+    return parse.news(data)
+  }
+
   async getMenu(child: Child): Promise<MenuItem[]> {
     const url = routes.menu(child.id)
     const response = await this.fetch('menu', url, this.session)

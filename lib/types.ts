@@ -104,6 +104,7 @@ export interface NewsItem {
   published: Moment;
   modified?: Moment;
   imageUrl?: string;
+  author?: string;
 }
 
 /**

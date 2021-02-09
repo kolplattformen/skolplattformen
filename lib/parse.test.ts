@@ -284,103 +284,180 @@ describe('parse', () => {
         expect(trimmed).toEqual(expected)
       })
     })
-    describe('menu', () => {
+
+
+    describe('newsItem', () => {
       beforeEach(() => {
         response = {
-          Success: true,
-          Error: null,
-          Data: [
-            {
-              Title: 'Måndag - Vecka 52',
-              Description: 'Körrfärsrätt .<br/>Veg färs'
+          "Success": true,
+          "Error": null,
+          "Data": {
+            "CurrentNewsItem": {
+              "NewsId": '123',
+              "SiteId": "elevstockholm.sharepoint.com,d112c398-71d4-468f-9a59-84d806751b08,3addab10-546a-4551-8076-72c9cd67f961",
+              "NewsListId": "95df7d70-fbf0-470d-9926-e4e633f77f27",
+              "NewsItemId": "elevstockholm.sharepoint.com,d112c398-71d4-468f-9a59-84d806751b08,3addab10-546a-4551-8076-72c9cd67f961_40",
+              "Header": "Avlusningsdagarna 5-7 februari 2021",
+              "PublicationDate": "/Date(1612445471000)/",
+              "PubDateSE": "4 februari 2021 14:31",
+              "ModifiedDate": "/Date(1612445852000)/",
+              "ModDateSE": "4 februari 2021 14:37",
+              "Source": "Södra Ängby skola",
+              "Preamble": "Kära vårdnadshavare!I helgen är det avlusningsdagar!",
+              "BannerImageUrl": "123123.jpeg",
+              "BannerImageGuid": "7a8142d9d9d54cf090e8457e4c629227",
+              "BannerImageListId": "a88c22e8-7094-4a71-b4fd-8792c62a7b4a",
+              "Body": "<div data-sp-rte=\"\"><p><span><span><span>Kära vårdnadshavare!</span></span></span></p><p><span><span><span>I helgen är det avlusningsdagar! Ta tillfället i akt att luskamma ditt barn </span></span></span></p><p><span><span><span>Du finner all info du behöver på <a href=\"https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/\" data-cke-saved-href=\"https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/\" data-interception=\"on\" title=\"https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/\">1177 hemsida </a></span></span></span><span><span><span>​​​​​​​</span></span></span></p><p><span><span><span>Trevlig helg!</span></span></span></p><p><span><span><span>​​​​​​​</span></span></span></p></div>",
+              "BodyNoHtml": null,
+              "AuthorDisplayName": "Tieto Evry",
+              "altText": null,
+              "OriginalSourceUrl": null
             },
-          ],
+            "CurrentChild": null,
+            "ViewGlobalTranslations": {},
+            "ViewLocalTranslations": {},
+            "Children": null,
+            "Status": null,
+            "GlobalTranslationIds": [
+              "InformationalHeader",
+              "ContactUsMessageLabel",
+              "Send",
+              "RequiredFieldMessageInfo",
+              "Sex",
+              "Male",
+              "Female",
+              "SSN",
+              "FirstName",
+              "LastName",
+              "Email",
+              "Zip",
+              "Address",
+              "ValidationRequiredFieldMessage",
+              "ValidationErrorMessage"
+            ],
+            "LocalTranslationIds": [
+              "IndexPageHeading1"
+            ]
+          }
         }
       })
-      it('parses menu correctly', () => {
-        expect(parse.menu(response)).toEqual([{
-          title: 'Måndag - Vecka 52',
-          description: 'Körrfärsrätt .\nVeg färs'
-        }])
-      })
+    it('parses news details (except body) correctly', () => {
+      const item = parse.newsItemDetails(response)
+
+      expect(item.id).toEqual('123')
+      expect(item.header).toEqual('Avlusningsdagarna 5-7 februari 2021')
+      expect(item.imageUrl).toEqual('123123.jpeg')
+      expect(item.intro).toEqual('Kära vårdnadshavare!I helgen är det avlusningsdagar!')
+      expect(item.modified).toEqual(moment(new Date('4 februari 2021 14:37')))
+      expect(item.published).toEqual(moment(new Date('4 februari 2021 14:31')))
+      expect(item.author).toEqual('Tieto Evry')
     })
-    describe('user', () => {
-      let userResponse: any
-      beforeEach(() => {
-        userResponse = {
-          socialSecurityNumber: '197106171635',
-          isAuthenticated: true,
-          userFirstName: 'Per-Ola',
-          userLastName: 'Assarsson',
-          userEmail: 'per-ola.assarsson@dodgit.com',
-          notificationId: 'B026594053D44299AB64ED81990B49C04D32F635C9A3454A84030439BFDDEF04'
-        }
-      })
-      it('parses user correctly', () => {
-        expect(parse.user(userResponse)).toEqual({
-          personalNumber: '197106171635',
-          firstName: 'Per-Ola',
-          lastName: 'Assarsson',
-          email: 'per-ola.assarsson@dodgit.com',
-          isAuthenticated: true,
-          notificationId: 'B026594053D44299AB64ED81990B49C04D32F635C9A3454A84030439BFDDEF04',
-        })
-      })
+    it('parses body correctly', () => {
+      const item = parse.newsItemDetails(response)
+
+      const expected = '[1177 hemsida ](https://www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/)​​​​​​​'
+      expect(item.body).toContain(expected)
     })
-    describe('notifications', () => {
-      beforeEach(() => {
-        response = {
-          Success: true,
-          Error: null,
-          Data: [
-            {
-              Notification: {
-                Messageid: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
-                Messagecorrelationid: 'BB54DC8E-BB02-49A5-9806-4A2433031AA7',
-                Message: '{"messages":{"message":{"messageid":"E2E3A567-307F-4859-91BA-31B1F4522A7B","messagecorrelationid":"BB54DC8E-BB02-49A5-9806-4A2433031AA7","messagetext":"Betygen är publicerade.","messagesubject":"Betyg klara","messagetime":"2020-12-18T15:59:43.195","linkbackurl":"https://elevdokumentation.stockholm.se/loa3/gradesStudent.do","sender":{"name":"Elevdokumentation"},"recipient":{"recipient":"195709227283","role":"Guardian"},"messagetype":{"type":"webnotify"},"system":"Elevdokumentation","participant":"BB7DE89D-D714-4EB2-85CD-36F9991E7C34"}}}',
-                Readreceipt: false,
-                Recipient: '195709227283',
-                Id: 5880387,
-                DateCreated: '2020-12-18T15:59:46.34',
-                DateModified: '/Date(1608307186340)/',
-                Role: 'Guardian',
-                Participant: 'BB7DE89D-D714-4EB2-85CD-36F9991E7C34'
-              },
-              NotificationMessage: {
-                Messages: {
-                  Message: {
-                    Messageid: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
-                    Messagecorrelationid: 'BB54DC8E-BB02-49A5-9806-4A2433031AA7',
-                    Messagetext: 'Betygen är publicerade.',
-                    Messagetime: '/Date(1608303583195)/',
-                    Linkbackurl: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
-                    Category: null,
-                    Sender: { Name: 'Elevdokumentation' },
-                    Recipient: {
-                      RecipientRecipient: '195709227283',
-                      Role: 'Guardian',
-                      Schooltype: null
-                    },
-                    Messagetype: { Type: 'webnotify' },
-                    System: 'Elevdokumentation'
-                  }
-                }
-              }
-            },
-          ],
-        }
-      })
-      it('parses notifications correctly', () => {
-        expect(parse.notifications(response)).toEqual([{
-          id: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
-          message: 'Betygen är publicerade.',
-          sender: 'Elevdokumentation',
-          url: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
-          dateCreated: moment(new Date('2020-12-18T15:59:46.34')),
-          category: null,
-          type: 'webnotify',
-        }])
+  })
+
+
+  describe('menu', () => {
+    beforeEach(() => {
+      response = {
+        Success: true,
+        Error: null,
+        Data: [
+          {
+            Title: 'Måndag - Vecka 52',
+            Description: 'Körrfärsrätt .<br/>Veg färs'
+          },
+        ],
+      }
+    })
+    it('parses menu correctly', () => {
+      expect(parse.menu(response)).toEqual([{
+        title: 'Måndag - Vecka 52',
+        description: 'Körrfärsrätt .\nVeg färs'
+      }])
+    })
+  })
+  describe('user', () => {
+    let userResponse: any
+    beforeEach(() => {
+      userResponse = {
+        socialSecurityNumber: '197106171635',
+        isAuthenticated: true,
+        userFirstName: 'Per-Ola',
+        userLastName: 'Assarsson',
+        userEmail: 'per-ola.assarsson@dodgit.com',
+        notificationId: 'B026594053D44299AB64ED81990B49C04D32F635C9A3454A84030439BFDDEF04'
+      }
+    })
+    it('parses user correctly', () => {
+      expect(parse.user(userResponse)).toEqual({
+        personalNumber: '197106171635',
+        firstName: 'Per-Ola',
+        lastName: 'Assarsson',
+        email: 'per-ola.assarsson@dodgit.com',
+        isAuthenticated: true,
+        notificationId: 'B026594053D44299AB64ED81990B49C04D32F635C9A3454A84030439BFDDEF04',
       })
     })
   })
+  describe('notifications', () => {
+    beforeEach(() => {
+      response = {
+        Success: true,
+        Error: null,
+        Data: [
+          {
+            Notification: {
+              Messageid: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
+              Messagecorrelationid: 'BB54DC8E-BB02-49A5-9806-4A2433031AA7',
+              Message: '{"messages":{"message":{"messageid":"E2E3A567-307F-4859-91BA-31B1F4522A7B","messagecorrelationid":"BB54DC8E-BB02-49A5-9806-4A2433031AA7","messagetext":"Betygen är publicerade.","messagesubject":"Betyg klara","messagetime":"2020-12-18T15:59:43.195","linkbackurl":"https://elevdokumentation.stockholm.se/loa3/gradesStudent.do","sender":{"name":"Elevdokumentation"},"recipient":{"recipient":"195709227283","role":"Guardian"},"messagetype":{"type":"webnotify"},"system":"Elevdokumentation","participant":"BB7DE89D-D714-4EB2-85CD-36F9991E7C34"}}}',
+              Readreceipt: false,
+              Recipient: '195709227283',
+              Id: 5880387,
+              DateCreated: '2020-12-18T15:59:46.34',
+              DateModified: '/Date(1608307186340)/',
+              Role: 'Guardian',
+              Participant: 'BB7DE89D-D714-4EB2-85CD-36F9991E7C34'
+            },
+            NotificationMessage: {
+              Messages: {
+                Message: {
+                  Messageid: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
+                  Messagecorrelationid: 'BB54DC8E-BB02-49A5-9806-4A2433031AA7',
+                  Messagetext: 'Betygen är publicerade.',
+                  Messagetime: '/Date(1608303583195)/',
+                  Linkbackurl: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
+                  Category: null,
+                  Sender: { Name: 'Elevdokumentation' },
+                  Recipient: {
+                    RecipientRecipient: '195709227283',
+                    Role: 'Guardian',
+                    Schooltype: null
+                  },
+                  Messagetype: { Type: 'webnotify' },
+                  System: 'Elevdokumentation'
+                }
+              }
+            }
+          },
+        ],
+      }
+    })
+    it('parses notifications correctly', () => {
+      expect(parse.notifications(response)).toEqual([{
+        id: 'E2E3A567-307F-4859-91BA-31B1F4522A7B',
+        message: 'Betygen är publicerade.',
+        sender: 'Elevdokumentation',
+        url: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
+        dateCreated: moment(new Date('2020-12-18T15:59:46.34')),
+        category: null,
+        type: 'webnotify',
+      }])
+    })
+  })
+})
 })
