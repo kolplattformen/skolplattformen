@@ -11,12 +11,12 @@ import {
 export const ContactMenu = ({contact, selected, setSelected}) => {
   const [visible, setVisible] = React.useState(selected)
 
-  const contactIcon = (props) => <Icon {...props} name="phone-outline" />
+  const moreIcon = (props) => <Icon {...props} name="more-horizontal-outline" />
   const renderToggleButton = () => (
     <Button
       onPress={() => setVisible(true)}
       appearance="ghost"
-      accessoryLeft={contactIcon}
+      accessoryLeft={moreIcon}
     />
   )
 
@@ -36,29 +36,32 @@ export const ContactMenu = ({contact, selected, setSelected}) => {
       anchor={renderToggleButton}
       backdropStyle={styles.backdrop}
       onBackdropPress={handleBackdropPress}>
-      {contact.guardians.map((parent, i) => (
-        <MenuGroup key={i} title={`${parent.firstname} ${parent.lastname}`}>
+      {contact.guardians.map((parent) => (
+        <MenuGroup
+          key={`${parent.firstname}-${parent.lastname}`}
+          title={`${parent.firstname} ${parent.lastname}`}
+          style={{position: 'relative', zIndex: 10}}>
           <MenuItem
             accessoryLeft={CallIcon}
-            visible={!parent.mobile}
+            style={{display: parent.mobile ? 'flex' : 'none'}}
             title="Ring"
             onPress={(e) => Linking.openURL(`tel:${parent.mobile}`)}
           />
           <MenuItem
             accessoryLeft={SMSIcon}
-            visible={!parent.mobile}
+            style={{display: parent.mobile ? 'flex' : 'none'}}
             title="SMS"
             onPress={(e) => Linking.openURL(`sms:${parent.mobile}`)}
           />
           <MenuItem
             accessoryLeft={EmailIcon}
-            visible={!parent.email}
+            style={{display: parent.email ? 'flex' : 'none'}}
             title="Maila"
             onPress={(e) => Linking.openURL(`mailto:${parent.email}`)}
           />
           <MenuItem
             accessoryLeft={MapIcon}
-            visible={!parent.address}
+            style={{display: parent.address ? 'flex' : 'none'}}
             title="Hem"
             onPress={(e) =>
               Linking.openURL(`http://maps.apple.com/?daddr=${parent.address}`)
