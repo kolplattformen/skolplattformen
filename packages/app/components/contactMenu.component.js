@@ -36,8 +36,11 @@ export const ContactMenu = ({contact, selected, setSelected}) => {
       anchor={renderToggleButton}
       backdropStyle={styles.backdrop}
       onBackdropPress={handleBackdropPress}>
-      {contact.guardians.map((parent, i) => (
-        <MenuGroup key={i} title={`${parent.firstname} ${parent.lastname}`}>
+      {contact.guardians.map((parent) => (
+        <MenuGroup
+          key={`${parent.firstname}-${parent.lastname}`}
+          title={`${parent.firstname} ${parent.lastname}`}
+          style={{position: 'relative', zIndex: 10}}>
           <MenuItem
             accessoryLeft={CallIcon}
             style={{display: parent.mobile ? 'flex' : 'none'}}
