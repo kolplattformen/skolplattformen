@@ -40,25 +40,25 @@ export const ContactMenu = ({contact, selected, setSelected}) => {
         <MenuGroup key={i} title={`${parent.firstname} ${parent.lastname}`}>
           <MenuItem
             accessoryLeft={CallIcon}
-            visible={!parent.mobile}
+            style={{display: parent.mobile ? 'flex' : 'none'}}
             title="Ring"
             onPress={(e) => Linking.openURL(`tel:${parent.mobile}`)}
           />
           <MenuItem
             accessoryLeft={SMSIcon}
-            visible={!parent.mobile}
+            style={{display: parent.mobile ? 'flex' : 'none'}}
             title="SMS"
             onPress={(e) => Linking.openURL(`sms:${parent.mobile}`)}
           />
           <MenuItem
             accessoryLeft={EmailIcon}
-            visible={!parent.email}
+            style={{display: parent.email ? 'flex' : 'none'}}
             title="Maila"
             onPress={(e) => Linking.openURL(`mailto:${parent.email}`)}
           />
           <MenuItem
             accessoryLeft={MapIcon}
-            visible={!parent.address}
+            style={{display: parent.address ? 'flex' : 'none'}}
             title="Hem"
             onPress={(e) =>
               Linking.openURL(`http://maps.apple.com/?daddr=${parent.address}`)
