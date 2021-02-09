@@ -16,10 +16,7 @@ import {
   Modal,
   Card,
   Text,
-  ImageBackground,
-  Divider,
   Layout,
-  TopNavigation,
   Input,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
@@ -46,7 +43,7 @@ const funArguments = [
   'agila',
 ] // TODO: add moare
 
-export const Login = ({navigation, route}) => {
+export const Login = ({navigation}) => {
   const {api, isLoggedIn} = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
@@ -59,6 +56,7 @@ export const Login = ({navigation, route}) => {
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState(
     socialSecurityNumberCache,
   )
+  const isFemale = Personnummer.parse(socialSecurityNumberCache).isFemale()
 
   /* Initial load functions */
   useEffect(() => {
@@ -146,50 +144,78 @@ export const Login = ({navigation, route}) => {
       <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
         {isLoggedIn ? (
           <Layout
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <TopNavigation
-              title={`Skolplattformen.org - det ${argument} alternativet`}
-              alignment="center"
-            />
-            <Image
-              source={require('../assets/man.png')}
-              style={{maxHeight: 300, width: '100%', borderBottomWidth: 1}}
-            />
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingHorizontal: 20,
+            }}>
+            <Text category="h2">Skolplattformen.org</Text>
+            <Text
+              category="h6"
+              style={{color: '#9CA3AF', marginTop: 4, marginBottom: 20}}>
+              Det {argument} alternativet
+            </Text>
+            {isFemale ? (
+              <Image
+                source={require('../assets/kvinna.png')}
+                style={{maxHeight: 300, width: '100%'}}
+              />
+            ) : (
+              <Image
+                source={require('../assets/man.png')}
+                style={{maxHeight: 300, width: '100%', borderBottomWidth: 1}}
+              />
+            )}
             <View
               style={{
-                marginTop: 80,
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                flex: 1,
+                marginTop: 32,
               }}>
-              <Text category="h4">{socialSecurityNumber}</Text>
-              <Text>{error || 'Hurra, du är inloggad!'}</Text>
+              <Text category="h5">{socialSecurityNumber}</Text>
+              <Text
+                style={{textAlign: 'center', marginBottom: 20, marginTop: 10}}>
+                {error || 'Hurra, du är inloggad!'}
+              </Text>
               <Button
                 status="success"
                 size="medium"
-                style={{marginTop: 10, width: 200}}
                 accessoryRight={CheckIcon}
                 onPress={() => navigateToChildren()}>
                 {error ? 'Försök igen' : 'Fortsätt'}
               </Button>
-              <Button
-                onPress={() => startLogout()}
-                accessoryRight={LogoutIcon}
-                style={{marginTop: 10, width: 200}}
-                size="medium">
-                Logga ut
-              </Button>
+              <View style={{marginTop: 10}}>
+                <Button
+                  onPress={() => startLogout()}
+                  accessoryRight={LogoutIcon}
+                  size="medium">
+                  Logga ut
+                </Button>
+              </View>
             </View>
           </Layout>
         ) : (
-          <Layout style={{flex: 1, padding: 24}}>
-            <TopNavigation
-              title={`Skolplattformen.org - det ${argument} alternativet`}
-              alignment="center"
-            />
+          <Layout
+            style={{
+              flex: 1,
+              padding: 24,
+              justifyContent: 'center',
+            }}>
             {
               // hidden easter egg, just touch the image to login without bankId if you still have a valid token
             }
+            <Text category="h2" style={{textAlign: 'center'}}>
+              Skolplattformen.org
+            </Text>
+            <Text
+              category="h6"
+              style={{
+                color: '#9CA3AF',
+                marginTop: 4,
+                marginBottom: 32,
+                textAlign: 'center',
+              }}>
+              Det {argument} alternativet
+            </Text>
             <TouchableOpacity onPress={navigateToChildren}>
               <Image
                 source={require('../assets/boys.png')}
@@ -203,11 +229,11 @@ export const Login = ({navigation, route}) => {
             </TouchableOpacity>
             <View
               style={{
-                flex: 1,
                 justifyContent: 'flex-end',
                 alignItems: 'flex-start',
                 paddingHorizontal: 20,
                 paddingBottom: 72,
+                marginTop: 48,
               }}>
               <Input
                 label="Personnummer"
