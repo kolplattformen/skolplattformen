@@ -146,15 +146,18 @@ export const Login = ({navigation, route}) => {
       <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
         {isLoggedIn ? (
           <Layout
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <TopNavigation
-              title={`Skolplattformen.org - det ${argument} alternativet`}
-              alignment="center"
-            />
-            <Image
-              source={require('../assets/man.png')}
-              style={{maxHeight: 300, width: '100%', borderBottomWidth: 1}}
-            />
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingHorizontal: 20,
+            }}>
+            <Text category="h2">Skolplattformen.org</Text>
+            <Text
+              category="h6"
+              style={{color: '#9CA3AF', marginTop: 4, marginBottom: 20}}>
+              Det {argument} alternativet
+            </Text>
             <View
               style={{
                 marginTop: 80,
@@ -183,10 +186,7 @@ export const Login = ({navigation, route}) => {
           </Layout>
         ) : (
           <Layout style={{flex: 1, padding: 24}}>
-            <TopNavigation
-              title={`Skolplattformen.org - det ${argument} alternativet`}
-              alignment="center"
-            />
+            <Text>Skolplattformen.org - det {argument} alternativet</Text>
             {
               // hidden easter egg, just touch the image to login without bankId if you still have a valid token
             }
