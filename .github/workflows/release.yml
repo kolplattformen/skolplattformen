@@ -17,11 +17,9 @@ jobs:
         uses: actions/setup-node@v1
 
       - name: Install dependencies
-        run: |
-          npm i -g lerna
-          lerna bootstrap
+        run: npx lerna bootstrap
 
       - name: Run tests
-        run: npm test
+        run: yarn test
         env:
           CI: true
