@@ -15,6 +15,7 @@
     "react-modal-video": "^1.2.3",
     "react-scroll": "^1.8.0",
     "react-visibility-sensor": "^5.1.1",
+    "sharp": "^0.26.3",
     "swiper": "^6.0.4"
   },
   "scripts": {
