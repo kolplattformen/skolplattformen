@@ -233,10 +233,10 @@ const data: any = {
     news: [
       {
         id: 'asdfasdfasdfw',
-        author: 'Skolp Lattformen',
-        header: 'Minus eos eligendi eveniet.',
-        intro: 'Reprehenderit delectus esse itaque minus nulla quidem ipsa. Esse deleniti maiores voluptates. Iure nemo et velit culpa sint doloribus necessitatibus. Natus debitis et aperiam ratione earum at. Provident eligendi sint repellat numquam rerum voluptatem. Atque nulla laboriosam voluptatem reprehenderit eos maiores quia dolorem.',
-        body: '## Suscipit asperiores quo delectus ad \n\nAst quis. Maxime earum aspernatur nemo. Mollitia voluptatibus dolores quas voluptates deleniti quisquam quis quas. Ut id sed. Perspiciatis labore commodi ullam fugiat. Aliquid quas beatae totam assumenda nihil aut fugit et. Itaque ut nihil et. \n\n##Non perferendis impedit\n\n qui. Illo aut enim temporibus accusamus ab voluptatem dignissimos quisquam. Eum velit fugit culpa ad sit voluptatum blanditiis exercitationem atque. Asperiores provident quae aperiam eaque. Dolor ut optio.',
+        author: 'Vaktmästare Persson',
+        header: 'Brandsläckare.',
+        intro: 'Idag hade vi en incident med en brandsläckare.',
+        body: '## Information om brandsläckarincidenten\n\nHej, idag vid lunchtid utlöste en elev av misstag en pulverbrandsläckare i kapprummet. En del pulver yrde runt i rummet och under saneringen fick eleverna i angränsande klassrum vara i aulan istället för klassrummet.\n\nFlera elever var på plats i hallen när detta inträffade men utrymdes kort därefter. Pulvret är INTE hälsovådligt men kan ge upphov till halsirritation vid inandning.\n\nJag har pratat med berörda elever om det inträffade och uppmanat dem att ta hem kläder och tillhörigheter som fanns i kapprummet eftersom de troligen blivit dammiga. Vi rekommenderar att ni tvättar eller vädrar dessa.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://cdn.breakit.se/assets/article/6607f9b923edb6f85aa4417bab43c0f8.jpg?d=980x500',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
