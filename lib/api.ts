@@ -1,7 +1,8 @@
-import { Moment } from 'moment'
+import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
 import {
-  checkStatus, LoginStatusChecker,
+  checkStatus,
+  LoginStatusChecker,
 } from './loginStatus'
 import {
   AsyncishFunction,
@@ -20,9 +21,12 @@ import {
 import * as routes from './routes'
 import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
+import * as fake from './fakeData'
 
 export class Api extends EventEmitter {
   private fetch: Fetcher
+
+  private personalNumber?: string
 
   private session?: RequestInit
 
@@ -30,10 +34,16 @@ export class Api extends EventEmitter {
 
   public isLoggedIn: boolean = false
 
+  public isFake: boolean = false
+
   constructor(fetch: Fetch, clearCookies: AsyncishFunction, options?: FetcherOptions) {
     super()
     this.fetch = wrap(fetch, options)
     this.clearCookies = clearCookies
+  }
+
+  getPersonalNumber() {
+    return this.personalNumber
   }
 
   getSessionCookie() {
@@ -52,9 +62,16 @@ export class Api extends EventEmitter {
   }
 
   async login(personalNumber: string): Promise<LoginStatusChecker> {
+    if (personalNumber.endsWith('1212121212')) return this.fakeMode()
+
+    this.isFake = false
+
     const ticketUrl = routes.login(personalNumber)
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
     const ticket: AuthTicket = await ticketResponse.json()
+
+    // login was initiated - store personal number
+    this.personalNumber = personalNumber
 
     const status = checkStatus(this.fetch, ticket)
     status.on('OK', async () => {
@@ -63,11 +80,27 @@ export class Api extends EventEmitter {
       const cookie = cookieResponse.headers.get('set-cookie') || ''
       this.setSessionCookie(cookie)
     })
+    status.on('ERROR', () => { this.personalNumber = undefined })
 
     return status
   }
 
+  async fakeMode(): Promise<LoginStatusChecker> {
+    this.isFake = true
+
+    setTimeout(() => {
+      this.isLoggedIn = true
+      this.emit('login')
+    }, 50)
+
+    const emitter: any = new EventEmitter()
+    emitter.token = 'fake'
+    return emitter
+  }
+
   async getUser(): Promise<User> {
+    if (this.isFake) return fake.user()
+
     const url = routes.user
     const response = await this.fetch('user', url, this.session)
     const data = await response.json()
@@ -75,6 +108,8 @@ export class Api extends EventEmitter {
   }
 
   async getChildren(): Promise<Child[]> {
+    if (this.isFake) return fake.children()
+
     const url = routes.children
     const response = await this.fetch('children', url, this.session)
     const data = await response.json()
@@ -82,6 +117,8 @@ export class Api extends EventEmitter {
   }
 
   async getCalendar(child: Child): Promise<CalendarItem[]> {
+    if (this.isFake) return fake.calendar(child)
+
     const url = routes.calendar(child.id)
     const response = await this.fetch('calendar', url, this.session)
     const data = await response.json()
@@ -89,34 +126,42 @@ export class Api extends EventEmitter {
   }
 
   async getClassmates(child: Child): Promise<Classmate[]> {
+    if (this.isFake) return fake.classmates(child)
+
     const url = routes.classmates(child.sdsId)
     const response = await this.fetch('classmates', url, this.session)
     const data = await response.json()
     return parse.classmates(data)
   }
 
-  async getSchedule(child: Child, from: Moment, to: Moment): Promise<ScheduleItem[]> {
-    const url = routes.schedule(child.sdsId, from.format('YYYY-MM-DD'), to.format('YYYY-MM-DD'))
+  async getSchedule(child: Child, from: DateTime, to: DateTime): Promise<ScheduleItem[]> {
+    if (this.isFake) return fake.schedule(child)
+
+    const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
     const response = await this.fetch('schedule', url, this.session)
     const data = await response.json()
     return parse.schedule(data)
   }
 
   async getNews(child: Child): Promise<NewsItem[]> {
+    if (this.isFake) return fake.news(child)
+
     const url = routes.news(child.id)
     const response = await this.fetch('news', url, this.session)
     const data = await response.json()
     return parse.news(data)
   }
 
-  async getNewsItem(child: Child, newsId: string): Promise<NewsItem[]> {
-    const url = routes.newsItem(child.id, newsId)
-    const response = await this.fetch('newsItem', url, this.session)
+  async getNewsDetails(child: Child, item: NewsItem): Promise<any> {
+    const url = routes.newsDetails(child.id, item.id)
+    const response = await this.fetch(`news_${item.id}`, url, this.session)
     const data = await response.json()
-    return parse.news(data)
+    return data
   }
 
   async getMenu(child: Child): Promise<MenuItem[]> {
+    if (this.isFake) return fake.menu(child)
+
     const url = routes.menu(child.id)
     const response = await this.fetch('menu', url, this.session)
     const data = await response.json()
@@ -124,22 +169,20 @@ export class Api extends EventEmitter {
   }
 
   async getNotifications(child: Child): Promise<Notification[]> {
+    if (this.isFake) return fake.notifications(child)
+
     const url = routes.notifications(child.sdsId)
     const response = await this.fetch('notifications', url, this.session)
     const data = await response.json()
     return parse.notifications(data)
   }
 
-  async getImage(imageUrl: string): Promise<Blob> {
-    const response = await this.fetch('image', imageUrl, this.session)
-    const data = await response.blob()
-    return data
-  }
-
   async logout() {
+    this.isFake = false
     this.session = undefined
-    await this.clearCookies()
+    this.personalNumber = undefined
     this.isLoggedIn = false
+    try { await this.clearCookies() } catch (_) { /* do nothing */ }
     this.emit('logout')
   }
 }

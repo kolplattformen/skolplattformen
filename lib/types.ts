@@ -1,5 +1,3 @@
-import { Moment } from 'moment'
-
 export interface AsyncishFunction { (): void | Promise<void> }
 
 export interface RequestInit {
@@ -19,7 +17,6 @@ export interface Response {
   statusText: string
   text: () => Promise<string>
   json: () => Promise<any>
-  blob: () => Promise<Blob>
 }
 
 export interface Fetch {
@@ -36,13 +33,13 @@ export interface AuthTicket {
  * @interface CalendarItem
  */
 export interface CalendarItem {
-  id: number;
-  title: string;
-  description?: string;
-  location?: string;
-  startDate?: Moment;
-  endDate?: Moment;
-  allDay?: boolean;
+  id: number
+  title: string
+  description?: string
+  location?: string
+  startDate?: string
+  endDate?: string
+  allDay?: boolean
 }
 
 /**
@@ -50,21 +47,21 @@ export interface CalendarItem {
  * @interface Child
  */
 export interface Child {
-  id: string;
+  id: string
   /**
    * <p>Special ID used to access certain subsystems</p>
    * @type {string}
    * @memberof Child
    */
-  sdsId: string;
-  name: string;
+  sdsId: string
+  name: string
   /**
    * <p>F - förskola, GR - grundskola?</p>
    * @type {string}
    * @memberof Child
    */
-  status?: string;
-  schoolId?: string;
+  status?: string
+  schoolId?: string
 }
 
 /**
@@ -72,11 +69,11 @@ export interface Child {
  * @interface Classmate
  */
 export interface Classmate {
-  sisId: string;
-  className?: string;
-  firstname: string;
-  lastname: string;
-  guardians: Guardian[];
+  sisId: string
+  className?: string
+  firstname: string
+  lastname: string
+  guardians: Guardian[]
 }
 
 /**
@@ -84,11 +81,11 @@ export interface Classmate {
  * @interface Guardian
  */
 export interface Guardian {
-  email?: string;
-  firstname: string;
-  lastname: string;
-  mobile?: string;
-  address?: string;
+  email?: string
+  firstname: string
+  lastname: string
+  mobile?: string
+  address?: string
 }
 
 /**
@@ -97,14 +94,16 @@ export interface Guardian {
  * @interface NewsItem
  */
 export interface NewsItem {
-  id?: string;
-  header?: string;
-  intro?: string;
-  body?: string;
-  published: Moment;
-  modified?: Moment;
-  imageUrl?: string;
-  author?: string;
+  id: string
+  author?: string
+  header?: string
+  intro?: string
+  body?: string
+  published: string
+  modified?: string
+  imageUrl?: string
+  fullImageUrl?: string
+  imageAltText?: string
 }
 
 /**
@@ -114,16 +113,8 @@ export interface NewsItem {
 export interface Notification {
   id: string
   sender: string
-  dateCreated: Moment
+  dateCreated: string
   message: string
-  /**
-   * <p>
-   *  URL with the actual message as a webpage. Needs separate login.
-   * TODO: Investigate how to solve this somehow
-   * </p>
-   * @type {string}
-   * @memberof Notification
-   */
   url: string
   category: string | null
   type: string
@@ -137,8 +128,8 @@ export interface ScheduleItem {
   title: string
   description?: string
   location?: string
-  startDate: Moment
-  endDate: Moment
+  startDate: string
+  endDate: string
   oneDayEvent: boolean
   allDayEvent: boolean
 }
@@ -149,10 +140,10 @@ export interface MenuItem {
 }
 
 export interface User {
-  personalNumber: string
-  isAuthenticated: boolean
-  firstName: string
-  lastName: string
-  email: string | null
-  notificationId: string
+  personalNumber?: string
+  isAuthenticated?: boolean
+  firstName?: string
+  lastName?: string
+  email?: string | null
+  notificationId?: string
 }

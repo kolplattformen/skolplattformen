@@ -1,6 +1,4 @@
-import * as moment from 'moment'
 import * as parse from "./parse"
-import { NewsItem } from "./types"
 
 describe('parse', () => {
   let response: parse.EtjanstResponse
@@ -99,8 +97,8 @@ describe('parse', () => {
           location: null,
           title: 'Jullov',
           description: 'hello',
-          startDate: moment(new Date('2020-12-21 09:00')),
-          endDate: moment(new Date('2021-01-08 10:00')),
+          startDate: '2020-12-21T09:00:00.000+01:00',
+          endDate: '2021-01-08T10:00:00.000+01:00',
           allDay: false,
         }])
       })
@@ -205,8 +203,8 @@ describe('parse', () => {
           title: 'Canceled: Julavslutning 8C',
           description: 'Nåt kul',
           location: 'Lakritskolan',
-          startDate: moment(new Date('2020-12-14 14:10')),
-          endDate: moment(new Date('2020-12-14 14:40')),
+          startDate: '2020-12-14T14:10:00.000+01:00',
+          endDate: '2020-12-14T14:40:00.000+01:00',
           oneDayEvent: true,
           allDayEvent: false,
         }])
@@ -270,11 +268,14 @@ describe('parse', () => {
         const [item] = parse.news(response)
 
         expect(item.id).toEqual('news id')
+        expect(item.author).toEqual('Eva-Lotta Rönnberg')
         expect(item.header).toEqual('Problemet med att se betyg i bild, slöjd och teknik löst!')
         expect(item.imageUrl).toEqual('A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
+        expect(item.fullImageUrl).toEqual('https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
+        expect(item.imageAltText).toEqual('Nyhetsbild. Bildtext ej tillgänglig.')
         expect(item.intro).toEqual('Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...')
-        expect(item.modified).toEqual(moment(new Date('18 december 2020 16:18')))
-        expect(item.published).toEqual(moment(new Date('18 december 2020 16:15')))
+        expect(item.modified).toEqual('2020-12-18T16:18:00.000+01:00')
+        expect(item.published).toEqual('2020-12-18T16:15:00.000+01:00')
       })
       it('parses body correctly', () => {
         const [item] = parse.news(response)
@@ -348,8 +349,8 @@ describe('parse', () => {
       expect(item.header).toEqual('Avlusningsdagarna 5-7 februari 2021')
       expect(item.imageUrl).toEqual('123123.jpeg')
       expect(item.intro).toEqual('Kära vårdnadshavare!I helgen är det avlusningsdagar!')
-      expect(item.modified).toEqual(moment(new Date('4 februari 2021 14:37')))
-      expect(item.published).toEqual(moment(new Date('4 februari 2021 14:31')))
+      expect(item.modified).toEqual(new Date('4 februari 2021 14:37').toISOString())
+      expect(item.published).toEqual(new Date('4 februari 2021 14:31').toISOString())
       expect(item.author).toEqual('Tieto Evry')
     })
     it('parses body correctly', () => {
@@ -453,7 +454,7 @@ describe('parse', () => {
         message: 'Betygen är publicerade.',
         sender: 'Elevdokumentation',
         url: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
-        dateCreated: moment(new Date('2020-12-18T15:59:46.34')),
+        dateCreated: new Date('2020-12-18T15:59:46.34').toISOString(),
         category: null,
         type: 'webnotify',
       }])
