@@ -11,12 +11,12 @@ import {
 export const ContactMenu = ({contact, selected, setSelected}) => {
   const [visible, setVisible] = React.useState(selected)
 
-  const contactIcon = (props) => <Icon {...props} name="phone-outline" />
+  const moreIcon = (props) => <Icon {...props} name="more-horizontal-outline" />
   const renderToggleButton = () => (
     <Button
       onPress={() => setVisible(true)}
       appearance="ghost"
-      accessoryLeft={contactIcon}
+      accessoryLeft={moreIcon}
     />
   )
 
