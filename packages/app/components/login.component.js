@@ -16,10 +16,7 @@ import {
   Modal,
   Card,
   Text,
-  ImageBackground,
-  Divider,
   Layout,
-  TopNavigation,
   Input,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
@@ -46,7 +43,7 @@ const funArguments = [
   'agila',
 ] // TODO: add moare
 
-export const Login = ({navigation, route}) => {
+export const Login = ({navigation}) => {
   const {api, isLoggedIn} = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
@@ -172,28 +169,27 @@ export const Login = ({navigation, route}) => {
             )}
             <View
               style={{
-                marginTop: 80,
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                flex: 1,
+                marginTop: 32,
               }}>
               <Text category="h4">{socialSecurityNumber}</Text>
-              <Text>{error || 'Hurra, du är inloggad!'}</Text>
+              <Text style={{textAlign: 'center', marginBottom: 20}}>
+                {error || 'Hurra, du är inloggad!'}
+              </Text>
               <Button
                 status="success"
                 size="medium"
-                style={{marginTop: 10, width: 200}}
                 accessoryRight={CheckIcon}
                 onPress={() => navigateToChildren()}>
                 {error ? 'Försök igen' : 'Fortsätt'}
               </Button>
-              <Button
-                onPress={() => startLogout()}
-                accessoryRight={LogoutIcon}
-                style={{marginTop: 10, width: 200}}
-                size="medium">
-                Logga ut
-              </Button>
+              <View style={{marginTop: 10}}>
+                <Button
+                  onPress={() => startLogout()}
+                  accessoryRight={LogoutIcon}
+                  size="medium">
+                  Logga ut
+                </Button>
+              </View>
             </View>
           </Layout>
         ) : (
