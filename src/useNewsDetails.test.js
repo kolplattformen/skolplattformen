@@ -13,6 +13,7 @@ describe('useNewsDetails(child, newsItem)', () => {
   let api
   let storage
   let response
+  let cached
   let child
   let newsItem
   const wrapper = ({ children }) => (
@@ -25,7 +26,8 @@ describe('useNewsDetails(child, newsItem)', () => {
     </ApiProvider>
   )
   beforeEach(() => {
-    response = { id: '1337', modified: 'now' }
+    cached = { id: '1337', modified: 'yesterday', body: 'rich and old' }
+    response = { id: '1337', modified: 'now', body: 'rich and new' }
     api = init()
     api.getNewsDetails.mockImplementation(() => (
       new Promise((res) => {
@@ -33,10 +35,10 @@ describe('useNewsDetails(child, newsItem)', () => {
       })
     ))
     storage = createStorage({
-      news_details_1337: { id: '1337', modified: 'yesterday' },
+      news_details_1337: { ...cached },
     }, 2)
     child = { id: 10 }
-    newsItem = { id: '1337', modified: 'this morning' }
+    newsItem = { id: '1337', modified: 'now', body: 'simple' }
   })
   afterEach(async () => {
     await act(async () => {
@@ -86,7 +88,7 @@ describe('useNewsDetails(child, newsItem)', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
 
-      expect(result.current.data).toEqual({ id: '1337' })
+      expect(result.current.data).toEqual(cached)
     })
   })
   it('updates status to loading', async () => {
@@ -124,7 +126,7 @@ describe('useNewsDetails(child, newsItem)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.news_1).toEqual('{"id":"1337"}')
+      expect(storage.cache.news_details_1337).toEqual(JSON.stringify(response))
     })
   })
   it('does not store in cache if fake', async () => {
@@ -138,7 +140,7 @@ describe('useNewsDetails(child, newsItem)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.news_2).toEqual('{"id":"1337"}')
+      expect(storage.cache.news_details_1337).toEqual(JSON.stringify(cached))
     })
   })
   it('retries if api fails', async () => {
@@ -155,7 +157,7 @@ describe('useNewsDetails(child, newsItem)', () => {
 
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
-      expect(result.current.data).toEqual({ id: '1337' })
+      expect(result.current.data).toEqual({ ...cached })
 
       jest.advanceTimersToNextTimer()
 
@@ -164,7 +166,7 @@ describe('useNewsDetails(child, newsItem)', () => {
       await waitForNextUpdate()
 
       expect(result.current.status).toEqual('loaded')
-      expect(result.current.data).toEqual({ id: '1337' })
+      expect(result.current.data).toEqual({ ...response })
     })
   })
   it('gives up after 3 retries', async () => {
@@ -183,7 +185,7 @@ describe('useNewsDetails(child, newsItem)', () => {
 
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
-      expect(result.current.data).toEqual({ id: '1337' })
+      expect(result.current.data).toEqual({ ...cached })
 
       jest.advanceTimersToNextTimer()
 
@@ -193,7 +195,7 @@ describe('useNewsDetails(child, newsItem)', () => {
 
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
-      expect(result.current.data).toEqual({ id: '1337' })
+      expect(result.current.data).toEqual({ ...cached })
     })
   })
   it('reports if api fails', async () => {

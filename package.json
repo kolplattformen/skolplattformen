@@ -19,7 +19,7 @@
     "publish-package": "npm publish --access public"
   },
   "dependencies": {
-    "@skolplattformen/embedded-api": "^0.20.0",
+    "@skolplattformen/embedded-api": "^0.22.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5"
   },
