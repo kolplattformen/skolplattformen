@@ -50,6 +50,11 @@ const Footer = () => {
                     </li>
                   </ul>
                 </div>
+                <p>
+                  <a href="mailto:info@skolplattformen.org">
+                    info@skolplattformen.org
+                  </a>
+                </p>
               </div>
             </div>
 
