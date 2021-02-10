@@ -28,7 +28,7 @@ export const Calendar = ({calendar}) => {
       <ListItem
         disabled={true}
         title={`${item.title}`}
-        description={`${moment(item.startDate).calendar()}`}
+        description={`${moment(item.startDate).fromNow()}`}
         accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
       />
     )
