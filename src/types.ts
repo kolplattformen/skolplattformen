@@ -55,6 +55,7 @@ export type EntityName = 'USER'
   | 'CLASSMATES'
   | 'MENU'
   | 'NEWS'
+  | 'NEWS_DETAILS'
   | 'NOTIFICATIONS'
   | 'SCHEDULE'
   | 'ALL'
@@ -76,6 +77,7 @@ export interface EntityStoreRootState {
   classmates: EntityMap<Classmate[]>,
   menu: EntityMap<MenuItem[]>,
   news: EntityMap<NewsItem[]>,
+  newsDetails: EntityMap<NewsItem>,
   notifications: EntityMap<Notification[]>,
   schedule: EntityMap<ScheduleItem[]>,
 }

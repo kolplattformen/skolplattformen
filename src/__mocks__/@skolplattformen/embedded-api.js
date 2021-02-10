@@ -18,6 +18,7 @@ const createApi = () => ({
   getClassmates: jest.fn(),
   getMenu: jest.fn(),
   getNews: jest.fn(),
+  getNewsDetails: jest.fn(),
   getNotifications: jest.fn(),
   getSchedule: jest.fn(),
   getUser: jest.fn(),

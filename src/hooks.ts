@@ -130,6 +130,15 @@ export const useNews = (child: Child) => hook<NewsItem[]>(
   (api) => () => api.getNews(child),
 )
 
+export const useNewsDetails = (child: Child, news: NewsItem) => hook<NewsItem>(
+  'NEWS_DETAILS',
+  `news_details_${news.id}`,
+  news,
+  (s) => s.newsDetails,
+  (api) => () => api.getNewsDetails(child, news),
+)
+
+
 export const useNotifications = (child: Child) => hook<Notification[]>(
   'NOTIFICATIONS',
   `notifications_${child.id}`,
