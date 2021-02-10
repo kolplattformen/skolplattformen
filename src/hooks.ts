@@ -34,6 +34,7 @@ const hook = <T>(
   selector: StoreSelector<T>,
   apiCaller: (api: Api) => ApiCall<T>,
 ): EntityHookResult<T> => {
+  const getState = (): EntityStoreRootState => store.getState() as unknown as EntityStoreRootState
   const select = (storeState: EntityStoreRootState) => {
     const stateMap = selector(storeState) || {}
     const state = stateMap[key] || { status: 'pending', data: defaultValue }
@@ -42,7 +43,7 @@ const hook = <T>(
   const {
     api, isLoggedIn, reporter, storage,
   } = useApi()
-  const initialState = select(store.getState() as EntityStoreRootState)
+  const initialState = select(getState())
   const [state, setState] = useState(initialState)
   const dispatch = useDispatch()
 
@@ -70,7 +71,7 @@ const hook = <T>(
   useEffect(() => { load() }, [isLoggedIn])
 
   const listener = () => {
-    const newState = select(store.getState() as EntityStoreRootState)
+    const newState = select(getState())
     if (newState.status !== state.status
       || newState.data !== state.data
       || newState.error !== state.error) {
@@ -128,6 +129,14 @@ export const useNews = (child: Child) => hook<NewsItem[]>(
   [],
   (s) => s.news,
   (api) => () => api.getNews(child),
+)
+
+export const useNewsDetails = (child: Child, news: NewsItem) => hook<NewsItem>(
+  'NEWS_DETAILS',
+  `news_details_${news.id}`,
+  news,
+  (s) => s.newsDetails,
+  (api) => () => api.getNewsDetails(child, news),
 )
 
 export const useNotifications = (child: Child) => hook<Notification[]>(

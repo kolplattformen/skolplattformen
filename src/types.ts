@@ -43,21 +43,22 @@ export interface ExtraActionProps<T> {
   saveToCache?: (value: string) => Promise<void>
 }
 export type EntityActionType = 'GET_FROM_API'
-  | 'RESULT_FROM_API'
-  | 'API_ERROR'
-  | 'GET_FROM_CACHE'
-  | 'RESULT_FROM_CACHE'
-  | 'STORE_IN_CACHE'
-  | 'CLEAR'
+| 'RESULT_FROM_API'
+| 'API_ERROR'
+| 'GET_FROM_CACHE'
+| 'RESULT_FROM_CACHE'
+| 'STORE_IN_CACHE'
+| 'CLEAR'
 export type EntityName = 'USER'
-  | 'CHILDREN'
-  | 'CALENDAR'
-  | 'CLASSMATES'
-  | 'MENU'
-  | 'NEWS'
-  | 'NOTIFICATIONS'
-  | 'SCHEDULE'
-  | 'ALL'
+| 'CHILDREN'
+| 'CALENDAR'
+| 'CLASSMATES'
+| 'MENU'
+| 'NEWS'
+| 'NEWS_DETAILS'
+| 'NOTIFICATIONS'
+| 'SCHEDULE'
+| 'ALL'
 export interface EntityAction<T> extends Action<EntityActionType> {
   entity: EntityName
   data?: T
@@ -76,6 +77,7 @@ export interface EntityStoreRootState {
   classmates: EntityMap<Classmate[]>,
   menu: EntityMap<MenuItem[]>,
   news: EntityMap<NewsItem[]>,
+  newsDetails: EntityMap<NewsItem>,
   notifications: EntityMap<Notification[]>,
   schedule: EntityMap<ScheduleItem[]>,
 }
