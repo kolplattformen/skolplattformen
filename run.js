@@ -76,7 +76,10 @@ async function run() {
 
       console.log('news')
       const news = await api.getNews(children[0])
-      console.log(news)
+
+      console.log('news details')
+      const newsItems = await Promise.all(news.map(async newsItem => await api.getNewsItem(children[0], newsItem.id)))
+      console.log(newsItems)
 
       // console.log('menu')
       // const menu = await api.getMenu(children[0])

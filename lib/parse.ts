@@ -90,10 +90,12 @@ export const newsItem = ({
   fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
   imageAltText: altText,
   body: htmlDecode(h2m(body)),
-  published: DateTime.fromFormat(pubDateSe, 'dd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
-  modified: DateTime.fromFormat(modDateSe, 'dd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
+  published: DateTime.fromFormat(pubDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
+  modified: DateTime.fromFormat(modDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
 })
 export const news = (data: any): NewsItem[] => etjanst(data).newsItems.map(newsItem)
+
+export const newsItemDetails = (data: any): NewsItem => newsItem(etjanst(data).currentNewsItem)
 
 export const scheduleItem = ({
   title, description, location, longEventDateTime, longEndDateTime, isSameDay, allDayEvent,
