@@ -18,10 +18,10 @@ export const NewsList = ({news}) => {
 
 const styles = StyleSheet.create({
   container: {
+    height: '100%',
     width: '100%',
   },
   contentContainer: {
-    alignItems: 'stretch',
-    paddingRight: 10,
+    padding: 10,
   },
 })

@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native'
 import {List} from '@ui-kitten/components'
 import {Notification} from './notification.component'
 
-export const NotificationsList = ({notifications, status}) => {
+export const NotificationsList = ({notifications}) => {
   return (
     <List
       style={styles.container}
@@ -18,11 +18,10 @@ export const NotificationsList = ({notifications, status}) => {
 
 const styles = StyleSheet.create({
   container: {
+    height: '100%',
     width: '100%',
   },
   contentContainer: {
-    alignItems: 'stretch',
-    paddingRight: 10,
-    paddingBottom: 330,
+    padding: 10,
   },
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyleSheet} from 'react-native'
-import {Divider, List, ListItem, Icon} from '@ui-kitten/components'
+import {Divider, List, ListItem, Icon, Text} from '@ui-kitten/components'
 import {ContactMenu} from './contactMenu.component'
 
 export const Classmates = ({classmates}) => {
@@ -31,6 +31,11 @@ export const Classmates = ({classmates}) => {
       style={styles.container}
       data={classmates}
       ItemSeparatorComponent={Divider}
+      ListHeaderComponent={
+        <Text category="h5" style={styles.listHeader}>
+          Klass {classmates?.length ? classmates[0].className : ''}
+        </Text>
+      }
       renderItem={renderItem}
     />
   )
@@ -39,5 +44,10 @@ export const Classmates = ({classmates}) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  listHeader: {
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingLeft: 15,
   },
 })
