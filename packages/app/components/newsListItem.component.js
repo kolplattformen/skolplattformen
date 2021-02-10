@@ -1,18 +1,16 @@
 import React from 'react'
-import {useNavigation} from '@react-navigation/native'
-import {useApi} from '@skolplattformen/api-hooks'
-import {Card, Text} from '@ui-kitten/components'
-import {StyleSheet, View, Image} from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { Card, Text } from '@ui-kitten/components'
+import { StyleSheet, View } from 'react-native'
+import { Image } from './image.component'
 
-export const NewsListItem = ({item}) => {
+export const NewsListItem = ({ item }) => {
   const navigation = useNavigation()
-  const {api} = useApi()
-  const cookie = api.getSessionCookie()
 
   return (
     <Card
       style={styles.card}
-      onPress={() => navigation.navigate('NewsItem', {newsItem: item})}
+      onPress={() => navigation.navigate('NewsItem', { newsItem: item })}
       header={(headerProps) => (
         <View {...headerProps}>
           <Text category="h6">{item.header}</Text>
@@ -20,8 +18,8 @@ export const NewsListItem = ({item}) => {
         </View>
       )}>
       <Image
-        source={{uri: item.fullImageUrl, headers: {cookie}}}
-        style={{height: 300}}
+        src={item.fullImageUrl}
+        style={{ height: 300 }}
       />
     </Card>
   )
