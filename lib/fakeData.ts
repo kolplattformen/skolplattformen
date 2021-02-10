@@ -789,7 +789,7 @@ const data: any = {
         published: '2020-08-16T21:10:00.000+02:0',
         modified: '2021-01-22T14:49:00.000+01:00',
       },
-       {
+      {
         id: 'asdfasdfasdfdsa',
         author: 'Köket',
         header: 'Ekologisk vecka i matsalen',
@@ -801,7 +801,7 @@ const data: any = {
         published: '2021-01-16T21:10:03.000+02:0',
         modified: '2021-01-17T14:40:00.000+01:00',
       },
-       {
+      {
         id: 'asdfasdfasdfbvdsa',
         author: 'Vaktmästaren',
         header: 'Klotter i korridoren (igen)',
