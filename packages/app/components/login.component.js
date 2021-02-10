@@ -56,7 +56,9 @@ export const Login = ({navigation}) => {
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState(
     socialSecurityNumberCache,
   )
-  const isFemale = Personnummer.parse(socialSecurityNumberCache).isFemale()
+  const isFemale =
+    socialSecurityNumberCache &&
+    Personnummer.parse(socialSecurityNumberCache).isFemale()
 
   /* Initial load functions */
   useEffect(() => {
