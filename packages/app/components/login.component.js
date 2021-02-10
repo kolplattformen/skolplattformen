@@ -7,6 +7,8 @@ import {
   Linking,
   KeyboardAvoidingView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
   View,
 } from 'react-native'
 
@@ -143,138 +145,153 @@ export const Login = ({navigation}) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{flex: 1}}>
-      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-        {isLoggedIn ? (
-          <Layout
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingHorizontal: 20,
-            }}>
-            <Text category="h2">Skolplattformen.org</Text>
-            <Text
-              category="h6"
-              style={{color: '#9CA3AF', marginTop: 4, marginBottom: 20}}>
-              Det {argument} alternativet
-            </Text>
-            {isFemale ? (
-              <Image
-                source={require('../assets/kvinna.png')}
-                style={{maxHeight: 300, width: '100%'}}
-              />
-            ) : (
-              <Image
-                source={require('../assets/man.png')}
-                style={{maxHeight: 300, width: '100%', borderBottomWidth: 1}}
-              />
-            )}
-            <View
-              style={{
-                marginTop: 32,
-              }}>
-              <Text category="h5">{socialSecurityNumber}</Text>
-              <Text
-                style={{textAlign: 'center', marginBottom: 20, marginTop: 10}}>
-                {error || 'Hurra, du är inloggad!'}
-              </Text>
-              <Button
-                status="success"
-                size="medium"
-                accessoryRight={CheckIcon}
-                onPress={() => navigateToChildren()}>
-                {error ? 'Försök igen' : 'Fortsätt'}
-              </Button>
-              <View style={{marginTop: 10}}>
-                <Button
-                  onPress={() => startLogout()}
-                  accessoryRight={LogoutIcon}
-                  size="medium">
-                  Logga ut
-                </Button>
-              </View>
-            </View>
-          </Layout>
-        ) : (
-          <Layout
-            style={{
-              flex: 1,
-              padding: 24,
-              justifyContent: 'center',
-            }}>
-            {
-              // hidden easter egg, just touch the image to login without bankId if you still have a valid token
-            }
-            <Text category="h2" style={{textAlign: 'center'}}>
-              Skolplattformen.org
-            </Text>
-            <Text
-              category="h6"
-              style={{
-                color: '#9CA3AF',
-                marginTop: 4,
-                marginBottom: 32,
-                textAlign: 'center',
-              }}>
-              Det {argument} alternativet
-            </Text>
-            <TouchableOpacity onPress={navigateToChildren}>
-              <Image
-                source={require('../assets/boys.png')}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+          <>
+            {isLoggedIn ? (
+              <Layout
                 style={{
-                  height: 320,
-                  marginTop: -20,
-                  marginLeft: -10,
-                  width: '110%',
-                }}
-              />
-            </TouchableOpacity>
-            <View
-              style={{
-                justifyContent: 'flex-end',
-                alignItems: 'flex-start',
-                paddingHorizontal: 20,
-                paddingBottom: 72,
-                marginTop: 48,
-              }}>
-              <Input
-                label="Personnummer"
-                autoFocus
-                value={socialSecurityNumber}
-                style={{minHeight: 70}}
-                accessoryLeft={PersonIcon}
-                keyboardType="numeric"
-                caption={error?.message || ''}
-                onChangeText={(text) => handleInput(text)}
-                placeholder="Ditt personnr (10 eller 12 siffror)"
-              />
-              <Button
-                onPress={startLogin}
-                style={{width: '100%'}}
-                appearence="ghost"
-                disabled={!valid}
-                status="primary"
-                accessoryRight={SecureIcon}
-                size="medium">
-                Öppna BankID
-              </Button>
-            </View>
-          </Layout>
-        )}
-        <Modal
-          visible={visible}
-          style={styles.modal}
-          backdropStyle={styles.backdrop}
-          onBackdropPress={() => showModal(false)}>
-          <Card disabled>
-            <Text style={{margin: 10}}>Väntar på BankID...</Text>
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingHorizontal: 20,
+                }}>
+                <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
+                  Öppna Skolplattformen
+                </Text>
+                <Text
+                  category="h6"
+                  style={{color: '#9CA3AF', marginTop: 4, marginBottom: 20}}>
+                  Det {argument} alternativet
+                </Text>
+                {isFemale ? (
+                  <Image
+                    source={require('../assets/kvinna.png')}
+                    style={{maxHeight: 300, width: '100%'}}
+                  />
+                ) : (
+                  <Image
+                    source={require('../assets/man.png')}
+                    style={{
+                      maxHeight: 300,
+                      width: '100%',
+                      borderBottomWidth: 1,
+                    }}
+                  />
+                )}
+                <View
+                  style={{
+                    marginTop: 32,
+                  }}>
+                  <Text category="h5">{socialSecurityNumber}</Text>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginBottom: 20,
+                      marginTop: 10,
+                    }}>
+                    {error || 'Hurra, du är inloggad!'}
+                  </Text>
+                  <Button
+                    status="success"
+                    size="medium"
+                    accessoryRight={CheckIcon}
+                    onPress={() => navigateToChildren()}>
+                    {error ? 'Försök igen' : 'Fortsätt'}
+                  </Button>
+                  <View style={{marginTop: 10}}>
+                    <Button
+                      onPress={() => startLogout()}
+                      accessoryRight={LogoutIcon}
+                      size="medium">
+                      Logga ut
+                    </Button>
+                  </View>
+                </View>
+              </Layout>
+            ) : (
+              <Layout
+                style={{
+                  flex: 1,
+                  padding: 24,
+                  justifyContent: 'center',
+                }}>
+                <View style={{justifyContent: 'flex-end'}}>
+                  <Text
+                    category="h2"
+                    style={{textAlign: 'center'}}
+                    adjustsFontSizeToFit
+                    numberOfLines={1}>
+                    Öppna Skolplattformen
+                  </Text>
+                  <Text
+                    category="h6"
+                    style={{
+                      color: '#9CA3AF',
+                      marginTop: 4,
+                      marginBottom: 32,
+                      textAlign: 'center',
+                    }}>
+                    Det {argument} alternativet
+                  </Text>
+                  <Image
+                    source={require('../assets/boys.png')}
+                    style={{
+                      height: 320,
+                      marginTop: -20,
+                      marginLeft: -10,
+                      width: '110%',
+                    }}
+                  />
+                  <View
+                    style={{
+                      justifyContent: 'flex-end',
+                      alignItems: 'flex-start',
+                      paddingHorizontal: 20,
+                      paddingBottom: 72,
+                      marginTop: 48,
+                    }}>
+                    <Input
+                      label="Personnummer"
+                      autoFocus
+                      value={socialSecurityNumber}
+                      style={{minHeight: 70}}
+                      accessoryLeft={PersonIcon}
+                      keyboardType="numeric"
+                      caption={error?.message || ''}
+                      onChangeText={(text) => handleInput(text)}
+                      placeholder="Ditt personnr (10 eller 12 siffror)"
+                    />
+                    <Button
+                      onPress={startLogin}
+                      style={{width: '100%'}}
+                      appearence="ghost"
+                      disabled={!valid}
+                      status="primary"
+                      accessoryRight={SecureIcon}
+                      size="medium">
+                      Öppna BankID
+                    </Button>
+                  </View>
+                </View>
+              </Layout>
+            )}
+            <Modal
+              visible={visible}
+              style={styles.modal}
+              backdropStyle={styles.backdrop}
+              onBackdropPress={() => showModal(false)}>
+              <Card disabled>
+                <Text style={{margin: 10}}>Väntar på BankID...</Text>
 
-            <Button visible={!isLoggedIn} onPress={() => showModal(false)}>
-              Avbryt
-            </Button>
-          </Card>
-        </Modal>
-      </SafeAreaView>
+                <Button visible={!isLoggedIn} onPress={() => showModal(false)}>
+                  Avbryt
+                </Button>
+              </Card>
+            </Modal>
+          </>
+        </SafeAreaView>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   )
 }
