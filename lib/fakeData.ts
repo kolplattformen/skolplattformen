@@ -754,6 +754,18 @@ const data: any = {
         modified: '2021-01-22T14:49:00.000+01:00',
       },
       {
+        id: 'asdfabbuasdfs',
+        author: 'Ada L.',
+        header: 'App, App, App',
+        intro: 'Denna vecka bygger vi appar!',
+        body: '## Appar med öppen data \n\nDenna vecka har vi förmånen att få besök av några föräldrar som visar hur vi enkelt kan skapa appar som visar information ifrån öppna datakällor.\n\nEn fantastisk möjlighet att lära oss hur digitalisering skapar nya möjligheter i såväl skolan som arbetslivet.',
+        imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
+        fullImageUrl: 'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
+        imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
+        published: '2020-10-13T09:10:00.000+02:00',
+        modified: '2021-02-09T15:45:00.000+02:00',
+      },
+      {
         id: 'asdfasdfasdfs',
         author: 'Magister Svensson',
         header: 'Läxor vecka 6.',
