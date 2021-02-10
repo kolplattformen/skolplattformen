@@ -29,7 +29,7 @@ const Layout = (props) => {
         <link rel="shortcut icon" type="image/png" href={favImg} />
         <link
           href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700"
-          rel="preload"
+          rel="stylesheet"
         />
       </Head>
       <div className="page-wrapper" id="wrapper">

@@ -103,6 +103,9 @@ const Footer = () => {
                       <li>
                         <a href="/integritet">Integritetspolicy</a>
                       </li>
+                      <li>
+                        <a href="/qa">Frågor och svar</a>
+                      </li>
                     </ul>
                   </div>
                   <div className="link-right"></div>

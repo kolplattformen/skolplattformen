@@ -102,6 +102,10 @@ const Banner = () => {
                   <Link href="/integritet">
                     <a className="btn">Integritetspolicy</a>
                   </Link>
+
+                  <Link href="/qa">
+                    <a className="btn">Frågor och svar</a>
+                  </Link>
                 </p>
               </div>
             </Col>
