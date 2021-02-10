@@ -23,13 +23,16 @@ export const Calendar = ({calendar}) => {
     <Icon {...props} name={'calendar'} />
   )
 
-  const renderItem = ({item}) => (
-    <ListItem
-      title={`${item.title}`}
-      description={`${moment(item.startDate).calendar()}`}
-      accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
-    />
-  )
+  const renderItem = ({item}) => {
+    return (
+      <ListItem
+        disabled={true}
+        title={`${item.title}`}
+        description={`${moment(item.startDate).calendar()}`}
+        accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
+      />
+    )
+  }
 
   return !calendar?.length ? (
     <View style={{flex: 1}}>
