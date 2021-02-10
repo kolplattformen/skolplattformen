@@ -57,8 +57,8 @@ export const Login = ({navigation}) => {
     socialSecurityNumberCache,
   )
   const isFemale =
-    socialSecurityNumberCache &&
-    Personnummer.parse(socialSecurityNumberCache).isFemale()
+    Personnummer.valid(socialSecurityNumber) &&
+    Personnummer.parse(socialSecurityNumber).isFemale()
 
   /* Initial load functions */
   useEffect(() => {
