@@ -59,6 +59,14 @@ const Footer = () => {
                         Johan Öbrink
                       </a>
                     </li>
+                    <li>
+                      <span>
+                        <i className="fa fa-twitter"></i>
+                      </span>
+                      <a href="https://twitter.com/@oppnaskolplatt">
+                        Öppna Skolplattformen
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
