@@ -153,10 +153,13 @@ export class Api extends EventEmitter {
   }
 
   async getNewsDetails(child: Child, item: NewsItem): Promise<any> {
+    if (this.isFake) {
+      return fake.news(child).find((ni) => ni.id === item.id)
+    }
     const url = routes.newsDetails(child.id, item.id)
     const response = await this.fetch(`news_${item.id}`, url, this.session)
     const data = await response.json()
-    return data
+    return parse.newsItem(data)
   }
 
   async getMenu(child: Child): Promise<MenuItem[]> {
