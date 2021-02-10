@@ -1363,20 +1363,19 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-1.2.1.tgz#0116177204e691649311343d2812eb0a049f315d"
-  integrity sha512-eqi8ftYrCBJefpYHHY1irf2Q9rXFFT8KZlphW6LiWxnJhJEFBZXX21fhZyPUVhR8u+ABn5pJiUBvqkPY5cMZww==
+"@skolplattformen/api-hooks@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-1.4.0.tgz#d42ce9c5bda11aa51a12a0253ef4718abeee3157"
+  integrity sha512-CMR21dop0fOgx211ohBqt5LDW4Zpnt792vX9oX/LSdgbGZS3GzMmhW0bcPBhuONerZqlTECmNPNHapYqvFF6Zg==
   dependencies:
-    "@skolplattformen/embedded-api" "^0.20.0"
-    react "^16.11.0"
+    "@skolplattformen/embedded-api" "^0.22.0"
     react-redux "^7.2.2"
     redux "^4.0.5"
 
-"@skolplattformen/embedded-api@0.20.0", "@skolplattformen/embedded-api@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-0.20.0.tgz#51671ffd8b55dfd256f37c1f515c33035d75322c"
-  integrity sha512-GoY433UjoL9EzoOTfFz5r6fa27ygOYCM5YCUbrEr4CLjkE/n1wrj5efUjRHVwbg1rbxgTWROWGH8LnWX/UmUIg==
+"@skolplattformen/embedded-api@0.22.2", "@skolplattformen/embedded-api@^0.22.0":
+  version "0.22.2"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-0.22.2.tgz#c848d4217171a758024d67236ab272e930cc7cad"
+  integrity sha512-xmdMavlpIqvcMJ7CyGF4LINk1f0R0zsDnaHW4vV3f0U22jhBW1f9BIW7PmFQmlM5K1h87Wkk5qalQXeQ5G5iKw==
   dependencies:
     camelcase-keys "^6.2.2"
     events "^3.2.0"
@@ -7124,7 +7123,7 @@ react-test-renderer@16.13.1:
     react-is "^16.8.6"
     scheduler "^0.19.1"
 
-react@16.13.1, react@^16.11.0:
+react@16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
