@@ -2674,7 +2674,7 @@ footer.footer {
 .footer-post-details:after {
   height: 31px;
   width: 69px;
-  background: #fff;
+  background: #f7f6f9;
   content: "";
   position: absolute;
   bottom: -3px;
@@ -2694,11 +2694,11 @@ footer.footer {
   left: 33px;
 }
 
-.twetter-post {
+.twitter-post {
   padding-left: 20px;
 }
 
-.twetter-post span {
+.twitter-post span {
   margin-right: 7px;
   color: #f77ade;
   font-size: 20px;
@@ -2706,7 +2706,7 @@ footer.footer {
 .footer-post-details {
   padding: 32px 20px 36px 40px;
   position: relative;
-  background: #fff;
+  background: #f7f6f9;
   font-size: 14px;
   line-height: 26px;
   margin-bottom: 20px;
