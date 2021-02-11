@@ -6,7 +6,7 @@ describe('parseHtml', () => {
       const html = `<div>
         <b>Hello </b>
         <i> World</i>
-        <u> ! </u>
+        <u>&#160;!&#160;</u>
       </div>`
 
       expect(trim(html)).toEqual('<div><b>Hello</b><i>World</i><u>!</u></div>')
