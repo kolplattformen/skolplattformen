@@ -20,8 +20,29 @@ describe('parseHtml', () => {
         <ul>
           <li> Foo </li>
         </ul>
+        <a href="#">link</a>
+        <table>
+          <tbody>
+            <tr>
+              <td>left 1</td>
+              <td>right 1</td>
+            </tr>
+            <tr>
+              <td>left 2</td>
+              <td>right 2</td>
+            </tr>
+          </tbody>
+        </table>
       </div>`
-      const expected = '# Hello\n**World**\n- Foo'
+      const expected = `# Hello #
+**World**
+- Foo
+
+[link](#)
+
+|left 1|right 1|
+|--------|--------|
+|left 2|right 2|`
 
       expect(toMarkdown(html)).toEqual(expected)
     })

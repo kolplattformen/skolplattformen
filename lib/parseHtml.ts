@@ -10,9 +10,20 @@ export const trim = (html: string): string => html
   .map((token) => token.trim())
   .join('</')
 
+interface Node {
+  name: string
+  attrs: { [key: string]: string }
+  isInPreNode: boolean
+  md: string
+}
+const converter = 'MarkdownExtra'
+const overides = {
+  a: (node: Node) => `[${node.md}](${node.attrs.href})`,
+}
+
 export const toMarkdown = (html: string): string => {
   const trimmed = trim(html)
-  const markdown = h2m(trimmed)
+  const markdown = h2m(trimmed, { overides, converter })
   const decoded = htmlDecode(markdown)
   return decoded
 }
