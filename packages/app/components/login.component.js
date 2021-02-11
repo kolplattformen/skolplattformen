@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import {
   Platform,
   SafeAreaView,
@@ -6,7 +6,6 @@ import {
   Image,
   Linking,
   KeyboardAvoidingView,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
   View,
@@ -22,8 +21,8 @@ import {
   Input,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import {useAsyncStorage} from 'use-async-storage'
-import {useApi} from '@skolplattformen/api-hooks'
+import { useAsyncStorage } from 'use-async-storage'
+import { useApi } from '@skolplattformen/api-hooks'
 
 const funArguments = [
   'öppna',
@@ -45,8 +44,8 @@ const funArguments = [
   'agila',
 ] // TODO: add moare
 
-export const Login = ({navigation}) => {
-  const {api, isLoggedIn} = useApi()
+export const Login = ({ navigation }) => {
+  const { api, isLoggedIn } = useApi()
   const [visible, showModal] = React.useState(false)
   const [valid, setValid] = React.useState(false)
   const [argument, setArgument] = React.useState('öppna')
@@ -144,9 +143,9 @@ export const Login = ({navigation}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}>
+      style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
           <>
             {isLoggedIn ? (
               <Layout
@@ -161,24 +160,24 @@ export const Login = ({navigation}) => {
                 </Text>
                 <Text
                   category="h6"
-                  style={{color: '#9CA3AF', marginTop: 4, marginBottom: 20}}>
+                  style={{ color: '#9CA3AF', marginTop: 4, marginBottom: 20 }}>
                   Det {argument} alternativet
                 </Text>
                 {isFemale ? (
                   <Image
                     source={require('../assets/kvinna.png')}
-                    style={{maxHeight: 300, width: '100%'}}
+                    style={{ maxHeight: 300, width: '100%' }}
                   />
                 ) : (
-                  <Image
-                    source={require('../assets/man.png')}
-                    style={{
-                      maxHeight: 300,
-                      width: '100%',
-                      borderBottomWidth: 1,
-                    }}
-                  />
-                )}
+                    <Image
+                      source={require('../assets/man.png')}
+                      style={{
+                        maxHeight: 300,
+                        width: '100%',
+                        borderBottomWidth: 1,
+                      }}
+                    />
+                  )}
                 <View
                   style={{
                     marginTop: 32,
@@ -199,7 +198,7 @@ export const Login = ({navigation}) => {
                     onPress={() => navigateToChildren()}>
                     {error ? 'Försök igen' : 'Fortsätt'}
                   </Button>
-                  <View style={{marginTop: 10}}>
+                  <View style={{ marginTop: 10 }}>
                     <Button
                       onPress={() => startLogout()}
                       accessoryRight={LogoutIcon}
@@ -210,79 +209,79 @@ export const Login = ({navigation}) => {
                 </View>
               </Layout>
             ) : (
-              <Layout
-                style={{
-                  flex: 1,
-                  padding: 24,
-                  justifyContent: 'center',
-                }}>
-                <View style={{justifyContent: 'flex-end'}}>
-                  <Text
-                    category="h2"
-                    style={{textAlign: 'center'}}
-                    adjustsFontSizeToFit
-                    numberOfLines={1}>
-                    Öppna Skolplattformen
+                <Layout
+                  style={{
+                    flex: 1,
+                    padding: 24,
+                    justifyContent: 'center',
+                  }}>
+                  <View style={{ justifyContent: 'flex-end' }}>
+                    <Text
+                      category="h2"
+                      style={{ textAlign: 'center' }}
+                      adjustsFontSizeToFit
+                      numberOfLines={1}>
+                      Öppna Skolplattformen
                   </Text>
-                  <Text
-                    category="h6"
-                    style={{
-                      color: '#9CA3AF',
-                      marginTop: 4,
-                      marginBottom: 32,
-                      textAlign: 'center',
-                    }}>
-                    Det {argument} alternativet
+                    <Text
+                      category="h6"
+                      style={{
+                        color: '#9CA3AF',
+                        marginTop: 4,
+                        marginBottom: 32,
+                        textAlign: 'center',
+                      }}>
+                      Det {argument} alternativet
                   </Text>
-                  <Image
-                    source={require('../assets/boys.png')}
-                    style={{
-                      height: 320,
-                      marginTop: -20,
-                      marginLeft: -10,
-                      width: '110%',
-                    }}
-                  />
-                  <View
-                    style={{
-                      justifyContent: 'flex-end',
-                      alignItems: 'flex-start',
-                      paddingHorizontal: 20,
-                      paddingBottom: 72,
-                      marginTop: 48,
-                    }}>
-                    <Input
-                      label="Personnummer"
-                      autoFocus
-                      value={socialSecurityNumber}
-                      style={{minHeight: 70}}
-                      accessoryLeft={PersonIcon}
-                      keyboardType="numeric"
-                      caption={error?.message || ''}
-                      onChangeText={(text) => handleInput(text)}
-                      placeholder="Ditt personnr (10 eller 12 siffror)"
+                    <Image
+                      source={require('../assets/boys.png')}
+                      style={{
+                        height: 320,
+                        marginTop: -20,
+                        marginLeft: -10,
+                        width: '110%',
+                      }}
                     />
-                    <Button
-                      onPress={startLogin}
-                      style={{width: '100%'}}
-                      appearence="ghost"
-                      disabled={!valid}
-                      status="primary"
-                      accessoryRight={SecureIcon}
-                      size="medium">
-                      Öppna BankID
+                    <View
+                      style={{
+                        justifyContent: 'flex-end',
+                        alignItems: 'flex-start',
+                        paddingHorizontal: 20,
+                        paddingBottom: 72,
+                        marginTop: 48,
+                      }}>
+                      <Input
+                        label="Personnummer"
+                        autoFocus
+                        value={socialSecurityNumber}
+                        style={{ minHeight: 70 }}
+                        accessoryLeft={PersonIcon}
+                        keyboardType="numeric"
+                        caption={error?.message || ''}
+                        onChangeText={(text) => handleInput(text)}
+                        placeholder="Ditt personnr (10 eller 12 siffror)"
+                      />
+                      <Button
+                        onPress={startLogin}
+                        style={{ width: '100%' }}
+                        appearence="ghost"
+                        disabled={!valid}
+                        status="primary"
+                        accessoryRight={SecureIcon}
+                        size="medium">
+                        Öppna BankID
                     </Button>
+                    </View>
                   </View>
-                </View>
-              </Layout>
-            )}
+                </Layout>
+              )}
             <Modal
               visible={visible}
               style={styles.modal}
               backdropStyle={styles.backdrop}
               onBackdropPress={() => showModal(false)}>
               <Card disabled>
-                <Text style={{margin: 10}}>Väntar på BankID...</Text>
+                <Text style={{ margin: 10 }}>Väntar på BankID...</Text>
 
                 <Button visible={!isLoggedIn} onPress={() => showModal(false)}>
                   Avbryt

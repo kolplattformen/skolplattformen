@@ -1,5 +1,5 @@
 import React from 'react'
-import {SafeAreaView, StyleSheet, View, ScrollView, Image} from 'react-native'
+import { SafeAreaView, StyleSheet, View, ScrollView } from 'react-native'
 import {
   Card,
   Divider,
@@ -10,14 +10,12 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import Markdown from 'react-native-markdown-display'
-import {useApi} from '@skolplattformen/api-hooks'
+import { Image } from './image.component'
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
-export const NewsItem = ({navigation, route}) => {
-  const {newsItem} = route.params
-  const {api} = useApi()
-  const cookie = api.getSessionCookie()
+export const NewsItem = ({ navigation, route }) => {
+  const { newsItem } = route.params
 
   const navigateBack = () => {
     navigation.goBack()
@@ -31,10 +29,7 @@ export const NewsItem = ({navigation, route}) => {
     <View {...headerProps}>
       <Text category="h3">{newsItem.header}</Text>
       <Image
-        source={{
-          uri: newsItem.fullImageUrl,
-          headers: {cookie},
-        }}
+        src={newsItem.fullImageUrl}
         style={styles.image}
       />
     </View>
@@ -49,19 +44,19 @@ export const NewsItem = ({navigation, route}) => {
       allowedImageHandlers,
       defaultImageHandler,
     ) => {
-      const {src} = node.attributes
+      const { src } = node.attributes
       return (
         <Image
           key={src}
-          source={{uri: `https://elevstockholm.sharepoint.com${src}`}}
-          style={{width: '100%', minHeight: 300}}
+          src={`https://elevstockholm.sharepoint.com${src}`}
+          style={{ width: '100%', minHeight: 300 }}
         />
       )
     },
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation
         title="Nyhet från Skolplattformen"
         alignment="center"
@@ -77,8 +72,8 @@ export const NewsItem = ({navigation, route}) => {
             <Markdown
               rules={rules}
               style={{
-                body: {color: 'black', fontSize: 17, lineHeight: 23},
-                heading1: {color: 'black'},
+                body: { color: 'black', fontSize: 17, lineHeight: 23 },
+                heading1: { color: 'black' },
               }}>
               {decodeURIComponent(newsItem.body)}
             </Markdown>
