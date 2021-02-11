@@ -1,6 +1,5 @@
 import { DateTime, DateTimeOptions } from 'luxon'
-import * as h2m from 'h2m'
-import { htmlDecode } from 'js-htmlencode'
+import { toMarkdown } from './parseHtml'
 import {
   CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem, User, Notification,
 } from './types'
@@ -89,7 +88,7 @@ export const newsItem = ({
   imageUrl: bannerImageUrl,
   fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
   imageAltText: altText,
-  body: htmlDecode(h2m(body)),
+  body: toMarkdown(body),
   published: DateTime.fromFormat(pubDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
   modified: DateTime.fromFormat(modDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
 })
@@ -114,7 +113,7 @@ export const menuItem = ({
   title, description,
 }: any): MenuItem => ({
   title,
-  description: htmlDecode(h2m(description)),
+  description: toMarkdown(description),
 })
 export const menu = (data: any): MenuItem[] => etjanst(data).map(menuItem)
 
