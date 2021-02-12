@@ -25,7 +25,7 @@ const Media = () => {
   return (
     <section className="border-top pt-120 pb-80">
       <Container>
-        <div class='section-title text-center'>
+        <div className="section-title text-center">
           <h1>Öppna Skolplattformen i media</h1>
         </div>
         <Row>
