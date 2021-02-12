@@ -9,13 +9,16 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import Markdown from 'react-native-markdown-display'
+import { Markdown } from './markdown.component'
 import { Image } from './image.component'
+import { useNewsDetails } from '@skolplattformen/api-hooks'
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
 export const NewsItem = ({ navigation, route }) => {
-  const { newsItem } = route.params
+  const { newsItem, child } = route.params
+  const { data } = useNewsDetails(child, newsItem)
+  console.log(data)
 
   const navigateBack = () => {
     navigation.goBack()
@@ -35,26 +38,6 @@ export const NewsItem = ({ navigation, route }) => {
     </View>
   )
 
-  const rules = {
-    image: (
-      node,
-      children,
-      parent,
-      styles,
-      allowedImageHandlers,
-      defaultImageHandler,
-    ) => {
-      const { src } = node.attributes
-      return (
-        <Image
-          key={src}
-          src={`https://elevstockholm.sharepoint.com${src}`}
-          style={{ width: '100%', minHeight: 300 }}
-        />
-      )
-    },
-  }
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation
@@ -68,14 +51,13 @@ export const NewsItem = ({ navigation, route }) => {
         <ScrollView>
           <Card
             style={styles.card}
-            header={(headerProps) => renderItemHeader(headerProps, newsItem)}>
+            header={(headerProps) => renderItemHeader(headerProps, data)}>
             <Markdown
-              rules={rules}
               style={{
                 body: { color: 'black', fontSize: 17, lineHeight: 23 },
                 heading1: { color: 'black' },
               }}>
-              {decodeURIComponent(newsItem.body)}
+              {data.body}
             </Markdown>
           </Card>
         </ScrollView>

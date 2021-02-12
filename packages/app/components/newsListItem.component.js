@@ -3,14 +3,16 @@ import { useNavigation } from '@react-navigation/native'
 import { Card, Text } from '@ui-kitten/components'
 import { StyleSheet, View } from 'react-native'
 import { Image } from './image.component'
+import { useChild } from './childContext.component'
 
 export const NewsListItem = ({ item }) => {
   const navigation = useNavigation()
+  const child = useChild()
 
   return (
     <Card
       style={styles.card}
-      onPress={() => navigation.navigate('NewsItem', { newsItem: item })}
+      onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
       header={(headerProps) => (
         <View {...headerProps}>
           <Text category="h6">{item.header}</Text>

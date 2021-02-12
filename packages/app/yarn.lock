@@ -1372,7 +1372,18 @@
     react-redux "^7.2.2"
     redux "^4.0.5"
 
-"@skolplattformen/embedded-api@0.22.2", "@skolplattformen/embedded-api@^0.22.0":
+"@skolplattformen/embedded-api@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-1.0.3.tgz#79dbd239029d7a56b05e2dd930c46e61a83dfae1"
+  integrity sha512-/uaYR4QHouTBJHHR+8PddE++WaHgp3viFUOvWsR2ddBmjiXvkWOUNxr4tGu3Eeq0eUuJ4cjHTcKz0dT6OE1Wgg==
+  dependencies:
+    camelcase-keys "^6.2.2"
+    events "^3.2.0"
+    h2m "^0.7.0"
+    js-htmlencode "^0.3.0"
+    luxon "^1.25.0"
+
+"@skolplattformen/embedded-api@^0.22.0":
   version "0.22.2"
   resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-0.22.2.tgz#c848d4217171a758024d67236ab272e930cc7cad"
   integrity sha512-xmdMavlpIqvcMJ7CyGF4LINk1f0R0zsDnaHW4vV3f0U22jhBW1f9BIW7PmFQmlM5K1h87Wkk5qalQXeQ5G5iKw==
