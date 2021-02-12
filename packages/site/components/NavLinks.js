@@ -1,6 +1,7 @@
 import NavLink from 'next/link'
 import { useRouter } from 'next/router'
 import { Link as ScrollLink } from 'react-scroll'
+import { pageview } from './gtag'
 
 const NavLinks = () => {
   const { pathname } = useRouter()
@@ -20,14 +21,15 @@ const NavLinks = () => {
         smooth={true}
         offset={-70}
         duration={500}
+        onClick={() => pageview(href)}
       >
-        <a>{children}</a>
+        {children}
       </ScrollLink>
     ) : (
-      <NavLink href={href}>
-        <a>{children}</a>
-      </NavLink>
-    )
+        <NavLink href={href}>
+          {children}
+        </NavLink>
+      )
 
   return (
     <ul className="main-nav__navigation-box">

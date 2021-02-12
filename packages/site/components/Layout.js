@@ -2,6 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 import favImg from '../assets/img/favicon.png'
+import { GA_TRACKING_ID } from './gtag'
 
 const Layout = (props) => {
   const [scrollTop, setScrollTop] = React.useState(false)
@@ -30,6 +31,22 @@ const Layout = (props) => {
         <link
           href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700"
           rel="stylesheet"
+        />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_TRACKING_ID}', {
+            page_path: window.location.pathname,
+          });
+        `,
+          }}
         />
       </Head>
       <div className="page-wrapper" id="wrapper">
