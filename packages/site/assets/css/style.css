@@ -3415,6 +3415,14 @@ h1 span {
   margin: 0;
 }
 
+.features-pagination {
+  width: 100%;
+}
+
+.features-pagination > * + * {
+  margin-left: 8px;
+}
+
 @media (max-width: 575px) {
   .side-menu__top,
   .side-menu__content,

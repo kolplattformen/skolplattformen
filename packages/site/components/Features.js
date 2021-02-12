@@ -109,7 +109,7 @@ const Features = () => {
             </Swiper>
             <div
               id="features-paginations"
-              className="swiper-pagination d-flex justify-content-center align-items-center"
+              className="swiper-pagination d-flex justify-content-center align-items-center features-pagination"
             />
           </Col>
         </Row>
