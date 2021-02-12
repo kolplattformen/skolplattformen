@@ -14,6 +14,13 @@ describe('parseHtml', () => {
     it('handles missing html', () => {
       expect(() => trim()).not.toThrow()
     })
+    it('handles links with spaces', () => {
+      const html = `<div>
+        <a href="/foo bar">Hello </a>
+      </div>`
+
+      expect(trim(html)).toEqual('<div><a href="/foo%20bar">Hello</a></div>')
+    })
   })
   describe('toMarkdown', () => {
     it('turns html into Markdown', () => {
