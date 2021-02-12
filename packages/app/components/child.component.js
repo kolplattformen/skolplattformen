@@ -103,7 +103,7 @@ const TopTabBar = ({ navigation, state }) => (
       icon={NewsIcon}
     />
     <Tab
-      title={(props) => <TabTitle {...props}>Notifieringar</TabTitle>}
+      title={(props) => <TabTitle {...props}>Aviseringar</TabTitle>}
       icon={NotificationsIcon}
     />
     <Tab
