@@ -11,7 +11,7 @@ const Pricing = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-12 col-lg-12">
-            <div className="section-title text-center">
+            <div className="text-center section-title">
               <h2>Vad kostar det och varför är det inte gratis?</h2>
               <p>
                 Vi som bygger appen vill gärna fortsätta vidareutveckla den och
@@ -29,7 +29,7 @@ const Pricing = () => {
                 <div id="month">
                   <div className="row">
                     <div className="col-md-6 col-lg-4">
-                      <div className="single-price-plan text-center">
+                      <div className="text-center single-price-plan">
                         <div className="single-price-top">
                           <h4>Engångskostnad</h4>
                           <span>{formatPrice(price)}</span>
@@ -93,7 +93,12 @@ const Pricing = () => {
                               </li>
                             </ul>
                           </div>
-                          <a href="#" className="btn">
+                          <a
+                            href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
+                            className="btn"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             App Store
                           </a>
                         </div>
@@ -106,7 +111,7 @@ const Pricing = () => {
                 <div id="year">
                   <div className="row">
                     <div className="col-md-6 col-lg-4">
-                      <div className="single-price-plan text-center">
+                      <div className="text-center single-price-plan">
                         <div className="single-price-top">
                           <h4>Standard</h4>
                           <span>$200</span>
@@ -168,7 +173,7 @@ const Pricing = () => {
                       </div>
                     </div>
                     <div className="col-md-6 col-lg-4">
-                      <div className="single-price-plan active text-center">
+                      <div className="text-center single-price-plan active">
                         <div className="single-price-top">
                           <h4>Business</h4>
                           <span>$300</span>
@@ -230,7 +235,7 @@ const Pricing = () => {
                       </div>
                     </div>
                     <div className="col-md-6 col-lg-4">
-                      <div className="single-price-plan text-center">
+                      <div className="text-center single-price-plan">
                         <div className="single-price-top">
                           <h4>Professional</h4>
                           <span>$400</span>

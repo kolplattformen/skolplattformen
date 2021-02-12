@@ -16,7 +16,12 @@ const CtaThree = () => {
                 direkt se allt som är aktuellt för alla barnen på en och samma
                 skärm.
               </p>
-              <a href="#" className="btn">
+              <a
+                href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
+                className="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 App Store
               </a>
             </div>

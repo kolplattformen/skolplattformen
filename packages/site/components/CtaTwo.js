@@ -2,7 +2,6 @@ import { Col, Container, Row } from 'react-bootstrap'
 import Image from 'next/image'
 import img1 from '../assets/img/boys.png'
 
-
 const CtaTwo = () => {
   return (
     <section className="bg-2 pt-120 pb-120">
@@ -21,7 +20,12 @@ const CtaTwo = () => {
                 kommunikation går direkt mellan din telefon och Skolplattformens
                 servrar. Du loggar in med BankID som vanligt.
               </p>
-              <a href="#" className="btn">
+              <a
+                href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
+                className="btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 App Store
               </a>
             </div>
