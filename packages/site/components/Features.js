@@ -1,4 +1,3 @@
-import { Col, Container, Row } from 'react-bootstrap'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import img4 from '../assets/img/icons/goal.svg'
@@ -84,36 +83,31 @@ const Features = () => {
   }
 
   return (
-    <section className="pb-110" id="funktioner">
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={12} lg={8}>
-            <SectionTitle
-              title="Enkelhet och snabbhet"
-              text="Vi vill att det ska vara enkelt att få en överblick över vad som händer i skolan. Vi har gjort allt för att ge dig en enkel och snabb översikt över alla dina barn och det som är aktuellt just nu i skolan."
-            />
-          </Col>
-        </Row>
-        <Row className="justify-content-center">
-          <Col xl={10} lg={12}>
-            <Swiper className="feature-carousel" {...swiperParams}>
-              {FEATURES_DATA.map((feature, index) => (
-                <SwiperSlide key={`feature-post-${index}`}>
-                  <FeatureCard
-                    title={feature.title}
-                    text={feature.text}
-                    image={feature.image}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div
-              id="features-paginations"
-              className="swiper-pagination d-flex justify-content-center align-items-center features-pagination"
-            />
-          </Col>
-        </Row>
-      </Container>
+    <section className="max-w-6xl mx-auto" id="funktioner">
+      <div className="max-w-2xl mx-auto">
+        <SectionTitle
+          title="Enkelhet och snabbhet"
+          text="Vi vill att det ska vara enkelt att få en överblick över vad som händer i skolan. Vi har gjort allt för att ge dig en enkel och snabb översikt över alla dina barn och det som är aktuellt just nu i skolan."
+        />
+      </div>
+      <Swiper className="feature-carousel" {...swiperParams}>
+        {FEATURES_DATA.map((feature) => (
+          <SwiperSlide key={feature.title}>
+            {({ isActive }) => (
+              <FeatureCard
+                isActive={isActive}
+                title={feature.title}
+                text={feature.text}
+                image={feature.image}
+              />
+            )}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div
+        id="features-paginations"
+        className="flex justify-center space-x-2"
+      />
     </section>
   )
 }

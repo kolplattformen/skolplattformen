@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tw4: 1rem;
+  --tw5: 1.25rem;
+  --twMw6xl: 72rem;
+}
+
+.grid-main {
+  grid-template-columns: var(--tw5) 1fr minmax(0, var(--twMw6xl)) 1fr var(--tw5);
+}
+
+.header:before {
+  background-image: url(../assets/img/banner/main-base.png);
+  background-position: top right;
+  background-repeat: no-repeat;
+  content: '';
+  height: 100%;
+  position: absolute;
+  right: -15%;
+  top: 0%;
+  width: 100%;
+  z-index: -1;
+}

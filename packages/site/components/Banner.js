@@ -82,7 +82,7 @@ const Banner = () => {
                       className="appstore ios"
                     />
                   </a>
-                  <a 
+                  <a
                     href="https://play.google.com/store/apps/details?id=org.skolplattformen.app"
                     target="_blank"
                     rel="noopener noreferrer"

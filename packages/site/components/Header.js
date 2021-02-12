@@ -2,8 +2,9 @@ import Link from 'next/link'
 import React from 'react'
 import headerLogo from '../assets/img/logo.png'
 import NavLinks from './NavLinks'
+import classnames from 'classnames'
 
-const HeaderHome = (props) => {
+const HeaderHome = () => {
   const [sticky, setSticky] = React.useState(false)
 
   const handleScroll = () => {
@@ -45,41 +46,29 @@ const HeaderHome = (props) => {
   }
 
   return (
-    <header className={`header ${props.extraClassName}`}>
+    <header className="fixed top-0 left-0 right-0 z-10">
       <div
-        className={`main-header ${sticky === true ? 'sticky fadeInDown' : ' '}`}
+        className={classnames(
+          'bg-white bg-opacity-0 duration-200 transition-colors',
+          {
+            'shadow-md fade-in-down bg-opacity-100': sticky,
+          }
+        )}
       >
-        <div className="main-menu-wrap">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-xl-3 col-lg-3 col-md-4 col-6">
-                <div className="logo">
-                  <Link href="/">
-                    <a>
-                      <img src={headerLogo} alt="Skolplattformen" />
-                    </a>
-                  </Link>
-                </div>
+        <div className="sticky flex items-center justify-between max-w-6xl py-4 mx-auto">
+          <Link href="/">
+            <a>
+              <img className="h-24" src={headerLogo} alt="Skolplattformen" />
+            </a>
+          </Link>
+          <nav>
+            <div className="header-menu">
+              <div id="menu-button" className="block">
+                <i className="fa fa-bars"></i>
               </div>
-              <div className="col-xl-9 col-lg-9 col-md-8 col-6 menu-button">
-                <div className="menu--inner-area clearfix">
-                  <div className="menu-wraper">
-                    <nav>
-                      <div className="header-menu">
-                        <div
-                          id="menu-button"
-                          className="menu-opened side-menu__toggler"
-                        >
-                          <i className="fa fa-bars"></i>
-                        </div>
-                        <NavLinks />
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </div>
+              <NavLinks />
             </div>
-          </div>
+          </nav>
         </div>
       </div>
     </header>
