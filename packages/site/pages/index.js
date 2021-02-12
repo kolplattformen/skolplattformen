@@ -7,6 +7,7 @@ import FunFacts from '../components/FunFacts'
 import MobileMenu from '../components/MobileMenu'
 import Pricing from '../components/Pricing'
 import Testimonials from '../components/Testimonials'
+import Media from '../components/Media'
 
 const HomePage = () => {
   return (
@@ -20,6 +21,7 @@ const HomePage = () => {
       <AppShots />
       <Pricing />
       <Testimonials />
+      <Media />
     </>
   )
 }
