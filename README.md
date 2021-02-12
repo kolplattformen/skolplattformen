@@ -120,4 +120,3 @@ The `LoginStatusChecker` returned by the login method will have `.token` set to 
 3. Build package: `yarn build`
 4. Run example: `node run [your personal number]`
 5. Sign in with mobile BankID
-
