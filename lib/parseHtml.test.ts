@@ -17,9 +17,10 @@ describe('parseHtml', () => {
     it('handles links with spaces', () => {
       const html = `<div>
         <a href="/foo bar">Hello </a>
+        <a href='/foo bar'>Hello </a>
       </div>`
 
-      expect(trim(html)).toEqual('<div><a href="/foo%20bar">Hello</a></div>')
+      expect(trim(html)).toEqual('<div><a href="/foo%20bar">Hello</a><a href=\'/foo%20bar\'>Hello</a></div>')
     })
   })
   describe('toMarkdown', () => {

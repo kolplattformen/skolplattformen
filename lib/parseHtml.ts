@@ -10,17 +10,26 @@ export const trim = (html: string = ''): string => {
     .split('</')
     .map((token) => token.trim())
     .join('</')
+
+  let result = trimmed
   const rxSpaces = /href="(.*)"/g
-  const matches = trimmed.match(rxSpaces)
+  let matches = trimmed.match(rxSpaces)
   if (matches) {
-    let result = trimmed
     // eslint-disable-next-line no-restricted-syntax
     for (const match of matches) {
       result = result.replace(match, match.replace(/ /g, '%20'))
     }
-    return result
   }
-  return trimmed
+
+  const rxSpacesSing = /href='(.*)'/g
+  matches = trimmed.match(rxSpacesSing)
+  if (matches) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const match of matches) {
+      result = result.replace(match, match.replace(/ /g, '%20'))
+    }
+  }
+  return result
 }
 
 interface Node {
