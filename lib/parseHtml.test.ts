@@ -11,6 +11,9 @@ describe('parseHtml', () => {
 
       expect(trim(html)).toEqual('<div><b>Hello</b><i>World</i><u>!</u></div>')
     })
+    it('handles missing html', () => {
+      expect(() => trim()).not.toThrow()
+    })
   })
   describe('toMarkdown', () => {
     it('turns html into Markdown', () => {

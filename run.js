@@ -78,7 +78,12 @@ async function run() {
       const news = await api.getNews(children[0])
 
       console.log('news details')
-      const newsItems = await Promise.all(news.map(async newsItem => await api.getNewsItem(children[0], newsItem.id)))
+      const newsItems = await Promise.all(
+        news.map((newsItem) =>
+          api.getNewsDetails(children[0], newsItem)
+            .catch((err) => { console.error(newsItem.id, err) })
+        )
+      )
       console.log(newsItems)
 
       // console.log('menu')

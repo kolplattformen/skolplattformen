@@ -12,6 +12,14 @@ const dateTimeOptions: DateTimeOptions = {
   zone: 'Europe/Stockholm',
 }
 
+const tryParseDate = (date: string, format: string, options: DateTimeOptions) => {
+  try {
+    return DateTime.fromFormat(date, format, options).toISO()
+  } catch (err) {
+    return ''
+  }
+}
+
 export interface EtjanstResponse {
   Success: boolean
   Error: string | null
@@ -80,18 +88,22 @@ export const calendar = (data: any): CalendarItem[] => etjanst(data).map(calenda
 const IMAGE_HOST = 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
 export const newsItem = ({
   newsId, header, preamble, body, bannerImageUrl, pubDateSe, modDateSe, authorDisplayName, altText,
-}: any): NewsItem => ({
-  header,
-  id: newsId,
-  author: authorDisplayName,
-  intro: preamble,
-  imageUrl: bannerImageUrl,
-  fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
-  imageAltText: altText,
-  body: toMarkdown(body),
-  published: DateTime.fromFormat(pubDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
-  modified: DateTime.fromFormat(modDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions).toISO(),
-})
+}: any): NewsItem => {
+  const published = tryParseDate(pubDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions)
+  const modified = tryParseDate(modDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions)
+  return {
+    header,
+    published,
+    modified,
+    id: newsId,
+    author: authorDisplayName,
+    intro: preamble,
+    imageUrl: bannerImageUrl,
+    fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
+    imageAltText: altText,
+    body: toMarkdown(body),
+  }
+}
 export const news = (data: any): NewsItem[] => etjanst(data).newsItems.map(newsItem)
 
 export const newsItemDetails = (data: any): NewsItem => newsItem(etjanst(data).currentNewsItem)
