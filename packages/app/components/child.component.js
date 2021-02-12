@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import {
   TopNavigation,
   TopNavigationAction,
@@ -9,12 +9,12 @@ import {
   Text,
   Icon,
 } from '@ui-kitten/components'
-import {DateTime} from 'luxon'
-import {NewsList} from './newsList.component'
-import {Calendar} from './calendar.component'
-import {Classmates} from './classmates.component'
-import {NotificationsList} from './notificationsList.component'
-import {SafeAreaView} from 'react-native-safe-area-context'
+import { DateTime } from 'luxon'
+import { NewsList } from './newsList.component'
+import { Calendar } from './calendar.component'
+import { Classmates } from './classmates.component'
+import { NotificationsList } from './notificationsList.component'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   useNotifications,
   useNews,
@@ -22,16 +22,14 @@ import {
   useCalendar,
   useSchedule,
 } from '@skolplattformen/api-hooks'
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { ChildProvider, useChild } from './childContext.component'
 
-const {Navigator, Screen} = createMaterialTopTabNavigator()
-
-const ChildContext = React.createContext({})
-const useChild = () => React.useContext(ChildContext)
+const { Navigator, Screen } = createMaterialTopTabNavigator()
 
 const NewsScreen = () => {
   const child = useChild()
-  const {data: news} = useNews(child)
+  const { data: news } = useNews(child)
 
   return (
     <Layout>
@@ -42,7 +40,7 @@ const NewsScreen = () => {
 
 const NotificationsScreen = () => {
   const child = useChild()
-  const {data: notifications, status: notificationsStatus} = useNotifications(
+  const { data: notifications, status: notificationsStatus } = useNotifications(
     child,
   )
 
@@ -58,11 +56,11 @@ const NotificationsScreen = () => {
 
 const CalendarScreen = () => {
   const child = useChild()
-  const {data: calendar} = useCalendar(child)
-  const {data: schedule} = useSchedule(
+  const { data: calendar } = useCalendar(child)
+  const { data: schedule } = useSchedule(
     child,
     DateTime.local(),
-    DateTime.local().plus({days: 7}),
+    DateTime.local().plus({ days: 7 }),
   )
 
   return (
@@ -74,7 +72,7 @@ const CalendarScreen = () => {
 
 const ClassmatesScreen = () => {
   const child = useChild()
-  const {data: classmates} = useClassmates(child)
+  const { data: classmates } = useClassmates(child)
 
   return (
     <Layout>
@@ -83,7 +81,7 @@ const ClassmatesScreen = () => {
   )
 }
 
-const TabTitle = ({style, children}) => (
+const TabTitle = ({ style, children }) => (
   <Text adjustsFontSizeToFit numberOfLines={1} style={style}>
     {children}
   </Text>
@@ -96,7 +94,7 @@ const NotificationsIcon = (props) => (
 const CalendarIcon = (props) => <Icon {...props} name="calendar-outline" />
 const ClassIcon = (props) => <Icon {...props} name="people-outline" />
 
-const TopTabBar = ({navigation, state}) => (
+const TopTabBar = ({ navigation, state }) => (
   <TabBar
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}>
@@ -128,8 +126,8 @@ const TabNavigator = () => (
   </Navigator>
 )
 
-export const Child = ({route, navigation}) => {
-  const {child, color} = route.params
+export const Child = ({ route, navigation }) => {
+  const { child, color } = route.params
 
   const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
@@ -142,8 +140,8 @@ export const Child = ({route, navigation}) => {
   }
 
   return (
-    <SafeAreaView style={{...styles.wrap, color}}>
-      <ChildContext.Provider value={child}>
+    <SafeAreaView style={{ ...styles.wrap, color }}>
+      <ChildProvider child={child}>
         <TopNavigation
           title={child.name.split('(')[0]}
           alignment="center"
@@ -151,7 +149,7 @@ export const Child = ({route, navigation}) => {
           style={styles.topBar}
         />
         <TabNavigator />
-      </ChildContext.Provider>
+      </ChildProvider>
     </SafeAreaView>
   )
 }
