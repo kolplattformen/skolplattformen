@@ -540,7 +540,7 @@ const data: any = {
       },
       {
         sisId: 'd3a4b-16b53de-63c22-56d1ad24-4a64a2d',
-        firstname: 'George',
+        firstname: 'Fanny',
         lastname: 'Karlsson',
         guardians: [
           {
@@ -577,7 +577,7 @@ const data: any = {
       },
       {
         sisId: 'dad49-74308c8-83612-5eb7f3a5-e1c4047',
-        firstname: 'Brycen',
+        firstname: 'Iris',
         lastname: 'Eriksson',
         guardians: [
           {
@@ -621,7 +621,7 @@ const data: any = {
       },
       {
         sisId: '67471-6c03979-9ef6e-bb2827c4-96d00d5',
-        firstname: 'Dovie',
+        firstname: 'Evy',
         lastname: 'Larsson',
         guardians: [
           {
@@ -651,7 +651,7 @@ const data: any = {
       },
       {
         sisId: 'a9494-75d8ca7-a5fd4-977eca3c-40edbc1',
-        firstname: 'Era',
+        firstname: 'Pia',
         lastname: 'Karlsson',
         guardians: [
           {
@@ -681,7 +681,7 @@ const data: any = {
       },
       {
         sisId: '9077d-c323c8d-d0d29-5690abfb-d348317',
-        firstname: 'Roy',
+        firstname: 'Torun',
         lastname: 'Eriksson',
         guardians: [
           {
