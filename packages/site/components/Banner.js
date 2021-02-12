@@ -83,11 +83,15 @@ const Banner = () => {
                   </b>
                 </p>
                 <p className="app-store-buttons">
-                  <a onClick={coolIt}>
+                  <a
+                    href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img
                       alt="Ladda ner i App Store"
                       src={appstore}
-                      className="appstore ios disabled"
+                      className="appstore ios"
                     />
                   </a>
                   <a onClick={coolIt}>
@@ -109,7 +113,7 @@ const Banner = () => {
                 </p>
               </div>
             </Col>
-            <Col md={4} lg={5} className="  offset-lg-1  offse-xl-2">
+            <Col md={4} lg={5} className="offset-lg-1 offset-xl-2">
               <div className="banner-image">
                 <Image src={bannerMoc} width="300" height="584" alt="" />
               </div>

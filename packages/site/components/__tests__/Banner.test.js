@@ -15,10 +15,11 @@ test('renders a link to app store', () => {
 
   setup()
 
-  fireEvent.click(screen.getByAltText('Ladda ner i App Store'))
-
-  expect(global.alert).toHaveBeenCalledWith(
-    'Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊'
+  expect(
+    screen.getByAltText('Ladda ner i App Store').parentNode
+  ).toHaveAttribute(
+    'href',
+    'https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468'
   )
 })
 
