@@ -12,12 +12,6 @@ import Image from 'next/image'
 import appstore from '../assets/img/appstore.svg'
 import playstore from '../assets/img/playstore.png'
 
-const coolIt = () => {
-  alert(
-    'Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊'
-  )
-}
-
 const Banner = () => {
   return (
     <div className="banner-area-inner">
@@ -94,7 +88,11 @@ const Banner = () => {
                       className="appstore ios"
                     />
                   </a>
-                  <a onClick={coolIt}>
+                  <a 
+                    href="https://play.google.com/store/apps/details?id=org.skolplattformen.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img
                       alt="Ladda ner i Google Play Store"
                       src={playstore}
