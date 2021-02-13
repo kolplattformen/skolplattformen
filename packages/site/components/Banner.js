@@ -96,7 +96,7 @@ const Banner = () => {
                     <img
                       alt="Ladda ner i Google Play Store"
                       src={playstore}
-                      className="appstore android disabled"
+                      className="appstore android"
                     />
                   </a>
                 </p>
