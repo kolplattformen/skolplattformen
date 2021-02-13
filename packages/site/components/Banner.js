@@ -70,12 +70,6 @@ const Banner = () => {
                   som förälder. Snabbare och framförallt – mycket mindre
                   krångel.
                 </p>
-                <p>
-                  <b>
-                    Appen är klar och kommer att dyka upp på App Store och
-                    Google Play Store vilken dag som helst.
-                  </b>
-                </p>
                 <p className="app-store-buttons">
                   <a
                     href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
