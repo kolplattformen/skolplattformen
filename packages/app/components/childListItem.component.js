@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { DateTime } from 'luxon'
 import moment from 'moment'
@@ -23,6 +23,7 @@ const CalendarIcon = (props) => <Icon {...props} name="calendar-outline" />
 const PeopleIcon = (props) => <Icon {...props} name="people-outline" />
 
 export const ChildListItem = ({ navigation, child, color }) => {
+  useEffect(() => { }, [child.id])
   const { data: notifications, status: notificationsStatus } = useNotifications(
     child,
   )
