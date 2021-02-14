@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import Image from 'next/image'
 import img2 from '../assets/img/girls.png'
+import DownloadButtons from './DownloadButtons'
 
 const CtaThree = () => {
   return (
@@ -16,14 +17,8 @@ const CtaThree = () => {
                 direkt se allt som är aktuellt för alla barnen på en och samma
                 skärm.
               </p>
-              <a
-                href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
-                className="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                App Store
-              </a>
+              <DownloadButtons/>
+              
             </div>
           </Col>
           <Col lg={7} sm={7}>
