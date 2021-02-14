@@ -26,13 +26,14 @@ describe('useNotifications(child)', () => {
   beforeEach(() => {
     response = [{ id: 1 }]
     api = init()
+    api.getPersonalNumber.mockReturnValue('123')
     api.getNotifications.mockImplementation(() => (
       new Promise((res) => {
         setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      notifications_10: [{ id: 2 }],
+      '123_notifications_10': [{ id: 2 }],
     }, 2)
     child = { id: 10 }
   })
@@ -122,7 +123,7 @@ describe('useNotifications(child)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.notifications_10).toEqual('[{"id":1}]')
+      expect(storage.cache['123_notifications_10']).toEqual('[{"id":1}]')
     })
   })
   it('does not store in cache if fake', async () => {
@@ -136,7 +137,7 @@ describe('useNotifications(child)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.notifications_10).toEqual('[{"id":2}]')
+      expect(storage.cache['123_notifications_10']).toEqual('[{"id":2}]')
     })
   })
   it('retries if api fails', async () => {

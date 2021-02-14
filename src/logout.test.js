@@ -25,13 +25,14 @@ describe('logout - cleanup', () => {
   beforeEach(() => {
     response = [{ id: 1 }]
     api = init()
+    api.getPersonalNumber.mockReturnValue('123')
     api.getChildren.mockImplementation(() => (
       new Promise((res) => {
         setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      children: [{ id: 2 }],
+      '123_children': [{ id: 2 }],
     }, 2)
   })
   afterEach(async () => {

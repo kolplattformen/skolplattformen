@@ -25,13 +25,14 @@ describe('useUser()', () => {
   beforeEach(() => {
     response = { id: 1 }
     api = init()
+    api.getPersonalNumber.mockReturnValue('123')
     api.getUser.mockImplementation(() => (
       new Promise((res) => {
         setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      user: { id: 2 },
+      '123_user': { id: 2 },
     }, 2)
   })
   afterEach(async () => {
@@ -120,7 +121,7 @@ describe('useUser()', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.user).toEqual('{"id":1}')
+      expect(storage.cache['123_user']).toEqual('{"id":1}')
     })
   })
   it('does not store in cache if fake', async () => {
@@ -134,7 +135,7 @@ describe('useUser()', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.user).toEqual('{"id":2}')
+      expect(storage.cache['123_user']).toEqual('{"id":2}')
     })
   })
   it('retries if api fails', async () => {

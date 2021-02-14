@@ -28,13 +28,14 @@ describe('useSchedule(child, from, to)', () => {
   beforeEach(() => {
     response = [{ id: 1 }]
     api = init()
+    api.getPersonalNumber.mockReturnValue('123')
     api.getSchedule.mockImplementation(() => (
       new Promise((res) => {
         setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      'schedule_10_2021-01-01_2021-01-08': [{ id: 2 }],
+      '123_schedule_10_2021-01-01_2021-01-08': [{ id: 2 }],
     }, 2)
     child = { id: 10 }
     from = '2021-01-01'
@@ -126,7 +127,7 @@ describe('useSchedule(child, from, to)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":1}]')
+      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":1}]')
     })
   })
   it('does not store in cache if fake', async () => {
@@ -140,7 +141,7 @@ describe('useSchedule(child, from, to)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":2}]')
+      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":2}]')
     })
   })
   it('retries if api fails', async () => {

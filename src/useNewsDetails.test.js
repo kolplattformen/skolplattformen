@@ -29,13 +29,14 @@ describe('useNewsDetails(child, newsItem)', () => {
     cached = { id: '1337', modified: 'yesterday', body: 'rich and old' }
     response = { id: '1337', modified: 'now', body: 'rich and new' }
     api = init()
+    api.getPersonalNumber.mockReturnValue('123')
     api.getNewsDetails.mockImplementation(() => (
       new Promise((res) => {
         setTimeout(() => res(response), 50)
       })
     ))
     storage = createStorage({
-      news_details_1337: { ...cached },
+      '123_news_details_1337': { ...cached },
     }, 2)
     child = { id: 10 }
     newsItem = { id: '1337', modified: 'now', body: 'simple' }
@@ -126,7 +127,7 @@ describe('useNewsDetails(child, newsItem)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.news_details_1337).toEqual(JSON.stringify(response))
+      expect(storage.cache['123_news_details_1337']).toEqual(JSON.stringify(response))
     })
   })
   it('does not store in cache if fake', async () => {
@@ -140,7 +141,7 @@ describe('useNewsDetails(child, newsItem)', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache.news_details_1337).toEqual(JSON.stringify(cached))
+      expect(storage.cache['123_news_details_1337']).toEqual(JSON.stringify(cached))
     })
   })
   it('retries if api fails', async () => {

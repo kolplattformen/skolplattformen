@@ -34,15 +34,16 @@ const hook = <T>(
   selector: StoreSelector<T>,
   apiCaller: (api: Api) => ApiCall<T>,
 ): EntityHookResult<T> => {
+  const {
+    api, isLoggedIn, reporter, storage,
+  } = useApi()
+
   const getState = (): EntityStoreRootState => store.getState() as unknown as EntityStoreRootState
   const select = (storeState: EntityStoreRootState) => {
     const stateMap = selector(storeState) || {}
     const state = stateMap[key] || { status: 'pending', data: defaultValue }
     return state
   }
-  const {
-    api, isLoggedIn, reporter, storage,
-  } = useApi()
   const initialState = select(getState())
   const [state, setState] = useState(initialState)
   const dispatch = useDispatch()
@@ -58,11 +59,13 @@ const hook = <T>(
 
       // Only use cache when not in fake mode
       if (!api.isFake) {
+        const pnr = api.getPersonalNumber()
+
         // Only get from cache first time
         if (state.status === 'pending') {
-          extra.getFromCache = () => storage.getItem(key)
+          extra.getFromCache = () => storage.getItem(`${pnr}_${key}`)
         }
-        extra.saveToCache = (value: string) => storage.setItem(key, value)
+        extra.saveToCache = (value: string) => storage.setItem(`${pnr}_${key}`, value)
       }
       const action = loadAction<T>(entityName, extra)
       dispatch(action)
