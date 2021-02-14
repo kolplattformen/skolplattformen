@@ -60,13 +60,13 @@ const QA = () => {
                  Är Öppna Skolplattformen lanserad?
                 </h3>
                 <p>
-                  Inte ännu, men snart. Vi hoppas släppa första releasen där man hittar appar (dvs App Store och Google Play) inom kort, till en låg engångskostnad. Vi gör detta på vår fritid, så vi jobbar så fort vi kan.
+                  Ja! Den finns på App Store och Google Play. Hämta gärna ner och hjälp oss att tipsa kollegor, vänner och partner. Du stöttar vidareutvecklingen genom att ladda ner appen.
                 </p>
                 <h3>
-                 Hur får man vara med och testa?
+                 Hur rapporterar man buggar och önskemål?
                 </h3>
                 <p>
-                  Vi har ett begränsat antal testare idag, men så fort vi för ut den första releasen ser vi fram emot att fortsätta att utveckla den vidare baserad på fler föräldrars behov.
+                  Vi vet att en app som lanseras har många brister därför är vi väldigt tacksamma för alla buggrapporter vi får. Vi satsar mycket på att så snabbt som möjligt fixa de saker som dyker upp. För att få lite ordning så försöker vi samla alla buggar och önskemål på samma ställe. <a href="https://github.com/kolplattformen.com/skolplattformen/issues">Github. Klicka här</a> för att se vilka funktioner och buggar vi redan har tagit emot och jobbar på.
                 </p>
                 <h3>
                  Vad är Öppna Skolplattformen?
