@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Banner from '../Banner'
 
 const setup = (customProps = {}) => {
@@ -28,10 +28,11 @@ test('renders a link to play store', () => {
 
   setup()
 
-  fireEvent.click(screen.getByAltText('Ladda ner i Google Play Store'))
-
-  expect(global.alert).toHaveBeenCalledWith(
-    'Lugn i stormen. Appen väntar på godkännande. Snart kan du ladda ner den! 😊'
+  expect(
+    screen.getByAltText('Ladda ner i Google Play Store').parentNode
+  ).toHaveAttribute(
+    'href',
+    'https://play.google.com/store/apps/details?id=org.skolplattformen.app'
   )
 })
 
