@@ -36,6 +36,12 @@ describe('parseHtml', () => {
 
       expect(clean(html)).toEqual(expected)
     })
+    it('handles breaks in <strong>', () => {
+      const html = '<strong>Uppdatering 2021-02-08 <br /></strong>'
+      const expected = '<STRONG>Uppdatering 2021-02-08</STRONG>'
+
+      expect(clean(html)).toEqual(expected)
+    })
   })
   describe('toMarkdown', () => {
     it('turns html into Markdown', () => {

@@ -5,13 +5,16 @@ import {
   parse, HTMLElement, TextNode,
 } from 'node-html-parser'
 
-const trimNodes = [
+const noChildren = [
   'strong',
   'b',
   'em',
   'i',
   'u',
   's',
+]
+const trimNodes = [
+  ...noChildren,
   'h1',
   'h2',
   'h3',
@@ -40,7 +43,11 @@ const deepClean = (node: HTMLElement): HTMLElement => {
   const cleaned = new HTMLElement(node.tagName, {}, attributes, node.parentNode)
   node.childNodes.forEach((childNode) => {
     if (childNode instanceof HTMLElement) {
-      cleaned.childNodes.push(deepClean(childNode))
+      if (node.tagName && noChildren.includes(node.tagName.toLowerCase())) {
+        cleaned.childNodes.push(cleanText(new TextNode(childNode.innerText), node.tagName))
+      } else {
+        cleaned.childNodes.push(deepClean(childNode))
+      }
     } else if (childNode instanceof TextNode) {
       cleaned.childNodes.push(cleanText(childNode, node.tagName))
     }
