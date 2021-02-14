@@ -18,7 +18,6 @@ const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 export const NewsItem = ({ navigation, route }) => {
   const { newsItem, child } = route.params
   const { data } = useNewsDetails(child, newsItem)
-  console.log(data)
 
   const navigateBack = () => {
     navigation.goBack()
@@ -74,6 +73,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 2,
+    marginBottom: 50,
   },
   image: {
     width: '100%',
