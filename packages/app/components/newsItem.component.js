@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet, View, ScrollView } from 'react-native'
+import {SafeAreaView, StyleSheet, View, ScrollView} from 'react-native'
 import {
   Card,
   Divider,
@@ -9,15 +9,19 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import { Markdown } from './markdown.component'
-import { Image } from './image.component'
-import { useNewsDetails } from '@skolplattformen/api-hooks'
+import {Markdown} from './markdown.component'
+import {Image} from './image.component'
+import {useNewsDetails} from '@skolplattformen/api-hooks'
+import {DateTime} from 'luxon'
+
+const displayDate = (date) =>
+  DateTime.fromISO(date).setLocale('sv').toLocaleString(DateTime.DATETIME_MED)
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
-export const NewsItem = ({ navigation, route }) => {
-  const { newsItem, child } = route.params
-  const { data } = useNewsDetails(child, newsItem)
+export const NewsItem = ({navigation, route}) => {
+  const {newsItem, child} = route.params
+  const {data} = useNewsDetails(child, newsItem)
   console.log(data)
 
   const navigateBack = () => {
@@ -31,15 +35,22 @@ export const NewsItem = ({ navigation, route }) => {
   const renderItemHeader = (headerProps, newsItem) => (
     <View {...headerProps}>
       <Text category="h3">{newsItem.header}</Text>
-      <Image
-        src={newsItem.fullImageUrl}
-        style={styles.image}
-      />
+      <Image src={newsItem.fullImageUrl} style={styles.image} />
+      <Text category="s1" appearance="hint">
+        {newsItem.published
+          ? `Publicerad: ${displayDate(newsItem.published)}`
+          : ''}
+      </Text>
+      <Text category="s1" appearance="hint">
+        {newsItem.modified
+          ? `Uppdaterad: ${displayDate(newsItem.modified)}`
+          : ''}
+      </Text>
     </View>
   )
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <TopNavigation
         title="Nyhet från Skolplattformen"
         alignment="center"
@@ -54,8 +65,8 @@ export const NewsItem = ({ navigation, route }) => {
             header={(headerProps) => renderItemHeader(headerProps, data)}>
             <Markdown
               style={{
-                body: { color: 'black', fontSize: 17, lineHeight: 23 },
-                heading1: { color: 'black' },
+                body: {color: 'black', fontSize: 17, lineHeight: 23},
+                heading1: {color: 'black'},
               }}>
               {data.body}
             </Markdown>
@@ -78,5 +89,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     minHeight: 300,
+    marginBottom: 5,
   },
 })
