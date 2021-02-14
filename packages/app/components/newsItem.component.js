@@ -12,6 +12,10 @@ import {
 import { Markdown } from './markdown.component'
 import { Image } from './image.component'
 import { useNewsDetails } from '@skolplattformen/api-hooks'
+import { DateTime } from 'luxon'
+
+const displayDate = (date) =>
+  DateTime.fromISO(date).setLocale('sv').toLocaleString(DateTime.DATETIME_MED)
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
@@ -30,10 +34,17 @@ export const NewsItem = ({ navigation, route }) => {
   const renderItemHeader = (headerProps, newsItem) => (
     <View {...headerProps}>
       <Text category="h3">{newsItem.header}</Text>
-      <Image
-        src={newsItem.fullImageUrl}
-        style={styles.image}
-      />
+      <Image src={newsItem.fullImageUrl} style={styles.image} />
+      <Text category="s1" appearance="hint">
+        {newsItem.published
+          ? `Publicerad: ${displayDate(newsItem.published)}`
+          : ''}
+      </Text>
+      <Text category="s1" appearance="hint">
+        {newsItem.modified
+          ? `Uppdaterad: ${displayDate(newsItem.modified)}`
+          : ''}
+      </Text>
     </View>
   )
 
@@ -78,5 +89,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     minHeight: 300,
+    marginBottom: 5,
   },
 })
