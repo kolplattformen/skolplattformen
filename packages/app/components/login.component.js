@@ -53,7 +53,7 @@ export const Login = ({ navigation }) => {
   const [
     socialSecurityNumberCache,
     setSocialSecurityNumberCache,
-  ] = useAsyncStorage('@socialSecurityNumber')
+  ] = useAsyncStorage('socialSecurityNumber')
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState(
     socialSecurityNumberCache,
   )
@@ -253,7 +253,7 @@ export const Login = ({ navigation }) => {
                       <Input
                         label="Personnummer"
                         autoFocus
-                        value={socialSecurityNumber}
+                        value={socialSecurityNumberCache}
                         style={{ minHeight: 70 }}
                         accessoryLeft={PersonIcon}
                         keyboardType="numeric"
