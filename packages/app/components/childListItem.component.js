@@ -23,7 +23,9 @@ const CalendarIcon = (props) => <Icon {...props} name="calendar-outline" />
 const PeopleIcon = (props) => <Icon {...props} name="people-outline" />
 
 export const ChildListItem = ({ navigation, child, color }) => {
+  // Forces rerender when child.id changes
   useEffect(() => { }, [child.id])
+
   const { data: notifications, status: notificationsStatus } = useNotifications(
     child,
   )
