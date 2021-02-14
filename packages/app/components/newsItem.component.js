@@ -1,5 +1,5 @@
 import React from 'react'
-import {SafeAreaView, StyleSheet, View, ScrollView} from 'react-native'
+import { SafeAreaView, StyleSheet, View, ScrollView } from 'react-native'
 import {
   Card,
   Divider,
@@ -9,20 +9,19 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import {Markdown} from './markdown.component'
-import {Image} from './image.component'
-import {useNewsDetails} from '@skolplattformen/api-hooks'
-import {DateTime} from 'luxon'
+import { Markdown } from './markdown.component'
+import { Image } from './image.component'
+import { useNewsDetails } from '@skolplattformen/api-hooks'
+import { DateTime } from 'luxon'
 
 const displayDate = (date) =>
   DateTime.fromISO(date).setLocale('sv').toLocaleString(DateTime.DATETIME_MED)
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
-export const NewsItem = ({navigation, route}) => {
-  const {newsItem, child} = route.params
-  const {data} = useNewsDetails(child, newsItem)
-  console.log(data)
+export const NewsItem = ({ navigation, route }) => {
+  const { newsItem, child } = route.params
+  const { data } = useNewsDetails(child, newsItem)
 
   const navigateBack = () => {
     navigation.goBack()
@@ -50,7 +49,7 @@ export const NewsItem = ({navigation, route}) => {
   )
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <TopNavigation
         title="Nyhet från Skolplattformen"
         alignment="center"
@@ -65,8 +64,8 @@ export const NewsItem = ({navigation, route}) => {
             header={(headerProps) => renderItemHeader(headerProps, data)}>
             <Markdown
               style={{
-                body: {color: 'black', fontSize: 17, lineHeight: 23},
-                heading1: {color: 'black'},
+                body: { color: 'black', fontSize: 17, lineHeight: 23 },
+                heading1: { color: 'black' },
               }}>
               {data.body}
             </Markdown>
@@ -85,6 +84,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 2,
+    marginBottom: 50,
   },
   image: {
     width: '100%',
