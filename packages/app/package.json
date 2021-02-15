@@ -47,6 +47,8 @@
     "@babel/core": "^7.12.13",
     "@babel/runtime": "^7.12.13",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/jest-native": "^3.4.3",
+    "@testing-library/react-native": "^7.1.0",
     "@types/luxon": "^1.25.1",
     "@types/react": "^16.8.24",
     "@types/react-native": "^0.63.43",
@@ -55,6 +57,7 @@
     "eslint": "^7.19.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.65.0",
+    "mockdate": "^3.0.2",
     "react-test-renderer": "16.13.1"
   },
   "resolutions": {
@@ -62,6 +65,10 @@
     "@types/react": "^16.8.24"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "react-native-gesture-handler/jestSetup",
+      "@testing-library/jest-native/extend-expect"
+    ]
   }
 }
