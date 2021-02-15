@@ -58,8 +58,13 @@ export const Login = ({ navigation }) => {
 
   /* Initial load functions */
   useEffect(() => {
-    setValid(Personnummer.valid(socialSecurityNumber || cachedSsn))
-  }, [socialSecurityNumber, cachedSsn])
+    setValid(Personnummer.valid(socialSecurityNumber))
+  }, [socialSecurityNumber])
+  useEffect(() => {
+    if (cachedSsn && socialSecurityNumber !== cachedSsn) {
+      setSocialSecurityNumber(cachedSsn)
+    }
+  }, [cachedSsn])
 
   const loginHandler = async () => {
     showModal(false)
