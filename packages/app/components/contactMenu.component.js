@@ -1,14 +1,14 @@
-import React from 'react'
-import {StyleSheet, Linking} from 'react-native'
 import {
   Button,
   Icon,
-  MenuItem,
   MenuGroup,
+  MenuItem,
   OverflowMenu,
 } from '@ui-kitten/components'
+import React from 'react'
+import { Linking, StyleSheet } from 'react-native'
 
-export const ContactMenu = ({contact, selected, setSelected}) => {
+export const ContactMenu = ({ contact, selected, setSelected }) => {
   const [visible, setVisible] = React.useState(selected)
 
   const moreIcon = (props) => <Icon {...props} name="more-horizontal-outline" />
@@ -35,33 +35,35 @@ export const ContactMenu = ({contact, selected, setSelected}) => {
       visible={visible}
       anchor={renderToggleButton}
       backdropStyle={styles.backdrop}
-      onBackdropPress={handleBackdropPress}>
+      onBackdropPress={handleBackdropPress}
+    >
       {contact.guardians.map((parent) => (
         <MenuGroup
           key={`${parent.firstname}-${parent.lastname}`}
           title={`${parent.firstname} ${parent.lastname}`}
-          style={{position: 'relative', zIndex: 10}}>
+          style={{ position: 'relative', zIndex: 10 }}
+        >
           <MenuItem
             accessoryLeft={CallIcon}
-            style={{display: parent.mobile ? 'flex' : 'none'}}
+            style={{ display: parent.mobile ? 'flex' : 'none' }}
             title="Ring"
             onPress={(e) => Linking.openURL(`tel:${parent.mobile}`)}
           />
           <MenuItem
             accessoryLeft={SMSIcon}
-            style={{display: parent.mobile ? 'flex' : 'none'}}
+            style={{ display: parent.mobile ? 'flex' : 'none' }}
             title="SMS"
             onPress={(e) => Linking.openURL(`sms:${parent.mobile}`)}
           />
           <MenuItem
             accessoryLeft={EmailIcon}
-            style={{display: parent.email ? 'flex' : 'none'}}
+            style={{ display: parent.email ? 'flex' : 'none' }}
             title="Maila"
             onPress={(e) => Linking.openURL(`mailto:${parent.email}`)}
           />
           <MenuItem
             accessoryLeft={MapIcon}
-            style={{display: parent.address ? 'flex' : 'none'}}
+            style={{ display: parent.address ? 'flex' : 'none' }}
             title="Hem"
             onPress={(e) =>
               Linking.openURL(`http://maps.apple.com/?daddr=${parent.address}`)

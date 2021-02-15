@@ -1,13 +1,13 @@
+import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
 import React from 'react'
-import {StyleSheet} from 'react-native'
-import {Divider, List, ListItem, Icon, Text} from '@ui-kitten/components'
-import {ContactMenu} from './contactMenu.component'
+import { StyleSheet } from 'react-native'
+import { ContactMenu } from './contactMenu.component'
 
-export const Classmates = ({classmates}) => {
+export const Classmates = ({ classmates }) => {
   const renderItemIcon = (props) => <Icon {...props} name="people-outline" />
   const [selected, setSelected] = React.useState()
 
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <ListItem
       title={`${item.firstname} ${item.lastname}`}
       onPress={() => setSelected(item)}

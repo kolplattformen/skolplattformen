@@ -1,21 +1,21 @@
-import React from 'react'
-import { StyleSheet, View, Image, SafeAreaView } from 'react-native'
 import { useChildList } from '@skolplattformen/api-hooks'
 import {
   Divider,
   Icon,
   Layout,
+  Spinner,
   Text,
   TopNavigation,
   TopNavigationAction,
-  Spinner,
 } from '@ui-kitten/components'
+import React from 'react'
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native'
 import { ChildListItem } from './childListItem.component'
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 export const Children = ({ navigation }) => {
-  const { data: childList, status, error, reload } = useChildList()
+  const { data: childList, status } = useChildList()
   const navigateBack = () => {
     navigation.goBack()
   }
@@ -45,19 +45,19 @@ export const Children = ({ navigation }) => {
             ))}
           </Layout>
         ) : (
-            <Layout style={styles.loading}>
-              <Image
-                source={require('../assets/girls.png')}
-                style={{ height: 400, width: '100%' }}
-              />
-              <View style={{ flexDirection: 'row' }}>
-                <Spinner size="large" status="warning" />
-                <Text category="h1" style={{ marginLeft: 10, marginTop: -7 }}>
-                  Laddar...
+          <Layout style={styles.loading}>
+            <Image
+              source={require('../assets/girls.png')}
+              style={{ height: 400, width: '100%' }}
+            />
+            <View style={{ flexDirection: 'row' }}>
+              <Spinner size="large" status="warning" />
+              <Text category="h1" style={{ marginLeft: 10, marginTop: -7 }}>
+                Laddar...
               </Text>
-              </View>
-            </Layout>
-          )}
+            </View>
+          </Layout>
+        )}
       </Layout>
     </SafeAreaView>
   )

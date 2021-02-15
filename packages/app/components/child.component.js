@@ -1,29 +1,29 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import {
-  TopNavigation,
-  TopNavigationAction,
-  Tab,
-  TabBar,
-  Layout,
-  Text,
-  Icon,
-} from '@ui-kitten/components'
-import { DateTime } from 'luxon'
-import { NewsList } from './newsList.component'
-import { Calendar } from './calendar.component'
-import { Classmates } from './classmates.component'
-import { NotificationsList } from './notificationsList.component'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import {
-  useNotifications,
-  useNews,
-  useClassmates,
   useCalendar,
+  useClassmates,
+  useNews,
+  useNotifications,
   useSchedule,
 } from '@skolplattformen/api-hooks'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import {
+  Icon,
+  Layout,
+  Tab,
+  TabBar,
+  Text,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components'
+import { DateTime } from 'luxon'
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Calendar } from './calendar.component'
 import { ChildProvider, useChild } from './childContext.component'
+import { Classmates } from './classmates.component'
+import { NewsList } from './newsList.component'
+import { NotificationsList } from './notificationsList.component'
 
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
@@ -41,7 +41,7 @@ const NewsScreen = () => {
 const NotificationsScreen = () => {
   const child = useChild()
   const { data: notifications, status: notificationsStatus } = useNotifications(
-    child,
+    child
   )
 
   return (
@@ -60,7 +60,7 @@ const CalendarScreen = () => {
   const { data: schedule } = useSchedule(
     child,
     DateTime.local(),
-    DateTime.local().plus({ days: 7 }),
+    DateTime.local().plus({ days: 7 })
   )
 
   return (
@@ -97,7 +97,8 @@ const ClassIcon = (props) => <Icon {...props} name="people-outline" />
 const TopTabBar = ({ navigation, state }) => (
   <TabBar
     selectedIndex={state.index}
-    onSelect={(index) => navigation.navigate(state.routeNames[index])}>
+    onSelect={(index) => navigation.navigate(state.routeNames[index])}
+  >
     <Tab
       title={(props) => <TabTitle {...props}>Nyheter</TabTitle>}
       icon={NewsIcon}
@@ -117,10 +118,11 @@ const TopTabBar = ({ navigation, state }) => (
   </TabBar>
 )
 
-const TabNavigator = ({initialRouteName = 'Nyheter'}) => (
+const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
   <Navigator
     initialRouteName={initialRouteName}
-    tabBar={(props) => <TopTabBar {...props} />}>
+    tabBar={(props) => <TopTabBar {...props} />}
+  >
     <Screen name="Nyheter" component={NewsScreen} />
     <Screen name="Notifieringar" component={NotificationsScreen} />
     <Screen name="Kalender" component={CalendarScreen} />
@@ -128,8 +130,8 @@ const TabNavigator = ({initialRouteName = 'Nyheter'}) => (
   </Navigator>
 )
 
-export const Child = ({route, navigation}) => {
-  const {child, color, initialRouteName} = route.params
+export const Child = ({ route, navigation }) => {
+  const { child, color, initialRouteName } = route.params
 
   const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 

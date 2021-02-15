@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { DateTime } from 'luxon'
-import moment from 'moment'
 import {
-  useNotifications,
-  useNews,
-  useClassmates,
   useCalendar,
-  useMenu,
+  useClassmates,
+  useNews,
+  useNotifications,
   useSchedule,
 } from '@skolplattformen/api-hooks'
-import { Button, Icon, Text, Card, Avatar } from '@ui-kitten/components'
+import { Avatar, Button, Card, Icon, Text } from '@ui-kitten/components'
+import { DateTime } from 'luxon'
+import moment from 'moment'
+import React, { useEffect } from 'react'
+import { StyleSheet, View } from 'react-native'
 
 const NotificationsIcon = (props) => (
   <Icon {...props} name="alert-circle-outline" />
@@ -24,19 +23,18 @@ const PeopleIcon = (props) => <Icon {...props} name="people-outline" />
 
 export const ChildListItem = ({ navigation, child, color }) => {
   // Forces rerender when child.id changes
-  useEffect(() => { }, [child.id])
+  useEffect(() => {}, [child.id])
 
   const { data: notifications, status: notificationsStatus } = useNotifications(
-    child,
+    child
   )
   const { data: news, status: newsStatus } = useNews(child)
   const { data: classmates, status: classmatesStatus } = useClassmates(child)
   const { data: calendar, status: calendarStatus } = useCalendar(child)
-  const { data: menu, status: menuStatus } = useMenu(child)
-  const { data: schedule, status: scheduleStatus } = useSchedule(
+  const { data: schedule } = useSchedule(
     child,
     DateTime.local(),
-    DateTime.local().plus({ days: 7 }),
+    DateTime.local().plus({ days: 7 })
   )
 
   const getClassName = () => {
@@ -58,18 +56,18 @@ export const ChildListItem = ({ navigation, child, color }) => {
   }
 
   const Header = (props) => (
-    <View {...props} style={{flexDirection: 'row', alignItems: 'center'}}>
-      <View style={{margin: 20, marginRight: 0}}>
+    <View {...props} style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={{ margin: 20, marginRight: 0 }}>
         <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
-      <View style={{margin: 20, flex: 1}}>
+      <View style={{ margin: 20, flex: 1 }}>
         <Text category="h6">{child.name?.split('(')[0]}</Text>
         <Text category="s1">{`${getClassName()}`}</Text>
       </View>
     </View>
   )
 
-  const Footer = (props, info) => (
+  const Footer = () => (
     <View style={styles.itemFooter}>
       <Button
         style={[styles.item, styles[newsStatus]]}
@@ -82,7 +80,8 @@ export const ChildListItem = ({ navigation, child, color }) => {
             initialRouteName: 'Nyheter',
           })
         }
-        accessoryLeft={NewsIcon}>
+        accessoryLeft={NewsIcon}
+      >
         {`${(news || []).length}`}
       </Button>
       <Button
@@ -96,7 +95,8 @@ export const ChildListItem = ({ navigation, child, color }) => {
             initialRouteName: 'Notifieringar',
           })
         }
-        accessoryLeft={NotificationsIcon}>
+        accessoryLeft={NotificationsIcon}
+      >
         {`${(notifications || []).length}`}
       </Button>
       <Button
@@ -110,7 +110,8 @@ export const ChildListItem = ({ navigation, child, color }) => {
             initialRouteName: 'Kalender',
           })
         }
-        accessoryLeft={CalendarIcon}>
+        accessoryLeft={CalendarIcon}
+      >
         {`${(notifications || []).length}`}
       </Button>
       <Button
@@ -124,7 +125,8 @@ export const ChildListItem = ({ navigation, child, color }) => {
             initialRouteName: 'Klassen',
           })
         }
-        accessoryLeft={PeopleIcon}>
+        accessoryLeft={PeopleIcon}
+      >
         {`${(classmates || []).length}`}
       </Button>
     </View>
@@ -137,7 +139,8 @@ export const ChildListItem = ({ navigation, child, color }) => {
       status={color}
       header={Header}
       footer={Footer}
-      onPress={() => navigation.navigate('Child', { child, color })}>
+      onPress={() => navigation.navigate('Child', { child, color })}
+    >
       {[...(calendar ?? []), ...(schedule ?? [])]
         .filter((a) => moment(a.startDate).isSame('week'))
         .slice(0, 3)
@@ -146,7 +149,8 @@ export const ChildListItem = ({ navigation, child, color }) => {
             appearance="hint"
             category="c1"
             key={i}
-            style={{ textColor: styles.loaded(notificationsStatus) }}>
+            style={{ textColor: styles.loaded(notificationsStatus) }}
+          >
             {`${calendarItem.title}`}
           </Text>
         ))}
