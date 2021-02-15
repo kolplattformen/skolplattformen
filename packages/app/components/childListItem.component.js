@@ -134,7 +134,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
 
   return (
     <Card
-      style={{ ...styles.card }}
+      style={styles.card}
       appearance="filled"
       status={color}
       header={Header}
@@ -168,8 +168,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    margin: 10,
+    marginBottom: 20,
   },
   itemFooter: {
     flexDirection: 'row',
