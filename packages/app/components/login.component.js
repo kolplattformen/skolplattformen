@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Platform,
   SafeAreaView,
@@ -46,20 +46,20 @@ const funArguments = [
 
 export const Login = ({ navigation }) => {
   const { api, isLoggedIn } = useApi()
-  const [visible, showModal] = React.useState(false)
-  const [argument, setArgument] = React.useState('öppna')
-  const [error, setError] = React.useState(null)
+  const [visible, showModal] = useState(false)
+  const [argument, setArgument] = useState('öppna')
+  const [error, setError] = useState(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
-  const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
+  const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
   const isFemale =
     Personnummer.valid(socialSecurityNumber) &&
     Personnummer.parse(socialSecurityNumber).isFemale()
-    const [valid, setValid] = React.useState(false)
+  const [valid, setValid] = useState(false)
 
   /* Initial load functions */
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber || cachedSsn))
-  }, [socialSecurityNumber])
+  }, [socialSecurityNumber, cachedSsn])
 
   const loginHandler = async () => {
     showModal(false)
@@ -136,7 +136,7 @@ export const Login = ({ navigation }) => {
   const clearInput = (props) => <TouchableWithoutFeedback onPress={() => handleInput('')}>
     <ClearIcon {...props} />
   </TouchableWithoutFeedback>
-  
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
