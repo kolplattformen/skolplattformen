@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Platform,
   SafeAreaView,
@@ -46,25 +46,25 @@ const funArguments = [
 
 export const Login = ({ navigation }) => {
   const { api, isLoggedIn } = useApi()
-  const [visible, showModal] = React.useState(false)
-  const [valid, setValid] = React.useState(false)
-  const [argument, setArgument] = React.useState('öppna')
-  const [error, setError] = React.useState(null)
-  const [
-    socialSecurityNumberCache,
-    setSocialSecurityNumberCache,
-  ] = useAsyncStorage('@socialSecurityNumber')
-  const [socialSecurityNumber, setSocialSecurityNumber] = React.useState(
-    socialSecurityNumberCache,
-  )
+  const [visible, showModal] = useState(false)
+  const [argument, setArgument] = useState('öppna')
+  const [error, setError] = useState(null)
+  const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
+  const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
   const isFemale =
     Personnummer.valid(socialSecurityNumber) &&
     Personnummer.parse(socialSecurityNumber).isFemale()
+  const [valid, setValid] = useState(false)
 
   /* Initial load functions */
   useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
   }, [socialSecurityNumber])
+  useEffect(() => {
+    if (cachedSsn && socialSecurityNumber !== cachedSsn) {
+      setSocialSecurityNumber(cachedSsn)
+    }
+  }, [cachedSsn])
 
   const loginHandler = async () => {
     showModal(false)
@@ -80,16 +80,9 @@ export const Login = ({ navigation }) => {
 
   /* Helpers */
   const handleInput = (text) => {
-    const isValid = Personnummer.valid(text)
-    setValid(isValid)
-
-    if (isValid) {
-      const parsedInput = Personnummer.parse(text).format(true)
-      setSocialSecurityNumber(parsedInput)
-      setSocialSecurityNumberCache(parsedInput)
-    } else {
-      setSocialSecurityNumber(text)
-    }
+    setValid(Personnummer.valid(text))
+    setCachedSsn(text)
+    setSocialSecurityNumber(text)
   }
 
   const openBankId = (token) => {
@@ -109,9 +102,14 @@ export const Login = ({ navigation }) => {
     navigation.navigate('Children')
   }
 
-  const startLogin = async () => {
+  const ssnValue = socialSecurityNumber || cachedSsn
+
+  const startLogin = async (text) => {
     showModal(true)
-    const status = await api.login(socialSecurityNumber)
+    const ssn = Personnummer.parse(text).format(true)
+    setCachedSsn(ssn)
+    setSocialSecurityNumber(ssn)
+    const status = await api.login(ssn)
     if (status.token !== 'fake') {
       openBankId(status.token)
     }
@@ -139,6 +137,10 @@ export const Login = ({ navigation }) => {
   const CheckIcon = (style) => <Icon {...style} name="checkmark-outline" />
   const LogoutIcon = (style) => <Icon {...style} name="close-outline" />
   const PersonIcon = (style) => <Icon {...style} name="person-outline" />
+  const ClearIcon = (style) => <Icon {...style} name="close-outline" />
+  const clearInput = (props) => <TouchableWithoutFeedback onPress={() => handleInput('')}>
+    <ClearIcon {...props} />
+  </TouchableWithoutFeedback>
 
   return (
     <KeyboardAvoidingView
@@ -182,7 +184,7 @@ export const Login = ({ navigation }) => {
                   style={{
                     marginTop: 32,
                   }}>
-                  <Text category="h5">{socialSecurityNumber}</Text>
+                  <Text category="h5">{ssnValue}</Text>
                   <Text
                     style={{
                       textAlign: 'center',
@@ -253,16 +255,18 @@ export const Login = ({ navigation }) => {
                       <Input
                         label="Personnummer"
                         autoFocus
-                        value={socialSecurityNumber}
+                        value={ssnValue}
                         style={{ minHeight: 70 }}
                         accessoryLeft={PersonIcon}
+                        accessoryRight={clearInput}
                         keyboardType="numeric"
+                        onSubmitEditing={async (event) => await startLogin(event.nativeEvent.text)}
                         caption={error?.message || ''}
                         onChangeText={(text) => handleInput(text)}
-                        placeholder="Ditt personnr (10 eller 12 siffror)"
+                        placeholder="Ditt personnr"
                       />
                       <Button
-                        onPress={startLogin}
+                        onPress={async () => await startLogin(socialSecurityNumber)}
                         style={{ width: '100%' }}
                         appearence="ghost"
                         disabled={!valid}
@@ -270,7 +274,7 @@ export const Login = ({ navigation }) => {
                         accessoryRight={SecureIcon}
                         size="medium">
                         Öppna BankID
-                    </Button>
+                      </Button>
                     </View>
                   </View>
                 </Layout>
