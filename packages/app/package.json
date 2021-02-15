@@ -68,7 +68,7 @@
   "jest": {
     "preset": "react-native",
     "setupFilesAfterEnv": [
-      "react-native-gesture-handler/jestSetup",
+      "<rootDir>/setupTests.js",
       "@testing-library/jest-native/extend-expect"
     ],
     "transformIgnorePatterns": [
