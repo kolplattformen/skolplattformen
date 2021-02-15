@@ -5,6 +5,8 @@ import { StyleSheet, View, Alert } from 'react-native'
 import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 
 export const Notification = ({ item }) => {
+  const { api } = useApi()
+  const cookie = api.getSessionCookie()
   const open = async () => {
     try {
       if (await InAppBrowser.isAvailable()) {
@@ -13,6 +15,7 @@ export const Notification = ({ item }) => {
           enableBarCollapsing: true,
           enableUrlBarHiding: true,
           enableDefaultShare: false,        
+          headers: { cookie }
         })
       } else {
         Alert.alert('Det gick inte att öppna webbläsaren.')
