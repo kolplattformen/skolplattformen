@@ -76,7 +76,11 @@ export const ChildListItem = ({ navigation, child, color }) => {
         status="control"
         size="small"
         onPress={() =>
-          navigation.navigate('Child', {child, color, selectedTab: 'Nyheter'})
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Nyheter',
+          })
         }
         accessoryLeft={NewsIcon}>
         {`${(news || []).length}`}
@@ -89,7 +93,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
           navigation.navigate('Child', {
             child,
             color,
-            selectedTab: 'Notifieringar',
+            initialRouteName: 'Notifieringar',
           })
         }
         accessoryLeft={NotificationsIcon}>
@@ -100,7 +104,11 @@ export const ChildListItem = ({ navigation, child, color }) => {
         status="control"
         size="small"
         onPress={() =>
-          navigation.navigate('Child', {child, color, selectedTab: 'Kalender'})
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Kalender',
+          })
         }
         accessoryLeft={CalendarIcon}>
         {`${(notifications || []).length}`}
@@ -110,7 +118,11 @@ export const ChildListItem = ({ navigation, child, color }) => {
         status="control"
         size="small"
         onPress={() =>
-          navigation.navigate('Child', {child, color, selectedTab: 'Klassen'})
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Klassen',
+          })
         }
         accessoryLeft={PeopleIcon}>
         {`${(classmates || []).length}`}

@@ -129,7 +129,7 @@ const TabNavigator = ({initialRouteName = 'Nyheter'}) => (
 )
 
 export const Child = ({route, navigation}) => {
-  const {child, color, selectedTab} = route.params
+  const {child, color, initialRouteName} = route.params
 
   const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
@@ -150,7 +150,7 @@ export const Child = ({route, navigation}) => {
           accessoryLeft={BackAction}
           style={styles.topBar}
         />
-        <TabNavigator initialRouteName={selectedTab} />
+        <TabNavigator initialRouteName={initialRouteName} />
       </ChildProvider>
     </SafeAreaView>
   )
