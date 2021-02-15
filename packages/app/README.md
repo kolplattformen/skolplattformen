@@ -1,20 +1,35 @@
-# `app`
+# `Öppna Skolplattformen App
 
-This is a demo app for using the API
+This is the app for Öppna Skolplattformen
 
-## Usage
+## Get started
 
-Clone the repo and make sure you have react-native installed:
+To get started using the iOS simulator start by installing the JavaScript
+dependencies using
 
-    npm i -g react-native
+```
+$ yarn
+```
 
-To run the app in a simulator:
+Next you need to install the [Cocoapods](https://cocoapods.org/) dependencies
+for the iOS project
 
-    react-native run-ios
+```
+$ cd ios
+$ pod setup
+$ pod install
+```
+
+You should now be setup to run the app in the Simulator. Run the `ios` command
+in the root of the app.
+
+```
+$ yarn ios
+```
 
 ## TODO
 
-  [x] Välj barn
-  [x] Login
-  [ ] Anmäl frånvaro
-  [ ] Settings
+[x] Välj barn
+[x] Login
+[ ] Anmäl frånvaro
+[ ] Settings
