@@ -22,7 +22,9 @@ export const Notification = ({item}) => {
           <View {...headerProps}>
             <Text category="h6">{item.sender}</Text>
             <Text category="s1">
-              {item.category ? `${item.category} ` : ''}({displayDate})
+              {item.category ? item.category : ''}
+              {item.category && displayDate ? ' ' : ''}
+              {displayDate ? `(${displayDate})` : ''}
             </Text>
           </View>
         )}>
