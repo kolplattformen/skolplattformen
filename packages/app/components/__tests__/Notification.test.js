@@ -1,8 +1,6 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
+import { render } from '../../utils/testHelpers'
 import { Notification } from '../notification.component.js'
-import { ApplicationProvider } from '@ui-kitten/components'
-import * as eva from '@eva-design/eva'
 import MockDate from 'mockdate'
 
 const defaultItem = {
@@ -17,11 +15,7 @@ const setup = (customProps = {}) => {
     ...customProps,
   }
 
-  return render(
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <Notification {...props} />
-    </ApplicationProvider>
-  )
+  return render(<Notification {...props} />)
 }
 
 beforeEach(() => {
