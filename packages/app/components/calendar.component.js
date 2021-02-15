@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Image, View} from 'react-native'
+import { StyleSheet, Image, View } from 'react-native'
 import {
   Divider,
   List,
@@ -8,7 +8,7 @@ import {
   Text,
   Layout,
 } from '@ui-kitten/components'
-import {DateTime} from 'luxon'
+import { DateTime } from 'luxon'
 import moment from 'moment'
 import 'moment/locale/sv'
 
@@ -16,14 +16,14 @@ moment.locale('sv')
 
 // is not as versatile as moment.calendar()
 const displayDate = (date) =>
-  DateTime.fromISO(date).toRelative({locale: 'sv', style: 'long'})
+  DateTime.fromISO(date).toRelative({ locale: 'sv', style: 'long' })
 
-export const Calendar = ({calendar}) => {
+export const Calendar = ({ calendar }) => {
   const renderItemIcon = (startDate, endDate) => (props) => (
     <Icon {...props} name={'calendar'} />
   )
 
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <ListItem
       disabled={true}
       title={`${item.title}`}
@@ -33,10 +33,10 @@ export const Calendar = ({calendar}) => {
   )
 
   return !calendar?.length ? (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <Image
         source={require('../assets/girls.png')}
-        style={{height: 200, width: '100%'}}
+        style={{ height: 200, width: '100%' }}
       />
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
     </View>

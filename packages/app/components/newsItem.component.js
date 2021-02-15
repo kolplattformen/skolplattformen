@@ -61,12 +61,14 @@ export const NewsItem = ({ navigation, route }) => {
         <ScrollView>
           <Card
             style={styles.card}
-            header={(headerProps) => renderItemHeader(headerProps, data)}>
+            header={(headerProps) => renderItemHeader(headerProps, data)}
+          >
             <Markdown
               style={{
                 body: { color: 'black', fontSize: 17, lineHeight: 23 },
                 heading1: { color: 'black' },
-              }}>
+              }}
+            >
               {data.body}
             </Markdown>
           </Card>

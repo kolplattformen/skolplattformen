@@ -1,13 +1,13 @@
 import React from 'react'
-import {StatusBar} from 'react-native'
-import {NavigationContainer} from '@react-navigation/native'
-import {createStackNavigator} from '@react-navigation/stack'
-import {Login} from './login.component'
-import {Children} from './children.component'
-import {Child} from './child.component'
-import {NewsItem} from './newsItem.component'
+import { StatusBar } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { Login } from './login.component'
+import { Children } from './children.component'
+import { Child } from './child.component'
+import { NewsItem } from './newsItem.component'
 
-const {Navigator, Screen} = createStackNavigator()
+const { Navigator, Screen } = createStackNavigator()
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">

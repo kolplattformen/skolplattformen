@@ -1,7 +1,7 @@
 import React from 'react'
-import {render} from '@testing-library/react-native'
-import {Notification} from '../notification.component.js'
-import {ApplicationProvider} from '@ui-kitten/components'
+import { render } from '@testing-library/react-native'
+import { Notification } from '../notification.component.js'
+import { ApplicationProvider } from '@ui-kitten/components'
 import * as eva from '@eva-design/eva'
 import MockDate from 'mockdate'
 
@@ -20,7 +20,7 @@ const setup = (customProps = {}) => {
   return render(
     <ApplicationProvider {...eva} theme={eva.light}>
       <Notification {...props} />
-    </ApplicationProvider>,
+    </ApplicationProvider>
   )
 }
 
@@ -40,7 +40,7 @@ test('renders subtitle without date', () => {
     dateCreated: undefined,
   }
 
-  const screen = setup({item: itemWithoutDate})
+  const screen = setup({ item: itemWithoutDate })
 
   expect(screen.getByText('Bedömning')).toBeTruthy()
 })
@@ -51,7 +51,7 @@ test('renders subtitle without category', () => {
     category: undefined,
   }
 
-  const screen = setup({item: itemWithoutCategory})
+  const screen = setup({ item: itemWithoutCategory })
 
   expect(screen.getByText('(för 17 minuter sedan)')).toBeTruthy()
 })

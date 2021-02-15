@@ -4,10 +4,10 @@ import { Card, Text } from '@ui-kitten/components'
 import { StyleSheet, View } from 'react-native'
 import { Image } from './image.component'
 import { useChild } from './childContext.component'
-import {DateTime} from 'luxon'
+import { DateTime } from 'luxon'
 
 const displayDate = (date) =>
-  DateTime.fromISO(date).toRelative({locale: 'sv', style: 'long'})
+  DateTime.fromISO(date).toRelative({ locale: 'sv', style: 'long' })
 
 export const NewsListItem = ({ item }) => {
   const navigation = useNavigation()
@@ -24,7 +24,8 @@ export const NewsListItem = ({ item }) => {
             {displayDate(item.published || item.modified)}
           </Text>
         </View>
-      )}>
+      )}
+    >
       <Image src={item.fullImageUrl} style={styles.image} />
     </Card>
   )

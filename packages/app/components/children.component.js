@@ -45,19 +45,19 @@ export const Children = ({ navigation }) => {
             ))}
           </Layout>
         ) : (
-            <Layout style={styles.loading}>
-              <Image
-                source={require('../assets/girls.png')}
-                style={{ height: 400, width: '100%' }}
-              />
-              <View style={{ flexDirection: 'row' }}>
-                <Spinner size="large" status="warning" />
-                <Text category="h1" style={{ marginLeft: 10, marginTop: -7 }}>
-                  Laddar...
+          <Layout style={styles.loading}>
+            <Image
+              source={require('../assets/girls.png')}
+              style={{ height: 400, width: '100%' }}
+            />
+            <View style={{ flexDirection: 'row' }}>
+              <Spinner size="large" status="warning" />
+              <Text category="h1" style={{ marginLeft: 10, marginTop: -7 }}>
+                Laddar...
               </Text>
-              </View>
-            </Layout>
-          )}
+            </View>
+          </Layout>
+        )}
       </Layout>
     </SafeAreaView>
   )

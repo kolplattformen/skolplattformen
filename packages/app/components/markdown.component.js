@@ -11,7 +11,7 @@ const rules = {
     parent,
     styles,
     allowedImageHandlers,
-    defaultImageHandler,
+    defaultImageHandler
   ) => {
     const { src } = node.attributes
     return (
@@ -28,7 +28,8 @@ const rules = {
       <Text
         key={node.key}
         style={styles.link}
-        onPress={() => Linking.openURL(node.attributes.href)}>
+        onPress={() => Linking.openURL(node.attributes.href)}
+      >
         {children}
       </Text>
     )
@@ -37,9 +38,7 @@ const rules = {
 
 export const Markdown = ({ style, children }) => {
   return (
-    <MarkdownBase
-      rules={rules}
-      style={style}>
+    <MarkdownBase rules={rules} style={style}>
       {children}
     </MarkdownBase>
   )
