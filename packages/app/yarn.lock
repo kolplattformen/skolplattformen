@@ -1363,10 +1363,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-1.4.0.tgz#d42ce9c5bda11aa51a12a0253ef4718abeee3157"
-  integrity sha512-CMR21dop0fOgx211ohBqt5LDW4Zpnt792vX9oX/LSdgbGZS3GzMmhW0bcPBhuONerZqlTECmNPNHapYqvFF6Zg==
+"@skolplattformen/api-hooks@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-1.5.0.tgz#f1c69357b426389867a6a10b64d4586ed64e29a4"
+  integrity sha512-pR/sssKFYA692n36/twAa3uPbLpNRhQtigP5XCU0kQsE7GqngQ551a0dUD8uotmCCwGPyu5rmrt+PJb/5UkWng==
   dependencies:
     "@skolplattformen/embedded-api" "^0.22.0"
     react-redux "^7.2.2"
