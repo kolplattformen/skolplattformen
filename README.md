@@ -8,7 +8,7 @@ This is a try to reverse engineer Skolplattformen and create a more fast, consis
 
 We previously were testing having a proxy for the API. That was a bad idea, even if we werent saving any information on our side it still was an extra complexity so we encapsulated our API into its own npm package so the app still could be lightweight and not have to worry about the complex nature of the official API.
 
-Read about the embedded api here: https://github.com/kolplattformen/react-native-embedded-api
+Read about the embedded api here: https://github.com/kolplattformen/api-hooks
 
 ## App
 
