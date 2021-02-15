@@ -58,11 +58,11 @@ export const ChildListItem = ({ navigation, child, color }) => {
   }
 
   const Header = (props) => (
-    <View {...props} style={{ flexDirection: 'row' }}>
-      <View style={{ margin: 20 }}>
+    <View {...props} style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{margin: 20, marginRight: 0}}>
         <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
-      <View style={{ margin: 20 }}>
+      <View style={{margin: 20, flex: 1}}>
         <Text category="h6">{child.name?.split('(')[0]}</Text>
         <Text category="s1">{`${getClassName()}`}</Text>
       </View>
