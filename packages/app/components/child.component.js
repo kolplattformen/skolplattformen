@@ -117,8 +117,10 @@ const TopTabBar = ({ navigation, state }) => (
   </TabBar>
 )
 
-const TabNavigator = () => (
-  <Navigator tabBar={(props) => <TopTabBar {...props} />}>
+const TabNavigator = ({initialRouteName = 'Nyheter'}) => (
+  <Navigator
+    initialRouteName={initialRouteName}
+    tabBar={(props) => <TopTabBar {...props} />}>
     <Screen name="Nyheter" component={NewsScreen} />
     <Screen name="Notifieringar" component={NotificationsScreen} />
     <Screen name="Kalender" component={CalendarScreen} />
@@ -126,8 +128,8 @@ const TabNavigator = () => (
   </Navigator>
 )
 
-export const Child = ({ route, navigation }) => {
-  const { child, color } = route.params
+export const Child = ({route, navigation}) => {
+  const {child, color, initialRouteName} = route.params
 
   const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
@@ -148,7 +150,7 @@ export const Child = ({ route, navigation }) => {
           accessoryLeft={BackAction}
           style={styles.topBar}
         />
-        <TabNavigator />
+        <TabNavigator initialRouteName={initialRouteName} />
       </ChildProvider>
     </SafeAreaView>
   )
