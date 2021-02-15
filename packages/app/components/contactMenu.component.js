@@ -1,12 +1,12 @@
-import React from 'react'
-import { StyleSheet, Linking } from 'react-native'
 import {
   Button,
   Icon,
-  MenuItem,
   MenuGroup,
+  MenuItem,
   OverflowMenu,
 } from '@ui-kitten/components'
+import React from 'react'
+import { Linking, StyleSheet } from 'react-native'
 
 export const ContactMenu = ({ contact, selected, setSelected }) => {
   const [visible, setVisible] = React.useState(selected)

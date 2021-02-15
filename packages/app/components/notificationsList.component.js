@@ -1,6 +1,6 @@
+import { List } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { List } from '@ui-kitten/components'
 import { Notification } from './notification.component'
 
 export const NotificationsList = ({ notifications }) => {

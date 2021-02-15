@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { DateTime } from 'luxon'
-import moment from 'moment'
 import {
-  useNotifications,
-  useNews,
-  useClassmates,
   useCalendar,
-  useMenu,
+  useClassmates,
+  useNews,
+  useNotifications,
   useSchedule,
 } from '@skolplattformen/api-hooks'
-import { Button, Icon, Text, Card, Avatar } from '@ui-kitten/components'
+import { Avatar, Button, Card, Icon, Text } from '@ui-kitten/components'
+import { DateTime } from 'luxon'
+import moment from 'moment'
+import React, { useEffect } from 'react'
+import { StyleSheet, View } from 'react-native'
 
 const NotificationsIcon = (props) => (
   <Icon {...props} name="alert-circle-outline" />
@@ -32,8 +31,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
   const { data: news, status: newsStatus } = useNews(child)
   const { data: classmates, status: classmatesStatus } = useClassmates(child)
   const { data: calendar, status: calendarStatus } = useCalendar(child)
-  const { data: menu, status: menuStatus } = useMenu(child)
-  const { data: schedule, status: scheduleStatus } = useSchedule(
+  const { data: schedule } = useSchedule(
     child,
     DateTime.local(),
     DateTime.local().plus({ days: 7 })
@@ -69,7 +67,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
     </View>
   )
 
-  const Footer = (props, info) => (
+  const Footer = () => (
     <View style={styles.itemFooter}>
       <Button
         style={[styles.item, styles[newsStatus]]}

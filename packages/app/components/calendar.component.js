@@ -1,27 +1,13 @@
-import React from 'react'
-import { StyleSheet, Image, View } from 'react-native'
-import {
-  Divider,
-  List,
-  ListItem,
-  Icon,
-  Text,
-  Layout,
-} from '@ui-kitten/components'
-import { DateTime } from 'luxon'
+import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
+import React from 'react'
+import { Image, StyleSheet, View } from 'react-native'
 
 moment.locale('sv')
 
-// is not as versatile as moment.calendar()
-const displayDate = (date) =>
-  DateTime.fromISO(date).toRelative({ locale: 'sv', style: 'long' })
-
 export const Calendar = ({ calendar }) => {
-  const renderItemIcon = (startDate, endDate) => (props) => (
-    <Icon {...props} name={'calendar'} />
-  )
+  const renderItemIcon = () => (props) => <Icon {...props} name={'calendar'} />
 
   const renderItem = ({ item }) => (
     <ListItem

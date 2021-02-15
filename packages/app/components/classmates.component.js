@@ -1,6 +1,6 @@
+import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Divider, List, ListItem, Icon, Text } from '@ui-kitten/components'
 import { ContactMenu } from './contactMenu.component'
 
 export const Classmates = ({ classmates }) => {

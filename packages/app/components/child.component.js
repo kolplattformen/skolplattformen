@@ -1,29 +1,29 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import {
-  TopNavigation,
-  TopNavigationAction,
-  Tab,
-  TabBar,
-  Layout,
-  Text,
-  Icon,
-} from '@ui-kitten/components'
-import { DateTime } from 'luxon'
-import { NewsList } from './newsList.component'
-import { Calendar } from './calendar.component'
-import { Classmates } from './classmates.component'
-import { NotificationsList } from './notificationsList.component'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import {
-  useNotifications,
-  useNews,
-  useClassmates,
   useCalendar,
+  useClassmates,
+  useNews,
+  useNotifications,
   useSchedule,
 } from '@skolplattformen/api-hooks'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import {
+  Icon,
+  Layout,
+  Tab,
+  TabBar,
+  Text,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components'
+import { DateTime } from 'luxon'
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Calendar } from './calendar.component'
 import { ChildProvider, useChild } from './childContext.component'
+import { Classmates } from './classmates.component'
+import { NewsList } from './newsList.component'
+import { NotificationsList } from './notificationsList.component'
 
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 

@@ -1,19 +1,13 @@
+import { Text } from '@ui-kitten/components'
 import React from 'react'
+import { Linking } from 'react-native'
 import MarkdownBase from 'react-native-markdown-display'
 import { Image } from './image.component'
-import { Text } from '@ui-kitten/components'
-import { Linking } from 'react-native'
 
 const rules = {
-  image: (
-    node,
-    children,
-    parent,
-    styles,
-    allowedImageHandlers,
-    defaultImageHandler
-  ) => {
+  image: (node) => {
     const { src } = node.attributes
+
     return (
       <Image
         key={src}
@@ -22,8 +16,7 @@ const rules = {
       />
     )
   },
-  link: (node, children, parent, styles) => {
-    const url = node.attributes.href
+  link: (node, children, _parent, styles) => {
     return (
       <Text
         key={node.key}

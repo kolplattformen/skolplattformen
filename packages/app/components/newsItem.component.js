@@ -1,5 +1,4 @@
-import React from 'react'
-import { SafeAreaView, StyleSheet, View, ScrollView } from 'react-native'
+import { useNewsDetails } from '@skolplattformen/api-hooks'
 import {
   Card,
   Divider,
@@ -9,10 +8,11 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import { Markdown } from './markdown.component'
-import { Image } from './image.component'
-import { useNewsDetails } from '@skolplattformen/api-hooks'
 import { DateTime } from 'luxon'
+import React from 'react'
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { Image } from './image.component'
+import { Markdown } from './markdown.component'
 
 const displayDate = (date) =>
   DateTime.fromISO(date).setLocale('sv').toLocaleString(DateTime.DATETIME_MED)
@@ -31,7 +31,7 @@ export const NewsItem = ({ navigation, route }) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   )
 
-  const renderItemHeader = (headerProps, newsItem) => (
+  const renderItemHeader = (headerProps) => (
     <View {...headerProps}>
       <Text category="h3">{newsItem.header}</Text>
       <Image src={newsItem.fullImageUrl} style={styles.image} />

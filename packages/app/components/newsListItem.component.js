@@ -1,10 +1,10 @@
-import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Card, Text } from '@ui-kitten/components'
-import { StyleSheet, View } from 'react-native'
-import { Image } from './image.component'
-import { useChild } from './childContext.component'
 import { DateTime } from 'luxon'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { useChild } from './childContext.component'
+import { Image } from './image.component'
 
 const displayDate = (date) =>
   DateTime.fromISO(date).toRelative({ locale: 'sv', style: 'long' })

@@ -1,28 +1,27 @@
+import { useApi } from '@skolplattformen/api-hooks'
+import {
+  Button,
+  Card,
+  Icon,
+  Input,
+  Layout,
+  Modal,
+  Text,
+} from '@ui-kitten/components'
+import Personnummer from 'personnummer'
 import React, { useEffect, useState } from 'react'
 import {
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Linking,
   Platform,
   SafeAreaView,
   StyleSheet,
-  Image,
-  Linking,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard,
   View,
 } from 'react-native'
-
-import {
-  Button,
-  Icon,
-  Modal,
-  Card,
-  Text,
-  Layout,
-  Input,
-} from '@ui-kitten/components'
-import Personnummer from 'personnummer'
 import { useAsyncStorage } from 'use-async-storage'
-import { useApi } from '@skolplattformen/api-hooks'
 
 const funArguments = [
   'öppna',
