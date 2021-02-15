@@ -33,6 +33,7 @@
     "react-native-calendar-strip": "2.1.6",
     "react-native-fix-image": "2.1.0",
     "react-native-gesture-handler": "1.9.0",
+    "react-native-inappbrowser-reborn": "^3.5.1",
     "react-native-markdown-display": "7.0.0-alpha.2",
     "react-native-reanimated": "1.13.2",
     "react-native-safe-area-context": "3.1.9",

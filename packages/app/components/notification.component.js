@@ -1,13 +1,27 @@
 import { Card, Text } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { ModalWebView } from './modalWebView.component'
+import { StyleSheet, View, Alert } from 'react-native'
+import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 
 export const Notification = ({ item }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const open = () => setIsOpen(true)
-  const close = () => setIsOpen(false)
+  const open = async () => {
+    try {
+      if (await InAppBrowser.isAvailable()) {
+        await InAppBrowser.open(item.url, {
+          showTitle: true,
+          enableBarCollapsing: true,
+          enableUrlBarHiding: true,
+          enableDefaultShare: false,        
+        })
+      } else {
+        Alert.alert('Det gick inte att öppna webbläsaren.')
+      }  
+    } catch (error) {
+      Alert.alert(`Ett fel inträffade när vi försökte öppna webbläsaren: ${error.message}`)
+    }
+
+  }
 
   const displayDate = DateTime.fromISO(item.dateCreated).toRelative({
     locale: 'sv',
@@ -31,7 +45,6 @@ export const Notification = ({ item }) => {
       >
         <Text>{item.message}</Text>
       </Card>
-      {isOpen && <ModalWebView url={item.url} onClose={close} />}
     </>
   )
 }
