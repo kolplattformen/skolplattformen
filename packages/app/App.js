@@ -8,6 +8,7 @@ import init from '@skolplattformen/embedded-api'
 import {ApiProvider} from '@skolplattformen/api-hooks'
 import CookieManager from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {StatusBar} from 'react-native'
 
 const api = init(fetch, () => {
   CookieManager.clearAll()
@@ -16,6 +17,7 @@ const api = init(fetch, () => {
 export default () => {
   return (
     <ApiProvider api={api} storage={AsyncStorage}>
+      <StatusBar barStyle="dark-content" />
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{...eva.light, ...customization}}>
         <AppNavigator />
