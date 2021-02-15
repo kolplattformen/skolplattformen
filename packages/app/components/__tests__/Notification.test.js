@@ -31,8 +31,6 @@ beforeEach(() => {
 test('renders subtitle with date', () => {
   const screen = setup()
 
-  screen.debug()
-
   expect(screen.getByText('Bedömning (för 17 minuter sedan)')).toBeTruthy()
 })
 
@@ -54,8 +52,6 @@ test('renders subtitle without category', () => {
   }
 
   const screen = setup({item: itemWithoutCategory})
-
-  screen.debug()
 
   expect(screen.getByText('(för 17 minuter sedan)')).toBeTruthy()
 })
