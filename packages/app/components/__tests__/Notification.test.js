@@ -3,7 +3,6 @@ import {render} from '@testing-library/react-native'
 import {Notification} from '../notification.component.js'
 import {ApplicationProvider} from '@ui-kitten/components'
 import * as eva from '@eva-design/eva'
-import customization from '../../design/customization.json'
 import MockDate from 'mockdate'
 
 const defaultItem = {
@@ -19,7 +18,7 @@ const setup = (customProps = {}) => {
   }
 
   return render(
-    <ApplicationProvider {...eva} theme={{...eva.light, ...customization}}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <Notification {...props} />
     </ApplicationProvider>,
   )
