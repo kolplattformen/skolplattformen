@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h5 className="mb-4 text-xl font-semibold">Vilka är vi?</h5>
+          <h6 className="mb-4 text-xl font-semibold">Vilka är vi?</h6>
           <ul className="space-y-2">
             {team.map(({ name, twitter }) => (
               <li className="flex items-center space-x-2" key={name}>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h5 className="mb-4 text-xl font-semibold">Länkar</h5>
+          <h6 className="mb-4 text-xl font-semibold">Länkar</h6>
           <ul className="space-y-2">
             <li>
               <Link.Internal href="/integritet">
