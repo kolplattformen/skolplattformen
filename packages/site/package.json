@@ -4,18 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
-    "next": "^10.0.6",
+    "next": "^10.0.7",
     "next-images": "^1.4.0",
-    "react": "^16.13.1",
+    "react": "^17.0.1",
     "react-countup": "^4.3.3",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-id-swiper": "^4.0.0",
     "react-scroll": "^1.8.0",
     "react-visibility-sensor": "^5.1.1",
-    "sharp": "^0.26.3",
-    "swiper": "^6.0.4"
+    "sharp": "^0.27.1",
+    "swiper": "6.1.1"
   },
   "scripts": {
     "dev": "next dev",
@@ -32,7 +31,7 @@
     "@testing-library/react": "11.2.5",
     "autoprefixer": "^10.2.4",
     "babel-eslint": "10.1.0",
-    "eslint": "7.19.0",
+    "eslint": "7.20.0",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-react": "7.22.0",
