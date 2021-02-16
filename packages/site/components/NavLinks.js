@@ -32,8 +32,8 @@ const NavLinks = () => {
       )
 
   return (
-    <ul className="main-nav__navigation-box">
-      <li className="dropdown">
+    <ul>
+      <li>
         <Link to="wrapper" href="/#">
           Hem
         </Link>

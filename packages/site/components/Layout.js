@@ -21,7 +21,7 @@ const Layout = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollTop)
     }
-  })
+  }, [])
 
   return (
     <div>
