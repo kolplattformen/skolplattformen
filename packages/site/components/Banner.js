@@ -16,7 +16,7 @@ import NextLink from 'next/link'
 const Banner = () => {
   return (
     <div className="header">
-      <div className="relative max-w-6xl mx-auto mb-20 md:pt-32 md:mb-52">
+      <div className="relative max-w-6xl mx-auto mt-5 mb-20 md:pt-32 md:mb-52">
         <div className="px-5 grid grid-cols-1 md:grid-cols-2 md:px-0 gap-12">
           <div>
             <div className="hidden select-none md:block">

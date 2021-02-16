@@ -1,7 +1,7 @@
 const QA = () => {
   return (
     <div className="header">
-      <div className="max-w-6xl mx-auto my-24 prose">
+      <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose">
         <h1>Frågor och svar om Öppna Skolplattformen</h1>
         <h3>Är Öppna Skolplattformen lanserad?</h3>
         <p>

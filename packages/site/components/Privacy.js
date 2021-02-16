@@ -1,7 +1,7 @@
-const Banner = () => {
+const Privacy = () => {
   return (
     <div className="header">
-      <div className="max-w-6xl mx-auto my-24 prose">
+      <div className="max-w-6xl mx-auto px-5 md:px-0 my-5 md:my-24 prose">
         <h1>Öppna Skolplattformen</h1>
         <h2>Integritetspolicy</h2>
         <p>
@@ -94,4 +94,4 @@ const Banner = () => {
   )
 }
 
-export default Banner
+export default Privacy
