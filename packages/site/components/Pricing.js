@@ -35,7 +35,7 @@ const baseFeatures = [
 
 const Pricing = () => {
   return (
-    <section className="px-5 md:px-0 py-8 md:py-32" id="vad-kostar-det">
+    <section className="px-5 py-8 md:px-0 md:py-32" id="vad-kostar-det">
       <div className="max-w-2xl mx-auto">
         <SectionTitle
           title="Vad kostar det och varför är det inte gratis?"
@@ -46,7 +46,7 @@ const Pricing = () => {
       </div>
       <div className="flex">
         <div className="flex flex-col items-center inline-block px-5 py-8 mx-auto text-center shadow-lg rounded-md">
-          <h5 className="text-3xl text-gray-800">Engångskostnad</h5>
+          <h3 className="text-3xl text-gray-800">Engångskostnad</h3>
           <div className="mt-5 text-6xl text-pink-500">
             {formatPrice(price)}
           </div>
