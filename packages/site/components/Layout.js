@@ -17,8 +17,9 @@ const Layout = (props) => {
         <meta property="og:image" content={logo} />
         <title>{props.pageTitle}</title>
         <link rel="shortcut icon" type="image/png" href={favImg} />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <script
