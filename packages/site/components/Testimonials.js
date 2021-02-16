@@ -47,6 +47,7 @@ const Testimonials = () => {
           <div className="max-w-md px-8 py-4 bg-white rounded-lg shadow-lg">
             <div className="flex justify-center -mt-16 md:justify-start">
               <img
+                alt={testimonial.name}
                 className="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full"
                 src={testimonial.image}
               />
