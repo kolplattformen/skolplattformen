@@ -1,28 +1,10 @@
 import Head from 'next/head'
 import React from 'react'
-import { Link as ScrollLink } from 'react-scroll'
 import favImg from '../assets/img/favicon.png'
 import logo from '../assets/img/logo.png'
 import { GA_TRACKING_ID } from './gtag'
 
 const Layout = (props) => {
-  const [scrollTop, setScrollTop] = React.useState(false)
-
-  const handleScrollTop = () => {
-    if (window.scrollY > 70) {
-      setScrollTop(true)
-    } else if (window.scrollY < 70) {
-      setScrollTop(false)
-    }
-  }
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScrollTop)
-    return () => {
-      window.removeEventListener('scroll', handleScrollTop)
-    }
-  }, [])
-
   return (
     <div>
       <Head>
