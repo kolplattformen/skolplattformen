@@ -11,6 +11,10 @@ const Layout = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta property="og:title" content="Öppna skolplattformen" />
         <meta
+          name="description"
+          content="Öppna Skolplattformen är en app för iOS och Android som gör det enklare för föräldrar att komma åt uppgifter i Skolplattformen."
+        />
+        <meta
           property="og:description"
           content="Öppna Skolplattformen är en app för iOS och Android som gör det enklare för föräldrar att komma åt uppgifter i Skolplattformen."
         />
