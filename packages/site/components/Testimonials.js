@@ -42,7 +42,7 @@ const Testimonials = () => {
       {testimonials.map((testimonial) => (
         <div
           className="flex justify-center mt-12 md:mt-0"
-          key={testimonial.title}
+          key={testimonial.name}
         >
           <div className="max-w-md px-8 py-4 bg-white rounded-lg shadow-lg">
             <div className="flex justify-center -mt-16 md:justify-start">
