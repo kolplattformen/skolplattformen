@@ -2,7 +2,7 @@ import React from 'react'
 import imgKarin from '../assets/img/karin.jpg'
 import imgNiels from '../assets/img/niels.jpg'
 import imgPer from '../assets/img/per.jpg'
-import imgFredrik from '../assets/img/wass.png'
+import imgFredrik from '../assets/img/wass.jpg'
 import Section from './Section'
 
 const testimonials = [
