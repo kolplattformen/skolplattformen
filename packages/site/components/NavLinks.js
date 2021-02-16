@@ -30,7 +30,7 @@ const NavLinks = ({ onClick }) => {
       </ScrollLink>
     ) : (
       <NavLink href={href}>
-        <a>{children}</a>
+        <a onClick={() => onClick?.()}>{children}</a>
       </NavLink>
     )
 
