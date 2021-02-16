@@ -54,7 +54,7 @@ const Testimonials = () => {
             <div>
               <p className="mt-2 text-gray-600">{testimonial.text}</p>
             </div>
-            <div className="flex flex-col mt-4 text-pink-500">
+            <div className="flex flex-col mt-4 text-pink-600">
               {testimonial.name}
               <div className="text-sm text-gray-500">{testimonial.title}</div>
             </div>

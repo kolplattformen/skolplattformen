@@ -20,12 +20,18 @@ const AppShots = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4">
-        <img src={screenshotLogin} />
-        <img src={screenshotChildren} />
-        <img src={screenshotChildNews} />
-        <img src={screenshotChildNotifications} />
-        <img src={screenshotChildCalendar} />
-        <img src={screenshotChildClass} />
+        <img src={screenshotLogin} alt="Inloggning med BankID" />
+        <img
+          src={screenshotChildren}
+          alt="Lista med dina barn i Stockholms Stad"
+        />
+        <img src={screenshotChildNews} alt="Barnets nyheter" />
+        <img
+          src={screenshotChildNotifications}
+          alt="Lista med barnets aviseringar"
+        />
+        <img src={screenshotChildCalendar} alt="Barnets kalender" />
+        <img src={screenshotChildClass} alt="Barnets klasskompisar" />
       </div>
     </section>
   )

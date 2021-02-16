@@ -43,7 +43,7 @@ const HeaderHome = () => {
             'bg-white bg-opacity-0 duration-200 transition-colors sticky'
           )}
         >
-          <div className=" flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-0">
+          <div className="flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-0">
             <Link href="/">
               <a>
                 <img
@@ -60,6 +60,7 @@ const HeaderHome = () => {
         </div>
       </header>
       <button
+        aria-label={displayMobileMenu ? 'Stäng meny' : 'Visa meny'}
         className="fixed z-30 block w-6 w-16 p-5 text-white bg-gray-900 rounded-full md:hidden bottom-5 right-5"
         onClick={() => setDisplayMobileMenu(!displayMobileMenu)}
       >
