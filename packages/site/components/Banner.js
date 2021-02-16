@@ -67,9 +67,9 @@ const Banner = () => {
               byggt en bättre. Med all information du behöver som förälder.
               Snabbare och framförallt – mycket mindre krångel.
             </p>
-            <p className="flex sm:items-center sm:flex-row md:space-x-2">
+            <p className="flex items-center sm:flex-row md:space-x-2">
               <Link.External
-                className="inline-block p-3 md:p-0"
+                className="inline-block"
                 href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
                 target="_blank"
               >
@@ -87,7 +87,7 @@ const Banner = () => {
                 <img
                   alt="Ladda ner i Google Play Store"
                   src={playstore}
-                  className="w-auto h-16 md:h-20"
+                  className="h-16 md:h-20"
                 />
               </Link.External>
             </p>
