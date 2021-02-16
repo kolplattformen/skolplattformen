@@ -7,7 +7,7 @@
     "ios": "react-native-fix-image && react-native run-ios",
     "pod": "npx pod-install",
     "start": "react-native start",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -68,7 +68,7 @@
   "jest": {
     "preset": "react-native",
     "setupFilesAfterEnv": [
-      "react-native-gesture-handler/jestSetup",
+      "<rootDir>/setupTests.js",
       "@testing-library/jest-native/extend-expect"
     ],
     "transformIgnorePatterns": [
