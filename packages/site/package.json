@@ -4,17 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@tailwindcss/typography": "^0.4.0",
     "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "next": "^10.0.6",
     "next-images": "^1.4.0",
     "react": "^16.13.1",
-    "react-bootstrap": "^1.0.1",
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-id-swiper": "^4.0.0",
-    "react-modal-video": "^1.2.3",
     "react-scroll": "^1.8.0",
     "react-visibility-sensor": "^5.1.1",
     "sharp": "^0.26.3",
@@ -30,6 +27,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.4.0",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "autoprefixer": "^10.2.4",
