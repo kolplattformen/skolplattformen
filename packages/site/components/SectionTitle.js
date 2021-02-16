@@ -1,10 +1,10 @@
-const SectionTitle = (props) => {
+const SectionTitle = ({ text, title }) => {
   return (
-    <div className="mb-16 text-center">
-      <h2 className="mb-5 text-5xl font-bold leading-tight text-gray-800">
-        {props.title}
+    <div className="mb-16 text-center space-y-5">
+      <h2 className="text-4xl md:text-5xl font-bold leading-tight text-gray-800">
+        {title}
       </h2>
-      <p className="text-gray-600">{props.text}</p>
+      {text && <p className="text-gray-600">{text}</p>}
     </div>
   )
 }

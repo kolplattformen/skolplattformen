@@ -1,8 +1,8 @@
 import React from 'react'
 import { formatPrice } from '../utils/intl'
-import ButtonLink from './ButtonLink'
 import SectionTitle from './SectionTitle'
 import Icon from './Icon'
+import DownloadButtons from './DownloadButtons'
 
 const price = 12
 
@@ -35,7 +35,7 @@ const baseFeatures = [
 
 const Pricing = () => {
   return (
-    <section className="pb-32" id="vad-kostar-det">
+    <section className="px-5 md:px-0 py-8 md:py-32" id="vad-kostar-det">
       <div className="max-w-2xl mx-auto">
         <SectionTitle
           title="Vad kostar det och varför är det inte gratis?"
@@ -66,7 +66,7 @@ const Pricing = () => {
               </li>
             ))}
           </ul>
-          <ButtonLink href="#">App Store</ButtonLink>
+          <DownloadButtons />
         </div>
       </div>
     </section>

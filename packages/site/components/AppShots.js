@@ -8,7 +8,10 @@ import SectionTitle from './SectionTitle'
 
 const AppShots = () => {
   return (
-    <section className="max-w-6xl py-32 mx-auto" id="screenshots">
+    <section
+      className="max-w-6xl px-5 md:px-0 py-8 md:py-32 mx-auto"
+      id="screenshots"
+    >
       <div className="max-w-2xl mx-auto">
         <SectionTitle
           title="Så här ser appen ut"
@@ -16,7 +19,7 @@ const AppShots = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-x-4">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4">
         <img src={screenshotLogin} />
         <img src={screenshotChildren} />
         <img src={screenshotChildNews} />

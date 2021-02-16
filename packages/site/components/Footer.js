@@ -12,7 +12,7 @@ const team = [
 const Footer = () => {
   return (
     <footer>
-      <div className="max-w-6xl py-12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-x-12">
+      <div className="items-start max-w-6xl py-8 md:py-12 mx-auto grid px-5 md:px-0 grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-5">
         <div>
           <p className="mb-5">
             Skolplattformen utvecklas av föräldrar för föräldrar. Vill du hjälpa
@@ -29,7 +29,7 @@ const Footer = () => {
 
         <div>
           <h5 className="mb-4 text-xl font-semibold">Vilka är vi?</h5>
-          <ul>
+          <ul className="space-y-2">
             {team.map(({ name, twitter }) => (
               <li className="flex items-center space-x-2" key={name}>
                 <div className="w-5 text-gray-700">
@@ -45,7 +45,7 @@ const Footer = () => {
 
         <div>
           <h5 className="mb-4 text-xl font-semibold">Länkar</h5>
-          <ul>
+          <ul className="space-y-2">
             <li>
               <Link.Internal href="/integritet">
                 Integritetspolicy
@@ -57,15 +57,15 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div>
-          <div className="p-5 bg-white shadow-md rounded-md">
-            <div className="mb-3 text-gray-800">
-              @iteam1337 Digitalisering på riktigt.
-            </div>
-            <div>
-              <Link.External href="https://iteam.se">Iteam</Link.External>
-              <div className="text-sm text-gray-500">En sponsor</div>
-            </div>
+        <div className="p-5 bg-white shadow-md rounded-md">
+          <div className="mb-3 text-gray-800">
+            @iteam1337 Digitalisering på riktigt.
+          </div>
+          <div>
+            <Link.External href="https://iteam.se" target="_blank">
+              Iteam
+            </Link.External>
+            <div className="text-sm text-gray-500">En sponsor</div>
           </div>
         </div>
       </div>

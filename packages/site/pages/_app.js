@@ -1,9 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap.min.css'
-import '../assets/css/font-awesome.min.css'
 import 'swiper/swiper-bundle.min.css'
-import '../assets/css/style.css'
-import '../assets/css/responsive.css'
-import '../assets/css/custom.css'
 import '../styles/global.css'
 
 import Layout from '../components/Layout'

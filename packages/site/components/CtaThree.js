@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import img2 from '../assets/img/girls.png'
-import ButtonLink from './ButtonLink'
+import DownloadButtons from './DownloadButtons'
 import Section from './Section'
 import { H2 } from './Typography'
 
@@ -15,7 +15,7 @@ const CtaThree = () => {
           som är aktuellt för alla barnen på en och samma skärm.
         </p>
         <div className="mt-5">
-          <ButtonLink href="#">App Store</ButtonLink>
+          <DownloadButtons />
         </div>
       </div>
 

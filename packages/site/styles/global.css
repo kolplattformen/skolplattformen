@@ -8,6 +8,15 @@
   --twMw6xl: 72rem;
 }
 
+html,
+body {
+  @apply font-sans text-gray-700;
+}
+
+p {
+  @apply leading-loose font-normal;
+}
+
 .grid-main {
   grid-template-columns: var(--tw5) 1fr minmax(0, var(--twMw6xl)) 1fr var(--tw5);
 }
@@ -19,8 +28,14 @@
   content: '';
   height: 100%;
   position: absolute;
-  right: -15%;
-  top: 0%;
+  right: 0;
+  top: 0;
   width: 100%;
   z-index: -1;
+}
+
+@media (max-width: 480px) {
+  .header:before {
+    display: none;
+  }
 }

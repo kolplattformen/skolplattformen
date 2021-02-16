@@ -1,4 +1,5 @@
 import NavLinks from './NavLinks'
+import Link from './Link'
 
 const MobileMenu = () => {
   return (
@@ -24,26 +25,10 @@ const MobileMenu = () => {
             föräldrar. Hjälp till du också. Kontakta oss nedan:
           </p>
           <p>
-            <a href="mailto:info@skolplattformen.org">
+            <Link href="mailto:info@skolplattformen.org">
               info@skolplattformen.org
-            </a>{' '}
-            <br />
-            <a href="tel:+46707755831">+46 70 775 58 31</a>
+            </Link>
           </p>
-          <div className="side-menu__social">
-            <a href="#">
-              <i className="fa fa-facebook-square"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-twitter"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-instagram"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-pinterest-p"></i>
-            </a>
-          </div>
         </div>
       </div>
     </div>

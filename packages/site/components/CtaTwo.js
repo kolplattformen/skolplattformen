@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import img1 from '../assets/img/boys.png'
 import DownloadButtons from './DownloadButtons'
-import ButtonLink from './ButtonLink'
 import Section from './Section'
 import { H2 } from './Typography'
 
@@ -17,7 +16,7 @@ const CtaTwo = () => {
           med BankID som vanligt.
         </p>
         <div className="mt-5">
-          <ButtonLink href="#">App Store</ButtonLink>
+          <DownloadButtons />
         </div>
       </div>
     </Section>

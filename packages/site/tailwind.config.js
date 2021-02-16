@@ -2,6 +2,9 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+    },
     extend: {
       animation: {
         'bounce-slow': 'slow-bounce 2s ease-in-out infinite',
@@ -28,5 +31,5 @@ module.exports = {
       animation: ['motion-safe'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

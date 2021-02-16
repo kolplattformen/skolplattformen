@@ -59,18 +59,6 @@ const Layout = (props) => {
       <div className="page-wrapper" id="wrapper">
         {props.children}
       </div>
-      {scrollTop === true ? (
-        <div className="back-to-top show" style={{ cursor: 'pointer' }}>
-          <ScrollLink
-            to="wrapper"
-            smooth={true}
-            duration={500}
-            className="scroll-to-top"
-          >
-            <i className="fa fa-chevron-up"></i>
-          </ScrollLink>
-        </div>
-      ) : null}
     </div>
   )
 }

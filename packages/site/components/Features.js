@@ -83,7 +83,7 @@ const Features = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto" id="funktioner">
+    <section className="max-w-6xl mx-auto px-5 md:px-0" id="funktioner">
       <div className="max-w-2xl mx-auto">
         <SectionTitle
           title="Enkelhet och snabbhet"
@@ -106,7 +106,7 @@ const Features = () => {
       </Swiper>
       <div
         id="features-paginations"
-        className="flex justify-center space-x-2"
+        className="flex justify-center mt-8 space-x-2"
       />
     </section>
   )

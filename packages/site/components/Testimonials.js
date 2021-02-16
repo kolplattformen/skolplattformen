@@ -38,9 +38,12 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <Section padding="pb-8 pt-16 md:pt-32 md:pb-20">
+    <Section padding="py-8 md:pt-32 md:pb-20">
       {testimonials.map((testimonial) => (
-        <div className="flex justify-center" key={testimonial.title}>
+        <div
+          className="flex justify-center mt-12 md:mt-0"
+          key={testimonial.title}
+        >
           <div className="max-w-md px-8 py-4 bg-white rounded-lg shadow-lg">
             <div className="flex justify-center -mt-16 md:justify-start">
               <img

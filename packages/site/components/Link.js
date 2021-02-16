@@ -8,9 +8,14 @@ const Internal = ({ href, children }) => {
   )
 }
 
-const External = ({ href, children }) => {
+const External = ({ href, children, target }) => {
   return (
-    <a className="text-indigo-800" href={href}>
+    <a
+      className="text-indigo-800"
+      href={href}
+      target={target}
+      rel={target === '_blank' ? 'noopener noreferrer' : ''}
+    >
       {children}
     </a>
   )

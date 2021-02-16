@@ -1,77 +1,82 @@
 import Link from 'next/link'
-import React from 'react'
 import headerLogo from '../assets/img/logo.png'
+import React from 'react'
 import NavLinks from './NavLinks'
 import classnames from 'classnames'
+import Icon from './Icon'
+
+const useMobile = (cb) => {
+  React.useEffect(() => {
+    const mobileMql = window.matchMedia('(max-width: 480px)')
+
+    mobileMql.addEventListener?.('change', cb)
+
+    // Safari < 14
+    if (mobileMql.addListener) {
+      mobileMql.addListener(cb)
+    }
+
+    return () => {
+      mobileMql.removeEventListener?.('change', cb)
+
+      if (mobileMql.removeListener) {
+        mobileMql.removeListener('change', cb)
+      }
+    }
+  }, [])
+}
 
 const HeaderHome = () => {
-  const [sticky, setSticky] = React.useState(false)
+  const [displayMobileMenu, setDisplayMobileMenu] = React.useState(false)
 
-  const handleScroll = () => {
-    if (window.scrollY > 70) {
-      setSticky(true)
-    } else if (window.scrollY < 70) {
-      setSticky(false)
-    }
-  }
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    mobileMenu()
-    return () => {
-      mobileMenu()
-      window.removeEventListener('scroll', handleScroll)
+  useMobile((e) => {
+    if (!e.matches) {
+      setDisplayMobileMenu(false)
     }
   })
 
-  const mobileMenu = () => {
-    document
-      .querySelector('.side-menu__toggler')
-      .addEventListener('click', function (e) {
-        document.querySelector('.side-menu__block').classList.toggle('active')
-        e.preventDefault()
-      })
-
-    //Close Mobile Menu
-    let sideMenuCloser = document.querySelectorAll(
-      '.side-menu__close-btn, .side-menu__block-overlay'
-    )
-
-    sideMenuCloser.forEach((sideMenuCloserBtn) => {
-      sideMenuCloserBtn.addEventListener('click', function (e) {
-        document.querySelector('.side-menu__block').classList.remove('active')
-        e.preventDefault()
-      })
-    })
-  }
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-10">
-      <div
-        className={classnames(
-          'bg-white bg-opacity-0 duration-200 transition-colors',
-          {
-            'shadow-md fade-in-down bg-opacity-100': sticky,
-          }
-        )}
-      >
-        <div className="sticky flex items-center justify-between max-w-6xl py-4 mx-auto">
-          <Link href="/">
-            <a>
-              <img className="h-24" src={headerLogo} alt="Skolplattformen" />
-            </a>
-          </Link>
-          <nav>
-            <div className="header-menu">
-              <div id="menu-button" className="block">
-                <i className="fa fa-bars"></i>
-              </div>
+    <>
+      <header>
+        <div
+          className={classnames(
+            'bg-white bg-opacity-0 duration-200 transition-colors sticky'
+          )}
+        >
+          <div className=" flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-0">
+            <Link href="/">
+              <a>
+                <img
+                  className="h-12 md:h-24"
+                  src={headerLogo}
+                  alt="Skolplattformen"
+                />
+              </a>
+            </Link>
+            <nav className="hidden md:block">
               <NavLinks />
-            </div>
-          </nav>
+            </nav>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <button
+        className="fixed z-30 block w-6 w-16 p-5 text-white bg-gray-900 rounded-full md:hidden bottom-5 right-5"
+        onClick={() => setDisplayMobileMenu(!displayMobileMenu)}
+      >
+        {displayMobileMenu ? <Icon.Times /> : <Icon.Menu />}
+      </button>
+      {displayMobileMenu && (
+        <>
+          <div
+            className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50"
+            onClick={() => setDisplayMobileMenu(false)}
+          />
+          <div className="fixed top-0 bottom-0 left-0 z-20 w-9/12 h-screen p-5 bg-white">
+            <NavLinks onClick={() => setDisplayMobileMenu(false)} />
+          </div>
+        </>
+      )}
+    </>
   )
 }
 
