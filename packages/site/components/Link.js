@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import classnames from 'classnames'
 
 const Internal = ({ href, children }) => {
   return (
@@ -8,10 +9,10 @@ const Internal = ({ href, children }) => {
   )
 }
 
-const External = ({ href, children, target }) => {
+const External = ({ className, href, children, target }) => {
   return (
     <a
-      className="text-indigo-800"
+      className={classnames('text-indigo-800', className)}
       href={href}
       target={target}
       rel={target === '_blank' ? 'noopener noreferrer' : ''}

@@ -67,29 +67,31 @@ const Banner = () => {
               byggt en bättre. Med all information du behöver som förälder.
               Snabbare och framförallt – mycket mindre krångel.
             </p>
-            <p className="flex items-center space-x-2">
+            <p className="flex sm:items-center sm:flex-row md:space-x-2">
               <Link.External
+                className="inline-block p-3 md:p-0"
                 href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
                 target="_blank"
               >
                 <img
                   alt="Ladda ner i App Store"
                   src={appstore}
-                  className="w-auto h-16"
+                  className="w-auto h-12"
                 />
               </Link.External>
               <Link.External
+                className="inline-block"
                 href="https://play.google.com/store/apps/details?id=org.skolplattformen.app"
                 target="_blank"
               >
                 <img
                   alt="Ladda ner i Google Play Store"
                   src={playstore}
-                  className="w-auto h-20 md:h-24"
+                  className="w-auto h-16 md:h-20"
                 />
               </Link.External>
             </p>
-            <p className="flex flex-wrap items-center mt-5 space-x-2">
+            <p className="flex flex-col sm:items-center mt-5 sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <NextLink href="/integritet">
                 <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
                   Integritetspolicy
