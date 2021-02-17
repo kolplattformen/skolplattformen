@@ -12,22 +12,21 @@ Read about the embedded api here: https://github.com/kolplattformen/api-hooks
 
 ## App
 
-The central part of the project is of course the app. It is written in React Native and is using a UI library called React Native Kitten. Our goal with the app is to make it as fast and easy to use as possible. We start small and will continue to add more features over time.
+The central part of the project is of course the app. It is written in [React Native](https://reactnative.dev/) and is using a UI library called React Native Kitten. Our goal with the app is to make it as fast and easy to use as possible. We start small and will continue to add more features over time.
 [packages/app](packages/app)
 
 _PRO TIP_ Login with personal number 12121212121212, 201212121212 or 1212121212 and the api will be put into fake mode. Static data will be returned and no calls to backend will be made.
 
 ## Website
 
-Our official site for the project is https://skolplattformen.org
-The source code for the site lives here [packages/site](packages/site)
+Our official site for the project is [https://skolplattformen.org](https://skolplattformen.org). The source code for the site lives here [packages/site](packages/site)
 
 ## Development
 
 ### Get started
 
 Run the following command to install JavaScript dependencies (using `yarn`) in
-all the packages. After that you can refer to the specific package's readme to
+all the packages. After that you can refer to the specific package's README to
 find out how to get it running.
 
 ```

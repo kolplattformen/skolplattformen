@@ -1,8 +1,14 @@
-# `Öppna Skolplattformen App
+# Öppna Skolplattformen App
 
 This is the app for Öppna Skolplattformen
 
 ## Get started
+
+### Prerequisites
+
+We use `yarn` as our package manager. To install it run `npm install -g yarn`.
+
+### iOS
 
 To get started using the iOS simulator start by installing the JavaScript
 dependencies using
@@ -25,6 +31,29 @@ in the root of the app.
 
 ```
 $ yarn ios
+```
+
+### Android
+
+Android development requires that you have [Android Studio](https://developer.android.google.cn/studio?hl=en) and relevant build tools installed.
+
+Start by installing JavaScript dependencies using
+
+```
+$ yarn
+```
+
+Before running the app you should start an emulator from Android Studio. Then
+run the following command to start the build
+
+```
+$ yarn android
+```
+
+## Running tests
+
+```
+$ yarn test
 ```
 
 ## TODO

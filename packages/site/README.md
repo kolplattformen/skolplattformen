@@ -11,3 +11,8 @@ $ yarn dev
 
 Open your favorite browser to http://localhost:3000
 
+## Running tests
+
+```
+$ yarn test
+```
