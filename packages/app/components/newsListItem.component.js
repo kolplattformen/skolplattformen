@@ -27,6 +27,7 @@ export const NewsListItem = ({ item }) => {
       )}
     >
       <Image src={item.fullImageUrl} style={styles.image} />
+      <Text style={styles.preamble} category="s2">{item.intro}</Text>
     </Card>
   )
 }
@@ -38,5 +39,9 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 300,
+    marginBottom: 20,
   },
+  preamble: {
+    marginBottom: 10,
+  }
 })
