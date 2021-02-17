@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Header from '../Header'
 
 jest.mock('next/router', () => ({
@@ -9,6 +9,8 @@ jest.mock('next/router', () => ({
 }))
 
 const setup = (customProps = {}) => {
+  global.matchMedia = jest.fn().mockReturnValue({ addEventListener: jest.fn() })
+
   const props = {
     ...customProps,
   }

@@ -1,306 +1,72 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { formatPrice } from '../utils/intl'
+import SectionTitle from './SectionTitle'
+import Icon from './Icon'
+import DownloadButtons from './DownloadButtons'
+
+const price = 12
+
+const baseFeatures = [
+  {
+    included: true,
+    title: 'BankID-inloggning',
+  },
+  {
+    included: true,
+    title: 'Se nyheter',
+  },
+  {
+    included: true,
+    title: 'Se notifieringar',
+  },
+  {
+    included: true,
+    title: 'Kontaktuppgifter till andra föräldrar',
+  },
+  {
+    included: false,
+    title: 'Gratis support',
+  },
+  {
+    included: false,
+    title: 'Pushnotifieringar',
+  },
+]
 
 const Pricing = () => {
-  const [pricing] = useState(false)
-
-  const price = 12
-
   return (
-    <section className="pb-90" id="vad-kostar-det">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-12 col-lg-12">
-            <div className="text-center section-title">
-              <h2>Vad kostar det och varför är det inte gratis?</h2>
-              <p>
-                Vi som bygger appen vill gärna fortsätta vidareutveckla den och
-                även ha möjlighet att ge ersättning till de som hjälper till.
-                Därför kostar det {formatPrice(price)} att ladda ner appen. Det
-                är en engångskostnad och hjälper oss att göra appen bättre.
-              </p>
-            </div>
+    <section className="px-5 py-8 md:px-0 md:py-32" id="vad-kostar-det">
+      <div className="max-w-2xl mx-auto">
+        <SectionTitle
+          title="Vad kostar det och varför är det inte gratis?"
+          text={`Vi som bygger appen vill gärna fortsätta vidareutveckla den och även ha möjlighet att ge ersättning till de som hjälper till. Därför kostar det ${formatPrice(
+            price
+          )} att ladda ner appen. Det är en engångskostnad och hjälper oss att göra appen bättre.`}
+        />
+      </div>
+      <div className="flex">
+        <div className="flex flex-col items-center inline-block px-5 py-8 mx-auto text-center shadow-lg rounded-md">
+          <h3 className="text-3xl text-gray-800">Engångskostnad</h3>
+          <div className="mt-5 text-6xl text-pink-500">
+            {formatPrice(price)}
           </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="price-content">
-              {pricing === false ? (
-                <div id="month">
-                  <div className="row">
-                    <div className="col-md-6 col-lg-4">
-                      <div className="text-center single-price-plan">
-                        <div className="single-price-top">
-                          <h4>Engångskostnad</h4>
-                          <span>{formatPrice(price)}</span>
-                        </div>
-                        <div className="single-price-body">
-                          <div className="price-list">
-                            <ul>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                BankID-inloggning
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Se nyheter
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Se notifieringar
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Kontaktuppgifter till andra föräldrar
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-times"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Gratis support
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-times"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Pushnotifieringar
-                              </li>
-                            </ul>
-                          </div>
-                          <a
-                            href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
-                            className="btn"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            App Store
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+          <ul className="my-5">
+            {baseFeatures.map(({ included, title }) => (
+              <li className="flex items-center space-x-1" key={title}>
+                {included ? (
+                  <div className="w-5 text-green-500">
+                    <Icon.Check />
                   </div>
-                </div>
-              ) : null}
-              {pricing === true ? (
-                <div id="year">
-                  <div className="row">
-                    <div className="col-md-6 col-lg-4">
-                      <div className="text-center single-price-plan">
-                        <div className="single-price-top">
-                          <h4>Standard</h4>
-                          <span>$200</span>
-                        </div>
-                        <div className="single-price-body">
-                          <div className="price-list">
-                            <ul>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                10 pages
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                500 gb storage
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                10 sdd Database
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-times"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Free coustom domain
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-times"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                24/7 free support
-                              </li>
-                            </ul>
-                          </div>
-                          <a href="#" className="btn">
-                            Get Started
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4">
-                      <div className="text-center single-price-plan active">
-                        <div className="single-price-top">
-                          <h4>Business</h4>
-                          <span>$300</span>
-                        </div>
-                        <div className="single-price-body">
-                          <div className="price-list">
-                            <ul>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                10 pages
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                500 gb storage
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                10 sdd Database
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Free coustom domain
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-times"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                24/7 free support
-                              </li>
-                            </ul>
-                          </div>
-                          <a href="#" className="btn">
-                            Get Started
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4">
-                      <div className="text-center single-price-plan">
-                        <div className="single-price-top">
-                          <h4>Professional</h4>
-                          <span>$400</span>
-                        </div>
-                        <div className="single-price-body">
-                          <div className="price-list">
-                            <ul>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                10 pages
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                500 gb storage
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                10 sdd Database
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                Free coustom domain
-                              </li>
-                              <li>
-                                <span>
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                                24/7 free support
-                              </li>
-                            </ul>
-                          </div>
-                          <a href="#" className="btn">
-                            Get Started
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                ) : (
+                  <div className="w-5 text-red-500">
+                    <Icon.Times />
                   </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
+                )}
+                <span>{title}</span>
+              </li>
+            ))}
+          </ul>
+          <DownloadButtons />
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Link as ScrollLink } from 'react-scroll'
 import { pageview } from './gtag'
 
-const NavLinks = () => {
+const NavLinks = ({ onClick }) => {
   const { pathname } = useRouter()
 
   const path = (href) => {
@@ -21,19 +21,22 @@ const NavLinks = () => {
         smooth={true}
         offset={-70}
         duration={500}
-        onClick={() => pageview(href)}
+        onClick={() => {
+          pageview(href)
+          onClick?.()
+        }}
       >
-        {children}
+        <a href={href}>{children}</a>
       </ScrollLink>
     ) : (
-        <NavLink href={href}>
-          {children}
-        </NavLink>
-      )
+      <NavLink href={href}>
+        <a onClick={() => onClick?.()}>{children}</a>
+      </NavLink>
+    )
 
   return (
-    <ul className="main-nav__navigation-box">
-      <li className="dropdown">
+    <ul className="flex flex-col text-xl text-gray-800 md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 md:text-base">
+      <li>
         <Link to="wrapper" href="/#">
           Hem
         </Link>

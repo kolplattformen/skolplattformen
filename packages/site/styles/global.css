@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tw4: 1rem;
+  --tw5: 1.25rem;
+  --twMw6xl: 72rem;
+}
+
+html,
+body {
+  @apply font-sans text-gray-700;
+}
+
+p {
+  @apply leading-loose font-normal;
+}
+
+.grid-main {
+  grid-template-columns: var(--tw5) 1fr minmax(0, var(--twMw6xl)) 1fr var(--tw5);
+}
+
+.header:before {
+  background-image: url(../assets/img/banner/main-base.png);
+  background-position: top right;
+  background-repeat: no-repeat;
+  content: '';
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+@media (max-width: 480px) {
+  .header:before {
+    display: none;
+  }
+}

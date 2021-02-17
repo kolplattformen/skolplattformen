@@ -1,23 +1,22 @@
 import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
 import CountUp from 'react-countup'
 import VisibilitySensor from 'react-visibility-sensor'
 
 const FUNFACTS_DATA = [
   {
-    count: '1000000000',
+    count: 1000000000,
     title: 'kronor kostade originalet',
   },
   {
-    count: '7',
+    count: 7,
     title: 'år att utveckla',
   },
   {
-    count: '12',
+    count: 12,
     title: 'kronor kostar vår app :)',
   },
   {
-    count: '5',
+    count: 5,
     title: 'veckors utveckling',
   },
 ]
@@ -34,27 +33,23 @@ const FunFacts = () => {
   }
 
   return (
-    <section className="border-top pt-120 pb-80">
-      <Container>
-        <Row>
-          {FUNFACTS_DATA.map((funfact, index) => (
-            <Col md={3} sm={6} key={`funfact-post-${index}`}>
-              <div className="single-counter text-center">
-                <span className="counter">
-                  <VisibilitySensor
-                    onChange={onVisibilityChange}
-                    offset={{ top: 10 }}
-                    delayedCall
-                  >
-                    <CountUp end={counter.startCounter ? funfact.count : 0} />
-                  </VisibilitySensor>
-                </span>
-                <p>{funfact.title}</p>
-              </div>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+    <section className="max-w-6xl py-8 mx-auto md:py-32">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5">
+        {FUNFACTS_DATA.map((funfact) => (
+          <div className="text-center" key={funfact.title}>
+            <span className="text-5xl text-indigo-500">
+              <VisibilitySensor
+                onChange={onVisibilityChange}
+                offset={{ top: 10 }}
+                delayedCall
+              >
+                <CountUp end={counter.startCounter ? funfact.count : 0} />
+              </VisibilitySensor>
+            </span>
+            <p className="text-gray-700">{funfact.title}</p>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
