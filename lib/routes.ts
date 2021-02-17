@@ -21,7 +21,7 @@ export const classmates = (childId: string) => (
 export const user = 'https://etjanst.stockholm.se/vardnadshavare/base/getuserdata'
 
 export const news = (childId: string) => (
-  `https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsOverview?childId=${childId}`
+  `https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArchive?bannerImageLimit=5000&childId=${childId}`
 )
 
 export const newsDetails = (childId: string, newsId: string) => (
