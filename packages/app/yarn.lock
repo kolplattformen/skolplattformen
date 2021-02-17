@@ -1372,10 +1372,10 @@
     react-redux "^7.2.2"
     redux "^4.0.5"
 
-"@skolplattformen/embedded-api@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-1.1.1.tgz#13b7db403807549e18620130f14e1f746557964c"
-  integrity sha512-LLmu67uF/n/DPNu9ZSZWq6uNc9BfVyeU9YcbhWMkgwuyRCF3o+w0Ui+lxZV8esxHecw1uysGIL7QlBxJNI1Kug==
+"@skolplattformen/embedded-api@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-1.2.0.tgz#f2f0bc280af21ba70e5b5dd524b3dc9204773c19"
+  integrity sha512-GWDO/jcsiSllHTBJ8a8yDbLo056FN0ypb+f4ZdDxShuP+zXcYvS2oCdFpaJGHq/wpccIQpKaW26B/rsefPvXRw==
   dependencies:
     "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
