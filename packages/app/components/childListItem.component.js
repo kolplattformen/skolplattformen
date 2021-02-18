@@ -162,6 +162,10 @@ export const ChildListItem = ({ navigation, child, color }) => {
             {`${notification.message}`}
           </Text>
         ))}
+
+      <Button onPress={() => navigation.navigate('Absence', { child })}>
+        Anmäl frånvaro
+      </Button>
     </Card>
   )
 }
