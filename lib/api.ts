@@ -23,6 +23,10 @@ import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import * as fake from './fakeData'
 
+const fakeResponse = <T>(data: T): Promise<T> => new Promise((res) => (
+  setTimeout(() => res(data), 200 + Math.random() * 800)
+))
+
 export class Api extends EventEmitter {
   private fetch: Fetcher
 
@@ -99,7 +103,7 @@ export class Api extends EventEmitter {
   }
 
   async getUser(): Promise<User> {
-    if (this.isFake) return fake.user()
+    if (this.isFake) return fakeResponse(fake.user())
 
     const url = routes.user
     const response = await this.fetch('user', url, this.session)
@@ -108,7 +112,7 @@ export class Api extends EventEmitter {
   }
 
   async getChildren(): Promise<Child[]> {
-    if (this.isFake) return fake.children()
+    if (this.isFake) return fakeResponse(fake.children())
 
     const url = routes.children
     const response = await this.fetch('children', url, this.session)
@@ -117,7 +121,7 @@ export class Api extends EventEmitter {
   }
 
   async getCalendar(child: Child): Promise<CalendarItem[]> {
-    if (this.isFake) return fake.calendar(child)
+    if (this.isFake) return fakeResponse(fake.calendar(child))
 
     const url = routes.calendar(child.id)
     const response = await this.fetch('calendar', url, this.session)
@@ -126,7 +130,7 @@ export class Api extends EventEmitter {
   }
 
   async getClassmates(child: Child): Promise<Classmate[]> {
-    if (this.isFake) return fake.classmates(child)
+    if (this.isFake) return fakeResponse(fake.classmates(child))
 
     const url = routes.classmates(child.sdsId)
     const response = await this.fetch('classmates', url, this.session)
@@ -135,7 +139,7 @@ export class Api extends EventEmitter {
   }
 
   async getSchedule(child: Child, from: DateTime, to: DateTime): Promise<ScheduleItem[]> {
-    if (this.isFake) return fake.schedule(child)
+    if (this.isFake) return fakeResponse(fake.schedule(child))
 
     const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
     const response = await this.fetch('schedule', url, this.session)
@@ -144,7 +148,7 @@ export class Api extends EventEmitter {
   }
 
   async getNews(child: Child): Promise<NewsItem[]> {
-    if (this.isFake) return fake.news(child)
+    if (this.isFake) return fakeResponse(fake.news(child))
 
     const url = routes.news(child.id)
     const response = await this.fetch('news', url, this.session)
@@ -154,7 +158,7 @@ export class Api extends EventEmitter {
 
   async getNewsDetails(child: Child, item: NewsItem): Promise<any> {
     if (this.isFake) {
-      return fake.news(child).find((ni) => ni.id === item.id)
+      return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
     }
     const url = routes.newsDetails(child.id, item.id)
     const response = await this.fetch(`news_${item.id}`, url, this.session)
@@ -163,7 +167,7 @@ export class Api extends EventEmitter {
   }
 
   async getMenu(child: Child): Promise<MenuItem[]> {
-    if (this.isFake) return fake.menu(child)
+    if (this.isFake) return fakeResponse(fake.menu(child))
 
     const url = routes.menu(child.id)
     const response = await this.fetch('menu', url, this.session)
@@ -172,7 +176,7 @@ export class Api extends EventEmitter {
   }
 
   async getNotifications(child: Child): Promise<Notification[]> {
-    if (this.isFake) return fake.notifications(child)
+    if (this.isFake) return fakeResponse(fake.notifications(child))
 
     const url = routes.notifications(child.sdsId)
     const response = await this.fetch('notifications', url, this.session)
