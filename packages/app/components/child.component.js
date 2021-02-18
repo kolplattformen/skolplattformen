@@ -24,6 +24,7 @@ import { ChildProvider, useChild } from './childContext.component'
 import { Classmates } from './classmates.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
+import { childName } from '../utils/childHelpers'
 
 const { Navigator, Screen } = createMaterialTopTabNavigator()
 
@@ -147,7 +148,7 @@ export const Child = ({ route, navigation }) => {
     <SafeAreaView style={{ ...styles.wrap, color }}>
       <ChildProvider child={child}>
         <TopNavigation
-          title={child.name.split('(')[0]}
+          title={childName(child.name)}
           alignment="center"
           accessoryLeft={BackAction}
           style={styles.topBar}

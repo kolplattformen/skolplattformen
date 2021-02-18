@@ -156,7 +156,7 @@ test('removes any parenthesis from name', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [
       {
-        name: 'Test Testsson(något annat)',
+        name: 'Test Testsson (elev)',
         status: 'G',
       },
     ],
@@ -172,7 +172,7 @@ test('handles multiple statuses for a child', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [
       {
-        name: 'Test Testsson(något annat)',
+        name: 'Test Testsson(elev)',
         status: 'G;GR;F',
       },
     ],
