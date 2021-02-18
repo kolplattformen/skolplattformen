@@ -13,7 +13,7 @@ import {
   useTheme,
 } from '@ui-kitten/components'
 import { Formik } from 'formik'
-import SMS from '../utils/SMS'
+import { useSMS } from '../utils/SMS'
 import * as Yup from 'yup'
 import Personnummer from 'personnummer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -37,6 +37,7 @@ const AbsenceSchema = Yup.object().shape({
 })
 
 const Absence = ({ route, navigation }) => {
+  const { sendSMS } = useSMS()
   const { child } = route.params
   const theme = useTheme()
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
@@ -85,9 +86,9 @@ const Absence = ({ route, navigation }) => {
             const ssn = Personnummer.parse(values.socialSecurityNumber).format()
 
             if (values.isFullDay) {
-              SMS.send(ssn)
+              sendSMS(ssn)
             } else {
-              SMS.send(
+              sendSMS(
                 `${ssn} ${moment(values.startTime).format('HHmm')}-${moment(
                   values.endTime
                 ).format('HHmm')}`

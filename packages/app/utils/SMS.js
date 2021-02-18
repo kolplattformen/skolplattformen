@@ -1,5 +1,13 @@
-export const send = (data) => {
-  console.log(data)
-}
+import { Linking, Platform } from 'react-native'
 
-export default { send }
+const phoneNumber = '+46730121740'
+
+export const useSMS = () => {
+  const sendSMS = async (message) => {
+    const separator = Platform.OS === 'ios' ? '&' : '?'
+    const url = `sms:${phoneNumber}${separator}body=${message}`
+    await Linking.openURL(url)
+  }
+
+  return { sendSMS }
+}
