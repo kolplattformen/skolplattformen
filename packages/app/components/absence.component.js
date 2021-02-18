@@ -39,6 +39,7 @@ const Absence = ({ route, navigation }) => {
   const { child } = route.params
   const theme = useTheme()
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
+  const endTime = moment().hours(17).minute(0)
 
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
@@ -75,7 +76,7 @@ const Absence = ({ route, navigation }) => {
             startTime: moment()
               .hours(Math.max(8, new Date().getHours()))
               .minute(0),
-            endTime: moment().hours(17).minute(0),
+            endTime,
           }}
           onSubmit={async (values) => {
             const ssn = Personnummer.parse(values.socialSecurityNumber).format()
@@ -154,7 +155,7 @@ const Absence = ({ route, navigation }) => {
                         isVisible={values.displayStartTimePicker}
                         headerTextIOS="Välj en starttid"
                         locale="sv-SE"
-                        maximumDate={moment().hours(17).minute(0).toISOString()}
+                        maximumDate={endTime.toISOString()}
                         minimumDate={moment().hours(8).minute(0).toISOString()}
                         minuteInterval={10}
                         mode="time"
@@ -190,7 +191,7 @@ const Absence = ({ route, navigation }) => {
                         isVisible={values.displayEndTimePicker}
                         headerTextIOS="Välj en sluttid"
                         locale="sv-SE"
-                        maximumDate={moment().hours(17).minute(0).toISOString()}
+                        maximumDate={endTime.toISOString()}
                         minimumDate={moment().hours(8).minute(0).toISOString()}
                         minuteInterval={10}
                         mode="time"
