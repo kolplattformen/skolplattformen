@@ -88,7 +88,7 @@ export const Login = ({ navigation }) => {
     try {
       const bankIdUrl =
         Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null`
+          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=${encodeURIComponent('oppnaskolplattformen://')}`
           : `bankid:///?autostarttoken=${token.token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {

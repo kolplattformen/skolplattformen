@@ -18,9 +18,17 @@ const HomeNavigator = () => (
   </Navigator>
 )
 
+const linking = {
+  prefixes: ['oppnaskolplattformen://'],
+  config: {
+    screens: {
+      Login: 'login',
+    },
+  },
+}
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <StatusBar />
       <HomeNavigator />
     </NavigationContainer>
