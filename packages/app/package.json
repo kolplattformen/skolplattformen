@@ -16,7 +16,7 @@
     "@react-native-async-storage/async-storage": "1.13.4",
     "@react-native-community/cookies": "5.0.1",
     "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/material-top-tabs": "5.3.13",
+    "@react-navigation/bottom-tabs": "^5.11.7",
     "@react-navigation/native": "5.9.2",
     "@react-navigation/stack": "5.14.2",
     "@skolplattformen/api-hooks": "1.5.1",
