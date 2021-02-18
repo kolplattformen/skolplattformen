@@ -40,7 +40,8 @@ const Absence = ({ route, navigation }) => {
   const { child } = route.params
   const theme = useTheme()
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
-  const endTime = moment().hours(17).minute(0)
+  const minumumDate = moment().hours(8).minute(0)
+  const maximumDate = moment().hours(17).minute(0)
 
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
@@ -78,7 +79,7 @@ const Absence = ({ route, navigation }) => {
             startTime: moment()
               .hours(Math.max(8, new Date().getHours()))
               .minute(0),
-            endTime,
+            endTime: maximumDate,
           }}
           onSubmit={async (values) => {
             const ssn = Personnummer.parse(values.socialSecurityNumber).format()
@@ -153,12 +154,12 @@ const Absence = ({ route, navigation }) => {
                       <DateTimePickerModal
                         cancelTextIOS="Avbryt"
                         confirmTextIOS="Bekräfta"
-                        date={moment(values.startTime).toISOString()}
+                        date={moment(values.startTime).toDate()}
                         isVisible={values.displayStartTimePicker}
                         headerTextIOS="Välj en starttid"
                         locale="sv-SE"
-                        maximumDate={endTime.toISOString()}
-                        minimumDate={moment().hours(8).minute(0).toISOString()}
+                        maximumDate={maximumDate.toDate()}
+                        minimumDate={minumumDate.toDate()}
                         minuteInterval={10}
                         mode="time"
                         onConfirm={(date) => {
@@ -189,12 +190,12 @@ const Absence = ({ route, navigation }) => {
                       <DateTimePickerModal
                         cancelTextIOS="Avbryt"
                         confirmTextIOS="Bekräfta"
-                        date={moment(values.endTime).toISOString()}
+                        date={moment(values.endTime).toDate()}
                         isVisible={values.displayEndTimePicker}
                         headerTextIOS="Välj en sluttid"
                         locale="sv-SE"
-                        maximumDate={endTime.toISOString()}
-                        minimumDate={moment().hours(8).minute(0).toISOString()}
+                        maximumDate={maximumDate.toDate()}
+                        minimumDate={minumumDate.toDate()}
                         minuteInterval={10}
                         mode="time"
                         onConfirm={(date) => {
