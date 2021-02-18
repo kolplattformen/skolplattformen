@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/native'
-import { Card, Text } from '@ui-kitten/components'
+import { Text } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 
@@ -14,21 +15,24 @@ export const NewsListItem = ({ item }) => {
   const child = useChild()
 
   return (
-    <Card
-      style={styles.card}
+    <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
-      header={(headerProps) => (
-        <View {...headerProps}>
-          <Text category="h6">{item.header}</Text>
-          <Text category="s1">
-            {displayDate(item.published || item.modified)}
-          </Text>
-        </View>
-      )}
     >
-      <Image src={item.fullImageUrl} style={styles.image} />
-      <Text style={styles.preamble} category="s2">{item.intro}</Text>
-    </Card>
+      <View style={styles.card}>
+        <Image src={item.fullImageUrl} style={styles.image} />
+        <View style={styles.text}>
+          <View>
+            <Text category="h5" style={styles.header}>
+              {item.header}
+            </Text>
+            <Text category="s2">
+              {displayDate(item.published || item.modified)}
+            </Text>
+          </View>
+          <Text category="s1">{item.author}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   )
 }
 
@@ -36,12 +40,29 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 2,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 2,
+    borderColor: '#f0f0f0',
+    borderWidth: 1,
+    padding: 20,
+    marginVertical: 5,
+  },
+  text: {
+    justifyContent: 'space-between',
+  },
+  header: {
+    flexWrap: 'wrap',
+    flex: 1,
+    width: '99%',
   },
   image: {
-    height: 300,
     marginBottom: 20,
+    width: 100,
+    height: 100,
+    marginRight: 10,
   },
   preamble: {
     marginBottom: 10,
-  }
+  },
 })
