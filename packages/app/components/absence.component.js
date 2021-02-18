@@ -200,7 +200,6 @@ const Absence = ({ route, navigation }) => {
                         minuteInterval={10}
                         mode="time"
                         onConfirm={(date) => {
-                          console.log(date)
                           setFieldValue('endTime', date)
                           setFieldValue('displayEndTimePicker', false)
                         }}
