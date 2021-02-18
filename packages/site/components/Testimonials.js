@@ -4,12 +4,13 @@ import imgNiels from '../assets/img/niels.jpg'
 import imgPer from '../assets/img/per.jpg'
 import imgFredrik from '../assets/img/wass.jpg'
 import Section from './Section'
+import Image from 'next/image'
 
-const testimonials = [
+export const testimonials = [
   {
     image: imgKarin,
     text:
-      'Det känns bra att mänskligheten nu befrias från upphandlingshaveriets bojor. Framtiden är här! Och den kostade nästan ingenting. Öppen data är kärlek.',
+      'Oftast när jag behöver kolla upp något är jag stressad och på språng. Om det tar tid att logga in och leta så struntar jag till sist i det.',
     name: 'Karin Nygårds',
     title: 'Lärare och förälder',
   },
@@ -46,11 +47,15 @@ const Testimonials = () => {
         >
           <div className="max-w-md px-8 py-4 bg-white rounded-lg shadow-lg">
             <div className="flex justify-center -mt-16 md:justify-start">
-              <img
-                alt={testimonial.name}
-                className="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full"
-                src={testimonial.image}
-              />
+              <div className="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full">
+                <Image
+                  alt={testimonial.name}
+                  className="object-cover rounded-full"
+                  height={80}
+                  src={testimonial.image}
+                  width={80}
+                />
+              </div>
             </div>
             <div>
               <p className="mt-2 text-gray-600">{testimonial.text}</p>

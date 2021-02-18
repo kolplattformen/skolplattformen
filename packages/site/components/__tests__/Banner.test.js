@@ -11,8 +11,6 @@ const setup = (customProps = {}) => {
 }
 
 test('renders a link to app store', () => {
-  global.alert = jest.fn()
-
   setup()
 
   expect(
@@ -24,8 +22,6 @@ test('renders a link to app store', () => {
 })
 
 test('renders a link to play store', () => {
-  global.alert = jest.fn()
-
   setup()
 
   expect(

@@ -5,11 +5,12 @@ import screenshotChildNews from '../assets/img/screenshots/screenshot_child_news
 import screenshotChildNotifications from '../assets/img/screenshots/screenshot_child_notifications.png'
 import screenshotLogin from '../assets/img/screenshots/screenshot_login.png'
 import SectionTitle from './SectionTitle'
+import Image from 'next/image'
 
 const AppShots = () => {
   return (
     <section
-      className="max-w-6xl px-5 md:px-0 py-8 md:py-32 mx-auto"
+      className="max-w-6xl px-5 py-8 mx-auto md:px-0 md:py-32"
       id="screenshots"
     >
       <div className="max-w-2xl mx-auto">
@@ -20,18 +21,48 @@ const AppShots = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4">
-        <img src={screenshotLogin} alt="Inloggning med BankID" />
-        <img
-          src={screenshotChildren}
+        <Image
+          alt="Inloggning med BankID"
+          height={376}
+          layout="responsive"
+          src={screenshotLogin}
+          width={178}
+        />
+        <Image
           alt="Lista med dina barn i Stockholms Stad"
+          height={376}
+          layout="responsive"
+          src={screenshotChildren}
+          width={178}
         />
-        <img src={screenshotChildNews} alt="Barnets nyheter" />
-        <img
-          src={screenshotChildNotifications}
+        <Image
+          alt="Barnets nyheter"
+          height={376}
+          layout="responsive"
+          src={screenshotChildNews}
+          width={178}
+        />
+        <Image
           alt="Lista med barnets aviseringar"
+          height={376}
+          layout="responsive"
+          src={screenshotChildNotifications}
+          width={178}
         />
-        <img src={screenshotChildCalendar} alt="Barnets kalender" />
-        <img src={screenshotChildClass} alt="Barnets klasskompisar" />
+        <Image
+          alt="Barnets kalender"
+          height={376}
+          layout="responsive"
+          src={screenshotChildCalendar}
+          width={178}
+        />
+        <Image
+          alt="Barnets klasskompisar"
+          height={376}
+          layout="responsive"
+          src={screenshotChildClass}
+          width={178}
+        />
       </div>
     </section>
   )
