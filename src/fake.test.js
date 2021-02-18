@@ -12,6 +12,7 @@ import {
   useSchedule,
   useUser,
 } from './hooks'
+import store from './store'
 
 const { default: init } = jest.requireActual('@skolplattformen/embedded-api')
 
@@ -35,6 +36,7 @@ describe('hooks with fake data', () => {
         waitForNextUpdate,
       } = renderHook(() => useUser(), { wrapper })
 
+      await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
 
@@ -69,13 +71,14 @@ describe('hooks with fake data', () => {
 
       await waitForNextUpdate()
       await waitForNextUpdate()
+      await waitForNextUpdate()
 
       expect(result.current.data).toHaveLength(2)
     })
   })
   describe('data belonging to one child', () => {
     let child
-    beforeAll(async () => {
+    beforeEach(async () => {
       [child] = await api.getChildren()
     })
     it('returns calendar', async () => {
@@ -158,6 +161,33 @@ describe('hooks with fake data', () => {
         // No fake schedule in embedded-api yet
         expect(result.current.data.length).not.toBeGreaterThan(1)
       })
+    })
+
+  })
+  it('handles reloads', async () => {
+    await act(async () => {
+      store.dispatch({ type: 'CLEAR' })
+
+      const [child] = await api.getChildren()
+
+      const {
+        result,
+        waitForNextUpdate,
+      } = renderHook(() => useNotifications(child), { wrapper })
+
+      await waitForNextUpdate()
+
+      result.current.reload()
+      await waitForNextUpdate()
+
+      result.current.reload()
+      result.current.reload()
+      await waitForNextUpdate()
+
+      result.current.reload()
+      await waitForNextUpdate()
+
+      expect(result.current.status).toEqual('loaded')
     })
   })
 })
