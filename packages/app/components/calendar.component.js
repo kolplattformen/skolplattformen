@@ -39,7 +39,6 @@ export const Calendar = ({ }) => {
     </View>
   ) : (
       <List
-        onRefresh={refresh}
         refreshing={refreshing}
         style={styles.container}
         data={data.sort((a, b) => b.startDate < a.startDate)}

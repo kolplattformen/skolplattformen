@@ -1363,19 +1363,18 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-1.4.0.tgz#d42ce9c5bda11aa51a12a0253ef4718abeee3157"
-  integrity sha512-CMR21dop0fOgx211ohBqt5LDW4Zpnt792vX9oX/LSdgbGZS3GzMmhW0bcPBhuONerZqlTECmNPNHapYqvFF6Zg==
+"@skolplattformen/api-hooks@1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-1.5.1.tgz#b4595da69d8e5bff42cbd9502cd04f77aba7c4d9"
+  integrity sha512-UPFhuYBRB4sDCl/qrgBP55uuVEm6cqJ5ufD7/WRlD7DKqX4Y1ivtFgDEO1NmFC16I4MbqY6W3LQntjn6JJxsEw==
   dependencies:
-    "@skolplattformen/embedded-api" "^0.22.0"
     react-redux "^7.2.2"
     redux "^4.0.5"
 
-"@skolplattformen/embedded-api@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-1.2.0.tgz#f2f0bc280af21ba70e5b5dd524b3dc9204773c19"
-  integrity sha512-GWDO/jcsiSllHTBJ8a8yDbLo056FN0ypb+f4ZdDxShuP+zXcYvS2oCdFpaJGHq/wpccIQpKaW26B/rsefPvXRw==
+"@skolplattformen/embedded-api@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-1.3.0.tgz#0e0b2d8a130fdd9b303084de924730c545064b35"
+  integrity sha512-3K4FswSgQbDP6Mxb4DQB9eYFlv4inWBJcz3D1D57HczlH5PopxIQNCltkKlqsFDUKSGlj1QLbfgbFfsIUu6ZOA==
   dependencies:
     "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
@@ -1385,17 +1384,6 @@
     js-htmlencode "^0.3.0"
     luxon "^1.25.0"
     node-html-parser "^2.1.0"
-
-"@skolplattformen/embedded-api@^0.22.0":
-  version "0.22.2"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-0.22.2.tgz#c848d4217171a758024d67236ab272e930cc7cad"
-  integrity sha512-xmdMavlpIqvcMJ7CyGF4LINk1f0R0zsDnaHW4vV3f0U22jhBW1f9BIW7PmFQmlM5K1h87Wkk5qalQXeQ5G5iKw==
-  dependencies:
-    camelcase-keys "^6.2.2"
-    events "^3.2.0"
-    h2m "^0.7.0"
-    js-htmlencode "^0.3.0"
-    luxon "^1.25.0"
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"

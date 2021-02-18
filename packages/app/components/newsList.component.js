@@ -1,5 +1,5 @@
-import { useNews, useNewsDetails } from '@skolplattformen/api-hooks'
-import { List } from '@ui-kitten/components'
+import { useNews } from '@skolplattformen/api-hooks'
+import { List, Text } from '@ui-kitten/components'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { useChild } from './childContext.component'
@@ -16,16 +16,17 @@ export const NewsList = () => {
   const refresh = () => reload()
 
   return (
-    <List
-      onRefresh={refresh}
-      refreshing={refreshing}
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-      data={data}
-      renderItem={(info) => (
-        <NewsListItem key={info.item.id} item={info.item} />
-      )}
-    />
+    <>
+      <List
+        refreshing={refreshing}
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        data={data}
+        renderItem={(info) => (
+          <NewsListItem key={info.item.id} item={info.item} />
+        )}
+      />
+    </>
   )
 }
 

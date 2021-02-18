@@ -39,7 +39,6 @@ export const Classmates = () => {
 
   return (
     <List
-      onRefresh={refresh}
       refreshing={refreshing}
       style={styles.container}
       data={data}

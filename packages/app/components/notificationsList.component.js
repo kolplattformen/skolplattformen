@@ -16,7 +16,6 @@ export const NotificationsList = () => {
   const refresh = () => reload()
   return (
     <List
-      onRefresh={refresh}
       refreshing={refreshing}
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
