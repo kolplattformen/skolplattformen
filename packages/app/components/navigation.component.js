@@ -6,6 +6,7 @@ import { Child } from './child.component'
 import { Children } from './children.component'
 import { Login } from './login.component'
 import { NewsItem } from './newsItem.component'
+import Absence from './absence.component'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -15,6 +16,7 @@ const HomeNavigator = () => (
     <Screen name="Children" component={Children} />
     <Screen name="Child" component={Child} />
     <Screen name="NewsItem" component={NewsItem} />
+    <Screen name="Absence" component={Absence} />
   </Navigator>
 )
 
