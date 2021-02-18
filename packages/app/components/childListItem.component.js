@@ -10,6 +10,7 @@ import { DateTime } from 'luxon'
 import moment from 'moment'
 import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { childName } from '../utils/childHelpers'
 
 const NotificationsIcon = (props) => (
   <Icon {...props} name="alert-circle-outline" />
@@ -61,7 +62,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
         <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
       <View style={{ margin: 20, flex: 1 }}>
-        <Text category="h6">{child.name?.split('(')[0]}</Text>
+        <Text category="h6">{childName(child.name)}</Text>
         <Text category="s1">{`${getClassName()}`}</Text>
       </View>
     </View>
