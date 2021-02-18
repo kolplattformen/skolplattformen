@@ -6,11 +6,11 @@ import imgFredrik from '../assets/img/wass.jpg'
 import Section from './Section'
 import Image from 'next/image'
 
-const testimonials = [
+export const testimonials = [
   {
     image: imgKarin,
     text:
-      'Det känns bra att mänskligheten nu befrias från upphandlingshaveriets bojor. Framtiden är här! Och den kostade nästan ingenting. Öppen data är kärlek.',
+      'Oftast när jag behöver kolla upp något är jag stressad och på språng. Om det tar tid att logga in och leta så struntar jag till sist i det.',
     name: 'Karin Nygårds',
     title: 'Lärare och förälder',
   },
