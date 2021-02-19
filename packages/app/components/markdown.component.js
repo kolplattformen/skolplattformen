@@ -7,11 +7,11 @@ import { Image } from './image.component'
 const rules = {
   image: (node) => {
     const { src } = node.attributes
-
+    const url = src.startsWith('/') ? `https://elevstockholm.sharepoint.com${src}` : src;
     return (
       <Image
         key={src}
-        src={`https://elevstockholm.sharepoint.com${src}`}
+        src={url}
         style={{ width: '100%', minHeight: 300 }}
       />
     )
