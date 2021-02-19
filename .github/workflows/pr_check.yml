@@ -18,10 +18,10 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Set timezone
-        uses: actions/set-timezone-action@v1.1
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
         with:
-          timezoneLinux: "Europe/Stockholm"
+          timezone: Europe/Stockholm
 
       - name: Install dependencies
         run: npx lerna bootstrap
