@@ -6,7 +6,7 @@ import { Child } from './child.component'
 import { Children } from './children.component'
 import { Login } from './login.component'
 import { NewsItem } from './newsItem.component'
-
+import { schema } from '../app.json'
 const { Navigator, Screen } = createStackNavigator()
 
 const HomeNavigator = () => (
@@ -18,9 +18,17 @@ const HomeNavigator = () => (
   </Navigator>
 )
 
+const linking = {
+  prefixes: [schema],
+  config: {
+    screens: {
+      Login: 'login',
+    },
+  },
+}
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <StatusBar />
       <HomeNavigator />
     </NavigationContainer>
