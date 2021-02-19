@@ -184,3 +184,18 @@ test('handles multiple statuses for a child', () => {
   expect(screen.getByText('Test Testsson')).toBeTruthy()
   expect(screen.getByText('Gymnasiet, Grundskolan, Förskoleklass')).toBeTruthy()
 })
+
+test('says if there is nothing new this week', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [
+      {
+        name: 'Kanye West',
+        status: 'F',
+      },
+    ],
+    status: 'loaded',
+  }))
+  const screen = setup()
+
+  expect(screen.getByText('Inga nya inlägg denna vecka.')).toBeTruthy()
+})

@@ -38,6 +38,15 @@ export const ChildListItem = ({ navigation, child, color }) => {
     DateTime.local().plus({ days: 7 })
   )
 
+  const notificationsThisWeek = notifications.filter((n) =>
+    moment(n).isSame('week')
+  )
+
+  const scheduleAndCalendarThisWeek = [
+    ...(calendar ?? []),
+    ...(schedule ?? []),
+  ].filter((a) => moment(a.startDate).isSame('week'))
+
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates. let's pick the first one and select theirs class
     if (classmates.length > 0) {
@@ -152,27 +161,27 @@ export const ChildListItem = ({ navigation, child, color }) => {
       footer={Footer}
       onPress={() => navigation.navigate('Child', { child, color })}
     >
-      {[...(calendar ?? []), ...(schedule ?? [])]
-        .filter((a) => moment(a.startDate).isSame('week'))
-        .slice(0, 3)
-        .map((calendarItem, i) => (
-          <Text
-            appearance="hint"
-            category="c1"
-            key={i}
-            style={{ textColor: styles.loaded(notificationsStatus) }}
-          >
-            {`${calendarItem.title}`}
-          </Text>
-        ))}
-
-      {notifications
-        .filter((n) => moment(n).isSame('week'))
-        .map((notification, i) => (
-          <Text appearance="hint" category="c1" key={i}>
-            {`${notification.message}`}
-          </Text>
-        ))}
+      {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
+        <Text
+          appearance="hint"
+          category="c1"
+          key={i}
+          style={{ textColor: styles.loaded(notificationsStatus) }}
+        >
+          {`${calendarItem.title}`}
+        </Text>
+      ))}
+      {notificationsThisWeek.map((notification, i) => (
+        <Text appearance="hint" category="c1" key={i}>
+          {`${notification.message}`}
+        </Text>
+      ))}
+      {scheduleAndCalendarThisWeek.length ||
+      notificationsThisWeek.length ? null : (
+        <Text appearance="hint" category="c1">
+          Inga nya inlägg denna vecka.
+        </Text>
+      )}
     </Card>
   )
 }
