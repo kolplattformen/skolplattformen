@@ -13,10 +13,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '14'
+
+      - name: Set timezone
+        uses: actions/set-timezone-action@v1.1
+        with:
+          timezoneLinux: "Europe/Stockholm"
 
       - name: Install dependencies
         run: npx lerna bootstrap
