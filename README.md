@@ -2,7 +2,7 @@
 
 This is a try to reverse engineer Skolplattformen and create a more fast, consistent and secure experience for the users of Skolplattformen.
 
-![packages/site/assets/img/banner/mockup.png](packages/site/assets/img/banner/mockup.png)
+![Login screen](packages/site/assets/img/screenshots/screenshot_login.png)
 
 ## Embedded API
 
