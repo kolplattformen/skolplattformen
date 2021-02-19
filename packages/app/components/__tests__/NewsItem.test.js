@@ -61,6 +61,8 @@ test('gets article details using useNewsDetails', () => {
 test('renders an article', () => {
   const screen = setup()
 
+  screen.debug()
+
   expect(screen.getByText(/k-bullar!/i)).toBeTruthy()
   expect(screen.getByText(/nu blir det köttbullar/i)).toBeTruthy()
   expect(screen.getByText('Publicerad: 15 feb. 2021 10:13')).toBeTruthy()
