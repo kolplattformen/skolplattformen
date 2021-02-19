@@ -1,11 +1,22 @@
+import { useClassmates } from '@skolplattformen/api-hooks'
 import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
+import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
 
-export const Classmates = ({ classmates }) => {
+export const Classmates = () => {
+  const child = useChild()
+  const { data, status, reload } = useClassmates(child)
+  const [refreshing, setRefreshing] = useState(status === 'loading')
+  useEffect(() => {
+    setRefreshing(status === 'loading')
+  }, [status])
+
+  const refresh = () => reload()
+
   const renderItemIcon = (props) => <Icon {...props} name="people-outline" />
-  const [selected, setSelected] = React.useState()
+  const [selected, setSelected] = useState()
 
   const renderItem = ({ item }) => (
     <ListItem
@@ -28,22 +39,28 @@ export const Classmates = ({ classmates }) => {
 
   return (
     <List
+      refreshing={refreshing}
       style={styles.container}
-      data={classmates}
+      data={data}
       ItemSeparatorComponent={Divider}
       ListHeaderComponent={
         <Text category="h5" style={styles.listHeader}>
-          Klass {classmates?.length ? classmates[0].className : ''}
+          Klass {data?.length ? data[0].className : ''}
         </Text>
       }
       renderItem={renderItem}
+      contentContainerStyle={styles.contentContainer}
     />
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: '100%',
     width: '100%',
+  },
+  contentContainer: {
+    padding: 10,
   },
   listHeader: {
     backgroundColor: '#fff',

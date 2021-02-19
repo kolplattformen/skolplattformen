@@ -15,7 +15,7 @@ const QA = () => {
           tacksamma för alla buggrapporter vi får. Vi satsar mycket på att så
           snabbt som möjligt fixa de saker som dyker upp. För att få lite
           ordning så försöker vi samla alla buggar och önskemål på samma ställe.{' '}
-          <a href="https://github.com/kolplattformen.com/skolplattformen/issues">
+          <a href="https://github.com/kolplattformen/skolplattformen/issues">
             Github. Klicka här
           </a>{' '}
           för att se vilka funktioner och buggar vi redan har tagit emot och
