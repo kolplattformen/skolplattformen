@@ -44,7 +44,7 @@ const AppShots = () => {
           width={178}
         />
         <Image
-          alt="Lista med barnets aviseringar"
+          alt="Barnets aviseringar"
           height={376}
           layout="responsive"
           src={screenshotChildNotifications}
