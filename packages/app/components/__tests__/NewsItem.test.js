@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '../../utils/testHelpers'
-import { NewsItem } from '../newsitem.component'
+import { NewsItem } from '../newsItem.component'
 import MockDate from 'mockdate'
 import { fireEvent } from '@testing-library/react-native'
 import { useNewsDetails, useApi } from '@skolplattformen/api-hooks'
