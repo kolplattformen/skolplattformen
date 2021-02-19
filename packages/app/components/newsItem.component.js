@@ -8,14 +8,15 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import { DateTime } from 'luxon'
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
+import moment from 'moment'
+import 'moment/locale/sv'
 
 const displayDate = (date) =>
-  DateTime.fromISO(date).setLocale('sv').toLocaleString(DateTime.DATETIME_MED)
+  moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
@@ -28,23 +29,30 @@ export const NewsItem = ({ navigation, route }) => {
   }
 
   const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+    <TopNavigationAction
+      accessibilityLabel="Tillbaka till barn"
+      icon={BackIcon}
+      onPress={navigateBack}
+    />
   )
+
+  const publishedAt = displayDate(newsItem.published)
+  const modifiedAt = displayDate(newsItem.modified)
 
   const renderItemHeader = (headerProps) => (
     <View {...headerProps}>
       <Text category="h3">{newsItem.header}</Text>
       <Image src={newsItem.fullImageUrl} style={styles.image} />
-      <Text category="s1" appearance="hint">
-        {newsItem.published
-          ? `Publicerad: ${displayDate(newsItem.published)}`
-          : ''}
-      </Text>
-      <Text category="s1" appearance="hint">
-        {newsItem.modified
-          ? `Uppdaterad: ${displayDate(newsItem.modified)}`
-          : ''}
-      </Text>
+      {publishedAt !== 'Invalid DateTime' && (
+        <Text category="s1" appearance="hint">
+          Publicerad: {publishedAt}
+        </Text>
+      )}
+      {modifiedAt !== 'Invalid DateTime' && (
+        <Text category="s1" appearance="hint">
+          Uppdaterad: {modifiedAt}
+        </Text>
+      )}
     </View>
   )
 
