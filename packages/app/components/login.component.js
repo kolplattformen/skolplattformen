@@ -22,6 +22,7 @@ import {
   View,
 } from 'react-native'
 import { useAsyncStorage } from 'use-async-storage'
+import {schema} from "../app.json"
 
 const funArguments = [
   'öppna',
@@ -88,7 +89,7 @@ export const Login = ({ navigation }) => {
     try {
       const bankIdUrl =
         Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=null`
+          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=${encodeURIComponent(schema)}`
           : `bankid:///?autostarttoken=${token.token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
