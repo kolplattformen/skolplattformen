@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { NewsItem } from '../newsItem.component'
-import MockDate from 'mockdate'
 import { fireEvent } from '@testing-library/react-native'
 import { useNewsDetails, useApi } from '@skolplattformen/api-hooks'
 
@@ -48,10 +47,6 @@ const setup = (customProps = { newsItem: {} }) => {
   return render(<NewsItem {...props} />)
 }
 
-beforeEach(() => {
-  MockDate.set('2021-02-15T09:30:28.484Z')
-})
-
 test('gets article details using useNewsDetails', () => {
   setup()
 
@@ -60,8 +55,6 @@ test('gets article details using useNewsDetails', () => {
 
 test('renders an article', () => {
   const screen = setup()
-
-  screen.debug()
 
   expect(screen.getByText(/k-bullar!/i)).toBeTruthy()
   expect(screen.getByText(/nu blir det köttbullar/i)).toBeTruthy()
@@ -72,7 +65,7 @@ test('renders an article', () => {
 test('renders an article without published date if date is invalid', () => {
   const newsItemWithoutPublishedDate = {
     ...defaultNewsItem,
-    published: '__invalid_date__',
+    published: null,
   }
 
   const screen = setup({ newsItem: newsItemWithoutPublishedDate })
@@ -86,7 +79,7 @@ test('renders an article without published date if date is invalid', () => {
 test('renders an article without modified date if date is invalid', () => {
   const newsItemWithoutPublishedDate = {
     ...defaultNewsItem,
-    modified: '__invalid_date__',
+    modified: null,
   }
 
   const screen = setup({ newsItem: newsItemWithoutPublishedDate })

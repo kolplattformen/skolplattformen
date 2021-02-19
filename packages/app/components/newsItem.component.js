@@ -8,14 +8,15 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import { DateTime } from 'luxon'
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
+import moment from 'moment'
+import 'moment/locale/sv'
 
 const displayDate = (date) =>
-  DateTime.fromISO(date).setLocale('sv').toLocaleString(DateTime.DATETIME_MED)
+  moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
