@@ -1,30 +1,24 @@
 import { useClassmates } from '@skolplattformen/api-hooks'
 import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
+import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
 
 export const Classmates = () => {
   const child = useChild()
-  const { data, status, reload } = useClassmates(child)
-  const [refreshing, setRefreshing] = useState(status === 'loading')
-  useEffect(() => {
-    setRefreshing(status === 'loading')
-  }, [status])
-
-  const refresh = () => reload()
+  const { data } = useClassmates(child)
 
   const renderItemIcon = (props) => <Icon {...props} name="people-outline" />
   const [selected, setSelected] = useState()
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <ListItem
-      title={`${item.firstname} ${item.lastname}`}
+      accessibilityLabel={`Barn ${index + 1}`}
+      title={fullName(item)}
       onPress={() => setSelected(item)}
-      description={item.guardians
-        .map((guardian) => `${guardian.firstname} ${guardian.lastname}`)
-        .join(', ')}
+      description={guardians(item.guardians)}
       accessoryLeft={renderItemIcon}
       accessoryRight={(props) =>
         ContactMenu({
@@ -39,13 +33,12 @@ export const Classmates = () => {
 
   return (
     <List
-      refreshing={refreshing}
       style={styles.container}
-      data={data}
+      data={sortByFirstName(data)}
       ItemSeparatorComponent={Divider}
       ListHeaderComponent={
         <Text category="h5" style={styles.listHeader}>
-          Klass {data?.length ? data[0].className : ''}
+          {data?.length ? `Klass ${data[0].className}` : 'Klass'}
         </Text>
       }
       renderItem={renderItem}

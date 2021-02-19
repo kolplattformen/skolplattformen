@@ -24,7 +24,7 @@ import { ChildProvider, useChild } from './childContext.component'
 import { Classmates } from './classmates.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
-import { childName } from '../utils/childHelpers'
+import { studentName } from '../utils/peopleHelpers'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -72,12 +72,9 @@ const CalendarScreen = () => {
 }
 
 const ClassmatesScreen = () => {
-  const child = useChild()
-  const { data: classmates } = useClassmates(child)
-
   return (
     <Layout>
-      <Classmates classmates={classmates} />
+      <Classmates />
     </Layout>
   )
 }
@@ -148,7 +145,7 @@ export const Child = ({ route, navigation }) => {
     <SafeAreaView style={{ ...styles.wrap, color }}>
       <ChildProvider child={child}>
         <TopNavigation
-          title={childName(child.name)}
+          title={studentName(child.name)}
           alignment="center"
           accessoryLeft={BackAction}
           style={styles.topBar}

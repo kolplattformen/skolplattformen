@@ -19,7 +19,7 @@ import Personnummer from 'personnummer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import moment from 'moment'
-import { childName } from '../utils/childHelpers'
+import { studentName } from '../utils/peopleHelpers'
 
 const AbsenceSchema = Yup.object().shape({
   socialSecurityNumber: Yup.string()
@@ -65,7 +65,7 @@ const Absence = ({ route, navigation }) => {
         alignment="center"
         style={styles.topBar}
         title="Anmäl frånvaro"
-        subtitle={childName(child.name)}
+        subtitle={studentName(child.name)}
       />
       <Divider />
       <Layout style={styles.wrap}>
