@@ -1,4 +1,4 @@
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   useCalendar,
   useClassmates,
@@ -7,10 +7,10 @@ import {
   useSchedule,
 } from '@skolplattformen/api-hooks'
 import {
+  BottomNavigation,
+  BottomNavigationTab,
   Icon,
   Layout,
-  Tab,
-  TabBar,
   Text,
   TopNavigation,
   TopNavigationAction,
@@ -25,7 +25,7 @@ import { Classmates } from './classmates.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 
-const { Navigator, Screen } = createMaterialTopTabNavigator()
+const { Navigator, Screen } = createBottomTabNavigator()
 
 const NewsScreen = () => {
   const child = useChild()
@@ -94,34 +94,34 @@ const NotificationsIcon = (props) => (
 const CalendarIcon = (props) => <Icon {...props} name="calendar-outline" />
 const ClassIcon = (props) => <Icon {...props} name="people-outline" />
 
-const TopTabBar = ({ navigation, state }) => (
-  <TabBar
+const BottomTabBar = ({ navigation, state }) => (
+  <BottomNavigation
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
-    <Tab
+    <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Nyheter</TabTitle>}
       icon={NewsIcon}
     />
-    <Tab
+    <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Aviseringar</TabTitle>}
       icon={NotificationsIcon}
     />
-    <Tab
+    <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Kalender</TabTitle>}
       icon={CalendarIcon}
     />
-    <Tab
+    <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
       icon={ClassIcon}
     />
-  </TabBar>
+  </BottomNavigation>
 )
 
 const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
   <Navigator
     initialRouteName={initialRouteName}
-    tabBar={(props) => <TopTabBar {...props} />}
+    tabBar={(props) => <BottomTabBar {...props} />}
   >
     <Screen name="Nyheter" component={NewsScreen} />
     <Screen name="Notifieringar" component={NotificationsScreen} />
