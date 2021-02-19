@@ -70,7 +70,7 @@ test('renders an article', () => {
 test('renders an article without published date if date is invalid', () => {
   const newsItemWithoutPublishedDate = {
     ...defaultNewsItem,
-    published: null,
+    published: '__invalid_date__',
   }
 
   const screen = setup({ newsItem: newsItemWithoutPublishedDate })
@@ -84,7 +84,7 @@ test('renders an article without published date if date is invalid', () => {
 test('renders an article without modified date if date is invalid', () => {
   const newsItemWithoutPublishedDate = {
     ...defaultNewsItem,
-    modified: null,
+    modified: '__invalid_date__',
   }
 
   const screen = setup({ newsItem: newsItemWithoutPublishedDate })
