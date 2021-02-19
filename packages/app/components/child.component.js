@@ -77,7 +77,11 @@ const ClassmatesScreen = () => {
 
   return (
     <Layout>
-      <Classmates classmates={classmates} />
+      <Classmates
+        classmates={classmates.sort((a, b) =>
+          a.firstname.localeCompare(b.firstname)
+        )}
+      />
     </Layout>
   )
 }
