@@ -17,7 +17,7 @@ const api = init(fetch, () => {
 export default () => {
   return (
     <ApiProvider api={api} storage={AsyncStorage}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent />
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{ ...eva.light, ...customization }}>
         <AppNavigator />
