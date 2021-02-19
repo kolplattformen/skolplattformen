@@ -20,11 +20,11 @@ export const Notification = ({ item }) => {
         onPress={open}
         header={(headerProps) => (
           <View {...headerProps}>
-            <Text category="h6">{item.sender}</Text>
-            <Text category="s1">
+            <Text style={styles.title}>{item.sender}</Text>
+            <Text style={styles.subtitle}>
               {item.category ? item.category : ''}
-              {item.category && displayDate ? ' ' : ''}
-              {displayDate ? `(${displayDate})` : ''}
+              {item.category && displayDate ? ' • ' : ''}
+              {displayDate ? displayDate : ''}
             </Text>
           </View>
         )}
@@ -39,6 +39,19 @@ export const Notification = ({ item }) => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    margin: 2,
+    backgroundColor: '#fff',
+    borderRadius: 2,
+    borderColor: '#f0f0f0',
+    borderWidth: 1,
+    marginBottom: 8,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 2,
+  },
+  subtitle: {
+    color: '#6B7280',
+    fontSize: 12,
   },
 })
