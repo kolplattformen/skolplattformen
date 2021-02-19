@@ -2,12 +2,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import { StatusBar } from 'react-native'
+import { schema } from '../app.json'
+import Absence from './absence.component'
 import { Child } from './child.component'
 import { Children } from './children.component'
 import { Login } from './login.component'
 import { NewsItem } from './newsItem.component'
-import Absence from './absence.component'
-import { schema } from '../app.json'
 
 const { Navigator, Screen } = createStackNavigator()
 
