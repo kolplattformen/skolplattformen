@@ -10,6 +10,7 @@ import { DateTime } from 'luxon'
 import moment from 'moment'
 import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { childName } from '../utils/childHelpers'
 
 const NotificationsIcon = (props) => (
   <Icon {...props} name="alert-circle-outline" />
@@ -61,75 +62,85 @@ export const ChildListItem = ({ navigation, child, color }) => {
         <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
       <View style={{ margin: 20, flex: 1 }}>
-        <Text category="h6">{child.name?.split('(')[0]}</Text>
+        <Text category="h6">{childName(child.name)}</Text>
         <Text category="s1">{`${getClassName()}`}</Text>
       </View>
     </View>
   )
 
   const Footer = () => (
-    <View style={styles.itemFooter}>
-      <Button
-        style={[styles.item, styles[newsStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: 'Nyheter',
-          })
-        }
-        accessoryLeft={NewsIcon}
-      >
-        {`${(news || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[notificationsStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: 'Notifieringar',
-          })
-        }
-        accessoryLeft={NotificationsIcon}
-      >
-        {`${(notifications || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[calendarStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: 'Kalender',
-          })
-        }
-        accessoryLeft={CalendarIcon}
-      >
-        {`${(notifications || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[classmatesStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: 'Klassen',
-          })
-        }
-        accessoryLeft={PeopleIcon}
-      >
-        {`${(classmates || []).length}`}
-      </Button>
-    </View>
+    <>
+      <View style={styles.itemFooter}>
+        <Button
+          style={[styles.item, styles[newsStatus]]}
+          status="control"
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'Nyheter',
+            })
+          }
+          accessoryLeft={NewsIcon}
+        >
+          {`${(news || []).length}`}
+        </Button>
+        <Button
+          style={[styles.item, styles[notificationsStatus]]}
+          status="control"
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'Notifieringar',
+            })
+          }
+          accessoryLeft={NotificationsIcon}
+        >
+          {`${(notifications || []).length}`}
+        </Button>
+        <Button
+          style={[styles.item, styles[calendarStatus]]}
+          status="control"
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'Kalender',
+            })
+          }
+          accessoryLeft={CalendarIcon}
+        >
+          {`${(notifications || []).length}`}
+        </Button>
+        <Button
+          style={[styles.item, styles[classmatesStatus]]}
+          status="control"
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'Klassen',
+            })
+          }
+          accessoryLeft={PeopleIcon}
+        >
+          {`${(classmates || []).length}`}
+        </Button>
+      </View>
+      <View style={styles.itemFooterAbsence}>
+        <Button
+          size="small"
+          onPress={() => navigation.navigate('Absence', { child })}
+        >
+          Anmäl frånvaro
+        </Button>
+      </View>
+    </>
   )
 
   return (
@@ -173,10 +184,13 @@ const styles = StyleSheet.create({
   itemFooter: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingHorizontal: 5,
-    paddingVertical: 5,
+    paddingVertical: 8,
     borderRadius: 5,
     margin: 0,
+  },
+  itemFooterAbsence: {
+    alignItems: 'flex-end',
+    padding: 8,
   },
   item: {
     paddingHorizontal: 0,
