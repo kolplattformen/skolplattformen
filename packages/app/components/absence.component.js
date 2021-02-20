@@ -1,25 +1,25 @@
-import React from 'react'
-import { StyleSheet, SafeAreaView, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   Button,
   CheckBox,
   Divider,
-  Icon,
-  Layout,
   Input,
+  Layout,
   Text,
   TopNavigation,
   TopNavigationAction,
   useTheme,
 } from '@ui-kitten/components'
 import { Formik } from 'formik'
-import { useSMS } from '../utils/SMS'
-import * as Yup from 'yup'
-import Personnummer from 'personnummer'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import moment from 'moment'
+import Personnummer from 'personnummer'
+import React from 'react'
+import { SafeAreaView, StyleSheet, View } from 'react-native'
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import * as Yup from 'yup'
 import { studentName } from '../utils/peopleHelpers'
+import { useSMS } from '../utils/SMS'
+import { BackIcon } from './icon.component'
 
 const AbsenceSchema = Yup.object().shape({
   socialSecurityNumber: Yup.string()
@@ -58,7 +58,7 @@ const Absence = ({ route, navigation }) => {
       <TopNavigation
         accessoryLeft={() => (
           <TopNavigationAction
-            icon={(props) => <Icon {...props} name="arrow-back" />}
+            icon={BackIcon}
             onPress={() => navigation.goBack()}
           />
         )}

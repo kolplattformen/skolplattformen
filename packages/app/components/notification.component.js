@@ -1,11 +1,11 @@
 import { Card, Text } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ModalWebView } from './modalWebView.component'
 
 export const Notification = ({ item }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
 

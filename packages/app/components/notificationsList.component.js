@@ -1,22 +1,16 @@
 import { useNotifications } from '@skolplattformen/api-hooks'
 import { List } from '@ui-kitten/components'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
 import { useChild } from './childContext.component'
 import { Notification } from './notification.component'
 
 export const NotificationsList = () => {
   const child = useChild()
-  const { data, status, reload } = useNotifications(child)
-  const [refreshing, setRefreshing] = useState(status === 'loading')
-  useEffect(() => {
-    setRefreshing(status === 'loading')
-  }, [status])
+  const { data } = useNotifications(child)
 
-  const refresh = () => reload()
   return (
     <List
-      refreshing={refreshing}
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       data={data}

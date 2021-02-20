@@ -1,31 +1,24 @@
 import { useCalendar } from '@skolplattformen/api-hooks'
-import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
+import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
 import { useChild } from './childContext.component'
+import { CalendarOutlineIcon } from './icon.component'
 
 moment.locale('sv')
 
-export const Calendar = ({ }) => {
+export const Calendar = () => {
   const child = useChild()
-  const { data, status, reload } = useCalendar(child)
-  const [refreshing, setRefreshing] = useState(status === 'loading')
-  useEffect(() => {
-    setRefreshing(status === 'loading')
-  }, [status])
-
-  const refresh = () => reload()
-
-  const renderItemIcon = () => (props) => <Icon {...props} name={'calendar'} />
+  const { data } = useCalendar(child)
 
   const renderItem = ({ item }) => (
     <ListItem
       disabled={true}
       title={`${item.title}`}
       description={`${moment(item.startDate).fromNow()}`}
-      accessoryLeft={renderItemIcon(item.startDate, item.endDate)}
+      accessoryLeft={CalendarOutlineIcon}
     />
   )
 
@@ -38,15 +31,14 @@ export const Calendar = ({ }) => {
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
     </View>
   ) : (
-      <List
-        refreshing={refreshing}
-        style={styles.container}
-        data={data.sort((a, b) => b.startDate < a.startDate)}
-        ItemSeparatorComponent={Divider}
-        renderItem={renderItem}
-        contentContainerStyle={styles.contentContainer}
-      />
-    )
+    <List
+      style={styles.container}
+      data={data.sort((a, b) => b.startDate < a.startDate)}
+      ItemSeparatorComponent={Divider}
+      renderItem={renderItem}
+      contentContainerStyle={styles.contentContainer}
+    />
+  )
 }
 
 const styles = StyleSheet.create({

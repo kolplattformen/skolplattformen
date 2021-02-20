@@ -1,15 +1,7 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import {
-  Button,
-  Card,
-  Icon,
-  Input,
-  Layout,
-  Modal,
-  Text,
-} from '@ui-kitten/components'
+import { Button, Card, Input, Layout, Modal, Text } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   Image,
   Keyboard,
@@ -22,7 +14,13 @@ import {
   View,
 } from 'react-native'
 import { useAsyncStorage } from 'use-async-storage'
-import {schema} from "../app.json"
+import { schema } from '../app.json'
+import {
+  CheckIcon,
+  CloseOutlineIcon,
+  PersonIcon,
+  SecureIcon,
+} from './icon.component'
 
 const funArguments = [
   'öppna',
@@ -46,21 +44,21 @@ const funArguments = [
 
 export const Login = ({ navigation }) => {
   const { api, isLoggedIn } = useApi()
-  const [visible, showModal] = useState(false)
-  const [argument, setArgument] = useState('öppna')
-  const [error, setError] = useState(null)
+  const [visible, showModal] = React.useState(false)
+  const [argument, setArgument] = React.useState('öppna')
+  const [error, setError] = React.useState(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
-  const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
+  const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
   const isFemale =
     Personnummer.valid(socialSecurityNumber) &&
     Personnummer.parse(socialSecurityNumber).isFemale()
-  const [valid, setValid] = useState(false)
+  const [valid, setValid] = React.useState(false)
 
   /* Initial load functions */
-  useEffect(() => {
+  React.useEffect(() => {
     setValid(Personnummer.valid(socialSecurityNumber))
   }, [socialSecurityNumber])
-  useEffect(() => {
+  React.useEffect(() => {
     if (cachedSsn && socialSecurityNumber !== cachedSsn) {
       setSocialSecurityNumber(cachedSsn)
     }
@@ -71,7 +69,7 @@ export const Login = ({ navigation }) => {
     navigateToChildren()
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     setArgument(funArguments[Math.floor(Math.random() * funArguments.length)])
     api.on('login', loginHandler)
 
@@ -89,7 +87,9 @@ export const Login = ({ navigation }) => {
     try {
       const bankIdUrl =
         Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=${encodeURIComponent(schema)}`
+          ? `https://app.bankid.com/?autostarttoken=${
+              token.token
+            }&redirect=${encodeURIComponent(schema)}`
           : `bankid:///?autostarttoken=${token.token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
@@ -132,15 +132,9 @@ export const Login = ({ navigation }) => {
     }
   }
 
-  /* Icons */
-  const SecureIcon = (style) => <Icon {...style} name="keypad-outline" />
-  const CheckIcon = (style) => <Icon {...style} name="checkmark-outline" />
-  const LogoutIcon = (style) => <Icon {...style} name="close-outline" />
-  const PersonIcon = (style) => <Icon {...style} name="person-outline" />
-  const ClearIcon = (style) => <Icon {...style} name="close-outline" />
   const clearInput = (props) => (
     <TouchableWithoutFeedback onPress={() => handleInput('')}>
-      <ClearIcon {...props} />
+      <CloseOutlineIcon {...props} />
     </TouchableWithoutFeedback>
   )
 
@@ -211,7 +205,7 @@ export const Login = ({ navigation }) => {
                   <View style={{ marginTop: 10 }}>
                     <Button
                       onPress={() => startLogout()}
-                      accessoryRight={LogoutIcon}
+                      accessoryRight={CloseOutlineIcon}
                       size="medium"
                     >
                       Logga ut

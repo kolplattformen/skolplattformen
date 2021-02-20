@@ -1,14 +1,14 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { Icon, Text } from '@ui-kitten/components'
+import { Text } from '@ui-kitten/components'
 import URI from 'jsuri'
-import React, { useState } from 'react'
-import { Modal, StyleSheet, View } from 'react-native'
-import { TouchableOpacity } from 'react-native'
+import React from 'react'
+import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
+import { CloseIcon } from './icon.component'
 
 export const ModalWebView = ({ url, onClose }) => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
   const cookie = api.getSessionCookie()
   const uri = new URI(url)
@@ -23,13 +23,14 @@ export const ModalWebView = ({ url, onClose }) => {
       animationType="slide"
       statusBarTranslucent={true}
       visible={modalVisible}
-      onRequestClose={closeModal}>
+      onRequestClose={closeModal}
+    >
       <SafeAreaView style={styles.container}>
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
             <Text category="s1">{uri.host()}</Text>
             <TouchableOpacity onPress={closeModal}>
-              <Icon name="close-circle" style={styles.icon} fill="#333333" />
+              <CloseIcon style={styles.icon} fill="#333333" />
             </TouchableOpacity>
           </View>
         </View>

@@ -1,17 +1,17 @@
 import { useClassmates } from '@skolplattformen/api-hooks'
 import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
+import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
 import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
-import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
 
 export const Classmates = () => {
   const child = useChild()
   const { data } = useClassmates(child)
 
   const renderItemIcon = (props) => <Icon {...props} name="people-outline" />
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = React.useState()
 
   const renderItem = ({ item, index }) => (
     <ListItem
@@ -20,14 +20,13 @@ export const Classmates = () => {
       onPress={() => setSelected(item)}
       description={guardians(item.guardians)}
       accessoryLeft={renderItemIcon}
-      accessoryRight={(props) =>
-        ContactMenu({
-          ...props,
-          contact: item,
-          selected: item === selected,
-          setSelected,
-        })
-      }
+      accessoryRight={() => (
+        <ContactMenu
+          contact={item}
+          selected={item === selected}
+          setSelected={setSelected}
+        />
+      )}
     />
   )
 
