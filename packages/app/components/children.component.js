@@ -1,7 +1,6 @@
 import { useChildList } from '@skolplattformen/api-hooks'
 import {
   Divider,
-  Icon,
   Layout,
   List,
   Spinner,
@@ -12,11 +11,10 @@ import {
 import React from 'react'
 import { Dimensions, Image, SafeAreaView, StyleSheet, View } from 'react-native'
 import { ChildListItem } from './childListItem.component'
+import { BackIcon } from './icon.component'
 
 const { width } = Dimensions.get('window')
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
-
-const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
 export const Children = ({ navigation }) => {
   const { data: childList, status } = useChildList()

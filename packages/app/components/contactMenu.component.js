@@ -1,22 +1,29 @@
 import {
   Button,
-  Icon,
   MenuGroup,
   MenuItem,
   OverflowMenu,
 } from '@ui-kitten/components'
 import React from 'react'
 import { Linking, StyleSheet } from 'react-native'
+import { fullName } from '../utils/peopleHelpers'
+import {
+  CallIcon,
+  EmailIcon,
+  MapIcon,
+  MoreIcon,
+  SMSIcon,
+} from './icon.component'
 
 export const ContactMenu = ({ contact, selected, setSelected }) => {
   const [visible, setVisible] = React.useState(selected)
 
-  const moreIcon = (props) => <Icon {...props} name="more-horizontal-outline" />
   const renderToggleButton = () => (
     <Button
+      accessibilityLabel="Visa kontaktinformation"
       onPress={() => setVisible(true)}
       appearance="ghost"
-      accessoryLeft={moreIcon}
+      accessoryLeft={MoreIcon}
     />
   )
 
@@ -25,10 +32,7 @@ export const ContactMenu = ({ contact, selected, setSelected }) => {
     setSelected(null)
   }
 
-  const CallIcon = (props) => <Icon {...props} name="phone-outline" />
-  const SMSIcon = (props) => <Icon {...props} name="message-square-outline" />
-  const EmailIcon = (props) => <Icon {...props} name="email-outline" />
-  const MapIcon = (props) => <Icon {...props} name="map-outline" />
+  const shouldDisplay = (option) => (option ? 'flex' : 'none')
 
   return (
     <OverflowMenu
@@ -37,40 +41,48 @@ export const ContactMenu = ({ contact, selected, setSelected }) => {
       backdropStyle={styles.backdrop}
       onBackdropPress={handleBackdropPress}
     >
-      {contact.guardians.map((parent) => (
-        <MenuGroup
-          key={`${parent.firstname}-${parent.lastname}`}
-          title={`${parent.firstname} ${parent.lastname}`}
-          style={{ position: 'relative', zIndex: 10 }}
-        >
-          <MenuItem
-            accessoryLeft={CallIcon}
-            style={{ display: parent.mobile ? 'flex' : 'none' }}
-            title="Ring"
-            onPress={(e) => Linking.openURL(`tel:${parent.mobile}`)}
-          />
-          <MenuItem
-            accessoryLeft={SMSIcon}
-            style={{ display: parent.mobile ? 'flex' : 'none' }}
-            title="SMS"
-            onPress={(e) => Linking.openURL(`sms:${parent.mobile}`)}
-          />
-          <MenuItem
-            accessoryLeft={EmailIcon}
-            style={{ display: parent.email ? 'flex' : 'none' }}
-            title="Maila"
-            onPress={(e) => Linking.openURL(`mailto:${parent.email}`)}
-          />
-          <MenuItem
-            accessoryLeft={MapIcon}
-            style={{ display: parent.address ? 'flex' : 'none' }}
-            title="Hem"
-            onPress={(e) =>
-              Linking.openURL(`http://maps.apple.com/?daddr=${parent.address}`)
-            }
-          />
-        </MenuGroup>
-      ))}
+      {contact.guardians.map((guardian) => {
+        const { address, email, mobile } = guardian
+
+        return (
+          <MenuGroup
+            key={fullName(guardian)}
+            title={fullName(guardian)}
+            style={styles.group}
+          >
+            <MenuItem
+              accessibilityLabel="Ring"
+              accessoryLeft={CallIcon}
+              style={{ display: shouldDisplay(mobile) }}
+              title="Ring"
+              onPress={() => Linking.openURL(`tel:${mobile}`)}
+            />
+            <MenuItem
+              accessibilityLabel="SMS"
+              accessoryLeft={SMSIcon}
+              style={{ display: shouldDisplay(mobile) }}
+              title="SMS"
+              onPress={() => Linking.openURL(`sms:${mobile}`)}
+            />
+            <MenuItem
+              accessibilityLabel="Maila"
+              accessoryLeft={EmailIcon}
+              style={{ display: shouldDisplay(email) }}
+              title="Maila"
+              onPress={() => Linking.openURL(`mailto:${email}`)}
+            />
+            <MenuItem
+              accessibilityLabel="Hem"
+              accessoryLeft={MapIcon}
+              style={{ display: shouldDisplay(address) }}
+              title="Hem"
+              onPress={() =>
+                Linking.openURL(`http://maps.apple.com/?daddr=${address}`)
+              }
+            />
+          </MenuGroup>
+        )
+      })}
     </OverflowMenu>
   )
 }
@@ -78,5 +90,9 @@ export const ContactMenu = ({ contact, selected, setSelected }) => {
 const styles = StyleSheet.create({
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  group: {
+    position: 'relative',
+    zIndex: 10,
   },
 })

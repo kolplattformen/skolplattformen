@@ -2,23 +2,21 @@ import { useNewsDetails } from '@skolplattformen/api-hooks'
 import {
   Card,
   Divider,
-  Icon,
   Layout,
   Text,
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import React from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
-import { Image } from './image.component'
-import { Markdown } from './markdown.component'
 import moment from 'moment'
 import 'moment/locale/sv'
+import React from 'react'
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { BackIcon } from './icon.component'
+import { Image } from './image.component'
+import { Markdown } from './markdown.component'
 
 const displayDate = (date) =>
   moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
-
-const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
 export const NewsItem = ({ navigation, route }) => {
   const { newsItem, child } = route.params

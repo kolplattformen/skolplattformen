@@ -5,26 +5,22 @@ import {
   useNotifications,
   useSchedule,
 } from '@skolplattformen/api-hooks'
-import { Avatar, Button, Card, Icon, Text } from '@ui-kitten/components'
+import { Avatar, Button, Card, Text } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 import moment from 'moment'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { studentName } from '../utils/peopleHelpers'
-
-const NotificationsIcon = (props) => (
-  <Icon {...props} name="alert-circle-outline" />
-)
-
-const NewsIcon = (props) => <Icon {...props} name="activity-outline" />
-
-const CalendarIcon = (props) => <Icon {...props} name="calendar-outline" />
-
-const PeopleIcon = (props) => <Icon {...props} name="people-outline" />
+import {
+  CalendarOutlineIcon,
+  ClassIcon,
+  NewsIcon,
+  NotificationsIcon,
+} from './icon.component'
 
 export const ChildListItem = ({ navigation, child, color }) => {
   // Forces rerender when child.id changes
-  useEffect(() => {}, [child.id])
+  React.useEffect(() => {}, [child.id])
 
   const { data: notifications, status: notificationsStatus } = useNotifications(
     child
@@ -121,7 +117,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
               initialRouteName: 'Kalender',
             })
           }
-          accessoryLeft={CalendarIcon}
+          accessoryLeft={CalendarOutlineIcon}
         >
           {`${(notifications || []).length}`}
         </Button>
@@ -136,7 +132,7 @@ export const ChildListItem = ({ navigation, child, color }) => {
               initialRouteName: 'Klassen',
             })
           }
-          accessoryLeft={PeopleIcon}
+          accessoryLeft={ClassIcon}
         >
           {`${(classmates || []).length}`}
         </Button>

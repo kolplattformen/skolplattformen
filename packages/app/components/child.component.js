@@ -1,72 +1,51 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
-  useCalendar,
-  useClassmates,
-  useNews,
-  useNotifications,
-  useSchedule,
-} from '@skolplattformen/api-hooks'
-import {
   BottomNavigation,
   BottomNavigationTab,
-  Icon,
   Layout,
   Text,
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components'
-import { DateTime } from 'luxon'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
-import { ChildProvider, useChild } from './childContext.component'
+import { ChildProvider } from './childContext.component'
 import { Classmates } from './classmates.component'
+import {
+  BackIcon,
+  CalendarOutlineIcon,
+  ClassIcon,
+  NewsIcon,
+  NotificationsIcon,
+} from './icon.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
-import { studentName } from '../utils/peopleHelpers'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
 const NewsScreen = () => {
-  const child = useChild()
-  const { data: news } = useNews(child)
-
   return (
     <Layout>
-      <NewsList news={news} />
+      <NewsList />
     </Layout>
   )
 }
 
 const NotificationsScreen = () => {
-  const child = useChild()
-  const { data: notifications, status: notificationsStatus } = useNotifications(
-    child
-  )
-
   return (
     <Layout>
-      <NotificationsList
-        notifications={notifications}
-        status={notificationsStatus}
-      />
+      <NotificationsList />
     </Layout>
   )
 }
 
 const CalendarScreen = () => {
-  const child = useChild()
-  const { data: calendar } = useCalendar(child)
-  const { data: schedule } = useSchedule(
-    child,
-    DateTime.local(),
-    DateTime.local().plus({ days: 7 })
-  )
-
   return (
     <Layout>
-      <Calendar calendar={[...(calendar ?? []), ...(schedule ?? [])]} />
+      <Calendar />
     </Layout>
   )
 }
@@ -85,13 +64,6 @@ const TabTitle = ({ style, children }) => (
   </Text>
 )
 
-const NewsIcon = (props) => <Icon {...props} name="activity-outline" />
-const NotificationsIcon = (props) => (
-  <Icon {...props} name="alert-circle-outline" />
-)
-const CalendarIcon = (props) => <Icon {...props} name="calendar-outline" />
-const ClassIcon = (props) => <Icon {...props} name="people-outline" />
-
 const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
     selectedIndex={state.index}
@@ -107,7 +79,7 @@ const BottomTabBar = ({ navigation, state }) => (
     />
     <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Kalender</TabTitle>}
-      icon={CalendarIcon}
+      icon={CalendarOutlineIcon}
     />
     <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
@@ -130,8 +102,6 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
 
 export const Child = ({ route, navigation }) => {
   const { child, color, initialRouteName } = route.params
-
-  const BackIcon = (props) => <Icon {...props} name="arrow-back" />
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
