@@ -70,7 +70,9 @@ export const NewsItem = ({ navigation, route }) => {
           >
             {data.body}
           </Markdown>
-          <Image src={newsItem.fullImageUrl} style={styles.image} />
+          {newsItem.fullImageUrl && (
+            <Image src={newsItem.fullImageUrl} style={styles.image} />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
