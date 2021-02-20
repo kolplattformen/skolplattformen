@@ -6,12 +6,14 @@ import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
+import { SaveToCalendar } from './saveToCalendar.component'
 
 moment.locale('sv')
 
 export const Calendar = () => {
   const child = useChild()
   const { data } = useCalendar(child)
+  const [selected, setSelected] = React.useState()
 
   const renderItem = ({ item }) => (
     <ListItem
@@ -19,6 +21,13 @@ export const Calendar = () => {
       title={`${item.title}`}
       description={`${moment(item.startDate).fromNow()}`}
       accessoryLeft={CalendarOutlineIcon}
+      accessoryRight={() => (
+        <SaveToCalendar
+          event={item}
+          selected={item === selected}
+          setSelected={setSelected}
+        />
+      )}
     />
   )
 
