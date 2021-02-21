@@ -27,8 +27,10 @@ jobs:
       - name: Install dependencies
         run: npx lerna bootstrap
 
-      - name: Run tests
-        run: yarn test
+      - name: Run linting and tests
+        run: |
+          yarn lint
+          yarn test
         env:
           CI: true
 

@@ -23,36 +23,37 @@ export const Calendar = () => {
   )
 
   return !data?.length ? (
-    <View style={{ flex: 1 }}>
+    <View style={styles.emptyState}>
       <Image
         source={require('../assets/girls.png')}
-        style={{ height: 200, width: '100%' }}
+        style={styles.emptyStateImage}
       />
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
     </View>
   ) : (
     <List
-      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
       data={data.sort((a, b) => b.startDate < a.startDate)}
       ItemSeparatorComponent={Divider}
       renderItem={renderItem}
-      contentContainerStyle={styles.contentContainer}
+      style={styles.container}
     />
   )
 }
 
 const styles = StyleSheet.create({
+  emptyState: {
+    flex: 1,
+  },
+  emptyStateImage: {
+    height: 200,
+    width: '100%',
+  },
   container: {
     height: '100%',
     width: '100%',
   },
   contentContainer: {
     padding: 10,
-  },
-  ongoing: {
-    color: 'red',
-  },
-  normal: {
-    color: 'black',
   },
 })
