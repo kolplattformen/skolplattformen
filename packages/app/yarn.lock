@@ -7294,13 +7294,6 @@ react-native-tab-view@2.15.2:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.2.tgz#4bc7832d33a119306614efee667509672a7ee64e"
   integrity sha512-2hxLkBnZtEKFDyfvNO5EUywhy3f/EiLOBO8SWqKj4BMBTO0QwnybaPE5MVF00Fhz+VA4+h/iI40Dkrrtq70dGg==
 
-react-native-toast-message@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-1.4.7.tgz#7db334f1425036181b634e5bd032f81ac8c00320"
-  integrity sha512-MTY/n9z4XSqb/YHgUBcLUHJf0QQtnVKgPcw99BUqE3E2pAh2BOjO7C0UrC9SmjBvRz68o1FCfYox5yhwJBAvHQ==
-  dependencies:
-    prop-types "^15.7.2"
-
 react-native-webview@11.2.1:
   version "11.2.1"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.2.1.tgz#abe68c38808f34aeed0a10740b2efba74ac610b8"
