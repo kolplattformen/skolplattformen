@@ -74,78 +74,68 @@ export const ChildListItem = ({ navigation, child, color }) => {
   )
 
   const Footer = () => (
-    <>
-      <View style={styles.itemFooter}>
-        <Button
-          style={[styles.item, styles[newsStatus]]}
-          status="control"
-          size="small"
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: 'Nyheter',
-            })
-          }
-          accessoryLeft={NewsIcon}
-        >
-          {`${(news || []).length}`}
-        </Button>
-        <Button
-          style={[styles.item, styles[notificationsStatus]]}
-          status="control"
-          size="small"
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: 'Notifieringar',
-            })
-          }
-          accessoryLeft={NotificationsIcon}
-        >
-          {`${(notifications || []).length}`}
-        </Button>
-        <Button
-          style={[styles.item, styles[calendarStatus]]}
-          status="control"
-          size="small"
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: 'Kalender',
-            })
-          }
-          accessoryLeft={CalendarOutlineIcon}
-        >
-          {`${(notifications || []).length}`}
-        </Button>
-        <Button
-          style={[styles.item, styles[classmatesStatus]]}
-          status="control"
-          size="small"
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: 'Klassen',
-            })
-          }
-          accessoryLeft={ClassIcon}
-        >
-          {`${(classmates || []).length}`}
-        </Button>
-      </View>
-      <View style={styles.itemFooterAbsence}>
-        <Button
-          size="small"
-          onPress={() => navigation.navigate('Absence', { child })}
-        >
-          Anmäl frånvaro
-        </Button>
-      </View>
-    </>
+    <View style={styles.itemFooter}>
+      <Button
+        style={[styles.item, styles[newsStatus]]}
+        status="control"
+        size="small"
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Nyheter',
+          })
+        }
+        accessoryLeft={NewsIcon}
+      >
+        {`${(news || []).length}`}
+      </Button>
+      <Button
+        style={[styles.item, styles[notificationsStatus]]}
+        status="control"
+        size="small"
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Notifieringar',
+          })
+        }
+        accessoryLeft={NotificationsIcon}
+      >
+        {`${(notifications || []).length}`}
+      </Button>
+      <Button
+        style={[styles.item, styles[calendarStatus]]}
+        status="control"
+        size="small"
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Kalender',
+          })
+        }
+        accessoryLeft={CalendarOutlineIcon}
+      >
+        {`${(notifications || []).length}`}
+      </Button>
+      <Button
+        style={[styles.item, styles[classmatesStatus]]}
+        status="control"
+        size="small"
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Klassen',
+          })
+        }
+        accessoryLeft={ClassIcon}
+      >
+        {`${(classmates || []).length}`}
+      </Button>
+    </View>
   )
 
   return (
@@ -178,6 +168,14 @@ export const ChildListItem = ({ navigation, child, color }) => {
           Inga nya inlägg denna vecka.
         </Text>
       )}
+      <View style={styles.itemFooterAbsence}>
+        <Button
+          size="small"
+          onPress={() => navigation.navigate('Absence', { child })}
+        >
+          Anmäl frånvaro
+        </Button>
+      </View>
     </Card>
   )
 }
@@ -194,8 +192,8 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   itemFooterAbsence: {
-    alignItems: 'flex-end',
-    padding: 8,
+    alignItems: 'flex-start',
+    marginTop: 16,
   },
   item: {
     paddingHorizontal: 0,
