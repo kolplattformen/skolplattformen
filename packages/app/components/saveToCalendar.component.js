@@ -5,8 +5,8 @@ import RNCalendarEvents from 'react-native-calendar-events'
 import { CalendarOutlineIcon, MoreIcon } from './icon.component'
 import Toast from 'react-native-simple-toast'
 
-export const SaveToCalendar = ({ event, selected, setSelected }) => {
-  const [visible, setVisible] = React.useState(selected)
+export const SaveToCalendar = ({ event }) => {
+  const [visible, setVisible] = React.useState(false)
 
   const renderToggleButton = () => (
     <Button
@@ -19,7 +19,6 @@ export const SaveToCalendar = ({ event, selected, setSelected }) => {
 
   const closeOverflowMenu = () => {
     setVisible(false)
-    setSelected(null)
   }
 
   const toast = (text) => Toast.showWithGravity(text, Toast.SHORT, Toast.BOTTOM)

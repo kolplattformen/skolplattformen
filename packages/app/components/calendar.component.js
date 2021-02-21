@@ -21,13 +21,7 @@ export const Calendar = () => {
       title={`${item.title}`}
       description={`${moment(item.startDate).fromNow()}`}
       accessoryLeft={CalendarOutlineIcon}
-      accessoryRight={() => (
-        <SaveToCalendar
-          event={item}
-          selected={item === selected}
-          setSelected={setSelected}
-        />
-      )}
+      accessoryRight={() => <SaveToCalendar event={item} />}
     />
   )
 
