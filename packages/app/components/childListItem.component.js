@@ -62,11 +62,11 @@ export const ChildListItem = ({ navigation, child, color }) => {
   }
 
   const Header = (props) => (
-    <View {...props} style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <View style={{ margin: 20, marginRight: 0 }}>
+    <View {...props} style={styles.cardHeader}>
+      <View style={styles.cardAvatar}>
         <Avatar source={require('../assets/avatar.png')} shape="square" />
       </View>
-      <View style={{ margin: 20, flex: 1 }}>
+      <View style={styles.cardHeaderText}>
         <Text category="h6">{studentName(child.name)}</Text>
         <Text category="s1">{`${getClassName()}`}</Text>
       </View>
@@ -184,6 +184,12 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
   },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cardAvatar: { margin: 20, marginRight: 0 },
+  cardHeaderText: { margin: 20, flex: 1 },
   itemFooter: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
