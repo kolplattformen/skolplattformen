@@ -34,60 +34,52 @@ export const Children = ({ navigation }) => {
         accessoryLeft={BackAction}
       />
       <Divider />
-      <Layout style={styles.fullFlex}>
-        {status === 'loaded' ? (
-          <Layout style={styles.childListWrap}>
-            <List
-              contentContainerStyle={styles.childList}
-              data={childList}
-              ListEmptyComponent={
-                <View style={styles.emptyState}>
-                  <Text category="h2">Inga barn</Text>
-                  <Text style={styles.emptyStateDescription}>
-                    Det finns inga barn registrerade för ditt personnummer i
-                    Stockholms Stad
-                  </Text>
-                  <Image
-                    source={require('../assets/children.png')}
-                    style={styles.emptyStateImage}
-                  />
-                </View>
-              }
-              renderItem={({ item: child, index }) => {
-                return (
-                  <ChildListItem
-                    child={child}
-                    color={colors[index % colors.length]}
-                    key={child.id}
-                    navigation={navigation}
-                  />
-                )
-              }}
-            />
-          </Layout>
-        ) : (
-          <Layout style={styles.loading}>
-            <Image
-              source={require('../assets/girls.png')}
-              style={styles.loadingImage}
-            />
-            <View style={styles.loadingMessage}>
-              <Spinner size="large" status="warning" />
-              <Text category="h1" style={styles.loadingText}>
-                Laddar...
+      {status === 'loaded' ? (
+        <List
+          contentContainerStyle={styles.childListContainer}
+          data={childList}
+          style={styles.childList}
+          ListEmptyComponent={
+            <View style={styles.emptyState}>
+              <Text category="h2">Inga barn</Text>
+              <Text style={styles.emptyStateDescription}>
+                Det finns inga barn registrerade för ditt personnummer i
+                Stockholms Stad
               </Text>
+              <Image
+                source={require('../assets/children.png')}
+                style={styles.emptyStateImage}
+              />
             </View>
-          </Layout>
-        )}
-      </Layout>
+          }
+          renderItem={({ item: child, index }) => (
+            <ChildListItem
+              child={child}
+              color={colors[index % colors.length]}
+              key={child.id}
+              navigation={navigation}
+            />
+          )}
+        />
+      ) : (
+        <Layout style={styles.loading}>
+          <Image
+            source={require('../assets/girls.png')}
+            style={styles.loadingImage}
+          />
+          <View style={styles.loadingMessage}>
+            <Spinner size="large" status="warning" />
+            <Text category="h1" style={styles.loadingText}>
+              Laddar...
+            </Text>
+          </View>
+        </Layout>
+      )}
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  fullFlex: {
-    flex: 1,
-  },
   topContainer: {
     flex: 1,
     backgroundColor: '#fff',
@@ -109,12 +101,10 @@ const styles = StyleSheet.create({
   loadingText: {
     marginLeft: 20,
   },
-  childListWrap: {
-    flex: 1,
-    justifyContent: 'flex-start',
-  },
   childList: {
     flex: 1,
+  },
+  childListContainer: {
     padding: 20,
   },
   emptyState: {
