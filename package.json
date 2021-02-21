@@ -8,5 +8,5 @@
     "bootstrap": "npx lerna bootstrap",
     "test": "npx lerna run test --stream"
   },
-  "version": "1.0.0"
+  "version": "1.4.0"
 }
