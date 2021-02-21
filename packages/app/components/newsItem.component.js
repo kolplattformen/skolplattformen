@@ -1,8 +1,6 @@
 import { useNewsDetails } from '@skolplattformen/api-hooks'
 import {
-  Card,
   Divider,
-  Layout,
   Text,
   TopNavigation,
   TopNavigationAction,
@@ -17,6 +15,8 @@ import { Markdown } from './markdown.component'
 
 const displayDate = (date) =>
   moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
+
+const dateIsValid = (date) => moment(date, moment.ISO_8601).isValid()
 
 export const NewsItem = ({ navigation, route }) => {
   const { newsItem, child } = route.params
@@ -34,28 +34,8 @@ export const NewsItem = ({ navigation, route }) => {
     />
   )
 
-  const publishedAt = displayDate(newsItem.published)
-  const modifiedAt = displayDate(newsItem.modified)
-
-  const renderItemHeader = (headerProps) => (
-    <View {...headerProps}>
-      <Text category="h3">{newsItem.header}</Text>
-      <Image src={newsItem.fullImageUrl} style={styles.image} />
-      {publishedAt !== 'Invalid DateTime' && (
-        <Text category="s1" appearance="hint">
-          Publicerad: {publishedAt}
-        </Text>
-      )}
-      {modifiedAt !== 'Invalid DateTime' && (
-        <Text category="s1" appearance="hint">
-          Uppdaterad: {modifiedAt}
-        </Text>
-      )}
-    </View>
-  )
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={styles.safeArea}>
       <TopNavigation
         title="Nyhet från Skolplattformen"
         alignment="center"
@@ -63,40 +43,80 @@ export const NewsItem = ({ navigation, route }) => {
       />
       <Divider />
 
-      <Layout style={styles.topContainer} level="1">
-        <ScrollView>
-          <Card
-            style={styles.card}
-            header={(headerProps) => renderItemHeader(headerProps, data)}
+      <ScrollView
+        contentContainerStyle={styles.article}
+        style={styles.scrollView}
+      >
+        <Text style={styles.title}>{newsItem.header}</Text>
+        {dateIsValid(newsItem.published) && (
+          <Text style={[styles.subtitle, styles.published]}>
+            <Text style={styles.strong}>Publicerad:</Text>{' '}
+            {displayDate(newsItem.published)}
+          </Text>
+        )}
+        {dateIsValid(newsItem.modified) && (
+          <Text style={styles.subtitle}>
+            <Text style={styles.strong}>Uppdaterad:</Text>{' '}
+            {displayDate(newsItem.modified)}
+          </Text>
+        )}
+        <View style={styles.body}>
+          <Markdown
+            style={{
+              body: { color: '#1F2937', fontSize: 16, lineHeight: 26 },
+              heading1: { color: '#1F2937', fontSize: 20 },
+              heading2: { color: '#1F2937', fontSize: 18 },
+            }}
           >
-            <Markdown
-              style={{
-                body: { color: 'black', fontSize: 17, lineHeight: 23 },
-                heading1: { color: 'black' },
-              }}
-            >
-              {data.body}
-            </Markdown>
-          </Card>
-        </ScrollView>
-      </Layout>
+            {data.body}
+          </Markdown>
+          {newsItem.fullImageUrl && (
+            <Image src={newsItem.fullImageUrl} style={styles.image} />
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  card: {
+  article: {
+    padding: 20,
+  },
+  scrollView: {
     flex: 1,
-    margin: 2,
-    marginBottom: 50,
   },
   image: {
     width: '100%',
     minHeight: 300,
-    marginBottom: 5,
+    marginTop: 16,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  subtitle: {
+    color: '#6B7280',
+    fontSize: 12,
+  },
+  strong: {
+    color: '#6B7280',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  published: {
+    marginBottom: 4,
+  },
+  body: {
+    marginTop: 16,
   },
 })
