@@ -35,12 +35,18 @@ export const SaveToCalendar = ({ event, selected, setSelected }) => {
 
     if (auth === 'authorized') {
       try {
-        await RNCalendarEvents.saveEvent(title, {
+        const details = {
           startDate: new Date(startDate).toISOString(),
           endDate: new Date(endDate).toISOString(),
           location,
           notes,
-        })
+        }
+
+        const detailsWithoutEmpty = Object.fromEntries(
+          Object.entries(details).filter(([_, v]) => v != null)
+        )
+
+        await RNCalendarEvents.saveEvent(title, detailsWithoutEmpty)
 
         toast('✔️ Sparad till kalender')
       } catch (err) {

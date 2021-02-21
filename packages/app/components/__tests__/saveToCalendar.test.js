@@ -76,7 +76,26 @@ test('requests calendar permissons', () => {
   expect(RNCalendarEvents.requestPermissions).toHaveBeenCalled()
 })
 
-test('renders save to calendar', async () => {
+test('can save an event to the calendar', async () => {
+  const screen = setup({
+    event: {
+      ...defaultEvent,
+      location: null,
+      description: null,
+    },
+  })
+
+  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByText(/Spara/i))
+  await RNCalendarEvents.requestPermissions()
+
+  expect(RNCalendarEvents.saveEvent).toHaveBeenCalledWith('Utvecklingssamtal', {
+    startDate: '2021-06-19T11:00:00.000Z',
+    endDate: '2021-06-19T12:00:00.000Z',
+  })
+})
+
+test('removes any null values from the event', async () => {
   const screen = setup()
 
   fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
