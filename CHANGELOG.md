@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/kolplattformen/skolplattformen/compare/v1.0.0...v1.1.0) (2021-02-23)
+
+
+### Features
+
+* 🎸 Valbar inloggningsmetod ([#172](https://github.com/kolplattformen/skolplattformen/issues/172)) ([624c705](https://github.com/kolplattformen/skolplattformen/commit/624c705d4bf86005bba82b41f69afce7106101da))
+
 # 1.4.0 (2021-02-21)
 
 
