@@ -1,5 +1,12 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { Button, ButtonGroup, Card, Input, Modal, Text } from '@ui-kitten/components'
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  Input,
+  Modal,
+  Text,
+} from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import React, { useEffect, useState } from 'react'
 import {
@@ -9,11 +16,19 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  Dimensions,
 } from 'react-native'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
-import { CloseOutlineIcon, PersonIcon, SecureIcon, SelectIcon } from './icon.component'
+import {
+  CloseOutlineIcon,
+  PersonIcon,
+  SecureIcon,
+  SelectIcon,
+} from './icon.component'
 import ActionSheet from 'rn-actionsheet-module'
+
+const { width } = Dimensions.get('window')
 
 export const Login = ({ navigation }) => {
   const { api, isLoggedIn } = useApi()
@@ -23,7 +38,10 @@ export const Login = ({ navigation }) => {
   const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
   const [valid, setValid] = useState(false)
   const [loginMethodIndex, setLoginMethodIndex] = useState(0)
-  const [cachedLoginMethodIndex, setCachedLoginMethodIndex] = useAsyncStorage('loginMethodIndex', '0')
+  const [cachedLoginMethodIndex, setCachedLoginMethodIndex] = useAsyncStorage(
+    'loginMethodIndex',
+    '0'
+  )
   const loginMethods = [
     'Öppna BankID på denna enhet',
     'Öppna BankID på annan enhet',
@@ -83,8 +101,7 @@ export const Login = ({ navigation }) => {
       const redirect = loginMethodIndex === 0 ? encodeURIComponent(schema) : ''
       const bankIdUrl =
         Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token.token
-          }&redirect=${redirect}`
+          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=${redirect}`
           : `bankid:///?autostarttoken=${token.token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
@@ -112,7 +129,8 @@ export const Login = ({ navigation }) => {
       status.on(
         'ERROR',
         () =>
-          setError('Inloggningen misslyckades, försök igen!') && showModal(false)
+          setError('Inloggningen misslyckades, försök igen!') &&
+          showModal(false)
       )
       status.on('OK', () => console.log('BankID ok'))
     } else {
@@ -128,11 +146,8 @@ export const Login = ({ navigation }) => {
 
   return (
     <>
-      <Image
-        source={require('../assets/boys.png')}
-        style={styles.image}
-      />
-      <View style={styles.loginForm} >
+      <Image source={require('../assets/boys.png')} style={styles.image} />
+      <View style={styles.loginForm}>
         {loginMethodIndex !== 2 && (
           <Input
             label="Personnummer"
@@ -169,7 +184,6 @@ export const Login = ({ navigation }) => {
             size="medium"
           />
         </ButtonGroup>
-
       </View>
       <Modal
         visible={visible}
@@ -191,24 +205,18 @@ export const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   image: {
-    height: 320,
-    marginTop: -20,
-    marginLeft: -10,
-    width: '110%',
+    height: ((width * 0.9) / 4) * 3,
+    marginVertical: 16,
+    width: width * 0.9,
   },
   loginForm: {
-    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
     paddingHorizontal: 20,
-    paddingBottom: 72,
-    marginTop: 48,
-    width: '100%'
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
     minHeight: 45,
-    alignItems: 'stretch'
   },
   loginButton: { flex: 1 },
   loginMethodButton: { width: 45 },
