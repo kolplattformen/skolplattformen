@@ -26,5 +26,5 @@ test('renders a random fun argument state', () => {
   const screen = setup()
 
   expect(screen.getByText(/öppna skolplattformen/i)).toBeTruthy()
-  expect(screen.getByText(/det \w+ alternativet/i)).toBeTruthy()
+  expect(screen.getByText(/det [a-zåäö]+ alternativet/i)).toBeTruthy()
 })
