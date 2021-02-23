@@ -6,14 +6,14 @@ import { schema } from '../app.json'
 import Absence from './absence.component'
 import { Child } from './child.component'
 import { Children } from './children.component'
-import { Login } from './login.component'
+import { Auth } from './auth.component'
 import { NewsItem } from './newsItem.component'
 
 const { Navigator, Screen } = createStackNavigator()
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">
-    <Screen name="Login" component={Login} />
+    <Screen name="Login" component={Auth} />
     <Screen name="Children" component={Children} />
     <Screen name="Child" component={Child} />
     <Screen name="NewsItem" component={NewsItem} />
