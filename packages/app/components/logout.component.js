@@ -1,27 +1,27 @@
 import { useApi, useUser } from '@skolplattformen/api-hooks'
 import { Button, Text } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
 import { CheckIcon, CloseOutlineIcon } from './icon.component'
+
+const imageSources = {
+  male: require('../assets/man.png'),
+  female: require('../assets/kvinna.png'),
+}
 
 export const Logout = ({ navigation }) => {
   const { api } = useApi()
   const { data } = useUser()
-  const imageSources = {
-    male: require('../assets/man.png'),
-    female: require('../assets/kvinna.png'),
-  }
-  const [imageSource, setImageSource] = useState(imageSources.female)
-
-  useEffect(() => {
-    if (data && data.personalNumber && Personnummer.valid(data.personalNumber)) {
-      setImageSource(
-        Personnummer.parse(data.personalNumber).isFemale()
-          ? imageSources.female : imageSources.male
-      )
+  const [gender] = React.useState(() => {
+    if (data?.personalNumber && Personnummer.valid(data.personalNumber)) {
+      return Personnummer.parse(data.personalNumber).isFemale()
+        ? 'female'
+        : 'male'
     }
-  }, [data.personalNumber])
+
+    return 'female'
+  })
 
   const navigateToChildren = () => {
     navigation.navigate('Children')
@@ -31,14 +31,19 @@ export const Logout = ({ navigation }) => {
     api.logout()
   }
 
+  const aspectRatio = {
+    female: 2048 / 1919,
+    male: 638 / 512,
+  }
+
   return (
     <>
-      <Image source={imageSource} style={styles.image} />
+      <Image
+        source={imageSources[gender]}
+        style={[styles.image, { aspectRatio: aspectRatio[gender] }]}
+      />
       <View style={styles.content}>
-        <Text category="h5">{data.personalNumber}</Text>
-        <Text style={styles.text}>
-          Hurra, du är inloggad!
-        </Text>
+        <Text style={styles.socialSecurityNumber}>{data.personalNumber}</Text>
         <View style={styles.buttons}>
           <Button
             style={styles.button}
@@ -50,7 +55,6 @@ export const Logout = ({ navigation }) => {
             Fortsätt
           </Button>
           <Button
-            style={styles.button}
             size="medium"
             accessoryRight={CloseOutlineIcon}
             onPress={startLogout}
@@ -65,20 +69,25 @@ export const Logout = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   image: {
-    maxHeight: 300,
-    width: '100%',
+    aspectRatio: 2048 / 1919,
+    height: undefined,
+    marginTop: 20,
+    width: '90%',
   },
   content: {
-    marginTop: 32,
-  },
-  text: {
-    textAlign: 'center',
-    marginBottom: 20,
-    marginTop: 10,
+    marginTop: 20,
   },
   buttons: {
-    flex: 1,
     flexDirection: 'column',
   },
-  button: { marginBottom: 10 }
+  button: {
+    marginBottom: 10,
+  },
+  socialSecurityNumber: {
+    color: '#6B7280',
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
 })
