@@ -60,11 +60,13 @@ export const Login = ({ navigation }) => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
       setCachedLoginMethodIndex(loginMethodIndex)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginMethodIndex])
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
       setLoginMethodIndex(parseInt(cachedLoginMethodIndex, 10))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cachedLoginMethodIndex])
 
   /* Initial load functions */
@@ -87,6 +89,7 @@ export const Login = ({ navigation }) => {
   useEffect(() => {
     api.on('login', loginHandler)
     return () => api.off('login', loginHandler)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   /* Helpers */
