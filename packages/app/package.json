@@ -33,7 +33,7 @@
     "react-native": "0.63.4",
     "react-native-calendar-strip": "2.1.9",
     "react-native-fix-image": "2.1.0",
-    "react-native-gesture-handler": "1.10.1",
+    "react-native-gesture-handler": "1.9.0",
     "react-native-markdown-display": "7.0.0-alpha.2",
     "react-native-modal-datetime-picker": "9.1.0",
     "react-native-reanimated": "1.13.2",
@@ -76,7 +76,7 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry|@ui-kitten/.*)"
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry|@ui-kitten|rn-actionsheet-module/.*)"
     ]
   }
 }

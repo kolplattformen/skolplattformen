@@ -1593,7 +1593,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/hammerjs@^2.0.36", "@types/hammerjs@^2.0.38":
+"@types/hammerjs@^2.0.36":
   version "2.0.39"
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.39.tgz#4be64bbacf3813c79c0dab895c6b0fdc7d5e513f"
   integrity sha512-lYR2Y/tV2ujpk/WyUc7S0VLI0a9hrtVIN9EwnrNo5oSEJI2cK2/XrgwOQmXLL3eTulOESvh9qP6si9+DWM9cOA==
@@ -7194,13 +7194,12 @@ react-native-fix-image@2.1.0:
   resolved "https://registry.yarnpkg.com/react-native-fix-image/-/react-native-fix-image-2.1.0.tgz#a4677b91529be926544775faf736df6af8c4743c"
   integrity sha512-qn4xItNSKfwlSkMHgxH9cusUQuk5Lhag9aHqL9ESxnCDUDwqS6rsWuOYt/JlncaKhsCc9cANFomCLlY8+Ffuaw==
 
-react-native-gesture-handler@1.10.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.1.tgz#e7a93a5bc516338bc24a57b3312043dc00489377"
-  integrity sha512-sDo6T0m+izIDczsIzE63nAqEG3BE/OwkCJoU4/qjdo7ryem7D0Rj/Y+SlAZP2lVAhllo65LDRYqd6SBe4y19Mg==
+react-native-gesture-handler@1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.9.0.tgz#e441b1c0277c3fd4ca3e5c58fdd681e2f0ceddf0"
+  integrity sha512-fkkNeWDBzDdwDxDcxtYbrb9T1g0PLgT1AxBs2iO/p7uEbDbC6mIoL/NzuOnKNEBHcd0lpLoJuNmIfdmucEON5g==
   dependencies:
     "@egjs/hammerjs" "^2.0.17"
-    "@types/hammerjs" "^2.0.38"
     fbjs "^3.0.0"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
