@@ -49,7 +49,7 @@ const hook = <T>(
   const dispatch = useDispatch()
 
   const load = (force = false) => {
-    if (isLoggedIn && state.status !== 'loading' && (force || state.status === 'pending')) {
+    if (isLoggedIn && state.status !== 'loading' && ((force && !api.isFake) || state.status === 'pending')) {
       const extra: ExtraActionProps<T> = {
         key,
         defaultValue,

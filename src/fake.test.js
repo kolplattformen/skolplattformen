@@ -16,6 +16,8 @@ import store from './store'
 
 const { default: init } = jest.requireActual('@skolplattformen/embedded-api')
 
+const wait = (ms) => new Promise((res) => setTimeout(res, ms))
+
 describe('hooks with fake data', () => {
   let api
   let storage
@@ -176,16 +178,10 @@ describe('hooks with fake data', () => {
       } = renderHook(() => useNotifications(child), { wrapper })
 
       await waitForNextUpdate()
+      expect(result.current.status).toEqual('loaded')
 
       result.current.reload()
-      await waitForNextUpdate()
-
-      result.current.reload()
-      result.current.reload()
-      await waitForNextUpdate()
-
-      result.current.reload()
-      await waitForNextUpdate()
+      await wait(30)
 
       expect(result.current.status).toEqual('loaded')
     })
