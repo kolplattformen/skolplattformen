@@ -1,13 +1,14 @@
 import { useClassmates } from '@skolplattformen/api-hooks'
-import { Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
+import { Card, Divider, Icon, List, ListItem, Text } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
 import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
 
 export const Classmates = () => {
   const child = useChild()
+/*   
   const { data } = useClassmates(child)
 
   const renderItemIcon = (props) => <Icon {...props} name="people-outline" />
@@ -44,6 +45,25 @@ export const Classmates = () => {
       contentContainerStyle={styles.contentContainer}
     />
   )
+ */
+
+  const cardHeader = (props) => {
+    return (
+      <View style={styles.topContainer}>
+        <Text category='h6'>Klasslistan ej tillgänglig</Text>
+      </View>
+    )
+  }
+
+  return (
+    <View style={styles.container}>
+      <Card 
+        header={cardHeader}
+        style={styles.contentContainer}>
+          <Text>Klasslista kan tyvärr inte visas längre. Vi jobbar på att lösa det, och återkommer med information när vi vet mer.</Text>
+      </Card>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -52,7 +72,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    margin: 10,
+    justifyContent: 'flex-start',
+  },
+  topContainer: {
+    margin: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   listHeader: {
     backgroundColor: '#fff',
