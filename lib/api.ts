@@ -114,8 +114,43 @@ export class Api extends EventEmitter {
   async getChildren(): Promise<Child[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
+    //--------
+    const cdnUrl = 'https://etjanst.stockholm.se/vardnadshavare/base/cdn'
+    const authUrl = 'https://etjanst.stockholm.se/vardnadshavare/base/auth'
+    const cdnResponse = await this.fetch('cdn_', cdnUrl, this.session)
+    const cdn = await cdnResponse.text()
+  
+    const authResponse = await this.fetch('auth_', authUrl, this.session)
+    const auth = await authResponse.text()
+
+    const rawResponse = await this.fetch('cdn2_', cdn, {
+      method: 'POST',
+      
+      headers: {
+        'Accept': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'text/plain',
+        'Cookie': this.getSessionCookie()
+      },
+      body: auth
+    })
+    const authData = await rawResponse.json();
+
+    const apiKey = 'QgBGAEYANgA1AEYAMABGAC0ARgA1AEIAQQAtADQANQA0ADEALQA5ADcAMQA3AC0ARQBBADMANQA0AEIAOQBCADgAMgA2AEQA'
+
     const url = routes.children
-    const response = await this.fetch('children', url, this.session)
+    const response = await this.fetch('children', url, {
+      method: 'GET',
+      headers:{
+        'Accept': 'application/json;odata=verbose',
+        'Auth': authData.token,
+        'API-Key': apiKey,
+        'Cookie': this.getSessionCookie(),
+        'Host': 'etjanst.stockholm.se',
+        'Referer': 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem'
+      }
+    })
+
     const data = await response.json()
     return parse.children(data)
   }
