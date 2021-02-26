@@ -1,3 +1,4 @@
+import screenshotAbsence from '../assets/img/screenshots/screenshot_absence.png'
 import screenshotChildren from '../assets/img/screenshots/screenshot_children.png'
 import screenshotChildCalendar from '../assets/img/screenshots/screenshot_child_calendar.png'
 import screenshotChildClass from '../assets/img/screenshots/screenshot_child_class.png'
@@ -20,7 +21,7 @@ const AppShots = () => {
         />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4">
+      <div className="grid grid-cols-2 md:grid-cols-7 gap-x-4">
         <Image
           alt="Inloggning med BankID"
           height={376}
@@ -43,7 +44,7 @@ const AppShots = () => {
           width={178}
         />
         <Image
-          alt="Lista med barnets aviseringar"
+          alt="Barnets aviseringar"
           height={376}
           layout="responsive"
           src={screenshotChildNotifications}
@@ -61,6 +62,13 @@ const AppShots = () => {
           height={376}
           layout="responsive"
           src={screenshotChildClass}
+          width={178}
+        />
+        <Image
+          alt="Frånvaroanmälan"
+          height={376}
+          layout="responsive"
+          src={screenshotAbsence}
           width={178}
         />
       </div>
