@@ -3,6 +3,8 @@ const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
 const { writeFile } = require('fs/promises')
+const path = require('path')
+const fs = require('fs')
 
 const init = require('./dist').default
 
@@ -13,8 +15,18 @@ if (!personalNumber) {
   process.exit(1)
 }
 
+function ensureDirectoryExistence(filePath) {
+  var dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
+}
+
 const record = async (info, data) => {
   const filename = `./record/${info.name}.json`
+  ensureDirectoryExistence(filename)
   const content = {
     url: info.url,
     headers: info.headers,
