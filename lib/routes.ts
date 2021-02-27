@@ -45,4 +45,7 @@ export const schedule = (childId: string, fromDate: string, endDate: string) => 
 )
 
 export const cdn = 'https://etjanst.stockholm.se/vardnadshavare/base/cdn'
+
 export const auth = 'https://etjanst.stockholm.se/vardnadshavare/base/auth'
+
+export const startBundle = 'https://etjanst.stockholm.se/vardnadshavare/bundles/start'
