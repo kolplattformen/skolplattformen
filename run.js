@@ -60,6 +60,10 @@ async function run() {
     status.on('USER_SIGN', () => console.log('USER_SIGN'))
     status.on('ERROR', () => console.error('ERROR'))
     status.on('OK', () => console.log('OK'))
+    status.on('CANCELLED', () => {
+      console.log("User cancelled login")
+      process.exit(0)
+    })
 
     api.on('login', async () => {
       console.log('Logged in')
