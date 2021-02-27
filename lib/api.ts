@@ -117,7 +117,7 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.children())
 
     const startBundleResponse = await this.fetch('startBundle', routes.startBundle, this.session)
-    const startBundleText = await startBundleResponse.text();
+    const startBundleText = await startBundleResponse.text()
 
     const apiKeyMatches = apiKeyRegex.exec(startBundleText)
     const apiKey = apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
