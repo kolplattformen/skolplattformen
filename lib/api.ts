@@ -114,16 +114,13 @@ export class Api extends EventEmitter {
   async getChildren(): Promise<Child[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
-    //--------
-    const cdnUrl = 'https://etjanst.stockholm.se/vardnadshavare/base/cdn'
-    const authUrl = 'https://etjanst.stockholm.se/vardnadshavare/base/auth'
-    const cdnResponse = await this.fetch('cdn_', cdnUrl, this.session)
+    const cdnResponse = await this.fetch('cdn', routes.cdn, this.session)
     const cdn = await cdnResponse.text()
   
-    const authResponse = await this.fetch('auth_', authUrl, this.session)
+    const authResponse = await this.fetch('auth', routes.auth, this.session)
     const auth = await authResponse.text()
 
-    const rawResponse = await this.fetch('cdn2_', cdn, {
+    const rawResponse = await this.fetch('createItem', cdn, {
       method: 'POST',
       
       headers: {
