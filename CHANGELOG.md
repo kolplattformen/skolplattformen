@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/kolplattformen/skolplattformen/compare/v1.1.0...v1.1.1) (2021-02-26)
+
+
+### Bug Fixes
+
+* 🐛 Ikoner för initialt iPad stöd ([6ee68bf](https://github.com/kolplattformen/skolplattformen/commit/6ee68bf19f0d6849a872bceff1e5b46217f35f4c)), closes [#166](https://github.com/kolplattformen/skolplattformen/issues/166)
+
 # [1.1.0](https://github.com/kolplattformen/skolplattformen/compare/v1.0.0...v1.1.0) (2021-02-23)
 
 
