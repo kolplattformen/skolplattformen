@@ -43,3 +43,6 @@ export const menu = (childId: string) => (
 export const schedule = (childId: string, fromDate: string, endDate: string) => (
   `https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchema?childId=${childId}&startDate=${fromDate}&endDate=${endDate}`
 )
+
+export const cdn = 'https://etjanst.stockholm.se/vardnadshavare/base/cdn'
+export const auth = 'https://etjanst.stockholm.se/vardnadshavare/base/auth'
