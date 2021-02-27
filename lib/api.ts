@@ -23,6 +23,8 @@ import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import * as fake from './fakeData'
 
+const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm;
+
 const fakeResponse = <T>(data: T): Promise<T> => new Promise((res) => (
   setTimeout(() => res(data), 200 + Math.random() * 800)
 ))
@@ -114,15 +116,27 @@ export class Api extends EventEmitter {
   async getChildren(): Promise<Child[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
+    const startBundleResponse = await this.fetch('startBundle', routes.startBundle, this.session)
+    const startBundleText = await startBundleResponse.text();
+
+    const apiKeyMatches = apiKeyRegex.exec(startBundleText)
+    const apiKey = apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
+    if (this.session) {
+      this.session.headers = {
+        ...this.session.headers,
+        'API-Key': apiKey
+      }
+    }
+
     const cdnResponse = await this.fetch('cdn', routes.cdn, this.session)
     const cdn = await cdnResponse.text()
-  
+
     const authResponse = await this.fetch('auth', routes.auth, this.session)
     const auth = await authResponse.text()
 
     const rawResponse = await this.fetch('createItem', cdn, {
       method: 'POST',
-      
+
       headers: {
         'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
@@ -133,15 +147,13 @@ export class Api extends EventEmitter {
     })
     const authData = await rawResponse.json();
 
-    const apiKey = 'QgBGAEYANgA1AEYAMABGAC0ARgA1AEIAQQAtADQANQA0ADEALQA5ADcAMQA3AC0ARQBBADMANQA0AEIAOQBCADgAMgA2AEQA'
-
     const url = routes.children
     const response = await this.fetch('children', url, {
       method: 'GET',
-      headers:{
+      headers: {
+        ...this.session?.headers,
         'Accept': 'application/json;odata=verbose',
         'Auth': authData.token,
-        'API-Key': apiKey,
         'Cookie': this.getSessionCookie(),
         'Host': 'etjanst.stockholm.se',
         'Referer': 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem'
