@@ -77,12 +77,13 @@ export class Api extends EventEmitter {
 
     const ticketUrl = routes.login(personalNumber)
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
-      .then(response => {
-        if(!response.ok){
-          throw `Server error [${response.status}] [${response.statusText}] [${ticketUrl}]`
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Server Error [${response.status}] [${response.statusText}] [${ticketUrl}]`)
         }
-        return response;
+        return response
       })
+
     const ticket: AuthTicket = await ticketResponse.json()
 
     // login was initiated - store personal number
