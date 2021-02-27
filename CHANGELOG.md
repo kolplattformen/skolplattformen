@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/kolplattformen/skolplattformen/compare/v1.1.1...v1.1.2) (2021-02-27)
+
+
+### Bug Fixes
+
+* 🐛 Dekativera klasslistan ([eef1193](https://github.com/kolplattformen/skolplattformen/commit/eef1193b598b55c20e895c6ab849e828bc42a252)), closes [#161](https://github.com/kolplattformen/skolplattformen/issues/161) [#159](https://github.com/kolplattformen/skolplattformen/issues/159)
+
 ## [1.1.1](https://github.com/kolplattformen/skolplattformen/compare/v1.1.0...v1.1.1) (2021-02-26)
 
 
