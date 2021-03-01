@@ -77,12 +77,10 @@ export class Api extends EventEmitter {
 
     const ticketUrl = routes.login(personalNumber)
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Server Error [${response.status}] [${response.statusText}] [${ticketUrl}]`)
-        }
-        return response
-      })
+
+    if(!ticketResponse.ok) {
+      throw new Error(`Server Error [${ticketResponse.status}] [${ticketResponse.statusText}] [${ticketUrl}]`)
+    }
 
     const ticket: AuthTicket = await ticketResponse.json()
 
@@ -158,7 +156,7 @@ export class Api extends EventEmitter {
     const authResponse = await this.fetch('auth', routes.auth, this.session)
     const auth = await authResponse.text()
 
-    const rawResponse = await this.fetch('createItem', cdn, {
+    const createItemResponse = await this.fetch('createItem', cdn, {
       method: 'POST',
 
       headers: {
@@ -169,10 +167,15 @@ export class Api extends EventEmitter {
       },
       body: auth
     })
-    const authData = await rawResponse.json();
 
-    const url = routes.children
-    const response = await this.fetch('children', url, {
+    if(!createItemResponse.ok) {
+      throw new Error(`Server Error [${createItemResponse.status}] [${createItemResponse.statusText}] [${cdn}]`)
+    }
+    
+    const authData = await createItemResponse.json();
+
+    const childrenUrl = routes.children
+    const childrenResponse = await this.fetch('children', childrenUrl, {
       method: 'GET',
       headers: {
         ...this.session?.headers,
@@ -184,7 +187,11 @@ export class Api extends EventEmitter {
       }
     })
 
-    const data = await response.json()
+    if(!childrenResponse.ok) {
+      throw new Error(`Server Error [${childrenResponse.status}] [${childrenResponse.statusText}] [${childrenUrl}]`)
+    }
+
+    const data = await childrenResponse.json()
     return parse.children(data)
   }
 
