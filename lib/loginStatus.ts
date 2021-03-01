@@ -14,7 +14,8 @@ export enum LoginEvent {
 
 export interface LoginStatusChecker {
   token: string
-  on: (event: 'OK' | 'PENDING' | 'ERROR' | 'USER_SIGN' | 'CANCELLED', listener: (...args: any[]) => void) => LoginStatusChecker
+  on: (event: 'OK' | 'PENDING' | 'ERROR' | 'USER_SIGN' | 'CANCELLED',
+    listener: (...args: any[]) => void) => LoginStatusChecker
   cancel: () => Promise<void>
 }
 

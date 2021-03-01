@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
-import { htmlDecode } from 'js-htmlencode'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
 import {
@@ -26,7 +25,7 @@ import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import * as fake from './fakeData'
 
-const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm;
+const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm
 
 const fakeResponse = <T>(data: T): Promise<T> => new Promise((res) => (
   setTimeout(() => res(data), 200 + Math.random() * 800)
@@ -78,7 +77,7 @@ export class Api extends EventEmitter {
     const ticketUrl = routes.login(personalNumber)
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
 
-    if(!ticketResponse.ok) {
+    if (!ticketResponse.ok) {
       throw new Error(`Server Error [${ticketResponse.status}] [${ticketResponse.statusText}] [${ticketUrl}]`)
     }
 
@@ -121,7 +120,7 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
-  parseXsrfToken(htmltext: string): string {
+  static parseXsrfToken(htmltext: string): string {
     const doc = html.parse(decode(htmltext))
     return doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
   }
@@ -130,11 +129,11 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.children())
 
     const hemResponse = await this.fetch('hemPage', routes.hemPage, this.session)
-    const xsrfToken = this.parseXsrfToken(await hemResponse.text())
+    const xsrfToken = Api.parseXsrfToken(await hemResponse.text())
     if (this.session) {
       this.session.headers = {
         ...this.session.headers,
-        'X-XSRF-Token': xsrfToken
+        'X-XSRF-Token': xsrfToken,
       }
     }
 
@@ -146,7 +145,7 @@ export class Api extends EventEmitter {
     if (this.session) {
       this.session.headers = {
         ...this.session.headers,
-        'API-Key': apiKey
+        'API-Key': apiKey,
       }
     }
 
@@ -160,34 +159,34 @@ export class Api extends EventEmitter {
       method: 'POST',
 
       headers: {
-        'Accept': 'text/plain',
+        Accept: 'text/plain',
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'text/plain',
-        'Cookie': this.getSessionCookie()
+        Cookie: this.getSessionCookie(),
       },
-      body: auth
+      body: auth,
     })
 
-    if(!createItemResponse.ok) {
+    if (!createItemResponse.ok) {
       throw new Error(`Server Error [${createItemResponse.status}] [${createItemResponse.statusText}] [${cdn}]`)
     }
-    
-    const authData = await createItemResponse.json();
+
+    const authData = await createItemResponse.json()
 
     const childrenUrl = routes.children
     const childrenResponse = await this.fetch('children', childrenUrl, {
       method: 'GET',
       headers: {
         ...this.session?.headers,
-        'Accept': 'application/json;odata=verbose',
-        'Auth': authData.token,
-        'Cookie': this.getSessionCookie(),
-        'Host': 'etjanst.stockholm.se',
-        'Referer': 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem'
-      }
+        Accept: 'application/json;odata=verbose',
+        Auth: authData.token,
+        Cookie: this.getSessionCookie(),
+        Host: 'etjanst.stockholm.se',
+        Referer: 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem',
+      },
     })
 
-    if(!childrenResponse.ok) {
+    if (!childrenResponse.ok) {
       throw new Error(`Server Error [${childrenResponse.status}] [${childrenResponse.statusText}] [${childrenUrl}]`)
     }
 
