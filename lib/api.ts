@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
+import { htmlDecode } from 'js-htmlencode'
+import { decode } from 'he'
+import * as html from 'node-html-parser'
 import {
   checkStatus,
   LoginStatusChecker,
@@ -113,8 +116,22 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
+  parseXsrfToken(htmltext: string): string {
+    const doc = html.parse(decode(htmltext))
+    return doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
+  }
+
   async getChildren(): Promise<Child[]> {
     if (this.isFake) return fakeResponse(fake.children())
+
+    const hemResponse = await this.fetch('hemPage', routes.hemPage, this.session)
+    const xsrfToken = this.parseXsrfToken(await hemResponse.text())
+    if (this.session) {
+      this.session.headers = {
+        ...this.session.headers,
+        'X-XSRF-Token': xsrfToken
+      }
+    }
 
     const startBundleResponse = await this.fetch('startBundle', routes.startBundle, this.session)
     const startBundleText = await startBundleResponse.text()

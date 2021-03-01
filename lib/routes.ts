@@ -49,3 +49,5 @@ export const cdn = 'https://etjanst.stockholm.se/vardnadshavare/base/cdn'
 export const auth = 'https://etjanst.stockholm.se/vardnadshavare/base/auth'
 
 export const startBundle = 'https://etjanst.stockholm.se/vardnadshavare/bundles/start'
+
+export const hemPage = 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem'
