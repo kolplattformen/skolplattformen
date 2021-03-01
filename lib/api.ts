@@ -147,9 +147,11 @@ export class Api extends EventEmitter {
 
     const cdnResponse = await this.fetch('cdn', routes.cdn, this.session)
     const cdn = await cdnResponse.text()
+    const cdnHost = new URL(cdn).host
 
     const authResponse = await this.fetch('auth', routes.auth, this.session)
     const auth = await authResponse.text()
+
 
     const rawResponse = await this.fetch('createItem', cdn, {
       method: 'POST',
@@ -158,7 +160,9 @@ export class Api extends EventEmitter {
         'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'text/plain',
-        'Cookie': this.getSessionCookie()
+        'Cookie': this.getSessionCookie(),
+        Host: cdnHost,
+        Origin: 'https://etjanst.stockholm.se'
       },
       body: auth
     })
