@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
-import { htmlDecode } from 'js-htmlencode'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
 import {
@@ -116,16 +115,12 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
-  parseXsrfToken(htmltext: string): string {
-    const doc = html.parse(decode(htmltext))
-    return doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
-  }
-
   async getChildren(): Promise<Child[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
     const hemResponse = await this.fetch('hemPage', routes.hemPage, this.session)
-    const xsrfToken = this.parseXsrfToken(await hemResponse.text())
+    const doc = html.parse(decode(await hemResponse.text())) 
+    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
     if (this.session) {
       this.session.headers = {
         ...this.session.headers,
@@ -147,9 +142,11 @@ export class Api extends EventEmitter {
 
     const cdnResponse = await this.fetch('cdn', routes.cdn, this.session)
     const cdn = await cdnResponse.text()
+    const cdnHost = new URL(cdn).host
 
     const authResponse = await this.fetch('auth', routes.auth, this.session)
     const auth = await authResponse.text()
+
 
     const rawResponse = await this.fetch('createItem', cdn, {
       method: 'POST',
@@ -158,7 +155,9 @@ export class Api extends EventEmitter {
         'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'text/plain',
-        'Cookie': this.getSessionCookie()
+        'Cookie': this.getSessionCookie(),
+        Host: cdnHost,
+        Origin: 'https://etjanst.stockholm.se'
       },
       body: auth
     })
