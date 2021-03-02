@@ -9,7 +9,8 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import React from 'react'
-import { Dimensions, Image, SafeAreaView, StyleSheet, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { ChildListItem } from './childListItem.component'
 import { BackIcon } from './icon.component'
 
