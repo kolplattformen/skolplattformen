@@ -104,8 +104,8 @@ export const Login = ({ navigation }) => {
       const redirect = loginMethodIndex === 0 ? encodeURIComponent(schema) : ''
       const bankIdUrl =
         Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token.token}&redirect=${redirect}`
-          : `bankid:///?autostarttoken=${token.token}&redirect=null`
+          ? `https://app.bankid.com/?autostarttoken=${token}&redirect=${redirect}`
+          : `bankid:///?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
       setError('Öppna BankID manuellt')
