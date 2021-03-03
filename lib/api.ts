@@ -25,7 +25,7 @@ import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import * as fake from './fakeData'
 
-const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm;
+const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm
 
 const fakeResponse = <T>(data: T): Promise<T> => new Promise((res) => (
   setTimeout(() => res(data), 200 + Math.random() * 800)
@@ -76,6 +76,11 @@ export class Api extends EventEmitter {
 
     const ticketUrl = routes.login(personalNumber)
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
+
+    if (!ticketResponse.ok) {
+      throw new Error(`Server Error [${ticketResponse.status}] [${ticketResponse.statusText}] [${ticketUrl}]`)
+    }
+
     const ticket: AuthTicket = await ticketResponse.json()
 
     // login was initiated - store personal number
@@ -124,7 +129,7 @@ export class Api extends EventEmitter {
     if (this.session) {
       this.session.headers = {
         ...this.session.headers,
-        'X-XSRF-Token': xsrfToken
+        'X-XSRF-Token': xsrfToken,
       }
     }
 
@@ -136,7 +141,7 @@ export class Api extends EventEmitter {
     if (this.session) {
       this.session.headers = {
         ...this.session.headers,
-        'API-Key': apiKey
+        'API-Key': apiKey,
       }
     }
 
@@ -147,36 +152,44 @@ export class Api extends EventEmitter {
     const authResponse = await this.fetch('auth', routes.auth, this.session)
     const auth = await authResponse.text()
 
-
-    const rawResponse = await this.fetch('createItem', cdn, {
+    const createItemResponse = await this.fetch('createItem', cdn, {
       method: 'POST',
 
       headers: {
-        'Accept': 'text/plain',
+        Accept: 'text/plain',
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'text/plain',
         'Cookie': this.getSessionCookie(),
         Host: cdnHost,
         Origin: 'https://etjanst.stockholm.se'
       },
-      body: auth
+      body: auth,
     })
-    const authData = await rawResponse.json();
 
-    const url = routes.children
-    const response = await this.fetch('children', url, {
+    if (!createItemResponse.ok) {
+      throw new Error(`Server Error [${createItemResponse.status}] [${createItemResponse.statusText}] [${cdn}]`)
+    }
+
+    const authData = await createItemResponse.json()
+
+    const childrenUrl = routes.children
+    const childrenResponse = await this.fetch('children', childrenUrl, {
       method: 'GET',
       headers: {
         ...this.session?.headers,
-        'Accept': 'application/json;odata=verbose',
-        'Auth': authData.token,
-        'Cookie': this.getSessionCookie(),
-        'Host': 'etjanst.stockholm.se',
-        'Referer': 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem'
-      }
+        Accept: 'application/json;odata=verbose',
+        Auth: authData.token,
+        Cookie: this.getSessionCookie(),
+        Host: 'etjanst.stockholm.se',
+        Referer: 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem',
+      },
     })
 
-    const data = await response.json()
+    if (!childrenResponse.ok) {
+      throw new Error(`Server Error [${childrenResponse.status}] [${childrenResponse.statusText}] [${childrenUrl}]`)
+    }
+
+    const data = await childrenResponse.json()
     return parse.children(data)
   }
 

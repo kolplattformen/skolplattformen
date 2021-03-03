@@ -113,6 +113,22 @@ describe('api', () => {
         done()
       })
     })
+    it('throws error on external api error', async () => {
+      expect.hasAssertions()
+
+      const data = ""
+      response.json.mockResolvedValue(data)
+      response.ok = false
+      response.status = 500
+      response.statusText = "Internal Server Error"
+
+      const personalNumber = 'my personal number'
+      try {
+        await api.login(personalNumber)
+      } catch (error) {
+        expect(error.message).toEqual(expect.stringContaining("Server Error"))
+      }
+    })
   })
   describe('#logout', () => {
     it('clears cookies', async () => {

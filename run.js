@@ -3,6 +3,8 @@ const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
 const { writeFile } = require('fs/promises')
+const path = require('path')
+const fs = require('fs')
 
 const init = require('./dist').default
 
@@ -13,8 +15,18 @@ if (!personalNumber) {
   process.exit(1)
 }
 
+function ensureDirectoryExistence(filePath) {
+  var dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
+}
+
 const record = async (info, data) => {
   const filename = `./record/${info.name}.json`
+  ensureDirectoryExistence(filename)
   const content = {
     url: info.url,
     headers: info.headers,
@@ -48,6 +60,10 @@ async function run() {
     status.on('USER_SIGN', () => console.log('USER_SIGN'))
     status.on('ERROR', () => console.error('ERROR'))
     status.on('OK', () => console.log('OK'))
+    status.on('CANCELLED', () => {
+      console.log("User cancelled login")
+      process.exit(0)
+    })
 
     api.on('login', async () => {
       console.log('Logged in')
