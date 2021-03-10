@@ -37,13 +37,16 @@ const FunFacts = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5">
         {FUNFACTS_DATA.map((funfact) => (
           <div className="text-center" key={funfact.title}>
-            <span className="text-5xl text-indigo-500">
+            <span className="text-4xl sm:text-5xl text-indigo-500 whitespace-nowrap">
               <VisibilitySensor
                 onChange={onVisibilityChange}
                 offset={{ top: 10 }}
                 delayedCall
               >
-                <CountUp end={counter.startCounter ? funfact.count : 0} />
+                <CountUp
+                  end={counter.startCounter ? funfact.count : 0}
+                  separator=" "
+                />
               </VisibilitySensor>
             </span>
             <p className="text-gray-700">{funfact.title}</p>
