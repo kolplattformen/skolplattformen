@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/kolplattformen/skolplattformen/compare/v1.1.2...v1.1.3) (2021-03-10)
+
+
+### Bug Fixes
+
+* använd korrekt komponent för github-länk ([#183](https://github.com/kolplattformen/skolplattformen/issues/183)) ([d9428c9](https://github.com/kolplattformen/skolplattformen/commit/d9428c98c8110fcf028dca3598ca6707d7e03643))
+
 ## [1.1.2](https://github.com/kolplattformen/skolplattformen/compare/v1.1.1...v1.1.2) (2021-02-27)
 
 
