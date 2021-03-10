@@ -1,3 +1,6 @@
+import Image from 'next/image'
+import NextLink from 'next/link'
+import appstore from '../assets/img/appstore.svg'
 import phone from '../assets/img/banner/phone_login.png'
 import shape1 from '../assets/img/banner/shape1.png'
 import shape2 from '../assets/img/banner/shape2.png'
@@ -6,12 +9,9 @@ import shape4 from '../assets/img/banner/shape4.png'
 import shape5 from '../assets/img/banner/shape5.png'
 import shape6 from '../assets/img/banner/shape6.png'
 import shape7 from '../assets/img/banner/shape7.png'
-import Image from 'next/image'
-import appstore from '../assets/img/appstore.svg'
 import playstore from '../assets/img/playstore.png'
-import { H1 } from './Typography'
 import Link from './Link'
-import NextLink from 'next/link'
+import { H1 } from './Typography'
 
 const Banner = () => {
   return (
@@ -67,7 +67,7 @@ const Banner = () => {
               byggt en bättre. Med all information du behöver som förälder.
               Snabbare och framförallt – mycket mindre krångel.
             </p>
-            <p className="flex items-center sm:flex-row md:space-x-2">
+            <p className="py-4 flex items-center sm:flex-row space-x-2 md:space-x-4">
               <Link.External
                 className="inline-block"
                 href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
@@ -87,7 +87,7 @@ const Banner = () => {
                 <img
                   alt="Ladda ner i Google Play Store"
                   src={playstore}
-                  className="h-16 md:h-20"
+                  className="h-12"
                 />
               </Link.External>
             </p>
