@@ -17,10 +17,12 @@ const Footer = () => {
           <p className="mb-5">
             Skolplattformen utvecklas av föräldrar för föräldrar. Vill du hjälpa
             till? Kom till vår{' '}
-            <a href="https://github.com/kolplattformen">Github</a>, där finns
-            all källkod och även uppgifter att ta tag i, vi behöver hjälp med
-            allt från illustrationer, UX, design och programmering. Vi har även
-            en Discord där vi hjälps åt.
+            <Link.External href="https://github.com/kolplattformen">
+              Github
+            </Link.External>
+            , där finns all källkod och även uppgifter att ta tag i, vi behöver
+            hjälp med allt från illustrationer, UX, design och programmering. Vi
+            har även en Discord där vi hjälps åt.
           </p>
           <Link.External href="mailto:info@skolplattformen.org">
             info@skolplattformen.org
