@@ -7,11 +7,11 @@ import {
   LoginStatusChecker,
 } from './loginStatus'
 import {
-  AsyncishFunction,
   AuthTicket,
   CalendarItem,
   Child,
   Classmate,
+  CookieManager,
   Fetch,
   MenuItem,
   NewsItem,
@@ -25,8 +25,6 @@ import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import * as fake from './fakeData'
 
-const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm
-
 const fakeResponse = <T>(data: T): Promise<T> => new Promise((res) => (
   setTimeout(() => res(data), 200 + Math.random() * 800)
 ))
@@ -36,37 +34,44 @@ export class Api extends EventEmitter {
 
   private personalNumber?: string
 
-  private session?: RequestInit
+  private headers: any
 
-  private clearCookies: AsyncishFunction
+  private cookieManager: CookieManager
 
   public isLoggedIn: boolean = false
 
   public isFake: boolean = false
 
-  constructor(fetch: Fetch, clearCookies: AsyncishFunction, options?: FetcherOptions) {
+  constructor(fetch: Fetch, cookieManager: CookieManager, options?: FetcherOptions) {
     super()
     this.fetch = wrap(fetch, options)
-    this.clearCookies = clearCookies
+    this.cookieManager = cookieManager
+    this.headers = {}
   }
 
   getPersonalNumber() {
     return this.personalNumber
   }
 
-  getSessionCookie() {
-    return this.session?.headers?.Cookie
-  }
-
-  setSessionCookie(cookie: string) {
-    this.session = {
+  async getSession(url: string, options: RequestInit = {}): Promise<RequestInit> {
+    const cookie = await this.cookieManager.getCookieString(url)
+    return {
+      ...options,
       headers: {
-        Cookie: cookie,
+        ...this.headers,
+        ...options.headers,
+        cookie,
       },
     }
+  }
 
-    this.isLoggedIn = true
-    this.emit('login')
+  async clearSession(): Promise<void> {
+    this.headers = {}
+    await this.cookieManager.clearAll()
+  }
+
+  addHeader(name: string, value: string): void {
+    this.headers[name] = value
   }
 
   async login(personalNumber: string): Promise<LoginStatusChecker> {
@@ -88,14 +93,95 @@ export class Api extends EventEmitter {
 
     const status = checkStatus(this.fetch, ticket)
     status.on('OK', async () => {
-      const cookieUrl = routes.loginCookie
-      const cookieResponse = await this.fetch('login-cookie', cookieUrl)
-      const cookie = cookieResponse.headers.get('set-cookie') || ''
-      this.setSessionCookie(cookie)
+      await this.retrieveSessionCookie()
+      await this.retrieveXsrfToken()
+      await this.retrieveApiKey()
+
+      this.isLoggedIn = true
+      this.emit('login')
     })
     status.on('ERROR', () => { this.personalNumber = undefined })
 
     return status
+  }
+
+  async retrieveSessionCookie(): Promise<void> {
+    const url = routes.loginCookie
+    await this.fetch('login-cookie', url)
+  }
+
+  async retrieveXsrfToken(): Promise<void> {
+    const url = routes.hemPage
+    const session = await this.getSession(url)
+    const response = await this.fetch('hemPage', url, session)
+    const text = await response.text()
+    const doc = html.parse(decode(text))
+    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
+    this.addHeader('X-XSRF-Token', xsrfToken)
+  }
+
+  async retrieveApiKey(): Promise<void> {
+    const url = routes.startBundle
+    const session = await this.getSession(url)
+    const response = await this.fetch('startBundle', url, session)
+    const text = await response.text()
+
+    const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm
+    const apiKeyMatches = apiKeyRegex.exec(text)
+    const apiKey = apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
+
+    this.addHeader('API-Key', apiKey)
+  }
+
+  async retrieveCdnUrl(): Promise<string> {
+    const url = routes.cdn
+    const session = await this.getSession(url)
+    const response = await this.fetch('cdn', url, session)
+    const cdnUrl = await response.text()
+    return cdnUrl
+  }
+
+  async retrieveAuthBody(): Promise<string> {
+    const url = routes.auth
+    const session = await this.getSession(url)
+    const response = await this.fetch('auth', url, session)
+    const authBody = await response.text()
+    return authBody
+  }
+
+  async retrieveAuthToken(url: string, authBody: string): Promise<string> {
+    const cdnHost = new URL(url).host
+    const session = await this.getSession(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'text/plain',
+        Host: cdnHost,
+        Origin: 'https://etjanst.stockholm.se',
+        Referer: 'https://etjanst.stockholm.se/',
+        Connection: 'keep-alive',
+      },
+      body: authBody,
+    })
+
+    // Delete cookies from session and empty cookie manager
+    delete session.headers.cookie
+    const cookies = await this.cookieManager.getCookies(url)
+    this.cookieManager.clearAll()
+
+    // Perform request
+    const response = await this.fetch('createItem', url, session)
+
+    // Refill cookie manager
+    cookies.forEach((cookie) => {
+      this.cookieManager.setCookie(cookie, url)
+    })
+
+    if (!response.ok) {
+      throw new Error(`Server Error [${response.status}] [${response.statusText}] [${url}]`)
+    }
+
+    const authData = await response.json()
+    return authData.token
   }
 
   async fakeMode(): Promise<LoginStatusChecker> {
@@ -115,7 +201,8 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.user())
 
     const url = routes.user
-    const response = await this.fetch('user', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('user', url, session)
     const data = await response.json()
     return parse.user(data)
   }
@@ -123,73 +210,28 @@ export class Api extends EventEmitter {
   async getChildren(): Promise<Child[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
-    const hemResponse = await this.fetch('hemPage', routes.hemPage, this.session)
-    const doc = html.parse(decode(await hemResponse.text())) 
-    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
-    if (this.session) {
-      this.session.headers = {
-        ...this.session.headers,
-        'X-XSRF-Token': xsrfToken,
-      }
-    }
+    const cdnUrl = await this.retrieveCdnUrl()
+    const authBody = await this.retrieveAuthBody()
+    const token = await this.retrieveAuthToken(cdnUrl, authBody)
 
-    const startBundleResponse = await this.fetch('startBundle', routes.startBundle, this.session)
-    const startBundleText = await startBundleResponse.text()
-
-    const apiKeyMatches = apiKeyRegex.exec(startBundleText)
-    const apiKey = apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
-    if (this.session) {
-      this.session.headers = {
-        ...this.session.headers,
-        'API-Key': apiKey,
-      }
-    }
-
-    const cdnResponse = await this.fetch('cdn', routes.cdn, this.session)
-    const cdn = await cdnResponse.text()
-    const cdnHost = new URL(cdn).host
-
-    const authResponse = await this.fetch('auth', routes.auth, this.session)
-    const auth = await authResponse.text()
-
-    const createItemResponse = await this.fetch('createItem', cdn, {
-      method: 'POST',
-
+    const url = routes.children
+    const session = await this.getSession(url, {
       headers: {
-        Accept: 'text/plain',
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'text/plain',
-        'Cookie': this.getSessionCookie(),
-        Host: cdnHost,
-        Origin: 'https://etjanst.stockholm.se'
-      },
-      body: auth,
-    })
-
-    if (!createItemResponse.ok) {
-      throw new Error(`Server Error [${createItemResponse.status}] [${createItemResponse.statusText}] [${cdn}]`)
-    }
-
-    const authData = await createItemResponse.json()
-
-    const childrenUrl = routes.children
-    const childrenResponse = await this.fetch('children', childrenUrl, {
-      method: 'GET',
-      headers: {
-        ...this.session?.headers,
         Accept: 'application/json;odata=verbose',
-        Auth: authData.token,
-        Cookie: this.getSessionCookie(),
+        Auth: token,
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem',
       },
     })
+    const response = await this.fetch('children', url, session)
 
-    if (!childrenResponse.ok) {
-      throw new Error(`Server Error [${childrenResponse.status}] [${childrenResponse.statusText}] [${childrenUrl}]`)
+    console.log(session.headers)
+    console.log('children response', response)
+    if (!response.ok) {
+      throw new Error(`Server Error [${response.status}] [${response.statusText}] [${url}]`)
     }
 
-    const data = await childrenResponse.json()
+    const data = await response.json()
     return parse.children(data)
   }
 
@@ -197,7 +239,8 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.calendar(child))
 
     const url = routes.calendar(child.id)
-    const response = await this.fetch('calendar', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('calendar', url, session)
     const data = await response.json()
     return parse.calendar(data)
   }
@@ -206,7 +249,8 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.classmates(child))
 
     const url = routes.classmates(child.sdsId)
-    const response = await this.fetch('classmates', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('classmates', url, session)
     const data = await response.json()
     return parse.classmates(data)
   }
@@ -215,7 +259,8 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.schedule(child))
 
     const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
-    const response = await this.fetch('schedule', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('schedule', url, session)
     const data = await response.json()
     return parse.schedule(data)
   }
@@ -224,7 +269,8 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.news(child))
 
     const url = routes.news(child.id)
-    const response = await this.fetch('news', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('news', url, session)
     const data = await response.json()
     return parse.news(data)
   }
@@ -234,7 +280,8 @@ export class Api extends EventEmitter {
       return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
     }
     const url = routes.newsDetails(child.id, item.id)
-    const response = await this.fetch(`news_${item.id}`, url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch(`news_${item.id}`, url, session)
     const data = await response.json()
     return parse.newsItemDetails(data)
   }
@@ -243,7 +290,8 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.menu(child))
 
     const url = routes.menu(child.id)
-    const response = await this.fetch('menu', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('menu', url, session)
     const data = await response.json()
     return parse.menu(data)
   }
@@ -252,17 +300,17 @@ export class Api extends EventEmitter {
     if (this.isFake) return fakeResponse(fake.notifications(child))
 
     const url = routes.notifications(child.sdsId)
-    const response = await this.fetch('notifications', url, this.session)
+    const session = await this.getSession(url)
+    const response = await this.fetch('notifications', url, session)
     const data = await response.json()
     return parse.notifications(data)
   }
 
   async logout() {
     this.isFake = false
-    this.session = undefined
     this.personalNumber = undefined
     this.isLoggedIn = false
-    try { await this.clearCookies() } catch (_) { /* do nothing */ }
     this.emit('logout')
+    await this.clearSession()
   }
 }

@@ -19,9 +19,11 @@
     "publish-package": "npm publish --access public"
   },
   "devDependencies": {
+    "@react-native-cookies/cookies": "^6.0.4",
     "@types/jest": "^26.0.19",
     "@types/luxon": "^1.25.0",
     "@types/node-fetch": "^2.5.7",
+    "@types/tough-cookie": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "eslint": "^7.16.0",
@@ -38,6 +40,7 @@
   "dependencies": {
     "@types/he": "^1.1.1",
     "camelcase-keys": "^6.2.2",
+    "change-case": "^4.1.2",
     "events": "^3.2.0",
     "h2m": "^0.7.0",
     "he": "^1.2.0",

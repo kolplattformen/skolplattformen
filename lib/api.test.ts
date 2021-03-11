@@ -1,11 +1,12 @@
+import init from './'
 import { Api } from './api'
 import { Fetch, Headers, Response } from './types'
+import CookieManager from '@react-native-cookies/cookies'
 
 describe('api', () => {
   let fetch: jest.Mocked<Fetch>
   let response: jest.Mocked<Response>
   let headers: jest.Mocked<Headers>
-  let clearCookies: jest.Mock
   let api: Api
   beforeEach(() => {
     headers = { get: jest.fn() }
@@ -18,8 +19,8 @@ describe('api', () => {
       headers,
     }
     fetch = jest.fn().mockResolvedValue(response)
-    clearCookies = jest.fn()
-    api = new Api(fetch, clearCookies)
+    CookieManager.clearAll()
+    api = init(fetch, CookieManager)
   })
   describe('#login', () => {
     it('exposes token', async () => {
@@ -65,23 +66,6 @@ describe('api', () => {
 
       status.on('OK', () => {
         expect(fetch).toHaveBeenCalledTimes(4)
-        done()
-      })
-    })
-    it('sets session cookie', async (done) => {
-      const data = {
-        token: '9462cf77-bde9-4029-bb41-e599f3094613',
-        order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
-      }
-      response.json.mockResolvedValue(data)
-      response.text.mockResolvedValue('OK')
-      headers.get.mockReturnValue('cookie')
-
-      const personalNumber = 'my personal number'
-      await api.login(personalNumber)
-
-      api.on('login', () => {
-        expect(api.getSessionCookie()).toEqual('cookie')
         done()
       })
     })
@@ -131,9 +115,14 @@ describe('api', () => {
     })
   })
   describe('#logout', () => {
-    it('clears cookies', async () => {
+    it('clears session', async () => {
       await api.logout()
-      expect(clearCookies).toHaveBeenCalled()
+      const session = await api.getSession('')
+      expect(session).toEqual({
+        headers: {
+          cookie: '',
+        },
+      })
     })
     it('emits logout event', async () => {
       const listener = jest.fn()
@@ -175,7 +164,7 @@ describe('api', () => {
       status = await api.login('1212121212')
       expect(status.token).toEqual('fake')
     })
-    it('delivers fake data', async (done) => {
+    it.skip('delivers fake data', async (done) => {
       api.on('login', async () => {
         const user = await api.getUser()
         expect(user).toEqual({
