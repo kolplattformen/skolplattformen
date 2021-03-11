@@ -10,9 +10,7 @@ import CookieManager from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StatusBar } from 'react-native'
 
-const api = init(fetch, () => {
-  CookieManager.clearAll()
-})
+const api = init(fetch, CookieManager)
 
 export default () => {
   return (
