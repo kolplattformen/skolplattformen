@@ -10,7 +10,7 @@ const createApi = () => ({
   on: jest.fn().mockImplementation((...args) => emitter.on(...args)),
   off: jest.fn().mockImplementation((...args) => emitter.off(...args)),
 
-  getSessionCookie: jest.fn(),
+  getSession: jest.fn(),
   getPersonalNumber: jest.fn(),
 
   getCalendar: jest.fn(),

@@ -164,7 +164,6 @@ describe('hooks with fake data', () => {
         expect(result.current.data.length).not.toBeGreaterThan(1)
       })
     })
-
   })
   it('handles reloads', async () => {
     await act(async () => {
