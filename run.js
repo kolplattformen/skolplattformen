@@ -91,14 +91,14 @@ async function run() {
     api.on('login', async () => {
       console.log('Logged in')
 
-      console.log('user')
-      const user = await api.getUser()
-      console.log(user)
+      // console.log('user')
+      // const user = await api.getUser()
+      // console.log(user)
 
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-
+/*
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
@@ -113,7 +113,7 @@ async function run() {
 
       console.log('news')
       const news = await api.getNews(children[0])
-
+*/
       /*console.log('news details')
       const newsItems = await Promise.all(
         news.map((newsItem) =>
@@ -127,9 +127,9 @@ async function run() {
       const menu = await api.getMenu(children[0])
       console.log(menu)*/
 
-      console.log('notifications')
-      const notifications = await api.getNotifications(children[0])
-      console.log(notifications)
+      // console.log('notifications')
+      // const notifications = await api.getNotifications(children[0])
+      // console.log(notifications)
 
       await api.logout()
     })
