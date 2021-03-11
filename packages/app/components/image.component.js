@@ -1,18 +1,33 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image as ImageBase } from 'react-native'
 
 export const Image = ({ src, style }) => {
   const { api } = useApi()
-  const cookie = api.getSessionCookie()
+  const [headers, setHeaders] = useState()
+
+  const getHeaders = async (url) => {
+    // eslint-disable-next-line no-shadow
+    const { headers } = await api.getSession(url)
+    setHeaders(headers)
+  }
+
+  useEffect(() => {
+    getHeaders(src)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src])
 
   return (
-    <ImageBase
-      source={{
-        uri: src,
-        headers: { cookie },
-      }}
-      style={style}
-    />
+    <>
+      {headers && (
+        <ImageBase
+          source={{
+            uri: src,
+            headers,
+          }}
+          style={style}
+        />
+      )}
+    </>
   )
 }

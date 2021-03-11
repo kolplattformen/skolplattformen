@@ -1,7 +1,7 @@
 import { useApi } from '@skolplattformen/api-hooks'
 import { Text } from '@ui-kitten/components'
 import URI from 'jsuri'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
@@ -10,7 +10,19 @@ import { CloseIcon } from './icon.component'
 export const ModalWebView = ({ url, onClose }) => {
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
-  const cookie = api.getSessionCookie()
+  const [headers, setHeaders] = useState()
+
+  const getHeaders = async (url) => {
+    // eslint-disable-next-line no-shadow
+    const { headers } = await api.getSession(url)
+    setHeaders(headers)
+  }
+
+  useEffect(() => {
+    getHeaders(url)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url])
+
   const uri = new URI(url)
 
   const closeModal = () => {
@@ -34,11 +46,9 @@ export const ModalWebView = ({ url, onClose }) => {
             </TouchableOpacity>
           </View>
         </View>
-
-        <WebView
-          style={styles.webview}
-          source={{ uri: url, headers: { cookie } }}
-        />
+        {headers && (
+          <WebView style={styles.webview} source={{ uri: url, headers }} />
+        )}
       </SafeAreaView>
     </Modal>
   )

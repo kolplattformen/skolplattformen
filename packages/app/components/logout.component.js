@@ -1,7 +1,7 @@
 import { useApi, useUser } from '@skolplattformen/api-hooks'
 import { Button, Text } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, StyleSheet, View } from 'react-native'
 import { CheckIcon, CloseOutlineIcon } from './icon.component'
 
@@ -13,7 +13,7 @@ const imageSources = {
 export const Logout = ({ navigation }) => {
   const { api } = useApi()
   const { data } = useUser()
-  const [gender] = React.useState(() => {
+  const [gender] = useState(() => {
     if (data?.personalNumber && Personnummer.valid(data.personalNumber)) {
       return Personnummer.parse(data.personalNumber).isFemale()
         ? 'female'

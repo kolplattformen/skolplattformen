@@ -132,8 +132,8 @@ android {
         applicationId "org.skolplattformen.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 140
-        versionName "1.4.0"
+        versionCode 142
+        versionName "1.4.2"
     }
     splits {
         abi {
