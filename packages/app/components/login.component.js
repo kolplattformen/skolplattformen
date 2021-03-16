@@ -176,7 +176,7 @@ export const Login = ({ navigation }) => {
             accessoryLeft={SecureIcon}
             size="medium"
           >
-            {loginMethods[loginMethodIndex]}
+            <Text adjustsFontSizeToFit style={{ color: '#ffffff' }}>{loginMethods[loginMethodIndex]}</Text>
           </Button>
           <Button
             onPress={selectLoginMethod}
