@@ -170,6 +170,7 @@ export class Api extends EventEmitter {
       },
       body: authBody,
     })
+    delete session.headers['API-Key']
 
     // Temporarily remove cookies
     const cookies = await this.cookieManager.getCookies(url)
