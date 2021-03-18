@@ -164,7 +164,7 @@ export class Api extends EventEmitter {
     const response = await this.fetch('navigationControllerScript', url, {})
     const text = await response.text()
 
-    const xsrfRegExp = /'x-xsrf-token':'([\w\d]+)'/gm
+    const xsrfRegExp = /'x-xsrf-token':[ ]?'([\w\d_-]+)'/gim
     const xsrfMatches = xsrfRegExp.exec(text)
     return xsrfMatches && xsrfMatches.length > 1 ? xsrfMatches[1] : ''
   }
