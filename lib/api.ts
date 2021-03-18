@@ -127,7 +127,7 @@ export class Api extends EventEmitter {
     const text = await response.text()
     const doc = html.parse(decode(text))
     const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
-    this.addHeader('X-XSRF-Token', xsrfToken)
+    this.addHeader('x-xsrf-token', xsrfToken)
   }
 
   private async retrieveApiKey(): Promise<void> {
@@ -159,6 +159,16 @@ export class Api extends EventEmitter {
     return authBody
   }
 
+  private async retrieveCreateItemXsrfToken() {
+    const url = routes.navigationControllerScript
+    const response = await this.fetch('navigationControllerScript', url, {})
+    const text = await response.text()
+
+    const xsrfRegExp = /'x-xsrf-token':'([\w\d]+)'/gm
+    const xsrfMatches = xsrfRegExp.exec(text)
+    return xsrfMatches && xsrfMatches.length > 1 ? xsrfMatches[1] : ''
+  }
+
   private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
     const session = this.getRequestInit({
       method: 'POST',
@@ -177,7 +187,14 @@ export class Api extends EventEmitter {
     this.cookieManager.clearAll()
 
     // Perform request
-    const response = await this.fetch('createItem', url, session)
+    const createItemXsrfToken = await this.retrieveCreateItemXsrfToken()
+    const response = await this.fetch('createItem', url, {
+      ...session,
+      headers: {
+        ...session.headers,
+        'x-xsrf-token': createItemXsrfToken
+      }
+    })
 
     // Restore cookies
     cookies.forEach((cookie) => {
