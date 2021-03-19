@@ -53,3 +53,5 @@ export const startBundle = 'https://etjanst.stockholm.se/vardnadshavare/bundles/
 export const hemPage = 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem'
 
 export const navigationControllerScript = 'https://etjanst.stockholm.se/vardnadshavare/bundles/navigationController'
+
+export const childcontrollerScript = 'https://etjanst.stockholm.se/vardnadshavare/bundles/childcontroller'

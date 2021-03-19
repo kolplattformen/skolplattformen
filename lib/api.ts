@@ -160,8 +160,8 @@ export class Api extends EventEmitter {
   }
 
   private async retrieveCreateItemXsrfToken() {
-    const url = routes.navigationControllerScript
-    const response = await this.fetch('navigationControllerScript', url, {})
+    const url = routes.childcontrollerScript
+    const response = await this.fetch('childcontrollerScript', url, {})
     const text = await response.text()
 
     const xsrfRegExp = /'x-xsrf-token':[ ]?'([\w\d_-]+)'/gim
