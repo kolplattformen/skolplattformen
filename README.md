@@ -1,6 +1,6 @@
 # Skolplattformen.org monorepo
 
-This is a try to reverse engineer Skolplattformen and create a more fast, consistent and secure experience for the users of Skolplattformen.
+This is a try to reverse engineer Skolplattformen and create a faster, more consistent and secure experience for the users of Skolplattformen.
 
 ![Login screen](packages/site/assets/img/screenshots/screenshot_login.png)
 
