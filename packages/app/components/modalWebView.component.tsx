@@ -17,17 +17,15 @@ export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
   const { api } = useApi()
   const [headers, setHeaders] = useState()
 
-  const getHeaders = async (url) => {
-    if (sharedCookiesEnabled) return
-    // eslint-disable-next-line no-shadow
-    const { headers } = await api.getSession(url)
-    setHeaders(headers)
-  }
-
   useEffect(() => {
-    getHeaders()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url])
+    const getHeaders = async (urlToGetSessionFor) => {
+      if (sharedCookiesEnabled) return
+      const { headers: newHeaders } = await api.getSession(urlToGetSessionFor)
+      setHeaders(newHeaders)
+    }
+
+    getHeaders(url)
+  }, [url, sharedCookiesEnabled, api])
 
   const uri = new URI(url)
 
