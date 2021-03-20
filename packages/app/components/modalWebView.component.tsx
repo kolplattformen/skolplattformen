@@ -17,9 +17,11 @@ export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
   const { api } = useApi()
   const [headers, setHeaders] = useState()
 
-  const getHeaders = async () => {
-    const { headers: updatedHeaders } = await api.getSession(url)
-    setHeaders(updatedHeaders)
+  const getHeaders = async (url) => {
+    if (sharedCookiesEnabled) return
+    // eslint-disable-next-line no-shadow
+    const { headers } = await api.getSession(url)
+    setHeaders(headers)
   }
 
   useEffect(() => {
@@ -50,8 +52,12 @@ export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
             </TouchableOpacity>
           </View>
         </View>
-        {headers && (
-          <WebView style={styles.webview} source={{ uri: url, headers }} />
+        {(headers || sharedCookiesEnabled) && (
+          <WebView
+            style={styles.webview}
+            source={{ uri: url, headers }}
+            sharedCookiesEnabled={sharedCookiesEnabled}
+          />
         )}
       </SafeAreaView>
     </Modal>
