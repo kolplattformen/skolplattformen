@@ -159,12 +159,11 @@ export class Api extends EventEmitter {
     return authBody
   }
 
-  private async retrieveCreateItemXsrfToken() {
-    const url = routes.childcontrollerScript
+  private async retrieveCreateItemXsrfToken(url: string) {
     const response = await this.fetch('childcontrollerScript', url, {})
     const text = await response.text()
 
-    const xsrfRegExp = /'x-xsrf-token':[ ]?'([\w\d_-]+)'/gim
+    const xsrfRegExp = /'x-xsrf-token2':[ ]?'([\w\d_-]+)'/gim
     const xsrfMatches = xsrfRegExp.exec(text)
     return xsrfMatches && xsrfMatches.length > 1 ? xsrfMatches[1] : ''
   }
@@ -187,12 +186,12 @@ export class Api extends EventEmitter {
     this.cookieManager.clearAll()
 
     // Perform request
-    const createItemXsrfToken = await this.retrieveCreateItemXsrfToken()
+    const createItemXsrfToken = await this.retrieveCreateItemXsrfToken(routes.childcontrollerScript)
     const response = await this.fetch('createItem', url, {
       ...session,
       headers: {
         ...session.headers,
-        'x-xsrf-token': createItemXsrfToken
+        'x-xsrf-token2': createItemXsrfToken
       }
     })
 
