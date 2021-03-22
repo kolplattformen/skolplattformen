@@ -50,6 +50,8 @@ export default function wrap(fetch: Fetch, options: FetcherOptions = {}): Fetche
       ...init,
       headers: {
         ...init.headers,
+        Pragma: 'no-cache',
+        'Cache-Control': 'no-cache, no-store',
         // eslint-disable-next-line max-len
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
       },
