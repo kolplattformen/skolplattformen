@@ -58,7 +58,7 @@ export const Logout = ({ navigation }) => {
               accessoryRight={CheckIcon}
               onPress={navigateToChildren}
             >
-              Fortsätt
+              Gå tillbaka
             </Button>
             <Button
               size="medium"
