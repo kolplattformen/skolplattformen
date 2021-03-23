@@ -9,16 +9,20 @@ import { ApiProvider } from '@skolplattformen/api-hooks'
 import CookieManager from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StatusBar } from 'react-native'
+import { useBackgroundBlur } from './utils/blur'
 
 const api = init(fetch, CookieManager)
 
 export default () => {
+  const FullBlurView = useBackgroundBlur()
+
   return (
     <ApiProvider api={api} storage={AsyncStorage}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent />
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{ ...eva.light, ...customization }}>
         <AppNavigator />
+        {FullBlurView}
       </ApplicationProvider>
     </ApiProvider>
   )
