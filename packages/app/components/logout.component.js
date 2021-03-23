@@ -3,6 +3,7 @@ import { Button, Text } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import React, { useState } from 'react'
 import { Image, StyleSheet, View } from 'react-native'
+import { Directions, FlingGestureHandler } from 'react-native-gesture-handler'
 import { CheckIcon, CloseOutlineIcon } from './icon.component'
 
 const imageSources = {
@@ -37,33 +38,39 @@ export const Logout = ({ navigation }) => {
   }
 
   return (
-    <>
-      <Image
-        source={imageSources[gender]}
-        style={[styles.image, { aspectRatio: aspectRatio[gender] }]}
-      />
-      <View style={styles.content}>
-        <Text style={styles.socialSecurityNumber}>{data.personalNumber}</Text>
-        <View style={styles.buttons}>
-          <Button
-            style={styles.button}
-            status="success"
-            size="medium"
-            accessoryRight={CheckIcon}
-            onPress={navigateToChildren}
-          >
-            Fortsätt
-          </Button>
-          <Button
-            size="medium"
-            accessoryRight={CloseOutlineIcon}
-            onPress={startLogout}
-          >
-            Logga ut
-          </Button>
+    <FlingGestureHandler
+      direction={Directions.LEFT}
+      numberOfPointers={1}
+      onHandlerStateChange={navigateToChildren}
+    >
+      <View>
+        <Image
+          source={imageSources[gender]}
+          style={[styles.image, { aspectRatio: aspectRatio[gender] }]}
+        />
+        <View style={styles.content}>
+          <Text style={styles.socialSecurityNumber}>{data.personalNumber}</Text>
+          <View style={styles.buttons}>
+            <Button
+              style={styles.button}
+              status="success"
+              size="medium"
+              accessoryRight={CheckIcon}
+              onPress={navigateToChildren}
+            >
+              Fortsätt
+            </Button>
+            <Button
+              size="medium"
+              accessoryRight={CloseOutlineIcon}
+              onPress={startLogout}
+            >
+              Logga ut
+            </Button>
+          </View>
         </View>
       </View>
-    </>
+    </FlingGestureHandler>
   )
 }
 

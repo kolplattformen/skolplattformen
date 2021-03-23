@@ -34,7 +34,7 @@
     "react-native-calendar-events": "2.2.0",
     "react-native-calendar-strip": "2.2.0",
     "react-native-fix-image": "2.1.0",
-    "react-native-gesture-handler": "1.10.3",
+    "react-native-gesture-handler": "^1.10.3",
     "react-native-markdown-display": "7.0.0-alpha.2",
     "react-native-modal-datetime-picker": "9.2.0",
     "react-native-reanimated": "1.13.2",
