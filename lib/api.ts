@@ -131,7 +131,7 @@ export class Api extends EventEmitter {
   }
 
   private async retrieveApiKey(): Promise<void> {
-    const url = routes.startBundle
+    const url = routes.childcontrollerScript
     const session = this.getRequestInit()
     const response = await this.fetch('startBundle', url, session)
     const text = await response.text()
@@ -163,9 +163,12 @@ export class Api extends EventEmitter {
     const response = await this.fetch('childcontrollerScript', url, {})
     const text = await response.text()
 
-    const xsrfRegExp = /'x-xsrf-token2':[ ]?'([\w\d_-]+)'/gim
+    const xsrfRegExp = /'(x-xsrf-token[\d]+)':[ ]?'([\w\d_-]+)'/gim
     const xsrfMatches = xsrfRegExp.exec(text)
-    return xsrfMatches && xsrfMatches.length > 1 ? xsrfMatches[1] : ''
+    
+    return xsrfMatches && xsrfMatches.length > 2 
+      ? {'xsrfTokenName': xsrfMatches[1], 'xsrfTokenValue':xsrfMatches[2]}  
+      : {'xsrfTokenName': 'x-xsrf-token',  'xsrfTokenValue':''} 
   }
 
   private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
@@ -186,12 +189,12 @@ export class Api extends EventEmitter {
     this.cookieManager.clearAll()
 
     // Perform request
-    const createItemXsrfToken = await this.retrieveCreateItemXsrfToken(routes.childcontrollerScript)
+    const {xsrfTokenName, xsrfTokenValue}  = await this.retrieveCreateItemXsrfToken(routes.childcontrollerScript)
     const response = await this.fetch('createItem', url, {
       ...session,
       headers: {
         ...session.headers,
-        'x-xsrf-token2': createItemXsrfToken
+        [xsrfTokenName] : xsrfTokenValue
       }
     })
 
