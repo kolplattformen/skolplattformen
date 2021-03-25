@@ -83,7 +83,6 @@ export const Login = ({ navigation }) => {
 
   const loginHandler = async () => {
     showModal(false)
-    navigateToChildren()
   }
 
   useEffect(() => {
@@ -110,11 +109,6 @@ export const Login = ({ navigation }) => {
     } catch (err) {
       setError('Öppna BankID manuellt')
     }
-  }
-
-  /* Navigation actions */
-  const navigateToChildren = () => {
-    navigation.navigate('Children')
   }
 
   const startLogin = async (text) => {
