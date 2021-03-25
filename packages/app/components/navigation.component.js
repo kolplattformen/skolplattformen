@@ -1,3 +1,4 @@
+import { useApi } from '@skolplattformen/api-hooks'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
@@ -11,16 +12,6 @@ import { NewsItem } from './newsItem.component'
 
 const { Navigator, Screen } = createStackNavigator()
 
-const HomeNavigator = () => (
-  <Navigator headerMode="none">
-    <Screen name="Login" component={Auth} />
-    <Screen name="Children" component={Children} />
-    <Screen name="Child" component={Child} />
-    <Screen name="NewsItem" component={NewsItem} />
-    <Screen name="Absence" component={Absence} />
-  </Navigator>
-)
-
 const linking = {
   prefixes: [schema],
   config: {
@@ -30,10 +21,23 @@ const linking = {
   },
 }
 export const AppNavigator = () => {
+  const { isLoggedIn } = useApi()
+
   return (
     <NavigationContainer linking={linking}>
       <StatusBar />
-      <HomeNavigator />
+      <Navigator headerMode="none">
+        {isLoggedIn ? (
+          <>
+            <Screen name="Children" component={Children} />
+            <Screen name="Child" component={Child} />
+            <Screen name="NewsItem" component={NewsItem} />
+            <Screen name="Absence" component={Absence} />
+          </>
+        ) : (
+          <Screen name="Login" component={Auth} />
+        )}
+      </Navigator>
     </NavigationContainer>
   )
 }
