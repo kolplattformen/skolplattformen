@@ -13,7 +13,6 @@ moment.locale('sv')
 export const Calendar = () => {
   const child = useChild()
   const { data } = useCalendar(child)
-  const [selected, setSelected] = React.useState()
 
   const renderItem = ({ item }) => (
     <ListItem

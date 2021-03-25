@@ -12,14 +12,13 @@ export const ModalWebView = ({ url, onClose }) => {
   const { api } = useApi()
   const [headers, setHeaders] = useState()
 
-  const getHeaders = async (url) => {
-    // eslint-disable-next-line no-shadow
-    const { headers } = await api.getSession(url)
-    setHeaders(headers)
+  const getHeaders = async () => {
+    const { headers: updatedHeaders } = await api.getSession(url)
+    setHeaders(updatedHeaders)
   }
 
   useEffect(() => {
-    getHeaders(url)
+    getHeaders()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
