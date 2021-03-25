@@ -57,3 +57,5 @@ export const navigationControllerScript = 'https://etjanst.stockholm.se/vardnads
 export const baseEtjanst = 'https://etjanst.stockholm.se'
 
 export const childcontrollerScript = `https://etjanst.stockholm.se/vardnadshavare/bundles/childcontroller?v=${Date.now()}`
+
+export const createItemConfig = 'https://raw.githubusercontent.com/kolplattformen/embedded-api/main/config.json'
