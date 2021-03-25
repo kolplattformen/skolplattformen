@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/kolplattformen/skolplattformen/compare/v1.2.0...v1.2.1) (2021-03-25)
+
+
+### Bug Fixes
+
+* göm bilder i nyhetslistan för mindre enheter ([#205](https://github.com/kolplattformen/skolplattformen/issues/205)) ([480abc4](https://github.com/kolplattformen/skolplattformen/commit/480abc4d92c6c6372dbad40e92d26f3b696444f3))
+
 # [1.2.0](https://github.com/kolplattformen/skolplattformen/compare/v1.1.3...v1.2.0) (2021-03-25)
 
 
