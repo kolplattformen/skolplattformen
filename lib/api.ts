@@ -167,25 +167,10 @@ export class Api extends EventEmitter {
     return authBody
   }
 
-  private async retrieveCreateItemHeaders(url: string) {
-    const config = {
-      method: 'GET',
-      headers: {
-        Pragma: 'no-cache', 
-        'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0', 
-      }
-    }
-    const response = await this.fetch('childcontrollerScript', url, config)
-    const text = await response.text()
-    
-    const headerRegexp = /{\s*headers:\s*({.+})}/gis
-    const matches = text.match(headerRegexp)
-    if (matches && matches.length >= 1) {
-      console.log('Matches:', matches[0])
-      return JSON.parse(matches[0].replace(/ /g,'').replace(/\'/g,'"').replace(/headers:/g,'"headers":'))
-    } else {
-      return null
-    }
+  private async retrieveCreateItemHeaders() {
+    const response = await this.fetch('createItemConfig', routes.createItemConfig)
+    const json = await response.json()
+    return json
   }
 
   private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
@@ -210,9 +195,12 @@ export class Api extends EventEmitter {
     if (!scriptUrl) {
       scriptUrl = routes.childcontrollerScript
     }
-    const createItemHeaders = await this.retrieveCreateItemHeaders(scriptUrl)    
-    const response = await this.fetch('createItem', url, createItemHeaders)
-
+    const createItemHeaders = await this.retrieveCreateItemHeaders()
+    const response = await this.fetch('createItem', url, {
+      method: 'POST',
+      ...createItemHeaders,
+      body: authBody,
+    })
     // Restore cookies
     cookies.forEach((cookie) => {
       this.cookieManager.setCookie(cookie, url)
