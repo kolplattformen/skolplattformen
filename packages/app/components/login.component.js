@@ -83,6 +83,7 @@ export const Login = ({ navigation }) => {
 
   const loginHandler = async () => {
     showModal(false)
+    navigateToChildren()
   }
 
   useEffect(() => {

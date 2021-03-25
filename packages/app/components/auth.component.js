@@ -1,4 +1,3 @@
-import { useApi } from '@skolplattformen/api-hooks'
 import { Layout, Text } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import {
@@ -10,7 +9,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { Children } from './children.component'
 import { Login } from './login.component'
 
 const funArguments = [
@@ -34,15 +32,12 @@ const funArguments = [
 ]
 
 export const Auth = (props) => {
-  const { isLoggedIn } = useApi()
   const [argument] = useState(() => {
     const argNum = Math.floor(Math.random() * funArguments.length)
     return funArguments[argNum]
   })
 
-  return isLoggedIn ? (
-    <Children />
-  ) : (
+  return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.keyboardAvoidingView}
