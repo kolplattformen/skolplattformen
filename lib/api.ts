@@ -42,6 +42,8 @@ export class Api extends EventEmitter {
 
   public isFake: boolean = false
 
+  public childControllerUrl?: string
+
   constructor(fetch: Fetch, cookieManager: CookieManager, options?: FetcherOptions) {
     super()
     this.fetch = wrap(fetch, options)
@@ -127,6 +129,12 @@ export class Api extends EventEmitter {
     const text = await response.text()
     const doc = html.parse(decode(text))
     const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
+    const scriptTags = doc.querySelectorAll('script')
+    const childControllerScriptTag = scriptTags.find((elem) => {
+      const srcAttr = elem.getAttribute('src')
+      return srcAttr?.startsWith('/vardnadshavare/bundles/childcontroller')
+    })
+    this.childControllerUrl = routes.baseEtjanst + childControllerScriptTag?.getAttribute('src')
     this.addHeader('x-xsrf-token', xsrfToken)
   }
 
@@ -159,16 +167,25 @@ export class Api extends EventEmitter {
     return authBody
   }
 
-  private async retrieveCreateItemXsrfToken(url: string) {
-    const response = await this.fetch('childcontrollerScript', url, {})
+  private async retrieveCreateItemHeaders(url: string) {
+    const config = {
+      method: 'GET',
+      headers: {
+        Pragma: 'no-cache', 
+        'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0', 
+      }
+    }
+    const response = await this.fetch('childcontrollerScript', url, config)
     const text = await response.text()
-
-    const xsrfRegExp = /'(x-xsrf-token[\d]+)':[ ]?'([\w\d_-]+)'/gim
-    const xsrfMatches = xsrfRegExp.exec(text)
     
-    return xsrfMatches && xsrfMatches.length > 2 
-      ? {'xsrfTokenName': xsrfMatches[1], 'xsrfTokenValue':xsrfMatches[2]}  
-      : {'xsrfTokenName': 'x-xsrf-token',  'xsrfTokenValue':''} 
+    const headerRegexp = /{\s*headers:\s*({.+})}/gis
+    const matches = text.match(headerRegexp)
+    if (matches && matches.length >= 1) {
+      console.log('Matches:', matches[0])
+      return JSON.parse(matches[0].replace(/ /g,'').replace(/\'/g,'"').replace(/headers:/g,'"headers":'))
+    } else {
+      return null
+    }
   }
 
   private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
@@ -189,14 +206,12 @@ export class Api extends EventEmitter {
     this.cookieManager.clearAll()
 
     // Perform request
-    const {xsrfTokenName, xsrfTokenValue}  = await this.retrieveCreateItemXsrfToken(routes.childcontrollerScript)
-    const response = await this.fetch('createItem', url, {
-      ...session,
-      headers: {
-        ...session.headers,
-        [xsrfTokenName] : xsrfTokenValue
-      }
-    })
+    let scriptUrl = this.childControllerUrl
+    if (!scriptUrl) {
+      scriptUrl = routes.childcontrollerScript
+    }
+    const createItemHeaders = await this.retrieveCreateItemHeaders(scriptUrl)    
+    const response = await this.fetch('createItem', url, createItemHeaders)
 
     // Restore cookies
     cookies.forEach((cookie) => {
@@ -247,7 +262,7 @@ export class Api extends EventEmitter {
         Accept: 'application/json;odata=verbose',
         Auth: token,
         Host: 'etjanst.stockholm.se',
-        Referer: 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/hem',
+        Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },
     })
     const response = await this.fetch('children', url, session)

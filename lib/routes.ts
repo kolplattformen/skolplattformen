@@ -54,4 +54,6 @@ export const hemPage = 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/he
 
 export const navigationControllerScript = 'https://etjanst.stockholm.se/vardnadshavare/bundles/navigationController'
 
+export const baseEtjanst = 'https://etjanst.stockholm.se'
+
 export const childcontrollerScript = `https://etjanst.stockholm.se/vardnadshavare/bundles/childcontroller?v=${Date.now()}`
