@@ -10,8 +10,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
+import { Children } from './children.component'
 import { Login } from './login.component'
-import { Logout } from './logout.component'
 
 const funArguments = [
   'agila',
@@ -40,7 +40,9 @@ export const Auth = (props) => {
     return funArguments[argNum]
   })
 
-  return (
+  return isLoggedIn ? (
+    <Children />
+  ) : (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.keyboardAvoidingView}
@@ -55,7 +57,7 @@ export const Auth = (props) => {
               <Text category="h6" style={styles.subtitle}>
                 Det {argument} alternativet
               </Text>
-              {isLoggedIn ? <Logout {...props} /> : <Login {...props} />}
+              <Login {...props} />
             </Layout>
           </View>
         </SafeAreaView>
