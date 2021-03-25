@@ -1,4 +1,5 @@
 import {
+  useApi,
   useChildList,
   useCalendar,
   useClassmates,
@@ -17,6 +18,10 @@ const setup = () => {
 }
 
 beforeEach(() => {
+  useApi.mockReturnValue({
+    api: { on: jest.fn(), off: jest.fn(), logout: jest.fn() },
+    isLoggedIn: false,
+  })
   useCalendar.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNotifications.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
