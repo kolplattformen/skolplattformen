@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/kolplattformen/skolplattformen/compare/v1.1.3...v1.2.0) (2021-03-25)
+
+
+### Bug Fixes
+
+* 🐛 Fixar senaste blocken ([c150216](https://github.com/kolplattformen/skolplattformen/commit/c150216e13be5d4166dd65d4edcdda5ee512bc44))
+* 🐛 Login funkar i iOS ([1c3d6f5](https://github.com/kolplattformen/skolplattformen/commit/1c3d6f5a5a33d81420b3170083756313341dd1e4))
+* 🐛 Repaired login ([4f6ab3b](https://github.com/kolplattformen/skolplattformen/commit/4f6ab3bec7180e9c6771e165a273f1deb37af35b))
+* använd korrekt tusen-separator för miljarden ([#184](https://github.com/kolplattformen/skolplattformen/issues/184)) ([8e21ad3](https://github.com/kolplattformen/skolplattformen/commit/8e21ad37e65531eb74088b4e210ffd4b9e668b0c))
+* gör båda store-knapparna lika stora ([#185](https://github.com/kolplattformen/skolplattformen/issues/185)) ([a35ef5e](https://github.com/kolplattformen/skolplattformen/commit/a35ef5edee283dee6312fbd8ce5fe0b0475ca14f))
+
+
+### Features
+
+* 🎸 relase 1.4.2 ([8bea63f](https://github.com/kolplattformen/skolplattformen/commit/8bea63f75ce40215cd595e87b7d874e94a6cf821))
+* 🎸 release 1.5.3 ([2ce7f01](https://github.com/kolplattformen/skolplattformen/commit/2ce7f01c8d552ac6ecc86110e20aeaf2b15a7066))
+
 ## [1.1.3](https://github.com/kolplattformen/skolplattformen/compare/v1.1.2...v1.1.3) (2021-03-10)
 
 
