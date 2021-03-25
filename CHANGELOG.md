@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/kolplattformen/skolplattformen/compare/v1.2.1...v1.3.0) (2021-03-25)
+
+
+### Bug Fixes
+
+* do not navigate to children after login ([d6fd614](https://github.com/kolplattformen/skolplattformen/commit/d6fd614eabcb94d17e271cf1043f9d58f4165ba6))
+* navigate to child view ([bf05fdb](https://github.com/kolplattformen/skolplattformen/commit/bf05fdb4823497da2a56708cd1607ca788f6efbc))
+
+
+### Features
+
+* add settings icon ([0b63391](https://github.com/kolplattformen/skolplattformen/commit/0b6339154638c4a86840318aca1e92f869d26dab))
+* add settings with logout on children view ([a2b9d30](https://github.com/kolplattformen/skolplattformen/commit/a2b9d30282e1bfadd1516469f2b330ada66ff9f5))
+* replace logout screen with children ([c6f4662](https://github.com/kolplattformen/skolplattformen/commit/c6f46628750ee208b404c44907ba1e4709bda3b7))
+
 ## [1.2.1](https://github.com/kolplattformen/skolplattformen/compare/v1.2.0...v1.2.1) (2021-03-25)
 
 
