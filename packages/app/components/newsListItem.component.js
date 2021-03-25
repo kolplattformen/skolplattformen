@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import { DateTime } from 'luxon'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
+
+const { width } = Dimensions.get('window')
 
 export const NewsListItem = ({ item }) => {
   const navigation = useNavigation()
@@ -19,7 +21,7 @@ export const NewsListItem = ({ item }) => {
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
       <View style={styles.card}>
-        <Image src={item.fullImageUrl} style={styles.image} />
+        {width > 320 && <Image src={item.fullImageUrl} style={styles.image} />}
         <View style={styles.text}>
           <View>
             <Text style={styles.title}>{item.header}</Text>
