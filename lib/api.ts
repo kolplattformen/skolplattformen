@@ -168,24 +168,21 @@ export class Api extends EventEmitter {
   }
 
   private async retrieveCreateItemHeaders(url: string) {
-    const config = {
-      method: 'GET',
-      headers: {
-        Pragma: 'no-cache', 
-        'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0', 
-      }
-    }
-    const response = await this.fetch('childcontrollerScript', url, config)
+    /*
+    const session = this.getRequestInit()
+    const response = await this.fetch('childcontroller', url, session)
     const text = await response.text()
     
     const headerRegexp = /{\s*headers:\s*({.+})}/gis
     const matches = text.match(headerRegexp)
     if (matches && matches.length >= 1) {
-      console.log('Matches:', matches[0])
       return JSON.parse(matches[0].replace(/ /g,'').replace(/\'/g,'"').replace(/headers:/g,'"headers":'))
     } else {
       return null
     }
+    */  
+    const response = await this.fetch('createItemConfig', 'https://raw.githubusercontent.com/kolplattformen/embedded-api/3038b294bf4c4bbeaba00ce6bd2009ccf1f978b7/config.json')
+    return await response.json()
   }
 
   private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
@@ -211,8 +208,11 @@ export class Api extends EventEmitter {
       scriptUrl = routes.childcontrollerScript
     }
     const createItemHeaders = await this.retrieveCreateItemHeaders(scriptUrl)    
-    const response = await this.fetch('createItem', url, createItemHeaders)
-
+    const response = await this.fetch('createItem', url, {
+      method: 'POST',
+      ...createItemHeaders,
+      body: authBody
+    })
     // Restore cookies
     cookies.forEach((cookie) => {
       this.cookieManager.setCookie(cookie, url)

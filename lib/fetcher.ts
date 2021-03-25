@@ -46,16 +46,14 @@ const record = async (
 
 export default function wrap(fetch: Fetch, options: FetcherOptions = {}): Fetcher {
   return async (name: string, url: string, init: RequestInit = { headers: {} }): Promise<Response> => {
-    const response = await fetch(url, {
+    const config = {
       ...init,
       headers: {
-        ...init.headers,
-        Pragma: 'no-cache',
-        'Cache-Control': 'no-cache, no-store',
-        // eslint-disable-next-line max-len
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
+        ...init.headers
       },
-    })
+    }
+    const response = await fetch(url, config)
 
     const wrapMethod = (res: Response, methodName: string): void => {
       // @ts-ignore
@@ -63,7 +61,7 @@ export default function wrap(fetch: Fetch, options: FetcherOptions = {}): Fetche
       // @ts-ignore
       res[methodName] = async (...args) => {
         const result = await original(...args)
-        await record(name, url, init, methodName, options, response, result)
+        await record(name, url, config, methodName, options, response, result)
         return result
       }
     }
