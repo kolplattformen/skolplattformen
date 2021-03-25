@@ -13,6 +13,7 @@ import { Dimensions, Image, SafeAreaView, StyleSheet, View } from 'react-native'
 import ActionSheet from 'rn-actionsheet-module'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const { width } = Dimensions.get('window')
 
@@ -27,6 +28,7 @@ export const Children = ({ navigation }) => {
     switch (index) {
       case 0:
         api.logout()
+        AsyncStorage.clear()
         navigation.navigate('Login')
     }
   }
