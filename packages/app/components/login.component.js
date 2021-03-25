@@ -176,7 +176,9 @@ export const Login = ({ navigation }) => {
             accessoryLeft={SecureIcon}
             size="medium"
           >
-            <Text adjustsFontSizeToFit style={{ color: '#ffffff' }}>{loginMethods[loginMethodIndex]}</Text>
+            <Text adjustsFontSizeToFit style={styles.loginButtonText}>
+              {loginMethods[loginMethodIndex]}
+            </Text>
           </Button>
           <Button
             onPress={selectLoginMethod}
@@ -222,6 +224,7 @@ const styles = StyleSheet.create({
     minHeight: 45,
   },
   loginButton: { flex: 1 },
+  loginButtonText: { color: '#fff' },
   loginMethodButton: { width: 45 },
   modal: {
     width: '80%',
