@@ -169,7 +169,8 @@ export class Api extends EventEmitter {
 
   private async retrieveCreateItemHeaders() {
     const response = await this.fetch('createItemConfig', routes.createItemConfig)
-    return await response.json()
+    const json = await response.json()
+    return json
   }
 
   private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
@@ -194,11 +195,11 @@ export class Api extends EventEmitter {
     if (!scriptUrl) {
       scriptUrl = routes.childcontrollerScript
     }
-    const createItemHeaders = await this.retrieveCreateItemHeaders()    
+    const createItemHeaders = await this.retrieveCreateItemHeaders()
     const response = await this.fetch('createItem', url, {
       method: 'POST',
       ...createItemHeaders,
-      body: authBody
+      body: authBody,
     })
     // Restore cookies
     cookies.forEach((cookie) => {

@@ -49,8 +49,9 @@ export default function wrap(fetch: Fetch, options: FetcherOptions = {}): Fetche
     const config = {
       ...init,
       headers: {
+        // eslint-disable-next-line max-len
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
-        ...init.headers
+        ...init.headers,
       },
     }
     const response = await fetch(url, config)
