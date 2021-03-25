@@ -1,4 +1,4 @@
-import { useChildList } from '@skolplattformen/api-hooks'
+import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import {
   Divider,
   Layout,
@@ -10,57 +10,78 @@ import {
 } from '@ui-kitten/components'
 import React from 'react'
 import { Dimensions, Image, SafeAreaView, StyleSheet, View } from 'react-native'
+import ActionSheet from 'rn-actionsheet-module'
 import { ChildListItem } from './childListItem.component'
-import { BackIcon } from './icon.component'
+import { SettingsIcon } from './icon.component'
 
 const { width } = Dimensions.get('window')
+
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
+const settingsOptions = ['Logga ut', 'Avbryt']
 
 export const Children = ({ navigation }) => {
+  const { api } = useApi()
   const { data: childList, status } = useChildList()
-  const navigateBack = () => {
-    navigation.goBack()
+
+  const handleSettingSelection = (index) => {
+    switch (index) {
+      case 0:
+        api.logout()
+        navigation.navigate('Login')
+    }
   }
 
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
-  )
+  const settings = () => {
+    const options = {
+      cancelButtonIndex: 1,
+      title: 'Inställningar',
+      optionsIOS: settingsOptions,
+      optionsAndroid: settingsOptions,
+      onCancelAndroidIndex: handleSettingSelection,
+    }
+
+    ActionSheet(options, handleSettingSelection)
+  }
 
   return (
     <SafeAreaView style={styles.topContainer}>
-      <TopNavigation
-        title="Dina barn"
-        alignment="center"
-        accessoryLeft={BackAction}
-      />
-      <Divider />
       {status === 'loaded' ? (
-        <List
-          contentContainerStyle={styles.childListContainer}
-          data={childList}
-          style={styles.childList}
-          ListEmptyComponent={
-            <View style={styles.emptyState}>
-              <Text category="h2">Inga barn</Text>
-              <Text style={styles.emptyStateDescription}>
-                Det finns inga barn registrerade för ditt personnummer i
-                Stockholms Stad
-              </Text>
-              <Image
-                source={require('../assets/children.png')}
-                style={styles.emptyStateImage}
+        <>
+          <TopNavigation
+            title="Dina barn"
+            alignment="center"
+            accessoryRight={() => (
+              <TopNavigationAction icon={SettingsIcon} onPress={settings} />
+            )}
+          />
+          <Divider />
+          <List
+            contentContainerStyle={styles.childListContainer}
+            data={childList}
+            style={styles.childList}
+            ListEmptyComponent={
+              <View style={styles.emptyState}>
+                <Text category="h2">Inga barn</Text>
+                <Text style={styles.emptyStateDescription}>
+                  Det finns inga barn registrerade för ditt personnummer i
+                  Stockholms Stad
+                </Text>
+                <Image
+                  source={require('../assets/children.png')}
+                  style={styles.emptyStateImage}
+                />
+              </View>
+            }
+            renderItem={({ item: child, index }) => (
+              <ChildListItem
+                child={child}
+                color={colors[index % colors.length]}
+                key={child.id}
+                navigation={navigation}
               />
-            </View>
-          }
-          renderItem={({ item: child, index }) => (
-            <ChildListItem
-              child={child}
-              color={colors[index % colors.length]}
-              key={child.id}
-              navigation={navigation}
-            />
-          )}
-        />
+            )}
+          />
+        </>
       ) : (
         <Layout style={styles.loading}>
           <Image

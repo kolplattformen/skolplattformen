@@ -1,4 +1,3 @@
-import { useApi } from '@skolplattformen/api-hooks'
 import { Layout, Text } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import {
@@ -11,7 +10,6 @@ import {
   View,
 } from 'react-native'
 import { Login } from './login.component'
-import { Logout } from './logout.component'
 
 const funArguments = [
   'agila',
@@ -34,7 +32,6 @@ const funArguments = [
 ]
 
 export const Auth = (props) => {
-  const { isLoggedIn } = useApi()
   const [argument] = useState(() => {
     const argNum = Math.floor(Math.random() * funArguments.length)
     return funArguments[argNum]
@@ -55,7 +52,7 @@ export const Auth = (props) => {
               <Text category="h6" style={styles.subtitle}>
                 Det {argument} alternativet
               </Text>
-              {isLoggedIn ? <Logout {...props} /> : <Login {...props} />}
+              <Login {...props} />
             </Layout>
           </View>
         </SafeAreaView>
