@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/kolplattformen/skolplattformen/compare/v1.4.1...v1.5.0) (2021-03-26)
+
+
+### Bug Fixes
+
+* clear AsyncStorage on logout ([c95e00e](https://github.com/kolplattformen/skolplattformen/commit/c95e00e0b654ba4666a57cfd0fd12b7dd123d77e))
+* separate navigation stacks ([2dea366](https://github.com/kolplattformen/skolplattformen/commit/2dea366427cc37bc47ddc853c7c34d2afa417c42))
+
+
+### Features
+
+* 🎸 Release 1.5.6 ([68f1f95](https://github.com/kolplattformen/skolplattformen/commit/68f1f951ca25d70ff9d2080c1bed1bdd7a461305))
+
 ## [1.4.1](https://github.com/kolplattformen/skolplattformen/compare/v1.4.0...v1.4.1) (2021-03-26)
 
 
