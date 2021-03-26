@@ -32,7 +32,7 @@ const { width } = Dimensions.get('window')
 
 export const Login = ({ navigation }) => {
   const { api, isLoggedIn } = useApi()
-  const [statusApi, setStatusApi] = useState(null)
+  const [cancelLoginRequest, setCancelLoginRequest] = useState(() => () => null)
   const [visible, showModal] = useState(false)
   const [error, setError] = useState(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
@@ -125,7 +125,7 @@ export const Login = ({ navigation }) => {
       setCachedSsn(ssn)
       setSocialSecurityNumber(ssn)
       const status = await api.login(ssn)
-      setStatusApi(status)
+      setCancelLoginRequest(() => () => status.cancel())
       if (status.token !== 'fake' && loginMethodIndex === 0) {
         openBankId(status.token)
       }
@@ -202,7 +202,7 @@ export const Login = ({ navigation }) => {
           <Button
             visible={!isLoggedIn}
             onPress={() => {
-              statusApi?.cancel()
+              cancelLoginRequest()
               showModal(false)
             }}
           >
