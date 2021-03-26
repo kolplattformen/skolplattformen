@@ -11,7 +11,7 @@ import {
   TopNavigationAction,
   useTheme,
 } from '@ui-kitten/components'
-import { ErrorMessage, Formik } from 'formik'
+import { Formik } from 'formik'
 import moment from 'moment'
 import Personnummer from 'personnummer'
 import React from 'react'

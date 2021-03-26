@@ -1,12 +1,10 @@
+import { CalendarItem } from '@skolplattformen/embedded-api'
 import { Button, MenuItem, OverflowMenu } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import RNCalendarEvents, {
-  CalendarEventWritable,
-} from 'react-native-calendar-events'
-import { CalendarOutlineIcon, MoreIcon } from './icon.component'
+import RNCalendarEvents from 'react-native-calendar-events'
 import Toast from 'react-native-simple-toast'
-import { CalendarItem } from '@skolplattformen/embedded-api'
+import { CalendarOutlineIcon, MoreIcon } from './icon.component'
 
 interface SaveToCalendarProps {
   event: CalendarItem

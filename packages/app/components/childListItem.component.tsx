@@ -8,11 +8,10 @@ import {
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import { Avatar, Button, Card, Text } from '@ui-kitten/components'
-import { RenderProp } from '@ui-kitten/components/devsupport'
 import { DateTime } from 'luxon'
 import moment from 'moment'
 import React from 'react'
-import { StyleSheet, View, ViewProps } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { studentName } from '../utils/peopleHelpers'
 import {
   CalendarOutlineIcon,
