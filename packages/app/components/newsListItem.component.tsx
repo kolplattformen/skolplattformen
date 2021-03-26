@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
+import { NewsItem } from '@skolplattformen/embedded-api'
 import { DateTime } from 'luxon'
 import React from 'react'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
@@ -6,22 +7,29 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 
+interface NewsListItemProps {
+  item: NewsItem
+}
+
 const { width } = Dimensions.get('window')
 
-export const NewsListItem = ({ item }) => {
+export const NewsListItem = ({ item }: NewsListItemProps) => {
   const navigation = useNavigation()
   const child = useChild()
+  const hasDate = item.published || item.modified
 
-  const displayDate = DateTime.fromISO(
-    item.published || item.modified
-  ).toRelative({ locale: 'sv', style: 'long' })
+  const displayDate = hasDate
+    ? DateTime.fromISO(hasDate).toRelative({ locale: 'sv', style: 'long' })
+    : null
 
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
       <View style={styles.card}>
-        {width > 320 && <Image src={item.fullImageUrl} style={styles.image} />}
+        {width > 320 && item.fullImageUrl ? (
+          <Image src={item.fullImageUrl} style={styles.image} />
+        ) : null}
         <View style={styles.text}>
           <View>
             <Text style={styles.title}>{item.header}</Text>
@@ -30,12 +38,7 @@ export const NewsListItem = ({ item }) => {
               {item.author && displayDate ? ' • ' : ''}
               {displayDate}
             </Text>
-            <Text
-              ellipsizeMode="tail"
-              numberOfLines={2}
-              category="s2"
-              style={styles.intro}
-            >
+            <Text ellipsizeMode="tail" numberOfLines={2} style={styles.intro}>
               {item.intro}
             </Text>
           </View>

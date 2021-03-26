@@ -1,11 +1,18 @@
 import { Button, MenuItem, OverflowMenu } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import RNCalendarEvents from 'react-native-calendar-events'
+import RNCalendarEvents, {
+  CalendarEventWritable,
+} from 'react-native-calendar-events'
 import { CalendarOutlineIcon, MoreIcon } from './icon.component'
 import Toast from 'react-native-simple-toast'
+import { CalendarItem } from '@skolplattformen/embedded-api'
 
-export const SaveToCalendar = ({ event }) => {
+interface SaveToCalendarProps {
+  event: CalendarItem
+}
+
+export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
   const [visible, setVisible] = React.useState(false)
 
   const renderToggleButton = () => (
@@ -21,7 +28,14 @@ export const SaveToCalendar = ({ event }) => {
     setVisible(false)
   }
 
-  const toast = (text) => Toast.showWithGravity(text, Toast.SHORT, Toast.BOTTOM)
+  const toast = (text: string) =>
+    Toast.showWithGravity(text, Toast.SHORT, Toast.BOTTOM)
+
+  function removeEmptyValues<T extends object>(obj: T) {
+    return Object.fromEntries(
+      Object.entries(obj).filter(([_, v]) => v != null)
+    ) as { [K in keyof T]: any }
+  }
 
   const requestPermissionsAndSave = async ({
     title,
@@ -29,21 +43,23 @@ export const SaveToCalendar = ({ event }) => {
     endDate,
     location,
     description: notes,
-  }) => {
+  }: CalendarItem) => {
     const auth = await RNCalendarEvents.requestPermissions()
 
     if (auth === 'authorized') {
       try {
         const details = {
-          startDate: new Date(startDate).toISOString(),
-          endDate: new Date(endDate).toISOString(),
+          startDate: startDate
+            ? new Date(startDate).toISOString()
+            : new Date().toISOString(),
+          endDate: endDate
+            ? new Date(endDate).toISOString()
+            : new Date().toISOString(),
           location,
           notes,
         }
 
-        const detailsWithoutEmpty = Object.fromEntries(
-          Object.entries(details).filter(([_, v]) => v != null)
-        )
+        const detailsWithoutEmpty = removeEmptyValues(details)
 
         await RNCalendarEvents.saveEvent(title, detailsWithoutEmpty)
 

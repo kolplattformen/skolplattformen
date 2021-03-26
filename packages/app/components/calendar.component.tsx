@@ -1,9 +1,10 @@
 import { useCalendar } from '@skolplattformen/api-hooks'
+import { CalendarItem } from '@skolplattformen/embedded-api'
 import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { SaveToCalendar } from './saveToCalendar.component'
@@ -13,16 +14,6 @@ moment.locale('sv')
 export const Calendar = () => {
   const child = useChild()
   const { data } = useCalendar(child)
-
-  const renderItem = ({ item }) => (
-    <ListItem
-      disabled={true}
-      title={`${item.title}`}
-      description={`${moment(item.startDate).fromNow()}`}
-      accessoryLeft={CalendarOutlineIcon}
-      accessoryRight={() => <SaveToCalendar event={item} />}
-    />
-  )
 
   return !data?.length ? (
     <View style={styles.emptyState}>
@@ -35,9 +26,19 @@ export const Calendar = () => {
   ) : (
     <List
       contentContainerStyle={styles.contentContainer}
-      data={data.sort((a, b) => b.startDate < a.startDate)}
+      data={data.sort((a, b) =>
+        a.startDate && b.startDate ? b.startDate.localeCompare(a.startDate) : 0
+      )}
       ItemSeparatorComponent={Divider}
-      renderItem={renderItem}
+      renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
+        <ListItem
+          disabled={true}
+          title={`${item.title}`}
+          description={`${moment(item.startDate).fromNow()}`}
+          accessoryLeft={CalendarOutlineIcon}
+          accessoryRight={() => <SaveToCalendar event={item} />}
+        />
+      )}
       style={styles.container}
     />
   )

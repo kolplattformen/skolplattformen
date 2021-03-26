@@ -1,10 +1,15 @@
+import { Notification as NotificationType } from '@skolplattformen/embedded-api'
 import { Card, Text } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ModalWebView } from './modalWebView.component'
 
-export const Notification = ({ item }) => {
+interface NotificationProps {
+  item: NotificationType
+}
+
+export const Notification = ({ item }: NotificationProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)

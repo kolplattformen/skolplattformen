@@ -1,3 +1,5 @@
+import { RouteProp } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { useNewsDetails } from '@skolplattformen/api-hooks'
 import {
   Divider,
@@ -12,13 +14,20 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { BackIcon } from './icon.component'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
+import { RootStackParamList } from './navigation.component'
 
-const displayDate = (date) =>
+interface NewsItemProps {
+  navigation: StackNavigationProp<RootStackParamList, 'NewsItem'>
+  route: RouteProp<RootStackParamList, 'NewsItem'>
+}
+
+const displayDate = (date: string | undefined) =>
   moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
 
-const dateIsValid = (date) => moment(date, moment.ISO_8601).isValid()
+const dateIsValid = (date: string | undefined) =>
+  moment(date, moment.ISO_8601).isValid()
 
-export const NewsItem = ({ navigation, route }) => {
+export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   const { newsItem, child } = route.params
   const { data } = useNewsDetails(child, newsItem)
 

@@ -7,7 +7,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
 import { CloseIcon } from './icon.component'
 
-export const ModalWebView = ({ url, onClose }) => {
+interface ModalWebViewProps {
+  url: string
+  onClose: () => void
+}
+
+export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
   const [headers, setHeaders] = useState()

@@ -1,4 +1,9 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import {
+  BottomTabBarOptions,
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs'
+import { NavigationProp, RouteProp } from '@react-navigation/core'
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -8,7 +13,7 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleProp, StyleSheet, TextProps } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
@@ -21,8 +26,19 @@ import {
   NewsIcon,
   NotificationsIcon,
 } from './icon.component'
+import { RootStackParamList } from './navigation.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
+
+interface ChildProps {
+  navigation: NavigationProp<RootStackParamList, 'Child'>
+  route: RouteProp<RootStackParamList, 'Child'>
+}
+
+interface TabTitleProps {
+  children: string
+  style?: StyleProp<TextProps>
+}
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -58,13 +74,16 @@ const ClassmatesScreen = () => {
   )
 }
 
-const TabTitle = ({ style, children }) => (
+const TabTitle = ({ style, children }: TabTitleProps) => (
   <Text adjustsFontSizeToFit numberOfLines={1} style={style}>
     {children}
   </Text>
 )
 
-const BottomTabBar = ({ navigation, state }) => (
+const BottomTabBar = ({
+  navigation,
+  state,
+}: BottomTabBarProps<BottomTabBarOptions>) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
@@ -100,8 +119,8 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
   </Navigator>
 )
 
-export const Child = ({ route, navigation }) => {
-  const { child, color, initialRouteName } = route.params
+export const Child = ({ route, navigation }: ChildProps) => {
+  const { child, initialRouteName } = route.params
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
@@ -112,7 +131,7 @@ export const Child = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ ...styles.wrap, color }}>
+    <SafeAreaView style={{ ...styles.wrap }}>
       <ChildProvider child={child}>
         <TopNavigation
           title={studentName(child.name)}
