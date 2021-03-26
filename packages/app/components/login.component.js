@@ -32,6 +32,7 @@ const { width } = Dimensions.get('window')
 
 export const Login = ({ navigation }) => {
   const { api, isLoggedIn } = useApi()
+  const [cancelLoginRequest, setCancelLoginRequest] = useState(() => () => null)
   const [visible, showModal] = useState(false)
   const [error, setError] = useState(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
@@ -124,17 +125,16 @@ export const Login = ({ navigation }) => {
       setCachedSsn(ssn)
       setSocialSecurityNumber(ssn)
       const status = await api.login(ssn)
+      setCancelLoginRequest(() => () => status.cancel())
       if (status.token !== 'fake' && loginMethodIndex === 0) {
         openBankId(status.token)
       }
       status.on('PENDING', () => console.log('BankID app not yet opened'))
       status.on('USER_SIGN', () => console.log('BankID app is open'))
-      status.on(
-        'ERROR',
-        () =>
-          setError('Inloggningen misslyckades, försök igen!') &&
-          showModal(false)
-      )
+      status.on('ERROR', () => {
+        setError('Inloggningen misslyckades, försök igen!')
+        showModal(false)
+      })
       status.on('OK', () => console.log('BankID ok'))
     } else {
       await api.login('201212121212')
@@ -199,7 +199,13 @@ export const Login = ({ navigation }) => {
         <Card disabled>
           <Text style={styles.bankIdLoading}>Väntar på BankID...</Text>
 
-          <Button visible={!isLoggedIn} onPress={() => showModal(false)}>
+          <Button
+            visible={!isLoggedIn}
+            onPress={() => {
+              cancelLoginRequest()
+              showModal(false)
+            }}
+          >
             Avbryt
           </Button>
         </Card>
