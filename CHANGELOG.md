@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/kolplattformen/skolplattformen/compare/v1.4.0...v1.4.1) (2021-03-26)
+
+
+### Bug Fixes
+
+* avbryt bankid-inloggning ([#209](https://github.com/kolplattformen/skolplattformen/issues/209)) ([4732de0](https://github.com/kolplattformen/skolplattformen/commit/4732de0819b5984b7a40ea21997cc0a61e481432))
+
 # [1.4.0](https://github.com/kolplattformen/skolplattformen/compare/v1.3.0...v1.4.0) (2021-03-26)
 
 
