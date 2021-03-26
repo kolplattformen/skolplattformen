@@ -9,7 +9,7 @@ import {
 } from '@skolplattformen/api-hooks'
 import { render } from '../../utils/testHelpers'
 import React from 'react'
-import { Children } from '../children.component.js'
+import { Children } from '../children.component'
 
 jest.mock('@skolplattformen/api-hooks')
 

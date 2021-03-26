@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '../../utils/testHelpers'
-import { Notification } from '../notification.component.js'
+import { Notification } from '../notification.component'
 import MockDate from 'mockdate'
 
 const defaultItem = {
