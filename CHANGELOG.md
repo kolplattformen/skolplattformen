@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/kolplattformen/skolplattformen/compare/v1.3.0...v1.4.0) (2021-03-26)
+
+
+### Features
+
+* **ios:** dimma skärmen när man växlar app ([#201](https://github.com/kolplattformen/skolplattformen/issues/201)) ([f1b0f4b](https://github.com/kolplattformen/skolplattformen/commit/f1b0f4b6f03a1216ef4325592454cb657b11ae02))
+
 # [1.3.0](https://github.com/kolplattformen/skolplattformen/compare/v1.2.1...v1.3.0) (2021-03-25)
 
 
