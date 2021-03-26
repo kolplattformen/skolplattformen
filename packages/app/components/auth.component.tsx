@@ -1,4 +1,3 @@
-import { NavigationProp } from '@react-navigation/native'
 import { Layout, Text } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import {
@@ -11,11 +10,6 @@ import {
   View,
 } from 'react-native'
 import { Login } from './login.component'
-import { SigninStackParamList } from './navigation.component'
-
-interface AuthProps {
-  navigation: NavigationProp<SigninStackParamList, 'Login'>
-}
 
 const funArguments = [
   'agila',
@@ -37,7 +31,7 @@ const funArguments = [
   'öppna',
 ]
 
-export const Auth = ({ navigation }: AuthProps) => {
+export const Auth = () => {
   const [argument] = useState(() => {
     const argNum = Math.floor(Math.random() * funArguments.length)
     return funArguments[argNum]
@@ -58,7 +52,7 @@ export const Auth = ({ navigation }: AuthProps) => {
               <Text category="h6" style={styles.subtitle}>
                 Det {argument} alternativet
               </Text>
-              <Login navigation={navigation} />
+              <Login />
             </Layout>
           </View>
         </SafeAreaView>

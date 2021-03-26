@@ -10,14 +10,15 @@ import {
 import Personnummer from 'personnummer'
 import React, { useEffect, useState } from 'react'
 import {
+  Dimensions,
   Image,
   Linking,
   Platform,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  Dimensions,
 } from 'react-native'
+import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
 import {
@@ -26,15 +27,16 @@ import {
   SecureIcon,
   SelectIcon,
 } from './icon.component'
-import ActionSheet from 'rn-actionsheet-module'
 
 const { width } = Dimensions.get('window')
 
-export const Login = ({ navigation }) => {
-  const { api, isLoggedIn } = useApi()
-  const [cancelLoginRequest, setCancelLoginRequest] = useState(() => () => null)
+export const Login = () => {
+  const { api } = useApi()
+  const [cancelLoginRequest, setCancelLoginRequest] = useState<
+    (() => Promise<void>) | (() => null)
+  >(() => () => null)
   const [visible, showModal] = useState(false)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
   const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
   const [valid, setValid] = useState(false)
@@ -55,11 +57,11 @@ export const Login = ({ navigation }) => {
       optionsAndroid: loginMethods,
       onCancelAndroidIndex: loginMethodIndex,
     }
-    ActionSheet(options, (index) => setLoginMethodIndex(index))
+    ActionSheet(options, (index: number) => setLoginMethodIndex(index))
   }
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
-      setCachedLoginMethodIndex(loginMethodIndex)
+      setCachedLoginMethodIndex(loginMethodIndex.toString())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginMethodIndex])
@@ -88,18 +90,20 @@ export const Login = ({ navigation }) => {
 
   useEffect(() => {
     api.on('login', loginHandler)
-    return () => api.off('login', loginHandler)
+    return () => {
+      api.off('login', loginHandler)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   /* Helpers */
-  const handleInput = (text) => {
+  const handleInput = (text: string) => {
     setValid(Personnummer.valid(text))
     setCachedSsn(text)
     setSocialSecurityNumber(text)
   }
 
-  const openBankId = (token) => {
+  const openBankId = (token: string) => {
     try {
       const redirect = loginMethodIndex === 0 ? encodeURIComponent(schema) : ''
       const bankIdUrl =
@@ -112,7 +116,7 @@ export const Login = ({ navigation }) => {
     }
   }
 
-  const startLogin = async (text) => {
+  const startLogin = async (text: string) => {
     if (loginMethodIndex < 2) {
       showModal(true)
       const ssn = Personnummer.parse(text).format(true)
@@ -135,12 +139,6 @@ export const Login = ({ navigation }) => {
     }
   }
 
-  const clearInput = (props) => (
-    <TouchableWithoutFeedback onPress={() => handleInput('')}>
-      <CloseOutlineIcon {...props} />
-    </TouchableWithoutFeedback>
-  )
-
   return (
     <>
       <Image source={require('../assets/boys.png')} style={styles.image} />
@@ -152,10 +150,14 @@ export const Login = ({ navigation }) => {
             value={socialSecurityNumber}
             style={styles.pnrInput}
             accessoryLeft={PersonIcon}
-            accessoryRight={clearInput}
+            accessoryRight={(props) => (
+              <TouchableWithoutFeedback onPress={() => handleInput('')}>
+                <CloseOutlineIcon {...props} />
+              </TouchableWithoutFeedback>
+            )}
             keyboardType="numeric"
             onSubmitEditing={(event) => startLogin(event.nativeEvent.text)}
-            caption={error?.message || ''}
+            caption={error || ''}
             onChangeText={(text) => handleInput(text)}
             placeholder="Ditt personnr"
           />
@@ -164,20 +166,18 @@ export const Login = ({ navigation }) => {
           <Button
             onPress={() => startLogin(socialSecurityNumber)}
             style={styles.loginButton}
-            appearence="ghost"
+            appearance="ghost"
             disabled={loginMethodIndex !== 2 && !valid}
             status="primary"
             accessoryLeft={SecureIcon}
             size="medium"
           >
-            <Text adjustsFontSizeToFit style={styles.loginButtonText}>
-              {loginMethods[loginMethodIndex]}
-            </Text>
+            {loginMethods[loginMethodIndex]}
           </Button>
           <Button
             onPress={selectLoginMethod}
             style={styles.loginMethodButton}
-            appearence="ghost"
+            appearance="ghost"
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
@@ -194,7 +194,6 @@ export const Login = ({ navigation }) => {
           <Text style={styles.bankIdLoading}>Väntar på BankID...</Text>
 
           <Button
-            visible={!isLoggedIn}
             onPress={() => {
               cancelLoginRequest()
               showModal(false)

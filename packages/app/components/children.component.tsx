@@ -23,6 +23,7 @@ import ActionSheet from 'rn-actionsheet-module'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface ChildrenProps {
   navigation: NavigationProp<RootStackParamList, 'Children'>
@@ -41,7 +42,7 @@ export const Children = ({ navigation }: ChildrenProps) => {
     switch (index) {
       case 0:
         api.logout()
-        navigation.navigate('Login')
+        AsyncStorage.clear()
     }
   }
 

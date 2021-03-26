@@ -1,3 +1,4 @@
+import { Classmate } from '@skolplattformen/embedded-api'
 import {
   Button,
   MenuGroup,
@@ -15,7 +16,17 @@ import {
   SMSIcon,
 } from './icon.component'
 
-export const ContactMenu = ({ contact, selected, setSelected }) => {
+interface ContactMenuProps {
+  contact: Classmate
+  selected: boolean
+  setSelected: (value?: number | null) => void
+}
+
+export const ContactMenu = ({
+  contact,
+  selected,
+  setSelected,
+}: ContactMenuProps) => {
   const [visible, setVisible] = React.useState(selected)
 
   const renderToggleButton = () => (
@@ -32,7 +43,7 @@ export const ContactMenu = ({ contact, selected, setSelected }) => {
     setSelected(null)
   }
 
-  const shouldDisplay = (option) => (option ? 'flex' : 'none')
+  const shouldDisplay = (option?: string) => (option ? 'flex' : 'none')
 
   return (
     <OverflowMenu

@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { NavigationProp, RouteProp } from '@react-navigation/native'
 import {
   Button,
   CheckBox,
@@ -10,7 +11,7 @@ import {
   TopNavigationAction,
   useTheme,
 } from '@ui-kitten/components'
-import { Formik } from 'formik'
+import { ErrorMessage, Formik } from 'formik'
 import moment from 'moment'
 import Personnummer from 'personnummer'
 import React from 'react'
@@ -20,23 +21,32 @@ import * as Yup from 'yup'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
 import { BackIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
+
+interface AbsenceProps {
+  navigation: NavigationProp<RootStackParamList, 'Absence'>
+  route: RouteProp<RootStackParamList, 'Absence'>
+}
+
+interface AbsenceFormValues {
+  displayStartTimePicker: boolean
+  displayEndTimePicker: boolean
+  socialSecurityNumber: string
+  isFullDay: boolean
+  startTime: moment.Moment
+  endTime: moment.Moment
+}
 
 const AbsenceSchema = Yup.object().shape({
   socialSecurityNumber: Yup.string()
     .required('Personnummer saknas')
     .test('is-valid', 'Personnumret är ogiltigt', (value) =>
-      Personnummer.valid(value)
+      value ? Personnummer.valid(value) : true
     ),
   isFullDay: Yup.bool().required(),
-  startTime: Yup.string().when('isFullDay', (isFullDay, schema) =>
-    isFullDay ? schema : schema.required('Starttid saknas')
-  ),
-  endTime: Yup.string().when('isFullDay', (isFullDay, schema) =>
-    isFullDay ? schema : schema.required('Sluttid saknas')
-  ),
 })
 
-const Absence = ({ route, navigation }) => {
+const Absence = ({ route, navigation }: AbsenceProps) => {
   const { sendSMS } = useSMS()
   const { child } = route.params
   const theme = useTheme()
@@ -47,11 +57,20 @@ const Absence = ({ route, navigation }) => {
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
       const ssn = await AsyncStorage.getItem(`@childssn.${child.id}`)
-      setSocialSecurityNumber(ssn)
+      setSocialSecurityNumber(ssn || '')
     }
 
     getSocialSecurityNumber()
   }, [child])
+
+  const initialValues: AbsenceFormValues = {
+    displayStartTimePicker: false,
+    displayEndTimePicker: false,
+    socialSecurityNumber: socialSecurityNumber || '',
+    isFullDay: true,
+    startTime: moment().hours(Math.max(8, new Date().getHours())).minute(0),
+    endTime: maximumDate,
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -72,16 +91,7 @@ const Absence = ({ route, navigation }) => {
         <Formik
           enableReinitialize
           validationSchema={AbsenceSchema}
-          initialValues={{
-            displayStartTimePicker: false,
-            displayEndTimePicker: false,
-            socialSecurityNumber: socialSecurityNumber || '',
-            isFullDay: true,
-            startTime: moment()
-              .hours(Math.max(8, new Date().getHours()))
-              .minute(0),
-            endTime: maximumDate,
-          }}
+          initialValues={initialValues}
           onSubmit={async (values) => {
             const ssn = Personnummer.parse(values.socialSecurityNumber).format()
 
@@ -110,7 +120,8 @@ const Absence = ({ route, navigation }) => {
             touched,
             errors,
           }) => {
-            const hasError = (field) => errors[field] && touched[field]
+            const hasError = (field: keyof typeof values) =>
+              errors[field] && touched[field]
 
             return (
               <View>
@@ -171,11 +182,6 @@ const Absence = ({ route, navigation }) => {
                           setFieldValue('displayStartTimePicker', false)
                         }
                       />
-                      {hasError('startTime') && (
-                        <Text style={{ color: theme['color-danger-700'] }}>
-                          {errors.startTime}
-                        </Text>
-                      )}
                     </View>
                     <View style={styles.spacer} />
                     <View style={styles.inputHalf}>
@@ -207,11 +213,6 @@ const Absence = ({ route, navigation }) => {
                           setFieldValue('displayEndTimePicker', false)
                         }
                       />
-                      {hasError('endTime') && (
-                        <Text style={{ color: theme['color-danger-700'] }}>
-                          {errors.endTime}
-                        </Text>
-                      )}
                     </View>
                   </View>
                 )}
