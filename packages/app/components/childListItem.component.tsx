@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
   useClassmates,
+  useMenu,
   useNews,
   useNotifications,
   useSchedule,
@@ -15,6 +16,7 @@ import { StyleSheet, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import {
+  BookOpenIcon,
   CalendarOutlineIcon,
   ClassIcon,
   NewsIcon,
@@ -48,6 +50,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     moment().toISOString(),
     moment().add(7, 'days').toISOString()
   )
+  const { status: menuStatus } = useMenu(child)
 
   const notificationsThisWeek = notifications.filter(({ dateCreated }) => {
     dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
@@ -135,6 +138,19 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       >
         {`${(notifications || []).length}`}
       </Button>
+      <Button
+        style={[styles.item, styles[menuStatus]]}
+        status="control"
+        size="small"
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Meny',
+          })
+        }
+        accessoryLeft={BookOpenIcon}
+      />
       <Button
         style={[styles.item, styles[classmatesStatus]]}
         status="control"
