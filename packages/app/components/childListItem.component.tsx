@@ -70,7 +70,8 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     const abbrevations = {
       G: 'Gymnasiet', // ? i'm guessing here
       GR: 'Grundskolan',
-      F: 'Förskoleklass',
+      F: 'Fritids',
+      FS: 'Förskola',
     }
 
     return child.status
