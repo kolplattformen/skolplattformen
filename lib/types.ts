@@ -156,6 +156,20 @@ export interface MenuItem {
   description: string
 }
 
+export interface MenuList {
+  selectedWeek: number,
+  menus: MenuListItem[]
+}
+
+export interface MenuListItem {
+  'week': string,
+  'mon': string,
+  'tue': string,
+  'wed': string,
+  'thu': string,
+  'fri': string
+}
+
 export interface User {
   personalNumber?: string
   isAuthenticated?: boolean
