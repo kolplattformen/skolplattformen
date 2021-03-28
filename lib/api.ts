@@ -117,6 +117,30 @@ export class Api extends EventEmitter {
     return status
   }
 
+  public async setSessionCookie(sessionCookie : string) : Promise<void> {
+    // Manually set cookie in this call and let the cookieManager
+    // handle it from here
+    // If we put it into the cookieManager manually, we get duplicate cookies
+    const url = routes.loginCookie
+    await this.fetch('login-cookie', url, {
+      headers: {
+        cookie: sessionCookie,
+      },
+      redirect: 'manual', // Important! Turn off redirect following. We can get into a redirect loop without this.
+    })
+
+    const user = await this.getUser()
+    if (!user.isAuthenticated) {
+      throw new Error('Session cookie is expired')
+    }
+
+    await this.retrieveXsrfToken()
+    await this.retrieveApiKey()
+
+    this.isLoggedIn = true
+    this.emit('login')
+  }
+
   private async retrieveSessionCookie(): Promise<void> {
     const url = routes.loginCookie
     await this.fetch('login-cookie', url)
@@ -128,7 +152,7 @@ export class Api extends EventEmitter {
     const response = await this.fetch('hemPage', url, session)
     const text = await response.text()
     const doc = html.parse(decode(text))
-    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
+    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]')?.getAttribute('value') || ''
     const scriptTags = doc.querySelectorAll('script')
     const childControllerScriptTag = scriptTags.find((elem) => {
       const srcAttr = elem.getAttribute('src')

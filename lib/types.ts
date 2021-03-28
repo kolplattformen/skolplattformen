@@ -20,7 +20,10 @@ export interface CookieManager {
 export interface RequestInit {
   headers?: any
   method?: string
-  body?: string
+  body?: string,
+  /**
+   * Set to `manual` to extract redirect headers, `error` to reject redirect */
+  redirect?: string,
 }
 
 export interface Headers {

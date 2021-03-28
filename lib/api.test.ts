@@ -19,6 +19,7 @@ describe('api', () => {
       headers,
     }
     fetch = jest.fn().mockResolvedValue(response)
+    response.text.mockResolvedValue('<html></html>')
     CookieManager.clearAll()
     api = init(fetch, CookieManager)
   })

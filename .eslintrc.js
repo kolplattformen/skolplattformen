@@ -3,7 +3,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
-    project: ['./tsconfig.json']
+    project: ['./tsconfig.eslint.json']
   },
   extends: [
     'airbnb-typescript/base',

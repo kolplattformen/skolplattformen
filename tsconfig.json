@@ -5,7 +5,8 @@
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true
   },
   "include": [
     "lib"
