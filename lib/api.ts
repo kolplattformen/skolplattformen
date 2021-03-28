@@ -128,7 +128,7 @@ export class Api extends EventEmitter {
     const response = await this.fetch('hemPage', url, session)
     const text = await response.text()
     const doc = html.parse(decode(text))
-    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]').getAttribute('value') || ''
+    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]')?.getAttribute('value') || ''
     const scriptTags = doc.querySelectorAll('script')
     const childControllerScriptTag = scriptTags.find((elem) => {
       const srcAttr = elem.getAttribute('src')
