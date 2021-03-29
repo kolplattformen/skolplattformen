@@ -45,9 +45,16 @@ const MEDIA_DATA = [
   },
   {
     title: 'Stockholms stad sätter krokben för föräldrarnas skolplattform',
-    source: 'DI Digital',
+    source: 'Di Digital',
     link:
       'https://digital.di.se/artikel/stockholms-stad-satter-krokben-for-foraldrarnas-skolplattform',
+      date: '2021-03-29',
+  },
+  {
+    title: 'De utmanar Stockholms stads kritiserade Skolplattformen: ”Stockholm stad stökar bara till”',
+    source: 'Di TV',
+    link:
+      'https://www.expressen.se/tv/ditv/ekonomistudion/de-utmanar-skolplattformen/',
       date: '2021-03-29',
   },
 ]
