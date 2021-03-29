@@ -12,7 +12,6 @@ target 'app' do
     :hermes_enabled => true
   )
 
-  pod 'react-native-simple-toast', :path => '../node_modules/react-native-simple-toast'
 
   target 'appTests' do
     inherit! :complete

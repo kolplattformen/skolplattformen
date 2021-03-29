@@ -12,6 +12,7 @@ const HomePage = () => {
   return (
     <>
       <Banner />
+      <Media />
       <Features />
       <FunFacts />
       <CtaTwo />
@@ -19,7 +20,6 @@ const HomePage = () => {
       <AppShots />
       <Pricing />
       <Testimonials />
-      <Media />
     </>
   )
 }

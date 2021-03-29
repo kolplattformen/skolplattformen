@@ -10,8 +10,10 @@ import {
 import { render } from '../../utils/testHelpers'
 import React from 'react'
 import { Children } from '../children.component'
+import { useNavigation } from '@react-navigation/native'
 
 jest.mock('@skolplattformen/api-hooks')
+jest.mock('@react-navigation/native')
 
 const setup = () => {
   return render(<Children />)
@@ -27,6 +29,7 @@ beforeEach(() => {
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
   useClassmates.mockReturnValueOnce({ data: [], status: 'loaded' })
   useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useNavigation.mockReturnValue({ navigate: jest.fn() })
 })
 
 test('renders loading state', () => {

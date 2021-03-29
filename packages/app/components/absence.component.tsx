@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { NavigationProp, RouteProp } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import {
   Button,
   CheckBox,
@@ -23,10 +24,8 @@ import { useSMS } from '../utils/SMS'
 import { BackIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 
-interface AbsenceProps {
-  navigation: NavigationProp<RootStackParamList, 'Absence'>
-  route: RouteProp<RootStackParamList, 'Absence'>
-}
+type AbsenceNavigationProp = StackNavigationProp<RootStackParamList, 'Absence'>
+type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
 
 interface AbsenceFormValues {
   displayStartTimePicker: boolean
@@ -46,7 +45,9 @@ const AbsenceSchema = Yup.object().shape({
   isFullDay: Yup.bool().required(),
 })
 
-const Absence = ({ route, navigation }: AbsenceProps) => {
+const Absence = () => {
+  const navigation = useNavigation<AbsenceNavigationProp>()
+  const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
   const theme = useTheme()
