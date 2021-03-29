@@ -4,4 +4,4 @@ import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/asy
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
 
 // Silence useNativeDriver error
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
