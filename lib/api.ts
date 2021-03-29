@@ -341,11 +341,29 @@ export class Api extends EventEmitter {
   public async getMenu(child: Child): Promise<MenuItem[]> {
     if (this.isFake) return fakeResponse(fake.menu(child))
 
-    const url = routes.menu(child.id)
+    const menuService = await this.getMenuChoice(child)
+    if (menuService === 'rss') {
+      const url = routes.menuRss(child.id)
+      const session = this.getRequestInit()
+      const response = await this.fetch('menu-rss', url, session)
+      const data = await response.json()
+      return parse.menu(data)
+    }
+
+    const url = routes.menuList(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('menu', url, session)
+    const response = await this.fetch('menu-list', url, session)
     const data = await response.json()
-    return parse.menu(data)
+    return parse.menuList(data)
+  }
+
+  private async getMenuChoice(child : Child) : Promise<string> {
+    const url = routes.menuChoice(child.id)
+    const session = this.getRequestInit()
+    const response = await this.fetch('menu-choice', url, session)
+    const data = await response.json()
+    const etjanstResponse = parse.etjanst(data)
+    return etjanstResponse
   }
 
   public async getNotifications(child: Child): Promise<Notification[]> {

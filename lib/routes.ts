@@ -36,8 +36,16 @@ export const notifications = (childId: string) => (
   `https://etjanst.stockholm.se/vardnadshavare/inloggad2/Overview/GetNotification?childId=${childId}`
 )
 
-export const menu = (childId: string) => (
+export const menuRss = (childId: string) => (
   `https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelRSS?childId=${childId}`
+)
+
+export const menuList = (childId: string) => (
+  `https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelList?childId=${childId}`
+)
+
+export const menuChoice = (childId: string) => (
+  `https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelChoice?childId=${childId}`
 )
 
 export const schedule = (childId: string, fromDate: string, endDate: string) => (
