@@ -1,4 +1,4 @@
-import { NavigationProp } from '@react-navigation/core'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
@@ -22,19 +22,13 @@ import {
 import ActionSheet from 'rn-actionsheet-module'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
-import { RootStackParamList } from './navigation.component'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
-interface ChildrenProps {
-  navigation: NavigationProp<RootStackParamList, 'Children'>
-}
 
 const { width } = Dimensions.get('window')
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 const settingsOptions = ['Logga ut', 'Avbryt']
 
-export const Children = ({ navigation }: ChildrenProps) => {
+export const Children = () => {
   const { api } = useApi()
   const { data: childList, status } = useChildList()
 
@@ -92,7 +86,6 @@ export const Children = ({ navigation }: ChildrenProps) => {
                 child={child}
                 color={colors[index % colors.length]}
                 key={child.id}
-                navigation={navigation}
               />
             )}
           />
