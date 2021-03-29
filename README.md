@@ -47,7 +47,7 @@ We are both an open source project and still charge money for our app. Isn't thi
 
 This initiative is started by frustrated parents and we have no affiliation with Stockholm Stad. We just want to find and read our newsletters a little bit easier and register sick-leave more convenient.
 
-If you are offended by this initiative, please don't - we come in peas.
+If you are offended by this initiative, please don't - we come in peace.
 
 # Contributors
 
