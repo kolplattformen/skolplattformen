@@ -43,6 +43,13 @@ const MEDIA_DATA = [
       'https://www.mitti.se/nyheter/strid-mellan-foraldrar-och-staden-om-skolplattforms-app/repucx!1Pdq1EzU1bVp5ns0Fuykjg/',
       date: '2021-03-29',
   },
+  {
+    title: 'Stockholms stad sätter krokben för föräldrarnas skolplattform',
+    source: 'DI Digital',
+    link:
+      'https://digital.di.se/artikel/stockholms-stad-satter-krokben-for-foraldrarnas-skolplattform',
+      date: '2021-03-29',
+  },
 ]
 
 const Media = () => {
@@ -50,7 +57,7 @@ const Media = () => {
     <section className="max-w-6xl px-5 py-8 mx-auto md:px-0 md:py-32">
       <SectionTitle title="Öppna Skolplattformen i media" />
       <ul className="flex flex-col items-center max-w-xl mx-auto space-y-5">
-        {MEDIA_DATA.sort(
+        {MEDIA_DATA.reverse().sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         ).map((article) => (
           <li className="w-full" key={article.title}>
