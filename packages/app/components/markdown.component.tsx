@@ -10,7 +10,7 @@ interface MarkdownProps {
 }
 
 const rules: RenderRules = {
-  image: (node) => {
+  image: node => {
     const { src } = node.attributes
     const url = src.startsWith('/')
       ? `https://elevstockholm.sharepoint.com${src}`

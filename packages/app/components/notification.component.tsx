@@ -23,7 +23,7 @@ export const Notification = ({ item }: NotificationProps) => {
       <Card
         style={styles.card}
         onPress={open}
-        header={(headerProps) => (
+        header={headerProps => (
           <View {...headerProps}>
             <Text style={styles.title}>{item.sender}</Text>
             <Text style={styles.subtitle}>
