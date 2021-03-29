@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/kolplattformen/skolplattformen/compare/v1.7.0...v1.8.0) (2021-03-29)
+
+
+### Features
+
+* 🎸 Di TV ([#221](https://github.com/kolplattformen/skolplattformen/issues/221)) ([7dd778a](https://github.com/kolplattformen/skolplattformen/commit/7dd778a384e216623ea47c6c5b5027d3018b9b7d))
+
 # [1.7.0](https://github.com/kolplattformen/skolplattformen/compare/v1.6.0...v1.7.0) (2021-03-29)
 
 
