@@ -18,6 +18,8 @@ jobs:
           node-version: 14
       - name: Install dependencies
         run: yarn install --immutable --silent --non-interactive 2> >(grep -v warning 1>&2)
+      - name: Audit
+        run: yarn audit
       - name: Build
         run: yarn build
       - name: Release
