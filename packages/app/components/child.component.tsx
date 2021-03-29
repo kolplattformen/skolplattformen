@@ -3,7 +3,8 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
-import { NavigationProp, RouteProp } from '@react-navigation/core'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -30,10 +31,8 @@ import { RootStackParamList } from './navigation.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 
-interface ChildProps {
-  navigation: NavigationProp<RootStackParamList, 'Child'>
-  route: RouteProp<RootStackParamList, 'Child'>
-}
+type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
+type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
 
 interface TabTitleProps {
   children: string
@@ -119,7 +118,9 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
   </Navigator>
 )
 
-export const Child = ({ route, navigation }: ChildProps) => {
+export const Child = () => {
+  const navigation = useNavigation<ChildNavigationProp>()
+  const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
 
   const BackAction = () => (

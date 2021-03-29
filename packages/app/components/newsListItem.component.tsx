@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { NewsItem } from '@skolplattformen/embedded-api'
 import { DateTime } from 'luxon'
 import React from 'react'
@@ -6,15 +7,21 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
+import { RootStackParamList } from './navigation.component'
 
 interface NewsListItemProps {
   item: NewsItem
 }
 
+type NewsListItemNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'NewsItem'
+>
+
 const { width } = Dimensions.get('window')
 
 export const NewsListItem = ({ item }: NewsListItemProps) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
   const hasDate = item.published || item.modified
 

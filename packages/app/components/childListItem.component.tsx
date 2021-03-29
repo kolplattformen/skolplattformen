@@ -1,4 +1,5 @@
-import { NavigationProp } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
   useClassmates,
@@ -24,17 +25,18 @@ import { RootStackParamList } from './navigation.component'
 interface ChildListItemProps {
   child: Child
   color: string
-  navigation: NavigationProp<RootStackParamList, 'Children'>
 }
 
-export const ChildListItem = ({
-  navigation,
-  child,
-  color,
-}: ChildListItemProps) => {
+type ChildListItemNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Children'
+>
+
+export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
+  const navigation = useNavigation<ChildListItemNavigationProp>()
   const { data: notifications, status: notificationsStatus } = useNotifications(
     child
   )
