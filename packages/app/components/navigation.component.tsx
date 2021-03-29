@@ -9,6 +9,22 @@ import { Child } from './child.component'
 import { Children } from './children.component'
 import { Auth } from './auth.component'
 import { NewsItem } from './newsItem.component'
+import {
+  Child as ChildType,
+  NewsItem as NewsItemType,
+} from '@skolplattformen/embedded-api'
+
+export type RootStackParamList = {
+  Login: undefined
+  Children: undefined
+  Child: {
+    child: ChildType
+    color: string
+    initialRouteName?: string
+  }
+  NewsItem: { newsItem: NewsItemType; child: ChildType }
+  Absence: { child: ChildType }
+}
 
 const { Navigator, Screen } = createStackNavigator()
 

@@ -1,4 +1,6 @@
+import { NavigationProp } from '@react-navigation/core'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
+import { Child } from '@skolplattformen/embedded-api'
 import {
   Divider,
   Layout,
@@ -9,27 +11,38 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import React from 'react'
-import { Dimensions, Image, SafeAreaView, StyleSheet, View } from 'react-native'
+import {
+  Dimensions,
+  Image,
+  ListRenderItemInfo,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native'
 import ActionSheet from 'rn-actionsheet-module'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
+interface ChildrenProps {
+  navigation: NavigationProp<RootStackParamList, 'Children'>
+}
 
 const { width } = Dimensions.get('window')
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 const settingsOptions = ['Logga ut', 'Avbryt']
 
-export const Children = ({ navigation }) => {
+export const Children = ({ navigation }: ChildrenProps) => {
   const { api } = useApi()
   const { data: childList, status } = useChildList()
 
-  const handleSettingSelection = (index) => {
+  const handleSettingSelection = (index: number) => {
     switch (index) {
       case 0:
         api.logout()
         AsyncStorage.clear()
-        navigation.navigate('Login')
     }
   }
 
@@ -74,7 +87,7 @@ export const Children = ({ navigation }) => {
                 />
               </View>
             }
-            renderItem={({ item: child, index }) => (
+            renderItem={({ item: child, index }: ListRenderItemInfo<Child>) => (
               <ChildListItem
                 child={child}
                 color={colors[index % colors.length]}

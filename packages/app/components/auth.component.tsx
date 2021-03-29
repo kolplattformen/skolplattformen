@@ -31,7 +31,7 @@ const funArguments = [
   'öppna',
 ]
 
-export const Auth = (props) => {
+export const Auth = () => {
   const [argument] = useState(() => {
     const argNum = Math.floor(Math.random() * funArguments.length)
     return funArguments[argNum]
@@ -52,7 +52,7 @@ export const Auth = (props) => {
               <Text category="h6" style={styles.subtitle}>
                 Det {argument} alternativet
               </Text>
-              <Login {...props} />
+              <Login />
             </Layout>
           </View>
         </SafeAreaView>

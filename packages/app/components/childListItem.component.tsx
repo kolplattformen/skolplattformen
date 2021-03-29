@@ -1,3 +1,4 @@
+import { NavigationProp } from '@react-navigation/core'
 import {
   useCalendar,
   useClassmates,
@@ -5,6 +6,7 @@ import {
   useNotifications,
   useSchedule,
 } from '@skolplattformen/api-hooks'
+import { Child } from '@skolplattformen/embedded-api'
 import { Avatar, Button, Card, Text } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 import moment from 'moment'
@@ -17,8 +19,19 @@ import {
   NewsIcon,
   NotificationsIcon,
 } from './icon.component'
+import { RootStackParamList } from './navigation.component'
 
-export const ChildListItem = ({ navigation, child, color }) => {
+interface ChildListItemProps {
+  child: Child
+  color: string
+  navigation: NavigationProp<RootStackParamList, 'Children'>
+}
+
+export const ChildListItem = ({
+  navigation,
+  child,
+  color,
+}: ChildListItemProps) => {
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
@@ -30,12 +43,12 @@ export const ChildListItem = ({ navigation, child, color }) => {
   const { data: calendar, status: calendarStatus } = useCalendar(child)
   const { data: schedule } = useSchedule(
     child,
-    DateTime.local(),
-    DateTime.local().plus({ days: 7 })
+    DateTime.local().toISO(),
+    DateTime.local().plus({ days: 7 }).toISO()
   )
 
   const notificationsThisWeek = notifications.filter((n) =>
-    moment(n).isSame('week')
+    moment(n.dateCreated).isSame('week')
   )
 
   const scheduleAndCalendarThisWeek = [
@@ -55,23 +68,20 @@ export const ChildListItem = ({ navigation, child, color }) => {
       GR: 'Grundskolan',
       F: 'Förskoleklass',
     }
+
     return child.status
-      .split(';')
-      .map((status) => abbrevations[status] || status)
-      .join(', ')
+      ? child.status
+          .split(';')
+          .map((status) => {
+            const statusAsAbbreviation = status as keyof typeof abbrevations
+
+            return abbrevations[statusAsAbbreviation] || status
+          })
+          .join(', ')
+      : null
   }
 
-  const Header = (props) => (
-    <View {...props} style={styles.cardHeader}>
-      <View style={styles.cardAvatar}>
-        <Avatar source={require('../assets/avatar.png')} shape="square" />
-      </View>
-      <View style={styles.cardHeaderText}>
-        <Text category="h6">{studentName(child.name)}</Text>
-        <Text category="s1">{`${getClassName()}`}</Text>
-      </View>
-    </View>
-  )
+  const className = getClassName()
 
   const Footer = () => (
     <View style={styles.itemFooter}>
@@ -143,17 +153,22 @@ export const ChildListItem = ({ navigation, child, color }) => {
       style={styles.card}
       appearance="filled"
       status={color}
-      header={Header}
+      header={(props) => (
+        <View {...props} style={styles.cardHeader}>
+          <View style={styles.cardAvatar}>
+            <Avatar source={require('../assets/avatar.png')} shape="square" />
+          </View>
+          <View style={styles.cardHeaderText}>
+            <Text category="h6">{studentName(child.name)}</Text>
+            {className ? <Text category="s1">{className}</Text> : null}
+          </View>
+        </View>
+      )}
       footer={Footer}
       onPress={() => navigation.navigate('Child', { child, color })}
     >
       {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
-        <Text
-          appearance="hint"
-          category="c1"
-          key={i}
-          style={{ textColor: styles.loaded(notificationsStatus) }}
-        >
+        <Text appearance="hint" category="c1" key={i} style={styles.loaded}>
           {`${calendarItem.title}`}
         </Text>
       ))}
@@ -213,4 +228,5 @@ const styles = StyleSheet.create({
   error: {
     color: '#500',
   },
+  pending: {},
 })
