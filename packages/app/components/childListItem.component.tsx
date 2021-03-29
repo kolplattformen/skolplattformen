@@ -49,14 +49,14 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     DateTime.local().plus({ days: 7 }).toISO()
   )
 
-  const notificationsThisWeek = notifications.filter(n =>
+  const notificationsThisWeek = notifications.filter((n) =>
     moment(n.dateCreated).isSame('week')
   )
 
   const scheduleAndCalendarThisWeek = [
     ...(calendar ?? []),
     ...(schedule ?? []),
-  ].filter(a => moment(a.startDate).isSame('week'))
+  ].filter((a) => moment(a.startDate).isSame('week'))
 
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates. let's pick the first one and select theirs class
@@ -74,7 +74,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     return child.status
       ? child.status
           .split(';')
-          .map(status => {
+          .map((status) => {
             const statusAsAbbreviation = status as keyof typeof abbrevations
 
             return abbrevations[statusAsAbbreviation] || status
@@ -155,7 +155,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       style={styles.card}
       appearance="filled"
       status={color}
-      header={props => (
+      header={(props) => (
         <View {...props} style={styles.cardHeader}>
           <View style={styles.cardAvatar}>
             <Avatar source={require('../assets/avatar.png')} shape="square" />

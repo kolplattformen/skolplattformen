@@ -150,15 +150,15 @@ export const Login = () => {
             value={socialSecurityNumber}
             style={styles.pnrInput}
             accessoryLeft={PersonIcon}
-            accessoryRight={props => (
+            accessoryRight={(props) => (
               <TouchableWithoutFeedback onPress={() => handleInput('')}>
                 <CloseOutlineIcon {...props} />
               </TouchableWithoutFeedback>
             )}
             keyboardType="numeric"
-            onSubmitEditing={event => startLogin(event.nativeEvent.text)}
+            onSubmitEditing={(event) => startLogin(event.nativeEvent.text)}
             caption={error || ''}
-            onChangeText={text => handleInput(text)}
+            onChangeText={(text) => handleInput(text)}
             placeholder="Ditt personnr"
           />
         )}

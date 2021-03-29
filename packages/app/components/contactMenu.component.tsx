@@ -52,7 +52,7 @@ export const ContactMenu = ({
       backdropStyle={styles.backdrop}
       onBackdropPress={handleBackdropPress}
     >
-      {contact.guardians.map(guardian => {
+      {contact.guardians.map((guardian) => {
         const { address, email, mobile } = guardian
 
         return (

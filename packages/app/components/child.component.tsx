@@ -85,22 +85,22 @@ const BottomTabBar = ({
 }: BottomTabBarProps<BottomTabBarOptions>) => (
   <BottomNavigation
     selectedIndex={state.index}
-    onSelect={index => navigation.navigate(state.routeNames[index])}
+    onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
     <BottomNavigationTab
-      title={props => <TabTitle {...props}>Nyheter</TabTitle>}
+      title={(props) => <TabTitle {...props}>Nyheter</TabTitle>}
       icon={NewsIcon}
     />
     <BottomNavigationTab
-      title={props => <TabTitle {...props}>Aviseringar</TabTitle>}
+      title={(props) => <TabTitle {...props}>Aviseringar</TabTitle>}
       icon={NotificationsIcon}
     />
     <BottomNavigationTab
-      title={props => <TabTitle {...props}>Kalender</TabTitle>}
+      title={(props) => <TabTitle {...props}>Kalender</TabTitle>}
       icon={CalendarOutlineIcon}
     />
     <BottomNavigationTab
-      title={props => <TabTitle {...props}>Klassen</TabTitle>}
+      title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
       icon={ClassIcon}
     />
   </BottomNavigation>
@@ -109,7 +109,7 @@ const BottomTabBar = ({
 const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
   <Navigator
     initialRouteName={initialRouteName}
-    tabBar={props => <BottomTabBar {...props} />}
+    tabBar={(props) => <BottomTabBar {...props} />}
   >
     <Screen name="Nyheter" component={NewsScreen} />
     <Screen name="Notifieringar" component={NotificationsScreen} />

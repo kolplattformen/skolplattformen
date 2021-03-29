@@ -15,7 +15,7 @@ export const NewsList = () => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
         data={data}
-        renderItem={info => (
+        renderItem={(info) => (
           <NewsListItem key={info.item.id} item={info.item} />
         )}
       />

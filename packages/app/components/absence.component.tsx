@@ -39,7 +39,7 @@ interface AbsenceFormValues {
 const AbsenceSchema = Yup.object().shape({
   socialSecurityNumber: Yup.string()
     .required('Personnummer saknas')
-    .test('is-valid', 'Personnumret är ogiltigt', value =>
+    .test('is-valid', 'Personnumret är ogiltigt', (value) =>
       value ? Personnummer.valid(value) : true
     ),
   isFullDay: Yup.bool().required(),
@@ -93,7 +93,7 @@ const Absence = () => {
           enableReinitialize
           validationSchema={AbsenceSchema}
           initialValues={initialValues}
-          onSubmit={async values => {
+          onSubmit={async (values) => {
             const ssn = Personnummer.parse(values.socialSecurityNumber).format()
 
             if (values.isFullDay) {
@@ -147,7 +147,7 @@ const Absence = () => {
                 <View style={styles.field}>
                   <CheckBox
                     checked={values.isFullDay}
-                    onChange={checked => setFieldValue('isFullDay', checked)}
+                    onChange={(checked) => setFieldValue('isFullDay', checked)}
                   >
                     Heldag
                   </CheckBox>
@@ -175,7 +175,7 @@ const Absence = () => {
                         minimumDate={minumumDate.toDate()}
                         minuteInterval={10}
                         mode="time"
-                        onConfirm={date => {
+                        onConfirm={(date) => {
                           setFieldValue('startTime', date)
                           setFieldValue('displayStartTimePicker', false)
                         }}
@@ -206,7 +206,7 @@ const Absence = () => {
                         minimumDate={minumumDate.toDate()}
                         minuteInterval={10}
                         mode="time"
-                        onConfirm={date => {
+                        onConfirm={(date) => {
                           setFieldValue('endTime', date)
                           setFieldValue('displayEndTimePicker', false)
                         }}

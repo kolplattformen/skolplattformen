@@ -14,7 +14,9 @@ export const NotificationsList = () => {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       data={data}
-      renderItem={info => <Notification key={info.item.id} item={info.item} />}
+      renderItem={(info) => (
+        <Notification key={info.item.id} item={info.item} />
+      )}
     />
   )
 }
