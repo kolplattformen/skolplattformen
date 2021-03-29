@@ -29,6 +29,20 @@ const MEDIA_DATA = [
       'https://www.svt.se/nyheter/lokalt/stockholm/han-trottnade-pa-skolplattformen-byggde-en-egen-app',
     date: '2021-02-06',
   },
+  {
+    title: 'Dåliga it-lösningar får värre konsekvenser än bara missnöjda användare',
+    source: 'Bohuslänningen',
+    link:
+      'https://www.bohuslaningen.se/%C3%A5sikt/ledare/d%C3%A5liga-it-l%C3%B6sningar-f%C3%A5r-v%C3%A4rre-konsekvenser-%C3%A4n-bara-missn%C3%B6jda-anv%C3%A4ndare-1.43510223',
+      date: '2021-03-24',
+  },
+  {
+    title: 'Strid mellan föräldrar och staden om skolplattforms-app',
+    source: 'Mitt i Stockholm',
+    link:
+      'https://www.mitti.se/nyheter/strid-mellan-foraldrar-och-staden-om-skolplattforms-app/repucx!1Pdq1EzU1bVp5ns0Fuykjg/',
+      date: '2021-03-29',
+  },
 ]
 
 const Media = () => {
