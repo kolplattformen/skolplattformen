@@ -1,3 +1,11 @@
+# [1.6.0](https://github.com/kolplattformen/skolplattformen/compare/v1.5.0...v1.6.0) (2021-03-29)
+
+
+### Features
+
+* 🎸 Flyttade upp Media ([#217](https://github.com/kolplattformen/skolplattformen/issues/217)) ([ffe71d6](https://github.com/kolplattformen/skolplattformen/commit/ffe71d690817313c59cf27e700eb17b3c278aeae))
+* 🎸 Ytterligare media ([c74d650](https://github.com/kolplattformen/skolplattformen/commit/c74d6503b636927d8ac83edffb1b589a3bf9908f))
+
 # [1.5.0](https://github.com/kolplattformen/skolplattformen/compare/v1.4.1...v1.5.0) (2021-03-26)
 
 
