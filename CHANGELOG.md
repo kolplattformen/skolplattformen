@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/kolplattformen/skolplattformen/compare/v1.6.0...v1.7.0) (2021-03-29)
+
+
+### Features
+
+* 🎸 Artikel i DI Digital ([#219](https://github.com/kolplattformen/skolplattformen/issues/219)) ([ed75f59](https://github.com/kolplattformen/skolplattformen/commit/ed75f596795b35f24900607da8d73c747275df08))
+
 # [1.6.0](https://github.com/kolplattformen/skolplattformen/compare/v1.5.0...v1.6.0) (2021-03-29)
 
 
