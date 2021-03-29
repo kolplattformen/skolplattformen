@@ -10,6 +10,6 @@ module.exports = {
   ],
   testPathIgnorePatterns: ['__tests__/Classmates.test.js'],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?@react-native|react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry|@ui-kitten|rn-actionsheet-module/.*)',
+    'node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|react-navigation|@react-navigation/.*|@ui-kitten|rn-actionsheet-module/.*)',
   ],
 }
