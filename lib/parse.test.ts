@@ -91,23 +91,52 @@ describe('parse', () => {
               ListId: null,
               Mentor: null,
             },
+            {
+              Title: 'Utvecklingsdag, förskolorna är stängda',
+              Id: 5,
+              Description: null,
+              Location: null,
+              EventDate: '2021-05-28',
+              EventDateTime: '',
+              LongEventDateTime: '2021-05-28',
+              EndDate: '2021-05-28',
+              EndDateTime: '',
+              LongEndDateTime: '2021-05-28',
+              EventDateDayNumber: '28',
+              EventDateMonthName: 'maj',
+              EventDateMonthFullName: 'maj',
+              FullDateDescription: '2021-05-28 - 2021-05-28',
+              IsSameDay: true,
+              AllDayEvent: true,
+              ListId: null,
+              Mentor: null,
+            },
           ],
         }
       })
+
       it('parses calendar correctly', () => {
-        expect(parse.calendar(response)).toEqual([
-          {
-            id: 29,
-            location: null,
-            title: 'Jullov',
-            description: 'hello',
-            startDate: '2020-12-21T09:00:00.000+01:00',
-            endDate: '2021-01-08T10:00:00.000+01:00',
-            allDay: false,
-          },
-        ])
+        const [firstEvent] = parse.calendar(response)
+
+        expect(firstEvent).toEqual({
+          id: 29,
+          location: null,
+          title: 'Jullov',
+          description: 'hello',
+          startDate: '2020-12-21T08:00:00.000Z',
+          endDate: '2021-01-08T09:00:00.000Z',
+          allDay: false,
+        })
+      })
+
+      it('parses start and end date without time', () => {
+        const [, secondEvent] = parse.calendar(response)
+
+        expect(secondEvent.startDate).toEqual('2021-05-27T22:00:00.000Z')
+        expect(secondEvent.endDate).toEqual('2021-05-27T22:00:00.000Z')
       })
     })
+
     describe('classmates', () => {
       beforeEach(() => {
         response = {

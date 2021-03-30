@@ -116,10 +116,10 @@ export const calendarItem = ({
   location,
   allDay: allDayEvent,
   startDate: longEventDateTime
-    ? DateTime.fromSQL(longEventDateTime, dateTimeOptions).toISO()
+    ? DateTime.fromSQL(longEventDateTime, dateTimeOptions).toUTC().toISO()
     : undefined,
   endDate: longEndDateTime
-    ? DateTime.fromSQL(longEndDateTime, dateTimeOptions).toISO()
+    ? DateTime.fromSQL(longEndDateTime, dateTimeOptions).toUTC().toISO()
     : undefined,
 })
 export const calendar = (data: any): CalendarItem[] =>
