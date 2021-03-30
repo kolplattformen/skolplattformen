@@ -1,9 +1,8 @@
 
-package org.skolplattformen.app;
+package org.skolplattformen.modules;
 
 import java.io.IOException;
 import java.net.CookieHandler;
-import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,11 +17,10 @@ import static okhttp3.internal.Util.delimiterOffset;
 import static okhttp3.internal.Util.trimSubstring;
 import static okhttp3.internal.platform.Platform.WARN;
 
-
-final class OBJavaNetCookieJar implements CookieJar {
+final class CookieJarCustom implements CookieJar {
     private final CookieHandler cookieHandler;
-  
-    public OBJavaNetCookieJar(CookieHandler cookieHandler) {
+
+    public CookieJarCustom(CookieHandler cookieHandler) {
       this.cookieHandler = cookieHandler;
     }
   
