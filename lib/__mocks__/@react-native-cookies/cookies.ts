@@ -32,13 +32,14 @@ const convertTtoC = (cookie: string | TCookie): Cookie => {
     name: cookie.key,
     value: cookie.value,
     domain: cookie.domain || undefined,
-    expires: cookie.expires === 'Infinity' ? undefined : cookie.expires.toUTCString(),
+    expires:
+      cookie.expires === 'Infinity' ? undefined : cookie.expires.toUTCString(),
     httpOnly: cookie.httpOnly || undefined,
     path: cookie.path || undefined,
     secure: cookie.secure,
   }
 }
-const convertCtoT = (cookie: Cookie): TCookie => (
+const convertCtoT = (cookie: Cookie): TCookie =>
   new TCookie({
     key: cookie.name,
     value: cookie.value,
@@ -48,13 +49,14 @@ const convertCtoT = (cookie: Cookie): TCookie => (
     path: cookie.path,
     secure: cookie.secure || false,
   })
-)
-const convertCookies = (cookies: TCookie[]): Cookies => (
-  cookies.reduce((map, cookie) => ({
-    ...map,
-    [cookie.key]: convertTtoC(cookie),
-  }), {} as Cookies)
-)
+const convertCookies = (cookies: TCookie[]): Cookies =>
+  cookies.reduce(
+    (map, cookie) => ({
+      ...map,
+      [cookie.key]: convertTtoC(cookie),
+    }),
+    {} as Cookies
+  )
 
 const jar = new CookieJar()
 const CookieManager: CookieManagerStatic = {

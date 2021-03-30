@@ -2,10 +2,7 @@ import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
-import {
-  checkStatus,
-  LoginStatusChecker,
-} from './loginStatus'
+import { checkStatus, LoginStatusChecker } from './loginStatus'
 import {
   AuthTicket,
   CalendarItem,
@@ -25,9 +22,8 @@ import * as parse from './parse'
 import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import * as fake from './fakeData'
 
-const fakeResponse = <T>(data: T): Promise<T> => new Promise((res) => (
-  setTimeout(() => res(data), 200 + Math.random() * 800)
-))
+const fakeResponse = <T>(data: T): Promise<T> =>
+  new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))
 
 export class Api extends EventEmitter {
   private fetch: Fetcher
@@ -44,7 +40,11 @@ export class Api extends EventEmitter {
 
   public childControllerUrl?: string
 
-  constructor(fetch: Fetch, cookieManager: CookieManager, options?: FetcherOptions) {
+  constructor(
+    fetch: Fetch,
+    cookieManager: CookieManager,
+    options?: FetcherOptions
+  ) {
     super()
     this.fetch = wrap(fetch, options)
     this.cookieManager = cookieManager
@@ -65,7 +65,10 @@ export class Api extends EventEmitter {
     }
   }
 
-  public async getSession(url: string, options?: RequestInit): Promise<RequestInit> {
+  public async getSession(
+    url: string,
+    options?: RequestInit
+  ): Promise<RequestInit> {
     const init = this.getRequestInit(options)
     const cookie = await this.cookieManager.getCookieString(url)
     return {
@@ -95,7 +98,9 @@ export class Api extends EventEmitter {
     const ticketResponse = await this.fetch('auth-ticket', ticketUrl)
 
     if (!ticketResponse.ok) {
-      throw new Error(`Server Error [${ticketResponse.status}] [${ticketResponse.statusText}] [${ticketUrl}]`)
+      throw new Error(
+        `Server Error [${ticketResponse.status}] [${ticketResponse.statusText}] [${ticketUrl}]`
+      )
     }
 
     const ticket: AuthTicket = await ticketResponse.json()
@@ -112,12 +117,14 @@ export class Api extends EventEmitter {
       this.isLoggedIn = true
       this.emit('login')
     })
-    status.on('ERROR', () => { this.personalNumber = undefined })
+    status.on('ERROR', () => {
+      this.personalNumber = undefined
+    })
 
     return status
   }
 
-  public async setSessionCookie(sessionCookie : string) : Promise<void> {
+  public async setSessionCookie(sessionCookie: string): Promise<void> {
     // Manually set cookie in this call and let the cookieManager
     // handle it from here
     // If we put it into the cookieManager manually, we get duplicate cookies
@@ -152,13 +159,17 @@ export class Api extends EventEmitter {
     const response = await this.fetch('hemPage', url, session)
     const text = await response.text()
     const doc = html.parse(decode(text))
-    const xsrfToken = doc.querySelector('input[name="__RequestVerificationToken"]')?.getAttribute('value') || ''
+    const xsrfToken =
+      doc
+        .querySelector('input[name="__RequestVerificationToken"]')
+        ?.getAttribute('value') || ''
     const scriptTags = doc.querySelectorAll('script')
     const childControllerScriptTag = scriptTags.find((elem) => {
       const srcAttr = elem.getAttribute('src')
       return srcAttr?.startsWith('/vardnadshavare/bundles/childcontroller')
     })
-    this.childControllerUrl = routes.baseEtjanst + childControllerScriptTag?.getAttribute('src')
+    this.childControllerUrl =
+      routes.baseEtjanst + childControllerScriptTag?.getAttribute('src')
     this.addHeader('x-xsrf-token', xsrfToken)
   }
 
@@ -170,7 +181,8 @@ export class Api extends EventEmitter {
 
     const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm
     const apiKeyMatches = apiKeyRegex.exec(text)
-    const apiKey = apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
+    const apiKey =
+      apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
 
     this.addHeader('API-Key', apiKey)
   }
@@ -192,12 +204,18 @@ export class Api extends EventEmitter {
   }
 
   private async retrieveCreateItemHeaders() {
-    const response = await this.fetch('createItemConfig', routes.createItemConfig)
+    const response = await this.fetch(
+      'createItemConfig',
+      routes.createItemConfig
+    )
     const json = await response.json()
     return json
   }
 
-  private async retrieveAuthToken(url: string, authBody: string): Promise<string> {
+  private async retrieveAuthToken(
+    url: string,
+    authBody: string
+  ): Promise<string> {
     const session = this.getRequestInit({
       method: 'POST',
       headers: {
@@ -231,7 +249,9 @@ export class Api extends EventEmitter {
     })
 
     if (!response.ok) {
-      throw new Error(`Server Error [${response.status}] [${response.statusText}] [${url}]`)
+      throw new Error(
+        `Server Error [${response.status}] [${response.statusText}] [${url}]`
+      )
     }
 
     const authData = await response.json()
@@ -280,7 +300,9 @@ export class Api extends EventEmitter {
     const response = await this.fetch('children', url, session)
 
     if (!response.ok) {
-      throw new Error(`Server Error [${response.status}] [${response.statusText}] [${url}]`)
+      throw new Error(
+        `Server Error [${response.status}] [${response.statusText}] [${url}]`
+      )
     }
 
     const data = await response.json()
@@ -307,7 +329,11 @@ export class Api extends EventEmitter {
     return parse.classmates(data)
   }
 
-  public async getSchedule(child: Child, from: DateTime, to: DateTime): Promise<ScheduleItem[]> {
+  public async getSchedule(
+    child: Child,
+    from: DateTime,
+    to: DateTime
+  ): Promise<ScheduleItem[]> {
     if (this.isFake) return fakeResponse(fake.schedule(child))
 
     const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
@@ -357,7 +383,7 @@ export class Api extends EventEmitter {
     return parse.menuList(data)
   }
 
-  private async getMenuChoice(child : Child) : Promise<string> {
+  private async getMenuChoice(child: Child): Promise<string> {
     const url = routes.menuChoice(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('menu-choice', url, session)

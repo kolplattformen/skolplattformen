@@ -101,17 +101,17 @@ describe('api', () => {
     it('throws error on external api error', async () => {
       expect.hasAssertions()
 
-      const data = ""
+      const data = ''
       response.json.mockResolvedValue(data)
       response.ok = false
       response.status = 500
-      response.statusText = "Internal Server Error"
+      response.statusText = 'Internal Server Error'
 
       const personalNumber = 'my personal number'
       try {
         await api.login(personalNumber)
       } catch (error) {
-        expect(error.message).toEqual(expect.stringContaining("Server Error"))
+        expect(error.message).toEqual(expect.stringContaining('Server Error'))
       }
     })
   })
@@ -170,7 +170,7 @@ describe('api', () => {
         const user = await api.getUser()
         expect(user).toEqual({
           firstName: 'Namn',
-          lastName: 'Namnsson'
+          lastName: 'Namnsson',
         })
 
         const children = await api.getChildren()

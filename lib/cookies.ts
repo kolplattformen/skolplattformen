@@ -2,7 +2,7 @@ import { camelCase, pascalCase } from 'change-case'
 import { Cookie, CookieManager } from './types'
 
 interface IndexableCookie extends Cookie {
-  [key: string]: string|boolean|undefined
+  [key: string]: string | boolean | undefined
 }
 interface Serializer {
   (cookie: Cookie): string
@@ -15,19 +15,25 @@ export const serialize: Serializer = (cookie) => {
   const tokens = [`${ic.name}=${ic.value}`]
 
   const keyVals = ['expires', 'domain', 'path']
-  keyVals.filter((key) => ic[key]).forEach((key) => {
-    tokens.push(`${pascalCase(key)}=${ic[key]}`)
-  })
+  keyVals
+    .filter((key) => ic[key])
+    .forEach((key) => {
+      tokens.push(`${pascalCase(key)}=${ic[key]}`)
+    })
 
   const bools = ['secure', 'httpOnly']
-  bools.filter((key) => ic[key]).forEach((key) => {
-    tokens.push(pascalCase(key))
-  })
+  bools
+    .filter((key) => ic[key])
+    .forEach((key) => {
+      tokens.push(pascalCase(key))
+    })
 
   return tokens.join('; ')
 }
 export const deserialize: Deserializer = (cookieString) => {
-  const [nameVal, ...others] = cookieString.split(';').map((token) => token.trim())
+  const [nameVal, ...others] = cookieString
+    .split(';')
+    .map((token) => token.trim())
   const [name, value] = nameVal.split('=')
 
   const cookie: Cookie = {
@@ -35,21 +41,23 @@ export const deserialize: Deserializer = (cookieString) => {
     value,
   }
 
-  others.map((keyVal) => keyVal.split('=')).forEach(([key, val]) => {
-    const prop = camelCase(key)
-    // eslint-disable-next-line default-case
-    switch (prop) {
-      case 'expires':
-      case 'domain':
-      case 'path':
-        cookie[prop] = val
-        break
-      case 'secure':
-      case 'httpOnly':
-        cookie[prop] = true
-        break
-    }
-  })
+  others
+    .map((keyVal) => keyVal.split('='))
+    .forEach(([key, val]) => {
+      const prop = camelCase(key)
+      // eslint-disable-next-line default-case
+      switch (prop) {
+        case 'expires':
+        case 'domain':
+        case 'path':
+          cookie[prop] = val
+          break
+        case 'secure':
+        case 'httpOnly':
+          cookie[prop] = true
+          break
+      }
+    })
 
   return cookie
 }
@@ -87,12 +95,15 @@ export interface RNCookieManager {
   get(url: string, useWebKit?: boolean): Promise<RNCookies>
   clearAll(useWebKit?: boolean): Promise<boolean>
 }
-export const wrapReactNativeCookieManager = (rnc: RNCookieManager): CookieManager => ({
+export const wrapReactNativeCookieManager = (
+  rnc: RNCookieManager
+): CookieManager => ({
   clearAll: () => rnc.clearAll().then(),
   getCookieString: async (url) => {
     const cookies = await rnc.get(url)
     return Object.values(cookies)
-      .map((c) => `${c.name}=${c.value}`).join('; ')
+      .map((c) => `${c.name}=${c.value}`)
+      .join('; ')
   },
   getCookies: async (url) => {
     const cookies = await rnc.get(url)

@@ -20,10 +20,10 @@ export interface CookieManager {
 export interface RequestInit {
   headers?: any
   method?: string
-  body?: string,
+  body?: string
   /**
    * Set to `manual` to extract redirect headers, `error` to reject redirect */
-  redirect?: string,
+  redirect?: string
 }
 
 export interface Headers {
@@ -160,17 +160,17 @@ export interface MenuItem {
 }
 
 export interface MenuList {
-  selectedWeek: number,
+  selectedWeek: number
   menus: MenuListItem[]
 }
 
 export interface MenuListItem {
-  'week': string,
-  'mon': string,
-  'tue': string,
-  'wed': string,
-  'thu': string,
-  'fri': string
+  week: string
+  mon: string
+  tue: string
+  wed: string
+  thu: string
+  fri: string
 }
 
 export interface User {

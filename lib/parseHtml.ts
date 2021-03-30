@@ -1,32 +1,15 @@
 import * as h2m from 'h2m'
 import { htmlDecode } from 'js-htmlencode'
 import { decode } from 'he'
-import {
-  parse, HTMLElement, TextNode,
-} from 'node-html-parser'
+import { parse, HTMLElement, TextNode } from 'node-html-parser'
 
-const noChildren = [
-  'strong',
-  'b',
-  'em',
-  'i',
-  'u',
-  's',
-]
-const trimNodes = [
-  ...noChildren,
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'li',
-  'a',
-]
+const noChildren = ['strong', 'b', 'em', 'i', 'u', 's']
+const trimNodes = [...noChildren, 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'a']
 const cleanText = (node: TextNode, parentType: string): TextNode => {
-  const text = (parentType && trimNodes.includes(parentType.toLowerCase()))
-    ? node.rawText.trim() : node.rawText
+  const text =
+    parentType && trimNodes.includes(parentType.toLowerCase())
+      ? node.rawText.trim()
+      : node.rawText
   return new TextNode(text)
 }
 
@@ -44,7 +27,9 @@ const deepClean = (node: HTMLElement): HTMLElement => {
   node.childNodes.forEach((childNode) => {
     if (childNode instanceof HTMLElement) {
       if (node.tagName && noChildren.includes(node.tagName.toLowerCase())) {
-        cleaned.childNodes.push(cleanText(new TextNode(childNode.innerText), node.tagName))
+        cleaned.childNodes.push(
+          cleanText(new TextNode(childNode.innerText), node.tagName)
+        )
       } else {
         cleaned.childNodes.push(deepClean(childNode))
       }
@@ -55,9 +40,8 @@ const deepClean = (node: HTMLElement): HTMLElement => {
   return cleaned
 }
 
-export const clean = (html: string = ''): string => (
+export const clean = (html: string = ''): string =>
   deepClean(parse(decode(html))).outerHTML
-)
 
 interface Node {
   name: string

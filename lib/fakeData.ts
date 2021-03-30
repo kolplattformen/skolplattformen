@@ -236,9 +236,11 @@ const data: any = {
         author: 'Vaktmästare Persson',
         header: 'Brandsläckare.',
         intro: 'Idag hade vi en incident med en brandsläckare.',
-        body: '## Information om brandsläckarincidenten\n\nHej, idag vid lunchtid utlöste en elev av misstag en pulverbrandsläckare i kapprummet. En del pulver yrde runt i rummet och under saneringen fick eleverna i angränsande klassrum vara i aulan istället för klassrummet.\n\nFlera elever var på plats i hallen när detta inträffade men utrymdes kort därefter. Pulvret är INTE hälsovådligt men kan ge upphov till halsirritation vid inandning.\n\nJag har pratat med berörda elever om det inträffade och uppmanat dem att ta hem kläder och tillhörigheter som fanns i kapprummet eftersom de troligen blivit dammiga. Vi rekommenderar att ni tvättar eller vädrar dessa.',
+        body:
+          '## Information om brandsläckarincidenten\n\nHej, idag vid lunchtid utlöste en elev av misstag en pulverbrandsläckare i kapprummet. En del pulver yrde runt i rummet och under saneringen fick eleverna i angränsande klassrum vara i aulan istället för klassrummet.\n\nFlera elever var på plats i hallen när detta inträffade men utrymdes kort därefter. Pulvret är INTE hälsovådligt men kan ge upphov till halsirritation vid inandning.\n\nJag har pratat med berörda elever om det inträffade och uppmanat dem att ta hem kläder och tillhörigheter som fanns i kapprummet eftersom de troligen blivit dammiga. Vi rekommenderar att ni tvättar eller vädrar dessa.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
-        fullImageUrl: 'https://cdn.breakit.se/assets/article/6607f9b923edb6f85aa4417bab43c0f8.jpg?d=980x500',
+        fullImageUrl:
+          'https://cdn.breakit.se/assets/article/6607f9b923edb6f85aa4417bab43c0f8.jpg?d=980x500',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: '2020-08-16T21:10:00.000+02:0',
         modified: '2021-01-22T14:49:00.000+01:00',
@@ -248,9 +250,11 @@ const data: any = {
         author: 'Ada L.',
         header: 'App, App, App',
         intro: 'Denna vecka bygger vi appar!',
-        body: '## Appar med öppen data \n\nDenna vecka har vi förmånen att få besök av några föräldrar som visar hur vi enkelt kan skapa appar som visar information ifrån öppna datakällor.\n\nEn fantastisk möjlighet att lära oss hur digitalisering skapar nya möjligheter i såväl skolan som arbetslivet.',
+        body:
+          '## Appar med öppen data \n\nDenna vecka har vi förmånen att få besök av några föräldrar som visar hur vi enkelt kan skapa appar som visar information ifrån öppna datakällor.\n\nEn fantastisk möjlighet att lära oss hur digitalisering skapar nya möjligheter i såväl skolan som arbetslivet.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
-        fullImageUrl: 'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
+        fullImageUrl:
+          'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: '2020-10-13T09:10:00.000+02:00',
         modified: '2021-02-09T15:45:00.000+02:00',
@@ -260,9 +264,11 @@ const data: any = {
         author: 'Magister Svensson',
         header: 'Läxor vecka 6.',
         intro: 'Alla elever måste göra sina läxor!',
-        body: '## Läxor vecka 6 \n\nFöljande läxor är obligatoriska:\n\n- Antikens historia\n- Svenska stormaktstiden\n- Statistik A\n- Flerdimensionell analys, del 1',
+        body:
+          '## Läxor vecka 6 \n\nFöljande läxor är obligatoriska:\n\n- Antikens historia\n- Svenska stormaktstiden\n- Statistik A\n- Flerdimensionell analys, del 1',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
-        fullImageUrl: 'https://www.mitti.se/_internal/cimg!0/ejf8efxee735ymm8tm40q3hhkl36sdt.jpeg',
+        fullImageUrl:
+          'https://www.mitti.se/_internal/cimg!0/ejf8efxee735ymm8tm40q3hhkl36sdt.jpeg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: '2020-08-16T21:10:00.000+02:0',
         modified: '2021-01-22T14:49:00.000+01:00',
@@ -434,7 +440,8 @@ const data: any = {
       {
         title: 'Läsårsslut',
         id: 91,
-        description: '<html><head><style>\r\np.MsoNormal, li.MsoNormal, div.MsoNormal {\nmargin:0cm;\nmargin-bottom:.0001pt;\nfont-size:11.0pt;\nfont-family:\'Calibri\',sans-serif;\n}\n\na:link, span.MsoHyperlink {\ncolor:#0563C1;\ntext-decoration:underline;\n}\n\nspan.MsoHyperlinkFollowed {\ncolor:#954F72;\ntext-decoration:underline;\n}\n\nspan.E-postmall17 {\nfont-family:\'Calibri\',sans-serif;\ncolor:windowtext;\n}\n\n.MsoChpDefault {\nfont-family:\'Calibri\',sans-serif;\n}\n\ndiv.WordSection1 {\n}\n\r\n</style></head><body lang=\'SV\' link=\'#0563C1\' vlink=\'#954F72\' style=\'\'><div class=\'WordSection1\'><p class=\'MsoNormal\'>&#160;</p></div></body></html>',
+        description:
+          "<html><head><style>\r\np.MsoNormal, li.MsoNormal, div.MsoNormal {\nmargin:0cm;\nmargin-bottom:.0001pt;\nfont-size:11.0pt;\nfont-family:'Calibri',sans-serif;\n}\n\na:link, span.MsoHyperlink {\ncolor:#0563C1;\ntext-decoration:underline;\n}\n\nspan.MsoHyperlinkFollowed {\ncolor:#954F72;\ntext-decoration:underline;\n}\n\nspan.E-postmall17 {\nfont-family:'Calibri',sans-serif;\ncolor:windowtext;\n}\n\n.MsoChpDefault {\nfont-family:'Calibri',sans-serif;\n}\n\ndiv.WordSection1 {\n}\n\r\n</style></head><body lang='SV' link='#0563C1' vlink='#954F72' style=''><div class='WordSection1'><p class='MsoNormal'>&#160;</p></div></body></html>",
         location: null,
         startDate: '2021-06-11',
         endDate: '2021-06-11',
@@ -443,7 +450,8 @@ const data: any = {
       {
         title: 'Fritids stängt',
         id: 92,
-        description: '<html><head><style>\r\np.MsoNormal, li.MsoNormal, div.MsoNormal {\nmargin:0cm;\nmargin-bottom:.0001pt;\nfont-size:11.0pt;\nfont-family:\'Calibri\',sans-serif;\n}\n\na:link, span.MsoHyperlink {\ncolor:#0563C1;\ntext-decoration:underline;\n}\n\nspan.MsoHyperlinkFollowed {\ncolor:#954F72;\ntext-decoration:underline;\n}\n\nspan.E-postmall17 {\nfont-family:\'Calibri\',sans-serif;\ncolor:windowtext;\n}\n\n.MsoChpDefault {\nfont-family:\'Calibri\',sans-serif;\n}\n\ndiv.WordSection1 {\n}\n\r\n</style></head><body lang=\'SV\' link=\'#0563C1\' vlink=\'#954F72\' style=\'\'><div class=\'WordSection1\'><p class=\'MsoNormal\'>&#160;</p></div></body></html>',
+        description:
+          "<html><head><style>\r\np.MsoNormal, li.MsoNormal, div.MsoNormal {\nmargin:0cm;\nmargin-bottom:.0001pt;\nfont-size:11.0pt;\nfont-family:'Calibri',sans-serif;\n}\n\na:link, span.MsoHyperlink {\ncolor:#0563C1;\ntext-decoration:underline;\n}\n\nspan.MsoHyperlinkFollowed {\ncolor:#954F72;\ntext-decoration:underline;\n}\n\nspan.E-postmall17 {\nfont-family:'Calibri',sans-serif;\ncolor:windowtext;\n}\n\n.MsoChpDefault {\nfont-family:'Calibri',sans-serif;\n}\n\ndiv.WordSection1 {\n}\n\r\n</style></head><body lang='SV' link='#0563C1' vlink='#954F72' style=''><div class='WordSection1'><p class='MsoNormal'>&#160;</p></div></body></html>",
         location: null,
         startDate: '2021-06-14',
         endDate: '2021-06-14',
@@ -466,11 +474,13 @@ const data: any = {
       },
       {
         title: 'Torsdag - Vecka 51',
-        description: 'Prinskorv potatis rödbetssallad +<br/>Inlagd och senapssill',
+        description:
+          'Prinskorv potatis rödbetssallad +<br/>Inlagd och senapssill',
       },
       {
         title: 'Fredag - Vecka 51',
-        description: 'Avslutning  Varmkorv bröd ketchup senap<br/>( F-3 i matsalen från 10:30 )',
+        description:
+          'Avslutning  Varmkorv bröd ketchup senap<br/>( F-3 i matsalen från 10:30 )',
       },
     ],
     notifications: [
@@ -478,8 +488,10 @@ const data: any = {
         id: '9025f9-a1e685-d7c4668f09-e14bc5-0ab',
         sender: 'Elevdokumentation',
         dateCreated: '2020-12-10T14:31:29.966Z',
-        message: 'Nu kan du ta del av ditt barns dokumentation av utvecklingssamtal',
-        url: 'https://www.breakit.se/artikel/21404/kodaren-slog-larm-nu-akutstoppas-skolplattformen-i-stockholm',
+        message:
+          'Nu kan du ta del av ditt barns dokumentation av utvecklingssamtal',
+        url:
+          'https://www.breakit.se/artikel/21404/kodaren-slog-larm-nu-akutstoppas-skolplattformen-i-stockholm',
         category: null,
         type: 'webnotify',
       },
@@ -488,7 +500,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-11-16T13:24:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url: 'https://www.breakit.se/artikel/21423/har-ar-it-bolaget-bakom-haveriet-pa-skolplattformen',
+        url:
+          'https://www.breakit.se/artikel/21423/har-ar-it-bolaget-bakom-haveriet-pa-skolplattformen',
         category: 'Lärlogg',
         type: 'avisering',
       },
@@ -497,7 +510,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-06-10T12:18:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
-        url: 'https://www.svt.se/nyheter/lokalt/stockholm/skolplattformen-i-stockholm-beratta-om-era-erfarenheter',
+        url:
+          'https://www.svt.se/nyheter/lokalt/stockholm/skolplattformen-i-stockholm-beratta-om-era-erfarenheter',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -506,7 +520,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-03-24T14:28:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
-        url: 'https://www.breakit.se/artikel/18120/skolplattformen-kostade-700-miljoner-strid-med-entreprenor-om-varumarket',
+        url:
+          'https://www.breakit.se/artikel/18120/skolplattformen-kostade-700-miljoner-strid-med-entreprenor-om-varumarket',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -515,7 +530,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-03-24T13:48:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
-        url: 'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen/lmsau!5338007/',
+        url:
+          'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen/lmsau!5338007/',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -745,10 +761,13 @@ const data: any = {
         id: 'asdfasdfasdfa',
         author: 'Rektor Gustavsson',
         header: 'Välkommen till skolan!',
-        intro: 'Hej alla barn och föräldrar och välkomna till Storskolan! Här kommer en del information som kan vara bra att känna till inför första dagen.',
-        body: '## Information till föräldrar \n\nSkolan börjar kl 08.00 och slutar 18.00. Kommer man sent eller blir sjuk så ska det anmälas via Skolplattformen. Se till så att dina barn har ätit frukost. Frukt är nyttigt! \n\n## Information till barn\n\nLek är tillåtet på rasterna men enbart på skolgården. Medtag ej egna leksaker. Tvätta händerna.',
+        intro:
+          'Hej alla barn och föräldrar och välkomna till Storskolan! Här kommer en del information som kan vara bra att känna till inför första dagen.',
+        body:
+          '## Information till föräldrar \n\nSkolan börjar kl 08.00 och slutar 18.00. Kommer man sent eller blir sjuk så ska det anmälas via Skolplattformen. Se till så att dina barn har ätit frukost. Frukt är nyttigt! \n\n## Information till barn\n\nLek är tillåtet på rasterna men enbart på skolgården. Medtag ej egna leksaker. Tvätta händerna.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
-        fullImageUrl: 'https://timbro.se/app/uploads/2020/10/broman-skolplattformen-1280x752.jpg',
+        fullImageUrl:
+          'https://timbro.se/app/uploads/2020/10/broman-skolplattformen-1280x752.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: '2020-08-16T21:10:00.000+02:0',
         modified: '2021-01-22T14:49:00.000+01:00',
@@ -758,9 +777,11 @@ const data: any = {
         author: 'Ada L.',
         header: 'App, App, App',
         intro: 'Denna vecka bygger vi appar!',
-        body: '## Appar med öppen data \n\nDenna vecka har vi förmånen att få besök av några föräldrar som visar hur vi enkelt kan skapa appar som visar information ifrån öppna datakällor.\n\nEn fantastisk möjlighet att lära oss hur digitalisering skapar nya möjligheter i såväl skolan som arbetslivet.',
+        body:
+          '## Appar med öppen data \n\nDenna vecka har vi förmånen att få besök av några föräldrar som visar hur vi enkelt kan skapa appar som visar information ifrån öppna datakällor.\n\nEn fantastisk möjlighet att lära oss hur digitalisering skapar nya möjligheter i såväl skolan som arbetslivet.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
-        fullImageUrl: 'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
+        fullImageUrl:
+          'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: '2020-10-13T09:10:00.000+02:00',
         modified: '2021-02-09T15:45:00.000+02:00',
@@ -770,9 +791,11 @@ const data: any = {
         author: 'Magister Svensson',
         header: 'Läxor vecka 6.',
         intro: 'Alla elever måste göra sina läxor!',
-        body: '## Läxor vecka 6 \n\nFöljande läxor är obligatoriska:\n\n- Antikens historia\n- Svenska stormaktstiden\n- Statistik A\n- Flerdimensionell analys, del 1',
+        body:
+          '## Läxor vecka 6 \n\nFöljande läxor är obligatoriska:\n\n- Antikens historia\n- Svenska stormaktstiden\n- Statistik A\n- Flerdimensionell analys, del 1',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
-        fullImageUrl: 'https://www.mitti.se/_internal/cimg!0/ejf8efxee735ymm8tm40q3hhkl36sdt.jpeg',
+        fullImageUrl:
+          'https://www.mitti.se/_internal/cimg!0/ejf8efxee735ymm8tm40q3hhkl36sdt.jpeg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: '2020-08-16T21:10:00.000+02:0',
         modified: '2021-01-22T14:49:00.000+01:00',
@@ -781,8 +804,10 @@ const data: any = {
         id: 'asdfasdfasdfd',
         author: 'Information från Förskoleklass',
         header: 'Vinteraktiviteter',
-        intro: 'Vi kommer efter att förskoleklassen är slut arrangera olika vinteraktiviteter genom fridtidsverksamheten.',
-        body: '##  Vänligen ta med hjälm, skridskor eller stjärtlapp. Alla barn måste ha hjälm på sig samt varma kläder. Vi kommer åka i backen bakom skolbyggnaden samt använda isen som spolats vid Mullsjöskolan. Personal kommer finnas på plats samt att vi erbjuda varm dryck, frukt och lek för de barn som ej har hjälm eller lämpligt åkdon.',
+        intro:
+          'Vi kommer efter att förskoleklassen är slut arrangera olika vinteraktiviteter genom fridtidsverksamheten.',
+        body:
+          '##  Vänligen ta med hjälm, skridskor eller stjärtlapp. Alla barn måste ha hjälm på sig samt varma kläder. Vi kommer åka i backen bakom skolbyggnaden samt använda isen som spolats vid Mullsjöskolan. Personal kommer finnas på plats samt att vi erbjuda varm dryck, frukt och lek för de barn som ej har hjälm eller lämpligt åkdon.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/yB_aiAWkm40',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -794,7 +819,8 @@ const data: any = {
         author: 'Köket',
         header: 'Ekologisk vecka i matsalen',
         intro: 'Ekologiska veckan i matsalen vecka 11',
-        body: '##  Vi kommer ha tema jorden i matsalen och servera ekologisk mat från hela världen med tema jorden. Detta för att belysa att man kan använda alla delar av råvaorna. Det kommer erbjudas rätter från alla världsdelar som är producerat för jordens bästa. Smaklig spis hälsar Gunnel i köket med personal.',
+        body:
+          '##  Vi kommer ha tema jorden i matsalen och servera ekologisk mat från hela världen med tema jorden. Detta för att belysa att man kan använda alla delar av råvaorna. Det kommer erbjudas rätter från alla världsdelar som är producerat för jordens bästa. Smaklig spis hälsar Gunnel i köket med personal.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/7K17MvT8qBg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -805,8 +831,10 @@ const data: any = {
         id: 'asdfasdfasdfbvdsa',
         author: 'Vaktmästaren',
         header: 'Klotter i korridoren (igen)',
-        intro: 'Ännu en gång har vi råka ut för skadegörelse i korridorerna vid åk 5',
-        body: '##  Tyvärr har flera elever klottat på skåp och väggar vid åk5 skåpen. Detta är helt oacceptablet beteende och kostar skolan stora belopp att åtgärda. Vi ber alla föräldrar prata med sina barn om klotter samt att det var väldigt grovt spårkbruk. Personalen på skolan kommer att hålla extra uppsikt och vi har även pratat med en del av de inblandade eleverna i denna skadegörelse.\n\nPersonalen har även börjat forska på vad vissa av de skrivna orden betyder och Eva-Britt är förfasad över språkbruket samt vad de innebär. Bernt kommer att påbörja saneringen och återställningen av skadegörelsen samt vakta korridorerna nogrannare för att säkerställa att detta ej kommer ske igen. \nUPPDATERING: Det som är skrivet om Sara är inte sant!  ',
+        intro:
+          'Ännu en gång har vi råka ut för skadegörelse i korridorerna vid åk 5',
+        body:
+          '##  Tyvärr har flera elever klottat på skåp och väggar vid åk5 skåpen. Detta är helt oacceptablet beteende och kostar skolan stora belopp att åtgärda. Vi ber alla föräldrar prata med sina barn om klotter samt att det var väldigt grovt spårkbruk. Personalen på skolan kommer att hålla extra uppsikt och vi har även pratat med en del av de inblandade eleverna i denna skadegörelse.\n\nPersonalen har även börjat forska på vad vissa av de skrivna orden betyder och Eva-Britt är förfasad över språkbruket samt vad de innebär. Bernt kommer att påbörja saneringen och återställningen av skadegörelsen samt vakta korridorerna nogrannare för att säkerställa att detta ej kommer ske igen. \nUPPDATERING: Det som är skrivet om Sara är inte sant!  ',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/SkbEZ16VywM',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -994,11 +1022,13 @@ const data: any = {
       },
       {
         title: 'Torsdag - Vecka 51',
-        description: 'Prinskorv potatis rödbetssallad +<br/>Inlagd och senapssill',
+        description:
+          'Prinskorv potatis rödbetssallad +<br/>Inlagd och senapssill',
       },
       {
         title: 'Fredag - Vecka 51',
-        description: 'Avslutning  Varmkorv bröd ketchup senap<br/>( F-3 i matsalen från 10:30 )',
+        description:
+          'Avslutning  Varmkorv bröd ketchup senap<br/>( F-3 i matsalen från 10:30 )',
       },
     ],
     notifications: [
@@ -1007,7 +1037,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-12-02T14:02:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url: 'https://www.mitti.se/nyheter/rekorddyr-skolplattform-kostar-258-miljoner-till/lmsao!5381301/',
+        url:
+          'https://www.mitti.se/nyheter/rekorddyr-skolplattform-kostar-258-miljoner-till/lmsao!5381301/',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -1016,7 +1047,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-12-01T12:43:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url: 'https://computersweden.idg.se/2.2683/1.722561/lacka-skolplattformen-datainspektionen',
+        url:
+          'https://computersweden.idg.se/2.2683/1.722561/lacka-skolplattformen-datainspektionen',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -1034,7 +1066,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-11-16T13:24:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url: 'https://www.breakit.se/artikel/27075/skolplattformen-kostade-1-miljard-att-bygga-nu-tvingas-stockholm-bota',
+        url:
+          'https://www.breakit.se/artikel/27075/skolplattformen-kostade-1-miljard-att-bygga-nu-tvingas-stockholm-bota',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -1043,7 +1076,8 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-11-12T13:27:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url: 'https://www.nyteknik.se/sakerhet/ygeman-om-datalackan-i-skolplattformen-det-ar-upprorande-6968853',
+        url:
+          'https://www.nyteknik.se/sakerhet/ygeman-om-datalackan-i-skolplattformen-det-ar-upprorande-6968853',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -1051,14 +1085,12 @@ const data: any = {
   },
 }
 
-export const user = (): User => (
-  {
-    firstName: 'Namn',
-    lastName: 'Namnsson',
-  }
-)
+export const user = (): User => ({
+  firstName: 'Namn',
+  lastName: 'Namnsson',
+})
 
-export const children = (): Child[] => ([
+export const children = (): Child[] => [
   {
     name: 'Shanel Nilsson (elev)',
     id: '39b59e-bf4b9f-f68ac25321-977218-bf0',
@@ -1073,28 +1105,20 @@ export const children = (): Child[] => ([
     status: 'GR',
     schoolId: '8e6b13b-3116-e66c39b-a4c3fa5-a1d72d9',
   },
-])
+]
 
-export const classmates = (child: Child): Classmate[] => (
+export const classmates = (child: Child): Classmate[] =>
   data[child.id].classmates
-)
 
-export const news = (child: Child): NewsItem[] => (
-  data[child.id].news
-)
+export const news = (child: Child): NewsItem[] => data[child.id].news
 
-export const calendar = (child: Child): CalendarItem[] => (
+export const calendar = (child: Child): CalendarItem[] =>
   data[child.id].calendar
-)
 
-export const schedule = (child: Child): ScheduleItem[] => (
+export const schedule = (child: Child): ScheduleItem[] =>
   data[child.id].schedule
-)
 
-export const menu = (child: Child): MenuItem[] => (
-  data[child.id].menu
-)
+export const menu = (child: Child): MenuItem[] => data[child.id].menu
 
-export const notifications = (child: Child): Notification[] => (
+export const notifications = (child: Child): Notification[] =>
   data[child.id].notifications
-)

@@ -3,18 +3,17 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
-    project: ['./tsconfig.eslint.json']
+    project: ['./tsconfig.eslint.json'],
   },
-  extends: [
-    'airbnb-typescript/base',
-  ],
+  extends: ['airbnb-typescript/base', 'prettier'],
+  plugins: ['prettier'],
   ignorePatterns: ['*.test.ts'],
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     // '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/semi': [2, 'never'],
-    'max-len': ['error', { code: 120, 'ignoreUrls': true }],
+    'max-len': ['error', { code: 120, ignoreUrls: true }],
     'import/prefer-default-export': 0,
   },
 }

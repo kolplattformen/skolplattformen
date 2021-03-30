@@ -14,8 +14,10 @@ export enum LoginEvent {
 
 export interface LoginStatusChecker {
   token: string
-  on: (event: 'OK' | 'PENDING' | 'ERROR' | 'USER_SIGN' | 'CANCELLED',
-    listener: (...args: any[]) => void) => LoginStatusChecker
+  on: (
+    event: 'OK' | 'PENDING' | 'ERROR' | 'USER_SIGN' | 'CANCELLED',
+    listener: (...args: any[]) => void
+  ) => LoginStatusChecker
   cancel: () => Promise<void>
 }
 
@@ -40,7 +42,12 @@ class Checker extends EventEmitter {
     const response = await this.fetcher('login-status', this.url)
     const status = await response.text()
     this.emit(status)
-    if (!this.cancelled && status !== 'OK' && status !== 'ERROR!' && status !== 'CANCELLED') {
+    if (
+      !this.cancelled &&
+      status !== 'OK' &&
+      status !== 'ERROR!' &&
+      status !== 'CANCELLED'
+    ) {
       setTimeout(() => this.check(), 1000)
     }
   }
@@ -50,6 +57,7 @@ class Checker extends EventEmitter {
   }
 }
 
-export const checkStatus = (fetch: Fetcher, ticket: AuthTicket): LoginStatusChecker => (
-  new Checker(fetch, ticket)
-)
+export const checkStatus = (
+  fetch: Fetcher,
+  ticket: AuthTicket
+): LoginStatusChecker => new Checker(fetch, ticket)

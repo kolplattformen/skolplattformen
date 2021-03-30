@@ -1,5 +1,10 @@
-import { deserialize, serialize, wrapToughCookie, wrapReactNativeCookieManager } from './cookies'
-import { Cookie, CookieManager} from './types'
+import {
+  deserialize,
+  serialize,
+  wrapToughCookie,
+  wrapReactNativeCookieManager,
+} from './cookies'
+import { Cookie, CookieManager } from './types'
 import { CookieJar } from 'tough-cookie'
 import RNCookieManager from '@react-native-cookies/cookies'
 
@@ -75,7 +80,8 @@ describe('CookieManager', () => {
       expect(deserialize(cookieStr)).toEqual(cookie)
     })
     it('deserializes cookies with all properties', () => {
-      const cookieStr = 'foo=bar; Expires=Tue, 09 Mar 2021 08:27:48 GMT; Domain=.stockholm.se; Path=/; Secure; HTTPOnly'
+      const cookieStr =
+        'foo=bar; Expires=Tue, 09 Mar 2021 08:27:48 GMT; Domain=.stockholm.se; Path=/; Secure; HTTPOnly'
       const cookie: Cookie = {
         name: 'foo',
         value: 'bar',
@@ -150,7 +156,8 @@ describe('CookieManager', () => {
       expect(serialize(cookie)).toEqual(cookieStr)
     })
     it('serializes cookies with all properties', () => {
-      const cookieStr = 'foo=bar; Expires=Tue, 09 Mar 2021 08:27:48 GMT; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+      const cookieStr =
+        'foo=bar; Expires=Tue, 09 Mar 2021 08:27:48 GMT; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
       const cookie: Cookie = {
         name: 'foo',
         value: 'bar',
@@ -174,15 +181,19 @@ describe('CookieManager', () => {
       })
       it('handles getCookieString', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
 
         await jar.setCookie(cookieStr, url)
-        const storedCookies = await manager.getCookieString('https://foo.stockholm.se/bar/baz')
+        const storedCookies = await manager.getCookieString(
+          'https://foo.stockholm.se/bar/baz'
+        )
         expect(storedCookies).toEqual('foo=bar')
       })
       it('handles getCookies', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
         const cookie: Cookie = {
           name: 'foo',
           value: 'bar',
@@ -193,8 +204,10 @@ describe('CookieManager', () => {
         }
 
         await jar.setCookie(cookieStr, url)
-        const storedCookies = await manager.getCookies('https://foo.stockholm.se/bar/baz')
-        
+        const storedCookies = await manager.getCookies(
+          'https://foo.stockholm.se/bar/baz'
+        )
+
         expect(storedCookies).toHaveLength(1)
         expect(storedCookies[0]).toEqual(cookie)
       })
@@ -216,7 +229,8 @@ describe('CookieManager', () => {
       })
       it('handles setCookieString', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
 
         await manager.setCookieString(cookieStr, url)
 
@@ -225,12 +239,13 @@ describe('CookieManager', () => {
       })
       it('handles clearAll', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
 
         await manager.setCookieString(cookieStr, url)
         await manager.clearAll()
         const cookies = await jar.getCookieString(url)
-        
+
         expect(cookies).toEqual('')
       })
     })
@@ -242,15 +257,19 @@ describe('CookieManager', () => {
       })
       it('handles getCookieString', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
 
         await RNCookieManager.setFromResponse(url, cookieStr)
-        const storedCookies = await manager.getCookieString('https://foo.stockholm.se/bar/baz')
+        const storedCookies = await manager.getCookieString(
+          'https://foo.stockholm.se/bar/baz'
+        )
         expect(storedCookies).toEqual('foo=bar')
       })
       it('handles getCookies', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
         const cookie: Cookie = {
           name: 'foo',
           value: 'bar',
@@ -261,8 +280,10 @@ describe('CookieManager', () => {
         }
 
         await RNCookieManager.setFromResponse(url, cookieStr)
-        const storedCookies = await manager.getCookies('https://foo.stockholm.se/bar/baz')
-        
+        const storedCookies = await manager.getCookies(
+          'https://foo.stockholm.se/bar/baz'
+        )
+
         expect(storedCookies).toHaveLength(1)
         expect(storedCookies[0]).toEqual(cookie)
       })
@@ -285,7 +306,8 @@ describe('CookieManager', () => {
       })
       it('handles setCookieString', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
 
         await manager.setCookieString(cookieStr, url)
         const cookies = await RNCookieManager.get(url)
@@ -295,7 +317,8 @@ describe('CookieManager', () => {
       })
       it('handles clearAll', async () => {
         const url = 'https://etjanster.stockholm.se/'
-        const cookieStr = 'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
+        const cookieStr =
+          'foo=bar; Domain=.stockholm.se; Path=/; Secure; HttpOnly'
 
         await manager.setCookieString(cookieStr, url)
         await manager.clearAll()

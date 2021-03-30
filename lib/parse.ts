@@ -1,7 +1,16 @@
 import { DateTime, DateTimeOptions } from 'luxon'
 import { toMarkdown } from './parseHtml'
 import {
-  CalendarItem, Child, Classmate, Guardian, MenuItem, NewsItem, ScheduleItem, User, Notification, MenuList,
+  CalendarItem,
+  Child,
+  Classmate,
+  Guardian,
+  MenuItem,
+  NewsItem,
+  ScheduleItem,
+  User,
+  Notification,
+  MenuList,
 } from './types'
 
 const camel = require('camelcase-keys')
@@ -12,7 +21,11 @@ const dateTimeOptions: DateTimeOptions = {
   zone: 'Europe/Stockholm',
 }
 
-const tryParseDate = (date: string, format: string, options: DateTimeOptions) => {
+const tryParseDate = (
+  date: string,
+  format: string,
+  options: DateTimeOptions
+) => {
   try {
     return DateTime.fromFormat(date, format, options).toISO()
   } catch (err) {
@@ -34,7 +47,12 @@ export const etjanst = (response: EtjanstResponse): any | any[] => {
 }
 
 export const user = ({
-  socialSecurityNumber, isAuthenticated, userFirstName, userLastName, userEmail, notificationId,
+  socialSecurityNumber,
+  isAuthenticated,
+  userFirstName,
+  userLastName,
+  userEmail,
+  notificationId,
 }: any): User => ({
   personalNumber: socialSecurityNumber,
   firstName: userFirstName,
@@ -44,15 +62,21 @@ export const user = ({
   notificationId,
 })
 
-export const child = ({
-  id, sdsId, name, status, schoolId,
-}: any): Child => ({
-  id, sdsId, name, status, schoolId,
+export const child = ({ id, sdsId, name, status, schoolId }: any): Child => ({
+  id,
+  sdsId,
+  name,
+  status,
+  schoolId,
 })
 export const children = (data: any): Child[] => etjanst(data).map(child)
 
 export const guardian = ({
-  emailhome, firstname, lastname, address, telmobile,
+  emailhome,
+  firstname,
+  lastname,
+  address,
+  telmobile,
 }: any): Guardian => ({
   firstname,
   lastname,
@@ -62,7 +86,11 @@ export const guardian = ({
 })
 
 export const classmate = ({
-  sisId, firstname, lastname, className, guardians = [],
+  sisId,
+  firstname,
+  lastname,
+  className,
+  guardians = [],
 }: any): Classmate => ({
   sisId,
   firstname,
@@ -70,26 +98,51 @@ export const classmate = ({
   className,
   guardians: guardians.map(guardian),
 })
-export const classmates = (data: any): Classmate[] => etjanst(data).map(classmate)
+export const classmates = (data: any): Classmate[] =>
+  etjanst(data).map(classmate)
 
 export const calendarItem = ({
-  id, title, description, location, longEventDateTime, longEndDateTime, allDayEvent,
+  id,
+  title,
+  description,
+  location,
+  longEventDateTime,
+  longEndDateTime,
+  allDayEvent,
 }: any): CalendarItem => ({
   id,
   title,
   description,
   location,
   allDay: allDayEvent,
-  startDate: longEventDateTime ? DateTime.fromSQL(longEventDateTime, dateTimeOptions).toISO() : undefined,
-  endDate: longEndDateTime ? DateTime.fromSQL(longEndDateTime, dateTimeOptions).toISO() : undefined,
+  startDate: longEventDateTime
+    ? DateTime.fromSQL(longEventDateTime, dateTimeOptions).toISO()
+    : undefined,
+  endDate: longEndDateTime
+    ? DateTime.fromSQL(longEndDateTime, dateTimeOptions).toISO()
+    : undefined,
 })
-export const calendar = (data: any): CalendarItem[] => etjanst(data).map(calendarItem)
+export const calendar = (data: any): CalendarItem[] =>
+  etjanst(data).map(calendarItem)
 
-const IMAGE_HOST = 'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
+const IMAGE_HOST =
+  'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
 export const newsItem = ({
-  newsId, header, preamble, body, bannerImageUrl, pubDateSe, modDateSe, authorDisplayName, altText,
+  newsId,
+  header,
+  preamble,
+  body,
+  bannerImageUrl,
+  pubDateSe,
+  modDateSe,
+  authorDisplayName,
+  altText,
 }: any): NewsItem => {
-  const published = tryParseDate(pubDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions)
+  const published = tryParseDate(
+    pubDateSe,
+    'd LLLL yyyy HH:mm',
+    dateTimeOptions
+  )
   const modified = tryParseDate(modDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions)
   return {
     header,
@@ -104,12 +157,20 @@ export const newsItem = ({
     body: toMarkdown(body),
   }
 }
-export const news = (data: any): NewsItem[] => etjanst(data).newsItems.map(newsItem)
+export const news = (data: any): NewsItem[] =>
+  etjanst(data).newsItems.map(newsItem)
 
-export const newsItemDetails = (data: any): NewsItem => newsItem(etjanst(data).currentNewsItem)
+export const newsItemDetails = (data: any): NewsItem =>
+  newsItem(etjanst(data).currentNewsItem)
 
 export const scheduleItem = ({
-  title, description, location, longEventDateTime, longEndDateTime, isSameDay, allDayEvent,
+  title,
+  description,
+  location,
+  longEventDateTime,
+  longEndDateTime,
+  isSameDay,
+  allDayEvent,
 }: any): ScheduleItem => ({
   title,
   description,
@@ -119,28 +180,31 @@ export const scheduleItem = ({
   endDate: DateTime.fromSQL(longEndDateTime, dateTimeOptions).toISO(),
   oneDayEvent: isSameDay,
 })
-export const schedule = (data: any): ScheduleItem[] => etjanst(data).map(scheduleItem)
+export const schedule = (data: any): ScheduleItem[] =>
+  etjanst(data).map(scheduleItem)
 
-export const menuItem = ({
-  title, description,
-}: any): MenuItem => ({
+export const menuItem = ({ title, description }: any): MenuItem => ({
   title,
   description: toMarkdown(description),
 })
 
 export const menu = (data: any): MenuItem[] => etjanst(data).map(menuItem)
 
-export const menuList = (data : any) : MenuItem[] => {
+export const menuList = (data: any): MenuItem[] => {
   const etjanstData = etjanst(data)
   const menuFS = etjanstData as MenuList
 
-  const currentWeek = menuFS.menus.find((item) => menuFS.selectedWeek === Number.parseInt(item.week, 10))
+  const currentWeek = menuFS.menus.find(
+    (item) => menuFS.selectedWeek === Number.parseInt(item.week, 10)
+  )
 
   if (!currentWeek) {
-    return [{
-      title: 'Måndag - Vecka ?',
-      description: 'Hittade ingen meny',
-    }]
+    return [
+      {
+        title: 'Måndag - Vecka ?',
+        description: 'Hittade ingen meny',
+      },
+    ]
   }
 
   const menuItemsFS = [
@@ -170,22 +234,15 @@ export const menuList = (data : any) : MenuItem[] => {
 }
 
 export const notification = ({
-  notification: {
-    messageid,
-    dateCreated,
-  },
+  notification: { messageid, dateCreated },
   notificationMessage: {
     messages: {
       message: {
         category,
         messagetext,
         linkbackurl,
-        messagetype: {
-          type,
-        },
-        sender: {
-          name,
-        },
+        messagetype: { type },
+        sender: { name },
       },
     },
   },
@@ -198,4 +255,5 @@ export const notification = ({
   category,
   type,
 })
-export const notifications = (data: any): Notification[] => etjanst(data).map(notification)
+export const notifications = (data: any): Notification[] =>
+  etjanst(data).map(notification)

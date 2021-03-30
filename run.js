@@ -1,8 +1,11 @@
-function requestLogger(httpModule){
+function requestLogger(httpModule) {
   var original = httpModule.request
-  httpModule.request = function(options, callback){
+  httpModule.request = function (options, callback) {
     console.log('-----------------------------------------------')
-    console.log(options.href||options.proto+"://"+options.host+options.path, options.method)
+    console.log(
+      options.href || options.proto + '://' + options.host + options.path,
+      options.method
+    )
     console.log(options.headers)
     console.log('-----------------------------------------------')
     return original(options, callback)
@@ -25,17 +28,19 @@ const init = require('./dist').default
 const [, , personalNumber] = process.argv
 
 if (!personalNumber) {
-  console.error('You must pass in a valid personal number, eg `node run 197001011111`')
+  console.error(
+    'You must pass in a valid personal number, eg `node run 197001011111`'
+  )
   process.exit(1)
 }
 
 function ensureDirectoryExistence(filePath) {
-  var dirname = path.dirname(filePath);
+  var dirname = path.dirname(filePath)
   if (fs.existsSync(dirname)) {
-    return true;
+    return true
   }
-  ensureDirectoryExistence(dirname);
-  fs.mkdirSync(dirname);
+  ensureDirectoryExistence(dirname)
+  fs.mkdirSync(dirname)
 }
 
 const record = async (info, data) => {
@@ -62,10 +67,10 @@ const record = async (info, data) => {
         break
     }
   } else if (info.error) {
-    const {message, stack} = info.error
+    const { message, stack } = info.error
     content.error = {
       message,
-      stack
+      stack,
     }
   }
   await writeFile(filename, JSON.stringify(content, null, 2))
@@ -76,7 +81,6 @@ async function run() {
   const fetch = fetchCookie(nodeFetch, cookieJar)
 
   try {
-
     const api = init(fetch, cookieJar, { record })
     const status = await api.login(personalNumber)
     status.on('PENDING', () => console.log('PENDING'))
@@ -84,7 +88,7 @@ async function run() {
     status.on('ERROR', () => console.error('ERROR'))
     status.on('OK', () => console.log('OK'))
     status.on('CANCELLED', () => {
-      console.log("User cancelled login")
+      console.log('User cancelled login')
       process.exit(0)
     })
 
@@ -98,7 +102,7 @@ async function run() {
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-/*
+      /*
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)

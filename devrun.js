@@ -38,8 +38,13 @@ async function run() {
       if (bankIdUsed) {
         const sessionCookie = getSessionCookieFromCookieJar()
         ensureDirectoryExistence('./record')
-        await writeFile('./record/latestSessionCookie.txt', JSON.stringify(sessionCookie))
-        console.log('Session cookie saved to file ./record/latesSessionCookie.txt')
+        await writeFile(
+          './record/latestSessionCookie.txt',
+          JSON.stringify(sessionCookie)
+        )
+        console.log(
+          'Session cookie saved to file ./record/latesSessionCookie.txt'
+        )
       }
       console.log('user')
       const user = await api.getUser()
@@ -116,7 +121,9 @@ async function Login(api) {
   if (useBankId) {
     console.log('*** BankId login - open BankId app ***')
     if (!personalNumber) {
-      console.error('You must pass in a valid personal number, eg `node run 197001011111`')
+      console.error(
+        'You must pass in a valid personal number, eg `node run 197001011111`'
+      )
       process.exit(1)
     }
     const status = await api.login(personalNumber)
