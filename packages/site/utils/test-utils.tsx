@@ -4,9 +4,16 @@ import { render as rtlRender } from '@testing-library/react'
 import { IntlProvider } from 'react-intl'
 import messages from '../content/locale'
 
-function render(ui, { locale = 'sv', ...renderOptions } = {}) {
+function render(
+  ui: React.ReactElement,
+  { locale = 'sv', ...renderOptions } = {}
+) {
   function Wrapper({ children }) {
-    return <IntlProvider locale={locale} messages={messages[locale]}>{children}</IntlProvider>
+    return (
+      <IntlProvider locale={locale} messages={messages[locale]}>
+        {children}
+      </IntlProvider>
+    )
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }

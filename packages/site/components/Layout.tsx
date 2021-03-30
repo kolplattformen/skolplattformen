@@ -1,10 +1,15 @@
 import Head from 'next/head'
-import React from 'react'
+import { ReactNode } from 'react'
 import favImg from '../assets/img/favicon.png'
 import logo from '../assets/img/logo.png'
 import { GA_TRACKING_ID } from './gtag'
 
-const Layout = (props) => {
+interface LayoutProps {
+  children: ReactNode
+  pageTitle: string
+}
+
+const Layout = ({ children, pageTitle }: LayoutProps) => {
   return (
     <div>
       <Head>
@@ -19,7 +24,7 @@ const Layout = (props) => {
           content="Öppna Skolplattformen är en app för iOS och Android som gör det enklare för föräldrar att komma åt uppgifter i Skolplattformen."
         />
         <meta property="og:image" content={logo} />
-        <title>{props.pageTitle}</title>
+        <title>{pageTitle}</title>
         <link rel="shortcut icon" type="image/png" href={favImg} />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -44,7 +49,7 @@ const Layout = (props) => {
         />
       </Head>
       <div className="page-wrapper" id="wrapper">
-        {props.children}
+        {children}
       </div>
     </div>
   )

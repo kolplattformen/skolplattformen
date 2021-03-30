@@ -26,7 +26,7 @@ const FunFacts = () => {
     startCounter: false,
   })
 
-  const onVisibilityChange = (isVisible) => {
+  const onVisibilityChange = (isVisible: boolean) => {
     if (isVisible) {
       setCounter({ startCounter: true })
     }

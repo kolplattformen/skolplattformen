@@ -33,5 +33,5 @@ test('handles missing Intl', () => {
 
   expect(screen.getAllByText(/2021-01/i)[0]).toBeInTheDocument()
 
-  global.intl = intl
+  global.Intl = intl
 })

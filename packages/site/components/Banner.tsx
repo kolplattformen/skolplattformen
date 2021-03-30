@@ -15,9 +15,8 @@ import { H1 } from './Typography'
 import { useIntl } from 'react-intl'
 
 const Banner = () => {
-
   const intl = useIntl()
-  
+
   return (
     <div className="header">
       <div className="relative max-w-6xl mx-auto mt-5 mb-20 md:pt-32 md:mb-52">
@@ -62,10 +61,8 @@ const Banner = () => {
                 />
               </div>
             </div>
-            <H1>{intl.formatMessage({ id: 'general.title'})}</H1>
-            <p>
-              {intl.formatMessage({ id: 'general.description'})}
-            </p>
+            <H1>{intl.formatMessage({ id: 'general.title' })}</H1>
+            <p>{intl.formatMessage({ id: 'general.description' })}</p>
             <p className="py-4 flex items-center sm:flex-row space-x-2 md:space-x-4">
               <Link.External
                 className="inline-block"
@@ -90,7 +87,7 @@ const Banner = () => {
                 />
               </Link.External>
             </p>
-            <p className="flex flex-col sm:items-center mt-5 sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+            <p className="flex flex-col mt-5 sm:items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <NextLink href="/integritet">
                 <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
                   Integritetspolicy

@@ -1,4 +1,4 @@
-import SwiperCore, { Autoplay, Pagination } from 'swiper'
+import SwiperCore, { Autoplay, Pagination, SwiperOptions } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import img4 from '../assets/img/icons/goal.svg'
 import img3 from '../assets/img/icons/planning.svg'
@@ -42,7 +42,7 @@ const FEATURES_DATA = [
 ]
 
 const Features = () => {
-  const swiperParams = {
+  const swiperParams: SwiperOptions = {
     slidesPerView: 3,
     slidesPerGroup: 3,
     centeredSlides: true,
