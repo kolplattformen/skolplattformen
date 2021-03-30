@@ -28,7 +28,7 @@ const NavLinks = ({ onClick }) => {
           onClick?.()
         }}
       >
-        <a href={href}>{children}</a>
+        {children}
       </ScrollLink>
     ) : (
       <NavLink href={href}>
@@ -42,6 +42,9 @@ const NavLinks = ({ onClick }) => {
         <Link to="wrapper" href="/#">
           {intl.formatMessage({ id: 'navigation.home'})}
         </Link>
+      </li>
+      <li>
+        <NavLink href="/historia">Media & historia</NavLink>
       </li>
       <li>
         <Link to="funktioner" href="/#funktioner">
