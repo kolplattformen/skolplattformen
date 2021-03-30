@@ -1,5 +1,6 @@
 import 'swiper/swiper-bundle.min.css'
 import '../styles/global.css'
+import { IntlProvider } from "react-intl"
 
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
@@ -7,9 +8,13 @@ import Header from '../components/Header'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { pageview } from '../components/gtag'
+import messages from '../content/locale/'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
+  const { locale, defaultLocale } = router
+
+  const currentMessages = messages[locale];
 
   // Google analytics
   useEffect(() => {
@@ -23,10 +28,16 @@ export default function App({ Component, pageProps }) {
   }, [router.events])
 
   return (
-    <Layout pageTitle="Skolplattformen">
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
-    </Layout>
+      <IntlProvider
+        locale={locale}
+        defaultLocale={defaultLocale}
+        messages={currentMessages}
+      >
+      <Layout pageTitle="Skolplattformen">
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </Layout>
+    </IntlProvider>
   )
 }

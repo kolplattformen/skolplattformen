@@ -12,8 +12,12 @@ import shape7 from '../assets/img/banner/shape7.png'
 import playstore from '../assets/img/playstore.png'
 import Link from './Link'
 import { H1 } from './Typography'
+import { useIntl } from 'react-intl'
 
 const Banner = () => {
+
+  const intl = useIntl()
+  
   return (
     <div className="header">
       <div className="relative max-w-6xl mx-auto mt-5 mb-20 md:pt-32 md:mb-52">
@@ -58,14 +62,9 @@ const Banner = () => {
                 />
               </div>
             </div>
-            <H1>Öppna Skolplattformen</H1>
+            <H1>{intl.formatMessage({ id: 'general.title'})}</H1>
             <p>
-              Oavsett om du har tre eller sju barn – det är mycket att hålla
-              reda på. Frånvaroanmälan nummer 17 i februari. Vad vikarien heter
-              den här veckan. Gympakläderna. En dåligt fungerande Skolplattform
-              som äter tid och ork? Det finns inte plats för det. Så vi har
-              byggt en bättre. Med all information du behöver som förälder.
-              Snabbare och framförallt – mycket mindre krångel.
+              {intl.formatMessage({ id: 'general.description'})}
             </p>
             <p className="py-4 flex items-center sm:flex-row space-x-2 md:space-x-4">
               <Link.External
