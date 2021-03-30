@@ -7,7 +7,7 @@ const fixEvent = (date) => ({
 
 const sabotageEvent = (date) => ({
   date,
-  description: 'Kommunen saboterar en privatutvecklad app',
+  description: 'Kommun saboterar Öppna Skolplattformen',
 })
 
 const events = [
