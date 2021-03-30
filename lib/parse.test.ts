@@ -242,7 +242,7 @@ describe('parse', () => {
                 ModDateSE: '18 december 2020 16:18',
                 Source: 'Livets hårda skolklasser',
                 Preamble:
-                  'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...',
+                  'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...',
                 BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
                 BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
                 BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
@@ -296,7 +296,7 @@ describe('parse', () => {
           'Nyhetsbild. Bildtext ej tillgänglig.'
         )
         expect(item.intro).toEqual(
-          'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...'
+          'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...'
         )
         expect(item.modified).toEqual('2020-12-18T16:18:00.000+01:00')
         expect(item.published).toEqual('2020-12-18T16:15:00.000+01:00')
@@ -377,7 +377,7 @@ describe('parse', () => {
         expect(item.header).toEqual('Avlusningsdagarna 5-7 februari 2021')
         expect(item.imageUrl).toEqual('123123.jpeg')
         expect(item.intro).toEqual(
-          'Kära vårdnadshavare!I helgen är det avlusningsdagar!'
+          'Kära vårdnadshavare! I helgen är det avlusningsdagar!'
         )
         expect(item.published).toEqual('2021-02-04T14:31:00.000+01:00')
         expect(item.modified).toEqual('2021-02-14T14:37:00.000+01:00')
