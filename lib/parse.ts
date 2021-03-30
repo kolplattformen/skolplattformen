@@ -1,4 +1,3 @@
-import { DateTime, DateTimeOptions } from 'luxon'
 import { toMarkdown } from './parseHtml'
 import {
   CalendarItem,
@@ -14,24 +13,6 @@ import {
 } from './types'
 
 const camel = require('camelcase-keys')
-
-const dateTimeOptions: DateTimeOptions = {
-  locale: 'sv',
-  setZone: true,
-  zone: 'Europe/Stockholm',
-}
-
-const tryParseDate = (
-  date: string,
-  format: string,
-  options: DateTimeOptions
-) => {
-  try {
-    return DateTime.fromFormat(date, format, options).toISO()
-  } catch (err) {
-    return ''
-  }
-}
 
 export interface EtjanstResponse {
   Success: boolean
@@ -116,10 +97,10 @@ export const calendarItem = ({
   location,
   allDay: allDayEvent,
   startDate: longEventDateTime
-    ? DateTime.fromSQL(longEventDateTime, dateTimeOptions).toUTC().toISO()
+    ? new Date(longEventDateTime).toISOString()
     : undefined,
   endDate: longEndDateTime
-    ? DateTime.fromSQL(longEndDateTime, dateTimeOptions).toUTC().toISO()
+    ? new Date(longEndDateTime).toISOString()
     : undefined,
 })
 export const calendar = (data: any): CalendarItem[] =>
@@ -137,26 +118,18 @@ export const newsItem = ({
   modDateSe,
   authorDisplayName,
   altText,
-}: any): NewsItem => {
-  const published = tryParseDate(
-    pubDateSe,
-    'd LLLL yyyy HH:mm',
-    dateTimeOptions
-  )
-  const modified = tryParseDate(modDateSe, 'd LLLL yyyy HH:mm', dateTimeOptions)
-  return {
-    header,
-    published,
-    modified,
-    id: newsId,
-    author: authorDisplayName,
-    intro: preamble.replace(/([!,.])(\w)/gi, '$1 $2'),
-    imageUrl: bannerImageUrl,
-    fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
-    imageAltText: altText,
-    body: toMarkdown(body),
-  }
-}
+}: any): NewsItem => ({
+  header,
+  published: pubDateSe ? new Date(pubDateSe).toISOString() : '',
+  modified: modDateSe ? new Date(modDateSe).toISOString() : '',
+  id: newsId,
+  author: authorDisplayName,
+  intro: preamble.replace(/([!,.])(\w)/gi, '$1 $2'),
+  imageUrl: bannerImageUrl,
+  fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
+  imageAltText: altText,
+  body: toMarkdown(body),
+})
 export const news = (data: any): NewsItem[] =>
   etjanst(data).newsItems.map(newsItem)
 
@@ -176,8 +149,8 @@ export const scheduleItem = ({
   description,
   location,
   allDayEvent,
-  startDate: DateTime.fromSQL(longEventDateTime, dateTimeOptions).toISO(),
-  endDate: DateTime.fromSQL(longEndDateTime, dateTimeOptions).toISO(),
+  startDate: new Date(longEventDateTime).toISOString(),
+  endDate: new Date(longEndDateTime).toISOString(),
   oneDayEvent: isSameDay,
 })
 export const schedule = (data: any): ScheduleItem[] =>
@@ -251,7 +224,7 @@ export const notification = ({
   message: messagetext,
   sender: name,
   url: linkbackurl,
-  dateCreated: DateTime.fromISO(dateCreated, dateTimeOptions).toISO(),
+  dateCreated: new Date(dateCreated).toISOString(),
   category,
   type,
 })

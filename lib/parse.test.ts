@@ -132,8 +132,8 @@ describe('parse', () => {
       it('parses start and end date without time', () => {
         const [, secondEvent] = parse.calendar(response)
 
-        expect(secondEvent.startDate).toEqual('2021-05-27T22:00:00.000Z')
-        expect(secondEvent.endDate).toEqual('2021-05-27T22:00:00.000Z')
+        expect(secondEvent.startDate).toEqual('2021-05-28T00:00:00.000Z')
+        expect(secondEvent.endDate).toEqual('2021-05-28T00:00:00.000Z')
       })
     })
 
@@ -240,8 +240,8 @@ describe('parse', () => {
             title: 'Canceled: Julavslutning 8C',
             description: 'Nåt kul',
             location: 'Lakritskolan',
-            startDate: '2020-12-14T14:10:00.000+01:00',
-            endDate: '2020-12-14T14:40:00.000+01:00',
+            startDate: '2020-12-14T13:10:00.000Z',
+            endDate: '2020-12-14T13:40:00.000Z',
             oneDayEvent: true,
             allDayEvent: false,
           },
@@ -327,8 +327,8 @@ describe('parse', () => {
         expect(item.intro).toEqual(
           'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...'
         )
-        expect(item.modified).toEqual('2020-12-18T16:18:00.000+01:00')
-        expect(item.published).toEqual('2020-12-18T16:15:00.000+01:00')
+        expect(item.modified).toEqual('2020-12-18T15:18:00.000Z')
+        expect(item.published).toEqual('2020-12-18T15:15:00.000Z')
       })
       it('parses body correctly', () => {
         const [item] = parse.news(response)
@@ -408,8 +408,8 @@ describe('parse', () => {
         expect(item.intro).toEqual(
           'Kära vårdnadshavare! I helgen är det avlusningsdagar!'
         )
-        expect(item.published).toEqual('2021-02-04T14:31:00.000+01:00')
-        expect(item.modified).toEqual('2021-02-14T14:37:00.000+01:00')
+        expect(item.published).toEqual('2021-02-04T13:31:00.000Z')
+        expect(item.modified).toEqual('2021-02-14T13:37:00.000Z')
         expect(item.author).toEqual('Tieto Evry')
       })
       it('parses body correctly', () => {
@@ -586,7 +586,7 @@ describe('parse', () => {
             message: 'Betygen är publicerade.',
             sender: 'Elevdokumentation',
             url: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
-            dateCreated: '2020-12-18T15:59:46.340+01:00',
+            dateCreated: '2020-12-18T14:59:46.340Z',
             category: null,
             type: 'webnotify',
           },
