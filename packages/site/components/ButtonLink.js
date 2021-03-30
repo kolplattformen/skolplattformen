@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const ButtonLink = ({ children, href, target }) => {
   return (
     <a
@@ -11,11 +13,13 @@ const ButtonLink = ({ children, href, target }) => {
   )
 }
 
-export const ButtonLinkInternal = ({ children }) => {
+export const ButtonLinkInternal = ({ children, href }) => {
   return (
-    <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
-      {children}
-    </a>
+    <Link href={href}>
+      <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full cursor-pointer md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
+        {children}
+      </a>
+    </Link>
   )
 }
 

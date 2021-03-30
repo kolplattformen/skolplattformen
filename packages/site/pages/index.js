@@ -6,13 +6,13 @@ import Features from '../components/Features'
 import FunFacts from '../components/FunFacts'
 import Pricing from '../components/Pricing'
 import Testimonials from '../components/Testimonials'
-import Media from '../components/Media'
+import TimelineLatest from '../components/TimelineLatest'
 
 const HomePage = () => {
   return (
     <>
       <Banner />
-      <Media />
+      <TimelineLatest />
       <Features />
       <FunFacts />
       <CtaTwo />
