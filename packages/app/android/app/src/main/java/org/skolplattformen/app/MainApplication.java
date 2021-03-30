@@ -2,14 +2,24 @@ package org.skolplattformen.app;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.network.ForwardingCookieHandler;
+import com.facebook.react.modules.network.OkHttpClientProvider;
+import com.facebook.react.modules.network.ReactCookieJarContainer;
 import com.facebook.soloader.SoLoader;
+
 import java.lang.reflect.InvocationTargetException;
+import java.net.CookieHandler;
 import java.util.List;
+
+import okhttp3.CookieJar;
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -45,9 +55,28 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    changeCookieManager();
   }
 
-  /**
+    private void changeCookieManager() {
+        OkHttpClientProvider.setOkHttpClientFactory(() -> {
+            OkHttpClient.Builder builder = OkHttpClientProvider.createClientBuilder(
+                    mReactNativeHost.getReactInstanceManager().getCurrentReactContext());
+
+
+            builder.cookieJar(new ReactCookieJarContainer() {
+
+                @Override
+                public void setCookieJar(CookieJar cookieJar) {
+                  super.setCookieJar(new OBJavaNetCookieJar(new ForwardingCookieHandler(mReactNativeHost.getReactInstanceManager().getCurrentReactContext())));
+                }
+            });
+            return builder.build();
+        });
+    }
+
+
+    /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
    *
@@ -77,4 +106,6 @@ public class MainApplication extends Application implements ReactApplication {
       }
     }
   }
+
+
 }
