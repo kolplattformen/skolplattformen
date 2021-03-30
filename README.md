@@ -55,6 +55,7 @@ If you are offended by this initiative, please don't - we come in peace.
 - [Johan Öbrink](https://github.com/JohanObrink)
 - [Erik Hellman](https://github.com/ErikHellman)
 - [Rickard Natt och Dag](https://github.com/believer)
+- [Viktor Sarström](https://github.com/viktorlarsson)
 - You?
 
 ## License
