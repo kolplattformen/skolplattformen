@@ -2,14 +2,11 @@ import { useCalendar } from '@skolplattformen/api-hooks'
 import { CalendarItem } from '@skolplattformen/embedded-api'
 import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
-import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { SaveToCalendar } from './saveToCalendar.component'
-
-moment.locale('sv')
 
 export const Calendar = () => {
   const child = useChild()

@@ -9,7 +9,6 @@ import {
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import { Avatar, Button, Card, Text } from '@ui-kitten/components'
-import { DateTime } from 'luxon'
 import moment from 'moment'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -45,8 +44,8 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const { data: calendar, status: calendarStatus } = useCalendar(child)
   const { data: schedule } = useSchedule(
     child,
-    DateTime.local().toISO(),
-    DateTime.local().plus({ days: 7 }).toISO()
+    moment().toISOString(),
+    moment().add(7, 'days').toISOString()
   )
 
   const notificationsThisWeek = notifications.filter((n) =>

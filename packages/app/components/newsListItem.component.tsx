@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewsItem } from '@skolplattformen/embedded-api'
-import { DateTime } from 'luxon'
 import React from 'react'
+import moment from 'moment'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
@@ -25,9 +25,7 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
   const child = useChild()
   const hasDate = item.published || item.modified
 
-  const displayDate = hasDate
-    ? DateTime.fromISO(hasDate).toRelative({ locale: 'sv', style: 'long' })
-    : null
+  const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
   return (
     <TouchableOpacity
