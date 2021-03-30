@@ -9,7 +9,7 @@ const Internal = ({ href, children }) => {
   )
 }
 
-const External = ({ className, href, children, target }) => {
+const External = ({ className, href, children, target = '_blank' }) => {
   return (
     <a
       className={classnames('text-indigo-800', className)}
