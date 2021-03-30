@@ -15,6 +15,12 @@ jobs:
         uses: actions/setup-node@v2.1.2
         with:
           node-version: 14.x
+
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Europe/Stockholm
+
       - run: yarn install --immutable --silent --non-interactive 2> >(grep -v warning 1>&2)
       - run: yarn audit
       - run: yarn lint
