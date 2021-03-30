@@ -6,6 +6,7 @@ const team = [
   { name: 'Erik Hellman', twitter: 'erikhellman' },
   { name: 'Johan Öbrink', twitter: 'johanobrink' },
   { name: 'Rickard Natt och Dag', twitter: 'rnattochdag' },
+  { name: 'Viktor Sarstrom', twitter: 'viktorsarstrom' },
   { name: 'Öppna skolplattformen', twitter: 'oppnaskolplatt' },
 ]
 
