@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/kolplattformen/skolplattformen/compare/v1.8.0...v1.9.0) (2021-03-30)
+
+
+### Features
+
+* **site:** add timeline ([#223](https://github.com/kolplattformen/skolplattformen/issues/223)) ([1e8a21f](https://github.com/kolplattformen/skolplattformen/commit/1e8a21f3fb66102b79361d53cd1d0fae42f8d0de))
+
 # [1.8.0](https://github.com/kolplattformen/skolplattformen/compare/v1.7.0...v1.8.0) (2021-03-29)
 
 
