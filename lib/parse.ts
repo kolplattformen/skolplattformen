@@ -150,7 +150,7 @@ export const newsItem = ({
     modified,
     id: newsId,
     author: authorDisplayName,
-    intro: preamble.replace(/(?<=[,.!])(\w)/ig, ' $1'),
+    intro: preamble.replace(/([!,.])(\w)/gi, '$1 $2'),
     imageUrl: bannerImageUrl,
     fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
     imageAltText: altText,

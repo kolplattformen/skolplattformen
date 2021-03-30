@@ -271,7 +271,7 @@ describe('parse', () => {
                 ModDateSE: '18 december 2020 16:18',
                 Source: 'Livets hårda skolklasser',
                 Preamble:
-                  'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...',
+                  'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...',
                 BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
                 BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
                 BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
