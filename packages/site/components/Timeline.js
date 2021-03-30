@@ -101,10 +101,7 @@ const events = [
         date: '2021-03-11',
         description: 'Öppna skolplattformen släpper ny fix (efter sportlov)',
       },
-      {
-        date: '2021-02-26',
-        description: 'Kommunen saboterar en privatutvecklad app',
-      },
+      sabotageEvent('2021-02-26'),
       {
         date: '2021-02-25',
         description:
