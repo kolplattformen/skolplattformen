@@ -1,5 +1,9 @@
 const sv = 
     {
+        'navigation.home': 'Hem',
+        'navigation.functions': 'Funktioner',
+        'navigation.screenshots': 'Screenshots',
+        'navigation.whatdoesitcost': 'Vad kostar det?',
         'general.title': 'Öppna skolplattformen',
         'general.description': `Oavsett om du har tre eller sju barn – det är mycket att hålla
         reda på. Frånvaroanmälan nummer 17 i februari. Vad vikarien heter
