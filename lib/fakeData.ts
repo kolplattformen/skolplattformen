@@ -242,8 +242,8 @@ const data: any = {
         fullImageUrl:
           'https://cdn.breakit.se/assets/article/6607f9b923edb6f85aa4417bab43c0f8.jpg?d=980x500',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-08-16T21:10:00.000+02:0',
-        modified: '2021-01-22T14:49:00.000+01:00',
+        published: '2020-08-16T21:10:00.000Z',
+        modified: '2021-01-22T14:49:00.000Z',
       },
       {
         id: 'asdfabbuasdfs',
@@ -256,8 +256,8 @@ const data: any = {
         fullImageUrl:
           'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-10-13T09:10:00.000+02:00',
-        modified: '2021-02-09T15:45:00.000+02:00',
+        published: '2020-10-13T09:10:00.000Z',
+        modified: '2021-02-09T15:45:00.000Z',
       },
       {
         id: 'asdfasdfasdfs',
@@ -270,8 +270,8 @@ const data: any = {
         fullImageUrl:
           'https://www.mitti.se/_internal/cimg!0/ejf8efxee735ymm8tm40q3hhkl36sdt.jpeg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-08-16T21:10:00.000+02:0',
-        modified: '2021-01-22T14:49:00.000+01:00',
+        published: '2020-08-16T21:10:00.000Z',
+        modified: '2021-01-22T14:49:00.000Z',
       },
     ],
     calendar: [
@@ -769,8 +769,8 @@ const data: any = {
         fullImageUrl:
           'https://timbro.se/app/uploads/2020/10/broman-skolplattformen-1280x752.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-08-16T21:10:00.000+02:0',
-        modified: '2021-01-22T14:49:00.000+01:00',
+        published: '2020-08-16T21:10:00.000Z',
+        modified: '2021-01-22T14:49:00.000Z',
       },
       {
         id: 'asdfabbuasdfs',
@@ -783,8 +783,8 @@ const data: any = {
         fullImageUrl:
           'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-10-13T09:10:00.000+02:00',
-        modified: '2021-02-09T15:45:00.000+02:00',
+        published: '2020-10-13T09:10:00.000Z',
+        modified: '2021-02-09T15:45:00.000Z',
       },
       {
         id: 'asdfasdfasdfs',
@@ -797,8 +797,8 @@ const data: any = {
         fullImageUrl:
           'https://www.mitti.se/_internal/cimg!0/ejf8efxee735ymm8tm40q3hhkl36sdt.jpeg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-08-16T21:10:00.000+02:0',
-        modified: '2021-01-22T14:49:00.000+01:00',
+        published: '2020-08-16T21:10:00.000Z',
+        modified: '2021-01-22T14:49:00.000Z',
       },
       {
         id: 'asdfasdfasdfd',
@@ -811,8 +811,8 @@ const data: any = {
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/yB_aiAWkm40',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2020-08-16T21:10:00.000+02:0',
-        modified: '2021-01-22T14:49:00.000+01:00',
+        published: '2020-08-16T21:10:00.000Z',
+        modified: '2021-01-22T14:49:00.000Z',
       },
       {
         id: 'asdfasdfasdfdsa',
@@ -824,8 +824,8 @@ const data: any = {
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/7K17MvT8qBg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2021-01-16T21:10:03.000+02:0',
-        modified: '2021-01-17T14:40:00.000+01:00',
+        published: '2021-01-16T21:10:03.000Z',
+        modified: '2021-01-17T14:40:00.000Z',
       },
       {
         id: 'asdfasdfasdfbvdsa',
@@ -838,8 +838,8 @@ const data: any = {
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/SkbEZ16VywM',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: '2021-02-02T14:10:03.000+02:0',
-        modified: '2021-02-02T14:15:00.000+01:00',
+        published: '2021-02-02T14:10:03.000Z',
+        modified: '2021-02-02T14:15:00.000Z',
       },
     ],
     calendar: [
