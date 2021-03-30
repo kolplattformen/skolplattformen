@@ -1,9 +1,9 @@
 import { Notification as NotificationType } from '@skolplattformen/embedded-api'
 import { Card, Text } from '@ui-kitten/components'
-import { DateTime } from 'luxon'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ModalWebView } from './modalWebView.component'
+import moment from 'moment'
 
 interface NotificationProps {
   item: NotificationType
@@ -14,9 +14,9 @@ export const Notification = ({ item }: NotificationProps) => {
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
 
-  const displayDate = DateTime.fromISO(item.dateCreated).toRelative({
-    locale: 'sv',
-  })
+  const displayDate = item.dateCreated
+    ? moment(item.dateCreated).fromNow()
+    : null
 
   return (
     <>
