@@ -1,6 +1,6 @@
 const sv = 
     {
-		'general.title': 'Öppna skolplattformen',
+        'general.title': 'Öppna skolplattformen',
         'general.description': `Oavsett om du har tre eller sju barn – det är mycket att hålla
         reda på. Frånvaroanmälan nummer 17 i februari. Vad vikarien heter
         den här veckan. Gympakläderna. En dåligt fungerande Skolplattform
