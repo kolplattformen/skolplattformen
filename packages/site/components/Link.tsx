@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import classnames from 'classnames'
+import { ReactNode } from 'react'
 
-const Internal = ({ href, children }) => {
+interface LinkInternalProps {
+  children: ReactNode
+  href: string
+}
+
+const Internal = ({ href, children }: LinkInternalProps) => {
   return (
     <Link href={href}>
       <a className="text-indigo-800">{children}</a>
@@ -9,7 +15,19 @@ const Internal = ({ href, children }) => {
   )
 }
 
-const External = ({ className, href, children, target = '_blank' }) => {
+interface LinkExternalProps {
+  children: ReactNode
+  className?: string
+  href: string
+  target?: string
+}
+
+const External = ({
+  className,
+  href,
+  children,
+  target = '_blank',
+}: LinkExternalProps) => {
   return (
     <a
       className={classnames('text-indigo-800', className)}

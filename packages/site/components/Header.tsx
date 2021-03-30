@@ -5,7 +5,9 @@ import NavLinks from './NavLinks'
 import classnames from 'classnames'
 import Icon from './Icon'
 
-const useMobile = (cb) => {
+type UseMobileCallback = (ev: MediaQueryListEvent) => any
+
+const useMobile = (cb: UseMobileCallback) => {
   React.useEffect(() => {
     const mobileMql = window.matchMedia('(max-width: 480px)')
 
@@ -20,7 +22,7 @@ const useMobile = (cb) => {
       mobileMql.removeEventListener?.('change', cb)
 
       if (mobileMql.removeListener) {
-        mobileMql.removeListener('change', cb)
+        mobileMql.removeListener(cb)
       }
     }
   }, [])

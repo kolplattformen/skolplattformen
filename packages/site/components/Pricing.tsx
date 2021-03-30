@@ -1,8 +1,7 @@
-import React from 'react'
 import { formatPrice } from '../utils/intl'
-import SectionTitle from './SectionTitle'
-import Icon from './Icon'
 import DownloadButtons from './DownloadButtons'
+import Icon from './Icon'
+import SectionTitle from './SectionTitle'
 
 const price = 12
 

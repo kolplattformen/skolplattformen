@@ -1,6 +1,7 @@
+import { TimelineEvent } from '../data/timelineEvents'
 import Link from './Link'
 
-const dateFormat = (date) => {
+const dateFormat = (date: string) => {
   const parsedDate = new Date(date)
 
   return Intl
@@ -11,7 +12,11 @@ const dateFormat = (date) => {
     : `${parsedDate.getFullYear()}-${parsedDate.getMonth()}`
 }
 
-const Timeline = ({ events }) => {
+interface TimelineProps {
+  events: TimelineEvent[]
+}
+
+const Timeline = ({ events }: TimelineProps) => {
   return (
     <ul className="max-w-2xl border-gray-200 md:mx-auto md:border-l-2 space-y-4 md:space-y-12">
       {events.map(({ date, media, importantDates, overview }) => (

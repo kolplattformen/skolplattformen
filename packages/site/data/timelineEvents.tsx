@@ -1,16 +1,30 @@
+import { ReactNode } from 'react'
 import Link from '../components/Link'
 
-const fixEvent = (date) => ({
+const fixEvent = (date: string) => ({
   date,
   description: 'Öppna skolplattformen släpper ny fix',
 })
 
-const sabotageEvent = (date) => ({
+const sabotageEvent = (date: string) => ({
   date,
   description: 'Kommun saboterar Öppna Skolplattformen',
 })
 
-export const events = [
+interface Event {
+  date: string
+  description: string
+  link?: string
+}
+
+export interface TimelineEvent {
+  overview: ReactNode
+  date: string
+  importantDates?: Event[]
+  media?: Event[]
+}
+
+export const events: TimelineEvent[] = [
   {
     overview: (
       <p>
