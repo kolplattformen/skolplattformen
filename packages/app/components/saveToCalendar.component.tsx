@@ -40,7 +40,6 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
     startDate,
     endDate,
     location,
-    description: notes,
   }: CalendarItem) => {
     const auth = await RNCalendarEvents.requestPermissions()
 
@@ -54,7 +53,6 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
             ? new Date(endDate).toISOString()
             : new Date().toISOString(),
           location,
-          notes,
         }
 
         const detailsWithoutEmpty = removeEmptyValues(details)
