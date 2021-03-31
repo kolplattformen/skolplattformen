@@ -10,7 +10,6 @@ import {
 import Personnummer from 'personnummer'
 import React, { useEffect, useState } from 'react'
 import {
-  Dimensions,
   Image,
   Linking,
   Platform,
@@ -28,8 +27,6 @@ import {
   SecureIcon,
   SelectIcon,
 } from './icon.component'
-
-const { width } = Dimensions.get('window')
 
 export const Login = () => {
   const { api } = useApi()
