@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/kolplattformen/skolplattformen/compare/v1.9.1...v1.9.2) (2021-03-31)
+
+
+### Bug Fixes
+
+* korrekt registrering av cookie jar ([b24e090](https://github.com/kolplattformen/skolplattformen/commit/b24e09047115c043e022a984eae4522ccec24693))
+
 ## [1.9.1](https://github.com/kolplattformen/skolplattformen/compare/v1.9.0...v1.9.1) (2021-03-31)
 
 
