@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/kolplattformen/skolplattformen/compare/v1.9.0...v1.9.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* 🐛 Refactoring and simpler registering of custom cookie jar ([e783504](https://github.com/kolplattformen/skolplattformen/commit/e78350414a5206b094fdb2bb8080efba056687a0))
+
 # [1.9.0](https://github.com/kolplattformen/skolplattformen/compare/v1.8.0...v1.9.0) (2021-03-30)
 
 
