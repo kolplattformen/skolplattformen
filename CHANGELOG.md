@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/kolplattformen/skolplattformen/compare/v1.9.2...v1.9.3) (2021-03-31)
+
+
+### Bug Fixes
+
+* ta bort anteckningar från kalenderevent ([#231](https://github.com/kolplattformen/skolplattformen/issues/231)) ([cf85a52](https://github.com/kolplattformen/skolplattformen/commit/cf85a52c50e2a4bfd8062c2000c8f945a5b96799))
+
 ## [1.9.2](https://github.com/kolplattformen/skolplattformen/compare/v1.9.1...v1.9.2) (2021-03-31)
 
 
