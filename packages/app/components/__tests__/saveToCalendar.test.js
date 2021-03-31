@@ -35,7 +35,6 @@ const defaultEvent = {
   startDate: '2021-06-19 13:00',
   endDate: '2021-06-19 14:00',
   location: 'Gubbängsskolan',
-  description: 'Vi går igenom hur Kanye West har presterat denna terminen',
 }
 
 const defaultProps = {
@@ -106,7 +105,6 @@ test('removes any null values from the event', async () => {
     startDate: '2021-06-19T11:00:00.000Z',
     endDate: '2021-06-19T12:00:00.000Z',
     location: 'Gubbängsskolan',
-    notes: 'Vi går igenom hur Kanye West har presterat denna terminen',
   })
 })
 
