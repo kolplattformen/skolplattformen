@@ -2,10 +2,28 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-es2017": "^7.0.0-beta.53",
+    "lerna": "^4.0.0"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "@react-native-community/async-storage",
+      "**/react-native", 
+      "**/react-native/**",
+      "jetifier",
+      "formik"
+    ]
   },
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
+    "build": "npx lerna run build",
     "test": "npx lerna run test --stream",
     "lint": "npx lerna run lint --stream"
   },

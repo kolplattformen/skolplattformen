@@ -1,0 +1,42 @@
+/// <reference types="node" />
+import { DateTime } from 'luxon';
+import { EventEmitter } from 'events';
+import { LoginStatusChecker } from './loginStatus';
+import { CalendarItem, Child, Classmate, CookieManager, Fetch, MenuItem, NewsItem, Notification, RequestInit, ScheduleItem, User } from './types';
+import { FetcherOptions } from './fetcher';
+export declare class Api extends EventEmitter {
+    private fetch;
+    private personalNumber?;
+    private headers;
+    private cookieManager;
+    isLoggedIn: boolean;
+    isFake: boolean;
+    childControllerUrl?: string;
+    constructor(fetch: Fetch, cookieManager: CookieManager, options?: FetcherOptions);
+    getPersonalNumber(): string | undefined;
+    private getRequestInit;
+    getSession(url: string, options?: RequestInit): Promise<RequestInit>;
+    private clearSession;
+    private addHeader;
+    login(personalNumber: string): Promise<LoginStatusChecker>;
+    setSessionCookie(sessionCookie: string): Promise<void>;
+    private retrieveSessionCookie;
+    private retrieveXsrfToken;
+    private retrieveApiKey;
+    private retrieveCdnUrl;
+    private retrieveAuthBody;
+    private retrieveCreateItemHeaders;
+    private retrieveAuthToken;
+    private fakeMode;
+    getUser(): Promise<User>;
+    getChildren(): Promise<Child[]>;
+    getCalendar(child: Child): Promise<CalendarItem[]>;
+    getClassmates(child: Child): Promise<Classmate[]>;
+    getSchedule(child: Child, from: DateTime, to: DateTime): Promise<ScheduleItem[]>;
+    getNews(child: Child): Promise<NewsItem[]>;
+    getNewsDetails(child: Child, item: NewsItem): Promise<any>;
+    getMenu(child: Child): Promise<MenuItem[]>;
+    private getMenuChoice;
+    getNotifications(child: Child): Promise<Notification[]>;
+    logout(): Promise<void>;
+}

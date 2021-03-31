@@ -1,0 +1,11 @@
+import { CalendarItem, Child, Classmate, MenuItem, NewsItem, Notification, ScheduleItem, User } from '@skolplattformen/embedded-api';
+import { EntityHookResult } from './types';
+export declare const useChildList: () => EntityHookResult<Child[]>;
+export declare const useCalendar: (child: Child) => EntityHookResult<CalendarItem[]>;
+export declare const useClassmates: (child: Child) => EntityHookResult<Classmate[]>;
+export declare const useMenu: (child: Child) => EntityHookResult<MenuItem[]>;
+export declare const useNews: (child: Child) => EntityHookResult<NewsItem[]>;
+export declare const useNewsDetails: (child: Child, news: NewsItem) => EntityHookResult<NewsItem>;
+export declare const useNotifications: (child: Child) => EntityHookResult<Notification[]>;
+export declare const useSchedule: (child: Child, from: string, to: string) => EntityHookResult<ScheduleItem[]>;
+export declare const useUser: () => EntityHookResult<User>;

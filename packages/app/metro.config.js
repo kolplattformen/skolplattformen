@@ -4,23 +4,26 @@
  *
  * @format
  */
+ const path = require('path');
+ const exclusionList = require('metro-config/src/defaults/exclusionList');
 
-const MetroConfig = require('@ui-kitten/metro-config')
-
-/**
- * @see https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance
- */
-const evaConfig = {
-  evaPackage: '@eva-design/eva',
-}
-
-module.exports = MetroConfig.create(evaConfig, {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
+ const watchFolders = [
+   path.resolve(__dirname + '/..'), //Relative path to packages directory
+   path.resolve(__dirname + '/../../node_modules') //Relative path to packages directory
+ ];
+ 
+ module.exports = {
+  resolver: {
+    blacklistRE: exclusionList([/dist\/.*/]),
+    sourceExts: ['jsx', 'js', 'ts', 'tsx'],
   },
-})
+   transformer: {
+     getTransformOptions: async () => ({
+       transform: {
+         experimentalImportSupport: false,
+         inlineRequires: false,
+       },
+     }),
+   },
+   watchFolders
+ };

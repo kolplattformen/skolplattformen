@@ -1,0 +1,11 @@
+import { CalendarItem, Child, Classmate, MenuItem, NewsItem, Notification, ScheduleItem, User } from '@skolplattformen/embedded-api';
+import { EntityReducer } from './types';
+export declare const user: EntityReducer<User>;
+export declare const children: EntityReducer<Child[]>;
+export declare const calendar: EntityReducer<CalendarItem[]>;
+export declare const classmates: EntityReducer<Classmate[]>;
+export declare const menu: EntityReducer<MenuItem[]>;
+export declare const news: EntityReducer<NewsItem[]>;
+export declare const newsDetails: EntityReducer<NewsItem[]>;
+export declare const notifications: EntityReducer<Notification[]>;
+export declare const schedule: EntityReducer<ScheduleItem[]>;
