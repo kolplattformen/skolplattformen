@@ -5,6 +5,7 @@ import React from 'react'
 import moment from 'moment'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Colors, Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 import { RootStackParamList } from './navigation.component'
@@ -55,36 +56,36 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
+    ...Layout.flex.full,
+    ...Layout.flex.row,
+    backgroundColor: Colors.neutral.white,
     borderRadius: 2,
     borderColor: '#f0f0f0',
     borderWidth: 1,
-    padding: 20,
-    marginBottom: 8,
+    padding: Sizing.t5,
+    marginBottom: Sizing.t2,
   },
   text: {
-    flex: 1,
+    ...Layout.flex.full,
   },
   title: {
-    fontSize: 18,
-    fontWeight: '700',
+    ...Typography.fontWeight.bold,
+    ...Typography.fontSize.lg,
     marginBottom: 2,
   },
   subtitle: {
+    ...Typography.fontSize.xs,
     color: '#6B7280',
-    fontSize: 12,
-    marginBottom: 8,
+    marginBottom: Sizing.t2,
   },
   intro: {
+    ...Typography.fontSize.sm,
     color: '#374151',
-    fontSize: 14,
   },
   image: {
     borderRadius: 3,
     width: 80,
     height: 80,
-    marginRight: 16,
+    marginRight: Sizing.t5,
   },
 })

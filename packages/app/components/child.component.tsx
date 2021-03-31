@@ -16,6 +16,7 @@ import {
 import React from 'react'
 import { StyleProp, StyleSheet, TextProps } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Colors, Layout as LayoutStyle } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
@@ -148,11 +149,11 @@ export const Child = () => {
 
 const styles = StyleSheet.create({
   wrap: {
-    backgroundColor: '#fff',
-    flex: 1,
+    ...LayoutStyle.flex.full,
+    backgroundColor: Colors.neutral.white,
   },
   topBar: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.neutral.white,
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

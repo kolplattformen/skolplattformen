@@ -12,6 +12,7 @@ import { Avatar, Button, Card, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import {
   CalendarOutlineIcon,
@@ -198,30 +199,30 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
 
 const styles = StyleSheet.create({
   card: {
-    marginBottom: 20,
+    marginBottom: Sizing.t5,
   },
   cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    ...Layout.flex.row,
+    ...Layout.mainAxis.center,
   },
-  cardAvatar: { margin: 20, marginRight: 0 },
-  cardHeaderText: { margin: 20, flex: 1 },
+  cardAvatar: { margin: Sizing.t5, marginRight: 0 },
+  cardHeaderText: { margin: Sizing.t5, flex: 1 },
   itemFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingVertical: 8,
+    ...Layout.flex.row,
+    ...Layout.crossAxis.evenly,
+    paddingVertical: Sizing.t2,
     borderRadius: 5,
     margin: 0,
   },
   itemFooterAbsence: {
-    alignItems: 'flex-start',
-    marginTop: 16,
+    ...Layout.mainAxis.flexStart,
+    marginTop: Sizing.t4,
   },
   item: {
     paddingHorizontal: 0,
   },
   loaded: {
-    color: '#000',
+    color: Colors.neutral.black,
   },
   loading: {
     color: '#555',

@@ -12,7 +12,6 @@ import {
 } from '@ui-kitten/components'
 import React from 'react'
 import {
-  Dimensions,
   Image,
   ListRenderItemInfo,
   SafeAreaView,
@@ -20,10 +19,9 @@ import {
   View,
 } from 'react-native'
 import ActionSheet from 'rn-actionsheet-module'
+import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
-
-const { width } = Dimensions.get('window')
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 const settingsOptions = ['Logga ut', 'Avbryt']
@@ -110,48 +108,43 @@ export const Children = () => {
 
 const styles = StyleSheet.create({
   topContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
+    ...LayoutStyle.flex.full,
+    backgroundColor: Colors.neutral.white,
   },
   loading: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...LayoutStyle.center,
+    ...LayoutStyle.flex.full,
   },
   loadingImage: {
-    height: (width / 16) * 9,
-    width: width,
+    ...Sizing.aspectRatio(),
   },
   loadingMessage: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginTop: 8,
+    ...LayoutStyle.mainAxis.center,
+    ...LayoutStyle.flex.row,
+    marginTop: Sizing.t2,
   },
   loadingText: {
-    marginLeft: 20,
+    marginLeft: Sizing.t5,
   },
   childList: {
-    flex: 1,
+    ...LayoutStyle.flex.full,
   },
   childListContainer: {
-    padding: 20,
+    padding: Sizing.t5,
   },
   emptyState: {
-    backgroundColor: '#fff',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    ...LayoutStyle.center,
+    ...LayoutStyle.flex.full,
+    backgroundColor: Colors.neutral.white,
+    paddingHorizontal: Sizing.t5,
   },
   emptyStateDescription: {
+    ...Typography.align.center,
     lineHeight: 21,
-    marginTop: 8,
-    textAlign: 'center',
+    marginTop: Sizing.t2,
   },
   emptyStateImage: {
-    // 80% size and 16:9 aspect ratio
-    height: ((width * 0.8) / 16) * 9,
-    marginTop: 20,
-    width: width * 0.8,
+    ...Sizing.aspectRatio(0.8),
+    marginTop: Sizing.t5,
   },
 })
