@@ -20,10 +20,10 @@ import static okhttp3.internal.Util.trimSubstring;
 import static okhttp3.internal.platform.Platform.WARN;
 
 public final class SkolplattformenCookieJar implements CookieJar {
-  public static final String HEADER_COOKIE_2 = "Cookie2";
-  public static final String HEADER_COOKIE = "Cookie";
-  public static final String HEADER_SET_COOKIE = "Set-Cookie";
-  private final CookieHandler cookieHandler;
+    public static final String HEADER_COOKIE_2 = "Cookie2";
+    public static final String HEADER_COOKIE = "Cookie";
+    public static final String HEADER_SET_COOKIE = "Set-Cookie";
+    private final CookieHandler cookieHandler;
 
     public SkolplattformenCookieJar(CookieHandler cookieHandler) {
         this.cookieHandler = cookieHandler;
