@@ -29,7 +29,7 @@ export const events: TimelineEvent[] = [
     overview: (
       <p>
         Månaden då Christian Landgren får nog av att försöka sammanställa
-        informationen för sina tre barn på ett översiktligt, begär ut
+        informationen för sina tre barn på ett översiktligt sätt och begär ut
         API-dokumentationen från kommunen
       </p>
     ),
@@ -317,6 +317,13 @@ export const events: TimelineEvent[] = [
       },
     ],
     media: [
+      {
+        date: '2021-03-31',
+        description:
+          'Maktkampen om Skolplattformen fortsätter: ”Välriktat sabotage” (Ny Teknik)',
+        link:
+          'https://www.nyteknik.se/digitalisering/maktkampen-om-skolplattformen-fortsatter-valriktat-sabotage-7012339',
+      },
       {
         date: '2021-03-30',
         description:
