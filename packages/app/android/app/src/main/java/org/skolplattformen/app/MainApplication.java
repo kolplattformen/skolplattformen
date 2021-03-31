@@ -8,15 +8,15 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.modules.network.OkHttpClientFactory;
 import com.facebook.react.modules.network.OkHttpClientProvider;
 import com.facebook.soloader.SoLoader;
 
-import org.skolplattformen.modules.OkHttpClientFactoryCustom;
-
 import java.lang.reflect.InvocationTargetException;
+import java.net.CookieManager;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =
@@ -53,8 +53,16 @@ public class MainApplication extends Application implements ReactApplication {
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
     ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-    mReactInstanceManager.addReactInstanceEventListener(reactContext ->
-          OkHttpClientProvider.setOkHttpClientFactory(new OkHttpClientFactoryCustom(reactContext)));
+    mReactInstanceManager.addReactInstanceEventListener(reactContext -> {
+        OkHttpClientProvider.setOkHttpClientFactory(new OkHttpClientFactory() {
+            @Override
+            public OkHttpClient createNewNetworkModuleClient() {
+                return OkHttpClientProvider.createClientBuilder(reactContext)
+                        .cookieJar(new SkolplattformenCookieJar(new CookieManager()))
+                        .build();
+            }
+        });
+    });
 
   }
 
