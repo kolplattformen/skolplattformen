@@ -19,6 +19,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import * as Yup from 'yup'
+import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
 import { BackIcon } from './icon.component'
@@ -232,17 +233,23 @@ const Absence = () => {
 export default Absence
 
 const styles = StyleSheet.create({
-  safeArea: { backgroundColor: '#fff', flex: 1 },
-  topBar: { backgroundColor: '#fff' },
-  wrap: { flex: 1, padding: 20 },
-  field: { marginBottom: 16 },
-  partOfDay: { flexDirection: 'row', marginBottom: 16 },
-  spacer: { width: 8 },
-  inputHalf: { flex: 1 },
+  safeArea: {
+    ...LayoutStyle.flex.full,
+    backgroundColor: Colors.neutral.white,
+  },
+  topBar: { backgroundColor: Colors.neutral.white },
+  wrap: {
+    ...LayoutStyle.flex.full,
+    padding: Sizing.t5,
+  },
+  field: { marginBottom: Sizing.t4 },
+  partOfDay: { ...LayoutStyle.flex.row, marginBottom: Sizing.t4 },
+  spacer: { width: Sizing.t2 },
+  inputHalf: { ...LayoutStyle.flex.full },
   label: {
+    ...Typography.fontSize.xs,
+    ...Typography.fontWeight.bold,
     color: 'rgb(150,161,184)',
-    fontWeight: '700',
-    fontSize: 12,
-    marginBottom: 4,
+    marginBottom: Sizing.t1,
   },
 })

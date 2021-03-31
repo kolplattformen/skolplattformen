@@ -21,6 +21,7 @@ import {
 import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
+import { Colors, Layout, Sizing } from '../styles'
 import {
   CloseOutlineIcon,
   PersonIcon,
@@ -209,21 +210,20 @@ export const Login = () => {
 
 const styles = StyleSheet.create({
   image: {
-    height: ((width * 0.9) / 4) * 3,
-    marginVertical: 16,
-    width: width * 0.9,
+    ...Sizing.aspectRatio(0.9, Sizing.Ratio['4:3']),
+    marginVertical: Sizing.t4,
   },
   loginForm: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    paddingHorizontal: 20,
+    ...Layout.mainAxis.flexStart,
+    ...Layout.crossAxis.flexEnd,
+    paddingHorizontal: Sizing.t5,
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
     minHeight: 45,
   },
-  loginButton: { flex: 1 },
-  loginButtonText: { color: '#fff' },
+  loginButton: { ...Layout.flex.full },
+  loginButtonText: { color: Colors.neutral.white },
   loginMethodButton: { width: 45 },
   modal: {
     width: '80%',

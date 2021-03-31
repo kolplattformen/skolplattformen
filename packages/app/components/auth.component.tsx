@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native'
 import { Login } from './login.component'
+import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 
 const funArguments = [
   'agila',
@@ -62,21 +63,23 @@ export const Auth = () => {
 }
 
 const styles = StyleSheet.create({
-  keyboardAvoidingView: { flex: 1 },
-  safeArea: { flex: 1, backgroundColor: '#fff' },
+  keyboardAvoidingView: { ...LayoutStyle.flex.full },
+  safeArea: {
+    ...LayoutStyle.flex.full,
+    backgroundColor: Colors.neutral.white,
+  },
   container: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: 20,
+    ...LayoutStyle.mainAxis.center,
+    ...LayoutStyle.crossAxis.flexEnd,
+    padding: Sizing.t5,
   },
   content: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
+    ...LayoutStyle.center,
+    ...LayoutStyle.flex.full,
   },
   subtitle: {
+    ...Typography.align.center,
     color: '#9CA3AF',
-    marginTop: 4,
-    textAlign: 'center',
+    marginTop: Sizing.t1,
   },
 })
