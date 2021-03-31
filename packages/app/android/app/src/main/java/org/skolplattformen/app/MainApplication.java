@@ -2,17 +2,23 @@ package org.skolplattformen.app;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.network.OkHttpClientFactory;
+import com.facebook.react.modules.network.OkHttpClientProvider;
 import com.facebook.soloader.SoLoader;
+
 import java.lang.reflect.InvocationTargetException;
+import java.net.CookieManager;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+import okhttp3.OkHttpClient;
 
+public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
         @Override
@@ -45,9 +51,22 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+    ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+    mReactInstanceManager.addReactInstanceEventListener(reactContext -> {
+        OkHttpClientProvider.setOkHttpClientFactory(new OkHttpClientFactory() {
+            @Override
+            public OkHttpClient createNewNetworkModuleClient() {
+                return OkHttpClientProvider.createClientBuilder(reactContext)
+                        .cookieJar(new SkolplattformenCookieJar(new CookieManager()))
+                        .build();
+            }
+        });
+    });
+
   }
 
-  /**
+    /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
    *
@@ -77,4 +96,6 @@ public class MainApplication extends Application implements ReactApplication {
       }
     }
   }
+
+
 }
