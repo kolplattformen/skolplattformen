@@ -2,22 +2,32 @@ package org.skolplattformen.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.network.ForwardingCookieHandler;
+import com.facebook.react.modules.network.NetworkingModule;
 import com.facebook.react.modules.network.OkHttpClientFactory;
 import com.facebook.react.modules.network.OkHttpClientProvider;
 import com.facebook.react.modules.network.ReactCookieJarContainer;
 import com.facebook.soloader.SoLoader;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.util.Collections;
 import java.util.List;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainApplication extends Application implements ReactApplication {
     private final ReactNativeHost mReactNativeHost =
@@ -53,20 +63,16 @@ public class MainApplication extends Application implements ReactApplication {
         SoLoader.init(this, /* native exopackage */ false);
         initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
-        ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-        mReactInstanceManager.addReactInstanceEventListener(reactContext -> {
-            OkHttpClientProvider.setOkHttpClientFactory(new OkHttpClientFactory() {
-                @Override
-                public OkHttpClient createNewNetworkModuleClient() {
-                    ReactCookieJarContainer reactCookieJarContainer = new ReactCookieJarContainer();
-                    reactCookieJarContainer.setCookieJar(new SkolplattformenCookieJar(CookieHandler.getDefault()));
-                    return OkHttpClientProvider.createClientBuilder(reactContext)
-                            .cookieJar(reactCookieJarContainer)
-                            .build();
-                }
-            });
+        ReactCookieJarContainer reactCookieJarContainer = new ReactCookieJarContainer();
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        reactCookieJarContainer.setCookieJar(new SkolplattformenCookieJar(cookieManager));
+        NetworkingModule.setCustomClientBuilder(new NetworkingModule.CustomClientBuilder() {
+            @Override
+            public void apply(OkHttpClient.Builder builder) {
+                builder.cookieJar(reactCookieJarContainer);
+            }
         });
-
     }
 
     /**
