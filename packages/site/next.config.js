@@ -2,11 +2,12 @@ const withImages = require('next-images')
 
 module.exports = {
   ...withImages(),
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/historia',
         destination: '/aktuellt',
+        permanent: true,
       },
     ]
   },
