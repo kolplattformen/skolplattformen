@@ -8,7 +8,7 @@ exports[`handles route classmates 1`] = `"https://etjanst.stockholm.se/vardnadsh
 
 exports[`handles route classmates 2`] = `"https://etjanst.stockholm.se/vardnadshavare/base/getuserdata"`;
 
-exports[`handles route image 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/NewsBanner?url=123"`;
+exports[`handles route image 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/NewsBanner?url=https://example.com/img.png"`;
 
 exports[`handles route menuChoice 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelChoice?childId=123"`;
 
@@ -18,8 +18,8 @@ exports[`handles route menuRss 1`] = `"https://etjanst.stockholm.se/vardnadshava
 
 exports[`handles route news 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArchive?bannerImageLimit=5000&childId=123"`;
 
-exports[`handles route newsDetails 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArticle?newsItemId=undefined&childId=123"`;
+exports[`handles route newsDetails 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArticle?newsItemId=321&childId=123"`;
 
 exports[`handles route notifications 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Overview/GetNotification?childId=123"`;
 
-exports[`handles route schedule 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchema?childId=123&startDate=undefined&endDate=undefined"`;
+exports[`handles route schedule 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchema?childId=123&startDate=2021-01-01&endDate=2021-01-01"`;
