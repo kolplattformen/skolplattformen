@@ -148,8 +148,8 @@ export interface ScheduleItem {
   title: string
   description?: string
   location?: string
-  startDate: string
-  endDate: string
+  startDate?: string
+  endDate?: string
   oneDayEvent: boolean
   allDayEvent: boolean
 }
