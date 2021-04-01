@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/kolplattformen/skolplattformen/compare/v1.9.4...v1.9.5) (2021-04-01)
+
+
+### Bug Fixes
+
+* 🐛 Korrekt registrering av CookieJar för Android ([74de762](https://github.com/kolplattformen/skolplattformen/commit/74de762f9aa223fc1c7507adf0cfb003994890fd))
+
 ## [1.9.4](https://github.com/kolplattformen/skolplattformen/compare/v1.9.3...v1.9.4) (2021-04-01)
 
 
