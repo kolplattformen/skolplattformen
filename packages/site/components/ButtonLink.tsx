@@ -29,7 +29,6 @@ export const ButtonLinkInternal = ({
   children,
   href,
 }: ButtonLinkInternalProps) => {
-  console.log(href)
   return (
     <Link href={href}>
       <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full cursor-pointer md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
