@@ -3,7 +3,7 @@ import { ButtonLinkInternal } from './ButtonLink'
 import Timeline from './Timeline'
 
 const TimelineLatest = () => {
-  const latestMonthsEvents = [events.slice().pop()]
+  const latestMonthsEvents = events.slice(0, 1)
 
   return (
     <section className="max-w-6xl px-5 py-8 mx-auto lg:px-0 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -30,7 +30,7 @@ const TimelineLatest = () => {
           attackeras nu appen från stadens sida. Här är vårt försök till att
           skapa transparens.
         </p>
-        <ButtonLinkInternal href="/historia">
+        <ButtonLinkInternal href="/aktuellt">
           Läs hela historien
         </ButtonLinkInternal>
       </div>
