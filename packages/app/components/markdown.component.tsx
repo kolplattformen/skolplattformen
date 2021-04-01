@@ -18,14 +18,16 @@ const rules: RenderRules = {
     return <Image key={src} src={url} style={styles.markdownImage} />
   },
   link: (node, children, _parent, styles) => {
-    if (typeof children === 'string') {
+    if (children) {
       return (
         <Text
           key={node.key}
           style={styles.link}
           onPress={() => Linking.openURL(node.attributes.href)}
         >
-          {children}
+          {children.map((child) => (
+            <>{child}</>
+          ))}
         </Text>
       )
     }
