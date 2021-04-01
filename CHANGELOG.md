@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/kolplattformen/skolplattformen/compare/v1.10.0...v1.10.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* fel i datumhantering ([#241](https://github.com/kolplattformen/skolplattformen/issues/241)) ([7e1b068](https://github.com/kolplattformen/skolplattformen/commit/7e1b068e8f8fc3a23ad16cc25cb340a026f1f5eb))
+
 # [1.10.0](https://github.com/kolplattformen/skolplattformen/compare/v1.9.5...v1.10.0) (2021-04-01)
 
 
