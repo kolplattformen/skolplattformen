@@ -117,8 +117,8 @@ export const newsItem = ({
   altText,
 }: any): NewsItem => ({
   header,
-  published: pubDateSe ? new Date(pubDateSe).toISOString() : '',
-  modified: modDateSe ? new Date(modDateSe).toISOString() : '',
+  published: parseDate(pubDateSe) || '',
+  modified: parseDate(modDateSe) || '',
   id: newsId,
   author: authorDisplayName,
   intro: preamble.replace(/([!,.])(\w)/gi, '$1 $2'),
@@ -221,7 +221,7 @@ export const notification = ({
   message: messagetext,
   sender: name,
   url: linkbackurl,
-  dateCreated: new Date(dateCreated).toISOString(),
+  dateCreated: parseDate(dateCreated) || '',
   category,
   type,
 })
