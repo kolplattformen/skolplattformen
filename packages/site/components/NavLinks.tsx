@@ -48,7 +48,7 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
         </Link>
       </li>
       <li>
-        <NavLink href="/historia">Media & historia</NavLink>
+        <NavLink href="/aktuellt">Aktuellt</NavLink>
       </li>
       <li>
         <Link to="funktioner" href="/#funktioner">
