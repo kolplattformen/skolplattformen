@@ -24,7 +24,7 @@
     "@react-navigation/native": "5.9.3",
     "@react-navigation/stack": "5.14.3",
     "@skolplattformen/api-hooks": "2.0.0",
-    "@skolplattformen/embedded-api": "^2.1.7",
+    "@skolplattformen/embedded-api": "^3.0.0",
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
     "buffer": "6.0.3",
