@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles route calender 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchoolCalender?childId=123&rowLimit=50"`;
+
+exports[`handles route children 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/GetChildren"`;
+
+exports[`handles route classmates 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/contacts/GetStudentsByClass?studentId=123"`;
+
+exports[`handles route classmates 2`] = `"https://etjanst.stockholm.se/vardnadshavare/base/getuserdata"`;
+
+exports[`handles route image 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/NewsBanner?url=123"`;
+
+exports[`handles route menuChoice 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelChoice?childId=123"`;
+
+exports[`handles route menuList 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelList?childId=123"`;
+
+exports[`handles route menuRss 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelRSS?childId=123"`;
+
+exports[`handles route news 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArchive?bannerImageLimit=5000&childId=123"`;
+
+exports[`handles route newsDetails 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArticle?newsItemId=undefined&childId=123"`;
+
+exports[`handles route notifications 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Overview/GetNotification?childId=123"`;
+
+exports[`handles route schedule 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchema?childId=123&startDate=undefined&endDate=undefined"`;
