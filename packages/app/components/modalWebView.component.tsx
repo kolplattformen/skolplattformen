@@ -60,6 +60,7 @@ export const ModalWebView = ({
             style={styles.webview}
             source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
+            thirdPartyCookiesEnabled={sharedCookiesEnabled}
           />
         )}
       </SafeAreaView>
