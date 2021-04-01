@@ -1,6 +1,8 @@
 
 package org.skolplattformen.app;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
@@ -31,6 +33,9 @@ public final class SkolplattformenCookieJar implements CookieJar {
 
     @Override
     public void saveFromResponse(@NonNull HttpUrl url, @NonNull List<Cookie> cookies) {
+        for (Cookie cookie : cookies) {
+            Log.d("CookieJar", "saveFromResponse: " + cookie.name() + ": " + cookie.value());
+        }
         if (cookieHandler != null) {
             List<String> cookieStrings = new ArrayList<>();
             for (Cookie cookie : cookies) {
@@ -48,6 +53,11 @@ public final class SkolplattformenCookieJar implements CookieJar {
     @Override
     @NonNull
     public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
+        if (cookieHandler == null) {
+            Platform.get().log(WARN, "No cookie handler set!", null);
+            Log.w("CooieJar", "No cookie jag set!");
+            return Collections.emptyList();
+        }
         // The RI passes all headers. We don't have 'em, so we don't pass 'em!
         Map<String, List<String>> headers = Collections.emptyMap();
         Map<String, List<String>> cookieHeaders;
