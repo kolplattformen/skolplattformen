@@ -9,16 +9,21 @@ import { CloseIcon } from './icon.component'
 
 interface ModalWebViewProps {
   url: string
+  sharedCookiesEnabled: boolean
   onClose: () => void
 }
 
-export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
+export const ModalWebView = ({
+  url,
+  onClose,
+  sharedCookiesEnabled,
+}: ModalWebViewProps) => {
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
   const [headers, setHeaders] = useState()
 
   useEffect(() => {
-    const getHeaders = async (urlToGetSessionFor) => {
+    const getHeaders = async (urlToGetSessionFor: string) => {
       if (sharedCookiesEnabled) return
       const { headers: newHeaders } = await api.getSession(urlToGetSessionFor)
       setHeaders(newHeaders)

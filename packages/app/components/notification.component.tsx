@@ -19,9 +19,9 @@ export const Notification = ({ item }: NotificationProps) => {
     ? moment(item.dateCreated).fromNow()
     : null
 
-  const sharedCookiesEnabled = () => {
-    return item.url && item.url.startsWith('https://start.unikum.net/')
-  }
+  const sharedCookiesEnabled: boolean = Boolean(
+    item.url && item.url.startsWith('https://start.unikum.net/')
+  )
 
   return (
     <>
@@ -45,7 +45,7 @@ export const Notification = ({ item }: NotificationProps) => {
         <ModalWebView
           url={item.url}
           onClose={close}
-          sharedCookiesEnabled={sharedCookiesEnabled()}
+          sharedCookiesEnabled={sharedCookiesEnabled}
         />
       )}
     </>
