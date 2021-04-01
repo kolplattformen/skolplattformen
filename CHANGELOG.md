@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/kolplattformen/skolplattformen/compare/v1.9.5...v1.10.0) (2021-04-01)
+
+
+### Features
+
+* 🎸 release 1.6.0 för Android ([241c984](https://github.com/kolplattformen/skolplattformen/commit/241c9846a34a025ec480488162a2154184d60a4e))
+
 ## [1.9.5](https://github.com/kolplattformen/skolplattformen/compare/v1.9.4...v1.9.5) (2021-04-01)
 
 
