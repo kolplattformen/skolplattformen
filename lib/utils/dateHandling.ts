@@ -24,16 +24,16 @@ export const parseDate = (input?: string): string | undefined => {
     return onlyDate.toUTC().toISO()
   }
 
-  const dateLongForm = dateParse('dd MMMM yyyy')
+  const dateLongForm = dateParse('d MMMM yyyy')
 
   if (dateLongForm.isValid) {
     return dateLongForm.toUTC().toISO()
   }
 
-  const dateLongFormOneDigit = dateParse('d MMMM yyyy')
+  const dateTimeLongForm = dateParse('d MMMM yyyy HH:mm')
 
-  if (dateLongFormOneDigit.isValid) {
-    return dateLongFormOneDigit.toUTC().toISO()
+  if (dateTimeLongForm.isValid) {
+    return dateTimeLongForm.toUTC().toISO()
   }
 
   // Explicit return to satisfy ESLint
