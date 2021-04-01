@@ -1,3 +1,10 @@
+## [1.9.4](https://github.com/kolplattformen/skolplattformen/compare/v1.9.3...v1.9.4) (2021-04-01)
+
+
+### Bug Fixes
+
+* förbättra tillgänglighet för länkar i navigering ([#237](https://github.com/kolplattformen/skolplattformen/issues/237)) ([9a3b036](https://github.com/kolplattformen/skolplattformen/commit/9a3b0360d6f84f5f4070759ec42edb013970d49b))
+
 ## [1.9.3](https://github.com/kolplattformen/skolplattformen/compare/v1.9.2...v1.9.3) (2021-03-31)
 
 
