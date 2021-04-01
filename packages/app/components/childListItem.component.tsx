@@ -49,14 +49,16 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     moment().add(7, 'days').toISOString()
   )
 
-  const notificationsThisWeek = notifications.filter((n) =>
-    moment(n.dateCreated).isSame('week')
-  )
+  const notificationsThisWeek = notifications.filter(({ dateCreated }) => {
+    dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
+  })
 
   const scheduleAndCalendarThisWeek = [
     ...(calendar ?? []),
     ...(schedule ?? []),
-  ].filter((a) => moment(a.startDate).isSame('week'))
+  ].filter(({ startDate }) =>
+    startDate ? moment(startDate).isSame(moment(), 'week') : false
+  )
 
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates. let's pick the first one and select theirs class
