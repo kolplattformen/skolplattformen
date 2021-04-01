@@ -7,6 +7,8 @@ test.each([
   ['12 oktober 2020', '2020-10-11T22:00:00.000Z'],
   ['5 oktober 2020 11:34', '2020-10-05T09:34:00.000Z'],
   ['15 oktober 2020 11:34', '2020-10-15T09:34:00.000Z'],
+  ['2020-12-18T15:59:46.34', '2020-12-18T14:59:46.340Z'],
+  ['2020-12-18T15:59:46.340Z', '2020-12-18T15:59:46.340Z'],
   ['This is an invalid date', undefined],
 ])('handles date parsing of %s', (input, expected) => {
   expect(parseDate(input)).toEqual(expected)
