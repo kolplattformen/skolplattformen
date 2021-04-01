@@ -132,8 +132,8 @@ describe('parse', () => {
       it('parses start and end date without time', () => {
         const [, secondEvent] = parse.calendar(response)
 
-        expect(secondEvent.startDate).toEqual('2021-05-28T00:00:00.000Z')
-        expect(secondEvent.endDate).toEqual('2021-05-28T00:00:00.000Z')
+        expect(secondEvent.startDate).toEqual('2021-05-27T22:00:00.000Z')
+        expect(secondEvent.endDate).toEqual('2021-05-27T22:00:00.000Z')
       })
     })
 

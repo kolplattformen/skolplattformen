@@ -1,3 +1,4 @@
+import { parseDate } from './utils/dateHandling'
 import { toMarkdown } from './parseHtml'
 import {
   CalendarItem,
@@ -96,12 +97,8 @@ export const calendarItem = ({
   description,
   location,
   allDay: allDayEvent,
-  startDate: longEventDateTime
-    ? new Date(longEventDateTime).toISOString()
-    : undefined,
-  endDate: longEndDateTime
-    ? new Date(longEndDateTime).toISOString()
-    : undefined,
+  startDate: parseDate(longEventDateTime),
+  endDate: parseDate(longEndDateTime),
 })
 export const calendar = (data: any): CalendarItem[] =>
   etjanst(data).map(calendarItem)
@@ -149,8 +146,8 @@ export const scheduleItem = ({
   description,
   location,
   allDayEvent,
-  startDate: new Date(longEventDateTime).toISOString(),
-  endDate: new Date(longEndDateTime).toISOString(),
+  startDate: parseDate(longEventDateTime),
+  endDate: parseDate(longEndDateTime),
   oneDayEvent: isSameDay,
 })
 export const schedule = (data: any): ScheduleItem[] =>
