@@ -72,7 +72,7 @@ test('renders child in preschool', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Förskoleklass')).toBeTruthy()
+  expect(screen.getByText('Fritids')).toBeTruthy()
 })
 
 test('renders child in elementary school', () => {
@@ -190,7 +190,7 @@ test('handles multiple statuses for a child', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet, Grundskolan, Förskoleklass')).toBeTruthy()
+  expect(screen.getByText('Gymnasiet, Grundskolan, Fritids')).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {

@@ -9,23 +9,28 @@ import { CloseIcon } from './icon.component'
 
 interface ModalWebViewProps {
   url: string
+  sharedCookiesEnabled: boolean
   onClose: () => void
 }
 
-export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
+export const ModalWebView = ({
+  url,
+  onClose,
+  sharedCookiesEnabled,
+}: ModalWebViewProps) => {
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
   const [headers, setHeaders] = useState()
 
-  const getHeaders = async () => {
-    const { headers: updatedHeaders } = await api.getSession(url)
-    setHeaders(updatedHeaders)
-  }
-
   useEffect(() => {
-    getHeaders()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url])
+    const getHeaders = async (urlToGetSessionFor: string) => {
+      if (sharedCookiesEnabled) return
+      const { headers: newHeaders } = await api.getSession(urlToGetSessionFor)
+      setHeaders(newHeaders)
+    }
+
+    getHeaders(url)
+  }, [url, sharedCookiesEnabled, api])
 
   const uri = new URI(url)
 
@@ -50,8 +55,13 @@ export const ModalWebView = ({ url, onClose }: ModalWebViewProps) => {
             </TouchableOpacity>
           </View>
         </View>
-        {headers && (
-          <WebView style={styles.webview} source={{ uri: url, headers }} />
+        {(headers || sharedCookiesEnabled) && (
+          <WebView
+            style={styles.webview}
+            source={{ uri: url, headers }}
+            sharedCookiesEnabled={sharedCookiesEnabled}
+            thirdPartyCookiesEnabled={sharedCookiesEnabled}
+          />
         )}
       </SafeAreaView>
     </Modal>
