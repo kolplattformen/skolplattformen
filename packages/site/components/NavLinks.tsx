@@ -23,6 +23,7 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
       <ScrollLink
         activeClass="current"
         to={to}
+        href={`#${to}`}
         spy={true}
         smooth={true}
         offset={-70}
