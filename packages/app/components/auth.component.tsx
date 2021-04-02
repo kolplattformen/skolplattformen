@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { Login } from './login.component'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 
 const funArguments = [
   'agila',
@@ -45,17 +46,19 @@ export const Auth = () => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.safeArea}>
-          <View style={styles.content}>
-            <Layout style={styles.container}>
-              <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
-                Öppna Skolplattformen
-              </Text>
-              <Text category="h6" style={styles.subtitle}>
-                Det {argument} alternativet
-              </Text>
-              <Login />
-            </Layout>
-          </View>
+          <SafeAreaViewContainer>
+            <View style={styles.content}>
+              <Layout style={styles.container}>
+                <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
+                  Öppna Skolplattformen
+                </Text>
+                <Text category="h6" style={styles.subtitle}>
+                  Det {argument} alternativet
+                </Text>
+                <Login />
+              </Layout>
+            </View>
+          </SafeAreaViewContainer>
         </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

@@ -1,4 +1,6 @@
 import React from 'react'
+import { StyleSheet, Platform } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import * as eva from '@eva-design/eva'
@@ -22,12 +24,17 @@ export default () => {
 
   return (
     <ApiProvider api={api} storage={AsyncStorage}>
-      <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent />
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={{ ...eva.light, ...customization }}>
-        <AppNavigator />
-        {FullBlurView}
-      </ApplicationProvider>
+      <SafeAreaProvider>
+        <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent />
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={{ ...eva.light, ...customization }}
+        >
+          <AppNavigator />
+          {FullBlurView}
+        </ApplicationProvider>
+      </SafeAreaProvider>
     </ApiProvider>
   )
 }
