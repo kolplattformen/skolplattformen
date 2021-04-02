@@ -133,7 +133,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         }
         accessoryLeft={CalendarOutlineIcon}
       >
-        {`${(notifications || []).length}`}
+        {`${(calendar || []).length}`}
       </Button>
       <Button
         style={[styles.item, styles[classmatesStatus]]}
