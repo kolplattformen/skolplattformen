@@ -24,7 +24,7 @@ export const Calendar = () => {
     <List
       contentContainerStyle={styles.contentContainer}
       data={data.sort((a, b) =>
-        a.startDate && b.startDate ? b.startDate.localeCompare(a.startDate) : 0
+        a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0
       )}
       ItemSeparatorComponent={Divider}
       renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
