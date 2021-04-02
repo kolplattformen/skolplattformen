@@ -6,6 +6,7 @@ import {
   useNews,
   useNotifications,
   useSchedule,
+  useMenu,
 } from '@skolplattformen/api-hooks'
 import { render } from '../../utils/testHelpers'
 import React from 'react'
@@ -29,6 +30,7 @@ beforeEach(() => {
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
   useClassmates.mockReturnValueOnce({ data: [], status: 'loaded' })
   useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useMenu.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNavigation.mockReturnValue({ navigate: jest.fn() })
 })
 
