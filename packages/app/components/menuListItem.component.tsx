@@ -7,8 +7,8 @@ interface MenuListItemProps {
   item: MenuItem
 }
 
-export const MenuListItem = ( {item}: MenuListItemProps) => {
-  const cardHeader = (props: any) => {
+export const MenuListItem = ({ item }: MenuListItemProps) => {
+  const cardHeader = () => {
     return (
       <View style={styles.topContainer}>
         <Text category="h6">{`${item.title}`}</Text>
@@ -19,9 +19,7 @@ export const MenuListItem = ( {item}: MenuListItemProps) => {
   return (
     <View style={styles.container}>
       <Card header={cardHeader} style={styles.contentContainer}>
-        <Text>
-        {`${item.description}`}
-        </Text>
+        <Text>{`${item.description}`}</Text>
       </Card>
     </View>
   )
@@ -29,7 +27,6 @@ export const MenuListItem = ( {item}: MenuListItemProps) => {
 
 const styles = StyleSheet.create({
   container: {
-  //  height: '100%',
     width: '100%',
   },
   contentContainer: {

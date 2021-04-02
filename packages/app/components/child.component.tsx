@@ -20,12 +20,10 @@ import { Colors, Layout as LayoutStyle } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
-import { Classmates } from './classmates.component'
 import { Menu } from './menu.component'
 import {
   BackIcon,
   CalendarOutlineIcon,
-  ClassIcon,
   MenuIcon,
   NewsIcon,
   NotificationsIcon,
@@ -76,14 +74,6 @@ const MenuScreen = () => {
   )
 }
 
-// const ClassmatesScreen = () => {
-//   return (
-//     <Layout>
-//       <Classmates />
-//     </Layout>
-//   )
-// }
-
 const TabTitle = ({ style, children }: TabTitleProps) => (
   <Text adjustsFontSizeToFit numberOfLines={1} style={style}>
     {children}
@@ -114,10 +104,6 @@ const BottomTabBar = ({
       title={(props) => <TabTitle {...props}>Veckans meny</TabTitle>}
       icon={MenuIcon}
     />
-    {/* <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
-      icon={ClassIcon}
-    /> */}
   </BottomNavigation>
 )
 
@@ -130,7 +116,6 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
     <Screen name="Notifieringar" component={NotificationsScreen} />
     <Screen name="Kalender" component={CalendarScreen} />
     <Screen name="Meny" component={MenuScreen} />
-    {/* <Screen name="Klassen" component={ClassmatesScreen} /> */}
   </Navigator>
 )
 

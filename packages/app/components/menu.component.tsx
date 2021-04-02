@@ -1,13 +1,12 @@
 import { useMenu } from '@skolplattformen/api-hooks'
 import { MenuItem } from '@skolplattformen/embedded-api'
-import {List, Text } from '@ui-kitten/components'
+import { List, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
-
 
 moment.locale('sv')
 
@@ -28,9 +27,7 @@ export const Menu = () => {
       contentContainerStyle={styles.contentContainer}
       data={data}
       renderItem={({ item }: ListRenderItemInfo<MenuItem>) => (
-        
-        <MenuListItem key={item.title} item={item} ></MenuListItem>
-        
+        <MenuListItem key={item.title} item={item} />
       )}
       style={styles.container}
     />

@@ -17,7 +17,6 @@ import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import {
   CalendarOutlineIcon,
-  ClassIcon,
   MenuIcon,
   NewsIcon,
   NotificationsIcon,
@@ -43,7 +42,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     child
   )
   const { data: news, status: newsStatus } = useNews(child)
-  const { data: classmates, status: classmatesStatus } = useClassmates(child)
+  const { data: classmates } = useClassmates(child)
   const { data: calendar, status: calendarStatus } = useCalendar(child)
   const { data: schedule } = useSchedule(
     child,
@@ -151,21 +150,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         }
         accessoryLeft={MenuIcon}
       />
-      {/* <Button
-        style={[styles.item, styles[classmatesStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: 'Klassen',
-          })
-        }
-        accessoryLeft={ClassIcon}
-      >
-        {`${(classmates || []).length}`}
-      </Button> */}
     </View>
   )
 
