@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/kolplattformen/skolplattformen/compare/v1.10.2...v1.10.3) (2021-04-02)
+
+
+### Bug Fixes
+
+* 🐛 siffran vid kalenderikonen visade fel antal ([b34a2c2](https://github.com/kolplattformen/skolplattformen/commit/b34a2c20b6b28b3de9cd8bc226813d5b02857144))
+
 ## [1.10.2](https://github.com/kolplattformen/skolplattformen/compare/v1.10.1...v1.10.2) (2021-04-02)
 
 
