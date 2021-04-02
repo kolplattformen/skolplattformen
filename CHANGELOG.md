@@ -1,3 +1,10 @@
+## [1.10.4](https://github.com/kolplattformen/skolplattformen/compare/v1.10.3...v1.10.4) (2021-04-02)
+
+
+### Bug Fixes
+
+* 🐛 calendar sorting ([c0f5336](https://github.com/kolplattformen/skolplattformen/commit/c0f5336012c7fc7145ba042a1df76054ba1aed75))
+
 ## [1.10.3](https://github.com/kolplattformen/skolplattformen/compare/v1.10.2...v1.10.3) (2021-04-02)
 
 
