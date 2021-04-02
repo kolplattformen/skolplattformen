@@ -49,16 +49,29 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     moment().add(7, 'days').toISOString()
   )
 
-  const notificationsThisWeek = notifications.filter(({ dateCreated }) => {
+  const notificationsThisWeek = notifications.filter(({ dateCreated }) =>
     dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
-  })
+  )
+
+  const newsThisWeek = news.filter(({ published }) =>
+    published ? moment(published).isSame(moment(), 'week') : false
+  )
 
   const scheduleAndCalendarThisWeek = [
     ...(calendar ?? []),
     ...(schedule ?? []),
   ].filter(({ startDate }) =>
-    startDate ? moment(startDate).isSame(moment(), 'week') : false
+    startDate
+      ? moment(startDate).isBetween(
+          moment().startOf('day'),
+          moment().add(7, 'days')
+        )
+      : false
   )
+
+  const displayDate = (date: moment.MomentInput) => {
+    return moment(date).fromNow()
+  }
 
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates. let's pick the first one and select theirs class
@@ -173,17 +186,25 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       onPress={() => navigation.navigate('Child', { child, color })}
     >
       {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
-        <Text appearance="hint" category="c1" key={i} style={styles.loaded}>
-          {`${calendarItem.title}`}
+        <Text appearance="hint" category="c1" key={i}>
+          {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
         </Text>
       ))}
-      {notificationsThisWeek.map((notification, i) => (
+      {notificationsThisWeek.slice(0, 3).map((notification, i) => (
         <Text appearance="hint" category="c1" key={i}>
-          {`${notification.message}`}
+          {`Avisering: ${notification.message} (${displayDate(
+            notification.dateCreated
+          )})`}
+        </Text>
+      ))}
+      {newsThisWeek.slice(0, 3).map((newsItem, i) => (
+        <Text appearance="hint" category="c1" key={i}>
+          {`Nyhet: ${newsItem.header} (${displayDate(newsItem.published)})`}
         </Text>
       ))}
       {scheduleAndCalendarThisWeek.length ||
-      notificationsThisWeek.length ? null : (
+      notificationsThisWeek.length ||
+      newsThisWeek.length ? null : (
         <Text appearance="hint" category="c1">
           Inga nya inlägg denna vecka.
         </Text>
