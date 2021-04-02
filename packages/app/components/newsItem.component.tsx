@@ -15,6 +15,7 @@ import { BackIcon } from './icon.component'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
 import { RootStackParamList } from './navigation.component'
+import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 
 interface NewsItemProps {
   navigation: StackNavigationProp<RootStackParamList, 'NewsItem'>
@@ -45,45 +46,47 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <TopNavigation
-        title="Nyhet från Skolplattformen"
-        alignment="center"
-        accessoryLeft={BackAction}
-      />
-      <Divider />
+      <SafeAreaViewContainer>
+        <TopNavigation
+          title="Nyhet från Skolplattformen"
+          alignment="center"
+          accessoryLeft={BackAction}
+        />
+        <Divider />
 
-      <ScrollView
-        contentContainerStyle={styles.article}
-        style={styles.scrollView}
-      >
-        <Text style={styles.title}>{newsItem.header}</Text>
-        {dateIsValid(newsItem.published) && (
-          <Text style={[styles.subtitle, styles.published]}>
-            <Text style={styles.strong}>Publicerad:</Text>{' '}
-            {displayDate(newsItem.published)}
-          </Text>
-        )}
-        {dateIsValid(newsItem.modified) && (
-          <Text style={styles.subtitle}>
-            <Text style={styles.strong}>Uppdaterad:</Text>{' '}
-            {displayDate(newsItem.modified)}
-          </Text>
-        )}
-        <View style={styles.body}>
-          <Markdown
-            style={{
-              body: { color: '#1F2937', fontSize: 16, lineHeight: 26 },
-              heading1: { color: '#1F2937', fontSize: 20 },
-              heading2: { color: '#1F2937', fontSize: 18 },
-            }}
-          >
-            {data.body}
-          </Markdown>
-          {newsItem.fullImageUrl && (
-            <Image src={newsItem.fullImageUrl} style={styles.image} />
+        <ScrollView
+          contentContainerStyle={styles.article}
+          style={styles.scrollView}
+        >
+          <Text style={styles.title}>{newsItem.header}</Text>
+          {dateIsValid(newsItem.published) && (
+            <Text style={[styles.subtitle, styles.published]}>
+              <Text style={styles.strong}>Publicerad:</Text>{' '}
+              {displayDate(newsItem.published)}
+            </Text>
           )}
-        </View>
-      </ScrollView>
+          {dateIsValid(newsItem.modified) && (
+            <Text style={styles.subtitle}>
+              <Text style={styles.strong}>Uppdaterad:</Text>{' '}
+              {displayDate(newsItem.modified)}
+            </Text>
+          )}
+          <View style={styles.body}>
+            <Markdown
+              style={{
+                body: { color: '#1F2937', fontSize: 16, lineHeight: 26 },
+                heading1: { color: '#1F2937', fontSize: 20 },
+                heading2: { color: '#1F2937', fontSize: 18 },
+              }}
+            >
+              {data.body}
+            </Markdown>
+            {newsItem.fullImageUrl && (
+              <Image src={newsItem.fullImageUrl} style={styles.image} />
+            )}
+          </View>
+        </ScrollView>
+      </SafeAreaViewContainer>
     </SafeAreaView>
   )
 }
