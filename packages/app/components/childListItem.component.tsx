@@ -16,9 +16,9 @@ import { StyleSheet, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import {
-  BookOpenIcon,
   CalendarOutlineIcon,
   ClassIcon,
+  MenuIcon,
   NewsIcon,
   NotificationsIcon,
 } from './icon.component'
@@ -149,9 +149,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             initialRouteName: 'Meny',
           })
         }
-        accessoryLeft={BookOpenIcon}
+        accessoryLeft={MenuIcon}
       />
-      <Button
+      {/* <Button
         style={[styles.item, styles[classmatesStatus]]}
         status="control"
         size="small"
@@ -165,7 +165,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         accessoryLeft={ClassIcon}
       >
         {`${(classmates || []).length}`}
-      </Button>
+      </Button> */}
     </View>
   )
 

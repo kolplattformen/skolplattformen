@@ -24,9 +24,9 @@ import { Classmates } from './classmates.component'
 import { Menu } from './menu.component'
 import {
   BackIcon,
-  BookOpenIcon,
   CalendarOutlineIcon,
   ClassIcon,
+  MenuIcon,
   NewsIcon,
   NotificationsIcon,
 } from './icon.component'
@@ -76,13 +76,13 @@ const MenuScreen = () => {
   )
 }
 
-const ClassmatesScreen = () => {
-  return (
-    <Layout>
-      <Classmates />
-    </Layout>
-  )
-}
+// const ClassmatesScreen = () => {
+//   return (
+//     <Layout>
+//       <Classmates />
+//     </Layout>
+//   )
+// }
 
 const TabTitle = ({ style, children }: TabTitleProps) => (
   <Text adjustsFontSizeToFit numberOfLines={1} style={style}>
@@ -112,12 +112,12 @@ const BottomTabBar = ({
     />
     <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Veckans meny</TabTitle>}
-      icon={BookOpenIcon}
+      icon={MenuIcon}
     />
-    <BottomNavigationTab
+    {/* <BottomNavigationTab
       title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
       icon={ClassIcon}
-    />
+    /> */}
   </BottomNavigation>
 )
 
@@ -130,7 +130,7 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
     <Screen name="Notifieringar" component={NotificationsScreen} />
     <Screen name="Kalender" component={CalendarScreen} />
     <Screen name="Meny" component={MenuScreen} />
-    <Screen name="Klassen" component={ClassmatesScreen} />
+    {/* <Screen name="Klassen" component={ClassmatesScreen} /> */}
   </Navigator>
 )
 

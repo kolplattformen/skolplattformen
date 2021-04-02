@@ -1,12 +1,17 @@
 import { Text, Card } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { MenuItem } from '@skolplattformen/embedded-api'
 
-export const Menu = ({ menuItem }) => {
-  const cardHeader = (props) => {
+interface MenuListItemProps {
+  item: MenuItem
+}
+
+export const MenuListItem = ( {item}: MenuListItemProps) => {
+  const cardHeader = (props: any) => {
     return (
       <View style={styles.topContainer}>
-        <Text category="h6">Måndag</Text>
+        <Text category="h6">{`${item.title}`}</Text>
       </View>
     )
   }
@@ -15,7 +20,7 @@ export const Menu = ({ menuItem }) => {
     <View style={styles.container}>
       <Card header={cardHeader} style={styles.contentContainer}>
         <Text>
-          Här ska menyn för måndag stå, tex Köttbullar med potatis och sås
+        {`${item.description}`}
         </Text>
       </Card>
     </View>
@@ -24,11 +29,11 @@ export const Menu = ({ menuItem }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+  //  height: '100%',
     width: '100%',
   },
   contentContainer: {
-    margin: 10,
+    margin: 5,
     justifyContent: 'flex-start',
   },
   topContainer: {
