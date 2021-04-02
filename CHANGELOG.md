@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/kolplattformen/skolplattformen/compare/v1.10.1...v1.10.2) (2021-04-02)
+
+
+### Bug Fixes
+
+* 🐛 Fixes issue where settings icon was hidden on Android ([f3d3af1](https://github.com/kolplattformen/skolplattformen/commit/f3d3af1b6e30fa011a6d553b5c9e210aca63cc5c)), closes [#180](https://github.com/kolplattformen/skolplattformen/issues/180)
+
 ## [1.10.1](https://github.com/kolplattformen/skolplattformen/compare/v1.10.0...v1.10.1) (2021-04-01)
 
 
