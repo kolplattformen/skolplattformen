@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/kolplattformen/skolplattformen/compare/v1.10.4...v1.11.0) (2021-04-03)
+
+
+### Features
+
+* 🎸 Datum i kalendern ([b1e2d4f](https://github.com/kolplattformen/skolplattformen/commit/b1e2d4f541f44ac0223d12719d1e1caf0f28fd02))
+
 ## [1.10.4](https://github.com/kolplattformen/skolplattformen/compare/v1.10.3...v1.10.4) (2021-04-02)
 
 
