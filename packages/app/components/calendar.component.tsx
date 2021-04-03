@@ -31,7 +31,9 @@ export const Calendar = () => {
         <ListItem
           disabled={true}
           title={`${item.title}`}
-          description={`${moment(item.startDate).fromNow()}`}
+          description={`${moment(item.startDate).format(
+            'YYYY-MM-DD'
+          )} (${moment(item.startDate).fromNow()})`}
           accessoryLeft={CalendarOutlineIcon}
           accessoryRight={() => <SaveToCalendar event={item} />}
         />
