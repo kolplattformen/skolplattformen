@@ -25,8 +25,8 @@ const rules: RenderRules = {
           style={styles.link}
           onPress={() => Linking.openURL(node.attributes.href)}
         >
-          {children.map((child) => (
-            <>{child}</>
+          {children.map((child, index) => (
+            <React.Fragment key={index}>{child}</React.Fragment>
           ))}
         </Text>
       )
