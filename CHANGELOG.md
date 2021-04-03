@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/kolplattformen/skolplattformen/compare/v1.11.0...v1.11.1) (2021-04-03)
+
+
+### Bug Fixes
+
+* 🐛 Remove warning on markdown component '... unique key ..' ([5ab6ce2](https://github.com/kolplattformen/skolplattformen/commit/5ab6ce2b094aa5becfdb633ec8af071f49fa50ed))
+
 # [1.11.0](https://github.com/kolplattformen/skolplattformen/compare/v1.10.4...v1.11.0) (2021-04-03)
 
 
