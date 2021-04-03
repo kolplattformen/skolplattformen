@@ -20,11 +20,11 @@ import { Colors, Layout as LayoutStyle } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
-import { Classmates } from './classmates.component'
+import { Menu } from './menu.component'
 import {
   BackIcon,
   CalendarOutlineIcon,
-  ClassIcon,
+  MenuIcon,
   NewsIcon,
   NotificationsIcon,
 } from './icon.component'
@@ -66,10 +66,10 @@ const CalendarScreen = () => {
   )
 }
 
-const ClassmatesScreen = () => {
+const MenuScreen = () => {
   return (
     <Layout>
-      <Classmates />
+      <Menu />
     </Layout>
   )
 }
@@ -101,8 +101,8 @@ const BottomTabBar = ({
       icon={CalendarOutlineIcon}
     />
     <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Klassen</TabTitle>}
-      icon={ClassIcon}
+      title={(props) => <TabTitle {...props}>Veckans meny</TabTitle>}
+      icon={MenuIcon}
     />
   </BottomNavigation>
 )
@@ -115,7 +115,7 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
     <Screen name="Nyheter" component={NewsScreen} />
     <Screen name="Notifieringar" component={NotificationsScreen} />
     <Screen name="Kalender" component={CalendarScreen} />
-    <Screen name="Klassen" component={ClassmatesScreen} />
+    <Screen name="Meny" component={MenuScreen} />
   </Navigator>
 )
 

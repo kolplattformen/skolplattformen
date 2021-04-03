@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
   useClassmates,
+  useMenu,
   useNews,
   useNotifications,
   useSchedule,
@@ -16,7 +17,7 @@ import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import {
   CalendarOutlineIcon,
-  ClassIcon,
+  MenuIcon,
   NewsIcon,
   NotificationsIcon,
 } from './icon.component'
@@ -41,13 +42,14 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     child
   )
   const { data: news, status: newsStatus } = useNews(child)
-  const { data: classmates, status: classmatesStatus } = useClassmates(child)
+  const { data: classmates } = useClassmates(child)
   const { data: calendar, status: calendarStatus } = useCalendar(child)
   const { data: schedule } = useSchedule(
     child,
     moment().toISOString(),
     moment().add(7, 'days').toISOString()
   )
+  const { status: menuStatus } = useMenu(child)
 
   const notificationsThisWeek = notifications.filter(({ dateCreated }) =>
     dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
@@ -149,20 +151,18 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         {`${(calendar || []).length}`}
       </Button>
       <Button
-        style={[styles.item, styles[classmatesStatus]]}
+        style={[styles.item, styles[menuStatus]]}
         status="control"
         size="small"
         onPress={() =>
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Klassen',
+            initialRouteName: 'Meny',
           })
         }
-        accessoryLeft={ClassIcon}
-      >
-        {`${(classmates || []).length}`}
-      </Button>
+        accessoryLeft={MenuIcon}
+      />
     </View>
   )
 
