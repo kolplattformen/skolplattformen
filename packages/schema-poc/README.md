@@ -4,12 +4,17 @@ Schema POC
 ## Status
 POC fungerar, jag tror att jag förstår ungefär hur systemen fungerar. Har bara följt de request och de anrop som görs när jag är inloggad. Vet inte hur det fungerar för någon annan.
 
+Jag har benat ut lite frågetecken angående id:n
+Eftersom detta är ett annat system så har allting andra GUIDar än de vi får från skolplattformen. I värsta fall får vi matcha på namn.
+Jag har har lagt till en funktion som hämtar alla ens barn och loopar igenom dem och skriver ut schema.
+//Kajetan
+
 ## För att testa
-Ändra xxx-xxx-xxx till ditt barns childId (eller sdsId - vet inte vilket än).
+
 Lägg in en cookie från din webbläsare i 'cookie' fältet. Då ska koden logga in dig och visa schema för valt barn
 
     cookie= 'din cookie'
-    getSchema(cookie, 'xxxx-xxxx-xxx', '15', '2021')
+    
 
 Kör igång
 
