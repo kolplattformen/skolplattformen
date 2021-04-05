@@ -78,7 +78,7 @@ describe('news', () => {
       'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...'
     )
     expect(item.modified).toEqual('2020-12-18T15:18:00.000Z')
-    expect(item.published).toEqual('2020-12-18T15:15:00.000Z')
+    expect(item.published).toEqual('2020-12-18T15:15:42.000Z')
   })
   it(' body correctly', () => {
     const [item] = news(response)
@@ -159,8 +159,8 @@ describe('newsItem', () => {
     expect(item.intro).toEqual(
       'Kära vårdnadshavare! I helgen är det avlusningsdagar!'
     )
-    expect(item.published).toEqual('2021-02-04T13:31:00.000Z')
-    expect(item.modified).toEqual('2021-02-14T13:37:00.000Z')
+    expect(item.published).toEqual('2021-02-04T13:31:11.000Z')
+    expect(item.modified).toEqual('2021-02-04T13:37:32.000Z')
     expect(item.author).toEqual('Tieto Evry')
   })
 

@@ -5,10 +5,21 @@ const options = {
 }
 
 const toISOString = (date: DateTime) => date.toUTC().toISO()
+const aspNetJsonRegex = /^\/?Date\((-?\d+)/i
 
 export const parseDate = (input?: string): string | undefined => {
   if (!input) {
     return undefined
+  }
+
+  // First try and parse old Aps.Net format
+  // \/Date(1612525846000)\/ 
+  // where the numbers are milliseconds from Epoc
+  const matched = aspNetJsonRegex.exec(input)
+  if (matched !== null) {
+      const millisecondsSinceEpoc = parseInt(matched[1], 10)
+      const date = DateTime.fromMillis(millisecondsSinceEpoc)
+      return toISOString(date)
   }
 
   const dateParse = (format: string) =>
