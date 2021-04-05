@@ -4,7 +4,7 @@ const Status = () => {
             <h1>Status</h1>
             <h3>Funkar appen som den ska?</h3>
             <p>
-                Ja! 
+                Senast vi kollade!
             </p>
             <p>
                 Vi har inga rapporter om att appen har problem för tillfället.
@@ -12,10 +12,10 @@ const Status = () => {
             </p>
             <p>
                 Det finns det tre sätt att göra det (i stigande ordning av braighet):
-                <ul className="list-none" >
+                <ul>
                     <li>Skicka en tweet 🥉</li>
-                    <li>Lägg en buggrapport <a href="https://github.com/kolplattformen/skolplattformen/issues">här</a> 🥈</li>
-                    <li>Skicka en <a href="https://github.com/kolplattformen/skolplattformen/pulls">PR</a> 🥇</li>
+                    <li><a href="https://github.com/kolplattformen/skolplattformen/issues">Lägg en buggrapport här</a> 🥈</li>
+                    <li><a href="https://github.com/kolplattformen/skolplattformen/pulls">Skicka en PR</a> 🥇</li>
                 </ul>
             </p>
         </div>
