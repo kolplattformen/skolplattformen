@@ -1456,9 +1456,9 @@
     redux "^4.0.5"
 
 "@skolplattformen/embedded-api@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-3.0.1.tgz#51ab2debc764c6b5886661e4c2797cf1c82edbf2"
-  integrity sha512-T3y/3dgiC5vnKjAMth/hXt2K+KW7EaigyJEUykwr4hlB1Tz5H8aICMA0RR/5fiGkbbwYvrPh4ZhPS5cqOjPWxQ==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-3.0.2.tgz#001a39cff9423cdbb5292b2180cacb14a85c8f75"
+  integrity sha512-Ljmk/36Eq0GkOREbyFhVPmo8/7qQuRAY32/QG+gnFQSWLVtC3ZHYIJ/088nOdcPfGXMnTgn8LvVqAvC54wlsgQ==
   dependencies:
     "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
@@ -8650,10 +8650,15 @@ tslib@^1.10.0, tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1, tslib@^2.0.3:
+tslib@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
+
+tslib@^2.0.3:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
+  integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
 
 tsutils@^3.17.1:
   version "3.21.0"
