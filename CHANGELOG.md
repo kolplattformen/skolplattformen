@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/kolplattformen/skolplattformen/compare/v1.11.1...v1.12.0) (2021-04-05)
+
+
+### Features
+
+* 🎸 Upgrade embedded-api to 3.0.2 ([654471f](https://github.com/kolplattformen/skolplattformen/commit/654471f8030f413e56d9ecdb7c21f730bdef4aff))
+
 ## [1.11.1](https://github.com/kolplattformen/skolplattformen/compare/v1.11.0...v1.11.1) (2021-04-03)
 
 
