@@ -4,8 +4,10 @@ import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
+import { Week } from './week.component'
 import { SaveToCalendar } from './saveToCalendar.component'
 
 export const Calendar = () => {
@@ -21,25 +23,32 @@ export const Calendar = () => {
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
     </View>
   ) : (
-    <List
-      contentContainerStyle={styles.contentContainer}
-      data={data.sort((a, b) =>
-        a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0
-      )}
-      ItemSeparatorComponent={Divider}
-      renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
-        <ListItem
-          disabled={true}
-          title={`${item.title}`}
-          description={`${moment(item.startDate).format(
-            'YYYY-MM-DD'
-          )} (${moment(item.startDate).fromNow()})`}
-          accessoryLeft={CalendarOutlineIcon}
-          accessoryRight={() => <SaveToCalendar event={item} />}
-        />
-      )}
-      style={styles.container}
-    />
+    <View>
+      <Text category="h1">Schema</Text>
+      <Week />
+      <Text category="h1">Händelser</Text>
+      <List
+        contentContainerStyle={styles.contentContainer}
+        data={data.sort((a, b) =>
+          a.startDate && b.startDate
+            ? a.startDate.localeCompare(b.startDate)
+            : 0
+        )}
+        ItemSeparatorComponent={Divider}
+        renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
+          <ListItem
+            disabled={true}
+            title={`${item.title}`}
+            description={`${moment(item.startDate).format(
+              'YYYY-MM-DD'
+            )} (${moment(item.startDate).fromNow()})`}
+            accessoryLeft={CalendarOutlineIcon}
+            accessoryRight={() => <SaveToCalendar event={item} />}
+          />
+        )}
+        style={styles.container}
+      />
+    </View>
   )
 }
 
