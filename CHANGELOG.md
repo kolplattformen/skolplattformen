@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/kolplattformen/skolplattformen/compare/v1.12.0...v1.13.0) (2021-04-07)
+
+
+### Features
+
+* **site:** uppdatera timeline med april ([#264](https://github.com/kolplattformen/skolplattformen/issues/264)) ([ddf74eb](https://github.com/kolplattformen/skolplattformen/commit/ddf74ebdf3054069196bbea72d48c9377ec004f9))
+
 # [1.12.0](https://github.com/kolplattformen/skolplattformen/compare/v1.11.1...v1.12.0) (2021-04-05)
 
 
