@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyleSheet, Platform } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'

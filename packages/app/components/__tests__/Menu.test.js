@@ -45,5 +45,5 @@ test('renders title and description', () => {
 
 test('renders empty menu', () => {
   const screen = setup([])
-  expect(screen.getByText('Det ser lite tomt ut i menyn')).toBeTruthy()
+  expect(screen.getByText('Det ser lite tomt ut i matsedeln')).toBeTruthy()
 })

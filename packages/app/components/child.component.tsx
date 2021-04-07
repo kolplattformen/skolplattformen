@@ -101,7 +101,7 @@ const BottomTabBar = ({
       icon={CalendarOutlineIcon}
     />
     <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Veckans meny</TabTitle>}
+      title={(props) => <TabTitle {...props}>Matsedel</TabTitle>}
       icon={MenuIcon}
     />
   </BottomNavigation>
@@ -115,7 +115,7 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
     <Screen name="Nyheter" component={NewsScreen} />
     <Screen name="Notifieringar" component={NotificationsScreen} />
     <Screen name="Kalender" component={CalendarScreen} />
-    <Screen name="Meny" component={MenuScreen} />
+    <Screen name="Matsedel" component={MenuScreen} />
   </Navigator>
 )
 
