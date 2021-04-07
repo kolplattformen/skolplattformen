@@ -49,6 +49,7 @@
     "react-native-tab-view": "2.15.2",
     "react-native-typography": "^1.4.1",
     "react-native-webview": "11.2.4",
+    "react-native-weekly-calendar": "^0.2.0",
     "rn-actionsheet-module": "1.0.3",
     "use-async-storage": "1.2.0",
     "yup": "0.32.9"
