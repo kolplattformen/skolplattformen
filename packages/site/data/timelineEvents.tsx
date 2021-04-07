@@ -28,6 +28,33 @@ export const events: TimelineEvent[] = [
   {
     overview: (
       <p>
+        Svenska medier rapporterar vidare om de säkerhetsluckor vi hittat och
+        rapporterat i Stockholms stads it-system. Vi fokuserar på att utveckla
+        ny funktionalitet så att det blir lättare för föräldrar att hitta
+        information om deras egna barns skolgång.
+      </p>
+    ),
+    date: '2021-04-01',
+    importantDates: [],
+    media: [
+      {
+        date: '2021-04-01',
+        description:
+          'Därför åkte vi vilse på resan mot digitalisering" (SvD Ledare)',
+        link: 'https://www.svd.se/darfor-akte-vi-vilse-pa-digitaliseringsresan',
+      },
+      {
+        date: '2021-04-01',
+        description:
+          'Ny säkerhetslucka i Stockholms stad - utbildningsminister kallas till utskott” (Ny Teknik)',
+        link:
+          'https://www.nyteknik.se/sakerhet/ny-sakerhetslucka-i-stockholms-stad-utbildningsminister-kallas-till-utskott-7012459',
+      },
+    ],
+  },
+  {
+    overview: (
+      <p>
         IT-direktören meddelar att utstörningsåtgärderna nu ska upphöra. Det gör
         de inte. Mars är månaden då vi släpper sju releaser som svar på stadens
         sju sabotage av appen. Samtidigt hittar våra kodare ytterligare
