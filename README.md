@@ -67,4 +67,4 @@ If you are offended by this initiative, please don't - we come in peace.
 
 ## License
 
-[Apache 2.0](LICENCE)
+[Apache 2.0](LICENSE)
