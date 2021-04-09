@@ -4,7 +4,7 @@ import { ApiProvider } from '.'
 import createStorage from './__mocks__/AsyncStorage'
 import {
   useCalendar,
-  useChildList,
+  useEtjanstChildren,
   useClassmates,
   useMenu,
   useNews,
@@ -69,7 +69,7 @@ describe('hooks with fake data', () => {
       const {
         result,
         waitForNextUpdate,
-      } = renderHook(() => useChildList(), { wrapper })
+      } = renderHook(() => useEtjanstChildren(), { wrapper })
 
       await waitForNextUpdate()
       await waitForNextUpdate()

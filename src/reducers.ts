@@ -1,12 +1,14 @@
 import {
   CalendarItem,
-  Child,
   Classmate,
+  EtjanstChild,
+  Skola24Child,
   MenuItem,
   NewsItem,
   Notification,
   ScheduleItem,
   User,
+  TimetableEntry,
 } from '@skolplattformen/embedded-api'
 import { EntityName, EntityReducer, EntityState } from './types'
 
@@ -65,7 +67,8 @@ const createReducer = <T>(entity: EntityName): EntityReducer<T> => {
 }
 
 export const user = createReducer<User>('USER')
-export const children = createReducer<Child[]>('CHILDREN')
+export const etjanstChildren = createReducer<EtjanstChild[]>('ETJANST_CHILDREN')
+export const skola24Children = createReducer<Skola24Child[]>('SKOLA24_CHILDREN')
 export const calendar = createReducer<CalendarItem[]>('CALENDAR')
 export const classmates = createReducer<Classmate[]>('CLASSMATES')
 export const menu = createReducer<MenuItem[]>('MENU')
@@ -73,3 +76,4 @@ export const news = createReducer<NewsItem[]>('NEWS')
 export const newsDetails = createReducer<NewsItem[]>('NEWS_DETAILS')
 export const notifications = createReducer<Notification[]>('NOTIFICATIONS')
 export const schedule = createReducer<ScheduleItem[]>('SCHEDULE')
+export const timetable = createReducer<TimetableEntry[]>('TIMETABLE')

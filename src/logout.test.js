@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { ApiProvider } from './provider'
-import { useChildList } from './hooks'
+import { useEtjanstChildren } from './hooks'
 import store from './store'
 import init from './__mocks__/@skolplattformen/embedded-api'
 import createStorage from './__mocks__/AsyncStorage'
@@ -32,7 +32,7 @@ describe('logout - cleanup', () => {
       })
     ))
     storage = createStorage({
-      '123_children': [{ id: 2 }],
+      '123_etjanst_children': [{ id: 2 }],
     }, 2)
   })
   afterEach(async () => {
@@ -46,7 +46,7 @@ describe('logout - cleanup', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate: wait1 } = renderHook(() => useChildList(), { wrapper })
+      const { waitForNextUpdate: wait1 } = renderHook(() => useEtjanstChildren(), { wrapper })
 
       await wait1()
       await wait1()
@@ -56,14 +56,14 @@ describe('logout - cleanup', () => {
       api.isLoggedIn = false
       api.emitter.emit('logout')
 
-      const { result } = renderHook(() => useChildList(), { wrapper })
+      const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
       expect(result.current.data).toHaveLength(0)
 
       api.isLoggedIn = true
       api.emitter.emit('login')
 
-      const { result: result2, waitForNextUpdate: wait2 } = renderHook(() => useChildList(), { wrapper })
+      const { result: result2, waitForNextUpdate: wait2 } = renderHook(() => useEtjanstChildren(), { wrapper })
 
       await wait2()
 

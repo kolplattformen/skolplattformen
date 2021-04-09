@@ -5,10 +5,13 @@ import {
   CalendarItem,
   Child,
   Classmate,
+  EtjanstChild,
   MenuItem,
   NewsItem,
   Notification,
   ScheduleItem,
+  Skola24Child,
+  TimetableEntry,
   User,
 } from '@skolplattformen/embedded-api'
 import {
@@ -22,6 +25,7 @@ import {
 import { useApi } from './context'
 import { loadAction } from './actions'
 import store from './store'
+import { merge } from './childlists'
 
 interface StoreSelector<T> {
   (state: EntityStoreRootState): EntityMap<T>
@@ -73,7 +77,15 @@ const hook = <T>(
   }
   useEffect(() => { load() }, [isLoggedIn])
 
+  let mounted: boolean
+  useEffect(() => {
+    mounted = true
+    return () => { mounted = false }
+  }, [])
+
   const listener = () => {
+    if (!mounted) return
+
     const newState = select(getState())
     if (newState.status !== state.status
       || newState.data !== state.data
@@ -94,12 +106,20 @@ const hook = <T>(
   }
 }
 
-export const useChildList = () => hook<Child[]>(
-  'CHILDREN',
-  'children',
+export const useEtjanstChildren = () => hook<EtjanstChild[]>(
+  'ETJANST_CHILDREN',
+  'etjanst_children',
   [],
-  (s) => s.children,
+  (s) => s.etjanstChildren,
   (api) => () => api.getChildren(),
+)
+
+export const useSkola24Children = () => hook<Skola24Child[]>(
+  'SKOLA24_CHILDREN',
+  'skola24_children',
+  [],
+  (s) => s.skola24Children,
+  (api) => () => api.getSkola24Children(),
 )
 
 export const useCalendar = (child: Child) => hook<CalendarItem[]>(
@@ -158,6 +178,14 @@ export const useSchedule = (child: Child, from: string, to: string) => hook<Sche
   (api) => () => api.getSchedule(child, from, to),
 )
 
+export const useTimetable = (child: Skola24Child, week: number, year: number) => hook<TimetableEntry[]>(
+  'TIMETABLE',
+  `timetable_${child.personGuid}_${week}_${year}`,
+  [],
+  (s) => s.timetable,
+  (api) => () => api.getTimetable(child, week, year),
+)
+
 export const useUser = () => hook<User>(
   'USER',
   'user',
@@ -165,3 +193,25 @@ export const useUser = () => hook<User>(
   (s) => s.user,
   (api) => () => api.getUser(),
 )
+
+export const useChildList = (): EntityHookResult<Child[]> => {
+  const {
+    data: etjanstData, status, error, reload: etjanstReload,
+  } = useEtjanstChildren()
+  const { data: skola24Data, reload: skola24Reload } = useSkola24Children()
+
+  const [data, setData] = useState<Child[]>([])
+  const reload = () => {
+    etjanstReload()
+    skola24Reload()
+  }
+
+  useEffect(() => {
+    if (!etjanstData.length) return
+    setData(merge(etjanstData, skola24Data))
+  }, [etjanstData, skola24Data])
+
+  return {
+    data, status, error, reload,
+  }
+}

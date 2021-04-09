@@ -1,6 +1,7 @@
 import {
   Api,
-  Child,
+  EtjanstChild,
+  Skola24Child,
   User,
   CalendarItem,
   Classmate,
@@ -8,6 +9,7 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  TimetableEntry,
 } from '@skolplattformen/embedded-api'
 import { Action, Reducer } from 'redux'
 
@@ -50,6 +52,8 @@ export type EntityActionType = 'GET_FROM_API'
 | 'STORE_IN_CACHE'
 | 'CLEAR'
 export type EntityName = 'USER'
+| 'ETJANST_CHILDREN'
+| 'SKOLA24_CHILDREN'
 | 'CHILDREN'
 | 'CALENDAR'
 | 'CLASSMATES'
@@ -58,6 +62,7 @@ export type EntityName = 'USER'
 | 'NEWS_DETAILS'
 | 'NOTIFICATIONS'
 | 'SCHEDULE'
+| 'TIMETABLE'
 | 'ALL'
 export interface EntityAction<T> extends Action<EntityActionType> {
   entity: EntityName
@@ -71,7 +76,8 @@ export interface EntityMap<T> {
 export type EntityReducer<T> = Reducer<EntityMap<T>, EntityAction<T>>
 
 export interface EntityStoreRootState {
-  children: EntityMap<Child[]>
+  etjanstChildren: EntityMap<EtjanstChild[]>
+  skola24Children: EntityMap<Skola24Child[]>
   user: EntityMap<User>
   calendar: EntityMap<CalendarItem[]>,
   classmates: EntityMap<Classmate[]>,
@@ -80,6 +86,7 @@ export interface EntityStoreRootState {
   newsDetails: EntityMap<NewsItem>,
   notifications: EntityMap<Notification[]>,
   schedule: EntityMap<ScheduleItem[]>,
+  timetable: EntityMap<TimetableEntry[]>,
 }
 
 export interface EntityHookResult<T> extends EntityState<T> {

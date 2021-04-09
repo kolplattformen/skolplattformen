@@ -15,12 +15,14 @@ const createApi = () => ({
 
   getCalendar: jest.fn(),
   getChildren: jest.fn(),
+  getSkola24Children: jest.fn(),
   getClassmates: jest.fn(),
   getMenu: jest.fn(),
   getNews: jest.fn(),
   getNewsDetails: jest.fn(),
   getNotifications: jest.fn(),
   getSchedule: jest.fn(),
+  getTimetable: jest.fn(),
   getUser: jest.fn(),
 })
 const init = jest.fn().mockImplementation(() => createApi())

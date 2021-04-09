@@ -2,25 +2,29 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { apiMiddleware, cacheMiddleware } from './middleware'
 import {
   calendar,
-  children,
   classmates,
+  etjanstChildren,
   menu,
   news,
   newsDetails,
   notifications,
   schedule,
+  skola24Children,
+  timetable,
   user,
 } from './reducers'
 
 const appReducer = combineReducers({
   calendar,
-  children,
   classmates,
+  etjanstChildren,
   menu,
   news,
   newsDetails,
   notifications,
   schedule,
+  skola24Children,
+  timetable,
   user,
 })
 const rootReducer: typeof appReducer = (state, action) => {
