@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
-import { URLSearchParams } from 'url'
+import { URLSearchParams } from './URLSearchParams'
 import { checkStatus, LoginStatusChecker } from './loginStatus'
 import {
   AuthTicket,
