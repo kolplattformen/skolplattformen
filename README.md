@@ -102,7 +102,7 @@ const skola24Children = await getSkola24Children()
 // Get timetable
 const weekNumber = 15
 const year = 2021
-const timetable = await api.getTimeTable(skola24Children[0], weekNumber, year)
+const timetable = await api.getTimetable(skola24Children[0], weekNumber, year)
 ```
 
 ### Setting session cookie
