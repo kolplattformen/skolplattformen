@@ -165,7 +165,7 @@ describe('api', () => {
       status = await api.login('1212121212')
       expect(status.token).toEqual('fake')
     })
-    it.skip('delivers fake data', async (done) => {
+    it('delivers fake data', async (done) => {
       api.on('login', async () => {
         const user = await api.getUser()
         expect(user).toEqual({
@@ -180,6 +180,12 @@ describe('api', () => {
         expect(calendar1).toHaveLength(20)
         const calendar2 = await api.getCalendar(children[1])
         expect(calendar2).toHaveLength(18)
+
+        const skola24Children = await api.getSkola24Children()
+        expect(skola24Children).toHaveLength(1)
+
+        const timetable = await api.getTimetable(skola24Children[0], 2021, 15)
+        expect(timetable).toHaveLength(32)
 
         done()
       })

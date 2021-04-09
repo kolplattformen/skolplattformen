@@ -66,7 +66,7 @@ export interface CalendarItem {
  * @export
  * @interface Child
  */
-export interface Child {
+export interface EtjanstChild {
   id: string
   /**
    * <p>Special ID used to access certain subsystems</p>
@@ -83,6 +83,8 @@ export interface Child {
   status?: string
   schoolId?: string
 }
+
+export interface Child extends EtjanstChild, Skola24Child {}
 
 /**
  * @export
@@ -180,4 +182,30 @@ export interface User {
   lastName?: string
   email?: string | null
   notificationId?: string
+}
+
+export interface Skola24Child {
+  schoolGuid?: string
+  unitGuid?: string
+  schoolID?: string
+  timetableID?: string
+  personGuid?: string
+  firstName?: string
+  lastName?: string
+}
+
+export type SSOSystem = 'TimetableViewer'
+
+export interface TimetableEntry {
+  id: string
+  code: string
+  name: string
+  teacher: string
+  location: string
+  timeStart: string
+  timeEnd: string
+  dayOfWeek: number
+  blockName: string
+  dateStart: string
+  dateEnd: string
 }
