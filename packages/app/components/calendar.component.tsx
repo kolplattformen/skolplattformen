@@ -4,7 +4,6 @@ import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { Week } from './week.component'
@@ -24,9 +23,7 @@ export const Calendar = () => {
     </View>
   ) : (
     <View>
-      <Text category="h1">Schema</Text>
       <Week />
-      <Text category="h1">Händelser</Text>
       <List
         contentContainerStyle={styles.contentContainer}
         data={data.sort((a, b) =>
@@ -65,6 +62,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    padding: 15,
+  },
+  header: {
+    paddingLeft: 15,
   },
 })
