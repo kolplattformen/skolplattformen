@@ -340,8 +340,7 @@ const LessonList = ({ lessons, header, ...props }) => (
         key={id}
         style={styles.item}
         title={`${subject}`}
-        description={`${start} - ${end}
-${room}: ${teacher}`}
+        description={`${start} - ${end} ${room ? `(${room})` : ''} ${teacher}`}
       />
     )}
   />
@@ -406,16 +405,20 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: '#fafafa',
   },
+  part: {
+    backgroundColor: 'transparent',
+    width: '33%',
+  },
   tab: {
-    height: 220,
     flexDirection: 'row',
     padding:0,
   },
   item: {
-    height: 55,
-    backgroundColor: 'transparent',
+    height: 45,
+    backgroundColor: 'white',
     paddingHorizontal: 0,
-    margin: 0,
+    borderRadius: 2,
+    margin: 2,
   },
   time: {
     color: '#333',
@@ -425,7 +428,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   summary: {
-    paddingRight: 10,
+    paddingRight: 20,
     paddingLeft: 2,
   },
   pager: {
