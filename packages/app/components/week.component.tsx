@@ -272,7 +272,7 @@ const subjects = {
   EV: 'Elevens val', // jag gissar
   FY: 'Fysik',
   GE: 'Geografi',
-  HKK: 'Hem- och konsumentkunskap',
+  HKK: 'Hemkunskap',
   HI: 'Historia',
   IDH: 'Idrott och hälsa',
   KE: 'Kemi',
@@ -330,14 +330,18 @@ const LessonList = ({ lessons, header, ...props }) => (
   <List
     {...props}
     data={lessons}
-    ListHeaderComponent={() => <Text category="c2">{header}</Text>}
-    renderItem={({ item: { id, subject, start, end, room } }) => (
+    ListHeaderComponent={() => (
+      <Text category="c1" style={styles.header}>
+        {header}
+      </Text>
+    )}
+    renderItem={({ item: { id, subject, start, end, teacher, room } }) => (
       <ListItem
         key={id}
         style={styles.item}
         title={`${subject}`}
         description={`${start} - ${end}
-${room}`}
+${room}: ${teacher}`}
       />
     )}
   />
@@ -347,7 +351,7 @@ export const Week = () => {
   const data = convert(lessonInfo)
   const [selectedIndex, setSelectedIndex] = React.useState()
   return (
-    <View>
+    <View style={styles.view}>
       <TabBar
         selectedIndex={selectedIndex}
         onSelect={(index) => setSelectedIndex(index)}
@@ -360,17 +364,22 @@ export const Week = () => {
       {selectedIndex >= 0 ? (
         <ViewPager
           selectedIndex={selectedIndex}
+          style={styles.pager}
           onSelect={(index) => setSelectedIndex(index)}
         >
           {Object.entries(data).map(([dayName, day]) => (
             <View style={styles.tab} key={dayName}>
-              <Card>
-                <Text category="c1">Börjar</Text>
-                <Text category="h3">{day[0].start}</Text>
+              <View style={styles.summary}>
+                <Text category="c1" style={{ paddingBottom: 2}}>Börjar</Text>
+                <Text category="h4">{day[0].start}</Text>
                 <Text category="c1">Slutar</Text>
-                <Text category="h3">{day[day.length - 1].end}</Text>
-                <Text category="h2">{day.some(lesson => lesson.subjectCode === 'IDH') ? '🤼‍♀️': ''}</Text>
-              </Card>
+                <Text category="h4">{day[day.length - 1].end}</Text>
+                <Text category="c2">
+                  {day.some((lesson) => lesson.subjectCode === 'IDH')
+                    ? '🤼‍♀️ Gymnastik'
+                    : ''}
+                </Text>
+              </View>
               <LessonList
                 style={styles.part}
                 header="FM"
@@ -394,15 +403,19 @@ export const Week = () => {
 }
 
 const styles = StyleSheet.create({
+  view: {
+    backgroundColor: '#fafafa',
+  },
   tab: {
-    height: 200,
+    height: 220,
     flexDirection: 'row',
+    padding:0,
   },
   item: {
-    height: 45,
-  },
-  part: {
-    width: '50%',
+    height: 55,
+    backgroundColor: 'transparent',
+    paddingHorizontal: 0,
+    margin: 0,
   },
   time: {
     color: '#333',
@@ -411,4 +424,14 @@ const styles = StyleSheet.create({
   dayTab: {
     textAlign: 'left',
   },
+  summary: {
+    paddingRight: 10,
+    paddingLeft: 2,
+  },
+  pager: {
+    margin: 10,
+  },
+  header: {
+    paddingLeft: 8,
+  }
 })
