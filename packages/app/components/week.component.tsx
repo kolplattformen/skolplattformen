@@ -375,7 +375,7 @@ export const Week = () => {
                 <Text category="h4">{day[day.length - 1].end}</Text>
                 <Text category="c2">
                   {day.some((lesson) => lesson.subjectCode === 'IDH')
-                    ? '🤼‍♀️ Gymnastik'
+                    ? '🤼‍♀️ Gympapåse'
                     : ''}
                 </Text>
               </View>
@@ -419,6 +419,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     borderRadius: 2,
     margin: 2,
+    width: '90%',
   },
   time: {
     color: '#333',
