@@ -1487,18 +1487,18 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-2.0.0.tgz#455faa780d8d5c3372af7ac6a78dca4a3e208dc5"
-  integrity sha512-5dCC3WRTqFgllpTzvkghnKCb99IxB/M9KHA6+6U1sYX1Ptl+8wFCk0bQXgX8NpMPr2hY+upL8UPmP5YGoyfwug==
+"@skolplattformen/api-hooks@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-2.1.0.tgz#56e38359020772086bfdccab364c24063a820948"
+  integrity sha512-a5DEUwlZjqJE5qfTyefjUYcKSwBv0CHnD6g5pvHU8KSLRNVVBpcUpy10g5qnObHxhjpbPLdRLxMbnHpYfrb69Q==
   dependencies:
-    react-redux "^7.2.2"
+    react-redux "^7.2.3"
     redux "^4.0.5"
 
-"@skolplattformen/embedded-api@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.0.1.tgz#315f2d49914e7f0e1ae4e576b30fe0c47c09dbca"
-  integrity sha512-Bg0Vp1JLbU5OQMrqd7XDQWJufOafn8gyI5vEyucEIHMkov0T/I61gTzCdF9LUjKJKb9WrUYZXMXgQkoammqwBw==
+"@skolplattformen/embedded-api@4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.0.3.tgz#a0b8b77b4ee347cd3fc4b5a304bbeee2cb4dd97f"
+  integrity sha512-5n5DbqP2dVxXoyQ7awQQEQXV4O5D+Ph2wVLfDTCgbtFkDrw6hqxjk31L5i+IrZrqypgjLc7goKOVKaNgSOS01w==
   dependencies:
     "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
@@ -7512,7 +7512,7 @@ react-native@0.64.0:
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
 
-react-redux@^7.2.2:
+react-redux@^7.2.3:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.3.tgz#4c084618600bb199012687da9e42123cca3f0be9"
   integrity sha512-ZhAmQ1lrK+Pyi0ZXNMUZuYxYAZd59wFuVDGUt536kSGdD0ya9Q7BfsE95E3TsFLE3kOSFp5m6G5qbatE+Ic1+w==
