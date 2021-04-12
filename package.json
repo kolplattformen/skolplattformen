@@ -2,7 +2,11 @@
   "name": "@skolplattformen/curriculum",
   "version": "0.1.0",
   "description": "Swedish curriculum codes to plain text",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
