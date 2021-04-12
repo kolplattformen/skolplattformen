@@ -1045,4 +1045,18 @@ describe('parse', () => {
       name: 'Övriga språk',
     })
   })
+  it('handles comments', () => {
+    expect(parse('NO  a)')).toEqual({
+      code: 'NO',
+      category: '',
+      name: 'Naturorienterande ämnen',
+      comment: 'a)',
+    })
+    expect(parse('MTID Arbetslagsråd 7C')).toEqual({
+      code: 'MTID',
+      category: 'Okänd',
+      name: 'MTID',
+      comment: 'Arbetslagsråd 7C',
+    })
+  })
 })

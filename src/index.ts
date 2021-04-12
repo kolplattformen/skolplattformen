@@ -274,13 +274,18 @@ const parseNativeLanguage: Parser = (code) => {
 }
 
 const parse = (code: string): Subject => {
-  return (
-    parseSubject(code) ||
+  const [subjectCode, ...rest] = code.split(' ')
+  const result: Subject = parseSubject(subjectCode) ||
     parseTrainingSubject(code) ||
     parseLanguage(code) ||
     parseAltLanguage(code) ||
-    parseNativeLanguage(code) || { code, category: 'Okänd', name: code }
-  )
+    parseNativeLanguage(code) || {
+      code: subjectCode,
+      category: 'Okänd',
+      name: subjectCode,
+    }
+  if (rest.length) result.comment = rest.join(' ').trim()
+  return result
 }
 
 export default parse
