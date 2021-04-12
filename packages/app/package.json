@@ -23,7 +23,7 @@
     "@react-navigation/bottom-tabs": "5.11.9",
     "@react-navigation/native": "5.9.4",
     "@react-navigation/stack": "5.14.4",
-    "@skolplattformen/api-hooks": "2.1.0",
+    "@skolplattformen/api-hooks": "2.0.0",
     "@skolplattformen/embedded-api": "4.0.1",
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
