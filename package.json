@@ -7,6 +7,8 @@
   "files": [
     "dist/**/*"
   ],
+  "repository": "git@github.com:kolplattformen/curriculum.git",
+  "author": "Johan Öbrink <johan.obrink@gmail.com>",
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
