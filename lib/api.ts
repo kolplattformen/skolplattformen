@@ -431,7 +431,7 @@ export class Api extends EventEmitter {
     })
     const response = await this.fetch('samlRequest', url, session)
     const text = await response.text()
-    const samlRequest = /name="SAMLRequest" value="(?<saml>\S+)">/gm.exec(text || '')?.groups?.saml
+    const samlRequest = /name="SAMLRequest" value="(\S+)">/gm.exec(text || '')?.[1]
     if (!samlRequest) {
       throw new Error('Could not parse SAML Request')
     } else {
