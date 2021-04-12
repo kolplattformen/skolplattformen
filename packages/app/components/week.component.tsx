@@ -5,13 +5,12 @@ import {
   Text,
   TabBar,
   Tab,
-  Card,
 } from '@ui-kitten/components'
 import React from 'react'
 import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
 
-const week = 15
+const weekNr = 15
 const lessonInfo = [
   {
     guidId: 'NDRhMTM1MGMtZmJmZi05MTYzLWVmNzUtMGEyZDM4Mzk0N2Q4',
@@ -292,8 +291,8 @@ const subjects = {
   Prandium: 'Lunch',
 }
 
-const convert = (lessonInfo) =>
-  lessonInfo
+const convert = (lessons: any) =>
+  lessons
     .map(
       ({
         guidId: id,
@@ -308,7 +307,7 @@ const convert = (lessonInfo) =>
         teacher,
         room,
         date: moment()
-          .week(week)
+          .week(weekNr)
           .weekday(day)
           .hours(timeStart.slice(0, 2))
           .minute(timeStart.slice(3, 5)),
@@ -317,9 +316,9 @@ const convert = (lessonInfo) =>
         day: days[day],
       })
     )
-    .sort((a, b) => a.date - b.date)
+    .sort((a: { date: number }, b: { date: number }) => a.date - b.date)
     .reduce(
-      (week, item) => ({
+      (week: { [x: string]: any }, item: { day: number }) => ({
         ...week,
         [item.day]: [...(week[item.day] || []), item],
       }),
@@ -348,7 +347,8 @@ const LessonList = ({ lessons, header, ...props }) => (
 
 export const Week = () => {
   const data = convert(lessonInfo)
-  const [selectedIndex, setSelectedIndex] = React.useState()
+  const defaultDay = moment().add(7, 'hours').weekday() // show tomorrow's schedule after 17
+  const [selectedIndex, setSelectedIndex] = React.useState(defaultDay)
   return (
     <View style={styles.view}>
       <TabBar
@@ -369,7 +369,9 @@ export const Week = () => {
           {Object.entries(data).map(([dayName, day]) => (
             <View style={styles.tab} key={dayName}>
               <View style={styles.summary}>
-                <Text category="c1" style={{ paddingBottom: 2}}>Börjar</Text>
+                <Text category="c1" style={{ paddingBottom: 2 }}>
+                  Börjar
+                </Text>
                 <Text category="h4">{day[0].start}</Text>
                 <Text category="c1">Slutar</Text>
                 <Text category="h4">{day[day.length - 1].end}</Text>
@@ -411,7 +413,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     flexDirection: 'row',
-    padding:0,
+    padding: 0,
   },
   item: {
     height: 45,
@@ -437,5 +439,5 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingLeft: 8,
-  }
+  },
 })
