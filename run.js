@@ -103,11 +103,11 @@ async function run() {
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-      /*
+      
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
-
+/*
       console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
