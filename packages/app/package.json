@@ -28,7 +28,6 @@
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
     "buffer": "6.0.3",
-    "fast-memoize": "^2.5.2",
     "formik": "2.2.6",
     "hermes-engine": "0.7.2",
     "i18n-js": "^3.8.0",

@@ -4,6 +4,7 @@ import React from 'react'
 import { Auth } from '../auth.component'
 import { useAsyncStorage } from 'use-async-storage'
 import { findBestAvailableLanguage } from 'react-native-localize'
+import { translate } from '../../utils/translation'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('use-async-storage')
@@ -36,9 +37,15 @@ test('renders a random fun argument state', () => {
   expect(screen.getByText(/det [a-zåäö]+ alternativet/i)).toBeTruthy()
 })
 
-test('renders a random fun argument state in english', () => {
-  const screen = setup('en')
+describe('english translations of auth', () => {
+  let screen
 
-  expect(screen.getByText(/open school platform/i)).toBeTruthy()
-  expect(screen.getByText(/the [a-zåäö]+ alternative/i)).toBeTruthy()
+  beforeAll(() => {
+    screen = setup('en')
+  })
+
+  test('renders a random fun argument state in english', () => {
+    expect(screen.getByText(/open school platform/i)).toBeTruthy()
+    expect(screen.getByText(/the [a-zåäö]+ alternative/i)).toBeTruthy()
+  })
 })

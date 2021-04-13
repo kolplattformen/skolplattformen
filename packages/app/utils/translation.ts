@@ -1,4 +1,3 @@
-import memoize from 'fast-memoize'
 import i18n from 'i18n-js'
 import { I18nManager } from 'react-native'
 import { findBestAvailableLanguage } from 'react-native-localize'
@@ -22,4 +21,4 @@ export const setI18nConfig = () => {
   i18n.locale = languageTag
 }
 
-export const translate = memoize(i18n.t)
+export const translate = i18n.t
