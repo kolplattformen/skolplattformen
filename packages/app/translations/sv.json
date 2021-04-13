@@ -1,6 +1,7 @@
 {
     "general": {
-        "title": "Öppna skolplattformen"
+        "title": "Öppna skolplattformen",
+        "loading": "Laddar..."
     },
     "auth": {
         "subtitle": "Det {{word}} alternativet",
@@ -31,5 +32,10 @@
             "enlightened": "upplysta",
             "open": "open"
         }
+    },
+    "children": {
+        "title": "Dina barn",
+        "noKids_title": "Inga barn",
+        "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad"
     }
 }

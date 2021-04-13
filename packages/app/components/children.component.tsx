@@ -15,11 +15,15 @@ import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import ActionSheet from 'rn-actionsheet-module'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
-const settingsOptions = ['Logga ut', 'Avbryt']
+const settingsOptions = [
+  translate('general.logout'),
+  translate('general.abort'),
+]
 
 export const Children = () => {
   const { api } = useApi()
@@ -37,7 +41,7 @@ export const Children = () => {
   const settings = () => {
     const options = {
       cancelButtonIndex: 1,
-      title: 'Inställningar',
+      title: translate('general.settings'),
       optionsIOS: settingsOptions,
       optionsAndroid: settingsOptions,
       onCancelAndroidIndex: handleSettingSelection,
@@ -59,7 +63,7 @@ export const Children = () => {
         {status === 'loaded' ? (
           <>
             <TopNavigation
-              title="Dina barn"
+              title={translate('children.title')}
               alignment="center"
               accessoryRight={() => (
                 <TopNavigationAction icon={SettingsIcon} onPress={settings} />
@@ -72,10 +76,11 @@ export const Children = () => {
               style={styles.childList}
               ListEmptyComponent={
                 <View style={styles.emptyState}>
-                  <Text category="h2">Inga barn</Text>
+                  <Text category="h2">
+                    {translate('children.noKids_title')}
+                  </Text>
                   <Text style={styles.emptyStateDescription}>
-                    Det finns inga barn registrerade för ditt personnummer i
-                    Stockholms Stad
+                    {translate('children.noKids_title')}
                   </Text>
                   <Image
                     source={require('../assets/children.png')}
@@ -104,7 +109,7 @@ export const Children = () => {
             <View style={styles.loadingMessage}>
               <Spinner size="large" status="warning" />
               <Text category="h1" style={styles.loadingText}>
-                Laddar...
+                {translate('general.loading')}
               </Text>
             </View>
           </Layout>

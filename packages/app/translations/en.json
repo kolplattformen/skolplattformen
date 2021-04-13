@@ -1,6 +1,10 @@
 {
     "general": {
-        "title": "Open school platform"
+        "title": "Open school platform",
+        "loading": "Loading...",
+        "logout": "Logout",
+        "abort": "Abort",
+        "settings": "Settings"
     },
     "auth": {
         "subtitle": "The {{word}} alternative",
@@ -31,5 +35,10 @@
             "enlightened": "enlightened",
             "open": "open"
         }
+    },
+    "children": {
+        "title": "Your children",
+        "noKids_title": "Inga barn",
+        "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad",
     }
 }
