@@ -53,10 +53,22 @@
     "abscense": {
         "title": "Report absence",
         "selectAbscenseEndTime": "Choose end time",
-        "entireDay": "Whole day"
+        "entireDay": "Whole day",
+        "newsTitle": "News item: {{header}} ({{published}})"
     },
     "news": {
         "title": "News from the school platform",
-        "backToChild": "Back to child"
+        "backToChild": "Back to child",
+        "noNewNewsItemsThisWeek": "No new news items this week.",
+        "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
+    },
+    "notifications": {
+        "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
+    },
+    "calender": {
+        "showCalenderActions": "Show calender actions",
+        "saveToCalenderSuccess": "✔️ Saved to calender",
+        "saveToCalenderError": "Something went wrong",
+        "approveAccessToCalender": "You have to approve access to your calender"
     }
 }

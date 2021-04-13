@@ -57,6 +57,18 @@
     },
     "news": {
         "title": "Nyhet från skolplattformen",
-        "backToChild": "Tillbaka till barn"
+        "backToChild": "Tillbaka till barn",
+        "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
+        "newsTitle": "Nyhet: {{message}} ({{dateCreated}})"
+    },
+    "notifications": {
+        "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
+    },
+    "calender": {
+        "saveToCalender": "Spara till kalender",
+        "showCalenderActions": "Visa kalender actions",
+        "saveToCalenderSuccess": "✔️ Sparad till kalender",
+        "saveToCalenderError": "Något gick fel",
+        "approveAccessToCalender": "Du måste godkänna access till kalender"
     }
 }

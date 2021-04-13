@@ -193,21 +193,25 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       ))}
       {notificationsThisWeek.slice(0, 3).map((notification, i) => (
         <Text appearance="hint" category="c1" key={i}>
-          {`Avisering: ${notification.message} (${displayDate(
-            notification.dateCreated
-          )})`}
+          {translate('notifications.notificationTitle', {
+            message: notification.message,
+            dateCreated: displayDate(notification.dateCreated),
+          })}
         </Text>
       ))}
       {newsThisWeek.slice(0, 3).map((newsItem, i) => (
         <Text appearance="hint" category="c1" key={i}>
-          {`Nyhet: ${newsItem.header} (${displayDate(newsItem.published)})`}
+          {translate('notifications.notificationTitle', {
+            header: newsItem.header,
+            published: displayDate(newsItem.published),
+          })}
         </Text>
       ))}
       {scheduleAndCalendarThisWeek.length ||
       notificationsThisWeek.length ||
       newsThisWeek.length ? null : (
         <Text appearance="hint" category="c1">
-          Inga nya inlägg denna vecka.
+          {translate('news.noNewNewsItemsThisWeek')}
         </Text>
       )}
       <View style={styles.itemFooterAbsence}>

@@ -13,11 +13,11 @@ const getNumberFormatSettings = () => ({
   groupingSeparator: ',',
 })
 
-const getCalendar = () => 'gregorian' // or "japanese", "buddhist"
-const getCountry = () => 'US' // the country code you want
-const getCurrencies = () => ['USD', 'EUR'] // can be empty array
-const getTemperatureUnit = () => 'celsius' // or "fahrenheit"
-const getTimeZone = () => 'Europe/Paris' // the timezone you want
+const getCalendar = () => 'gregorian'
+const getCountry = () => 'SE'
+const getCurrencies = () => ['USD', 'SEK']
+const getTemperatureUnit = () => 'celsius'
+const getTimeZone = () => 'Europe/Stockholm'
 const uses24HourClock = () => true
 const usesMetricSystem = () => true
 
