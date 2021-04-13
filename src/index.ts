@@ -217,6 +217,12 @@ const languages: Repo = {
   SPK: 'Övriga språk',
 }
 
+const misc: Repo = {
+  Lunch: 'Lunch',
+  Prandium: 'Lunch',
+  MTID: 'Mentorstid',
+}
+
 type Parser = (code: string) => Subject | null
 const parseSubject: Parser = (code) => {
   if (!subjects[code]) return null
@@ -273,13 +279,24 @@ const parseNativeLanguage: Parser = (code) => {
   }
 }
 
+const parseMisc: Parser = (code) => {
+  if (!misc[code]) return null
+
+  return {
+    code,
+    category: 'Diverse',
+    name: misc[code] as string,
+  }
+}
+
 const parse = (code: string): Subject => {
   const [subjectCode, ...rest] = code.split(' ')
   const result: Subject = parseSubject(subjectCode) ||
-    parseTrainingSubject(code) ||
-    parseLanguage(code) ||
-    parseAltLanguage(code) ||
-    parseNativeLanguage(code) || {
+    parseTrainingSubject(subjectCode) ||
+    parseLanguage(subjectCode) ||
+    parseAltLanguage(subjectCode) ||
+    parseNativeLanguage(subjectCode) ||
+    parseMisc(subjectCode) || {
       code: subjectCode,
       category: 'Okänd',
       name: subjectCode,

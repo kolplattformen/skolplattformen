@@ -1,6 +1,23 @@
 import parse from './'
 
 describe('parse', () => {
+  it('Diverse', () => {
+    expect(parse('Lunch')).toEqual({
+      code: 'Lunch',
+      category: 'Diverse',
+      name: 'Lunch',
+    })
+    expect(parse('Prandium')).toEqual({
+      code: 'Prandium',
+      category: 'Diverse',
+      name: 'Lunch',
+    })
+    expect(parse('MTID')).toEqual({
+      code: 'MTID',
+      category: 'Diverse',
+      name: 'Mentorstid',
+    })
+  })
   it('Ämnesområden', () => {
     expect(parse('BL')).toEqual({ code: 'BL', category: '', name: 'Bild' })
     expect(parse('EN')).toEqual({ code: 'EN', category: '', name: 'Engelska' })
@@ -1054,8 +1071,8 @@ describe('parse', () => {
     })
     expect(parse('MTID Arbetslagsråd 7C')).toEqual({
       code: 'MTID',
-      category: 'Okänd',
-      name: 'MTID',
+      category: 'Diverse',
+      name: 'Mentorstid',
       comment: 'Arbetslagsråd 7C',
     })
   })
