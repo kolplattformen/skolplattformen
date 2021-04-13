@@ -80,7 +80,7 @@ export const Children = () => {
                     {translate('children.noKids_title')}
                   </Text>
                   <Text style={styles.emptyStateDescription}>
-                    {translate('children.noKids_title')}
+                    {translate('children.noKids_description')}
                   </Text>
                   <Image
                     source={require('../assets/children.png')}

@@ -202,7 +202,7 @@ export const Login = () => {
               showModal(false)
             }}
           >
-            Avbryt
+            {translate('general.abort')}
           </Button>
         </Card>
       </Modal>

@@ -169,8 +169,8 @@ const Absence = () => {
                         {moment(values.startTime).format('HH:mm')}
                       </Button>
                       <DateTimePickerModal
-                        cancelTextIOS="Avbryt"
-                        confirmTextIOS="Bekräfta"
+                        cancelTextIOS={translate('general.abort')}
+                        confirmTextIOS={translate('general.confirm')}
                         date={moment(values.startTime).toDate()}
                         isVisible={values.displayStartTimePicker}
                         headerTextIOS="Välj en starttid"
