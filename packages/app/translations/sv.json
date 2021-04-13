@@ -25,6 +25,7 @@
         "loginAsTestUser": "Logga in som testanvändare",
         "placeholder_YourPersonalNumber": "Ditt personnummer",
         "chooseLoginMethod": "Välj inloggningsmetod",
+        "loginFailed": "Inloggningen misslyckades, försök igen!",
         "words": {
             "agile": "agila",
             "cheap": "billiga",

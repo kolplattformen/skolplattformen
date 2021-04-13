@@ -25,6 +25,7 @@
         "loginAsTestUser": "Login as test user",
         "placeholder_YourPersonalNumber": "Your personal number",
         "chooseLoginMethod": "Choose login method",
+        "loginFailed": "Login failed, please try again!",
         "words": {
             "agile": "agile",
             "cheap": "cheap",

@@ -131,7 +131,7 @@ export const Login = () => {
       status.on('PENDING', () => console.log('BankID app not yet opened'))
       status.on('USER_SIGN', () => console.log('BankID app is open'))
       status.on('ERROR', () => {
-        setError('Inloggningen misslyckades, försök igen!')
+        setError(translate('auth.loginFailed'))
         showModal(false)
       })
       status.on('OK', () => console.log('BankID ok'))
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   loginForm: {
     ...Layout.mainAxis.flexStart,
     ...Layout.crossAxis.flexEnd,
-    paddingHorizontal: Sizing.t5,
+    paddingHorizontal: Sizing.t4,
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
