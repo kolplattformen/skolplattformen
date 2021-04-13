@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/kolplattformen/skolplattformen/compare/v1.14.0...v1.15.0) (2021-04-13)
+
+
+### Features
+
+* 🎸 Updated curriculum ([#268](https://github.com/kolplattformen/skolplattformen/issues/268)) ([960be8a](https://github.com/kolplattformen/skolplattformen/commit/960be8a33460e3fe40cd9477e9b3c805bbbb88d9))
+
 # [1.14.0](https://github.com/kolplattformen/skolplattformen/compare/v1.13.0...v1.14.0) (2021-04-13)
 
 
