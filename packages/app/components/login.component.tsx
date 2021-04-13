@@ -146,7 +146,7 @@ export const Login = () => {
       <View style={styles.loginForm}>
         {loginMethodIndex !== 2 && (
           <Input
-            label={translate('auth.personalNumber')}
+            label={translate('general.socialSecurityNumber')}
             autoFocus
             value={socialSecurityNumber}
             style={styles.pnrInput}

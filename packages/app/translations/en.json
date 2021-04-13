@@ -6,7 +6,14 @@
         "abort": "Abort",
         "settings": "Settings",
         "send": "Send",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "socialSecurityNumber": "Personal number"
+    },
+    "navigation": {
+        "news": "News",
+        "notifications": "Notifications",
+        "calender": "Calender",
+        "menu": "Menu"
     },
     "auth": {
         "subtitle": "The {{word}} alternative",
@@ -45,6 +52,7 @@
     },
     "abscense": {
         "title": "Report absence",
-        "selectAbscenseEndTime": "Choose end time"
+        "selectAbscenseEndTime": "Choose end time",
+        "entireDay": "Whole day"
     }
 }

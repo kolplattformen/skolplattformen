@@ -130,8 +130,10 @@ const Absence = () => {
               <View>
                 <View style={styles.field}>
                   <Input
-                    accessibilityLabel="Personnummer"
-                    label="Personnummer"
+                    accessibilityLabel={translate(
+                      'general.socialSecurityNumber'
+                    )}
+                    label={translate('general.socialSecurityNumber')}
                     keyboardType="number-pad"
                     onChangeText={handleChange('socialSecurityNumber')}
                     onBlur={handleBlur('socialSecurityNumber')}
@@ -151,7 +153,7 @@ const Absence = () => {
                     checked={values.isFullDay}
                     onChange={(checked) => setFieldValue('isFullDay', checked)}
                   >
-                    Heldag
+                    {translate('abscense.entireDay')}
                   </CheckBox>
                 </View>
                 {!values.isFullDay && (

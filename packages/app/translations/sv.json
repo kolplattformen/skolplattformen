@@ -6,7 +6,14 @@
         "abort": "Avbryt",
         "settings": "Inställningar",
         "send": "Skicka",
-        "confirm": "Bekräfta"
+        "confirm": "Bekräfta",
+        "socialSecurityNumber": "Personnummer"
+    },
+    "navigation": {
+        "news": "News",
+        "notifications": "Notifications",
+        "calender": "Calender",
+        "menu": "Menu"
     },
     "auth": {
         "subtitle": "Det {{word}} alternativet",
@@ -45,6 +52,7 @@
     },
     "abscense": {
         "title": "Anmäl frånvaro",
-        "selectAbscenseEndTime": "Välj sluttid"
+        "selectAbscenseEndTime": "Välj sluttid",
+        "entireDay": "Heldag"
     }
 }
