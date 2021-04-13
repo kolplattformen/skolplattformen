@@ -1,3 +1,18 @@
+# [1.14.0](https://github.com/kolplattformen/skolplattformen/compare/v1.13.0...v1.14.0) (2021-04-13)
+
+
+### Bug Fixes
+
+* 🐛 Downgraded react-native testing lib ([14e9ad8](https://github.com/kolplattformen/skolplattformen/commit/14e9ad89727d980055ebbb35f1a44ea06a932467))
+* 🐛 Reverting to old api-hooks to isolate problem ([5945651](https://github.com/kolplattformen/skolplattformen/commit/5945651803ce111b3bd4d4a059b045e22947dedc))
+
+
+### Features
+
+* 🎸 Updated embedded-api and api-hooks ([5a3391a](https://github.com/kolplattformen/skolplattformen/commit/5a3391ad2423e323c6dc217ea3c22b6d233925db))
+* 🎸 Updated embedded-api for time tables with full names ([bc1e638](https://github.com/kolplattformen/skolplattformen/commit/bc1e638426814669fe38daa769a078502251228b))
+* 🎸 Working compound child list enabling time tables ([323fc13](https://github.com/kolplattformen/skolplattformen/commit/323fc13efee2c8b27546c2b29192772ddbb9628d))
+
 # [1.13.0](https://github.com/kolplattformen/skolplattformen/compare/v1.12.0...v1.13.0) (2021-04-07)
 
 
