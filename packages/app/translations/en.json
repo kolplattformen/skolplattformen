@@ -4,7 +4,9 @@
         "loading": "Loading...",
         "logout": "Logout",
         "abort": "Abort",
-        "settings": "Settings"
+        "settings": "Settings",
+        "send": "Send",
+        "confirm": "Confirm"
     },
     "auth": {
         "subtitle": "The {{word}} alternative",
@@ -39,6 +41,10 @@
     "children": {
         "title": "Your children",
         "noKids_title": "Inga barn",
-        "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad",
+        "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad"
+    },
+    "abscense": {
+        "title": "Report absence",
+        "selectAbscenseEndTime": "Choose end time"
     }
 }

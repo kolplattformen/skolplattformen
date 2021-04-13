@@ -15,6 +15,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
+import { translate } from '../utils/translation'
 import {
   CalendarOutlineIcon,
   MenuIcon,
@@ -214,7 +215,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           size="small"
           onPress={() => navigation.navigate('Absence', { child })}
         >
-          Anmäl frånvaro
+          {translate('abscense.title')}
         </Button>
       </View>
     </Card>
