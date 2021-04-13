@@ -23,7 +23,7 @@
         "bankid_Waiting": "Waiting for BankID...",
         "bankid_OpenManually": "Open BankID manually",
         "loginAsTestUser": "Login as test user",
-        "placeholder_YourPersonalNumber": "Your personal number",
+        "placeholder_SocialSecurityNumber": "Your personal number",
         "chooseLoginMethod": "Choose login method",
         "loginFailed": "Login failed, please try again!",
         "words": {

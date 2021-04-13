@@ -23,7 +23,7 @@
         "bankid_Waiting": "Väntar på BankID...",
         "bankid_OpenManually": "Öppna BankID manuellt",
         "loginAsTestUser": "Logga in som testanvändare",
-        "placeholder_YourPersonalNumber": "Ditt personnummer",
+        "placeholder_SocialSecuritylNumber": "Ditt personnummer",
         "chooseLoginMethod": "Välj inloggningsmetod",
         "loginFailed": "Inloggningen misslyckades, försök igen!",
         "words": {
