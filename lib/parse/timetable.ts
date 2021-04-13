@@ -1,3 +1,4 @@
+import parse from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
 import { TimetableEntry } from '../types'
 
@@ -41,9 +42,9 @@ interface EntryParser {
 export const timetableEntry: EntryParser = ({
   guidId, texts: [code, teacher, location], timeStart, timeEnd, dayOfWeekNumber, blockName,
 }, year, week) => ({
+  ...parse(code),
   id: guidId,
   blockName,
-  code,
   dayOfWeek: dayOfWeekNumber,
   location,
   teacher,
@@ -51,7 +52,6 @@ export const timetableEntry: EntryParser = ({
   timeStart,
   dateStart: calculateDate(year, week, dayOfWeekNumber, timeStart),
   dateEnd: calculateDate(year, week, dayOfWeekNumber, timeEnd),
-  name: ''
 })
 
 export const timetable = (response: TimetableResponse, year: number, week: number) => {

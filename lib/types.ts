@@ -1,3 +1,5 @@
+import { Subject } from '@skolplattformen/curriculum'
+
 export interface Cookie {
   name: string
   value: string
@@ -196,10 +198,8 @@ export interface Skola24Child {
 
 export type SSOSystem = 'TimetableViewer'
 
-export interface TimetableEntry {
+export interface TimetableEntry extends Subject {
   id: string
-  code: string
-  name: string
   teacher: string
   location: string
   timeStart: string

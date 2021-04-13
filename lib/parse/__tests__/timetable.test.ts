@@ -118,6 +118,7 @@ describe('Timetable', () => {
 
       expect(entry.id).toEqual('ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw')
       expect(entry.code).toEqual('BL')
+      expect(entry.name).toEqual('Bild')
       expect(entry.teacher).toEqual('KUr')
       expect(entry.location).toEqual('221')
       expect(entry.timeStart).toEqual('09:40:00')
