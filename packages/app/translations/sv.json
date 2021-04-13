@@ -54,5 +54,9 @@
         "title": "Anmäl frånvaro",
         "selectAbscenseEndTime": "Välj sluttid",
         "entireDay": "Heldag"
+    },
+    "news": {
+        "title": "Nyhet från skolplattformen",
+        "backToChild": "Tillbaka till barn"
     }
 }
