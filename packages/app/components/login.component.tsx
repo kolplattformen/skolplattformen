@@ -21,6 +21,7 @@ import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
 import { Colors, Layout, Sizing } from '../styles'
+import { translate } from '../utils/translation'
 import {
   CloseOutlineIcon,
   PersonIcon,
@@ -43,14 +44,16 @@ export const Login = () => {
     'loginMethodIndex',
     '0'
   )
+
   const loginMethods = [
-    'Öppna BankID på denna enhet',
-    'Öppna BankID på annan enhet',
-    'Logga in som testanvändare',
+    translate('auth.bankid_OpenOnThisDevice'),
+    translate('auth.bankid_OpenOnAnotherDevice'),
+    translate('auth.loginAsTestUser'),
   ]
+
   const selectLoginMethod = () => {
     const options = {
-      title: 'Välj inloggningsmetod',
+      title: translate('auth.chooseLoginMethod'),
       optionsIOS: loginMethods,
       optionsAndroid: loginMethods,
       onCancelAndroidIndex: loginMethodIndex,
@@ -110,7 +113,7 @@ export const Login = () => {
           : `bankid:///?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
-      setError('Öppna BankID manuellt')
+      setError(translate('bankid_OpenManually'))
     }
   }
 
@@ -143,7 +146,7 @@ export const Login = () => {
       <View style={styles.loginForm}>
         {loginMethodIndex !== 2 && (
           <Input
-            label="Personnummer"
+            label={translate('auth.personalNumber')}
             autoFocus
             value={socialSecurityNumber}
             style={styles.pnrInput}
@@ -157,7 +160,7 @@ export const Login = () => {
             onSubmitEditing={(event) => startLogin(event.nativeEvent.text)}
             caption={error || ''}
             onChangeText={(text) => handleInput(text)}
-            placeholder="Ditt personnr"
+            placeholder={translate('auth.placeholder_YourPersonalNumber')}
           />
         )}
         <ButtonGroup style={styles.loginButtonGroup}>
@@ -189,7 +192,9 @@ export const Login = () => {
         onBackdropPress={() => showModal(false)}
       >
         <Card disabled>
-          <Text style={styles.bankIdLoading}>Väntar på BankID...</Text>
+          <Text style={styles.bankIdLoading}>
+            {translate('auth.bankid_Waiting')}
+          </Text>
 
           <Button
             onPress={() => {

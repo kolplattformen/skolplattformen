@@ -13,6 +13,7 @@ import { StatusBar } from 'react-native'
 import { useBackgroundBlur } from './utils/blur'
 import moment from 'moment'
 import 'moment/locale/sv'
+import { useTranslation } from './hooks/use-translation'
 
 moment.locale('sv')
 
@@ -20,6 +21,8 @@ const api = init(fetch, CookieManager)
 
 export default () => {
   const FullBlurView = useBackgroundBlur()
+
+  useTranslation()
 
   return (
     <ApiProvider api={api} storage={AsyncStorage}>

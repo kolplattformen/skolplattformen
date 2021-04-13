@@ -1,0 +1,35 @@
+{
+    "general": {
+        "title": "Öppna skolplattformen"
+    },
+    "auth": {
+        "subtitle": "Det {{word}} alternativet",
+        "personalNumber": "Personnummer",
+        "bankid_OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
+        "bankid_OpenOnThisDevice": "Öppna BankID på denna enhet",
+        "bankid_Waiting": "Väntar på BankID...",
+        "bankid_OpenManually": "Öppna BankID manuellt",
+        "loginAsTestUser": "Logga in som testanvändare",
+        "placeholder_YourPersonalNumber": "Ditt personnummer",
+        "chooseLoginMethod": "Välj inloggningsmetod",
+        "words": {
+            "agile": "agila",
+            "cheap": "billiga",
+            "better": "bättre",
+            "cooler": "coolare",
+            "awaited": "efterlängtade",
+            "simple": "enkla",
+            "fantastic": "fantastiska",
+            "free": "fria",
+            "working": "fungerande",
+            "first": "första",
+            "homemade": "hemmagjorda",
+            "imperfect": "operfekta",
+            "rebellious": "rebelliska",
+            "fun": "roliga",
+            "fast": "snabba",
+            "enlightened": "upplysta",
+            "open": "open"
+        }
+    }
+}

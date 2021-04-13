@@ -1,0 +1,35 @@
+{
+    "general": {
+        "title": "Open school platform"
+    },
+    "auth": {
+        "subtitle": "The {{word}} alternative",
+        "personalNumber": "Personal number",
+        "bankid_OpenOnAnotherDevice": "Open BankID on another device",
+        "bankid_OpenOnThisDevice": "Open BankID on this device",
+        "bankid_Waiting": "Waiting for BankID...",
+        "bankid_OpenManually": "Open BankID manually",
+        "loginAsTestUser": "Login as test user",
+        "placeholder_YourPersonalNumber": "Your personal number",
+        "chooseLoginMethod": "Choose login method",
+        "words": {
+            "agile": "agile",
+            "cheap": "cheap",
+            "better": "better",
+            "cooler": "ccooleroolare",
+            "awaited": "awaited",
+            "simple": "simple",
+            "fantastic": "fantastic",
+            "free": "free",
+            "working": "working",
+            "first": "first",
+            "homemade": "homemade",
+            "imperfect": "imperfect",
+            "rebellious": "rebellious",
+            "fun": "fun",
+            "fast": "fast",
+            "enlightened": "enlightened",
+            "open": "open"
+        }
+    }
+}

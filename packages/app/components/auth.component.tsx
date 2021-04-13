@@ -1,5 +1,5 @@
 import { Layout, Text } from '@ui-kitten/components'
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -12,33 +12,20 @@ import {
 import { Login } from './login.component'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import { translate } from '../utils/translation'
 
-const funArguments = [
-  'agila',
-  'billiga',
-  'bättre',
-  'coolare',
-  'efterlängtade',
-  'enkla',
-  'fantastiska',
-  'fria',
-  'fungerande',
-  'första',
-  'hemmagjorda',
-  'operfekta',
-  'rebelliska',
-  'roliga',
-  'snabba',
-  'upplysta',
-  'öppna',
-]
+const randomWord = () => {
+  const words = translate('auth.words')
+  const keys = Object.keys(words)
+
+  const randomIndex: number = Math.floor(Math.random() * keys.length)
+  const argumentKey: string = keys[randomIndex]
+
+  // @ts-expect-error Fix this later
+  return words[argumentKey]
+}
 
 export const Auth = () => {
-  const [argument] = useState(() => {
-    const argNum = Math.floor(Math.random() * funArguments.length)
-    return funArguments[argNum]
-  })
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -50,10 +37,12 @@ export const Auth = () => {
             <View style={styles.content}>
               <Layout style={styles.container}>
                 <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
-                  Öppna Skolplattformen
+                  {translate('general.title')}
                 </Text>
                 <Text category="h6" style={styles.subtitle}>
-                  Det {argument} alternativet
+                  {translate('auth.subtitle', {
+                    word: randomWord(),
+                  })}
                 </Text>
                 <Login />
               </Layout>
