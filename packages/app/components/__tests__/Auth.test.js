@@ -4,7 +4,6 @@ import React from 'react'
 import { Auth } from '../auth.component'
 import { useAsyncStorage } from 'use-async-storage'
 import { findBestAvailableLanguage } from 'react-native-localize'
-import { translate } from '../../utils/translation'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('use-async-storage')
