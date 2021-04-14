@@ -87,7 +87,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     const abbrevations = {
       G: translate('abbrevations.upperSecondarySchool'),
       GR: translate('abbrevations.compulsorySchool'),
-      F: translate('abbrevations.leasureTimeCenter'),
+      F: translate('abbrevations.leisureTimeCentre'),
       FS: translate('abbrevations.preSchool'),
     }
 

@@ -1,6 +1,6 @@
-import i18n from 'i18n-js'
 import { I18nManager } from 'react-native'
 import { findBestAvailableLanguage } from 'react-native-localize'
+import i18n from 'i18n-js'
 
 const translations = {
   en: () => require('../translations/en.json'),
@@ -21,4 +21,6 @@ export const setI18nConfig = () => {
   i18n.locale = languageTag
 }
 
-export const translate = i18n.t
+export const translate = (key: string, options?: Record<string, any>) => {
+  return i18n.t(key, options)
+}
