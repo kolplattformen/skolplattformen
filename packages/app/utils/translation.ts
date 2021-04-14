@@ -17,6 +17,18 @@ export const changeLanguage = (lang: AvailableLanguages) => {
   setI18nConfig(lang)
 }
 
+export const getCurrentLanguage = async () => {
+  const savedLocale = (await AsyncStorage.getItem(
+    'selectedLocale'
+  )) as AvailableLanguages
+
+  if (savedLocale) {
+    return savedLocale as AvailableLanguages
+  } else {
+    currentLocale() as AvailableLanguages
+  }
+}
+
 export const setI18nConfig = (lang: AvailableLanguages = 'sv') => {
   // TODO: Fix this
   I18nManager.forceRTL(false)
