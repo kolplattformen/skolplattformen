@@ -82,12 +82,13 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       return classmates[0].className
     }
 
-    // otherwise we show the status: Grundskola, Gymnasium etc.
+    // Taken from Skolverket
+    // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
     const abbrevations = {
-      G: 'Gymnasiet', // ? i'm guessing here
-      GR: 'Grundskolan',
-      F: 'Fritids',
-      FS: 'Förskola',
+      G: translate('abbrevations.upperSecondarySchool'),
+      GR: translate('abbrevations.compulsorySchool'),
+      F: translate('abbrevations.leasureTimeCenter'),
+      FS: translate('abbrevations.preSchool'),
     }
 
     return child.status
@@ -114,7 +115,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Nyheter',
+            initialRouteName: translate('navigation.news'),
           })
         }
         accessoryLeft={NewsIcon}
@@ -129,7 +130,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Notifieringar',
+            initialRouteName: translate('navigation.notifications'),
           })
         }
         accessoryLeft={NotificationsIcon}
@@ -144,7 +145,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Kalender',
+            initialRouteName: translate('navigation.calender'),
           })
         }
         accessoryLeft={CalendarOutlineIcon}

@@ -71,5 +71,11 @@
         "saveToCalenderSuccess": "✔️ Saved to calender",
         "saveToCalenderError": "Something went wrong",
         "approveAccessToCalender": "You have to approve access to your calender"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Upper secondary school",
+        "preschool": "Preschool",
+        "compulsorySchool": "Compulsory school",
+        "leisureTimeCentre": "Leisure-time centre"
     }
 }
