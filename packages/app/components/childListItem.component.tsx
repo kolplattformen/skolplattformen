@@ -160,7 +160,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Matsedel',
+            initialRouteName: translate('navigation.menu'),
           })
         }
         accessoryLeft={MenuIcon}
