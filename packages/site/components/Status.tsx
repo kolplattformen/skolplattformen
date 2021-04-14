@@ -5,6 +5,10 @@ const Status = () => {
             <h3>Funkar appen som den ska?</h3>
             <p>
                 Senast vi kollade!
+                <br />
+                ✅ iPhone
+                <br />
+                ✅ Android
             </p>
             <p>
                 Vi har inga rapporter om att appen har problem för tillfället.
