@@ -3,6 +3,7 @@ import { I18nManager } from 'react-native'
 import i18n from 'i18n-js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import moment from 'moment'
+import 'moment/locale/sv'
 
 export type AvailableLanguages = 'sv' | 'en'
 
