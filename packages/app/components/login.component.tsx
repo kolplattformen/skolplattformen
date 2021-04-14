@@ -117,9 +117,14 @@ export const Login = () => {
   const startLogin = async (text: string) => {
     if (loginMethodIndex < 2) {
       showModal(true)
-      const ssn = Personnummer.parse(text).format(true)
-      setCachedSsn(ssn)
-      setSocialSecurityNumber(ssn)
+
+      let ssn
+      if (loginMethodIndex === 1) {
+        ssn = Personnummer.parse(text).format(true)
+        setCachedSsn(ssn)
+        setSocialSecurityNumber(ssn)
+      }
+
       const status = await api.login(ssn)
       setCancelLoginRequest(() => () => status.cancel())
       if (status.token !== 'fake' && loginMethodIndex === 0) {
@@ -141,7 +146,7 @@ export const Login = () => {
     <>
       <Image source={require('../assets/boys.png')} style={styles.image} />
       <View style={styles.loginForm}>
-        {loginMethodIndex !== 2 && (
+        {loginMethodIndex === 1 && (
           <Input
             label="Personnummer"
             autoFocus
@@ -165,7 +170,7 @@ export const Login = () => {
             onPress={() => startLogin(socialSecurityNumber)}
             style={styles.loginButton}
             appearance="ghost"
-            disabled={loginMethodIndex !== 2 && !valid}
+            disabled={loginMethodIndex === 1 && !valid}
             status="primary"
             accessoryLeft={SecureIcon}
             size="medium"
