@@ -44,7 +44,7 @@ describe('english translations of auth', () => {
   })
 
   test('renders a random fun argument state in english', () => {
-    expect(screen.getByText(/open school platform/i)).toBeTruthy()
+    expect(screen.getByText(/öppna skolplattformen/i)).toBeTruthy()
     expect(screen.getByText(/the [a-zåäö]+ alternative/i)).toBeTruthy()
   })
 })

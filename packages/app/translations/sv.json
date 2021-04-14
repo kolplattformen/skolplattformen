@@ -62,7 +62,8 @@
         "title": "Nyhet från skolplattformen",
         "backToChild": "Tillbaka till barn",
         "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
-        "newsTitle": "Nyhet: {{message}} ({{dateCreated}})"
+        "newsTitle": "Nyhet: {{message}} ({{dateCreated}})",
+        "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
     },
     "notifications": {
         "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"

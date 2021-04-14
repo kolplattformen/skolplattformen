@@ -2,9 +2,15 @@ import { I18nManager } from 'react-native'
 import { findBestAvailableLanguage } from 'react-native-localize'
 import i18n from 'i18n-js'
 
+type AvailableLanguages = 'sv' | 'en'
+
 const translations = {
   en: () => require('../translations/en.json'),
   sv: () => require('../translations/sv.json'),
+}
+
+export const changeLanguage = (lang: AvailableLanguages) => {
+  i18n.locale = lang
 }
 
 export const setI18nConfig = () => {
