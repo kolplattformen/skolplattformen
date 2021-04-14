@@ -1,6 +1,7 @@
 import { I18nManager } from 'react-native'
 //import { findBestAvailableLanguage } from 'react-native-localize'
 import i18n from 'i18n-js'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export type AvailableLanguages = 'sv' | 'en'
 
@@ -10,6 +11,7 @@ const translations = {
 }
 
 export const changeLanguage = (lang: AvailableLanguages) => {
+  AsyncStorage.setItem('selectedLocale', lang)
   setI18nConfig(lang)
 }
 
