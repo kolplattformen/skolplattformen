@@ -15,10 +15,9 @@ export const changeLanguage = (lang: AvailableLanguages) => {
   setI18nConfig(lang)
 }
 
-export const setI18nConfig = (lang: AvailableLanguages) => {
-  const fallback = { languageTag: 'sv', isRTL: false }
-
-  I18nManager.forceRTL(fallback.isRTL)
+export const setI18nConfig = (lang: AvailableLanguages = 'sv') => {
+  // TODO: Fix this
+  I18nManager.forceRTL(false)
   i18n.translations = { [lang]: translations[lang]() }
   i18n.locale = lang
 }

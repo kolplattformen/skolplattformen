@@ -19,7 +19,9 @@ import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 import { translate } from '../utils/translation'
 import { GlobeIcon } from './icon.component'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from './navigation.component'
 
 const randomWord = () => {
   const words = translate('auth.words')
@@ -32,8 +34,11 @@ const randomWord = () => {
   return words[argumentKey]
 }
 
-export const Auth = () => {
-  const navigation = useNavigation()
+interface AuthProps {
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>
+}
+
+export const Auth: React.FC<AuthProps> = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

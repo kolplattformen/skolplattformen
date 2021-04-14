@@ -214,27 +214,3 @@ test('says if there is nothing new this week', () => {
 
   expect(screen.getByText('Inga nya inlägg denna vecka.')).toBeTruthy()
 })
-
-describe('english translations of children', () => {
-  beforeAll(() => {
-    RNLocalize.findBestAvailableLanguage.mockImplementationOnce(() => ({
-      languageTag: 'en',
-      isRTL: false,
-    }))
-  })
-  test('says if there is nothing new this week', () => {
-    useChildList.mockImplementationOnce(() => ({
-      data: [
-        {
-          name: 'Kanye West',
-          status: 'F',
-        },
-      ],
-      status: 'loaded',
-    }))
-
-    const screen = setup()
-
-    expect(screen.getByText('No new news items this week.')).toBeTruthy()
-  })
-})

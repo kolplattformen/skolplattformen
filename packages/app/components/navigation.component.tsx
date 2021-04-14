@@ -25,6 +25,7 @@ export type RootStackParamList = {
   }
   NewsItem: { newsItem: NewsItemType; child: ChildType }
   Absence: { child: ChildType }
+  SetLanguage: undefined
 }
 
 const { Navigator, Screen } = createStackNavigator()
