@@ -11,10 +11,10 @@
         "changeLanguage": "Byt språk"
     },
     "navigation": {
-        "news": "News",
-        "notifications": "Notifications",
-        "calender": "Calender",
-        "menu": "Menu"
+        "news": "Nyheter",
+        "notifications": "Aviseringar",
+        "calender": "Kalender",
+        "menu": "Matsedel"
     },
     "auth": {
         "bankid": {
