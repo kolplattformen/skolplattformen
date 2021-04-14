@@ -16,12 +16,14 @@
         "menu": "Menu"
     },
     "auth": {
+        "bankid": {
+            "OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
+            "OpenOnThisDevice": "Öppna BankID på denna enhet",
+            "Waiting": "Väntar på BankID...",
+            "OpenManually": "Öppna BankID manuellt"
+        },
         "subtitle": "Det {{word}} alternativet",
         "personalNumber": "Personnummer",
-        "bankid_OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
-        "bankid_OpenOnThisDevice": "Öppna BankID på denna enhet",
-        "bankid_Waiting": "Väntar på BankID...",
-        "bankid_OpenManually": "Öppna BankID manuellt",
         "loginAsTestUser": "Logga in som testanvändare",
         "placeholder_SocialSecuritylNumber": "Ditt personnummer",
         "chooseLoginMethod": "Välj inloggningsmetod",

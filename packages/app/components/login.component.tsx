@@ -46,8 +46,8 @@ export const Login = () => {
   )
 
   const loginMethods = [
-    translate('auth.bankid_OpenOnThisDevice'),
-    translate('auth.bankid_OpenOnAnotherDevice'),
+    translate('auth.bankid.OpenOnThisDevice'),
+    translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
   ]
 
@@ -113,7 +113,7 @@ export const Login = () => {
           : `bankid:///?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
-      setError(translate('auth.bankid_OpenManually'))
+      setError(translate('auth.bankid.OpenManually'))
     }
   }
 
@@ -193,7 +193,7 @@ export const Login = () => {
       >
         <Card disabled>
           <Text style={styles.bankIdLoading}>
-            {translate('auth.bankid_Waiting')}
+            {translate('auth.bankid.Waiting')}
           </Text>
 
           <Button

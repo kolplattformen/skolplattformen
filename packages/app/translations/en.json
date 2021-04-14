@@ -16,12 +16,14 @@
         "menu": "Menu"
     },
     "auth": {
+        "bankid": {
+            "OpenOnAnotherDevice": "Open BankID on another device",
+            "OpenOnThisDevice": "Open BankID on this device",
+            "Waiting": "Waiting for BankID...",
+            "OpenManually": "Waiting for BankID..."
+        },
         "subtitle": "The {{word}} alternative",
         "personalNumber": "Personal number",
-        "bankid_OpenOnAnotherDevice": "Open BankID on another device",
-        "bankid_OpenOnThisDevice": "Open BankID on this device",
-        "bankid_Waiting": "Waiting for BankID...",
-        "bankid_OpenManually": "Open BankID manually",
         "loginAsTestUser": "Login as test user",
         "placeholder_SocialSecurityNumber": "Your personal number",
         "chooseLoginMethod": "Choose login method",
