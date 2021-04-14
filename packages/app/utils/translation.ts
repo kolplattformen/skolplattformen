@@ -2,6 +2,7 @@ import { I18nManager } from 'react-native'
 //import { findBestAvailableLanguage } from 'react-native-localize'
 import i18n from 'i18n-js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import moment from 'moment'
 
 export type AvailableLanguages = 'sv' | 'en'
 
@@ -20,6 +21,7 @@ export const setI18nConfig = (lang: AvailableLanguages = 'sv') => {
   I18nManager.forceRTL(false)
   i18n.translations = { [lang]: translations[lang]() }
   i18n.locale = lang
+  moment.locale(lang)
 }
 
 export const currentLocale = () => {
