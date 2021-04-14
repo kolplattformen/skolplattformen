@@ -63,7 +63,7 @@
         "title": "News from the school platform",
         "backToChild": "Back to child",
         "noNewNewsItemsThisWeek": "No new news items this week.",
-        "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
+        "notificationTitle": "Nyhet: {{message}} ({{dateCreated}})"
     },
     "notifications": {
         "notificationTitle": "Notification: {{message}} ({{dateCreated}})"

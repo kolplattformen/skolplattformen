@@ -202,7 +202,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       ))}
       {newsThisWeek.slice(0, 3).map((newsItem, i) => (
         <Text appearance="hint" category="c1" key={i}>
-          {translate('notifications.notificationTitle', {
+          {translate('news.notificationTitle', {
             header: newsItem.header,
             published: displayDate(newsItem.published),
           })}

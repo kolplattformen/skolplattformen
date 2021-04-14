@@ -12,7 +12,7 @@ import { render } from '../../utils/testHelpers'
 import React from 'react'
 import { Children } from '../children.component'
 import { useNavigation } from '@react-navigation/native'
-import { findBestAvailableLanguage } from 'react-native-localize'
+import * as RNLocalize from 'react-native-localize'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('@react-navigation/native')
@@ -26,10 +26,10 @@ beforeEach(() => {
     api: { on: jest.fn(), off: jest.fn(), logout: jest.fn() },
     isLoggedIn: false,
   })
-  findBestAvailableLanguage.mockReturnValue({
+  RNLocalize.findBestAvailableLanguage.mockImplementationOnce(() => ({
     languageTag: 'sv',
     isRTL: false,
-  })
+  }))
   useCalendar.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNotifications.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
@@ -213,4 +213,28 @@ test('says if there is nothing new this week', () => {
   const screen = setup()
 
   expect(screen.getByText('Inga nya inlägg denna vecka.')).toBeTruthy()
+})
+
+describe('english translations of children', () => {
+  beforeAll(() => {
+    RNLocalize.findBestAvailableLanguage.mockImplementationOnce(() => ({
+      languageTag: 'en',
+      isRTL: false,
+    }))
+  })
+  test('says if there is nothing new this week', () => {
+    useChildList.mockImplementationOnce(() => ({
+      data: [
+        {
+          name: 'Kanye West',
+          status: 'F',
+        },
+      ],
+      status: 'loaded',
+    }))
+
+    const screen = setup()
+
+    expect(screen.getByText('No new news items this week.')).toBeTruthy()
+  })
 })
