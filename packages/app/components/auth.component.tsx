@@ -19,7 +19,6 @@ import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 import { translate } from '../utils/translation'
 import { GlobeIcon } from './icon.component'
-import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from './navigation.component'
 
