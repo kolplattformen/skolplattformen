@@ -113,7 +113,7 @@ export const Login = () => {
           : `bankid:///?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
-      setError(translate('bankid_OpenManually'))
+      setError(translate('auth.bankid_OpenManually'))
     }
   }
 
