@@ -7,7 +7,8 @@
         "settings": "Settings",
         "send": "Send",
         "confirm": "Confirm",
-        "socialSecurityNumber": "Personal number"
+        "socialSecurityNumber": "Personal number",
+        "changeLanguage": "Change language"
     },
     "navigation": {
         "news": "News",
@@ -50,8 +51,8 @@
     },
     "children": {
         "title": "Your children",
-        "noKids_title": "Inga barn",
-        "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad"
+        "noKids_title": "No kids",
+        "noKids_description": "There are no kids registered with your your social security number in Stockholm stad"
     },
     "abscense": {
         "title": "Report absence",
@@ -79,5 +80,9 @@
         "preschool": "Preschool",
         "compulsorySchool": "Compulsory school",
         "leisureTimeCentre": "Leisure-time centre"
+    },
+    "language": {
+        "changeLanguage": "Change language",
+        "changeLanguageButton": "Save"
     }
 }

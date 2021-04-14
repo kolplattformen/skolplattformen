@@ -1,4 +1,9 @@
-import { Layout, Text } from '@ui-kitten/components'
+import {
+  Layout,
+  Text,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components'
 import React from 'react'
 import {
   Keyboard,
@@ -13,6 +18,8 @@ import { Login } from './login.component'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 import { translate } from '../utils/translation'
+import { GlobeIcon } from './icon.component'
+import { useNavigation } from '@react-navigation/core'
 
 const randomWord = () => {
   const words = translate('auth.words')
@@ -26,6 +33,7 @@ const randomWord = () => {
 }
 
 export const Auth = () => {
+  const navigation = useNavigation()
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -34,6 +42,15 @@ export const Auth = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.safeArea}>
           <SafeAreaViewContainer>
+            <TopNavigation
+              alignment="center"
+              accessoryRight={() => (
+                <TopNavigationAction
+                  icon={GlobeIcon}
+                  onPress={() => navigation.navigate('SetLanguage')}
+                />
+              )}
+            />
             <View style={styles.content}>
               <Layout style={styles.container}>
                 <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>

@@ -160,7 +160,7 @@ export const Login = () => {
             onSubmitEditing={(event) => startLogin(event.nativeEvent.text)}
             caption={error || ''}
             onChangeText={(text) => handleInput(text)}
-            placeholder={translate('auth.placeholder_SocialSecuritylNumber')}
+            placeholder={translate('auth.placeholder_SocialSecurityNumber')}
           />
         )}
         <ButtonGroup style={styles.loginButtonGroup}>

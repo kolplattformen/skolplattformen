@@ -7,7 +7,8 @@
         "settings": "Inställningar",
         "send": "Skicka",
         "confirm": "Bekräfta",
-        "socialSecurityNumber": "Personnummer"
+        "socialSecurityNumber": "Personnummer",
+        "changeLanguage": "Byt språk"
     },
     "navigation": {
         "news": "News",
@@ -25,7 +26,7 @@
         "subtitle": "Det {{word}} alternativet",
         "personalNumber": "Personnummer",
         "loginAsTestUser": "Logga in som testanvändare",
-        "placeholder_SocialSecuritylNumber": "Ditt personnummer",
+        "placeholder_SocialSecurityNumber": "Ditt personnummer",
         "chooseLoginMethod": "Välj inloggningsmetod",
         "loginFailed": "Inloggningen misslyckades, försök igen!",
         "words": {
@@ -80,5 +81,9 @@
         "preschool": "Förskola",
         "compulsorySchool": "Grundskola",
         "leisureTimeCentre": "Fritidshem"
+    },
+    "language": {
+        "changeLanguage": "Byt språk",
+        "changeLanguageButton": "Spara"
     }
 }

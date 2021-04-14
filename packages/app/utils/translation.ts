@@ -1,8 +1,8 @@
 import { I18nManager } from 'react-native'
-import { findBestAvailableLanguage } from 'react-native-localize'
+//import { findBestAvailableLanguage } from 'react-native-localize'
 import i18n from 'i18n-js'
 
-type AvailableLanguages = 'sv' | 'en'
+export type AvailableLanguages = 'sv' | 'en'
 
 const translations = {
   en: () => require('../translations/en.json'),
@@ -10,21 +10,19 @@ const translations = {
 }
 
 export const changeLanguage = (lang: AvailableLanguages) => {
+  setI18nConfig(lang)
+}
+
+export const setI18nConfig = (lang: AvailableLanguages) => {
+  const fallback = { languageTag: 'sv', isRTL: false }
+
+  I18nManager.forceRTL(fallback.isRTL)
+  i18n.translations = { [lang]: translations[lang]() }
   i18n.locale = lang
 }
 
-export const setI18nConfig = () => {
-  const fallback = { languageTag: 'sv', isRTL: false }
-
-  const { languageTag, isRTL } =
-    findBestAvailableLanguage(Object.keys(translations)) || fallback
-
-  I18nManager.forceRTL(isRTL)
-
-  // @ts-expect-error Fix later
-  i18n.translations = { [languageTag]: translations[languageTag]() }
-
-  i18n.locale = languageTag
+export const currentLocale = () => {
+  return i18n.locale
 }
 
 export const translate = (key: string, options?: Record<string, any>) => {

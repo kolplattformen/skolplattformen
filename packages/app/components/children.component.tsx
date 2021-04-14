@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/core'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
@@ -35,6 +36,7 @@ export const Children = () => {
       case 0:
         api.logout()
         AsyncStorage.clear()
+        break
     }
   }
 

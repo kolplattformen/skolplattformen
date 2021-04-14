@@ -1,20 +1,20 @@
-import { useEffect } from 'react'
-import { setI18nConfig } from '../utils/translation'
-import useForceUpdate from './use-force-update'
-import * as RNLocalize from 'react-native-localize'
+import { useEffect, useState } from 'react'
+import {
+  AvailableLanguages,
+  currentLocale,
+  setI18nConfig,
+} from '../utils/translation'
 
 export const useTranslation = () => {
-  const forceUpdate = useForceUpdate()
-
-  const handleLocalizationChange = () => {
-    setI18nConfig()
-    forceUpdate()
-  }
-
+  const [currentLanguage, setCurrentLanguage] = useState<AvailableLanguages>(
+    currentLocale() as AvailableLanguages
+  )
   useEffect(() => {
-    setI18nConfig()
+    setI18nConfig(currentLanguage)
+  }, [currentLanguage])
 
-    return RNLocalize.addEventListener('change', handleLocalizationChange)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  return {
+    currentLanguage,
+    setCurrentLanguage,
+  }
 }
