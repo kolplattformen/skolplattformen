@@ -36,6 +36,8 @@
     "@types/jest": "^26.0.22",
     "@types/react": "^17.0.3",
     "@types/react-scroll": "^1.8.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
     "autoprefixer": "^10.2.5",
     "babel-eslint": "10.1.0",
     "eslint": "7.24.0",
