@@ -59,7 +59,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-hooks": "^5.1.1",
-    "@testing-library/react-native": "7.2.0",
+    "@testing-library/react-native": "7.1.0",
     "@types/jest": "^26.0.22",
     "@types/jsuri": "^1.3.30",
     "@types/markdown-it": "^12.0.1",
