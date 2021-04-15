@@ -2,6 +2,8 @@ import { I18nManager } from 'react-native'
 //import { findBestAvailableLanguage } from 'react-native-localize'
 import i18n from 'i18n-js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import moment from 'moment'
+import 'moment/locale/sv'
 
 export type AvailableLanguages = 'sv' | 'en'
 
@@ -15,11 +17,24 @@ export const changeLanguage = (lang: AvailableLanguages) => {
   setI18nConfig(lang)
 }
 
+export const getCurrentLanguage = async () => {
+  const savedLocale = (await AsyncStorage.getItem(
+    'selectedLocale'
+  )) as AvailableLanguages
+
+  if (savedLocale) {
+    return savedLocale as AvailableLanguages
+  } else {
+    currentLocale() as AvailableLanguages
+  }
+}
+
 export const setI18nConfig = (lang: AvailableLanguages = 'sv') => {
   // TODO: Fix this
   I18nManager.forceRTL(false)
   i18n.translations = { [lang]: translations[lang]() }
   i18n.locale = lang
+  moment.locale(lang)
 }
 
 export const currentLocale = () => {

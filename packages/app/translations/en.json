@@ -64,7 +64,7 @@
         "title": "News from the school platform",
         "backToChild": "Back to child",
         "noNewNewsItemsThisWeek": "No new news items this week.",
-        "notificationTitle": "News: {{header}} ({{publishedDate}})"
+        "notificationTitle": "News: {{header}} ({{published}})"
     },
     "notifications": {
         "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
@@ -77,7 +77,7 @@
     },
     "abbrevations": {
         "upperSecondarySchool": "Upper secondary school",
-        "preschool": "Preschool",
+        "preSchool": "Preschool",
         "compulsorySchool": "Compulsory school",
         "leisureTimeCentre": "Leisure-time centre"
     },

@@ -11,11 +11,7 @@ import CookieManager from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StatusBar } from 'react-native'
 import { useBackgroundBlur } from './utils/blur'
-import moment from 'moment'
-import 'moment/locale/sv'
 import { useTranslation } from './hooks/use-translation'
-
-moment.locale('sv')
 
 const api = init(fetch, CookieManager)
 

@@ -11,9 +11,9 @@
         "changeLanguage": "Byt språk"
     },
     "navigation": {
-        "news": "News",
-        "notifications": "Notifications",
-        "calender": "Calender",
+        "news": "Nyheter",
+        "notifications": "Aviseringar",
+        "calender": "Kalender",
         "menu": "Matsedel"
     },
     "auth": {
@@ -64,7 +64,7 @@
         "backToChild": "Tillbaka till barn",
         "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
         "newsTitle": "Nyhet: {{message}} ({{dateCreated}})",
-        "notificationTitle": "Nyhet: {{header}} ({{publishedDate}})"
+        "notificationTitle": "Nyhet: {{header}} ({{published}})"
     },
     "notifications": {
         "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
@@ -78,9 +78,9 @@
     },
     "abbrevations": {
         "upperSecondarySchool": "Gymnasieskola",
-        "preschool": "Förskola",
+        "preSchool": "Förskola",
         "compulsorySchool": "Grundskola",
-        "leisureTimeCentre": "Fritidshem"
+        "leisureTimeCentre": "Fritids"
     },
     "language": {
         "changeLanguage": "Byt språk",
