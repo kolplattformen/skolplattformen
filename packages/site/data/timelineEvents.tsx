@@ -40,6 +40,13 @@ export const events: TimelineEvent[] = [
       {
         date: '2021-04-15',
         description:
+          'Stockholms stad polisanmäler appen Öppna skolplattformen (DN)',
+        link:
+          'https://www.dn.se/sthlm/stockholms-stad-polisanmaler-appen-oppna-skolplattformen/',
+      },
+      {
+        date: '2021-04-15',
+        description:
           'Stockholms stad polisanmäler Öppna skolplattformen (Ny Teknik)',
         link:
           'https://www.nyteknik.se/digitalisering/stockholms-stad-polisanmaler-oppna-skolplattformen-7013108',
