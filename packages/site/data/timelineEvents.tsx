@@ -40,7 +40,7 @@ export const events: TimelineEvent[] = [
       {
         date: '2021-04-15',
         description:
-          '#49- Utvecklaren och pappan Christian Landgren om frustrationen som ledde till bygget av en egen skolplattform. (podd, Allt du behöver veta om ny teknik)',
+          '#49 - Utvecklaren och pappan Christian Landgren om frustrationen som ledde till bygget av en egen skolplattform. (podd, Allt du behöver veta om ny teknik)',
         link:
           'https://podcasts.nu/avsnitt/allt-du-behover-veta-om-ny-teknik/49-utvecklaren-och-pappan-christian-landgren-om-frustrationen-som-ledde-till-bygget-av-en-egen-skolplattform-o2z9E646y',
       },
