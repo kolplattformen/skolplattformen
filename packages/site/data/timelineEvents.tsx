@@ -38,15 +38,29 @@ export const events: TimelineEvent[] = [
     importantDates: [],
     media: [
       {
+        date: '2021-04-15',
+        description:
+          'Stockholms stad polisanmäler appen Öppna skolplattformen (DN)',
+        link:
+          'https://www.dn.se/sthlm/stockholms-stad-polisanmaler-appen-oppna-skolplattformen/',
+      },
+      {
+        date: '2021-04-15',
+        description:
+          'Stockholms stad polisanmäler Öppna skolplattformen (Ny Teknik)',
+        link:
+          'https://www.nyteknik.se/digitalisering/stockholms-stad-polisanmaler-oppna-skolplattformen-7013108',
+      },
+      {
         date: '2021-04-01',
         description:
-          'Därför åkte vi vilse på resan mot digitalisering" (SvD Ledare)',
+          'Därför åkte vi vilse på resan mot digitalisering (SvD Ledare)',
         link: 'https://www.svd.se/darfor-akte-vi-vilse-pa-digitaliseringsresan',
       },
       {
         date: '2021-04-01',
         description:
-          'Ny säkerhetslucka i Stockholms stad - utbildningsminister kallas till utskott” (Ny Teknik)',
+          'Ny säkerhetslucka i Stockholms stad - utbildningsminister kallas till utskott (Ny Teknik)',
         link:
           'https://www.nyteknik.se/sakerhet/ny-sakerhetslucka-i-stockholms-stad-utbildningsminister-kallas-till-utskott-7012459',
       },
