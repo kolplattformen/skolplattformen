@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/kolplattformen/skolplattformen/compare/v1.15.0...v1.15.1) (2021-04-16)
+
+
+### Bug Fixes
+
+* 🐛 Remove two packages that have security issues ([5a0d673](https://github.com/kolplattformen/skolplattformen/commit/5a0d67363d549fa5f431cce8f23e061acd5cc33c))
+
 # [1.15.0](https://github.com/kolplattformen/skolplattformen/compare/v1.14.0...v1.15.0) (2021-04-13)
 
 
