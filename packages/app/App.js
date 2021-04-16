@@ -31,7 +31,6 @@ export default () => {
           <LanguageProvider
             cache={true}
             data={translations}
-            initialLanguageCode={'sv'}
             initalHasCheckedLanguage={false}
           >
             <AppNavigator />
