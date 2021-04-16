@@ -8,7 +8,7 @@ import {
   useSchedule,
   useMenu,
 } from '@skolplattformen/api-hooks'
-import { render } from '../../utils/testHelpers.tsx'
+import { render } from '../../utils/testHelpers'
 import React from 'react'
 import { Children } from '../children.component'
 import { useNavigation } from '@react-navigation/native'

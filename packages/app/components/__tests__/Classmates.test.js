@@ -1,6 +1,6 @@
 import { useClassmates } from '@skolplattformen/api-hooks'
 import React from 'react'
-import { render } from '../../utils/testHelpers.tsx'
+import { render } from '../../utils/testHelpers'
 import { ChildProvider } from '../childContext.component'
 import { Classmates } from '../classmates.component'
 

@@ -1,5 +1,5 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { render } from '../../utils/testHelpers.tsx'
+import { render } from '../../utils/testHelpers'
 import React from 'react'
 import { Auth } from '../auth.component'
 import { useAsyncStorage } from 'use-async-storage'

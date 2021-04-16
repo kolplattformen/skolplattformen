@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '../../utils/testHelpers.tsx'
+import { render } from '../../utils/testHelpers'
 import { NewsListItem } from '../newsListItem.component'
 import MockDate from 'mockdate'
 import { fireEvent } from '@testing-library/react-native'
