@@ -4,10 +4,10 @@
 # https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
 
 # Secure the whole repo with these groups or people
-* @irony @ErikHellman @JohanObrink @believer
+* @irony @ErikHellman @JohanObrink
 
 # Secure build actions with these groups or people 
-.github/* @irony @ErikHellman @JohanObrink @believer
+.github/* @irony @ErikHellman @JohanObrink
 
 # Secure source with these groups or people
-packages/* @irony @ErikHellman @JohanObrink @believer
+packages/* @irony @ErikHellman @JohanObrink
