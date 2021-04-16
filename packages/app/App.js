@@ -34,7 +34,7 @@ export default () => {
           <LanguageProvider
             cache={true}
             data={translations}
-            initialLanguageCode={initialLanguageCode && 'sv'}
+            initialLanguageCode={initialLanguageCode || 'sv'}
           >
             <AppNavigator />
           </LanguageProvider>
