@@ -38,9 +38,6 @@ export const LanguageProvider: React.FC<Props> = ({
       fallBack
     const bestStrings = data[languageTag]
 
-    console.log('LANGUAGE TAG', languageTag)
-    console.log('LANGUAGE BEST', bestStrings)
-
     LanguageService.setLanguageCode({ langCode: languageTag })
     LanguageService.seti18nConfig({ langCode: languageTag })
 
