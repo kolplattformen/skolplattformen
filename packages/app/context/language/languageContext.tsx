@@ -30,6 +30,9 @@ export const LanguageProvider: React.FC<Props> = ({
   const [Strings, setStrings] = useState(() => {
     if (initialLanguageCode && data[initialLanguageCode]) {
       LanguageService.setLanguageCode({ langCode: initialLanguageCode })
+      LanguageService.seti18nConfig({ langCode: initialLanguageCode })
+      setHasCheckedLanguage(true)
+
       return data[initialLanguageCode]
     }
 
