@@ -13,14 +13,11 @@ import { StatusBar } from 'react-native'
 import { useBackgroundBlur } from './utils/blur'
 import { LanguageProvider } from './context/language/languageContext'
 import { translations } from './utils/translation'
-import { LanguageService } from './services/languageService'
 
 const api = init(fetch, CookieManager)
 
 export default () => {
   const FullBlurView = useBackgroundBlur()
-
-  const initialLanguageCode = LanguageService.getLanguageCode()
 
   return (
     <ApiProvider api={api} storage={AsyncStorage}>
@@ -34,7 +31,8 @@ export default () => {
           <LanguageProvider
             cache={true}
             data={translations}
-            initialLanguageCode={initialLanguageCode || 'sv'}
+            initialLanguageCode={'sv'}
+            initalHasCheckedLanguage={false}
           >
             <AppNavigator />
           </LanguageProvider>

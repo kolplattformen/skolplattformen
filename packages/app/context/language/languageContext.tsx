@@ -65,13 +65,18 @@ export const LanguageProvider: React.FC<Props> = ({
     )
 
     const checkLanguageLocal = async () => {
+      setHasCheckedLanguage(false)
       if (cache) {
         const languageCode = await LanguageStorage.get()
         if (languageCode) {
+          console.log('we are here')
           LanguageService.setLanguageCode({ langCode: languageCode })
           LanguageService.seti18nConfig({ langCode: languageCode })
-          setHasCheckedLanguage(true)
+        } else {
+          LanguageService.setLanguageCode({ langCode: initialLanguageCode })
+          LanguageService.seti18nConfig({ langCode: initialLanguageCode })
         }
+        setHasCheckedLanguage(true)
       }
     }
     checkLanguageLocal()
