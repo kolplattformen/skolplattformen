@@ -12,6 +12,8 @@ let languageCode: string
 const isRTL: { [key: string]: boolean } = {
   en: false,
   sv: false,
+  so: false,
+  ar: true,
 }
 
 export const LanguageService = {
@@ -21,10 +23,10 @@ export const LanguageService = {
     allString = data
   },
   seti18nConfig: ({ langCode }: { langCode: string }) => {
-    I18nManager.forceRTL(false)
     i18n.translations = { [langCode]: Strings }
     i18n.locale = langCode
     I18nManager.forceRTL(isRTL[langCode])
+    console.log(isRTL[langCode])
     moment.locale(langCode)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {

@@ -52,23 +52,45 @@ export const SetLanguage = () => {
         />
         <View style={styles.content}>
           <Layout style={styles.container}>
-            <TouchableOpacity
-              style={styles.languageButton}
-              onPress={() => setSelectedLanguage('sv')}
-            >
-              <Text style={styles.check}>{isSelected('sv') ? '✓' : ''}</Text>
-              <Text>Swedish</Text>
-              <Text style={styles.languageButtonSubtitle}>svenska</Text>
-            </TouchableOpacity>
+            <View style={styles.languageList}>
+              <TouchableOpacity
+                style={styles.languageButton}
+                onPress={() => setSelectedLanguage('sv')}
+              >
+                <Text style={styles.check}>{isSelected('sv') ? '✓' : ''}</Text>
+                <Text>Swedish</Text>
+                <Text style={styles.languageButtonSubtitle}>svenska</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.languageButton}
-              onPress={() => setSelectedLanguage('en')}
-            >
-              <Text style={styles.check}>{isSelected('en') ? '✓' : ''}</Text>
-              <Text>English</Text>
-              <Text style={styles.languageButtonSubtitle}>engelska</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.languageButton}
+                onPress={() => setSelectedLanguage('en')}
+              >
+                <Text style={styles.check}>{isSelected('en') ? '✓' : ''}</Text>
+                <Text>English</Text>
+                <Text style={styles.languageButtonSubtitle}>engelska</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.languageButton}
+                onPress={() => setSelectedLanguage('ar')}
+              >
+                <Text style={styles.check}>{isSelected('ar') ? '✓' : ''}</Text>
+                <Text>Arabic</Text>
+                <Text style={styles.languageButtonSubtitle}>
+                  (اَلْعَرَبِيَّةُ,
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.languageButton}
+                onPress={() => setSelectedLanguage('so')}
+              >
+                <Text style={styles.check}>{isSelected('so') ? '✓' : ''}</Text>
+                <Text>Somalia</Text>
+                <Text style={styles.languageButtonSubtitle}>af-Soomaali</Text>
+              </TouchableOpacity>
+            </View>
           </Layout>
 
           <ButtonGroup style={styles.buttonGroup}>
@@ -95,6 +117,12 @@ const styles = StyleSheet.create({
     ...LayoutStyle.flex.full,
     backgroundColor: Colors.neutral.white,
   },
+  languageList: {
+    flex: 1,
+    alignSelf: 'stretch',
+    flexDirection: 'column',
+    marginTop: 40,
+  },
   icon: {
     width: 30,
     height: 30,
@@ -120,6 +148,7 @@ const styles = StyleSheet.create({
   },
   languageButton: {
     minHeight: 45,
+    marginBottom: 10,
   },
   languageButtonSubtitle: {
     opacity: 0.4,

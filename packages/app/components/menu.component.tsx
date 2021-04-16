@@ -1,15 +1,12 @@
 import { useMenu } from '@skolplattformen/api-hooks'
 import { MenuItem } from '@skolplattformen/embedded-api'
 import { List, Text } from '@ui-kitten/components'
-import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { Colors, Sizing, Layout as LayoutStyle, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
-
-moment.locale('sv')
 
 export const Menu = () => {
   const child = useChild()
