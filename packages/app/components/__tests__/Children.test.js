@@ -12,10 +12,11 @@ import { render } from '../../utils/testHelpers'
 import React from 'react'
 import { Children } from '../children.component'
 import { useNavigation } from '@react-navigation/native'
+import * as RNLocalize from 'react-native-localize'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('@react-navigation/native')
-
+jest.mock('react-native-localize')
 const setup = () => {
   return render(<Children />)
 }
@@ -25,6 +26,10 @@ beforeEach(() => {
     api: { on: jest.fn(), off: jest.fn(), logout: jest.fn() },
     isLoggedIn: false,
   })
+  RNLocalize.findBestAvailableLanguage.mockImplementationOnce(() => ({
+    languageTag: 'sv',
+    isRTL: false,
+  }))
   useCalendar.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNotifications.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
@@ -91,7 +96,7 @@ test('renders child in elementary school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskolan')).toBeTruthy()
+  expect(screen.getByText('Grundskola')).toBeTruthy()
 })
 
 test('renders child in high school', () => {
@@ -108,7 +113,7 @@ test('renders child in high school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
 })
 
 test('renders multiple children', () => {
@@ -129,10 +134,10 @@ test('renders multiple children', () => {
   const screen = setup()
 
   expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
 
   expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskolan')).toBeTruthy()
+  expect(screen.getByText('Grundskola')).toBeTruthy()
 })
 
 test('displays class name if child has class mates', () => {
@@ -159,7 +164,7 @@ test('displays class name if child has class mates', () => {
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
   expect(screen.getByText('8C')).toBeTruthy()
-  expect(screen.queryByText('Gymnasiet')).toBeFalsy()
+  expect(screen.queryByText('Gymnasieskola')).toBeFalsy()
 })
 
 test('removes any parenthesis from name', () => {
@@ -192,7 +197,7 @@ test('handles multiple statuses for a child', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet, Grundskolan, Fritids')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola, Grundskola, Fritids')).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {
