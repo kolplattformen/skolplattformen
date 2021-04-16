@@ -3,6 +3,7 @@ import * as RNLocalize from 'react-native-localize'
 
 import { LanguageService } from '../../services/languageService'
 import { LanguageStorage } from '../../services/languageStorage'
+import { translations } from '../../utils/translation'
 
 export const LanguageContext = React.createContext({ Strings: {} })
 
@@ -30,19 +31,19 @@ export const LanguageProvider: React.FC<Props> = ({
       return data[initialLanguageCode]
     }
 
-    let languageCode
-    let bestStrings
-    const localizes = RNLocalize.getLocales()
-    for (let i = 0; i < localizes.length; i++) {
-      const element = localizes[i]
-      if (data[element.languageCode]) {
-        bestStrings = data[element.languageCode]
-        languageCode = element.languageCode
-        break
-      }
-    }
+    const fallBack = { languageTag: 'sv' }
 
-    LanguageService.setLanguageCode({ langCode: languageCode })
+    const { languageTag } =
+      RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
+      fallBack
+    const bestStrings = data[languageTag]
+
+    console.log('LANGUAGE TAG', languageTag)
+    console.log('LANGUAGE BEST', bestStrings)
+
+    LanguageService.setLanguageCode({ langCode: languageTag })
+    LanguageService.seti18nConfig({ langCode: languageTag })
+
     return bestStrings
   })
   useEffect(() => {
@@ -59,16 +60,14 @@ export const LanguageProvider: React.FC<Props> = ({
     )
 
     const checkLanguageLocal = async () => {
-      //setHasCheckedLanguage(false)
       if (cache) {
         const languageCode = await LanguageStorage.get()
-        if (languageCode) {
-          LanguageService.setLanguageCode({ langCode: languageCode })
-          LanguageService.seti18nConfig({ langCode: languageCode })
-        } else {
-          LanguageService.setLanguageCode({ langCode: initialLanguageCode })
-          LanguageService.seti18nConfig({ langCode: initialLanguageCode })
-        }
+        LanguageService.setLanguageCode({
+          langCode: languageCode || initialLanguageCode,
+        })
+        LanguageService.seti18nConfig({
+          langCode: languageCode || initialLanguageCode,
+        })
       }
     }
     checkLanguageLocal()

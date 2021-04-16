@@ -21,11 +21,13 @@ export const LanguageService = {
   setAllData: ({ data }: { data: Record<string, any> }) => {
     allString = data
   },
-  seti18nConfig: ({ langCode }: { langCode: string }) => {
-    i18n.translations = { [langCode]: Strings }
-    i18n.locale = langCode
-    I18nManager.forceRTL(false)
+  seti18nConfig: ({ langCode }: { langCode?: string }) => {
+    if (langCode) {
+      i18n.translations = { [langCode]: Strings }
+      i18n.locale = langCode
+    }
 
+    I18nManager.forceRTL(false)
     moment.locale(langCode)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
@@ -40,16 +42,12 @@ export const LanguageService = {
     Object.keys(changeListeners).forEach((k) => {
       changeListeners[k](langCode)
     })
-    if (langCode) {
-      i18n.translations = { [langCode]: Strings }
-      i18n.locale = langCode
-    }
     return Strings
   },
 
-  // @ts-expect-error Fix later
+  // @ts-expect-error Fix later, Typecast callback
   onChange: ({ key }: { key: string }, cb) => {
-    // @ts-expect-error Fix later
+    // @ts-expect-error Fix later, Typecast callback
     changeListeners[`${key}`] = (langCode) => cb(langCode)
   },
 }

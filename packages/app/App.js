@@ -28,11 +28,7 @@ export default () => {
           {...eva}
           theme={{ ...eva.light, ...customization }}
         >
-          <LanguageProvider
-            cache={true}
-            data={translations}
-            initalHasCheckedLanguage={false}
-          >
+          <LanguageProvider cache={true} data={translations}>
             <AppNavigator />
           </LanguageProvider>
           {FullBlurView}

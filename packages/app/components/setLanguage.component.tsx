@@ -37,7 +37,8 @@ export const SetLanguage = () => {
   }
 
   const goBack = () => {
-    navigation.navigate('Login', { locale: LanguageService.getLanguageCode() })
+    // Need to reset the view so it updates the language
+    navigation.navigate('Login', { rand: Math.random() })
   }
 
   return (

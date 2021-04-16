@@ -7,6 +7,7 @@ export const useLanguage = () => {
 
   const setLanguageCode = ({ languageCode }: { languageCode: string }) => {
     LanguageService.setLanguageCode({ langCode: languageCode })
+    LanguageService.seti18nConfig({ langCode: languageCode })
   }
 
   return { Strings, setLanguageCode }
