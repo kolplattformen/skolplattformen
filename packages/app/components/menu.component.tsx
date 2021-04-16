@@ -5,6 +5,7 @@ import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { Colors, Sizing, Layout as LayoutStyle, Typography } from '../styles'
+import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
 
@@ -18,9 +19,9 @@ export const Menu = () => {
       data={data}
       ListEmptyComponent={
         <View style={styles.emptyState}>
-          <Text category="h6">Det ser lite tomt ut i matsedeln</Text>
+          <Text category="h6">{translate('menu.emptyHeadline')}</Text>
           <Text style={styles.emptyStateDescription}>
-            Hittade ingenting att visa för den här veckan
+            {translate('menu.emptyText')}
           </Text>
           <Image
             source={require('../assets/children.png')}
