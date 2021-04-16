@@ -387,7 +387,7 @@ export class Api extends EventEmitter {
   }
 
   public async getMenu(child: EtjanstChild): Promise<MenuItem[]> {
-    if (this.isFake) return fakeResponse(fake.menu(child))
+    if (this.isFake) return fakeResponse(fake.menu(child).map(parse.menuItem))
 
     const menuService = await this.getMenuChoice(child)
     if (menuService === 'rss') {

@@ -18,34 +18,29 @@ export const menuList = (data: any): MenuItem[] => {
   )
 
   if (!currentWeek) {
-    return [
-      {
-        title: 'Måndag - Vecka ?',
-        description: 'Hittade ingen meny',
-      },
-    ]
+    return []
   }
 
   const menuItemsFS = [
     {
       title: `Måndag - Vecka ${currentWeek.week}`,
-      description: currentWeek.mon,
+      description: toMarkdown(currentWeek.mon) ,
     },
     {
       title: `Tisdag - Vecka ${currentWeek.week}`,
-      description: currentWeek.tue,
+      description: toMarkdown(currentWeek.tue),
     },
     {
       title: `Onsdag - Vecka ${currentWeek.week}`,
-      description: currentWeek.wed,
+      description: toMarkdown(currentWeek.wed),
     },
     {
       title: `Torsdag - Vecka ${currentWeek.week}`,
-      description: currentWeek.thu,
+      description: toMarkdown(currentWeek.thu),
     },
     {
       title: `Fredag - Vecka ${currentWeek.week}`,
-      description: currentWeek.fri,
+      description: toMarkdown(currentWeek.fri),
     },
   ]
 
