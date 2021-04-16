@@ -1500,10 +1500,10 @@
   resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.2.0.tgz#f6975bf241c09e05bb81f3493ac7cf35aa23d6c4"
   integrity sha512-26/R+ZN1P0jrH26xVrn6ue8WxDPag/TRWqEKyMckSbPWFUpuDRv7/FXRF3q4cRIIowvus6V4L63y3u4ao7Yj3A==
 
-"@skolplattformen/embedded-api@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.2.0.tgz#d17c4c246c05d50fe02d8e932e602c3ad33dd946"
-  integrity sha512-Jmlge3CtmkU0t56x82YW+PMY/+cFBXWGiGQEa2kMngpuxwqoabI4TmC7d1xTa/jZTHvRcaaBH0LV0V8vv75Sxg==
+"@skolplattformen/embedded-api@4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.3.0.tgz#e76b0fe3511e969d8108cff7d809e9f0f0d834da"
+  integrity sha512-z9qVhW9z67Wcyos1r0oG8hNW0ChUVcrWyBo3y6KjisejFoUeUD4+YMDXhZolzeg+sxxeoTfwwUwmrEywurCZIg==
   dependencies:
     "@skolplattformen/curriculum" "^1.2.0"
     "@types/he" "^1.1.1"
