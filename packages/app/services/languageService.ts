@@ -12,8 +12,6 @@ let languageCode: string
 const isRTL: { [key: string]: boolean } = {
   en: false,
   sv: false,
-  so: false,
-  ar: true,
 }
 
 export const LanguageService = {

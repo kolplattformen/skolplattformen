@@ -70,26 +70,6 @@ export const SetLanguage = () => {
                 <Text>English</Text>
                 <Text style={styles.languageButtonSubtitle}>engelska</Text>
               </TouchableOpacity>
-
-              {/* <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('ar')}
-              >
-                <Text style={styles.check}>{isSelected('ar') ? '✓' : ''}</Text>
-                <Text>Arabic</Text>
-                <Text style={styles.languageButtonSubtitle}>
-                  (اَلْعَرَبِيَّةُ,
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('so')}
-              >
-                <Text style={styles.check}>{isSelected('so') ? '✓' : ''}</Text>
-                <Text>Somalia</Text>
-                <Text style={styles.languageButtonSubtitle}>af-Soomaali</Text>
-                  </TouchableOpacity> */}
             </View>
           </Layout>
 
