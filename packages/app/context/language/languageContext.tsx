@@ -32,7 +32,7 @@ export const LanguageProvider: React.FC<Props> = ({
       LanguageService.setLanguageCode({ langCode: initialLanguageCode })
       return data[initialLanguageCode]
     }
-    //init base device
+
     let languageCode
     let bestStrings
     const localizes = RNLocalize.getLocales()
@@ -44,7 +44,7 @@ export const LanguageProvider: React.FC<Props> = ({
         break
       }
     }
-    //Strings is used in function
+
     LanguageService.setLanguageCode({ langCode: languageCode })
     return bestStrings
   })
