@@ -9,6 +9,11 @@ let allString: Record<string, any> = {}
 let Strings: Record<string, any> = {}
 let languageCode: string
 
+const isRTL: { [key: string]: boolean } = {
+  en: false,
+  sv: false,
+}
+
 export const LanguageService = {
   get: () => Strings,
   getLanguageCode: () => languageCode,
@@ -19,6 +24,7 @@ export const LanguageService = {
     I18nManager.forceRTL(false)
     i18n.translations = { [langCode]: Strings }
     i18n.locale = langCode
+    I18nManager.forceRTL(isRTL[langCode])
     moment.locale(langCode)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
