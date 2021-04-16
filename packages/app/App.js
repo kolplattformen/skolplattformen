@@ -11,14 +11,13 @@ import CookieManager from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StatusBar } from 'react-native'
 import { useBackgroundBlur } from './utils/blur'
-import { useTranslation } from './hooks/use-translation'
+import { LanguageProvider } from './context/language/languageContext'
+import { translations } from './utils/translation'
 
 const api = init(fetch, CookieManager)
 
 export default () => {
   const FullBlurView = useBackgroundBlur()
-
-  useTranslation()
 
   return (
     <ApiProvider api={api} storage={AsyncStorage}>
@@ -29,7 +28,9 @@ export default () => {
           {...eva}
           theme={{ ...eva.light, ...customization }}
         >
-          <AppNavigator />
+          <LanguageProvider cache={true} data={translations}>
+            <AppNavigator />
+          </LanguageProvider>
           {FullBlurView}
         </ApplicationProvider>
       </SafeAreaProvider>

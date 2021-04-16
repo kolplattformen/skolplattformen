@@ -1,17 +1,14 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { render } from '../../utils/testHelpers'
+import { render } from '../../utils/testHelpers.tsx'
 import React from 'react'
 import { Auth } from '../auth.component'
 import { useAsyncStorage } from 'use-async-storage'
-import { setI18nConfig } from '../../utils/translation'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('use-async-storage')
 jest.mock('react-native-localize')
 
-const setup = (lang = 'sv') => {
-  setI18nConfig(lang)
-
+const setup = () => {
   useApi.mockReturnValue({
     api: { on: jest.fn(), off: jest.fn() },
     isLoggedIn: false,

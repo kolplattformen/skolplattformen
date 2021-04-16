@@ -10,36 +10,34 @@ import {
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { useTranslation } from '../hooks/use-translation'
+import { useLanguage } from '../hooks/useLanguage'
+import { LanguageService } from '../services/languageService'
 import { Colors, Layout as LayoutStyle, Sizing } from '../styles'
-import {
-  AvailableLanguages,
-  changeLanguage,
-  currentLocale,
-  translate,
-} from '../utils/translation'
+import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
-  const [selectedLanguage, setSelectedLanguage] = useState<AvailableLanguages>(
-    currentLocale() as AvailableLanguages
+
+  const currentLanguage = LanguageService.getLanguageCode()
+
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(
+    currentLanguage
   )
-  const { setCurrentLanguage } = useTranslation()
+  const { setLanguageCode } = useLanguage()
 
   const saveLanguage = () => {
-    setCurrentLanguage(selectedLanguage)
-    changeLanguage(selectedLanguage)
+    setLanguageCode({ languageCode: selectedLanguage })
     goBack()
   }
 
-  const isDisabled = (lang: string): boolean => {
+  const isSelected = (lang: string): boolean => {
     return selectedLanguage === lang
   }
 
   const goBack = () => {
-    navigation.navigate('Login', { locale: currentLocale() })
+    navigation.navigate('Login', { locale: LanguageService.getLanguageCode() })
   }
 
   return (
@@ -58,7 +56,7 @@ export const SetLanguage = () => {
               style={styles.languageButton}
               onPress={() => setSelectedLanguage('sv')}
             >
-              <Text style={styles.check}>{isDisabled('sv') ? '✓' : ''}</Text>
+              <Text style={styles.check}>{isSelected('sv') ? '✓' : ''}</Text>
               <Text>Swedish</Text>
               <Text style={styles.languageButtonSubtitle}>svenska</Text>
             </TouchableOpacity>
@@ -67,7 +65,7 @@ export const SetLanguage = () => {
               style={styles.languageButton}
               onPress={() => setSelectedLanguage('en')}
             >
-              <Text style={styles.check}>{isDisabled('en') ? '✓' : ''}</Text>
+              <Text style={styles.check}>{isSelected('en') ? '✓' : ''}</Text>
               <Text>English</Text>
               <Text style={styles.languageButtonSubtitle}>engelska</Text>
             </TouchableOpacity>
@@ -78,7 +76,7 @@ export const SetLanguage = () => {
               onPress={() => saveLanguage()}
               appearance="ghost"
               status="primary"
-              disabled={currentLocale() === selectedLanguage}
+              disabled={currentLanguage === selectedLanguage}
               style={styles.button}
               size="medium"
             >

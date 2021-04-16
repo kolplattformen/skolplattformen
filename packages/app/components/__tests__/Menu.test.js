@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '../../utils/testHelpers'
+import { render } from '../../utils/testHelpers.tsx'
 import { Menu } from '../menu.component'
 import { useMenu } from '@skolplattformen/api-hooks'
 

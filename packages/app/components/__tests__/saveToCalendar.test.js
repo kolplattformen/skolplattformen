@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react-native'
 import React from 'react'
 import RNCalendarEvents from 'react-native-calendar-events'
-import { render } from '../../utils/testHelpers'
+import { render } from '../../utils/testHelpers.tsx'
 import { SaveToCalendar } from '../saveToCalendar.component'
 import Toast from 'react-native-simple-toast'
 

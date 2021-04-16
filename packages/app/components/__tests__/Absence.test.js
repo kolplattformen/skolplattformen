@@ -4,7 +4,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import Mockdate from 'mockdate'
 import React from 'react'
 import { useSMS } from '../../utils/SMS'
-import { render } from '../../utils/testHelpers'
+import { render } from '../../utils/testHelpers.tsx'
 import Absence from '../absence.component'
 
 jest.mock('@react-navigation/native')

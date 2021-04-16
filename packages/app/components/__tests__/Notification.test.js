@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '../../utils/testHelpers'
+import { render } from '../../utils/testHelpers.tsx'
 import { Notification } from '../notification.component'
 import MockDate from 'mockdate'
 
