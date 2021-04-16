@@ -9,11 +9,19 @@ let allString: Record<string, any> = {}
 let Strings: Record<string, any> = {}
 let languageCode: string
 
-/*
-const isRTL: { [key: string]: boolean } = {
+const rtlList: { [key: string]: boolean } = {
   en: false,
   sv: false,
-}*/
+  so: false,
+  ar: true,
+}
+
+const isRTL = (langCode: string) => {
+  if (!isRTL.hasOwnProperty(langCode)) {
+    return false
+  }
+  return rtlList[langCode]
+}
 
 export const LanguageService = {
   get: () => Strings,
@@ -25,9 +33,9 @@ export const LanguageService = {
     if (langCode) {
       i18n.translations = { [langCode]: Strings }
       i18n.locale = langCode
+      I18nManager.forceRTL(isRTL(langCode))
     }
 
-    I18nManager.forceRTL(false)
     moment.locale(langCode)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
