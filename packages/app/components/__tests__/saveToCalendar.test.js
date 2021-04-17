@@ -149,7 +149,7 @@ test('tells user if they havent authorized calendar', async () => {
   await RNCalendarEvents.saveEvent()
 
   expect(Toast.showWithGravity).toHaveBeenCalledWith(
-    'Du måste godkänna access till kalender',
+    'Du måste godkänna åtkomst till kalendern',
     'short',
     'bottom'
   )
