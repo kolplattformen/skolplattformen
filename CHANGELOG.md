@@ -1,3 +1,25 @@
+## [1.16.1](https://github.com/kolplattformen/skolplattformen/compare/v1.16.0...v1.16.1) (2021-04-17)
+
+
+### Bug Fixes
+
+* 🐛 Fixes issue where locale was not saved ([19554c7](https://github.com/kolplattformen/skolplattformen/commit/19554c788fec4d37e8d86a654a83c960704f8c61)), closes [#280](https://github.com/kolplattformen/skolplattformen/issues/280)
+
+# [1.16.0](https://github.com/kolplattformen/skolplattformen/compare/v1.15.1...v1.16.0) (2021-04-16)
+
+
+### Features
+
+* 🎸 Added text for empty menu ([bbfb2a3](https://github.com/kolplattformen/skolplattformen/commit/bbfb2a36aea659b91ba1ed528691066caf0c0cef))
+* 🎸 Updated embedded-api for better menu handling ([675454a](https://github.com/kolplattformen/skolplattformen/commit/675454a2fe9be5738c6965971da9db2f7b4c75a4))
+
+## [1.15.1](https://github.com/kolplattformen/skolplattformen/compare/v1.15.0...v1.15.1) (2021-04-16)
+
+
+### Bug Fixes
+
+* 🐛 Remove two packages that have security issues ([5a0d673](https://github.com/kolplattformen/skolplattformen/commit/5a0d67363d549fa5f431cce8f23e061acd5cc33c))
+
 # [1.15.0](https://github.com/kolplattformen/skolplattformen/compare/v1.14.0...v1.15.0) (2021-04-13)
 
 

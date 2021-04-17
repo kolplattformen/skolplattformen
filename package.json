@@ -2,12 +2,12 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^4.0.0"
   },
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
     "test": "npx lerna run test --stream",
     "lint": "npx lerna run lint --stream"
   },
-  "version": "1.15.0"
+  "version": "1.16.1"
 }

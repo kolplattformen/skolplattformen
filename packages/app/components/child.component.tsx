@@ -31,6 +31,7 @@ import {
 import { RootStackParamList } from './navigation.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
+import { translate } from '../utils/translation'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -89,19 +90,27 @@ const BottomTabBar = ({
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
     <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Nyheter</TabTitle>}
+      title={(props) => (
+        <TabTitle {...props}>{translate('navigation.news')}</TabTitle>
+      )}
       icon={NewsIcon}
     />
     <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Aviseringar</TabTitle>}
+      title={(props) => (
+        <TabTitle {...props}>{translate('navigation.notifications')}</TabTitle>
+      )}
       icon={NotificationsIcon}
     />
     <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Kalender</TabTitle>}
+      title={(props) => (
+        <TabTitle {...props}>{translate('navigation.calender')}</TabTitle>
+      )}
       icon={CalendarOutlineIcon}
     />
     <BottomNavigationTab
-      title={(props) => <TabTitle {...props}>Matsedel</TabTitle>}
+      title={(props) => (
+        <TabTitle {...props}>{translate('navigation.menu')}</TabTitle>
+      )}
       icon={MenuIcon}
     />
   </BottomNavigation>
@@ -112,10 +121,16 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
     initialRouteName={initialRouteName}
     tabBar={(props) => <BottomTabBar {...props} />}
   >
-    <Screen name="Nyheter" component={NewsScreen} />
-    <Screen name="Notifieringar" component={NotificationsScreen} />
-    <Screen name="Kalender" component={CalendarScreen} />
-    <Screen name="Matsedel" component={MenuScreen} />
+    <Screen name={translate('navigation.news')} component={NewsScreen} />
+    <Screen
+      name={translate('navigation.notifications')}
+      component={NotificationsScreen}
+    />
+    <Screen
+      name={translate('navigation.calender')}
+      component={CalendarScreen}
+    />
+    <Screen name={translate('navigation.menu')} component={MenuScreen} />
   </Navigator>
 )
 

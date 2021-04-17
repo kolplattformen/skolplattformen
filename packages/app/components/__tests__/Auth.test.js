@@ -6,6 +6,7 @@ import { useAsyncStorage } from 'use-async-storage'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('use-async-storage')
+jest.mock('react-native-localize')
 
 const setup = () => {
   useApi.mockReturnValue({

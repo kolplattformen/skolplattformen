@@ -15,6 +15,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
+import { translate } from '../utils/translation'
 import {
   CalendarOutlineIcon,
   MenuIcon,
@@ -81,12 +82,13 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       return classmates[0].className
     }
 
-    // otherwise we show the status: Grundskola, Gymnasium etc.
+    // Taken from Skolverket
+    // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
     const abbrevations = {
-      G: 'Gymnasiet', // ? i'm guessing here
-      GR: 'Grundskolan',
-      F: 'Fritids',
-      FS: 'Förskola',
+      G: translate('abbrevations.upperSecondarySchool'),
+      GR: translate('abbrevations.compulsorySchool'),
+      F: translate('abbrevations.leisureTimeCentre'),
+      FS: translate('abbrevations.preSchool'),
     }
 
     return child.status
@@ -113,7 +115,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Nyheter',
+            initialRouteName: translate('navigation.news'),
           })
         }
         accessoryLeft={NewsIcon}
@@ -128,7 +130,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Notifieringar',
+            initialRouteName: translate('navigation.notifications'),
           })
         }
         accessoryLeft={NotificationsIcon}
@@ -143,7 +145,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Kalender',
+            initialRouteName: translate('navigation.calender'),
           })
         }
         accessoryLeft={CalendarOutlineIcon}
@@ -158,7 +160,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           navigation.navigate('Child', {
             child,
             color,
-            initialRouteName: 'Matsedel',
+            initialRouteName: translate('navigation.menu'),
           })
         }
         accessoryLeft={MenuIcon}
@@ -192,21 +194,25 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       ))}
       {notificationsThisWeek.slice(0, 3).map((notification, i) => (
         <Text appearance="hint" category="c1" key={i}>
-          {`Avisering: ${notification.message} (${displayDate(
-            notification.dateCreated
-          )})`}
+          {translate('notifications.notificationTitle', {
+            message: notification.message,
+            dateCreated: displayDate(notification.dateCreated),
+          })}
         </Text>
       ))}
       {newsThisWeek.slice(0, 3).map((newsItem, i) => (
         <Text appearance="hint" category="c1" key={i}>
-          {`Nyhet: ${newsItem.header} (${displayDate(newsItem.published)})`}
+          {translate('news.notificationTitle', {
+            header: newsItem.header,
+            published: displayDate(newsItem.published),
+          })}
         </Text>
       ))}
       {scheduleAndCalendarThisWeek.length ||
       notificationsThisWeek.length ||
       newsThisWeek.length ? null : (
         <Text appearance="hint" category="c1">
-          Inga nya inlägg denna vecka.
+          {translate('news.noNewNewsItemsThisWeek')}
         </Text>
       )}
       <View style={styles.itemFooterAbsence}>
@@ -214,7 +220,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           size="small"
           onPress={() => navigation.navigate('Absence', { child })}
         >
-          Anmäl frånvaro
+          {translate('abscense.title')}
         </Button>
       </View>
     </Card>

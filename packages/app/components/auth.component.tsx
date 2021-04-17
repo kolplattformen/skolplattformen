@@ -1,5 +1,10 @@
-import { Layout, Text } from '@ui-kitten/components'
-import React, { useState } from 'react'
+import {
+  Layout,
+  Text,
+  TopNavigation,
+  TopNavigationAction,
+} from '@ui-kitten/components'
+import React from 'react'
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -12,33 +17,27 @@ import {
 import { Login } from './login.component'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import { translate } from '../utils/translation'
+import { GlobeIcon } from './icon.component'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from './navigation.component'
 
-const funArguments = [
-  'agila',
-  'billiga',
-  'bättre',
-  'coolare',
-  'efterlängtade',
-  'enkla',
-  'fantastiska',
-  'fria',
-  'fungerande',
-  'första',
-  'hemmagjorda',
-  'operfekta',
-  'rebelliska',
-  'roliga',
-  'snabba',
-  'upplysta',
-  'öppna',
-]
+const randomWord = () => {
+  const words = translate('auth.words')
+  const keys = Object.keys(words)
 
-export const Auth = () => {
-  const [argument] = useState(() => {
-    const argNum = Math.floor(Math.random() * funArguments.length)
-    return funArguments[argNum]
-  })
+  const randomIndex: number = Math.floor(Math.random() * keys.length)
+  const argumentKey: string = keys[randomIndex]
 
+  // @ts-expect-error Fix this later
+  return words[argumentKey]
+}
+
+interface AuthProps {
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>
+}
+
+export const Auth: React.FC<AuthProps> = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -47,13 +46,24 @@ export const Auth = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.safeArea}>
           <SafeAreaViewContainer>
+            <TopNavigation
+              alignment="center"
+              accessoryRight={() => (
+                <TopNavigationAction
+                  icon={GlobeIcon}
+                  onPress={() => navigation.navigate('SetLanguage')}
+                />
+              )}
+            />
             <View style={styles.content}>
               <Layout style={styles.container}>
                 <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
-                  Öppna Skolplattformen
+                  {translate('general.title')}
                 </Text>
                 <Text category="h6" style={styles.subtitle}>
-                  Det {argument} alternativet
+                  {translate('auth.subtitle', {
+                    word: randomWord(),
+                  })}
                 </Text>
                 <Login />
               </Layout>
