@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/kolplattformen/skolplattformen/compare/v1.16.1...v1.17.0) (2021-04-17)
+
+
+### Features
+
+* 🎸 Remove required personal number on login on same device ([#271](https://github.com/kolplattformen/skolplattformen/issues/271)) ([2604640](https://github.com/kolplattformen/skolplattformen/commit/260464026b39d3e66098df037a19a9fe586a000c))
+
 ## [1.16.1](https://github.com/kolplattformen/skolplattformen/compare/v1.16.0...v1.16.1) (2021-04-17)
 
 
