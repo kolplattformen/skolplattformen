@@ -6,7 +6,12 @@ import { LanguageService } from '../../services/languageService'
 import { LanguageStorage } from '../../services/languageStorage'
 import { translations } from '../../utils/translation'
 
-export const LanguageContext = React.createContext({
+interface LanguageContextProps {
+  Strings: Record<string, any>
+  languageCode?: string
+}
+
+export const LanguageContext = React.createContext<LanguageContextProps>({
   Strings: {},
   languageCode: '',
 })
@@ -24,9 +29,13 @@ export const LanguageProvider: React.FC<Props> = ({
   initialLanguageCode,
   cache,
 }) => {
+  const fallBack = { languageTag: 'sv' }
+
   LanguageService.setAllData({ data })
 
-  const [languageCode, setLanguageCode] = useState<string>('')
+  const [languageCode, setLanguageCode] = useState<string | undefined>(
+    undefined
+  )
 
   const [Strings, setStrings] = useState(() => {
     if (initialLanguageCode && data[initialLanguageCode]) {
@@ -36,8 +45,6 @@ export const LanguageProvider: React.FC<Props> = ({
 
       return data[initialLanguageCode]
     }
-
-    const fallBack = { languageTag: 'sv' }
 
     const { languageTag } =
       RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
@@ -64,18 +71,21 @@ export const LanguageProvider: React.FC<Props> = ({
 
     const checkLanguageLocal = async () => {
       if (cache) {
-        const lang = (await LanguageStorage.get()) || initialLanguageCode
+        const cachedLang = await LanguageStorage.get()
+        const currentLanguageCode = cachedLang || fallBack.languageTag
+
         LanguageService.setLanguageCode({
-          langCode: lang,
+          langCode: currentLanguageCode,
         })
         LanguageService.seti18nConfig({
-          langCode: lang,
+          langCode: currentLanguageCode,
         })
-        setLanguageCode(lang)
+        setLanguageCode(currentLanguageCode)
       }
     }
     checkLanguageLocal()
-  }, [cache, data, initialLanguageCode, languageCode])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <LanguageContext.Provider value={{ Strings, languageCode: languageCode }}>
