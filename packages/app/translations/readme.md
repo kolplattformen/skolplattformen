@@ -8,9 +8,13 @@ Knowledge regarding the ISO-638-1 code that is for the languages that you know. 
 
 ## Edit a already added language
 
-Locate the language that you want to edit 
+We have some languages on the app, and if you wanna makes changes, please go through the following steps.
+
+### Locate the language that you want to edit by looking at the files above
 
 ![Screenshot on how to add a new language file on Github](./docs/edit_file.png)
+
+### Save your changes
 
 Then commit and save your changes when you are done.
 
