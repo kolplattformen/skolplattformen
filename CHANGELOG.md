@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/kolplattformen/skolplattformen/compare/v1.17.0...v1.18.0) (2021-04-17)
+
+
+### Features
+
+* 🎸 Add new Status page ([#259](https://github.com/kolplattformen/skolplattformen/issues/259)) ([2dd1564](https://github.com/kolplattformen/skolplattformen/commit/2dd15640e2020d92486511b1dd330eaa0b8559c5))
+
 # [1.17.0](https://github.com/kolplattformen/skolplattformen/compare/v1.16.1...v1.17.0) (2021-04-17)
 
 
