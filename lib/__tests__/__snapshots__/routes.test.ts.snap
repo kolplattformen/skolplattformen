@@ -6,9 +6,11 @@ exports[`handles route children 1`] = `"https://etjanst.stockholm.se/vardnadshav
 
 exports[`handles route classmates 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/contacts/GetStudentsByClass?studentId=123"`;
 
-exports[`handles route classmates 2`] = `"https://etjanst.stockholm.se/vardnadshavare/base/getuserdata"`;
-
 exports[`handles route image 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/NewsBanner?url=https://example.com/img.png"`;
+
+exports[`handles route login with personal number 1`] = `"https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid?TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0LnN0b2NraG9sbS5zZS92YXJkbmFkc2hhdmFyZS9pbmxvZ2dhZDIvaGVt&initialize=bankid&personalNumber=201701012393&_=1618404258782"`;
+
+exports[`handles route login without personal number 1`] = `"https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid?TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0LnN0b2NraG9sbS5zZS92YXJkbmFkc2hhdmFyZS9pbmxvZ2dhZDIvaGVt&initialize=bankid&_=1618404258782"`;
 
 exports[`handles route menuChoice 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Matsedel/GetMatsedelChoice?childId=123"`;
 
@@ -23,3 +25,5 @@ exports[`handles route newsDetails 1`] = `"https://etjanst.stockholm.se/vardnads
 exports[`handles route notifications 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Overview/GetNotification?childId=123"`;
 
 exports[`handles route schedule 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchema?childId=123&startDate=2021-01-01&endDate=2021-01-01"`;
+
+exports[`handles route user 1`] = `"https://etjanst.stockholm.se/vardnadshavare/base/getuserdata"`;

@@ -111,8 +111,8 @@ export class Api extends EventEmitter {
     this.headers[name] = value
   }
 
-  public async login(personalNumber: string): Promise<LoginStatusChecker> {
-    if (personalNumber.endsWith('1212121212')) return this.fakeMode()
+  public async login(personalNumber?: string): Promise<LoginStatusChecker> {
+    if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
 
     this.isFake = false
 
