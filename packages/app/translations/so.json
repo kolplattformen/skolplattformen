@@ -75,6 +75,10 @@
     "saveToCalenderError": "Waxbaa qaldamay",
     "approveAccessToCalender": "Waa inaad ansixisaa helitaanka jadwalkaaga"
   },
+  "menu": {
+    "emptyHeadline": "The menu looks kinda empty",
+    "emptyText": "Couldn't find anything for this week"
+  },
   "abbrevations": {
     "upperSecondarySchool": "Dugsiga sare",
     "preSchool": "Dugsiga barbaarinta",

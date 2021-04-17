@@ -75,6 +75,10 @@
     "saveToCalenderError": "هناك خطأ ما",
     "approveAccessToCalender": "يجب عليك الموافقة على الوصول إلى التقويم الخاص بك"
   },
+  "menu": {
+    "emptyHeadline": "The menu looks kinda empty",
+    "emptyText": "Couldn't find anything for this week"
+  },
   "abbrevations": {
     "upperSecondarySchool": "المدرسه الثانويه العليا",
     "preSchool": "مرحلة ما قبل المدرسة",
