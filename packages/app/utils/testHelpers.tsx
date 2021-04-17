@@ -16,10 +16,9 @@ export const render = (
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
           <LanguageProvider
-            cache={true}
+            cache={false}
             data={translations}
             initialLanguageCode={language}
-            initalHasCheckedLanguage={true}
           >
             {children}
           </LanguageProvider>

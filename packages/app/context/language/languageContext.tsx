@@ -1,18 +1,26 @@
 import React, { useState, useEffect, ReactNode } from 'react'
 import * as RNLocalize from 'react-native-localize'
+import { LoadingComponent } from '../../components/loading.component'
 
 import { LanguageService } from '../../services/languageService'
 import { LanguageStorage } from '../../services/languageStorage'
 import { translations } from '../../utils/translation'
 
-export const LanguageContext = React.createContext({ Strings: {} })
+interface LanguageContextProps {
+  Strings: Record<string, any>
+  languageCode?: string
+}
+
+export const LanguageContext = React.createContext<LanguageContextProps>({
+  Strings: {},
+  languageCode: '',
+})
 
 interface Props {
   children: ReactNode
   data: any
   initialLanguageCode: string
   cache: any
-  initalHasCheckedLanguage: boolean
 }
 
 export const LanguageProvider: React.FC<Props> = ({
@@ -21,33 +29,42 @@ export const LanguageProvider: React.FC<Props> = ({
   initialLanguageCode,
   cache,
 }) => {
+  const fallBack = { languageTag: 'sv', isRTL: false }
+
   LanguageService.setAllData({ data })
+
+  const [languageCode, setLanguageCode] = useState<string | undefined>(
+    undefined
+  )
+
+  const setLanguageConfig = (langCode: string) => {
+    LanguageService.setLanguageCode({ langCode: langCode })
+    LanguageService.seti18nConfig({ langCode: langCode })
+    setLanguageCode(langCode)
+  }
 
   const [Strings, setStrings] = useState(() => {
     if (initialLanguageCode && data[initialLanguageCode]) {
-      LanguageService.setLanguageCode({ langCode: initialLanguageCode })
-      LanguageService.seti18nConfig({ langCode: initialLanguageCode })
+      setLanguageConfig(initialLanguageCode)
 
       return data[initialLanguageCode]
     }
 
-    const fallBack = { languageTag: 'sv' }
-
     const { languageTag } =
       RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
       fallBack
-    const bestStrings = data[languageTag]
 
-    LanguageService.setLanguageCode({ langCode: languageTag })
-    LanguageService.seti18nConfig({ langCode: languageTag })
+    const bestStrings = data[languageTag]
 
     return bestStrings
   })
+
   useEffect(() => {
     LanguageService.onChange(
       { key: 'LanguageProvider' },
       (langCode: string) => {
         if (langCode && data[langCode]) {
+          setLanguageCode(langCode)
           setStrings(data[langCode])
           if (cache) {
             LanguageStorage.save(langCode)
@@ -57,14 +74,19 @@ export const LanguageProvider: React.FC<Props> = ({
     )
 
     const checkLanguageLocal = async () => {
+      // Saved language
       if (cache) {
-        const languageCode = await LanguageStorage.get()
-        LanguageService.setLanguageCode({
-          langCode: languageCode || initialLanguageCode,
-        })
-        LanguageService.seti18nConfig({
-          langCode: languageCode || initialLanguageCode,
-        })
+        // Get cached lang
+        const cachedLang = await LanguageStorage.get()
+
+        // Try to find best suited language
+        const { languageTag } =
+          RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
+          fallBack
+
+        const currentLanguageCode = cachedLang || languageTag
+
+        setLanguageConfig(currentLanguageCode)
       }
     }
     checkLanguageLocal()
@@ -72,8 +94,8 @@ export const LanguageProvider: React.FC<Props> = ({
   }, [])
 
   return (
-    <LanguageContext.Provider value={{ Strings }}>
-      {children}
+    <LanguageContext.Provider value={{ Strings, languageCode: languageCode }}>
+      {languageCode ? children : <LoadingComponent />}
     </LanguageContext.Provider>
   )
 }
