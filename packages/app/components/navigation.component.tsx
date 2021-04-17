@@ -8,6 +8,7 @@ import Absence from './absence.component'
 import { Child } from './child.component'
 import { Children } from './children.component'
 import { Auth } from './auth.component'
+import { SetLanguage } from './setLanguage.component'
 import { NewsItem } from './newsItem.component'
 import {
   Child as ChildType,
@@ -24,6 +25,7 @@ export type RootStackParamList = {
   }
   NewsItem: { newsItem: NewsItemType; child: ChildType }
   Absence: { child: ChildType }
+  SetLanguage: undefined
 }
 
 const { Navigator, Screen } = createStackNavigator()
@@ -38,7 +40,6 @@ const linking = {
 }
 export const AppNavigator = () => {
   const { isLoggedIn } = useApi()
-
   return (
     <NavigationContainer linking={linking}>
       <StatusBar />
@@ -51,7 +52,10 @@ export const AppNavigator = () => {
             <Screen name="Absence" component={Absence} />
           </>
         ) : (
-          <Screen name="Login" component={Auth} />
+          <>
+            <Screen name="Login" component={Auth} />
+            <Screen name="SetLanguage" component={SetLanguage} />
+          </>
         )}
       </Navigator>
     </NavigationContainer>

@@ -22,6 +22,7 @@ import * as Yup from 'yup'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
+import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 
@@ -85,7 +86,7 @@ const Absence = () => {
         )}
         alignment="center"
         style={styles.topBar}
-        title="Anmäl frånvaro"
+        title={translate('abscense.title')}
         subtitle={studentName(child.name)}
       />
       <Divider />
@@ -129,8 +130,10 @@ const Absence = () => {
               <View>
                 <View style={styles.field}>
                   <Input
-                    accessibilityLabel="Personnummer"
-                    label="Personnummer"
+                    accessibilityLabel={translate(
+                      'general.socialSecurityNumber'
+                    )}
+                    label={translate('general.socialSecurityNumber')}
                     keyboardType="number-pad"
                     onChangeText={handleChange('socialSecurityNumber')}
                     onBlur={handleBlur('socialSecurityNumber')}
@@ -150,7 +153,7 @@ const Absence = () => {
                     checked={values.isFullDay}
                     onChange={(checked) => setFieldValue('isFullDay', checked)}
                   >
-                    Heldag
+                    {translate('abscense.entireDay')}
                   </CheckBox>
                 </View>
                 {!values.isFullDay && (
@@ -166,8 +169,8 @@ const Absence = () => {
                         {moment(values.startTime).format('HH:mm')}
                       </Button>
                       <DateTimePickerModal
-                        cancelTextIOS="Avbryt"
-                        confirmTextIOS="Bekräfta"
+                        cancelTextIOS={translate('general.abort')}
+                        confirmTextIOS={translate('general.confirm')}
                         date={moment(values.startTime).toDate()}
                         isVisible={values.displayStartTimePicker}
                         headerTextIOS="Välj en starttid"
@@ -197,11 +200,14 @@ const Absence = () => {
                         {moment(values.endTime).format('HH:mm')}
                       </Button>
                       <DateTimePickerModal
-                        cancelTextIOS="Avbryt"
-                        confirmTextIOS="Bekräfta"
+                        cancelTextIOS={translate('general.abort')}
+                        confirmTextIOS={translate('general.confirm')}
                         date={moment(values.endTime).toDate()}
                         isVisible={values.displayEndTimePicker}
-                        headerTextIOS="Välj en sluttid"
+                        headerTextIOS={translate(
+                          'abscense.selectAbscenseEndTime'
+                        )}
+                        // Todo fix this
                         locale="sv-SE"
                         maximumDate={maximumDate.toDate()}
                         minimumDate={minumumDate.toDate()}
@@ -219,7 +225,7 @@ const Absence = () => {
                   </View>
                 )}
                 <Button onPress={handleSubmit} status="primary">
-                  Skicka
+                  {translate('general.send')}
                 </Button>
               </View>
             )

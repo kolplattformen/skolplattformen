@@ -15,6 +15,7 @@ function render(
       </IntlProvider>
     )
   }
+
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 

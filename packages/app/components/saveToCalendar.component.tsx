@@ -4,6 +4,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import RNCalendarEvents from 'react-native-calendar-events'
 import Toast from 'react-native-simple-toast'
+import { translate } from '../utils/translation'
 import { CalendarOutlineIcon, MoreIcon } from './icon.component'
 
 interface SaveToCalendarProps {
@@ -15,7 +16,7 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
 
   const renderToggleButton = () => (
     <Button
-      accessibilityLabel="Visa kalender actions"
+      accessibilityLabel={translate('calender.showCalenderActions')}
       onPress={() => setVisible(true)}
       appearance="ghost"
       accessoryLeft={MoreIcon}
@@ -59,13 +60,13 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
 
         await RNCalendarEvents.saveEvent(title, detailsWithoutEmpty)
 
-        toast('✔️ Sparad till kalender')
+        toast(translate('calender.saveToCalenderSuccess'))
       } catch (err) {
-        toast('Något gick fel')
+        toast(translate('calender.saveToCalenderError'))
       }
       closeOverflowMenu()
     } else {
-      toast('Du måste godkänna access till kalender')
+      toast(translate('calender.approveAccessToCalender'))
     }
   }
 
@@ -77,9 +78,9 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
       onBackdropPress={closeOverflowMenu}
     >
       <MenuItem
-        accessibilityLabel="Spara till kalender"
+        accessibilityLabel={translate('calender.saveToCalender')}
         accessoryLeft={CalendarOutlineIcon}
-        title="Spara till kalender"
+        title={translate('calender.saveToCalender')}
         onPress={() => requestPermissionsAndSave(event)}
       />
     </OverflowMenu>

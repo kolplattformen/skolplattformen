@@ -1,61 +1,73 @@
-# Skolplattformen.org monorepo
+# Skolplattformen.org
 
-This is a try to reverse engineer Skolplattformen and create a faster, more consistent and secure experience for the users of Skolplattformen.
+[Öppna skolplattformen](https://skolplattformen.org/) is an attempt at reverse-engineering Skolplattformen to create a faster, more consistent, and secure experience.
 
 ![Login screen](packages/site/assets/img/screenshots/screenshot_login.png)
 
-## Embedded API
+## Architecture
 
-We previously were testing having a proxy for the API. That was a bad idea, even if we weren't saving any information on our side it still was an extra complexity so we encapsulated our API into its own npm package so the app still could be lightweight and not have to worry about the complex nature of the official API.
+The project consists of two main parts: the _app_ and the _embedded API_.
 
-Read about the embedded api here: https://github.com/kolplattformen/embedded-api
+### App
 
-## Api Hooks
+The central part of the project is the app itself. It's written in [TypeScript](https://typescriptlang.org) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
-To simplify using the Embedded API from the App it is wrapped in api-hooks. 
+Our goal with the app is to make it as fast and easy to use as possible. We're starting small, with more features being added over time.
 
-Read more about api-hooks here: https://github.com/kolplattformen/api-hooks
+For more information, check out the [source code](packages/app).
 
-## App
+**Pro tip:** If you don't want the API to make requests to the backend, you can enable _fake mode_ to return static data instead. To enable fake mode, log in using any of the following personal numbers:
 
-The central part of the project is of course the app. It is written in [React Native](https://reactnative.dev/) and is using a UI library called React Native Kitten. Our goal with the app is to make it as fast and easy to use as possible. We start small and will continue to add more features over time.
-[packages/app](packages/app)
+- 12121212121212
+- 1212121212
 
-_PRO TIP_ Login with personal number 12121212121212, 201212121212 or 1212121212 and the api will be put into fake mode. Static data will be returned and no calls to backend will be made.
+### Embedded API
+
+We first tried to create a proxy for the API. That was a bad idea. Even if the proxy wouldn't save any information it would still have introduced extra complexity.
+
+Instead, we decided to encapsulate our API into its own npm package. By not having to worry about the complex nature of the official API, the app becomes light-weight.
+
+For more information on the embedded API, refer to the [project page](https://github.com/kolplattformen/embedded-api).
+
+> **Note:** To make it easier to use the embedded API in the app, we also created a [set of React hooks](https://github.com/kolplattformen/api-hooks).
 
 ## Website
 
-Our official site for the project is [https://skolplattformen.org](https://skolplattformen.org). The source code for the site lives here [packages/site](packages/site)
+The official site for the project is [https://skolplattformen.org](https://skolplattformen.org).
+
+The source code for the site is available under [packages/site](packages/site).
 
 ## Development
 
-### Get started
+To build the project yourself, you first need to install the required dependencies:
 
-Run the following command to install JavaScript dependencies (using `yarn`) in
-all the packages. After that you can refer to the specific package's README to
-find out how to get it running.
-
-```
+```bash
 npx lerna bootstrap
 ```
 
+Once all the dependencies are installed, refer to the README in each package for further instructions.
+
 ## Contributions
 
-We want this project to become a citizen movement. Every time you find something you want to fix, we encourage you to try to fix the problem yourself by providing a "pull request" - meaning you fix the problem yourself, test it out on your machine and then send the fix to us with documentation about why we should incorporate your fix into our main branch. This way we can continue to improve the project together with our users which hopefully will render in a much better experience and fast moving project.
+We want this project to become a citizen movement. If you find something you think needs to be fixed, we encourage you to fix the problem yourself and test it out on your machine first. When you're done, create a _pull request_ where you explain why we should incorporate your fix into the project.
 
-If you don't know how to program and still want to contribute we encourage you to file an Issue or help us an any other way. Please find the Issues tab above to see other issues or file one yourselves. We are super duper happy for both issues and PR:s and will try to answer all of them as soon as humanly possible.
+We believe that by working together, we can leverage each other's skills and experiences to improve the project, and ultimately create a better experience, faster.
+
+There are many ways to contribute to the project. If you don't know how to program and still want to help, you can also [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know if something isn't working properly.
+
+We're super duper happy for both issues and pull requests and we try to answer all of them as soon as humanly possible.
 
 ## Money
 
-We are both an open source project and still charge money for our app. Isn't this contradicting? No. Open doesn't mean free. We want to be able to sustainably continue to work with maintaining this project which means someone needs to pay for the köttbullar to the kids. Our goal is to be able to reimburse all contributions to the project.
+We're an open source project and we still charge money for our app. Isn't this a contradiction? No. Open doesn't mean free. We want to continue to maintain this project in a sustainable way, which means that someone needs to pay for the köttbullar for the kids. Our goal is to be able to reimburse all contributions to the project.
 
 ## Disclaimer
 
-This initiative is started by frustrated parents and we have no affiliation with Stockholm Stad. We just want to find and read our newsletters a little bit easier and register sick-leave more convenient.
+This initiative was started by frustrated parents with no affiliation with Stockholm Stad. We just want to find and read our newsletters a little bit easier, and register sick-leave a little more conveniently.
 
-If you are offended by this initiative, please don't - we come in peace.
+If you're offended by this initiative, please don't be—we come in peace.
 
-# Contributors
+## Contributors
 
 - [Christian Landgren](https://github.com/irony)
 - [Johan Öbrink](https://github.com/JohanObrink)

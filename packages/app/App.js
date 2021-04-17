@@ -11,10 +11,8 @@ import CookieManager from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StatusBar } from 'react-native'
 import { useBackgroundBlur } from './utils/blur'
-import moment from 'moment'
-import 'moment/locale/sv'
-
-moment.locale('sv')
+import { LanguageProvider } from './context/language/languageContext'
+import { translations } from './utils/translation'
 
 const api = init(fetch, CookieManager)
 
@@ -30,7 +28,9 @@ export default () => {
           {...eva}
           theme={{ ...eva.light, ...customization }}
         >
-          <AppNavigator />
+          <LanguageProvider cache={true} data={translations}>
+            <AppNavigator />
+          </LanguageProvider>
           {FullBlurView}
         </ApplicationProvider>
       </SafeAreaProvider>
