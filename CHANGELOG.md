@@ -1,10 +1,3 @@
-## [1.16.1](https://github.com/kolplattformen/skolplattformen/compare/v1.16.0...v1.16.1) (2021-04-17)
-
-
-### Bug Fixes
-
-* 🐛 Fixes issue where locale was not saved ([19554c7](https://github.com/kolplattformen/skolplattformen/commit/19554c788fec4d37e8d86a654a83c960704f8c61)), closes [#280](https://github.com/kolplattformen/skolplattformen/issues/280)
-
 # [1.16.0](https://github.com/kolplattformen/skolplattformen/compare/v1.15.1...v1.16.0) (2021-04-16)
 
 
