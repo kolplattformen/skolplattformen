@@ -29,7 +29,7 @@ export const LanguageProvider: React.FC<Props> = ({
   initialLanguageCode,
   cache,
 }) => {
-  const fallBack = { languageTag: 'sv' }
+  const fallBack = { languageTag: 'sv', isRTL: false }
 
   LanguageService.setAllData({ data })
 
@@ -37,11 +37,15 @@ export const LanguageProvider: React.FC<Props> = ({
     undefined
   )
 
+  const setLanguageConfig = (langCode: string) => {
+    LanguageService.setLanguageCode({ langCode: langCode })
+    LanguageService.seti18nConfig({ langCode: langCode })
+    setLanguageCode(langCode)
+  }
+
   const [Strings, setStrings] = useState(() => {
     if (initialLanguageCode && data[initialLanguageCode]) {
-      LanguageService.setLanguageCode({ langCode: initialLanguageCode })
-      LanguageService.seti18nConfig({ langCode: initialLanguageCode })
-      setLanguageCode(initialLanguageCode)
+      setLanguageConfig(initialLanguageCode)
 
       return data[initialLanguageCode]
     }
@@ -70,17 +74,19 @@ export const LanguageProvider: React.FC<Props> = ({
     )
 
     const checkLanguageLocal = async () => {
+      // Saved language
       if (cache) {
+        // Get cached lang
         const cachedLang = await LanguageStorage.get()
-        const currentLanguageCode = cachedLang || fallBack.languageTag
+        console.log(cachedLang)
+        // Try to find best suited language
+        const { languageTag } =
+          RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
+          fallBack
 
-        LanguageService.setLanguageCode({
-          langCode: currentLanguageCode,
-        })
-        LanguageService.seti18nConfig({
-          langCode: currentLanguageCode,
-        })
-        setLanguageCode(currentLanguageCode)
+        const currentLanguageCode = cachedLang || languageTag
+
+        setLanguageConfig(currentLanguageCode)
       }
     }
     checkLanguageLocal()
