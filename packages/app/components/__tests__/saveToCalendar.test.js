@@ -61,7 +61,7 @@ beforeEach(jest.clearAllMocks)
 test('renders save to calendar', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
 
   expect(screen.getByText(/Spara/i)).toBeTruthy()
 })
@@ -69,7 +69,7 @@ test('renders save to calendar', () => {
 test('requests calendar permissons', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
   fireEvent.press(screen.getByText(/Spara/i))
 
   expect(RNCalendarEvents.requestPermissions).toHaveBeenCalled()
@@ -84,7 +84,7 @@ test('can save an event to the calendar', async () => {
     },
   })
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
   fireEvent.press(screen.getByText(/Spara/i))
   await RNCalendarEvents.requestPermissions()
 
@@ -97,7 +97,7 @@ test('can save an event to the calendar', async () => {
 test('removes any null values from the event', async () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
   fireEvent.press(screen.getByText(/Spara/i))
   await RNCalendarEvents.requestPermissions()
 
@@ -111,7 +111,7 @@ test('removes any null values from the event', async () => {
 test('calls toast with success', async () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
   fireEvent.press(screen.getByText(/Spara/i))
   await RNCalendarEvents.requestPermissions()
   await RNCalendarEvents.saveEvent()
@@ -127,7 +127,7 @@ test('says if something goes wrong', async () => {
   const screen = setup()
   RNCalendarEvents.saveEvent.mockRejectedValueOnce()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
   fireEvent.press(screen.getByText(/Spara/i))
   await RNCalendarEvents.requestPermissions()
   await RNCalendarEvents.saveEvent()
@@ -143,7 +143,7 @@ test('tells user if they havent authorized calendar', async () => {
   const screen = setup()
   RNCalendarEvents.requestPermissions.mockResolvedValueOnce('not auth')
 
-  fireEvent.press(screen.getByA11yLabel('Visa kalender actions'))
+  fireEvent.press(screen.getByA11yLabel('Visa kalenderactions'))
   fireEvent.press(screen.getByText(/Spara/i))
   await RNCalendarEvents.requestPermissions()
   await RNCalendarEvents.saveEvent()
