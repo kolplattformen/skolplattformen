@@ -52,7 +52,11 @@
   "children": {
     "title": "Dina barn",
     "noKids_title": "Inga barn",
-    "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad"
+    "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad",
+    "loadingErrorHeading": "Hoppsan!",
+    "loadingErrorInformationText": "Vi lyckades inte ladda sidan. Försök igen eller se status på skolplattformen.org.",
+    "tryAgain": "Försök igen",
+    "viewStatus": "Se status på skolplattformen.org"
   },
   "abscense": {
     "title": "Anmäl frånvaro",

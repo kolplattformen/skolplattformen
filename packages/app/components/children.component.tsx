@@ -40,8 +40,7 @@ export const Children = () => {
   const handleSettingSelection = (index: number) => {
     switch (index) {
       case 0:
-        api.logout()
-        AsyncStorage.clear()
+        logout()
         break
     }
   }
@@ -62,8 +61,9 @@ export const Children = () => {
     reload()
   }
 
-  const logoutAndTryAgain = () => {
+  const logout = () => {
     api.logout()
+    AsyncStorage.clear()
   }
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
@@ -124,14 +124,15 @@ export const Children = () => {
             />
             {status === 'error' ? (
               <View style={styles.errorMessage}>
-                <Text category="h5">Hoppsan!</Text>
+                <Text category="h5">
+                  {translate('children.loadingErrorHeading')}
+                </Text>
                 <Text style={{ fontSize: Sizing.t5 }}>
-                  Vi lyckades inte ladda sidan. Försök igen eller se status på
-                  skolplattformen.org.
+                  {translate('children.loadingErrorInformationText')}
                 </Text>
                 <View style={styles.errorButtons}>
                   <Button status="success" onPress={() => reloadChildren()}>
-                    Försök igen
+                    {translate('children.tryAgain')}
                   </Button>
                   <Button
                     status="basic"
@@ -139,16 +140,18 @@ export const Children = () => {
                       Linking.openURL('https://skolplattformen.org/status')
                     }
                   >
-                    Se status på skolplattformen.org
+                    {translate('children.viewStatus')}
                   </Button>
-                  <Button onPress={() => logoutAndTryAgain()}>Logga ut</Button>
+                  <Button onPress={() => logout()}>
+                    {translate('general.logout')}
+                  </Button>
                 </View>
               </View>
             ) : (
               <View style={styles.loadingMessage}>
                 <Spinner size="large" status="warning" />
                 <Text category="h1" style={styles.loadingText}>
-                   {translate('general.loading')}
+                  {translate('general.loading')}
                 </Text>
               </View>
             )}
