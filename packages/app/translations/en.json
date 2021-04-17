@@ -7,7 +7,7 @@
     "settings": "Settings",
     "send": "Send",
     "confirm": "Confirm",
-    "socialSecurityNumber": "Personal number",
+    "socialSecurityNumber": "Personal identity number",
     "changeLanguage": "Change language"
   },
   "navigation": {
@@ -24,16 +24,16 @@
       "OpenManually": "Waiting for BankID..."
     },
     "subtitle": "The {{word}} alternative",
-    "personalNumber": "Personal number",
+    "personalNumber": "Personal identity number",
     "loginAsTestUser": "Login as test user",
-    "placeholder_SocialSecurityNumber": "Your personal number",
+    "placeholder_SocialSecurityNumber": "Your personal identity number",
     "chooseLoginMethod": "Choose login method",
     "loginFailed": "Login failed, please try again!",
     "words": {
       "agile": "agile",
       "cheap": "cheap",
       "better": "better",
-      "cooler": "ccooleroolare",
+      "cooler": "cooler",
       "awaited": "awaited",
       "simple": "simple",
       "fantastic": "fantastic",
@@ -52,7 +52,7 @@
   "children": {
     "title": "Your children",
     "noKids_title": "No kids",
-    "noKids_description": "There are no kids registered with your your social security number in Stockholm stad"
+    "noKids_description": "There are no kids registered in the City of Stockholm for your personal identity number"
   },
   "abscense": {
     "title": "Report absence",
@@ -61,7 +61,7 @@
     "newsTitle": "News item: {{header}} ({{published}})"
   },
   "news": {
-    "title": "News from the school platform",
+    "title": "News from Skolplattformen",
     "backToChild": "Back to child",
     "noNewNewsItemsThisWeek": "No new news items this week.",
     "notificationTitle": "News: {{header}} ({{published}})"
