@@ -94,6 +94,15 @@ export const SetLanguage = () => {
 
               <TouchableOpacity
                 style={styles.languageButton}
+                onPress={() => setSelectedLanguage('pl')}
+              >
+                <Text style={styles.check}>{isSelected('pl') ? '✓' : ''}</Text>
+                <Text>Polish</Text>
+                <Text style={styles.languageButtonSubtitle}>Polski</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.languageButton}
                 onPress={() => setSelectedLanguage('so')}
               >
                 <Text style={styles.check}>{isSelected('so') ? '✓' : ''}</Text>
