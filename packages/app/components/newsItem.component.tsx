@@ -8,7 +8,6 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import moment from 'moment'
-import 'moment/locale/sv'
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { translate } from '../utils/translation'
@@ -23,8 +22,7 @@ interface NewsItemProps {
   route: RouteProp<RootStackParamList, 'NewsItem'>
 }
 
-const displayDate = (date: string | undefined) =>
-  moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
+const displayDate = (date: string | undefined) => moment(date).format('lll')
 
 const dateIsValid = (date: string | undefined) =>
   moment(date, moment.ISO_8601).isValid()
@@ -62,13 +60,13 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
           <Text style={styles.title}>{newsItem.header}</Text>
           {dateIsValid(newsItem.published) && (
             <Text style={[styles.subtitle, styles.published]}>
-              <Text style={styles.strong}>Publicerad:</Text>{' '}
+              <Text style={styles.strong}>{translate('news.published')}:</Text>{' '}
               {displayDate(newsItem.published)}
             </Text>
           )}
           {dateIsValid(newsItem.modified) && (
             <Text style={styles.subtitle}>
-              <Text style={styles.strong}>Uppdaterad:</Text>{' '}
+              <Text style={styles.strong}>{translate('news.updated')}:</Text>{' '}
               {displayDate(newsItem.modified)}
             </Text>
           )}

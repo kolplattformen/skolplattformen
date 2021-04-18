@@ -1,7 +1,6 @@
 import { useMenu } from '@skolplattformen/api-hooks'
 import { MenuItem } from '@skolplattformen/embedded-api'
 import { List, Text } from '@ui-kitten/components'
-import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { Colors, Sizing, Layout as LayoutStyle, Typography } from '../styles'

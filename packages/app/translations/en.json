@@ -68,7 +68,9 @@
     "title": "News from Skolplattformen",
     "backToChild": "Back to child",
     "noNewNewsItemsThisWeek": "No new news items this week.",
-    "notificationTitle": "News: {{header}} ({{published}})"
+    "notificationTitle": "News: {{header}} ({{published}})",
+    "published": "Published",
+    "updated": "Updated"
   },
   "notifications": {
     "notificationTitle": "Notification: {{message}} ({{dateCreated}})"

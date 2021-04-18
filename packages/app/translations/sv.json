@@ -68,7 +68,9 @@
     "backToChild": "Tillbaka till barn",
     "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
     "newsTitle": "Nyhet: {{message}} ({{dateCreated}})",
-    "notificationTitle": "Nyhet: {{header}} ({{published}})"
+    "notificationTitle": "Nyhet: {{header}} ({{published}})",
+    "published": "Publicerad",
+    "updated": "Uppdaterad"
   },
   "notifications": {
     "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
