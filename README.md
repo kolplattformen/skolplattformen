@@ -3,11 +3,11 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=skolplattformen)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-There's a lot of things to keep track of, no matter how many kids you have. We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. Give us a ⭐ if you like what we're doing!
+We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. Give us a ⭐ if you like what we're doing!
 
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). Check out [the changelog](CHANGELOG.md) to see what new features we've added and what bugs we've squashed.
 
-This is the project's main repository. It contains the source code for both the app and its website. The sources for each can be found under [packages/site](packages/site) and [packages/app](packages/app). The readme files there contain more detailed descriptions.
+This is the project's main repository. It contains the source code for both the app and its website. The sources for each can be found under [packages/app](packages/app) and [packages/site](packages/site). The readme files there contain more detailed descriptions.
 
 ![Login screen](packages/site/assets/img/screenshots/screenshot_login.png) ![Child list screen](packages/site/assets/img/screenshots/screenshot_children.png)
 
