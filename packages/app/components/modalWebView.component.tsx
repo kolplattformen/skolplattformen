@@ -2,10 +2,10 @@ import { useApi } from '@skolplattformen/api-hooks'
 import { Text } from '@ui-kitten/components'
 import URI from 'jsuri'
 import React, { useEffect, useState } from 'react'
-import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Linking,Modal, StyleSheet, TouchableOpacity, View,SyntheticEvent } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
-import { CloseIcon } from './icon.component'
+import { BackIcon,ShareIcon } from './icon.component'
 
 interface ModalWebViewProps {
   url: string
@@ -20,6 +20,7 @@ export const ModalWebView = ({
 }: ModalWebViewProps) => {
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
+  const [title, setTitle] = React.useState("...")
   const [headers, setHeaders] = useState()
 
   useEffect(() => {
@@ -31,14 +32,16 @@ export const ModalWebView = ({
 
     getHeaders(url)
   }, [url, sharedCookiesEnabled, api])
-
+ 
   const uri = new URI(url)
 
   const closeModal = () => {
     setModalVisible(false)
     onClose()
   }
-
+  const openInApp = ()=>{
+    Linking.openURL(url)
+  }
   return (
     <Modal
       animationType="slide"
@@ -49,9 +52,12 @@ export const ModalWebView = ({
       <SafeAreaView style={styles.container}>
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
-            <Text category="s1">{uri.host()}</Text>
-            <TouchableOpacity onPress={closeModal}>
-              <CloseIcon style={styles.icon} fill="#333333" />
+          <TouchableOpacity onPress={closeModal}>
+              <BackIcon style={styles.backIcon} fill="#333333" />
+            </TouchableOpacity>
+            <Text category="s1" style={styles.headerText} numberOfLines={1} >{title}</Text>
+            <TouchableOpacity onPress={openInApp}>
+              <ShareIcon style={styles.shareIcon} fill="#333333" />
             </TouchableOpacity>
           </View>
         </View>
@@ -61,6 +67,12 @@ export const ModalWebView = ({
             source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
             thirdPartyCookiesEnabled={sharedCookiesEnabled}
+            onLoad={
+              (event:SyntheticEvent) => {
+                setTitle(event.nativeEvent.title )
+              }
+            }
+           
           />
         )}
       </SafeAreaView>
@@ -73,21 +85,32 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerWrapper: {
-    backgroundColor: '#333333',
+    marginTop:5,
+    backgroundColor: '#ffffff',
     padding: 5,
+    borderRadius: 2,
+    borderColor: '#6B7280',
+    borderBottomWidth: 1,
+  },headerText:{
+    overflow: 'hidden',
+    width: '85%',
+    paddingRight:2
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 4,
     backgroundColor: '#ffffff',
-    borderRadius: 5,
   },
-  icon: {
-    width: 30,
-    height: 30,
+  shareIcon: {
+    width: 24,
+    height: 24,
+
+  },backIcon: {
+    width: 24,
+    height: 24,
+    marginRight:15,
   },
   webview: {},
 })
