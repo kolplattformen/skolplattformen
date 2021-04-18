@@ -27,12 +27,13 @@ import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
-const settingsOptions = [
-  translate('general.logout'),
-  translate('general.abort'),
-]
 
 export const Children = () => {
+  const settingsOptions = [
+    translate('general.logout'),
+    translate('general.abort'),
+  ]
+
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
   const insets = useSafeAreaInsets()
