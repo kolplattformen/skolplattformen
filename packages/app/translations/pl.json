@@ -1,0 +1,93 @@
+{
+    "general": {
+        "title": "Öppna skolplattformen",
+        "loading": "Trwa ładowanie...",
+        "logout": "Wyloguj",
+        "abort": "Anuluj",
+        "settings": "Ustawienia",
+        "send": "Wyślij",
+        "confirm": "Potwierdź",
+        "socialSecurityNumber": "Personnummer",
+        "changeLanguage": "Zmień język"
+    },
+    "navigation": {
+        "news": "Wiadomości",
+        "notifications": "Powiadomienia",
+        "calender": "Kalendarz",
+        "menu": "Jadłospis"
+    },
+    "auth": {
+        "bankid": {
+            "OpenOnAnotherDevice": "Otwórz BankID na innym urządzeniu",
+            "OpenOnThisDevice": "Otwórz BankID na tym urządzeniu",
+            "Waiting": "Oczekiwanie på BankID...",
+            "OpenManually": "Otwórz BankID manualnie"
+        },
+        "subtitle": "{{word}} alternatywa",
+        "personalNumber": "Personnummer",
+        "loginAsTestUser": "Użytkownik testowy",
+        "placeholder_SocialSecurityNumber": "Twój personnummer",
+        "chooseLoginMethod": "Wymierz sposób logowania",
+        "loginFailed": "Logowanie nie powiodło się, spróbuj ponownie!",
+        "words": {
+            "agile": "Szybka",
+            "cheap": "Tania",
+            "better": "Lepsza",
+            "cooler": "Odlotowa",
+            "awaited": "Oczekiwana",
+            "simple": "Prosta",
+            "fantastic": "Fantastyczna",
+            "free": "Wolna",
+            "working": "Działająca",
+            "first": "Pierwsza",
+            "homemade": "Domowa",
+            "imperfect": "Niedoskonała",
+            "rebellious": "Buntownicza",
+            "fun": "Śmieszna",
+            "fast": "Szybka",
+            "enlightened": "Oświecona",
+            "open": "Otwarta"
+        }
+    },
+    "children": {
+        "title": "Twoje dzieci",
+        "noKids_title": "Nie znaleziono dzieci",
+        "noKids_description": "Nie znaleziono dzieci zarejestrowanych na twój personnummer w mieście Sztokholm"
+    },
+    "abscense": {
+        "title": "Zgłoś nieobecność",
+        "selectAbscenseEndTime": "Wybierz czas zakończenia",
+        "entireDay": "Cały dzień"
+    },
+    "news": {
+        "title": "Wiadomość od szkoły",
+        "backToChild": "Z powrotem do dzieci",
+        "noNewNewsItemsThisWeek": "Nie ma nowych wiadomości w tym tygodniu.",
+        "newsTitle": "Wiadomość: {{message}} ({{dateCreated}})",
+        "notificationTitle": "Wiadomość: {{header}} ({{published}})"
+    },
+    "notifications": {
+        "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
+    },
+    "calender": {
+        "saveToCalender": "Zapisz w kalendarzu",
+        "showCalenderActions": "Wyświetl działania kalendarza",
+        "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
+        "saveToCalenderError": "Coś poszło nie tak",
+        "approveAccessToCalender": "Musisz zatwierdzić dostęp do kalendarza"
+    },
+    "menu": {
+        "emptyHeadline": "Brak informacji",
+        "emptyText": "Nie znaleziono jadłospisu na ten tydzień"
+      },
+    "abbrevations": {
+        "upperSecondarySchool": "Liceum",
+        "preschool": "Przedszkole",
+        "compulsorySchool": "Szkoła podstawowa",
+        "leisureTimeCentre": "Świetlica"
+    },
+    "language": {
+      "changeLanguage": "Zmień język",
+      "changeLanguageButton": "Zachowaj"
+    }
+}

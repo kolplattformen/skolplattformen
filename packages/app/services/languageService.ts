@@ -11,6 +11,7 @@ let languageCode: string
 
 const rtlList: { [key: string]: boolean } = {
   en: false,
+  pl: false,
   sv: false,
   so: false,
   ar: true,
