@@ -56,7 +56,7 @@
   },
   "abscense": {
     "title": "Report absence",
-    "selectAbscenseStartTime": "Choose star time",
+    "selectAbscenseStartTime": "Choose start time",
     "selectAbscenseEndTime": "Choose end time",
     "entireDay": "Whole day",
     "newsTitle": "News item: {{header}} ({{published}})",
