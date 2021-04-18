@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
+  Button,
   Divider,
   Layout,
   List,
@@ -11,7 +12,13 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import React from 'react'
-import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
+import {
+  Image,
+  ListRenderItemInfo,
+  StyleSheet,
+  View,
+  Linking,
+} from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import ActionSheet from 'rn-actionsheet-module'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -27,14 +34,13 @@ const settingsOptions = [
 
 export const Children = () => {
   const { api } = useApi()
-  const { data: childList, status } = useChildList()
+  const { data: childList, status, reload } = useChildList()
   const insets = useSafeAreaInsets()
 
   const handleSettingSelection = (index: number) => {
     switch (index) {
       case 0:
-        api.logout()
-        AsyncStorage.clear()
+        logout()
         break
     }
   }
@@ -49,6 +55,15 @@ export const Children = () => {
     }
 
     ActionSheet(options, handleSettingSelection)
+  }
+
+  const reloadChildren = () => {
+    reload()
+  }
+
+  const logout = () => {
+    api.logout()
+    AsyncStorage.clear()
   }
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
@@ -107,12 +122,39 @@ export const Children = () => {
               source={require('../assets/girls.png')}
               style={styles.loadingImage}
             />
-            <View style={styles.loadingMessage}>
-              <Spinner size="large" status="warning" />
-              <Text category="h1" style={styles.loadingText}>
-                {translate('general.loading')}
-              </Text>
-            </View>
+            {status === 'error' ? (
+              <View style={styles.errorMessage}>
+                <Text category="h5">
+                  {translate('children.loadingErrorHeading')}
+                </Text>
+                <Text style={{ fontSize: Sizing.t5 }}>
+                  {translate('children.loadingErrorInformationText')}
+                </Text>
+                <View style={styles.errorButtons}>
+                  <Button status="success" onPress={() => reloadChildren()}>
+                    {translate('children.tryAgain')}
+                  </Button>
+                  <Button
+                    status="basic"
+                    onPress={() =>
+                      Linking.openURL('https://skolplattformen.org/status')
+                    }
+                  >
+                    {translate('children.viewStatus')}
+                  </Button>
+                  <Button onPress={() => logout()}>
+                    {translate('general.logout')}
+                  </Button>
+                </View>
+              </View>
+            ) : (
+              <View style={styles.loadingMessage}>
+                <Spinner size="large" status="warning" />
+                <Text category="h1" style={styles.loadingText}>
+                  {translate('general.loading')}
+                </Text>
+              </View>
+            )}
           </Layout>
         )}
       </>
@@ -140,6 +182,21 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     marginLeft: Sizing.t5,
+  },
+  errorButtons: {
+    height: Sizing.screen.height * 0.2,
+    width: Sizing.screen.width * 0.73,
+    justifyContent: 'space-evenly',
+  },
+  errorMessage: {
+    height: Sizing.screen.height * 0.4,
+    width: Sizing.screen.width * 0.73,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginTop: Sizing.t2,
+  },
+  errorText: {
+    marginBottom: Sizing.t3,
   },
   childList: {
     ...LayoutStyle.flex.full,

@@ -16,11 +16,21 @@ import { translations } from './utils/translation'
 
 const api = init(fetch, CookieManager)
 
+const reporter = __DEV__
+  ? {
+      log: (message) => console.log(message),
+      error: (error, label) => console.error(label, error),
+    }
+  : {
+      log: () => {},
+      error: () => {},
+    }
+
 export default () => {
   const FullBlurView = useBackgroundBlur()
 
   return (
-    <ApiProvider api={api} storage={AsyncStorage}>
+    <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>
       <SafeAreaProvider>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent />
         <IconRegistry icons={EvaIconsPack} />
