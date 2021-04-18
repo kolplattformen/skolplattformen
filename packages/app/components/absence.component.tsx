@@ -38,8 +38,6 @@ interface AbsenceFormValues {
   endTime: moment.Moment
 }
 
-
-
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
     socialSecurityNumber: Yup.string()
@@ -160,7 +158,9 @@ const Absence = () => {
                 {!values.isFullDay && (
                   <View style={styles.partOfDay}>
                     <View style={styles.inputHalf}>
-                      <Text style={styles.label}>{translate('abscense.startTime')}</Text>
+                      <Text style={styles.label}>
+                        {translate('abscense.startTime')}
+                      </Text>
                       <Button
                         status="basic"
                         onPress={() =>
@@ -193,7 +193,9 @@ const Absence = () => {
                     </View>
                     <View style={styles.spacer} />
                     <View style={styles.inputHalf}>
-                      <Text style={styles.label}>{translate('abscense.endTime')}</Text>
+                      <Text style={styles.label}>
+                        {translate('abscense.endTime')}
+                      </Text>
                       <Button
                         status="basic"
                         onPress={() =>
