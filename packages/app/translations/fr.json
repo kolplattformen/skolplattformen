@@ -1,0 +1,89 @@
+{
+  "general": {
+    "title": "Öppna skolplattformen",
+    "loading": "Chargement...",
+    "logout": "Déconnexion",
+    "abort": "Avorter",
+    "settings": "Les paramètres",
+    "send": "Envoyer",
+    "confirm": "Confirmer",
+    "socialSecurityNumber": "Numéro d'identification national",
+    "changeLanguage": "Changer de langue"
+  },
+  "navigation": {
+    "news": "Nouvelles",
+    "notifications": "Notifications",
+    "calender": "Calendrier",
+    "menu": "Menu"
+  },
+  "auth": {
+    "bankid": {
+      "OpenOnAnotherDevice": "Ouvrez BankID sur un autre appareil ",
+      "OpenOnThisDevice": "Ouvrez BankID sur cet appareil",
+      "Waiting": "En attente de BankID ...",
+      "OpenManually": "En attente de BankID ..."
+    },
+    "subtitle": "L'alternative {{word}}",
+    "personalNumber": "Numéro d'identification national",
+    "loginAsTestUser": "Connectez-vous en tant qu'utilisateur test",
+    "placeholder_SocialSecurityNumber": "Votre numéro d'identité personnel",
+    "chooseLoginMethod": "Choisissez la méthode de connexion",
+    "loginFailed": "La connexion a échoué, veuillez réessayer!",
+    "words": {
+      "agile": "agile",
+      "cheap": "bon marché",
+      "cooler": "plus cool",
+      "awaited": "attendue",
+      "simple": "simple",
+      "fantastic": "fantastique",
+      "free": "gratuite",
+      "homemade": "maison",
+      "imperfect": "imparfaite",
+      "rebellious": "rebelle",
+      "fun": "amusante",
+      "fast": "rapide",
+      "enlightened": "éclairée",
+      "open": "ouverte"
+    }
+  },
+  "children": {
+    "title": "Vos enfants",
+    "noKids_title": "Pas d'enfants",
+    "noKids_description": "Il n'y a pas d'enfants enregistrés dans la ville de Stockholm pour votre numéro d'identité personnel"
+  },
+  "abscense": {
+    "title": "Signaler une absence ",
+    "selectAbscenseEndTime": "Choisissez l'heure de la fin",
+    "entireDay": "Toute la journée",
+    "newsTitle": "Information: {{header}} ({{published}})"
+  },
+  "news": {
+    "title": "Nouvelles de Skolplattformen",
+    "backToChild": "Retour à l'enfant",
+    "noNewNewsItemsThisWeek": "Pas de nouvelles actualités cette semaine.",
+    "notificationTitle": "Nouvelles: {{header}} ({{published}})"
+  },
+  "notifications": {
+    "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
+  },
+  "calender": {
+    "showCalenderActions": "Afficher les actions du calendrier",
+    "saveToCalenderSuccess": "✔️ Enregistré dans le calendrier",
+    "saveToCalenderError": "Enregistré dans le calendrier",
+    "approveAccessToCalender": "Vous devez approuver l'accès à votre calendrier"
+  },
+  "menu": {
+    "emptyHeadline": "Le menu a l'air un peu vide",
+    "emptyText": "Je n'ai rien trouvé pour cette semaine"
+  },
+  "abbrevations": {
+    "upperSecondarySchool": "L'enseignement secondaire supérieur",
+    "preSchool": "Préscolaire",
+    "compulsorySchool": "L'école obligatoire",
+    "leisureTimeCentre": "Centre de loisirs"
+  },
+  "language": {
+    "changeLanguage": "Changer de langue",
+    "changeLanguageButton": "Sauver"
+  }
+}

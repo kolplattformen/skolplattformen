@@ -13,7 +13,7 @@
   "navigation": {
     "news": "News",
     "notifications": "Notifications",
-    "calender": "Calender",
+    "calender": "Calendar",
     "menu": "Menu"
   },
   "auth": {
@@ -70,10 +70,10 @@
     "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
   },
   "calender": {
-    "showCalenderActions": "Show calender actions",
-    "saveToCalenderSuccess": "✔️ Saved to calender",
+    "showCalenderActions": "Show calendar actions",
+    "saveToCalenderSuccess": "✔️ Saved to calendar",
     "saveToCalenderError": "Something went wrong",
-    "approveAccessToCalender": "You have to approve access to your calender"
+    "approveAccessToCalender": "You have to approve access to your calendar"
   },
   "menu": {
     "emptyHeadline": "The menu looks kinda empty",
