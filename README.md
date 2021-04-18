@@ -1,7 +1,7 @@
 # Öppna skolplattformen
 
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=skolplattformen)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. Give us a ⭐ if you like what we're doing!
 
