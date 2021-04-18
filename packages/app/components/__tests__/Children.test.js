@@ -60,7 +60,7 @@ test('renders empty state message', () => {
 
   expect(
     screen.getByText(
-      'Det finns inga barn registrerade för ditt personnummer i Stockholms Stad'
+      'Det finns inga barn registrerade för ditt personnummer i Stockholms stad'
     )
   ).toBeTruthy()
 })

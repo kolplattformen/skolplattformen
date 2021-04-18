@@ -52,7 +52,7 @@
   "children": {
     "title": "Dina barn",
     "noKids_title": "Inga barn",
-    "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms Stad",
+    "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms stad",
     "loadingErrorHeading": "Hoppsan!",
     "loadingErrorInformationText": "Vi lyckades inte ladda sidan. Försök igen eller se status på skolplattformen.org.",
     "tryAgain": "Försök igen",
@@ -64,7 +64,7 @@
     "entireDay": "Heldag"
   },
   "news": {
-    "title": "Nyhet från skolplattformen",
+    "title": "Nyhet från Skolplattformen",
     "backToChild": "Tillbaka till barn",
     "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
     "newsTitle": "Nyhet: {{message}} ({{dateCreated}})",
@@ -75,10 +75,10 @@
   },
   "calender": {
     "saveToCalender": "Spara till kalender",
-    "showCalenderActions": "Visa kalender actions",
+    "showCalenderActions": "Visa kalenderactions",
     "saveToCalenderSuccess": "✔️ Sparad till kalender",
     "saveToCalenderError": "Något gick fel",
-    "approveAccessToCalender": "Du måste godkänna access till kalender"
+    "approveAccessToCalender": "Du måste godkänna åtkomst till kalendern"
   },
   "menu": {
     "emptyHeadline": "Det ser lite tomt ut i matsedeln",
