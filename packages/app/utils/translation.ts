@@ -6,7 +6,7 @@ export const translations = {
   en: require('../translations/en.json'),
   pl: require('../translations/pl.json'),
   so: require('../translations/so.json'),
-  sv: require('../translations/sv.json')
+  sv: require('../translations/sv.json'),
 }
 
 export const translate = (key: string, options?: Record<string, any>) => {
