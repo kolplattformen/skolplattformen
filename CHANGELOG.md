@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/kolplattformen/skolplattformen/compare/v1.18.0...v1.19.0) (2021-04-18)
+
+
+### Features
+
+* 🎸 Add errormessage to loading page ([#255](https://github.com/kolplattformen/skolplattformen/issues/255)) ([d1c5b09](https://github.com/kolplattformen/skolplattformen/commit/d1c5b09cf31113318f9811bea16d809dbde90c4e)), closes [#195](https://github.com/kolplattformen/skolplattformen/issues/195)
+
 # [1.18.0](https://github.com/kolplattformen/skolplattformen/compare/v1.17.0...v1.18.0) (2021-04-17)
 
 
