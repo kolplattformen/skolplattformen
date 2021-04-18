@@ -56,8 +56,13 @@
   },
   "abscense": {
     "title": "Anmäl frånvaro",
+    "selectAbscenseStartTime": "Välj startid",
     "selectAbscenseEndTime": "Välj sluttid",
-    "entireDay": "Heldag"
+    "entireDay": "Heldag",
+    "personalNumberMissing": "Personnummer saknas",
+    "invalidPersonalNumber":"Personnumret är ogiltigt",
+    "startTime":"Starttid",
+    "endTime":"Sluttid"
   },
   "news": {
     "title": "Nyhet från skolplattformen",
