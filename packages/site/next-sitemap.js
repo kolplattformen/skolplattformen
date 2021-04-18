@@ -2,10 +2,9 @@ module.exports = {
   siteUrl: 'https://skolplattformen.org',
   generateRobotsTxt: true,
   transform: async (config, path) => {
-    console.log(path)
-    dailypages = ['/aktuellt', '/status', '/qa']
-    changefreq = dailypages.includes(path) ? 'daily' : 'weekly'
-    priority = config.priority
+    let dailypages = ['/aktuellt', '/status', '/qa']
+    let changefreq = dailypages.includes(path) ? 'daily' : 'weekly'
+    let priority = config.priority
     if (path == '/') {
       priority = 1.0
     } else if (path == '/aktuellt') {
