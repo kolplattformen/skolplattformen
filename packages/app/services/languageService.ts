@@ -1,6 +1,10 @@
 import { I18nManager } from 'react-native'
 import i18n from 'i18n-js'
 import moment from 'moment'
+import 'moment/locale/ar'
+import 'moment/locale/de'
+import 'moment/locale/pl'
+import 'moment/locale/sv'
 
 const changeListeners: Record<string, any> = {}
 
@@ -11,6 +15,7 @@ let languageCode: string
 
 const rtlList: { [key: string]: boolean } = {
   en: false,
+  de: false,
   pl: false,
   sv: false,
   so: false,
