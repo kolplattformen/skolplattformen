@@ -1,24 +1,3 @@
-# [1.18.0](https://github.com/kolplattformen/skolplattformen/compare/v1.17.0...v1.18.0) (2021-04-17)
-
-
-### Features
-
-* 🎸 Add new Status page ([#259](https://github.com/kolplattformen/skolplattformen/issues/259)) ([2dd1564](https://github.com/kolplattformen/skolplattformen/commit/2dd15640e2020d92486511b1dd330eaa0b8559c5))
-
-# [1.17.0](https://github.com/kolplattformen/skolplattformen/compare/v1.16.1...v1.17.0) (2021-04-17)
-
-
-### Features
-
-* 🎸 Remove required personal number on login on same device ([#271](https://github.com/kolplattformen/skolplattformen/issues/271)) ([2604640](https://github.com/kolplattformen/skolplattformen/commit/260464026b39d3e66098df037a19a9fe586a000c))
-
-## [1.16.1](https://github.com/kolplattformen/skolplattformen/compare/v1.16.0...v1.16.1) (2021-04-17)
-
-
-### Bug Fixes
-
-* 🐛 Fixes issue where locale was not saved ([19554c7](https://github.com/kolplattformen/skolplattformen/commit/19554c788fec4d37e8d86a654a83c960704f8c61)), closes [#280](https://github.com/kolplattformen/skolplattformen/issues/280)
-
 # [1.16.0](https://github.com/kolplattformen/skolplattformen/compare/v1.15.1...v1.16.0) (2021-04-16)
 
 

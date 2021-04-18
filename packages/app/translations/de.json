@@ -1,0 +1,93 @@
+{
+  "general": {
+    "title": "Öppna skolplattformen",
+    "loading": "Wird geladen...",
+    "logout": "Ausloggen",
+    "abort": "Abbrechen",
+    "settings": "Einstellungen",
+    "send": "Senden",
+    "confirm": "Bestätigen",
+    "socialSecurityNumber": "Personenkennzeichen",
+    "changeLanguage": "Sprache wechseln"
+  },
+  "navigation": {
+    "news": "Nachrichten",
+    "notifications": "Mitteilungen",
+    "calender": "Kalender",
+    "menu": "Speisekarte"
+  },
+  "auth": {
+    "bankid": {
+      "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
+      "OpenOnThisDevice": "BankID auf dieses Gerät benutzen",
+      "Waiting": "Wartet auf BankID...",
+      "OpenManually": "BankID manuell öffnen"
+    },
+    "subtitle": "Die {{word}} Alternative",
+    "personalNumber": "Personenkennzeichen",
+    "loginAsTestUser": "Als Testbenutzer einloggen",
+    "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
+    "chooseLoginMethod": "Anmeldemethode wählen",
+    "loginFailed": "Die Anmeldung ist fehlgeschlagen, versuche nochmal!",
+    "words": {
+      "agile": "agile",
+      "cheap": "billige",
+      "better": "bessere",
+      "cooler": "coolere",
+      "awaited": "erwartete",
+      "simple": "enfache",
+      "fantastic": "fantastische",
+      "free": "freie",
+      "working": "funktionierende",
+      "first": "erste",
+      "homemade": "selbstgemachte",
+      "imperfect": "unvollkommene",
+      "rebellious": "rebellische",
+      "fun": "komische",
+      "fast": "schnelle",
+      "enlightened": "erleuchtete",
+      "open": "offene"
+    }
+  },
+  "children": {
+    "title": "Deine Kinder",
+    "noKids_title": "Keine Kinder",
+    "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert"
+  },
+  "abscense": {
+    "title": "Fernbleiben melden",
+    "selectAbscenseEndTime": "Endzeit wählen",
+    "entireDay": "Ganzen Tag"
+  },
+  "news": {
+    "title": "Nachricht von Skolplattformen",
+    "backToChild": "Zurück zu Kind",
+    "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
+    "newsTitle": "Nachricht: {{message}} ({{dateCreated}})",
+    "notificationTitle": "Nachricht: {{header}} ({{published}})"
+  },
+  "notifications": {
+    "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
+  },
+  "calender": {
+    "saveToCalender": "Im Kalender speichern",
+    "showCalenderActions": "Kalender-Actions zeigen",
+    "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
+    "saveToCalenderError": "Etwas hat sich verlaufen",
+    "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben"
+  },
+  "menu": {
+    "emptyHeadline": "Die Speisekarte sieht en bisschen leer aus",
+    "emptyText": "Nichts zu zeigen für diese Woche "
+  },
+  "abbrevations": {
+    "upperSecondarySchool": "Gymnasium",
+    "preSchool": "Vorschule",
+    "compulsorySchool": "Grundschule",
+    "leisureTimeCentre": "Hort"
+  },
+  "language": {
+    "changeLanguage": "Sprache wechseln",
+    "changeLanguageButton": "Speichern"
+  }
+}

@@ -85,10 +85,19 @@ export const SetLanguage = () => {
 
               <TouchableOpacity
                 style={styles.languageButton}
+                onPress={() => setSelectedLanguage('de')}
+              >
+                <Text style={styles.check}>{isSelected('de') ? '✓' : ''}</Text>
+                <Text>German</Text>
+                <Text style={styles.languageButtonSubtitle}>Deutsch</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.languageButton}
                 onPress={() => setSelectedLanguage('so')}
               >
                 <Text style={styles.check}>{isSelected('so') ? '✓' : ''}</Text>
-                <Text>Somalia</Text>
+                <Text>Somali</Text>
                 <Text style={styles.languageButtonSubtitle}>af-Soomaali</Text>
               </TouchableOpacity>
             </View>
