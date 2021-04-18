@@ -26,7 +26,7 @@ export const Children = () => {
     translate('general.logout'),
     translate('general.abort'),
   ]
-  
+
   const { api } = useApi()
   const { data: childList, status } = useChildList()
   const insets = useSafeAreaInsets()
