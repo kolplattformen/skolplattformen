@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/kolplattformen/skolplattformen/compare/v1.19.0...v1.19.1) (2021-04-18)
+
+
+### Bug Fixes
+
+* 🐛 Settings menu was not updated on language change ([#286](https://github.com/kolplattformen/skolplattformen/issues/286)) ([6418d6e](https://github.com/kolplattformen/skolplattformen/commit/6418d6ee42e5f953b2a1f83613f07f7e0f2963d8))
+
 # [1.19.0](https://github.com/kolplattformen/skolplattformen/compare/v1.18.0...v1.19.0) (2021-04-18)
 
 
