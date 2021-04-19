@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     ...LayoutStyle.center,
     ...LayoutStyle.flex.full,
     margin: Sizing.t5,
+    paddingBottom: Sizing.t5,
   },
   buttonGroup: {
     minHeight: 45,
