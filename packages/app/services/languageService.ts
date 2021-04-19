@@ -39,6 +39,7 @@ export const LanguageService = {
     if (langCode) {
       i18n.translations = { [langCode]: Strings }
       i18n.locale = langCode
+      i18n.fallbacks = true
       I18nManager.forceRTL(isRTL(langCode))
     }
 
