@@ -60,9 +60,14 @@
   },
   "abscense": {
     "title": "Report absence",
+    "selectAbscenseStartTime": "Choose start time",
     "selectAbscenseEndTime": "Choose end time",
     "entireDay": "Whole day",
-    "newsTitle": "News item: {{header}} ({{published}})"
+    "newsTitle": "News item: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
+    "invalidPersonalNumber":"Personal number invalid",
+    "startTime":"Start time",
+    "endTime":"End time"
   },
   "news": {
     "title": "News from Skolplattformen",
