@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/kolplattformen/skolplattformen/compare/v1.20.0...v1.20.1) (2021-04-19)
+
+
+### Bug Fixes
+
+* 🐛 uppdatering av QA sidan ([c90aeff](https://github.com/kolplattformen/skolplattformen/commit/c90aeffe36c520db4cd3e53766f9c5e7784b7432))
+
 # [1.20.0](https://github.com/kolplattformen/skolplattformen/compare/v1.19.1...v1.20.0) (2021-04-19)
 
 
