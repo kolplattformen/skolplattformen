@@ -21,7 +21,6 @@
     "chooseLoginMethod": "Anmeldemethode wählen",
     "loginAsTestUser": "Als Testbenutzer einloggen",
     "loginFailed": "Die Anmeldung ist fehlgeschlagen, versuche nochmal!",
-    "personalNumber": "Personenkennzeichen",
     "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
     "subtitle": "Die {{word}} Alternative",
     "words": {

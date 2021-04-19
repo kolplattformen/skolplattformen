@@ -21,7 +21,6 @@
     "chooseLoginMethod": "Välj inloggningsmetod",
     "loginAsTestUser": "Logga in som testanvändare",
     "loginFailed": "Inloggningen misslyckades, försök igen!",
-    "personalNumber": "Personnummer",
     "placeholder_SocialSecurityNumber": "Ditt personnummer",
     "subtitle": "Det {{word}} alternativet",
     "words": {

@@ -21,7 +21,6 @@
     "chooseLoginMethod": "اختر طريقة تسجيل الدخول",
     "loginAsTestUser": "تسجيل الدخول كمستخدم تجريبي",
     "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى!",
-    "personalNumber": "الرقم الشخصي",
     "placeholder_SocialSecurityNumber": "رقمك الشخصي",
     "subtitle": "البديل {{word}}",
     "words": {

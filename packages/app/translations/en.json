@@ -21,7 +21,6 @@
     "chooseLoginMethod": "Choose login method",
     "loginAsTestUser": "Login as test user",
     "loginFailed": "Login failed, please try again!",
-    "personalNumber": "Personal identity number",
     "placeholder_SocialSecurityNumber": "Your personal identity number",
     "subtitle": "The {{word}} alternative",
     "words": {
