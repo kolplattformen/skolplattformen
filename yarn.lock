@@ -904,11 +904,6 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/react-native-restart@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-native-restart/-/react-native-restart-0.0.0.tgz#5c86bd8d3acb9dc8c8e41963cc038b8ac76d3271"
-  integrity sha512-MLawyWpEkVlzxAZkdWDYabpL4zPRo7oBd1gE683WEr/7szwh+WVIjReSsLdFeRiiFoNuEEjAthnGx2YLFzwHEQ==
-
 JSONStream@^1.0.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.5.tgz#3208c1f08d3a4d99261ab64f92302bc15e111ca0"

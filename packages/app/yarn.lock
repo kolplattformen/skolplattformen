@@ -1815,6 +1815,11 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native-restart@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-restart/-/react-native-restart-0.0.0.tgz#5c86bd8d3acb9dc8c8e41963cc038b8ac76d3271"
+  integrity sha512-MLawyWpEkVlzxAZkdWDYabpL4zPRo7oBd1gE683WEr/7szwh+WVIjReSsLdFeRiiFoNuEEjAthnGx2YLFzwHEQ==
+
 "@types/react-native@^0.64.2":
   version "0.64.2"
   resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.64.2.tgz"
