@@ -1,93 +1,92 @@
 {
-  "general": {
-    "title": "Öppna skolplattformen",
-    "loading": "Wird geladen...",
-    "logout": "Ausloggen",
-    "abort": "Abbrechen",
-    "settings": "Einstellungen",
-    "send": "Senden",
-    "confirm": "Bestätigen",
-    "socialSecurityNumber": "Personenkennzeichen",
-    "changeLanguage": "Sprache wechseln"
+  "abbrevations": {
+    "compulsorySchool": "Grundschule",
+    "leisureTimeCentre": "Hort",
+    "preSchool": "Vorschule",
+    "upperSecondarySchool": "Gymnasium"
   },
-  "navigation": {
-    "news": "Nachrichten",
-    "notifications": "Mitteilungen",
-    "calender": "Kalender",
-    "menu": "Speisekarte"
+  "abscense": {
+    "entireDay": "Ganzen Tag",
+    "newsTitle": "News item: {{header}} ({{published}})",
+    "selectAbscenseEndTime": "Endzeit wählen",
+    "title": "Fernbleiben melden"
   },
   "auth": {
     "bankid": {
+      "OpenManually": "BankID manuell öffnen",
       "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
       "OpenOnThisDevice": "BankID auf dieses Gerät benutzen",
-      "Waiting": "Wartet auf BankID...",
-      "OpenManually": "BankID manuell öffnen"
+      "Waiting": "Wartet auf BankID..."
     },
-    "subtitle": "Die {{word}} Alternative",
-    "personalNumber": "Personenkennzeichen",
-    "loginAsTestUser": "Als Testbenutzer einloggen",
-    "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
     "chooseLoginMethod": "Anmeldemethode wählen",
+    "loginAsTestUser": "Als Testbenutzer einloggen",
     "loginFailed": "Die Anmeldung ist fehlgeschlagen, versuche nochmal!",
+    "personalNumber": "Personenkennzeichen",
+    "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
+    "subtitle": "Die {{word}} Alternative",
     "words": {
       "agile": "agile",
-      "cheap": "billige",
-      "better": "bessere",
-      "cooler": "coolere",
       "awaited": "erwartete",
-      "simple": "enfache",
+      "better": "bessere",
+      "cheap": "billige",
+      "cooler": "coolere",
+      "enlightened": "erleuchtete",
       "fantastic": "fantastische",
-      "free": "freie",
-      "working": "funktionierende",
+      "fast": "schnelle",
       "first": "erste",
+      "free": "freie",
+      "fun": "komische",
       "homemade": "selbstgemachte",
       "imperfect": "unvollkommene",
+      "open": "offene",
       "rebellious": "rebellische",
-      "fun": "komische",
-      "fast": "schnelle",
-      "enlightened": "erleuchtete",
-      "open": "offene"
+      "simple": "enfache",
+      "working": "funktionierende"
     }
   },
-  "children": {
-    "title": "Deine Kinder",
-    "noKids_title": "Keine Kinder",
-    "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert"
-  },
-  "abscense": {
-    "title": "Fernbleiben melden",
-    "selectAbscenseEndTime": "Endzeit wählen",
-    "entireDay": "Ganzen Tag"
-  },
-  "news": {
-    "title": "Nachricht von Skolplattformen",
-    "backToChild": "Zurück zu Kind",
-    "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
-    "newsTitle": "Nachricht: {{message}} ({{dateCreated}})",
-    "notificationTitle": "Nachricht: {{header}} ({{published}})"
-  },
-  "notifications": {
-    "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
-  },
   "calender": {
-    "saveToCalender": "Im Kalender speichern",
-    "showCalenderActions": "Kalender-Actions zeigen",
-    "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
+    "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben",
     "saveToCalenderError": "Etwas hat sich verlaufen",
-    "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben"
+    "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
+    "showCalenderActions": "Kalender-Actions zeigen"
+  },
+  "children": {
+    "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert",
+    "noKids_title": "Keine Kinder",
+    "title": "Deine Kinder"
+  },
+  "general": {
+    "abort": "Abbrechen",
+    "changeLanguage": "Sprache wechseln",
+    "confirm": "Bestätigen",
+    "loading": "Wird geladen...",
+    "logout": "Ausloggen",
+    "send": "Senden",
+    "settings": "Einstellungen",
+    "socialSecurityNumber": "Personenkennzeichen",
+    "title": "Öppna skolplattformen"
+  },
+  "language": {
+    "changeLanguage": "Sprache wechseln",
+    "changeLanguageButton": "Speichern"
   },
   "menu": {
     "emptyHeadline": "Die Speisekarte sieht en bisschen leer aus",
     "emptyText": "Nichts zu zeigen für diese Woche "
   },
-  "abbrevations": {
-    "upperSecondarySchool": "Gymnasium",
-    "preSchool": "Vorschule",
-    "compulsorySchool": "Grundschule",
-    "leisureTimeCentre": "Hort"
+  "navigation": {
+    "calender": "Kalender",
+    "menu": "Speisekarte",
+    "news": "Nachrichten",
+    "notifications": "Mitteilungen"
   },
-  "language": {
-    "changeLanguage": "Sprache wechseln",
-    "changeLanguageButton": "Speichern"
+  "news": {
+    "backToChild": "Zurück zu Kind",
+    "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
+    "notificationTitle": "Nachricht: {{header}} ({{published}})",
+    "title": "Nachricht von Skolplattformen"
+  },
+  "notifications": {
+    "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
   }
 }

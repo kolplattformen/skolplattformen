@@ -1,93 +1,92 @@
 {
-  "general": {
-    "title": "Öppna skolplattformen",
-    "loading": "جار التحميل...",
-    "logout": "تسجيل خروج",
-    "abort": "إجهاض",
-    "settings": "إعدادات",
-    "send": "إرسال",
-    "confirm": "يتأكد",
-    "socialSecurityNumber": "الرقم الشخصي",
-    "changeLanguage": "تغيير اللغة"
+  "abbrevations": {
+    "compulsorySchool": "المدرسة الاجبارية",
+    "leisureTimeCentre": "مركز أوقات الفراغ",
+    "preSchool": "مرحلة ما قبل المدرسة",
+    "upperSecondarySchool": "المدرسه الثانويه العليا"
   },
-  "navigation": {
-    "news": "أخبار",
-    "notifications": "إشعارات",
-    "calender": "رزنامة",
-    "menu": "لائحة الطعام"
+  "abscense": {
+    "entireDay": "كل اليوم",
+    "newsTitle": "عنصر أخبار: {{header}} ({{published}})",
+    "selectAbscenseEndTime": "اختر وقت الانتهاء",
+    "title": "الإبلاغ عن الغياب"
   },
   "auth": {
     "bankid": {
+      "OpenManually": "في انتظار BankID ...",
       "OpenOnAnotherDevice": "افتح BankID على جهاز آخر",
       "OpenOnThisDevice": "افتح BankID على هذا الجهاز",
-      "Waiting": "في انتظار BankID ...",
-      "OpenManually": "في انتظار BankID ..."
+      "Waiting": "في انتظار BankID ..."
     },
-    "subtitle": "البديل {{word}}",
-    "personalNumber": "الرقم الشخصي",
-    "loginAsTestUser": "تسجيل الدخول كمستخدم تجريبي",
-    "placeholder_SocialSecurityNumber": "رقمك الشخصي",
     "chooseLoginMethod": "اختر طريقة تسجيل الدخول",
+    "loginAsTestUser": "تسجيل الدخول كمستخدم تجريبي",
     "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى!",
+    "personalNumber": "الرقم الشخصي",
+    "placeholder_SocialSecurityNumber": "رقمك الشخصي",
+    "subtitle": "البديل {{word}}",
     "words": {
       "agile": "رشيق",
-      "cheap": "رخيص",
-      "better": "أفضل",
-      "cooler": "برودة",
       "awaited": "في انتظار",
-      "simple": "بسيط",
+      "better": "أفضل",
+      "cheap": "رخيص",
+      "cooler": "برودة",
+      "enlightened": "المستنير",
       "fantastic": "جميل",
-      "free": "مجانا",
-      "working": "عمل",
+      "fast": "سريع",
       "first": "أول",
+      "free": "مجانا",
+      "fun": "مرح",
       "homemade": "محلي الصنع",
       "imperfect": "غير تام",
+      "open": "افتح",
       "rebellious": "انفصام شخصيه",
-      "fun": "مرح",
-      "fast": "سريع",
-      "enlightened": "المستنير",
-      "open": "افتح"
+      "simple": "بسيط",
+      "working": "عمل"
     }
   },
-  "children": {
-    "title": "أطفالك",
-    "noKids_title": "لا اطفال",
-    "noKids_description": "لا يوجد أطفال مسجلين برقم الضمان الاجتماعي الخاص بك في استاد ستوكهولم"
-  },
-  "abscense": {
-    "title": "الإبلاغ عن الغياب",
-    "selectAbscenseEndTime": "اختر وقت الانتهاء",
-    "entireDay": "كل اليوم",
-    "newsTitle": "عنصر أخبار: {{header}} ({{published}})"
-  },
-  "news": {
-    "title": "أخبار من منصة المدرسة",
-    "backToChild": "العودة إلى الطفل",
-    "noNewNewsItemsThisWeek": "لا توجد أخبار جديدة هذا الأسبوع.",
-    "notificationTitle": "أخبار: {{header}} ({{published}})",
-    "newsTitle": "News item: {{header}} ({{published}})"
-  },
-  "notifications": {
-    "notificationTitle": "إشعار: {{message}} ({{dateCreated}})"
-  },
   "calender": {
-    "showCalenderActions": "إظهار إجراءات التقويم",
-    "saveToCalenderSuccess": "✔️ تم الحفظ في التقويم",
+    "approveAccessToCalender": "يجب عليك الموافقة على الوصول إلى التقويم الخاص بك",
     "saveToCalenderError": "هناك خطأ ما",
-    "approveAccessToCalender": "يجب عليك الموافقة على الوصول إلى التقويم الخاص بك"
+    "saveToCalenderSuccess": "✔️ تم الحفظ في التقويم",
+    "showCalenderActions": "إظهار إجراءات التقويم"
+  },
+  "children": {
+    "noKids_description": "لا يوجد أطفال مسجلين برقم الضمان الاجتماعي الخاص بك في استاد ستوكهولم",
+    "noKids_title": "لا اطفال",
+    "title": "أطفالك"
+  },
+  "general": {
+    "abort": "إجهاض",
+    "changeLanguage": "تغيير اللغة",
+    "confirm": "يتأكد",
+    "loading": "جار التحميل...",
+    "logout": "تسجيل خروج",
+    "send": "إرسال",
+    "settings": "إعدادات",
+    "socialSecurityNumber": "الرقم الشخصي",
+    "title": "Öppna skolplattformen"
+  },
+  "language": {
+    "changeLanguage": "تغيير اللغة",
+    "changeLanguageButton": "يحفظ"
   },
   "menu": {
     "emptyHeadline": "The menu looks kinda empty",
     "emptyText": "Couldn't find anything for this week"
   },
-  "abbrevations": {
-    "upperSecondarySchool": "المدرسه الثانويه العليا",
-    "preSchool": "مرحلة ما قبل المدرسة",
-    "compulsorySchool": "المدرسة الاجبارية",
-    "leisureTimeCentre": "مركز أوقات الفراغ"
+  "navigation": {
+    "calender": "رزنامة",
+    "menu": "لائحة الطعام",
+    "news": "أخبار",
+    "notifications": "إشعارات"
   },
-  "language": {
-    "changeLanguage": "تغيير اللغة",
-    "changeLanguageButton": "يحفظ"
+  "news": {
+    "backToChild": "العودة إلى الطفل",
+    "noNewNewsItemsThisWeek": "لا توجد أخبار جديدة هذا الأسبوع.",
+    "notificationTitle": "أخبار: {{header}} ({{published}})",
+    "title": "أخبار من منصة المدرسة"
+  },
+  "notifications": {
+    "notificationTitle": "إشعار: {{message}} ({{dateCreated}})"
   }
 }

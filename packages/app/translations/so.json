@@ -1,92 +1,92 @@
 {
-  "general": {
-    "title": "Öppna skolplattformen",
-    "loading": "Raadinaya ...",
-    "logout": "Ka bax",
-    "abort": "Ilmo iska soo ridid",
-    "settings": "Dejinta",
-    "send": "Dir",
-    "confirm": "Xaqiiji",
-    "socialSecurityNumber": "Lambarka shaqsiga",
-    "changeLanguage": "Beddel luqadda"
+  "abbrevations": {
+    "compulsorySchool": "Dugsiga khasabka ah",
+    "leisureTimeCentre": "Waqtiga firaaqada",
+    "preSchool": "Dugsiga barbaarinta",
+    "upperSecondarySchool": "Dugsiga sare"
   },
-  "navigation": {
-    "news": "Wararka",
-    "notifications": "Ogeysiisyada",
-    "calender": "Calender",
-    "menu": "Liiska"
+  "abscense": {
+    "entireDay": "Maalintoo dhan",
+    "newsTitle": "Shayga wararka: {{header}} ({{published}})",
+    "selectAbscenseEndTime": "Xulo waqtiga dhamaadka",
+    "title": "Maqnaanshaha ka warbixi"
   },
   "auth": {
     "bankid": {
+      "OpenManually": "Sugaya BankID ...",
       "OpenOnAnotherDevice": "Ku fur BankID qalab kale",
       "OpenOnThisDevice": "Ku fur BankID qalabkan",
-      "Waiting": "Sugaya BankID ...",
-      "OpenManually": "Sugaya BankID ..."
+      "Waiting": "Sugaya BankID ..."
     },
-    "subtitle": "Beddelka {{word}}",
-    "personalNumber": "Lambarka shaqsiga",
-    "loginAsTestUser": "Soo gal isticmaalaha imtixaanka",
-    "placeholder_SocialSecurityNumber": "Lambarkaaga gaarka ah",
     "chooseLoginMethod": "Xulo habka galitaanka",
+    "loginAsTestUser": "Soo gal isticmaalaha imtixaanka",
     "loginFailed": "Soo galitaanku wuu fashilmay, fadlan iskuday markale!",
+    "personalNumber": "Lambarka shaqsiga",
+    "placeholder_SocialSecurityNumber": "Lambarkaaga gaarka ah",
+    "subtitle": "Beddelka {{word}}",
     "words": {
       "agile": "kacsan",
-      "cheap": "jaban",
-      "better": "fiican",
-      "cooler": "ccooleroolare",
       "awaited": "sugayay",
-      "simple": "fudud",
+      "better": "fiican",
+      "cheap": "jaban",
+      "cooler": "ccooleroolare",
+      "enlightened": "iftiimiyay",
       "fantastic": "cajiib ah",
-      "free": "bilaash ah",
-      "working": "shaqeeya",
+      "fast": "soon",
       "first": "marka hore",
+      "free": "bilaash ah",
+      "fun": "madadaalo",
       "homemade": "macmal ah",
       "imperfect": "aan dhammaystirnayn",
+      "open": "furid",
       "rebellious": "caasiyoobay",
-      "fun": "madadaalo",
-      "fast": "soon",
-      "enlightened": "iftiimiyay",
-      "open": "furid"
+      "simple": "fudud",
+      "working": "shaqeeya"
     }
   },
-  "children": {
-    "title": "Caruurtaada",
-    "noKids_title": "Carruur ma leh",
-    "noKids_description": "Ma jiraan caruur ka diiwaan gashan lambarkaaga sooshiyal sekuyuuriyada Stockholm"
-  },
-  "abscense": {
-    "title": "Maqnaanshaha ka warbixi",
-    "selectAbscenseEndTime": "Xulo waqtiga dhamaadka",
-    "entireDay": "Maalintoo dhan",
-    "newsTitle": "Shayga wararka: {{header}} ({{published}})"
-  },
-  "news": {
-    "title": "Wararka ka imanaya madasha dugsiga",
-    "backToChild": "Ku noqo ilmaha",
-    "noNewNewsItemsThisWeek": "Ma jiraan warar cusub toddobaadkan.",
-    "notificationTitle": "Warar: {{header}} ({{published}})"
-  },
-  "notifications": {
-    "notificationTitle": "Ogeysiis: {{message}} ({{dateCreated}})"
-  },
   "calender": {
-    "showCalenderActions": "Muuji ficilada calender-ka",
-    "saveToCalenderSuccess": "Ved Lagu keydiyey calender",
+    "approveAccessToCalender": "Waa inaad ansixisaa helitaanka jadwalkaaga",
     "saveToCalenderError": "Waxbaa qaldamay",
-    "approveAccessToCalender": "Waa inaad ansixisaa helitaanka jadwalkaaga"
+    "saveToCalenderSuccess": "Ved Lagu keydiyey calender",
+    "showCalenderActions": "Muuji ficilada calender-ka"
+  },
+  "children": {
+    "noKids_description": "Ma jiraan caruur ka diiwaan gashan lambarkaaga sooshiyal sekuyuuriyada Stockholm",
+    "noKids_title": "Carruur ma leh",
+    "title": "Caruurtaada"
+  },
+  "general": {
+    "abort": "Ilmo iska soo ridid",
+    "changeLanguage": "Beddel luqadda",
+    "confirm": "Xaqiiji",
+    "loading": "Raadinaya ...",
+    "logout": "Ka bax",
+    "send": "Dir",
+    "settings": "Dejinta",
+    "socialSecurityNumber": "Lambarka shaqsiga",
+    "title": "Öppna skolplattformen"
+  },
+  "language": {
+    "changeLanguage": "Beddel luqadda",
+    "changeLanguageButton": "Keydso"
   },
   "menu": {
     "emptyHeadline": "The menu looks kinda empty",
     "emptyText": "Couldn't find anything for this week"
   },
-  "abbrevations": {
-    "upperSecondarySchool": "Dugsiga sare",
-    "preSchool": "Dugsiga barbaarinta",
-    "compulsorySchool": "Dugsiga khasabka ah",
-    "leisureTimeCentre": "Waqtiga firaaqada"
+  "navigation": {
+    "calender": "Calender",
+    "menu": "Liiska",
+    "news": "Wararka",
+    "notifications": "Ogeysiisyada"
   },
-  "language": {
-    "changeLanguage": "Beddel luqadda",
-    "changeLanguageButton": "Keydso"
+  "news": {
+    "backToChild": "Ku noqo ilmaha",
+    "noNewNewsItemsThisWeek": "Ma jiraan warar cusub toddobaadkan.",
+    "notificationTitle": "Warar: {{header}} ({{published}})",
+    "title": "Wararka ka imanaya madasha dugsiga"
+  },
+  "notifications": {
+    "notificationTitle": "Ogeysiis: {{message}} ({{dateCreated}})"
   }
 }
