@@ -64,7 +64,8 @@
     "title": "أخبار من منصة المدرسة",
     "backToChild": "العودة إلى الطفل",
     "noNewNewsItemsThisWeek": "لا توجد أخبار جديدة هذا الأسبوع.",
-    "notificationTitle": "أخبار: {{header}} ({{published}})"
+    "notificationTitle": "أخبار: {{header}} ({{published}})",
+    "newsTitle": "News item: {{header}} ({{published}})"
   },
   "notifications": {
     "notificationTitle": "إشعار: {{message}} ({{dateCreated}})"
