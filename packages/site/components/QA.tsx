@@ -154,7 +154,7 @@ const QA = () => {
           projekt: många, små, agila. Snarare än gårdagens misslyckade
           IT-satsningar: öppna API:er, öppen källkod och öppen data.
         </p>
-        <h3>Vad är er syn på den kommunala skolplattformen?</h3>
+        <h3>Vad är er syn på den kommunala Skolplattformen?</h3>
         <p>
           Den typen av mastodontprojekt har alltid och kommer alltid att
           misslyckas. Det går inte att bygga fungerande system utifrån krav och
