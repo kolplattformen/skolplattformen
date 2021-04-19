@@ -22,8 +22,8 @@ const rtlList: { [key: string]: boolean } = {
   ar: true,
 }
 
-const isRTL = (langCode: string) => {
-  if (!isRTL.hasOwnProperty(langCode)) {
+export const isRTL = (langCode: string) => {
+  if (!rtlList.hasOwnProperty(langCode)) {
     return false
   }
   return rtlList[langCode]

@@ -11,11 +11,12 @@ import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
-import { LanguageService } from '../services/languageService'
+import { isRTL, LanguageService } from '../services/languageService'
 import { Colors, Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import RNRestart from 'react-native-restart'
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
@@ -27,9 +28,19 @@ export const SetLanguage = () => {
   )
   const { setLanguageCode } = useLanguage()
 
+  const shouldRestart = () => {
+    return isRTL(selectedLanguage) || isRTL(currentLanguage)
+  }
+
   const saveLanguage = () => {
     setLanguageCode({ languageCode: selectedLanguage })
-    goBack()
+
+    // Checks if rtl mode has changed, then we need to restart the app
+    if (shouldRestart()) {
+      RNRestart.Restart()
+    } else {
+      goBack()
+    }
   }
 
   const isSelected = (lang: string): boolean => {

@@ -45,6 +45,7 @@
     "react-native-localize": "^2.0.2",
     "react-native-markdown-display": "7.0.0-alpha.2",
     "react-native-modal-datetime-picker": "9.2.0",
+    "react-native-restart": "^0.0.22",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "2.18.1",
     "react-native-simple-toast": "1.1.3",
