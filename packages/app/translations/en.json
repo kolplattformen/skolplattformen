@@ -6,9 +6,14 @@
     "upperSecondarySchool": "Upper secondary school"
   },
   "abscense": {
+    "endTime": "End time",
     "entireDay": "Whole day",
+    "invalidPersonalNumber": "Personal number invalid",
     "newsTitle": "News item: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
     "selectAbscenseEndTime": "Choose end time",
+    "selectAbscenseStartTime": "Choose start time",
+    "startTime": "Start time",
     "title": "Report absence"
   },
   "auth": {
@@ -56,17 +61,6 @@
     "noKids_title": "No kids",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
-  },
-  "general": {
-    "abort": "Abort",
-    "changeLanguage": "Change language",
-    "confirm": "Confirm",
-    "loading": "Loading...",
-    "logout": "Logout",
-    "send": "Send",
-    "settings": "Settings",
-    "socialSecurityNumber": "Personal identity number",
-    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "Change language",

@@ -6,9 +6,14 @@
     "upperSecondarySchool": "Dugsiga sare"
   },
   "abscense": {
+    "endTime": "End time",
     "entireDay": "Maalintoo dhan",
+    "invalidPersonalNumber": "Personal number invalid",
     "newsTitle": "Shayga wararka: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
     "selectAbscenseEndTime": "Xulo waqtiga dhamaadka",
+    "selectAbscenseStartTime": "Choose start time",
+    "startTime": "Start time",
     "title": "Maqnaanshaha ka warbixi"
   },
   "auth": {
@@ -56,17 +61,6 @@
     "noKids_title": "Carruur ma leh",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
-  },
-  "general": {
-    "abort": "Ilmo iska soo ridid",
-    "changeLanguage": "Beddel luqadda",
-    "confirm": "Xaqiiji",
-    "loading": "Raadinaya ...",
-    "logout": "Ka bax",
-    "send": "Dir",
-    "settings": "Dejinta",
-    "socialSecurityNumber": "Lambarka shaqsiga",
-    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "Beddel luqadda",

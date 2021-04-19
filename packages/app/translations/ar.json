@@ -6,9 +6,14 @@
     "upperSecondarySchool": "المدرسه الثانويه العليا"
   },
   "abscense": {
+    "endTime": "End time",
     "entireDay": "كل اليوم",
+    "invalidPersonalNumber": "Personal number invalid",
     "newsTitle": "عنصر أخبار: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
     "selectAbscenseEndTime": "اختر وقت الانتهاء",
+    "selectAbscenseStartTime": "Choose start time",
+    "startTime": "Start time",
     "title": "الإبلاغ عن الغياب"
   },
   "auth": {
@@ -56,17 +61,6 @@
     "noKids_title": "لا اطفال",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
-  },
-  "general": {
-    "abort": "إجهاض",
-    "changeLanguage": "تغيير اللغة",
-    "confirm": "يتأكد",
-    "loading": "جار التحميل...",
-    "logout": "تسجيل خروج",
-    "send": "إرسال",
-    "settings": "إعدادات",
-    "socialSecurityNumber": "الرقم الشخصي",
-    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "تغيير اللغة",

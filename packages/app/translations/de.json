@@ -6,9 +6,14 @@
     "upperSecondarySchool": "Gymnasium"
   },
   "abscense": {
+    "endTime": "End time",
     "entireDay": "Ganzen Tag",
+    "invalidPersonalNumber": "Personal number invalid",
     "newsTitle": "News item: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
     "selectAbscenseEndTime": "Endzeit wählen",
+    "selectAbscenseStartTime": "Choose start time",
+    "startTime": "Start time",
     "title": "Fernbleiben melden"
   },
   "auth": {
@@ -56,17 +61,6 @@
     "noKids_title": "Keine Kinder",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
-  },
-  "general": {
-    "abort": "Abbrechen",
-    "changeLanguage": "Sprache wechseln",
-    "confirm": "Bestätigen",
-    "loading": "Wird geladen...",
-    "logout": "Ausloggen",
-    "send": "Senden",
-    "settings": "Einstellungen",
-    "socialSecurityNumber": "Personenkennzeichen",
-    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "Sprache wechseln",
