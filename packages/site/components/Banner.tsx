@@ -19,10 +19,10 @@ const Banner = () => {
 
   return (
     <div className="header">
-      <div className="relative max-w-6xl mx-auto mt-5 mb-20 md:pt-32 md:mb-52">
-        <div className="px-5 grid grid-cols-1 md:grid-cols-2 md:px-0 gap-12">
-          <div>
-            <div className="hidden select-none md:block">
+      <div className="relative max-w-6xl mx-auto mt-5 mb-20 lg:pt-32 lg:mb-52">
+        <div className="px-5 grid grid-cols-1 lg:grid-cols-2 lg:px-0 xl:gap-12 lg:gap-1 gap-12   ">
+          <div className=" pl-0 md:pl-4 xl:pl-0">
+            <div className="hidden select-none lg:block">
               <div>
                 <img
                   src={shape1}
@@ -61,9 +61,9 @@ const Banner = () => {
                 />
               </div>
             </div>
-            <H1>{intl.formatMessage({ id: 'general.title' })}</H1>
+            <H1 >{intl.formatMessage({ id: 'general.title' })}</H1>
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
-            <p className="py-4 flex items-center sm:flex-row space-x-2 md:space-x-4">
+            <p className="py-4 flex items-center sm:flex-row space-x-2 lg:space-x-4">
               <Link.External
                 className="inline-block"
                 href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
@@ -89,19 +89,19 @@ const Banner = () => {
             </p>
             <p className="flex flex-col mt-5 sm:items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <NextLink href="/integritet">
-                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
+                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
                   Integritetspolicy
                 </a>
               </NextLink>
 
               <NextLink href="/qa">
-                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full md:px-8 md:py-4 hover:bg-indigo-800 hover:text-white">
+                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
                   Frågor och svar
                 </a>
               </NextLink>
             </p>
           </div>
-          <div className="flex justify-center motion-safe:animate-bounce-slow">
+          <div className="flex justify-center motion-safe:animate-bounce-slow pr-0 md:pr-4 xl:pr-0">
             <Image src={phone} width="350" height="712" alt="" />
           </div>
         </div>
