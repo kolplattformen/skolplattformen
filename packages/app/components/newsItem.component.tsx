@@ -62,13 +62,13 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
           <Text style={styles.title}>{newsItem.header}</Text>
           {dateIsValid(newsItem.published) && (
             <Text style={[styles.subtitle, styles.published]}>
-              <Text style={styles.strong}>Publicerad:</Text>{' '}
+              <Text style={styles.strong}>{translate('news.published')}:</Text>{' '}
               {displayDate(newsItem.published)}
             </Text>
           )}
           {dateIsValid(newsItem.modified) && (
             <Text style={styles.subtitle}>
-              <Text style={styles.strong}>Uppdaterad:</Text>{' '}
+              <Text style={styles.strong}>{translate('news.updated')}:</Text>{' '}
               {displayDate(newsItem.modified)}
             </Text>
           )}

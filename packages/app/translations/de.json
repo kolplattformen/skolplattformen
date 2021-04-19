@@ -50,6 +50,7 @@
   },
   "calender": {
     "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben",
+    "saveToCalender": "Save to calender",
     "saveToCalenderError": "Etwas hat sich verlaufen",
     "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
     "showCalenderActions": "Kalender-Actions zeigen"
@@ -59,8 +60,20 @@
     "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
     "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert",
     "noKids_title": "Keine Kinder",
+    "title": "Your kids",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
+  },
+  "general": {
+    "abort": "Abort",
+    "changeLanguage": "Change language",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "send": "Send",
+    "settings": "Settings",
+    "socialSecurityNumber": "Personal identity number",
+    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "Sprache wechseln",
@@ -80,7 +93,9 @@
     "backToChild": "Zurück zu Kind",
     "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
     "notificationTitle": "Nachricht: {{header}} ({{published}})",
-    "title": "Nachricht von Skolplattformen"
+    "published": "Published",
+    "title": "Nachricht von Skolplattformen",
+    "updated": "Updated"
   },
   "notifications": {
     "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"

@@ -50,6 +50,7 @@
   },
   "calender": {
     "approveAccessToCalender": "Musisz zatwierdzić dostęp do kalendarza",
+    "saveToCalender": "Save to calender",
     "saveToCalenderError": "Coś poszło nie tak",
     "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
     "showCalenderActions": "Wyświetl działania kalendarza"
@@ -59,8 +60,20 @@
     "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
     "noKids_description": "Nie znaleziono dzieci zarejestrowanych na twój personnummer w mieście Sztokholm",
     "noKids_title": "Nie znaleziono dzieci",
+    "title": "Twoje dzieci",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
+  },
+  "general": {
+    "abort": "Abort",
+    "changeLanguage": "Change language",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "send": "Send",
+    "settings": "Settings",
+    "socialSecurityNumber": "Personal identity number",
+    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "Zmień język",
@@ -80,7 +93,9 @@
     "backToChild": "Z powrotem do dzieci",
     "noNewNewsItemsThisWeek": "Nie ma nowych wiadomości w tym tygodniu.",
     "notificationTitle": "Wiadomość: {{header}} ({{published}})",
-    "title": "Wiadomość od szkoły"
+    "published": "Published",
+    "title": "Wiadomość od szkoły",
+    "updated": "Updated"
   },
   "notifications": {
     "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"

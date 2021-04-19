@@ -50,6 +50,7 @@
   },
   "calender": {
     "approveAccessToCalender": "Waa inaad ansixisaa helitaanka jadwalkaaga",
+    "saveToCalender": "Save to calender",
     "saveToCalenderError": "Waxbaa qaldamay",
     "saveToCalenderSuccess": "Ved Lagu keydiyey calender",
     "showCalenderActions": "Muuji ficilada calender-ka"
@@ -59,8 +60,20 @@
     "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
     "noKids_description": "Ma jiraan caruur ka diiwaan gashan lambarkaaga sooshiyal sekuyuuriyada Stockholm",
     "noKids_title": "Carruur ma leh",
+    "title": "Your kids",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
+  },
+  "general": {
+    "abort": "Abort",
+    "changeLanguage": "Change language",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "send": "Send",
+    "settings": "Settings",
+    "socialSecurityNumber": "Personal identity number",
+    "title": "Öppna skolplattformen"
   },
   "language": {
     "changeLanguage": "Beddel luqadda",
@@ -80,7 +93,9 @@
     "backToChild": "Ku noqo ilmaha",
     "noNewNewsItemsThisWeek": "Ma jiraan warar cusub toddobaadkan.",
     "notificationTitle": "Warar: {{header}} ({{published}})",
-    "title": "Wararka ka imanaya madasha dugsiga"
+    "published": "Published",
+    "title": "Wararka ka imanaya madasha dugsiga",
+    "updated": "Updated"
   },
   "notifications": {
     "notificationTitle": "Ogeysiis: {{message}} ({{dateCreated}})"
