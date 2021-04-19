@@ -50,9 +50,12 @@
     "showCalenderActions": "Visa kalenderactions"
   },
   "children": {
+    "loadingErrorHeading": "Hoppsan!",
+    "loadingErrorInformationText": "Vi lyckades inte ladda sidan. Försök igen eller se status på skolplattformen.org.",
     "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms stad",
     "noKids_title": "Inga barn",
-    "title": "Dina barn"
+    "tryAgain": "Försök igen",
+    "viewStatus": "Se status på skolplattformen.org"
   },
   "general": {
     "abort": "Avbryt",

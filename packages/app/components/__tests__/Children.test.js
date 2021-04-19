@@ -65,6 +65,17 @@ test('renders empty state message', () => {
   ).toBeTruthy()
 })
 
+test('renders error state message', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [],
+    status: 'error',
+  }))
+
+  const screen = setup()
+
+  expect(screen.getByText('Hoppsan!')).toBeTruthy()
+})
+
 test('renders child in preschool', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [

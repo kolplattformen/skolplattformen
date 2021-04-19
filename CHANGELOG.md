@@ -1,3 +1,45 @@
+# [1.20.0](https://github.com/kolplattformen/skolplattformen/compare/v1.19.1...v1.20.0) (2021-04-19)
+
+
+### Features
+
+* 🎸 Redesign of webview, simpler interface ([#287](https://github.com/kolplattformen/skolplattformen/issues/287)) ([5723b19](https://github.com/kolplattformen/skolplattformen/commit/5723b198f74ed5f5298bee21e4e2c8e4aef08401))
+
+## [1.19.1](https://github.com/kolplattformen/skolplattformen/compare/v1.19.0...v1.19.1) (2021-04-18)
+
+
+### Bug Fixes
+
+* 🐛 Settings menu was not updated on language change ([#286](https://github.com/kolplattformen/skolplattformen/issues/286)) ([6418d6e](https://github.com/kolplattformen/skolplattformen/commit/6418d6ee42e5f953b2a1f83613f07f7e0f2963d8))
+
+# [1.19.0](https://github.com/kolplattformen/skolplattformen/compare/v1.18.0...v1.19.0) (2021-04-18)
+
+
+### Features
+
+* 🎸 Add errormessage to loading page ([#255](https://github.com/kolplattformen/skolplattformen/issues/255)) ([d1c5b09](https://github.com/kolplattformen/skolplattformen/commit/d1c5b09cf31113318f9811bea16d809dbde90c4e)), closes [#195](https://github.com/kolplattformen/skolplattformen/issues/195)
+
+# [1.18.0](https://github.com/kolplattformen/skolplattformen/compare/v1.17.0...v1.18.0) (2021-04-17)
+
+
+### Features
+
+* 🎸 Add new Status page ([#259](https://github.com/kolplattformen/skolplattformen/issues/259)) ([2dd1564](https://github.com/kolplattformen/skolplattformen/commit/2dd15640e2020d92486511b1dd330eaa0b8559c5))
+
+# [1.17.0](https://github.com/kolplattformen/skolplattformen/compare/v1.16.1...v1.17.0) (2021-04-17)
+
+
+### Features
+
+* 🎸 Remove required personal number on login on same device ([#271](https://github.com/kolplattformen/skolplattformen/issues/271)) ([2604640](https://github.com/kolplattformen/skolplattformen/commit/260464026b39d3e66098df037a19a9fe586a000c))
+
+## [1.16.1](https://github.com/kolplattformen/skolplattformen/compare/v1.16.0...v1.16.1) (2021-04-17)
+
+
+### Bug Fixes
+
+* 🐛 Fixes issue where locale was not saved ([19554c7](https://github.com/kolplattformen/skolplattformen/commit/19554c788fec4d37e8d86a654a83c960704f8c61)), closes [#280](https://github.com/kolplattformen/skolplattformen/issues/280)
+
 # [1.16.0](https://github.com/kolplattformen/skolplattformen/compare/v1.15.1...v1.16.0) (2021-04-16)
 
 
