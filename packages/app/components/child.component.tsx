@@ -11,7 +11,7 @@ import {
   Layout,
   Text,
   TopNavigation,
-  TopNavigationAction,
+  TopNavigationAction, useTheme
 } from '@ui-kitten/components'
 import React from 'react'
 import { StyleProp, StyleSheet, TextProps } from 'react-native'
@@ -42,6 +42,7 @@ interface TabTitleProps {
 }
 
 const { Navigator, Screen } = createBottomTabNavigator()
+const theme = useTheme();
 
 const NewsScreen = () => {
   return (
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.neutral.white,
   },
   topBar: {
-    backgroundColor: Colors.neutral.white,
+    backgroundColor: theme['background-basic-color-1'],
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

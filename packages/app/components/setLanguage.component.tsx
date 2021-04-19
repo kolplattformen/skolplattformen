@@ -6,6 +6,7 @@ import {
   ButtonGroup,
   TopNavigationAction,
   TopNavigation,
+  useTheme,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
@@ -16,6 +17,8 @@ import { Colors, Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+
+const theme = useTheme();
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: { ...LayoutStyle.flex.full },
   safeArea: {
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
+    backgroundColor: theme['background-basic-color-1'],
   },
   languageList: {
     flex: 1,

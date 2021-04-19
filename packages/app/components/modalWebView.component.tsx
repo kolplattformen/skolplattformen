@@ -1,5 +1,5 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { Text } from '@ui-kitten/components'
+import { Text, useTheme } from '@ui-kitten/components'
 import React, { useEffect, useState } from 'react'
 import {
   Linking,
@@ -18,7 +18,7 @@ interface ModalWebViewProps {
   sharedCookiesEnabled: boolean
   onClose: () => void
 }
-
+const theme = useTheme();
 export const ModalWebView = ({
   url,
   onClose,
@@ -57,13 +57,13 @@ export const ModalWebView = ({
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
             <TouchableOpacity onPress={closeModal}>
-              <BackIcon style={styles.backIcon} fill="#333333" />
+              <BackIcon style={styles.backIcon} fill={theme['text-basic-color']} />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
               {title}
             </Text>
             <TouchableOpacity onPress={openInApp}>
-              <ExternalLinkIcon style={styles.shareIcon} fill="#333333" />
+              <ExternalLinkIcon style={styles.shareIcon} fill={theme['text-basic-color']} />
             </TouchableOpacity>
           </View>
         </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   headerWrapper: {
     marginTop: 5,
-    backgroundColor: '#ffffff',
+    backgroundColor: theme['background-basic-color-1'],
     padding: 5,
     borderRadius: 2,
     borderColor: '#6B7280',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 4,
-    backgroundColor: '#ffffff',
+    backgroundColor: theme['background-basic-color-1'],
   },
   shareIcon: {
     width: 24,

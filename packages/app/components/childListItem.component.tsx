@@ -9,6 +9,7 @@ import {
   useSchedule,
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
+
 import { Avatar, Button, Card, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
@@ -28,7 +29,6 @@ interface ChildListItemProps {
   child: Child
   color: string
 }
-
 type ChildListItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Children'

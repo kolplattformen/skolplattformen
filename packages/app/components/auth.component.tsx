@@ -3,6 +3,7 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
+  useTheme,
 } from '@ui-kitten/components'
 import React from 'react'
 import {
@@ -32,6 +33,9 @@ const randomWord = () => {
   // @ts-expect-error Fix this later
   return words[argumentKey]
 }
+
+const theme = useTheme();
+
 
 interface AuthProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: { ...LayoutStyle.flex.full },
   safeArea: {
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
+    backgroundColor: theme['background-basic-color-1']
   },
   container: {
     ...LayoutStyle.mainAxis.center,

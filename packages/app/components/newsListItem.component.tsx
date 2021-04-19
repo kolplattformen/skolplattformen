@@ -9,6 +9,7 @@ import { Colors, Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 import { RootStackParamList } from './navigation.component'
+import { useTheme } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
@@ -20,7 +21,6 @@ type NewsListItemNavigationProp = StackNavigationProp<
 >
 
 const { width } = Dimensions.get('window')
-
 export const NewsListItem = ({ item }: NewsListItemProps) => {
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
@@ -53,7 +53,6 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
     </TouchableOpacity>
   )
 }
-
 const styles = StyleSheet.create({
   card: {
     ...Layout.flex.full,
