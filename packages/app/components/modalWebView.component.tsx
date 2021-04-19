@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 4,
-    backgroundColor: theme['background-basic-color-1'],
+    backgroundColor: theme['background-basic-color-1']
   },
   shareIcon: {
     width: 24,

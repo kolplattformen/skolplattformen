@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
@@ -10,6 +11,7 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
+  useTheme,
 } from '@ui-kitten/components'
 import React from 'react'
 import {
@@ -19,6 +21,7 @@ import {
   View,
   Linking,
 } from 'react-native'
+import { useColorScheme } from 'react-native-appearance'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import ActionSheet from 'rn-actionsheet-module'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -27,6 +30,8 @@ import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
+const theme = useTheme()
+let colorScheme = useColorScheme();
 
 export const Children = () => {
   const settingsOptions = [
@@ -37,7 +42,6 @@ export const Children = () => {
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
   const insets = useSafeAreaInsets()
-
   const handleSettingSelection = (index: number) => {
     switch (index) {
       case 0:
@@ -113,6 +117,7 @@ export const Children = () => {
                   child={child}
                   color={colors[index % colors.length]}
                   key={child.id}
+                  theme={theme}
                 />
               )}
             />
@@ -120,7 +125,7 @@ export const Children = () => {
         ) : (
           <Layout style={styles.loading}>
             <Image
-              source={require('../assets/girls.png')}
+              source={colorScheme === "dark" ? require('../assets/girls-dark-mode.png'): require( '../assets/girls.png')}
               style={styles.loadingImage}
             />
             {status === 'error' ? (

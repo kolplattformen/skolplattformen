@@ -17,6 +17,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
+import { useColorScheme } from 'react-native-appearance'
 import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
@@ -30,6 +31,7 @@ import {
 } from './icon.component'
 
 export const Login = () => {
+  let colorScheme = useColorScheme();
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
     (() => Promise<void>) | (() => null)
@@ -147,7 +149,7 @@ export const Login = () => {
 
   return (
     <>
-      <Image source={require('../assets/boys.png')} style={styles.image} />
+      <Image source={colorScheme === "dark" ? require('../assets/boys-dark-mode.png'): require( '../assets/boys.png')} style={styles.image} />
       <View style={styles.loginForm}>
         {loginMethodIndex === 1 && (
           <Input

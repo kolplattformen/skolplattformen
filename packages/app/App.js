@@ -31,7 +31,7 @@ export default () => {
   const colorScheme = useColorScheme();
   return (
     <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>
-      <SafeAreaProvider   backgroundColor="#e48332"> 
+      <SafeAreaProvider > 
         <AppearanceProvider>
         <StatusBar backgroundColor={colorScheme =="dark" ? "#222B45" : "#FFF" } barStyle={colorScheme =="dark" ? "light-content":"dark-content"  } translucent />
         <IconRegistry icons={EvaIconsPack} />

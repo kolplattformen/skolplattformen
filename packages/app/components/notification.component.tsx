@@ -8,9 +8,28 @@ import moment from 'moment'
 
 interface NotificationProps {
   item: NotificationType
+  theme: Record<string,string>
 }
 
-export const Notification = ({ item }: NotificationProps) => {
+export const Notification = ({ item, theme }: NotificationProps) => {
+  const styles = StyleSheet.create({
+    card: {
+      ...Layout.flex.full,
+      backgroundColor: theme['background-basic-color-1'],
+      borderRadius: 2,
+      borderColor: theme['border-basic-color-3'],
+      borderWidth: 1,
+      marginBottom: Sizing.t2,
+    },
+    title: {
+      ...Typography.header,
+      marginBottom: 2,
+    },
+    subtitle: {
+      color: theme['text-hint-color'],
+      ...Typography.fontSize.xs,
+    },
+  })
   const [isOpen, setIsOpen] = React.useState(false)
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
@@ -52,21 +71,4 @@ export const Notification = ({ item }: NotificationProps) => {
   )
 }
 
-const styles = StyleSheet.create({
-  card: {
-    ...Layout.flex.full,
-    backgroundColor: Colors.neutral.white,
-    borderRadius: 2,
-    borderColor: '#f0f0f0',
-    borderWidth: 1,
-    marginBottom: Sizing.t2,
-  },
-  title: {
-    ...Typography.header,
-    marginBottom: 2,
-  },
-  subtitle: {
-    color: '#6B7280',
-    ...Typography.fontSize.xs,
-  },
-})
+
