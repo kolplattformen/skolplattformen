@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "@types/react-native-restart": "^0.0.0",
     "lerna": "^4.0.0"
   },
   "scripts": {
