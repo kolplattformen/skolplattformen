@@ -9,8 +9,5 @@
     "test": "npx lerna run test --stream",
     "lint": "npx lerna run lint --stream"
   },
-  "version": "1.16.0",
-  "dependencies": {
-    "sync-i18n": "^0.0.18"
-  }
+  "version": "1.16.0"
 }
