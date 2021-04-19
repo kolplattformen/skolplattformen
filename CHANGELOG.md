@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/kolplattformen/skolplattformen/compare/v1.19.1...v1.20.0) (2021-04-19)
+
+
+### Features
+
+* 🎸 Redesign of webview, simpler interface ([#287](https://github.com/kolplattformen/skolplattformen/issues/287)) ([5723b19](https://github.com/kolplattformen/skolplattformen/commit/5723b198f74ed5f5298bee21e4e2c8e4aef08401))
+
 ## [1.19.1](https://github.com/kolplattformen/skolplattformen/compare/v1.19.0...v1.19.1) (2021-04-18)
 
 
