@@ -18,6 +18,52 @@ import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 import RNRestart from 'react-native-restart'
 
+interface Language {
+  langCode: string
+  languageName: string
+  languageLocalName: string
+  active: boolean
+}
+
+const languages: Language[] = [
+  {
+    langCode: 'sv',
+    languageName: 'Swedish',
+    languageLocalName: 'svenska',
+    active: true,
+  },
+  {
+    langCode: 'en',
+    languageName: 'Engelska',
+    languageLocalName: 'english',
+    active: true,
+  },
+  {
+    langCode: 'pl',
+    languageName: 'Polish',
+    languageLocalName: 'polski',
+    active: true,
+  },
+  {
+    langCode: 'de',
+    languageName: 'German',
+    languageLocalName: 'Deutsch',
+    active: true,
+  },
+  {
+    langCode: 'ar',
+    languageName: 'Arabic',
+    languageLocalName: 'اَلْعَرَبِيَّةُ',
+    active: false,
+  },
+  {
+    langCode: 'so',
+    languageName: 'Somali',
+    languageLocalName: 'af-Soomaali',
+    active: false,
+  },
+]
+
 export const SetLanguage = () => {
   const navigation = useNavigation()
 
@@ -52,6 +98,8 @@ export const SetLanguage = () => {
     navigation.navigate('Login', { rand: Math.random() })
   }
 
+  const activeLanguages = languages.filter((language) => language.active)
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <SafeAreaViewContainer>
@@ -65,61 +113,20 @@ export const SetLanguage = () => {
         <View style={styles.content}>
           <Layout style={styles.container}>
             <View style={styles.languageList}>
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('sv')}
-              >
-                <Text style={styles.check}>{isSelected('sv') ? '✓' : ''}</Text>
-                <Text>Swedish</Text>
-                <Text style={styles.languageButtonSubtitle}>svenska</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('en')}
-              >
-                <Text style={styles.check}>{isSelected('en') ? '✓' : ''}</Text>
-                <Text>English</Text>
-                <Text style={styles.languageButtonSubtitle}>engelska</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('ar')}
-              >
-                <Text style={styles.check}>{isSelected('ar') ? '✓' : ''}</Text>
-                <Text>Arabic</Text>
-                <Text style={styles.languageButtonSubtitle}>
-                  (اَلْعَرَبِيَّةُ,
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('de')}
-              >
-                <Text style={styles.check}>{isSelected('de') ? '✓' : ''}</Text>
-                <Text>German</Text>
-                <Text style={styles.languageButtonSubtitle}>Deutsch</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('pl')}
-              >
-                <Text style={styles.check}>{isSelected('pl') ? '✓' : ''}</Text>
-                <Text>Polish</Text>
-                <Text style={styles.languageButtonSubtitle}>Polski</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('so')}
-              >
-                <Text style={styles.check}>{isSelected('so') ? '✓' : ''}</Text>
-                <Text>Somali</Text>
-                <Text style={styles.languageButtonSubtitle}>af-Soomaali</Text>
-              </TouchableOpacity>
+              {activeLanguages.map((language) => (
+                <TouchableOpacity
+                  style={styles.languageButton}
+                  onPress={() => setSelectedLanguage(language.langCode)}
+                >
+                  <Text style={styles.check}>
+                    {isSelected(language.langCode) ? '✓' : ''}
+                  </Text>
+                  <Text>{language.languageName}</Text>
+                  <Text style={styles.languageButtonSubtitle}>
+                    {language.languageLocalName}
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </View>
           </Layout>
 
