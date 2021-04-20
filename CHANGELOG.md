@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/kolplattformen/skolplattformen/compare/v1.22.0...v1.22.1) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Lade tillbaka utbildningsnivå under barnets namn ([#307](https://github.com/kolplattformen/skolplattformen/issues/307)) ([659cb36](https://github.com/kolplattformen/skolplattformen/commit/659cb36b09770e46db55175544ab246d470196b6))
+
 # [1.22.0](https://github.com/kolplattformen/skolplattformen/compare/v1.21.1...v1.22.0) (2021-04-20)
 
 
