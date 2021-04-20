@@ -6,14 +6,14 @@
     "upperSecondarySchool": "Gymnasium"
   },
   "abscense": {
-    "endTime": "End time",
+    "endTime": "Endzeit",
     "entireDay": "Ganzen Tag",
-    "invalidPersonalNumber": "Personal number invalid",
-    "newsTitle": "News item: {{header}} ({{published}})",
-    "personalNumberMissing": "Personal number missing",
+    "invalidPersonalNumber": "Personenkennzeichen ungültig",
+    "newsTitle": "Nachricht: {{header}} ({{published}})",
+    "personalNumberMissing": "Personenkennzeichen fehlt",
     "selectAbscenseEndTime": "Endzeit wählen",
-    "selectAbscenseStartTime": "Choose start time",
-    "startTime": "Start time",
+    "selectAbscenseStartTime": "Startzeit wählen",
+    "startTime": "Startzeit",
     "title": "Fernbleiben melden"
   },
   "auth": {
@@ -50,33 +50,33 @@
   },
   "calender": {
     "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben",
-    "saveToCalender": "Save to calender",
+    "saveToCalender": "Im Kalender speichern",
     "saveToCalenderError": "Etwas hat sich verlaufen",
     "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
     "showCalenderActions": "Kalender-Actions zeigen"
   },
   "children": {
-    "loadingErrorHeading": "Oops!",
-    "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
+    "loadingErrorHeading": "Hoppla!",
+    "loadingErrorInformationText": "Diese seite kann nicht geladen werden. Versuche es nochmal oder zeige den aktuellen Status an am skolplattformen.org.",
     "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert",
     "noKids_title": "Keine Kinder",
-    "title": "Your kids",
-    "tryAgain": "Try again",
-    "viewStatus": "View status on skolplattformen.org"
+    "title": "Deine Kinder",
+    "tryAgain": "Nochmal versuchen",
+    "viewStatus": "Status anzeigen an skolplattformen.org"
   },
   "general": {
-    "abort": "Abort",
-    "changeLanguage": "Change language",
-    "confirm": "Confirm",
-    "loading": "Loading...",
-    "logout": "Logout",
-    "send": "Send",
-    "settings": "Settings",
-    "socialSecurityNumber": "Personal identity number",
+    "abort": "Abbrechen",
+    "changeLanguage": "Sprache ändern",
+    "confirm": "Bestätigen",
+    "loading": "Wird geladen...",
+    "logout": "Ausloggen",
+    "send": "Senden",
+    "settings": "Einstellungen",
+    "socialSecurityNumber": "Personenkennzeichen",
     "title": "Öppna skolplattformen"
   },
   "language": {
-    "changeLanguage": "Sprache wechseln",
+    "changeLanguage": "Sprache ändern",
     "changeLanguageButton": "Speichern"
   },
   "menu": {
@@ -93,9 +93,9 @@
     "backToChild": "Zurück zu Kind",
     "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
     "notificationTitle": "Nachricht: {{header}} ({{published}})",
-    "published": "Published",
+    "published": "Erscheint",
     "title": "Nachricht von Skolplattformen",
-    "updated": "Updated"
+    "updated": "Aktualisiert"
   },
   "notifications": {
     "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
