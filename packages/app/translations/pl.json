@@ -2,18 +2,18 @@
   "abbrevations": {
     "compulsorySchool": "Szkoła podstawowa",
     "leisureTimeCentre": "Świetlica",
-    "preSchool": "Preschool",
+    "preSchool": "Przedszkole",
     "upperSecondarySchool": "Liceum"
   },
   "abscense": {
-    "endTime": "End time",
+    "endTime": "Czas zakończenia",
     "entireDay": "Cały dzień",
     "invalidPersonalNumber": "Personal number invalid",
-    "newsTitle": "News item: {{header}} ({{published}})",
+    "newsTitle": "Wiadomość: {{header}} ({{published}})",
     "personalNumberMissing": "Personal number missing",
     "selectAbscenseEndTime": "Wybierz czas zakończenia",
-    "selectAbscenseStartTime": "Choose start time",
-    "startTime": "Start time",
+    "selectAbscenseStartTime": "Wybierz czas rozpoczęcia",
+    "startTime": "Czas rozpoczęcia",
     "title": "Zgłoś nieobecność"
   },
   "auth": {
@@ -23,7 +23,7 @@
       "OpenOnThisDevice": "Otwórz BankID na tym urządzeniu",
       "Waiting": "Oczekiwanie på BankID..."
     },
-    "chooseLoginMethod": "Wymierz sposób logowania",
+    "chooseLoginMethod": "Wybierz sposób logowania",
     "loginAsTestUser": "Użytkownik testowy",
     "loginFailed": "Logowanie nie powiodło się, spróbuj ponownie!",
     "placeholder_SocialSecurityNumber": "Twój personnummer",
@@ -50,29 +50,29 @@
   },
   "calender": {
     "approveAccessToCalender": "Musisz zatwierdzić dostęp do kalendarza",
-    "saveToCalender": "Save to calender",
+    "saveToCalender": "Zapisz w kalendarzu",
     "saveToCalenderError": "Coś poszło nie tak",
     "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
-    "showCalenderActions": "Wyświetl działania kalendarza"
+    "showCalenderActions": "Pokaż opcje kalendarza"
   },
   "children": {
-    "loadingErrorHeading": "Oops!",
-    "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
-    "noKids_description": "Nie znaleziono dzieci zarejestrowanych na twój personnummer w mieście Sztokholm",
+    "loadingErrorHeading": "Oj!",
+    "loadingErrorInformationText": "Ładowanie strony nie powiodło się. Spróbuj ponownie, albo sprawdź status na skolplattformen.org.",
+    "noKids_description": "Nie znaleziono dzieci zarejestrowanych na Twój personnummer w mieście Sztokholm",
     "noKids_title": "Nie znaleziono dzieci",
     "title": "Twoje dzieci",
-    "tryAgain": "Try again",
-    "viewStatus": "View status on skolplattformen.org"
+    "tryAgain": "Spróbuj ponownie",
+    "viewStatus": "Sprawdź status na skolplattformen.org"
   },
   "general": {
-    "abort": "Abort",
-    "changeLanguage": "Change language",
-    "confirm": "Confirm",
-    "loading": "Loading...",
-    "logout": "Logout",
-    "send": "Send",
-    "settings": "Settings",
-    "socialSecurityNumber": "Personal identity number",
+    "abort": "Anuluj",
+    "changeLanguage": "Zmień język",
+    "confirm": "Potwierdź",
+    "loading": "Ładowanie...",
+    "logout": "Wyloguj",
+    "send": "Wyślij",
+    "settings": "Ustawienia",
+    "socialSecurityNumber": "Personnummer",
     "title": "Öppna skolplattformen"
   },
   "language": {
@@ -93,9 +93,9 @@
     "backToChild": "Z powrotem do dzieci",
     "noNewNewsItemsThisWeek": "Nie ma nowych wiadomości w tym tygodniu.",
     "notificationTitle": "Wiadomość: {{header}} ({{published}})",
-    "published": "Published",
+    "published": "Opublikowano",
     "title": "Wiadomość od szkoły",
-    "updated": "Updated"
+    "updated": "Uaktualniono"
   },
   "notifications": {
     "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
