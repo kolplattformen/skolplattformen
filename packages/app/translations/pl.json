@@ -1,103 +1,103 @@
 {
-  "abbrevations": {
-    "compulsorySchool": "Szkoła podstawowa",
-    "leisureTimeCentre": "Świetlica",
-    "preSchool": "Przedszkole",
-    "upperSecondarySchool": "Liceum"
-  },
-  "abscense": {
-    "endTime": "Czas zakończenia",
-    "entireDay": "Cały dzień",
-    "invalidPersonalNumber": "Błąd w personnumerze",
-    "newsTitle": "Wiadomość: {{header}} ({{published}})",
-    "personalNumberMissing": "Brak personnumeru",
-    "selectAbscenseEndTime": "Wybierz czas zakończenia",
-    "selectAbscenseStartTime": "Wybierz czas rozpoczęcia",
-    "startTime": "Czas rozpoczęcia",
-    "title": "Zgłoś nieobecność"
-  },
-  "auth": {
-    "bankid": {
-      "OpenManually": "Otwórz BankID manualnie",
-      "OpenOnAnotherDevice": "Otwórz BankID na innym urządzeniu",
-      "OpenOnThisDevice": "Otwórz BankID na tym urządzeniu",
-      "Waiting": "Oczekiwanie på BankID..."
+    "abbrevations": {
+        "compulsorySchool": "Szkoła podstawowa",
+        "leisureTimeCentre": "Świetlica",
+        "preSchool": "Przedszkole",
+        "upperSecondarySchool": "Liceum"
     },
-    "chooseLoginMethod": "Wybierz sposób logowania",
-    "loginAsTestUser": "Użytkownik testowy",
-    "loginFailed": "Logowanie nie powiodło się, spróbuj ponownie!",
-    "placeholder_SocialSecurityNumber": "Twój personnummer",
-    "subtitle": "{{word}} alternatywa",
-    "words": {
-      "agile": "Szybka",
-      "awaited": "Oczekiwana",
-      "better": "Lepsza",
-      "cheap": "Tania",
-      "cooler": "Odlotowa",
-      "enlightened": "Oświecona",
-      "fantastic": "Fantastyczna",
-      "fast": "Szybka",
-      "first": "Pierwsza",
-      "free": "Wolna",
-      "fun": "Śmieszna",
-      "homemade": "Domowa",
-      "imperfect": "Niedoskonała",
-      "open": "Otwarta",
-      "rebellious": "Buntownicza",
-      "simple": "Prosta",
-      "working": "Działająca"
+    "abscense": {
+        "endTime": "Czas zakończenia",
+        "entireDay": "Cały dzień",
+        "invalidPersonalNumber": "Błąd w personnumerze",
+        "newsTitle": "Wiadomość: {{header}} ({{published}})",
+        "personalNumberMissing": "Brak personnumeru",
+        "selectAbscenseEndTime": "Wybierz czas zakończenia",
+        "selectAbscenseStartTime": "Wybierz czas rozpoczęcia",
+        "startTime": "Czas rozpoczęcia",
+        "title": "Zgłoś nieobecność"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Otwórz BankID manualnie",
+            "OpenOnAnotherDevice": "Otwórz BankID na innym urządzeniu",
+            "OpenOnThisDevice": "Otwórz BankID na tym urządzeniu",
+            "Waiting": "Oczekiwanie på BankID..."
+        },
+        "chooseLoginMethod": "Wybierz sposób logowania",
+        "loginAsTestUser": "Użytkownik testowy",
+        "loginFailed": "Logowanie nie powiodło się, spróbuj ponownie!",
+        "placeholder_SocialSecurityNumber": "Twój personnummer",
+        "subtitle": "{{word}} alternatywa",
+        "words": {
+            "agile": "Szybka",
+            "awaited": "Oczekiwana",
+            "better": "Lepsza",
+            "cheap": "Tania",
+            "cooler": "Odlotowa",
+            "enlightened": "Oświecona",
+            "fantastic": "Fantastyczna",
+            "fast": "Szybka",
+            "first": "Pierwsza",
+            "free": "Wolna",
+            "fun": "Śmieszna",
+            "homemade": "Domowa",
+            "imperfect": "Niedoskonała",
+            "open": "Otwarta",
+            "rebellious": "Buntownicza",
+            "simple": "Prosta",
+            "working": "Działająca"
+        }
+    },
+    "calender": {
+        "approveAccessToCalender": "Musisz zatwierdzić dostęp do kalendarza",
+        "saveToCalender": "Zapisz w kalendarzu",
+        "saveToCalenderError": "Coś poszło nie tak",
+        "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
+        "showCalenderActions": "Pokaż opcje kalendarza"
+    },
+    "children": {
+        "loadingErrorHeading": "Oj!",
+        "loadingErrorInformationText": "Ładowanie strony nie powiodło się. Spróbuj ponownie, albo sprawdź status na skolplattformen.org.",
+        "noKids_description": "Nie znaleziono dzieci zarejestrowanych na Twój personnummer w mieście Sztokholm",
+        "noKids_title": "Nie znaleziono dzieci",
+        "title": "Twoje dzieci",
+        "tryAgain": "Spróbuj ponownie",
+        "viewStatus": "Sprawdź status na skolplattformen.org"
+    },
+    "general": {
+        "abort": "Anuluj",
+        "changeLanguage": "Zmień język",
+        "confirm": "Potwierdź",
+        "loading": "Ładowanie...",
+        "logout": "Wyloguj",
+        "send": "Wyślij",
+        "settings": "Ustawienia",
+        "socialSecurityNumber": "Personnummer",
+        "title": "Öppna skolplattformen"
+    },
+    "language": {
+        "changeLanguage": "Zmień język",
+        "changeLanguageButton": "Zachowaj"
+    },
+    "menu": {
+        "emptyHeadline": "Brak informacji",
+        "emptyText": "Nie znaleziono jadłospisu na ten tydzień"
+    },
+    "navigation": {
+        "calender": "Kalendarz",
+        "menu": "Jadłospis",
+        "news": "Wiadomości",
+        "notifications": "Powiadomienia"
+    },
+    "news": {
+        "backToChild": "Z powrotem do dzieci",
+        "noNewNewsItemsThisWeek": "Nie ma nowych wiadomości w tym tygodniu.",
+        "notificationTitle": "Wiadomość: {{header}} ({{published}})",
+        "published": "Opublikowano",
+        "title": "Wiadomość od szkoły",
+        "updated": "Uaktualniono"
+    },
+    "notifications": {
+        "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
     }
-  },
-  "calender": {
-    "approveAccessToCalender": "Musisz zatwierdzić dostęp do kalendarza",
-    "saveToCalender": "Zapisz w kalendarzu",
-    "saveToCalenderError": "Coś poszło nie tak",
-    "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
-    "showCalenderActions": "Pokaż opcje kalendarza"
-  },
-  "children": {
-    "loadingErrorHeading": "Oj!",
-    "loadingErrorInformationText": "Ładowanie strony nie powiodło się. Spróbuj ponownie, albo sprawdź status na skolplattformen.org.",
-    "noKids_description": "Nie znaleziono dzieci zarejestrowanych na Twój personnummer w mieście Sztokholm",
-    "noKids_title": "Nie znaleziono dzieci",
-    "title": "Twoje dzieci",
-    "tryAgain": "Spróbuj ponownie",
-    "viewStatus": "Sprawdź status na skolplattformen.org"
-  },
-  "general": {
-    "abort": "Anuluj",
-    "changeLanguage": "Zmień język",
-    "confirm": "Potwierdź",
-    "loading": "Ładowanie...",
-    "logout": "Wyloguj",
-    "send": "Wyślij",
-    "settings": "Ustawienia",
-    "socialSecurityNumber": "Personnummer",
-    "title": "Öppna skolplattformen"
-  },
-  "language": {
-    "changeLanguage": "Zmień język",
-    "changeLanguageButton": "Zachowaj"
-  },
-  "menu": {
-    "emptyHeadline": "Brak informacji",
-    "emptyText": "Nie znaleziono jadłospisu na ten tydzień"
-  },
-  "navigation": {
-    "calender": "Kalendarz",
-    "menu": "Jadłospis",
-    "news": "Wiadomości",
-    "notifications": "Powiadomienia"
-  },
-  "news": {
-    "backToChild": "Z powrotem do dzieci",
-    "noNewNewsItemsThisWeek": "Nie ma nowych wiadomości w tym tygodniu.",
-    "notificationTitle": "Wiadomość: {{header}} ({{published}})",
-    "published": "Opublikowano",
-    "title": "Wiadomość od szkoły",
-    "updated": "Uaktualniono"
-  },
-  "notifications": {
-    "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
-  }
 }
