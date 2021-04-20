@@ -120,6 +120,64 @@ test('renders child in high school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
+})
+
+test('renders multiple children', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [
+      {
+        name: 'Storasyster Testsson',
+        status: 'G',
+      },
+      {
+        name: 'Lillebror Testsson',
+        status: 'GR',
+      },
+    ],
+    status: 'loaded',
+  }))
+
+  const screen = setup()
+
+  expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
+
+  expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
+  expect(screen.getByText('Grundskola')).toBeTruthy()
+})
+
+test('removes any parenthesis from name', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [
+      {
+        name: 'Test Testsson (elev)',
+        status: 'G',
+      },
+    ],
+    status: 'loaded',
+  }))
+
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+})
+
+test('handles multiple statuses for a child', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [
+      {
+        name: 'Test Testsson(elev)',
+        status: 'G;GR;F',
+      },
+    ],
+    status: 'loaded',
+  }))
+
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola, Grundskola, Fritids')).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {
