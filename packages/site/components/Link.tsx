@@ -7,7 +7,7 @@ interface LinkInternalProps {
   href: string
 }
 
-const Internal = ({ href, children }: LinkInternalProps) => {
+const Internal = ({ href, children }: LinkInternalProps): JSX.Element => {
   return (
     <Link href={href}>
       <a className="text-indigo-800">{children}</a>
@@ -27,7 +27,7 @@ const External = ({
   href,
   children,
   target = '_blank',
-}: LinkExternalProps) => {
+}: LinkExternalProps): JSX.Element => {
   return (
     <a
       className={classnames('text-indigo-800', className)}
