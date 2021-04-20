@@ -30,50 +30,53 @@ export const events: TimelineEvent[] = [
       <p>
         Svenska medier rapporterar vidare om de säkerhetsluckor vi hittat och
         rapporterat i Stockholms stads it-system. Vi fokuserar på att utveckla
-        ny funktionalitet – som flera språkval och överskådligt schema – för att öka tillgängligheten så att fler föräldrar lättare kan hitta
-        information om deras egna barns skolgång. Utbildningsdirektör Lena Holmdahl ber oss avpublicera vår egen kod, släpper förvaltningens juridiska utredning och gör en polisanmälan (mer om detta nedan och i vår QA).
+        ny funktionalitet – som flera språkval och överskådligt schema – för att
+        öka tillgängligheten så att fler föräldrar lättare kan hitta information
+        om deras egna barns skolgång. Utbildningsdirektör Lena Holmdahl ber oss
+        avpublicera vår egen kod, släpper förvaltningens juridiska utredning och
+        gör en polisanmälan (mer om detta nedan och i vår{' '}
+        <Link.Internal href="/qa">QA</Link.Internal>).
       </p>
     ),
     date: '2021-04-01',
-    importantDates:
+    importantDates: [
       {
         date: '2021-04-16',
         description:
-          'Utbildningsdirektör Lena Holmdahl polisanmnäler appen och privatpersonerna bakom Öppna Skolplattformen',
+          'Utbildningsdirektör Lena Holmdahl polisanmäler appen och privatpersonerna bakom Öppna Skolplattformen',
       },
-    {
+      {
         date: '2021-04-15',
         description:
           'Utbildningsförvaltningen publicerar sin juridiska utredning',
-     link:
+        link:
           'https://start.stockholm/aktuellt/nyheter/2021/04/juridisk-utredning-om-betalapp-sakerhet-gar-fore-it-utveckling/',
       },
+      {
         date: '2021-04-15',
         description:
-          'Per Axbom publicerar texten 'Öppna Skolplattformen synliggör Stockholms stads upprepade blunder',
-     link:
-          'https://axbom.se/oppna-skolplattformen-stockholm/',
+          'Per Axbom publicerar texten Öppna Skolplattformen synliggör Stockholms stads upprepade blunder',
+        link: 'https://axbom.se/oppna-skolplattformen-stockholm/',
       },
-  {
+      {
         date: '2021-04-06',
         description:
           'Lena Holmdahl skriver i ett mail "Jag vill också att ni slutar delar med er av den kod som härrör till staden API:er och tar bort den från de plattformar (ex. Github) där ni har publicerat den.',
       },
-  {
+      {
         date: '2021-04-01',
         description:
           'Vi besöker Utbildningsförvaltningen och blir, trots tryckfrihetsförordningens omedelbarhetskrav, nekade att få se offentliga handlingar.',
       },
-
     ],
     media: [
       {
         date: '2021-04-16',
         description:
-          'Öppna Skolplattformen polisanmäls av Stockholms stad' (Sweclockers)',
+          'Öppna Skolplattformen polisanmäls av Stockholms stad (Sweclockers)',
         link:
-          'https://www.sweclockers.com/nyhet/31775-oppna-skolplattformen-polisanmals-av-stockholms-stad},
-         },
+          'https://www.sweclockers.com/nyhet/31775-oppna-skolplattformen-polisanmals-av-stockholms-stad',
+      },
       {
         date: '2021-04-16',
         description:
