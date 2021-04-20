@@ -1,48 +1,13 @@
-# How to help out with translating Öppna Skolplattformen
+# How to help out with translating Öppna Skolplattformen using Weblate
 
-## Getting started
-You need to create a [Github](https://github.com/join) account prior to doing any changes to the translation
+We are using Weblate to translate our app. You can find the project [https://hosted.weblate.org/projects/skolplattformen/app-translation/](here).
+
+![Translation statues](https://hosted.weblate.org/widgets/skolplattformen/-/app-translation/multi-auto.svg)
 
 Knowledge regarding the ISO-638-1 code that is for the languages that you know. Read here on [https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes](Wikipedia).
 
+## OSS License
 
-## Edit a already added language
+Weblate is sponsering this project and we would be very happy to see you donate to them! <3
 
-We have some languages on the app, and if you wanna makes changes, please go through the following steps.
-
-### Locate the language that you want to edit by looking at the files above
-
-![Screenshot on how to add a new language file on Github](./docs/edit_file.png)
-
-### Save your changes
-
-Then commit and save your changes when you are done.
-
-## Add a new language
-
-If you cant find the language you want to translate to, please go through the following steps
-
-### Create a file in Github
-
-![Screenshot on how to add a new language file on Github](./docs/add_file.png)
-
-### Name the file
-
-![Screenshot on how to name a translation file on Github](./docs/name_file.png)
-
-
-Please locate your language code (639-1) on [https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes](Wikipedia)
-
-Examples
-
-```
-German: de.json   
-Finnish: fi.json
-```
-
-### Adding the translation
-
-Start by copying the contents either 
-[swedish](https://github.com/kolplattformen/skolplattformen/blob/feature/add-langugages/packages/app/translations/sv.json), or 
-[english](https://github.com/kolplattformen/skolplattformen/blob/feature/add-langugages/packages/app/translations/sv.json) base (or the one that you are most comfortable with) and copy paste the content into the new language that you have created.
-
+[https://weblate.org/sv/contribute/](Contribute here)
