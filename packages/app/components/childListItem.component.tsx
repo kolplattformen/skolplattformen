@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
-  useClassmates,
   useMenu,
   useNews,
   useNotifications,
@@ -43,7 +42,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     child
   )
   const { data: news, status: newsStatus } = useNews(child)
-  const { data: classmates } = useClassmates(child)
   const { data: calendar, status: calendarStatus } = useCalendar(child)
   const { data: schedule } = useSchedule(
     child,
@@ -75,35 +73,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const displayDate = (date: moment.MomentInput) => {
     return moment(date).fromNow()
   }
-
-  const getClassName = () => {
-    // hack: we can find the class name (ex. 8C) from the classmates. let's pick the first one and select theirs class
-    if (classmates.length > 0) {
-      return classmates[0].className
-    }
-
-    // Taken from Skolverket
-    // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
-    const abbrevations = {
-      G: translate('abbrevations.upperSecondarySchool'),
-      GR: translate('abbrevations.compulsorySchool'),
-      F: translate('abbrevations.leisureTimeCentre'),
-      FS: translate('abbrevations.preSchool'),
-    }
-
-    return child.status
-      ? child.status
-          .split(';')
-          .map((status) => {
-            const statusAsAbbreviation = status as keyof typeof abbrevations
-
-            return abbrevations[statusAsAbbreviation] || status
-          })
-          .join(', ')
-      : null
-  }
-
-  const className = getClassName()
 
   const Footer = () => (
     <View style={styles.itemFooter}>
@@ -180,7 +149,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           </View>
           <View style={styles.cardHeaderText}>
             <Text category="h6">{studentName(child.name)}</Text>
-            {className ? <Text category="s1">{className}</Text> : null}
           </View>
         </View>
       )}

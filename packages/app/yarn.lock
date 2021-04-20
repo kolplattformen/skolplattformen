@@ -1487,11 +1487,12 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/@skolplattformen/api-hooks/-/api-hooks-2.1.0.tgz"
-  integrity sha512-a5DEUwlZjqJE5qfTyefjUYcKSwBv0CHnD6g5pvHU8KSLRNVVBpcUpy10g5qnObHxhjpbPLdRLxMbnHpYfrb69Q==
+"@skolplattformen/api-hooks@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-2.1.1.tgz#e9d07617b97661c77dba90ef9a8f73be9b5b6b42"
+  integrity sha512-62rgv4yxBwYr5OjzRxfkz1pZQ6nvnVoxqqokVzz+Yzx/1VoxkFBCyAXTE5bfMWGn4qGNNEOdYJgMA5lCvlmB1w==
   dependencies:
+    luxon "^1.26.0"
     react-redux "^7.2.3"
     redux "^4.0.5"
 
@@ -6112,9 +6113,9 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-luxon@^1.25.0:
+luxon@^1.25.0, luxon@^1.26.0:
   version "1.26.0"
-  resolved "https://registry.npmjs.org/luxon/-/luxon-1.26.0.tgz"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.26.0.tgz#d3692361fda51473948252061d0f8561df02b578"
   integrity sha512-+V5QIQ5f6CDXQpWNICELwjwuHdqeJM1UenlZWx5ujcRMc9venvluCjFb4t5NYLhb6IhkbMVOxzVuOqkgMxee2A==
 
 make-dir@^2.0.0, make-dir@^2.1.0:
