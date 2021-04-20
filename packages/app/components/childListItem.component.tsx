@@ -74,6 +74,30 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     return moment(date).fromNow()
   }
 
+  const getClassName = () => {
+    // Taken from Skolverket
+    // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
+    const abbrevations = {
+      G: translate('abbrevations.upperSecondarySchool'),
+      GR: translate('abbrevations.compulsorySchool'),
+      F: translate('abbrevations.leisureTimeCentre'),
+      FS: translate('abbrevations.preSchool'),
+    }
+
+    return child.status
+      ? child.status
+          .split(';')
+          .map((status) => {
+            const statusAsAbbreviation = status as keyof typeof abbrevations
+
+            return abbrevations[statusAsAbbreviation] || status
+          })
+          .join(', ')
+      : null
+  }
+
+  const className = getClassName()
+
   const Footer = () => (
     <View style={styles.itemFooter}>
       <Button
@@ -149,6 +173,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           </View>
           <View style={styles.cardHeaderText}>
             <Text category="h6">{studentName(child.name)}</Text>
+            {className ? <Text category="s1">{className}</Text> : null}
           </View>
         </View>
       )}
