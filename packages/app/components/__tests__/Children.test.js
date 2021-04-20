@@ -2,7 +2,6 @@ import {
   useApi,
   useChildList,
   useCalendar,
-  useClassmates,
   useNews,
   useNotifications,
   useSchedule,
@@ -33,7 +32,6 @@ beforeEach(() => {
   useCalendar.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNotifications.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
-  useClassmates.mockReturnValueOnce({ data: [], status: 'loaded' })
   useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
   useMenu.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNavigation.mockReturnValue({ navigate: jest.fn() })
@@ -90,7 +88,6 @@ test('renders child in preschool', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Fritids')).toBeTruthy()
 })
 
 test('renders child in elementary school', () => {
@@ -107,7 +104,6 @@ test('renders child in elementary school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskola')).toBeTruthy()
 })
 
 test('renders child in high school', () => {
@@ -124,91 +120,6 @@ test('renders child in high school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
-})
-
-test('renders multiple children', () => {
-  useChildList.mockImplementationOnce(() => ({
-    data: [
-      {
-        name: 'Storasyster Testsson',
-        status: 'G',
-      },
-      {
-        name: 'Lillebror Testsson',
-        status: 'GR',
-      },
-    ],
-    status: 'loaded',
-  }))
-
-  const screen = setup()
-
-  expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
-
-  expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskola')).toBeTruthy()
-})
-
-test('displays class name if child has class mates', () => {
-  useClassmates.mockReset()
-  useClassmates.mockReturnValueOnce({
-    data: [
-      {
-        className: '8C',
-      },
-    ],
-    status: 'loaded',
-  })
-  useChildList.mockImplementationOnce(() => ({
-    data: [
-      {
-        name: 'Test Testsson',
-        status: 'G',
-      },
-    ],
-    status: 'loaded',
-  }))
-
-  const screen = setup()
-
-  expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('8C')).toBeTruthy()
-  expect(screen.queryByText('Gymnasieskola')).toBeFalsy()
-})
-
-test('removes any parenthesis from name', () => {
-  useChildList.mockImplementationOnce(() => ({
-    data: [
-      {
-        name: 'Test Testsson (elev)',
-        status: 'G',
-      },
-    ],
-    status: 'loaded',
-  }))
-
-  const screen = setup()
-
-  expect(screen.getByText('Test Testsson')).toBeTruthy()
-})
-
-test('handles multiple statuses for a child', () => {
-  useChildList.mockImplementationOnce(() => ({
-    data: [
-      {
-        name: 'Test Testsson(elev)',
-        status: 'G;GR;F',
-      },
-    ],
-    status: 'loaded',
-  }))
-
-  const screen = setup()
-
-  expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasieskola, Grundskola, Fritids')).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {
