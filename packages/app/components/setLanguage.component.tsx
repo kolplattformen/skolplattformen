@@ -34,7 +34,7 @@ const languages: Language[] = [
   },
   {
     langCode: 'en',
-    languageName: 'Engelska',
+    languageName: 'English',
     languageLocalName: 'english',
     active: true,
   },
@@ -42,7 +42,7 @@ const languages: Language[] = [
     langCode: 'pl',
     languageName: 'Polish',
     languageLocalName: 'polski',
-    active: false,
+    active: true,
   },
   {
     langCode: 'de',
