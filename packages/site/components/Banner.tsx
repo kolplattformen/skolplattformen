@@ -61,9 +61,9 @@ const Banner = () => {
                 />
               </div>
             </div>
-            <H1 >{intl.formatMessage({ id: 'general.title' })}</H1>
+            <H1>{intl.formatMessage({ id: 'general.title' })}</H1>
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
-            <p className="py-4 flex items-center sm:flex-row space-x-2 lg:space-x-4">
+            <p className="flex items-center py-4 sm:flex-row space-x-2 lg:space-x-4">
               <Link.External
                 className="inline-block"
                 href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
@@ -101,7 +101,7 @@ const Banner = () => {
               </NextLink>
             </p>
           </div>
-          <div className="flex justify-center motion-safe:animate-bounce-slow pr-0 md:pr-4 xl:pr-0">
+          <div className="flex justify-center pr-0 motion-safe:animate-bounce-slow md:pr-4 xl:pr-0">
             <Image src={phone} width="350" height="712" alt="" />
           </div>
         </div>
