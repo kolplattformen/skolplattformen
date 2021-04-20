@@ -11,11 +11,58 @@ import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
-import { LanguageService } from '../services/languageService'
+import { isRTL, LanguageService } from '../services/languageService'
 import { Colors, Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import RNRestart from 'react-native-restart'
+
+interface Language {
+  langCode: string
+  languageName: string
+  languageLocalName: string
+  active: boolean
+}
+
+const languages: Language[] = [
+  {
+    langCode: 'sv',
+    languageName: 'Swedish',
+    languageLocalName: 'svenska',
+    active: true,
+  },
+  {
+    langCode: 'en',
+    languageName: 'Engelska',
+    languageLocalName: 'english',
+    active: true,
+  },
+  {
+    langCode: 'pl',
+    languageName: 'Polish',
+    languageLocalName: 'polski',
+    active: false,
+  },
+  {
+    langCode: 'de',
+    languageName: 'German',
+    languageLocalName: 'Deutsch',
+    active: false,
+  },
+  {
+    langCode: 'ar',
+    languageName: 'Arabic',
+    languageLocalName: 'اَلْعَرَبِيَّةُ',
+    active: false,
+  },
+  {
+    langCode: 'so',
+    languageName: 'Somali',
+    languageLocalName: 'af-Soomaali',
+    active: false,
+  },
+]
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
@@ -27,9 +74,19 @@ export const SetLanguage = () => {
   )
   const { setLanguageCode } = useLanguage()
 
+  const shouldRestart = () => {
+    return isRTL(selectedLanguage) || isRTL(currentLanguage)
+  }
+
   const saveLanguage = () => {
     setLanguageCode({ languageCode: selectedLanguage })
-    goBack()
+
+    // Checks if rtl mode has changed, then we need to restart the app
+    if (shouldRestart()) {
+      RNRestart.Restart()
+    } else {
+      goBack()
+    }
   }
 
   const isSelected = (lang: string): boolean => {
@@ -40,6 +97,8 @@ export const SetLanguage = () => {
     // Need to reset the view so it updates the language
     navigation.navigate('Login', { rand: Math.random() })
   }
+
+  const activeLanguages = languages.filter((language) => language.active)
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -54,23 +113,20 @@ export const SetLanguage = () => {
         <View style={styles.content}>
           <Layout style={styles.container}>
             <View style={styles.languageList}>
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('sv')}
-              >
-                <Text style={styles.check}>{isSelected('sv') ? '✓' : ''}</Text>
-                <Text>Swedish</Text>
-                <Text style={styles.languageButtonSubtitle}>svenska</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.languageButton}
-                onPress={() => setSelectedLanguage('en')}
-              >
-                <Text style={styles.check}>{isSelected('en') ? '✓' : ''}</Text>
-                <Text>English</Text>
-                <Text style={styles.languageButtonSubtitle}>engelska</Text>
-              </TouchableOpacity>
+              {activeLanguages.map((language) => (
+                <TouchableOpacity
+                  style={styles.languageButton}
+                  onPress={() => setSelectedLanguage(language.langCode)}
+                >
+                  <Text style={styles.check}>
+                    {isSelected(language.langCode) ? '✓' : ''}
+                  </Text>
+                  <Text>{language.languageName}</Text>
+                  <Text style={styles.languageButtonSubtitle}>
+                    {language.languageLocalName}
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </View>
           </Layout>
 

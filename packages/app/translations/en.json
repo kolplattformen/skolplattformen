@@ -1,101 +1,103 @@
 {
-  "general": {
-    "title": "Öppna skolplattformen",
-    "loading": "Loading...",
-    "logout": "Logout",
-    "abort": "Abort",
-    "settings": "Settings",
-    "send": "Send",
-    "confirm": "Confirm",
-    "socialSecurityNumber": "Personal identity number",
-    "changeLanguage": "Change language"
+  "abbrevations": {
+    "compulsorySchool": "Compulsory school",
+    "leisureTimeCentre": "Leisure-time centre",
+    "preSchool": "Preschool",
+    "upperSecondarySchool": "Upper secondary school"
   },
-  "navigation": {
-    "news": "News",
-    "notifications": "Notifications",
-    "calender": "Calender",
-    "menu": "Menu"
+  "abscense": {
+    "endTime": "End time",
+    "entireDay": "Whole day",
+    "invalidPersonalNumber": "Personal number invalid",
+    "newsTitle": "News item: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
+    "selectAbscenseEndTime": "Choose end time",
+    "selectAbscenseStartTime": "Choose start time",
+    "startTime": "Start time",
+    "title": "Report absence"
   },
   "auth": {
     "bankid": {
+      "OpenManually": "Waiting for BankID...",
       "OpenOnAnotherDevice": "Open BankID on another device",
       "OpenOnThisDevice": "Open BankID on this device",
-      "Waiting": "Waiting for BankID...",
-      "OpenManually": "Waiting for BankID..."
+      "Waiting": "Waiting for BankID..."
     },
-    "subtitle": "The {{word}} alternative",
-    "personalNumber": "Personal identity number",
-    "loginAsTestUser": "Login as test user",
-    "placeholder_SocialSecurityNumber": "Your personal identity number",
     "chooseLoginMethod": "Choose login method",
+    "loginAsTestUser": "Login as test user",
     "loginFailed": "Login failed, please try again!",
+    "placeholder_SocialSecurityNumber": "Your personal identity number",
+    "subtitle": "The {{word}} alternative",
     "words": {
       "agile": "agile",
-      "cheap": "cheap",
-      "better": "better",
-      "cooler": "cooler",
       "awaited": "awaited",
-      "simple": "simple",
+      "better": "better",
+      "cheap": "cheap",
+      "cooler": "cooler",
+      "enlightened": "enlightened",
       "fantastic": "fantastic",
-      "free": "free",
-      "working": "working",
+      "fast": "fast",
       "first": "first",
+      "free": "free",
+      "fun": "fun",
       "homemade": "homemade",
       "imperfect": "imperfect",
+      "open": "open",
       "rebellious": "rebellious",
-      "fun": "fun",
-      "fast": "fast",
-      "enlightened": "enlightened",
-      "open": "open"
+      "simple": "simple",
+      "working": "working"
     }
   },
+  "calender": {
+    "approveAccessToCalender": "You have to approve access to your calender",
+    "saveToCalender": "Save to calender",
+    "saveToCalenderError": "Something went wrong",
+    "saveToCalenderSuccess": "✔️ Saved to calender",
+    "showCalenderActions": "Show calender actions"
+  },
   "children": {
-    "title": "Your children",
-    "noKids_title": "No kids",
-    "noKids_description": "There are no kids registered in the City of Stockholm for your personal identity number",
     "loadingErrorHeading": "Oops!",
     "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
+    "noKids_description": "There are no kids registered in the City of Stockholm for your personal identity number",
+    "noKids_title": "No kids",
+    "title": "Your kids",
     "tryAgain": "Try again",
     "viewStatus": "View status on skolplattformen.org"
   },
-  "abscense": {
-    "title": "Report absence",
-    "selectAbscenseStartTime": "Choose start time",
-    "selectAbscenseEndTime": "Choose end time",
-    "entireDay": "Whole day",
-    "newsTitle": "News item: {{header}} ({{published}})",
-    "personalNumberMissing": "Personal number missing",
-    "invalidPersonalNumber":"Personal number invalid",
-    "startTime":"Start time",
-    "endTime":"End time"
+  "general": {
+    "abort": "Abort",
+    "changeLanguage": "Change language",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "send": "Send",
+    "settings": "Settings",
+    "socialSecurityNumber": "Personal identity number",
+    "title": "Öppna skolplattformen"
   },
-  "news": {
-    "title": "News from Skolplattformen",
-    "backToChild": "Back to child",
-    "noNewNewsItemsThisWeek": "No new news items this week.",
-    "notificationTitle": "News: {{header}} ({{published}})"
-  },
-  "notifications": {
-    "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
-  },
-  "calender": {
-    "showCalenderActions": "Show calender actions",
-    "saveToCalenderSuccess": "✔️ Saved to calender",
-    "saveToCalenderError": "Something went wrong",
-    "approveAccessToCalender": "You have to approve access to your calender"
+  "language": {
+    "changeLanguage": "Change language",
+    "changeLanguageButton": "Save"
   },
   "menu": {
     "emptyHeadline": "The menu looks kinda empty",
     "emptyText": "Couldn't find anything for this week"
   },
-  "abbrevations": {
-    "upperSecondarySchool": "Upper secondary school",
-    "preSchool": "Preschool",
-    "compulsorySchool": "Compulsory school",
-    "leisureTimeCentre": "Leisure-time centre"
+  "navigation": {
+    "calender": "Calendar",
+    "menu": "Menu",
+    "news": "News",
+    "notifications": "Notifications"
   },
-  "language": {
-    "changeLanguage": "Change language",
-    "changeLanguageButton": "Save"
+  "news": {
+    "backToChild": "Back to child",
+    "noNewNewsItemsThisWeek": "No new news items this week.",
+    "notificationTitle": "News: {{header}} ({{published}})",
+    "published": "Published",
+    "title": "News from Skolplattformen",
+    "updated": "Updated"
+  },
+  "notifications": {
+    "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
   }
 }

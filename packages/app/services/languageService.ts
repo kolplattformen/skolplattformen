@@ -1,6 +1,10 @@
 import { I18nManager } from 'react-native'
 import i18n from 'i18n-js'
 import moment from 'moment'
+import 'moment/locale/ar'
+import 'moment/locale/de'
+import 'moment/locale/pl'
+import 'moment/locale/sv'
 
 const changeListeners: Record<string, any> = {}
 
@@ -9,11 +13,21 @@ let allString: Record<string, any> = {}
 let Strings: Record<string, any> = {}
 let languageCode: string
 
-/*
-const isRTL: { [key: string]: boolean } = {
+const rtlList: { [key: string]: boolean } = {
   en: false,
+  de: false,
+  pl: false,
   sv: false,
-}*/
+  so: false,
+  ar: true,
+}
+
+export const isRTL = (langCode: string) => {
+  if (!rtlList.hasOwnProperty(langCode)) {
+    return false
+  }
+  return rtlList[langCode]
+}
 
 export const LanguageService = {
   get: () => Strings,
@@ -25,9 +39,10 @@ export const LanguageService = {
     if (langCode) {
       i18n.translations = { [langCode]: Strings }
       i18n.locale = langCode
+      i18n.fallbacks = true
+      I18nManager.forceRTL(isRTL(langCode))
     }
 
-    I18nManager.forceRTL(false)
     moment.locale(langCode)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
