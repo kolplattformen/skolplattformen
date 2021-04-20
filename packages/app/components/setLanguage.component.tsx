@@ -42,13 +42,13 @@ const languages: Language[] = [
     langCode: 'pl',
     languageName: 'Polish',
     languageLocalName: 'polski',
-    active: true,
+    active: false,
   },
   {
     langCode: 'de',
     languageName: 'German',
     languageLocalName: 'Deutsch',
-    active: true,
+    active: false,
   },
   {
     langCode: 'ar',
