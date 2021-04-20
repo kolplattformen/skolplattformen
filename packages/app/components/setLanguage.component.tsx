@@ -48,7 +48,7 @@ const languages: Language[] = [
     langCode: 'de',
     languageName: 'German',
     languageLocalName: 'Deutsch',
-    active: false,
+    active: true,
   },
   {
     langCode: 'ar',
