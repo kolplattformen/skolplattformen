@@ -2,6 +2,8 @@
 
 We are using Weblate to translate our app. You can find the project [here](https://hosted.weblate.org/projects/skolplattformen/app-translation/).
 
+![Image of the weblate project](https://hosted.weblate.org/widgets/skolplattformen/-/app-translation/open-graph.png)
+
 ![Translation statues](https://hosted.weblate.org/widgets/skolplattformen/-/app-translation/multi-auto.svg)
 
 ## OSS License
