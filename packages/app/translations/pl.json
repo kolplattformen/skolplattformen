@@ -8,9 +8,9 @@
   "abscense": {
     "endTime": "Czas zakończenia",
     "entireDay": "Cały dzień",
-    "invalidPersonalNumber": "Personal number invalid",
+    "invalidPersonalNumber": "Błąd w personnumerze",
     "newsTitle": "Wiadomość: {{header}} ({{published}})",
-    "personalNumberMissing": "Personal number missing",
+    "personalNumberMissing": "Brank personnumeru",
     "selectAbscenseEndTime": "Wybierz czas zakończenia",
     "selectAbscenseStartTime": "Wybierz czas rozpoczęcia",
     "startTime": "Czas rozpoczęcia",
