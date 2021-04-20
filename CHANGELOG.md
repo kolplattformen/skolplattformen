@@ -1,3 +1,15 @@
+# [1.21.0](https://github.com/kolplattformen/skolplattformen/compare/v1.20.1...v1.21.0) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 added import of moment locales for available languages ([e7c0d55](https://github.com/kolplattformen/skolplattformen/commit/e7c0d5568bec28e0745752d5205b576180ea08fb))
+
+
+### Features
+
+* 🎸 Added Polish language ([53f6d4c](https://github.com/kolplattformen/skolplattformen/commit/53f6d4c4f0559c7a39a419ce49108d9ca7c1137b))
+
 ## [1.20.1](https://github.com/kolplattformen/skolplattformen/compare/v1.20.0...v1.20.1) (2021-04-19)
 
 
