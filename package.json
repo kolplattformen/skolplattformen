@@ -19,6 +19,7 @@
     "publish-package": "npm publish --access public"
   },
   "dependencies": {
+    "luxon": "^1.26.0",
     "react-redux": "^7.2.3",
     "redux": "^4.0.5"
   },
@@ -35,6 +36,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/react-hooks": "^5.1.1",
     "@types/jest": "^26.0.22",
+    "@types/luxon": "^1.26.4",
     "@types/react": "^16.14.3",
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.21.0",

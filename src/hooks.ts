@@ -14,6 +14,7 @@ import {
   TimetableEntry,
   User,
 } from '@skolplattformen/embedded-api'
+import { DateTime } from 'luxon'
 import {
   ApiCall,
   EntityHookResult,
@@ -175,7 +176,7 @@ export const useSchedule = (child: Child, from: string, to: string) => hook<Sche
   `schedule_${child.id}_${from}_${to}`,
   [],
   (s) => s.schedule,
-  (api) => () => api.getSchedule(child, from, to),
+  (api) => () => api.getSchedule(child, DateTime.fromISO(from), DateTime.fromISO(to)),
 )
 
 export const useTimetable = (child: Skola24Child, week: number, year: number) => hook<TimetableEntry[]>(
