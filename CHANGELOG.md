@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/kolplattformen/skolplattformen/compare/v1.21.1...v1.22.0) (2021-04-20)
+
+
+### Features
+
+* 🎸 Added Polish ([bb35884](https://github.com/kolplattformen/skolplattformen/commit/bb35884651d7b9af5959b10c3d0ed778e9f6d017))
+
 ## [1.21.1](https://github.com/kolplattformen/skolplattformen/compare/v1.21.0...v1.21.1) (2021-04-20)
 
 
