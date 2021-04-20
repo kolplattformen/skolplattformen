@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/kolplattformen/skolplattformen/compare/v1.21.0...v1.21.1) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Adress call turned off everywhere ([b95c9e7](https://github.com/kolplattformen/skolplattformen/commit/b95c9e77cf9adb4d1521cff1af992dba34325641))
+
 # [1.21.0](https://github.com/kolplattformen/skolplattformen/compare/v1.20.1...v1.21.0) (2021-04-20)
 
 
