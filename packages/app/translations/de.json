@@ -1,103 +1,103 @@
 {
-  "abbrevations": {
-    "compulsorySchool": "Grundschule",
-    "leisureTimeCentre": "Hort",
-    "preSchool": "Vorschule",
-    "upperSecondarySchool": "Gymnasium"
-  },
-  "abscense": {
-    "endTime": "Endzeit",
-    "entireDay": "Ganzen Tag",
-    "invalidPersonalNumber": "Personenkennzeichen ungültig",
-    "newsTitle": "Nachricht: {{header}} ({{published}})",
-    "personalNumberMissing": "Personenkennzeichen fehlt",
-    "selectAbscenseEndTime": "Endzeit wählen",
-    "selectAbscenseStartTime": "Startzeit wählen",
-    "startTime": "Startzeit",
-    "title": "Fernbleiben melden"
-  },
-  "auth": {
-    "bankid": {
-      "OpenManually": "BankID manuell öffnen",
-      "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
-      "OpenOnThisDevice": "BankID auf dieses Gerät benutzen",
-      "Waiting": "Wartet auf BankID..."
+    "abbrevations": {
+        "compulsorySchool": "Grundschule",
+        "leisureTimeCentre": "Hort",
+        "preSchool": "Vorschule",
+        "upperSecondarySchool": "Gymnasium"
     },
-    "chooseLoginMethod": "Anmeldemethode wählen",
-    "loginAsTestUser": "Als Testbenutzer einloggen",
-    "loginFailed": "Die Anmeldung ist fehlgeschlagen, versuche nochmal!",
-    "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
-    "subtitle": "Die {{word}} Alternative",
-    "words": {
-      "agile": "agile",
-      "awaited": "erwartete",
-      "better": "bessere",
-      "cheap": "billige",
-      "cooler": "coolere",
-      "enlightened": "erleuchtete",
-      "fantastic": "fantastische",
-      "fast": "schnelle",
-      "first": "erste",
-      "free": "freie",
-      "fun": "komische",
-      "homemade": "selbstgemachte",
-      "imperfect": "unvollkommene",
-      "open": "offene",
-      "rebellious": "rebellische",
-      "simple": "enfache",
-      "working": "funktionierende"
+    "abscense": {
+        "endTime": "Endzeit",
+        "entireDay": "Ganzen Tag",
+        "invalidPersonalNumber": "Personenkennzeichen ungültig",
+        "newsTitle": "Nachricht: {{header}} ({{published}})",
+        "personalNumberMissing": "Personenkennzeichen fehlt",
+        "selectAbscenseEndTime": "Endzeit wählen",
+        "selectAbscenseStartTime": "Startzeit wählen",
+        "startTime": "Startzeit",
+        "title": "Fernbleiben melden"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "BankID manuell öffnen",
+            "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
+            "OpenOnThisDevice": "BankID auf dieses Gerät benutzen",
+            "Waiting": "Wartet auf BankID..."
+        },
+        "chooseLoginMethod": "Anmeldemethode wählen",
+        "loginAsTestUser": "Als Testbenutzer einloggen",
+        "loginFailed": "Die Anmeldung ist fehlgeschlagen, versuche nochmal!",
+        "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
+        "subtitle": "Die {{word}} Alternative",
+        "words": {
+            "agile": "agile",
+            "awaited": "erwartete",
+            "better": "bessere",
+            "cheap": "billige",
+            "cooler": "coolere",
+            "enlightened": "erleuchtete",
+            "fantastic": "fantastische",
+            "fast": "schnelle",
+            "first": "erste",
+            "free": "freie",
+            "fun": "komische",
+            "homemade": "selbstgemachte",
+            "imperfect": "unvollkommene",
+            "open": "offene",
+            "rebellious": "rebellische",
+            "simple": "enfache",
+            "working": "funktionierende"
+        }
+    },
+    "calender": {
+        "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben",
+        "saveToCalender": "Im Kalender speichern",
+        "saveToCalenderError": "Etwas hat sich verlaufen",
+        "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
+        "showCalenderActions": "Kalender-Actions zeigen"
+    },
+    "children": {
+        "loadingErrorHeading": "Hoppla!",
+        "loadingErrorInformationText": "Diese seite kann nicht geladen werden. Versuche es nochmal oder zeige den aktuellen Status an am skolplattformen.org.",
+        "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert",
+        "noKids_title": "Keine Kinder",
+        "title": "Deine Kinder",
+        "tryAgain": "Nochmal versuchen",
+        "viewStatus": "Status anzeigen an skolplattformen.org"
+    },
+    "general": {
+        "abort": "Abbrechen",
+        "changeLanguage": "Sprache ändern",
+        "confirm": "Bestätigen",
+        "loading": "Wird geladen...",
+        "logout": "Ausloggen",
+        "send": "Senden",
+        "settings": "Einstellungen",
+        "socialSecurityNumber": "Personenkennzeichen",
+        "title": "Öppna skolplattformen"
+    },
+    "language": {
+        "changeLanguage": "Sprache ändern",
+        "changeLanguageButton": "Speichern"
+    },
+    "menu": {
+        "emptyHeadline": "Die Speisekarte sieht en bisschen leer aus",
+        "emptyText": "Nichts zu zeigen für diese Woche"
+    },
+    "navigation": {
+        "calender": "Kalender",
+        "menu": "Speisekarte",
+        "news": "Nachrichten",
+        "notifications": "Mitteilungen"
+    },
+    "news": {
+        "backToChild": "Zurück zu Kind",
+        "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
+        "notificationTitle": "Nachricht: {{header}} ({{published}})",
+        "published": "Erscheint",
+        "title": "Nachricht von Skolplattformen",
+        "updated": "Aktualisiert"
+    },
+    "notifications": {
+        "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
     }
-  },
-  "calender": {
-    "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben",
-    "saveToCalender": "Im Kalender speichern",
-    "saveToCalenderError": "Etwas hat sich verlaufen",
-    "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
-    "showCalenderActions": "Kalender-Actions zeigen"
-  },
-  "children": {
-    "loadingErrorHeading": "Hoppla!",
-    "loadingErrorInformationText": "Diese seite kann nicht geladen werden. Versuche es nochmal oder zeige den aktuellen Status an am skolplattformen.org.",
-    "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert",
-    "noKids_title": "Keine Kinder",
-    "title": "Deine Kinder",
-    "tryAgain": "Nochmal versuchen",
-    "viewStatus": "Status anzeigen an skolplattformen.org"
-  },
-  "general": {
-    "abort": "Abbrechen",
-    "changeLanguage": "Sprache ändern",
-    "confirm": "Bestätigen",
-    "loading": "Wird geladen...",
-    "logout": "Ausloggen",
-    "send": "Senden",
-    "settings": "Einstellungen",
-    "socialSecurityNumber": "Personenkennzeichen",
-    "title": "Öppna skolplattformen"
-  },
-  "language": {
-    "changeLanguage": "Sprache ändern",
-    "changeLanguageButton": "Speichern"
-  },
-  "menu": {
-    "emptyHeadline": "Die Speisekarte sieht en bisschen leer aus",
-    "emptyText": "Nichts zu zeigen für diese Woche "
-  },
-  "navigation": {
-    "calender": "Kalender",
-    "menu": "Speisekarte",
-    "news": "Nachrichten",
-    "notifications": "Mitteilungen"
-  },
-  "news": {
-    "backToChild": "Zurück zu Kind",
-    "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
-    "notificationTitle": "Nachricht: {{header}} ({{published}})",
-    "published": "Erscheint",
-    "title": "Nachricht von Skolplattformen",
-    "updated": "Aktualisiert"
-  },
-  "notifications": {
-    "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
-  }
 }
