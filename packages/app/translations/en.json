@@ -18,7 +18,7 @@
   },
   "auth": {
     "bankid": {
-      "OpenManually": "Waiting for BankID...",
+      "OpenManually": "Open BankID manually",
       "OpenOnAnotherDevice": "Open BankID on another device",
       "OpenOnThisDevice": "Open BankID on this device",
       "Waiting": "Waiting for BankID..."
