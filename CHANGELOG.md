@@ -1,3 +1,17 @@
+# [1.24.0](https://github.com/kolplattformen/skolplattformen/compare/v1.23.0...v1.24.0) (2021-04-21)
+
+
+### Features
+
+* Add Patreon badge. Add info about contributing with Weblate. ([#311](https://github.com/kolplattformen/skolplattformen/issues/311)) ([b37571d](https://github.com/kolplattformen/skolplattformen/commit/b37571d0123aa85f5b132a87fb1753a103dd702b))
+
+# [1.23.0](https://github.com/kolplattformen/skolplattformen/compare/v1.22.1...v1.23.0) (2021-04-21)
+
+
+### Features
+
+* 🎸 Gratis ([#312](https://github.com/kolplattformen/skolplattformen/issues/312)) ([ac8581d](https://github.com/kolplattformen/skolplattformen/commit/ac8581d0b96771883ef91ea0445d360972c6ed73))
+
 ## [1.22.1](https://github.com/kolplattformen/skolplattformen/compare/v1.22.0...v1.22.1) (2021-04-20)
 
 
