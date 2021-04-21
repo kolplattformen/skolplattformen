@@ -1,4 +1,4 @@
-import ButtonLink from './ButtonLink'
+import ButtonLink, { ButtonLinkPatreon } from './ButtonLink'
 
 const DownloadButtons = () => {
   return (
@@ -16,6 +16,9 @@ const DownloadButtons = () => {
       >
         Play Store
       </ButtonLink>
+      <ButtonLinkPatreon>
+        Stöd oss på Patreon!
+      </ButtonLinkPatreon>
     </div>
   )
 }
