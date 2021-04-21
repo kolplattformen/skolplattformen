@@ -16,7 +16,7 @@ import {
   View,
 } from 'react-native'
 import { Login } from './login.component'
-import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 import { translate } from '../utils/translation'
 import { GlobeIcon } from './icon.component'
@@ -34,13 +34,12 @@ const randomWord = () => {
   return words[argumentKey]
 }
 
-
 interface AuthProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>
 }
 
 export const Auth: React.FC<AuthProps> = ({ navigation }) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <KeyboardAvoidingView
@@ -48,7 +47,12 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
       style={styles.keyboardAvoidingView}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1']}]}>
+        <SafeAreaView
+          style={[
+            styles.safeArea,
+            { backgroundColor: theme['background-basic-color-1'] },
+          ]}
+        >
           <SafeAreaViewContainer>
             <TopNavigation
               alignment="center"

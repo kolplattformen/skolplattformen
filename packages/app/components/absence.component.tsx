@@ -19,7 +19,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import * as Yup from 'yup'
-import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
@@ -75,7 +75,12 @@ const Absence = () => {
   }
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1'] }]}>
+    <SafeAreaView
+      style={[
+        styles.safeArea,
+        { backgroundColor: theme['background-basic-color-1'] },
+      ]}
+    >
       <TopNavigation
         accessoryLeft={() => (
           <TopNavigationAction
@@ -84,7 +89,10 @@ const Absence = () => {
           />
         )}
         alignment="center"
-        style={[styles.topBar, { backgroundColor: theme['background-basic-color-1'] }]}
+        style={[
+          styles.topBar,
+          { backgroundColor: theme['background-basic-color-1'] },
+        ]}
         title={translate('abscense.title')}
         subtitle={studentName(child.name)}
       />
@@ -247,7 +255,7 @@ const styles = StyleSheet.create({
   safeArea: {
     ...LayoutStyle.flex.full,
   },
-  topBar: { },
+  topBar: {},
   wrap: {
     ...LayoutStyle.flex.full,
     padding: Sizing.t5,

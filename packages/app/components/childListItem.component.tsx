@@ -33,9 +33,6 @@ type ChildListItemNavigationProp = StackNavigationProp<
   'Children'
 >
 export const ChildListItem = ({ child, color }: ChildListItemProps) => {
-
-  
-  
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
@@ -151,7 +148,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         style={[styles.item, styles[menuStatus]]}
         status="control"
         size="small"
-
         onPress={() =>
           navigation.navigate('Child', {
             child,
@@ -246,8 +242,6 @@ const styles = StyleSheet.create({
   },
   item: {
     paddingHorizontal: 0,
-
-
   },
   loaded: {
     color: Colors.neutral.black,

@@ -13,7 +13,7 @@ import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
-import { Colors, Layout as LayoutStyle, Sizing } from '../styles'
+import { Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
@@ -65,10 +65,9 @@ const languages: Language[] = [
   },
 ]
 
-
 export const SetLanguage = () => {
   const navigation = useNavigation()
-  const theme = useTheme();
+  const theme = useTheme()
 
   const currentLanguage = LanguageService.getLanguageCode()
 
@@ -100,12 +99,16 @@ export const SetLanguage = () => {
     // Need to reset the view so it updates the language
     navigation.navigate('Login', { rand: Math.random() })
   }
-  
 
   const activeLanguages = languages.filter((language) => language.active)
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1']}]}>
+    <SafeAreaView
+      style={[
+        styles.safeArea,
+        { backgroundColor: theme['background-basic-color-1'] },
+      ]}
+    >
       <SafeAreaViewContainer>
         <TopNavigation
           accessoryLeft={() => (

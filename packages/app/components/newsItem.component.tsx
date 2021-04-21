@@ -33,7 +33,7 @@ const dateIsValid = (date: string | undefined) =>
 export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   const { newsItem, child } = route.params
   const { data } = useNewsDetails(child, newsItem)
-  const theme = useTheme();
+  const theme = useTheme()
   const navigateBack = () => {
     navigation.goBack()
   }
@@ -47,7 +47,12 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   )
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1']}]}>
+    <SafeAreaView
+      style={[
+        styles.safeArea,
+        { backgroundColor: theme['background-basic-color-1'] },
+      ]}
+    >
       <SafeAreaViewContainer>
         <TopNavigation
           title={translate('news.title')}
@@ -107,8 +112,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor: '#FFF'
-
+    backgroundColor: '#FFF',
   },
   image: {
     width: '100%',
@@ -119,8 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginBottom: 8,
-    color: '#222B45'
-    
+    color: '#222B45',
   },
   subtitle: {
     color: '#6B7280',

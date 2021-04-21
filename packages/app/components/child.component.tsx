@@ -11,12 +11,13 @@ import {
   Layout,
   Text,
   TopNavigation,
-  TopNavigationAction, useTheme
+  TopNavigationAction,
+  useTheme,
 } from '@ui-kitten/components'
 import React from 'react'
 import { StyleProp, StyleSheet, TextProps } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Colors, Layout as LayoutStyle } from '../styles'
+import { Layout as LayoutStyle } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
@@ -146,16 +147,24 @@ export const Child = () => {
   const navigateBack = () => {
     navigation.goBack()
   }
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
-    <SafeAreaView style={[{ ...styles.wrap }, { backgroundColor: theme['background-basic-color-1']}]}>
+    <SafeAreaView
+      style={[
+        { ...styles.wrap },
+        { backgroundColor: theme['background-basic-color-1'] },
+      ]}
+    >
       <ChildProvider child={child}>
         <TopNavigation
           title={studentName(child.name)}
           alignment="center"
           accessoryLeft={BackAction}
-          style={[styles.topBar, { backgroundColor: theme['background-basic-color-1']}]}
+          style={[
+            styles.topBar,
+            { backgroundColor: theme['background-basic-color-1'] },
+          ]}
         />
         <TabNavigator initialRouteName={initialRouteName} />
       </ChildProvider>
@@ -167,9 +176,7 @@ const styles = StyleSheet.create({
   wrap: {
     ...LayoutStyle.flex.full,
   },
-  topBar: {
-
-  },
+  topBar: {},
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },

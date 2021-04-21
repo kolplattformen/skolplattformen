@@ -31,7 +31,7 @@ import {
 } from './icon.component'
 
 export const Login = () => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
     (() => Promise<void>) | (() => null)
@@ -149,7 +149,14 @@ export const Login = () => {
 
   return (
     <>
-      <Image source={colorScheme === "dark" ? require('../assets/boys-dark-mode.png'): require( '../assets/boys.png')} style={styles.image} />
+      <Image
+        source={
+          colorScheme === 'dark'
+            ? require('../assets/boys-dark-mode.png')
+            : require('../assets/boys.png')
+        }
+        style={styles.image}
+      />
       <View style={styles.loginForm}>
         {loginMethodIndex === 1 && (
           <Input
@@ -241,5 +248,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   bankIdLoading: { margin: 10 },
-  
 })

@@ -2,7 +2,7 @@ import { Notification as NotificationType } from '@skolplattformen/embedded-api'
 import { Card, Text, useTheme } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Colors, Layout, Sizing, Typography } from '../styles'
+import { Layout, Sizing, Typography } from '../styles'
 import { ModalWebView } from './modalWebView.component'
 import moment from 'moment'
 
@@ -11,7 +11,7 @@ interface NotificationProps {
 }
 
 export const Notification = ({ item }: NotificationProps) => {
-  const theme = useTheme();
+  const theme = useTheme()
   const [isOpen, setIsOpen] = React.useState(false)
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
@@ -25,15 +25,22 @@ export const Notification = ({ item }: NotificationProps) => {
   )
 
   return (
-   
     <>
       <Card
-        style={[styles.card, { backgroundColor: theme['background-basic-color-1'], borderColor: theme['border-basic-color-3']}]}
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme['background-basic-color-1'],
+            borderColor: theme['border-basic-color-3'],
+          },
+        ]}
         onPress={open}
         header={(headerProps) => (
           <View {...headerProps}>
             <Text style={styles.title}>{item.sender}</Text>
-            <Text style={[styles.subtitle, { color: theme['text-hint-color']}]}>
+            <Text
+              style={[styles.subtitle, { color: theme['text-hint-color'] }]}
+            >
               {item.category ? item.category : ''}
               {item.category && displayDate ? ' • ' : ''}
               {displayDate ? displayDate : ''}
@@ -54,12 +61,11 @@ export const Notification = ({ item }: NotificationProps) => {
   )
 }
 
-
 const styles = StyleSheet.create({
   card: {
     ...Layout.flex.full,
     borderRadius: 2,
-    
+
     borderWidth: 1,
     marginBottom: Sizing.t2,
   },
@@ -68,7 +74,6 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   subtitle: {
-    
     ...Typography.fontSize.xs,
   },
 })

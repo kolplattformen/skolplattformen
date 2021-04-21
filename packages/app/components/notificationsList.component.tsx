@@ -1,5 +1,5 @@
 import { useNotifications } from '@skolplattformen/api-hooks'
-import { List} from '@ui-kitten/components'
+import { List } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { useChild } from './childContext.component'
@@ -14,7 +14,7 @@ export const NotificationsList = () => {
       contentContainerStyle={styles.contentContainer}
       data={data}
       renderItem={(info) => (
-        <Notification key={info.item.id} item={info.item}  />
+        <Notification key={info.item.id} item={info.item} />
       )}
     />
   )

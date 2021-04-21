@@ -5,7 +5,7 @@ import React from 'react'
 import moment from 'moment'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Colors, Layout, Sizing, Typography } from '../styles'
+import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 import { RootStackParamList } from './navigation.component'
@@ -29,27 +29,39 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
 
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
-  
-
-
-
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
-      <View style={[styles.card, { backgroundColor: theme['background-basic-color-1'], borderColor: theme['border-basic-color-3']}]}>
+      <View
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme['background-basic-color-1'],
+            borderColor: theme['border-basic-color-3'],
+          },
+        ]}
+      >
         {width > 320 && item.fullImageUrl ? (
           <Image src={item.fullImageUrl} style={styles.image} />
         ) : null}
         <View style={styles.text}>
           <View>
-            <Text style={[styles.title, { color: theme['text-basic-color'] }]}>{item.header}</Text>
-            <Text style={[styles.subtitle, { color: theme['text-hint-color'] }]}>
+            <Text style={[styles.title, { color: theme['text-basic-color'] }]}>
+              {item.header}
+            </Text>
+            <Text
+              style={[styles.subtitle, { color: theme['text-hint-color'] }]}
+            >
               {item.author}
               {item.author && displayDate ? ' • ' : ''}
               {displayDate}
             </Text>
-            <Text ellipsizeMode="tail" numberOfLines={2} style={[styles.intro, { color: theme['text-disabled-color'] }]}>
+            <Text
+              ellipsizeMode="tail"
+              numberOfLines={2}
+              style={[styles.intro, { color: theme['text-disabled-color'] }]}
+            >
               {item.intro}
             </Text>
           </View>
@@ -63,9 +75,9 @@ const styles = StyleSheet.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
-    
+
     borderRadius: 2,
-    
+
     borderWidth: 1,
     padding: Sizing.t5,
     marginBottom: Sizing.t2,
@@ -77,17 +89,14 @@ const styles = StyleSheet.create({
     ...Typography.fontWeight.bold,
     ...Typography.fontSize.lg,
     marginBottom: 2,
-    
-
   },
   subtitle: {
     ...Typography.fontSize.xs,
-    
+
     marginBottom: Sizing.t2,
   },
   intro: {
     ...Typography.fontSize.sm,
-  
   },
   image: {
     borderRadius: 3,

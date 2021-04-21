@@ -23,7 +23,7 @@ export const ModalWebView = ({
   onClose,
   sharedCookiesEnabled,
 }: ModalWebViewProps) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
@@ -54,18 +54,38 @@ export const ModalWebView = ({
       visible={modalVisible}
       onRequestClose={closeModal}
     >
-      
-      <SafeAreaView style={[styles.container, { backgroundColor: theme['background-basic-color-1'] }]}>
-        <View style={[styles.headerWrapper, { backgroundColor: theme['background-basic-color-1']}]}>
-          <View style={[styles.header, { backgroundColor: theme['background-basic-color-1'] }]}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          { backgroundColor: theme['background-basic-color-1'] },
+        ]}
+      >
+        <View
+          style={[
+            styles.headerWrapper,
+            { backgroundColor: theme['background-basic-color-1'] },
+          ]}
+        >
+          <View
+            style={[
+              styles.header,
+              { backgroundColor: theme['background-basic-color-1'] },
+            ]}
+          >
             <TouchableOpacity onPress={closeModal}>
-              <BackIcon style={styles.backIcon} fill={theme['text-basic-color']} />
+              <BackIcon
+                style={styles.backIcon}
+                fill={theme['text-basic-color']}
+              />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
               {title}
             </Text>
             <TouchableOpacity onPress={openInApp}>
-              <ExternalLinkIcon style={styles.shareIcon} fill={theme['text-basic-color']} />
+              <ExternalLinkIcon
+                style={styles.shareIcon}
+                fill={theme['text-basic-color']}
+              />
             </TouchableOpacity>
           </View>
         </View>

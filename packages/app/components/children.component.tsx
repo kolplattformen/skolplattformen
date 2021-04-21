@@ -37,7 +37,7 @@ export const Children = () => {
     translate('general.abort'),
   ]
   const theme = useTheme()
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
@@ -75,10 +75,13 @@ export const Children = () => {
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
   return (
     <View
-      style={[{
-        ...styles.topContainer,
-        paddingTop: insets.top,
-      }, {backgroundColor: theme['background-basic-color-1']}]}
+      style={[
+        {
+          ...styles.topContainer,
+          paddingTop: insets.top,
+        },
+        { backgroundColor: theme['background-basic-color-1'] },
+      ]}
     >
       <>
         {status === 'loaded' ? (
@@ -124,7 +127,11 @@ export const Children = () => {
         ) : (
           <Layout style={styles.loading}>
             <Image
-              source={colorScheme === "dark" ? require('../assets/girls-dark-mode.png'): require( '../assets/girls.png')}
+              source={
+                colorScheme === 'dark'
+                  ? require('../assets/girls-dark-mode.png')
+                  : require('../assets/girls.png')
+              }
               style={styles.loadingImage}
             />
             {status === 'error' ? (
