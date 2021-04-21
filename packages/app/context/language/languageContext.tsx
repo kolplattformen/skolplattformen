@@ -78,7 +78,7 @@ export const LanguageProvider: React.FC<Props> = ({
       if (cache) {
         // Get cached lang
         const cachedLang = await LanguageStorage.get()
-        console.log(cachedLang)
+
         // Try to find best suited language
         const { languageTag } =
           RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||

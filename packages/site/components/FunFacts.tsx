@@ -34,7 +34,7 @@ const FunFacts = () => {
 
   return (
     <section className="max-w-6xl py-8 mx-auto md:py-32">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-5">
         {FUNFACTS_DATA.map((funfact) => (
           <div className="text-center" key={funfact.title}>
             <span className="text-4xl sm:text-5xl text-indigo-500 whitespace-nowrap">

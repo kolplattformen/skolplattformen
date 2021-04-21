@@ -1,0 +1,103 @@
+{
+  "abbrevations": {
+    "compulsorySchool": "المدرسة الاجبارية",
+    "leisureTimeCentre": "مركز أوقات الفراغ",
+    "preSchool": "مرحلة ما قبل المدرسة",
+    "upperSecondarySchool": "المدرسه الثانويه العليا"
+  },
+  "abscense": {
+    "endTime": "End time",
+    "entireDay": "كل اليوم",
+    "invalidPersonalNumber": "Personal number invalid",
+    "newsTitle": "عنصر أخبار: {{header}} ({{published}})",
+    "personalNumberMissing": "Personal number missing",
+    "selectAbscenseEndTime": "اختر وقت الانتهاء",
+    "selectAbscenseStartTime": "Choose start time",
+    "startTime": "Start time",
+    "title": "الإبلاغ عن الغياب"
+  },
+  "auth": {
+    "bankid": {
+      "OpenManually": "في انتظار BankID ...",
+      "OpenOnAnotherDevice": "افتح BankID على جهاز آخر",
+      "OpenOnThisDevice": "افتح BankID على هذا الجهاز",
+      "Waiting": "في انتظار BankID ..."
+    },
+    "chooseLoginMethod": "اختر طريقة تسجيل الدخول",
+    "loginAsTestUser": "تسجيل الدخول كمستخدم تجريبي",
+    "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى!",
+    "placeholder_SocialSecurityNumber": "رقمك الشخصي",
+    "subtitle": "البديل {{word}}",
+    "words": {
+      "agile": "رشيق",
+      "awaited": "في انتظار",
+      "better": "أفضل",
+      "cheap": "رخيص",
+      "cooler": "برودة",
+      "enlightened": "المستنير",
+      "fantastic": "جميل",
+      "fast": "سريع",
+      "first": "أول",
+      "free": "مجانا",
+      "fun": "مرح",
+      "homemade": "محلي الصنع",
+      "imperfect": "غير تام",
+      "open": "افتح",
+      "rebellious": "انفصام شخصيه",
+      "simple": "بسيط",
+      "working": "عمل"
+    }
+  },
+  "calender": {
+    "approveAccessToCalender": "يجب عليك الموافقة على الوصول إلى التقويم الخاص بك",
+    "saveToCalender": "Save to calender",
+    "saveToCalenderError": "هناك خطأ ما",
+    "saveToCalenderSuccess": "✔️ تم الحفظ في التقويم",
+    "showCalenderActions": "إظهار إجراءات التقويم"
+  },
+  "children": {
+    "loadingErrorHeading": "Oops!",
+    "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
+    "noKids_description": "لا يوجد أطفال مسجلين برقم الضمان الاجتماعي الخاص بك في استاد ستوكهولم",
+    "noKids_title": "لا اطفال",
+    "title": "Your kids",
+    "tryAgain": "Try again",
+    "viewStatus": "View status on skolplattformen.org"
+  },
+  "general": {
+    "abort": "Abort",
+    "changeLanguage": "Change language",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "send": "Send",
+    "settings": "Settings",
+    "socialSecurityNumber": "Personal identity number",
+    "title": "Öppna skolplattformen"
+  },
+  "language": {
+    "changeLanguage": "تغيير اللغة",
+    "changeLanguageButton": "يحفظ"
+  },
+  "menu": {
+    "emptyHeadline": "The menu looks kinda empty",
+    "emptyText": "Couldn't find anything for this week"
+  },
+  "navigation": {
+    "calender": "رزنامة",
+    "menu": "لائحة الطعام",
+    "news": "أخبار",
+    "notifications": "إشعارات"
+  },
+  "news": {
+    "backToChild": "العودة إلى الطفل",
+    "noNewNewsItemsThisWeek": "لا توجد أخبار جديدة هذا الأسبوع.",
+    "notificationTitle": "أخبار: {{header}} ({{published}})",
+    "published": "Published",
+    "title": "أخبار من منصة المدرسة",
+    "updated": "Updated"
+  },
+  "notifications": {
+    "notificationTitle": "إشعار: {{message}} ({{dateCreated}})"
+  }
+}

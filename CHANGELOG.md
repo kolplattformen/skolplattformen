@@ -1,3 +1,43 @@
+## [1.22.1](https://github.com/kolplattformen/skolplattformen/compare/v1.22.0...v1.22.1) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Lade tillbaka utbildningsnivå under barnets namn ([#307](https://github.com/kolplattformen/skolplattformen/issues/307)) ([659cb36](https://github.com/kolplattformen/skolplattformen/commit/659cb36b09770e46db55175544ab246d470196b6))
+
+# [1.22.0](https://github.com/kolplattformen/skolplattformen/compare/v1.21.1...v1.22.0) (2021-04-20)
+
+
+### Features
+
+* 🎸 Added Polish ([bb35884](https://github.com/kolplattformen/skolplattformen/commit/bb35884651d7b9af5959b10c3d0ed778e9f6d017))
+
+## [1.21.1](https://github.com/kolplattformen/skolplattformen/compare/v1.21.0...v1.21.1) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Adress call turned off everywhere ([b95c9e7](https://github.com/kolplattformen/skolplattformen/commit/b95c9e77cf9adb4d1521cff1af992dba34325641))
+
+# [1.21.0](https://github.com/kolplattformen/skolplattformen/compare/v1.20.1...v1.21.0) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 added import of moment locales for available languages ([e7c0d55](https://github.com/kolplattformen/skolplattformen/commit/e7c0d5568bec28e0745752d5205b576180ea08fb))
+
+
+### Features
+
+* 🎸 Added Polish language ([53f6d4c](https://github.com/kolplattformen/skolplattformen/commit/53f6d4c4f0559c7a39a419ce49108d9ca7c1137b))
+
+## [1.20.1](https://github.com/kolplattformen/skolplattformen/compare/v1.20.0...v1.20.1) (2021-04-19)
+
+
+### Bug Fixes
+
+* 🐛 uppdatering av QA sidan ([c90aeff](https://github.com/kolplattformen/skolplattformen/commit/c90aeffe36c520db4cd3e53766f9c5e7784b7432))
+
 # [1.20.0](https://github.com/kolplattformen/skolplattformen/compare/v1.19.1...v1.20.0) (2021-04-19)
 
 
