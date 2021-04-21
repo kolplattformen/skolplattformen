@@ -30,7 +30,6 @@ import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
-const theme = useTheme()
 let colorScheme = useColorScheme();
 
 export const Children = () => {
@@ -38,6 +37,7 @@ export const Children = () => {
     translate('general.logout'),
     translate('general.abort'),
   ]
+  const theme = useTheme()
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
@@ -75,10 +75,10 @@ export const Children = () => {
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
   return (
     <View
-      style={{
+      style={[{
         ...styles.topContainer,
         paddingTop: insets.top,
-      }}
+      }, {backgroundColor: theme['background-basic-color-1']}]}
     >
       <>
         {status === 'loaded' ? (
@@ -171,7 +171,6 @@ export const Children = () => {
 const styles = StyleSheet.create({
   topContainer: {
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
     paddingBottom: 0,
   },
   loading: {

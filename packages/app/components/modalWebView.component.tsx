@@ -18,12 +18,13 @@ interface ModalWebViewProps {
   sharedCookiesEnabled: boolean
   onClose: () => void
 }
-const theme = useTheme();
 export const ModalWebView = ({
   url,
   onClose,
   sharedCookiesEnabled,
 }: ModalWebViewProps) => {
+  const theme = useTheme();
+
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
   const [title, setTitle] = React.useState('...')
@@ -53,9 +54,10 @@ export const ModalWebView = ({
       visible={modalVisible}
       onRequestClose={closeModal}
     >
-      <SafeAreaView style={styles.container}>
-        <View style={styles.headerWrapper}>
-          <View style={styles.header}>
+      
+      <SafeAreaView style={[styles.container, { backgroundColor: theme['background-basic-color-1'] }]}>
+        <View style={[styles.headerWrapper, { backgroundColor: theme['background-basic-color-1']}]}>
+          <View style={[styles.header, { backgroundColor: theme['background-basic-color-1'] }]}>
             <TouchableOpacity onPress={closeModal}>
               <BackIcon style={styles.backIcon} fill={theme['text-basic-color']} />
             </TouchableOpacity>
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
   },
   headerWrapper: {
     marginTop: 5,
-    backgroundColor: theme['background-basic-color-1'],
     padding: 5,
     borderRadius: 2,
     borderColor: '#6B7280',
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 4,
-    backgroundColor: theme['background-basic-color-1']
   },
   shareIcon: {
     width: 24,

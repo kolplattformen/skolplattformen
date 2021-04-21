@@ -42,7 +42,6 @@ interface TabTitleProps {
 }
 
 const { Navigator, Screen } = createBottomTabNavigator()
-const theme = useTheme();
 
 const NewsScreen = () => {
   return (
@@ -147,15 +146,16 @@ export const Child = () => {
   const navigateBack = () => {
     navigation.goBack()
   }
+  const theme = useTheme();
 
   return (
-    <SafeAreaView style={{ ...styles.wrap }}>
+    <SafeAreaView style={[{ ...styles.wrap }, { backgroundColor: theme['background-basic-color-1']}]}>
       <ChildProvider child={child}>
         <TopNavigation
           title={studentName(child.name)}
           alignment="center"
           accessoryLeft={BackAction}
-          style={styles.topBar}
+          style={[styles.topBar, { backgroundColor: theme['background-basic-color-1']}]}
         />
         <TabNavigator initialRouteName={initialRouteName} />
       </ChildProvider>
@@ -166,10 +166,9 @@ export const Child = () => {
 const styles = StyleSheet.create({
   wrap: {
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
   },
   topBar: {
-    backgroundColor: theme['background-basic-color-1'],
+
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

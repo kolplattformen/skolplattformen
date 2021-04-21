@@ -6,6 +6,7 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
+  useTheme,
 } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
@@ -32,7 +33,7 @@ const dateIsValid = (date: string | undefined) =>
 export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   const { newsItem, child } = route.params
   const { data } = useNewsDetails(child, newsItem)
-
+  const theme = useTheme();
   const navigateBack = () => {
     navigation.goBack()
   }
@@ -46,7 +47,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   )
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1']}]}>
       <SafeAreaViewContainer>
         <TopNavigation
           title={translate('news.title')}
@@ -106,6 +107,8 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    backgroundColor: '#FFF'
+
   },
   image: {
     width: '100%',
@@ -116,6 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginBottom: 8,
+    color: '#222B45'
     
   },
   subtitle: {

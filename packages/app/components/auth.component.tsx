@@ -34,21 +34,21 @@ const randomWord = () => {
   return words[argumentKey]
 }
 
-const theme = useTheme();
-
 
 interface AuthProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>
 }
 
 export const Auth: React.FC<AuthProps> = ({ navigation }) => {
+  const theme = useTheme();
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.keyboardAvoidingView}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1']}]}>
           <SafeAreaViewContainer>
             <TopNavigation
               alignment="center"
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: { ...LayoutStyle.flex.full },
   safeArea: {
     ...LayoutStyle.flex.full,
-    backgroundColor: theme['background-basic-color-1']
   },
   container: {
     ...LayoutStyle.mainAxis.center,

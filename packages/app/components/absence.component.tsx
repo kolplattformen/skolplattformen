@@ -75,7 +75,7 @@ const Absence = () => {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1'] }]}>
       <TopNavigation
         accessoryLeft={() => (
           <TopNavigationAction
@@ -84,7 +84,7 @@ const Absence = () => {
           />
         )}
         alignment="center"
-        style={styles.topBar}
+        style={[styles.topBar, { backgroundColor: theme['background-basic-color-1'] }]}
         title={translate('abscense.title')}
         subtitle={studentName(child.name)}
       />
@@ -246,9 +246,8 @@ export default Absence
 const styles = StyleSheet.create({
   safeArea: {
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
   },
-  topBar: { backgroundColor: Colors.neutral.white },
+  topBar: { },
   wrap: {
     ...LayoutStyle.flex.full,
     padding: Sizing.t5,
