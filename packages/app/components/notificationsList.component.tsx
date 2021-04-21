@@ -8,14 +8,13 @@ import { Notification } from './notification.component'
 export const NotificationsList = () => {
   const child = useChild()
   const { data } = useNotifications(child)
-  const theme = useTheme();
   return (
     <List
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       data={data}
       renderItem={(info) => (
-        <Notification key={info.item.id} item={info.item} theme={theme} />
+        <Notification key={info.item.id} item={info.item}  />
       )}
     />
   )
