@@ -21,11 +21,11 @@
             "OpenManually": "Open BankID manually",
             "OpenOnAnotherDevice": "Open BankID on another device",
             "OpenOnThisDevice": "Open BankID on this device",
-            "Waiting": "Waiting for BankID..."
+            "Waiting": "Awaiting BankID…"
         },
         "chooseLoginMethod": "Choose login method",
-        "loginAsTestUser": "Login as test user",
-        "loginFailed": "Login failed, please try again!",
+        "loginAsTestUser": "Log in as a test user",
+        "loginFailed": "Could not log in. Please try again.",
         "placeholder_SocialSecurityNumber": "Your personal identity number",
         "subtitle": "The {{word}} alternative",
         "words": {
@@ -38,7 +38,7 @@
             "fantastic": "fantastic",
             "fast": "fast",
             "first": "first",
-            "free": "free",
+            "free": "libre",
             "fun": "fun",
             "homemade": "homemade",
             "imperfect": "imperfect",
@@ -50,9 +50,9 @@
     },
     "calender": {
         "approveAccessToCalender": "You have to approve access to your calender",
-        "saveToCalender": "Save to calender",
+        "saveToCalender": "Save in calendar",
         "saveToCalenderError": "Something went wrong",
-        "saveToCalenderSuccess": "✔️ Saved to calender",
+        "saveToCalenderSuccess": "✔️ Saved in calendar",
         "showCalenderActions": "Show calender actions"
     },
     "children": {
@@ -68,12 +68,12 @@
         "abort": "Abort",
         "changeLanguage": "Change language",
         "confirm": "Confirm",
-        "loading": "Loading...",
-        "logout": "Logout",
+        "loading": "Loading…",
+        "logout": "Log out",
         "send": "Send",
         "settings": "Settings",
         "socialSecurityNumber": "Personal identity number",
-        "title": "Öppna skolplattformen"
+        "title": "Open Skolplattformen"
     },
     "language": {
         "changeLanguage": "Change language",
