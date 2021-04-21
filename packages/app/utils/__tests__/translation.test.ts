@@ -6,8 +6,8 @@ describe('translation in swedish', () => {
     i18n.translations = { ['sv']: translations.sv }
     i18n.locale = 'sv'
   })
-  it('should be able to translate the word loading', () => {
-    expect(translate('general.loading')).toEqual('Laddar...')
+  it('should be able to translate the word settings', () => {
+    expect(translate('general.settings')).toEqual('Inställningar')
   })
 })
 
@@ -16,7 +16,7 @@ describe('translation in english', () => {
     i18n.translations = { ['en']: translations.en }
     i18n.locale = 'en'
   })
-  it('should be able to translate the word loading', () => {
-    expect(translate('general.loading')).toEqual('Loading...')
+  it('should be able to translate the word settings', () => {
+    expect(translate('general.settings')).toEqual('Settings')
   })
 })
