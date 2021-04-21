@@ -13,6 +13,7 @@ import playstore from '../assets/img/playstore.png'
 import Link from './Link'
 import { H1 } from './Typography'
 import { useIntl } from 'react-intl'
+import { ButtonLinkPatreon } from './ButtonLink'
 
 const Banner = () => {
   const intl = useIntl()
@@ -63,6 +64,14 @@ const Banner = () => {
             </div>
             <H1>{intl.formatMessage({ id: 'general.title' })}</H1>
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
+            {!!intl.formatMessage({ id: 'general.flashtitle' }) && (
+              <>
+                <h2 className="text-2xl md:text-4xl font-bold leading-tight text-gray-800">
+                  {intl.formatMessage({ id: 'general.flashtitle' })}
+                </h2>
+                <p>{intl.formatMessage({ id: 'general.flashtext' })}</p>
+              </>
+            )}
             <p className="flex items-center py-4 sm:flex-row space-x-2 lg:space-x-4">
               <Link.External
                 className="inline-block"
@@ -87,16 +96,21 @@ const Banner = () => {
                 />
               </Link.External>
             </p>
+            <p className="flex items-center py-4 sm:flex-row space-x-2 lg:space-x-4">
+              <ButtonLinkPatreon>
+                {intl.formatMessage({ id: 'navigation.patreon' })}
+              </ButtonLinkPatreon>
+            </p>
             <p className="flex flex-col mt-5 sm:items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <NextLink href="/integritet">
                 <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
-                  Integritetspolicy
+                  {intl.formatMessage({ id: 'navigation.integrity' })}
                 </a>
               </NextLink>
 
               <NextLink href="/qa">
                 <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
-                  Frågor och svar
+                  {intl.formatMessage({ id: 'navigation.qna' })}
                 </a>
               </NextLink>
             </p>

@@ -38,4 +38,21 @@ export const ButtonLinkInternal = ({
   )
 }
 
+interface ButtonLinkPatreonProps {
+  children: ReactNode
+}
+
+export const ButtonLinkPatreon = ({ children }: ButtonLinkPatreonProps) => {
+  return (
+    <a
+      href="https://www.patreon.com/oppnaskolplattformen"
+      className="inline-block py-2 px-4 md:px-8 md:py-4 font-bold text-white border-2 bg-red-500 rounded-full hover:bg-white hover:border-red-500 hover:text-red-500"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
+}
+
 export default ButtonLink
