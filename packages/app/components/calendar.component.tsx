@@ -23,7 +23,7 @@ export const Calendar = () => {
     </View>
   ) : (
     <View>
-      <Week />
+      <Week child={child} />
       <List
         contentContainerStyle={styles.contentContainer}
         data={data.sort((a, b) =>

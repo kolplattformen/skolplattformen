@@ -1369,13 +1369,6 @@
   dependencies:
     invariant "^2.2.4"
 
-"@react-native-community/datetimepicker@~2.3.0":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-2.3.2.tgz#c4dfc503ed260c7c93ce838f60e707dbba179452"
-  integrity sha512-BbDmWVIaSYoYK2x5tRRuy/UWUVS6WtZ+3D210zYZgyD47yEVcTbaLFL9zFw7VxNMb8c/6BFcEpC6k18WTYplwA==
-  dependencies:
-    invariant "^2.2.4"
-
 "@react-native-community/eslint-config@^2.0.0":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@react-native-community/eslint-config/-/eslint-config-2.0.0.tgz"
@@ -1503,7 +1496,6 @@
     react-redux "^7.2.3"
     redux "^4.0.5"
 
-<<<<<<< HEAD
 "@skolplattformen/curriculum@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.2.0.tgz#f6975bf241c09e05bb81f3493ac7cf35aa23d6c4"
@@ -1513,12 +1505,6 @@
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.4.1.tgz#c8802c0f8bcf208dbf1ba9c67d3a9a3a156ce7f6"
   integrity sha512-2+MTs0AK0Qe9vPRyC0P2Y7/kh6QWk40rXh+VQ9e5vRakYIflbNDpdFg7Jo6ULkebF92eG+XnQlzj0QgCmlx0mg==
-=======
-"@skolplattformen/embedded-api@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-3.0.2.tgz#001a39cff9423cdbb5292b2180cacb14a85c8f75"
-  integrity sha512-Ljmk/36Eq0GkOREbyFhVPmo8/7qQuRAY32/QG+gnFQSWLVtC3ZHYIJ/088nOdcPfGXMnTgn8LvVqAvC54wlsgQ==
->>>>>>> feat: first working schema ui
   dependencies:
     "@skolplattformen/curriculum" "^1.2.0"
     "@types/he" "^1.1.1"
@@ -6619,10 +6605,14 @@ mockdate@^3.0.5:
   integrity sha512-iniQP4rj1FhBdBYS/+eQv7j1tadJ9lJtdzgOpvsOHng/GbcDh2Fhdeq+ZRldrPYdXvCyfFUmFeEwEGXZB5I/AQ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 moment@^2.29.1:
 =======
 moment@>=2.0.0, moment@^2.24.0:
 >>>>>>> feat: first working schema ui
+=======
+moment@>=2.0.0:
+>>>>>>> feat: first working version in test
   version "2.29.1"
   resolved "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
@@ -7356,8 +7346,12 @@ prop-types@15.5.8:
   dependencies:
     fbjs "^0.8.9"
 
+<<<<<<< HEAD
 prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.7.2:
 >>>>>>> feat: first working schema ui
+=======
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.7.2:
+>>>>>>> feat: first working version in test
   version "15.7.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7583,15 +7577,6 @@ react-native-webview@11.4.2:
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
-
-react-native-weekly-calendar@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-weekly-calendar/-/react-native-weekly-calendar-0.2.0.tgz#74e247fb7bdae56229b5045d531662352dfbb14e"
-  integrity sha512-F8nGekXSsKln+QbSSNFr5h1Qwz+m88baP8zu85gKzo0gkvOkj4TJoDHpa2/tI87RyUL/B1FahnK15r/F0WMbBA==
-  dependencies:
-    "@react-native-community/datetimepicker" "~2.3.0"
-    moment "^2.24.0"
-    prop-types "^15.5.7"
 
 react-native@0.64.0:
   version "0.64.0"
