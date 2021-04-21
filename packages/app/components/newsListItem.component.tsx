@@ -60,7 +60,7 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
             <Text
               ellipsizeMode="tail"
               numberOfLines={2}
-              style={[styles.intro, { color: theme['text-disabled-color'] }]}
+              style={[styles.intro, { color: theme['text-basic-color'] }]}
             >
               {item.intro}
             </Text>
