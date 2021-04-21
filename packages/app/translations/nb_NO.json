@@ -1,1 +1,103 @@
-{}
+{
+    "children": {
+        "noKids_description": "Det er ingen barn registrert i Stockholm by med det personnummeret",
+        "viewStatus": "Vis status på skolplattformen.org",
+        "tryAgain": "Prøv igjen",
+        "title": "Dine barn",
+        "noKids_title": "Ingen barn",
+        "loadingErrorInformationText": "Denne siden kan ikke lastes inn. Prøv igjen eller vis nåværende status på skolplattformen.org.",
+        "loadingErrorHeading": "Oida."
+    },
+    "auth": {
+        "bankid": {
+            "Waiting": "Venter på BankID …",
+            "OpenOnThisDevice": "Åpne BankID på denne enheten",
+            "OpenOnAnotherDevice": "Åpne BankID på en annen enhet",
+            "OpenManually": "Åpne BankID manuelt"
+        },
+        "loginAsTestUser": "Logg inn som tekstbruker",
+        "loginFailed": "Kunne ikke logge inn. Prøv igjen.",
+        "words": {
+            "free": "frie",
+            "working": "fungerende",
+            "simple": "enkle",
+            "rebellious": "rebelske",
+            "open": "åpne",
+            "imperfect": "uperfekte",
+            "homemade": "hjemmelagde",
+            "fun": "morsomme",
+            "first": "første",
+            "fast": "raske",
+            "fantastic": "fantastiske",
+            "enlightened": "opplyste",
+            "cooler": "kulere",
+            "cheap": "billige",
+            "better": "bedre",
+            "awaited": "etterlengtede",
+            "agile": "smidige"
+        },
+        "subtitle": "Det {{word}} alternativet",
+        "placeholder_SocialSecurityNumber": "Ditt personnummer",
+        "chooseLoginMethod": "Velg innloggingsmetode"
+    },
+    "calender": {
+        "saveToCalender": "Lagre i kalender",
+        "saveToCalenderSuccess": "✔️ Lagret i kalender",
+        "showCalenderActions": "Vis kalenderhandlinger",
+        "saveToCalenderError": "Noe gikk galt",
+        "approveAccessToCalender": "Du må innvilge tilgang til kalenderen din"
+    },
+    "general": {
+        "loading": "Laster inn …",
+        "logout": "Logg ut",
+        "title": "Åpne skolplattformen",
+        "socialSecurityNumber": "Personnummer",
+        "confirm": "Bekreft",
+        "changeLanguage": "Endre språk",
+        "abort": "Avbryt",
+        "settings": "Innstillinger",
+        "send": "Send"
+    },
+    "news": {
+        "updated": "Oppdatert",
+        "notificationTitle": "Nyheter: {{header}} ){{published}})",
+        "backToChild": "Tilbake til barn",
+        "published": "Publisert",
+        "title": "Nyheter fra Skolplattformen",
+        "noNewNewsItemsThisWeek": "Ingen nye nyhetselementer denne uken."
+    },
+    "abscense": {
+        "title": "Rapporter fravær",
+        "startTime": "Starttid",
+        "selectAbscenseStartTime": "Velg starttid",
+        "selectAbscenseEndTime": "Velg slutt-tid",
+        "personalNumberMissing": "Personnummer mangler",
+        "newsTitle": "Nyhetselement {{header}} ({{published}})",
+        "invalidPersonalNumber": "Ugyldig personnummer",
+        "entireDay": "Hele dagen",
+        "endTime": "Slutt"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Videregående",
+        "preSchool": "Førskole",
+        "leisureTimeCentre": "Skolefritidsordning",
+        "compulsorySchool": "Grunnskole"
+    },
+    "notifications": {
+        "notificationTitle": "Merknad: {{message}} ({{dateCreated}})"
+    },
+    "navigation": {
+        "notifications": "Merknader",
+        "news": "Nyheter",
+        "menu": "Meny",
+        "calender": "Kalender"
+    },
+    "menu": {
+        "emptyText": "Fant ikke noe denne uken",
+        "emptyHeadline": "Menyen ser ganske tom ut"
+    },
+    "language": {
+        "changeLanguageButton": "Lagre",
+        "changeLanguage": "Endre språk"
+    }
+}
