@@ -30,7 +30,6 @@ import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
-let colorScheme = useColorScheme();
 
 export const Children = () => {
   const settingsOptions = [
@@ -38,6 +37,7 @@ export const Children = () => {
     translate('general.abort'),
   ]
   const theme = useTheme()
+  const colorScheme = useColorScheme();
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
@@ -117,7 +117,6 @@ export const Children = () => {
                   child={child}
                   color={colors[index % colors.length]}
                   key={child.id}
-                  theme={theme}
                 />
               )}
             />

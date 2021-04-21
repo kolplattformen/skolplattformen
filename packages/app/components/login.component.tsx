@@ -31,7 +31,7 @@ import {
 } from './icon.component'
 
 export const Login = () => {
-  let colorScheme = useColorScheme();
+  const colorScheme = useColorScheme();
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
     (() => Promise<void>) | (() => null)

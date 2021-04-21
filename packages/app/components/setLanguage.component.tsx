@@ -18,10 +18,10 @@ import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 
-const theme = useTheme();
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
+  const theme = useTheme();
 
   const currentLanguage = LanguageService.getLanguageCode()
 
@@ -43,9 +43,10 @@ export const SetLanguage = () => {
     // Need to reset the view so it updates the language
     navigation.navigate('Login', { rand: Math.random() })
   }
+  
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme['background-basic-color-1']}]}>
       <SafeAreaViewContainer>
         <TopNavigation
           accessoryLeft={() => (
@@ -99,7 +100,6 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: { ...LayoutStyle.flex.full },
   safeArea: {
     ...LayoutStyle.flex.full,
-    backgroundColor: theme['background-basic-color-1'],
   },
   languageList: {
     flex: 1,

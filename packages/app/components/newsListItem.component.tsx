@@ -13,7 +13,6 @@ import { useTheme } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
-  theme: Record<string,string>
 }
 
 type NewsListItemNavigationProp = StackNavigationProp<
@@ -22,50 +21,14 @@ type NewsListItemNavigationProp = StackNavigationProp<
 >
 
 const { width } = Dimensions.get('window')
-export const NewsListItem = ({ item,theme }: NewsListItemProps) => {
+export const NewsListItem = ({ item }: NewsListItemProps) => {
+  const theme = useTheme()
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
   const hasDate = item.published || item.modified
 
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
-  const styles = StyleSheet.create({
-    card: {
-      ...Layout.flex.full,
-      ...Layout.flex.row,
-      backgroundColor: theme['background-basic-color-1'],
-      borderRadius: 2,
-      borderColor: theme['border-basic-color-3'],
-      borderWidth: 1,
-      padding: Sizing.t5,
-      marginBottom: Sizing.t2,
-    },
-    text: {
-      ...Layout.flex.full,
-    },
-    title: {
-      ...Typography.fontWeight.bold,
-      ...Typography.fontSize.lg,
-      marginBottom: 2,
-      color: theme['text-basic-color']
-
-    },
-    subtitle: {
-      ...Typography.fontSize.xs,
-      color: theme['text-hint-color'],
-      marginBottom: Sizing.t2,
-    },
-    intro: {
-      ...Typography.fontSize.sm,
-      color: theme['text-disabled-color'],
-    },
-    image: {
-      borderRadius: 3,
-      width: 80,
-      height: 80,
-      marginRight: Sizing.t5,
-    },
-  })
   
 
 
@@ -74,19 +37,19 @@ export const NewsListItem = ({ item,theme }: NewsListItemProps) => {
     <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
-      <View style={styles.card}>
+      <View style={[styles.card, { backgroundColor: theme['background-basic-color-1'], borderColor: theme['border-basic-color-3']}]}>
         {width > 320 && item.fullImageUrl ? (
           <Image src={item.fullImageUrl} style={styles.image} />
         ) : null}
         <View style={styles.text}>
           <View>
-            <Text style={styles.title}>{item.header}</Text>
-            <Text style={styles.subtitle}>
+            <Text style={[styles.title, { color: theme['text-basic-color'] }]}>{item.header}</Text>
+            <Text style={[styles.subtitle, { color: theme['text-hint-color'] }]}>
               {item.author}
               {item.author && displayDate ? ' • ' : ''}
               {displayDate}
             </Text>
-            <Text ellipsizeMode="tail" numberOfLines={2} style={styles.intro}>
+            <Text ellipsizeMode="tail" numberOfLines={2} style={[styles.intro, { color: theme['text-disabled-color'] }]}>
               {item.intro}
             </Text>
           </View>
@@ -95,3 +58,41 @@ export const NewsListItem = ({ item,theme }: NewsListItemProps) => {
     </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  card: {
+    ...Layout.flex.full,
+    ...Layout.flex.row,
+    
+    borderRadius: 2,
+    
+    borderWidth: 1,
+    padding: Sizing.t5,
+    marginBottom: Sizing.t2,
+  },
+  text: {
+    ...Layout.flex.full,
+  },
+  title: {
+    ...Typography.fontWeight.bold,
+    ...Typography.fontSize.lg,
+    marginBottom: 2,
+    
+
+  },
+  subtitle: {
+    ...Typography.fontSize.xs,
+    
+    marginBottom: Sizing.t2,
+  },
+  intro: {
+    ...Typography.fontSize.sm,
+  
+  },
+  image: {
+    borderRadius: 3,
+    width: 80,
+    height: 80,
+    marginRight: Sizing.t5,
+  },
+})

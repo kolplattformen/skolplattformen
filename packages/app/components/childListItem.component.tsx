@@ -10,7 +10,7 @@ import {
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 
-import { Avatar, Button, Card, Text, useTheme } from '@ui-kitten/components'
+import { Avatar, Button, Card, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -28,51 +28,14 @@ import { RootStackParamList } from './navigation.component'
 interface ChildListItemProps {
   child: Child
   color: string
-  theme: Record<string,string>
 }
 type ChildListItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Children'
 >
-export const ChildListItem = ({ child, color,theme }: ChildListItemProps) => {
+export const ChildListItem = ({ child, color }: ChildListItemProps) => {
 
-  const styles = StyleSheet.create({
-    card: {
-      marginBottom: Sizing.t5,
-    },
-    cardHeader: {
-      ...Layout.flex.row,
-      ...Layout.mainAxis.center,
-    },
-    cardAvatar: { margin: Sizing.t5, marginRight: 0 },
-    cardHeaderText: { margin: Sizing.t5, flex: 1 },
-    itemFooter: {
-      ...Layout.flex.row,
-      ...Layout.crossAxis.evenly,
-      paddingVertical: Sizing.t2,
-      borderRadius: 5,
-      margin: 0,
-    },
-    itemFooterAbsence: {
-      ...Layout.mainAxis.flexStart,
-      marginTop: Sizing.t4,
-    },
-    item: {
-      paddingHorizontal: 0,
-      
-      
-    },
-    loaded: {
-      color: Colors.neutral.black,
-    },
-    loading: {
-      color: '#555',
-    },
-    error: {
-      color: '#500',
-    },
-    pending: {},
-  })
+  
   
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
@@ -266,3 +229,41 @@ export const ChildListItem = ({ child, color,theme }: ChildListItemProps) => {
     </Card>
   )
 }
+
+const styles = StyleSheet.create({
+  card: {
+    marginBottom: Sizing.t5,
+  },
+  cardHeader: {
+    ...Layout.flex.row,
+    ...Layout.mainAxis.center,
+  },
+  cardAvatar: { margin: Sizing.t5, marginRight: 0 },
+  cardHeaderText: { margin: Sizing.t5, flex: 1 },
+  itemFooter: {
+    ...Layout.flex.row,
+    ...Layout.crossAxis.evenly,
+    paddingVertical: Sizing.t2,
+    borderRadius: 5,
+    margin: 0,
+  },
+  itemFooterAbsence: {
+    ...Layout.mainAxis.flexStart,
+    marginTop: Sizing.t4,
+  },
+  item: {
+    paddingHorizontal: 0,
+
+
+  },
+  loaded: {
+    color: Colors.neutral.black,
+  },
+  loading: {
+    color: '#555',
+  },
+  error: {
+    color: '#500',
+  },
+  pending: {},
+})
