@@ -1,5 +1,5 @@
 import { useNotifications } from '@skolplattformen/api-hooks'
-import { List, useTheme } from '@ui-kitten/components'
+import { List} from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { useChild } from './childContext.component'
