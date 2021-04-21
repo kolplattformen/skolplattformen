@@ -21,7 +21,7 @@
             "OpenManually": "Öppna BankID manuellt",
             "OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
             "OpenOnThisDevice": "Öppna BankID på denna enhet",
-            "Waiting": "Väntar på BankID..."
+            "Waiting": "Väntar på BankID…"
         },
         "chooseLoginMethod": "Välj inloggningsmetod",
         "loginAsTestUser": "Logga in som testanvändare",
@@ -68,7 +68,7 @@
         "abort": "Avbryt",
         "changeLanguage": "Byt språk",
         "confirm": "Bekräfta",
-        "loading": "Laddar...",
+        "loading": "Laddar…",
         "logout": "Logga ut",
         "send": "Skicka",
         "settings": "Inställningar",
