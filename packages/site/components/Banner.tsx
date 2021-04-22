@@ -38,7 +38,7 @@ const Banner = () => {
                 <img
                   src={shape3}
                   alt=""
-                  className="absolute -bottom-2 left-8 motion-safe:animate-pulse"
+                  className="absolute left-48 top-18 motion-safe:animate-pulse"
                 />
                 <img
                   src={shape4}
