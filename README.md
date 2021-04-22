@@ -72,7 +72,9 @@ We believe that by working together, we can leverage each other's skills and exp
 
 ## Money
 
-We're an open source project and we still charge money for our app. Isn't this a contradiction? No. Open doesn't mean free. We want to continue to maintain this project in a sustainable way, which means that someone needs to pay for the köttbullar for the kids. Our goal is to be able to reimburse all contributions to the project. Of course, you are always welcome to build the app from the source code and do what you want with it!
+Even if we definitely stand by our claim that Open Source doesn't mean free, we have now, in fact, made the app free on both App Store and Google Play store. We decided to try a different model of making money to reimburse all our contributors, both coders and other, through voluntary donations on Patreon. Please support us at [https://patreon.com/oppnaskolplattformen](https://patreon.com/oppnaskolplattformen) ❤️
+
+__We're an open source project and we still charge money for our app. Isn't this a contradiction? No. Open doesn't mean free. We want to continue to maintain this project in a sustainable way, which means that someone needs to pay for the köttbullar for the kids. Our goal is to be able to reimburse all contributions to the project. Of course, you are always welcome to build the app from the source code and do what you want with it!__
 
 ## Disclaimer
 
