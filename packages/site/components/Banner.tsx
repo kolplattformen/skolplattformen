@@ -115,7 +115,7 @@ const Banner = () => {
               </NextLink>
             </p>
           </div>
-          <div className="flex justify-center pr-0 motion-safe:animate-bounce-slow md:pr-4 xl:pr-0">
+          <div className="flex items-start justify-center pr-0 motion-safe:animate-bounce-slow md:pr-4 xl:pr-0">
             <Image src={phone} width="350" height="712" alt="" />
           </div>
         </div>
