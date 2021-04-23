@@ -22,7 +22,7 @@ const Banner = () => {
     <div className="header">
       <div className="relative max-w-6xl mx-auto mt-5 mb-20 lg:pt-32 lg:mb-52">
         <div className="px-5 grid grid-cols-1 lg:grid-cols-2 lg:px-0 xl:gap-12 lg:gap-1 gap-12   ">
-          <div className=" pl-0 md:pl-4 xl:pl-0">
+          <div className="pl-0 md:pl-4 xl:pl-0">
             <div className="hidden select-none lg:block">
               <div>
                 <img
@@ -65,12 +65,12 @@ const Banner = () => {
             <H1>{intl.formatMessage({ id: 'general.title' })}</H1>
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
             {!!intl.formatMessage({ id: 'general.flashtitle' }) && (
-              <>
-                <h2 className="text-2xl md:text-4xl font-bold leading-tight text-gray-800">
+              <div className="mt-5">
+                <h2 className="mb-4 text-2xl font-bold leading-tight text-gray-800 md:text-4xl">
                   {intl.formatMessage({ id: 'general.flashtitle' })}
                 </h2>
                 <p>{intl.formatMessage({ id: 'general.flashtext' })}</p>
-              </>
+              </div>
             )}
             <p className="flex items-center py-4 sm:flex-row space-x-2 lg:space-x-4">
               <Link.External
