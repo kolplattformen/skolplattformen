@@ -15,7 +15,7 @@ import { H1 } from './Typography'
 import { useIntl } from 'react-intl'
 import { ButtonLinkPatreon } from './ButtonLink'
 
-const Banner = () => {
+const Banner = (): JSX.Element => {
   const intl = useIntl()
 
   return (

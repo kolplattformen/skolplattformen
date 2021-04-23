@@ -8,7 +8,7 @@ import PricingTemp from '../components/PricingTemp'
 import Testimonials from '../components/Testimonials'
 import TimelineLatest from '../components/TimelineLatest'
 
-const HomePage = () => {
+const HomePage = (): JSX.Element => {
   return (
     <>
       <Banner />
