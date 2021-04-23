@@ -21,11 +21,11 @@
             "OpenManually": "BankID manuell öffnen",
             "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
             "OpenOnThisDevice": "BankID auf dieses Gerät benutzen",
-            "Waiting": "Wartet auf BankID..."
+            "Waiting": "Wartet auf BankID…"
         },
         "chooseLoginMethod": "Anmeldemethode wählen",
         "loginAsTestUser": "Als Testbenutzer einloggen",
-        "loginFailed": "Die Anmeldung ist fehlgeschlagen, versuche nochmal!",
+        "loginFailed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche nochmal.",
         "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
         "subtitle": "Die {{word}} Alternative",
         "words": {
@@ -68,12 +68,12 @@
         "abort": "Abbrechen",
         "changeLanguage": "Sprache ändern",
         "confirm": "Bestätigen",
-        "loading": "Wird geladen...",
+        "loading": "Wird geladen…",
         "logout": "Ausloggen",
         "send": "Senden",
         "settings": "Einstellungen",
         "socialSecurityNumber": "Personenkennzeichen",
-        "title": "Öppna skolplattformen"
+        "title": "Offenes Skolplattformen"
     },
     "language": {
         "changeLanguage": "Sprache ändern",
