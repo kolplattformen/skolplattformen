@@ -42,7 +42,7 @@
         "bankid": {
             "OpenManually": "En attente de BankID",
             "OpenOnAnotherDevice": "Ouvrez BankID sur un autre appareil",
-            "Waiting": "En attendent de BankID…",
+            "Waiting": "En attente de BankID…",
             "OpenOnThisDevice": "Ouvrez BankID sur cet appareil"
         },
         "loginFailed": "La connexion a échoué, veuillez réessayer.",
