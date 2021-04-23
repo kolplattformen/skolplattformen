@@ -1,6 +1,6 @@
 {
     "general": {
-        "loading": "Bezig met laden...",
+        "loading": "Bezig met laden…",
         "settings": "Instellingen",
         "send": "Sturen",
         "title": "Öppna skolplattformen",
@@ -12,7 +12,7 @@
     },
     "auth": {
         "placeholder_SocialSecurityNumber": "Jouw burgerservicenummer",
-        "loginFailed": "Inloggen mislukt, probeer het opnieuw!",
+        "loginFailed": "Inloggen mislukt. Probeer het opnieuw.",
         "loginAsTestUser": "Inloggen als testgebruiker",
         "words": {
             "working": "werkende",
@@ -37,7 +37,7 @@
         "bankid": {
             "OpenOnThisDevice": "Open BankID op dit apparaat",
             "OpenOnAnotherDevice": "Open BankID op een andere apparaat",
-            "Waiting": "Watchen op BankID...",
+            "Waiting": "Watchen op BankID…",
             "OpenManually": "Open BankID handmatig"
         },
         "chooseLoginMethod": "Kies inlogmethode"
@@ -88,8 +88,8 @@
         "showCalenderActions": "Agenda-acties weergeven",
         "approveAccessToCalender": "Je moet de toegang tot je agenda goedkeuren",
         "saveToCalenderError": "Er is iets fout gegaan",
-        "saveToCalenderSuccess": "✔️ Opgeslagen in agenda",
-        "saveToCalender": "Opslaan in agenda"
+        "saveToCalenderSuccess": "✔️ Opgeslagen in kalender",
+        "saveToCalender": "Opslaan in kalender"
     },
     "notifications": {
         "notificationTitle": "Melding: {{message}} ({{dateCreated}})"
