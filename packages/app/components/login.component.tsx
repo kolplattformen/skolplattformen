@@ -171,7 +171,7 @@ export const Login = () => {
         <ButtonGroup style={styles.loginButtonGroup}>
           <Button
             onPress={() => startLogin(socialSecurityNumber)}
-            style={styles.loginButton}
+            style={[styles.button, styles.loginButton]}
             appearance="ghost"
             disabled={loginMethodIndex === 1 && !valid}
             status="primary"
@@ -182,7 +182,7 @@ export const Login = () => {
           </Button>
           <Button
             onPress={selectLoginMethod}
-            style={styles.loginMethodButton}
+            style={[styles.button, styles.loginMethodButton]}
             appearance="ghost"
             status="primary"
             accessoryLeft={SelectIcon}
@@ -202,6 +202,7 @@ export const Login = () => {
           </Text>
 
           <Button
+            style={styles.button}
             onPress={() => {
               cancelLoginRequest()
               showModal(false)
@@ -239,4 +240,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   bankIdLoading: { margin: 10 },
+  button: {
+    backgroundColor: Colors.primary.primary600,
+    borderColor: Colors.primary.primary600,
+  },
 })

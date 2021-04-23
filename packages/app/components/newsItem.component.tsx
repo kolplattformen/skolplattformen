@@ -11,6 +11,7 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { Colors, Layout, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { Image } from './image.component'
@@ -75,9 +76,19 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
           <View style={styles.body}>
             <Markdown
               style={{
-                body: { color: '#1F2937', fontSize: 16, lineHeight: 26 },
-                heading1: { color: '#1F2937', fontSize: 20 },
-                heading2: { color: '#1F2937', fontSize: 18 },
+                body: {
+                  ...Typography.fontSize.base,
+                  color: Colors.neutral.gray800,
+                  lineHeight: 26,
+                },
+                heading1: {
+                  ...Typography.fontSize.xl,
+                  color: Colors.neutral.gray800,
+                },
+                heading2: {
+                  ...Typography.fontSize.lg,
+                  color: Colors.neutral.gray800,
+                },
               }}
             >
               {data.body}
@@ -94,42 +105,42 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
-    backgroundColor: '#fff',
+    ...Layout.flex.full,
+    backgroundColor: Colors.neutral.white,
   },
   topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    ...Layout.flex.row,
+    ...Layout.crossAxis.spaceBetween,
   },
   article: {
-    padding: 20,
+    padding: Sizing.t5,
   },
   scrollView: {
-    flex: 1,
+    ...Layout.flex.full,
   },
   image: {
     width: '100%',
     minHeight: 300,
-    marginTop: 16,
+    marginTop: Sizing.t4,
   },
   title: {
+    ...Typography.fontWeight.bold,
     fontSize: 30,
-    fontWeight: '700',
     marginBottom: 8,
   },
   subtitle: {
-    color: '#6B7280',
-    fontSize: 12,
+    ...Typography.fontSize.xs,
+    color: Colors.neutral.gray600,
   },
   strong: {
-    color: '#6B7280',
-    fontSize: 12,
-    fontWeight: '700',
+    ...Typography.fontSize.xs,
+    ...Typography.fontWeight.bold,
+    color: Colors.neutral.gray600,
   },
   published: {
-    marginBottom: 4,
+    marginBottom: Sizing.t1,
   },
   body: {
-    marginTop: 16,
+    marginTop: Sizing.t4,
   },
 })

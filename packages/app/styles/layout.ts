@@ -10,7 +10,7 @@ export const mainAxis: Record<MainAxis, ViewStyle> = {
   },
 }
 
-type CrossAxis = 'center' | 'flexEnd' | 'evenly'
+type CrossAxis = 'center' | 'flexEnd' | 'evenly' | 'spaceBetween'
 export const crossAxis: Record<CrossAxis, ViewStyle> = {
   center: {
     justifyContent: 'center',
@@ -20,6 +20,9 @@ export const crossAxis: Record<CrossAxis, ViewStyle> = {
   },
   flexEnd: {
     justifyContent: 'flex-end',
+  },
+  spaceBetween: {
+    justifyContent: 'space-between',
   },
 }
 

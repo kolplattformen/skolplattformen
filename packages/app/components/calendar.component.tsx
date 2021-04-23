@@ -4,6 +4,7 @@ import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
+import { Colors, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { SaveToCalendar } from './saveToCalendar.component'
@@ -22,7 +23,6 @@ export const Calendar = () => {
     </View>
   ) : (
     <List
-      contentContainerStyle={styles.contentContainer}
       data={data.sort((a, b) =>
         a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0
       )}
@@ -31,9 +31,13 @@ export const Calendar = () => {
         <ListItem
           disabled={true}
           title={`${item.title}`}
-          description={`${moment(item.startDate).format(
-            'YYYY-MM-DD'
-          )} (${moment(item.startDate).fromNow()})`}
+          description={(props) => (
+            <Text style={[props?.style, styles.description]}>
+              {`${moment(item.startDate).format('YYYY-MM-DD')} (${moment(
+                item.startDate
+              ).fromNow()})`}
+            </Text>
+          )}
           accessoryLeft={CalendarOutlineIcon}
           accessoryRight={() => <SaveToCalendar event={item} />}
         />
@@ -55,7 +59,8 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  contentContainer: {
-    padding: 10,
+  description: {
+    ...Typography.fontSize.xs,
+    color: Colors.neutral.gray500,
   },
 })
