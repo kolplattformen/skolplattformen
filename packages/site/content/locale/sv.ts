@@ -19,7 +19,6 @@ const sv = {
         via Patreon? Vi får väl se... Fram till den 29 april är appen gratis
         för både iOS och Android. Därefter måste vi bestämma oss för om det
         var en bra idé. Så tipsa alla dina vänner! Och stöd oss gärna på Patreon ❤️`,
-}
+} as const
 
 export default sv
-

@@ -1,15 +1,16 @@
 import Head from 'next/head'
-import { ReactNode } from 'react'
 import favImg from '../assets/img/favicon.png'
 import logo from '../assets/img/logo.png'
 import { GA_TRACKING_ID } from './gtag'
 
 interface LayoutProps {
-  children: ReactNode
   pageTitle: string
 }
 
-const Layout = ({ children, pageTitle }: LayoutProps) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  pageTitle,
+}): JSX.Element => {
   return (
     <div>
       <Head>

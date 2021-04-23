@@ -16,7 +16,7 @@ interface TimelineProps {
   events: TimelineEvent[]
 }
 
-const Timeline = ({ events }: TimelineProps) => {
+const Timeline = ({ events }: TimelineProps): JSX.Element => {
   return (
     <ul className="max-w-2xl border-gray-200 md:mx-auto md:border-l-2 space-y-4 md:space-y-12">
       {events.map(({ date, media, importantDates, overview }) => (
@@ -64,7 +64,7 @@ const Timeline = ({ events }: TimelineProps) => {
                 </ul>
               </div>
             )}
-            {media?.length > 0 && (
+            {media.length > 0 && (
               <div className="mt-4 text-sm">
                 <div className="font-bold">Media</div>
                 <ul className="pl-5 mt-2 list-disc space-y-2">

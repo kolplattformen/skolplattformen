@@ -20,8 +20,8 @@ interface Event {
 export interface TimelineEvent {
   overview: ReactNode
   date: string
-  importantDates?: Event[]
-  media?: Event[]
+  importantDates: Event[]
+  media: Event[]
 }
 
 export const events: TimelineEvent[] = [
@@ -488,6 +488,7 @@ export const events: TimelineEvent[] = [
           'Avslag på begäran om dokumentation med hänvisning till sekretess men utan lagrum',
       },
     ],
+    media: [],
   },
   {
     overview: (
@@ -505,5 +506,6 @@ export const events: TimelineEvent[] = [
           'Begäran om dokumentation av API (skickat till Kontaktcenter Stockholm)',
       },
     ],
+    media: [],
   },
 ]

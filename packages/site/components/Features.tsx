@@ -41,7 +41,7 @@ const FEATURES_DATA = [
   },
 ]
 
-const Features = () => {
+const Features = (): JSX.Element => {
   const swiperParams: SwiperOptions = {
     slidesPerView: 3,
     slidesPerGroup: 3,
@@ -83,7 +83,7 @@ const Features = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-5 md:px-0" id="funktioner">
+    <section className="max-w-6xl px-5 mx-auto md:px-0" id="funktioner">
       <div className="max-w-2xl mx-auto">
         <SectionTitle
           title="Enkelhet och snabbhet"
@@ -91,14 +91,14 @@ const Features = () => {
         />
       </div>
       <Swiper className="feature-carousel" {...swiperParams}>
-        {FEATURES_DATA.map((feature) => (
-          <SwiperSlide key={feature.title}>
-            {({ isActive }) => (
+        {FEATURES_DATA.map(({ title, text, image }) => (
+          <SwiperSlide key={title}>
+            {({ isActive }: { isActive: boolean }) => (
               <FeatureCard
                 isActive={isActive}
-                title={feature.title}
-                text={feature.text}
-                image={feature.image}
+                title={title}
+                text={text}
+                image={image}
               />
             )}
           </SwiperSlide>

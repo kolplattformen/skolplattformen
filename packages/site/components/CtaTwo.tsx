@@ -4,7 +4,7 @@ import DownloadButtons from './DownloadButtons'
 import Section from './Section'
 import { H2 } from './Typography'
 
-const CtaTwo = () => {
+const CtaTwo = (): JSX.Element => {
   return (
     <Section>
       <Image src={img1} width="668" height="500" alt="" />

@@ -3,7 +3,7 @@ interface SectionTitleProps {
   title: string
 }
 
-const SectionTitle = ({ text, title }: SectionTitleProps) => {
+const SectionTitle = ({ text, title }: SectionTitleProps): JSX.Element => {
   return (
     <div className="mb-16 text-center space-y-5">
       <h2 className="text-4xl md:text-5xl font-bold leading-tight text-gray-800">
