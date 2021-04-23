@@ -10,10 +10,22 @@
             "OpenManually": "Manu BankID aperire"
         },
         "words": {
-            "awaited": "exspectati",
-            "agile": "agiles",
-            "better": "meliores",
-            "cheap": "viles"
+            "awaited": "exspectatus",
+            "agile": "agilis",
+            "better": "melior",
+            "cheap": "vilis",
+            "cooler": "amatior",
+            "working": "operans",
+            "simple": "simplus",
+            "rebellious": "rebellis",
+            "open": "apertus",
+            "imperfect": "imperfectus",
+            "fun": "oblectans",
+            "free": "liber",
+            "fast": "celer",
+            "fantastic": "mirificus",
+            "enlightened": "illuminatus",
+            "first": "primus"
         }
     },
     "abscense": {
@@ -32,5 +44,14 @@
         "preSchool": "Praeschola",
         "leisureTimeCentre": "Centrum otii",
         "compulsorySchool": "Schola obligatoria"
+    },
+    "children": {
+        "loadingErrorHeading": "Eheu!"
+    },
+    "calender": {
+        "showCalenderActions": "Actiones calendarii exhibere",
+        "saveToCalenderSuccess": "✔️ In calendarium servatus",
+        "saveToCalender": "In calendarium servare",
+        "approveAccessToCalender": "Aditum in calendarium approbare debes"
     }
 }
