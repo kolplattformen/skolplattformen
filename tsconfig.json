@@ -4,11 +4,13 @@
     "module": "CommonJS",
     "declaration": true,
     "outDir": "./dist",
+    "resolveJsonModule": true,
     "strict": true,
     "sourceMap": true
   },
   "include": [
-    "src"
+    "src",
+    "src/**/*.json"
   ],
   "exclude": [
     "node_modules",

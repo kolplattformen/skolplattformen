@@ -90,22 +90,22 @@ describe('parse', () => {
   it('Träningsskolans ämnesområden', () => {
     expect(parse('KOM')).toEqual({
       code: 'KOM',
-      category: 'Träningsskolans ämnesområden',
+      category: 'Träningsskolan',
       name: 'Kommunikation',
     })
     expect(parse('MOT')).toEqual({
       code: 'MOT',
-      category: 'Träningsskolans ämnesområden',
+      category: 'Träningsskolan',
       name: 'Motorik',
     })
     expect(parse('VAA')).toEqual({
       code: 'VAA',
-      category: 'Träningsskolans ämnesområden',
+      category: 'Träningsskolan',
       name: 'Vardagsaktiviteter',
     })
     expect(parse('VEU')).toEqual({
       code: 'VEU',
-      category: 'Träningsskolans ämnesområden',
+      category: 'Träningsskolan',
       name: 'Verklighetsuppfattning',
     })
   })
