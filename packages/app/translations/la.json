@@ -4,10 +4,14 @@
         "loginFailed": "Nomen dare non possibilis erat. Denuo conare.",
         "chooseLoginMethod": "Methodum nomen dantem legere",
         "bankid": {
-            "Waiting": "Pro BankID expectans…",
+            "Waiting": "Pro BankID exspectans…",
             "OpenOnThisDevice": "In hac machina BankID aperire",
             "OpenOnAnotherDevice": "In machina differens BankID aperire",
             "OpenManually": "Manu BankID aperire"
+        },
+        "words": {
+            "awaited": "exspectatus",
+            "agile": "agilis"
         }
     },
     "abscense": {
