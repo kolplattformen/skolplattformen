@@ -66,6 +66,7 @@
     },
     "general": {
         "abort": "Avbryt",
+        "back": "Tillbaka",
         "changeLanguage": "Byt språk",
         "confirm": "Bekräfta",
         "loading": "Laddar…",

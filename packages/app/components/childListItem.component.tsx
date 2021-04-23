@@ -111,6 +111,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             initialRouteName: translate('navigation.news'),
           })
         }
+        accessible={true}
+        accessibilityRole={'button'}
+        accessibilityLabel={`${translate('navigation.news')} ${studentName(child.name)}`}
         accessoryLeft={NewsIcon}
       >
         {`${(news || []).length}`}
@@ -126,6 +129,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             initialRouteName: translate('navigation.notifications'),
           })
         }
+        accessible={true}
+        accessibilityRole={'button'}
+        accessibilityLabel={`${translate('navigation.notifications')} ${studentName(child.name)}`}
         accessoryLeft={NotificationsIcon}
       >
         {`${(notifications || []).length}`}
@@ -141,6 +147,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             initialRouteName: translate('navigation.calender'),
           })
         }
+        accessible={true}
+        accessibilityRole={'button'}
+        accessibilityLabel={`${translate('navigation.calendar')} ${studentName(child.name)}`}
         accessoryLeft={CalendarOutlineIcon}
       >
         {`${(calendar || []).length}`}
@@ -156,6 +165,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             initialRouteName: translate('navigation.menu'),
           })
         }
+        accessible={true}
+        accessibilityRole={'button'}
+        accessibilityLabel={`${translate('navigation.menu')} ${studentName(child.name)}`}
         accessoryLeft={MenuIcon}
       />
     </View>
@@ -212,6 +224,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           size="small"
           onPress={() => navigation.navigate('Absence', { child })}
+          accessible={true}
+          accessibilityRole={'button'}
+          accessibilityLabel={`${translate('abscense.title')} ${studentName(child.name)}`}
         >
           {translate('abscense.title')}
         </Button>

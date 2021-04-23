@@ -187,6 +187,9 @@ export const Login = () => {
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
+            accessible={true}
+            accessibilityRole={'spinbutton'}
+            accessibilityLabel={translate('auth.chooseLoginMethod')}
           />
         </ButtonGroup>
       </View>

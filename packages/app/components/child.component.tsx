@@ -140,7 +140,11 @@ export const Child = () => {
   const { child, initialRouteName } = route.params
 
   const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+    <TopNavigationAction
+      icon={BackIcon} onPress={navigateBack}
+      accessible={true}
+      accessibilityRole={'button'}
+      accessibilityLabel={translate('general.back')} />
   )
 
   const navigateBack = () => {

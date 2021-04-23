@@ -16,7 +16,9 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
 
   const renderToggleButton = () => (
     <Button
-      accessibilityLabel={translate('calender.showCalenderActions')}
+      accessibilityLabel={`${translate('calender.showCalenderActions')} ${event.title}`}
+      accessible={true}
+      accessibilityRole={'button'}
       onPress={() => setVisible(true)}
       appearance="ghost"
       accessoryLeft={MoreIcon}

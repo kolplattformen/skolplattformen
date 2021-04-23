@@ -83,7 +83,12 @@ export const Children = () => {
               title={translate('children.title')}
               alignment="center"
               accessoryRight={() => (
-                <TopNavigationAction icon={SettingsIcon} onPress={settings} />
+                <TopNavigationAction
+                  icon={SettingsIcon}
+                  onPress={settings}
+                  accessible={true}
+                  accessibilityRole={'button'}
+                  accessibilityLabel={translate('general.settings')} />
               )}
             />
             <Divider />

@@ -52,7 +52,9 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                 <TopNavigationAction
                   icon={GlobeIcon}
                   onPress={() => navigation.navigate('SetLanguage')}
-                />
+                  accessible={true}
+                  accessibilityRole={'button'}
+                  accessibilityLabel={translate('language.changeLanguage')} />
               )}
             />
             <View style={styles.content}>

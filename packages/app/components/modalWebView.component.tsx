@@ -12,6 +12,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
 import { BackIcon, ExternalLinkIcon } from './icon.component'
+import { translate } from '../utils/translation'
 
 interface ModalWebViewProps {
   url: string
@@ -56,13 +57,23 @@ export const ModalWebView = ({
       <SafeAreaView style={styles.container}>
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={closeModal}>
+            <TouchableOpacity 
+              accessibilityLabel={`${translate('general.back')}`}
+              accessible={true}
+              accessibilityRole={'button'}
+              onPress={closeModal}
+            >
               <BackIcon style={styles.backIcon} fill="#333333" />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
               {title}
             </Text>
-            <TouchableOpacity onPress={openInApp}>
+            <TouchableOpacity
+              onPress={openInApp}
+              accessibilityLabel={`${translate('general.openInBrowser')}`}
+              accessible={true}
+              accessibilityRole={'button'}
+            >
               <ExternalLinkIcon style={styles.shareIcon} fill="#333333" />
             </TouchableOpacity>
           </View>

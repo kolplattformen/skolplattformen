@@ -66,10 +66,12 @@
     },
     "general": {
         "abort": "Abort",
+        "back": "Back",
         "changeLanguage": "Change language",
         "confirm": "Confirm",
         "loading": "Loading…",
         "logout": "Log out",
+        "openInBrowser": "Open in web browser",
         "send": "Send",
         "settings": "Settings",
         "socialSecurityNumber": "Personal identity number",
