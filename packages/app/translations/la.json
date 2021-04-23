@@ -10,8 +10,10 @@
             "OpenManually": "Manu BankID aperire"
         },
         "words": {
-            "awaited": "exspectatus",
-            "agile": "agilis"
+            "awaited": "exspectati",
+            "agile": "agiles",
+            "better": "meliores",
+            "cheap": "viles"
         }
     },
     "abscense": {
