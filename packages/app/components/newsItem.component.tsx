@@ -78,12 +78,21 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
               {displayDate(newsItem.modified)}
             </Text>
           )}
-          <View style={styles.body}>
+          <View
+            style={[
+              styles.body,
+              { backgroundColor: theme['background-basic-color-1'] },
+            ]}
+          >
             <Markdown
               style={{
-                body: { color: '#1F2937', fontSize: 16, lineHeight: 26 },
-                heading1: { color: '#1F2937', fontSize: 20 },
-                heading2: { color: '#1F2937', fontSize: 18 },
+                body: {
+                  color: theme['text-basic-color'],
+                  fontSize: 16,
+                  lineHeight: 26,
+                },
+                heading1: { color: theme['text-hint-color'], fontSize: 20 },
+                heading2: { color: theme['text-hint-color'], fontSize: 18 },
               }}
             >
               {data.body}
@@ -101,7 +110,6 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   topContainer: {
     flexDirection: 'row',
@@ -112,7 +120,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor: '#FFF',
   },
   image: {
     width: '100%',
@@ -123,14 +130,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginBottom: 8,
-    color: '#222B45',
   },
   subtitle: {
-    color: '#6B7280',
     fontSize: 12,
   },
   strong: {
-    color: '#6B7280',
     fontSize: 12,
     fontWeight: '700',
   },
