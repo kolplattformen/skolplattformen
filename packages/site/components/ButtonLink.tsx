@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react'
 
 type ButtonLinkProps = Pick<HTMLAnchorElement, 'href' | 'target'>
 
