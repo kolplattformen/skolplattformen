@@ -219,7 +219,6 @@
   "misc": {
     "Lunch": "Lunch",
     "Prandium": "Lunch",
-    "MTID": "Mentor time",
-    "unknown": "Unknown"
+    "MTID": "Mentor time"
   }
 }
