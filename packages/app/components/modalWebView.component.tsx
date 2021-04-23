@@ -7,10 +7,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  SyntheticEvent,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
+import { WebViewNavigationEvent } from 'react-native-webview/lib/WebViewTypes'
 import { BackIcon, ExternalLinkIcon } from './icon.component'
 
 interface ModalWebViewProps {
@@ -73,7 +73,7 @@ export const ModalWebView = ({
             source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
             thirdPartyCookiesEnabled={sharedCookiesEnabled}
-            onLoad={(event: SyntheticEvent) => {
+            onLoad={(event: WebViewNavigationEvent) => {
               setTitle(event.nativeEvent.title)
             }}
           />
