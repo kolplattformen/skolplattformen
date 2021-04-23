@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/kolplattformen/skolplattformen/compare/v1.24.0...v1.24.1) (2021-04-23)
+
+
+### Bug Fixes
+
+* **site:** screenshot alignment ([#326](https://github.com/kolplattformen/skolplattformen/issues/326)) ([e777b69](https://github.com/kolplattformen/skolplattformen/commit/e777b693c337722e381141e71825047e89cad41f))
+
 # [1.24.0](https://github.com/kolplattformen/skolplattformen/compare/v1.23.0...v1.24.0) (2021-04-21)
 
 
