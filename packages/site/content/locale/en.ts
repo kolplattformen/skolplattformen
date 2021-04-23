@@ -18,7 +18,6 @@ const en = {
         through Patreon? We'll see... Until April 29:th, the app is free
         on both iOS and Android. After that we have to decide if it was a
         good idea or not. So tip yor friends! And please support us on Patreon ❤️`,
-}
+} as const
 
 export default en
-

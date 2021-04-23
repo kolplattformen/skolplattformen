@@ -1,49 +1,52 @@
-const QA = () => {
+const QA = (): JSX.Element => {
   return (
     <div className="header">
       <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose">
         <h1>Frågor och svar om Öppna skolplattformen</h1>
 
-        <h2>Om Utbildningsförvaltningens juridiska utredning och polisanmälan</h2>
+        <h2>
+          Om Utbildningsförvaltningens juridiska utredning och polisanmälan
+        </h2>
         <p>
           Den 15 april släppte Utbildningsförvaltningen sin juridiska utredning
           av Öppna skolplattformen och den 16 april ska de ha polisanmält oss.
           Vi är förvånade över att utbildningsdirektör Lena Holmdahl agerar så,
-          men tycker samtidigt att det ska bli skönt att någon annan än Utbildningsförvaltningen
-          granskar ärendet. Därmed kanske vi kan få stopp på några av de missförstånd
-          som nu sprids av förvaltningen, som att vi skulle ha bett om tillgång
-          till Skolplattformens API (vi bad om <u>dokumentation</u> av API:et,
-          vilket är en helt annan sak. Det vill de inte lämna ut och det beslutet
-          har vi överklagat till kammarrätten).
-          Nedan kommenterar vi delar av Utbildningsförvaltningens eget fråga-svar-dokument.
+          men tycker samtidigt att det ska bli skönt att någon annan än
+          Utbildningsförvaltningen granskar ärendet. Därmed kanske vi kan få
+          stopp på några av de missförstånd som nu sprids av förvaltningen, som
+          att vi skulle ha bett om tillgång till Skolplattformens API (vi bad om{' '}
+          <u>dokumentation</u> av API:et, vilket är en helt annan sak. Det vill
+          de inte lämna ut och det beslutet har vi överklagat till
+          kammarrätten). Nedan kommenterar vi delar av Utbildningsförvaltningens
+          eget fråga-svar-dokument.
         </p>
         <h3>Vad handlar Stockholms stads utredning om?</h3>
         <h4>Utbildningsförvaltningens svar</h4>
         <p>
-          Stockholms stad har gjort en utredning av juridiken kring “Öppna skolplattformens”
-          betal-app, som utan stadens medgivande behandlar information från
-          Stockholms stads skolplattform.
+          Stockholms stad har gjort en utredning av juridiken kring “Öppna
+          skolplattformens” betal-app, som utan stadens medgivande behandlar
+          information från Stockholms stads skolplattform.
         </p>
         <h4>Vår kommentar</h4>
         <p>
-          Detta är ett felaktigt påstående. Vår app Öppna skolplattformen använder
-          ett av Stockholms stads tillgängliggjorda API:er. Appen kommer åt den
-          information som antingen är allmänt tillgänglig eller som användaren
-          efter stark autentisering (i detta fall BankID) själv begär från
-          Stockholms stads skolplattform.
-          Detta konstaterades redan i februari av de externa it-experter som
-          Utbildningsförvaltningen själva anlitat för att inspektera vår (öppet tillgängliga) källkod.
+          Detta är ett felaktigt påstående. Vår app Öppna skolplattformen
+          använder ett av Stockholms stads tillgängliggjorda API:er. Appen
+          kommer åt den information som antingen är allmänt tillgänglig eller
+          som användaren efter stark autentisering (i detta fall BankID) själv
+          begär från Stockholms stads skolplattform. Detta konstaterades redan i
+          februari av de externa it-experter som Utbildningsförvaltningen själva
+          anlitat för att inspektera vår (öppet tillgängliga) källkod.
         </p>
         <h2>Om appen Öppna skolplattformen</h2>
         <h3>Vad är Öppna skolplattformen?</h3>
         <p>
           En app som ger föräldrar snabbare och lättare tillgång till sin egen
-          information på Stockholms stads skolplattform. Appen är
-          som ett lager ovanpå den befintliga plattformen som gör att vi kan visa
-          samma information, men snabbare och med mindre krångel. Vi har byggt
-          den för föräldrar. Vi har inte byggt något som kan användas av lärare
-          eller elever, helt enkelt för att vi har utgått från den information
-          vi själva har tillgång till som föräldrar, och de behov vi har.
+          information på Stockholms stads skolplattform. Appen är som ett lager
+          ovanpå den befintliga plattformen som gör att vi kan visa samma
+          information, men snabbare och med mindre krångel. Vi har byggt den för
+          föräldrar. Vi har inte byggt något som kan användas av lärare eller
+          elever, helt enkelt för att vi har utgått från den information vi
+          själva har tillgång till som föräldrar, och de behov vi har.
         </p>
         <h3>Vem ligger bakom Öppna skolplattformen?</h3>
         <p>
@@ -51,9 +54,10 @@ const QA = () => {
           Christian Landgren och Johan Öbrink. Vi är utvecklare och föräldrar
           till barn i grundskolan, och helt hänvisade till Skolplattformen i sin
           nuvarande form. Vi har tillsammans mer än 75 års erfarenhet som
-          konsulter av att hantera personuppgifter (det gör vi dock inte i
-          Öppna skolplattformen! Vi ser aldrig er information, bara våra egna barns)
-          och är alla tre flera år i rad utnämnda till Sveriges bästa utvecklare av IDG.
+          konsulter av att hantera personuppgifter (det gör vi dock inte i Öppna
+          skolplattformen! Vi ser aldrig er information, bara våra egna barns)
+          och är alla tre flera år i rad utnämnda till Sveriges bästa utvecklare
+          av IDG.
         </p>
         <h3>Varför har ni skapat Öppna skolplattformen?</h3>
         <p>
@@ -61,27 +65,32 @@ const QA = () => {
           informationen som finns i Skolplattformen men den är fruktansvärt
           otillgänglig. Fråga vilken förälder eller lärare som helst. Vi är
           utvecklare. Tekniken och kunskapen för att bygga ett bra verktyg
-          finns. Till slut gick det inte att tyst betrakta hur kommunen
-          bränner sådana oerhörda pengar på en så undermålig produkt, på grund
-          av undermålig upphandling och okunnig kravställning.
+          finns. Till slut gick det inte att tyst betrakta hur kommunen bränner
+          sådana oerhörda pengar på en så undermålig produkt, på grund av
+          undermålig upphandling och okunnig kravställning.
         </p>
         <h3>Vilken data har Öppna skolplattformen tillgång till?</h3>
         <p>
-          Du som använder vår app har, när du identifierat dig gentemot Stockholms stad,
-          tillgång till samma data som genom kommunens app eller webbsida.
-          Vi bakom Öppna skolplattformen kan inte se någon annan information än våra egna barns.
-          Den information du hämtar visas bara för dig och hanteras bara på din mobil eller surfplatta.
-          Ingen information skickas från den mobila enheten eller lagras,
-          analyseras eller processas någon annanstans. Inga tredjepartssystem
-          har tillgång till någon del av informationen.
+          Du som använder vår app har, när du identifierat dig gentemot
+          Stockholms stad, tillgång till samma data som genom kommunens app
+          eller webbsida. Vi bakom Öppna skolplattformen kan inte se någon annan
+          information än våra egna barns. Den information du hämtar visas bara
+          för dig och hanteras bara på din mobil eller surfplatta. Ingen
+          information skickas från den mobila enheten eller lagras, analyseras
+          eller processas någon annanstans. Inga tredjepartssystem har tillgång
+          till någon del av informationen.
         </p>
         <h3>Är Öppna skolplattformen laglig?</h3>
         <p>Ja.</p>
         <h3>Hur säker är Öppna skolplattformen?</h3>
         <p>
-          Din information är lika säker som i Skolplattformen. Vi är integritetsfanatiker och redogör
-          för vår syn på dataskydd i Öppna skolplattformen i
-          <a href="https://skolplattformen.org/integritet">vår integritetspolicy</a>.
+          Din information är lika säker som i Skolplattformen. Vi är
+          integritetsfanatiker och redogör för vår syn på dataskydd i Öppna
+          skolplattformen i
+          <a href="https://skolplattformen.org/integritet">
+            vår integritetspolicy
+          </a>
+          .
         </p>
         <h3>Men ni hanterar ju personinformation?</h3>
         <p>
@@ -90,27 +99,29 @@ const QA = () => {
           Varje förälder legitimerar sig med BankID.
         </p>
         <h3>
-          Den kommunala Skolplattformen har kritiserats
-          för att hantera t ex personinformation på ett osäkert sätt. Är detta
-          något ni sett exempel på när ni gjort er utveckling? Några andra
-          brister i den kommunala Skolplattformen ni upptäckt?
+          Den kommunala Skolplattformen har kritiserats för att hantera t ex
+          personinformation på ett osäkert sätt. Är detta något ni sett exempel
+          på när ni gjort er utveckling? Några andra brister i den kommunala
+          Skolplattformen ni upptäckt?
         </h3>
         <p>
-          Ja, vi har upptäckt sårbarheter som inte borde finnas i ett sådant här system.
-          De har vi rapporterat på ett ansvarsfullt sätt. Två fall har uppmärksammats
-          i media. I ett av fallen har kommunen täppt till luckan.
-          Vi kommer att fortsätta att rapportera eventuella sårbarheter vi upptäcker i vårt utvecklingsarbete.
+          Ja, vi har upptäckt sårbarheter som inte borde finnas i ett sådant här
+          system. De har vi rapporterat på ett ansvarsfullt sätt. Två fall har
+          uppmärksammats i media. I ett av fallen har kommunen täppt till
+          luckan. Vi kommer att fortsätta att rapportera eventuella sårbarheter
+          vi upptäcker i vårt utvecklingsarbete.
         </p>
         <h3>
           Vilken information och funktionalitet finns idag tillgänglig i Öppna
           skolplattformen?
         </h3>
         <p>
-          Vi har gjort det lättare att läsa veckobrev och matsedel, hitta notifieringar och frånvaroanmäla.
-          Vi gör nya releaser hela tiden och har byggt appen som man bygger appar i
-          dag, inte som man gjorde för sju år sedan. Vi har utgått från föräldrars önskemål
-          – inte minst så att de som är förälder till flera barn lättare
-          ska kunna få fullständig överblick av kommande prov, läxor och idrottsdagar.
+          Vi har gjort det lättare att läsa veckobrev och matsedel, hitta
+          notifieringar och frånvaroanmäla. Vi gör nya releaser hela tiden och
+          har byggt appen som man bygger appar i dag, inte som man gjorde för
+          sju år sedan. Vi har utgått från föräldrars önskemål – inte minst så
+          att de som är förälder till flera barn lättare ska kunna få
+          fullständig överblick av kommande prov, läxor och idrottsdagar.
         </p>
         <h3>
           Vilken information/funktionalitet kommer att finnas tillgänglig?
@@ -120,11 +131,10 @@ const QA = () => {
           veckobrev så att aktiviteter placeras ut på en kalender – dvs att en
           förälder till tre barn ska få en vy av vad som ska packas med till
           skolan under nästa vecka på en och samma plats. Vi vill få in flera
-          språkalternativ för att öka tillgängligheten.
-          Vi har massor av idéer till förbättringar som kommer dyka upp med
-          tiden och vi jobbar med löpande releaser snarare än att vänta på
-          att allt är klart. Med er hjälp kommer vi kunna prioritera de funktioner
-          som hjälper mest.
+          språkalternativ för att öka tillgängligheten. Vi har massor av idéer
+          till förbättringar som kommer dyka upp med tiden och vi jobbar med
+          löpande releaser snarare än att vänta på att allt är klart. Med er
+          hjälp kommer vi kunna prioritera de funktioner som hjälper mest.
         </p>
         <h3>
           Jag är lärare eller annan typ av användare. Snälla bygg något åt mig!
@@ -147,12 +157,12 @@ const QA = () => {
           Förutom att hjälpa oss själva slippa Skolplattformens horribla
           användarupplevelse har vi försökt illustrera en alternativ väg framåt.
           Vi byggde litet och utgick helt och hållet från användarbehov (dvs
-          vårt eget). All kod är släppt som öppen källkod så att den kan granskas
-          av andra och ett större värde kan komma världen till godo. Så borde
-          den offentliga sektorn alltid arbeta. Snarare än samordna, planera och
-          krava: göra, utforska och dela med sig. Snarare än få, stora, rigida
-          projekt: många, små, agila. Snarare än gårdagens misslyckade
-          IT-satsningar: öppna API:er, öppen källkod och öppen data.
+          vårt eget). All kod är släppt som öppen källkod så att den kan
+          granskas av andra och ett större värde kan komma världen till godo. Så
+          borde den offentliga sektorn alltid arbeta. Snarare än samordna,
+          planera och krava: göra, utforska och dela med sig. Snarare än få,
+          stora, rigida projekt: många, små, agila. Snarare än gårdagens
+          misslyckade IT-satsningar: öppna API:er, öppen källkod och öppen data.
         </p>
         <h3>Vad är er syn på den kommunala Skolplattformen?</h3>
         <p>
@@ -166,11 +176,11 @@ const QA = () => {
         </p>
         <h3>Vad anser ni borde göras med Skolplattformen?</h3>
         <p>
-          Skolplattformen är uppbyggd i flera delar. Dels
-          innehåller den bakomliggande delar som hanterar informationen som
-          lagras på ett säkert sätt och dels innehåller den en webbsida och app
-          som hämtar informationen och presenterar den. Vad vi förstår har mest
-          energi lagts på de bakomliggande delarna. Resultatet av det är att
+          Skolplattformen är uppbyggd i flera delar. Dels innehåller den
+          bakomliggande delar som hanterar informationen som lagras på ett
+          säkert sätt och dels innehåller den en webbsida och app som hämtar
+          informationen och presenterar den. Vad vi förstår har mest energi
+          lagts på de bakomliggande delarna. Resultatet av det är att
           användarupplevelsen för många målgrupper har blivit lidande. Vi har
           visat att det med relativt små resurser går att börja om från början
           och bygga en ny s.k. frontend – dvs app och webbsida som återanvänder
@@ -198,31 +208,34 @@ const QA = () => {
           om det ni gjort?
         </h3>
         <p>
-          Framför allt har vi anmält ett antal säkerhetsluckor i Stockholms stads it-system.
-          En av dem har anmälts till IMY, den andra ännu inte.
-          Eftersom den är allvarlig och vi inte är trygga med att Utbildningsförvaltningen
-          utrett om information läckt på ett bra sätt kommer vi att insistera på att den anmäls.
-          Utbildningsförvaltningen har också anmält vår app.
-          Självklart kommer vi att redovisa IMY:s ställningstagande när det kommer.
+          Framför allt har vi anmält ett antal säkerhetsluckor i Stockholms
+          stads it-system. En av dem har anmälts till IMY, den andra ännu inte.
+          Eftersom den är allvarlig och vi inte är trygga med att
+          Utbildningsförvaltningen utrett om information läckt på ett bra sätt
+          kommer vi att insistera på att den anmäls. Utbildningsförvaltningen
+          har också anmält vår app. Självklart kommer vi att redovisa IMY:s
+          ställningstagande när det kommer.
         </p>
         <h3>Hur har kommunen reagerat?</h3>
         <p>
           Inte som vi hade hoppats, trots flera möten där vi förklarat exakt vad
-          appen gör rent tekniskt. Sammanfattningsvis kan man säga att de lagt mer
-          energi på att misstänkliggöra oss än att täppa igen de stora säkerhetsluckor
-          vi hittat i deras system. Det är minst sagt olyckligt.
-          Du hittar alla våra svar på deras utredning i ett separat QA-segment ovan.
+          appen gör rent tekniskt. Sammanfattningsvis kan man säga att de lagt
+          mer energi på att misstänkliggöra oss än att täppa igen de stora
+          säkerhetsluckor vi hittat i deras system. Det är minst sagt olyckligt.
+          Du hittar alla våra svar på deras utredning i ett separat QA-segment
+          ovan.
         </p>
         <h3>Varför reagerar de så, tror ni?</h3>
         <p>
-          Det är svårt att spekulera i. Men deras tekniska förståelse är förbluffande låg.
+          Det är svårt att spekulera i. Men deras tekniska förståelse är
+          förbluffande låg.
         </p>
         <h3>Är ni oroliga för att bli stämda?</h3>
         <p>
-          Utbildningsdirektör Lena Holmdahl har polisanmält oss.
-          Det är förstås obehagligt och vi välkomnar inte slöseri med
-          polisens utredningsresurser. Men samtidigt är det skönt att ärendet
-          granskas av någon annan än Utbildningsförvaltningen.
+          Utbildningsdirektör Lena Holmdahl har polisanmält oss. Det är förstås
+          obehagligt och vi välkomnar inte slöseri med polisens
+          utredningsresurser. Men samtidigt är det skönt att ärendet granskas av
+          någon annan än Utbildningsförvaltningen.
         </p>
         <h3>Har ni rätt att använda varumärket Skolplattformen.</h3>
         <p>
@@ -235,15 +248,16 @@ const QA = () => {
         </h3>
         <p>
           Appen kostar 12 kronor. Intäkten registreras i handelsbolaget Not Free
-          Beer som ägs av tre av utvecklarna och går till att täcka kostnader för inköp.
-          Det täcker inte på långa vägar den tid vi lagt ner.
-          Med en låg engångskostnad ökar vi chansen att vi orkar syssla med
-          underhåll och uppdateringar. Vi vill ju ha en stabil lösning som
-          håller. Just nu jobbar vi på egen fritid med något som förbättrar det
-          kommunen lagt en miljard av allmänna medel på.
+          Beer som ägs av tre av utvecklarna och går till att täcka kostnader
+          för inköp. Det täcker inte på långa vägar den tid vi lagt ner. Med en
+          låg engångskostnad ökar vi chansen att vi orkar syssla med underhåll
+          och uppdateringar. Vi vill ju ha en stabil lösning som håller. Just nu
+          jobbar vi på egen fritid med något som förbättrar det kommunen lagt en
+          miljard av allmänna medel på.
         </p>
         <h3>
-          Är det moraliskt att tjäna pengar på något som kommunen borde erbjuda gratis?
+          Är det moraliskt att tjäna pengar på något som kommunen borde erbjuda
+          gratis?
         </h3>
         <p>
           Det är bra att föräldrar har en helt frivillig möjlighet att snabbare
@@ -252,21 +266,28 @@ const QA = () => {
           fungerar så dåligt, både för oss föräldrar och för alla de lärare som
           är helt utlämnade åt den.
         </p>
-        <h2>Om hur appen Öppna skolplattformen utvecklats och hur du kan bidra till utvecklingen</h2>
+        <h2>
+          Om hur appen Öppna skolplattformen utvecklats och hur du kan bidra
+          till utvecklingen
+        </h2>
         <h3>Hur rapporterar man buggar och önskemål?</h3>
         <p>
-          Vi är enormt tacksamma för alla buggrapporter och förslag vi får och satsar mycket på att så
-          snabbt som möjligt fixa de saker som dyker upp. För att få lite
-          ordning så försöker vi samla alla buggar och önskemål på samma ställe, Github.
+          Vi är enormt tacksamma för alla buggrapporter och förslag vi får och
+          satsar mycket på att så snabbt som möjligt fixa de saker som dyker
+          upp. För att få lite ordning så försöker vi samla alla buggar och
+          önskemål på samma ställe, Github.
           <a href="https://github.com/kolplattformen/skolplattformen/issues">
-            Klicka här</a> för att se vilka funktioner och buggar vi redan har tagit emot och jobbar på.
+            Klicka här
+          </a>{' '}
+          för att se vilka funktioner och buggar vi redan har tagit emot och
+          jobbar på.
         </p>
         <h3>Hur gick ni tillväga?</h3>
         <p>
           Allt bygger på reverse engineering. Vi öppnade DevTools i Chrome och
-          loggade in. Sen antecknade vi alla url:er och payloads. Vi
-          tog koden för att anropa API:et och byggde ett npm-paket av den så att
-          appen kunde köra proxyn i en process på telefonen.
+          loggade in. Sen antecknade vi alla url:er och payloads. Vi tog koden
+          för att anropa API:et och byggde ett npm-paket av den så att appen
+          kunde köra proxyn i en process på telefonen.
         </p>
         <h3>Vilka tekniska utmaningar har ni överkommit och hur?</h3>
         <p>
@@ -286,8 +307,8 @@ const QA = () => {
           Det är en anspelning på hur GNU-projektet beskriver fri programvara:
           To understand the concept, you should think of “free” as in “free
           speech,” not as in “free beer”. Då vi har valt att tillgängliggöra all
-          kod som öppen källkod (Apache 2.0) men ändå ta betalt för appen, tyckte
-          vi att namnet var passande.
+          kod som öppen källkod (Apache 2.0) men ändå ta betalt för appen,
+          tyckte vi att namnet var passande.
         </p>
         <h3>Kontakta oss</h3>
         <p>
@@ -295,7 +316,7 @@ const QA = () => {
           <a href="mailto:info@skolplattformen.org">dev@skolplattformen.org</a>.
         </p>
       </div>
-    </div >
+    </div>
   )
 }
 

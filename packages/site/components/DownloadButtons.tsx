@@ -1,6 +1,6 @@
 import ButtonLink, { ButtonLinkPatreon } from './ButtonLink'
 
-const DownloadButtons = () => {
+const DownloadButtons = (): JSX.Element => {
   return (
     <div className="space-x-4">
       <ButtonLink
@@ -16,9 +16,7 @@ const DownloadButtons = () => {
       >
         Play Store
       </ButtonLink>
-      <ButtonLinkPatreon>
-        Stöd oss på Patreon!
-      </ButtonLinkPatreon>
+      <ButtonLinkPatreon>Stöd oss på Patreon!</ButtonLinkPatreon>
     </div>
   )
 }
