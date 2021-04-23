@@ -1,1 +1,30 @@
-{}
+{
+    "auth": {
+        "placeholder_SocialSecurityNumber": "Numerus personalis tuus",
+        "loginFailed": "Nomen dare non possibilis erat. Denuo conare.",
+        "chooseLoginMethod": "Methodum nomen dantem legere",
+        "bankid": {
+            "Waiting": "Pro BankID expectans…",
+            "OpenOnThisDevice": "In hac machina BankID aperire",
+            "OpenOnAnotherDevice": "In machina differens BankID aperire",
+            "OpenManually": "Manu BankID aperire"
+        }
+    },
+    "abscense": {
+        "title": "Absentiam referre",
+        "selectAbscenseStartTime": "Horam exordii legere",
+        "selectAbscenseEndTime": "Horam terminalem legere",
+        "startTime": "Hora exordii",
+        "personalNumberMissing": "Numerus personalis absens",
+        "newsTitle": "Articulus nuntiorum:{{header}}{{published}}",
+        "invalidPersonalNumber": "Numerus personalis irritus est",
+        "entireDay": "Totus dies",
+        "endTime": "Hora terminalis"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Lyceum superior",
+        "preSchool": "Praeschola",
+        "leisureTimeCentre": "Centrum otii",
+        "compulsorySchool": "Schola obligatoria"
+    }
+}
