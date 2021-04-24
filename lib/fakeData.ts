@@ -1091,6 +1091,7 @@ const data: any = {
 export const user = (): User => ({
   firstName: 'Namn',
   lastName: 'Namnsson',
+  isAuthenticated: true
 })
 
 export const children = (): EtjanstChild[] => [
