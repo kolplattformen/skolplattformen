@@ -58,19 +58,19 @@
         "subtitle": "La alternativa {{word}}",
         "placeholder_SocialSecurityNumber": "Tu personnummer",
         "loginFailed": "No se pudo iniciar sesión. Vuelva a intentarlo.",
-        "chooseLoginMethod": "Elige forma de identificación",
+        "chooseLoginMethod": "Elija el método de inicio de sesión",
         "bankid": {
-            "Waiting": "Esperando a BankID…",
-            "OpenOnThisDevice": "Abre BankID en este dispositivo",
-            "OpenOnAnotherDevice": "Abre BankID en otro dispositivo",
-            "OpenManually": "Abre BankID manualmente"
+            "Waiting": "Esperando BankID…",
+            "OpenOnThisDevice": "Abra BankID en este dispositivo",
+            "OpenOnAnotherDevice": "Abra BankID en otro dispositivo",
+            "OpenManually": "Abrir BankID manualmente"
         },
         "loginAsTestUser": "Inicie sesión como usuario de pruebas"
     },
     "abscense": {
-        "title": "Notificar ausencia",
-        "startTime": "Hora de comienzo",
-        "selectAbscenseStartTime": "Elige hora de comienzo",
+        "title": "Informar ausencia",
+        "startTime": "hora de inicio",
+        "selectAbscenseStartTime": "Elige la hora de inicio",
         "personalNumberMissing": "Falta el personnummer",
         "newsTitle": "Noticia: {{header}} ({{published}})",
         "invalidPersonalNumber": "El personnumer no es válido",
