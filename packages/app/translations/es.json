@@ -57,7 +57,7 @@
         },
         "subtitle": "La alternativa {{word}}",
         "placeholder_SocialSecurityNumber": "Tu personnummer",
-        "loginFailed": "Login fallido. Prueba otra vez.",
+        "loginFailed": "No se pudo iniciar sesión. Vuelva a intentarlo.",
         "chooseLoginMethod": "Elige forma de identificación",
         "bankid": {
             "Waiting": "Esperando a BankID…",
@@ -65,7 +65,7 @@
             "OpenOnAnotherDevice": "Abre BankID en otro dispositivo",
             "OpenManually": "Abre BankID manualmente"
         },
-        "loginAsTestUser": "Inicie sesión como usuario de prueba"
+        "loginAsTestUser": "Inicie sesión como usuario de pruebas"
     },
     "abscense": {
         "title": "Notificar ausencia",
