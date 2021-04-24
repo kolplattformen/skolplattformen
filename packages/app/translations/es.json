@@ -10,12 +10,18 @@
         "calender": "Calendario"
     },
     "language": {
-        "changeLanguage": "Cambiar idioma"
+        "changeLanguage": "Cambiar idioma",
+        "changeLanguageButton": "Guardar"
     },
     "general": {
         "send": "Enviar",
         "logout": "Cerrar sesión",
-        "changeLanguage": "Cambiar idioma"
+        "changeLanguage": "Cambiar idioma",
+        "socialSecurityNumber": "Personnummer",
+        "settings": "Configuración",
+        "loading": "Cargando…",
+        "confirm": "Confirmar",
+        "abort": "Anular"
     },
     "children": {
         "viewStatus": "Ver estado en skolplattformen.org",
@@ -35,7 +41,39 @@
             "simple": "fácil",
             "rebellious": "rebelde",
             "free": "libre",
-            "cooler": "más guay"
+            "cooler": "más guay",
+            "working": "funcional",
+            "imperfect": "imperfecto",
+            "first": "primero/a (it depends on the noun it accompanies)",
+            "enlightened": "ilustrado",
+            "awaited": "esperado/a",
+            "agile": "ágil"
+        },
+        "subtitle": "La alternativa {{word}}",
+        "placeholder_SocialSecurityNumber": "Tu personnummer",
+        "loginFailed": "Login fallido. Prueba otra vez.",
+        "chooseLoginMethod": "Elige forma de identificación",
+        "bankid": {
+            "Waiting": "Esperando a BankID…",
+            "OpenOnThisDevice": "Abre BankID en este dispositivo",
+            "OpenOnAnotherDevice": "Abre BankID en otro dispositivo",
+            "OpenManually": "Abre BankID manualmente"
         }
+    },
+    "abscense": {
+        "title": "Notificar ausencia",
+        "startTime": "Hora de comienzo",
+        "selectAbscenseStartTime": "Elige hora de comienzo",
+        "personalNumberMissing": "Falta el personnummer",
+        "newsTitle": "Noticia: {{header}} ({{published}})",
+        "invalidPersonalNumber": "El personnumer no es válido",
+        "entireDay": "Día completo",
+        "endTime": "Hasta"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Escuela secundaria (instituto)",
+        "preSchool": "Guardería (förskola)",
+        "leisureTimeCentre": "Extraexcolar (fritids)",
+        "compulsorySchool": "Escuela obligatoria"
     }
 }
