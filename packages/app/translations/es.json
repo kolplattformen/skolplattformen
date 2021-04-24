@@ -1,6 +1,6 @@
 {
     "news": {
-        "notificationTitle": "Noticias: {{header}} ({{Published}})",
+        "notificationTitle": "Noticia: {{header}} ({{published}})",
         "noNewNewsItemsThisWeek": "No hay noticias nuevas esta semana.",
         "backToChild": "Volver al niño",
         "title": "Noticias de Skolplattformen",
