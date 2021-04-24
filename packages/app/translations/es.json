@@ -2,7 +2,9 @@
     "news": {
         "notificationTitle": "Noticias: {{header}} ({{Published}})",
         "noNewNewsItemsThisWeek": "No hay noticias nuevas esta semana.",
-        "backToChild": "Volver al niño"
+        "backToChild": "Volver al niño",
+        "title": "Noticias de Skolplattformen",
+        "published": "Publicada"
     },
     "navigation": {
         "notifications": "Notificaciones",
@@ -44,10 +46,13 @@
             "cooler": "más guay",
             "working": "funcional",
             "imperfect": "imperfecto",
-            "first": "primero/a (it depends on the noun it accompanies)",
-            "enlightened": "ilustrado",
-            "awaited": "esperado/a",
-            "agile": "ágil"
+            "first": "el primero",
+            "enlightened": "ilustrada",
+            "awaited": "esperado",
+            "agile": "ágil",
+            "fantastic": "fantástica",
+            "cheap": "barato",
+            "better": "mejor"
         },
         "subtitle": "La alternativa {{word}}",
         "placeholder_SocialSecurityNumber": "Tu personnummer",
@@ -58,7 +63,8 @@
             "OpenOnThisDevice": "Abre BankID en este dispositivo",
             "OpenOnAnotherDevice": "Abre BankID en otro dispositivo",
             "OpenManually": "Abre BankID manualmente"
-        }
+        },
+        "loginAsTestUser": "Inicie sesión como usuario de prueba"
     },
     "abscense": {
         "title": "Notificar ausencia",
@@ -68,12 +74,16 @@
         "newsTitle": "Noticia: {{header}} ({{published}})",
         "invalidPersonalNumber": "El personnumer no es válido",
         "entireDay": "Día completo",
-        "endTime": "Hasta"
+        "endTime": "hora de finalización",
+        "selectAbscenseEndTime": "Elige la hora de finalización"
     },
     "abbrevations": {
-        "upperSecondarySchool": "Escuela secundaria (instituto)",
+        "upperSecondarySchool": "Escuela Secundaria Obligatoria",
         "preSchool": "Guardería (förskola)",
         "leisureTimeCentre": "Extraexcolar (fritids)",
         "compulsorySchool": "Escuela obligatoria"
+    },
+    "notifications": {
+        "notificationTitle": "Notificación: {{message}} ({{dateCreated}})"
     }
 }
