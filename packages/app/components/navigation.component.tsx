@@ -43,12 +43,6 @@ const linking = {
   },
 }
 
-const navigationRef: React.RefObject<NavigationContainerRef> = React.createRef()
-
-export const navigate = (name: string, params?: any) => {
-  navigationRef.current?.navigate(name, params)
-}
-
 export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
 
@@ -60,7 +54,7 @@ export const AppNavigator = () => {
         const { isAuthenticated } = await api.getUser()
 
         if (!isAuthenticated) {
-          navigate('Login')
+          api.logout()
         }
       }
     }
@@ -69,7 +63,7 @@ export const AppNavigator = () => {
   }, [currentAppState, isLoggedIn])
 
   return (
-    <NavigationContainer linking={linking} ref={navigationRef}>
+    <NavigationContainer linking={linking}>
       <StatusBar />
       <Navigator headerMode="none">
         {isLoggedIn ? (
