@@ -23,7 +23,8 @@
         "settings": "Configuración",
         "loading": "Cargando…",
         "confirm": "Confirmar",
-        "abort": "Anular"
+        "abort": "Anular",
+        "title": "Öppna skolplattformen"
     },
     "children": {
         "viewStatus": "Ver estado en skolplattformen.org",
