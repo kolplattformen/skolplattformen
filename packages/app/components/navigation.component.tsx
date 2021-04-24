@@ -1,5 +1,8 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { NavigationContainer } from '@react-navigation/native'
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
@@ -39,6 +42,13 @@ const linking = {
     },
   },
 }
+
+const navigationRef: React.RefObject<NavigationContainerRef> = React.createRef()
+
+export const navigate = (name: string, params?: any) => {
+  navigationRef.current?.navigate(name, params)
+}
+
 export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
 
@@ -50,7 +60,7 @@ export const AppNavigator = () => {
         const { isAuthenticated } = await api.getUser()
 
         if (!isAuthenticated) {
-          /// TODO: Navigate
+          navigate('Login')
         }
       }
     }
@@ -59,7 +69,7 @@ export const AppNavigator = () => {
   }, [currentAppState, isLoggedIn])
 
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer linking={linking} ref={navigationRef}>
       <StatusBar />
       <Navigator headerMode="none">
         {isLoggedIn ? (
