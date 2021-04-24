@@ -1,1 +1,41 @@
-{}
+{
+    "news": {
+        "notificationTitle": "Noticias: {{header}} ({{Published}})",
+        "noNewNewsItemsThisWeek": "No hay noticias nuevas esta semana.",
+        "backToChild": "Volver al niño"
+    },
+    "navigation": {
+        "notifications": "Notificaciones",
+        "news": "Noticias",
+        "calender": "Calendario"
+    },
+    "language": {
+        "changeLanguage": "Cambiar idioma"
+    },
+    "general": {
+        "send": "Enviar",
+        "logout": "Cerrar sesión",
+        "changeLanguage": "Cambiar idioma"
+    },
+    "children": {
+        "viewStatus": "Ver estado en skolplattformen.org",
+        "tryAgain": "Intentar otra vez",
+        "title": "Tus hijos",
+        "noKids_title": "Sin niños"
+    },
+    "calender": {
+        "showCalenderActions": "Mostrar acciones de calendario",
+        "saveToCalenderSuccess": "✔️ Guardado en el calendario",
+        "saveToCalenderError": "Algo salió mal",
+        "saveToCalender": "Guardar en calendario",
+        "approveAccessToCalender": "Tienes que aprobar el acceso a tu calendario"
+    },
+    "auth": {
+        "words": {
+            "simple": "fácil",
+            "rebellious": "rebelde",
+            "free": "libre",
+            "cooler": "más guay"
+        }
+    }
+}
