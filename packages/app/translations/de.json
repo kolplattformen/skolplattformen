@@ -9,7 +9,6 @@
         "endTime": "Endzeit",
         "entireDay": "Ganzen Tag",
         "invalidPersonalNumber": "Personenkennzeichen ungültig",
-        "newsTitle": "Nachricht: {{header}} ({{published}})",
         "personalNumberMissing": "Personenkennzeichen fehlt",
         "selectAbscenseEndTime": "Endzeit wählen",
         "selectAbscenseStartTime": "Startzeit wählen",

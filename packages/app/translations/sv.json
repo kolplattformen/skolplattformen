@@ -9,7 +9,6 @@
         "endTime": "Sluttid",
         "entireDay": "Heldag",
         "invalidPersonalNumber": "Personnumret är ogiltigt",
-        "newsTitle": "Nyhet: {{header}} ({{published}})",
         "personalNumberMissing": "Personnummer saknas",
         "selectAbscenseEndTime": "Välj sluttid",
         "selectAbscenseStartTime": "Välj startid",

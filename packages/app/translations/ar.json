@@ -9,7 +9,6 @@
         "endTime": "وقت الإنتهاء",
         "entireDay": "كل اليوم",
         "invalidPersonalNumber": "الرقم الوطني غير صالح",
-        "newsTitle": "عنصر أخبار: {{header}} ({{published}})",
         "personalNumberMissing": "الرقم الوطني مطلوب",
         "selectAbscenseEndTime": "اختر وقت الانتهاء",
         "selectAbscenseStartTime": "اختر وقت البداية",
