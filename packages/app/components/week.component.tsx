@@ -63,7 +63,9 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
         <Text category="c1" style={styles.lunchLabel}>
           Lunch
         </Text>
-        <Text category="c2" style={styles.lunch}>{lunch}</Text>
+        <Text category="c2" style={styles.lunch}>
+          {lunch}
+        </Text>
         <Text category="c1" style={styles.endTime}>
           Slutar
         </Text>
