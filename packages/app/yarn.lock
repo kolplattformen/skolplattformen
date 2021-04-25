@@ -1487,16 +1487,15 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-2.1.1.tgz#e9d07617b97661c77dba90ef9a8f73be9b5b6b42"
-  integrity sha512-62rgv4yxBwYr5OjzRxfkz1pZQ6nvnVoxqqokVzz+Yzx/1VoxkFBCyAXTE5bfMWGn4qGNNEOdYJgMA5lCvlmB1w==
+"@skolplattformen/api-hooks@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-2.1.0.tgz#56e38359020772086bfdccab364c24063a820948"
+  integrity sha512-a5DEUwlZjqJE5qfTyefjUYcKSwBv0CHnD6g5pvHU8KSLRNVVBpcUpy10g5qnObHxhjpbPLdRLxMbnHpYfrb69Q==
   dependencies:
-    luxon "^1.26.0"
     react-redux "^7.2.3"
     redux "^4.0.5"
 
-"@skolplattformen/curriculum@^1.2.1":
+"@skolplattformen/curriculum@^1.2.0", "@skolplattformen/curriculum@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.2.1.tgz#ad4b10bab31ec24b3516c2fe896891566bcb2944"
   integrity sha512-L5NoG9Vjd4+MYnxMSI33KZwXz/RcHVmFW/lw1OnSW0U6nkG9ZlvLfDw8MEdcHbbPDY28nGnFizVRF91+ZFUauQ==
@@ -1506,7 +1505,6 @@
   resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.0.3.tgz#a0b8b77b4ee347cd3fc4b5a304bbeee2cb4dd97f"
   integrity sha512-5n5DbqP2dVxXoyQ7awQQEQXV4O5D+Ph2wVLfDTCgbtFkDrw6hqxjk31L5i+IrZrqypgjLc7goKOVKaNgSOS01w==
   dependencies:
-    "@skolplattformen/curriculum" "^1.2.0"
     "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
@@ -6113,7 +6111,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-luxon@^1.25.0, luxon@^1.26.0:
+luxon@^1.25.0:
   version "1.26.0"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.26.0.tgz#d3692361fda51473948252061d0f8561df02b578"
   integrity sha512-+V5QIQ5f6CDXQpWNICELwjwuHdqeJM1UenlZWx5ujcRMc9venvluCjFb4t5NYLhb6IhkbMVOxzVuOqkgMxee2A==
