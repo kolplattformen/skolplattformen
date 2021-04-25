@@ -60,9 +60,13 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
           Börjar
         </Text>
         <Text category="h4">{lessons[0].timeStart.slice(0, 5)}</Text>
-        <Text category="c1" style={styles.lunch}>Lunch</Text>
-        <Text category="c2">{lunch}</Text>
-        <Text category="c1" style={styles.endTime}>Slutar</Text>
+        <Text category="c1" style={styles.lunchLabel}>
+          Lunch
+        </Text>
+        <Text category="c2" style={styles.lunch}>{lunch}</Text>
+        <Text category="c1" style={styles.endTime}>
+          Slutar
+        </Text>
         <Text category="h4">
           {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
         </Text>
@@ -84,11 +88,14 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
   ) : null
 
 export const Week = ({ child }: WeekProps) => {
-  let date = moment().add(7, 'hours') // skip today after school, pick tomorrow
-  if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday instead
-  const [selectedIndex, setSelectedIndex] = React.useState(date.isoWeekday())
+  let date = moment() // skip today after school, pick tomorrow
+  //if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday next week instead
+  const [selectedIndex, setSelectedIndex] = React.useState(
+    Math.min(date.weekday(), 5)
+  )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
-  const { data: lessons } = useTimetable(child, year, week)
+  console.log('year week', year, week, date.toString())
+  const { data: lessons } = useTimetable(child, week, year)
   const { data: menu } = useMenu(child)
 
   return (
@@ -160,9 +167,12 @@ const styles = StyleSheet.create({
   startTime: {
     paddingBottom: 2,
   },
-  lunch: {
+  lunchLabel: {
     paddingTop: 10,
     paddingBottom: 2,
+  },
+  lunch: {
+    width: 100,
   },
   endTime: {
     paddingTop: 10,
