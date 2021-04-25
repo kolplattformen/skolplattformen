@@ -27,7 +27,7 @@ test('pages renders correctly and displays important dates and media', () => {
 
 test('handles missing Intl', () => {
   const intl = global.Intl
-  global.Intl = undefined
+  global.Intl = (undefined as unknown) as typeof Intl
 
   setup()
 

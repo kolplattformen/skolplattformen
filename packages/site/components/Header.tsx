@@ -28,7 +28,7 @@ const useMobile = (cb: UseMobileCallback) => {
   }, [])
 }
 
-const HeaderHome = () => {
+const HeaderHome = (): JSX.Element => {
   const [displayMobileMenu, setDisplayMobileMenu] = React.useState(false)
 
   useMobile((e) => {
@@ -45,7 +45,7 @@ const HeaderHome = () => {
             'bg-white bg-opacity-0 duration-200 transition-colors sticky'
           )}
         >
-          <div className="flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-0">
+          <div className="flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-2">
             <Link href="/">
               <a>
                 <img

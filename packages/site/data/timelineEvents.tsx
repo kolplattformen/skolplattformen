@@ -20,8 +20,8 @@ interface Event {
 export interface TimelineEvent {
   overview: ReactNode
   date: string
-  importantDates?: Event[]
-  media?: Event[]
+  importantDates: Event[]
+  media: Event[]
 }
 
 export const events: TimelineEvent[] = [
@@ -30,23 +30,98 @@ export const events: TimelineEvent[] = [
       <p>
         Svenska medier rapporterar vidare om de säkerhetsluckor vi hittat och
         rapporterat i Stockholms stads it-system. Vi fokuserar på att utveckla
-        ny funktionalitet så att det blir lättare för föräldrar att hitta
-        information om deras egna barns skolgång.
+        ny funktionalitet – som flera språkval och överskådligt schema – för att
+        öka tillgängligheten så att fler föräldrar lättare kan hitta information
+        om deras egna barns skolgång. Utbildningsdirektör Lena Holmdahl ber oss
+        avpublicera vår egen kod, släpper förvaltningens juridiska utredning och
+        gör en polisanmälan (mer om detta nedan och i vår{' '}
+        <Link.Internal href="/qa">QA</Link.Internal>).
       </p>
     ),
     date: '2021-04-01',
-    importantDates: [],
-    media: [
+    importantDates: [
+      {
+        date: '2021-04-16',
+        description:
+          'Utbildningsdirektör Lena Holmdahl polisanmäler appen och privatpersonerna bakom Öppna Skolplattformen',
+      },
+      {
+        date: '2021-04-15',
+        description:
+          'Utbildningsförvaltningen publicerar sin juridiska utredning',
+        link:
+          'https://start.stockholm/aktuellt/nyheter/2021/04/juridisk-utredning-om-betalapp-sakerhet-gar-fore-it-utveckling/',
+      },
+      {
+        date: '2021-04-15',
+        description:
+          'Per Axbom publicerar texten Öppna Skolplattformen synliggör Stockholms stads upprepade blunder',
+        link: 'https://axbom.se/oppna-skolplattformen-stockholm/',
+      },
+      {
+        date: '2021-04-06',
+        description:
+          'Lena Holmdahl skriver i ett mail "Jag vill också att ni slutar delar med er av den kod som härrör till staden API:er och tar bort den från de plattformar (ex. Github) där ni har publicerat den.',
+      },
       {
         date: '2021-04-01',
         description:
-          'Därför åkte vi vilse på resan mot digitalisering" (SvD Ledare)',
+          'Vi besöker Utbildningsförvaltningen och blir, trots tryckfrihetsförordningens omedelbarhetskrav, nekade att få se offentliga handlingar.',
+      },
+    ],
+    media: [
+      {
+        date: '2021-04-16',
+        description:
+          'Öppna Skolplattformen polisanmäls av Stockholms stad (Sweclockers)',
+        link:
+          'https://www.sweclockers.com/nyhet/31775-oppna-skolplattformen-polisanmals-av-stockholms-stad',
+      },
+      {
+        date: '2021-04-16',
+        description:
+          'Föräldrarnas skolplattform polisanmäls av Stockholms stad: ”Misstänkt dataintrång” (DN)',
+        link:
+          'https://digital.di.se/artikel/foraldrarnas-skolplattform-polisanmals-av-stockholms-stad-misstankt-dataintrang',
+      },
+      {
+        date: '2021-04-15',
+        description:
+          '#49 - Utvecklaren och pappan Christian Landgren om frustrationen som ledde till bygget av en egen skolplattform. (podd, Allt du behöver veta om ny teknik)',
+        link:
+          'https://podcasts.nu/avsnitt/allt-du-behover-veta-om-ny-teknik/49-utvecklaren-och-pappan-christian-landgren-om-frustrationen-som-ledde-till-bygget-av-en-egen-skolplattform-o2z9E646y',
+      },
+      {
+        date: '2021-04-15',
+        description:
+          'Stockholms stad polisanmäler appen Öppna skolplattformen (DN)',
+        link:
+          'https://www.dn.se/sthlm/stockholms-stad-polisanmaler-appen-oppna-skolplattformen/',
+      },
+      {
+        date: '2021-04-15',
+        description:
+          'Stockholms stad polisanmäler Öppna skolplattformen (Ny Teknik)',
+        link:
+          'https://www.nyteknik.se/digitalisering/stockholms-stad-polisanmaler-oppna-skolplattformen-7013108',
+      },
+      {
+        date: '2021-04-10',
+        description:
+          'Stockholms stad begär att Öppna Skolplattformen ska radera all källkod (Sweclockers)',
+        link:
+          'https://www.sweclockers.com/nyhet/31727-stockholms-stad-begar-att-oppna-skolplattformen-ska-radera-all-kallkod',
+      },
+      {
+        date: '2021-04-01',
+        description:
+          'Därför åkte vi vilse på resan mot digitalisering (SvD Ledare)',
         link: 'https://www.svd.se/darfor-akte-vi-vilse-pa-digitaliseringsresan',
       },
       {
         date: '2021-04-01',
         description:
-          'Ny säkerhetslucka i Stockholms stad - utbildningsminister kallas till utskott” (Ny Teknik)',
+          'Ny säkerhetslucka i Stockholms stad - utbildningsminister kallas till utskott (Ny Teknik)',
         link:
           'https://www.nyteknik.se/sakerhet/ny-sakerhetslucka-i-stockholms-stad-utbildningsminister-kallas-till-utskott-7012459',
       },
@@ -75,6 +150,11 @@ export const events: TimelineEvent[] = [
         description:
           'Öppna Skolplattformen tar sig till globala Hacker News förstasida',
         link: 'https://news.ycombinator.com/item?id=26597293',
+      },
+      {
+        date: '2021-03-26',
+        description:
+          'Utbildningsdirektör Lena Holmdahl skickar mail med följande formulering: “Så länge vi väntar på både kammarrättens ställningstagande och IMY:s svar så skulle jag be dig å Stockholms utbildningsförvaltnings vägnar att inte publicera din app öppna skolplattformen.” Vi ber återigen om ett klargörande om vilken lag de anser att vi bryter mot',
       },
       sabotageEvent('2021-03-26'),
       fixEvent('2021-03-26'),
@@ -235,6 +315,11 @@ export const events: TimelineEvent[] = [
       {
         date: '2021-02-12',
         description: 'Appen lanseras - hamnar 1:a på topplistan på App Store',
+      },
+      {
+        date: '2021-02-16',
+        description:
+          'Utbildningsförvaltningen får svaret på den granskning av Öppna skolplattformen de beställt av ett oberoende IT-säkerhetsföretag. Denna konstaterar att Öppna skolplattformen varken lagrar eller skickar vidare någon information.',
       },
       {
         date: '2021-02-12',
@@ -403,6 +488,7 @@ export const events: TimelineEvent[] = [
           'Avslag på begäran om dokumentation med hänvisning till sekretess men utan lagrum',
       },
     ],
+    media: [],
   },
   {
     overview: (
@@ -420,5 +506,6 @@ export const events: TimelineEvent[] = [
           'Begäran om dokumentation av API (skickat till Kontaktcenter Stockholm)',
       },
     ],
+    media: [],
   },
 ]

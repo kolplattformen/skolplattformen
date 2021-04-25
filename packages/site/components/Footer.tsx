@@ -10,10 +10,10 @@ const team = [
   { name: 'Öppna skolplattformen', twitter: 'oppnaskolplatt' },
 ]
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
   return (
     <footer>
-      <div className="items-start max-w-6xl py-8 md:py-12 mx-auto grid px-5 md:px-0 grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-5">
+      <div className="items-start max-w-6xl px-5 py-8 mx-auto lg:py-12 grid lg:px-4 grid-cols-1 lg:grid-cols-4 gap-x-12 gap-y-5">
         <div>
           <p className="mb-5">
             Skolplattformen utvecklas av föräldrar för föräldrar. Vill du hjälpa

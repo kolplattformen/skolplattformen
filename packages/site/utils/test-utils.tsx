@@ -1,20 +1,21 @@
 // test-utils.js
-import React from 'react'
-import { render as rtlRender } from '@testing-library/react'
+import React, { ReactNode } from 'react'
+import { render as rtlRender, RenderResult } from '@testing-library/react'
 import { IntlProvider } from 'react-intl'
-import messages from '../content/locale'
+import messages, { Languages } from '../content/locale'
 
 function render(
   ui: React.ReactElement,
-  { locale = 'sv', ...renderOptions } = {}
-) {
-  function Wrapper({ children }) {
+  { locale = 'sv' as Languages, ...renderOptions } = {}
+): RenderResult {
+  function Wrapper({ children }: { children?: ReactNode }) {
     return (
       <IntlProvider locale={locale} messages={messages[locale]}>
         {children}
       </IntlProvider>
     )
   }
+
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 

@@ -1,3 +1,143 @@
+## [1.24.1](https://github.com/kolplattformen/skolplattformen/compare/v1.24.0...v1.24.1) (2021-04-23)
+
+
+### Bug Fixes
+
+* **site:** screenshot alignment ([#326](https://github.com/kolplattformen/skolplattformen/issues/326)) ([e777b69](https://github.com/kolplattformen/skolplattformen/commit/e777b693c337722e381141e71825047e89cad41f))
+
+# [1.24.0](https://github.com/kolplattformen/skolplattformen/compare/v1.23.0...v1.24.0) (2021-04-21)
+
+
+### Features
+
+* Add Patreon badge. Add info about contributing with Weblate. ([#311](https://github.com/kolplattformen/skolplattformen/issues/311)) ([b37571d](https://github.com/kolplattformen/skolplattformen/commit/b37571d0123aa85f5b132a87fb1753a103dd702b))
+
+# [1.23.0](https://github.com/kolplattformen/skolplattformen/compare/v1.22.1...v1.23.0) (2021-04-21)
+
+
+### Features
+
+* 🎸 Gratis ([#312](https://github.com/kolplattformen/skolplattformen/issues/312)) ([ac8581d](https://github.com/kolplattformen/skolplattformen/commit/ac8581d0b96771883ef91ea0445d360972c6ed73))
+
+## [1.22.1](https://github.com/kolplattformen/skolplattformen/compare/v1.22.0...v1.22.1) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Lade tillbaka utbildningsnivå under barnets namn ([#307](https://github.com/kolplattformen/skolplattformen/issues/307)) ([659cb36](https://github.com/kolplattformen/skolplattformen/commit/659cb36b09770e46db55175544ab246d470196b6))
+
+# [1.22.0](https://github.com/kolplattformen/skolplattformen/compare/v1.21.1...v1.22.0) (2021-04-20)
+
+
+### Features
+
+* 🎸 Added Polish ([bb35884](https://github.com/kolplattformen/skolplattformen/commit/bb35884651d7b9af5959b10c3d0ed778e9f6d017))
+
+## [1.21.1](https://github.com/kolplattformen/skolplattformen/compare/v1.21.0...v1.21.1) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Adress call turned off everywhere ([b95c9e7](https://github.com/kolplattformen/skolplattformen/commit/b95c9e77cf9adb4d1521cff1af992dba34325641))
+
+# [1.21.0](https://github.com/kolplattformen/skolplattformen/compare/v1.20.1...v1.21.0) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 added import of moment locales for available languages ([e7c0d55](https://github.com/kolplattformen/skolplattformen/commit/e7c0d5568bec28e0745752d5205b576180ea08fb))
+
+
+### Features
+
+* 🎸 Added Polish language ([53f6d4c](https://github.com/kolplattformen/skolplattformen/commit/53f6d4c4f0559c7a39a419ce49108d9ca7c1137b))
+
+## [1.20.1](https://github.com/kolplattformen/skolplattformen/compare/v1.20.0...v1.20.1) (2021-04-19)
+
+
+### Bug Fixes
+
+* 🐛 uppdatering av QA sidan ([c90aeff](https://github.com/kolplattformen/skolplattformen/commit/c90aeffe36c520db4cd3e53766f9c5e7784b7432))
+
+# [1.20.0](https://github.com/kolplattformen/skolplattformen/compare/v1.19.1...v1.20.0) (2021-04-19)
+
+
+### Features
+
+* 🎸 Redesign of webview, simpler interface ([#287](https://github.com/kolplattformen/skolplattformen/issues/287)) ([5723b19](https://github.com/kolplattformen/skolplattformen/commit/5723b198f74ed5f5298bee21e4e2c8e4aef08401))
+
+## [1.19.1](https://github.com/kolplattformen/skolplattformen/compare/v1.19.0...v1.19.1) (2021-04-18)
+
+
+### Bug Fixes
+
+* 🐛 Settings menu was not updated on language change ([#286](https://github.com/kolplattformen/skolplattformen/issues/286)) ([6418d6e](https://github.com/kolplattformen/skolplattformen/commit/6418d6ee42e5f953b2a1f83613f07f7e0f2963d8))
+
+# [1.19.0](https://github.com/kolplattformen/skolplattformen/compare/v1.18.0...v1.19.0) (2021-04-18)
+
+
+### Features
+
+* 🎸 Add errormessage to loading page ([#255](https://github.com/kolplattformen/skolplattformen/issues/255)) ([d1c5b09](https://github.com/kolplattformen/skolplattformen/commit/d1c5b09cf31113318f9811bea16d809dbde90c4e)), closes [#195](https://github.com/kolplattformen/skolplattformen/issues/195)
+
+# [1.18.0](https://github.com/kolplattformen/skolplattformen/compare/v1.17.0...v1.18.0) (2021-04-17)
+
+
+### Features
+
+* 🎸 Add new Status page ([#259](https://github.com/kolplattformen/skolplattformen/issues/259)) ([2dd1564](https://github.com/kolplattformen/skolplattformen/commit/2dd15640e2020d92486511b1dd330eaa0b8559c5))
+
+# [1.17.0](https://github.com/kolplattformen/skolplattformen/compare/v1.16.1...v1.17.0) (2021-04-17)
+
+
+### Features
+
+* 🎸 Remove required personal number on login on same device ([#271](https://github.com/kolplattformen/skolplattformen/issues/271)) ([2604640](https://github.com/kolplattformen/skolplattformen/commit/260464026b39d3e66098df037a19a9fe586a000c))
+
+## [1.16.1](https://github.com/kolplattformen/skolplattformen/compare/v1.16.0...v1.16.1) (2021-04-17)
+
+
+### Bug Fixes
+
+* 🐛 Fixes issue where locale was not saved ([19554c7](https://github.com/kolplattformen/skolplattformen/commit/19554c788fec4d37e8d86a654a83c960704f8c61)), closes [#280](https://github.com/kolplattformen/skolplattformen/issues/280)
+
+# [1.16.0](https://github.com/kolplattformen/skolplattformen/compare/v1.15.1...v1.16.0) (2021-04-16)
+
+
+### Features
+
+* 🎸 Added text for empty menu ([bbfb2a3](https://github.com/kolplattformen/skolplattformen/commit/bbfb2a36aea659b91ba1ed528691066caf0c0cef))
+* 🎸 Updated embedded-api for better menu handling ([675454a](https://github.com/kolplattformen/skolplattformen/commit/675454a2fe9be5738c6965971da9db2f7b4c75a4))
+
+## [1.15.1](https://github.com/kolplattformen/skolplattformen/compare/v1.15.0...v1.15.1) (2021-04-16)
+
+
+### Bug Fixes
+
+* 🐛 Remove two packages that have security issues ([5a0d673](https://github.com/kolplattformen/skolplattformen/commit/5a0d67363d549fa5f431cce8f23e061acd5cc33c))
+
+# [1.15.0](https://github.com/kolplattformen/skolplattformen/compare/v1.14.0...v1.15.0) (2021-04-13)
+
+
+### Features
+
+* 🎸 Updated curriculum ([#268](https://github.com/kolplattformen/skolplattformen/issues/268)) ([960be8a](https://github.com/kolplattformen/skolplattformen/commit/960be8a33460e3fe40cd9477e9b3c805bbbb88d9))
+
+# [1.14.0](https://github.com/kolplattformen/skolplattformen/compare/v1.13.0...v1.14.0) (2021-04-13)
+
+
+### Bug Fixes
+
+* 🐛 Downgraded react-native testing lib ([14e9ad8](https://github.com/kolplattformen/skolplattformen/commit/14e9ad89727d980055ebbb35f1a44ea06a932467))
+* 🐛 Reverting to old api-hooks to isolate problem ([5945651](https://github.com/kolplattformen/skolplattformen/commit/5945651803ce111b3bd4d4a059b045e22947dedc))
+
+
+### Features
+
+* 🎸 Updated embedded-api and api-hooks ([5a3391a](https://github.com/kolplattformen/skolplattformen/commit/5a3391ad2423e323c6dc217ea3c22b6d233925db))
+* 🎸 Updated embedded-api for time tables with full names ([bc1e638](https://github.com/kolplattformen/skolplattformen/commit/bc1e638426814669fe38daa769a078502251228b))
+* 🎸 Working compound child list enabling time tables ([323fc13](https://github.com/kolplattformen/skolplattformen/commit/323fc13efee2c8b27546c2b29192772ddbb9628d))
+
 # [1.13.0](https://github.com/kolplattformen/skolplattformen/compare/v1.12.0...v1.13.0) (2021-04-07)
 
 

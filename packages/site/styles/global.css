@@ -34,7 +34,14 @@ p {
   z-index: -1;
 }
 
-@media (max-width: 480px) {
+a.patreon {
+  background-color: rgb(255, 66, 77);
+  color: #fff;
+  border-radius: 25px;
+  padding: 8px 20px;
+}
+
+@media (max-width: 1024px) {
   .header:before {
     display: none;
   }

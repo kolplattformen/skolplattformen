@@ -4,11 +4,11 @@ import CtaThree from '../components/CtaThree'
 import CtaTwo from '../components/CtaTwo'
 import Features from '../components/Features'
 import FunFacts from '../components/FunFacts'
-import Pricing from '../components/Pricing'
+import PricingTemp from '../components/PricingTemp'
 import Testimonials from '../components/Testimonials'
 import TimelineLatest from '../components/TimelineLatest'
 
-const HomePage = () => {
+const HomePage = (): JSX.Element => {
   return (
     <>
       <Banner />
@@ -18,7 +18,7 @@ const HomePage = () => {
       <CtaTwo />
       <CtaThree />
       <AppShots />
-      <Pricing />
+      <PricingTemp />
       <Testimonials />
     </>
   )

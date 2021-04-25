@@ -11,6 +11,7 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
@@ -38,7 +39,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 
   const BackAction = () => (
     <TopNavigationAction
-      accessibilityLabel="Tillbaka till barn"
+      accessibilityLabel={translate('news.backToChild')}
       icon={BackIcon}
       onPress={navigateBack}
     />
@@ -48,7 +49,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
     <SafeAreaView style={styles.safeArea}>
       <SafeAreaViewContainer>
         <TopNavigation
-          title="Nyhet från Skolplattformen"
+          title={translate('news.title')}
           alignment="center"
           accessoryLeft={BackAction}
         />
@@ -61,13 +62,13 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
           <Text style={styles.title}>{newsItem.header}</Text>
           {dateIsValid(newsItem.published) && (
             <Text style={[styles.subtitle, styles.published]}>
-              <Text style={styles.strong}>Publicerad:</Text>{' '}
+              <Text style={styles.strong}>{translate('news.published')}:</Text>{' '}
               {displayDate(newsItem.published)}
             </Text>
           )}
           {dateIsValid(newsItem.modified) && (
             <Text style={styles.subtitle}>
-              <Text style={styles.strong}>Uppdaterad:</Text>{' '}
+              <Text style={styles.strong}>{translate('news.updated')}:</Text>{' '}
               {displayDate(newsItem.modified)}
             </Text>
           )}
