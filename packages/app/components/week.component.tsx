@@ -7,39 +7,31 @@ import {
   Tab,
 } from '@ui-kitten/components'
 import React from 'react'
-import moment from 'moment'
+import moment, { weekdays } from 'moment'
 import { StyleSheet, View } from 'react-native'
 import { useTimetable } from '@skolplattformen/api-hooks'
 import parse from '@skolplattformen/curriculum'
-import { TimetableEntry } from '@skolplattformen/embedded-api'
+import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
 
-const days = [
-  'söndag', // yeah, they have us-type weeks in Skola24..
-  'måndag',
-  'tisdag',
-  'onsdag',
-  'torsdag',
-  'fredag',
-  'lördag',
-]
+const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag']
 
-const groupOnDays = (lessons: TimetableEntry[]) =>
-  lessons
-    .slice()
-    .sort((a: TimetableEntry, b: TimetableEntry) =>
-      a.dateStart.localeCompare(b.dateStart)
-    )
-    .reduce(
-      (week: Object, item: TimetableEntry) => ({
-        ...week,
-        [item.dayOfWeek]: [...(week[item.dayOfWeek] || []), item],
-      }),
-      {}
-    )
+interface WeekProps {
+  child: Child
+}
 
-const LessonList = ({ lessons, header, ...props }) => (
+interface LessonListProps {
+  lessons: TimetableEntry[]
+  header: string
+}
+
+interface DayProps {
+  weekDay: string
+  lessons: TimetableEntry[]
+}
+
+const LessonList = ({ lessons, header }: LessonListProps) => (
   <List
-    {...props}
+    style={styles.part}
     data={lessons}
     ListHeaderComponent={() => (
       <Text category="c1" style={styles.header}>
@@ -59,14 +51,39 @@ const LessonList = ({ lessons, header, ...props }) => (
   />
 )
 
-export const Week = ({ child }) => {
+export const Day = ({ weekDay, lessons }: DayProps) =>
+  lessons.length ? (
+    <View style={styles.tab} key={weekDay}>
+      <View style={styles.summary}>
+        <Text category="c1" style={styles.summaryHeader}>
+          Börjar
+        </Text>
+        <Text category="h4">{lessons[0].timeStart.slice(0, 5)}</Text>
+        <Text category="c1">Slutar</Text>
+        <Text category="h4">
+          {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
+        </Text>
+        <Text category="c2">
+          {lessons.some((lesson) => lesson.code === 'IDH')
+            ? '🤼‍♀️ Gympapåse'
+            : ''}
+        </Text>
+      </View>
+      <LessonList
+        header="FM"
+        lessons={lessons.filter(({ timeStart }) => timeStart < '12:00')}
+      />
+      <LessonList
+        header="EM"
+        lessons={lessons.filter(({ timeStart }) => timeStart >= '12:00')}
+      />
+    </View>
+  ) : null
+
+export const Week = ({ child }: WeekProps) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
-  const { data: lessons } = useTimetable(
-    child,
-    moment().isoWeek(),
-    moment().year()
-  )
-  const schedule = groupOnDays(lessons)
+  const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
+  const { data: lessons } = useTimetable(child, year, week)
 
   return (
     <View style={styles.view}>
@@ -74,52 +91,25 @@ export const Week = ({ child }) => {
         selectedIndex={selectedIndex}
         onSelect={(index) => setSelectedIndex(index)}
       >
-        {Object.keys(schedule).map((weekDay) => (
-          <Tab key={days[weekDay]} title={days[weekDay]} />
+        {days.map((weekDay) => (
+          <Tab key={weekDay} title={weekDay} />
         ))}
       </TabBar>
 
-      {selectedIndex >= 0 ? (
-        <ViewPager
-          selectedIndex={selectedIndex}
-          style={styles.pager}
-          onSelect={(index) => setSelectedIndex(index)}
-        >
-          {Object.entries(schedule).map(([weekDay, day]) => (
-            <View style={styles.tab} key={weekDay}>
-              <View style={styles.summary}>
-                <Text category="c1" style={{ paddingBottom: 2 }}>
-                  Börjar
-                </Text>
-                <Text category="h4">{day[0].timeStart.slice(0, 5)}</Text>
-                <Text category="c1">Slutar</Text>
-                <Text category="h4">
-                  {day[day.length - 1].timeEnd.slice(0, 5)}
-                </Text>
-                <Text category="c2">
-                  {day.some((lesson) => lesson.code === 'IDH')
-                    ? '🤼‍♀️ Gympapåse'
-                    : ''}
-                </Text>
-              </View>
-              <LessonList
-                style={styles.part}
-                header="FM"
-                lessons={day
-                  .filter(({ timeStart }) => timeStart < '12:00')
-                  .sort((a, b) => a.date - b.date)}
-              />
-              <LessonList
-                style={styles.part}
-                header="EM"
-                lessons={day
-                  .filter(({ timeStart }) => timeStart >= '12:00')
-                  .sort((a, b) => a.date - b.date)}
-              />
-            </View>
-          ))}
-        </ViewPager>
-      ) : null}
+      <ViewPager
+        selectedIndex={selectedIndex}
+        style={styles.pager}
+        onSelect={(index) => setSelectedIndex(index)}
+      >
+        {days.map((weekDay) => (
+          <Day
+            weekDay={weekDay}
+            lessons={lessons.filter(
+              (lesson) => days[lesson.dayOfWeek - 1] === weekDay
+            )}
+          />
+        ))}
+      </ViewPager>
     </View>
   )
 }
@@ -154,6 +144,9 @@ const styles = StyleSheet.create({
   summary: {
     paddingRight: 20,
     paddingLeft: 2,
+  },
+  summaryHeader: {
+    paddingBottom: 2,
   },
   pager: {
     margin: 10,
