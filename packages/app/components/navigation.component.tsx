@@ -1,8 +1,5 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import {
-  NavigationContainer,
-  NavigationContainerRef,
-} from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
@@ -54,13 +51,12 @@ export const AppNavigator = () => {
         const { isAuthenticated } = await api.getUser()
 
         if (!isAuthenticated) {
-          api.logout()
+          await api.logout()
         }
       }
     }
     checkUser()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentAppState, isLoggedIn])
+  }, [currentAppState, isLoggedIn, api])
 
   return (
     <NavigationContainer linking={linking}>
