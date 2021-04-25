@@ -95,7 +95,10 @@
         "notificationTitle": "Nyhet: {{header}} ({{published}})",
         "published": "Publicerad",
         "title": "Nyhet från Skolplattformen",
-        "updated": "Uppdaterad"
+        "updated": "Uppdaterad",
+        "search": {
+            "placeholder": "Sök alla nyheter..."
+        }
     },
     "notifications": {
         "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
