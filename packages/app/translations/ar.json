@@ -9,7 +9,6 @@
         "endTime": "End time",
         "entireDay": "كل اليوم",
         "invalidPersonalNumber": "Personal number invalid",
-        "newsTitle": "عنصر أخبار: {{header}} ({{published}})",
         "personalNumberMissing": "Personal number missing",
         "selectAbscenseEndTime": "اختر وقت الانتهاء",
         "selectAbscenseStartTime": "Choose start time",

@@ -55,7 +55,6 @@
         "personalNumberMissing": "Numéro personnel manquant",
         "invalidPersonalNumber": "Numéro personnel invalide",
         "endTime": "Heure de fin",
-        "newsTitle": "Information : {{header}} ({{published}})",
         "selectAbscenseEndTime": "Choisissez l'heure de la fin",
         "entireDay": "Toute la journée",
         "title": "Signaler une absence"

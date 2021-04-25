@@ -50,7 +50,6 @@
     },
     "abscense": {
         "title": "Afwezigheid melden",
-        "newsTitle": "Nieuwsbericht: {{header}} ({{published}})",
         "invalidPersonalNumber": "Ongeldig burgerservicenummer",
         "endTime": "Eindtijd",
         "startTime": "Starttijd",
