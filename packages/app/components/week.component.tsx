@@ -7,9 +7,9 @@ import {
   Tab,
 } from '@ui-kitten/components'
 import React from 'react'
-import moment, { weekdays } from 'moment'
+import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
-import { useTimetable } from '@skolplattformen/api-hooks'
+import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
 import parse from '@skolplattformen/curriculum'
 import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
 
@@ -26,6 +26,7 @@ interface LessonListProps {
 
 interface DayProps {
   weekDay: string
+  lunch?: string
   lessons: TimetableEntry[]
 }
 
@@ -51,15 +52,17 @@ const LessonList = ({ lessons, header }: LessonListProps) => (
   />
 )
 
-export const Day = ({ weekDay, lessons }: DayProps) =>
+export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
   lessons.length ? (
     <View style={styles.tab} key={weekDay}>
       <View style={styles.summary}>
-        <Text category="c1" style={styles.summaryHeader}>
+        <Text category="c1" style={styles.startTime}>
           Börjar
         </Text>
         <Text category="h4">{lessons[0].timeStart.slice(0, 5)}</Text>
-        <Text category="c1">Slutar</Text>
+        <Text category="c1" style={styles.lunch}>Lunch</Text>
+        <Text category="c2">{lunch}</Text>
+        <Text category="c1" style={styles.endTime}>Slutar</Text>
         <Text category="h4">
           {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
         </Text>
@@ -81,9 +84,12 @@ export const Day = ({ weekDay, lessons }: DayProps) =>
   ) : null
 
 export const Week = ({ child }: WeekProps) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  let date = moment().add(7, 'hours') // skip today after school, pick tomorrow
+  if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday instead
+  const [selectedIndex, setSelectedIndex] = React.useState(date.isoWeekday())
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
   const { data: lessons } = useTimetable(child, year, week)
+  const { data: menu } = useMenu(child)
 
   return (
     <View style={styles.view}>
@@ -103,10 +109,16 @@ export const Week = ({ child }: WeekProps) => {
       >
         {days.map((weekDay) => (
           <Day
+            key={weekDay}
             weekDay={weekDay}
-            lessons={lessons.filter(
-              (lesson) => days[lesson.dayOfWeek - 1] === weekDay
-            )}
+            lunch={menu
+              .filter((m) => m.title.toLowerCase().includes(weekDay))
+              .pop()
+              ?.description.split('<br/>')
+              .join('\n')}
+            lessons={lessons
+              .filter((lesson) => days[lesson.dayOfWeek - 1] === weekDay)
+              .sort((a, b) => a.dateStart.localeCompare(b.dateStart))}
           />
         ))}
       </ViewPager>
@@ -145,8 +157,15 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 2,
   },
-  summaryHeader: {
+  startTime: {
     paddingBottom: 2,
+  },
+  lunch: {
+    paddingTop: 10,
+    paddingBottom: 2,
+  },
+  endTime: {
+    paddingTop: 10,
   },
   pager: {
     margin: 10,
