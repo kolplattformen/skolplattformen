@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/kolplattformen/skolplattformen/compare/v1.24.1...v1.25.0) (2021-04-25)
+
+
+### Features
+
+* 🎸 Added useAppState hook and logs out user if not authenticated ([#328](https://github.com/kolplattformen/skolplattformen/issues/328)) ([772f652](https://github.com/kolplattformen/skolplattformen/commit/772f65273c4858eac680594f61dc7ac92c30faa0))
+
 ## [1.24.1](https://github.com/kolplattformen/skolplattformen/compare/v1.24.0...v1.24.1) (2021-04-23)
 
 

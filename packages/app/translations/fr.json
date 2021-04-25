@@ -1,7 +1,7 @@
 {
     "general": {
-        "loading": "Chargement...",
-        "title": "Öppna skolplattformen",
+        "loading": "Chargement…",
+        "title": "Ouvrez skolplattformen",
         "socialSecurityNumber": "Numéro d'identité personnel",
         "settings": "Paramètres",
         "send": "Envoyer",
@@ -42,10 +42,10 @@
         "bankid": {
             "OpenManually": "En attente de BankID",
             "OpenOnAnotherDevice": "Ouvrez BankID sur un autre appareil",
-            "Waiting": "En attente de BankID...",
+            "Waiting": "En attente de BankID…",
             "OpenOnThisDevice": "Ouvrez BankID sur cet appareil"
         },
-        "loginFailed": "La connexion a échoué, veuillez réessayer !",
+        "loginFailed": "La connexion a échoué, veuillez réessayer.",
         "loginAsTestUser": "Connectez-vous en tant qu'utilisateur test",
         "chooseLoginMethod": "Choisissez la méthode de connexion"
     },
@@ -55,7 +55,6 @@
         "personalNumberMissing": "Numéro personnel manquant",
         "invalidPersonalNumber": "Numéro personnel invalide",
         "endTime": "Heure de fin",
-        "newsTitle": "Information : {{header}} ({{published}})",
         "selectAbscenseEndTime": "Choisissez l'heure de la fin",
         "entireDay": "Toute la journée",
         "title": "Signaler une absence"
