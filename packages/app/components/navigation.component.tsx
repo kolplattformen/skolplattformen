@@ -1,7 +1,7 @@
 import { useApi } from '@skolplattformen/api-hooks'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
 import { schema } from '../app.json'
 import Absence from './absence.component'
@@ -14,6 +14,7 @@ import {
   Child as ChildType,
   NewsItem as NewsItemType,
 } from '@skolplattformen/embedded-api'
+import { useAppState } from '../hooks/useAppState'
 
 export type RootStackParamList = {
   Login: undefined
@@ -38,8 +39,25 @@ const linking = {
     },
   },
 }
+
 export const AppNavigator = () => {
-  const { isLoggedIn } = useApi()
+  const { isLoggedIn, api } = useApi()
+
+  const currentAppState = useAppState()
+
+  useEffect(() => {
+    const checkUser = async () => {
+      if (currentAppState === 'active' && isLoggedIn) {
+        const { isAuthenticated } = await api.getUser()
+
+        if (!isAuthenticated) {
+          await api.logout()
+        }
+      }
+    }
+    checkUser()
+  }, [currentAppState, isLoggedIn, api])
+
   return (
     <NavigationContainer linking={linking}>
       <StatusBar />
