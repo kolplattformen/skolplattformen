@@ -1495,6 +1495,11 @@
     react-redux "^7.2.3"
     redux "^4.0.5"
 
+"@skolplattformen/curriculum@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.2.1.tgz#ad4b10bab31ec24b3516c2fe896891566bcb2944"
+  integrity sha512-L5NoG9Vjd4+MYnxMSI33KZwXz/RcHVmFW/lw1OnSW0U6nkG9ZlvLfDw8MEdcHbbPDY28nGnFizVRF91+ZFUauQ==
+
 "@skolplattformen/embedded-api@4.0.3":
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.0.3.tgz#a0b8b77b4ee347cd3fc4b5a304bbeee2cb4dd97f"
