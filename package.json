@@ -24,14 +24,16 @@
     "redux": "^4.0.5"
   },
   "peerDependencies": {
-    "@skolplattformen/embedded-api": "^4.0.0",
+    "@skolplattformen/curriculum": "^1.3.0",
+    "@skolplattformen/embedded-api": "^5.1.0",
     "react": "^16.11.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.13.0",
-    "@skolplattformen/embedded-api": "^4.0.0",
+    "@skolplattformen/curriculum": "^1.3.0",
+    "@skolplattformen/embedded-api": "^5.1.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/react-hooks": "^5.1.1",

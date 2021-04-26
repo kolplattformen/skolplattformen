@@ -45,6 +45,7 @@ describe('hooks with fake data', () => {
       expect(result.current.data).toEqual({
         firstName: 'Namn',
         lastName: 'Namnsson',
+        isAuthenticated: true,
       })
     })
   })
@@ -61,6 +62,7 @@ describe('hooks with fake data', () => {
       expect(result.current.data).toEqual({
         firstName: 'Namn',
         lastName: 'Namnsson',
+        isAuthenticated: true,
       })
     })
   })

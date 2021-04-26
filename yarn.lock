@@ -1304,19 +1304,23 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/embedded-api@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.0.0.tgz#22ff23b12a111dbc92b20ee2017c78d417cd6e7d"
-  integrity sha512-leVEr1FXD2knV1K9ZT6bNcL+vCiuO+XpzASJAQOtYfgq869wF4Le5taP8N7jzxHh+Mm2hw7CaMsl5DIbL0YfFg==
+"@skolplattformen/curriculum@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.3.0.tgz#841e2ff0095e39e174cffdd0b8a81a17956de7ed"
+  integrity sha512-nuwZX45gHe5JaiYfygDP1HmbhAJOEXuuWwR04tNAnl/PaDGqJscfzKt8YD2SL+MHqi3LARjSKLa4ms4SxVQFyw==
+
+"@skolplattformen/embedded-api@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.1.0.tgz#924729bf82aad4e61663f54254b107cd9f6e8812"
+  integrity sha512-lne82FYZMx+fSJmWKA7gFtdsuL+t28HaRTGoqIZ+8Ys29ypU8uxHR7KMMo7rcykgKEe0ALWF3Vlmr66FrAG4Rg==
   dependencies:
-    "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
-    events "^3.2.0"
+    events "^3.3.0"
     h2m "^0.7.0"
     he "^1.2.0"
     js-htmlencode "^0.3.0"
-    luxon "^1.25.0"
+    luxon "^1.26.0"
     node-html-parser "^2.1.0"
 
 "@testing-library/dom@^7.28.1":
@@ -1411,11 +1415,6 @@
   integrity sha512-mWA/4zFQhfvOA8zWkXobwJvBD7vzcxgrOQ0J5CH1votGqdq9m7+FwtGaqyCZqC3NyyBkc9z4m+iry4LlqcMWJg==
   dependencies:
     "@types/node" "*"
-
-"@types/he@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@types/he/-/he-1.1.1.tgz#19e14033c4ee8f1a702c74dcc6182664839ac2b7"
-  integrity sha512-jpzrsR1ns0n3kyWt92QfOUQhIuJGQ9+QGa7M62rO6toe98woQjnsnzjdMtsQXCdvjjmqjS2ZBCC7xKw0cdzU+Q==
 
 "@types/hoist-non-react-statics@^3.3.0":
   version "3.3.1"
@@ -3024,11 +3023,6 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-events@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/events/-/events-3.2.0.tgz"
-  integrity sha512-/46HWwbfCX2xTawVfkKLGxMifJYQBWMwY1mjywRtb4c9x8l5NP3KoJtnIOiL1hfdRkIuYhETxQlo62IF8tcnlg==
-
 events@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
@@ -4552,11 +4546,6 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
-
-luxon@^1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.25.0.tgz#d86219e90bc0102c0eb299d65b2f5e95efe1fe72"
-  integrity sha512-hEgLurSH8kQRjY6i4YLey+mcKVAWXbDNlZRmM6AgWDJ1cY3atl8Ztf5wEY7VBReFbmGnwQPz7KYJblL8B2k0jQ==
 
 luxon@^1.26.0:
   version "1.26.0"
