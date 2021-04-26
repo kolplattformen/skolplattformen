@@ -1,4 +1,5 @@
 import parse from '@skolplattformen/curriculum'
+import { Language } from '@skolplattformen/curriculum/dist/translations'
 import { DateTime } from 'luxon'
 import { TimetableEntry } from '../types'
 
@@ -37,12 +38,12 @@ export interface TimetableResponse {
 }
 
 interface EntryParser {
-  (args: TimetableResponseEntry, year: number, week: number): TimetableEntry
+  (args: TimetableResponseEntry, year: number, week: number, lang: Language): TimetableEntry
 }
 export const timetableEntry: EntryParser = ({
   guidId, texts: [code, teacher, location], timeStart, timeEnd, dayOfWeekNumber, blockName,
-}, year, week) => ({
-  ...parse(code),
+}, year, week, lang) => ({
+  ...parse(code, lang),
   id: guidId,
   blockName,
   dayOfWeek: dayOfWeekNumber,
@@ -54,9 +55,9 @@ export const timetableEntry: EntryParser = ({
   dateEnd: calculateDate(year, week, dayOfWeekNumber, timeEnd),
 })
 
-export const timetable = (response: TimetableResponse, year: number, week: number) => {
+export const timetable = (response: TimetableResponse, year: number, week: number, lang: Language) => {
   if (response.error) {
     throw new Error(response.error)
   }
-  return response.data.lessonInfo.map((entry) => timetableEntry(entry, year, week))
+  return response.data.lessonInfo.map((entry) => timetableEntry(entry, year, week, lang))
 }

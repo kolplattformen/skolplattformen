@@ -114,7 +114,7 @@ describe('Timetable', () => {
   })
   describe('timetableEntry', () => {
     it('parses basic timeTableEntry data correctly', () => {
-      const entry = timetableEntry(response.data.lessonInfo[1], 2021, 15)
+      const entry = timetableEntry(response.data.lessonInfo[1], 2021, 15, 'sv')
 
       expect(entry.id).toEqual('ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw')
       expect(entry.code).toEqual('BL')
@@ -127,7 +127,7 @@ describe('Timetable', () => {
       expect(entry.blockName).toEqual('block')
     })
     it('parses dates correctly', () => {
-      const entry = timetableEntry(response.data.lessonInfo[1], 2021, 15)
+      const entry = timetableEntry(response.data.lessonInfo[1], 2021, 15, 'sv')
 
       expect(entry.dateStart).toEqual('2021-04-12T09:40:00.000+02:00')
       expect(entry.dateEnd).toEqual('2021-04-12T11:35:00.000+02:00')
@@ -136,10 +136,10 @@ describe('Timetable', () => {
   describe('timetable', () => {
     it('throws error', () => {
       response.error = 'b0rk'
-      expect(() => timetable(response, 2021, 15)).toThrow('b0rk')
+      expect(() => timetable(response, 2021, 15, 'sv')).toThrow('b0rk')
     })
     it('parses lessonInfo', () => {
-      const table = timetable(response, 2021, 15)
+      const table = timetable(response, 2021, 15, 'sv')
 
       expect(table).toHaveLength(2)
       expect(table[0].id).toEqual('N2FjMDc1NjYtZmM2Yy0wZDQyLTY3M2YtZWI5NGNiZDA3ZGU4')

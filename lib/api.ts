@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { EventEmitter } from 'events'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
+import { Language } from '@skolplattformen/curriculum/dist/translations'
 import { URLSearchParams } from './URLSearchParams'
 import { checkStatus, LoginStatusChecker } from './loginStatus'
 import {
@@ -354,7 +355,7 @@ export class Api extends EventEmitter {
   public async getSchedule(
     child: EtjanstChild,
     from: DateTime,
-    to: DateTime
+    to: DateTime,
   ): Promise<ScheduleItem[]> {
     if (this.isFake) return fakeResponse(fake.schedule(child))
 
@@ -515,7 +516,7 @@ export class Api extends EventEmitter {
     return key as string
   }
 
-  public async getTimetable(child: Skola24Child, week: number, year: number): Promise<any> {
+  public async getTimetable(child: Skola24Child, week: number, year: number, lang: Language): Promise<any> {
     if (this.isFake) return fakeResponse(fake.timetable(child))
     
     const url = routes.timetable
@@ -548,7 +549,7 @@ export class Api extends EventEmitter {
     const response = await this.fetch(`timetable_${child.personGuid}_${year}_${week}`, url, session)
     const json = await response.json()
 
-    return parse.timetable(json, year, week)
+    return parse.timetable(json, year, week, lang)
   }
 
   public async logout() {

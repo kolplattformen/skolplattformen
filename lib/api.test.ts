@@ -185,7 +185,7 @@ describe('api', () => {
         const skola24Children = await api.getSkola24Children()
         expect(skola24Children).toHaveLength(1)
 
-        const timetable = await api.getTimetable(skola24Children[0], 2021, 15)
+        const timetable = await api.getTimetable(skola24Children[0], 2021, 15, 'sv')
         expect(timetable).toHaveLength(32)
 
         done()
