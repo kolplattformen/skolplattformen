@@ -8,7 +8,7 @@
     "pod": "npx pod-install",
     "start": "react-native start",
     "test": "is-ci-cli test:ci test:watch",
-    "test:ci": "jest",
+    "test:ci": "TZ=Europe/Stockholm jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --watch",
     "i18n": "sync-i18n --files '**/translations/*.json' --primary en --languages ar de pl so sv --space 2",
