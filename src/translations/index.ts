@@ -10,15 +10,20 @@ interface RawTranslation extends Translation {
   specialLanguages: Repo
 }
 
-export type Language = 'sv' | 'en'
+const languageList = ['sv', 'en']
+export type Language = typeof languageList[number]
 type Translations = Record<Language, RawTranslation>
 
-const translations: Translations = {
-  sv: require('./sv.json'),
-  en: require('./en.json'),
-}
+const translations: Translations = languageList.reduce(
+  (map, lang) => ({
+    ...map,
+    [lang]: require(`./${lang}.json`),
+  }),
+  {}
+)
 
 const translate = (lang: Language): Translation => {
+  const selectedLanguage = languageList.includes(lang) ? lang : languageList[0]
   const {
     subjects,
     traningsskolaSubjects,
@@ -26,7 +31,7 @@ const translate = (lang: Language): Translation => {
     languages,
     categories,
     misc,
-  } = translations[lang]
+  } = translations[selectedLanguage]
 
   return {
     subjects,
