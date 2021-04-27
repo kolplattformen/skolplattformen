@@ -13,6 +13,7 @@ interface RawTranslation extends Translation {
 const translations: Translations = {
   sv: require('./sv.json'),
   en: require('./en.json'),
+  pl: require('./pl.json'),
 }
 const languageList: string[] = Object.keys(translations)
 export type Language = typeof languageList[number]
