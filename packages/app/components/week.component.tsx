@@ -13,8 +13,6 @@ import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
 import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
 
-const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag']
-
 interface WeekProps {
   child: Child
 }
@@ -92,13 +90,14 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
   ) : null
 
 export const Week = ({ child }: WeekProps) => {
+  moment.locale(LanguageService.getLanguageCode())
+  const days = moment.weekdaysShort().slice(1, 6)
   let date = moment() // skip today after school, pick tomorrow
   //if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday next week instead
   const [selectedIndex, setSelectedIndex] = React.useState(
     Math.min(date.isoWeekday() - 1, 5)
   )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
-  console.log('Language', LanguageService.getLanguageCode())
   const { data: lessons } = useTimetable(
     child,
     week,
