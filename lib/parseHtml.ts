@@ -45,6 +45,8 @@ const rearrangeWhitespace = (html: string = ''): string => {
   trimNodes.forEach((trimNode) => {
     content = content.split(`<${trimNode}> `).join(` <${trimNode}>`)
     content = content.split(` </${trimNode}>`).join(`</${trimNode}> `)
+    content = content.split(`<${trimNode}>&amp;nbsp;`).join(`&amp;nbsp;<${trimNode}>`)
+    content = content.split(`&amp;nbsp;</${trimNode}>`).join(`</${trimNode}>&amp;nbsp;`)
   })
   return content
 }
