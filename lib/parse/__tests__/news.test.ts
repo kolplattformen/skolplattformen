@@ -117,7 +117,7 @@ describe('newsItem', () => {
           BannerImageGuid: '7a8142d9d9d54cf090e8457e4c629227',
           BannerImageListId: 'a88c22e8-7094-4a71-b4fd-8792c62a7b4a',
           Body:
-            '<div data-sp-rte=""><p><span><span><span>Kära vårdnadshavare!</span></span></span></p><p><span><span><span>I helgen är det avlusningsdagar! Ta tillfället i akt att luskamma ditt barn </span></span></span></p><p><span><span><span>Du finner all info du behöver på <a href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-cke-saved-href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-interception="on" title="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/">1177 hemsida </a></span></span></span><span><span><span>​​​​​​​</span></span></span></p><p><span><span><span>Trevlig helg!</span></span></span></p><p><span><span><span>​​​​​​​</span></span></span></p></div>',
+            '<div data-sp-rte=""><p><span><span><span>Kära vårdnadshavare!</span></span></span></p><p><span><span><span>I helgen är det avlusningsdagar! Ta <strong>tillfället </strong>i akt att luskamma ditt barn </span></span></span></p><p><span><span><span>Du finner all info du behöver på <a href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-cke-saved-href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-interception="on" title="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/">1177 hemsida </a></span></span></span><span><span><span>​​​​​​​</span></span></span></p><p><span><span><span>Trevlig helg!</span></span></span></p><p><span><span><span>​​​​​​​</span></span></span></p></div>',
           BodyNoHtml: null,
           AuthorDisplayName: 'Tieto Evry',
           altText: null,
@@ -170,5 +170,73 @@ describe('newsItem', () => {
     const expected =
       '[1177 hemsida](https://www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/)​​​​​​​'
     expect(item.body).toContain(expected)
+    expect(item.body).toContain(' **tillfället** ')
+  })
+})
+
+
+describe('newsItem', () => {
+  beforeEach(() => {
+    response = {
+      Success: true,
+      Error: null,
+      Data: {
+        CurrentNewsItem: {
+          NewsId: '123',
+          SiteId:
+            'elevstockholm.sharepoint.com,d112c398-71d4-468f-9a59-84d806751b08,3addab10-546a-4551-8076-72c9cd67f961',
+          NewsListId: '95df7d70-fbf0-470d-9926-e4e633f77f27',
+          NewsItemId:
+            'elevstockholm.sharepoint.com,d112c398-71d4-468f-9a59-84d806751b08,3addab10-546a-4551-8076-72c9cd67f961_40',
+          Header: 'Avlusningsdagarna 5-7 februari 2021',
+          PublicationDate: '/Date(1612445471000)/',
+          PubDateSE: '4 februari 2021 14:31',
+          ModifiedDate: '/Date(1612445852000)/',
+          ModDateSE: '14 februari 2021 14:37',
+          Source: 'Södra Ängby skola',
+          Preamble: 'Kära vårdnadshavare!I helgen är det avlusningsdagar!',
+          BannerImageUrl: '123123.jpeg',
+          BannerImageGuid: '7a8142d9d9d54cf090e8457e4c629227',
+          BannerImageListId: 'a88c22e8-7094-4a71-b4fd-8792c62a7b4a',
+          Body:
+            '<i>italic</i>  <b>bold</b>  <em>emphasis </em><br/><strong>strong</strong>',
+          BodyNoHtml: null,
+          AuthorDisplayName: 'Tieto Evry',
+          altText: null,
+          OriginalSourceUrl: null,
+        },
+        CurrentChild: null,
+        ViewGlobalTranslations: {},
+        ViewLocalTranslations: {},
+        Children: null,
+        Status: null,
+        GlobalTranslationIds: [
+          'InformationalHeader',
+          'ContactUsMessageLabel',
+          'Send',
+          'RequiredFieldMessageInfo',
+          'Sex',
+          'Male',
+          'Female',
+          'SSN',
+          'FirstName',
+          'LastName',
+          'Email',
+          'Zip',
+          'Address',
+          'ValidationRequiredFieldMessage',
+          'ValidationErrorMessage',
+        ],
+        LocalTranslationIds: ['IndexPageHeading1'],
+      },
+    }
+  })
+  it(' emphasizes correctly', () => {
+    const item = newsItemDetails(response)
+
+    expect(item.body).toContain('*italic*')
+    expect(item.body).toContain('**bold**')
+    expect(item.body).toContain('*emphasis*')
+    expect(item.body).toContain('**strong**')
   })
 })
