@@ -97,19 +97,8 @@ export const Week = ({ child }: WeekProps) => {
     Math.min(date.weekday(), 5)
   )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
-<<<<<<< HEAD
-  console.log('year week', year, week, date.toString())
   const { data: lessons } = useTimetable(child, week, year)
-=======
-  console.log('Language', LanguageService.getLanguageCode())
-  const { data: lessons } = useTimetable(
-    child,
-    week,
-    year,
-    LanguageService.getLanguageCode()
-  )
   console.log(lessons)
->>>>>>> fix: 🐛 Renamed misnamed location
   const { data: menu } = useMenu(child)
 
   return (
