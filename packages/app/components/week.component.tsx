@@ -10,7 +10,6 @@ import React from 'react'
 import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
 import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
-import parse from '@skolplattformen/curriculum'
 import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
 
 const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag']
@@ -39,13 +38,15 @@ const LessonList = ({ lessons, header }: LessonListProps) => (
         {header}
       </Text>
     )}
-    renderItem={({ item: { id, code, timeStart, timeEnd, teacher, room } }) => (
+    renderItem={({
+      item: { id, name, timeStart, timeEnd, teacher, location },
+    }) => (
       <ListItem
         key={id}
         style={styles.item}
-        title={`${parse(code).name || code}`}
+        title={name}
         description={`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
-          room ? `(${room})` : ''
+          location ? `(${location})` : ''
         } ${teacher}`}
       />
     )}
@@ -96,8 +97,19 @@ export const Week = ({ child }: WeekProps) => {
     Math.min(date.weekday(), 5)
   )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
+<<<<<<< HEAD
   console.log('year week', year, week, date.toString())
   const { data: lessons } = useTimetable(child, week, year)
+=======
+  console.log('Language', LanguageService.getLanguageCode())
+  const { data: lessons } = useTimetable(
+    child,
+    week,
+    year,
+    LanguageService.getLanguageCode()
+  )
+  console.log(lessons)
+>>>>>>> fix: 🐛 Renamed misnamed location
   const { data: menu } = useMenu(child)
 
   return (
