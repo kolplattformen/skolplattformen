@@ -36,3 +36,11 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+        }
+    }
+}

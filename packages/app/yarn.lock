@@ -1487,32 +1487,32 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/api-hooks@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-2.1.0.tgz#56e38359020772086bfdccab364c24063a820948"
-  integrity sha512-a5DEUwlZjqJE5qfTyefjUYcKSwBv0CHnD6g5pvHU8KSLRNVVBpcUpy10g5qnObHxhjpbPLdRLxMbnHpYfrb69Q==
+"@skolplattformen/api-hooks@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/api-hooks/-/api-hooks-3.0.0.tgz#3f220bf8101994e71d2a8fd683033e9a3af4faa3"
+  integrity sha512-IeeAy1MdLyJdugvb5bjV2RRGXQ/IRnfyI4jLOsiijw63oT97TDdC/86f9QsWlrDv5VgF+ptpWv7tlcxW3je3uQ==
   dependencies:
+    luxon "^1.26.0"
     react-redux "^7.2.3"
     redux "^4.0.5"
 
-"@skolplattformen/curriculum@^1.2.0", "@skolplattformen/curriculum@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.2.1.tgz#ad4b10bab31ec24b3516c2fe896891566bcb2944"
-  integrity sha512-L5NoG9Vjd4+MYnxMSI33KZwXz/RcHVmFW/lw1OnSW0U6nkG9ZlvLfDw8MEdcHbbPDY28nGnFizVRF91+ZFUauQ==
+"@skolplattformen/curriculum@1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.3.1.tgz#a2baa10b27dfc014e940e484619729196c0c5677"
+  integrity sha512-Rh1RmwMks+PvR5H8MsrTow9bg0x1HKFbxPOD/EZr+Spfnf57E5sPMa61U+oCJ8XauyaWN3Ojd6XF2CmugSipPw==
 
-"@skolplattformen/embedded-api@4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.4.1.tgz#c8802c0f8bcf208dbf1ba9c67d3a9a3a156ce7f6"
-  integrity sha512-2+MTs0AK0Qe9vPRyC0P2Y7/kh6QWk40rXh+VQ9e5vRakYIflbNDpdFg7Jo6ULkebF92eG+XnQlzj0QgCmlx0mg==
+"@skolplattformen/embedded-api@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.1.0.tgz#924729bf82aad4e61663f54254b107cd9f6e8812"
+  integrity sha512-lne82FYZMx+fSJmWKA7gFtdsuL+t28HaRTGoqIZ+8Ys29ypU8uxHR7KMMo7rcykgKEe0ALWF3Vlmr66FrAG4Rg==
   dependencies:
-    "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
-    events "^3.2.0"
+    events "^3.3.0"
     h2m "^0.7.0"
     he "^1.2.0"
     js-htmlencode "^0.3.0"
-    luxon "^1.25.0"
+    luxon "^1.26.0"
     node-html-parser "^2.1.0"
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
@@ -1684,11 +1684,6 @@
   version "2.0.39"
   resolved "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.39.tgz"
   integrity sha512-lYR2Y/tV2ujpk/WyUc7S0VLI0a9hrtVIN9EwnrNo5oSEJI2cK2/XrgwOQmXLL3eTulOESvh9qP6si9+DWM9cOA==
-
-"@types/he@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@types/he/-/he-1.1.1.tgz"
-  integrity sha512-jpzrsR1ns0n3kyWt92QfOUQhIuJGQ9+QGa7M62rO6toe98woQjnsnzjdMtsQXCdvjjmqjS2ZBCC7xKw0cdzU+Q==
 
 "@types/highlight.js@^9.7.0":
   version "9.12.4"
@@ -3751,9 +3746,9 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
-events@^3.2.0:
+events@^3.3.0:
   version "3.3.0"
-  resolved "https://registry.npmjs.org/events/-/events-3.3.0.tgz"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
 exec-sh@^0.3.2:
@@ -6111,7 +6106,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-luxon@^1.25.0:
+luxon@^1.26.0:
   version "1.26.0"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.26.0.tgz#d3692361fda51473948252061d0f8561df02b578"
   integrity sha512-+V5QIQ5f6CDXQpWNICELwjwuHdqeJM1UenlZWx5ujcRMc9venvluCjFb4t5NYLhb6IhkbMVOxzVuOqkgMxee2A==
@@ -7545,10 +7540,10 @@ react-native-typography@1.4.1:
   resolved "https://registry.npmjs.org/react-native-typography/-/react-native-typography-1.4.1.tgz"
   integrity sha512-dc9Zfs4jUdq4ygx4/KwO6jKTERBu6cRrfPJGntw/pA+D6BMjlWfMNuhZ/69vf4Zpsnt9s4AGe+Z/V1QFYaCXAA==
 
-react-native-webview@11.3.2:
-  version "11.3.2"
-  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.3.2.tgz"
-  integrity sha512-j+0eUKYY3MCO7DRhZaIPY6+0q+Yo1Iyhz5f7cde+i5vR71CcJ/60DhZPw5SSqXZnZiVX0Myz1D46u8dtfRmQFg==
+react-native-webview@11.4.2:
+  version "11.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.4.2.tgz#5fe8867135e7395b16c08e8d26bc8064b5c0dfac"
+  integrity sha512-reGWtlFCQCgZEROy0IJaI5iMhrhFzedNIFlj0d6eo0K6T91eeKaoDr24ebBvqmeemOCj0ZYtzX19qiInRznhLA==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
@@ -7963,10 +7958,9 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
-rn-actionsheet-module@1.0.3:
+"rn-actionsheet-module@https://github.com/viktorlarsson/rn-actionsheet-module":
   version "1.0.3"
-  resolved "https://registry.npmjs.org/rn-actionsheet-module/-/rn-actionsheet-module-1.0.3.tgz"
-  integrity sha512-wm+VqcGEfmf5XcnyH7g98jqaAqj0EyjqaN1hIfip2qO/yMkg+ZX2gfus2kLJrvXRfEk9Rax40TnkzOEt6My5tA==
+  resolved "https://github.com/viktorlarsson/rn-actionsheet-module#44ae59bff1b61177b0e63d73383bce4582008b47"
 
 rsvp@^4.8.4:
   version "4.8.5"
