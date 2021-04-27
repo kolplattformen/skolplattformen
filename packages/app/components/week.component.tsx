@@ -39,13 +39,15 @@ const LessonList = ({ lessons, header }: LessonListProps) => (
         {header}
       </Text>
     )}
-    renderItem={({ item: { id, name, timeStart, timeEnd, teacher, room } }) => (
+    renderItem={({
+      item: { id, name, timeStart, timeEnd, teacher, location },
+    }) => (
       <ListItem
         key={id}
         style={styles.item}
         title={name}
         description={`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
-          room ? `(${room})` : ''
+          location ? `(${location})` : ''
         } ${teacher}`}
       />
     )}
@@ -103,6 +105,7 @@ export const Week = ({ child }: WeekProps) => {
     year,
     LanguageService.getLanguageCode()
   )
+  console.log(lessons)
   const { data: menu } = useMenu(child)
 
   return (
