@@ -105,7 +105,6 @@ export const Week = ({ child }: WeekProps) => {
     year,
     LanguageService.getLanguageCode()
   )
-  console.log(lessons)
   const { data: menu } = useMenu(child)
 
   return (
