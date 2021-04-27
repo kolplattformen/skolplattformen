@@ -1508,6 +1508,7 @@
 >>>>>>> feat: 🎸 Polish support in curriculum
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@skolplattformen/embedded-api@4.4.1":
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-4.4.1.tgz#c8802c0f8bcf208dbf1ba9c67d3a9a3a156ce7f6"
@@ -1518,6 +1519,12 @@
   resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.1.1.tgz#4a38cc3e4638355cbe5d0072a9b7e463d041014b"
   integrity sha512-XeMuT5kWXIbk4fcl/ZYKQfSxUe9vBfuzLpll8qWrsf1lcwA3S5HgMoGIDmm1Govq75EeavHFZyJL5f/amBNoVg==
 >>>>>>> fix: 🐛 Förbättrad markdown-parsning
+=======
+"@skolplattformen/embedded-api@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.1.2.tgz#c342d0a8b29d7c8d5a60d8b86e33e03eccc728c3"
+  integrity sha512-2xQZS1HRFKmLdvjeRQvkXG+yn3NSxWOiAvHtr8Kck/EsZ3pdMbuyp5X2ZNrhC15TlTSl+1SPmnonj+7KPAre/Q==
+>>>>>>> fix: 🐛 Localised names of days
   dependencies:
     "@types/he" "^1.1.1"
     camelcase-keys "^6.2.2"

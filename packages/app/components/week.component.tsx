@@ -11,8 +11,7 @@ import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
 import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
 import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
-
-const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag']
+import { LanguageService } from '../services/languageService'
 
 interface WeekProps {
   child: Child
@@ -91,6 +90,8 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
   ) : null
 
 export const Week = ({ child }: WeekProps) => {
+  moment.locale(LanguageService.getLanguageCode())
+  const days = moment.weekdaysShort().slice(1, 6)
   let date = moment() // skip today after school, pick tomorrow
   //if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday next week instead
   const [selectedIndex, setSelectedIndex] = React.useState(
@@ -98,7 +99,6 @@ export const Week = ({ child }: WeekProps) => {
   )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
   const { data: lessons } = useTimetable(child, week, year)
-  console.log(lessons)
   const { data: menu } = useMenu(child)
 
   return (
