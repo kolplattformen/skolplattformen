@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/kolplattformen/skolplattformen/compare/v1.26.0...v1.27.0) (2021-04-28)
+
+
+### Features
+
+* **a11y:** update colors and styling to improve accessibility ([9dd9691](https://github.com/kolplattformen/skolplattformen/commit/9dd9691aa94e33d9525c3ca96a9cfd0d35ef13b2))
+
 # [1.26.0](https://github.com/kolplattformen/skolplattformen/compare/v1.25.0...v1.26.0) (2021-04-28)
 
 
