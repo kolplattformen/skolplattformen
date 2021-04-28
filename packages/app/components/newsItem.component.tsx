@@ -24,8 +24,7 @@ interface NewsItemProps {
   route: RouteProp<RootStackParamList, 'NewsItem'>
 }
 
-const displayDate = (date: string | undefined) =>
-  moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
+const displayDate = (date: string | undefined) => moment(date).format('lll')
 
 const dateIsValid = (date: string | undefined) =>
   moment(date, moment.ISO_8601).isValid()

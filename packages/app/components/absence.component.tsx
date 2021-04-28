@@ -167,7 +167,7 @@ const Absence = () => {
                           setFieldValue('displayStartTimePicker', true)
                         }
                       >
-                        {moment(values.startTime).format('HH:mm')}
+                        {moment(values.startTime).format('LT')}
                       </Button>
                       <DateTimePickerModal
                         cancelTextIOS={translate('general.abort')}
@@ -202,7 +202,7 @@ const Absence = () => {
                           setFieldValue('displayEndTimePicker', true)
                         }
                       >
-                        {moment(values.endTime).format('HH:mm')}
+                        {moment(values.endTime).format('LT')}
                       </Button>
                       <DateTimePickerModal
                         cancelTextIOS={translate('general.abort')}
