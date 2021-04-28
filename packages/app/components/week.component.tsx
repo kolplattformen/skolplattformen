@@ -58,24 +58,26 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
     <View style={styles.tab} key={weekDay}>
       <View style={styles.summary}>
         <Text category="c1" style={styles.startTime}>
-          {translate('schedule.start')}
+          {translate('schedule.start', { defaultValue: 'Börjar' })}
         </Text>
         <Text category="h4">{lessons[0].timeStart.slice(0, 5)}</Text>
         <Text category="c1" style={styles.lunchLabel}>
-          {translate('schedule.lunch')}
+          {translate('schedule.lunch', { defaultValue: 'Lunch' })}
         </Text>
         <Text category="c2" style={styles.lunch}>
           {lunch}
         </Text>
         <Text category="c1" style={styles.endTime}>
-          {translate('schedule.end')}
+          {translate('schedule.end', { defaultValue: 'Slutar' })}
         </Text>
         <Text category="h4">
           {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
         </Text>
         <Text category="c2">
           {lessons.some((lesson) => lesson.code === 'IDH')
-            ? `🤼‍♀️ ${translate('schedule.gymBag')}`
+            ? `🤼‍♀️ ${translate('schedule.gymBag', {
+                defaultValue: 'Gympapåse',
+              })}`
             : ''}
         </Text>
       </View>

@@ -36,15 +36,12 @@ export const LanguageService = {
     allString = data
   },
   seti18nConfig: ({ langCode }: { langCode?: string }) => {
+    i18n.defaultLocale = 'sv'
     if (langCode) {
       i18n.translations = { [langCode]: Strings }
       i18n.locale = langCode
       I18nManager.forceRTL(isRTL(langCode))
     }
-    i18n.fallbacks = true
-    i18n.defaultLocale = 'sv'
-    i18n.missingBehaviour = 'guess'
-
     moment.locale(langCode)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
