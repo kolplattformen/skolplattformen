@@ -1,4 +1,4 @@
-import i18n from 'i18n-js'
+import i18n, { TranslateOptions } from 'i18n-js'
 
 export const translations = {
   ar: require('../translations/ar.json'),
@@ -9,6 +9,6 @@ export const translations = {
   sv: require('../translations/sv.json'),
 }
 
-export const translate = (key: string, options?: Record<string, any>) => {
+export const translate = (key: string, options?: TranslateOptions) => {
   return i18n.t(key, options)
 }
