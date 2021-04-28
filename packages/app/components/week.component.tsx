@@ -10,7 +10,7 @@ import React from 'react'
 import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
 import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
-import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
+import { TimetableEntry, Child, MenuItem } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
 import { translate } from '../utils/translation'
 
@@ -25,7 +25,7 @@ interface LessonListProps {
 
 interface DayProps {
   weekDay: string
-  lunch?: string
+  lunch?: MenuItem
   lessons: TimetableEntry[]
 }
 
@@ -65,7 +65,7 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
           {translate('schedule.lunch', { defaultValue: 'Lunch' })}
         </Text>
         <Text category="c2" style={styles.lunch}>
-          {lunch}
+          {lunch?.description}
         </Text>
         <Text category="c1" style={styles.endTime}>
           {translate('schedule.end', { defaultValue: 'Slutar' })}
@@ -125,15 +125,11 @@ export const Week = ({ child }: WeekProps) => {
         style={styles.pager}
         onSelect={(index) => setSelectedIndex(index)}
       >
-        {days.map((weekDay) => (
+        {days.map((weekDay, index) => (
           <Day
             key={weekDay}
             weekDay={weekDay}
-            lunch={menu
-              .filter((m) => m.title.toLowerCase().includes(weekDay))
-              .pop()
-              ?.description.split('<br/>')
-              .join('\n')}
+            lunch={menu[index]}
             lessons={lessons
               .filter((lesson) => days[lesson.dayOfWeek - 1] === weekDay)
               .sort((a, b) => a.dateStart.localeCompare(b.dateStart))}
