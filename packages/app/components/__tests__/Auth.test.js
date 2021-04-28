@@ -1,11 +1,12 @@
 import { useApi } from '@skolplattformen/api-hooks'
 import { render } from '../../utils/testHelpers'
 import React from 'react'
-import { Auth } from '../auth.component.js'
+import { Auth } from '../auth.component'
 import { useAsyncStorage } from 'use-async-storage'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('use-async-storage')
+jest.mock('react-native-localize')
 
 const setup = () => {
   useApi.mockReturnValue({

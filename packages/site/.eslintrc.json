@@ -1,8 +1,8 @@
 {
   "root": true,
-  "parser": "babel-eslint",
-  "extends": ["prettier", "eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["prettier"],
+  "parser": "@typescript-eslint/parser",
+  "extends": ["prettier", "eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "env": { "browser": true, "node": true, "jest": true },
   "settings": {
     "react": {

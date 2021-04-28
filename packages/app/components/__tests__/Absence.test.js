@@ -1,11 +1,13 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useRoute } from '@react-navigation/native'
 import { fireEvent, waitFor } from '@testing-library/react-native'
+import Mockdate from 'mockdate'
 import React from 'react'
+import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
-import { useSMS } from '../../utils/SMS'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import Mockdate from 'mockdate'
 
+jest.mock('@react-navigation/native')
 jest.mock('@react-native-async-storage/async-storage')
 jest.mock('../../utils/SMS')
 
@@ -15,9 +17,9 @@ const setup = (customProps = {}) => {
   sendSMS = jest.fn()
 
   useSMS.mockReturnValue({ sendSMS })
+  useRoute.mockReturnValue({ params: { child: { id: '1' } } })
 
   const props = {
-    route: { params: { child: { id: '1' } } },
     ...customProps,
   }
 

@@ -24,7 +24,11 @@ jobs:
           timezone: Europe/Stockholm
 
       - name: Install dependencies
-        run: npx lerna bootstrap
+        run: npx lerna bootstrap      
+        
+      - name: Run audit
+        run: |
+          yarn audit
 
       - name: Run linting and tests
         run: |

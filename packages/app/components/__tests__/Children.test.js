@@ -1,27 +1,40 @@
 import {
+  useApi,
   useChildList,
   useCalendar,
-  useClassmates,
   useNews,
   useNotifications,
   useSchedule,
+  useMenu,
 } from '@skolplattformen/api-hooks'
 import { render } from '../../utils/testHelpers'
 import React from 'react'
-import { Children } from '../children.component.js'
+import { Children } from '../children.component'
+import { useNavigation } from '@react-navigation/native'
+import * as RNLocalize from 'react-native-localize'
 
 jest.mock('@skolplattformen/api-hooks')
-
+jest.mock('@react-navigation/native')
+jest.mock('react-native-localize')
 const setup = () => {
   return render(<Children />)
 }
 
 beforeEach(() => {
+  useApi.mockReturnValue({
+    api: { on: jest.fn(), off: jest.fn(), logout: jest.fn() },
+    isLoggedIn: false,
+  })
+  RNLocalize.findBestAvailableLanguage.mockImplementationOnce(() => ({
+    languageTag: 'sv',
+    isRTL: false,
+  }))
   useCalendar.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNotifications.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
-  useClassmates.mockReturnValueOnce({ data: [], status: 'loaded' })
   useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useMenu.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useNavigation.mockReturnValue({ navigate: jest.fn() })
 })
 
 test('renders loading state', () => {
@@ -45,9 +58,20 @@ test('renders empty state message', () => {
 
   expect(
     screen.getByText(
-      'Det finns inga barn registrerade för ditt personnummer i Stockholms Stad'
+      'Det finns inga barn registrerade för ditt personnummer i Stockholms stad'
     )
   ).toBeTruthy()
+})
+
+test('renders error state message', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [],
+    status: 'error',
+  }))
+
+  const screen = setup()
+
+  expect(screen.getByText('Hoppsan!')).toBeTruthy()
 })
 
 test('renders child in preschool', () => {
@@ -64,7 +88,6 @@ test('renders child in preschool', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Förskoleklass')).toBeTruthy()
 })
 
 test('renders child in elementary school', () => {
@@ -81,7 +104,6 @@ test('renders child in elementary school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskolan')).toBeTruthy()
 })
 
 test('renders child in high school', () => {
@@ -98,7 +120,7 @@ test('renders child in high school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
 })
 
 test('renders multiple children', () => {
@@ -119,37 +141,10 @@ test('renders multiple children', () => {
   const screen = setup()
 
   expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
 
   expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskolan')).toBeTruthy()
-})
-
-test('displays class name if child has class mates', () => {
-  useClassmates.mockReset()
-  useClassmates.mockReturnValueOnce({
-    data: [
-      {
-        className: '8C',
-      },
-    ],
-    status: 'loaded',
-  })
-  useChildList.mockImplementationOnce(() => ({
-    data: [
-      {
-        name: 'Test Testsson',
-        status: 'G',
-      },
-    ],
-    status: 'loaded',
-  }))
-
-  const screen = setup()
-
-  expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('8C')).toBeTruthy()
-  expect(screen.queryByText('Gymnasiet')).toBeFalsy()
+  expect(screen.getByText('Grundskola')).toBeTruthy()
 })
 
 test('removes any parenthesis from name', () => {
@@ -182,7 +177,7 @@ test('handles multiple statuses for a child', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasiet, Grundskolan, Förskoleklass')).toBeTruthy()
+  expect(screen.getByText('Gymnasieskola, Grundskola, Fritids')).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {

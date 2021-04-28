@@ -1,0 +1,102 @@
+{
+    "general": {
+        "loading": "Bezig met laden…",
+        "settings": "Instellingen",
+        "send": "Sturen",
+        "title": "Öppna skolplattformen",
+        "logout": "Uitloggen",
+        "confirm": "Bevestigen",
+        "changeLanguage": "Taal wijzigen",
+        "abort": "Annuleren",
+        "socialSecurityNumber": "Burgerservicenummer"
+    },
+    "auth": {
+        "placeholder_SocialSecurityNumber": "Jouw burgerservicenummer",
+        "loginFailed": "Inloggen mislukt. Probeer het opnieuw.",
+        "loginAsTestUser": "Inloggen als testgebruiker",
+        "words": {
+            "working": "werkende",
+            "simple": "simpele",
+            "rebellious": "opstandige",
+            "open": "open",
+            "imperfect": "onvolmaakte",
+            "homemade": "zelfgemaakte",
+            "fun": "leuke",
+            "fast": "snellere",
+            "fantastic": "fantastische",
+            "enlightened": "verlichte",
+            "cooler": "koelere",
+            "agile": "flexibele",
+            "cheap": "goedkopere",
+            "better": "betere",
+            "awaited": "verwachte",
+            "free": "gratis",
+            "first": "eerste"
+        },
+        "subtitle": "Het {{word}} alternatief",
+        "bankid": {
+            "OpenOnThisDevice": "Open BankID op dit apparaat",
+            "OpenOnAnotherDevice": "Open BankID op een andere apparaat",
+            "Waiting": "Watchen op BankID…",
+            "OpenManually": "Open BankID handmatig"
+        },
+        "chooseLoginMethod": "Kies inlogmethode"
+    },
+    "abbrevations": {
+        "preSchool": "Peuterschool",
+        "leisureTimeCentre": "Centrum voor vrijetijdsbesteding",
+        "compulsorySchool": "Basisschool",
+        "upperSecondarySchool": "Middelbare school"
+    },
+    "abscense": {
+        "title": "Afwezigheid melden",
+        "invalidPersonalNumber": "Ongeldig burgerservicenummer",
+        "endTime": "Eindtijd",
+        "startTime": "Starttijd",
+        "personalNumberMissing": "Burgerservicenummer ontbreekt",
+        "selectAbscenseEndTime": "Kies eindtijd",
+        "selectAbscenseStartTime": "Kies starttijd",
+        "entireDay": "Hele dag"
+    },
+    "children": {
+        "noKids_description": "Er zijn geen kinderen geregistreerd in de stad Stockholm voor jouw burgerservicenummer",
+        "loadingErrorInformationText": "Deze pagina kan niet worden geladen. Probeer het opnieuw of bekijk de status op skolplattformen.org.",
+        "viewStatus": "Bekijk de status op skolplattformen.org",
+        "tryAgain": "Probeer het opnieuw",
+        "noKids_title": "Geen kinderen",
+        "title": "Jouw kinderen",
+        "loadingErrorHeading": "Oeps!"
+    },
+    "menu": {
+        "emptyText": "Vond niets te zien voor deze week",
+        "emptyHeadline": "Het ziet er leeg uit in het menu"
+    },
+    "news": {
+        "backToChild": "Terug naar kind",
+        "notificationTitle": "Nieuws: {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Geen nieuwe nieuwsberichten deze week.",
+        "updated": "Bijgewerkt",
+        "title": "Nieuws van Skolplattformen",
+        "published": "Gepubliceerd"
+    },
+    "language": {
+        "changeLanguage": "Taal wijzigen",
+        "changeLanguageButton": "Opslaan"
+    },
+    "calender": {
+        "showCalenderActions": "Agenda-acties weergeven",
+        "approveAccessToCalender": "Je moet de toegang tot je agenda goedkeuren",
+        "saveToCalenderError": "Er is iets fout gegaan",
+        "saveToCalenderSuccess": "✔️ Opgeslagen in kalender",
+        "saveToCalender": "Opslaan in kalender"
+    },
+    "notifications": {
+        "notificationTitle": "Melding: {{message}} ({{dateCreated}})"
+    },
+    "navigation": {
+        "notifications": "Meldingen",
+        "calender": "Agenda",
+        "menu": "Menu",
+        "news": "Nieuws"
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "auth": {
+        "placeholder_SocialSecurityNumber": "Numerus personalis tuus",
+        "loginFailed": "Nomen dare non possibilis erat. Denuo conare.",
+        "chooseLoginMethod": "Methodum nomen dantem legere",
+        "bankid": {
+            "Waiting": "Pro BankID exspectans…",
+            "OpenOnThisDevice": "In hac machina BankID aperire",
+            "OpenOnAnotherDevice": "In machina differens BankID aperire",
+            "OpenManually": "Manu BankID aperire"
+        },
+        "words": {
+            "awaited": "exspectatus",
+            "agile": "agilis",
+            "better": "melior",
+            "cheap": "vilis",
+            "cooler": "amatior",
+            "working": "operans",
+            "simple": "simplus",
+            "rebellious": "rebellis",
+            "open": "apertus",
+            "imperfect": "imperfectus",
+            "fun": "oblectans",
+            "free": "liber",
+            "fast": "celer",
+            "fantastic": "mirificus",
+            "enlightened": "illuminatus",
+            "first": "primus",
+            "homemade": "Domi factus"
+        },
+        "subtitle": "Optio {{word}}",
+        "loginAsTestUser": "In parte investigatoris nomen dare"
+    },
+    "abscense": {
+        "title": "Absentiam referre",
+        "selectAbscenseStartTime": "Horam exordii legere",
+        "selectAbscenseEndTime": "Horam terminalem legere",
+        "startTime": "Hora exordii",
+        "personalNumberMissing": "Numerus personalis absens est",
+        "newsTitle": "Articulus nuntiorum: {{header}} ({{published}})",
+        "invalidPersonalNumber": "Numerus personalis irritus est",
+        "entireDay": "Totus dies",
+        "endTime": "Hora terminalis"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Lyceum superior",
+        "preSchool": "Praeschola",
+        "leisureTimeCentre": "Centrum otii",
+        "compulsorySchool": "Schola fundamentalis"
+    },
+    "children": {
+        "loadingErrorHeading": "Eheu!",
+        "loadingErrorInformationText": "Hanc paginam non carricari potest. Aut denuo conare, aut statum actualem in skolplattformen.org vide.",
+        "viewStatus": "Statum in skolplattformen.org videre",
+        "tryAgain": "Denuo conare",
+        "title": "Filii tui",
+        "noKids_title": "Nulli filii",
+        "noKids_description": "Nulli filii pro numero personali tuo in Urbe Stockholmiae sunt"
+    },
+    "calender": {
+        "showCalenderActions": "Actiones calendarii exhibere",
+        "saveToCalenderSuccess": "✔️ In calendarium servatus",
+        "saveToCalender": "In calendarium servare",
+        "approveAccessToCalender": "Aditum in calendarium approbare debes",
+        "saveToCalenderError": "Aliquis deerat"
+    },
+    "menu": {
+        "emptyText": "Hac septimana nihil invenire poterat",
+        "emptyHeadline": "Charta vacua videtur"
+    },
+    "news": {
+        "noNewNewsItemsThisWeek": "Nulli novi nuncii hac septimana.",
+        "updated": "Ad diurnum missus",
+        "title": "Nuntii ex Skolplattformen",
+        "published": "Divulgatus",
+        "notificationTitle": "Nuntii: {{header}} ({{published}})",
+        "backToChild": "Ad filium revertere"
+    },
+    "notifications": {
+        "notificationTitle": "Nuntius: {{message}} ({{dateCreated}})"
+    },
+    "navigation": {
+        "notifications": "Nuntii",
+        "news": "Nuntii",
+        "menu": "Charta",
+        "calender": "Calendarium"
+    },
+    "language": {
+        "changeLanguageButton": "Servare",
+        "changeLanguage": "Linguam permutare"
+    },
+    "general": {
+        "title": "Apertus Skolplattformen",
+        "socialSecurityNumber": "Numerus personalis",
+        "settings": "Configurationes",
+        "send": "Mittere",
+        "logout": "Secedere",
+        "loading": "Carricans…",
+        "confirm": "Confirmare",
+        "changeLanguage": "Linguam permutare",
+        "abort": "Rescindere"
+    }
+}
