@@ -39,9 +39,11 @@ export const LanguageService = {
     if (langCode) {
       i18n.translations = { [langCode]: Strings }
       i18n.locale = langCode
-      i18n.fallbacks = true
       I18nManager.forceRTL(isRTL(langCode))
     }
+    i18n.fallbacks = true
+    i18n.defaultLocale = 'sv'
+    i18n.missingBehaviour = 'guess'
 
     moment.locale(langCode)
   },
@@ -66,3 +68,5 @@ export const LanguageService = {
     changeListeners[`${key}`] = (langCode) => cb(langCode)
   },
 }
+
+export const i18nService = i18n

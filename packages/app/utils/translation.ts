@@ -1,10 +1,5 @@
 import i18n from 'i18n-js'
 
-export const setupi18n = () => {
-  i18n.defaultLocale = 'sv'
-  i18n.fallbacks = true
-}
-
 export const translations = {
   ar: require('../translations/ar.json'),
   de: require('../translations/de.json'),
