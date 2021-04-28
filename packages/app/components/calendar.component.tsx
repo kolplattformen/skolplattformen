@@ -65,16 +65,8 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-<<<<<<< HEAD
   description: {
     ...Typography.fontSize.xs,
     color: Colors.neutral.gray500,
-=======
-  contentContainer: {
-    padding: 15,
-  },
-  header: {
-    paddingLeft: 15,
->>>>>>> 333f372edd5b88a71062ae0e15c5d382bad7cd75
   },
 })
