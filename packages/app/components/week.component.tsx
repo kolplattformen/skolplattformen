@@ -98,7 +98,12 @@ export const Week = ({ child }: WeekProps) => {
     Math.min(date.isoWeekday() - 1, 5)
   )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
-  const { data: lessons } = useTimetable(child, week, year)
+  const { data: lessons } = useTimetable(
+    child,
+    week,
+    year,
+    LanguageService.getLanguageCode()
+  )
   const { data: menu } = useMenu(child)
 
   return (
