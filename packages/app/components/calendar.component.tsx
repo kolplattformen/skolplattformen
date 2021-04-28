@@ -6,6 +6,7 @@ import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
+import { Week } from './week.component'
 import { SaveToCalendar } from './saveToCalendar.component'
 
 export const Calendar = () => {
@@ -21,25 +22,30 @@ export const Calendar = () => {
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
     </View>
   ) : (
-    <List
-      contentContainerStyle={styles.contentContainer}
-      data={data.sort((a, b) =>
-        a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0
-      )}
-      ItemSeparatorComponent={Divider}
-      renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
-        <ListItem
-          disabled={true}
-          title={`${item.title}`}
-          description={`${moment(item.startDate).format(
-            'YYYY-MM-DD'
-          )} (${moment(item.startDate).fromNow()})`}
-          accessoryLeft={CalendarOutlineIcon}
-          accessoryRight={() => <SaveToCalendar event={item} />}
-        />
-      )}
-      style={styles.container}
-    />
+    <View>
+      <Week child={child} />
+      <List
+        contentContainerStyle={styles.contentContainer}
+        data={data.sort((a, b) =>
+          a.startDate && b.startDate
+            ? a.startDate.localeCompare(b.startDate)
+            : 0
+        )}
+        ItemSeparatorComponent={Divider}
+        renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
+          <ListItem
+            disabled={true}
+            title={`${item.title}`}
+            description={`${moment(item.startDate).format(
+              'YYYY-MM-DD'
+            )} (${moment(item.startDate).fromNow()})`}
+            accessoryLeft={CalendarOutlineIcon}
+            accessoryRight={() => <SaveToCalendar event={item} />}
+          />
+        )}
+        style={styles.container}
+      />
+    </View>
   )
 }
 
@@ -56,6 +62,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    padding: 15,
+  },
+  header: {
+    paddingLeft: 15,
   },
 })
