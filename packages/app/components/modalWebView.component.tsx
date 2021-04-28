@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
 import { WebViewNavigationEvent } from 'react-native-webview/lib/WebViewTypes'
+import { Colors, Layout, Sizing } from '../styles'
 import { BackIcon, ExternalLinkIcon } from './icon.component'
 
 interface ModalWebViewProps {
@@ -43,9 +44,11 @@ export const ModalWebView = ({
     setModalVisible(false)
     onClose()
   }
+
   const openInApp = () => {
     Linking.openURL(url)
   }
+
   return (
     <Modal
       animationType="slide"
@@ -57,19 +60,21 @@ export const ModalWebView = ({
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
             <TouchableOpacity onPress={closeModal}>
-              <BackIcon style={styles.backIcon} fill="#333333" />
+              <BackIcon style={styles.backIcon} fill={Colors.neutral.gray800} />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
               {title}
             </Text>
             <TouchableOpacity onPress={openInApp}>
-              <ExternalLinkIcon style={styles.shareIcon} fill="#333333" />
+              <ExternalLinkIcon
+                style={styles.shareIcon}
+                fill={Colors.neutral.gray800}
+              />
             </TouchableOpacity>
           </View>
         </View>
         {(headers || sharedCookiesEnabled) && (
           <WebView
-            style={styles.webview}
             source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
             thirdPartyCookiesEnabled={sharedCookiesEnabled}
@@ -85,14 +90,14 @@ export const ModalWebView = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...Layout.flex.full,
   },
   headerWrapper: {
-    marginTop: 5,
-    backgroundColor: '#ffffff',
-    padding: 5,
+    marginTop: Sizing.t1,
+    backgroundColor: Colors.neutral.white,
+    padding: Sizing.t1,
     borderRadius: 2,
-    borderColor: '#6B7280',
+    borderColor: Colors.neutral.gray200,
     borderBottomWidth: 1,
   },
   headerText: {
@@ -101,11 +106,11 @@ const styles = StyleSheet.create({
     paddingRight: 2,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    backgroundColor: '#ffffff',
+    ...Layout.flex.row,
+    ...Layout.mainAxis.center,
+    paddingHorizontal: Sizing.t3,
+    paddingVertical: Sizing.t1,
+    backgroundColor: Colors.neutral.white,
   },
   shareIcon: {
     width: 24,
@@ -114,7 +119,6 @@ const styles = StyleSheet.create({
   backIcon: {
     width: 24,
     height: 24,
-    marginRight: 15,
+    marginRight: Sizing.t4,
   },
-  webview: {},
 })

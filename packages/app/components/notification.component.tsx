@@ -57,16 +57,16 @@ const styles = StyleSheet.create({
     ...Layout.flex.full,
     backgroundColor: Colors.neutral.white,
     borderRadius: 2,
-    borderColor: '#f0f0f0',
+    borderColor: Colors.neutral.gray200,
     borderWidth: 1,
     marginBottom: Sizing.t2,
   },
   title: {
     ...Typography.header,
-    marginBottom: 2,
+    marginBottom: Sizing.t1,
   },
   subtitle: {
-    color: '#6B7280',
+    color: Colors.neutral.gray600,
     ...Typography.fontSize.xs,
   },
 })

@@ -2,6 +2,7 @@ import { useNews } from '@skolplattformen/api-hooks'
 import { List } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { Sizing } from '../styles'
 import { useChild } from './childContext.component'
 import { NewsListItem } from './newsListItem.component'
 
@@ -10,16 +11,12 @@ export const NewsList = () => {
   const { data } = useNews(child)
 
   return (
-    <>
-      <List
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        data={data}
-        renderItem={(info) => (
-          <NewsListItem key={info.item.id} item={info.item} />
-        )}
-      />
-    </>
+    <List
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      data={data}
+      renderItem={({ item }) => <NewsListItem key={item.id} item={item} />}
+    />
   )
 }
 
@@ -29,6 +26,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    padding: Sizing.t3,
   },
 })

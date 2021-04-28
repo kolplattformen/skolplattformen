@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    padding: Sizing.t3,
   },
   emptyState: {
     ...LayoutStyle.center,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   emptyStateDescription: {
     ...Typography.align.center,
     lineHeight: 21,
-    marginTop: Sizing.t2,
+    marginTop: Sizing.t3,
   },
   emptyStateImage: {
     ...Sizing.aspectRatio(0.8),
