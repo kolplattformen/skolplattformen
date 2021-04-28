@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/kolplattformen/skolplattformen/compare/v1.27.0...v1.27.1) (2021-04-28)
+
+
+### Bug Fixes
+
+* 🐛 Fixes lunch rendering ([#341](https://github.com/kolplattformen/skolplattformen/issues/341)) ([6c75d9d](https://github.com/kolplattformen/skolplattformen/commit/6c75d9d1191fa4c6b8f92fe526e4c1f85915bddf))
+
 # [1.27.0](https://github.com/kolplattformen/skolplattformen/compare/v1.26.0...v1.27.0) (2021-04-28)
 
 
