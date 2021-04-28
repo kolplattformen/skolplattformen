@@ -98,5 +98,11 @@
     },
     "notifications": {
         "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "start": "Start",
+        "end": "End",
+        "lunch": "Lunch",
+        "gymBag": "Gym bag"
     }
 }

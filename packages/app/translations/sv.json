@@ -98,5 +98,11 @@
     },
     "notifications": {
         "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "start": "Börjar",
+        "end": "Slutar",
+        "lunch": "Lunch",
+        "gymBag": "Gympapåse"
     }
 }

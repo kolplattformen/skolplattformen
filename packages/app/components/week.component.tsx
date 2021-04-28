@@ -12,6 +12,7 @@ import { StyleSheet, View } from 'react-native'
 import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
 import { TimetableEntry, Child } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
+import { translate } from '../utils/translation'
 
 interface WeekProps {
   child: Child
@@ -57,24 +58,24 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
     <View style={styles.tab} key={weekDay}>
       <View style={styles.summary}>
         <Text category="c1" style={styles.startTime}>
-          Börjar
+          {translate('schedule.start')}
         </Text>
         <Text category="h4">{lessons[0].timeStart.slice(0, 5)}</Text>
         <Text category="c1" style={styles.lunchLabel}>
-          Lunch
+          {translate('schedule.lunch')}
         </Text>
         <Text category="c2" style={styles.lunch}>
           {lunch}
         </Text>
         <Text category="c1" style={styles.endTime}>
-          Slutar
+          {translate('schedule.end')}
         </Text>
         <Text category="h4">
           {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
         </Text>
         <Text category="c2">
           {lessons.some((lesson) => lesson.code === 'IDH')
-            ? '🤼‍♀️ Gympapåse'
+            ? `🤼‍♀️ ${translate('schedule.gymBag')}`
             : ''}
         </Text>
       </View>
