@@ -98,5 +98,11 @@
     },
     "notifications": {
         "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "gymBag": "Ubrania do WF",
+        "lunch": "Lunch",
+        "end": "Kończy",
+        "start": "Zaczyna"
     }
 }
