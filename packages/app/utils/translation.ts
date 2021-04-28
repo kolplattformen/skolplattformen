@@ -1,6 +1,6 @@
 import i18n from 'i18n-js'
 
-export const setup = () => {
+export const setupi18n = () => {
   i18n.defaultLocale = 'sv'
   i18n.fallbacks = true
 }
