@@ -129,7 +129,7 @@ export const Week = ({ child }: WeekProps) => {
           <Day
             key={weekDay}
             weekDay={weekDay}
-            lunch={menu[index]}
+            lunch={menu[index] || {}}
             lessons={lessons
               .filter((lesson) => days[lesson.dayOfWeek - 1] === weekDay)
               .sort((a, b) => a.dateStart.localeCompare(b.dateStart))}
