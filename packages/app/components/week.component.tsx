@@ -95,7 +95,7 @@ export const Week = ({ child }: WeekProps) => {
   let date = moment() // skip today after school, pick tomorrow
   //if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday next week instead
   const [selectedIndex, setSelectedIndex] = React.useState(
-    Math.min(date.weekday(), 5)
+    Math.min(date.isoWeekday() - 1, 5)
   )
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
   const { data: lessons } = useTimetable(child, week, year)
