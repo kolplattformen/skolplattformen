@@ -1,3 +1,10 @@
+## [1.27.2](https://github.com/kolplattformen/skolplattformen/compare/v1.27.1...v1.27.2) (2021-04-29)
+
+
+### Bug Fixes
+
+* 🐛 schema syns inte om kalender är tom ([#342](https://github.com/kolplattformen/skolplattformen/issues/342)) ([d9bcc06](https://github.com/kolplattformen/skolplattformen/commit/d9bcc06df36474a77fa4c314ec51af3e9c423de8))
+
 ## [1.27.1](https://github.com/kolplattformen/skolplattformen/compare/v1.27.0...v1.27.1) (2021-04-28)
 
 
