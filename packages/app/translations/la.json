@@ -6,7 +6,7 @@
         "bankid": {
             "Waiting": "Pro BankID exspectans…",
             "OpenOnThisDevice": "In hac machina BankID aperire",
-            "OpenOnAnotherDevice": "In machina differens BankID aperire",
+            "OpenOnAnotherDevice": "In machina differente BankID aperire",
             "OpenManually": "Manu BankID aperire"
         },
         "words": {
@@ -99,5 +99,11 @@
         "confirm": "Confirmare",
         "changeLanguage": "Linguam permutare",
         "abort": "Rescindere"
+    },
+    "schedule": {
+        "start": "Exordium",
+        "gymBag": "Saccus gymnasticus",
+        "lunch": "Prandium",
+        "end": "Finis"
     }
 }
