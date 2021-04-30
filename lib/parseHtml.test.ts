@@ -65,7 +65,7 @@ describe('parseHtml', () => {
           </tbody>
         </table>
       </div>`
-      const expected = `# Hello #
+      const expected = `# Hello
 **World**
 - Foo
 
@@ -92,8 +92,7 @@ Alla knep är tillåtna.
 Kolla in Reddit: [https://reddit.com/water-balloons/where-to-buy/](https://reddit.com/water-balloons/where-to-buy/)
 
 ...och här: [https://reddit.com/splash-wars/](https://reddit.com/splash-wars/)
-
-## Om att vara hemma vid symtom ##
+## Om att vara hemma vid symtom
 
 Även HackerNews är bra.
 
@@ -101,10 +100,10 @@ Kolla in Reddit: [https://reddit.com/water-balloons/where-to-buy/](https://reddi
 
 Vi fortsätter också att: 
 
-- hålla avstånd. 
+- hålla avstånd.
 - ha flera digitala möten.
-- tvätta händerna. 
-- undvika kollektivtrafik om det är möjligt. 
+- tvätta händerna.
+- undvika kollektivtrafik om det är möjligt.
 
 - stanna hemma även när man bara känner sig lite sjuk.
 - vädra ofta

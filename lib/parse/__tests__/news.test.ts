@@ -168,7 +168,7 @@ describe('newsItem', () => {
     const item = newsItemDetails(response)
 
     const expected =
-      '[1177 hemsida](https://www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/)​​​​​​​'
+      '[1177 hemsida](https://www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/)'
     expect(item.body).toContain(expected)
     expect(item.body).toContain(' **tillfället** ')
   })
