@@ -1,3 +1,10 @@
+## [1.27.3](https://github.com/kolplattformen/skolplattformen/compare/v1.27.2...v1.27.3) (2021-04-30)
+
+
+### Bug Fixes
+
+* 🐛 Day is selected after data is loaded ([ccaa17b](https://github.com/kolplattformen/skolplattformen/commit/ccaa17bf962a6e93898c9fc06d22403e10d9b528))
+
 ## [1.27.2](https://github.com/kolplattformen/skolplattformen/compare/v1.27.1...v1.27.2) (2021-04-29)
 
 
