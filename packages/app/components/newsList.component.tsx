@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { useNews } from '@skolplattformen/api-hooks'
 import { List, Input } from '@ui-kitten/components'
 import { StyleSheet } from 'react-native'
+import { Sizing } from '../styles'
 import { useChild } from './childContext.component'
 import { NewsListItem } from './newsListItem.component'
 import { translate } from '../utils/translation'
@@ -57,8 +58,8 @@ export const NewsList = () => {
       keyboardDismissMode="on-drag"
       data={data}
       ListHeaderComponent={header}
-      renderItem={(info) => (
-        <NewsListItem key={info.item.id} item={info.item} />
+      renderItem={({ item }) => (
+        <NewsListItem key={item.id} item={item} />
       )}
     />
   )
@@ -70,6 +71,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    padding: Sizing.t3,
   },
 })

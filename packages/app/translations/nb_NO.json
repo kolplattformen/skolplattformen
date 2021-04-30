@@ -72,7 +72,6 @@
         "selectAbscenseStartTime": "Velg starttid",
         "selectAbscenseEndTime": "Velg slutt-tid",
         "personalNumberMissing": "Personnummer mangler",
-        "newsTitle": "Nyhetselement {{header}} ({{published}})",
         "invalidPersonalNumber": "Ugyldig personnummer",
         "entireDay": "Hele dagen",
         "endTime": "Slutt"

@@ -1,3 +1,80 @@
+## [1.27.4](https://github.com/kolplattformen/skolplattformen/compare/v1.27.3...v1.27.4) (2021-04-30)
+
+
+### Bug Fixes
+
+* 🐛 Formatering nyhetsbrev. Bumpade version på embedded-api ([#345](https://github.com/kolplattformen/skolplattformen/issues/345)) ([7e2fd8f](https://github.com/kolplattformen/skolplattformen/commit/7e2fd8f74ddf3fe3d50fc1753d89780fd85e7515))
+
+## [1.27.3](https://github.com/kolplattformen/skolplattformen/compare/v1.27.2...v1.27.3) (2021-04-30)
+
+
+### Bug Fixes
+
+* 🐛 Day is selected after data is loaded ([ccaa17b](https://github.com/kolplattformen/skolplattformen/commit/ccaa17bf962a6e93898c9fc06d22403e10d9b528))
+
+## [1.27.2](https://github.com/kolplattformen/skolplattformen/compare/v1.27.1...v1.27.2) (2021-04-29)
+
+
+### Bug Fixes
+
+* 🐛 schema syns inte om kalender är tom ([#342](https://github.com/kolplattformen/skolplattformen/issues/342)) ([d9bcc06](https://github.com/kolplattformen/skolplattformen/commit/d9bcc06df36474a77fa4c314ec51af3e9c423de8))
+
+## [1.27.1](https://github.com/kolplattformen/skolplattformen/compare/v1.27.0...v1.27.1) (2021-04-28)
+
+
+### Bug Fixes
+
+* 🐛 Fixes lunch rendering ([#341](https://github.com/kolplattformen/skolplattformen/issues/341)) ([6c75d9d](https://github.com/kolplattformen/skolplattformen/commit/6c75d9d1191fa4c6b8f92fe526e4c1f85915bddf))
+
+# [1.27.0](https://github.com/kolplattformen/skolplattformen/compare/v1.26.0...v1.27.0) (2021-04-28)
+
+
+### Features
+
+* **a11y:** update colors and styling to improve accessibility ([9dd9691](https://github.com/kolplattformen/skolplattformen/commit/9dd9691aa94e33d9525c3ca96a9cfd0d35ef13b2))
+
+# [1.26.0](https://github.com/kolplattformen/skolplattformen/compare/v1.25.0...v1.26.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* 🐛 Förbättrad markdown-parsning ([9546540](https://github.com/kolplattformen/skolplattformen/commit/9546540d936f73eda70f236037d1f7ee37b5a0de))
+* 🐛 Förbättrad markdown-parsning ([6d3ff81](https://github.com/kolplattformen/skolplattformen/commit/6d3ff81185270df82863fed135e35bfcf4c76f79))
+* 🐛 Localised names of days ([fe27819](https://github.com/kolplattformen/skolplattformen/commit/fe2781994d7456cbc04f730d6a69a2dcc6c3f0f0))
+* 🐛 Localised names of days ([f31c93b](https://github.com/kolplattformen/skolplattformen/commit/f31c93b3d69ed02ec78b22721b0af86f23c4c968))
+* 🐛 Removed console.log ([9671fa2](https://github.com/kolplattformen/skolplattformen/commit/9671fa223db6a35f886488ce818071b783c5d639))
+* 🐛 Removed console.log ([9266711](https://github.com/kolplattformen/skolplattformen/commit/9266711e7eafa301bb1bdf1dfe556d78ef09c44b))
+* 🐛 Renamed misnamed location ([fba0c61](https://github.com/kolplattformen/skolplattformen/commit/fba0c617091dd04743b7d10a36d5f8879eca131b))
+* 🐛 Renamed misnamed location ([d537a6d](https://github.com/kolplattformen/skolplattformen/commit/d537a6d5eb84f8ad9350d0a6a31c641e47118308))
+* 🐛 uppdaterade version av embedded-api ([ebb0340](https://github.com/kolplattformen/skolplattformen/commit/ebb03408a1911f014bf1ab5e40af3c6f8693621a))
+* 🐛 uppdaterade version av embedded-api ([eaa2353](https://github.com/kolplattformen/skolplattformen/commit/eaa23539a1202a5a12a771149d175c043f942b35))
+* bug when getting next weeks schedule ([036968b](https://github.com/kolplattformen/skolplattformen/commit/036968bfc395e933c18a52b3e9f7d71fac7ee810))
+* bug when getting next weeks schedule ([fc22916](https://github.com/kolplattformen/skolplattformen/commit/fc2291605e017e1b8e5e908078c4df50d1ec66ef))
+* linter is picky ([3af39c1](https://github.com/kolplattformen/skolplattformen/commit/3af39c14be9d74193bbdae8f977601c85c9601d0))
+* linter is picky ([a2846cd](https://github.com/kolplattformen/skolplattformen/commit/a2846cdb35bc6df581a8b1584087b3415cbe110f))
+
+
+### Features
+
+* 🎸 Polish support in curriculum ([b8ef523](https://github.com/kolplattformen/skolplattformen/commit/b8ef523afc7de1554a782063a6f7679498aa7fef))
+* 🎸 Polish support in curriculum ([96c816e](https://github.com/kolplattformen/skolplattformen/commit/96c816e33c113c8da5b6e5bb695a8bdaf7d88a7f))
+* 🎸 Updated deps and removed unnecessary parsing in week ([586a975](https://github.com/kolplattformen/skolplattformen/commit/586a9759207dc0a53b277c451c7341e44dca479d))
+* first working schema ui ([d3d2be3](https://github.com/kolplattformen/skolplattformen/commit/d3d2be3a3e3c5910f698ea1c2c8f815b0e688aca))
+* first working schema ui ([8b69a20](https://github.com/kolplattformen/skolplattformen/commit/8b69a20ab2dc9fde5ae90b716a1646ab606fbd02))
+* first working version in test ([0a8be80](https://github.com/kolplattformen/skolplattformen/commit/0a8be80a1d12885bca5599bbb9376d710dd3e150))
+* first working version in test ([4bf571b](https://github.com/kolplattformen/skolplattformen/commit/4bf571b5d8c7cb5da2453330ef22e3e4b8ae2c7d))
+* use curriculun lib ([8b700e5](https://github.com/kolplattformen/skolplattformen/commit/8b700e5516414d4e0c4e70a2ff64a245645d1cd3))
+* use curriculun lib ([0e61c16](https://github.com/kolplattformen/skolplattformen/commit/0e61c16aa94761c6eb48c61cbd368ea288bd5b9d))
+* visa summering per dag inkl indikation om gymnastik ([ea18203](https://github.com/kolplattformen/skolplattformen/commit/ea182035d8960316a34f5fdd9c3a4769b3d1aa57))
+* visa summering per dag inkl indikation om gymnastik ([02eb7dc](https://github.com/kolplattformen/skolplattformen/commit/02eb7dcf92df6f25e28bc146255a7f4dc785ac58))
+
+# [1.25.0](https://github.com/kolplattformen/skolplattformen/compare/v1.24.1...v1.25.0) (2021-04-25)
+
+
+### Features
+
+* 🎸 Added useAppState hook and logs out user if not authenticated ([#328](https://github.com/kolplattformen/skolplattformen/issues/328)) ([772f652](https://github.com/kolplattformen/skolplattformen/commit/772f65273c4858eac680594f61dc7ac92c30faa0))
+
 ## [1.24.1](https://github.com/kolplattformen/skolplattformen/compare/v1.24.0...v1.24.1) (2021-04-23)
 
 

@@ -1,7 +1,7 @@
 import { TextStyle } from 'react-native'
 import { systemWeights } from 'react-native-typography'
 
-type FontSize = 'xs' | 'sm' | 'base' | 'lg'
+type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl'
 export const fontSize: Record<FontSize, TextStyle> = {
   xs: {
     fontSize: 12,
@@ -14,6 +14,9 @@ export const fontSize: Record<FontSize, TextStyle> = {
   },
   lg: {
     fontSize: 18,
+  },
+  xl: {
+    fontSize: 20,
   },
 }
 
@@ -31,7 +34,7 @@ export const fontWeight: Record<FontWeight, TextStyle> = {
 }
 
 export const header: TextStyle = {
-  ...fontSize.lg,
+  ...fontSize.base,
   ...fontWeight.bold,
 }
 

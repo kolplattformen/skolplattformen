@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     ...Layout.flex.row,
     backgroundColor: Colors.neutral.white,
     borderRadius: 2,
-    borderColor: '#f0f0f0',
+    borderColor: Colors.neutral.gray200,
     borderWidth: 1,
     padding: Sizing.t5,
     marginBottom: Sizing.t2,
@@ -70,18 +70,17 @@ const styles = StyleSheet.create({
     ...Layout.flex.full,
   },
   title: {
-    ...Typography.fontWeight.bold,
-    ...Typography.fontSize.lg,
-    marginBottom: 2,
+    ...Typography.header,
+    marginBottom: Sizing.t1,
   },
   subtitle: {
     ...Typography.fontSize.xs,
-    color: '#6B7280',
+    color: Colors.neutral.gray600,
     marginBottom: Sizing.t2,
   },
   intro: {
     ...Typography.fontSize.sm,
-    color: '#374151',
+    color: Colors.neutral.gray700,
   },
   image: {
     borderRadius: 3,

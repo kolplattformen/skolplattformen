@@ -9,7 +9,6 @@
         "endTime": "Czas zakończenia",
         "entireDay": "Cały dzień",
         "invalidPersonalNumber": "Błąd w personnumerze",
-        "newsTitle": "Wiadomość: {{header}} ({{published}})",
         "personalNumberMissing": "Brak personnumeru",
         "selectAbscenseEndTime": "Wybierz czas zakończenia",
         "selectAbscenseStartTime": "Wybierz czas rozpoczęcia",
@@ -99,5 +98,11 @@
     },
     "notifications": {
         "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "gymBag": "Ubrania do WF",
+        "lunch": "Lunch",
+        "end": "Kończy",
+        "start": "Zaczyna"
     }
 }

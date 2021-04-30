@@ -9,7 +9,6 @@
         "endTime": "Sluttid",
         "entireDay": "Heldag",
         "invalidPersonalNumber": "Personnumret är ogiltigt",
-        "newsTitle": "Nyhet: {{header}} ({{published}})",
         "personalNumberMissing": "Personnummer saknas",
         "selectAbscenseEndTime": "Välj sluttid",
         "selectAbscenseStartTime": "Välj startid",
@@ -102,5 +101,11 @@
     },
     "notifications": {
         "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "start": "Börjar",
+        "end": "Slutar",
+        "lunch": "Lunch",
+        "gymBag": "Gympapåse"
     }
 }
