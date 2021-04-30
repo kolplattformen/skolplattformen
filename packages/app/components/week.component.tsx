@@ -6,7 +6,7 @@ import {
   TabBar,
   Tab,
 } from '@ui-kitten/components'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
 import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
@@ -95,11 +95,7 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
 export const Week = ({ child }: WeekProps) => {
   moment.locale(LanguageService.getLanguageCode())
   const days = moment.weekdaysShort().slice(1, 6)
-  let date = moment() // skip today after school, pick tomorrow
-  //if (date.isoWeekday() > 5) date = date.add(3, 'days').startOf('week') // skip weekends, pick monday next week instead
-  const [selectedIndex, setSelectedIndex] = React.useState(
-    Math.min(date.isoWeekday() - 1, 5)
-  )
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
   const { data: lessons } = useTimetable(
     child,
@@ -108,6 +104,11 @@ export const Week = ({ child }: WeekProps) => {
     LanguageService.getLanguageCode()
   )
   const { data: menu } = useMenu(child)
+
+  useEffect(() => {
+    const updatedSelectedIndex = Math.min(moment().isoWeekday() - 1, 5)
+    setSelectedIndex(updatedSelectedIndex)
+  }, [lessons])
 
   return (
     <View style={styles.view}>
