@@ -58,9 +58,7 @@ export const NewsList = () => {
       keyboardDismissMode="on-drag"
       data={data}
       ListHeaderComponent={header}
-      renderItem={({ item }) => (
-        <NewsListItem key={item.id} item={item} />
-      )}
+      renderItem={({ item }) => <NewsListItem key={item.id} item={item} />}
     />
   )
 }
