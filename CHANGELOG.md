@@ -1,3 +1,10 @@
+## [1.27.4](https://github.com/kolplattformen/skolplattformen/compare/v1.27.3...v1.27.4) (2021-04-30)
+
+
+### Bug Fixes
+
+* 🐛 Formatering nyhetsbrev. Bumpade version på embedded-api ([#345](https://github.com/kolplattformen/skolplattformen/issues/345)) ([7e2fd8f](https://github.com/kolplattformen/skolplattformen/commit/7e2fd8f74ddf3fe3d50fc1753d89780fd85e7515))
+
 ## [1.27.3](https://github.com/kolplattformen/skolplattformen/compare/v1.27.2...v1.27.3) (2021-04-30)
 
 
