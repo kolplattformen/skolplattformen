@@ -106,7 +106,8 @@ export const Week = ({ child }: WeekProps) => {
   const { data: menu } = useMenu(child)
 
   useEffect(() => {
-    Math.min(moment().isoWeekday() - 1, 5)
+    const updatedSelectedIndex = Math.min(moment().isoWeekday() - 1, 5)
+    setSelectedIndex(updatedSelectedIndex)
   }, [lessons])
 
   return (
