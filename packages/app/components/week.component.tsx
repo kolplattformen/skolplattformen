@@ -13,6 +13,7 @@ import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
 import { TimetableEntry, Child, MenuItem } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
 import { translate } from '../utils/translation'
+import { TransitionView } from './transitionView.component'
 
 interface WeekProps {
   child: Child
@@ -113,33 +114,35 @@ export const Week = ({ child }: WeekProps) => {
   }, [lessons])
 
   return showSchema ? (
-    <View style={styles.view}>
-      <TabBar
-        selectedIndex={selectedIndex}
-        onSelect={(index) => setSelectedIndex(index)}
-      >
-        {days.map((weekDay) => (
-          <Tab key={weekDay} title={weekDay} />
-        ))}
-      </TabBar>
+    <TransitionView animation={'fadeInDown'}>
+      <TransitionView style={styles.view} animation={'fadeIn'}>
+        <TabBar
+          selectedIndex={selectedIndex}
+          onSelect={(index) => setSelectedIndex(index)}
+        >
+          {days.map((weekDay) => (
+            <Tab key={weekDay} title={weekDay} />
+          ))}
+        </TabBar>
 
-      <ViewPager
-        selectedIndex={selectedIndex}
-        style={styles.pager}
-        onSelect={(index) => setSelectedIndex(index)}
-      >
-        {days.map((weekDay, index) => (
-          <Day
-            key={weekDay}
-            weekDay={weekDay}
-            lunch={menu[index] || {}}
-            lessons={lessons
-              .filter((lesson) => days[lesson.dayOfWeek - 1] === weekDay)
-              .sort((a, b) => a.dateStart.localeCompare(b.dateStart))}
-          />
-        ))}
-      </ViewPager>
-    </View>
+        <ViewPager
+          selectedIndex={selectedIndex}
+          style={styles.pager}
+          onSelect={(index) => setSelectedIndex(index)}
+        >
+          {days.map((weekDay, index) => (
+            <Day
+              key={weekDay}
+              weekDay={weekDay}
+              lunch={menu[index] || {}}
+              lessons={lessons
+                .filter((lesson) => days[lesson.dayOfWeek - 1] === weekDay)
+                .sort((a, b) => a.dateStart.localeCompare(b.dateStart))}
+            />
+          ))}
+        </ViewPager>
+      </TransitionView>
+    </TransitionView>
   ) : null
 }
 
