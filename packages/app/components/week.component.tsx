@@ -99,7 +99,7 @@ export const Week = ({ child }: WeekProps) => {
   const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
   const [showSchema, setShowSchema] = useState(false)
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
-  const { data: lessons, status: lessonsLoadingStatus } = useTimetable(
+  const { data: lessons } = useTimetable(
     child,
     week,
     year,
@@ -108,10 +108,9 @@ export const Week = ({ child }: WeekProps) => {
   const { data: menu } = useMenu(child)
 
   useEffect(() => {
-    const shouldShowSchema =
-      lessonsLoadingStatus === 'loaded' && lessons.length > 0
+    const shouldShowSchema = lessons.length > 0
     setShowSchema(shouldShowSchema)
-  }, [lessonsLoadingStatus, lessons])
+  }, [lessons])
 
   return showSchema ? (
     <View style={styles.view}>
