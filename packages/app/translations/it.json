@@ -1,1 +1,94 @@
-{}
+{
+    "notifications": {
+        "notificationTitle": "Notifica: {{message}} ({{dateCreated}})"
+    },
+    "news": {
+        "notificationTitle": "Novità: {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Nessuna novità questa settimana.",
+        "title": "Novità da skolplattformen",
+        "backToChild": "Ritorna a figlio"
+    },
+    "general": {
+        "abort": "Interrompere",
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "Personnummer svedese",
+        "settings": "Impostazioni",
+        "send": "Invia",
+        "logout": "Logout",
+        "loading": "Caricamento in corso…",
+        "confirm": "Conferma",
+        "changeLanguage": "Cambia lingua"
+    },
+    "schedule": {
+        "end": "Finische",
+        "start": "Inizia",
+        "lunch": "Pranzo",
+        "gymBag": "I vestiti di ginnastica"
+    },
+    "navigation": {
+        "notifications": "Notifiche",
+        "news": "Novità",
+        "menu": "Menù pranzo",
+        "calender": "Calendario"
+    },
+    "language": {
+        "changeLanguageButton": "Salva",
+        "changeLanguage": "Cambia lingua"
+    },
+    "children": {
+        "loadingErrorHeading": "Ops!",
+        "title": "I tuoi figli",
+        "noKids_title": "Non ci sono figli",
+        "noKids_description": "No ci sono figli registrati a questo personnummer a Stoccolma"
+    },
+    "calender": {
+        "showCalenderActions": "Mostra calendario actions",
+        "saveToCalenderSuccess": "✔️ Salvato in calendario",
+        "saveToCalenderError": "Errore, non salvato",
+        "saveToCalender": "Salva in calendario",
+        "approveAccessToCalender": "Approva l'accesso al calendario"
+    },
+    "auth": {
+        "words": {
+            "working": "funzionante",
+            "simple": "facile",
+            "rebellious": "ribelle",
+            "open": "accessibile",
+            "imperfect": "imperfetta",
+            "homemade": "fatta a mano",
+            "fun": "divertente",
+            "free": "libera",
+            "first": "prima",
+            "fast": "veloce",
+            "fantastic": "fantastica",
+            "enlightened": "illumminata",
+            "cooler": "più cool",
+            "cheap": "economica",
+            "better": "migliore",
+            "awaited": "attesa",
+            "agile": "agile"
+        },
+        "subtitle": "L'alternativa {{word}}",
+        "placeholder_SocialSecurityNumber": "Il tuo personnummer svedese",
+        "loginFailed": "Accesso non riuscito, riprova.",
+        "loginAsTestUser": "Entra come utente test",
+        "chooseLoginMethod": "Scegli metodo di accesso",
+        "bankid": {
+            "Waiting": "Attendere BankID…",
+            "OpenOnThisDevice": "Apri BankID su questa unità",
+            "OpenOnAnotherDevice": "Apri BankID su un'altra unità",
+            "OpenManually": "Apri BankID manualmente"
+        }
+    },
+    "abscense": {
+        "title": "Registra l'assenza",
+        "entireDay": "Giorno intero",
+        "endTime": "Fine"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Scuola superiore",
+        "preSchool": "Scuola materna",
+        "leisureTimeCentre": "Tempo pieno",
+        "compulsorySchool": "Scuola inferiore e media"
+    }
+}
