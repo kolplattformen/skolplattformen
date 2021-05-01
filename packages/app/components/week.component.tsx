@@ -95,9 +95,11 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
 export const Week = ({ child }: WeekProps) => {
   moment.locale(LanguageService.getLanguageCode())
   const days = moment.weekdaysShort().slice(1, 6)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const currentDayIndex = Math.min(moment().isoWeekday() - 1, 5)
+  const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
+  const [showSchema, setShowSchema] = useState(false)
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
-  const { data: lessons } = useTimetable(
+  const { data: lessons, status: lessonsLoadingStatus } = useTimetable(
     child,
     week,
     year,
@@ -106,11 +108,12 @@ export const Week = ({ child }: WeekProps) => {
   const { data: menu } = useMenu(child)
 
   useEffect(() => {
-    const updatedSelectedIndex = Math.min(moment().isoWeekday() - 1, 5)
-    setSelectedIndex(updatedSelectedIndex)
-  }, [lessons])
+    const shouldShowSchema =
+      lessonsLoadingStatus === 'loaded' && lessons.length > 0
+    setShowSchema(shouldShowSchema)
+  }, [lessonsLoadingStatus, lessons])
 
-  return (
+  return showSchema ? (
     <View style={styles.view}>
       <TabBar
         selectedIndex={selectedIndex}
@@ -138,7 +141,7 @@ export const Week = ({ child }: WeekProps) => {
         ))}
       </ViewPager>
     </View>
-  )
+  ) : null
 }
 
 const styles = StyleSheet.create({
