@@ -89,7 +89,6 @@
         "selectAbscenseStartTime": "Valitse aloitusaika",
         "selectAbscenseEndTime": "Valitse päättymisaika",
         "personalNumberMissing": "Henkilötunnus puuttuu",
-        "newsTitle": "Uutinen: {{header}} ({{published}})",
         "invalidPersonalNumber": "Henkilötunnus on virheellinen",
         "entireDay": "Kokopäivä",
         "endTime": "Lopetusaika"

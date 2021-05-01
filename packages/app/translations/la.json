@@ -37,7 +37,6 @@
         "selectAbscenseEndTime": "Horam terminalem legere",
         "startTime": "Hora exordii",
         "personalNumberMissing": "Numerus personalis absens est",
-        "newsTitle": "Articulus nuntiorum: {{header}} ({{published}})",
         "invalidPersonalNumber": "Numerus personalis irritus est",
         "entireDay": "Totus dies",
         "endTime": "Hora terminalis"

@@ -72,7 +72,6 @@
         "startTime": "hora de inicio",
         "selectAbscenseStartTime": "Elige la hora de inicio",
         "personalNumberMissing": "Falta el personnummer",
-        "newsTitle": "Noticia: {{header}} ({{published}})",
         "invalidPersonalNumber": "El personnumer no es válido",
         "entireDay": "Día completo",
         "endTime": "hora de finalización",
