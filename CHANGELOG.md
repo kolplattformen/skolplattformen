@@ -1,3 +1,10 @@
+## [1.27.5](https://github.com/kolplattformen/skolplattformen/compare/v1.27.4...v1.27.5) (2021-05-02)
+
+
+### Bug Fixes
+
+* 🐛 Fixes crash in ViewPager when setting selectedIndex ([#347](https://github.com/kolplattformen/skolplattformen/issues/347)) ([a358351](https://github.com/kolplattformen/skolplattformen/commit/a358351a3a3c6d0b7f1d7469b96c23fab0461d5a))
+
 ## [1.27.4](https://github.com/kolplattformen/skolplattformen/compare/v1.27.3...v1.27.4) (2021-04-30)
 
 

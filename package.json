@@ -9,5 +9,5 @@
     "test": "npx lerna run test --stream",
     "lint": "npx lerna run lint --stream"
   },
-  "version": "1.27.4"
+  "version": "1.27.5"
 }
