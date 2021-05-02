@@ -101,7 +101,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     <View style={styles.itemFooter}>
       <Button
         style={[styles.item, styles[newsStatus]]}
-        status="control"
         size="small"
         onPress={() =>
           navigation.navigate('Child', {
@@ -116,7 +115,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       </Button>
       <Button
         style={[styles.item, styles[notificationsStatus]]}
-        status="control"
         size="small"
         onPress={() =>
           navigation.navigate('Child', {
@@ -131,7 +129,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       </Button>
       <Button
         style={[styles.item, styles[calendarStatus]]}
-        status="control"
         size="small"
         onPress={() =>
           navigation.navigate('Child', {
@@ -146,7 +143,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       </Button>
       <Button
         style={[styles.item, styles[menuStatus]]}
-        status="control"
         size="small"
         onPress={() =>
           navigation.navigate('Child', {
@@ -242,6 +238,8 @@ const styles = StyleSheet.create({
   },
   item: {
     paddingHorizontal: 0,
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
   },
   loaded: {
     color: Colors.neutral.black,
