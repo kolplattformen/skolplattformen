@@ -12,6 +12,7 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { Colors, Layout, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { Image } from './image.component'
@@ -24,8 +25,7 @@ interface NewsItemProps {
   route: RouteProp<RootStackParamList, 'NewsItem'>
 }
 
-const displayDate = (date: string | undefined) =>
-  moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
+const displayDate = (date: string | undefined) => moment(date).format('lll')
 
 const dateIsValid = (date: string | undefined) =>
   moment(date, moment.ISO_8601).isValid()
@@ -109,39 +109,41 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
+    ...Layout.flex.full,
+    backgroundColor: Colors.neutral.white,
   },
   topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    ...Layout.flex.row,
+    ...Layout.crossAxis.spaceBetween,
   },
   article: {
-    padding: 20,
+    padding: Sizing.t5,
   },
   scrollView: {
-    flex: 1,
+    ...Layout.flex.full,
   },
   image: {
     width: '100%',
     minHeight: 300,
-    marginTop: 16,
+    marginTop: Sizing.t4,
   },
   title: {
+    ...Typography.fontWeight.bold,
     fontSize: 30,
-    fontWeight: '700',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 12,
   },
   strong: {
-    fontSize: 12,
-    fontWeight: '700',
+    ...Typography.fontSize.xs,
+    ...Typography.fontWeight.bold,
+    color: Colors.neutral.gray600,
   },
   published: {
-    marginBottom: 4,
+    marginBottom: Sizing.t1,
   },
   body: {
-    marginTop: 16,
+    marginTop: Sizing.t4,
   },
 })

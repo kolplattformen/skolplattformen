@@ -16,7 +16,7 @@ import {
   View,
 } from 'react-native'
 import { Login } from './login.component'
-import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
 import { translate } from '../utils/translation'
 import { GlobeIcon } from './icon.component'
@@ -68,7 +68,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                 <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
                   {translate('general.title')}
                 </Text>
-                <Text category="h6" style={styles.subtitle}>
+                <Text style={styles.subtitle}>
                   {translate('auth.subtitle', {
                     word: randomWord(),
                   })}
@@ -99,7 +99,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     ...Typography.align.center,
-    color: '#9CA3AF',
+    ...Typography.fontSize.base,
+    ...Typography.fontWeight.bold,
+    color: Colors.neutral.gray500,
     marginTop: Sizing.t1,
   },
 })

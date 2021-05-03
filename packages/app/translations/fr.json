@@ -1,1 +1,102 @@
-{}
+{
+    "general": {
+        "loading": "Chargement…",
+        "title": "Ouvrez skolplattformen",
+        "socialSecurityNumber": "Numéro d'identité personnel",
+        "settings": "Paramètres",
+        "send": "Envoyer",
+        "logout": "Se déconnecter",
+        "confirm": "Confirmer",
+        "changeLanguage": "Changer de langue",
+        "abort": "Avorter"
+    },
+    "calender": {
+        "saveToCalenderError": "Un problème est survenu",
+        "saveToCalender": "Enregistrer dans le calendrier",
+        "approveAccessToCalender": "Vous devez approuver l'accès à votre calendrier",
+        "showCalenderActions": "Afficher les actions du calendrier",
+        "saveToCalenderSuccess": "✔️ Enregistré dans le calendrier"
+    },
+    "auth": {
+        "words": {
+            "working": "fonctionnement",
+            "first": "premier",
+            "better": "mieux",
+            "simple": "simple",
+            "rebellious": "rebelle",
+            "open": "ouverte",
+            "imperfect": "imparfaite",
+            "homemade": "maison",
+            "fun": "amusante",
+            "free": "gratuite",
+            "fast": "rapide",
+            "fantastic": "fantastique",
+            "enlightened": "éclairée",
+            "cooler": "plus cool",
+            "cheap": "bon marché",
+            "awaited": "attendue",
+            "agile": "agile"
+        },
+        "placeholder_SocialSecurityNumber": "Votre numéro d'identité personnel",
+        "subtitle": "L'alternative {{word}}",
+        "bankid": {
+            "OpenManually": "En attente de BankID",
+            "OpenOnAnotherDevice": "Ouvrez BankID sur un autre appareil",
+            "Waiting": "En attente de BankID…",
+            "OpenOnThisDevice": "Ouvrez BankID sur cet appareil"
+        },
+        "loginFailed": "La connexion a échoué, veuillez réessayer.",
+        "loginAsTestUser": "Connectez-vous en tant qu'utilisateur test",
+        "chooseLoginMethod": "Choisissez la méthode de connexion"
+    },
+    "abscense": {
+        "startTime": "Heure de début",
+        "selectAbscenseStartTime": "Choisissez l'heure de début",
+        "personalNumberMissing": "Numéro personnel manquant",
+        "invalidPersonalNumber": "Numéro personnel invalide",
+        "endTime": "Heure de fin",
+        "selectAbscenseEndTime": "Choisissez l'heure de la fin",
+        "entireDay": "Toute la journée",
+        "title": "Signaler une absence"
+    },
+    "notifications": {
+        "notificationTitle": "Notification : {{message}} ({{dateCreated}})"
+    },
+    "news": {
+        "updated": "Mise à jour",
+        "title": "Nouvelles de Skolplattformen",
+        "published": "Publié",
+        "notificationTitle": "Nouvelles : {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Pas de nouvelles actualités cette semaine.",
+        "backToChild": "Retour à l'enfant"
+    },
+    "navigation": {
+        "notifications": "Notifications",
+        "news": "Nouvelles",
+        "menu": "Menu",
+        "calender": "Calendrier"
+    },
+    "menu": {
+        "emptyText": "Je n'ai rien trouvé pour cette semaine",
+        "emptyHeadline": "Le menu a l'air un peu vide"
+    },
+    "language": {
+        "changeLanguageButton": "Sauvegarder",
+        "changeLanguage": "Changer de langue"
+    },
+    "children": {
+        "viewStatus": "Voir le statut sur skolplattformen.org",
+        "tryAgain": "Réessayer",
+        "title": "Vos enfants",
+        "noKids_title": "Pas d'enfants",
+        "noKids_description": "Il n'y a pas d'enfants enregistrés dans la ville de Stockholm pour votre numéro d'identité personnel",
+        "loadingErrorInformationText": "Cette page ne peut pas être chargée. Réessayez ou consultez l'état actuel sur skolplattformen.org.",
+        "loadingErrorHeading": "Oups !"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "L'enseignement secondaire supérieur",
+        "preSchool": "Préscolaire",
+        "leisureTimeCentre": "Centre de loisirs",
+        "compulsorySchool": "L'école obligatoire"
+    }
+}

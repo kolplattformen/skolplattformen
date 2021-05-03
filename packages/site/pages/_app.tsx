@@ -8,19 +8,19 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { IntlProvider } from 'react-intl'
 import { pageview } from '../components/gtag'
-import messages from '../content/locale/'
+import messages, { Languages } from '../content/locale/'
+import { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const router = useRouter()
-  const { locale, defaultLocale } = router
+  const { locale = 'sv', defaultLocale } = router
 
-  const currentMessages = messages[locale]
+  const currentMessages = messages[locale as Languages]
 
   // Google analytics
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      pageview(url)
-    }
+    const handleRouteChange = (url: string) => pageview(url)
+
     router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)

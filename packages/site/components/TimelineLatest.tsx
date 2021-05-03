@@ -2,7 +2,7 @@ import { events } from '../data/timelineEvents'
 import { ButtonLinkInternal } from './ButtonLink'
 import Timeline from './Timeline'
 
-const TimelineLatest = () => {
+const TimelineLatest = (): JSX.Element => {
   const latestMonthsEvents = events.slice(0, 1)
 
   return (
@@ -22,12 +22,14 @@ const TimelineLatest = () => {
           uppmärksamhet.
         </p>
         <p>
-          Stockholms stads skolplattform har fått omfattande kritik för att
-          den kostat enorma pengar, inte är användarvänlig och har stora
-          säkerhetsbrister. Vår förväntan var att vårt initiativ skulle välkomnas och att vi skulle kunna samarbeta
-          med staden för att skapa ännu bättre lösningar. Istället
-          attackerar staden genom Utbildningsdirektör Lena Holmdahl appen och oss som privatpersoner, senast genom en polisanmälan. 
-          I ett försök att skapa transparens har vi sammanställt vad som hänt nedan.
+          Stockholms stads skolplattform har fått omfattande kritik för att den
+          kostat enorma pengar, inte är användarvänlig och har stora
+          säkerhetsbrister. Vår förväntan var att vårt initiativ skulle
+          välkomnas och att vi skulle kunna samarbeta med staden för att skapa
+          ännu bättre lösningar. Istället attackerar staden genom
+          Utbildningsdirektör Lena Holmdahl appen och oss som privatpersoner,
+          senast genom en polisanmälan. I ett försök att skapa transparens har
+          vi sammanställt vad som hänt nedan.
         </p>
         <ButtonLinkInternal href="/aktuellt">
           Läs hela historien

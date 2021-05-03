@@ -1,6 +1,6 @@
 import QA from '../components/QA'
 
-const QAPage = () => {
+const QAPage = (): JSX.Element => {
   return <QA />
 }
 

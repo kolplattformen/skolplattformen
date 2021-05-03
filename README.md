@@ -1,7 +1,8 @@
 # Öppna skolplattformen
 
-![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=skolplattformen)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Patreon](https://img.shields.io/badge/dynamic/json?color=%23e85b46&label=Patreon&query=data.attributes.patron_count&suffix=%20patrons&url=https://www.patreon.com/api/campaigns/6649731)](https://www.patreon.com/oppnaskolplattformen)
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=skolplattformen)
 [![Translation status](https://hosted.weblate.org/widgets/skolplattformen/-/svg-badge.svg)](https://hosted.weblate.org/engage/skolplattformen/)
 
 We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. Give us a ⭐ if you like what we're doing!
@@ -65,11 +66,15 @@ We want this project to become a citizen movement. If you find something you thi
 
 There are many ways to contribute to the project and we understand that not everyone is a programmer. If you don't know how to program and still want to help, you can also [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know when something isn't working properly. We're super duper happy for both issues and pull requests and we try to answer all of them as soon as humanly possible.
 
+Another way to contribute is by helping translate Öppna skolplattformen into a new language or improve on the existing translations. Check us out [on Weblate](https://hosted.weblate.org/engage/skolplattformen/) if this sounds like something you're interested in.
+
 We believe that by working together, we can leverage each other's skills and experiences to improve the project, and ultimately create the best possible experience.
 
 ## Money
 
-We're an open source project and we still charge money for our app. Isn't this a contradiction? No. Open doesn't mean free. We want to continue to maintain this project in a sustainable way, which means that someone needs to pay for the köttbullar for the kids. Our goal is to be able to reimburse all contributions to the project. Of course, you are always welcome to build the app from the source code and do what you want with it!
+Even if we definitely stand by our claim that Open Source doesn't mean free, we have now, in fact, made the app free on both App Store and Google Play store. We decided to try a different model of making money to reimburse all our contributors, both coders and other, through voluntary donations on Patreon. Please support us at [https://patreon.com/oppnaskolplattformen](https://patreon.com/oppnaskolplattformen) ❤️
+
+~~We're an open source project and we still charge money for our app. Isn't this a contradiction? No. Open doesn't mean free. We want to continue to maintain this project in a sustainable way, which means that someone needs to pay for the köttbullar for the kids. Our goal is to be able to reimburse all contributions to the project. Of course, you are always welcome to build the app from the source code and do what you want with it!~~
 
 ## Disclaimer
 

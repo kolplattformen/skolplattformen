@@ -1,6 +1,6 @@
 import Status from '../components/Status'
 
-const StatusPage = () => {
+const StatusPage = (): JSX.Element => {
   return <Status />
 }
 

@@ -2,7 +2,7 @@ import { Notification as NotificationType } from '@skolplattformen/embedded-api'
 import { Card, Text, useTheme } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Layout, Sizing, Typography } from '../styles'
+import { Colors, Layout, Sizing, Typography } from '../styles'
 import { ModalWebView } from './modalWebView.component'
 import moment from 'moment'
 
@@ -65,15 +65,16 @@ const styles = StyleSheet.create({
   card: {
     ...Layout.flex.full,
     borderRadius: 2,
-
+    borderColor: Colors.neutral.gray200,
     borderWidth: 1,
     marginBottom: Sizing.t2,
   },
   title: {
     ...Typography.header,
-    marginBottom: 2,
+    marginBottom: Sizing.t1,
   },
   subtitle: {
     ...Typography.fontSize.xs,
+    color: Colors.neutral.gray600,
   },
 })

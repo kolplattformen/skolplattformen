@@ -1,103 +1,111 @@
 {
-  "abbrevations": {
-    "compulsorySchool": "Grundskola",
-    "leisureTimeCentre": "Fritids",
-    "preSchool": "Förskola",
-    "upperSecondarySchool": "Gymnasieskola"
-  },
-  "abscense": {
-    "endTime": "Sluttid",
-    "entireDay": "Heldag",
-    "invalidPersonalNumber": "Personnumret är ogiltigt",
-    "newsTitle": "News item: {{header}} ({{published}})",
-    "personalNumberMissing": "Personnummer saknas",
-    "selectAbscenseEndTime": "Välj sluttid",
-    "selectAbscenseStartTime": "Välj startid",
-    "startTime": "Starttid",
-    "title": "Anmäl frånvaro"
-  },
-  "auth": {
-    "bankid": {
-      "OpenManually": "Öppna BankID manuellt",
-      "OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
-      "OpenOnThisDevice": "Öppna BankID på denna enhet",
-      "Waiting": "Väntar på BankID..."
+    "abbrevations": {
+        "compulsorySchool": "Grundskola",
+        "leisureTimeCentre": "Fritids",
+        "preSchool": "Förskola",
+        "upperSecondarySchool": "Gymnasieskola"
     },
-    "chooseLoginMethod": "Välj inloggningsmetod",
-    "loginAsTestUser": "Logga in som testanvändare",
-    "loginFailed": "Inloggningen misslyckades, försök igen!",
-    "placeholder_SocialSecurityNumber": "Ditt personnummer",
-    "subtitle": "Det {{word}} alternativet",
-    "words": {
-      "agile": "agila",
-      "awaited": "efterlängtade",
-      "better": "bättre",
-      "cheap": "billiga",
-      "cooler": "coolare",
-      "enlightened": "upplysta",
-      "fantastic": "fantastiska",
-      "fast": "snabba",
-      "first": "första",
-      "free": "fria",
-      "fun": "roliga",
-      "homemade": "hemmagjorda",
-      "imperfect": "operfekta",
-      "open": "öppna",
-      "rebellious": "rebelliska",
-      "simple": "enkla",
-      "working": "fungerande"
+    "abscense": {
+        "endTime": "Sluttid",
+        "entireDay": "Heldag",
+        "invalidPersonalNumber": "Personnumret är ogiltigt",
+        "personalNumberMissing": "Personnummer saknas",
+        "selectAbscenseEndTime": "Välj sluttid",
+        "selectAbscenseStartTime": "Välj startid",
+        "startTime": "Starttid",
+        "title": "Anmäl frånvaro"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Öppna BankID manuellt",
+            "OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
+            "OpenOnThisDevice": "Öppna BankID på denna enhet",
+            "Waiting": "Väntar på BankID…"
+        },
+        "chooseLoginMethod": "Välj inloggningsmetod",
+        "loginAsTestUser": "Logga in som testanvändare",
+        "loginFailed": "Inloggningen misslyckades, försök igen!",
+        "placeholder_SocialSecurityNumber": "Ditt personnummer",
+        "subtitle": "Det {{word}} alternativet",
+        "words": {
+            "agile": "agila",
+            "awaited": "efterlängtade",
+            "better": "bättre",
+            "cheap": "billiga",
+            "cooler": "coolare",
+            "enlightened": "upplysta",
+            "fantastic": "fantastiska",
+            "fast": "snabba",
+            "first": "första",
+            "free": "fria",
+            "fun": "roliga",
+            "homemade": "hemmagjorda",
+            "imperfect": "operfekta",
+            "open": "öppna",
+            "rebellious": "rebelliska",
+            "simple": "enkla",
+            "working": "fungerande"
+        }
+    },
+    "calender": {
+        "approveAccessToCalender": "Du måste godkänna åtkomst till kalendern",
+        "saveToCalender": "Spara till kalender",
+        "saveToCalenderError": "Något gick fel",
+        "saveToCalenderSuccess": "✔️ Sparad till kalender",
+        "showCalenderActions": "Visa kalenderactions"
+    },
+    "children": {
+        "loadingErrorHeading": "Hoppsan!",
+        "loadingErrorInformationText": "Vi lyckades inte ladda sidan. Försök igen eller se status på skolplattformen.org.",
+        "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms stad",
+        "noKids_title": "Inga barn",
+        "title": "Dina barn",
+        "tryAgain": "Försök igen",
+        "viewStatus": "Se status på skolplattformen.org"
+    },
+    "general": {
+        "abort": "Avbryt",
+        "changeLanguage": "Byt språk",
+        "confirm": "Bekräfta",
+        "loading": "Laddar…",
+        "logout": "Logga ut",
+        "send": "Skicka",
+        "settings": "Inställningar",
+        "socialSecurityNumber": "Personnummer",
+        "title": "Öppna skolplattformen"
+    },
+    "language": {
+        "changeLanguage": "Byt språk",
+        "changeLanguageButton": "Spara"
+    },
+    "menu": {
+        "emptyHeadline": "Det ser lite tomt ut i matsedeln",
+        "emptyText": "Hittade ingenting att visa för den här veckan"
+    },
+    "navigation": {
+        "calender": "Kalender",
+        "menu": "Matsedel",
+        "news": "Nyheter",
+        "notifications": "Aviseringar"
+    },
+    "news": {
+        "backToChild": "Tillbaka till barn",
+        "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
+        "notificationTitle": "Nyhet: {{header}} ({{published}})",
+        "published": "Publicerad",
+        "title": "Nyhet från Skolplattformen",
+        "updated": "Uppdaterad",
+        "search": {
+            "placeholder": "Sök alla nyheter..."
+        }
+    },
+    "notifications": {
+        "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "start": "Börjar",
+        "end": "Slutar",
+        "lunch": "Lunch",
+        "gymBag": "Gympapåse"
     }
-  },
-  "calender": {
-    "approveAccessToCalender": "Du måste godkänna åtkomst till kalendern",
-    "saveToCalender": "Spara till kalender",
-    "saveToCalenderError": "Något gick fel",
-    "saveToCalenderSuccess": "✔️ Sparad till kalender",
-    "showCalenderActions": "Visa kalenderactions"
-  },
-  "children": {
-    "loadingErrorHeading": "Hoppsan!",
-    "loadingErrorInformationText": "Vi lyckades inte ladda sidan. Försök igen eller se status på skolplattformen.org.",
-    "noKids_description": "Det finns inga barn registrerade för ditt personnummer i Stockholms stad",
-    "noKids_title": "Inga barn",
-    "title": "Your kids",
-    "tryAgain": "Försök igen",
-    "viewStatus": "Se status på skolplattformen.org"
-  },
-  "general": {
-    "abort": "Avbryt",
-    "changeLanguage": "Byt språk",
-    "confirm": "Bekräfta",
-    "loading": "Laddar...",
-    "logout": "Logga ut",
-    "send": "Skicka",
-    "settings": "Inställningar",
-    "socialSecurityNumber": "Personnummer",
-    "title": "Öppna skolplattformen"
-  },
-  "language": {
-    "changeLanguage": "Byt språk",
-    "changeLanguageButton": "Spara"
-  },
-  "menu": {
-    "emptyHeadline": "Det ser lite tomt ut i matsedeln",
-    "emptyText": "Hittade ingenting att visa för den här veckan"
-  },
-  "navigation": {
-    "calender": "Kalender",
-    "menu": "Matsedel",
-    "news": "Nyheter",
-    "notifications": "Aviseringar"
-  },
-  "news": {
-    "backToChild": "Tillbaka till barn",
-    "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",
-    "notificationTitle": "Nyhet: {{header}} ({{published}})",
-    "published": "Publicerad",
-    "title": "Nyhet från Skolplattformen",
-    "updated": "Uppdaterad"
-  },
-  "notifications": {
-    "notificationTitle": "Avisering: {{message}} ({{dateCreated}})"
-  }
 }

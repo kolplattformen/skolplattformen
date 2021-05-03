@@ -1,18 +1,19 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewsItem } from '@skolplattformen/embedded-api'
-import React from 'react'
+import { useTheme } from '@ui-kitten/components'
 import moment from 'moment'
+import React, { ReactNode } from 'react'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Layout, Sizing, Typography } from '../styles'
+import { Colors, Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 import { RootStackParamList } from './navigation.component'
-import { useTheme } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
+  children?: ReactNode
 }
 
 type NewsListItemNavigationProp = StackNavigationProp<
@@ -21,7 +22,8 @@ type NewsListItemNavigationProp = StackNavigationProp<
 >
 
 const { width } = Dimensions.get('window')
-export const NewsListItem = ({ item }: NewsListItemProps) => {
+
+export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   const theme = useTheme()
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
@@ -57,12 +59,8 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
               {item.author && displayDate ? ' • ' : ''}
               {displayDate}
             </Text>
-            <Text
-              ellipsizeMode="tail"
-              numberOfLines={2}
-              style={[styles.intro, { color: theme['text-basic-color'] }]}
-            >
-              {item.intro}
+            <Text ellipsizeMode="tail" numberOfLines={2} style={styles.intro}>
+              {children ?? item.intro}
             </Text>
           </View>
         </View>
@@ -75,9 +73,8 @@ const styles = StyleSheet.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
-
     borderRadius: 2,
-
+    borderColor: Colors.neutral.gray200,
     borderWidth: 1,
     padding: Sizing.t5,
     marginBottom: Sizing.t2,
@@ -86,17 +83,17 @@ const styles = StyleSheet.create({
     ...Layout.flex.full,
   },
   title: {
-    ...Typography.fontWeight.bold,
-    ...Typography.fontSize.lg,
-    marginBottom: 2,
+    ...Typography.header,
+    marginBottom: Sizing.t1,
   },
   subtitle: {
     ...Typography.fontSize.xs,
-
+    color: Colors.neutral.gray600,
     marginBottom: Sizing.t2,
   },
   intro: {
     ...Typography.fontSize.sm,
+    color: Colors.neutral.gray700,
   },
   image: {
     borderRadius: 3,

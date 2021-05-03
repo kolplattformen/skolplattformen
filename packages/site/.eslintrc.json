@@ -10,6 +10,8 @@
     }
   },
   "rules": {
+    // No typing in project
+    "react/prop-types": "off",
     // React included automatically in Next.js
     "react/react-in-jsx-scope": "off",
     // Allow unescaped characters like '
