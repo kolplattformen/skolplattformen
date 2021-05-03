@@ -73,7 +73,10 @@
         "title": "Nuntii ex Skolplattformen",
         "published": "Divulgatus",
         "notificationTitle": "Nuntii: {{header}} ({{published}})",
-        "backToChild": "Ad filium revertere"
+        "backToChild": "Ad filium revertere",
+        "search": {
+            "placeholder": "Omnibus nuntiis quaerere…"
+        }
     },
     "notifications": {
         "notificationTitle": "Nuntius: {{message}} ({{dateCreated}})"
