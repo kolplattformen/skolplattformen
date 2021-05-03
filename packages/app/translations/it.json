@@ -39,7 +39,8 @@
         "loadingErrorHeading": "Ops!",
         "title": "I tuoi figli",
         "noKids_title": "Non ci sono figli",
-        "noKids_description": "No ci sono figli registrati a questo personnummer a Stoccolma"
+        "noKids_description": "No ci sono figli registrati a questo personnummer a Stoccolma",
+        "tryAgain": "Riprova"
     },
     "calender": {
         "showCalenderActions": "Mostra calendario actions",
@@ -83,7 +84,12 @@
     "abscense": {
         "title": "Registra l'assenza",
         "entireDay": "Giorno intero",
-        "endTime": "Fine"
+        "endTime": "Fine",
+        "selectAbscenseEndTime": "Fine a",
+        "selectAbscenseStartTime": "Inizio a",
+        "startTime": "Inizio",
+        "personalNumberMissing": "Codice Fiscale mancante",
+        "invalidPersonalNumber": "Codice Fiscale non valido"
     },
     "abbrevations": {
         "upperSecondarySchool": "Scuola superiore",
