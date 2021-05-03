@@ -8,24 +8,24 @@
     "abscense": {
         "endTime": "Endzeit",
         "entireDay": "Ganzen Tag",
-        "invalidPersonalNumber": "Personenkennzeichen ungültig",
-        "personalNumberMissing": "Personenkennzeichen fehlt",
+        "invalidPersonalNumber": "Personenkennziffer ungültig",
+        "personalNumberMissing": "Personenkennziffer fehlt",
         "selectAbscenseEndTime": "Endzeit wählen",
         "selectAbscenseStartTime": "Startzeit wählen",
         "startTime": "Startzeit",
-        "title": "Fernbleiben melden"
+        "title": "Abwesenheit anmelden"
     },
     "auth": {
         "bankid": {
             "OpenManually": "BankID manuell öffnen",
             "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
-            "OpenOnThisDevice": "BankID auf dieses Gerät benutzen",
+            "OpenOnThisDevice": "BankID auf diesem Gerät benutzen",
             "Waiting": "Wartet auf BankID…"
         },
-        "chooseLoginMethod": "Anmeldemethode wählen",
+        "chooseLoginMethod": "Anmeldemethode auswählen",
         "loginAsTestUser": "Als Testbenutzer einloggen",
-        "loginFailed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche nochmal.",
-        "placeholder_SocialSecurityNumber": "Dein Personenkennzeichen",
+        "loginFailed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es nochmal.",
+        "placeholder_SocialSecurityNumber": "Deine Personenkennziffer",
         "subtitle": "Die {{word}} Alternative",
         "words": {
             "agile": "agile",
@@ -38,30 +38,30 @@
             "fast": "schnelle",
             "first": "erste",
             "free": "freie",
-            "fun": "komische",
+            "fun": "lustige",
             "homemade": "selbstgemachte",
             "imperfect": "unvollkommene",
             "open": "offene",
             "rebellious": "rebellische",
-            "simple": "enfache",
+            "simple": "einfache",
             "working": "funktionierende"
         }
     },
     "calender": {
-        "approveAccessToCalender": "Du musst zugriff auf dein Kalender erlauben",
+        "approveAccessToCalender": "Du musst Zugriff auf deinen Kalender erlauben",
         "saveToCalender": "Im Kalender speichern",
-        "saveToCalenderError": "Etwas hat sich verlaufen",
+        "saveToCalenderError": "Ein Fehler ist aufgetreten",
         "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
         "showCalenderActions": "Kalender-Actions zeigen"
     },
     "children": {
         "loadingErrorHeading": "Hoppla!",
-        "loadingErrorInformationText": "Diese seite kann nicht geladen werden. Versuche es nochmal oder zeige den aktuellen Status an am skolplattformen.org.",
-        "noKids_description": "Für dein Personenkennzeichen gibt es keine Kinder in Stockholm registriert",
+        "loadingErrorInformationText": "Diese Seite kann nicht geladen werden. Versuche es nochmal oder kontrolliere den aktuellen Status auf skolplattformen.org.",
+        "noKids_description": "Für diese Personenkennziffer gibt es keine in Stockholm registrierten Kinder",
         "noKids_title": "Keine Kinder",
         "title": "Deine Kinder",
         "tryAgain": "Nochmal versuchen",
-        "viewStatus": "Status anzeigen an skolplattformen.org"
+        "viewStatus": "Status kontrollieren auf skolplattformen.org"
     },
     "general": {
         "abort": "Abbrechen",
@@ -71,15 +71,15 @@
         "logout": "Ausloggen",
         "send": "Senden",
         "settings": "Einstellungen",
-        "socialSecurityNumber": "Personenkennzeichen",
-        "title": "Offenes Skolplattformen"
+        "socialSecurityNumber": "Personenkennziffer",
+        "title": "Offene Skolplattformen"
     },
     "language": {
         "changeLanguage": "Sprache ändern",
         "changeLanguageButton": "Speichern"
     },
     "menu": {
-        "emptyHeadline": "Die Speisekarte sieht en bisschen leer aus",
+        "emptyHeadline": "Die Speisekarte sieht ein bisschen leer aus",
         "emptyText": "Nichts zu zeigen für diese Woche"
     },
     "navigation": {
@@ -90,9 +90,9 @@
     },
     "news": {
         "backToChild": "Zurück zu Kind",
-        "noNewNewsItemsThisWeek": "Diese Woche keine neue Nachrichten.",
+        "noNewNewsItemsThisWeek": "Keine neuen Nachrichten diese Woche.",
         "notificationTitle": "Nachricht: {{header}} ({{published}})",
-        "published": "Erscheint",
+        "published": "Veröffentlicht",
         "title": "Nachricht von Skolplattformen",
         "updated": "Aktualisiert",
         "search": {
