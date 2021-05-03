@@ -1,17 +1,18 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from './navigation.component'
 import { NewsItem } from '@skolplattformen/embedded-api'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import moment from 'moment'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Colors, Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
-import { RootStackParamList } from './navigation.component'
 
 interface NewsListItemProps {
   item: NewsItem
+  children?: ReactNode
 }
 
 type NewsListItemNavigationProp = StackNavigationProp<
@@ -21,7 +22,7 @@ type NewsListItemNavigationProp = StackNavigationProp<
 
 const { width } = Dimensions.get('window')
 
-export const NewsListItem = ({ item }: NewsListItemProps) => {
+export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
   const hasDate = item.published || item.modified
@@ -45,7 +46,7 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
               {displayDate}
             </Text>
             <Text ellipsizeMode="tail" numberOfLines={2} style={styles.intro}>
-              {item.intro}
+              {children ?? item.intro}
             </Text>
           </View>
         </View>
