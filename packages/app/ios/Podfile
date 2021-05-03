@@ -24,9 +24,21 @@ target 'app' do
   # you should disable the next line.
   # Workaround for Xcode 14.5 build errors 
   # (https://github.com/facebook/react-native/issues/31179#issuecomment-830184757)
-  use_flipper!('Flipper' => '0.75.1', 'Flipper-Folly' => '2.5.3')
+  use_flipper!('Flipper' => '0.87', 'Flipper-Folly' => '2.5.3')
+
   post_install do |installer|
     flipper_post_install(installer)
+
+    ## Fix for Flipper-Folly on XCode 14.5
+    find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
+    "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
+
+    find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
+    "atomic_wait_until(&state, previous | data, deadline)", "folly::atomic_wait_until(&state, previous | data, deadline)")
+
+    # Fix for RTC-Folly on XCode 14.5
+    find_and_replace("Pods/RCT-Folly/folly/synchronization/DistributedMutex-inl.h",
+    "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
   end
 end
 
@@ -37,4 +49,21 @@ target 'app-tvOS' do
     inherit! :search_paths
     # Pods for testing
   end
+end
+
+def find_and_replace(dir, findstr, replacestr)
+  Dir[dir].each do |name|
+      text = File.read(name)
+      replace = text.gsub(findstr,replacestr)
+      replaced = text.index(replacestr)
+      if replaced == nil && text != replace
+          puts "Fix: " + name
+          system('chmod +rw ' + name)
+          File.open(name, "w") { |file| file.puts replace }
+          STDOUT.flush
+      else
+          puts "Already fixed:" + name
+      end
+  end
+  Dir[dir + '*/'].each(&method(:find_and_replace))
 end
