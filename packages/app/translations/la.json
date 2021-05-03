@@ -6,7 +6,7 @@
         "bankid": {
             "Waiting": "Pro BankID exspectans…",
             "OpenOnThisDevice": "In hac machina BankID aperire",
-            "OpenOnAnotherDevice": "In machina differens BankID aperire",
+            "OpenOnAnotherDevice": "In machina differente BankID aperire",
             "OpenManually": "Manu BankID aperire"
         },
         "words": {
@@ -37,7 +37,6 @@
         "selectAbscenseEndTime": "Horam terminalem legere",
         "startTime": "Hora exordii",
         "personalNumberMissing": "Numerus personalis absens est",
-        "newsTitle": "Articulus nuntiorum: {{header}} ({{published}})",
         "invalidPersonalNumber": "Numerus personalis irritus est",
         "entireDay": "Totus dies",
         "endTime": "Hora terminalis"
@@ -99,5 +98,11 @@
         "confirm": "Confirmare",
         "changeLanguage": "Linguam permutare",
         "abort": "Rescindere"
+    },
+    "schedule": {
+        "start": "Exordium",
+        "gymBag": "Saccus gymnasticus",
+        "lunch": "Prandium",
+        "end": "Finis"
     }
 }

@@ -98,5 +98,11 @@
     "language": {
         "changeLanguageButton": "Lagre",
         "changeLanguage": "Endre språk"
+    },
+    "schedule": {
+        "gymBag": "Gym-bag",
+        "lunch": "Lunsj",
+        "end": "Slutt",
+        "start": "Start"
     }
 }

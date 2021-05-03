@@ -98,5 +98,11 @@
     },
     "notifications": {
         "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "gymBag": "Sporttasche",
+        "lunch": "Mittagessen",
+        "end": "Ende",
+        "start": "Anfang"
     }
 }
