@@ -35,7 +35,9 @@ function replaceNewLines(string: string): string {
   return string.replace(/\n/g, ' ')
 }
 
-export function renderSearchResultPreview(searchResult: MatchData<NewsItem>): ReactNode {
+export function renderSearchResultPreview(
+  searchResult: MatchData<NewsItem>
+): ReactNode {
   const start = searchResult.match.index
   const end = start + searchResult.match.length
 
