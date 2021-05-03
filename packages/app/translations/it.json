@@ -40,7 +40,8 @@
         "title": "I tuoi figli",
         "noKids_title": "Non ci sono figli",
         "noKids_description": "No ci sono figli registrati a questo personnummer a Stoccolma",
-        "tryAgain": "Riprova"
+        "tryAgain": "Riprova",
+        "viewStatus": "Vedi stato su skolplattformen.org"
     },
     "calender": {
         "showCalenderActions": "Mostra calendario actions",
@@ -96,5 +97,8 @@
         "preSchool": "Scuola materna",
         "leisureTimeCentre": "Tempo pieno",
         "compulsorySchool": "Scuola inferiore e media"
+    },
+    "menu": {
+        "emptyHeadline": "Il menù sembra piuttosto vuoto"
     }
 }

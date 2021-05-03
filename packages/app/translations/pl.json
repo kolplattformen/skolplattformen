@@ -94,7 +94,10 @@
         "notificationTitle": "Wiadomość: {{header}} ({{published}})",
         "published": "Opublikowano",
         "title": "Wiadomość od szkoły",
-        "updated": "Uaktualniono"
+        "updated": "Uaktualniono",
+        "search": {
+            "placeholder": "Szukaj w wiadomościach…"
+        }
     },
     "notifications": {
         "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"

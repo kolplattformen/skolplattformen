@@ -94,7 +94,10 @@
         "notificationTitle": "Nachricht: {{header}} ({{published}})",
         "published": "Erscheint",
         "title": "Nachricht von Skolplattformen",
-        "updated": "Aktualisiert"
+        "updated": "Aktualisiert",
+        "search": {
+            "placeholder": "Alle nachrichten durchsuchen…"
+        }
     },
     "notifications": {
         "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
