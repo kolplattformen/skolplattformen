@@ -64,7 +64,10 @@
         "backToChild": "Tilbake til barn",
         "published": "Publisert",
         "title": "Nyheter fra Skolplattformen",
-        "noNewNewsItemsThisWeek": "Ingen nye nyhetselementer denne uken."
+        "noNewNewsItemsThisWeek": "Ingen nye nyhetselementer denne uken.",
+        "search": {
+            "placeholder": "Søk i alle nyheter …"
+        }
     },
     "abscense": {
         "title": "Rapporter fravær",
