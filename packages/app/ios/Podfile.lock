@@ -14,7 +14,7 @@ PODS:
     - Flipper-Folly (~> 2.5)
     - Flipper-RSocket (~> 1.3)
   - Flipper-DoubleConversion (1.1.7)
-  - Flipper-Folly (2.5.1):
+  - Flipper-Folly (2.5.3):
     - boost-for-react-native
     - Flipper-DoubleConversion
     - Flipper-Glog
@@ -370,25 +370,25 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
-  - Flipper (~> 0.75.1)
+  - Flipper (= 0.75.1)
   - Flipper-DoubleConversion (= 1.1.7)
-  - Flipper-Folly (~> 2.5)
+  - Flipper-Folly (= 2.5.3)
   - Flipper-Glog (= 0.3.6)
   - Flipper-PeerTalk (~> 0.0.4)
   - Flipper-RSocket (~> 1.3)
-  - FlipperKit (~> 0.75.1)
-  - FlipperKit/Core (~> 0.75.1)
-  - FlipperKit/CppBridge (~> 0.75.1)
-  - FlipperKit/FBCxxFollyDynamicConvert (~> 0.75.1)
-  - FlipperKit/FBDefines (~> 0.75.1)
-  - FlipperKit/FKPortForwarding (~> 0.75.1)
-  - FlipperKit/FlipperKitHighlightOverlay (~> 0.75.1)
-  - FlipperKit/FlipperKitLayoutPlugin (~> 0.75.1)
-  - FlipperKit/FlipperKitLayoutTextSearchable (~> 0.75.1)
-  - FlipperKit/FlipperKitNetworkPlugin (~> 0.75.1)
-  - FlipperKit/FlipperKitReactPlugin (~> 0.75.1)
-  - FlipperKit/FlipperKitUserDefaultsPlugin (~> 0.75.1)
-  - FlipperKit/SKIOSNetworkPlugin (~> 0.75.1)
+  - FlipperKit (= 0.75.1)
+  - FlipperKit/Core (= 0.75.1)
+  - FlipperKit/CppBridge (= 0.75.1)
+  - FlipperKit/FBCxxFollyDynamicConvert (= 0.75.1)
+  - FlipperKit/FBDefines (= 0.75.1)
+  - FlipperKit/FKPortForwarding (= 0.75.1)
+  - FlipperKit/FlipperKitHighlightOverlay (= 0.75.1)
+  - FlipperKit/FlipperKitLayoutPlugin (= 0.75.1)
+  - FlipperKit/FlipperKitLayoutTextSearchable (= 0.75.1)
+  - FlipperKit/FlipperKitNetworkPlugin (= 0.75.1)
+  - FlipperKit/FlipperKitReactPlugin (= 0.75.1)
+  - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.75.1)
+  - FlipperKit/SKIOSNetworkPlugin (= 0.75.1)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (~> 0.7.2)
   - libevent (~> 2.1.12)
@@ -545,7 +545,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 0b41cf9e0b74ffa97ededb3d0210da5b4710474c
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
-  Flipper-Folly: f7a3caafbd74bda4827954fd7a6e000e36355489
+  Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
   Flipper-Glog: 1dfd6abf1e922806c52ceb8701a3599a79a200a6
   Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
   Flipper-RSocket: 602921fee03edacf18f5d6f3d3594ba477f456e5
@@ -595,6 +595,6 @@ SPEC CHECKSUMS:
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 150d11b9d14e4a3ff5a788d22b641a6bfbd16381
+PODFILE CHECKSUM: 2009e0613d2ab625134468df0e696b83e85498a0
 
 COCOAPODS: 1.10.1

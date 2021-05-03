@@ -39,7 +39,7 @@
     "moment": "^2.29.1",
     "personnummer": "3.1.3",
     "react": "17.0.2",
-    "react-native": "0.64.0",
+    "react-native": "facebook/react-native#cf8a364767df830d7255339741350bb53ab1a68a",
     "react-native-animatable": "^1.3.3",
     "react-native-calendar-events": "2.2.0",
     "react-native-fix-image": "2.1.0",
@@ -85,6 +85,7 @@
     "metro-react-native-babel-preset": "^0.65.2",
     "mockdate": "^3.0.5",
     "prettier": "^2.2.1",
+    "react-native-clean-project": "^3.6.3",
     "react-test-renderer": "17.0.2",
     "typescript": "^4.2.4"
   },
