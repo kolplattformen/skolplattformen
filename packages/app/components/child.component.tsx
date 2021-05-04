@@ -76,7 +76,12 @@ const MenuScreen = () => {
 }
 
 const TabTitle = ({ style, children }: TabTitleProps) => (
-  <Text adjustsFontSizeToFit numberOfLines={1} style={style}>
+  <Text
+    maxFontSizeMultiplier={1.5}
+    adjustsFontSizeToFit
+    numberOfLines={1}
+    style={style}
+  >
     {children}
   </Text>
 )
@@ -86,28 +91,33 @@ const BottomTabBar = ({
   state,
 }: BottomTabBarProps<BottomTabBarOptions>) => (
   <BottomNavigation
+    accessibilityRole="menu"
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
     <BottomNavigationTab
+      accessibilityRole="menuitem"
       title={(props) => (
         <TabTitle {...props}>{translate('navigation.news')}</TabTitle>
       )}
       icon={NewsIcon}
     />
     <BottomNavigationTab
+      accessibilityRole="menuitem"
       title={(props) => (
         <TabTitle {...props}>{translate('navigation.notifications')}</TabTitle>
       )}
       icon={NotificationsIcon}
     />
     <BottomNavigationTab
+      accessibilityRole="menuitem"
       title={(props) => (
         <TabTitle {...props}>{translate('navigation.calender')}</TabTitle>
       )}
       icon={CalendarOutlineIcon}
     />
     <BottomNavigationTab
+      accessibilityRole="menuitem"
       title={(props) => (
         <TabTitle {...props}>{translate('navigation.menu')}</TabTitle>
       )}
@@ -151,7 +161,9 @@ export const Child = () => {
     <SafeAreaView style={{ ...styles.wrap }}>
       <ChildProvider child={child}>
         <TopNavigation
-          title={studentName(child.name)}
+          title={() => (
+            <Text maxFontSizeMultiplier={2}>{studentName(child.name)}</Text>
+          )}
           alignment="center"
           accessoryLeft={BackAction}
           style={styles.topBar}

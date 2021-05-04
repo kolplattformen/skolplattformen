@@ -35,7 +35,7 @@ const LessonList = ({ lessons, header }: LessonListProps) => (
     style={styles.part}
     data={lessons}
     ListHeaderComponent={() => (
-      <Text category="c1" style={styles.header}>
+      <Text maxFontSizeMultiplier={2} category="c1" style={styles.header}>
         {header}
       </Text>
     )}
@@ -45,10 +45,15 @@ const LessonList = ({ lessons, header }: LessonListProps) => (
       <ListItem
         key={id}
         style={styles.item}
-        title={name}
-        description={`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
-          location ? `(${location})` : ''
-        } ${teacher}`}
+        title={() => <Text maxFontSizeMultiplier={1}>{name}</Text>}
+        description={() => (
+          <Text maxFontSizeMultiplier={1}>{`${timeStart.slice(
+            0,
+            5
+          )}-${timeEnd.slice(0, 5)} ${
+            location ? `(${location})` : ''
+          } ${teacher}`}</Text>
+        )}
       />
     )}
   />
@@ -58,23 +63,25 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
   lessons.length ? (
     <View style={styles.tab} key={weekDay}>
       <View style={styles.summary}>
-        <Text category="c1" style={styles.startTime}>
+        <Text maxFontSizeMultiplier={2} category="c1" style={styles.startTime}>
           {translate('schedule.start', { defaultValue: 'Börjar' })}
         </Text>
-        <Text category="h4">{lessons[0].timeStart.slice(0, 5)}</Text>
+        <Text maxFontSizeMultiplier={3} category="h4">
+          {lessons[0].timeStart.slice(0, 5)}
+        </Text>
         <Text category="c1" style={styles.lunchLabel}>
           {translate('schedule.lunch', { defaultValue: 'Lunch' })}
         </Text>
-        <Text category="c2" style={styles.lunch}>
+        <Text maxFontSizeMultiplier={2} category="c2" style={styles.lunch}>
           {lunch?.description}
         </Text>
-        <Text category="c1" style={styles.endTime}>
+        <Text maxFontSizeMultiplier={3} category="c1" style={styles.endTime}>
           {translate('schedule.end', { defaultValue: 'Slutar' })}
         </Text>
-        <Text category="h4">
+        <Text maxFontSizeMultiplier={2} category="h4">
           {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
         </Text>
-        <Text category="c2">
+        <Text maxFontSizeMultiplier={2} category="c2">
           {lessons.some((lesson) => lesson.code === 'IDH')
             ? `🤼‍♀️ ${translate('schedule.gymBag', {
                 defaultValue: 'Gympapåse',
@@ -121,7 +128,10 @@ export const Week = ({ child }: WeekProps) => {
           onSelect={(index) => setSelectedIndex(index)}
         >
           {days.map((weekDay) => (
-            <Tab key={weekDay} title={weekDay} />
+            <Tab
+              key={weekDay}
+              title={() => <Text maxFontSizeMultiplier={1.5}>{weekDay}</Text>}
+            />
           ))}
         </TabBar>
 

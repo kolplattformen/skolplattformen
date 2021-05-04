@@ -85,8 +85,12 @@ const Absence = () => {
         )}
         alignment="center"
         style={styles.topBar}
-        title={translate('abscense.title')}
-        subtitle={studentName(child.name)}
+        title={() => (
+          <Text maxFontSizeMultiplier={1.5}>{translate('abscense.title')}</Text>
+        )}
+        subtitle={() => (
+          <Text maxFontSizeMultiplier={1.5}>{studentName(child.name)}</Text>
+        )}
       />
       <Divider />
       <Layout style={styles.wrap}>

@@ -80,7 +80,11 @@ export const Children = () => {
         {status === 'loaded' ? (
           <>
             <TopNavigation
-              title={translate('children.title')}
+              title={() => (
+                <Text maxFontSizeMultiplier={2.5}>
+                  {translate('children.title')}
+                </Text>
+              )}
               alignment="center"
               accessoryRight={() => (
                 <TopNavigationAction icon={SettingsIcon} onPress={settings} />
