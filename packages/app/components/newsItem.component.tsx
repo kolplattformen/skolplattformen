@@ -49,7 +49,9 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
     <SafeAreaView style={styles.safeArea}>
       <SafeAreaViewContainer>
         <TopNavigation
-          title={translate('news.title')}
+          title={() => (
+            <Text maxFontSizeMultiplier={1.5}>{translate('news.title')}</Text>
+          )}
           alignment="center"
           accessoryLeft={BackAction}
         />
@@ -59,15 +61,20 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
           contentContainerStyle={styles.article}
           style={styles.scrollView}
         >
-          <Text style={styles.title}>{newsItem.header}</Text>
+          <Text maxFontSizeMultiplier={2} style={styles.title}>
+            {newsItem.header}
+          </Text>
           {dateIsValid(newsItem.published) && (
-            <Text style={[styles.subtitle, styles.published]}>
+            <Text
+              maxFontSizeMultiplier={2}
+              style={[styles.subtitle, styles.published]}
+            >
               <Text style={styles.strong}>{translate('news.published')}:</Text>{' '}
               {displayDate(newsItem.published)}
             </Text>
           )}
           {dateIsValid(newsItem.modified) && (
-            <Text style={styles.subtitle}>
+            <Text maxFontSizeMultiplier={2} style={styles.subtitle}>
               <Text style={styles.strong}>{translate('news.updated')}:</Text>{' '}
               {displayDate(newsItem.modified)}
             </Text>
