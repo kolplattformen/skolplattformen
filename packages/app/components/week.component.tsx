@@ -5,10 +5,12 @@ import {
   Text,
   TabBar,
   Tab,
+  StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components'
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
 import { TimetableEntry, Child, MenuItem } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
@@ -30,37 +32,46 @@ interface DayProps {
   lessons: TimetableEntry[]
 }
 
-const LessonList = ({ lessons, header }: LessonListProps) => (
-  <List
-    style={styles.part}
-    data={lessons}
-    ListHeaderComponent={() => (
-      <Text maxFontSizeMultiplier={2} category="c1" style={styles.header}>
-        {header}
-      </Text>
-    )}
-    renderItem={({
-      item: { id, name, timeStart, timeEnd, teacher, location },
-    }) => (
-      <ListItem
-        key={id}
-        style={styles.item}
-        title={() => <Text maxFontSizeMultiplier={1}>{name}</Text>}
-        description={() => (
-          <Text maxFontSizeMultiplier={1}>{`${timeStart.slice(
-            0,
-            5
-          )}-${timeEnd.slice(0, 5)} ${
-            location ? `(${location})` : ''
-          } ${teacher}`}</Text>
-        )}
-      />
-    )}
-  />
-)
+const LessonList = ({ lessons, header }: LessonListProps) => {
+  const styles = useStyleSheet(themedStyles)
 
-export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
-  lessons.length ? (
+  return (
+    <List
+      style={styles.part}
+      data={lessons}
+      ListHeaderComponent={() => (
+        <Text maxFontSizeMultiplier={2} category="c1" style={styles.header}>
+          {header}
+        </Text>
+      )}
+      renderItem={({
+        item: { id, name, timeStart, timeEnd, teacher, location },
+      }) => (
+        <ListItem
+          key={id}
+          style={styles.item}
+          title={() => <Text maxFontSizeMultiplier={1}>{name}</Text>}
+          description={() => (
+            <Text maxFontSizeMultiplier={1}>{`${timeStart.slice(
+              0,
+              5
+            )}-${timeEnd.slice(0, 5)} ${
+              location ? `(${location})` : ''
+            } ${teacher}`}</Text>
+          )}
+        />
+      )}
+    />
+  )
+}
+
+export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
+  const styles = useStyleSheet(themedStyles)
+
+  if (lessons.length <= 0) {
+    return null
+  }
+  return (
     <View style={styles.tab} key={weekDay}>
       <View style={styles.summary}>
         <Text maxFontSizeMultiplier={2} category="c1" style={styles.startTime}>
@@ -98,7 +109,8 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) =>
         lessons={lessons.filter(({ timeStart }) => timeStart >= '12:00')}
       />
     </View>
-  ) : null
+  )
+}
 
 export const Week = ({ child }: WeekProps) => {
   moment.locale(LanguageService.getLanguageCode())
@@ -114,6 +126,8 @@ export const Week = ({ child }: WeekProps) => {
     LanguageService.getLanguageCode()
   )
   const { data: menu } = useMenu(child)
+
+  const styles = useStyleSheet(themedStyles)
 
   useEffect(() => {
     const shouldShowSchema = lessons.length > 0
@@ -156,9 +170,9 @@ export const Week = ({ child }: WeekProps) => {
   ) : null
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   view: {
-    backgroundColor: '#fafafa',
+    backgroundColor: 'background-basic-color-1',
   },
   part: {
     backgroundColor: 'transparent',
@@ -170,14 +184,14 @@ const styles = StyleSheet.create({
   },
   item: {
     height: 45,
-    backgroundColor: 'white',
+    backgroundColor: 'background-basic-color-2',
     paddingHorizontal: 0,
     borderRadius: 2,
     margin: 2,
     width: '90%',
   },
   time: {
-    color: '#333',
+    color: 'color-basic-500',
     fontSize: 9,
   },
   dayTab: {
