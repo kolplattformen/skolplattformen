@@ -53,19 +53,13 @@ export const ModalWebView = ({
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
             <TouchableOpacity onPress={closeModal}>
-              <BackIcon
-                style={styles.backIcon}
-                fill={themedStyles.backIcon.fill}
-              />
+              <BackIcon style={styles.backIcon} />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
               {title}
             </Text>
             <TouchableOpacity onPress={openInApp}>
-              <ExternalLinkIcon
-                style={styles.shareIcon}
-                fill={themedStyles.shareIcon.fill}
-              />
+              <ExternalLinkIcon style={styles.shareIcon} />
             </TouchableOpacity>
           </View>
         </View>
@@ -116,14 +110,12 @@ const themedStyles = StyleService.create({
   shareIcon: {
     width: 24,
     height: 24,
-    fill: 'text-basic-color',
     color: 'text-basic-color',
   },
   backIcon: {
     width: 24,
     height: 24,
     marginRight: Sizing.t4,
-    fill: 'text-basic-color',
     color: 'text-basic-color',
   },
   webview: {},
