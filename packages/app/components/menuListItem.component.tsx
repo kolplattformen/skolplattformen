@@ -11,7 +11,7 @@ export const MenuListItem = ({ item }: MenuListItemProps) => {
   const cardHeader = () => {
     return (
       <View style={styles.topContainer}>
-        <Text category="h6">{`${item.title}`}</Text>
+        <Text style={styles.listHeader} category="h6">{`${item.title}`}</Text>
       </View>
     )
   }
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   listHeader: {
-    backgroundColor: '#fff',
     paddingTop: 10,
     paddingLeft: 15,
   },
