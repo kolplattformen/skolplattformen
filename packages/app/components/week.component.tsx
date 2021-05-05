@@ -197,6 +197,7 @@ const themedStyles = StyleService.create({
   },
   time: {
     color: 'color-basic-500',
+    fontSize: 9,
   },
   dayTab: {
     textAlign: 'left',
@@ -223,7 +224,7 @@ const themedStyles = StyleService.create({
     ...Typography.fontWeight.bold,
   },
   header: {
-    paddingLeft: 0,
+    paddingLeft: 8,
   },
   lessonTitle: {
     ...Typography.fontWeight.bold,

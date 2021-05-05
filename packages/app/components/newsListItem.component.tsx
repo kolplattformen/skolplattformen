@@ -77,9 +77,8 @@ const themedStyles = StyleService.create({
     ...Layout.flex.full,
   },
   title: {
-    ...Typography.fontWeight.bold,
-    ...Typography.fontSize.lg,
-    marginBottom: 2,
+    ...Typography.header,
+    marginBottom: Sizing.t1,
     color: 'text-basic-color',
   },
   subtitle: {
