@@ -22,9 +22,11 @@ export const Calendar = () => {
   return !data?.length ? (
     <View style={styles.emptyState}>
       <Image
-        source={require(colorScheme === 'dark'
-          ? require('../assets/girls-dark-mode.png')
-          : require('../assets/girls.png'))}
+        source={
+          colorScheme === 'dark'
+            ? require('../assets/girls-dark-mode.png')
+            : require('../assets/girls.png')
+        }
         style={styles.emptyStateImage}
       />
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
