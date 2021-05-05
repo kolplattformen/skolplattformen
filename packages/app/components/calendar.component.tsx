@@ -64,6 +64,6 @@ const themedStyles = StyleService.create({
   },
   description: {
     ...Typography.fontSize.xs,
-    color: 'color-basic-500',
+    color: 'color-basic-600',
   },
 })
