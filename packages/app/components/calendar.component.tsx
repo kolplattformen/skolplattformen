@@ -3,7 +3,13 @@ import { CalendarItem } from '@skolplattformen/embedded-api'
 import { Divider, List, ListItem, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
+import {
+  Image,
+  ListRenderItemInfo,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from 'react-native'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { SaveToCalendar } from './saveToCalendar.component'
@@ -11,11 +17,14 @@ import { SaveToCalendar } from './saveToCalendar.component'
 export const Calendar = () => {
   const child = useChild()
   const { data } = useCalendar(child)
+  const colorScheme = useColorScheme()
 
   return !data?.length ? (
     <View style={styles.emptyState}>
       <Image
-        source={require('../assets/girls.png')}
+        source={require(colorScheme === 'dark'
+          ? require('../assets/girls-dark-mode.png')
+          : require('../assets/girls.png'))}
         style={styles.emptyStateImage}
       />
       <Text category="h5">Det ser lite tomt ut i kalendern</Text>
