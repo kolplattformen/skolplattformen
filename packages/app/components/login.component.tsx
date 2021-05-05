@@ -18,7 +18,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { useColorScheme } from 'react-native-appearance'
 import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
@@ -32,7 +31,6 @@ import {
 } from './icon.component'
 
 export const Login = () => {
-  const colorScheme = useColorScheme()
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
     (() => Promise<void>) | (() => null)
@@ -153,11 +151,7 @@ export const Login = () => {
   return (
     <>
       <Image
-        source={
-          colorScheme === 'dark'
-            ? require('../assets/boys-dark-mode.png')
-            : require('../assets/boys.png')
-        }
+        source={require('../assets/boys.png')}
         // @ts-expect-error Don't know why this occurs
         style={styles.image}
       />

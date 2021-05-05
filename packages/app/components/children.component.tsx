@@ -21,7 +21,6 @@ import {
   View,
   Linking,
 } from 'react-native'
-import { useColorScheme } from 'react-native-appearance'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import ActionSheet from 'rn-actionsheet-module'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -37,7 +36,6 @@ export const Children = () => {
     translate('general.abort'),
   ]
   const theme = useTheme()
-  const colorScheme = useColorScheme()
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
@@ -131,11 +129,7 @@ export const Children = () => {
         ) : (
           <Layout style={styles.loading}>
             <Image
-              source={
-                colorScheme === 'dark'
-                  ? require('../assets/girls-dark-mode.png')
-                  : require('../assets/girls.png')
-              }
+              source={require('../assets/girls.png')}
               style={styles.loadingImage}
             />
             {status === 'error' ? (
