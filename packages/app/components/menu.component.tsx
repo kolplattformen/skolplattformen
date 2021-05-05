@@ -19,7 +19,7 @@ export const Menu = () => {
       data={data}
       ListEmptyComponent={
         <View style={styles.emptyState}>
-          <Text category="h6">{translate('menu.emptyHeadline')}</Text>
+          <Text category="h4">{translate('menu.emptyHeadline')}</Text>
           <Text style={styles.emptyStateDescription}>
             {translate('menu.emptyText')}
           </Text>
