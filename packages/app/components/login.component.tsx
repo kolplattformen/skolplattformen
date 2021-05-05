@@ -253,7 +253,7 @@ const themedStyles = StyleService.create({
   },
   bankIdLoading: { margin: 10 },
   button: {
-    backgroundColor: 'colors-primary-600',
-    borderColor: 'colors-primary-600',
+    backgroundColor: 'color-primary-600',
+    borderColor: 'color-primary-600',
   },
 })
