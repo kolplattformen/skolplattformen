@@ -103,16 +103,16 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 const themedStylesMarkdown = StyleService.create({
   body: {
     ...Typography.fontSize.base,
-    color: 'color-basic-800',
+    color: 'color-basic-500',
     lineHeight: 26,
   },
   heading1: {
     ...Typography.fontSize.lg,
-    color: 'color-basic-800',
+    color: 'color-basic-300',
   },
   heading2: {
     ...Typography.fontSize.lg,
-    color: 'color-basic-800',
+    color: 'color-basic-300',
   },
 })
 
