@@ -2,6 +2,7 @@ import { useNotifications } from '@skolplattformen/api-hooks'
 import { List } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { Sizing } from '../styles'
 import { useChild } from './childContext.component'
 import { Notification } from './notification.component'
 
@@ -26,6 +27,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: 10,
+    padding: Sizing.t3,
   },
 })

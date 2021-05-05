@@ -8,7 +8,12 @@ interface NavLinksProps {
   onClick?: () => void
 }
 
-const NavLinks = ({ onClick }: NavLinksProps) => {
+interface LinkProps {
+  href: string
+  to: string
+}
+
+const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
   const { pathname } = useRouter()
   const intl = useIntl()
 
@@ -18,7 +23,7 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
     return href.substring(0, hashIndex)
   }
 
-  const Link = ({ href, to, children }) =>
+  const Link: React.FC<LinkProps> = ({ href, to, children }) =>
     path(href) === pathname ? (
       <ScrollLink
         activeClass="current"

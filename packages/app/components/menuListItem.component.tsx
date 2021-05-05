@@ -1,45 +1,47 @@
-import { Text, Card } from '@ui-kitten/components'
+import { Text, Card, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { MenuItem } from '@skolplattformen/embedded-api'
+import { Sizing, Typography } from '../styles'
 
 interface MenuListItemProps {
   item: MenuItem
 }
 
 export const MenuListItem = ({ item }: MenuListItemProps) => {
-  const cardHeader = () => {
-    return (
-      <View style={styles.topContainer}>
-        <Text style={styles.listHeader} category="h6">{`${item.title}`}</Text>
-      </View>
-    )
-  }
 
+  const styles = useStyleSheet(themedStyles)
   return (
     <View style={styles.container}>
-      <Card header={cardHeader} style={styles.contentContainer}>
-        <Text>{`${item.description}`}</Text>
+      <Card
+        header={(props) => (
+          <View {...props}>
+            <Text style={styles.title}>{item.title}</Text>
+          </View>
+        )}
+        style={styles.contentContainer}
+      >
+        <Text category="p1">{item.description}</Text>
       </Card>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     width: '100%',
   },
   contentContainer: {
-    margin: 5,
+    marginBottom: Sizing.t2,
     justifyContent: 'flex-start',
   },
   topContainer: {
-    margin: 5,
+    margin: Sizing.t1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  listHeader: {
-    paddingTop: 10,
-    paddingLeft: 15,
+  title: {
+    ...Typography.header,
+    color: 'color-basic-700'
   },
 })

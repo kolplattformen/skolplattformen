@@ -89,8 +89,12 @@ const Absence = () => {
         )}
         alignment="center"
         style={styles.topBar}
-        title={translate('abscense.title')}
-        subtitle={studentName(child.name)}
+        title={() => (
+          <Text maxFontSizeMultiplier={1.5}>{translate('abscense.title')}</Text>
+        )}
+        subtitle={() => (
+          <Text maxFontSizeMultiplier={1.5}>{studentName(child.name)}</Text>
+        )}
       />
       <Divider />
       <Layout style={styles.wrap}>
@@ -173,7 +177,7 @@ const Absence = () => {
                           setFieldValue('displayStartTimePicker', true)
                         }
                       >
-                        {moment(values.startTime).format('HH:mm')}
+                        {moment(values.startTime).format('LT')}
                       </Button>
                       <DateTimePickerModal
                         cancelTextIOS={translate('general.abort')}
@@ -208,7 +212,7 @@ const Absence = () => {
                           setFieldValue('displayEndTimePicker', true)
                         }
                       >
-                        {moment(values.endTime).format('HH:mm')}
+                        {moment(values.endTime).format('LT')}
                       </Button>
                       <DateTimePickerModal
                         cancelTextIOS={translate('general.abort')}

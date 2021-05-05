@@ -55,7 +55,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                 <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
                   {translate('general.title')}
                 </Text>
-                <Text category="h6" style={styles.subtitle}>
+                <Text style={styles.subtitle}>
                   {translate('auth.subtitle', {
                     word: randomWord(),
                   })}
@@ -82,7 +82,9 @@ const themeStyles = StyleService.create({
   },
   subtitle: {
     ...Typography.align.center,
-    color: 'text-hint-color',
+    ...Typography.fontSize.base,
+    ...Typography.fontWeight.bold,
+    color: 'color-basic-500',
     marginTop: Sizing.t1,
   },
 })

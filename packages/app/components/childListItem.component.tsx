@@ -186,12 +186,12 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       onPress={() => navigation.navigate('Child', { child, color })}
     >
       {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
-        <Text appearance="hint" category="c1" key={i}>
+        <Text category="p1" key={i}>
           {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
         </Text>
       ))}
       {notificationsThisWeek.slice(0, 3).map((notification, i) => (
-        <Text appearance="hint" category="c1" key={i}>
+        <Text category="p1" key={i}>
           {translate('notifications.notificationTitle', {
             message: notification.message,
             dateCreated: displayDate(notification.dateCreated),
@@ -199,7 +199,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         </Text>
       ))}
       {newsThisWeek.slice(0, 3).map((newsItem, i) => (
-        <Text appearance="hint" category="c1" key={i}>
+        <Text category="p1" key={i}>
           {translate('news.notificationTitle', {
             header: newsItem.header,
             published: displayDate(newsItem.published),
@@ -209,14 +209,13 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       {scheduleAndCalendarThisWeek.length ||
       notificationsThisWeek.length ||
       newsThisWeek.length ? null : (
-        <Text appearance="hint" category="c1">
-          {translate('news.noNewNewsItemsThisWeek')}
-        </Text>
+        <Text category="p1">{translate('news.noNewNewsItemsThisWeek')}</Text>
       )}
       <View style={styles.itemFooterAbsence}>
         <Button
           size="small"
           onPress={() => navigation.navigate('Absence', { child })}
+          style={styles.button}
         >
           {translate('abscense.title')}
         </Button>
@@ -261,4 +260,8 @@ const themeStyles = StyleService.create({
     color: 'color-basic-1100',
   },
   pending: {},
+  button: {
+    backgroundColor: Colors.primary.primary600,
+    borderColor: Colors.primary.primary600,
+  },
 })

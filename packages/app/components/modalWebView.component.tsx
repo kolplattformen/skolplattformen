@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { Linking, Modal, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
+import { Layout, Sizing } from '../styles'
 import { BackIcon, ExternalLinkIcon } from './icon.component'
 
 interface ModalWebViewProps {
@@ -56,27 +57,18 @@ export const ModalWebView = ({
       onRequestClose={closeModal}
     >
       <SafeAreaView
-        style={[
-          styles.container,
-          { backgroundColor: theme['background-basic-color-1'] },
-        ]}
+        style={styles.container}
       >
         <View
-          style={[
-            styles.headerWrapper,
-            { backgroundColor: theme['background-basic-color-1'] },
-          ]}
+          style={styles.headerWrapper}
         >
           <View
-            style={[
-              styles.header,
-              { backgroundColor: theme['background-basic-color-1'] },
-            ]}
+            style={styles.header}
           >
             <TouchableOpacity onPress={closeModal}>
               <BackIcon
                 style={styles.backIcon}
-                fill={theme['text-basic-color']}
+                fill={themedStyles.backIcon.fill}
               />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
@@ -85,7 +77,7 @@ export const ModalWebView = ({
             <TouchableOpacity onPress={openInApp}>
               <ExternalLinkIcon
                 style={styles.shareIcon}
-                fill={theme['text-basic-color']}
+                fill={themedStyles.shareIcon.fill}
               />
             </TouchableOpacity>
           </View>
@@ -109,12 +101,15 @@ export const ModalWebView = ({
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
+    backgroundColor: 'background-basic-color-1'
   },
   headerWrapper: {
-    marginTop: 5,
-    padding: 5,
+    marginTop: Sizing.t1,
+    padding: Sizing.t1,
     borderRadius: 2,
+    borderColor: 'basic-color-200',
     borderBottomWidth: 1,
+    backgroundColor: 'background-basic-color-1'
   },
   backdrop: {
     backgroundColor: 'color-basic-transparent-600',
@@ -125,19 +120,24 @@ const themedStyles = StyleService.create({
     paddingRight: 2,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    ...Layout.flex.row,
+    ...Layout.mainAxis.center,
+    paddingHorizontal: Sizing.t3,
+    paddingVertical: Sizing.t1,
+    backgroundColor: 'background-basic-color-1'
   },
   shareIcon: {
     width: 24,
     height: 24,
+    fill: 'text-basic-color',
+    color: 'text-basic-color'
   },
   backIcon: {
     width: 24,
     height: 24,
-    marginRight: 15,
+    marginRight: Sizing.t4,
+    fill: 'text-basic-color',
+    color: 'text-basic-color'
   },
   webview: {},
 })

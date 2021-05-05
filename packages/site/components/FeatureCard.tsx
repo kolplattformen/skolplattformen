@@ -1,6 +1,18 @@
 import classnames from 'classnames'
 
-const FeatureCard = ({ image, title, text, isActive }) => {
+interface FeatureCardProps {
+  image: string
+  title: string
+  text: string
+  isActive: boolean
+}
+
+const FeatureCard = ({
+  image,
+  title,
+  text,
+  isActive,
+}: FeatureCardProps): JSX.Element => {
   return (
     <div
       className={classnames(

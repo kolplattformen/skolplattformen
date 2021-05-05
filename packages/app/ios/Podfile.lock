@@ -281,7 +281,7 @@ PODS:
   - react-native-simple-toast (1.1.3):
     - React-Core
     - Toast (~> 4.0.0)
-  - react-native-webview (11.3.2):
+  - react-native-webview (11.4.2):
     - React-Core
   - React-perflogger (0.64.0)
   - React-RCTActionSheet (0.64.0):
@@ -357,7 +357,7 @@ PODS:
     - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNLocalize (2.0.2):
+  - RNLocalize (2.0.3):
     - React-Core
   - RNScreens (2.18.1):
     - React-Core
@@ -576,7 +576,7 @@ SPEC CHECKSUMS:
   react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
-  react-native-webview: 71567b6bf3d4e55914e580d720cc8f7df64af817
+  react-native-webview: 4c85a3e5de574ee8c2c0985b4bebbdd240f49304
   React-perflogger: 9c547d8f06b9bf00cb447f2b75e8d7f19b7e02af
   React-RCTActionSheet: 3080b6e12e0e1a5b313c8c0050699b5c794a1b11
   React-RCTAnimation: 3f96f21a497ae7dabf4d2f150ee43f906aaf516f
@@ -594,7 +594,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNDateTimePicker: d943800c936fb01c352fcfb70439550d2cb57092
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNLocalize: 43f6c30d8e19ad92282ae434d310fb463b31f419
+  RNLocalize: 99e59cad311ca1b6872b1764514009416ccba03d
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196

@@ -6,27 +6,28 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
-  useTheme,
+  StyleService,
+  useStyleSheet
 } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { SafeAreaView } from '../ui/safeAreaView.component'
+import { Colors, Layout, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
 import { RootStackParamList } from './navigation.component'
 import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
+import { SafeAreaView } from '../ui/safeAreaView.component'
 
 interface NewsItemProps {
   navigation: StackNavigationProp<RootStackParamList, 'NewsItem'>
   route: RouteProp<RootStackParamList, 'NewsItem'>
 }
 
-const displayDate = (date: string | undefined) =>
-  moment(date).locale('sv').format('DD MMM. YYYY HH:mm')
+const displayDate = (date: string | undefined) => moment(date).format('lll')
 
 const dateIsValid = (date: string | undefined) =>
   moment(date, moment.ISO_8601).isValid()
@@ -34,7 +35,9 @@ const dateIsValid = (date: string | undefined) =>
 export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   const { newsItem, child } = route.params
   const { data } = useNewsDetails(child, newsItem)
-  const theme = useTheme()
+  const styles = useStyleSheet(themedStyles);
+  const stylesMarkdown = useStyleSheet(themedStylesMarkdown);
+
   const navigateBack = () => {
     navigation.goBack()
   }
@@ -51,7 +54,9 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
     <SafeAreaView>
       <SafeAreaViewContainer>
         <TopNavigation
-          title={translate('news.title')}
+          title={() => (
+            <Text maxFontSizeMultiplier={1.5}>{translate('news.title')}</Text>
+          )}
           alignment="center"
           accessoryLeft={BackAction}
         />
@@ -61,40 +66,34 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
           contentContainerStyle={styles.article}
           style={styles.scrollView}
         >
-          <Text style={styles.title}>{newsItem.header}</Text>
+          <Text maxFontSizeMultiplier={2} style={styles.title}>
+            {newsItem.header}
+          </Text>
           {dateIsValid(newsItem.published) && (
-            <Text style={[styles.subtitle, styles.published]}>
+            <Text
+              maxFontSizeMultiplier={2}
+              style={[styles.subtitle, styles.published]}
+            >
               <Text style={styles.strong}>{translate('news.published')}:</Text>{' '}
               {displayDate(newsItem.published)}
             </Text>
           )}
           {dateIsValid(newsItem.modified) && (
-            <Text style={styles.subtitle}>
+            <Text maxFontSizeMultiplier={2} style={styles.subtitle}>
               <Text style={styles.strong}>{translate('news.updated')}:</Text>{' '}
               {displayDate(newsItem.modified)}
             </Text>
           )}
-          <View
-            style={[
-              styles.body,
-              { backgroundColor: theme['background-basic-color-1'] },
-            ]}
-          >
+          <View style={styles.body}>
             <Markdown
-              style={{
-                body: {
-                  color: theme['text-basic-color'],
-                  fontSize: 16,
-                  lineHeight: 26,
-                },
-                heading1: { color: theme['text-hint-color'], fontSize: 20 },
-                heading2: { color: theme['text-hint-color'], fontSize: 18 },
-              }}
+              style={stylesMarkdown}
             >
               {data.body}
             </Markdown>
             {newsItem.fullImageUrl && (
-              <Image src={newsItem.fullImageUrl} style={styles.image} />
+              <Image src={newsItem.fullImageUrl} 
+              // @ts-expect-error Fix later on
+              style={styles.image} />
             )}
           </View>
         </ScrollView>
@@ -103,38 +102,60 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStylesMarkdown = StyleService.create({
+  body: {
+    ...Typography.fontSize.base,
+    color: 'color-basic-800',
+    lineHeight: 26,
+  },
+  heading1: {
+    ...Typography.fontSize.lg,
+    color: 'color-basic-800',
+  },
+  heading2: {
+    ...Typography.fontSize.lg,
+    color: 'color-basic-800',
+  },
+})
+
+const themedStyles = StyleService.create({
+  safeArea: {
+    ...Layout.flex.full,
+    backgroundColor: Colors.neutral.white,
+  },
   topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    ...Layout.flex.row,
+    ...Layout.crossAxis.spaceBetween,
   },
   article: {
-    padding: 20,
+    padding: Sizing.t5,
   },
   scrollView: {
-    flex: 1,
+    ...Layout.flex.full,
   },
   image: {
     width: '100%',
     minHeight: 300,
-    marginTop: 16,
+    marginTop: Sizing.t4,
   },
   title: {
+    ...Typography.fontWeight.bold,
     fontSize: 30,
-    fontWeight: '700',
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 12,
+    ...Typography.fontSize.xs,
+    color: 'color-basic-600',
   },
   strong: {
-    fontSize: 12,
-    fontWeight: '700',
+    ...Typography.fontSize.xs,
+    ...Typography.fontWeight.bold,
+    color: 'color-basic-600',
   },
   published: {
-    marginBottom: 4,
+    marginBottom: Sizing.t1,
   },
   body: {
-    marginTop: 16,
+    marginTop: Sizing.t4,
   },
 })

@@ -8,11 +8,12 @@
     "pod": "npx pod-install",
     "start": "react-native start",
     "test": "is-ci-cli test:ci test:watch",
-    "test:ci": "jest",
+    "test:ci": "TZ=Europe/Stockholm jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --watch",
     "i18n": "sync-i18n --files '**/translations/*.json' --primary en --languages ar de pl so sv --space 2",
-    "check-i18n": "npm run i18n -- --check"
+    "check-i18n": "npm run i18n -- --check",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@eva-design/eva": "2.0.0",
@@ -25,11 +26,13 @@
     "@react-navigation/bottom-tabs": "5.11.9",
     "@react-navigation/native": "5.9.4",
     "@react-navigation/stack": "5.14.4",
-    "@skolplattformen/api-hooks": "2.1.1",
-    "@skolplattformen/embedded-api": "4.4.0",
+    "@skolplattformen/api-hooks": "3.0.0",
+    "@skolplattformen/curriculum": "1.4.0",
+    "@skolplattformen/embedded-api": "5.1.3",
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
     "buffer": "6.0.3",
+    "fast-fuzzy": "^1.10.8",
     "formik": "2.2.6",
     "hermes-engine": "0.7.2",
     "i18n-js": "^3.8.0",
@@ -39,7 +42,11 @@
     "personnummer": "3.1.3",
     "react": "17.0.2",
     "react-native": "0.64.0",
+<<<<<<< HEAD
     "react-native-appearance": "^0.3.4",
+=======
+    "react-native-animatable": "^1.3.3",
+>>>>>>> b59f681516b6125c1894d94f40d33744c173dab6
     "react-native-calendar-events": "2.2.0",
     "react-native-fix-image": "2.1.0",
     "react-native-gesture-handler": "1.10.3",
@@ -54,8 +61,9 @@
     "react-native-svg-transformer": "0.14.3",
     "react-native-tab-view": "2.15.2",
     "react-native-typography": "1.4.1",
-    "react-native-webview": "11.3.2",
-    "rn-actionsheet-module": "1.0.3",
+    "react-native-webview": "11.4.2",
+    "react-native-weekly-calendar": "^0.2.0",
+    "rn-actionsheet-module": "https://github.com/viktorlarsson/rn-actionsheet-module",
     "use-async-storage": "1.2.0",
     "yup": "0.32.9"
   },
@@ -82,6 +90,7 @@
     "jest-watch-typeahead": "^0.6.2",
     "metro-react-native-babel-preset": "^0.65.2",
     "mockdate": "^3.0.5",
+    "patch-package": "^6.4.7",
     "prettier": "^2.2.1",
     "react-test-renderer": "17.0.2",
     "typescript": "^4.2.4"

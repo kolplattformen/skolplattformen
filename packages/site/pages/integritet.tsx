@@ -1,6 +1,6 @@
 import Privacy from '../components/Privacy'
 
-const IntegrityPage = () => {
+const IntegrityPage = (): JSX.Element => {
   return <Privacy />
 }
 

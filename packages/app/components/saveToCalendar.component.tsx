@@ -1,5 +1,5 @@
 import { CalendarItem } from '@skolplattformen/embedded-api'
-import { Button, MenuItem, OverflowMenu } from '@ui-kitten/components'
+import { Button, MenuItem, OverflowMenu, Text } from '@ui-kitten/components'
 import React from 'react'
 import RNCalendarEvents from 'react-native-calendar-events'
 import Toast from 'react-native-simple-toast'
@@ -78,7 +78,11 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
       <MenuItem
         accessibilityLabel={translate('calender.saveToCalender')}
         accessoryLeft={CalendarOutlineIcon}
-        title={translate('calender.saveToCalender')}
+        title={() => (
+          <Text maxFontSizeMultiplier={2}>
+            {translate('calender.saveToCalender')}
+          </Text>
+        )}
         onPress={() => requestPermissionsAndSave(event)}
       />
     </OverflowMenu>
