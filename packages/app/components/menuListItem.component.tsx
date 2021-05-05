@@ -9,7 +9,6 @@ interface MenuListItemProps {
 }
 
 export const MenuListItem = ({ item }: MenuListItemProps) => {
-
   const styles = useStyleSheet(themedStyles)
   return (
     <View style={styles.container}>
@@ -42,6 +41,6 @@ const themedStyles = StyleService.create({
   },
   title: {
     ...Typography.header,
-    color: 'color-basic-700'
+    color: 'color-basic-700',
   },
 })

@@ -7,12 +7,12 @@ import {
   TopNavigation,
   TopNavigationAction,
   StyleService,
-  useStyleSheet
+  useStyleSheet,
 } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Colors, Layout, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
@@ -35,8 +35,8 @@ const dateIsValid = (date: string | undefined) =>
 export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   const { newsItem, child } = route.params
   const { data } = useNewsDetails(child, newsItem)
-  const styles = useStyleSheet(themedStyles);
-  const stylesMarkdown = useStyleSheet(themedStylesMarkdown);
+  const styles = useStyleSheet(themedStyles)
+  const stylesMarkdown = useStyleSheet(themedStylesMarkdown)
 
   const navigateBack = () => {
     navigation.goBack()
@@ -85,15 +85,13 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
             </Text>
           )}
           <View style={styles.body}>
-            <Markdown
-              style={stylesMarkdown}
-            >
-              {data.body}
-            </Markdown>
+            <Markdown style={stylesMarkdown}>{data.body}</Markdown>
             {newsItem.fullImageUrl && (
-              <Image src={newsItem.fullImageUrl} 
-              // @ts-expect-error Fix later on
-              style={styles.image} />
+              <Image
+                src={newsItem.fullImageUrl}
+                // @ts-expect-error Fix later on
+                style={styles.image}
+              />
             )}
           </View>
         </ScrollView>

@@ -261,7 +261,7 @@ const themeStyles = StyleService.create({
   },
   pending: {},
   button: {
-    backgroundColor: Colors.primary.primary600,
-    borderColor: Colors.primary.primary600,
+    backgroundColor: 'colors-primary-600',
+    borderColor: 'colors-primary-600',
   },
 })
