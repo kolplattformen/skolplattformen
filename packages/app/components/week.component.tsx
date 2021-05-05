@@ -16,6 +16,7 @@ import { TimetableEntry, Child, MenuItem } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
 import { translate } from '../utils/translation'
 import { TransitionView } from './transitionView.component'
+import { Typography } from '../styles'
 
 interface WeekProps {
   child: Child
@@ -50,7 +51,11 @@ const LessonList = ({ lessons, header }: LessonListProps) => {
         <ListItem
           key={id}
           style={styles.item}
-          title={() => <Text maxFontSizeMultiplier={1}>{name}</Text>}
+          title={() => (
+            <Text style={styles.lessonTitle} maxFontSizeMultiplier={1}>
+              {name}
+            </Text>
+          )}
           description={() => (
             <Text maxFontSizeMultiplier={1}>{`${timeStart.slice(
               0,
@@ -192,7 +197,6 @@ const themedStyles = StyleService.create({
   },
   time: {
     color: 'color-basic-500',
-    fontSize: 9,
   },
   dayTab: {
     textAlign: 'left',
@@ -219,5 +223,8 @@ const themedStyles = StyleService.create({
   },
   header: {
     paddingLeft: 0,
+  },
+  lessonTitle: {
+    ...Typography.fontWeight.bold,
   },
 })
