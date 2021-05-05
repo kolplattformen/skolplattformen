@@ -172,7 +172,7 @@ export const Week = ({ child }: WeekProps) => {
 
 const themedStyles = StyleService.create({
   view: {
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
   },
   part: {
     backgroundColor: 'transparent',
@@ -184,7 +184,7 @@ const themedStyles = StyleService.create({
   },
   item: {
     height: 45,
-    backgroundColor: 'background-basic-color-2',
+    backgroundColor: 'background-basic-color-1',
     paddingHorizontal: 0,
     borderRadius: 2,
     margin: 2,

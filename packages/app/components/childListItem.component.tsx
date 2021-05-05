@@ -20,7 +20,7 @@ import {
 import moment from 'moment'
 import React from 'react'
 import { View } from 'react-native'
-import { Colors, Layout, Sizing } from '../styles'
+import { Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import {
@@ -105,12 +105,21 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
 
+  const statusColors = {
+    loading: 'basic',
+    loaded: 'basic',
+    error: 'error',
+    pending: 'basic',
+  }
+
   const Footer = () => {
     return (
       <View style={styles.itemFooter}>
         <Button
-          style={[styles.item, styles[newsStatus]]}
+          style={styles.item}
           size="small"
+          appearance="ghost"
+          status={statusColors[newsStatus]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
@@ -123,8 +132,10 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           {`${(news || []).length}`}
         </Button>
         <Button
-          style={[styles.item, styles[notificationsStatus]]}
+          style={styles.item}
           size="small"
+          appearance="ghost"
+          status={statusColors[notificationsStatus]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
@@ -137,8 +148,10 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           {`${(notifications || []).length}`}
         </Button>
         <Button
-          style={[styles.item, styles[calendarStatus]]}
+          style={styles.item}
           size="small"
+          appearance="ghost"
+          status={statusColors[calendarStatus]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
@@ -151,8 +164,10 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           {`${(calendar || []).length}`}
         </Button>
         <Button
-          style={[styles.item, styles[menuStatus]]}
+          style={styles.item}
           size="small"
+          appearance="ghost"
+          status={statusColors[menuStatus]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
@@ -209,13 +224,15 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       {scheduleAndCalendarThisWeek.length ||
       notificationsThisWeek.length ||
       newsThisWeek.length ? null : (
-        <Text category="p1">{translate('news.noNewNewsItemsThisWeek')}</Text>
+        <Text category="p1" style={styles.noNewNewsItemsText}>
+          {translate('news.noNewNewsItemsThisWeek')}
+        </Text>
       )}
       <View style={styles.itemFooterAbsence}>
         <Button
           size="small"
+          status="primary"
           onPress={() => navigation.navigate('Absence', { child })}
-          style={styles.button}
         >
           {translate('abscense.title')}
         </Button>
@@ -247,21 +264,8 @@ const themeStyles = StyleService.create({
   },
   item: {
     paddingHorizontal: 0,
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
   },
-  loaded: {
-    color: Colors.neutral.black,
-  },
-  loading: {
+  noNewNewsItemsText: {
     color: 'color-basic-600',
-  },
-  error: {
-    color: 'color-basic-1100',
-  },
-  pending: {},
-  button: {
-    backgroundColor: 'color-primary-600',
-    borderColor: 'color-primary-600',
   },
 })

@@ -178,7 +178,7 @@ export const Login = () => {
         <ButtonGroup style={styles.loginButtonGroup}>
           <Button
             onPress={() => startLogin(socialSecurityNumber)}
-            style={[styles.button, styles.loginButton]}
+            style={styles.loginButton}
             appearance="ghost"
             disabled={loginMethodIndex === 1 && !valid}
             status="primary"
@@ -189,7 +189,7 @@ export const Login = () => {
           </Button>
           <Button
             onPress={selectLoginMethod}
-            style={[styles.button, styles.loginMethodButton]}
+            style={styles.loginMethodButton}
             appearance="ghost"
             status="primary"
             accessoryLeft={SelectIcon}
@@ -209,7 +209,7 @@ export const Login = () => {
           </Text>
 
           <Button
-            style={styles.button}
+            status="primary"
             onPress={() => {
               cancelLoginRequest()
               showModal(false)
@@ -246,8 +246,4 @@ const themedStyles = StyleService.create({
     width: '80%',
   },
   bankIdLoading: { margin: 10 },
-  button: {
-    backgroundColor: 'color-primary-600',
-    borderColor: 'color-primary-600',
-  },
 })
