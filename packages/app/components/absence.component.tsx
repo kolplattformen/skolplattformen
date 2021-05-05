@@ -272,7 +272,7 @@ const themedStyles = StyleService.create({
   label: {
     ...Typography.fontSize.xs,
     ...Typography.fontWeight.bold,
-    color: 'color-basic-500',
+    color: 'color-basic-600',
     marginBottom: Sizing.t1,
   },
 })
