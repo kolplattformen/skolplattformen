@@ -218,6 +218,6 @@ const themedStyles = StyleService.create({
     margin: 10,
   },
   header: {
-    paddingLeft: 8,
+    paddingLeft: 0,
   },
 })
