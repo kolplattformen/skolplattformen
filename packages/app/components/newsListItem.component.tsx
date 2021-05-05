@@ -71,6 +71,7 @@ const themedStyles = StyleService.create({
     marginBottom: Sizing.t2,
 
     backgroundColor: 'background-basic-color-1',
+    borderColor: 'border-basic-color-3',
   },
   text: {
     ...Layout.flex.full,
