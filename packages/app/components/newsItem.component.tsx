@@ -127,6 +127,7 @@ const themedStyles = StyleService.create({
   },
   article: {
     padding: Sizing.t5,
+    backgroundColor: 'background-basic-color-2',
   },
   scrollView: {
     ...Layout.flex.full,

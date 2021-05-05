@@ -220,6 +220,7 @@ const themedStyles = StyleService.create({
   },
   pager: {
     margin: 10,
+    ...Typography.fontWeight.bold,
   },
   header: {
     paddingLeft: 0,
