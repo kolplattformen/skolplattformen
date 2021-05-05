@@ -41,6 +41,6 @@ const themedStyles = StyleService.create({
   },
   title: {
     ...Typography.header,
-    color: 'color-basic-300',
+    color: 'color-basic-800',
   },
 })
