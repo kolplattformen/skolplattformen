@@ -19,7 +19,7 @@ import {
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { View } from 'react-native'
+import { View, useColorScheme } from 'react-native'
 import { Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
@@ -40,6 +40,8 @@ type ChildListItemNavigationProp = StackNavigationProp<
   'Children'
 >
 export const ChildListItem = ({ child, color }: ChildListItemProps) => {
+  const colorScheme = useColorScheme()
+
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
@@ -112,13 +114,15 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     pending: 'basic',
   }
 
+  const buttonAppearance: string = colorScheme === 'dark' ? 'ghost' : 'basic'
+
   const Footer = () => {
     return (
       <View style={styles.itemFooter}>
         <Button
           style={styles.item}
           size="small"
-          appearance="basic"
+          appearance={buttonAppearance}
           status={statusColors[newsStatus]}
           onPress={() =>
             navigation.navigate('Child', {
@@ -134,7 +138,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="basic"
+          appearance={buttonAppearance}
           status={statusColors[notificationsStatus]}
           onPress={() =>
             navigation.navigate('Child', {
@@ -150,7 +154,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="basic"
+          appearance={buttonAppearance}
           status={statusColors[calendarStatus]}
           onPress={() =>
             navigation.navigate('Child', {
@@ -166,7 +170,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="basic"
+          appearance={buttonAppearance}
           status={statusColors[menuStatus]}
           onPress={() =>
             navigation.navigate('Child', {
