@@ -118,7 +118,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="ghost"
+          appearance="basic"
           status={statusColors[newsStatus]}
           onPress={() =>
             navigation.navigate('Child', {
@@ -134,7 +134,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="ghost"
+          appearance="basic"
           status={statusColors[notificationsStatus]}
           onPress={() =>
             navigation.navigate('Child', {
@@ -150,7 +150,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="ghost"
+          appearance="basic"
           status={statusColors[calendarStatus]}
           onPress={() =>
             navigation.navigate('Child', {
@@ -166,7 +166,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           size="small"
-          appearance="ghost"
+          appearance="basic"
           status={statusColors[menuStatus]}
           onPress={() =>
             navigation.navigate('Child', {
