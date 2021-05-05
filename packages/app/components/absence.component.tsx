@@ -7,19 +7,22 @@ import {
   Divider,
   Input,
   Layout,
+  StyleService,
   Text,
   TopNavigation,
   TopNavigationAction,
+  useStyleSheet,
   useTheme,
 } from '@ui-kitten/components'
 import { Formik } from 'formik'
 import moment from 'moment'
 import Personnummer from 'personnummer'
 import React from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import * as Yup from 'yup'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { SafeAreaView } from '../ui/safeAreaView.component'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
@@ -55,6 +58,7 @@ const Absence = () => {
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
   const minumumDate = moment().hours(8).minute(0)
   const maximumDate = moment().hours(17).minute(0)
+  const styles = useStyleSheet(themedStyles)
 
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
@@ -75,12 +79,7 @@ const Absence = () => {
   }
 
   return (
-    <SafeAreaView
-      style={[
-        styles.safeArea,
-        { backgroundColor: theme['background-basic-color-1'] },
-      ]}
-    >
+    <SafeAreaView>
       <TopNavigation
         accessoryLeft={() => (
           <TopNavigationAction
@@ -89,10 +88,7 @@ const Absence = () => {
           />
         )}
         alignment="center"
-        style={[
-          styles.topBar,
-          { backgroundColor: theme['background-basic-color-1'] },
-        ]}
+        style={styles.topBar}
         title={translate('abscense.title')}
         subtitle={studentName(child.name)}
       />
@@ -136,11 +132,13 @@ const Absence = () => {
             return (
               <View>
                 <View style={styles.field}>
+                  <Text style={styles.label}>
+                    {translate('general.socialSecurityNumber')}
+                  </Text>
                   <Input
                     accessibilityLabel={translate(
                       'general.socialSecurityNumber'
                     )}
-                    label={translate('general.socialSecurityNumber')}
                     keyboardType="number-pad"
                     onChangeText={handleChange('socialSecurityNumber')}
                     onBlur={handleBlur('socialSecurityNumber')}
@@ -251,11 +249,14 @@ const Absence = () => {
 
 export default Absence
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   safeArea: {
     ...LayoutStyle.flex.full,
+    backgroundColor: 'background-basic-color-1',
   },
-  topBar: {},
+  topBar: {
+    backgroundColor: 'background-basic-color-1',
+  },
   wrap: {
     ...LayoutStyle.flex.full,
     padding: Sizing.t5,
@@ -267,7 +268,7 @@ const styles = StyleSheet.create({
   label: {
     ...Typography.fontSize.xs,
     ...Typography.fontWeight.bold,
-    color: 'rgb(150,161,184)',
+    color: 'color-basic-500',
     marginBottom: Sizing.t1,
   },
 })

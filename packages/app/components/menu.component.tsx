@@ -4,7 +4,7 @@ import { List, Text } from '@ui-kitten/components'
 import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
-import { Colors, Sizing, Layout as LayoutStyle, Typography } from '../styles'
+import { Sizing, Layout as LayoutStyle, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   emptyState: {
     ...LayoutStyle.center,
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
     paddingHorizontal: Sizing.t5,
     paddingTop: 25,
   },

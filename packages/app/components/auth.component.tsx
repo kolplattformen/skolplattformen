@@ -3,25 +3,20 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
-  useTheme,
+  StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components'
 import React from 'react'
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { Login } from './login.component'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
-import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 import { translate } from '../utils/translation'
 import { GlobeIcon } from './icon.component'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from './navigation.component'
+import { SafeAreaView } from '../ui/safeAreaView.component'
+import { KeyboardAvoidingView } from '../ui/keyboardAvoidingView.component'
 
 const randomWord = () => {
   const words = translate('auth.words')
@@ -39,20 +34,12 @@ interface AuthProps {
 }
 
 export const Auth: React.FC<AuthProps> = ({ navigation }) => {
-  const theme = useTheme()
+  const styles = useStyleSheet(themeStyles)
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.keyboardAvoidingView}
-    >
+    <KeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView
-          style={[
-            styles.safeArea,
-            { backgroundColor: theme['background-basic-color-1'] },
-          ]}
-        >
+        <SafeAreaView>
           <SafeAreaViewContainer>
             <TopNavigation
               alignment="center"
@@ -83,11 +70,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
   )
 }
 
-const styles = StyleSheet.create({
-  keyboardAvoidingView: { ...LayoutStyle.flex.full },
-  safeArea: {
-    ...LayoutStyle.flex.full,
-  },
+const themeStyles = StyleService.create({
   container: {
     ...LayoutStyle.mainAxis.center,
     ...LayoutStyle.crossAxis.flexEnd,
@@ -99,7 +82,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     ...Typography.align.center,
-    color: '#9CA3AF',
+    color: 'text-hint-color',
     marginTop: Sizing.t1,
   },
 })

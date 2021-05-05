@@ -11,13 +11,14 @@ import {
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { SafeAreaView } from '../ui/safeAreaView.component'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
 import { RootStackParamList } from './navigation.component'
-import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 
 interface NewsItemProps {
   navigation: StackNavigationProp<RootStackParamList, 'NewsItem'>
@@ -47,12 +48,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   )
 
   return (
-    <SafeAreaView
-      style={[
-        styles.safeArea,
-        { backgroundColor: theme['background-basic-color-1'] },
-      ]}
-    >
+    <SafeAreaView>
       <SafeAreaViewContainer>
         <TopNavigation
           title={translate('news.title')}
@@ -108,9 +104,6 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -5,7 +5,9 @@ import {
   Card,
   Input,
   Modal,
+  StyleService,
   Text,
+  useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import React, { useEffect, useState } from 'react'
@@ -13,7 +15,6 @@ import {
   Image,
   Linking,
   Platform,
-  StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
@@ -21,7 +22,7 @@ import { useColorScheme } from 'react-native-appearance'
 import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
-import { Colors, Layout, Sizing } from '../styles'
+import { Layout, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import {
   CloseOutlineIcon,
@@ -147,6 +148,8 @@ export const Login = () => {
     }
   }
 
+  const styles = useStyleSheet(themedStyles)
+
   return (
     <>
       <Image
@@ -155,6 +158,7 @@ export const Login = () => {
             ? require('../assets/boys-dark-mode.png')
             : require('../assets/boys.png')
         }
+        // @ts-expect-error Don't know why this occurs
         style={styles.image}
       />
       <View style={styles.loginForm}>
@@ -202,8 +206,8 @@ export const Login = () => {
       <Modal
         visible={visible}
         style={styles.modal}
-        backdropStyle={styles.modalBackdrop}
         onBackdropPress={() => showModal(false)}
+        backdropStyle={styles.backdrop}
       >
         <Card disabled>
           <Text style={styles.bankIdLoading}>
@@ -224,10 +228,13 @@ export const Login = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   image: {
     ...Sizing.aspectRatio(0.9, Sizing.Ratio['4:3']),
     marginVertical: Sizing.t4,
+  },
+  backdrop: {
+    backgroundColor: 'color-basic-transparent-600',
   },
   loginForm: {
     ...Layout.mainAxis.flexStart,
@@ -239,13 +246,9 @@ const styles = StyleSheet.create({
     minHeight: 45,
   },
   loginButton: { ...Layout.flex.full },
-  loginButtonText: { color: Colors.neutral.white },
   loginMethodButton: { width: 45 },
   modal: {
     width: '80%',
-  },
-  modalBackdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   bankIdLoading: { margin: 10 },
 })

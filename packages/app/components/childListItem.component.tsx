@@ -9,10 +9,17 @@ import {
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 
-import { Avatar, Button, Card, Text } from '@ui-kitten/components'
+import {
+  Avatar,
+  Button,
+  Card,
+  StyleService,
+  Text,
+  useStyleSheet,
+} from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
@@ -96,65 +103,68 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   }
 
   const className = getClassName()
+  const styles = useStyleSheet(themeStyles)
 
-  const Footer = () => (
-    <View style={styles.itemFooter}>
-      <Button
-        style={[styles.item, styles[newsStatus]]}
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.news'),
-          })
-        }
-        accessoryLeft={NewsIcon}
-      >
-        {`${(news || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[notificationsStatus]]}
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.notifications'),
-          })
-        }
-        accessoryLeft={NotificationsIcon}
-      >
-        {`${(notifications || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[calendarStatus]]}
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.calender'),
-          })
-        }
-        accessoryLeft={CalendarOutlineIcon}
-      >
-        {`${(calendar || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[menuStatus]]}
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.menu'),
-          })
-        }
-        accessoryLeft={MenuIcon}
-      />
-    </View>
-  )
+  const Footer = () => {
+    return (
+      <View style={styles.itemFooter}>
+        <Button
+          style={[styles.item, styles[newsStatus]]}
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.news'),
+            })
+          }
+          accessoryLeft={NewsIcon}
+        >
+          {`${(news || []).length}`}
+        </Button>
+        <Button
+          style={[styles.item, styles[notificationsStatus]]}
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.notifications'),
+            })
+          }
+          accessoryLeft={NotificationsIcon}
+        >
+          {`${(notifications || []).length}`}
+        </Button>
+        <Button
+          style={[styles.item, styles[calendarStatus]]}
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.calender'),
+            })
+          }
+          accessoryLeft={CalendarOutlineIcon}
+        >
+          {`${(calendar || []).length}`}
+        </Button>
+        <Button
+          style={[styles.item, styles[menuStatus]]}
+          size="small"
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.menu'),
+            })
+          }
+          accessoryLeft={MenuIcon}
+        />
+      </View>
+    )
+  }
 
   return (
     <Card
@@ -215,7 +225,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themeStyles = StyleService.create({
   card: {
     marginBottom: Sizing.t5,
   },
@@ -245,10 +255,10 @@ const styles = StyleSheet.create({
     color: Colors.neutral.black,
   },
   loading: {
-    color: '#555',
+    color: 'color-basic-600',
   },
   error: {
-    color: '#500',
+    color: 'color-basic-1100',
   },
   pending: {},
 })

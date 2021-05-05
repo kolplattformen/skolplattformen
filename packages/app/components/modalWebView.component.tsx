@@ -1,14 +1,12 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { Text, useTheme } from '@ui-kitten/components'
-import React, { useEffect, useState } from 'react'
 import {
-  Linking,
-  Modal,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  SyntheticEvent,
-} from 'react-native'
+  StyleService,
+  Text,
+  useStyleSheet,
+  useTheme,
+} from '@ui-kitten/components'
+import React, { useEffect, useState } from 'react'
+import { Linking, Modal, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
 import { BackIcon, ExternalLinkIcon } from './icon.component'
@@ -47,6 +45,9 @@ export const ModalWebView = ({
   const openInApp = () => {
     Linking.openURL(url)
   }
+
+  const styles = useStyleSheet(themedStyles)
+
   return (
     <Modal
       animationType="slide"
@@ -95,7 +96,7 @@ export const ModalWebView = ({
             source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
             thirdPartyCookiesEnabled={sharedCookiesEnabled}
-            onLoad={(event: SyntheticEvent) => {
+            onLoad={(event) => {
               setTitle(event.nativeEvent.title)
             }}
           />
@@ -105,7 +106,7 @@ export const ModalWebView = ({
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
@@ -113,8 +114,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
     padding: 5,
     borderRadius: 2,
-    borderColor: '#6B7280',
     borderBottomWidth: 1,
+  },
+  backdrop: {
+    backgroundColor: 'color-basic-transparent-600',
   },
   headerText: {
     overflow: 'hidden',

@@ -3,13 +3,13 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { NewsItem } from '@skolplattformen/embedded-api'
 import React from 'react'
 import moment from 'moment'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 import { RootStackParamList } from './navigation.component'
-import { useTheme } from '@ui-kitten/components'
+import { StyleService, useStyleSheet } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
@@ -22,7 +22,7 @@ type NewsListItemNavigationProp = StackNavigationProp<
 
 const { width } = Dimensions.get('window')
 export const NewsListItem = ({ item }: NewsListItemProps) => {
-  const theme = useTheme()
+  const styles = useStyleSheet(themedStyles)
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
   const hasDate = item.published || item.modified
@@ -33,35 +33,23 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
     <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
-      <View
-        style={[
-          styles.card,
-          {
-            backgroundColor: theme['background-basic-color-1'],
-            borderColor: theme['border-basic-color-3'],
-          },
-        ]}
-      >
+      <View style={styles.card}>
         {width > 320 && item.fullImageUrl ? (
-          <Image src={item.fullImageUrl} style={styles.image} />
+          <Image
+            src={item.fullImageUrl}
+            // @ts-expect-error Don't know why this linter breaks
+            style={styles.image}
+          />
         ) : null}
         <View style={styles.text}>
           <View>
-            <Text style={[styles.title, { color: theme['text-basic-color'] }]}>
-              {item.header}
-            </Text>
-            <Text
-              style={[styles.subtitle, { color: theme['text-hint-color'] }]}
-            >
+            <Text style={styles.title}>{item.header}</Text>
+            <Text style={styles.subtitle}>
               {item.author}
               {item.author && displayDate ? ' • ' : ''}
               {displayDate}
             </Text>
-            <Text
-              ellipsizeMode="tail"
-              numberOfLines={2}
-              style={[styles.intro, { color: theme['text-basic-color'] }]}
-            >
+            <Text ellipsizeMode="tail" numberOfLines={2} style={styles.intro}>
               {item.intro}
             </Text>
           </View>
@@ -71,7 +59,7 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
@@ -81,6 +69,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: Sizing.t5,
     marginBottom: Sizing.t2,
+
+    backgroundColor: 'background-basic-color-1',
+    borderColor: 'border-basic-color-3',
   },
   text: {
     ...Layout.flex.full,
@@ -89,14 +80,17 @@ const styles = StyleSheet.create({
     ...Typography.fontWeight.bold,
     ...Typography.fontSize.lg,
     marginBottom: 2,
+    color: 'text-basic-color',
   },
   subtitle: {
     ...Typography.fontSize.xs,
 
     marginBottom: Sizing.t2,
+    color: 'text-hint-color',
   },
   intro: {
     ...Typography.fontSize.sm,
+    color: 'text-basic-color',
   },
   image: {
     borderRadius: 3,

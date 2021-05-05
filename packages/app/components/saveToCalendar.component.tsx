@@ -1,7 +1,6 @@
 import { CalendarItem } from '@skolplattformen/embedded-api'
 import { Button, MenuItem, OverflowMenu } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import RNCalendarEvents from 'react-native-calendar-events'
 import Toast from 'react-native-simple-toast'
 import { translate } from '../utils/translation'
@@ -74,7 +73,6 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
     <OverflowMenu
       visible={visible}
       anchor={renderToggleButton}
-      backdropStyle={styles.backdrop}
       onBackdropPress={closeOverflowMenu}
     >
       <MenuItem
@@ -86,13 +84,3 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
     </OverflowMenu>
   )
 }
-
-const styles = StyleSheet.create({
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  group: {
-    position: 'relative',
-    zIndex: 10,
-  },
-})
