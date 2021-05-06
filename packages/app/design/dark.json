@@ -77,7 +77,11 @@
   "background-basic-color-1": "#2E3137",
   "background-basic-color-2": "#202225",
   "color-control-default": "#E5E7EB",
+  /* text colors */
   "color-basic-800": "#DCDDDE",
   "color-basic-600": "#DCDDDE",
-  "color-basic-500": "#8E9297"
+  "color-basic-500": "#8E9297",
+  /* basic button colors */
+  "color-basic-300": "#202020",
+  "color-basic-400": "gray"
 }

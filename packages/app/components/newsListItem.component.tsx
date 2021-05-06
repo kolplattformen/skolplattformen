@@ -31,7 +31,6 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
 
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
-
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
@@ -39,10 +38,10 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
       <View style={styles.card}>
         {width > 320 && item.fullImageUrl ? (
           <Image
-          src={item.fullImageUrl}
-          // @ts-expect-error Don't know why this linter breaks
-          style={styles.image}
-        />
+            src={item.fullImageUrl}
+            // @ts-expect-error Don't know why this linter breaks
+            style={styles.image}
+          />
         ) : null}
         <View style={styles.text}>
           <View>

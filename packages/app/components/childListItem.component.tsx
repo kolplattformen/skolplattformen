@@ -19,7 +19,7 @@ import {
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { View, useColorScheme } from 'react-native'
+import { View } from 'react-native'
 import { Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
@@ -40,8 +40,6 @@ type ChildListItemNavigationProp = StackNavigationProp<
   'Children'
 >
 export const ChildListItem = ({ child, color }: ChildListItemProps) => {
-  const colorScheme = useColorScheme()
-
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
@@ -268,8 +266,6 @@ const themeStyles = StyleService.create({
   },
   item: {
     paddingHorizontal: 0,
-   // backgroundColor: 'background-basic-color-1',
-   // borderColor:  'background-basic-color-1'
   },
   noNewNewsItemsText: {
     color: 'color-basic-600',

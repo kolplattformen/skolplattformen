@@ -12,7 +12,6 @@ import {
   TopNavigation,
   TopNavigationAction,
   useStyleSheet,
-  useTheme,
 } from '@ui-kitten/components'
 import { Formik } from 'formik'
 import moment from 'moment'
@@ -54,7 +53,6 @@ const Absence = () => {
   const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
-  const theme = useTheme()
   const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
   const minumumDate = moment().hours(8).minute(0)
   const maximumDate = moment().hours(17).minute(0)
@@ -152,7 +150,7 @@ const Absence = () => {
                     value={values.socialSecurityNumber}
                   />
                   {hasError('socialSecurityNumber') && (
-                    <Text style={{ color: theme['color-danger-700'] }}>
+                    <Text style={styles.error}>
                       {errors.socialSecurityNumber}
                     </Text>
                   )}
@@ -274,5 +272,8 @@ const themedStyles = StyleService.create({
     ...Typography.fontWeight.bold,
     color: 'color-basic-600',
     marginBottom: Sizing.t1,
+  },
+  error: {
+    color: 'color-primary-600',
   },
 })
