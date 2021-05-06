@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/kolplattformen/skolplattformen/compare/v1.28.0...v1.28.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* 🐛 android layout fixes after dark mode ([#369](https://github.com/kolplattformen/skolplattformen/issues/369)) ([683afe1](https://github.com/kolplattformen/skolplattformen/commit/683afe15f83f0321866615da54d5e5a1d5752f4f))
+
 # [1.28.0](https://github.com/kolplattformen/skolplattformen/compare/v1.27.5...v1.28.0) (2021-05-06)
 
 
