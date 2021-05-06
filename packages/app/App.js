@@ -36,7 +36,7 @@ export default () => {
       <SafeAreaProvider>
         <AppearanceProvider>
           <StatusBar
-            backgroundColor={colorScheme === 'dark' ? '#222B45' : '#FFF'}
+            backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
             barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
             translucent
           />
