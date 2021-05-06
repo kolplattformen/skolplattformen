@@ -31,6 +31,7 @@ import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 import { translate } from '../utils/translation'
 import { SafeAreaView } from '../ui/safeAreaView.component'
+import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -158,16 +159,18 @@ export const Child = () => {
 
   return (
     <SafeAreaView>
-      <ChildProvider child={child}>
-        <TopNavigation
-          title={() => (
-            <Text maxFontSizeMultiplier={2}>{studentName(child.name)}</Text>
-          )}
-          alignment="center"
-          accessoryLeft={BackAction}
-        />
-        <TabNavigator initialRouteName={initialRouteName} />
-      </ChildProvider>
+      <SafeAreaViewContainer>
+        <ChildProvider child={child}>
+          <TopNavigation
+            title={() => (
+              <Text maxFontSizeMultiplier={2}>{studentName(child.name)}</Text>
+            )}
+            alignment="center"
+            accessoryLeft={BackAction}
+          />
+          <TabNavigator initialRouteName={initialRouteName} />
+        </ChildProvider>
+      </SafeAreaViewContainer>
     </SafeAreaView>
   )
 }

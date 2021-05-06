@@ -27,6 +27,7 @@ import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
+import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 
 type AbsenceNavigationProp = StackNavigationProp<RootStackParamList, 'Absence'>
 type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
@@ -78,173 +79,181 @@ const Absence = () => {
 
   return (
     <SafeAreaView>
-      <TopNavigation
-        accessoryLeft={() => (
-          <TopNavigationAction
-            icon={BackIcon}
-            onPress={() => navigation.goBack()}
-          />
-        )}
-        alignment="center"
-        style={styles.topBar}
-        title={() => (
-          <Text maxFontSizeMultiplier={1.5}>{translate('abscense.title')}</Text>
-        )}
-        subtitle={() => (
-          <Text maxFontSizeMultiplier={1.5}>{studentName(child.name)}</Text>
-        )}
-      />
-      <Divider />
-      <Layout style={styles.wrap}>
-        <Formik
-          enableReinitialize
-          validationSchema={AbsenceSchema}
-          initialValues={initialValues}
-          onSubmit={async (values) => {
-            const ssn = Personnummer.parse(values.socialSecurityNumber).format()
+      <SafeAreaViewContainer>
+        <TopNavigation
+          accessoryLeft={() => (
+            <TopNavigationAction
+              icon={BackIcon}
+              onPress={() => navigation.goBack()}
+            />
+          )}
+          alignment="center"
+          style={styles.topBar}
+          title={() => (
+            <Text maxFontSizeMultiplier={1.5}>
+              {translate('abscense.title')}
+            </Text>
+          )}
+          subtitle={() => (
+            <Text maxFontSizeMultiplier={1.5}>{studentName(child.name)}</Text>
+          )}
+        />
+        <Divider />
+        <Layout style={styles.wrap}>
+          <Formik
+            enableReinitialize
+            validationSchema={AbsenceSchema}
+            initialValues={initialValues}
+            onSubmit={async (values) => {
+              const ssn = Personnummer.parse(
+                values.socialSecurityNumber
+              ).format()
 
-            if (values.isFullDay) {
-              sendSMS(ssn)
-            } else {
-              sendSMS(
-                `${ssn} ${moment(values.startTime).format('HHmm')}-${moment(
-                  values.endTime
-                ).format('HHmm')}`
+              if (values.isFullDay) {
+                sendSMS(ssn)
+              } else {
+                sendSMS(
+                  `${ssn} ${moment(values.startTime).format('HHmm')}-${moment(
+                    values.endTime
+                  ).format('HHmm')}`
+                )
+              }
+
+              await AsyncStorage.setItem(
+                `@childssn.${child.id}`,
+                values.socialSecurityNumber
               )
-            }
+            }}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              setFieldValue,
+              values,
+              touched,
+              errors,
+            }) => {
+              const hasError = (field: keyof typeof values) =>
+                errors[field] && touched[field]
 
-            await AsyncStorage.setItem(
-              `@childssn.${child.id}`,
-              values.socialSecurityNumber
-            )
-          }}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setFieldValue,
-            values,
-            touched,
-            errors,
-          }) => {
-            const hasError = (field: keyof typeof values) =>
-              errors[field] && touched[field]
-
-            return (
-              <View>
-                <View style={styles.field}>
-                  <Text style={styles.label}>
-                    {translate('general.socialSecurityNumber')}
-                  </Text>
-                  <Input
-                    accessibilityLabel={translate(
-                      'general.socialSecurityNumber'
-                    )}
-                    keyboardType="number-pad"
-                    onChangeText={handleChange('socialSecurityNumber')}
-                    onBlur={handleBlur('socialSecurityNumber')}
-                    status={
-                      hasError('socialSecurityNumber') ? 'danger' : 'basic'
-                    }
-                    value={values.socialSecurityNumber}
-                  />
-                  {hasError('socialSecurityNumber') && (
-                    <Text style={styles.error}>
-                      {errors.socialSecurityNumber}
+              return (
+                <View>
+                  <View style={styles.field}>
+                    <Text style={styles.label}>
+                      {translate('general.socialSecurityNumber')}
                     </Text>
-                  )}
-                </View>
-                <View style={styles.field}>
-                  <CheckBox
-                    checked={values.isFullDay}
-                    onChange={(checked) => setFieldValue('isFullDay', checked)}
-                  >
-                    {translate('abscense.entireDay')}
-                  </CheckBox>
-                </View>
-                {!values.isFullDay && (
-                  <View style={styles.partOfDay}>
-                    <View style={styles.inputHalf}>
-                      <Text style={styles.label}>
-                        {translate('abscense.startTime')}
+                    <Input
+                      accessibilityLabel={translate(
+                        'general.socialSecurityNumber'
+                      )}
+                      keyboardType="number-pad"
+                      onChangeText={handleChange('socialSecurityNumber')}
+                      onBlur={handleBlur('socialSecurityNumber')}
+                      status={
+                        hasError('socialSecurityNumber') ? 'danger' : 'basic'
+                      }
+                      value={values.socialSecurityNumber}
+                    />
+                    {hasError('socialSecurityNumber') && (
+                      <Text style={styles.error}>
+                        {errors.socialSecurityNumber}
                       </Text>
-                      <Button
-                        status="basic"
-                        onPress={() =>
-                          setFieldValue('displayStartTimePicker', true)
-                        }
-                      >
-                        {moment(values.startTime).format('LT')}
-                      </Button>
-                      <DateTimePickerModal
-                        cancelTextIOS={translate('general.abort')}
-                        confirmTextIOS={translate('general.confirm')}
-                        date={moment(values.startTime).toDate()}
-                        isVisible={values.displayStartTimePicker}
-                        headerTextIOS={translate(
-                          'abscense.selectAbscenseStartTime'
-                        )}
-                        locale="sv-SE"
-                        maximumDate={maximumDate.toDate()}
-                        minimumDate={minumumDate.toDate()}
-                        minuteInterval={10}
-                        mode="time"
-                        onConfirm={(date) => {
-                          setFieldValue('startTime', date)
-                          setFieldValue('displayStartTimePicker', false)
-                        }}
-                        onCancel={() =>
-                          setFieldValue('displayStartTimePicker', false)
-                        }
-                      />
-                    </View>
-                    <View style={styles.spacer} />
-                    <View style={styles.inputHalf}>
-                      <Text style={styles.label}>
-                        {translate('abscense.endTime')}
-                      </Text>
-                      <Button
-                        status="basic"
-                        onPress={() =>
-                          setFieldValue('displayEndTimePicker', true)
-                        }
-                      >
-                        {moment(values.endTime).format('LT')}
-                      </Button>
-                      <DateTimePickerModal
-                        cancelTextIOS={translate('general.abort')}
-                        confirmTextIOS={translate('general.confirm')}
-                        date={moment(values.endTime).toDate()}
-                        isVisible={values.displayEndTimePicker}
-                        headerTextIOS={translate(
-                          'abscense.selectAbscenseEndTime'
-                        )}
-                        // Todo fix this
-                        locale="sv-SE"
-                        maximumDate={maximumDate.toDate()}
-                        minimumDate={minumumDate.toDate()}
-                        minuteInterval={10}
-                        mode="time"
-                        onConfirm={(date) => {
-                          setFieldValue('endTime', date)
-                          setFieldValue('displayEndTimePicker', false)
-                        }}
-                        onCancel={() =>
-                          setFieldValue('displayEndTimePicker', false)
-                        }
-                      />
-                    </View>
+                    )}
                   </View>
-                )}
-                <Button onPress={handleSubmit} status="primary">
-                  {translate('general.send')}
-                </Button>
-              </View>
-            )
-          }}
-        </Formik>
-      </Layout>
+                  <View style={styles.field}>
+                    <CheckBox
+                      checked={values.isFullDay}
+                      onChange={(checked) =>
+                        setFieldValue('isFullDay', checked)
+                      }
+                    >
+                      {translate('abscense.entireDay')}
+                    </CheckBox>
+                  </View>
+                  {!values.isFullDay && (
+                    <View style={styles.partOfDay}>
+                      <View style={styles.inputHalf}>
+                        <Text style={styles.label}>
+                          {translate('abscense.startTime')}
+                        </Text>
+                        <Button
+                          status="basic"
+                          onPress={() =>
+                            setFieldValue('displayStartTimePicker', true)
+                          }
+                        >
+                          {moment(values.startTime).format('LT')}
+                        </Button>
+                        <DateTimePickerModal
+                          cancelTextIOS={translate('general.abort')}
+                          confirmTextIOS={translate('general.confirm')}
+                          date={moment(values.startTime).toDate()}
+                          isVisible={values.displayStartTimePicker}
+                          headerTextIOS={translate(
+                            'abscense.selectAbscenseStartTime'
+                          )}
+                          locale="sv-SE"
+                          maximumDate={maximumDate.toDate()}
+                          minimumDate={minumumDate.toDate()}
+                          minuteInterval={10}
+                          mode="time"
+                          onConfirm={(date) => {
+                            setFieldValue('startTime', date)
+                            setFieldValue('displayStartTimePicker', false)
+                          }}
+                          onCancel={() =>
+                            setFieldValue('displayStartTimePicker', false)
+                          }
+                        />
+                      </View>
+                      <View style={styles.spacer} />
+                      <View style={styles.inputHalf}>
+                        <Text style={styles.label}>
+                          {translate('abscense.endTime')}
+                        </Text>
+                        <Button
+                          status="basic"
+                          onPress={() =>
+                            setFieldValue('displayEndTimePicker', true)
+                          }
+                        >
+                          {moment(values.endTime).format('LT')}
+                        </Button>
+                        <DateTimePickerModal
+                          cancelTextIOS={translate('general.abort')}
+                          confirmTextIOS={translate('general.confirm')}
+                          date={moment(values.endTime).toDate()}
+                          isVisible={values.displayEndTimePicker}
+                          headerTextIOS={translate(
+                            'abscense.selectAbscenseEndTime'
+                          )}
+                          // Todo fix this
+                          locale="sv-SE"
+                          maximumDate={maximumDate.toDate()}
+                          minimumDate={minumumDate.toDate()}
+                          minuteInterval={10}
+                          mode="time"
+                          onConfirm={(date) => {
+                            setFieldValue('endTime', date)
+                            setFieldValue('displayEndTimePicker', false)
+                          }}
+                          onCancel={() =>
+                            setFieldValue('displayEndTimePicker', false)
+                          }
+                        />
+                      </View>
+                    </View>
+                  )}
+                  <Button onPress={handleSubmit} status="primary">
+                    {translate('general.send')}
+                  </Button>
+                </View>
+              )
+            }}
+          </Formik>
+        </Layout>
+      </SafeAreaViewContainer>
     </SafeAreaView>
   )
 }
