@@ -90,6 +90,7 @@ If you're offended by this initiative, please don't be — we come in peace.
 - [Rickard Natt och Dag](https://github.com/believer)
 - [Viktor Sarström](https://github.com/viktorlarsson)
 - [Andreas Eriksson](https://github.com/whyer)
+- [Kajetan Kazimierczak](https://github.com/kajetan-kazimierczak)
 - You?
 
 ## License
