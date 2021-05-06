@@ -66,7 +66,7 @@ const themedStyles = StyleService.create({
   },
   title: {
     ...Typography.header,
-    marginBottom: 2,
+    marginBottom: Sizing.t1,
   },
   subtitle: {
     ...Typography.fontSize.xs,

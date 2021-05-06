@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewsItem } from '@skolplattformen/embedded-api'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import moment from 'moment'
 import { Dimensions, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -13,6 +13,7 @@ import { StyleService, useStyleSheet } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
+  children?: ReactNode
 }
 
 type NewsListItemNavigationProp = StackNavigationProp<
@@ -21,13 +22,15 @@ type NewsListItemNavigationProp = StackNavigationProp<
 >
 
 const { width } = Dimensions.get('window')
-export const NewsListItem = ({ item }: NewsListItemProps) => {
+
+export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   const styles = useStyleSheet(themedStyles)
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
   const hasDate = item.published || item.modified
 
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
+
 
   return (
     <TouchableOpacity
@@ -36,10 +39,10 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
       <View style={styles.card}>
         {width > 320 && item.fullImageUrl ? (
           <Image
-            src={item.fullImageUrl}
-            // @ts-expect-error Don't know why this linter breaks
-            style={styles.image}
-          />
+          src={item.fullImageUrl}
+          // @ts-expect-error Don't know why this linter breaks
+          style={styles.image}
+        />
         ) : null}
         <View style={styles.text}>
           <View>
@@ -50,7 +53,7 @@ export const NewsListItem = ({ item }: NewsListItemProps) => {
               {displayDate}
             </Text>
             <Text ellipsizeMode="tail" numberOfLines={2} style={styles.intro}>
-              {item.intro}
+              {children ?? item.intro}
             </Text>
           </View>
         </View>

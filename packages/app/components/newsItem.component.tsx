@@ -107,7 +107,7 @@ const themedStylesMarkdown = StyleService.create({
     lineHeight: 26,
   },
   heading1: {
-    ...Typography.fontSize.lg,
+    ...Typography.fontSize.xl,
     color: 'color-basic-600',
   },
   heading2: {
