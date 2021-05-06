@@ -114,7 +114,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     pending: 'basic',
   }
 
-  const buttonAppearance: string = colorScheme === 'dark' ? 'ghost' : 'basic'
+  const buttonAppearance: string = 'ghost'
 
   const Footer = () => {
     return (
@@ -268,6 +268,8 @@ const themeStyles = StyleService.create({
   },
   item: {
     paddingHorizontal: 0,
+   // backgroundColor: 'background-basic-color-1',
+   // borderColor:  'background-basic-color-1'
   },
   noNewNewsItemsText: {
     color: 'color-basic-600',
