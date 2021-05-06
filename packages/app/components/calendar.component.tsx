@@ -1,18 +1,26 @@
 import { useCalendar } from '@skolplattformen/api-hooks'
 import { CalendarItem } from '@skolplattformen/embedded-api'
-import { Divider, List, ListItem, Text } from '@ui-kitten/components'
+import {
+  Divider,
+  List,
+  ListItem,
+  Text,
+  StyleService,
+  useStyleSheet,
+} from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { ListRenderItemInfo, StyleSheet, View } from 'react-native'
-import { Colors, Typography } from '../styles'
+import { ListRenderItemInfo, View } from 'react-native'
+import { Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
-import { Week } from './week.component'
 import { SaveToCalendar } from './saveToCalendar.component'
+import { Week } from './week.component'
 
 export const Calendar = () => {
   const child = useChild()
   const { data } = useCalendar(child)
+  const styles = useStyleSheet(themedStyles)
 
   return !data?.length ? (
     <View>
@@ -49,17 +57,13 @@ export const Calendar = () => {
   )
 }
 
-const styles = StyleSheet.create({
-  emptyStateImage: {
-    height: 200,
-    width: '100%',
-  },
+const themedStyles = StyleService.create({
   container: {
     height: '100%',
     width: '100%',
   },
   description: {
     ...Typography.fontSize.xs,
-    color: Colors.neutral.gray500,
+    color: 'color-basic-600',
   },
 })

@@ -9,7 +9,6 @@ import { Notification } from './notification.component'
 export const NotificationsList = () => {
   const child = useChild()
   const { data } = useNotifications(child)
-
   return (
     <List
       style={styles.container}

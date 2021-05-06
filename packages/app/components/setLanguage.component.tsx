@@ -8,15 +8,16 @@ import {
   TopNavigation,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
-import { Colors, Layout as LayoutStyle, Sizing } from '../styles'
+import { Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { BackIcon } from './icon.component'
-import { SafeAreaViewContainer } from './safeAreaViewContainer.component'
+import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 import RNRestart from 'react-native-restart'
+import { SafeAreaView } from '../ui/safeAreaView.component'
 
 interface Language {
   langCode: string
@@ -101,7 +102,7 @@ export const SetLanguage = () => {
   const activeLanguages = languages.filter((language) => language.active)
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView>
       <SafeAreaViewContainer>
         <TopNavigation
           accessoryLeft={() => (
@@ -115,6 +116,7 @@ export const SetLanguage = () => {
             <View style={styles.languageList}>
               {activeLanguages.map((language) => (
                 <TouchableOpacity
+                  key={language.langCode}
                   style={styles.languageButton}
                   onPress={() => setSelectedLanguage(language.langCode)}
                 >
@@ -149,11 +151,6 @@ export const SetLanguage = () => {
 }
 
 const styles = StyleSheet.create({
-  keyboardAvoidingView: { ...LayoutStyle.flex.full },
-  safeArea: {
-    ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
-  },
   languageList: {
     flex: 1,
     alignSelf: 'stretch',

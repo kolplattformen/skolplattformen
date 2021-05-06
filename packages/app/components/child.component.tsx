@@ -14,9 +14,7 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components'
 import React from 'react'
-import { StyleProp, StyleSheet, TextProps } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Colors, Layout as LayoutStyle } from '../styles'
+import { StyleProp, TextProps } from 'react-native'
 import { studentName } from '../utils/peopleHelpers'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
@@ -32,6 +30,7 @@ import { RootStackParamList } from './navigation.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 import { translate } from '../utils/translation'
+import { SafeAreaView } from '../ui/safeAreaView.component'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -158,7 +157,7 @@ export const Child = () => {
   }
 
   return (
-    <SafeAreaView style={{ ...styles.wrap }}>
+    <SafeAreaView>
       <ChildProvider child={child}>
         <TopNavigation
           title={() => (
@@ -166,23 +165,9 @@ export const Child = () => {
           )}
           alignment="center"
           accessoryLeft={BackAction}
-          style={styles.topBar}
         />
         <TabNavigator initialRouteName={initialRouteName} />
       </ChildProvider>
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  wrap: {
-    ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
-  },
-  topBar: {
-    backgroundColor: Colors.neutral.white,
-  },
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-})

@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
@@ -10,6 +11,7 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
+  useTheme,
 } from '@ui-kitten/components'
 import React from 'react'
 import {
@@ -33,11 +35,11 @@ export const Children = () => {
     translate('general.logout'),
     translate('general.abort'),
   ]
+  const theme = useTheme()
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
   const insets = useSafeAreaInsets()
-
   const handleSettingSelection = (index: number) => {
     switch (index) {
       case 0:
@@ -71,10 +73,13 @@ export const Children = () => {
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
   return (
     <View
-      style={{
-        ...styles.topContainer,
-        paddingTop: insets.top,
-      }}
+      style={[
+        {
+          ...styles.topContainer,
+          paddingTop: insets.top,
+        },
+        { backgroundColor: theme['background-basic-color-1'] },
+      ]}
     >
       <>
         {status === 'loaded' ? (
@@ -170,7 +175,6 @@ export const Children = () => {
 const styles = StyleSheet.create({
   topContainer: {
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
     paddingBottom: 0,
   },
   loading: {

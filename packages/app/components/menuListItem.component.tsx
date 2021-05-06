@@ -1,14 +1,15 @@
-import { Text, Card } from '@ui-kitten/components'
+import { Text, Card, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { MenuItem } from '@skolplattformen/embedded-api'
-import { Colors, Sizing, Typography } from '../styles'
+import { Sizing, Typography } from '../styles'
 
 interface MenuListItemProps {
   item: MenuItem
 }
 
 export const MenuListItem = ({ item }: MenuListItemProps) => {
+  const styles = useStyleSheet(themedStyles)
   return (
     <View style={styles.container}>
       <Card
@@ -25,7 +26,7 @@ export const MenuListItem = ({ item }: MenuListItemProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     width: '100%',
   },
@@ -38,11 +39,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  listHeader: {
-    backgroundColor: '#fff',
-  },
   title: {
     ...Typography.header,
-    color: Colors.neutral.gray700,
+    color: 'color-basic-800',
   },
 })

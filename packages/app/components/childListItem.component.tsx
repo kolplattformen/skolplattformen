@@ -8,11 +8,19 @@ import {
   useSchedule,
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
-import { Avatar, Button, Card, Text } from '@ui-kitten/components'
+
+import {
+  Avatar,
+  Button,
+  Card,
+  StyleService,
+  Text,
+  useStyleSheet,
+} from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Colors, Layout, Sizing } from '../styles'
+import { View } from 'react-native'
+import { Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import {
@@ -27,12 +35,10 @@ interface ChildListItemProps {
   child: Child
   color: string
 }
-
 type ChildListItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Children'
 >
-
 export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
@@ -97,69 +103,85 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   }
 
   const className = getClassName()
+  const styles = useStyleSheet(themeStyles)
 
-  const Footer = () => (
-    <View style={styles.itemFooter}>
-      <Button
-        style={[styles.item, styles[newsStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.news'),
-          })
-        }
-        accessoryLeft={NewsIcon}
-      >
-        {`${(news || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[notificationsStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.notifications'),
-          })
-        }
-        accessoryLeft={NotificationsIcon}
-      >
-        {`${(notifications || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[calendarStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.calender'),
-          })
-        }
-        accessoryLeft={CalendarOutlineIcon}
-      >
-        {`${(calendar || []).length}`}
-      </Button>
-      <Button
-        style={[styles.item, styles[menuStatus]]}
-        status="control"
-        size="small"
-        onPress={() =>
-          navigation.navigate('Child', {
-            child,
-            color,
-            initialRouteName: translate('navigation.menu'),
-          })
-        }
-        accessoryLeft={MenuIcon}
-      />
-    </View>
-  )
+  const statusColors = {
+    loading: 'basic',
+    loaded: 'basic',
+    error: 'error',
+    pending: 'basic',
+  }
+
+  const buttonAppearance: string = 'ghost'
+
+  const Footer = () => {
+    return (
+      <View style={styles.itemFooter}>
+        <Button
+          style={styles.item}
+          size="small"
+          appearance={buttonAppearance}
+          status={statusColors[newsStatus]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.news'),
+            })
+          }
+          accessoryLeft={NewsIcon}
+        >
+          {`${(news || []).length}`}
+        </Button>
+        <Button
+          style={styles.item}
+          size="small"
+          appearance={buttonAppearance}
+          status={statusColors[notificationsStatus]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.notifications'),
+            })
+          }
+          accessoryLeft={NotificationsIcon}
+        >
+          {`${(notifications || []).length}`}
+        </Button>
+        <Button
+          style={styles.item}
+          size="small"
+          appearance={buttonAppearance}
+          status={statusColors[calendarStatus]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.calender'),
+            })
+          }
+          accessoryLeft={CalendarOutlineIcon}
+        >
+          {`${(calendar || []).length}`}
+        </Button>
+        <Button
+          style={styles.item}
+          size="small"
+          appearance={buttonAppearance}
+          status={statusColors[menuStatus]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: translate('navigation.menu'),
+            })
+          }
+          accessoryLeft={MenuIcon}
+        />
+      </View>
+    )
+  }
 
   return (
     <Card
@@ -204,13 +226,15 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       {scheduleAndCalendarThisWeek.length ||
       notificationsThisWeek.length ||
       newsThisWeek.length ? null : (
-        <Text category="p1">{translate('news.noNewNewsItemsThisWeek')}</Text>
+        <Text category="p1" style={styles.noNewNewsItemsText}>
+          {translate('news.noNewNewsItemsThisWeek')}
+        </Text>
       )}
       <View style={styles.itemFooterAbsence}>
         <Button
           size="small"
+          status="primary"
           onPress={() => navigation.navigate('Absence', { child })}
-          style={styles.button}
         >
           {translate('abscense.title')}
         </Button>
@@ -219,7 +243,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themeStyles = StyleService.create({
   card: {
     marginBottom: Sizing.t5,
   },
@@ -243,18 +267,7 @@ const styles = StyleSheet.create({
   item: {
     paddingHorizontal: 0,
   },
-  loaded: {
-    color: Colors.neutral.black,
-  },
-  loading: {
-    color: '#555',
-  },
-  error: {
-    color: '#500',
-  },
-  pending: {},
-  button: {
-    backgroundColor: Colors.primary.primary600,
-    borderColor: Colors.primary.primary600,
+  noNewNewsItemsText: {
+    color: 'color-basic-600',
   },
 })

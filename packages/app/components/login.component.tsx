@@ -5,7 +5,9 @@ import {
   Card,
   Input,
   Modal,
+  StyleService,
   Text,
+  useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
 import React, { useEffect, useState } from 'react'
@@ -13,14 +15,13 @@ import {
   Image,
   Linking,
   Platform,
-  StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
 import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
-import { Colors, Layout, Sizing } from '../styles'
+import { Layout, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import {
   CloseOutlineIcon,
@@ -145,9 +146,15 @@ export const Login = () => {
     }
   }
 
+  const styles = useStyleSheet(themedStyles)
+
   return (
     <>
-      <Image source={require('../assets/boys.png')} style={styles.image} />
+      <Image
+        source={require('../assets/boys.png')}
+        // @ts-expect-error Don't know why this occurs
+        style={styles.image}
+      />
       <View style={styles.loginForm}>
         {loginMethodIndex === 1 && (
           <Input
@@ -171,7 +178,7 @@ export const Login = () => {
         <ButtonGroup style={styles.loginButtonGroup}>
           <Button
             onPress={() => startLogin(socialSecurityNumber)}
-            style={[styles.button, styles.loginButton]}
+            style={styles.loginButton}
             appearance="ghost"
             disabled={loginMethodIndex === 1 && !valid}
             status="primary"
@@ -182,7 +189,7 @@ export const Login = () => {
           </Button>
           <Button
             onPress={selectLoginMethod}
-            style={[styles.button, styles.loginMethodButton]}
+            style={styles.loginMethodButton}
             appearance="ghost"
             status="primary"
             accessoryLeft={SelectIcon}
@@ -193,8 +200,8 @@ export const Login = () => {
       <Modal
         visible={visible}
         style={styles.modal}
-        backdropStyle={styles.modalBackdrop}
         onBackdropPress={() => showModal(false)}
+        backdropStyle={styles.backdrop}
       >
         <Card disabled>
           <Text style={styles.bankIdLoading}>
@@ -202,7 +209,7 @@ export const Login = () => {
           </Text>
 
           <Button
-            style={styles.button}
+            status="primary"
             onPress={() => {
               cancelLoginRequest()
               showModal(false)
@@ -216,10 +223,13 @@ export const Login = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   image: {
     ...Sizing.aspectRatio(0.9, Sizing.Ratio['4:3']),
     marginVertical: Sizing.t4,
+  },
+  backdrop: {
+    backgroundColor: 'color-basic-transparent-600',
   },
   loginForm: {
     ...Layout.mainAxis.flexStart,
@@ -231,17 +241,9 @@ const styles = StyleSheet.create({
     minHeight: 45,
   },
   loginButton: { ...Layout.flex.full },
-  loginButtonText: { color: Colors.neutral.white },
   loginMethodButton: { width: 45 },
   modal: {
     width: '80%',
   },
-  modalBackdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
   bankIdLoading: { margin: 10 },
-  button: {
-    backgroundColor: Colors.primary.primary600,
-    borderColor: Colors.primary.primary600,
-  },
 })

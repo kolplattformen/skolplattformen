@@ -1,14 +1,15 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList } from './navigation.component'
 import { NewsItem } from '@skolplattformen/embedded-api'
 import React, { ReactNode } from 'react'
 import moment from 'moment'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Colors, Layout, Sizing, Typography } from '../styles'
+import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
+import { RootStackParamList } from './navigation.component'
+import { StyleService, useStyleSheet } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
@@ -23,6 +24,7 @@ type NewsListItemNavigationProp = StackNavigationProp<
 const { width } = Dimensions.get('window')
 
 export const NewsListItem = ({ item, children }: NewsListItemProps) => {
+  const styles = useStyleSheet(themedStyles)
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
   const hasDate = item.published || item.modified
@@ -35,7 +37,11 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
     >
       <View style={styles.card}>
         {width > 320 && item.fullImageUrl ? (
-          <Image src={item.fullImageUrl} style={styles.image} />
+          <Image
+            src={item.fullImageUrl}
+            // @ts-expect-error Don't know why this linter breaks
+            style={styles.image}
+          />
         ) : null}
         <View style={styles.text}>
           <View>
@@ -55,16 +61,19 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
-    backgroundColor: Colors.neutral.white,
+
     borderRadius: 2,
-    borderColor: Colors.neutral.gray200,
+
     borderWidth: 1,
     padding: Sizing.t5,
     marginBottom: Sizing.t2,
+
+    backgroundColor: 'background-basic-color-1',
+    borderColor: 'border-basic-color-3',
   },
   text: {
     ...Layout.flex.full,
@@ -72,15 +81,17 @@ const styles = StyleSheet.create({
   title: {
     ...Typography.header,
     marginBottom: Sizing.t1,
+    color: 'text-basic-color',
   },
   subtitle: {
     ...Typography.fontSize.xs,
-    color: Colors.neutral.gray600,
+
     marginBottom: Sizing.t2,
+    color: 'text-hint-color',
   },
   intro: {
     ...Typography.fontSize.sm,
-    color: Colors.neutral.gray700,
+    color: 'text-basic-color',
   },
   image: {
     borderRadius: 3,

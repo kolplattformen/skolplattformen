@@ -1,17 +1,10 @@
 import { useApi } from '@skolplattformen/api-hooks'
-import { Text } from '@ui-kitten/components'
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import React, { useEffect, useState } from 'react'
-import {
-  Linking,
-  Modal,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { Linking, Modal, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
-import { WebViewNavigationEvent } from 'react-native-webview/lib/WebViewTypes'
-import { Colors, Layout, Sizing } from '../styles'
+import { Layout, Sizing } from '../styles'
 import { BackIcon, ExternalLinkIcon } from './icon.component'
 
 interface ModalWebViewProps {
@@ -19,7 +12,6 @@ interface ModalWebViewProps {
   sharedCookiesEnabled: boolean
   onClose: () => void
 }
-
 export const ModalWebView = ({
   url,
   onClose,
@@ -44,10 +36,11 @@ export const ModalWebView = ({
     setModalVisible(false)
     onClose()
   }
-
   const openInApp = () => {
     Linking.openURL(url)
   }
+
+  const styles = useStyleSheet(themedStyles)
 
   return (
     <Modal
@@ -60,7 +53,10 @@ export const ModalWebView = ({
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
             <TouchableOpacity onPress={closeModal}>
-              <BackIcon style={styles.backIcon} fill={Colors.neutral.gray800} />
+              <BackIcon
+                style={styles.backIcon}
+                fill={styles.backIcon.shadowColor}
+              />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
               {title}
@@ -68,17 +64,18 @@ export const ModalWebView = ({
             <TouchableOpacity onPress={openInApp}>
               <ExternalLinkIcon
                 style={styles.shareIcon}
-                fill={Colors.neutral.gray800}
+                fill={styles.shareIcon.shadowColor}
               />
             </TouchableOpacity>
           </View>
         </View>
         {(headers || sharedCookiesEnabled) && (
           <WebView
+            style={styles.webview}
             source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
             thirdPartyCookiesEnabled={sharedCookiesEnabled}
-            onLoad={(event: WebViewNavigationEvent) => {
+            onLoad={(event) => {
               setTitle(event.nativeEvent.title)
             }}
           />
@@ -88,17 +85,21 @@ export const ModalWebView = ({
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
-    ...Layout.flex.full,
+    flex: 1,
+    backgroundColor: 'background-basic-color-1',
   },
   headerWrapper: {
     marginTop: Sizing.t1,
-    backgroundColor: Colors.neutral.white,
     padding: Sizing.t1,
     borderRadius: 2,
-    borderColor: Colors.neutral.gray200,
+    borderColor: 'basic-color-200',
     borderBottomWidth: 1,
+    backgroundColor: 'background-basic-color-1',
+  },
+  backdrop: {
+    backgroundColor: 'color-basic-transparent-600',
   },
   headerText: {
     overflow: 'hidden',
@@ -110,15 +111,18 @@ const styles = StyleSheet.create({
     ...Layout.mainAxis.center,
     paddingHorizontal: Sizing.t3,
     paddingVertical: Sizing.t1,
-    backgroundColor: Colors.neutral.white,
+    backgroundColor: 'background-basic-color-1',
   },
   shareIcon: {
     width: 24,
     height: 24,
+    shadowColor: 'color-basic-600',
   },
   backIcon: {
     width: 24,
     height: 24,
     marginRight: Sizing.t4,
+    shadowColor: 'color-basic-600',
   },
+  webview: {},
 })

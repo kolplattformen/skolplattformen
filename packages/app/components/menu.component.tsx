@@ -4,7 +4,7 @@ import { List, Text } from '@ui-kitten/components'
 import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
-import { Colors, Sizing, Layout as LayoutStyle, Typography } from '../styles'
+import { Sizing, Layout as LayoutStyle, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
@@ -19,7 +19,7 @@ export const Menu = () => {
       data={data}
       ListEmptyComponent={
         <View style={styles.emptyState}>
-          <Text category="h6">{translate('menu.emptyHeadline')}</Text>
+          <Text category="h4">{translate('menu.emptyHeadline')}</Text>
           <Text style={styles.emptyStateDescription}>
             {translate('menu.emptyText')}
           </Text>
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   emptyState: {
     ...LayoutStyle.center,
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
     paddingHorizontal: Sizing.t5,
     paddingTop: 25,
   },

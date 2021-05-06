@@ -1,8 +1,8 @@
 import { Notification as NotificationType } from '@skolplattformen/embedded-api'
-import { Card, Text } from '@ui-kitten/components'
+import { Card, StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Colors, Layout, Sizing, Typography } from '../styles'
+import { View } from 'react-native'
+import { Layout, Sizing, Typography } from '../styles'
 import { ModalWebView } from './modalWebView.component'
 import moment from 'moment'
 
@@ -11,6 +11,7 @@ interface NotificationProps {
 }
 
 export const Notification = ({ item }: NotificationProps) => {
+  const styles = useStyleSheet(themedStyles)
   const [isOpen, setIsOpen] = React.useState(false)
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
@@ -52,21 +53,23 @@ export const Notification = ({ item }: NotificationProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
-    backgroundColor: Colors.neutral.white,
     borderRadius: 2,
-    borderColor: Colors.neutral.gray200,
+
     borderWidth: 1,
     marginBottom: Sizing.t2,
+
+    backgroundColor: 'background-basic-color-1',
+    borderColor: 'border-basic-color-3',
   },
   title: {
     ...Typography.header,
     marginBottom: Sizing.t1,
   },
   subtitle: {
-    color: Colors.neutral.gray600,
     ...Typography.fontSize.xs,
+    color: 'text-hint-color',
   },
 })
