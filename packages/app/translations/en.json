@@ -64,7 +64,7 @@
         "viewStatus": "View status on skolplattformen.org"
     },
     "general": {
-        "abort": "Abort",
+        "abort": "Cancel",
         "changeLanguage": "Change language",
         "confirm": "Confirm",
         "loading": "Loading…",
