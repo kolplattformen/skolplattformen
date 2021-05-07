@@ -16,7 +16,7 @@ import { TimetableEntry, Child, MenuItem } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
 import { translate } from '../utils/translation'
 import { TransitionView } from './transitionView.component'
-import { Typography } from '../styles'
+import { Typography, Sizing } from '../styles'
 
 interface WeekProps {
   child: Child
@@ -57,10 +57,10 @@ const LessonList = ({ lessons, header }: LessonListProps) => {
             </Text>
           )}
           description={() => (
-            <Text maxFontSizeMultiplier={1}>{`${timeStart.slice(
-              0,
-              5
-            )}-${timeEnd.slice(0, 5)} ${
+            <Text
+              style={styles.lessonDescription}
+              maxFontSizeMultiplier={1}
+            >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
               location ? `(${location})` : ''
             } ${teacher}`}</Text>
           )}
@@ -147,10 +147,7 @@ export const Week = ({ child }: WeekProps) => {
           onSelect={(index) => setSelectedIndex(index)}
         >
           {days.map((weekDay) => (
-            <Tab
-              key={weekDay}
-              title={() => <Text maxFontSizeMultiplier={1.5}>{weekDay}</Text>}
-            />
+            <Tab key={weekDay} title={weekDay} />
           ))}
         </TabBar>
 
@@ -193,6 +190,8 @@ const themedStyles = StyleService.create({
     paddingHorizontal: 0,
     borderRadius: 2,
     margin: 2,
+    paddingLeft: Sizing.t2,
+    paddingRight: Sizing.t2,
     width: '90%',
   },
   time: {
@@ -227,6 +226,10 @@ const themedStyles = StyleService.create({
     paddingLeft: 8,
   },
   lessonTitle: {
-    ...Typography.fontWeight.bold,
+    ...Typography.fontWeight.semibold,
+    fontSize: 13,
+  },
+  lessonDescription: {
+    fontSize: 13,
   },
 })
