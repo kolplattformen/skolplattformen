@@ -144,6 +144,7 @@ const Absence = () => {
                       {translate('general.socialSecurityNumber')}
                     </Text>
                     <Input
+                      testID="socialSecurityNumberInput"
                       accessibilityLabel={translate(
                         'general.socialSecurityNumber'
                       )}

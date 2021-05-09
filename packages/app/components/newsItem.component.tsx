@@ -44,6 +44,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
 
   const BackAction = () => (
     <TopNavigationAction
+      testID="topNavBackToChild"
       accessibilityLabel={translate('news.backToChild')}
       icon={BackIcon}
       onPress={navigateBack}

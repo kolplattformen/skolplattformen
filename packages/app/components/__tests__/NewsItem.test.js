@@ -93,7 +93,7 @@ test('renders an article without modified date if date is invalid', () => {
 test('handles navigating back to child view', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Tillbaka till barn'))
+  fireEvent.press(screen.getByTestId('topNavBackToChild'))
 
   expect(navigation.goBack).toHaveBeenCalled()
 })

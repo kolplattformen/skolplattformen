@@ -47,7 +47,10 @@ test('can fill out the form with full day absence', async () => {
   const screen = setup()
 
   await waitFor(() =>
-    fireEvent.changeText(screen.getByA11yLabel('Personnummer'), '1212121212')
+    fireEvent.changeText(
+      screen.getByTestId('socialSecurityNumberInput'),
+      '1212121212'
+    )
   )
   await waitFor(() => fireEvent.press(screen.getByText('Skicka')))
 
@@ -71,7 +74,10 @@ test('validates social security number', async () => {
   const screen = setup()
 
   await waitFor(() =>
-    fireEvent.changeText(screen.getByA11yLabel('Personnummer'), '12121212')
+    fireEvent.changeText(
+      screen.getByTestId('socialSecurityNumberInput'),
+      '12121212'
+    )
   )
   await waitFor(() => fireEvent.press(screen.getByText('Skicka')))
 
@@ -85,7 +91,10 @@ test('can fill out the form with part of day absence', async () => {
   const screen = setup()
 
   await waitFor(() =>
-    fireEvent.changeText(screen.getByA11yLabel('Personnummer'), '1212121212')
+    fireEvent.changeText(
+      screen.getByTestId('socialSecurityNumberInput'),
+      '1212121212'
+    )
   )
   await waitFor(() => fireEvent.press(screen.getByText('Heldag')))
 
