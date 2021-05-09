@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useNews } from '@skolplattformen/api-hooks'
 import { List, Input } from '@ui-kitten/components'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { Sizing } from '../styles'
 import { useChild } from './childContext.component'
 import { NewsListItem } from './newsListItem.component'
@@ -10,7 +10,7 @@ import {
   useNewsListSearchResults,
   renderSearchResultPreview,
 } from '../utils/search'
-import { SearchIcon } from './icon.component'
+import { SearchIcon, CloseOutlineIcon } from './icon.component'
 
 export const NewsList = () => {
   const child = useChild()
@@ -33,6 +33,11 @@ export const NewsList = () => {
         accessoryLeft={SearchIcon}
         onChangeText={setSearchQuery}
         value={searchQuery}
+        accessoryRight={(props) => (
+          <TouchableWithoutFeedback onPress={() => setSearchQuery('')}>
+            <CloseOutlineIcon {...props} />
+          </TouchableWithoutFeedback>
+        )}
       />
     ),
     [searchQuery]
