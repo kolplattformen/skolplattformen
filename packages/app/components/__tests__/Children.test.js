@@ -12,6 +12,7 @@ import React from 'react'
 import { Children } from '../children.component'
 import { useNavigation } from '@react-navigation/native'
 import * as RNLocalize from 'react-native-localize'
+import { translate } from '../../utils/translation'
 
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('@react-navigation/native')
@@ -45,7 +46,7 @@ test('renders loading state', () => {
 
   const screen = setup()
 
-  expect(screen.getByText(/laddar/i)).toBeTruthy()
+  expect(screen.getByText(translate('general.loading'))).toBeTruthy()
 })
 
 test('renders empty state message', () => {
@@ -57,9 +58,7 @@ test('renders empty state message', () => {
   const screen = setup()
 
   expect(
-    screen.getByText(
-      'Det finns inga barn registrerade för ditt personnummer i Stockholms stad'
-    )
+    screen.getByText(translate('children.noKids_description'))
   ).toBeTruthy()
 })
 
@@ -71,7 +70,9 @@ test('renders error state message', () => {
 
   const screen = setup()
 
-  expect(screen.getByText('Hoppsan!')).toBeTruthy()
+  expect(
+    screen.getByText(translate('children.loadingErrorHeading'))
+  ).toBeTruthy()
 })
 
 test('renders child in preschool', () => {
@@ -120,7 +121,9 @@ test('renders child in high school', () => {
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
+  expect(
+    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+  ).toBeTruthy()
 })
 
 test('renders multiple children', () => {
@@ -141,10 +144,14 @@ test('renders multiple children', () => {
   const screen = setup()
 
   expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasieskola')).toBeTruthy()
+  expect(
+    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+  ).toBeTruthy()
 
   expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
-  expect(screen.getByText('Grundskola')).toBeTruthy()
+  expect(
+    screen.getByText(translate('abbrevations.compulsorySchool'))
+  ).toBeTruthy()
 })
 
 test('removes any parenthesis from name', () => {
@@ -176,8 +183,14 @@ test('handles multiple statuses for a child', () => {
 
   const screen = setup()
 
+  var multipleStatusesRendered = `${translate(
+    'abbrevations.upperSecondarySchool'
+  )}, ${translate('abbrevations.compulsorySchool')}, ${translate(
+    'abbrevations.leisureTimeCentre'
+  )}`
+
   expect(screen.getByText('Test Testsson')).toBeTruthy()
-  expect(screen.getByText('Gymnasieskola, Grundskola, Fritids')).toBeTruthy()
+  expect(screen.getByText(multipleStatusesRendered)).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {
@@ -192,5 +205,7 @@ test('says if there is nothing new this week', () => {
   }))
   const screen = setup()
 
-  expect(screen.getByText('Inga nya inlägg denna vecka.')).toBeTruthy()
+  expect(
+    screen.getByText(translate('news.noNewNewsItemsThisWeek'))
+  ).toBeTruthy()
 })
