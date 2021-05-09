@@ -7,7 +7,6 @@
         "logout": "Uitloggen",
         "confirm": "Bevestigen",
         "changeLanguage": "Taal wijzigen",
-        "abort": "Annuleren",
         "socialSecurityNumber": "Burgerservicenummer"
     },
     "auth": {

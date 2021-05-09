@@ -6,7 +6,7 @@
         "bankid": {
             "Waiting": "Pro BankID exspectans…",
             "OpenOnThisDevice": "In hac machina BankID aperire",
-            "OpenOnAnotherDevice": "In machina differente BankID aperire",
+            "OpenOnAnotherDevice": "In machina differenti BankID aperire",
             "OpenManually": "Manu BankID aperire"
         },
         "words": {
@@ -26,7 +26,7 @@
             "fantastic": "mirificus",
             "enlightened": "illuminatus",
             "first": "primus",
-            "homemade": "Domi factus"
+            "homemade": "domi factus"
         },
         "subtitle": "Optio {{word}}",
         "loginAsTestUser": "In parte investigatoris nomen dare"
@@ -49,12 +49,12 @@
     },
     "children": {
         "loadingErrorHeading": "Eheu!",
-        "loadingErrorInformationText": "Hanc paginam non carricari potest. Aut denuo conare, aut statum actualem in skolplattformen.org vide.",
+        "loadingErrorInformationText": "Haec pagina non carricari potest. Aut denuo conare, aut statum actualem in skolplattformen.org vide.",
         "viewStatus": "Statum in skolplattformen.org videre",
         "tryAgain": "Denuo conare",
         "title": "Filii tui",
         "noKids_title": "Nulli filii",
-        "noKids_description": "Nulli filii pro numero personali tuo in Urbe Stockholmiae sunt"
+        "noKids_description": "Nulli filii pro numero personali tuo in Urbe Stockholmiae censi sunt"
     },
     "calender": {
         "showCalenderActions": "Actiones calendarii exhibere",
@@ -68,7 +68,7 @@
         "emptyHeadline": "Charta vacua videtur"
     },
     "news": {
-        "noNewNewsItemsThisWeek": "Nulli novi nuncii hac septimana.",
+        "noNewNewsItemsThisWeek": "Hac septimana nulli novi nuncii.",
         "updated": "Ad diurnum missus",
         "title": "Nuntii ex Skolplattformen",
         "published": "Divulgatus",
@@ -99,8 +99,7 @@
         "logout": "Secedere",
         "loading": "Carricans…",
         "confirm": "Confirmare",
-        "changeLanguage": "Linguam permutare",
-        "abort": "Rescindere"
+        "changeLanguage": "Linguam permutare"
     },
     "schedule": {
         "start": "Exordium",

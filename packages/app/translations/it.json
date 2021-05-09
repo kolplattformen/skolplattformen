@@ -9,7 +9,6 @@
         "backToChild": "Ritorna a figlio"
     },
     "general": {
-        "abort": "Interrompere",
         "title": "Öppna skolplattformen",
         "socialSecurityNumber": "Personnummer svedese",
         "settings": "Impostazioni",
@@ -87,7 +86,7 @@
         "entireDay": "Giorno intero",
         "endTime": "Fine",
         "selectAbscenseEndTime": "Fine a",
-        "selectAbscenseStartTime": "Inizio a",
+        "selectAbscenseStartTime": "Inizio da",
         "startTime": "Inizio",
         "personalNumberMissing": "Codice Fiscale mancante",
         "invalidPersonalNumber": "Codice Fiscale non valido"

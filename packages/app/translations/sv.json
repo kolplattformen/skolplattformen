@@ -52,7 +52,7 @@
         "saveToCalender": "Spara till kalender",
         "saveToCalenderError": "Något gick fel",
         "saveToCalenderSuccess": "✔️ Sparad till kalender",
-        "showCalenderActions": "Visa kalenderactions"
+        "showCalenderActions": "Visa kalenderfunktioner"
     },
     "children": {
         "loadingErrorHeading": "Hoppsan!",
@@ -64,7 +64,6 @@
         "viewStatus": "Se status på skolplattformen.org"
     },
     "general": {
-        "abort": "Avbryt",
         "changeLanguage": "Byt språk",
         "confirm": "Bekräfta",
         "loading": "Laddar…",
@@ -72,7 +71,8 @@
         "send": "Skicka",
         "settings": "Inställningar",
         "socialSecurityNumber": "Personnummer",
-        "title": "Öppna skolplattformen"
+        "title": "Öppna skolplattformen",
+        "cancel": "Avbryt"
     },
     "language": {
         "changeLanguage": "Byt språk",

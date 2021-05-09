@@ -20,7 +20,7 @@
             "OpenManually": "Open BankID manually",
             "OpenOnAnotherDevice": "Open BankID on another device",
             "OpenOnThisDevice": "Open BankID on this device",
-            "Waiting": "Awaiting BankID…"
+            "Waiting": "Waiting for BankID…"
         },
         "chooseLoginMethod": "Choose login method",
         "loginAsTestUser": "Log in as a test user",
@@ -48,11 +48,11 @@
         }
     },
     "calender": {
-        "approveAccessToCalender": "You have to approve access to your calender",
+        "approveAccessToCalender": "You have to approve access to your calendar",
         "saveToCalender": "Save in calendar",
         "saveToCalenderError": "Something went wrong",
         "saveToCalenderSuccess": "✔️ Saved in calendar",
-        "showCalenderActions": "Show calender actions"
+        "showCalenderActions": "Show calendar actions"
     },
     "children": {
         "loadingErrorHeading": "Oops!",

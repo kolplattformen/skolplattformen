@@ -8,7 +8,7 @@
         "logout": "Se déconnecter",
         "confirm": "Confirmer",
         "changeLanguage": "Changer de langue",
-        "abort": "Avorter"
+        "cancel": "Annuler"
     },
     "calender": {
         "saveToCalenderError": "Un problème est survenu",
