@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/kolplattformen/skolplattformen/compare/v1.30.0...v1.30.1) (2021-05-09)
+
+
+### Bug Fixes
+
+* 🐛 Patch fast-fuzzy to remove warning ([45210e1](https://github.com/kolplattformen/skolplattformen/commit/45210e15c63b56117c6da6eb3dca1d9187c4da02))
+
 # [1.30.0](https://github.com/kolplattformen/skolplattformen/compare/v1.29.0...v1.30.0) (2021-05-09)
 
 
