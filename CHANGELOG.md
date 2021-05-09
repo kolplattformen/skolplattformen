@@ -1,3 +1,15 @@
+# [1.29.0](https://github.com/kolplattformen/skolplattformen/compare/v1.28.1...v1.29.0) (2021-05-09)
+
+
+### Bug Fixes
+
+* 🐛 formattering av schema som försvann är tillbaka ([#371](https://github.com/kolplattformen/skolplattformen/issues/371)) ([fbc8514](https://github.com/kolplattformen/skolplattformen/commit/fbc85140521f23e47a57fe33789815d8c268708d))
+
+
+### Features
+
+* 🎸 Replace abort with cancel ([134e904](https://github.com/kolplattformen/skolplattformen/commit/134e904d86b0295614a4fd452355276b412d4e65))
+
 ## [1.28.1](https://github.com/kolplattformen/skolplattformen/compare/v1.28.0...v1.28.1) (2021-05-06)
 
 
