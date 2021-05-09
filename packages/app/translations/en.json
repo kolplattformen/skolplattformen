@@ -20,7 +20,7 @@
             "OpenManually": "Open BankID manually",
             "OpenOnAnotherDevice": "Open BankID on another device",
             "OpenOnThisDevice": "Open BankID on this device",
-            "Waiting": "Awaiting BankID…"
+            "Waiting": "Waiting for BankID…"
         },
         "chooseLoginMethod": "Choose login method",
         "loginAsTestUser": "Log in as a test user",
