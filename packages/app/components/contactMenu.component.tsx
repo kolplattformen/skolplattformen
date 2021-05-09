@@ -31,6 +31,7 @@ export const ContactMenu = ({
 
   const renderToggleButton = () => (
     <Button
+      testID="ShowContactInfoButton"
       accessibilityLabel="Visa kontaktinformation"
       onPress={() => setVisible(true)}
       appearance="ghost"
@@ -62,6 +63,7 @@ export const ContactMenu = ({
             style={styles.group}
           >
             <MenuItem
+              testID="CallMenuItem"
               accessibilityLabel="Ring"
               accessoryLeft={CallIcon}
               style={{ display: shouldDisplay(mobile) }}
@@ -69,6 +71,7 @@ export const ContactMenu = ({
               onPress={() => Linking.openURL(`tel:${mobile}`)}
             />
             <MenuItem
+              testID="SMSMenuItem"
               accessibilityLabel="SMS"
               accessoryLeft={SMSIcon}
               style={{ display: shouldDisplay(mobile) }}
@@ -76,6 +79,7 @@ export const ContactMenu = ({
               onPress={() => Linking.openURL(`sms:${mobile}`)}
             />
             <MenuItem
+              testID="SendEmailMenuItem"
               accessibilityLabel="Maila"
               accessoryLeft={EmailIcon}
               style={{ display: shouldDisplay(email) }}
@@ -83,6 +87,7 @@ export const ContactMenu = ({
               onPress={() => Linking.openURL(`mailto:${email}`)}
             />
             <MenuItem
+              testID="ShowHomeMenuItem"
               accessibilityLabel="Hem"
               accessoryLeft={MapIcon}
               style={{ display: shouldDisplay(address) }}

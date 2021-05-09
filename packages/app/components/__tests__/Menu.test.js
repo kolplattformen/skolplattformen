@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { Menu } from '../menu.component'
 import { useMenu } from '@skolplattformen/api-hooks'
+import { translate } from '../../utils/translation'
 
 jest.mock('@skolplattformen/api-hooks')
 
@@ -45,5 +46,5 @@ test('renders title and description', () => {
 
 test('renders empty menu', () => {
   const screen = setup([])
-  expect(screen.getByText('Det ser lite tomt ut i matsedeln')).toBeTruthy()
+  expect(screen.getByText(translate('menu.emptyText'))).toBeTruthy()
 })

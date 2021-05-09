@@ -52,7 +52,7 @@ beforeEach(jest.clearAllMocks)
 test('renders a parent', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
   expect(screen.getByText(/adam adamsson/i)).toBeTruthy()
 })
@@ -60,7 +60,7 @@ test('renders a parent', () => {
 test('displays option to call and text guardian', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
   fireEvent.press(screen.getByText(/ring/i))
   expect(Linking.openURL).toHaveBeenCalledWith('tel:0701234567')
@@ -83,16 +83,16 @@ test('hides options to call and text if no phone number', () => {
 
   const screen = setup(guardianWithoutPhoneNumber)
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByA11yLabel(/ring/i)).toHaveStyle({ display: 'none' })
-  expect(screen.getByA11yLabel(/sms/i)).toHaveStyle({ display: 'none' })
+  expect(screen.getByTestId('CallMenuItem')).toHaveStyle({ display: 'none' })
+  expect(screen.getByTestId('SMSMenuItem')).toHaveStyle({ display: 'none' })
 })
 
 test('displays option to email guardian', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
   fireEvent.press(screen.getByText(/maila/i))
   expect(Linking.openURL).toHaveBeenCalledWith('mailto:adam@adamsson.se')
@@ -112,15 +112,17 @@ test('hides options to email phone number', () => {
 
   const screen = setup(guardianWithoutEmail)
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByA11yLabel(/maila/i)).toHaveStyle({ display: 'none' })
+  expect(screen.getByTestId('SendEmailMenuItem')).toHaveStyle({
+    display: 'none',
+  })
 })
 
 test('displays address of guardian', () => {
   const screen = setup()
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
   fireEvent.press(screen.getByText(/hem/i))
   expect(Linking.openURL).toHaveBeenCalledWith(
@@ -142,7 +144,9 @@ test('hides address if it does not exist', () => {
 
   const screen = setup(guardianWithoutAddress)
 
-  fireEvent.press(screen.getByA11yLabel('Visa kontaktinformation'))
+  fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByA11yLabel(/hem/i)).toHaveStyle({ display: 'none' })
+  expect(screen.getByTestId('ShowHomeMenuItem')).toHaveStyle({
+    display: 'none',
+  })
 })
