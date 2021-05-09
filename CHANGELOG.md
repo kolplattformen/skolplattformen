@@ -1,3 +1,16 @@
+# [1.30.0](https://github.com/kolplattformen/skolplattformen/compare/v1.29.0...v1.30.0) (2021-05-09)
+
+
+### Bug Fixes
+
+* 🐛 Update to React-native 0.64.1 to make build work on xCode 4.5 ([#372](https://github.com/kolplattformen/skolplattformen/issues/372)) ([bbe268f](https://github.com/kolplattformen/skolplattformen/commit/bbe268f2c25ea31bf928f847c792997c5ca61854))
+
+
+### Features
+
+* 🎸 Add testId to find components in tests ([8636779](https://github.com/kolplattformen/skolplattformen/commit/8636779e3cf2ab63f47fef371ae43363c732e87f))
+* 🎸 Change to translated texts in tests ([29273b8](https://github.com/kolplattformen/skolplattformen/commit/29273b8566be0d74e1cf1bcfd91b9ab4911c7255))
+
 # [1.29.0](https://github.com/kolplattformen/skolplattformen/compare/v1.28.1...v1.29.0) (2021-05-09)
 
 
