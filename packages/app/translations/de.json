@@ -71,7 +71,8 @@
         "send": "Senden",
         "settings": "Einstellungen",
         "socialSecurityNumber": "Personenkennziffer",
-        "title": "Offene Skolplattformen"
+        "title": "Offene Skolplattformen",
+        "cancel": "Abbrechen"
     },
     "language": {
         "changeLanguage": "Sprache ändern",
