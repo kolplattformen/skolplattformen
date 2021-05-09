@@ -12,7 +12,6 @@ target 'app' do
     :hermes_enabled => true
   )
 
-
   target 'appTests' do
     inherit! :complete
     # Pods for testing
@@ -23,6 +22,10 @@ target 'app' do
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
   use_flipper!()
+
+  post_install do |installer|
+    react_native_post_install(installer)
+  end
 end
 
 target 'app-tvOS' do
