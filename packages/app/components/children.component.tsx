@@ -33,7 +33,7 @@ const colors = ['primary', 'success', 'info', 'warning', 'danger']
 export const Children = () => {
   const settingsOptions = [
     translate('general.logout'),
-    translate('general.abort'),
+    translate('general.cancel'),
   ]
   const theme = useTheme()
 

@@ -186,7 +186,7 @@ const Absence = () => {
                           {moment(values.startTime).format('LT')}
                         </Button>
                         <DateTimePickerModal
-                          cancelTextIOS={translate('general.abort')}
+                          cancelTextIOS={translate('general.cancel')}
                           confirmTextIOS={translate('general.confirm')}
                           date={moment(values.startTime).toDate()}
                           isVisible={values.displayStartTimePicker}
@@ -221,7 +221,7 @@ const Absence = () => {
                           {moment(values.endTime).format('LT')}
                         </Button>
                         <DateTimePickerModal
-                          cancelTextIOS={translate('general.abort')}
+                          cancelTextIOS={translate('general.cancel')}
                           confirmTextIOS={translate('general.confirm')}
                           date={moment(values.endTime).toDate()}
                           isVisible={values.displayEndTimePicker}

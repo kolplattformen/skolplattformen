@@ -215,7 +215,7 @@ export const Login = () => {
               showModal(false)
             }}
           >
-            {translate('general.abort')}
+            {translate('general.cancel')}
           </Button>
         </Card>
       </Modal>
