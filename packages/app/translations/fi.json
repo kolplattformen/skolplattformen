@@ -64,8 +64,7 @@
         "logout": "Kirjaudu ulos",
         "loading": "Ladataan…",
         "confirm": "Hyväksy",
-        "changeLanguage": "Vaihda kieltä",
-        "abort": "Keskeytä"
+        "changeLanguage": "Vaihda kieltä"
     },
     "children": {
         "viewStatus": "Näytä tila osoitteessa skolplattformen.org",

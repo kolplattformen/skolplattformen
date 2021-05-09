@@ -99,8 +99,7 @@
         "logout": "Secedere",
         "loading": "Carricans…",
         "confirm": "Confirmare",
-        "changeLanguage": "Linguam permutare",
-        "abort": "Rescindere"
+        "changeLanguage": "Linguam permutare"
     },
     "schedule": {
         "start": "Exordium",
