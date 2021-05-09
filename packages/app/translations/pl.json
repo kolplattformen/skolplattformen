@@ -71,7 +71,8 @@
         "send": "Wyślij",
         "settings": "Ustawienia",
         "socialSecurityNumber": "Personnummer",
-        "title": "Öppna skolplattformen"
+        "title": "Öppna skolplattformen",
+        "cancel": "Anuluj"
     },
     "language": {
         "changeLanguage": "Zmień język",
