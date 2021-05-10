@@ -22,6 +22,11 @@ export const Calendar = () => {
   const { data } = useCalendar(child)
   const styles = useStyleSheet(themedStyles)
 
+  const formatStartDate = (startDate: moment.MomentInput) => {
+    const date = moment(startDate)
+    return `${date.format('dddd')} ${date.format('ll')} • ${date.fromNow()}`
+  }
+
   return (
     <View style={styles.container}>
       <Week child={child} />
@@ -39,9 +44,7 @@ export const Calendar = () => {
               title={`${item.title}`}
               description={(props) => (
                 <Text style={[props?.style, styles.description]}>
-                  {`${moment(item.startDate).format('dddd')} ${moment(
-                    item.startDate
-                  ).format('ll')} (${moment(item.startDate).fromNow()})`}
+                  {formatStartDate(item.startDate)}
                 </Text>
               )}
               accessoryLeft={CalendarOutlineIcon}
