@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/kolplattformen/skolplattformen/compare/v1.31.0...v1.32.0) (2021-05-10)
+
+
+### Features
+
+* 🎸 Format calendar dates with weekday ([3923bf1](https://github.com/kolplattformen/skolplattformen/commit/3923bf11c41d06dca33c5aaf76cfafd51729c80e))
+
 # [1.31.0](https://github.com/kolplattformen/skolplattformen/compare/v1.30.1...v1.31.0) (2021-05-10)
 
 
