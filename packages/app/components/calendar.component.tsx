@@ -56,7 +56,7 @@ export const Calendar = () => {
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
     height: '100%',
     width: '100%',
   },
