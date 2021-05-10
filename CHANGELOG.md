@@ -1,3 +1,15 @@
+# [1.31.0](https://github.com/kolplattformen/skolplattformen/compare/v1.30.1...v1.31.0) (2021-05-10)
+
+
+### Bug Fixes
+
+* 🐛 Fixes background color issue when calender items is empt ([9f96431](https://github.com/kolplattformen/skolplattformen/commit/9f964316810f33761beea97e96671b3d8d914bdd))
+
+
+### Features
+
+* 🎸 Add clear icon to search input ([6f87887](https://github.com/kolplattformen/skolplattformen/commit/6f87887fcd4c726ac7e9697d9087d1036935455c))
+
 ## [1.30.1](https://github.com/kolplattformen/skolplattformen/compare/v1.30.0...v1.30.1) (2021-05-09)
 
 
