@@ -1,5 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
@@ -24,6 +22,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import ActionSheet from 'rn-actionsheet-module'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { clearCache } from '../utils/cache'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
@@ -66,7 +65,7 @@ export const Children = () => {
 
   const logout = () => {
     api.logout()
-    AsyncStorage.clear()
+    clearCache()
   }
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
