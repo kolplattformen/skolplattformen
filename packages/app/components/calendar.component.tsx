@@ -39,9 +39,9 @@ export const Calendar = () => {
               title={`${item.title}`}
               description={(props) => (
                 <Text style={[props?.style, styles.description]}>
-                  {`${moment(item.startDate).format('YYYY-MM-DD')} (${moment(
+                  {`${moment(item.startDate).format('dddd')} ${moment(
                     item.startDate
-                  ).fromNow()})`}
+                  ).format('ll')} (${moment(item.startDate).fromNow()})`}
                 </Text>
               )}
               accessoryLeft={CalendarOutlineIcon}
