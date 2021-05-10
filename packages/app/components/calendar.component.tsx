@@ -48,7 +48,6 @@ export const Calendar = () => {
               accessoryRight={() => <SaveToCalendar event={item} />}
             />
           )}
-          style={styles.container}
         />
       )}
     </View>
