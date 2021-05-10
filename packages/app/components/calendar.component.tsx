@@ -24,7 +24,13 @@ export const Calendar = () => {
 
   const formatStartDate = (startDate: moment.MomentInput) => {
     const date = moment(startDate)
-    return `${date.format('dddd')} ${date.format('ll')} • ${date.fromNow()}`
+    const output = `${date.format('dddd')} ${date.format(
+      'll'
+    )} • ${date.fromNow()}`
+
+    // Hack to remove yarn if it is this year
+    const currentYear = moment().year().toString(10)
+    return output.replace(currentYear, '')
   }
 
   return (
