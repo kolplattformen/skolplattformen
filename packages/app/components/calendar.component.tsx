@@ -22,43 +22,41 @@ export const Calendar = () => {
   const { data } = useCalendar(child)
   const styles = useStyleSheet(themedStyles)
 
-  return !data?.length ? (
-    <View>
+  return (
+    <View style={styles.container}>
       <Week child={child} />
-    </View>
-  ) : (
-    <View>
-      <Week child={child} />
-      <List
-        data={data.sort((a, b) =>
-          a.startDate && b.startDate
-            ? a.startDate.localeCompare(b.startDate)
-            : 0
-        )}
-        ItemSeparatorComponent={Divider}
-        renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
-          <ListItem
-            disabled={true}
-            title={`${item.title}`}
-            description={(props) => (
-              <Text style={[props?.style, styles.description]}>
-                {`${moment(item.startDate).format('dddd')} ${moment(
-                  item.startDate
-                ).format('ll')} (${moment(item.startDate).fromNow()})`}
-              </Text>
-            )}
-            accessoryLeft={CalendarOutlineIcon}
-            accessoryRight={() => <SaveToCalendar event={item} />}
-          />
-        )}
-        style={styles.container}
-      />
+      {data && data.length > 0 && (
+        <List
+          data={data.sort((a, b) =>
+            a.startDate && b.startDate
+              ? a.startDate.localeCompare(b.startDate)
+              : 0
+          )}
+          ItemSeparatorComponent={Divider}
+          renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
+            <ListItem
+              disabled={true}
+              title={`${item.title}`}
+              description={(props) => (
+                <Text style={[props?.style, styles.description]}>
+                  {`${moment(item.startDate).format('dddd')} ${moment(
+                    item.startDate
+                  ).format('ll')} (${moment(item.startDate).fromNow()})`}
+                </Text>
+              )}
+              accessoryLeft={CalendarOutlineIcon}
+              accessoryRight={() => <SaveToCalendar event={item} />}
+            />
+          )}
+        />
+      )}
     </View>
   )
 }
 
 const themedStyles = StyleService.create({
   container: {
+    backgroundColor: 'background-basic-color-2',
     height: '100%',
     width: '100%',
   },
