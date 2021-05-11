@@ -3,6 +3,7 @@ import React from 'react'
 
 const uiIcon = (name: string) => (props: any) => <Icon {...props} name={name} />
 
+export const AlertIcon = uiIcon('alert-circle-outline')
 export const BackIcon = uiIcon('arrow-back')
 export const CalendarOutlineIcon = uiIcon('calendar-outline')
 export const CallIcon = uiIcon('phone-outline')

@@ -25,7 +25,7 @@ import { SafeAreaView } from '../ui/safeAreaView.component'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
-import { BackIcon } from './icon.component'
+import { BackIcon, AlertIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 
@@ -40,6 +40,8 @@ interface AbsenceFormValues {
   startTime: moment.Moment
   endTime: moment.Moment
 }
+
+const Alert = (props: any) => <AlertIcon {...props} />
 
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
@@ -155,6 +157,9 @@ const Absence = () => {
                         hasError('socialSecurityNumber') ? 'danger' : 'basic'
                       }
                       value={values.socialSecurityNumber}
+                      accessoryRight={
+                        errors.socialSecurityNumber ? Alert : undefined
+                      }
                     />
                     {hasError('socialSecurityNumber') && (
                       <Text style={styles.error}>
