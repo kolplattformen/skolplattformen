@@ -8,7 +8,6 @@ import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
 
 jest.mock('@react-navigation/native')
-jest.mock('@react-native-async-storage/async-storage')
 jest.mock('../../utils/SMS')
 
 let sendSMS
