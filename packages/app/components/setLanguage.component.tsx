@@ -13,57 +13,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing } from '../styles'
-import { translate } from '../utils/translation'
+import { translate, languages } from '../utils/translation'
 import { BackIcon } from './icon.component'
 import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
 import RNRestart from 'react-native-restart'
 import { SafeAreaView } from '../ui/safeAreaView.component'
-
-interface Language {
-  langCode: string
-  languageName: string
-  languageLocalName: string
-  active: boolean
-}
-
-const languages: Language[] = [
-  {
-    langCode: 'sv',
-    languageName: 'Swedish',
-    languageLocalName: 'svenska',
-    active: true,
-  },
-  {
-    langCode: 'en',
-    languageName: 'English',
-    languageLocalName: 'english',
-    active: true,
-  },
-  {
-    langCode: 'pl',
-    languageName: 'Polish',
-    languageLocalName: 'polski',
-    active: true,
-  },
-  {
-    langCode: 'de',
-    languageName: 'German',
-    languageLocalName: 'Deutsch',
-    active: true,
-  },
-  {
-    langCode: 'ar',
-    languageName: 'Arabic',
-    languageLocalName: 'اَلْعَرَبِيَّةُ',
-    active: false,
-  },
-  {
-    langCode: 'so',
-    languageName: 'Somali',
-    languageLocalName: 'af-Soomaali',
-    active: false,
-  },
-]
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
