@@ -3,8 +3,9 @@ import * as RNLocalize from 'react-native-localize'
 import { LoadingComponent } from '../../components/loading.component'
 
 import { LanguageService } from '../../services/languageService'
-import { LanguageStorage } from '../../services/languageStorage'
 import { translations } from '../../utils/translation'
+
+import AppStorage from '../../services/appStorage'
 
 interface LanguageContextProps {
   Strings: Record<string, any>
@@ -67,7 +68,7 @@ export const LanguageProvider: React.FC<Props> = ({
           setLanguageCode(langCode)
           setStrings(data[langCode])
           if (cache) {
-            LanguageStorage.save(langCode)
+            AppStorage.setSetting('langCode', langCode)
           }
         }
       }
@@ -77,7 +78,7 @@ export const LanguageProvider: React.FC<Props> = ({
       // Saved language
       if (cache) {
         // Get cached lang
-        const cachedLang = await LanguageStorage.get()
+        const cachedLang = await AppStorage.getSetting<string>('langCode')
 
         // Try to find best suited language
         const { languageTag } =

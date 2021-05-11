@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AppStorage from '../services/appStorage'
 import { useNavigation } from '@react-navigation/core'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
@@ -50,24 +50,34 @@ export const Children = () => {
   }
 
   const logout = useCallback(() => {
-    api.logout()
-    AsyncStorage.clear()
+    AppStorage.clearTemporaryItems().then(() => api.logout())
+  }, [api])
+
+  const logoutAndClearAll = useCallback(() => {
+    AppStorage.clearTemporaryItems()
+      .then(() => AppStorage.clearAllSettings())
+      .then(() => api.logout())
   }, [api])
 
   const settingsOptions = useMemo(() => {
-    return [translate('general.logout'), translate('general.cancel')]
+    return [
+      translate('general.logout'),
+      'Logga ut och rensa allt',
+      translate('general.cancel'),
+    ]
   }, [])
 
   const handleSettingSelection = useCallback(
     (index: number) => {
       if (index === 0) logout()
+      if (index === 1) logoutAndClearAll()
     },
-    [logout]
+    [logout, logoutAndClearAll]
   )
 
   const settings = useCallback(() => {
     const options = {
-      cancelButtonIndex: 1,
+      cancelButtonIndex: settingsOptions.length - 1,
       title: translate('general.settings'),
       optionsIOS: settingsOptions,
       optionsAndroid: settingsOptions,

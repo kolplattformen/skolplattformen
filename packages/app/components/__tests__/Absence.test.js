@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRoute } from '@react-navigation/native'
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import Mockdate from 'mockdate'
@@ -6,9 +5,11 @@ import React from 'react'
 import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
+import AppStorage from '../../services/appStorage'
 
 jest.mock('@react-navigation/native')
 jest.mock('../../utils/SMS')
+jest.mock('../../services/appStorage')
 
 let sendSMS
 
@@ -33,7 +34,6 @@ beforeAll(() => {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  AsyncStorage.clear()
 })
 
 test('can fill out the form with full day absence', async () => {
@@ -51,7 +51,10 @@ test('can fill out the form with full day absence', async () => {
   expect(screen.queryByText(/sluttid/i)).toBeFalsy()
 
   expect(sendSMS).toHaveBeenCalledWith('121212-1212')
-  expect(AsyncStorage.setItem).toHaveBeenCalledWith('@childssn.1', '1212121212')
+  expect(AppStorage.setSetting).toHaveBeenCalledWith(
+    '@childssn.1',
+    '1212121212'
+  )
 })
 
 test('handles missing social security number', async () => {

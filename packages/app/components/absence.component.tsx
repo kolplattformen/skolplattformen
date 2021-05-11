@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import {
   Button,
@@ -22,6 +21,7 @@ import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
 import { AlertIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
+import AppStorage from '../services/appStorage'
 import { NavigationTitle } from './navigationTitle.component'
 
 type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
@@ -83,7 +83,7 @@ const Absence = () => {
         )
       }
 
-      await AsyncStorage.setItem(
+      await AppStorage.setSetting(
         `@childssn.${child.id}`,
         values.socialSecurityNumber
       )
@@ -93,7 +93,7 @@ const Absence = () => {
 
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
-      const ssn = await AsyncStorage.getItem(`@childssn.${child.id}`)
+      const ssn = await AppStorage.getSetting<string>(`@childssn.${child.id}`)
       setSocialSecurityNumber(ssn || '')
     }
 
