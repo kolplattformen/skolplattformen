@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/kolplattformen/skolplattformen/compare/v1.32.1...v1.33.0) (2021-05-11)
+
+
+### Features
+
+* 🎸 Added current language name to auth screen ([9f15a30](https://github.com/kolplattformen/skolplattformen/commit/9f15a303b895b375e34cb9e120bc988c6be558aa)), closes [#367](https://github.com/kolplattformen/skolplattformen/issues/367) [#332](https://github.com/kolplattformen/skolplattformen/issues/332)
+
 ## [1.32.1](https://github.com/kolplattformen/skolplattformen/compare/v1.32.0...v1.32.1) (2021-05-11)
 
 
