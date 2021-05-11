@@ -11,14 +11,13 @@ import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { Login } from './login.component'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
-import { translate } from '../utils/translation'
+import { translate, languages } from '../utils/translation'
 import { GlobeIcon } from './icon.component'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from './navigation.component'
 import { SafeAreaView } from '../ui/safeAreaView.component'
 import { KeyboardAvoidingView } from '../ui/keyboardAvoidingView.component'
 import { LanguageService } from '../services/languageService'
-import { languages } from './setLanguage.component'
 
 const randomWord = () => {
   const words = translate('auth.words')
