@@ -1,3 +1,10 @@
+## [1.33.1](https://github.com/kolplattformen/skolplattformen/compare/v1.33.0...v1.33.1) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Fixes dark mode image on children ([19b8f78](https://github.com/kolplattformen/skolplattformen/commit/19b8f783187f38fbede905abd833010633c1f9cd)), closes [#388](https://github.com/kolplattformen/skolplattformen/issues/388)
+
 # [1.33.0](https://github.com/kolplattformen/skolplattformen/compare/v1.32.1...v1.33.0) (2021-05-11)
 
 
