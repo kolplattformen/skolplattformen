@@ -16,6 +16,7 @@ interface LinkProps {
 const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
   const { pathname } = useRouter()
   const intl = useIntl()
+  const className = 'dark:text-gray-300'
 
   const path = (href: string) => {
     const hashIndex = href.indexOf('#')
@@ -23,10 +24,11 @@ const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
     return href.substring(0, hashIndex)
   }
 
-  const Link: React.FC<LinkProps> = ({ href, to, children }) =>
-    path(href) === pathname ? (
+  const Link: React.FC<LinkProps> = ({ href, to, children }) => {
+    return path(href) === pathname ? (
       <ScrollLink
         activeClass="current"
+        className={className}
         to={to}
         href={`#${to}`}
         spy={true}
@@ -42,9 +44,12 @@ const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
       </ScrollLink>
     ) : (
       <NavLink href={href}>
-        <a onClick={() => onClick?.()}>{children}</a>
+        <a className={className} onClick={() => onClick?.()}>
+          {children}
+        </a>
       </NavLink>
     )
+  }
 
   return (
     <ul className="flex flex-col text-xl text-gray-800 md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 md:text-base">
@@ -54,7 +59,9 @@ const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
         </Link>
       </li>
       <li>
-        <NavLink href="/aktuellt">Aktuellt</NavLink>
+        <NavLink href="/aktuellt">
+          <a className={className}>Aktuellt</a>
+        </NavLink>
       </li>
       <li>
         <Link to="funktioner" href="/#funktioner">

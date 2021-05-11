@@ -1,6 +1,7 @@
 import { events } from '../data/timelineEvents'
 import { ButtonLinkInternal } from './ButtonLink'
 import Timeline from './Timeline'
+import { H2 } from '../components/Typography'
 
 const TimelineLatest = (): JSX.Element => {
   const latestMonthsEvents = events.slice(0, 1)
@@ -8,9 +9,7 @@ const TimelineLatest = (): JSX.Element => {
   return (
     <section className="max-w-6xl px-5 py-8 mx-auto lg:px-0 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="space-y-8">
-        <h2 className="text-2xl md:text-4xl font-bold leading-tight text-gray-800">
-          Om Öppna Skolplattformen
-        </h2>
+        <H2>Om Öppna Skolplattformen</H2>
         <p>
           Det talas mycket om värdet av digitalisering, innovation och
           medskapande, om nytta för skattepengarna och medborgarinflytande.

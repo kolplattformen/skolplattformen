@@ -21,7 +21,7 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
     <ul className="max-w-2xl border-gray-200 md:mx-auto md:border-l-2 space-y-4 md:space-y-12">
       {events.map(({ date, media, importantDates, overview }) => (
         <li className="relative" key={date}>
-          <div className="absolute top-0 items-center justify-center hidden w-10 h-10 text-white bg-indigo-400 border-4 border-white rounded-full md:flex -left-5 -top-2">
+          <div className="absolute top-0 items-center justify-center hidden w-10 h-10 text-white bg-indigo-400 border-4 border-white rounded-full md:flex -left-5 -top-2 dark:border-gray-600">
             <svg
               className="w-5 h-5"
               xmlns="http://www.w3.org/2000/svg"
@@ -35,10 +35,10 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
               />
             </svg>
           </div>
-          <div className="hidden mb-4 ml-8 text-sm font-bold text-gray-700 capitalize md:block">
+          <div className="hidden mb-4 ml-8 text-sm font-bold text-gray-700 dark:text-gray-500 capitalize md:block">
             {dateFormat(date)}
           </div>
-          <div className="p-4 text-sm leading-relaxed bg-white border-t-4 border-indigo-300 rounded-b shadow-md md:p-5 md:ml-8">
+          <div className="p-4 text-sm leading-relaxed bg-white border-t-4 border-indigo-300 rounded-b shadow-md md:p-5 md:ml-8 dark:bg-gray-800">
             <div className="block mb-4 text-lg font-bold text-gray-700 capitalize md:hidden">
               {dateFormat(date)}
             </div>
@@ -56,7 +56,7 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
                       ) : (
                         important.description
                       )}
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
                         {important.date}
                       </div>
                     </li>
@@ -77,7 +77,9 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
                       ) : (
                         m.description
                       )}
-                      <div className="text-xs text-gray-500">{m.date}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                        {m.date}
+                      </div>
                     </li>
                   ))}
                 </ul>

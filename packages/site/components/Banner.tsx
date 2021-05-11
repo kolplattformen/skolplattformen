@@ -11,9 +11,9 @@ import shape6 from '../assets/img/banner/shape6.png'
 import shape7 from '../assets/img/banner/shape7.png'
 import playstore from '../assets/img/playstore.png'
 import Link from './Link'
-import { H1 } from './Typography'
+import { H1, H2 } from './Typography'
 import { useIntl } from 'react-intl'
-import { ButtonLinkPatreon } from './ButtonLink'
+import { ButtonLinkPatreon, ButtonLinkInternal } from './ButtonLink'
 
 const Banner = (): JSX.Element => {
   const intl = useIntl()
@@ -66,9 +66,7 @@ const Banner = (): JSX.Element => {
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
             {!!intl.formatMessage({ id: 'general.flashtitle' }) && (
               <div className="mt-5">
-                <h2 className="mb-4 text-2xl font-bold leading-tight text-gray-800 md:text-4xl">
-                  {intl.formatMessage({ id: 'general.flashtitle' })}
-                </h2>
+                <H2>{intl.formatMessage({ id: 'general.flashtitle' })}</H2>
                 <p>{intl.formatMessage({ id: 'general.flashtext' })}</p>
               </div>
             )}
@@ -102,17 +100,13 @@ const Banner = (): JSX.Element => {
               </ButtonLinkPatreon>
             </p>
             <p className="flex flex-col mt-5 sm:items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-              <NextLink href="/integritet">
-                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
-                  {intl.formatMessage({ id: 'navigation.integrity' })}
-                </a>
-              </NextLink>
+              <ButtonLinkInternal href="/integritet">
+                <a>{intl.formatMessage({ id: 'navigation.integrity' })}</a>
+              </ButtonLinkInternal>
 
-              <NextLink href="/qa">
-                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
-                  {intl.formatMessage({ id: 'navigation.qna' })}
-                </a>
-              </NextLink>
+              <ButtonLinkInternal href="/qa">
+                <a>{intl.formatMessage({ id: 'navigation.qna' })}</a>
+              </ButtonLinkInternal>
             </p>
           </div>
           <div className="flex items-start justify-center pr-0 motion-safe:animate-bounce-slow md:pr-4 xl:pr-0">

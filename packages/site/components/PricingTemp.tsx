@@ -42,8 +42,10 @@ const Pricing = (): JSX.Element => {
         />
       </div>
       <div className="flex">
-        <div className="flex flex-col items-center inline-block px-5 py-8 mx-auto text-center shadow-lg rounded-md">
-          <h3 className="text-3xl text-gray-800">Tillfälligt</h3>
+        <div className="flex flex-col items-center inline-block px-5 py-8 mx-auto text-center shadow-lg rounded-md dark:bg-gray-800">
+          <h3 className="text-3xl text-gray-800 dark:text-gray-300">
+            Tillfälligt
+          </h3>
           <div className="mt-5 text-6xl text-pink-500">
             {formatPrice(price)}
           </div>

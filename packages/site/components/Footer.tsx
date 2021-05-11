@@ -60,8 +60,8 @@ const Footer = (): JSX.Element => {
           </ul>
         </div>
 
-        <div className="p-5 bg-white shadow-md rounded-md">
-          <div className="mb-3 text-gray-800">
+        <div className="p-5 bg-white shadow-md rounded-md dark:bg-gray-800">
+          <div className="mb-3 text-gray-800 dark:text-gray-400">
             @iteam1337 Digitalisering på riktigt.
           </div>
           <div>

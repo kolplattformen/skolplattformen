@@ -1,4 +1,4 @@
-import ButtonLink, { ButtonLinkPatreon } from './ButtonLink'
+import { ButtonLink, ButtonLinkPatreon } from './ButtonLink'
 
 const DownloadButtons = (): JSX.Element => {
   return (

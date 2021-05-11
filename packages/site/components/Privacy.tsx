@@ -1,7 +1,7 @@
 const Privacy = (): JSX.Element => {
   return (
     <div className="header">
-      <div className="max-w-6xl mx-auto px-5 md:px-0 my-5 md:my-24 prose">
+      <div className="max-w-4xl mx-auto px-5 md:px-0 my-5 md:my-24 prose dark:prose-dark">
         <h1>Öppna Skolplattformen</h1>
         <h2>Integritetspolicy</h2>
         <p>
