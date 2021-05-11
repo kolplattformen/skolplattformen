@@ -2,7 +2,7 @@
     "auth": {
         "placeholder_SocialSecurityNumber": "Numerus personalis tuus",
         "loginFailed": "Nomen dare non possibilis erat. Denuo conare.",
-        "chooseLoginMethod": "Methodum nomen dantem legere",
+        "chooseLoginMethod": "Methodum nomen dare legere",
         "bankid": {
             "Waiting": "Pro BankID exspectans…",
             "OpenOnThisDevice": "In hac machina BankID aperire",
@@ -30,8 +30,10 @@
         },
         "subtitle": "Optio {{word}}",
         "loginAsTestUser": "In parte investigatoris nomen dare",
-        "a11y_select_login_method": "Hic preme ut methodum nomen dantem legeres",
-        "a11y_change_language": "Hic preme ut linguam legeres"
+        "a11y_select_login_method": "Hic preme ut methodum nomen dare legeres",
+        "a11y_change_language": "Hic preme ut linguam legeres",
+        "a11y_image_two_boys": "Pictura duobus hominibus, qui telephona sui speciunt",
+        "a11y_clear_social_security_input_field": "Hic preme ut cellam numeri personalis vacuares"
     },
     "abscense": {
         "title": "Absentiam referre",
