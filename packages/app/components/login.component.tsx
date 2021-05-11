@@ -154,17 +154,31 @@ export const Login = () => {
         source={require('../assets/boys.png')}
         // @ts-expect-error Don't know why this occurs
         style={styles.image}
+        accessibilityLabel={translate('login.a11y_image_two_boys', {
+          defaultValue: 'Bild på två personer som kollar i mobilen',
+        })}
       />
       <View style={styles.loginForm}>
         {loginMethodIndex === 1 && (
           <Input
+            accessible={true}
             label={translate('general.socialSecurityNumber')}
             autoFocus
             value={socialSecurityNumber}
             style={styles.pnrInput}
             accessoryLeft={PersonIcon}
             accessoryRight={(props) => (
-              <TouchableWithoutFeedback onPress={() => handleInput('')}>
+              <TouchableWithoutFeedback
+                accessible={true}
+                onPress={() => handleInput('')}
+                accessibilityLabel={translate(
+                  'login.a11y_clear_social_security_input_field',
+                  {
+                    defaultValue:
+                      'Tryck här för att rensa fältet för personnummer',
+                  }
+                )}
+              >
                 <CloseOutlineIcon {...props} />
               </TouchableWithoutFeedback>
             )}
@@ -177,6 +191,7 @@ export const Login = () => {
         )}
         <ButtonGroup style={styles.loginButtonGroup}>
           <Button
+            accessible={true}
             onPress={() => startLogin(socialSecurityNumber)}
             style={styles.loginButton}
             appearance="ghost"
@@ -188,12 +203,16 @@ export const Login = () => {
             {loginMethods[loginMethodIndex]}
           </Button>
           <Button
+            accessible={true}
             onPress={selectLoginMethod}
             style={styles.loginMethodButton}
             appearance="ghost"
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
+            accessibilityLabel={translate('login.a11y_select_login_method', {
+              defaultValue: 'Tryck här för att välja inloggningsmetod',
+            })}
           />
         </ButtonGroup>
       </View>
@@ -210,6 +229,7 @@ export const Login = () => {
 
           <Button
             status="primary"
+            accessible={true}
             onPress={() => {
               cancelLoginRequest()
               showModal(false)
