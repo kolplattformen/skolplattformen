@@ -29,7 +29,9 @@
             "homemade": "domi factus"
         },
         "subtitle": "Optio {{word}}",
-        "loginAsTestUser": "In parte investigatoris nomen dare"
+        "loginAsTestUser": "In parte investigatoris nomen dare",
+        "a11y_select_login_method": "Hic preme ut methodum nomen dantem legeres",
+        "a11y_change_language": "Hic preme ut linguam legeres"
     },
     "abscense": {
         "title": "Absentiam referre",
