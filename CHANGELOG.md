@@ -1,3 +1,11 @@
+## [1.32.1](https://github.com/kolplattformen/skolplattformen/compare/v1.32.0...v1.32.1) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Added Alert Icon when personal number is wrong ([b187c40](https://github.com/kolplattformen/skolplattformen/commit/b187c40ecb68c27f781386f96062ee3668b954ba)), closes [#359](https://github.com/kolplattformen/skolplattformen/issues/359)
+* 🐛 Improved accessibility on login screen ([d57078b](https://github.com/kolplattformen/skolplattformen/commit/d57078b65b33c7b4aa8da87b096e194659ebdc8b)), closes [#351](https://github.com/kolplattformen/skolplattformen/issues/351)
+
 # [1.32.0](https://github.com/kolplattformen/skolplattformen/compare/v1.31.0...v1.32.0) (2021-05-10)
 
 
