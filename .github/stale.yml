@@ -1,0 +1,16 @@
+# Number of days of inactivity before an issue becomes stale
+daysUntilStale: 40
+# Number of days of inactivity before a stale issue is closed
+daysUntilClose: 7
+# Issues with these labels will never be considered stale
+exemptLabels:
+  - pinned
+  - security
+# Label to use when marking an issue as stale
+staleLabel: stale
+# Comment to post when marking an issue as stale. Set to `false` to disable
+markComment: >
+   Det här problemet har automatiskt markerats som inaktuellt eftersom det inte har haft någon aktivitet. Det kommer att stängas om ingen ytterligare aktivitet inträffar. Tack
+   för ditt bidrag!
+# Comment to post when closing a stale issue. Set to `false` to disable
+closeComment: false
