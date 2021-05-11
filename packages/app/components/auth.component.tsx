@@ -17,6 +17,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from './navigation.component'
 import { SafeAreaView } from '../ui/safeAreaView.component'
 import { KeyboardAvoidingView } from '../ui/keyboardAvoidingView.component'
+import { LanguageService } from '../services/languageService'
+import { languages } from './setLanguage.component'
 
 const randomWord = () => {
   const words = translate('auth.words')
@@ -36,14 +38,20 @@ interface AuthProps {
 export const Auth: React.FC<AuthProps> = ({ navigation }) => {
   const styles = useStyleSheet(themeStyles)
 
+  const currentLanguage = LanguageService.getLanguageCode()
+  const currentLanguageName = languages.find(
+    (language) => language.langCode === currentLanguage
+  )?.languageLocalName
+
   return (
     <KeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView>
           <SafeAreaViewContainer>
             <TopNavigation
-              alignment="center"
-              accessoryRight={() => (
+              alignment="start"
+              subtitle={currentLanguageName}
+              accessoryLeft={() => (
                 <TopNavigationAction
                   accessibilityLabel={translate('auth.a11y_change_language', {
                     defaultValue: 'Tryck här för att välja språk',

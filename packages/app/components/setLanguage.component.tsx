@@ -26,23 +26,23 @@ interface Language {
   active: boolean
 }
 
-const languages: Language[] = [
+export const languages: Language[] = [
   {
     langCode: 'sv',
     languageName: 'Swedish',
-    languageLocalName: 'svenska',
+    languageLocalName: 'Svenska',
     active: true,
   },
   {
     langCode: 'en',
     languageName: 'English',
-    languageLocalName: 'english',
+    languageLocalName: 'English',
     active: true,
   },
   {
     langCode: 'pl',
     languageName: 'Polish',
-    languageLocalName: 'polski',
+    languageLocalName: 'Polski',
     active: true,
   },
   {
