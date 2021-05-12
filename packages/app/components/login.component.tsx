@@ -226,7 +226,7 @@ export const Login = () => {
         >
           {translate('auth.button_read_integrity_policy', {
             defaultValue:
-              'Vi samlar ingen data om dig eller dina barn. Läs vår integritetspolicy här',
+              'Vi samlar ingen data om dig eller dina barn. Läs vår integritetspolicy här.',
           })}
         </Button>
       </View>
