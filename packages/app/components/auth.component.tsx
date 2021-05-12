@@ -55,7 +55,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                   accessibilityHint={translate(
                     'auth.a11y_navigate_to_change_language',
                     {
-                      defaultValue: 'Navigerar till byt språk skärmen',
+                      defaultValue: 'Navigerar till vyn för att byta språk',
                     }
                   )}
                   accessibilityLabel={translate('auth.a11y_change_language', {
