@@ -17,7 +17,7 @@ const rules: RenderRules = {
       : src
     return (
       <Image
-        accessibilityIgnoresInvertColors={true}
+        accessibilityIgnoresInvertColors
         key={src}
         src={url}
         style={styles.markdownImage}
