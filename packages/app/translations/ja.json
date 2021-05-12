@@ -1,0 +1,19 @@
+{
+    "navigation": {
+        "notifications": "通知",
+        "menu": "メニュー",
+        "calender": "カレンダー"
+    },
+    "abscense": {
+        "endTime": "終了時間",
+        "personalNumberMissing": "個人識別番号が入力されていない",
+        "invalidPersonalNumber": "個人識別番号が無効",
+        "entireDay": "一日中"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "ギムナジウム",
+        "preSchool": "就学前学級",
+        "leisureTimeCentre": "学童保育",
+        "compulsorySchool": "基礎学校"
+    }
+}

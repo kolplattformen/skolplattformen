@@ -7,7 +7,8 @@
         "logout": "Uitloggen",
         "confirm": "Bevestigen",
         "changeLanguage": "Taal wijzigen",
-        "socialSecurityNumber": "Burgerservicenummer"
+        "socialSecurityNumber": "Burgerservicenummer",
+        "cancel": "Annuleren"
     },
     "auth": {
         "placeholder_SocialSecurityNumber": "Jouw burgerservicenummer",
@@ -39,7 +40,11 @@
             "Waiting": "Watchen op BankID…",
             "OpenManually": "Open BankID handmatig"
         },
-        "chooseLoginMethod": "Kies inlogmethode"
+        "chooseLoginMethod": "Kies inlogmethode",
+        "a11y_select_login_method": "Tik hier om de inlogmethode te selecteren",
+        "a11y_clear_social_security_input_field": "Tik hier om het veld voor het burgerservicenummer te wissen",
+        "a11y_image_two_boys": "Foto van twee mensen die naar hun mobiele telefoons kijken",
+        "a11y_change_language": "Tik hier om jouw taal te selecteren"
     },
     "abbrevations": {
         "preSchool": "Peuterschool",
@@ -76,7 +81,10 @@
         "noNewNewsItemsThisWeek": "Geen nieuwe nieuwsberichten deze week.",
         "updated": "Bijgewerkt",
         "title": "Nieuws van Skolplattformen",
-        "published": "Gepubliceerd"
+        "published": "Gepubliceerd",
+        "search": {
+            "placeholder": "Zoek al het nieuws…"
+        }
     },
     "language": {
         "changeLanguage": "Taal wijzigen",
@@ -97,5 +105,11 @@
         "calender": "Agenda",
         "menu": "Menu",
         "news": "Nieuws"
+    },
+    "schedule": {
+        "end": "Eind",
+        "gymBag": "Sporttas",
+        "lunch": "Middageten",
+        "start": "Start"
     }
 }

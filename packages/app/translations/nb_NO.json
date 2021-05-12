@@ -55,7 +55,8 @@
         "confirm": "Bekreft",
         "changeLanguage": "Endre språk",
         "settings": "Innstillinger",
-        "send": "Send"
+        "send": "Send",
+        "cancel": "Avbryt"
     },
     "news": {
         "updated": "Oppdatert",
