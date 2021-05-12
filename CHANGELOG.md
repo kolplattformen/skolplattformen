@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/kolplattformen/skolplattformen/compare/v1.33.1...v1.34.0) (2021-05-12)
+
+
+### Features
+
+* added flash message in header ([b7efee1](https://github.com/kolplattformen/skolplattformen/commit/b7efee1e99d932b93d49d6377060d9876f02ea0a))
+
 ## [1.33.1](https://github.com/kolplattformen/skolplattformen/compare/v1.33.0...v1.33.1) (2021-05-11)
 
 
