@@ -215,6 +215,19 @@ export const Login = () => {
             })}
           />
         </ButtonGroup>
+        <Button
+          status="basic"
+          size="tiny"
+          style={styles.integrityPolicyButton}
+          appearance="ghost"
+          onPress={() =>
+            Linking.openURL('https://skolplattformen.org/integritet')
+          }
+        >
+          {translate('auth.button_read_integrity_policy', {
+            defaultValue: 'Läs vår integritetspolicy här',
+          })}
+        </Button>
       </View>
       <Modal
         visible={visible}
@@ -264,6 +277,10 @@ const themedStyles = StyleService.create({
   loginMethodButton: { width: 45 },
   modal: {
     width: '80%',
+  },
+  integrityPolicyButton: {
+    marginTop: 10,
+    width: '100%',
   },
   bankIdLoading: { margin: 10 },
 })
