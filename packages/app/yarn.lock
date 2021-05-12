@@ -2198,6 +2198,11 @@ assign-symbols@^1.0.0:
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
+ast-types-flow@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/ast-types-flow/-/ast-types-flow-0.0.7.tgz#f70b735c6bca1a5c9c22d982c3e39e7feba3bdad"
+  integrity sha1-9wtzXGvKGlycItmCw+Oef+ujva0=
+
 ast-types@0.14.2:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.14.2.tgz#600b882df8583e3cd4f2df5fa20fa83759d4bdfd"
@@ -3586,6 +3591,15 @@ eslint-plugin-react-hooks@^4.0.4:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.2.0.tgz#8c229c268d468956334c943bb45fc860280f5556"
   integrity sha512-623WEiZJqxR7VdxFCKLI6d6LLpwJkGPYKODnkH3D7WpOG5KM8yWueBd8TLsNAetEJNF5iJmolaAKO3F8yzyVBQ==
+
+eslint-plugin-react-native-a11y@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-native-a11y/-/eslint-plugin-react-native-a11y-2.0.4.tgz#34efcfb2539dbfb8648c09b8cf115b9c35c21c42"
+  integrity sha512-pTmvqNilRtgfeHZuCu0d5KzRUPQGMsCHSDHKw144IhlUEvX3ILmM74dELjOIqbokIhtg4tguHpHGupoAQphGxw==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    ast-types-flow "^0.0.7"
+    jsx-ast-utils "^3.2.0"
 
 eslint-plugin-react-native-globals@^0.1.1:
   version "0.1.2"
@@ -5935,7 +5949,7 @@ jsuri@1.3.1:
   resolved "https://registry.yarnpkg.com/jsuri/-/jsuri-1.3.1.tgz#cd93fc6a87b255142cb7b0f479f00517ab9395ed"
   integrity sha1-zZP8aoeyVRQst7D0efAFF6uTle0=
 
-"jsx-ast-utils@^2.4.1 || ^3.0.0":
+"jsx-ast-utils@^2.4.1 || ^3.0.0", jsx-ast-utils@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-3.2.0.tgz#41108d2cec408c3453c1bbe8a4aae9e1e2bd8f82"
   integrity sha512-EIsmt3O3ljsU6sot/J4E1zDRxfBNrhjyf/OKjlydwgEimQuznlM4Wv7U+ueONJMyEn1WRE0K8dhi3dVAXYT24Q==

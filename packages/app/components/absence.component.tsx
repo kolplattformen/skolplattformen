@@ -147,9 +147,6 @@ const Absence = () => {
                     </Text>
                     <Input
                       testID="socialSecurityNumberInput"
-                      accessibilityLabel={translate(
-                        'general.socialSecurityNumber'
-                      )}
                       keyboardType="number-pad"
                       onChangeText={handleChange('socialSecurityNumber')}
                       onBlur={handleBlur('socialSecurityNumber')}

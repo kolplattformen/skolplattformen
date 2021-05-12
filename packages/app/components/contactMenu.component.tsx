@@ -1,3 +1,4 @@
+/* eslint-disable react-native-a11y/has-accessibility-hint */
 import { Classmate } from '@skolplattformen/embedded-api'
 import {
   Button,
@@ -15,6 +16,7 @@ import {
   MoreIcon,
   SMSIcon,
 } from './icon.component'
+import { translate } from '../utils/translation'
 
 interface ContactMenuProps {
   contact: Classmate
@@ -32,7 +34,18 @@ export const ContactMenu = ({
   const renderToggleButton = () => (
     <Button
       testID="ShowContactInfoButton"
-      accessibilityLabel="Visa kontaktinformation"
+      accessibilityHint={translate(
+        'contact.a11y_show_contact_info_button_hint',
+        {
+          defaultValue: 'Visar kontaktinformation',
+        }
+      )}
+      accessibilityLabel={translate(
+        'contact.a11y_show_contact_info_button_label',
+        {
+          defaultValue: 'Visa kontaktinformation',
+        }
+      )}
       onPress={() => setVisible(true)}
       appearance="ghost"
       accessoryLeft={MoreIcon}
