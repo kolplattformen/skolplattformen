@@ -52,8 +52,14 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
               subtitle={currentLanguageName}
               accessoryLeft={() => (
                 <TopNavigationAction
+                  accessibilityHint={translate(
+                    'auth.a11y_navigate_to_change_language',
+                    {
+                      defaultValue: 'Navigerar till byt språk skärmen',
+                    }
+                  )}
                   accessibilityLabel={translate('auth.a11y_change_language', {
-                    defaultValue: 'Tryck här för att välja språk',
+                    defaultValue: 'Byt språk',
                   })}
                   accessible={true}
                   icon={GlobeIcon}

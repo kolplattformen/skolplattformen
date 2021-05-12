@@ -5,9 +5,14 @@ import { Image as ImageBase, ImageStyle, StyleProp } from 'react-native'
 interface ImageProps {
   src: string
   style: StyleProp<ImageStyle>
+  accessibilityIgnoresInvertColors?: boolean
 }
 
-export const Image = ({ src, style }: ImageProps) => {
+export const Image = ({
+  src,
+  style,
+  accessibilityIgnoresInvertColors,
+}: ImageProps) => {
   const { api } = useApi()
   const [headers, setHeaders] = useState()
 
@@ -23,6 +28,7 @@ export const Image = ({ src, style }: ImageProps) => {
 
   return headers ? (
     <ImageBase
+      accessibilityIgnoresInvertColors={accessibilityIgnoresInvertColors}
       source={{
         uri: src,
         headers,

@@ -232,6 +232,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       )}
       <View style={styles.itemFooterAbsence}>
         <Button
+          accessible={true}
           size="small"
           status="primary"
           onPress={() => navigation.navigate('Absence', { child })}
