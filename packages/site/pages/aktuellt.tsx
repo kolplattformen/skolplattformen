@@ -1,8 +1,9 @@
+import { NextPage } from 'next'
 import Timeline from '../components/Timeline'
 import { H1 } from '../components/Typography'
 import { events } from '../data/timelineEvents'
 
-const CurrentEventsPage = (): JSX.Element => {
+const CurrentEventsPage: NextPage = () => {
   return (
     <section className="mx-5 max-w-2xl md:mx-auto">
       <div className="my-8 md:my-20">

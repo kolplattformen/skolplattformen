@@ -8,8 +8,9 @@ import PricingTemp from '../components/PricingTemp'
 import Testimonials from '../components/Testimonials'
 import TimelineLatest from '../components/TimelineLatest'
 import Flash from '../components/Flash'
+import { NextPage } from 'next'
 
-const HomePage = (): Element => {
+const HomePage: NextPage = () => {
   return (
     <>
       <Flash />

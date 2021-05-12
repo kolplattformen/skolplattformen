@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import Status from '../components/Status'
 
-const StatusPage = (): JSX.Element => {
+const StatusPage: NextPage = () => {
   return <Status />
 }
 
