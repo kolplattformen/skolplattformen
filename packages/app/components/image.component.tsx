@@ -5,7 +5,7 @@ import { Image as ImageBase, ImageStyle, StyleProp } from 'react-native'
 interface ImageProps {
   src: string
   style: StyleProp<ImageStyle>
-  accessibilityIgnoresInvertColors?: boolean
+  accessibilityIgnoresInvertColors: boolean
 }
 
 export const Image = ({
