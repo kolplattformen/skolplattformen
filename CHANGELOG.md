@@ -1,3 +1,10 @@
+## [1.34.1](https://github.com/kolplattformen/skolplattformen/compare/v1.34.0...v1.34.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* 🐛 Added a11y lint and fixes those errors ([a37aeab](https://github.com/kolplattformen/skolplattformen/commit/a37aeabf8807e16ac04f59b82ddd40aff3567252))
+
 # [1.34.0](https://github.com/kolplattformen/skolplattformen/compare/v1.33.1...v1.34.0) (2021-05-12)
 
 
