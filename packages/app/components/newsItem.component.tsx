@@ -45,7 +45,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
   const BackAction = () => (
     <TopNavigationAction
       testID="topNavBackToChild"
-      accessibilityLabel={translate('news.backToChild')}
+      accessibilityHint={translate('news.backToChild')}
       icon={BackIcon}
       onPress={navigateBack}
     />
@@ -89,6 +89,7 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
             <Markdown style={stylesMarkdown}>{data.body}</Markdown>
             {newsItem.fullImageUrl && (
               <Image
+                accessibilityIgnoresInvertColors={false}
                 src={newsItem.fullImageUrl}
                 // @ts-expect-error Fix later on
                 style={styles.image}

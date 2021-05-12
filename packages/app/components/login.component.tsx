@@ -154,9 +154,10 @@ export const Login = () => {
         source={require('../assets/boys.png')}
         // @ts-expect-error Don't know why this occurs
         style={styles.image}
-        accessibilityLabel={translate('login.a11y_image_two_boys', {
+        accessibilityHint={translate('login.a11y_image_two_boys', {
           defaultValue: 'Bild på två personer som kollar i mobilen',
         })}
+        accessibilityIgnoresInvertColors={false}
       />
       <View style={styles.loginForm}>
         {loginMethodIndex === 1 && (
@@ -171,11 +172,10 @@ export const Login = () => {
               <TouchableWithoutFeedback
                 accessible={true}
                 onPress={() => handleInput('')}
-                accessibilityLabel={translate(
+                accessibilityHint={translate(
                   'login.a11y_clear_social_security_input_field',
                   {
-                    defaultValue:
-                      'Tryck här för att rensa fältet för personnummer',
+                    defaultValue: 'Rensa fältet för personnummer',
                   }
                 )}
               >
@@ -210,8 +210,8 @@ export const Login = () => {
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
-            accessibilityLabel={translate('login.a11y_select_login_method', {
-              defaultValue: 'Tryck här för att välja inloggningsmetod',
+            accessibilityHint={translate('login.a11y_select_login_method', {
+              defaultValue: 'Välj inloggningsmetod',
             })}
           />
         </ButtonGroup>

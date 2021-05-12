@@ -24,6 +24,7 @@ export const Menu = () => {
             {translate('menu.emptyText')}
           </Text>
           <Image
+            accessibilityIgnoresInvertColors={false}
             source={require('../assets/children.png')}
             style={styles.emptyStateImage}
           />

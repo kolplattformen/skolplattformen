@@ -15,7 +15,14 @@ const rules: RenderRules = {
     const url = src.startsWith('/')
       ? `https://elevstockholm.sharepoint.com${src}`
       : src
-    return <Image key={src} src={url} style={styles.markdownImage} />
+    return (
+      <Image
+        accessibilityIgnoresInvertColors
+        key={src}
+        src={url}
+        style={styles.markdownImage}
+      />
+    )
   },
   link: (node, children, _parent, styles) => {
     if (children) {

@@ -109,6 +109,7 @@ export const Children = () => {
                     {translate('children.noKids_description')}
                   </Text>
                   <Image
+                    accessibilityIgnoresInvertColors={false}
                     source={require('../assets/children.png')}
                     style={styles.emptyStateImage}
                   />
@@ -129,6 +130,7 @@ export const Children = () => {
         ) : (
           <Layout style={styles.loading}>
             <Image
+              accessibilityIgnoresInvertColors={false}
               source={require('../assets/girls.png')}
               style={styles.loadingImage}
             />

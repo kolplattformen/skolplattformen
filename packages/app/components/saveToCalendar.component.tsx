@@ -16,7 +16,7 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
   const renderToggleButton = () => (
     <Button
       testID="actionsButton"
-      accessibilityLabel={translate('calender.showCalenderActions')}
+      accessibilityHint={translate('calender.showCalenderActions')}
       onPress={() => setVisible(true)}
       appearance="ghost"
       accessoryLeft={MoreIcon}
@@ -77,7 +77,6 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
       onBackdropPress={closeOverflowMenu}
     >
       <MenuItem
-        accessibilityLabel={translate('calender.saveToCalender')}
         accessoryLeft={CalendarOutlineIcon}
         title={() => (
           <Text maxFontSizeMultiplier={2}>

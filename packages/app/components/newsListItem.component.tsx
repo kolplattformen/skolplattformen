@@ -38,6 +38,7 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
       <View style={styles.card}>
         {width > 320 && item.fullImageUrl ? (
           <Image
+            accessibilityIgnoresInvertColors={false}
             src={item.fullImageUrl}
             // @ts-expect-error Don't know why this linter breaks
             style={styles.image}
