@@ -211,7 +211,7 @@ export const Login = () => {
             accessoryLeft={SelectIcon}
             size="medium"
             accessibilityHint={translate('login.a11y_select_login_method', {
-              defaultValue: 'Tryck här för att välja inloggningsmetod',
+              defaultValue: 'Välj inloggningsmetod',
             })}
           />
         </ButtonGroup>

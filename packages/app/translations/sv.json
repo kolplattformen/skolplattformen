@@ -46,10 +46,10 @@
             "simple": "enkla",
             "working": "fungerande"
         },
-        "a11y_change_language": "Tryck här för att välja språk",
+        "a11y_change_language": "Välj språk",
         "a11y_image_two_boys": "Bild på två personer som kollar i mobilen",
-        "a11y_clear_social_security_input_field": "Tryck här för att rensa fältet för personnummer",
-        "a11y_select_login_method": "Tryck här för att välja inloggningsmetod"
+        "a11y_clear_social_security_input_field": "Rensa fältet för personnummer",
+        "a11y_select_login_method": "Välja inloggningsmetod"
     },
     "calender": {
         "approveAccessToCalender": "Du måste godkänna åtkomst till kalendern",
@@ -111,5 +111,8 @@
         "end": "Slutar",
         "lunch": "Lunch",
         "gymBag": "Gympapåse"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Visa kontaktinformation"
     }
 }

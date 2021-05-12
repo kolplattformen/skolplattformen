@@ -46,10 +46,10 @@
             "simple": "simple",
             "working": "working"
         },
-        "a11y_change_language": "Tap here to select your language",
+        "a11y_change_language": "Select your language",
         "a11y_image_two_boys": "Picture of two people checking their mobile phones",
-        "a11y_clear_social_security_input_field": "Tap here to clear the social security number field",
-        "a11y_select_login_method": "Tap here to select the login method"
+        "a11y_clear_social_security_input_field": "Clear the social security number field",
+        "a11y_select_login_method": "Select the login method"
     },
     "calender": {
         "approveAccessToCalender": "You have to approve access to your calendar",
@@ -111,5 +111,8 @@
         "end": "End",
         "lunch": "Lunch",
         "gymBag": "Gym bag"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Show contact information"
     }
 }
