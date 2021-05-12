@@ -225,7 +225,8 @@ export const Login = () => {
           }
         >
           {translate('auth.button_read_integrity_policy', {
-            defaultValue: 'Läs vår integritetspolicy här',
+            defaultValue:
+              'Vi samlar ingen data om dig eller dina barn. Läs vår integritetspolicy här',
           })}
         </Button>
       </View>
