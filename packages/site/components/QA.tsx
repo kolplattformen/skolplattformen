@@ -1,7 +1,7 @@
 const QA = (): JSX.Element => {
   return (
     <div className="header">
-      <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose">
+      <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose dark:prose-dark relative z-10">
         <h1>Frågor och svar om Öppna skolplattformen</h1>
 
         <h2>

@@ -47,7 +47,7 @@ const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
     )
 
   return (
-    <ul className="flex flex-col text-xl text-gray-800 md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 md:text-base">
+    <ul className="flex flex-col text-xl text-gray-800 dark:text-white md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 md:text-base">
       <li>
         <Link to="wrapper" href="/#">
           {intl.formatMessage({ id: 'navigation.home' })}

@@ -22,9 +22,9 @@ const FeatureCard = ({
         }
       )}
     >
-      <div className="w-20 h-20 mx-auto mb-10">
-        <img src={image} className="svg" alt="" />
-      </div>
+      <div className="w-20 h-20 mx-auto mb-10 bg-current" style={{
+        mask: `url(${image}) no-repeat center`,
+      }} />
       <div className="font-bold text-lg mb-2">{title}</div>
       <p>{text}</p>
     </div>

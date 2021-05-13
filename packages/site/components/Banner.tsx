@@ -33,7 +33,7 @@ const Banner = (): JSX.Element => {
                 <img
                   src={shape2}
                   alt=""
-                  className="absolute left-9 top-20 -z-1 motion-safe:animate-pulse"
+                  className="absolute left-9 top-20 motion-safe:animate-pulse"
                 />
                 <img
                   src={shape3}
@@ -58,7 +58,7 @@ const Banner = (): JSX.Element => {
                 <img
                   src={shape7}
                   alt=""
-                  className="absolute bottom-48 right-8 -z-1 motion-safe:animate-bounce-slow"
+                  className="absolute bottom-48 right-8 motion-safe:animate-bounce-slow"
                 />
               </div>
             </div>
@@ -66,7 +66,7 @@ const Banner = (): JSX.Element => {
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
             {!!intl.formatMessage({ id: 'general.flashtitle' }) && (
               <div className="mt-5">
-                <h2 className="mb-4 text-2xl font-bold leading-tight text-gray-800 md:text-4xl">
+                <h2 className="mb-4 text-2xl font-bold leading-tight text-gray-800 dark:text-white md:text-4xl">
                   {intl.formatMessage({ id: 'general.flashtitle' })}
                 </h2>
                 <p>{intl.formatMessage({ id: 'general.flashtext' })}</p>

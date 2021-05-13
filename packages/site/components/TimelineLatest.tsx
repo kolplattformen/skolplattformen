@@ -8,7 +8,7 @@ const TimelineLatest = (): JSX.Element => {
   return (
     <section className="max-w-6xl px-5 py-8 mx-auto lg:px-0 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="space-y-8">
-        <h2 className="text-2xl md:text-4xl font-bold leading-tight text-gray-800">
+        <h2 className="text-2xl md:text-4xl font-bold leading-tight text-gray-800 dark:text-white">
           Om Öppna Skolplattformen
         </h2>
         <p>

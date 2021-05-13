@@ -11,7 +11,7 @@ const Internal: React.FC<LinkInternalProps> = ({
 }): JSX.Element => {
   return (
     <Link href={href}>
-      <a className="text-indigo-800">{children}</a>
+      <a className="text-indigo-800 dark:text-indigo-500">{children}</a>
     </Link>
   )
 }
@@ -30,7 +30,7 @@ const External: React.FC<LinkExternalProps> = ({
 }): JSX.Element => {
   return (
     <a
-      className={classnames('text-indigo-800', className)}
+      className={classnames('text-indigo-800 dark:text-indigo-500', className)}
       href={href}
       target={target}
       rel={target === '_blank' ? 'noopener noreferrer' : ''}

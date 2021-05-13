@@ -45,7 +45,7 @@ const Testimonials = (): JSX.Element => {
           className="flex justify-center mt-12 md:mt-0"
           key={testimonial.name}
         >
-          <div className="max-w-md px-8 py-4 bg-white rounded-lg shadow-lg">
+          <div className="max-w-md px-8 py-4 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
             <div className="flex justify-center -mt-16 md:justify-start">
               <div className="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full">
                 <Image
@@ -58,11 +58,11 @@ const Testimonials = (): JSX.Element => {
               </div>
             </div>
             <div>
-              <p className="mt-2 text-gray-600">{testimonial.text}</p>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">{testimonial.text}</p>
             </div>
             <div className="flex flex-col mt-4 text-pink-600">
               {testimonial.name}
-              <div className="text-sm text-gray-500">{testimonial.title}</div>
+              <div className="text-sm text-gray-400">{testimonial.title}</div>
             </div>
           </div>
         </div>
