@@ -38,7 +38,11 @@
         },
         "subtitle": "Det {{word}} alternativet",
         "placeholder_SocialSecurityNumber": "Ditt personnummer",
-        "chooseLoginMethod": "Velg innloggingsmetode"
+        "chooseLoginMethod": "Velg innloggingsmetode",
+        "a11y_select_login_method": "Velg innloggingsmetode",
+        "a11y_clear_social_security_input_field": "Tøm personnummerfeltet",
+        "a11y_image_two_boys": "Bilde av to folk som sjekker mobiltelefonene sine",
+        "a11y_change_language": "Velg språk"
     },
     "calender": {
         "saveToCalender": "Lagre i kalender",
@@ -107,5 +111,8 @@
         "lunch": "Lunsj",
         "end": "Slutt",
         "start": "Start"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Vis kontaktinfo"
     }
 }
