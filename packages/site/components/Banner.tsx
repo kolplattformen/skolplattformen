@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import NextLink from 'next/link'
 import appstore from '../assets/img/appstore.svg'
 import phone from '../assets/img/banner/phone_login.png'
 import shape1 from '../assets/img/banner/shape1.png'
@@ -13,7 +12,7 @@ import playstore from '../assets/img/playstore.png'
 import Link from './Link'
 import { H1 } from './Typography'
 import { useIntl } from 'react-intl'
-import { ButtonLinkPatreon } from './ButtonLink'
+import ButtonLink, { ButtonLinkPatreon } from './ButtonLink'
 
 const Banner = (): JSX.Element => {
   const intl = useIntl()
@@ -102,17 +101,13 @@ const Banner = (): JSX.Element => {
               </ButtonLinkPatreon>
             </p>
             <p className="flex flex-col mt-5 sm:items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-              <NextLink href="/integritet">
-                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
-                  {intl.formatMessage({ id: 'navigation.integrity' })}
-                </a>
-              </NextLink>
+              <ButtonLink href="/integritet">
+                {intl.formatMessage({ id: 'navigation.integrity' })}
+              </ButtonLink>
 
-              <NextLink href="/qa">
-                <a className="inline-block px-4 py-2 font-bold text-indigo-800 border-2 border-indigo-800 rounded-full lg:px-8 lg:py-4 hover:bg-indigo-800 hover:text-white">
-                  {intl.formatMessage({ id: 'navigation.qna' })}
-                </a>
-              </NextLink>
+              <ButtonLink href="/qa">
+                {intl.formatMessage({ id: 'navigation.qna' })}
+              </ButtonLink>
             </p>
           </div>
           <div className="flex items-start justify-center pr-0 motion-safe:animate-bounce-slow md:pr-4 xl:pr-0">

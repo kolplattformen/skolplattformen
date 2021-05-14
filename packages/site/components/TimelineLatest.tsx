@@ -1,5 +1,5 @@
 import { events } from '../data/timelineEvents'
-import { ButtonLinkInternal } from './ButtonLink'
+import ButtonLink from './ButtonLink'
 import Timeline from './Timeline'
 
 const TimelineLatest = (): JSX.Element => {
@@ -31,9 +31,9 @@ const TimelineLatest = (): JSX.Element => {
           senast genom en polisanmälan. I ett försök att skapa transparens har
           vi sammanställt vad som hänt nedan.
         </p>
-        <ButtonLinkInternal href="/aktuellt">
+        <ButtonLink href="/aktuellt">
           Läs hela historien
-        </ButtonLinkInternal>
+        </ButtonLink>
       </div>
       <Timeline events={latestMonthsEvents} />
     </section>

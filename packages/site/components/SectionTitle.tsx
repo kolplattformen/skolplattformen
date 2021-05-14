@@ -1,6 +1,8 @@
+import React, { ReactNode } from "react"
+
 interface SectionTitleProps {
-  text?: string
-  title: string
+  text?: ReactNode
+  title: ReactNode
 }
 
 const SectionTitle = ({ text, title }: SectionTitleProps): JSX.Element => {

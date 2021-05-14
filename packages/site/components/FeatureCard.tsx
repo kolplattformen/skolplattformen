@@ -18,7 +18,7 @@ const FeatureCard = ({
       className={classnames(
         'px-5 py-12 text-center border-2 border-transparent rounded-lg',
         {
-          'border-indigo-600': isActive,
+          'border-indigo-600 dark:border-indigo-400': isActive,
         }
       )}
     >
