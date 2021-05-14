@@ -1,45 +1,10 @@
 import SwiperCore, { Autoplay, Pagination, SwiperOptions } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import img4 from '../assets/img/icons/goal.svg'
-import img3 from '../assets/img/icons/planning.svg'
-import img1 from '../assets/img/icons/project-management.svg'
-import img2 from '../assets/img/icons/solution.svg'
 import FeatureCard from './FeatureCard'
 import SectionTitle from './SectionTitle'
+import { FEATURES_DATA } from './featureData'
 
 SwiperCore.use([Pagination, Autoplay])
-
-const FEATURES_DATA = [
-  {
-    title: 'Öppen källkod',
-    text: 'Har du egna förslag på förbättringar? Du kan hjälpa till.',
-    image: img1,
-  },
-  {
-    title: 'Bygger på ny teknik',
-    text:
-      'Till skillnad från den gamla skolplattformen så bygger den öppna på senaste tekniken.',
-    image: img2,
-  },
-  {
-    title: 'Det här är bara början',
-    text:
-      'Vi hoppas med denna app inspirera till fler initiativ i hela den offentliga digitaliseringen.',
-    image: img4,
-  },
-  {
-    title: 'Kan byggas ut till fler skolsystem',
-    text:
-      'Just nu stöds bara Stockholm Stads skolplattform men med din hjälp kan fler skolplattformar integreras så att du slipper logga in i flera appar om du har barn i olika skolor.',
-    image: img3,
-  },
-  {
-    title: 'Skolan är allas vårt ansvar',
-    text:
-      'Vi insåg att klaga inte hjälper så mycket så vi tog tag i problemet istället. Häng med!',
-    image: img1,
-  },
-]
 
 const Features = (): JSX.Element => {
   const swiperParams: SwiperOptions = {
