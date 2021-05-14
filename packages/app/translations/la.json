@@ -111,5 +111,8 @@
         "gymBag": "Saccus gymnasticus",
         "lunch": "Prandium",
         "end": "Finis"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Informationes contacti exhibere"
     }
 }
