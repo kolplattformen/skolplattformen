@@ -41,10 +41,10 @@
             "OpenManually": "Open BankID handmatig"
         },
         "chooseLoginMethod": "Kies inlogmethode",
-        "a11y_select_login_method": "Tik hier om de inlogmethode te selecteren",
-        "a11y_clear_social_security_input_field": "Tik hier om het veld voor het burgerservicenummer te wissen",
+        "a11y_select_login_method": "Selecteer de inlogmethode",
+        "a11y_clear_social_security_input_field": "Wis het veld voor het burgerservicenummer",
         "a11y_image_two_boys": "Foto van twee mensen die naar hun mobiele telefoons kijken",
-        "a11y_change_language": "Tik hier om jouw taal te selecteren"
+        "a11y_change_language": "Selecteer je taal"
     },
     "abbrevations": {
         "preSchool": "Peuterschool",
@@ -111,5 +111,8 @@
         "gymBag": "Sporttas",
         "lunch": "Middageten",
         "start": "Start"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Toon contactgegevens"
     }
 }
