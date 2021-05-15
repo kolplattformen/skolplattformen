@@ -118,6 +118,11 @@ const themedStylesMarkdown = StyleService.create({
     ...Typography.fontSize.lg,
     color: 'color-basic-800',
   },
+  code_block: {
+    color: 'color-basic-800',
+    backgroundColor: 'background-basic-color-1',
+    borderColor: 'color-basic-400',
+  },
 })
 
 const themedStyles = StyleService.create({
