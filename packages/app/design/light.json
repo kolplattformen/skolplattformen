@@ -76,5 +76,6 @@
   "color-danger-transparent-600": "rgba(186, 50, 127, 0.48)",
   "color-basic-800": "#1F2937",
   "color-basic-600": "#4B5563",
-  "color-basic-500": "#6B7280"
+  "color-basic-500": "#6B7280",
+  "color-basic-400": "#E4E9F2"
 }

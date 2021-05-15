@@ -56,7 +56,9 @@ export const NewsItem = ({ navigation, route }: NewsItemProps) => {
       <SafeAreaViewContainer>
         <TopNavigation
           title={() => (
-            <Text maxFontSizeMultiplier={1.5}>{translate('news.title')}</Text>
+            <Text maxFontSizeMultiplier={1.5} style={styles.topNavigationTitle}>
+              {translate('news.title')}
+            </Text>
           )}
           alignment="center"
           accessoryLeft={BackAction}
@@ -116,6 +118,11 @@ const themedStylesMarkdown = StyleService.create({
     ...Typography.fontSize.lg,
     color: 'color-basic-800',
   },
+  code_block: {
+    color: 'color-basic-800',
+    backgroundColor: 'background-basic-color-1',
+    borderColor: 'color-basic-400',
+  },
 })
 
 const themedStyles = StyleService.create({
@@ -158,5 +165,8 @@ const themedStyles = StyleService.create({
   },
   body: {
     marginTop: Sizing.t4,
+  },
+  topNavigationTitle: {
+    ...Typography.fontWeight.semibold,
   },
 })
