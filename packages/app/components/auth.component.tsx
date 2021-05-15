@@ -7,7 +7,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import React from 'react'
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View, Image } from 'react-native'
 import { Login } from './login.component'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
@@ -52,6 +52,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
               subtitle={currentLanguageName}
               accessoryLeft={() => (
                 <TopNavigationAction
+                  style={styles.languageChooser}
                   accessibilityHint={translate(
                     'auth.a11y_navigate_to_change_language',
                     {
@@ -68,16 +69,25 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
               )}
             />
             <View style={styles.content}>
+                <Image
+                  source={require('../assets/boys.png')}
+                  // @ts-expect-error Don't know why this occurs
+                  style={styles.image}
+                  accessibilityHint={translate('login.a11y_image_two_boys', {
+                    defaultValue: 'Bild på två personer som kollar i mobilen',
+                  })}
+                  accessibilityIgnoresInvertColors={false}
+                />
               <Layout style={styles.container}>
-                <Text category="h2" adjustsFontSizeToFit numberOfLines={1}>
+                <Text category="h5" style={styles.header} adjustsFontSizeToFit numberOfLines={2}>
                   {translate('general.title')}
                 </Text>
-                <Text style={styles.subtitle}>
+                <Login />
+                <Text category="c2" style={styles.subtitle}>
                   {translate('auth.subtitle', {
                     word: randomWord(),
                   })}
                 </Text>
-                <Login />
               </Layout>
             </View>
           </SafeAreaViewContainer>
@@ -89,19 +99,25 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
 
 const themeStyles = StyleService.create({
   container: {
-    ...LayoutStyle.mainAxis.center,
+    ...LayoutStyle.mainAxis.flexStart,
     ...LayoutStyle.crossAxis.flexEnd,
     padding: Sizing.t5,
   },
+  image: {
+    ...Sizing.aspectRatio(1.7, Sizing.Ratio['4:3']),
+    marginLeft: '-17%',
+  },
   content: {
-    ...LayoutStyle.center,
     ...LayoutStyle.flex.full,
   },
+  header: {
+    width: '50%',
+    marginBottom: Sizing.t5,
+  },
   subtitle: {
-    ...Typography.align.center,
-    ...Typography.fontSize.base,
-    ...Typography.fontWeight.bold,
-    color: 'color-basic-500',
-    marginTop: Sizing.t1,
+    textAlign: 'center',
+    ...Typography.fontSize.xs,
+    color: 'color-basic-800',
+    marginTop: Sizing.t5,
   },
 })

@@ -30,6 +30,13 @@ import {
   SelectIcon,
 } from './icon.component'
 
+const BankId = style => (
+  <Image
+    style={themedStyles.icon}
+    source={require('../assets/bankid_low_rgb.png')}
+  />
+)
+
 export const Login = () => {
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
@@ -150,15 +157,6 @@ export const Login = () => {
 
   return (
     <>
-      <Image
-        source={require('../assets/boys.png')}
-        // @ts-expect-error Don't know why this occurs
-        style={styles.image}
-        accessibilityHint={translate('login.a11y_image_two_boys', {
-          defaultValue: 'Bild på två personer som kollar i mobilen',
-        })}
-        accessibilityIgnoresInvertColors={false}
-      />
       <View style={styles.loginForm}>
         {loginMethodIndex === 1 && (
           <Input
@@ -189,7 +187,7 @@ export const Login = () => {
             placeholder={translate('auth.placeholder_SocialSecurityNumber')}
           />
         )}
-        <ButtonGroup style={styles.loginButtonGroup}>
+        <ButtonGroup style={styles.loginButtonGroup} status="primary">
           <Button
             accessible={true}
             onPress={() => startLogin(socialSecurityNumber)}
@@ -197,7 +195,7 @@ export const Login = () => {
             appearance="ghost"
             disabled={loginMethodIndex === 1 && !valid}
             status="primary"
-            accessoryLeft={SecureIcon}
+            accessoryLeft={BankId}
             size="medium"
           >
             {loginMethods[loginMethodIndex]}
@@ -244,17 +242,12 @@ export const Login = () => {
 }
 
 const themedStyles = StyleService.create({
-  image: {
-    ...Sizing.aspectRatio(0.9, Sizing.Ratio['4:3']),
-    marginVertical: Sizing.t4,
-  },
+
   backdrop: {
     backgroundColor: 'color-basic-transparent-600',
   },
   loginForm: {
     ...Layout.mainAxis.flexStart,
-    ...Layout.crossAxis.flexEnd,
-    paddingHorizontal: Sizing.t4,
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
@@ -266,4 +259,8 @@ const themedStyles = StyleService.create({
     width: '80%',
   },
   bankIdLoading: { margin: 10 },
+  icon: {
+    width: 20,
+    height: 20
+  }
 })

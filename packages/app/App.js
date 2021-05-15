@@ -16,6 +16,7 @@ import { LanguageProvider } from './context/language/languageContext'
 import { translations } from './utils/translation'
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
 const api = init(fetch, CookieManager)
+import { default as customMapping } from './design/mapping.json';
 
 const reporter = __DEV__
   ? {
@@ -43,6 +44,7 @@ export default () => {
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider
             {...eva}
+            customMapping={customMapping}
             theme={{
               ...(colorScheme === 'dark' ? eva.dark : eva.light),
               ...(colorScheme === 'dark' ? darkTheme : lightTheme),
