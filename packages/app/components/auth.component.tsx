@@ -52,7 +52,6 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
               subtitle={currentLanguageName}
               accessoryLeft={() => (
                 <TopNavigationAction
-                  style={styles.languageChooser}
                   accessibilityHint={translate(
                     'auth.a11y_navigate_to_change_language',
                     {
@@ -101,7 +100,7 @@ const themeStyles = StyleService.create({
   container: {
     ...LayoutStyle.mainAxis.flexStart,
     ...LayoutStyle.crossAxis.flexEnd,
-    padding: Sizing.t5,
+    padding: Sizing.t6,
   },
   image: {
     ...Sizing.aspectRatio(1.7, Sizing.Ratio['4:3']),
@@ -115,6 +114,7 @@ const themeStyles = StyleService.create({
     marginBottom: Sizing.t5,
   },
   subtitle: {
+    width: '100%',
     textAlign: 'center',
     ...Typography.fontSize.xs,
     color: 'color-basic-800',
