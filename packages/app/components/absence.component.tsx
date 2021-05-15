@@ -92,12 +92,17 @@ const Absence = () => {
           alignment="center"
           style={styles.topBar}
           title={() => (
-            <Text maxFontSizeMultiplier={1.5}>
+            <Text maxFontSizeMultiplier={1.5} style={styles.topNavigationTitle}>
               {translate('abscense.title')}
             </Text>
           )}
           subtitle={() => (
-            <Text maxFontSizeMultiplier={1.5}>{studentName(child.name)}</Text>
+            <Text
+              maxFontSizeMultiplier={1.5}
+              style={styles.topNavigationSubtitle}
+            >
+              {studentName(child.name)}
+            </Text>
           )}
         />
         <Divider />
@@ -287,5 +292,12 @@ const themedStyles = StyleService.create({
   },
   error: {
     color: 'color-primary-600',
+  },
+  topNavigationTitle: {
+    ...Typography.fontWeight.semibold,
+  },
+  topNavigationSubtitle: {
+    ...Typography.fontWeight.regular,
+    ...Typography.fontSize.sm,
   },
 })

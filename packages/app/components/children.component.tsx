@@ -86,7 +86,10 @@ export const Children = () => {
           <>
             <TopNavigation
               title={() => (
-                <Text maxFontSizeMultiplier={2.5}>
+                <Text
+                  maxFontSizeMultiplier={2.5}
+                  style={styles.topNavigationTitle}
+                >
                   {translate('children.title')}
                 </Text>
               )}
@@ -229,5 +232,8 @@ const styles = StyleSheet.create({
   emptyStateImage: {
     ...Sizing.aspectRatio(0.8),
     marginTop: Sizing.t5,
+  },
+  topNavigationTitle: {
+    ...Typography.fontWeight.semibold,
   },
 })
