@@ -1,3 +1,10 @@
+## [1.34.2](https://github.com/kolplattformen/skolplattformen/compare/v1.34.1...v1.34.2) (2021-05-16)
+
+
+### Bug Fixes
+
+* 🐛 Ord som inte är översatta hämtas från svenska ([6724f3f](https://github.com/kolplattformen/skolplattformen/commit/6724f3f683dd1ac81804fc509a775be05c704d29))
+
 ## [1.34.1](https://github.com/kolplattformen/skolplattformen/compare/v1.34.0...v1.34.1) (2021-05-12)
 
 
