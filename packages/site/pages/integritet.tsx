@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import Privacy from '../components/Privacy'
 
-const IntegrityPage = (): JSX.Element => {
+const IntegrityPage: NextPage = () => {
   return <Privacy />
 }
 

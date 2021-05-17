@@ -49,7 +49,7 @@ const FunFacts = (): JSX.Element => {
                 />
               </VisibilitySensor>
             </span>
-            <p className="text-gray-700">{funfact.title}</p>
+            <p className="text-gray-700 dark:text-gray-400">{funfact.title}</p>
           </div>
         ))}
       </div>

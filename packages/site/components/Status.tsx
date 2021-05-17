@@ -1,6 +1,6 @@
 const Status = (): JSX.Element => {
   return (
-    <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose">
+    <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose dark:prose-dark">
       <h1>Status</h1>
       <h3>Funkar appen som den ska?</h3>
       <p>

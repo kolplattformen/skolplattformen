@@ -10,7 +10,7 @@
 
 html,
 body {
-  @apply font-sans text-gray-700;
+  @apply font-sans text-gray-700 dark:bg-gray-900 dark:text-gray-300;
 }
 
 p {
@@ -31,7 +31,6 @@ p {
   right: 0;
   top: 0;
   width: 100%;
-  z-index: -1;
 }
 
 a.patreon {

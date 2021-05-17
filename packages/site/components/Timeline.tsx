@@ -18,7 +18,7 @@ interface TimelineProps {
 
 const Timeline = ({ events }: TimelineProps): JSX.Element => {
   return (
-    <ul className="max-w-2xl border-gray-200 md:mx-auto md:border-l-2 space-y-4 md:space-y-12">
+    <ul className="max-w-2xl border-gray-200 dark:border-gray-900 md:mx-auto md:border-l-2 space-y-4 md:space-y-12">
       {events.map(({ date, media, importantDates, overview }) => (
         <li className="relative" key={date}>
           <div className="absolute top-0 items-center justify-center hidden w-10 h-10 text-white bg-indigo-400 border-4 border-white rounded-full md:flex -left-5 -top-2">
@@ -35,10 +35,10 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
               />
             </svg>
           </div>
-          <div className="hidden mb-4 ml-8 text-sm font-bold text-gray-700 capitalize md:block">
+          <div className="hidden mb-4 ml-8 text-sm font-bold text-gray-700 dark:text-gray-400 capitalize md:block">
             {dateFormat(date)}
           </div>
-          <div className="p-4 text-sm leading-relaxed bg-white border-t-4 border-indigo-300 rounded-b shadow-md md:p-5 md:ml-8">
+          <div className="p-4 text-sm leading-relaxed bg-white dark:bg-gray-800 border-t-4 border-indigo-300 rounded-b shadow-md md:p-5 md:ml-8">
             <div className="block mb-4 text-lg font-bold text-gray-700 capitalize md:hidden">
               {dateFormat(date)}
             </div>

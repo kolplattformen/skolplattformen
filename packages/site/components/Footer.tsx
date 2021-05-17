@@ -35,7 +35,7 @@ const Footer = (): JSX.Element => {
           <ul className="space-y-2">
             {team.map(({ name, twitter }) => (
               <li className="flex items-center space-x-2" key={name}>
-                <div className="w-5 text-gray-700">
+                <div className="w-5 text-gray-700 dark:text-gray-500">
                   <Icon.Twitter />
                 </div>
                 <Link.External href={`https://twitter.com/@${twitter}`}>
@@ -60,8 +60,8 @@ const Footer = (): JSX.Element => {
           </ul>
         </div>
 
-        <div className="p-5 bg-white shadow-md rounded-md">
-          <div className="mb-3 text-gray-800">
+        <div className="p-5 bg-white dark:bg-gray-800 shadow-md rounded-md">
+          <div className="mb-3 text-gray-800 dark:text-gray-200">
             @iteam1337 Digitalisering på riktigt.
           </div>
           <div>
