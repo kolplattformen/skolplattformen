@@ -1,3 +1,10 @@
+## [1.35.1](https://github.com/kolplattformen/skolplattformen/compare/v1.35.0...v1.35.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* **site:** dark mode icons ([#396](https://github.com/kolplattformen/skolplattformen/issues/396)) ([d85915d](https://github.com/kolplattformen/skolplattformen/commit/d85915d79060bdfc68dc6e712716d077d57ae7be))
+
 # [1.35.0](https://github.com/kolplattformen/skolplattformen/compare/v1.34.2...v1.35.0) (2021-05-17)
 
 
