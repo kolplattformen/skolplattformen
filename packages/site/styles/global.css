@@ -45,3 +45,11 @@ a.patreon {
     display: none;
   }
 }
+
+.swiper-pagination-bullets > span {
+  @apply bg-gray-800 dark:bg-gray-200;
+}
+
+.swiper-pagination-bullets > span.swiper-pagination-bullet-active {
+  @apply bg-indigo-600 dark:bg-indigo-300;
+}

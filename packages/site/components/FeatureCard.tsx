@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 
 interface FeatureCardProps {
-  image: string
+  image: JSX.Element
   title: string
   text: string
   isActive: boolean
@@ -22,9 +22,9 @@ const FeatureCard = ({
         }
       )}
     >
-      <div className="w-20 h-20 mx-auto mb-10 bg-current" style={{
-        mask: `url(${image}) no-repeat center`,
-      }} />
+      <div className="w-20 h-20 mx-auto mb-10 text-gray-700 dark:text-gray-400">
+        {image}
+      </div>
       <div className="font-bold text-lg mb-2">{title}</div>
       <p>{text}</p>
     </div>
