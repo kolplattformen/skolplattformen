@@ -1,18 +1,25 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useNews } from '@skolplattformen/api-hooks'
-import { List, Input } from '@ui-kitten/components'
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native'
-import { Sizing } from '../styles'
-import { useChild } from './childContext.component'
-import { NewsListItem } from './newsListItem.component'
-import { translate } from '../utils/translation'
 import {
-  useNewsListSearchResults,
+  Divider,
+  Input,
+  List,
+  StyleService,
+  useStyleSheet,
+} from '@ui-kitten/components'
+import { TouchableWithoutFeedback } from 'react-native'
+import { Sizing } from '../styles'
+import {
   renderSearchResultPreview,
+  useNewsListSearchResults,
 } from '../utils/search'
-import { SearchIcon, CloseOutlineIcon } from './icon.component'
+import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { CloseOutlineIcon, SearchIcon } from './icon.component'
+import { NewsListItem } from './newsListItem.component'
 
 export const NewsList = () => {
+  const styles = useStyleSheet(themedStyles)
   const child = useChild()
   const { data } = useNews(child)
 
@@ -67,15 +74,17 @@ export const NewsList = () => {
       keyboardDismissMode="on-drag"
       data={data}
       ListHeaderComponent={header}
+      ItemSeparatorComponent={Divider}
       renderItem={({ item }) => <NewsListItem key={item.id} item={item} />}
     />
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     height: '100%',
     width: '100%',
+    backgroundColor: 'background-basic-color-1',
   },
   contentContainer: {
     padding: Sizing.t3,

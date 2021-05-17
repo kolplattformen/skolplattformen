@@ -66,15 +66,7 @@ const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
-
-    borderRadius: 2,
-
-    borderWidth: 1,
-    padding: Sizing.t5,
-    marginBottom: Sizing.t2,
-
-    backgroundColor: 'background-basic-color-1',
-    borderColor: 'border-basic-color-3',
+    paddingVertical: Sizing.t3,
   },
   text: {
     ...Layout.flex.full,
@@ -95,9 +87,9 @@ const themedStyles = StyleService.create({
     color: 'text-basic-color',
   },
   image: {
-    borderRadius: 3,
-    width: 80,
-    height: 80,
+    borderRadius: 15,
+    width: 70,
+    height: 70,
     marginRight: Sizing.t5,
   },
 })

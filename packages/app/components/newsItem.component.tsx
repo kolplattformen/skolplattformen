@@ -145,6 +145,7 @@ const themedStyles = StyleService.create({
     width: '100%',
     minHeight: 300,
     marginTop: Sizing.t4,
+    borderRadius: 15,
   },
   title: {
     ...Typography.fontWeight.bold,
