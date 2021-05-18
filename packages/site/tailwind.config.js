@@ -1,6 +1,7 @@
 module.exports = {
+  mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or false or 'class'
   theme: {
     fontFamily: {
       sans: ['Poppins', 'sans-serif'],
@@ -21,6 +22,25 @@ module.exports = {
           },
         },
       },
+      typography: (theme) => ({
+        dark: {
+          css: {
+            color: theme('colors.gray.200'),
+            h1: {
+              color: theme('colors.white'),
+            },
+            h2: {
+              color: theme('colors.white'),
+            },
+            h3: {
+              color: theme('colors.white'),
+            },
+            a: {
+              color: theme('colors.indigo.500'),
+            }
+          },
+        },
+      }),
       zIndex: {
         '-1': '-1',
       },
@@ -29,6 +49,7 @@ module.exports = {
   variants: {
     extend: {
       animation: ['motion-safe'],
+      typography: ['dark'],
     },
   },
   plugins: [require('@tailwindcss/typography')],

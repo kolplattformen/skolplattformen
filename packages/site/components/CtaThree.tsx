@@ -6,7 +6,7 @@ import { H2 } from './Typography'
 
 const CtaThree = (): JSX.Element => {
   return (
-    <Section bg="bg-white">
+    <Section bg="bg-white dark:bg-gray-900">
       <div>
         <H2>Se summering för alla dina barn på ett ställe</H2>
         <p>

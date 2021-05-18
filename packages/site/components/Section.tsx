@@ -7,7 +7,7 @@ interface SectionProps {
 }
 
 const Section: React.FC<SectionProps> = ({
-  bg = 'bg-gray-100',
+  bg = 'bg-gray-100 dark:bg-gray-800',
   padding = 'py-8 md:py-20',
   children,
   id,

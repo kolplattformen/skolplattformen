@@ -47,7 +47,7 @@ export const LanguageService = {
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
     if (langCode && allString[langCode]) {
       languageCode = langCode
-      Strings = allString[langCode]
+      Strings = { ...allString.sv, ...allString[langCode] }
     } else {
       const dataKeys = Object.keys(allString)
       languageCode = dataKeys[0]

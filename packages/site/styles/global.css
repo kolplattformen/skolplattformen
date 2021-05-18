@@ -10,7 +10,7 @@
 
 html,
 body {
-  @apply font-sans text-gray-700;
+  @apply font-sans text-gray-700 dark:bg-gray-900 dark:text-gray-300;
 }
 
 p {
@@ -31,7 +31,6 @@ p {
   right: 0;
   top: 0;
   width: 100%;
-  z-index: -1;
 }
 
 a.patreon {
@@ -45,4 +44,12 @@ a.patreon {
   .header:before {
     display: none;
   }
+}
+
+.swiper-pagination-bullets > span {
+  @apply bg-gray-800 dark:bg-gray-200;
+}
+
+.swiper-pagination-bullets > span.swiper-pagination-bullet-active {
+  @apply bg-indigo-600 dark:bg-indigo-300;
 }

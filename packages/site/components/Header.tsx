@@ -42,7 +42,7 @@ const HeaderHome = (): JSX.Element => {
       <header>
         <div
           className={classnames(
-            'bg-white bg-opacity-0 duration-200 transition-colors sticky'
+            'bg-white bg-opacity-0 duration-200 transition-colors sticky z-10'
           )}
         >
           <div className="flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-2">
@@ -63,7 +63,7 @@ const HeaderHome = (): JSX.Element => {
       </header>
       <button
         aria-label={displayMobileMenu ? 'Stäng meny' : 'Visa meny'}
-        className="fixed z-30 block w-6 w-16 p-5 text-white bg-gray-900 rounded-full md:hidden bottom-5 right-5"
+        className="fixed z-30 block w-16 p-5 text-white bg-gray-900 dark:bg-gray-700 rounded-full md:hidden bottom-5 right-5"
         onClick={() => setDisplayMobileMenu(!displayMobileMenu)}
       >
         {displayMobileMenu ? <Icon.Times /> : <Icon.Menu />}
@@ -74,7 +74,7 @@ const HeaderHome = (): JSX.Element => {
             className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50"
             onClick={() => setDisplayMobileMenu(false)}
           />
-          <div className="fixed top-0 bottom-0 left-0 z-20 w-9/12 h-screen p-5 bg-white">
+          <div className="fixed top-0 bottom-0 left-0 z-20 w-9/12 h-screen p-5 bg-white dark:bg-gray-800">
             <NavLinks onClick={() => setDisplayMobileMenu(false)} />
           </div>
         </>

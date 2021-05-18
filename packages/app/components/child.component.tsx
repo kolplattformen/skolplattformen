@@ -9,9 +9,11 @@ import {
   BottomNavigation,
   BottomNavigationTab,
   Layout,
+  StyleService,
   Text,
   TopNavigation,
   TopNavigationAction,
+  useStyleSheet,
 } from '@ui-kitten/components'
 import React from 'react'
 import { StyleProp, TextProps } from 'react-native'
@@ -32,6 +34,7 @@ import { NotificationsList } from './notificationsList.component'
 import { translate } from '../utils/translation'
 import { SafeAreaView } from '../ui/safeAreaView.component'
 import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
+import { Typography } from '../styles'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -148,6 +151,7 @@ export const Child = () => {
   const navigation = useNavigation<ChildNavigationProp>()
   const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
+  const styles = useStyleSheet(themedStyles)
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
@@ -163,7 +167,9 @@ export const Child = () => {
         <ChildProvider child={child}>
           <TopNavigation
             title={() => (
-              <Text maxFontSizeMultiplier={2}>{studentName(child.name)}</Text>
+              <Text maxFontSizeMultiplier={2} style={styles.topNavigationTitle}>
+                {studentName(child.name)}
+              </Text>
             )}
             alignment="center"
             accessoryLeft={BackAction}
@@ -174,3 +180,9 @@ export const Child = () => {
     </SafeAreaView>
   )
 }
+
+const themedStyles = StyleService.create({
+  topNavigationTitle: {
+    ...Typography.fontWeight.semibold,
+  },
+})
