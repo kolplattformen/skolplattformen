@@ -289,7 +289,7 @@ describe('parse', () => {
     expect(parse('MLAKA')).toEqual({
       code: 'MLAKA',
       category: 'Modersmål',
-      name: 'Akan, Asante, Fante',
+      name: 'Akan',
     })
     expect(parse('MLSQI')).toEqual({
       code: 'MLSQI',
@@ -329,7 +329,7 @@ describe('parse', () => {
     expect(parse('MLBAL')).toEqual({
       code: 'MLBAL',
       category: 'Modersmål',
-      name: 'Baluchi, Baloci, Baluci, Makrani',
+      name: 'Baluchiska',
     })
     expect(parse('MLBAM')).toEqual({
       code: 'MLBAM',
@@ -349,7 +349,7 @@ describe('parse', () => {
     expect(parse('MLBEM')).toEqual({
       code: 'MLBEM',
       category: 'Modersmål',
-      name: 'Bemba, Chibemba, Chiwemba, Ichibemba, Wemba',
+      name: 'Bemba',
     })
     expect(parse('MLBEN')).toEqual({
       code: 'MLBEN',
@@ -529,7 +529,7 @@ describe('parse', () => {
     expect(parse('MLKAM')).toEqual({
       code: 'MLKAM',
       category: 'Modersmål',
-      name: 'Kamba, Kekamba, Kikamba',
+      name: 'Kamba',
     })
     expect(parse('MLKHM')).toEqual({
       code: 'MLKHM',
@@ -894,7 +894,7 @@ describe('parse', () => {
     expect(parse('MLSOT')).toEqual({
       code: 'MLSOT',
       category: 'Modersmål',
-      name: 'Sesotho, Sisutho, Souto, Suthu, Suto',
+      name: 'Sydsotho',
     })
     expect(parse('MLSNA')).toEqual({
       code: 'MLSNA',
@@ -999,7 +999,7 @@ describe('parse', () => {
     expect(parse('MLTSN')).toEqual({
       code: 'MLTSN',
       category: 'Modersmål',
-      name: 'Tswana, Setswana',
+      name: 'Tswana',
     })
     expect(parse('MLTUR')).toEqual({
       code: 'MLTUR',
@@ -1049,7 +1049,7 @@ describe('parse', () => {
     expect(parse('MLYOR')).toEqual({
       code: 'MLYOR',
       category: 'Modersmål',
-      name: 'Yoruba, Yariba, Yooba',
+      name: 'Yoruba',
     })
     expect(parse('MLZUL')).toEqual({
       code: 'MLZUL',

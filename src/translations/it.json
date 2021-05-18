@@ -9,7 +9,18 @@
     },
     "languages": {
         "ITA": "Italiano",
-        "FRA": "Francese"
+        "FRA": "Francese",
+        "TUR": "Turco",
+        "SPA": "Spagnolo",
+        "RUS": "Russo",
+        "POR": "Portogese",
+        "NOR": "Norvegese",
+        "KOR": "Coreano",
+        "ZHO": "Cinese",
+        "JPN": "Giapponese",
+        "ENG": "Inglese",
+        "DAN": "Danese",
+        "FIN": "Finlandese"
     },
     "specialLanguages": {
         "SVA": "Svedese come secondo lingua",
