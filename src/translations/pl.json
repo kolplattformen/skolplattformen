@@ -219,6 +219,7 @@
     "misc": {
         "Lunch": "Lunch",
         "MTID": "Czas z mentorem",
-        "Prandium": "Lunch"
+        "Prandium": "Lunch",
+        "Rast": "Przerwa"
     }
 }
