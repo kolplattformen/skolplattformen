@@ -16,7 +16,8 @@
         "logout": "Logout",
         "loading": "Caricamento in corso…",
         "confirm": "Conferma",
-        "changeLanguage": "Cambia lingua"
+        "changeLanguage": "Cambia lingua",
+        "cancel": "Interrompere"
     },
     "schedule": {
         "end": "Finische",
