@@ -1,6 +1,6 @@
 {
   "strict": {
-    "border-radius": 50
+    "text-font-family": "Poppins"
   },
   "components": {
     "Button": {

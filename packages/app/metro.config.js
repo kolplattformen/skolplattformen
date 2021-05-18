@@ -12,6 +12,7 @@ const MetroConfig = require('@ui-kitten/metro-config')
  */
 const evaConfig = {
   evaPackage: '@eva-design/eva',
+  customMappingPath: './design/mapping.json',
 }
 
 module.exports = MetroConfig.create(evaConfig, {
