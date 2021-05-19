@@ -65,28 +65,28 @@ export const SetLanguage = () => {
           alignment="center"
           title={translate('language.changeLanguage')}
         />
-        
+
         <View style={styles.content}>
-        <ScrollView>
-          <Layout style={styles.container}>
-            <View style={styles.languageList}>
-              {activeLanguages.map((language) => (
-                <TouchableOpacity
-                  key={language.langCode}
-                  style={styles.languageButton}
-                  onPress={() => setSelectedLanguage(language.langCode)}
-                >
-                  <Text style={styles.check}>
-                    {isSelected(language.langCode) ? '✓' : ''}
-                  </Text>
-                  <Text>{language.languageName}</Text>
-                  <Text style={styles.languageButtonSubtitle}>
-                    {language.languageLocalName}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </Layout>
+          <ScrollView>
+            <Layout style={styles.container}>
+              <View style={styles.languageList}>
+                {activeLanguages.map((language) => (
+                  <TouchableOpacity
+                    key={language.langCode}
+                    style={styles.languageButton}
+                    onPress={() => setSelectedLanguage(language.langCode)}
+                  >
+                    <Text style={styles.check}>
+                      {isSelected(language.langCode) ? '✓' : ''}
+                    </Text>
+                    <Text>{language.languageName}</Text>
+                    <Text style={styles.languageButtonSubtitle}>
+                      {language.languageLocalName}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </Layout>
           </ScrollView>
 
           <ButtonGroup style={styles.buttonGroup}>
@@ -102,7 +102,6 @@ export const SetLanguage = () => {
             </Button>
           </ButtonGroup>
         </View>
-        
       </SafeAreaViewContainer>
     </SafeAreaView>
   )
