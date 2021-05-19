@@ -68,7 +68,7 @@ export const languages: Language[] = [
     langCode: 'la',
     languageName: 'Latin',
     languageLocalName: 'Latine',
-    active: true,
+    active: false,
   },
   {
     langCode: 'nb_NO',

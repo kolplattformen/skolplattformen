@@ -1,5 +1,6 @@
 import { I18nManager } from 'react-native'
 import i18n from 'i18n-js'
+import merge from 'deepmerge'
 import moment from 'moment'
 import 'moment/locale/ar'
 import 'moment/locale/de'
@@ -56,7 +57,7 @@ export const LanguageService = {
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
     if (langCode && allString[langCode]) {
       languageCode = langCode
-      Strings = { ...allString.sv, ...allString[langCode] }
+      Strings = merge(allString.sv, allString[langCode])
     } else {
       const dataKeys = Object.keys(allString)
       languageCode = dataKeys[0]

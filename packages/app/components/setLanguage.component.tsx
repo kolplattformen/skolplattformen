@@ -9,7 +9,7 @@ import {
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing } from '../styles'
@@ -65,7 +65,9 @@ export const SetLanguage = () => {
           alignment="center"
           title={translate('language.changeLanguage')}
         />
+        
         <View style={styles.content}>
+        <ScrollView>
           <Layout style={styles.container}>
             <View style={styles.languageList}>
               {activeLanguages.map((language) => (
@@ -85,6 +87,7 @@ export const SetLanguage = () => {
               ))}
             </View>
           </Layout>
+          </ScrollView>
 
           <ButtonGroup style={styles.buttonGroup}>
             <Button
@@ -99,6 +102,7 @@ export const SetLanguage = () => {
             </Button>
           </ButtonGroup>
         </View>
+        
       </SafeAreaViewContainer>
     </SafeAreaView>
   )
