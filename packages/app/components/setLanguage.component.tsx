@@ -9,7 +9,7 @@ import {
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing } from '../styles'
@@ -65,26 +65,29 @@ export const SetLanguage = () => {
           alignment="center"
           title={translate('language.changeLanguage')}
         />
+
         <View style={styles.content}>
-          <Layout style={styles.container}>
-            <View style={styles.languageList}>
-              {activeLanguages.map((language) => (
-                <TouchableOpacity
-                  key={language.langCode}
-                  style={styles.languageButton}
-                  onPress={() => setSelectedLanguage(language.langCode)}
-                >
-                  <Text style={styles.check}>
-                    {isSelected(language.langCode) ? '✓' : ''}
-                  </Text>
-                  <Text>{language.languageName}</Text>
-                  <Text style={styles.languageButtonSubtitle}>
-                    {language.languageLocalName}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </Layout>
+          <ScrollView>
+            <Layout style={styles.container}>
+              <View style={styles.languageList}>
+                {activeLanguages.map((language) => (
+                  <TouchableOpacity
+                    key={language.langCode}
+                    style={styles.languageButton}
+                    onPress={() => setSelectedLanguage(language.langCode)}
+                  >
+                    <Text style={styles.check}>
+                      {isSelected(language.langCode) ? '✓' : ''}
+                    </Text>
+                    <Text>{language.languageName}</Text>
+                    <Text style={styles.languageButtonSubtitle}>
+                      {language.languageLocalName}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </Layout>
+          </ScrollView>
 
           <ButtonGroup style={styles.buttonGroup}>
             <Button

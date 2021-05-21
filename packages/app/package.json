@@ -32,6 +32,7 @@
     "@ui-kitten/components": "5.0.0",
     "@ui-kitten/eva-icons": "5.0.0",
     "buffer": "6.0.3",
+    "deepmerge": "^4.2.2",
     "fast-fuzzy": "^1.10.8",
     "formik": "2.2.6",
     "hermes-engine": "0.7.2",

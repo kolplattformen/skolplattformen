@@ -1,9 +1,19 @@
 import { I18nManager } from 'react-native'
 import i18n from 'i18n-js'
+import merge from 'deepmerge'
 import moment from 'moment'
 import 'moment/locale/ar'
 import 'moment/locale/de'
+import 'moment/locale/es'
+import 'moment/locale/fi'
+import 'moment/locale/fr'
+import 'moment/locale/it'
+import 'moment/locale/ja'
+import 'moment/locale/uz-latn'
+import 'moment/locale/nb'
+import 'moment/locale/nl'
 import 'moment/locale/pl'
+import 'moment/locale/ru'
 import 'moment/locale/sv'
 
 const changeListeners: Record<string, any> = {}
@@ -47,7 +57,7 @@ export const LanguageService = {
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
     if (langCode && allString[langCode]) {
       languageCode = langCode
-      Strings = { ...allString.sv, ...allString[langCode] }
+      Strings = merge(allString.sv, allString[langCode])
     } else {
       const dataKeys = Object.keys(allString)
       languageCode = dataKeys[0]
