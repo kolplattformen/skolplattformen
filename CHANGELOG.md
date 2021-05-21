@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/kolplattformen/skolplattformen/compare/v1.35.1...v1.36.0) (2021-05-21)
+
+
+### Features
+
+* 🎸 Fler språk ([#400](https://github.com/kolplattformen/skolplattformen/issues/400)) ([0e8e905](https://github.com/kolplattformen/skolplattformen/commit/0e8e90581b7ab3c1705e590dbf0ef6f4a2286f1f))
+
 ## [1.35.1](https://github.com/kolplattformen/skolplattformen/compare/v1.35.0...v1.35.1) (2021-05-17)
 
 
