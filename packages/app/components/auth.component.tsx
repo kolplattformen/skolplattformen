@@ -78,7 +78,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                   accessibilityIgnoresInvertColors={false}
                 />
               <Layout style={styles.container}>
-                <Text category="h5" style={styles.header} adjustsFontSizeToFit numberOfLines={2}>
+                <Text category="h1" style={styles.header} adjustsFontSizeToFit numberOfLines={2}>
                   {translate('general.title')}
                 </Text>
                 <Login />
@@ -110,7 +110,7 @@ const themeStyles = StyleService.create({
     ...LayoutStyle.flex.full,
   },
   header: {
-    width: '50%',
+    width: '60%',
     marginBottom: Sizing.t5,
   },
   subtitle: {

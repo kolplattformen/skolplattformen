@@ -180,7 +180,7 @@ export const Login = () => {
             placeholder={translate('auth.placeholder_SocialSecurityNumber')}
           />
         )}
-        <ButtonGroup style={styles.loginButtonGroup} status="primary">
+        <ButtonGroup style={styles.loginButtonGroup} status="info">
           <Button
             accessible={true}
             onPress={() => startLogin(socialSecurityNumber)}
