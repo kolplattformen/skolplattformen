@@ -19,7 +19,7 @@
         "bankid": {
             "OpenManually": "Öppna BankID manuellt",
             "OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
-            "OpenOnThisDevice": "Öppna BankID på denna enhet",
+            "OpenOnThisDevice": "Logga in med BankID",
             "Waiting": "Väntar på BankID…"
         },
         "chooseLoginMethod": "Välj inloggningsmetod",

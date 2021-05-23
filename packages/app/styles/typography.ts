@@ -30,7 +30,7 @@ export const fontWeight: Record<FontWeight, TextStyle> = {
   },
   bold: {
     ...systemWeights.bold,
-  },
+  }
 }
 
 export const header: TextStyle = {

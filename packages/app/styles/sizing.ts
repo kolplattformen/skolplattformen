@@ -30,13 +30,14 @@ export const aspectRatio = (
   }
 }
 
-type Layout = 't1' | 't2' | 't3' | 't4' | 't5'
+type Layout = 't1' | 't2' | 't3' | 't4' | 't5' | 't6'
 export const layout: Record<Layout, number> = {
   t1: 4,
   t2: 8,
   t3: 12,
   t4: 16,
   t5: 20,
+  t6: 30,
 }
 
 /** 4px */
@@ -49,3 +50,5 @@ export const t3 = layout.t3
 export const t4 = layout.t4
 /** 20px */
 export const t5 = layout.t5
+/** 30px */
+export const t6 = layout.t6
