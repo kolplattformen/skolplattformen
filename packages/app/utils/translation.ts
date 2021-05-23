@@ -43,19 +43,19 @@ export const languages: Language[] = [
   {
     langCode: 'fi',
     languageName: 'Finnish',
-    languageLocalName: 'Suomalainen',
+    languageLocalName: 'Suomi',
     active: true,
   },
   {
     langCode: 'fr',
     languageName: 'French',
-    languageLocalName: 'Française',
+    languageLocalName: 'Français',
     active: true,
   },
   {
     langCode: 'it',
     languageName: 'Italian',
-    languageLocalName: 'Italiana',
+    languageLocalName: 'Italiano',
     active: true,
   },
   {
@@ -67,13 +67,13 @@ export const languages: Language[] = [
   {
     langCode: 'la',
     languageName: 'Latin',
-    languageLocalName: 'Latine',
-    active: false,
+    languageLocalName: 'Latina',
+    active: true,
   },
   {
     langCode: 'nb_NO',
     languageName: 'Norwegian Bokmål',
-    languageLocalName: 'Norsk Bokmål',
+    languageLocalName: 'Norsk bokmål',
     active: true,
   },
   {
