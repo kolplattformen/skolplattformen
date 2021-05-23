@@ -135,14 +135,8 @@ const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
     tabBar={(props) => <BottomTabBar {...props} />}
   >
     <Screen name={'navigation.news'} component={NewsScreen} />
-    <Screen
-      name={'navigation.notifications'}
-      component={NotificationsScreen}
-    />
-    <Screen
-      name={'navigation.calender'}
-      component={CalendarScreen}
-    />
+    <Screen name={'navigation.notifications'} component={NotificationsScreen} />
+    <Screen name={'navigation.calender'} component={CalendarScreen} />
     <Screen name={'navigation.menu'} component={MenuScreen} />
   </Navigator>
 )
