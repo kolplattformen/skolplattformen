@@ -4,7 +4,6 @@ import {
   ButtonGroup,
   Card,
   Divider,
-  Icon,
   Input,
   List,
   ListItem,
@@ -14,9 +13,8 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-  Animated,
   Image,
   Linking,
   Platform,
@@ -245,7 +243,8 @@ export const Login = () => {
             status="basic"
             onPress={() => {
               setShowLoginMethod(false)
-            }}>
+            }}
+          >
             {translate('general.cancel')}
           </Button>
         </Card>
