@@ -241,6 +241,7 @@ export const Login = () => {
           />
           <Button
             status="basic"
+            style={styles.cancelButtonStyle}
             onPress={() => {
               setShowLoginMethod(false)
             }}
@@ -299,4 +300,5 @@ const themedStyles = StyleService.create({
     width: '90%',
   },
   bankIdLoading: { margin: 10 },
+  cancelButtonStyle: { marginTop: 15 },
 })
