@@ -4,6 +4,7 @@ import {
   ButtonGroup,
   Card,
   Divider,
+  Icon,
   Input,
   List,
   ListItem,
@@ -13,8 +14,9 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
+  Animated,
   Image,
   Linking,
   Platform,
@@ -26,6 +28,7 @@ import { schema } from '../app.json'
 import { Layout, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import {
+  CheckIcon,
   CloseOutlineIcon,
   PersonIcon,
   SecureIcon,
@@ -197,7 +200,9 @@ export const Login = () => {
           </Button>
           <Button
             accessible={true}
-            onPress={() => setShowLoginMethod(true)}
+            onPress={() => {
+              setShowLoginMethod(true)
+            }}
             style={styles.loginMethodButton}
             appearance="ghost"
             status="primary"
@@ -215,20 +220,34 @@ export const Login = () => {
         onBackdropPress={() => setShowLoginMethod(false)}
         backdropStyle={styles.backdrop}
       >
-        <Card disabled={true}>
-          <Text category='h5' style={styles.bankIdLoading}>{translate('auth.chooseLoginMethod')}</Text>
+        <Card>
+          <Text category="h5" style={styles.bankIdLoading}>
+            {translate('auth.chooseLoginMethod')}
+          </Text>
           <List
             data={loginMethods}
             ItemSeparatorComponent={Divider}
             renderItem={({ item, index }) => (
               <ListItem
+                title={item}
                 accessible={true}
+                accessoryRight={
+                  loginMethodIndex === index ? CheckIcon : undefined
+                }
                 onPress={() => {
                   setLoginMethodIndex(index)
                   setShowLoginMethod(false)
-                }}><Text>{item}</Text></ListItem>
+                }}
+              />
             )}
           />
+          <Button
+            status="basic"
+            onPress={() => {
+              setShowLoginMethod(false)
+            }}>
+            {translate('general.cancel')}
+          </Button>
         </Card>
       </Modal>
       <Modal
@@ -278,7 +297,7 @@ const themedStyles = StyleService.create({
   loginButton: { ...Layout.flex.full },
   loginMethodButton: { width: 45 },
   modal: {
-    width: '80%',
+    width: '90%',
   },
   bankIdLoading: { margin: 10 },
 })
