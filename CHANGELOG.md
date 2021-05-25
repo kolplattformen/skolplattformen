@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/kolplattformen/skolplattformen/compare/v1.36.0...v1.36.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* 🐛 use modal for login method picker. Fixes [#404](https://github.com/kolplattformen/skolplattformen/issues/404) ([bf472fb](https://github.com/kolplattformen/skolplattformen/commit/bf472fb94389cdb7164e7d6fa042235722c7777e))
+
 # [1.36.0](https://github.com/kolplattformen/skolplattformen/compare/v1.35.1...v1.36.0) (2021-05-21)
 
 
