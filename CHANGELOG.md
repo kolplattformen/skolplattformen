@@ -1,3 +1,10 @@
+## [1.36.2](https://github.com/kolplattformen/skolplattformen/compare/v1.36.1...v1.36.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* 🐛 knapparna i childListItem pekar rätt igen ([#407](https://github.com/kolplattformen/skolplattformen/issues/407)) ([458daf6](https://github.com/kolplattformen/skolplattformen/commit/458daf6c67c26134dfd27a8a8c0fcef32daf7a45))
+
 ## [1.36.1](https://github.com/kolplattformen/skolplattformen/compare/v1.36.0...v1.36.1) (2021-05-25)
 
 
