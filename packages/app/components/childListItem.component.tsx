@@ -126,7 +126,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             navigation.navigate('Child', {
               child,
               color,
-              initialRouteName: translate('navigation.news'),
+              initialRouteName: 'navigation.news',
             })
           }
           accessoryLeft={NewsIcon}
@@ -142,7 +142,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             navigation.navigate('Child', {
               child,
               color,
-              initialRouteName: translate('navigation.notifications'),
+              initialRouteName: 'navigation.notifications',
             })
           }
           accessoryLeft={NotificationsIcon}
@@ -158,7 +158,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             navigation.navigate('Child', {
               child,
               color,
-              initialRouteName: translate('navigation.calender'),
+              initialRouteName: 'navigation.calender',
             })
           }
           accessoryLeft={CalendarOutlineIcon}
@@ -174,7 +174,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             navigation.navigate('Child', {
               child,
               color,
-              initialRouteName: translate('navigation.menu'),
+              initialRouteName: 'navigation.menu',
             })
           }
           accessoryLeft={MenuIcon}
