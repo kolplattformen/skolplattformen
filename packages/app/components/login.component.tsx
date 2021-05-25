@@ -3,7 +3,10 @@ import {
   Button,
   ButtonGroup,
   Card,
+  Divider,
   Input,
+  List,
+  ListItem,
   Modal,
   StyleService,
   Text,
@@ -36,6 +39,7 @@ export const Login = () => {
     (() => Promise<void>) | (() => null)
   >(() => () => null)
   const [visible, showModal] = useState(false)
+  const [showLoginMethod, setShowLoginMethod] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
   const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
@@ -51,7 +55,6 @@ export const Login = () => {
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
   ]
-
   const selectLoginMethod = () => {
     const options = {
       title: translate('auth.chooseLoginMethod'),
@@ -204,7 +207,7 @@ export const Login = () => {
           </Button>
           <Button
             accessible={true}
-            onPress={selectLoginMethod}
+            onPress={() => setShowLoginMethod(true)}
             style={styles.loginMethodButton}
             appearance="ghost"
             status="primary"
@@ -216,6 +219,28 @@ export const Login = () => {
           />
         </ButtonGroup>
       </View>
+      <Modal
+        visible={showLoginMethod}
+        style={styles.modal}
+        onBackdropPress={() => setShowLoginMethod(false)}
+        backdropStyle={styles.backdrop}
+      >
+        <Card disabled={true}>
+          <Text category='h5' style={styles.bankIdLoading}>{translate('auth.chooseLoginMethod')}</Text>
+          <List
+            data={loginMethods}
+            ItemSeparatorComponent={Divider}
+            renderItem={({ item, index }) => (
+              <ListItem
+                accessible={true}
+                onPress={() => {
+                  setLoginMethodIndex(index)
+                  setShowLoginMethod(false)
+                }}><Text>{item}</Text></ListItem>
+            )}
+          />
+        </Card>
+      </Modal>
       <Modal
         visible={visible}
         style={styles.modal}
