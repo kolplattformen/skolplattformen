@@ -21,7 +21,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
 import { Layout, Sizing } from '../styles'
@@ -55,15 +54,6 @@ export const Login = () => {
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
   ]
-  const selectLoginMethod = () => {
-    const options = {
-      title: translate('auth.chooseLoginMethod'),
-      optionsIOS: loginMethods,
-      optionsAndroid: loginMethods,
-      onCancelAndroidIndex: loginMethodIndex,
-    }
-    ActionSheet(options, (index: number) => setLoginMethodIndex(index))
-  }
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
       setCachedLoginMethodIndex(loginMethodIndex.toString())
