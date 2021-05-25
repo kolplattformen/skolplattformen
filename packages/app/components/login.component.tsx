@@ -3,7 +3,10 @@ import {
   Button,
   ButtonGroup,
   Card,
+  Divider,
   Input,
+  List,
+  ListItem,
   Modal,
   StyleService,
   Text,
@@ -18,12 +21,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
 import { Layout, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import {
+  CheckIcon,
   CloseOutlineIcon,
   PersonIcon,
   SecureIcon,
@@ -36,6 +39,7 @@ export const Login = () => {
     (() => Promise<void>) | (() => null)
   >(() => () => null)
   const [visible, showModal] = useState(false)
+  const [showLoginMethod, setShowLoginMethod] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
   const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
@@ -51,16 +55,6 @@ export const Login = () => {
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
   ]
-
-  const selectLoginMethod = () => {
-    const options = {
-      title: translate('auth.chooseLoginMethod'),
-      optionsIOS: loginMethods,
-      optionsAndroid: loginMethods,
-      onCancelAndroidIndex: loginMethodIndex,
-    }
-    ActionSheet(options, (index: number) => setLoginMethodIndex(index))
-  }
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
       setCachedLoginMethodIndex(loginMethodIndex.toString())
@@ -204,7 +198,9 @@ export const Login = () => {
           </Button>
           <Button
             accessible={true}
-            onPress={selectLoginMethod}
+            onPress={() => {
+              setShowLoginMethod(true)
+            }}
             style={styles.loginMethodButton}
             appearance="ghost"
             status="primary"
@@ -216,6 +212,44 @@ export const Login = () => {
           />
         </ButtonGroup>
       </View>
+      <Modal
+        visible={showLoginMethod}
+        style={styles.modal}
+        onBackdropPress={() => setShowLoginMethod(false)}
+        backdropStyle={styles.backdrop}
+      >
+        <Card>
+          <Text category="h5" style={styles.bankIdLoading}>
+            {translate('auth.chooseLoginMethod')}
+          </Text>
+          <List
+            data={loginMethods}
+            ItemSeparatorComponent={Divider}
+            renderItem={({ item, index }) => (
+              <ListItem
+                title={item}
+                accessible={true}
+                accessoryRight={
+                  loginMethodIndex === index ? CheckIcon : undefined
+                }
+                onPress={() => {
+                  setLoginMethodIndex(index)
+                  setShowLoginMethod(false)
+                }}
+              />
+            )}
+          />
+          <Button
+            status="basic"
+            style={styles.cancelButtonStyle}
+            onPress={() => {
+              setShowLoginMethod(false)
+            }}
+          >
+            {translate('general.cancel')}
+          </Button>
+        </Card>
+      </Modal>
       <Modal
         visible={visible}
         style={styles.modal}
@@ -263,7 +297,8 @@ const themedStyles = StyleService.create({
   loginButton: { ...Layout.flex.full },
   loginMethodButton: { width: 45 },
   modal: {
-    width: '80%',
+    width: '90%',
   },
   bankIdLoading: { margin: 10 },
+  cancelButtonStyle: { marginTop: 15 },
 })
