@@ -1,3 +1,10 @@
+## [1.36.3](https://github.com/kolplattformen/skolplattformen/compare/v1.36.2...v1.36.3) (2021-05-26)
+
+
+### Bug Fixes
+
+* 🐛 add a11y properties for childListItems ([db8434d](https://github.com/kolplattformen/skolplattformen/commit/db8434d7f33b404c2616a69714acc64c1a67d08e)), closes [#354](https://github.com/kolplattformen/skolplattformen/issues/354)
+
 ## [1.36.2](https://github.com/kolplattformen/skolplattformen/compare/v1.36.1...v1.36.2) (2021-05-25)
 
 
