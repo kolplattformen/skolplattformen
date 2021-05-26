@@ -1,3 +1,4 @@
+/* eslint-disable react-native-a11y/has-accessibility-hint */
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
@@ -119,6 +120,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       <View style={styles.itemFooter}>
         <Button
           style={styles.item}
+          accessible={true}
+          accessibilityLabel={`${child.name}, ${translate('navigation.news')}`}
+          accessibilityRole="button"
           size="small"
           appearance={buttonAppearance}
           status={statusColors[newsStatus]}
@@ -135,6 +139,11 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         </Button>
         <Button
           style={styles.item}
+          accessible={true}
+          accessibilityLabel={`${child.name}, ${translate(
+            'navigation.notifications'
+          )}`}
+          accessibilityRole="button"
           size="small"
           appearance={buttonAppearance}
           status={statusColors[notificationsStatus]}
@@ -151,6 +160,11 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         </Button>
         <Button
           style={styles.item}
+          accessible={true}
+          accessibilityLabel={`${child.name}, ${translate(
+            'navigation.calender'
+          )}`}
+          accessibilityRole="button"
           size="small"
           appearance={buttonAppearance}
           status={statusColors[calendarStatus]}
@@ -167,6 +181,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         </Button>
         <Button
           style={styles.item}
+          accessible={true}
+          accessibilityLabel={`${child.name}, ${translate('navigation.menu')}`}
+          accessibilityRole="button"
           size="small"
           appearance={buttonAppearance}
           status={statusColors[menuStatus]}
@@ -232,7 +249,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
       )}
       <View style={styles.itemFooterAbsence}>
         <Button
-          accessible
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel={`${child.name}, ${translate('abscense.title')}`}
           size="small"
           status="primary"
           onPress={() => navigation.navigate('Absence', { child })}
