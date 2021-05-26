@@ -140,7 +140,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           accessible={true}
-          accessibilityLabel={`${child.name}, ${translate('navigation.notifications')}`}
+          accessibilityLabel={`${child.name}, ${translate(
+            'navigation.notifications'
+          )}`}
           accessibilityRole="button"
           size="small"
           appearance={buttonAppearance}
@@ -159,7 +161,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         <Button
           style={styles.item}
           accessible={true}
-          accessibilityLabel={`${child.name}, ${translate('navigation.calender')}`}
+          accessibilityLabel={`${child.name}, ${translate(
+            'navigation.calender'
+          )}`}
           accessibilityRole="button"
           size="small"
           appearance={buttonAppearance}
