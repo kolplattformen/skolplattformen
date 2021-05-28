@@ -1,3 +1,10 @@
+## [1.36.4](https://github.com/kolplattformen/skolplattformen/compare/v1.36.3...v1.36.4) (2021-05-28)
+
+
+### Bug Fixes
+
+* 🐛 Kalender - text blir avklippt ([#410](https://github.com/kolplattformen/skolplattformen/issues/410)) ([377d468](https://github.com/kolplattformen/skolplattformen/commit/377d4684e4b1ef51647b3adcec9dadccbbbc2a76)), closes [#409](https://github.com/kolplattformen/skolplattformen/issues/409)
+
 ## [1.36.3](https://github.com/kolplattformen/skolplattformen/compare/v1.36.2...v1.36.3) (2021-05-26)
 
 
