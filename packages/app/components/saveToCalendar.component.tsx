@@ -78,8 +78,8 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
     >
       <MenuItem
         accessoryLeft={CalendarOutlineIcon}
-        title={() => (
-          <Text maxFontSizeMultiplier={2}>
+        title={(evaProps) => (
+          <Text {...evaProps} maxFontSizeMultiplier={2}>
             {translate('calender.saveToCalender')}
           </Text>
         )}
