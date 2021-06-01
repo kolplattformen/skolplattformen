@@ -34,6 +34,6 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-1',
   },
   contentContainer: {
-    paddingHorizontal: Sizing.t3,
+    paddingHorizontal: Sizing.t5,
   },
 })
