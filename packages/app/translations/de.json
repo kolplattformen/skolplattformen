@@ -45,7 +45,11 @@
             "rebellious": "rebellische",
             "simple": "einfache",
             "working": "funktionierende"
-        }
+        },
+        "a11y_select_login_method": "Wähle die Anmeldemethode",
+        "a11y_clear_social_security_input_field": "Sozialversicherungsnummer-Feld löschen",
+        "a11y_image_two_boys": "Bild von zwei Personen, die ihre Mobiltelefon überprüfen",
+        "a11y_change_language": "Wähle deine Sprache"
     },
     "calender": {
         "approveAccessToCalender": "Du musst Zugriff auf deinen Kalender erlauben",
@@ -96,7 +100,7 @@
         "title": "Nachricht von Skolplattformen",
         "updated": "Aktualisiert",
         "search": {
-            "placeholder": "Alle nachrichten durchsuchen…"
+            "placeholder": "Alle Nachrichten durchsuchen …"
         }
     },
     "notifications": {
@@ -107,5 +111,8 @@
         "lunch": "Mittagessen",
         "end": "Ende",
         "start": "Anfang"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Kontaktinformationen anzeigen"
     }
 }
