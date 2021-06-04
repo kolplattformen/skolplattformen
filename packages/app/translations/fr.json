@@ -47,7 +47,11 @@
         },
         "loginFailed": "La connexion a échoué, veuillez réessayer.",
         "loginAsTestUser": "Connectez-vous en tant qu'utilisateur test",
-        "chooseLoginMethod": "Choisissez la méthode de connexion"
+        "chooseLoginMethod": "Choisissez la méthode de connexion",
+        "a11y_select_login_method": "Sélectionnez la méthode de connexion",
+        "a11y_clear_social_security_input_field": "Effacer le champ du numéro de sécurité sociale",
+        "a11y_image_two_boys": "Photo de deux personnes consultant leur téléphone portable",
+        "a11y_change_language": "Sélectionnez votre langue"
     },
     "abscense": {
         "startTime": "Heure de début",
@@ -68,7 +72,10 @@
         "published": "Publié",
         "notificationTitle": "Nouvelles : {{header}} ({{published}})",
         "noNewNewsItemsThisWeek": "Pas de nouvelles actualités cette semaine.",
-        "backToChild": "Retour à l'enfant"
+        "backToChild": "Retour à l'enfant",
+        "search": {
+            "placeholder": "Rechercher toutes les nouvelles…"
+        }
     },
     "navigation": {
         "notifications": "Notifications",
@@ -94,9 +101,18 @@
         "loadingErrorHeading": "Oups !"
     },
     "abbrevations": {
-        "upperSecondarySchool": "L'enseignement secondaire supérieur",
+        "upperSecondarySchool": "École secondaire supérieure",
         "preSchool": "Préscolaire",
         "leisureTimeCentre": "Centre de loisirs",
-        "compulsorySchool": "L'école obligatoire"
+        "compulsorySchool": "École obligatoire"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Afficher les infos de contact"
+    },
+    "schedule": {
+        "gymBag": "Sac de sport",
+        "lunch": "Déjeuner",
+        "end": "Fin",
+        "start": "Début"
     }
 }
