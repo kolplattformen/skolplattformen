@@ -1,20 +1,24 @@
-import { useApi } from '@skolplattformen/api-hooks'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import React, { useEffect } from 'react'
-import { StatusBar } from 'react-native'
-import { schema } from '../app.json'
-import Absence from './absence.component'
-import { Child } from './child.component'
-import { Children } from './children.component'
-import { Auth } from './auth.component'
-import { SetLanguage } from './setLanguage.component'
-import { NewsItem } from './newsItem.component'
+import { useApi } from '@skolplattformen/api-hooks'
 import {
   Child as ChildType,
   NewsItem as NewsItemType,
 } from '@skolplattformen/embedded-api'
+import React, { useEffect } from 'react'
+import { StatusBar, useColorScheme } from 'react-native'
+import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { schema } from '../app.json'
+import {
+  darkNavigationTheme,
+  lightNavigationTheme,
+} from '../design/navigationThemes'
 import { useAppState } from '../hooks/useAppState'
+import Absence, { absenceRouteOptions } from './absence.component'
+import { Auth, authRouteOptions } from './auth.component'
+import { Child, childRouteOptions } from './child.component'
+import { childenRouteOptions, Children } from './children.component'
+import { NewsItem, newsItemRouteOptions } from './newsItem.component'
+import { SetLanguage, setLanguageRouteOptions } from './setLanguage.component'
 
 export type RootStackParamList = {
   Login: undefined
@@ -29,7 +33,7 @@ export type RootStackParamList = {
   SetLanguage: undefined
 }
 
-const { Navigator, Screen } = createStackNavigator()
+const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>()
 
 const linking = {
   prefixes: [schema],
@@ -42,6 +46,8 @@ const linking = {
 
 export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
+
+  const colorScheme = useColorScheme()
 
   const currentAppState = useAppState()
 
@@ -59,20 +65,45 @@ export const AppNavigator = () => {
   }, [currentAppState, isLoggedIn, api])
 
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer
+      linking={linking}
+      theme={
+        colorScheme === 'dark' ? darkNavigationTheme : lightNavigationTheme
+      }
+    >
       <StatusBar />
-      <Navigator headerMode="none">
+      <Navigator>
         {isLoggedIn ? (
           <>
-            <Screen name="Children" component={Children} />
-            <Screen name="Child" component={Child} />
-            <Screen name="NewsItem" component={NewsItem} />
-            <Screen name="Absence" component={Absence} />
+            <Screen
+              name="Children"
+              component={Children}
+              options={childenRouteOptions}
+            />
+            <Screen
+              name="Child"
+              component={Child}
+              options={childRouteOptions}
+            />
+            <Screen
+              name="NewsItem"
+              component={NewsItem}
+              options={newsItemRouteOptions}
+            />
+            <Screen
+              name="Absence"
+              component={Absence}
+              options={absenceRouteOptions}
+            />
           </>
         ) : (
           <>
-            <Screen name="Login" component={Auth} />
-            <Screen name="SetLanguage" component={SetLanguage} />
+            <Screen name="Login" component={Auth} options={authRouteOptions} />
+            <Screen
+              name="SetLanguage"
+              component={SetLanguage}
+              options={setLanguageRouteOptions}
+            />
           </>
         )}
       </Navigator>

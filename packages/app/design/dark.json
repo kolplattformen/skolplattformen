@@ -74,8 +74,10 @@
   "color-danger-transparent-400": "rgba(186, 50, 127, 0.32)",
   "color-danger-transparent-500": "rgba(186, 50, 127, 0.4)",
   "color-danger-transparent-600": "rgba(186, 50, 127, 0.48)",
-  "background-basic-color-1": "#2E3137",
-  "background-basic-color-2": "#202225",
+  // "background-basic-color-1": "#2E3137",
+  // "background-basic-color-2": "#202225",
+  "background-basic-color-1": "#0E1219",
+  "background-basic-color-2": "#0A0D11",
   "color-control-default": "#E5E7EB",
   /* text colors */
   "color-basic-800": "#DCDDDE",

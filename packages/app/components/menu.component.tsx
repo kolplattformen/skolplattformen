@@ -1,10 +1,10 @@
 import { useMenu } from '@skolplattformen/api-hooks'
 import { MenuItem } from '@skolplattformen/embedded-api'
-import { List, Text } from '@ui-kitten/components'
+import { Divider, List, Text } from '@ui-kitten/components'
 import 'moment/locale/sv'
 import React from 'react'
 import { Image, ListRenderItemInfo, StyleSheet, View } from 'react-native'
-import { Sizing, Layout as LayoutStyle, Typography } from '../styles'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
@@ -17,6 +17,7 @@ export const Menu = () => {
     <List
       contentContainerStyle={styles.contentContainer}
       data={data}
+      ItemSeparatorComponent={Divider}
       ListEmptyComponent={
         <View style={styles.emptyState}>
           <Text category="h4">{translate('menu.emptyHeadline')}</Text>
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    padding: Sizing.t3,
+    paddingHorizontal: Sizing.t4,
   },
   emptyState: {
     ...LayoutStyle.center,
