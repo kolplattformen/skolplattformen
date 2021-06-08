@@ -91,7 +91,7 @@ export const Children = () => {
       {status === 'loaded' ? (
         <List
           contentContainerStyle={styles.childListContainer}
-          data={[...childList, ...childList]}
+          data={childList}
           style={styles.childList}
           ListEmptyComponent={
             <View style={styles.emptyState}>
