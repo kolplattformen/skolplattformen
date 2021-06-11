@@ -9,7 +9,6 @@ import React from 'react'
 import { StatusBar } from 'react-native'
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { enableScreens } from 'react-native-screens'
 import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
 import { default as customMapping } from './design/mapping.json'
@@ -17,10 +16,6 @@ import { darkTheme, lightTheme } from './design/themes'
 import { useBackgroundBlur } from './utils/blur'
 import { translations } from './utils/translation'
 const api = init(fetch, CookieManager)
-
-// Enables react-native-screens for native
-// react-navigation stack navigators
-enableScreens()
 
 const reporter = __DEV__
   ? {
