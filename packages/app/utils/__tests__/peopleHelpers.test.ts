@@ -1,6 +1,7 @@
 import {
   fullName,
   guardians,
+  initials,
   sortByFirstName,
   studentName,
 } from '../peopleHelpers'
@@ -70,5 +71,15 @@ describe('#guardians', () => {
         },
       ])
     ).toEqual('Loras Eriksson, Margaery Eriksson')
+  })
+})
+describe('#initials', () => {
+  test('should extract initials from name', () => {
+    expect(initials('Namn Namnsson')).toEqual('NN')
+    expect(initials('Namn Namnsson Testsson')).toEqual('NN')
+  })
+
+  test('handles undefined name', () => {
+    expect(initials(undefined)).toBeUndefined()
   })
 })
