@@ -1,8 +1,7 @@
+import { useApi, useNewsDetails } from '@skolplattformen/api-hooks'
 import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { NewsItem } from '../newsItem.component'
-import { fireEvent } from '@testing-library/react-native'
-import { useNewsDetails, useApi } from '@skolplattformen/api-hooks'
 
 jest.mock('@skolplattformen/api-hooks')
 
@@ -88,12 +87,4 @@ test('renders an article without modified date if date is invalid', () => {
   expect(screen.getByText(/nu blir det köttbullar/i)).toBeTruthy()
   expect(screen.getByText('Publicerad: 15 feb 2021 10:13')).toBeTruthy()
   expect(screen.queryByText('Uppdaterad: Invalid DateTime')).toBeFalsy()
-})
-
-test('handles navigating back to child view', () => {
-  const screen = setup()
-
-  fireEvent.press(screen.getByTestId('topNavBackToChild'))
-
-  expect(navigation.goBack).toHaveBeenCalled()
 })
