@@ -1,10 +1,5 @@
 import { useNotifications } from '@skolplattformen/api-hooks'
-import {
-  Divider,
-  List,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components'
+import { List, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
 import { Sizing } from '../styles'
 import { useChild } from './childContext.component'
@@ -20,7 +15,6 @@ export const NotificationsList = () => {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       data={data}
-      ItemSeparatorComponent={Divider}
       renderItem={(info) => (
         <Notification key={info.item.id} item={info.item} />
       )}
@@ -34,6 +28,7 @@ const themedStyles = StyleService.create({
     width: '100%',
   },
   contentContainer: {
-    paddingHorizontal: Sizing.t4,
+    paddingHorizontal: Sizing.t3,
+    paddingVertical: Sizing.t3,
   },
 })

@@ -4,7 +4,6 @@ import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
   Button,
-  Layout,
   List,
   Spinner,
   StyleService,
@@ -34,6 +33,8 @@ export const childenRouteOptions = (): NativeStackNavigationOptions => {
   return {
     ...defaultStackStyling,
     title: translate('children.title'),
+    headerLargeTitle: true,
+    headerLargeTitleHideShadow: true,
   }
 }
 
@@ -115,7 +116,7 @@ export const Children = () => {
           )}
         />
       ) : (
-        <Layout style={styles.loading}>
+        <View style={styles.loading}>
           <Image
             accessibilityIgnoresInvertColors={false}
             source={require('../assets/girls.png')}
@@ -154,7 +155,7 @@ export const Children = () => {
               </Text>
             </View>
           )}
-        </Layout>
+        </View>
       )}
     </>
   )
@@ -168,7 +169,6 @@ const themedStyles = StyleService.create({
   loading: {
     ...LayoutStyle.center,
     ...LayoutStyle.flex.full,
-    backgroundColor: 'background-basic-color-2',
   },
   loadingImage: {
     ...Sizing.aspectRatio(),
@@ -200,7 +200,8 @@ const themedStyles = StyleService.create({
     ...LayoutStyle.flex.full,
   },
   childListContainer: {
-    padding: Sizing.t5,
+    paddingVertical: Sizing.t4,
+    paddingHorizontal: Sizing.t3,
   },
   emptyState: {
     ...LayoutStyle.center,

@@ -66,7 +66,11 @@ const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
-    paddingVertical: Sizing.t3,
+    borderRadius: 15,
+    paddingVertical: Sizing.t4,
+    paddingHorizontal: Sizing.t4,
+    marginBottom: Sizing.t3,
+    backgroundColor: 'background-basic-color-1',
   },
   text: {
     ...Layout.flex.full,
@@ -78,7 +82,6 @@ const themedStyles = StyleService.create({
   },
   subtitle: {
     ...Typography.fontSize.xs,
-
     marginBottom: Sizing.t2,
     color: 'text-hint-color',
   },
@@ -87,9 +90,9 @@ const themedStyles = StyleService.create({
     color: 'text-basic-color',
   },
   image: {
-    borderRadius: 15,
-    width: 70,
-    height: 70,
-    marginRight: Sizing.t5,
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    marginRight: Sizing.t3,
   },
 })

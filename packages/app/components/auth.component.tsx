@@ -79,7 +79,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                 <GlobeIcon
                   height={24}
                   width={24}
-                  fill={colors['color-basic-800']}
+                  fill={colors['color-primary-500']}
                 />
                 <Text style={styles.languageText}>{currentLanguageName}</Text>
               </View>
@@ -148,7 +148,6 @@ const themeStyles = StyleService.create({
     width: '100%',
     textAlign: 'center',
     ...Typography.fontSize.xs,
-    color: 'color-basic-800',
     marginTop: Sizing.t5,
   },
   language: {
@@ -159,6 +158,5 @@ const themeStyles = StyleService.create({
   languageText: {
     ...fontSize.xs,
     marginLeft: Sizing.t1,
-    color: 'color-basic-600',
   },
 })

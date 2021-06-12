@@ -4,6 +4,7 @@ import {
   Child as ChildType,
   NewsItem as NewsItemType,
 } from '@skolplattformen/embedded-api'
+import { useTheme } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
@@ -48,6 +49,7 @@ export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
 
   const colorScheme = useColorScheme()
+  const colors = useTheme()
 
   const currentAppState = useAppState()
 
@@ -72,7 +74,16 @@ export const AppNavigator = () => {
       }
     >
       <StatusBar />
-      <Navigator>
+      <Navigator
+        screenOptions={{
+          headerLargeStyle: {
+            backgroundColor: colors['background-basic-color-2'],
+          },
+          headerLargeTitleStyle: {
+            fontFamily: 'Poppins-ExtraBold',
+          },
+        }}
+      >
         {isLoggedIn ? (
           <>
             <Screen

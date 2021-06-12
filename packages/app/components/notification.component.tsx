@@ -53,7 +53,11 @@ export const Notification = ({ item }: NotificationProps) => {
 const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
-    paddingVertical: Sizing.t3,
+    borderRadius: 15,
+    paddingVertical: Sizing.t4,
+    paddingHorizontal: Sizing.t4,
+    marginBottom: Sizing.t3,
+    backgroundColor: 'background-basic-color-1',
   },
   title: {
     ...Typography.header,

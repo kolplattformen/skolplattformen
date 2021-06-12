@@ -8,7 +8,7 @@ import React from 'react'
 import { ScrollView, View } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
-import { Colors, Layout, Sizing, Typography } from '../styles'
+import { Layout, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { Image } from './image.component'
 import { Markdown } from './markdown.component'
@@ -84,36 +84,28 @@ export const NewsItem = ({ route }: NewsItemProps) => {
 const themedStylesMarkdown = StyleService.create({
   body: {
     ...Typography.fontSize.base,
-    color: 'color-basic-800',
+    color: 'text-basic-color',
     lineHeight: 26,
   },
   heading1: {
     ...Typography.fontSize.xl,
-    color: 'color-basic-600',
+    color: 'text-basic-color',
   },
   heading2: {
     ...Typography.fontSize.lg,
-    color: 'color-basic-800',
+    color: 'text-basic-color',
   },
   code_block: {
-    color: 'color-basic-800',
+    color: 'text-basic-color',
     backgroundColor: 'background-basic-color-1',
     borderColor: 'color-basic-400',
   },
 })
 
 const themedStyles = StyleService.create({
-  safeArea: {
-    ...Layout.flex.full,
-    backgroundColor: Colors.neutral.white,
-  },
-  topContainer: {
-    ...Layout.flex.row,
-    ...Layout.crossAxis.spaceBetween,
-  },
   article: {
     padding: Sizing.t5,
-    backgroundColor: 'background-basic-color-2',
+    backgroundColor: 'background-basic-color-1',
   },
   scrollView: {
     ...Layout.flex.full,
@@ -131,12 +123,12 @@ const themedStyles = StyleService.create({
   },
   subtitle: {
     ...Typography.fontSize.xs,
-    color: 'color-basic-600',
+    color: 'text-hint-color',
   },
   strong: {
     ...Typography.fontSize.xs,
     ...Typography.fontWeight.bold,
-    color: 'color-basic-600',
+    color: 'text-hint-color',
   },
   published: {
     marginBottom: Sizing.t1,

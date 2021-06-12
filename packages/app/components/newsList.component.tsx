@@ -1,11 +1,5 @@
 import { useNews } from '@skolplattformen/api-hooks'
-import {
-  Divider,
-  Input,
-  List,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components'
+import { Input, List, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React, { useMemo, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Sizing } from '../styles'
@@ -79,7 +73,6 @@ export const NewsList = () => {
       keyboardDismissMode="on-drag"
       data={data}
       ListHeaderComponent={header}
-      ItemSeparatorComponent={Divider}
       renderItem={({ item }) => <NewsListItem key={item.id} item={item} />}
     />
   )
@@ -92,10 +85,11 @@ const themedStyles = StyleService.create({
   },
   contentContainer: {
     paddingVertical: Sizing.t3,
-    paddingHorizontal: Sizing.t4,
+    paddingHorizontal: Sizing.t3,
   },
   search: {
     backgroundColor: 'background-basic-color-1',
     borderRadius: 40,
+    marginBottom: Sizing.t2,
   },
 })
