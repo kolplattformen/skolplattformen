@@ -75,14 +75,16 @@ export const AppNavigator = () => {
     >
       <StatusBar />
       <Navigator
-        screenOptions={{
-          headerLargeStyle: {
+        screenOptions={() => ({
+          headerLargeTitle: true,
+          headerLargeTitleHideShadow: true,
+          headerStyle: {
             backgroundColor: colors['background-basic-color-2'],
           },
           headerLargeTitleStyle: {
             fontFamily: 'Poppins-ExtraBold',
           },
-        }}
+        })}
       >
         {isLoggedIn ? (
           <>

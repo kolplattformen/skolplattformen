@@ -34,6 +34,11 @@ export const newsItemRouteOptions = ({
   return {
     ...defaultStackStyling,
     title: newsItem.header,
+    headerLargeTitle: true,
+    headerStyle: {
+      // TODO: This color must come from theme for dark mode
+      backgroundColor: '#fff',
+    },
   }
 }
 
@@ -48,9 +53,6 @@ export const NewsItem = ({ route }: NewsItemProps) => {
       contentContainerStyle={styles.article}
       style={styles.scrollView}
     >
-      <Text maxFontSizeMultiplier={2} style={styles.title}>
-        {newsItem.header}
-      </Text>
       {dateIsValid(newsItem.published) && (
         <Text
           maxFontSizeMultiplier={2}

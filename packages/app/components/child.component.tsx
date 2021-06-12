@@ -10,13 +10,11 @@ import React from 'react'
 import { StyleProp, TextProps } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
-import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
 import { Menu } from './menu.component'
 import { RootStackParamList } from './navigation.component'
-import { NavigationTitle } from './navigationTitle.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 
@@ -118,19 +116,9 @@ export const childRouteOptions = ({
 }: {
   route: RouteProp<RootStackParamList, 'Child'>
 }): NativeStackNavigationOptions => {
-  const child = route.params.child
-
   return {
     ...defaultStackStyling,
     title: getHeaderTitle(route),
-    headerCenter: () => {
-      return (
-        <NavigationTitle
-          title={getHeaderTitle(route)}
-          subtitle={studentName(child.name)}
-        />
-      )
-    },
   }
 }
 
