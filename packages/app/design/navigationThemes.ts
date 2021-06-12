@@ -9,7 +9,7 @@ export const darkNavigationTheme: Theme = {
     background: darkTheme['background-basic-color-2'],
     border: darkTheme['background-basic-color-1'],
     card: darkTheme['background-basic-color-1'],
-    primary: '#67B6FB',
+    primary: darkTheme['color-primary-400'],
     text: '#ddd',
   },
 }
@@ -21,7 +21,7 @@ export const lightNavigationTheme: Theme = {
     background: lightTheme['background-basic-color-2'],
     border: lightTheme['background-basic-color-1'],
     card: lightTheme['background-basic-color-1'],
-    primary: '#0173CC',
+    primary: lightTheme['color-primary-500'],
   },
 }
 
