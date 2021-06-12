@@ -51,16 +51,16 @@ export const absenceRouteOptions = ({
   }
 }
 
-const AbsenceSchema = Yup.object().shape({
-  socialSecurityNumber: Yup.string()
-    .required(translate('abscense.personalNumberMissing'))
-    .test('is-valid', translate('abscense.invalidPersonalNumber'), (value) =>
-      value ? Personnummer.valid(value) : true
-    ),
-  isFullDay: Yup.bool().required(),
-})
-
 const Absence = () => {
+  const AbsenceSchema = Yup.object().shape({
+    socialSecurityNumber: Yup.string()
+      .required(translate('abscense.personalNumberMissing'))
+      .test('is-valid', translate('abscense.invalidPersonalNumber'), (value) =>
+        value ? Personnummer.valid(value) : true
+      ),
+    isFullDay: Yup.bool().required(),
+  })
+
   const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
