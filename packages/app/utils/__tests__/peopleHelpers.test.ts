@@ -75,8 +75,8 @@ describe('#guardians', () => {
 })
 describe('#initials', () => {
   test('should extract initials from name', () => {
-    expect(initials('Namn Namnsson')).toEqual('NN')
-    expect(initials('Namn Namnsson Testsson')).toEqual('NN')
+    expect(initials('Namn Namnsson')).toEqual('Na')
+    expect(initials('Nisse Namnsson')).toEqual('Ni')
   })
 
   test('handles undefined name', () => {
