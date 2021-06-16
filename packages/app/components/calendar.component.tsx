@@ -65,12 +65,12 @@ export const Calendar = () => {
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: 'background-basic-color-2',
+    backgroundColor: 'background-basic-color-1',
     height: '100%',
     width: '100%',
   },
   description: {
     ...Typography.fontSize.xs,
-    color: 'color-basic-600',
+    color: 'text-hint-color',
   },
 })

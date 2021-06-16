@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewsItem } from '@skolplattformen/embedded-api'
-import React, { ReactNode } from 'react'
+import { StyleService, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
+import React, { ReactNode } from 'react'
 import { Dimensions, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
 import { RootStackParamList } from './navigation.component'
-import { StyleService, useStyleSheet } from '@ui-kitten/components'
 
 interface NewsListItemProps {
   item: NewsItem
@@ -66,15 +66,11 @@ const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
     ...Layout.flex.row,
-
-    borderRadius: 2,
-
-    borderWidth: 1,
-    padding: Sizing.t5,
-    marginBottom: Sizing.t2,
-
+    borderRadius: 15,
+    paddingVertical: Sizing.t4,
+    paddingHorizontal: Sizing.t4,
+    marginBottom: Sizing.t3,
     backgroundColor: 'background-basic-color-1',
-    borderColor: 'border-basic-color-3',
   },
   text: {
     ...Layout.flex.full,
@@ -86,7 +82,6 @@ const themedStyles = StyleService.create({
   },
   subtitle: {
     ...Typography.fontSize.xs,
-
     marginBottom: Sizing.t2,
     color: 'text-hint-color',
   },
@@ -95,9 +90,9 @@ const themedStyles = StyleService.create({
     color: 'text-basic-color',
   },
   image: {
-    borderRadius: 3,
-    width: 80,
-    height: 80,
-    marginRight: Sizing.t5,
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    marginRight: Sizing.t3,
   },
 })

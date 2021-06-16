@@ -1,22 +1,22 @@
+import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
+import { Child, MenuItem, TimetableEntry } from '@skolplattformen/embedded-api'
 import {
   List,
   ListItem,
-  ViewPager,
-  Text,
-  TabBar,
-  Tab,
   StyleService,
+  Tab,
+  TabBar,
+  Text,
   useStyleSheet,
+  ViewPager,
 } from '@ui-kitten/components'
-import React, { useEffect, useState } from 'react'
 import moment from 'moment'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
-import { TimetableEntry, Child, MenuItem } from '@skolplattformen/embedded-api'
 import { LanguageService } from '../services/languageService'
+import { Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { TransitionView } from './transitionView.component'
-import { Typography, Sizing } from '../styles'
 
 interface WeekProps {
   child: Child
@@ -174,7 +174,7 @@ export const Week = ({ child }: WeekProps) => {
 
 const themedStyles = StyleService.create({
   view: {
-    backgroundColor: 'background-basic-color-2',
+    backgroundColor: 'background-basic-color-1',
   },
   part: {
     backgroundColor: 'transparent',
@@ -186,7 +186,7 @@ const themedStyles = StyleService.create({
   },
   item: {
     height: 45,
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
     paddingHorizontal: 0,
     borderRadius: 2,
     margin: 2,

@@ -88,7 +88,7 @@ export const ModalWebView = ({
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
   },
   headerWrapper: {
     marginTop: Sizing.t1,
@@ -96,7 +96,7 @@ const themedStyles = StyleService.create({
     borderRadius: 2,
     borderColor: 'basic-color-200',
     borderBottomWidth: 1,
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
   },
   backdrop: {
     backgroundColor: 'color-basic-transparent-600',
@@ -111,7 +111,7 @@ const themedStyles = StyleService.create({
     ...Layout.mainAxis.center,
     paddingHorizontal: Sizing.t3,
     paddingVertical: Sizing.t1,
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
   },
   shareIcon: {
     width: 24,

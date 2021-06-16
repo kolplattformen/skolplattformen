@@ -1,10 +1,10 @@
 import { Notification as NotificationType } from '@skolplattformen/embedded-api'
-import { Card, StyleService, Text, useStyleSheet } from '@ui-kitten/components'
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
+import moment from 'moment'
 import React from 'react'
-import { View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Layout, Sizing, Typography } from '../styles'
 import { ModalWebView } from './modalWebView.component'
-import moment from 'moment'
 
 interface NotificationProps {
   item: NotificationType
@@ -26,11 +26,9 @@ export const Notification = ({ item }: NotificationProps) => {
 
   return (
     <>
-      <Card
-        style={styles.card}
-        onPress={open}
-        header={(headerProps) => (
-          <View {...headerProps}>
+      <TouchableOpacity onPress={open}>
+        <View style={styles.card}>
+          <View>
             <Text style={styles.title}>{item.sender}</Text>
             <Text style={styles.subtitle}>
               {item.category ? item.category : ''}
@@ -38,10 +36,9 @@ export const Notification = ({ item }: NotificationProps) => {
               {displayDate ? displayDate : ''}
             </Text>
           </View>
-        )}
-      >
-        <Text>{item.message}</Text>
-      </Card>
+          <Text>{item.message}</Text>
+        </View>
+      </TouchableOpacity>
       {isOpen && (
         <ModalWebView
           url={item.url}
@@ -56,13 +53,11 @@ export const Notification = ({ item }: NotificationProps) => {
 const themedStyles = StyleService.create({
   card: {
     ...Layout.flex.full,
-    borderRadius: 2,
-
-    borderWidth: 1,
-    marginBottom: Sizing.t2,
-
+    borderRadius: 15,
+    paddingVertical: Sizing.t4,
+    paddingHorizontal: Sizing.t4,
+    marginBottom: Sizing.t3,
     backgroundColor: 'background-basic-color-1',
-    borderColor: 'border-basic-color-3',
   },
   title: {
     ...Typography.header,
@@ -71,5 +66,6 @@ const themedStyles = StyleService.create({
   subtitle: {
     ...Typography.fontSize.xs,
     color: 'text-hint-color',
+    marginBottom: Sizing.t2,
   },
 })

@@ -1,182 +1,126 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
-  BottomTabBarOptions,
-  BottomTabBarProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+  getFocusedRouteNameFromRoute,
+  RouteProp,
+  useRoute,
+} from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import {
-  BottomNavigation,
-  BottomNavigationTab,
-  Layout,
-  StyleService,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
-  useStyleSheet,
-} from '@ui-kitten/components'
+import { Icon } from '@ui-kitten/components'
 import React from 'react'
 import { StyleProp, TextProps } from 'react-native'
-import { studentName } from '../utils/peopleHelpers'
+import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { defaultStackStyling } from '../design/navigationThemes'
+import { translate } from '../utils/translation'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
 import { Menu } from './menu.component'
-import {
-  BackIcon,
-  CalendarOutlineIcon,
-  MenuIcon,
-  NewsIcon,
-  NotificationsIcon,
-} from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
-import { translate } from '../utils/translation'
-import { SafeAreaView } from '../ui/safeAreaView.component'
-import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
-import { Typography } from '../styles'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
+
+export type ChildTabParamList = {
+  News: undefined
+  Notifications: undefined
+  Calendar: undefined
+  Menu: undefined
+}
 
 interface TabTitleProps {
   children: string
   style?: StyleProp<TextProps>
 }
 
-const { Navigator, Screen } = createBottomTabNavigator()
+const { Navigator, Screen } = createBottomTabNavigator<ChildTabParamList>()
 
-const NewsScreen = () => {
-  return (
-    <Layout>
-      <NewsList />
-    </Layout>
-  )
-}
+const NewsScreen = () => <NewsList />
+const NotificationsScreen = () => <NotificationsList />
+const CalendarScreen = () => <Calendar />
+const MenuScreen = () => <Menu />
 
-const NotificationsScreen = () => {
-  return (
-    <Layout>
-      <NotificationsList />
-    </Layout>
-  )
-}
-
-const CalendarScreen = () => {
-  return (
-    <Layout>
-      <Calendar />
-    </Layout>
-  )
-}
-
-const MenuScreen = () => {
-  return (
-    <Layout>
-      <Menu />
-    </Layout>
-  )
-}
-
-const TabTitle = ({ style, children }: TabTitleProps) => (
-  <Text
-    maxFontSizeMultiplier={1.5}
-    adjustsFontSizeToFit
-    numberOfLines={1}
-    style={style}
-  >
-    {children}
-  </Text>
-)
-
-const BottomTabBar = ({
-  navigation,
-  state,
-}: BottomTabBarProps<BottomTabBarOptions>) => (
-  <BottomNavigation
-    accessibilityRole="menu"
-    selectedIndex={state.index}
-    onSelect={(index) => navigation.navigate(state.routeNames[index])}
-  >
-    <BottomNavigationTab
-      accessibilityRole="menuitem"
-      title={(props) => (
-        <TabTitle {...props}>{translate('navigation.news')}</TabTitle>
-      )}
-      icon={NewsIcon}
-    />
-    <BottomNavigationTab
-      accessibilityRole="menuitem"
-      title={(props) => (
-        <TabTitle {...props}>{translate('navigation.notifications')}</TabTitle>
-      )}
-      icon={NotificationsIcon}
-    />
-    <BottomNavigationTab
-      accessibilityRole="menuitem"
-      title={(props) => (
-        <TabTitle {...props}>{translate('navigation.calender')}</TabTitle>
-      )}
-      icon={CalendarOutlineIcon}
-    />
-    <BottomNavigationTab
-      accessibilityRole="menuitem"
-      title={(props) => (
-        <TabTitle {...props}>{translate('navigation.menu')}</TabTitle>
-      )}
-      icon={MenuIcon}
-    />
-  </BottomNavigation>
-)
-
-const TabNavigator = ({ initialRouteName = 'Nyheter' }) => (
+const TabNavigator = ({
+  initialRouteName = 'News',
+}: {
+  initialRouteName: keyof ChildTabParamList
+}) => (
   <Navigator
     initialRouteName={initialRouteName}
-    tabBar={(props) => <BottomTabBar {...props} />}
+    screenOptions={({ route }) => {
+      return {
+        tabBarIcon: ({ focused, color }) => {
+          let iconName = 'news'
+
+          if (route.name === 'News')
+            iconName = focused ? 'book-open' : 'book-open-outline'
+          else if (route.name === 'Notifications')
+            iconName = focused ? 'alert-circle' : 'alert-circle-outline'
+          else if (route.name === 'Calendar')
+            iconName = focused ? 'calendar' : 'calendar-outline'
+          else if (route.name === 'Menu')
+            iconName = focused ? 'clipboard' : 'clipboard-outline'
+          return <Icon name={iconName} fill={color} height={24} width={24} />
+        },
+      }
+    }}
   >
-    <Screen name={'navigation.news'} component={NewsScreen} />
-    <Screen name={'navigation.notifications'} component={NotificationsScreen} />
-    <Screen name={'navigation.calender'} component={CalendarScreen} />
-    <Screen name={'navigation.menu'} component={MenuScreen} />
+    <Screen
+      name="News"
+      component={NewsScreen}
+      options={{ title: translate('navigation.news') }}
+    />
+    <Screen
+      name="Notifications"
+      component={NotificationsScreen}
+      options={{ title: translate('navigation.notifications') }}
+    />
+    <Screen
+      name="Calendar"
+      component={CalendarScreen}
+      options={{ title: translate('navigation.calender') }}
+    />
+    <Screen
+      name="Menu"
+      component={MenuScreen}
+      options={{ title: translate('navigation.menu') }}
+    />
   </Navigator>
 )
 
-export const Child = () => {
-  const navigation = useNavigation<ChildNavigationProp>()
-  const route = useRoute<ChildRouteProps>()
-  const { child, initialRouteName } = route.params
-  const styles = useStyleSheet(themedStyles)
+const getHeaderTitle = (route: any) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'News'
 
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
-  )
-
-  const navigateBack = () => {
-    navigation.goBack()
+  switch (routeName) {
+    case 'News':
+      return translate('navigation.news')
+    case 'Notifications':
+      return translate('navigation.notifications')
+    case 'Calendar':
+      return translate('navigation.calender')
+    case 'Menu':
+      return translate('navigation.menu')
   }
-
-  return (
-    <SafeAreaView>
-      <SafeAreaViewContainer>
-        <ChildProvider child={child}>
-          <TopNavigation
-            title={() => (
-              <Text maxFontSizeMultiplier={2} style={styles.topNavigationTitle}>
-                {studentName(child.name)}
-              </Text>
-            )}
-            alignment="center"
-            accessoryLeft={BackAction}
-          />
-          <TabNavigator initialRouteName={initialRouteName} />
-        </ChildProvider>
-      </SafeAreaViewContainer>
-    </SafeAreaView>
-  )
 }
 
-const themedStyles = StyleService.create({
-  topNavigationTitle: {
-    ...Typography.fontWeight.semibold,
-  },
-})
+export const childRouteOptions = ({
+  route,
+}: {
+  route: RouteProp<RootStackParamList, 'Child'>
+}): NativeStackNavigationOptions => {
+  return {
+    ...defaultStackStyling,
+    title: getHeaderTitle(route),
+  }
+}
+
+export const Child = () => {
+  const route = useRoute<ChildRouteProps>()
+  const { child, initialRouteName } = route.params
+
+  return (
+    <ChildProvider child={child}>
+      <TabNavigator initialRouteName={initialRouteName as any} />
+    </ChildProvider>
+  )
+}

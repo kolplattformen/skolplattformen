@@ -1,6 +1,7 @@
 {
   "strict": {
-    "text-font-family": "Poppins"
+    "text-font-family": "Poppins",
+    "border-radius": 10
   },
   "components": {
     "Button": {
@@ -10,10 +11,11 @@
           "mapping": {},
           "variantGroups": {
             "status": {
-              "primary": {
+              "basic": {
+                "textColor": "$color-basic-text"
               }
             }
-          } 
+          }
         }
       }
     }

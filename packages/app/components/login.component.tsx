@@ -32,10 +32,11 @@ import {
   SelectIcon,
 } from './icon.component'
 
-const BankId = (style) => (
+const BankId = () => (
   <Image
     style={themedStyles.icon}
     source={require('../assets/bankid_low_rgb.png')}
+    accessibilityIgnoresInvertColors
   />
 )
 
@@ -60,7 +61,9 @@ export const Login = () => {
     translate('auth.bankid.OpenOnThisDevice'),
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
+    translate('general.cancel'),
   ]
+
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
       setCachedLoginMethodIndex(loginMethodIndex.toString())
@@ -180,7 +183,7 @@ export const Login = () => {
             placeholder={translate('auth.placeholder_SocialSecurityNumber')}
           />
         )}
-        <ButtonGroup style={styles.loginButtonGroup} status="info">
+        <ButtonGroup style={styles.loginButtonGroup} status="primary">
           <Button
             accessible={true}
             onPress={() => startLogin(socialSecurityNumber)}
