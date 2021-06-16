@@ -63,14 +63,14 @@ const Banner = (): JSX.Element => {
             </div>
             <H1>{intl.formatMessage({ id: 'general.title' })}</H1>
             <p>{intl.formatMessage({ id: 'general.description' })}</p>
-            {!!intl.formatMessage({ id: 'general.flashtitle' }) && (
+            {/*intl.formatMessage({ id: 'general.flashtitle' }) && (
               <div className="mt-5">
                 <h2 className="mb-4 text-2xl font-bold leading-tight text-gray-800 dark:text-white md:text-4xl">
                   {intl.formatMessage({ id: 'general.flashtitle' })}
                 </h2>
                 <p>{intl.formatMessage({ id: 'general.flashtext' })}</p>
               </div>
-            )}
+            )*/}
             <p className="flex items-center py-4 sm:flex-row space-x-2 lg:space-x-4">
               <Link.External
                 className="inline-block"
