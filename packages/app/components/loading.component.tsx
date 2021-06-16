@@ -1,16 +1,22 @@
+import { StyleService, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
-import { ActivityIndicator, View, StyleSheet } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 
-export const LoadingComponent = () => (
-  <View style={[styles.container, styles.horizontal]}>
-    <ActivityIndicator size="large" />
-  </View>
-)
+export const LoadingComponent = () => {
+  const styles = useStyleSheet(themedStyles)
 
-const styles = StyleSheet.create({
+  return (
+    <View style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size="large" />
+    </View>
+  )
+}
+
+const themedStyles = StyleService.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: 'background-basic-color-2',
   },
   horizontal: {
     flexDirection: 'row',

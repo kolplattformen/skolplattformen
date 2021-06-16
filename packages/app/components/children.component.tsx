@@ -1,28 +1,27 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import { useNavigation } from '@react-navigation/core'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
 import {
   Button,
-  Divider,
-  Layout,
   List,
   Spinner,
+  StyleService,
   Text,
-  TopNavigation,
   TopNavigationAction,
-  useTheme,
+  useStyleSheet,
 } from '@ui-kitten/components'
-import React from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import {
   Image,
-  ListRenderItemInfo,
-  StyleSheet,
-  View,
+  ImageStyle,
   Linking,
+  ListRenderItemInfo,
+  View,
 } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import ActionSheet from 'rn-actionsheet-module'
+import { defaultStackStyling } from '../design/navigationThemes'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
@@ -30,25 +29,43 @@ import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
+export const childenRouteOptions = (): NativeStackNavigationOptions => {
+  return {
+    ...defaultStackStyling,
+    title: translate('children.title'),
+    headerLargeTitle: true,
+    headerLargeTitleHideShadow: true,
+  }
+}
+
 export const Children = () => {
-  const settingsOptions = [
-    translate('general.logout'),
-    translate('general.cancel'),
-  ]
-  const theme = useTheme()
+  const styles = useStyleSheet(themedStyles)
+
+  const navigation = useNavigation()
 
   const { api } = useApi()
-  const { data: childList, status, reload } = useChildList()
-  const insets = useSafeAreaInsets()
-  const handleSettingSelection = (index: number) => {
-    switch (index) {
-      case 0:
-        logout()
-        break
-    }
+  let { data: childList, status, reload } = useChildList()
+  const reloadChildren = () => {
+    reload()
   }
 
-  const settings = () => {
+  const logout = useCallback(() => {
+    api.logout()
+    AsyncStorage.clear()
+  }, [api])
+
+  const settingsOptions = useMemo(() => {
+    return [translate('general.logout'), translate('general.cancel')]
+  }, [])
+
+  const handleSettingSelection = useCallback(
+    (index: number) => {
+      if (index === 0) logout()
+    },
+    [logout]
+  )
+
+  const settings = useCallback(() => {
     const options = {
       cancelButtonIndex: 1,
       title: translate('general.settings'),
@@ -58,126 +75,93 @@ export const Children = () => {
     }
 
     ActionSheet(options, handleSettingSelection)
-  }
+  }, [handleSettingSelection, settingsOptions])
 
-  const reloadChildren = () => {
-    reload()
-  }
-
-  const logout = () => {
-    api.logout()
-    AsyncStorage.clear()
-  }
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return <TopNavigationAction icon={SettingsIcon} onPress={settings} />
+      },
+    })
+  }, [navigation, settings])
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
   return (
-    <View
-      style={[
-        {
-          ...styles.topContainer,
-          paddingTop: insets.top,
-        },
-        { backgroundColor: theme['background-basic-color-1'] },
-      ]}
-    >
-      <>
-        {status === 'loaded' ? (
-          <>
-            <TopNavigation
-              title={() => (
-                <Text
-                  maxFontSizeMultiplier={2.5}
-                  style={styles.topNavigationTitle}
+    <>
+      {status === 'loaded' ? (
+        <List
+          contentContainerStyle={styles.childListContainer}
+          data={childList}
+          style={styles.childList}
+          ListEmptyComponent={
+            <View style={styles.emptyState}>
+              <Text category="h2">{translate('children.noKids_title')}</Text>
+              <Text style={styles.emptyStateDescription}>
+                {translate('children.noKids_description')}
+              </Text>
+              <Image
+                accessibilityIgnoresInvertColors={false}
+                source={require('../assets/children.png')}
+                style={styles.emptyStateImage as ImageStyle}
+              />
+            </View>
+          }
+          renderItem={({ item: child, index }: ListRenderItemInfo<Child>) => (
+            <ChildListItem
+              child={child}
+              color={colors[index % colors.length]}
+              key={child.id}
+            />
+          )}
+        />
+      ) : (
+        <View style={styles.loading}>
+          <Image
+            accessibilityIgnoresInvertColors={false}
+            source={require('../assets/girls.png')}
+            style={styles.loadingImage as ImageStyle}
+          />
+          {status === 'error' ? (
+            <View style={styles.errorMessage}>
+              <Text category="h5">
+                {translate('children.loadingErrorHeading')}
+              </Text>
+              <Text style={{ fontSize: Sizing.t4 }}>
+                {translate('children.loadingErrorInformationText')}
+              </Text>
+              <View style={styles.errorButtons}>
+                <Button status="success" onPress={() => reloadChildren()}>
+                  {translate('children.tryAgain')}
+                </Button>
+                <Button
+                  status="basic"
+                  onPress={() =>
+                    Linking.openURL('https://skolplattformen.org/status')
+                  }
                 >
-                  {translate('children.title')}
-                </Text>
-              )}
-              alignment="center"
-              accessoryRight={() => (
-                <TopNavigationAction icon={SettingsIcon} onPress={settings} />
-              )}
-            />
-            <Divider />
-            <List
-              contentContainerStyle={styles.childListContainer}
-              data={childList}
-              style={styles.childList}
-              ListEmptyComponent={
-                <View style={styles.emptyState}>
-                  <Text category="h2">
-                    {translate('children.noKids_title')}
-                  </Text>
-                  <Text style={styles.emptyStateDescription}>
-                    {translate('children.noKids_description')}
-                  </Text>
-                  <Image
-                    accessibilityIgnoresInvertColors={false}
-                    source={require('../assets/children.png')}
-                    style={styles.emptyStateImage}
-                  />
-                </View>
-              }
-              renderItem={({
-                item: child,
-                index,
-              }: ListRenderItemInfo<Child>) => (
-                <ChildListItem
-                  child={child}
-                  color={colors[index % colors.length]}
-                  key={child.id}
-                />
-              )}
-            />
-          </>
-        ) : (
-          <Layout style={styles.loading}>
-            <Image
-              accessibilityIgnoresInvertColors={false}
-              source={require('../assets/girls.png')}
-              style={styles.loadingImage}
-            />
-            {status === 'error' ? (
-              <View style={styles.errorMessage}>
-                <Text category="h5">
-                  {translate('children.loadingErrorHeading')}
-                </Text>
-                <Text style={{ fontSize: Sizing.t5 }}>
-                  {translate('children.loadingErrorInformationText')}
-                </Text>
-                <View style={styles.errorButtons}>
-                  <Button status="success" onPress={() => reloadChildren()}>
-                    {translate('children.tryAgain')}
-                  </Button>
-                  <Button
-                    status="basic"
-                    onPress={() =>
-                      Linking.openURL('https://skolplattformen.org/status')
-                    }
-                  >
-                    {translate('children.viewStatus')}
-                  </Button>
-                  <Button onPress={() => logout()}>
-                    {translate('general.logout')}
-                  </Button>
-                </View>
+                  {translate('children.viewStatus')}
+                </Button>
+                <Button onPress={() => logout()}>
+                  {translate('general.logout')}
+                </Button>
               </View>
-            ) : (
-              <View style={styles.loadingMessage}>
-                <Spinner size="large" status="warning" />
-                <Text category="h1" style={styles.loadingText}>
-                  {translate('general.loading')}
-                </Text>
-              </View>
-            )}
-          </Layout>
-        )}
-      </>
-    </View>
+            </View>
+          ) : (
+            <View style={styles.loadingMessage}>
+              <Spinner size="large" status="primary" />
+              <Text category="h1" style={styles.loadingText}>
+                {translate('general.loading')}
+              </Text>
+            </View>
+          )}
+        </View>
+      )}
+    </>
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   topContainer: {
     ...LayoutStyle.flex.full,
     paddingBottom: 0,
@@ -216,7 +200,8 @@ const styles = StyleSheet.create({
     ...LayoutStyle.flex.full,
   },
   childListContainer: {
-    padding: Sizing.t5,
+    paddingVertical: Sizing.t4,
+    paddingHorizontal: Sizing.t3,
   },
   emptyState: {
     ...LayoutStyle.center,

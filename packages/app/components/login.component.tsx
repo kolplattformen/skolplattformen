@@ -21,19 +21,15 @@ import {
 import ActionSheet from 'rn-actionsheet-module'
 import { useAsyncStorage } from 'use-async-storage'
 import { schema } from '../app.json'
-import { Layout, Sizing } from '../styles'
+import { Layout } from '../styles'
 import { translate } from '../utils/translation'
-import {
-  CloseOutlineIcon,
-  PersonIcon,
-  SecureIcon,
-  SelectIcon,
-} from './icon.component'
+import { CloseOutlineIcon, PersonIcon, SelectIcon } from './icon.component'
 
-const BankId = style => (
+const BankId = () => (
   <Image
     style={themedStyles.icon}
     source={require('../assets/bankid_low_rgb.png')}
+    accessibilityIgnoresInvertColors
   />
 )
 
@@ -57,16 +53,22 @@ export const Login = () => {
     translate('auth.bankid.OpenOnThisDevice'),
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
+    translate('general.cancel'),
   ]
 
   const selectLoginMethod = () => {
     const options = {
+      cancelButtonIndex: 3,
       title: translate('auth.chooseLoginMethod'),
       optionsIOS: loginMethods,
       optionsAndroid: loginMethods,
       onCancelAndroidIndex: loginMethodIndex,
     }
-    ActionSheet(options, (index: number) => setLoginMethodIndex(index))
+    ActionSheet(options, (index: number) => {
+      if (options.cancelButtonIndex !== index) {
+        setLoginMethodIndex(index)
+      }
+    })
   }
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
@@ -187,7 +189,7 @@ export const Login = () => {
             placeholder={translate('auth.placeholder_SocialSecurityNumber')}
           />
         )}
-        <ButtonGroup style={styles.loginButtonGroup} status="info">
+        <ButtonGroup style={styles.loginButtonGroup} status="primary">
           <Button
             accessible={true}
             onPress={() => startLogin(socialSecurityNumber)}
@@ -242,7 +244,6 @@ export const Login = () => {
 }
 
 const themedStyles = StyleService.create({
-
   backdrop: {
     backgroundColor: 'color-basic-transparent-600',
   },
@@ -261,6 +262,6 @@ const themedStyles = StyleService.create({
   bankIdLoading: { margin: 10 },
   icon: {
     width: 20,
-    height: 20
-  }
+    height: 20,
+  },
 })

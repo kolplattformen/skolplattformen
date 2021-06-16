@@ -8,28 +8,28 @@ import {
   useSchedule,
 } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
-
 import {
-  Avatar,
   Button,
-  Card,
+  IconProps,
   StyleService,
   Text,
   useStyleSheet,
+  useTheme,
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import {
+  BookOpenIcon,
   CalendarOutlineIcon,
-  MenuIcon,
-  NewsIcon,
+  ClipboardIcon,
   NotificationsIcon,
 } from './icon.component'
 import { RootStackParamList } from './navigation.component'
+import { StudentAvatar } from './studentAvatar.component'
 
 interface ChildListItemProps {
   child: Child
@@ -39,10 +39,12 @@ type ChildListItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Children'
 >
+
 export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
+  const colors = useTheme()
   const navigation = useNavigation<ChildListItemNavigationProp>()
   const { data: notifications, status: notificationsStatus } = useNotifications(
     child
@@ -112,163 +114,182 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     pending: 'basic',
   }
 
-  const buttonAppearance: string = 'ghost'
-
-  const Footer = () => {
-    return (
-      <View style={styles.itemFooter}>
-        <Button
-          style={styles.item}
-          size="small"
-          appearance={buttonAppearance}
-          status={statusColors[newsStatus]}
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: translate('navigation.news'),
-            })
-          }
-          accessoryLeft={NewsIcon}
-        >
-          {`${(news || []).length}`}
-        </Button>
-        <Button
-          style={styles.item}
-          size="small"
-          appearance={buttonAppearance}
-          status={statusColors[notificationsStatus]}
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: translate('navigation.notifications'),
-            })
-          }
-          accessoryLeft={NotificationsIcon}
-        >
-          {`${(notifications || []).length}`}
-        </Button>
-        <Button
-          style={styles.item}
-          size="small"
-          appearance={buttonAppearance}
-          status={statusColors[calendarStatus]}
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: translate('navigation.calender'),
-            })
-          }
-          accessoryLeft={CalendarOutlineIcon}
-        >
-          {`${(calendar || []).length}`}
-        </Button>
-        <Button
-          style={styles.item}
-          size="small"
-          appearance={buttonAppearance}
-          status={statusColors[menuStatus]}
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: translate('navigation.menu'),
-            })
-          }
-          accessoryLeft={MenuIcon}
-        />
-      </View>
-    )
-  }
+  const buttonAppearance = 'basic'
 
   return (
-    <Card
-      style={styles.card}
-      appearance="filled"
-      status={color}
-      header={(props) => (
-        <View {...props} style={styles.cardHeader}>
-          <View style={styles.cardAvatar}>
-            <Avatar source={require('../assets/avatar.png')} shape="square" />
-          </View>
-          <View style={styles.cardHeaderText}>
-            <Text category="h6">{studentName(child.name)}</Text>
-            {className ? <Text category="s1">{className}</Text> : null}
-          </View>
-        </View>
-      )}
-      footer={Footer}
+    <TouchableOpacity
       onPress={() => navigation.navigate('Child', { child, color })}
     >
-      {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
-        <Text category="p1" key={i}>
-          {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
-        </Text>
-      ))}
-      {notificationsThisWeek.slice(0, 3).map((notification, i) => (
-        <Text category="p1" key={i}>
-          {translate('notifications.notificationTitle', {
-            message: notification.message,
-            dateCreated: displayDate(notification.dateCreated),
-          })}
-        </Text>
-      ))}
-      {newsThisWeek.slice(0, 3).map((newsItem, i) => (
-        <Text category="p1" key={i}>
-          {translate('news.notificationTitle', {
-            header: newsItem.header,
-            published: displayDate(newsItem.published),
-          })}
-        </Text>
-      ))}
-      {scheduleAndCalendarThisWeek.length ||
-      notificationsThisWeek.length ||
-      newsThisWeek.length ? null : (
-        <Text category="p1" style={styles.noNewNewsItemsText}>
-          {translate('news.noNewNewsItemsThisWeek')}
-        </Text>
-      )}
-      <View style={styles.itemFooterAbsence}>
-        <Button
-          accessible
-          size="small"
-          status="primary"
-          onPress={() => navigation.navigate('Absence', { child })}
-        >
-          {translate('abscense.title')}
-        </Button>
+      <View style={styles.card}>
+        <View style={styles.cardHeader}>
+          <View style={styles.cardHeaderLeft}>
+            <StudentAvatar name={studentName(child.name)} color={color} />
+            <View style={styles.cardHeaderText}>
+              <Text category="h6">{studentName(child.name)}</Text>
+              {className ? <Text category="s1">{className}</Text> : null}
+            </View>
+          </View>
+        </View>
+        {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
+          <Text category="p1" key={i}>
+            {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
+          </Text>
+        ))}
+        {notificationsThisWeek.slice(0, 3).map((notification, i) => (
+          <Text category="p1" key={i}>
+            {translate('notifications.notificationTitle', {
+              message: notification.message,
+              dateCreated: displayDate(notification.dateCreated),
+            })}
+          </Text>
+        ))}
+        {newsThisWeek.slice(0, 3).map((newsItem, i) => (
+          <Text category="p1" key={i}>
+            {translate('news.notificationTitle', {
+              header: newsItem.header,
+              published: displayDate(newsItem.published),
+            })}
+          </Text>
+        ))}
+        {scheduleAndCalendarThisWeek.length ||
+        notificationsThisWeek.length ||
+        newsThisWeek.length ? null : (
+          <Text category="p1" style={styles.noNewNewsItemsText}>
+            {translate('news.noNewNewsItemsThisWeek')}
+          </Text>
+        )}
+        <View style={styles.itemFooterAbsence}>
+          <Button
+            accessible
+            size="small"
+            status="primary"
+            onPress={() => navigation.navigate('Absence', { child })}
+          >
+            {translate('abscense.title')}
+          </Button>
+        </View>
+        <View style={styles.itemFooter}>
+          <Button
+            style={styles.item}
+            size="small"
+            appearance={buttonAppearance}
+            status={statusColors[newsStatus]}
+            onPress={() =>
+              navigation.navigate('Child', {
+                child,
+                color,
+                initialRouteName: translate('navigation.news'),
+              })
+            }
+            accessoryLeft={createFooterIcon(
+              BookOpenIcon,
+              colors['color-basic-text']
+            )}
+          >
+            {`${(news || []).length}`}
+          </Button>
+          <Button
+            style={styles.item}
+            size="small"
+            appearance={buttonAppearance}
+            status={statusColors[notificationsStatus]}
+            onPress={() =>
+              navigation.navigate('Child', {
+                child,
+                color,
+                initialRouteName: translate('navigation.notifications'),
+              })
+            }
+            accessoryLeft={createFooterIcon(
+              NotificationsIcon,
+              colors['color-basic-text']
+            )}
+          >
+            {`${(notifications || []).length}`}
+          </Button>
+          <Button
+            style={styles.item}
+            size="small"
+            appearance={buttonAppearance}
+            status={statusColors[calendarStatus]}
+            onPress={() =>
+              navigation.navigate('Child', {
+                child,
+                color,
+                initialRouteName: translate('navigation.calender'),
+              })
+            }
+            accessoryLeft={createFooterIcon(
+              CalendarOutlineIcon,
+              colors['color-basic-text']
+            )}
+          >
+            {`${(calendar || []).length}`}
+          </Button>
+          <Button
+            style={styles.item}
+            size="small"
+            appearance={buttonAppearance}
+            status={statusColors[menuStatus]}
+            onPress={() =>
+              navigation.navigate('Child', {
+                child,
+                color,
+                initialRouteName: translate('navigation.menu'),
+              })
+            }
+            accessoryLeft={createFooterIcon(
+              ClipboardIcon,
+              colors['color-basic-text']
+            )}
+          />
+        </View>
       </View>
-    </Card>
+    </TouchableOpacity>
   )
+}
+
+const createFooterIcon = (Icon: typeof BookOpenIcon, color: string) => (
+  props: IconProps
+) => {
+  return <Icon {...props} fill={color} />
 }
 
 const themeStyles = StyleService.create({
   card: {
-    marginBottom: Sizing.t5,
+    borderRadius: 25,
+    padding: Sizing.t5,
+    marginBottom: Sizing.t4,
+    backgroundColor: 'background-basic-color-1',
   },
   cardHeader: {
     ...Layout.flex.row,
     ...Layout.mainAxis.center,
+    ...Layout.crossAxis.spaceBetween,
+    marginBottom: Sizing.t4,
   },
-  cardAvatar: { margin: Sizing.t5, marginRight: 0 },
-  cardHeaderText: { margin: Sizing.t5, flex: 1 },
+  cardHeaderLeft: {
+    ...Layout.flex.row,
+    ...Layout.mainAxis.center,
+    flex: 1,
+  },
+  cardHeaderText: {
+    marginHorizontal: Sizing.t4,
+    flex: 1,
+  },
   itemFooter: {
     ...Layout.flex.row,
-    ...Layout.crossAxis.evenly,
-    paddingVertical: Sizing.t2,
-    borderRadius: 5,
-    margin: 0,
+    marginTop: Sizing.t4,
   },
   itemFooterAbsence: {
     ...Layout.mainAxis.flexStart,
     marginTop: Sizing.t4,
   },
   item: {
-    paddingHorizontal: 0,
+    marginRight: 12,
+    paddingHorizontal: 2,
+    paddingVertical: 0,
+    marginBottom: 0,
   },
-  noNewNewsItemsText: {
-    color: 'color-basic-600',
-  },
+  noNewNewsItemsText: {},
 })

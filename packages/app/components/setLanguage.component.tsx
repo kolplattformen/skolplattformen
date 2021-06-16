@@ -1,26 +1,32 @@
 import { useNavigation } from '@react-navigation/native'
 import {
-  Layout,
-  Text,
   Button,
   ButtonGroup,
-  TopNavigationAction,
-  TopNavigation,
+  StyleService,
+  Text,
+  useStyleSheet,
+  useTheme,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import RNRestart from 'react-native-restart'
+import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing } from '../styles'
-import { translate, languages } from '../utils/translation'
-import { BackIcon } from './icon.component'
-import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
-import RNRestart from 'react-native-restart'
-import { SafeAreaView } from '../ui/safeAreaView.component'
+import { fontSize } from '../styles/typography'
+import { languages, translate } from '../utils/translation'
+import { CheckIcon } from './icon.component'
+
+export const setLanguageRouteOptions = (): NativeStackNavigationOptions => ({
+  title: translate('language.changeLanguage'),
+})
 
 export const SetLanguage = () => {
   const navigation = useNavigation()
+  const styles = useStyleSheet(themedStyles)
+  const colors = useTheme()
 
   const currentLanguage = LanguageService.getLanguageCode()
 
@@ -56,73 +62,61 @@ export const SetLanguage = () => {
   const activeLanguages = languages.filter((language) => language.active)
 
   return (
-    <SafeAreaView>
-      <SafeAreaViewContainer>
-        <TopNavigation
-          accessoryLeft={() => (
-            <TopNavigationAction icon={BackIcon} onPress={() => goBack()} />
-          )}
-          alignment="center"
-          title={translate('language.changeLanguage')}
-        />
-        <View style={styles.content}>
-          <Layout style={styles.container}>
-            <View style={styles.languageList}>
-              {activeLanguages.map((language) => (
-                <TouchableOpacity
-                  key={language.langCode}
-                  style={styles.languageButton}
-                  onPress={() => setSelectedLanguage(language.langCode)}
-                >
-                  <Text style={styles.check}>
-                    {isSelected(language.langCode) ? '✓' : ''}
-                  </Text>
-                  <Text>{language.languageName}</Text>
-                  <Text style={styles.languageButtonSubtitle}>
-                    {language.languageLocalName}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+    <View style={styles.content}>
+      <View style={styles.languageList}>
+        {activeLanguages.map((language) => (
+          <TouchableOpacity
+            key={language.langCode}
+            style={styles.languageButton}
+            onPress={() => setSelectedLanguage(language.langCode)}
+          >
+            <View>
+              <Text style={styles.languageButtonTitle}>
+                {language.languageLocalName}
+              </Text>
+              <Text style={styles.languageButtonSubtitle}>
+                {language.languageName}
+              </Text>
             </View>
-          </Layout>
+            {isSelected(language.langCode) ? (
+              <CheckIcon
+                height={24}
+                width={24}
+                fill={colors['color-success-600']}
+              />
+            ) : null}
+          </TouchableOpacity>
+        ))}
+      </View>
 
-          <ButtonGroup style={styles.buttonGroup}>
-            <Button
-              onPress={() => saveLanguage()}
-              appearance="ghost"
-              status="primary"
-              disabled={currentLanguage === selectedLanguage}
-              style={styles.button}
-              size="medium"
-            >
-              {translate('language.changeLanguageButton')}
-            </Button>
-          </ButtonGroup>
-        </View>
-      </SafeAreaViewContainer>
-    </SafeAreaView>
+      <ButtonGroup style={styles.buttonGroup}>
+        <Button
+          onPress={() => saveLanguage()}
+          appearance="ghost"
+          status="primary"
+          disabled={currentLanguage === selectedLanguage}
+          style={styles.button}
+          size="medium"
+        >
+          {translate('language.changeLanguageButton')}
+        </Button>
+      </ButtonGroup>
+    </View>
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   languageList: {
     flex: 1,
     alignSelf: 'stretch',
     flexDirection: 'column',
-    marginTop: 40,
+    marginTop: 8,
   },
   icon: {
     width: 30,
     height: 30,
   },
-  check: {
-    position: 'absolute',
-    left: -20,
-    color: 'green',
-  },
   container: {
-    ...LayoutStyle.mainAxis.center,
-    ...LayoutStyle.crossAxis.flexEnd,
     padding: Sizing.t5,
   },
   content: {
@@ -138,8 +132,15 @@ const styles = StyleSheet.create({
   languageButton: {
     minHeight: 45,
     marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  languageButtonTitle: {
+    ...fontSize.lg,
   },
   languageButtonSubtitle: {
+    ...fontSize.sm,
     opacity: 0.4,
   },
   button: { ...LayoutStyle.flex.full },
