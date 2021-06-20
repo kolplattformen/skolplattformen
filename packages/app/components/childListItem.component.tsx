@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
-  useMenu,
   useNews,
   useNotifications,
   useSchedule,
@@ -10,7 +9,6 @@ import {
 import { Child } from '@skolplattformen/embedded-api'
 import {
   Button,
-  IconProps,
   StyleService,
   Text,
   useStyleSheet,
@@ -22,12 +20,6 @@ import { TouchableOpacity, View } from 'react-native'
 import { Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
-import {
-  BookOpenIcon,
-  CalendarOutlineIcon,
-  ClipboardIcon,
-  NotificationsIcon,
-} from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import { StudentAvatar } from './studentAvatar.component'
 
@@ -44,19 +36,15 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   // Forces rerender when child.id changes
   React.useEffect(() => {}, [child.id])
 
-  const colors = useTheme()
   const navigation = useNavigation<ChildListItemNavigationProp>()
-  const { data: notifications, status: notificationsStatus } = useNotifications(
-    child
-  )
-  const { data: news, status: newsStatus } = useNews(child)
-  const { data: calendar, status: calendarStatus } = useCalendar(child)
+  const { data: notifications } = useNotifications(child)
+  const { data: news } = useNews(child)
+  const { data: calendar } = useCalendar(child)
   const { data: schedule } = useSchedule(
     child,
     moment().toISOString(),
     moment().add(7, 'days').toISOString()
   )
-  const { status: menuStatus } = useMenu(child)
 
   const notificationsThisWeek = notifications.filter(({ dateCreated }) =>
     dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
@@ -107,15 +95,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
 
-  const statusColors = {
-    loading: 'basic',
-    loaded: 'basic',
-    error: 'error',
-    pending: 'basic',
-  }
-
-  const buttonAppearance = 'basic'
-
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Child', { child, color })}
@@ -162,97 +141,15 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           <Button
             accessible
             size="small"
-            status="primary"
+            status="basic"
             onPress={() => navigation.navigate('Absence', { child })}
           >
             {translate('abscense.title')}
           </Button>
         </View>
-        <View style={styles.itemFooter}>
-          <Button
-            style={styles.item}
-            size="small"
-            appearance={buttonAppearance}
-            status={statusColors[newsStatus]}
-            onPress={() =>
-              navigation.navigate('Child', {
-                child,
-                color,
-                initialRouteName: translate('navigation.news'),
-              })
-            }
-            accessoryLeft={createFooterIcon(
-              BookOpenIcon,
-              colors['color-basic-text']
-            )}
-          >
-            {`${(news || []).length}`}
-          </Button>
-          <Button
-            style={styles.item}
-            size="small"
-            appearance={buttonAppearance}
-            status={statusColors[notificationsStatus]}
-            onPress={() =>
-              navigation.navigate('Child', {
-                child,
-                color,
-                initialRouteName: translate('navigation.notifications'),
-              })
-            }
-            accessoryLeft={createFooterIcon(
-              NotificationsIcon,
-              colors['color-basic-text']
-            )}
-          >
-            {`${(notifications || []).length}`}
-          </Button>
-          <Button
-            style={styles.item}
-            size="small"
-            appearance={buttonAppearance}
-            status={statusColors[calendarStatus]}
-            onPress={() =>
-              navigation.navigate('Child', {
-                child,
-                color,
-                initialRouteName: translate('navigation.calender'),
-              })
-            }
-            accessoryLeft={createFooterIcon(
-              CalendarOutlineIcon,
-              colors['color-basic-text']
-            )}
-          >
-            {`${(calendar || []).length}`}
-          </Button>
-          <Button
-            style={styles.item}
-            size="small"
-            appearance={buttonAppearance}
-            status={statusColors[menuStatus]}
-            onPress={() =>
-              navigation.navigate('Child', {
-                child,
-                color,
-                initialRouteName: translate('navigation.menu'),
-              })
-            }
-            accessoryLeft={createFooterIcon(
-              ClipboardIcon,
-              colors['color-basic-text']
-            )}
-          />
-        </View>
       </View>
     </TouchableOpacity>
   )
-}
-
-const createFooterIcon = (Icon: typeof BookOpenIcon, color: string) => (
-  props: IconProps
-) => {
-  return <Icon {...props} fill={color} />
 }
 
 const themeStyles = StyleService.create({
