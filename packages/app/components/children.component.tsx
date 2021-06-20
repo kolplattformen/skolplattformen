@@ -25,7 +25,7 @@ import { defaultStackStyling } from '../design/navigationThemes'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
-import { SettingsIcon } from './icon.component'
+import { CloseOutlineIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -79,8 +79,8 @@ export const Children = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => {
-        return <TopNavigationAction icon={SettingsIcon} onPress={settings} />
+      headerLeft: () => {
+        return <TopNavigationAction icon={CloseOutlineIcon} onPress={settings} />
       },
     })
   }, [navigation, settings])
