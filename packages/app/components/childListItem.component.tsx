@@ -22,6 +22,7 @@ import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { RootStackParamList } from './navigation.component'
 import { StudentAvatar } from './studentAvatar.component'
+import { DaySummary } from './daySummary.component'
 
 interface ChildListItemProps {
   child: Child
@@ -94,6 +95,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
 
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
+  const date = moment()
 
   return (
     <TouchableOpacity
@@ -109,6 +111,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             </View>
           </View>
         </View>
+        <DaySummary child={child} date={date} />
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
