@@ -3,7 +3,7 @@ import DownloadButtons from './DownloadButtons'
 import Icon from './Icon'
 import SectionTitle from './SectionTitle'
 
-const price = 0
+const price = 12
 
 const baseFeatures = [
   {
@@ -33,17 +33,17 @@ const Pricing = (): JSX.Element => {
     <section className="px-5 py-8 md:px-0 md:py-32" id="vad-kostar-det">
       <div className="max-w-2xl mx-auto">
         <SectionTitle
-          title="Hur kan det vara gratis?"
+          title="Varför inte gratis?"
           text={`
             Vi som bygger appen vill gärna fortsätta vidareutveckla den och även ha möjlighet att ge ersättning
-            till de som hjälper till. Vi har dock bestämt oss för att, på försök, låta denna ersättning komma
-            från frivilliga donationer via Patreon.
+            till de som hjälper till. Vi gjorde ett försök att ge ut appen gratis och hoppades att fler kunde stötta oss via
+            Patreon istället. Det visade sig inte vara hållbart men om vi får fler sponsorer så kommer vi göra appen gratis igen!
           `}
         />
       </div>
       <div className="flex">
         <div className="flex flex-col items-center inline-block px-5 py-8 mx-auto text-center shadow-lg rounded-md dark:bg-gray-800">
-          <h3 className="text-3xl text-gray-800 dark:text-gray-400">Tillfälligt</h3>
+          <h3 className="text-3xl text-gray-800 dark:text-gray-400">Just nu</h3>
           <div className="mt-5 text-6xl text-pink-500">
             {formatPrice(price)}
           </div>
