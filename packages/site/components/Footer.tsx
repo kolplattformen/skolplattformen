@@ -8,6 +8,7 @@ const team = [
   { name: 'Rickard Natt och Dag', twitter: 'rnattochdag' },
   { name: 'Viktor Sarström', twitter: 'viktorsarstrom' },
   { name: 'Kajetan Kazimierczak', twitter: 'kajetanek' },
+  { name: 'Jonathan Edenström', twitter: 'edenstroem' },
   { name: 'Öppna skolplattformen', twitter: 'oppnaskolplatt' },
 ]
 
