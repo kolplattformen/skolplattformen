@@ -26,6 +26,172 @@ export interface TimelineEvent {
 
 export const events: TimelineEvent[] = [
   {
+    overview: (<>
+      <p>
+        I juli kommer det väntade beskedet från Kammarrätten: dokumentationen av
+        Skolplattformens API är inte att betrakta som allmän handling, för den
+        finns inte. Upphandlingens krav på dokumentation har inte uppfyllts, och
+        eftersom dokumentationen inte finns behöver den heller inte lämnas ut.
+      </p>
+      <p>
+        Redan i februari genomförde staden en oberoende säkerhetsanalys av koden i vår app men resultatet av denna utredning valde man att sekretessbelägga. Detta överklagade vi till Kammarrätten i Stockholm som gav oss rätt och mycket riktigt visar rapporten att vår app inte sparar några uppgifter. Detta kände alltså staden till men mörkade, även till polisen.
+
+      </p>
+      </>
+    ),
+    date: '2021-07-01',
+    importantDates: [
+      {
+        description:
+          'Öppna Skolplattformen deltar i Civic Tech Swedens event Samskapa teknik för samhällsnytta',
+        date: '2021-07-06',
+      },
+      {
+        description:
+          'Kammarrätten i Stockholm beslutar att dokumentation av Skolplattformens API:er inte lämnas ut eftersom de är för arbetskrävande att sammanställa. På frågan om huruvida dokumentationen har gjorts svarar Utbildningsförvaltningens chef Lena Holmdahl “det är en annan fråga”. Kammarrättens dom i sin helhet (mål 2598-21)',
+        date: '2021-07-01',
+      },
+      {
+        description: 'Kammarrätten i Stockholm beslutar att den sekretess som staden har lagt på den oberoende analysen av vår källkod skall hävas.',
+        date: '2021-07-15',
+        link: 'https://twitter.com/VikstromDaniel/status/1415683828622925825'
+      },
+      {
+        description: 'Avtal med Tieto visar att man har förhandlat bort viteskrav och skadeståndskrav',
+        link: 'https://twitter.com/landgren/status/1418493177774940165',
+        date:' 2021-07-23'
+      }
+    ],
+    media: [
+      {
+        date: '2021-07-01',
+        description:
+          'Uppgifter om Skolplattformen finns inte dokumenterade – trots krav (NyTeknik)',
+        link:
+          'https://www.nyteknik.se/digitalisering/uppgifter-om-skolplattformen-finns-inte-dokumenterade-trots-krav-7017562',
+      },
+      {
+        date: '2021-07-01',
+        description:
+          'Skolplattformens API:er lämnas inte ut. Finns inte dokumenterade (Feber)',
+        link:
+          'https://feber.se/internet/skolplattformens-apier-lamnas-inte-ut/426741/',
+      },
+      {
+        date: '2021-07-01',
+        description:
+          'Skolplattformens API:er lämnas inte ut – finns ingen dokumentation (Sweclockers)',
+        link:
+          'https://www.sweclockers.com/nyhet/32281-skolplattformens-apier-lamnas-inte-ut-finns-ingen-dokumentation',
+      },
+    ],
+  },
+  {
+    overview: (
+      <p>
+        Barn, lärare och vårdnadshavare checkar ut från allt vad skolplattformar
+        heter och tar välförtjänt sommarlov. Samtidigt pågår den storskaliga
+        covidvaccinskampanjen, flankerad av driftsproblem med vårdappen Alltid
+        Öppet. Under den här månaden engagerar vi oss i open source-initiativ
+        för att avlasta bokningssystemen. Frågan om bristfällig offentlig
+        digitalisering får återigen stort medial uppmärksamhet.
+      </p>
+    ),
+    date: '2021-06-01',
+    importantDates: [
+      {
+        date:'2021-06-10',
+        description: 'Sigrun Tallungs sammanfattar diskussionerna om offentlig digitalisering, bland annat av hälso- och sjukvården, i ett av våra många Clubhousesamtal'
+      }
+    ],
+    media: [
+      {
+        date:'2021-06-23',
+        description:'Dumhet 23 juni 2021 - P3 Dystopia',
+        link:'https://sverigesradio.se/avsnitt/1742863'
+      },
+      {
+        date:'2021-06-23',
+        description:'Fiaskot skolplattformen är en total katastrof (Aftonbladet Kultur)',
+        link:'https://www.aftonbladet.se/kultur/a/oA41Xj/fiaskot-skolplattformen-ar-en-total-katastrof'
+      },
+      {
+        date:'2021-06-03',
+        description:'Christian Landgren om framtidens transporten (logistikpodden)',
+        link:'https://open.spotify.com/episode/2KkcihM83ww1nRbLqyAVqP?si=t38SZqqAQXuNQ839Eh_iGg&dl_branch=1'
+      },
+    ],
+  },
+  {
+    overview: (
+      <p>
+        Vi släpper appens kanske enskilt mest efterfrågade feature: gympapåsen!
+        En annan uppskattad funktion som kommer under maj månad är fritextsök
+        (för i något veckobrev stod det något om nationella prov, men vilket
+        veckobrev var det?). Utbildningsförvaltningen svarar Kammarrätten i
+        frågan om vårt överklagande av att dokumentationen av API:et
+        sekretessbelagts. I svaret framgår att det inte finns något att
+        sekretessbelägga, dokumentationen finns nämligen inte. Detta trots att
+        dokumentation av API och SDK står som ett krav i upphandlingen.
+        Förvaltningen skriver bland annat att “API:erna är kodsträngar om hur
+        man gör anrop och kodsträngarna är inprogrammerade i en större mängd
+        kod” och man “har inte sammanställt dessa så de finns inprogrammerade på
+        en större mängd ställen”, att “det rör sig som en enorm mängd kod att gå
+        igenom” och att detta skulle kräva 30-40h av en extern leverantör att
+        göra.
+      </p>
+    ),
+    date: '2021-05-01',
+    importantDates: [
+      {
+        date: '2021-05-04',
+        description:
+          'Stockholms stad anställer assistenter för att avlasta lärare med bland annat administration av Skolplattformen',
+        link: 'https://t.co/Av18cUxzdF?amp=1',
+      },
+      {
+        date: '2021-05-04',
+        description:
+          'Lärarförbundet redovisar undersökning om skolplattformar ur lärarnas perspektiv: Sex av tio lärare missnöjda med lärplattformar - Arbetsvärlden',
+        link: 'https://t.co/Av18cUxzdF?amp=1',
+      },
+      {
+        date: '2021-05-04',
+        description:
+          'Ny release av appen med bland annat gympapåse och fritextsök',
+      },
+      {
+        date: '2021-05-12',
+        description:
+          'Problemen med Covid-vaccineringarna lyfts som ett exempel på Sveriges bristfälliga offentliga digitalisering',
+        link:
+          'https://www.svd.se/vi-maste-lara-av-vaccinationskraschen/i/senaste/om/ledare',
+      },
+      {
+        date: '2021-05-28',
+        description:
+          'Utbildningsförvaltningen blir intervjuad kring vårt yttrande till Kammarrätten att API:erna inte finns dokumenterade utan att “de är kodsträngar som är inprogrammerade i en större mängd kod”.',
+      },
+    ],
+    media: [
+      {
+        date: '2021-05-19',
+        description: 'Avsnitt 24 – Skolplattformen (podd, Piratpartiet)',
+        link: 'https://piratpartiet.se/nyheter/avsnitt-24-skolplattformen/',
+      },
+      {
+        date: '2021-05-14',
+        description: '#125 – Öppna skolplattformen (itsäkerhetspodden)',
+        link: 'https://www.itsakerhetspodden.se/125-oppna-skolplattformen/',
+      },
+      {
+        date: '2021-05-10',
+        description: 'Säkerhetspodcasten 203 - Ostrukturerat v 19 (podd)',
+        link: 'http://is.gd/tUSWai',
+      },
+    ],
+  },
+  {
     overview: (
       <p>
         Svenska medier rapporterar vidare om de säkerhetsluckor vi hittat och
