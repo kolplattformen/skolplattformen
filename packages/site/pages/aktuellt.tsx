@@ -26,7 +26,7 @@ let cachedEvents: TimelineEvent[]
 type VoidCallback = () => void
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-const runOrTimeout = (fun: VoidCallback, ms: number) => Promise.race([fun, timeout(ms).then(() => Promise.reject(new Error('Timout')))])
+const runOrTimeout = (fun: VoidCallback, ms: number) => Promise.race([fun(), timeout(ms).then(() => Promise.reject(new Error('Timout')))])
 
 export const getServerSideProps = async (): Promise<{props: TimelineProps}> => {
   // This info has moved to Google Sheets instead
