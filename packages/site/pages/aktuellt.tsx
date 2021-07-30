@@ -2,8 +2,21 @@ import { NextPage } from 'next'
 import Timeline from '../components/Timeline'
 import { H1 } from '../components/Typography'
 import { GoogleSpreadsheet } from 'google-spreadsheet'
-import { TimelineEvent } from '../data/timelineEvents'
+import { ReactNode } from 'react'
 
+
+interface Event {
+  date: string
+  description: string
+  link?: string
+}
+
+export interface TimelineEvent {
+  overview: ReactNode
+  date: string
+  importantDates: Event[]
+  media: Event[]
+}
 
 interface TimelineProps {
   events: TimelineEvent[]

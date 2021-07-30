@@ -1,4 +1,4 @@
-import { TimelineEvent } from '../data/timelineEvents'
+import { TimelineEvent } from '../pages/aktuellt'
 import Link from './Link'
 
 const dateFormat = (date: string) => {
