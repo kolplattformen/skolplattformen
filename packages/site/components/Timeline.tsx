@@ -19,7 +19,7 @@ interface TimelineProps {
 const Timeline = ({ events }: TimelineProps): JSX.Element => {
   return (
     <ul className="max-w-2xl border-gray-200 dark:border-gray-900 md:mx-auto md:border-l-2 space-y-4 md:space-y-12">
-      {events.map(({ date, media, importantDates, overview }) => (
+      {events.sort((a, b) => b.date.localeCompare(a.date)).map(({ date, media, importantDates, overview }) => (
         <li className="relative" key={date}>
           <div className="absolute top-0 items-center justify-center hidden w-10 h-10 text-white bg-indigo-400 border-4 border-white rounded-full md:flex -left-5 -top-2">
             <svg
@@ -47,7 +47,7 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
               <div className="mt-4 text-sm">
                 <div className="font-bold">Viktiga händelser</div>
                 <ul className="pl-5 mt-2 list-disc space-y-2">
-                  {importantDates.map((important, i) => (
+                  {importantDates.sort((a, b) => b.date.localeCompare(a.date)).map((important, i) => (
                     <li key={`${important.description}-${i}`}>
                       {important.link ? (
                         <Link.External href={important.link}>
@@ -68,7 +68,7 @@ const Timeline = ({ events }: TimelineProps): JSX.Element => {
               <div className="mt-4 text-sm">
                 <div className="font-bold">Media</div>
                 <ul className="pl-5 mt-2 list-disc space-y-2">
-                  {media.map((m) => (
+                  {media.sort((a, b) => b.date.localeCompare(a.date)).map((m) => (
                     <li key={m.description}>
                       {m.link ? (
                         <Link.External href={m.link}>

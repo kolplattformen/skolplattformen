@@ -26,17 +26,23 @@ export interface TimelineEvent {
 
 export const events: TimelineEvent[] = [
   {
-    overview: (<>
-      <p>
-        I juli kommer det väntade beskedet från Kammarrätten: dokumentationen av
-        Skolplattformens API är inte att betrakta som allmän handling, för den
-        finns inte. Upphandlingens krav på dokumentation har inte uppfyllts, och
-        eftersom dokumentationen inte finns behöver den heller inte lämnas ut.
-      </p>
-      <p>
-        Redan i februari genomförde staden en oberoende säkerhetsanalys av koden i vår app men resultatet av denna utredning valde man att sekretessbelägga. Detta överklagade vi till Kammarrätten i Stockholm som gav oss rätt och mycket riktigt visar rapporten att vår app inte sparar några uppgifter. Detta kände alltså staden till men mörkade, även till polisen.
-
-      </p>
+    overview: (
+      <>
+        <p>
+          I juli kommer det väntade beskedet från Kammarrätten: dokumentationen
+          av Skolplattformens API är inte att betrakta som allmän handling, för
+          den finns inte. Upphandlingens krav på dokumentation har inte
+          uppfyllts, och eftersom dokumentationen inte finns behöver den heller
+          inte lämnas ut.
+        </p>
+        <p>
+          Redan i februari genomförde staden en oberoende säkerhetsanalys av
+          koden i vår app men resultatet av denna utredning valde man att
+          sekretessbelägga. Detta överklagade vi till Kammarrätten i Stockholm
+          som gav oss rätt och mycket riktigt visar rapporten att vår app inte
+          sparar några uppgifter. Detta kände alltså staden till men mörkade,
+          även till polisen.
+        </p>
       </>
     ),
     date: '2021-07-01',
@@ -52,15 +58,17 @@ export const events: TimelineEvent[] = [
         date: '2021-07-01',
       },
       {
-        description: 'Kammarrätten i Stockholm beslutar att den sekretess som staden har lagt på den oberoende analysen av vår källkod skall hävas.',
+        description:
+          'Kammarrätten i Stockholm beslutar att den sekretess som staden har lagt på den oberoende analysen av vår källkod skall hävas.',
         date: '2021-07-15',
-        link: 'https://twitter.com/VikstromDaniel/status/1415683828622925825'
+        link: 'https://twitter.com/VikstromDaniel/status/1415683828622925825',
       },
       {
-        description: 'Avtal med Tieto visar att man har förhandlat bort viteskrav och skadeståndskrav',
+        description:
+          'Avtal med Tieto visar att man har förhandlat bort viteskrav och skadeståndskrav',
         link: 'https://twitter.com/landgren/status/1418493177774940165',
-        date:' 2021-07-23'
-      }
+        date: '2021-07-23',
+      },
     ],
     media: [
       {
@@ -100,25 +108,30 @@ export const events: TimelineEvent[] = [
     date: '2021-06-01',
     importantDates: [
       {
-        date:'2021-06-10',
-        description: 'Sigrun Tallungs sammanfattar diskussionerna om offentlig digitalisering, bland annat av hälso- och sjukvården, i ett av våra många Clubhousesamtal'
-      }
+        date: '2021-06-10',
+        description:
+          'Sigrun Tallungs sammanfattar diskussionerna om offentlig digitalisering, bland annat av hälso- och sjukvården, i ett av våra många Clubhousesamtal',
+      },
     ],
     media: [
       {
-        date:'2021-06-23',
-        description:'Dumhet 23 juni 2021 - P3 Dystopia',
-        link:'https://sverigesradio.se/avsnitt/1742863'
+        date: '2021-06-23',
+        description: 'Dumhet 23 juni 2021 - P3 Dystopia',
+        link: 'https://sverigesradio.se/avsnitt/1742863',
       },
       {
-        date:'2021-06-23',
-        description:'Fiaskot skolplattformen är en total katastrof (Aftonbladet Kultur)',
-        link:'https://www.aftonbladet.se/kultur/a/oA41Xj/fiaskot-skolplattformen-ar-en-total-katastrof'
+        date: '2021-06-23',
+        description:
+          'Fiaskot skolplattformen är en total katastrof (Aftonbladet Kultur)',
+        link:
+          'https://www.aftonbladet.se/kultur/a/oA41Xj/fiaskot-skolplattformen-ar-en-total-katastrof',
       },
       {
-        date:'2021-06-03',
-        description:'Christian Landgren om framtidens transporten (logistikpodden)',
-        link:'https://open.spotify.com/episode/2KkcihM83ww1nRbLqyAVqP?si=t38SZqqAQXuNQ839Eh_iGg&dl_branch=1'
+        date: '2021-06-03',
+        description:
+          'Christian Landgren om framtidens transporten (logistikpodden)',
+        link:
+          'https://open.spotify.com/episode/2KkcihM83ww1nRbLqyAVqP?si=t38SZqqAQXuNQ839Eh_iGg&dl_branch=1',
       },
     ],
   },
