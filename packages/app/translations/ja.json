@@ -8,12 +8,52 @@
         "endTime": "終了時間",
         "personalNumberMissing": "個人識別番号が入力されていない",
         "invalidPersonalNumber": "個人識別番号が無効",
-        "entireDay": "一日中"
+        "entireDay": "一日中",
+        "title": "不在を報告する",
+        "selectAbscenseEndTime": "終了時間を選択します",
+        "selectAbscenseStartTime": "開始時間を選択します",
+        "startTime": "開始時間"
     },
     "abbrevations": {
         "upperSecondarySchool": "ギムナジウム",
         "preSchool": "就学前学級",
         "leisureTimeCentre": "学童保育",
         "compulsorySchool": "基礎学校"
+    },
+    "general": {
+        "settings": "設定"
+    },
+    "children": {
+        "tryAgain": "やり直してください",
+        "title": "あなたの子供"
+    },
+    "auth": {
+        "a11y_image_two_boys": "自分の携帯電話を見ている二人",
+        "a11y_change_language": "あなたの言語を選択して下さい",
+        "words": {
+            "simple": "簡単",
+            "homemade": "自家製",
+            "imperfect": "不完全",
+            "agile": "アジャイル",
+            "open": "オープン",
+            "fun": "楽しい",
+            "free": "自由な",
+            "first": "最初",
+            "fast": "速い",
+            "fantastic": "素晴らしい",
+            "cheap": "安い",
+            "better": "より良い"
+        },
+        "subtitle": "{{word}}の選択肢",
+        "chooseLoginMethod": "ログイン方法を選択してください",
+        "loginAsTestUser": "テスト・ユーザーでログインしてください",
+        "bankid": {
+            "OpenManually": "BankIDを手動で開く",
+            "OpenOnAnotherDevice": "別のデバイスでBankIDを使用する",
+            "Waiting": "BankIDを待っています…",
+            "OpenOnThisDevice": "このデバイスでBankIDを使用する"
+        },
+        "loginFailed": "ログインできませんでした。再試行してください。",
+        "placeholder_SocialSecurityNumber": "あなたの個人番号"
     }
 }
