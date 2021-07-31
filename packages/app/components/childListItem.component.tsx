@@ -111,7 +111,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             </View>
           </View>
         </View>
-        <DaySummary child={child} date={date} />
+        {/*<DaySummary child={child} date={date} />*/}
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
