@@ -64,7 +64,7 @@ const Footer = (): JSX.Element => {
 
         <div className="p-5 bg-white dark:bg-gray-800 shadow-md rounded-md">
           <div className="mb-3 text-gray-800 dark:text-gray-200">
-            @iteam1337 Digitalisering på riktigt.
+            @iteam1337 We move fast and fix things.
           </div>
           <div>
             <Link.External href="https://iteam.se" target="_blank">
