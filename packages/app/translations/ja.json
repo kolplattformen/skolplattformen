@@ -42,7 +42,12 @@
             "fast": "速い",
             "fantastic": "素晴らしい",
             "cheap": "安い",
-            "better": "より良い"
+            "better": "より良い",
+            "working": "いいな機能性",
+            "rebellious": "反抗的な",
+            "enlightened": "エンライテンド",
+            "cooler": "かっこいい",
+            "awaited": "待ち受ける"
         },
         "subtitle": "{{word}}の選択肢",
         "chooseLoginMethod": "ログイン方法を選択してください",
