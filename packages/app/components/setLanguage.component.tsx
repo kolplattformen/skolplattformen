@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import RNRestart from 'react-native-restart'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
@@ -62,35 +63,36 @@ export const SetLanguage = () => {
   const activeLanguages = languages.filter((language) => language.active)
 
   return (
-    <View style={styles.content}>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
       <ScrollView>
-        <View style={styles.languageList}>
-          {activeLanguages.map((language) => (
-            <TouchableOpacity
-              key={language.langCode}
-              style={styles.languageButton}
-              onPress={() => setSelectedLanguage(language.langCode)}
-            >
-              <View>
-                <Text style={styles.languageButtonTitle}>
-                  {language.languageLocalName}
-                </Text>
-                <Text style={styles.languageButtonSubtitle}>
-                  {language.languageName}
-                </Text>
-              </View>
-              {isSelected(language.langCode) ? (
-                <CheckIcon
-                  height={24}
-                  width={24}
-                  fill={colors['color-success-600']}
-                />
-              ) : null}
-            </TouchableOpacity>
-          ))}
+        <View style={styles.content}>
+          <View style={styles.languageList}>
+            {activeLanguages.map((language) => (
+              <TouchableOpacity
+                key={language.langCode}
+                style={styles.languageButton}
+                onPress={() => setSelectedLanguage(language.langCode)}
+              >
+                <View>
+                  <Text style={styles.languageButtonTitle}>
+                    {language.languageLocalName}
+                  </Text>
+                  <Text style={styles.languageButtonSubtitle}>
+                    {language.languageName}
+                  </Text>
+                </View>
+                {isSelected(language.langCode) ? (
+                  <CheckIcon
+                    height={24}
+                    width={24}
+                    fill={colors['color-success-600']}
+                  />
+                ) : null}
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       </ScrollView>
-
       <ButtonGroup style={styles.buttonGroup}>
         <Button
           onPress={() => saveLanguage()}
@@ -103,7 +105,7 @@ export const SetLanguage = () => {
           {translate('language.changeLanguageButton')}
         </Button>
       </ButtonGroup>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -119,7 +121,8 @@ const themedStyles = StyleService.create({
     height: 30,
   },
   container: {
-    padding: Sizing.t5,
+    flex: 1,
+    backgroundColor: 'background-basic-color-2',
   },
   content: {
     ...LayoutStyle.center,
@@ -130,6 +133,7 @@ const themedStyles = StyleService.create({
   buttonGroup: {
     minHeight: 45,
     marginTop: 20,
+    marginHorizontal: Sizing.t5,
   },
   languageButton: {
     minHeight: 45,
