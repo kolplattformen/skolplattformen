@@ -31,8 +31,9 @@ export const SetLanguage = () => {
 
   const currentLanguage = LanguageService.getLanguageCode()
 
-  const [selectedLanguage, setSelectedLanguage] =
-    useState<string>(currentLanguage)
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(
+    currentLanguage
+  )
   const { setLanguageCode } = useLanguage()
 
   const shouldRestart = () => {
