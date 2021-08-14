@@ -246,6 +246,7 @@ const themedStyles = StyleService.create({
   wrap: {
     ...LayoutStyle.flex.full,
     padding: Sizing.t4,
+    backgroundColor: 'background-basic-color-2',
   },
   field: { marginBottom: Sizing.t4 },
   partOfDay: { ...LayoutStyle.flex.row, marginBottom: Sizing.t4 },
