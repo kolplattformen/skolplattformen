@@ -1,20 +1,20 @@
-import React from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import * as eva from '@eva-design/eva'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import CookieManager from '@react-native-community/cookies'
+import { ApiProvider } from '@skolplattformen/api-hooks'
+import init from '@skolplattformen/embedded-api'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
-import * as eva from '@eva-design/eva'
-import darkTheme from './design/dark.json'
-import lightTheme from './design/light.json'
-import { AppNavigator } from './components/navigation.component'
-import init from '@skolplattformen/embedded-api'
-import { ApiProvider } from '@skolplattformen/api-hooks'
-import CookieManager from '@react-native-community/cookies'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import React from 'react'
 import { StatusBar } from 'react-native'
-import { useBackgroundBlur } from './utils/blur'
-import { LanguageProvider } from './context/language/languageContext'
-import { translations } from './utils/translation'
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { AppNavigator } from './components/navigation.component'
+import { LanguageProvider } from './context/language/languageContext'
+import { default as customMapping } from './design/mapping.json'
+import { darkTheme, lightTheme } from './design/themes'
+import { useBackgroundBlur } from './utils/blur'
+import { translations } from './utils/translation'
 const api = init(fetch, CookieManager)
 
 const reporter = __DEV__
@@ -43,10 +43,8 @@ export default () => {
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider
             {...eva}
-            theme={{
-              ...(colorScheme === 'dark' ? eva.dark : eva.light),
-              ...(colorScheme === 'dark' ? darkTheme : lightTheme),
-            }}
+            customMapping={customMapping}
+            theme={colorScheme === 'dark' ? darkTheme : lightTheme}
           >
             <LanguageProvider cache={true} data={translations}>
               <AppNavigator />

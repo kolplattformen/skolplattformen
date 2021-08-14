@@ -1,18 +1,19 @@
-import React, { useState, useMemo } from 'react'
 import { useNews } from '@skolplattformen/api-hooks'
-import { List, Input } from '@ui-kitten/components'
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { Input, List, StyleService, useStyleSheet } from '@ui-kitten/components'
+import React, { useMemo, useState } from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import { Sizing } from '../styles'
-import { useChild } from './childContext.component'
-import { NewsListItem } from './newsListItem.component'
-import { translate } from '../utils/translation'
 import {
-  useNewsListSearchResults,
   renderSearchResultPreview,
+  useNewsListSearchResults,
 } from '../utils/search'
-import { SearchIcon, CloseOutlineIcon } from './icon.component'
+import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { CloseOutlineIcon, SearchIcon } from './icon.component'
+import { NewsListItem } from './newsListItem.component'
 
 export const NewsList = () => {
+  const styles = useStyleSheet(themedStyles)
   const child = useChild()
   const { data } = useNews(child)
 
@@ -33,14 +34,19 @@ export const NewsList = () => {
         accessoryLeft={SearchIcon}
         onChangeText={setSearchQuery}
         value={searchQuery}
-        accessoryRight={(props) => (
-          <TouchableWithoutFeedback onPress={() => setSearchQuery('')}>
-            <CloseOutlineIcon {...props} />
-          </TouchableWithoutFeedback>
-        )}
+        style={styles.search}
+        accessoryRight={(props) =>
+          searchQuery.length > 0 ? (
+            <TouchableOpacity onPress={() => setSearchQuery('')}>
+              <CloseOutlineIcon {...props} />
+            </TouchableOpacity>
+          ) : (
+            <View />
+          )
+        }
       />
     ),
-    [searchQuery]
+    [searchQuery, styles.search]
   )
 
   if (searchQuery) {
@@ -72,12 +78,18 @@ export const NewsList = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     height: '100%',
     width: '100%',
   },
   contentContainer: {
-    padding: Sizing.t3,
+    paddingVertical: Sizing.t3,
+    paddingHorizontal: Sizing.t3,
+  },
+  search: {
+    backgroundColor: 'background-basic-color-1',
+    borderRadius: 40,
+    marginBottom: Sizing.t2,
   },
 })
