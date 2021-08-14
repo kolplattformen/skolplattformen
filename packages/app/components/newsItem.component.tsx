@@ -30,15 +30,12 @@ export const newsItemRouteOptions = ({
   route: RouteProp<RootStackParamList, 'NewsItem'>
 }): NativeStackNavigationOptions => {
   const newsItem = route.params.newsItem
+ 
 
   return {
     ...defaultStackStyling,
     title: newsItem.header,
     headerLargeTitle: true,
-    headerStyle: {
-      // TODO: This color must come from theme for dark mode
-      backgroundColor: '#fff',
-    },
   }
 }
 
