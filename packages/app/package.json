@@ -12,8 +12,7 @@
     "test:watch": "jest --watch",
     "typecheck": "tsc --watch",
     "i18n": "sync-i18n --files '**/translations/*.json' --primary en --languages ar de pl so sv --space 2",
-    "check-i18n": "npm run i18n -- --check",
-    "postinstall": "patch-package"
+    "check-i18n": "npm run i18n -- --check"
   },
   "dependencies": {
     "@eva-design/eva": "2.0.0",
