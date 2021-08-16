@@ -1,6 +1,6 @@
 import { Linking, Platform } from 'react-native'
 
-const phoneNumber = '+46701234567'
+const phoneNumber = '+46730121740'
 
 export const useSMS = () => {
   const sendSMS = async (message) => {
