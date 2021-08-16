@@ -1,10 +1,10 @@
 import message from '../content/flash.json'
 
-const Flash = () => (
+const Flash = (): JSX.Element => (
   <>
   {message.subject &&
     <div className="max-w-6xl mx-auto mt-4">
-      <div className="bg-pink-100 sm:rounded px-4 py-3 shadow-md" role="alert">
+      <div className="bg-pink-100 fg-black text-red-800 sm:rounded px-4 py-3 shadow-md" role="alert">
         <div className="flex space-x-4">
           <svg
             className="w-6 h-6 mt-1"
