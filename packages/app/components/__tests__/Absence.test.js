@@ -37,12 +37,6 @@ beforeEach(() => {
   AsyncStorage.clear()
 })
 
-test('renders title', () => {
-  const screen = setup()
-
-  expect(screen.getByText('Anmäl frånvaro')).toBeTruthy()
-})
-
 test('can fill out the form with full day absence', async () => {
   const screen = setup()
 

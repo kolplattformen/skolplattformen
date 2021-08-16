@@ -1,35 +1,29 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp, useRoute } from '@react-navigation/native'
 import {
   Button,
   CheckBox,
-  Divider,
   Input,
-  Layout,
   StyleService,
   Text,
-  TopNavigation,
-  TopNavigationAction,
   useStyleSheet,
 } from '@ui-kitten/components'
 import { Formik } from 'formik'
 import moment from 'moment'
 import Personnummer from 'personnummer'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import * as Yup from 'yup'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
-import { SafeAreaView } from '../ui/safeAreaView.component'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
-import { BackIcon, AlertIcon } from './icon.component'
+import { AlertIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
-import { SafeAreaViewContainer } from '../ui/safeAreaViewContainer.component'
+import { NavigationTitle } from './navigationTitle.component'
 
-type AbsenceNavigationProp = StackNavigationProp<RootStackParamList, 'Absence'>
 type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
 
 interface AbsenceFormValues {
@@ -41,7 +35,21 @@ interface AbsenceFormValues {
   endTime: moment.Moment
 }
 
-const Alert = (props: any) => <AlertIcon {...props} />
+export const absenceRouteOptions = ({
+  route,
+}: {
+  route: RouteProp<RootStackParamList, 'Absence'>
+}): NativeStackNavigationOptions => {
+  const child = route.params.child
+  return {
+    headerCenter: () => (
+      <NavigationTitle
+        title={translate('abscense.title')}
+        subtitle={studentName(child?.name)}
+      />
+    ),
+  }
+}
 
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
@@ -52,7 +60,7 @@ const Absence = () => {
       ),
     isFullDay: Yup.bool().required(),
   })
-  const navigation = useNavigation<AbsenceNavigationProp>()
+
   const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
@@ -60,6 +68,28 @@ const Absence = () => {
   const minumumDate = moment().hours(8).minute(0)
   const maximumDate = moment().hours(17).minute(0)
   const styles = useStyleSheet(themedStyles)
+
+  const submit = useCallback(
+    async (values: AbsenceFormValues) => {
+      const ssn = Personnummer.parse(values.socialSecurityNumber).format()
+
+      if (values.isFullDay) {
+        sendSMS(ssn)
+      } else {
+        sendSMS(
+          `${ssn} ${moment(values.startTime).format('HHmm')}-${moment(
+            values.endTime
+          ).format('HHmm')}`
+        )
+      }
+
+      await AsyncStorage.setItem(
+        `@childssn.${child.id}`,
+        values.socialSecurityNumber
+      )
+    },
+    [child.id, sendSMS]
+  )
 
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
@@ -80,210 +110,155 @@ const Absence = () => {
   }
 
   return (
-    <SafeAreaView>
-      <SafeAreaViewContainer>
-        <TopNavigation
-          accessoryLeft={() => (
-            <TopNavigationAction
-              icon={BackIcon}
-              onPress={() => navigation.goBack()}
-            />
-          )}
-          alignment="center"
-          style={styles.topBar}
-          title={() => (
-            <Text maxFontSizeMultiplier={1.5} style={styles.topNavigationTitle}>
-              {translate('abscense.title')}
-            </Text>
-          )}
-          subtitle={() => (
-            <Text
-              maxFontSizeMultiplier={1.5}
-              style={styles.topNavigationSubtitle}
-            >
-              {studentName(child.name)}
-            </Text>
-          )}
-        />
-        <Divider />
-        <Layout style={styles.wrap}>
-          <Formik
-            enableReinitialize
-            validationSchema={AbsenceSchema}
-            initialValues={initialValues}
-            onSubmit={async (values) => {
-              const ssn = Personnummer.parse(
-                values.socialSecurityNumber
-              ).format()
+    <Formik
+      enableReinitialize
+      validationSchema={AbsenceSchema}
+      initialValues={initialValues}
+      onSubmit={submit}
+    >
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        setFieldValue,
+        values,
+        touched,
+        errors,
+      }) => {
+        const hasError = (field: keyof typeof values) =>
+          errors[field] && touched[field]
 
-              if (values.isFullDay) {
-                sendSMS(ssn)
-              } else {
-                sendSMS(
-                  `${ssn} ${moment(values.startTime).format('HHmm')}-${moment(
-                    values.endTime
-                  ).format('HHmm')}`
-                )
-              }
-
-              await AsyncStorage.setItem(
-                `@childssn.${child.id}`,
-                values.socialSecurityNumber
-              )
-            }}
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              setFieldValue,
-              values,
-              touched,
-              errors,
-            }) => {
-              const hasError = (field: keyof typeof values) =>
-                errors[field] && touched[field]
-
-              return (
-                <View>
-                  <View style={styles.field}>
-                    <Text style={styles.label}>
-                      {translate('general.socialSecurityNumber')}
-                    </Text>
-                    <Input
-                      testID="socialSecurityNumberInput"
-                      keyboardType="number-pad"
-                      onChangeText={handleChange('socialSecurityNumber')}
-                      onBlur={handleBlur('socialSecurityNumber')}
-                      status={
-                        hasError('socialSecurityNumber') ? 'danger' : 'basic'
-                      }
-                      value={values.socialSecurityNumber}
-                      accessoryRight={
-                        errors.socialSecurityNumber ? Alert : undefined
-                      }
-                    />
-                    {hasError('socialSecurityNumber') && (
-                      <Text style={styles.error}>
-                        {errors.socialSecurityNumber}
-                      </Text>
-                    )}
-                  </View>
-                  <View style={styles.field}>
-                    <CheckBox
-                      checked={values.isFullDay}
-                      onChange={(checked) =>
-                        setFieldValue('isFullDay', checked)
-                      }
-                    >
-                      {translate('abscense.entireDay')}
-                    </CheckBox>
-                  </View>
-                  {!values.isFullDay && (
-                    <View style={styles.partOfDay}>
-                      <View style={styles.inputHalf}>
-                        <Text style={styles.label}>
-                          {translate('abscense.startTime')}
-                        </Text>
-                        <Button
-                          status="basic"
-                          onPress={() =>
-                            setFieldValue('displayStartTimePicker', true)
-                          }
-                        >
-                          {moment(values.startTime).format('LT')}
-                        </Button>
-                        <DateTimePickerModal
-                          cancelTextIOS={translate('general.cancel')}
-                          confirmTextIOS={translate('general.confirm')}
-                          date={moment(values.startTime).toDate()}
-                          isVisible={values.displayStartTimePicker}
-                          headerTextIOS={translate(
-                            'abscense.selectAbscenseStartTime'
-                          )}
-                          locale="sv-SE"
-                          maximumDate={maximumDate.toDate()}
-                          minimumDate={minumumDate.toDate()}
-                          minuteInterval={10}
-                          mode="time"
-                          onConfirm={(date) => {
-                            setFieldValue('startTime', date)
-                            setFieldValue('displayStartTimePicker', false)
-                          }}
-                          onCancel={() =>
-                            setFieldValue('displayStartTimePicker', false)
-                          }
-                        />
-                      </View>
-                      <View style={styles.spacer} />
-                      <View style={styles.inputHalf}>
-                        <Text style={styles.label}>
-                          {translate('abscense.endTime')}
-                        </Text>
-                        <Button
-                          status="basic"
-                          onPress={() =>
-                            setFieldValue('displayEndTimePicker', true)
-                          }
-                        >
-                          {moment(values.endTime).format('LT')}
-                        </Button>
-                        <DateTimePickerModal
-                          cancelTextIOS={translate('general.cancel')}
-                          confirmTextIOS={translate('general.confirm')}
-                          date={moment(values.endTime).toDate()}
-                          isVisible={values.displayEndTimePicker}
-                          headerTextIOS={translate(
-                            'abscense.selectAbscenseEndTime'
-                          )}
-                          // Todo fix this
-                          locale="sv-SE"
-                          maximumDate={maximumDate.toDate()}
-                          minimumDate={minumumDate.toDate()}
-                          minuteInterval={10}
-                          mode="time"
-                          onConfirm={(date) => {
-                            setFieldValue('endTime', date)
-                            setFieldValue('displayEndTimePicker', false)
-                          }}
-                          onCancel={() =>
-                            setFieldValue('displayEndTimePicker', false)
-                          }
-                        />
-                      </View>
-                    </View>
-                  )}
-                  <Button onPress={handleSubmit} status="primary">
-                    {translate('general.send')}
+        return (
+          <View style={styles.wrap}>
+            <View style={styles.field}>
+              <Text style={styles.label}>
+                {translate('general.socialSecurityNumber')}
+              </Text>
+              <Input
+                testID="socialSecurityNumberInput"
+                keyboardType="number-pad"
+                onChangeText={handleChange('socialSecurityNumber')}
+                onBlur={handleBlur('socialSecurityNumber')}
+                status={hasError('socialSecurityNumber') ? 'danger' : 'basic'}
+                value={values.socialSecurityNumber}
+                style={styles.input}
+                accessoryRight={
+                  hasError('socialSecurityNumber') ? AlertIcon : undefined
+                }
+              />
+              {hasError('socialSecurityNumber') && (
+                <Text style={styles.error}>{errors.socialSecurityNumber}</Text>
+              )}
+            </View>
+            <View style={styles.field}>
+              <CheckBox
+                checked={values.isFullDay}
+                onChange={(checked) => setFieldValue('isFullDay', checked)}
+              >
+                {translate('abscense.entireDay')}
+              </CheckBox>
+            </View>
+            {!values.isFullDay && (
+              <View style={styles.partOfDay}>
+                <View style={styles.inputHalf}>
+                  <Text style={styles.label}>
+                    {translate('abscense.startTime')}
+                  </Text>
+                  <Button
+                    status="basic"
+                    style={styles.pickerButton}
+                    onPress={() =>
+                      setFieldValue('displayStartTimePicker', true)
+                    }
+                  >
+                    {moment(values.startTime).format('LT')}
                   </Button>
+                  <DateTimePickerModal
+                    cancelTextIOS={translate('general.cancel')}
+                    confirmTextIOS={translate('general.confirm')}
+                    date={moment(values.startTime).toDate()}
+                    isVisible={values.displayStartTimePicker}
+                    headerTextIOS={translate(
+                      'abscense.selectAbscenseStartTime'
+                    )}
+                    locale="sv-SE"
+                    maximumDate={maximumDate.toDate()}
+                    minimumDate={minumumDate.toDate()}
+                    minuteInterval={10}
+                    mode="time"
+                    onConfirm={(date) => {
+                      setFieldValue('startTime', date)
+                      setFieldValue('displayStartTimePicker', false)
+                    }}
+                    onCancel={() =>
+                      setFieldValue('displayStartTimePicker', false)
+                    }
+                  />
                 </View>
-              )
-            }}
-          </Formik>
-        </Layout>
-      </SafeAreaViewContainer>
-    </SafeAreaView>
+                <View style={styles.spacer} />
+                <View style={styles.inputHalf}>
+                  <Text style={styles.label}>
+                    {translate('abscense.endTime')}
+                  </Text>
+                  <Button
+                    status="basic"
+                    style={styles.pickerButton}
+                    onPress={() => setFieldValue('displayEndTimePicker', true)}
+                  >
+                    {moment(values.endTime).format('LT')}
+                  </Button>
+                  <DateTimePickerModal
+                    cancelTextIOS={translate('general.cancel')}
+                    confirmTextIOS={translate('general.confirm')}
+                    date={moment(values.endTime).toDate()}
+                    isVisible={values.displayEndTimePicker}
+                    headerTextIOS={translate('abscense.selectAbscenseEndTime')}
+                    // Todo fix this
+                    locale="sv-SE"
+                    maximumDate={maximumDate.toDate()}
+                    minimumDate={minumumDate.toDate()}
+                    minuteInterval={10}
+                    mode="time"
+                    onConfirm={(date) => {
+                      setFieldValue('endTime', date)
+                      setFieldValue('displayEndTimePicker', false)
+                    }}
+                    onCancel={() =>
+                      setFieldValue('displayEndTimePicker', false)
+                    }
+                  />
+                </View>
+              </View>
+            )}
+            <Button onPress={handleSubmit} status="primary">
+              {translate('general.send')}
+            </Button>
+          </View>
+        )
+      }}
+    </Formik>
   )
 }
 
 export default Absence
 
 const themedStyles = StyleService.create({
-  safeArea: {
-    ...LayoutStyle.flex.full,
-    backgroundColor: 'background-basic-color-1',
-  },
-  topBar: {
-    backgroundColor: 'background-basic-color-1',
-  },
   wrap: {
     ...LayoutStyle.flex.full,
-    padding: Sizing.t5,
+    padding: Sizing.t4,
+    backgroundColor: 'background-basic-color-2',
   },
   field: { marginBottom: Sizing.t4 },
   partOfDay: { ...LayoutStyle.flex.row, marginBottom: Sizing.t4 },
   spacer: { width: Sizing.t2 },
   inputHalf: { ...LayoutStyle.flex.full },
+  input: {
+    backgroundColor: 'background-basic-color-1',
+  },
+  // TODO: Refactor to use mapping.json in eva design
+  pickerButton: {
+    backgroundColor: 'background-basic-color-1',
+  },
   label: {
     ...Typography.fontSize.xs,
     ...Typography.fontWeight.bold,
@@ -292,12 +267,5 @@ const themedStyles = StyleService.create({
   },
   error: {
     color: 'color-primary-600',
-  },
-  topNavigationTitle: {
-    ...Typography.fontWeight.semibold,
-  },
-  topNavigationSubtitle: {
-    ...Typography.fontWeight.regular,
-    ...Typography.fontSize.sm,
   },
 })

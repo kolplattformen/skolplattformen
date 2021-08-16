@@ -7,6 +7,8 @@ const team = [
   { name: 'Johan Öbrink', twitter: 'johanobrink' },
   { name: 'Rickard Natt och Dag', twitter: 'rnattochdag' },
   { name: 'Viktor Sarström', twitter: 'viktorsarstrom' },
+  { name: 'Kajetan Kazimierczak', twitter: 'kajetanek' },
+  { name: 'Jonathan Edenström', twitter: 'edenstroem' },
   { name: 'Öppna skolplattformen', twitter: 'oppnaskolplatt' },
 ]
 
@@ -62,7 +64,7 @@ const Footer = (): JSX.Element => {
 
         <div className="p-5 bg-white dark:bg-gray-800 shadow-md rounded-md">
           <div className="mb-3 text-gray-800 dark:text-gray-200">
-            @iteam1337 Digitalisering på riktigt.
+            @iteam1337 We move fast and fix things.
           </div>
           <div>
             <Link.External href="https://iteam.se" target="_blank">
