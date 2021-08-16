@@ -1,3 +1,18 @@
+# [1.37.0](https://github.com/kolplattformen/skolplattformen/compare/v1.36.4...v1.37.0) (2021-08-16)
+
+
+### Bug Fixes
+
+* 🐛 dark mode-färgerna tillbaka ([49328b4](https://github.com/kolplattformen/skolplattformen/commit/49328b44f962517910a2e143ddf51cdc083a2d5c))
+
+
+### Features
+
+* Add custom Poppins typeface ([67a8aca](https://github.com/kolplattformen/skolplattformen/commit/67a8aca9e403ca98fefa8244c205a4cec8669f6a))
+* added day summary on front page ([1917b7e](https://github.com/kolplattformen/skolplattformen/commit/1917b7e2d425b0c40308480668b916156dd3e24a))
+* login screen and move logout button ([fa7b103](https://github.com/kolplattformen/skolplattformen/commit/fa7b10318fdf58ad1e2ef1238bae37c65ba301d5))
+* new colors ([c178f9c](https://github.com/kolplattformen/skolplattformen/commit/c178f9c3b4cd0ae9558df68bb51db48f33537e93))
+
 ## [1.36.4](https://github.com/kolplattformen/skolplattformen/compare/v1.36.3...v1.36.4) (2021-05-28)
 
 
