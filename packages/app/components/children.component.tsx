@@ -80,7 +80,9 @@ export const Children = () => {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => {
-        return <TopNavigationAction icon={CloseOutlineIcon} onPress={settings} />
+        return (
+          <TopNavigationAction icon={CloseOutlineIcon} onPress={settings} />
+        )
       },
     })
   }, [navigation, settings])
