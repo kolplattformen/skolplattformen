@@ -778,6 +778,11 @@
   dependencies:
     "classnames" "*"
 
+"@types/google-spreadsheet@^3.1.5":
+  "integrity" "sha512-7N+mDtZ1pmya2RRFPPl4KYc2TRgiqCNBLUZfyrKfER+u751JgCO+C24/LzF70UmUm/zhHUbzRZ5mtfaxekQ1ZQ=="
+  "resolved" "https://registry.npmjs.org/@types/google-spreadsheet/-/google-spreadsheet-3.1.5.tgz"
+  "version" "3.1.5"
+
 "@types/graceful-fs@^4.1.2":
   "integrity" "sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw=="
   "resolved" "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.5.tgz"
