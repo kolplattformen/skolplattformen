@@ -1,3 +1,22 @@
+# [1.38.0](https://github.com/kolplattformen/skolplattformen/compare/v1.37.0...v1.38.0) (2021-08-16)
+
+
+### Bug Fixes
+
+* bugfix, must call the damn function ([b6c7f78](https://github.com/kolplattformen/skolplattformen/commit/b6c7f7853b890b054a1f5ae54b69c1e1e006bc4f))
+* flash was in js, now ts ([5e39618](https://github.com/kolplattformen/skolplattformen/commit/5e39618e888449f06a1bb04771ad30af87012997))
+* linting ([1877cdd](https://github.com/kolplattformen/skolplattformen/commit/1877cdd594f0f6687f68ed58b5674bbac4d766c9))
+* remove flash msg for now ([f98b215](https://github.com/kolplattformen/skolplattformen/commit/f98b2154dc344b904fd29f4ab2bc365094f13994))
+
+
+### Features
+
+* automatic sorting on dates ([b911ae8](https://github.com/kolplattformen/skolplattformen/commit/b911ae8c8482f1817f3f54c5db135bfa33ac0885))
+* handle timeouts, throttling, ratelimit etc from google ([a67ee60](https://github.com/kolplattformen/skolplattformen/commit/a67ee60f027032c4141994a1ae0fbc5bb5bb06da))
+* load timeline dynamically from Google Sheet ([c53a8c0](https://github.com/kolplattformen/skolplattformen/commit/c53a8c0bb2181591e470cf6e38ef0a343d6f0167))
+* updated history ([9fa7d10](https://github.com/kolplattformen/skolplattformen/commit/9fa7d10bb1e1822a327e15cb773574c988997094))
+* updated history with events up to July ([#423](https://github.com/kolplattformen/skolplattformen/issues/423)) ([62c3f2a](https://github.com/kolplattformen/skolplattformen/commit/62c3f2a97f1c118f4bc1eed1b4bdc82ab13a907f))
+
 # [1.37.0](https://github.com/kolplattformen/skolplattformen/compare/v1.36.4...v1.37.0) (2021-08-16)
 
 
