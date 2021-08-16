@@ -27,10 +27,6 @@ jobs:
       - name: Install dependencies
         run: npx lerna bootstrap
 
-      - name: Run audit
-        run: |
-          yarn audit
-
       - name: Run linting and tests
         run: |
           yarn lint
