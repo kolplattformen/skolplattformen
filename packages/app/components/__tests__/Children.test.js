@@ -10,12 +10,12 @@ import {
 import { render } from '../../utils/testHelpers'
 import React from 'react'
 import { Children } from '../children.component'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/core'
 import * as RNLocalize from 'react-native-localize'
 import { translate } from '../../utils/translation'
 
 jest.mock('@skolplattformen/api-hooks')
-jest.mock('@react-navigation/native')
+jest.mock('@react-navigation/core')
 jest.mock('react-native-localize')
 const setup = () => {
   return render(<Children />)
@@ -35,7 +35,7 @@ beforeEach(() => {
   useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
   useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
   useMenu.mockReturnValueOnce({ data: [], status: 'loaded' })
-  useNavigation.mockReturnValue({ navigate: jest.fn() })
+  useNavigation.mockReturnValue({ navigate: jest.fn(), setOptions: jest.fn() })
 })
 
 test('renders loading state', () => {

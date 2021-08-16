@@ -55,7 +55,6 @@ test('gets article details using useNewsDetails', () => {
 test('renders an article', () => {
   const screen = setup()
 
-  expect(screen.getByText(/k-bullar!/i)).toBeTruthy()
   expect(screen.getByText(/nu blir det köttbullar/i)).toBeTruthy()
   expect(screen.getByText('Publicerad: 15 feb 2021 10:13')).toBeTruthy()
   expect(screen.getByText('Uppdaterad: 15 feb 2021 10:13')).toBeTruthy()
@@ -69,7 +68,6 @@ test('renders an article without published date if date is invalid', () => {
 
   const screen = setup({ newsItem: newsItemWithoutPublishedDate })
 
-  expect(screen.getByText(/k-bullar!/i)).toBeTruthy()
   expect(screen.getByText(/nu blir det köttbullar/i)).toBeTruthy()
   expect(screen.getByText('Uppdaterad: 15 feb 2021 10:13')).toBeTruthy()
   expect(screen.queryByText('Publicerad: Invalid DateTime')).toBeFalsy()
@@ -83,7 +81,6 @@ test('renders an article without modified date if date is invalid', () => {
 
   const screen = setup({ newsItem: newsItemWithoutPublishedDate })
 
-  expect(screen.getByText(/k-bullar!/i)).toBeTruthy()
   expect(screen.getByText(/nu blir det köttbullar/i)).toBeTruthy()
   expect(screen.getByText('Publicerad: 15 feb 2021 10:13')).toBeTruthy()
   expect(screen.queryByText('Uppdaterad: Invalid DateTime')).toBeFalsy()
