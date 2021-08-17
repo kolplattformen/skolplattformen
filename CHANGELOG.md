@@ -1,3 +1,10 @@
+## [1.38.1](https://github.com/kolplattformen/skolplattformen/compare/v1.38.0...v1.38.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* 🐛 Ta bort avbryt från listan vid login ([#443](https://github.com/kolplattformen/skolplattformen/issues/443)) ([6f68751](https://github.com/kolplattformen/skolplattformen/commit/6f68751e1029d0b83f4080052c44817dcd0fa8f5))
+
 # [1.38.0](https://github.com/kolplattformen/skolplattformen/compare/v1.37.0...v1.38.0) (2021-08-16)
 
 
