@@ -35,10 +35,6 @@ export const newsItemRouteOptions = ({
     ...defaultStackStyling,
     title: newsItem.header,
     headerLargeTitle: true,
-    headerStyle: {
-      // TODO: This color must come from theme for dark mode
-      backgroundColor: '#fff',
-    },
   }
 }
 
