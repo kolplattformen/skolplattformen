@@ -61,7 +61,6 @@ export const Login = () => {
     translate('auth.bankid.OpenOnThisDevice'),
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
-    translate('general.cancel'),
   ]
 
   useEffect(() => {
