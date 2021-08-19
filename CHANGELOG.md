@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/kolplattformen/skolplattformen/compare/v1.38.1...v1.39.0) (2021-08-19)
+
+
+### Features
+
+* add police report protocol ([77b3c6b](https://github.com/kolplattformen/skolplattformen/commit/77b3c6b0848578a3acf0a119450e5ba3396b93fe))
+
 ## [1.38.1](https://github.com/kolplattformen/skolplattformen/compare/v1.38.0...v1.38.1) (2021-08-17)
 
 
