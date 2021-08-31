@@ -1,13 +1,13 @@
 import { ViewStyle } from 'react-native'
 
-type MainAxis = 'center' | 'flexStart'
+type MainAxis = 'center' | 'flexStart' | 'flexEnd'
 export const mainAxis: Record<MainAxis, ViewStyle> = {
   center: {
     alignItems: 'center',
   },
   flexStart: {
     alignItems: 'flex-start',
-  },
+  }
 }
 
 type CrossAxis = 'center' | 'flexEnd' | 'evenly' | 'spaceBetween'

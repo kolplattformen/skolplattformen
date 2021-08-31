@@ -120,7 +120,7 @@ export const Child = () => {
 
   return (
     <ChildProvider child={child}>
-      <TabNavigator initialRouteName={initialRouteName as any} />
+      <TabNavigator initialRouteName={child.firstName} />
     </ChildProvider>
   )
 }

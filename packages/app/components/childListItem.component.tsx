@@ -10,6 +10,7 @@ import {
 import { Child } from '@skolplattformen/embedded-api'
 import {
   Button,
+  Icon,
   StyleService,
   Text,
   useStyleSheet,
@@ -17,11 +18,13 @@ import {
 import moment from 'moment'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { Layout, Sizing } from '../styles'
+import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { RootStackParamList } from './navigation.component'
 import { StudentAvatar } from './studentAvatar.component'
+import { DaySummary } from './daySummary.component'
+import { RightArrowIcon } from './icon.component'
 
 interface ChildListItemProps {
   child: Child
@@ -108,7 +111,16 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
               {className ? <Text category="s1">{className}</Text> : null}
             </View>
           </View>
+          <View style={styles.cardHeaderRight}>
+            <RightArrowIcon
+              style={styles.icon}
+              fill={Colors.neutral.gray500}
+              name="star"
+            />
+          </View>
         </View>
+
+        <DaySummary child={child} />
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
@@ -170,11 +182,20 @@ const themeStyles = StyleService.create({
   cardHeaderLeft: {
     ...Layout.flex.row,
     ...Layout.mainAxis.center,
+    flex: 10,
+  },
+  cardHeaderRight: {
+    ...Layout.flex.row,
+    ...Layout.crossAxis.flexEnd,
     flex: 1,
   },
   cardHeaderText: {
     marginHorizontal: Sizing.t4,
-    flex: 1,
+    flex: 10,
+  },
+  icon: {
+    width: 32,
+    height: 32,
   },
   itemFooter: {
     ...Layout.flex.row,

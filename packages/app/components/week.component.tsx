@@ -24,6 +24,7 @@ interface WeekProps {
 
 interface LessonListProps {
   lessons: TimetableEntry[]
+  lunch?: MenuItem
   header: string
 }
 
@@ -33,7 +34,7 @@ interface DayProps {
   lessons: TimetableEntry[]
 }
 
-const LessonList = ({ lessons, header }: LessonListProps) => {
+const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
   const styles = useStyleSheet(themedStyles)
 
   return (
@@ -52,9 +53,11 @@ const LessonList = ({ lessons, header }: LessonListProps) => {
           key={id}
           style={styles.item}
           title={() => (
-            <Text style={styles.lessonTitle} maxFontSizeMultiplier={1}>
-              {name}
-            </Text>
+            <View style={styles.header}>
+              <Text style={styles.lessonTitle} maxFontSizeMultiplier={1}>
+                {name}
+              </Text>
+            </View>
           )}
           description={() => (
             <Text
@@ -107,10 +110,12 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
       </View>
       <LessonList
         header="FM"
+        lunch={lunch}
         lessons={lessons.filter(({ timeStart }) => timeStart < '12:00')}
       />
       <LessonList
         header="EM"
+        lunch={lunch}
         lessons={lessons.filter(({ timeStart }) => timeStart >= '12:00')}
       />
     </View>
