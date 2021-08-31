@@ -47,13 +47,13 @@ const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
         </Text>
       )}
       renderItem={({
-        item: { id, name, timeStart, timeEnd, teacher, location },
+        item: { id, code, name, timeStart, timeEnd, teacher, location },
       }) => (
         <ListItem
           key={id}
           style={styles.item}
           title={() => (
-            <View style={styles.header}>
+            <View>
               <Text style={styles.lessonTitle} maxFontSizeMultiplier={1}>
                 {name}
               </Text>
@@ -63,8 +63,12 @@ const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
             <Text
               style={styles.lessonDescription}
               maxFontSizeMultiplier={1}
-            >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
-              location ? `(${location})` : ''
+            >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)}  ${
+              code === 'Lunch'
+                ? lunch?.description
+                : location
+                ? `(${location})`
+                : ''
             } ${teacher}`}</Text>
           )}
         />
@@ -81,33 +85,6 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
   }
   return (
     <View style={styles.tab} key={weekDay}>
-      <View style={styles.summary}>
-        <Text maxFontSizeMultiplier={2} category="c1" style={styles.startTime}>
-          {translate('schedule.start', { defaultValue: 'Börjar' })}
-        </Text>
-        <Text maxFontSizeMultiplier={3} category="h4">
-          {lessons[0].timeStart.slice(0, 5)}
-        </Text>
-        <Text category="c1" style={styles.lunchLabel}>
-          {translate('schedule.lunch', { defaultValue: 'Lunch' })}
-        </Text>
-        <Text maxFontSizeMultiplier={2} category="c2" style={styles.lunch}>
-          {lunch?.description}
-        </Text>
-        <Text maxFontSizeMultiplier={3} category="c1" style={styles.endTime}>
-          {translate('schedule.end', { defaultValue: 'Slutar' })}
-        </Text>
-        <Text maxFontSizeMultiplier={2} category="h4">
-          {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
-        </Text>
-        <Text maxFontSizeMultiplier={2} category="c2">
-          {lessons.some((lesson) => lesson.code === 'IDH')
-            ? `🤼‍♀️ ${translate('schedule.gymBag', {
-                defaultValue: 'Gympapåse',
-              })}`
-            : ''}
-        </Text>
-      </View>
       <LessonList
         header="FM"
         lunch={lunch}
@@ -228,7 +205,7 @@ const themedStyles = StyleService.create({
     ...Typography.fontWeight.bold,
   },
   header: {
-    paddingLeft: 8,
+    paddingLeft: 10,
   },
   lessonTitle: {
     ...Typography.fontWeight.semibold,
