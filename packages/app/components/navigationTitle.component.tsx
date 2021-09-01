@@ -28,5 +28,5 @@ const styles = StyleSheet.create({
     ...fontSize.base,
     fontWeight: '500',
   },
-  subtitle: { ...fontSize.xs },
+  subtitle: { ...fontSize.xxs },
 })
