@@ -104,7 +104,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                     adjustsFontSizeToFit
                     numberOfLines={2}
                   >
-                    {translate('general.title')}
+                    Öppna skolplattformen
                   </Text>
                   <Login />
                   <Text category="c2" style={styles.subtitle}>
@@ -139,7 +139,7 @@ const themeStyles = StyleService.create({
     ...LayoutStyle.flex.full,
   },
   header: {
-    width: '60%',
+    width: '100%',
     marginBottom: Sizing.t5,
     fontFamily: 'Poppins-Black',
     fontWeight: '900',
