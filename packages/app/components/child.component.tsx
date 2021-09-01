@@ -15,6 +15,7 @@ import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
 import { Menu } from './menu.component'
 import { RootStackParamList } from './navigation.component'
+import { NavigationTitle } from './navigationTitle.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 
@@ -108,9 +109,13 @@ export const childRouteOptions = ({
 }: {
   route: RouteProp<RootStackParamList, 'Child'>
 }): NativeStackNavigationOptions => {
+  const { child } = route.params
+
   return {
     ...defaultStackStyling,
-    title: getHeaderTitle(route),
+    headerCenter: () => (
+      <NavigationTitle title={getHeaderTitle(route)} subtitle={child?.name} />
+    ),
   }
 }
 
