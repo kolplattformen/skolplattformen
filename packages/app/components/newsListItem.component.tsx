@@ -4,8 +4,7 @@ import { NewsItem } from '@skolplattformen/embedded-api'
 import { StyleService, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React, { ReactNode } from 'react'
-import { Dimensions, Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Dimensions, Pressable, Text, View } from 'react-native'
 import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
@@ -32,7 +31,7 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
       <View style={styles.card}>
@@ -58,7 +57,7 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
