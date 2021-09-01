@@ -44,7 +44,7 @@ const MenuScreen = () => <Menu />
 const TabNavigator = ({
   initialRouteName = 'News',
 }: {
-  initialRouteName: keyof ChildTabParamList
+  initialRouteName?: keyof ChildTabParamList
 }) => (
   <Navigator
     initialRouteName={initialRouteName}
@@ -125,7 +125,9 @@ export const Child = () => {
 
   return (
     <ChildProvider child={child}>
-      <TabNavigator initialRouteName={child.firstName} />
+      <TabNavigator
+        initialRouteName={initialRouteName as keyof ChildTabParamList}
+      />
     </ChildProvider>
   )
 }

@@ -7,7 +7,7 @@ export const mainAxis: Record<MainAxis, ViewStyle> = {
   },
   flexStart: {
     alignItems: 'flex-start',
-  }
+  },
 }
 
 type CrossAxis = 'center' | 'flexEnd' | 'evenly' | 'spaceBetween'

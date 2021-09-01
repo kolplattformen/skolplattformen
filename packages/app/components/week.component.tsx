@@ -15,7 +15,6 @@ import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { LanguageService } from '../services/languageService'
 import { Sizing, Typography } from '../styles'
-import { translate } from '../utils/translation'
 import { TransitionView } from './transitionView.component'
 
 interface WeekProps {

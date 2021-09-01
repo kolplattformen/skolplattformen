@@ -10,7 +10,6 @@ import {
 import { Child } from '@skolplattformen/embedded-api'
 import {
   Button,
-  Icon,
   StyleService,
   Text,
   useStyleSheet,
