@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   getFocusedRouteNameFromRoute,
   RouteProp,
+  useNavigation,
   useRoute,
 } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -10,6 +11,7 @@ import React from 'react'
 import { StyleProp, TextProps } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
+import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
@@ -114,7 +116,10 @@ export const childRouteOptions = ({
   return {
     ...defaultStackStyling,
     headerCenter: () => (
-      <NavigationTitle title={getHeaderTitle(route)} subtitle={child?.name} />
+      <NavigationTitle
+        title={getHeaderTitle(route)}
+        subtitle={studentName(child?.name)}
+      />
     ),
   }
 }
@@ -122,6 +127,9 @@ export const childRouteOptions = ({
 export const Child = () => {
   const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
+
+  const navigation = useNavigation()
+  navigation.setOptions({ title: getHeaderTitle(route) })
 
   return (
     <ChildProvider child={child}>
