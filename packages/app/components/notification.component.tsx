@@ -2,7 +2,7 @@ import { Notification as NotificationType } from '@skolplattformen/embedded-api'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { Layout, Sizing, Typography } from '../styles'
 import { ModalWebView } from './modalWebView.component'
 
@@ -26,7 +26,7 @@ export const Notification = ({ item }: NotificationProps) => {
 
   return (
     <>
-      <TouchableOpacity onPress={open}>
+      <Pressable onPress={open}>
         <View style={styles.card}>
           <View>
             <Text style={styles.title}>{item.sender}</Text>
@@ -38,7 +38,7 @@ export const Notification = ({ item }: NotificationProps) => {
           </View>
           <Text>{item.message}</Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
       {isOpen && (
         <ModalWebView
           url={item.url}

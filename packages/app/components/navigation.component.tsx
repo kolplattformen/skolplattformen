@@ -76,7 +76,7 @@ export const AppNavigator = () => {
       <StatusBar />
       <Navigator
         screenOptions={() => ({
-          headerLargeTitle: true,
+          headerLargeTitle: false,
           headerLargeTitleHideShadow: true,
           headerStyle: {
             backgroundColor: colors['background-basic-color-2'],
