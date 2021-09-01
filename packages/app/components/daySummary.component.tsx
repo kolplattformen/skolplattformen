@@ -34,7 +34,6 @@ export const DaySummary = ({ child, date = moment() }: DaySummaryProps) => {
 
   return (
     <View style={styles.summary}>
-      <Text category="s1">Skoldag </Text>
       <Text category="s1">
         {lessons[0].timeStart.slice(0, 5)}-
         {lessons[lessons.length - 1].timeEnd.slice(0, 5)}

@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
+  useMenu,
   useNews,
   useNotifications,
   useSchedule,
@@ -23,7 +24,7 @@ import { translate } from '../utils/translation'
 import { RootStackParamList } from './navigation.component'
 import { StudentAvatar } from './studentAvatar.component'
 import { DaySummary } from './daySummary.component'
-import { RightArrowIcon } from './icon.component'
+import { AlertIcon, RightArrowIcon } from './icon.component'
 
 interface ChildListItemProps {
   child: Child
@@ -42,6 +43,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const { data: notifications } = useNotifications(child)
   const { data: news } = useNews(child)
   const { data: calendar } = useCalendar(child)
+  const { data: menu } = useMenu(child)
   const { data: schedule } = useSchedule(
     child,
     moment().toISOString(),
@@ -119,26 +121,27 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           </View>
         </View>
 
+        <Text category="c2" style={styles.label}>
+          {translate('schedule.start')} - {translate('schedule.end')}
+        </Text>
+
         <DaySummary child={child} />
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
           </Text>
         ))}
+        <Text category="c2" style={styles.label}>
+          {translate('navigation.news')}
+        </Text>
         {notificationsThisWeek.slice(0, 3).map((notification, i) => (
           <Text category="p1" key={i}>
-            {translate('notifications.notificationTitle', {
-              message: notification.message,
-              dateCreated: displayDate(notification.dateCreated),
-            })}
+            {notification.message}
           </Text>
         ))}
         {newsThisWeek.slice(0, 3).map((newsItem, i) => (
           <Text category="p1" key={i}>
-            {translate('news.notificationTitle', {
-              header: newsItem.header,
-              published: displayDate(newsItem.published),
-            })}
+            {newsItem.header ?? ''}
           </Text>
         ))}
         {scheduleAndCalendarThisWeek.length ||
@@ -148,13 +151,20 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             {translate('news.noNewNewsItemsThisWeek')}
           </Text>
         )}
+
+        <Text category="c2" style={styles.label}>
+          {translate('schedule.lunch')}
+        </Text>
+        <Text>{menu[moment().isoWeekday() - 1]?.description}</Text>
+
         <View style={styles.itemFooterAbsence}>
           <Button
             accessible
             accessibilityRole="button"
             accessibilityLabel={`${child.name}, ${translate('abscense.title')}`}
-            size="small"
-            status="basic"
+            appearance="ghost"
+            accessoryLeft={AlertIcon}
+            status=""
             onPress={() => navigation.navigate('Absence', { child })}
           >
             {translate('abscense.title')}
@@ -195,6 +205,9 @@ const themeStyles = StyleService.create({
   icon: {
     width: 32,
     height: 32,
+  },
+  label: {
+    marginTop: 10,
   },
   itemFooter: {
     ...Layout.flex.row,
