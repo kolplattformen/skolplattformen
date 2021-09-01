@@ -1,4 +1,4 @@
-# How to help out with translating Öppna Skolplattformen using Weblate
+# How to help out with translating Öppna skolplattformen using Weblate
 
 We are using Weblate to translate our app. You can find the project [here](https://hosted.weblate.org/projects/skolplattformen/app-translation/).
 
