@@ -41,7 +41,7 @@ export const newsItemRouteOptions = ({
         subtitle={studentName(child?.name)}
       />
     ),
-    headerLargeTitle: true,
+    headerLargeTitle: false,
   }
 }
 
