@@ -120,11 +120,6 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             />
           </View>
         </View>
-
-        <Text category="c2" style={styles.label}>
-          {translate('schedule.start')} - {translate('schedule.end')}
-        </Text>
-
         <DaySummary child={child} />
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
