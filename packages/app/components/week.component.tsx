@@ -59,16 +59,17 @@ const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
             </View>
           )}
           description={() => (
-            <Text
-              style={styles.lessonDescription}
-              maxFontSizeMultiplier={1}
-            >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)}  ${
-              code === 'Lunch'
-                ? lunch?.description
-                : location
-                ? `(${location})`
-                : ''
-            } ${teacher}`}</Text>
+            <View style={styles.lesson}>
+              <Text
+                style={styles.lessonDescription}
+                maxFontSizeMultiplier={1}
+              >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} (${
+                location
+              })`}</Text>
+              <Text style={styles.lessonDescription} maxFontSizeMultiplier={1}>
+                {code === 'Lunch' ? lunch?.description : teacher}
+              </Text>
+            </View>
           )}
         />
       )}
@@ -166,7 +167,7 @@ const themedStyles = StyleService.create({
     padding: 0,
   },
   item: {
-    height: 45,
+    height: 55,
     backgroundColor: 'background-basic-color-2',
     paddingHorizontal: 0,
     borderRadius: 2,
@@ -213,4 +214,7 @@ const themedStyles = StyleService.create({
   lessonDescription: {
     fontSize: 13,
   },
+  lesson: {
+    flexDirection: 'column',
+  }
 })

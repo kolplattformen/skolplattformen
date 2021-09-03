@@ -147,11 +147,14 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           </Text>
         )}
 
-        <Text category="c2" style={styles.label}>
-          {translate('schedule.lunch')}
-        </Text>
-        <Text>{menu[moment().isoWeekday() - 1]?.description}</Text>
-
+        {!menu[moment().isoWeekday() - 1] ? null : (
+          <>
+            <Text category="c2" style={styles.label}>
+              {translate('schedule.lunch')}
+            </Text>
+            <Text>{menu[moment().isoWeekday() - 1]?.description}</Text>
+          </>
+        )}
         <View style={styles.itemFooterAbsence}>
           <Button
             accessible
@@ -160,6 +163,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             appearance="ghost"
             accessoryLeft={AlertIcon}
             status=""
+            style={styles.absenceButton}
             onPress={() => navigation.navigate('Absence', { child })}
           >
             {translate('abscense.title')}
@@ -211,6 +215,9 @@ const themeStyles = StyleService.create({
   itemFooterAbsence: {
     ...Layout.mainAxis.flexStart,
     marginTop: Sizing.t4,
+  },
+  absenceButton: {
+    marginLeft: -20,
   },
   item: {
     marginRight: 12,

@@ -33,27 +33,47 @@ export const DaySummary = ({ child, date = moment() }: DaySummaryProps) => {
   const gymBag = lessons.some((lesson) => lesson.code === 'IDH')
 
   return (
-    <>
-      <Text category="c2" style={styles.label}>
-        {translate('schedule.start')} - {translate('schedule.end')}
-      </Text>
-
-      <View style={styles.summary}>
-        <Text category="s1">
-          {lessons[0].timeStart.slice(0, 5)}-
-          {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
-          {gymBag
-            ? ` (🤼‍♀️ ${translate('schedule.gymBag', {
-                defaultValue: 'Gympapåse',
-              })})`
-            : ''}
-        </Text>
+    <View style={styles.summary}>
+      <View style={styles.part}>
+        <View>
+          <Text category="c2" style={styles.label}>
+            {translate('schedule.start')}
+          </Text>
+          <Text category="h5">{lessons[0].timeStart.slice(0, 5)} - </Text>
+        </View>
       </View>
-    </>
+      <View style={styles.part}>
+        <View>
+          <Text category="c2" style={styles.label}>
+            {translate('schedule.end')}
+          </Text>
+          <Text category="h5">
+            {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
+          </Text>
+        </View>
+      </View>
+      <View style={styles.part}>
+        <View>
+          <Text category="c2" style={styles.label}>
+            &nbsp;
+          </Text>
+          <Text category="s2">
+            {gymBag
+              ? ` 🤼‍♀️ ${translate('schedule.gymBag', {
+                  defaultValue: 'Gympapåse',
+                })}`
+              : ''}
+          </Text>
+        </View>
+      </View>
+    </View>
   )
 }
 
 const themedStyles = StyleService.create({
+  part: {
+    flexDirection: 'column',
+  },
   summary: {
     flexDirection: 'row',
   },
