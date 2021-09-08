@@ -4,15 +4,14 @@ const Status = (): JSX.Element => {
       <h1>Status</h1>
       <h3>Funkar appen som den ska?</h3>
       <p>
-        Senast vi kollade!
-        <br />
-        ✅ iPhone
-        <br />✅ Android
+        Nej, tyvärr inte.
+        <br />🛑 iPhone
+        <br />🛑 Android
       </p>
       <p>
-        Vi har inga rapporter om att appen har problem för tillfället. Har du
-        upptäckt problem nu? Hjälp oss fixa det!
+        Vi har rapporter om att appen har problem för tillfället och har lokaliserat felet samt jobbar på en lösning.
       </p>
+      <h3>Upptäckt några problem? Hjälp oss att fixa det</h3>
       <p>
         Det finns det tre sätt att göra det (i stigande ordning av braighet):
         <ul>
@@ -36,4 +35,7 @@ const Status = (): JSX.Element => {
 }
 
 export default Status
+
+
+
 

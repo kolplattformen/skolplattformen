@@ -6,7 +6,12 @@
         "notificationTitle": "Novità: {{header}} ({{published}})",
         "noNewNewsItemsThisWeek": "Nessuna novità questa settimana.",
         "title": "Novità da skolplattformen",
-        "backToChild": "Ritorna a figlio"
+        "backToChild": "Ritorna a figlio",
+        "search": {
+            "placeholder": "Cerca tutte le notizie…"
+        },
+        "updated": "Aggiornato",
+        "published": "Pubblicato"
     },
     "general": {
         "title": "Öppna skolplattformen",
@@ -41,7 +46,8 @@
         "noKids_title": "Non ci sono figli",
         "noKids_description": "No ci sono figli registrati a questo personnummer a Stoccolma",
         "tryAgain": "Riprova",
-        "viewStatus": "Vedi stato su skolplattformen.org"
+        "viewStatus": "Vedi stato su skolplattformen.org",
+        "loadingErrorInformationText": "Questa pagina non può essere caricata. Riprova o visualizza lo stato attuale su skolplattformen.org."
     },
     "calender": {
         "showCalenderActions": "Mostra calendario actions",
@@ -80,7 +86,11 @@
             "OpenOnThisDevice": "Apri BankID su questa unità",
             "OpenOnAnotherDevice": "Apri BankID su un'altra unità",
             "OpenManually": "Apri BankID manualmente"
-        }
+        },
+        "a11y_select_login_method": "Seleziona il metodo di accesso",
+        "a11y_clear_social_security_input_field": "Cancella il campo del numero di previdenza sociale",
+        "a11y_image_two_boys": "Immagine di due persone che controllano i loro telefoni cellulari",
+        "a11y_change_language": "Seleziona la tua lingua"
     },
     "abscense": {
         "title": "Registra l'assenza",
@@ -99,6 +109,10 @@
         "compulsorySchool": "Scuola inferiore e media"
     },
     "menu": {
-        "emptyHeadline": "Il menù sembra piuttosto vuoto"
+        "emptyHeadline": "Il menù sembra piuttosto vuoto",
+        "emptyText": "Non ho trovato nulla per questa settimana"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Mostra le informazioni di contatto"
     }
 }
