@@ -3,6 +3,7 @@ import { EventEmitter } from 'events'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
 import { Language } from '@skolplattformen/curriculum/dist/translations'
+import * as base64 from 'base-64'
 import { URLSearchParams } from './URLSearchParams'
 import { checkStatus, LoginStatusChecker } from './loginStatus'
 import {
@@ -315,7 +316,7 @@ export class Api extends EventEmitter {
     const numberOfBase64Iterations = 9
 
     for (let i = 0; i < numberOfBase64Iterations; i += 1) {
-        topo = Buffer.from(topo).toString('base64')
+        topo = base64.encode(topo)
     };
 
     const part1 = topo.substring(0, 1)
