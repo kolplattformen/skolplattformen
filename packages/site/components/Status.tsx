@@ -4,12 +4,12 @@ const Status = (): JSX.Element => {
       <h1>Status</h1>
       <h3>Funkar appen som den ska?</h3>
       <p>
-        Senast vi kollade!
+        Nej, tyvärr inte.
         <br />🛑 iPhone
         <br />🛑 Android
       </p>
       <p>
-        Vi har  rapporter om att appen har problem för tillfället och har lokaliserat felet samt jobbar på en lösning.
+        Vi har rapporter om att appen har problem för tillfället och har lokaliserat felet samt jobbar på en lösning.
       </p>
       <h3>Upptäckt några problem? Hjälp oss att fixa det</h3>
       <p>
