@@ -306,7 +306,7 @@ export class Api extends EventEmitter {
 
   private static getTopology(): string {
     
-    const currentTime = new Date().getTime() + 600000 // Yes. If we come from the future we always succeed
+    const currentTime = new Date().getTime() + 600000
     
     let topo = 'make talk identify inside rubber title fold physical clump member pond divide hood' + 
     ` churn put brief swap ride paddle solve enjoy home sound basket|${  currentTime}`
