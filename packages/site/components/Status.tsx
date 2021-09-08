@@ -12,6 +12,7 @@ const Status = (): JSX.Element => {
       <p>
         Vi har  rapporter om att appen har problem för tillfället och har lokaliserat felet samt jobbar på en lösning.
       </p>
+      <h3>Har du upptäckt problem nu? Hjälp oss fixa det<h3>
       <p>
         Det finns det tre sätt att göra det (i stigande ordning av braighet):
         <ul>
