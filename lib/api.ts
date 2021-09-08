@@ -135,7 +135,7 @@ export class Api extends EventEmitter {
     status.on('OK', async () => {
       await this.retrieveSessionCookie()
       await this.retrieveXsrfToken()
-      await this.retrieveApiKey()
+   //   await this.retrieveApiKey()
 
       this.isLoggedIn = true
       this.emit('login')
@@ -304,18 +304,42 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
+  private static getTopology(): string {
+    
+    const currentTime = new Date().getTime() + 600000
+    
+    let topo = 'make talk identify inside rubber title fold physical clump member pond divide hood' + 
+    ` churn put brief swap ride paddle solve enjoy home sound basket|${  currentTime}`
+    
+    const secretNumberString = 'hijklmnopqrstuvwxyz'
+    const numberOfBase64Iterations = 9
+
+    for (let i = 0; i < numberOfBase64Iterations; i += 1) {
+        topo = Buffer.from(topo).toString('base64')
+    };
+
+    const part1 = topo.substring(0, 1)
+    const part2 = secretNumberString.charAt(numberOfBase64Iterations)
+    const part3 = topo.substring(1, topo.length)
+    
+    const finalTopology = part1 + part2 + part3
+
+    return finalTopology
+  }
+
   public async getChildren(): Promise<EtjanstChild[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
-    const cdnUrl = await this.retrieveCdnUrl()
-    const authBody = await this.retrieveAuthBody()
-    const token = await this.retrieveAuthToken(cdnUrl, authBody)
+  //  const cdnUrl = await this.retrieveCdnUrl()
+  //  const authBody = await this.retrieveAuthBody()
+  //  const token = await this.retrieveAuthToken(cdnUrl, authBody)
 
     const url = routes.children
     const session = this.getRequestInit({
       headers: {
         Accept: 'application/json;odata=verbose',
-        Auth: token,
+      //  Auth: token,
+        topology: Api.getTopology(),
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },
