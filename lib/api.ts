@@ -304,21 +304,27 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
-  private getTopology(): string {
-
-    var currentTime = new Date()['getTime']();
-    let topo = 'make talk identify inside rubber title fold physical clump member pond divide hood churn put brief swap ride paddle solve enjoy home sound basket|' + currentTime;
-    let _0x9748 = 'hijklmnopqrstuvwxyz';
-    let _0x9731 = 9;
-
-    for (let i = 0; i < _0x9731; i++) {
-        topo = Buffer.from(topo).toString('base64')
+  private static getTopology(): string {
     
+    const currentTime = new Date().getTime() + 600000 // Yes. If we come from the future we always succeed
+    
+    let topo = 'make talk identify inside rubber title fold physical clump member pond divide hood' + 
+    ` churn put brief swap ride paddle solve enjoy home sound basket|${  currentTime}`
+    
+    const secretNumberString = 'hijklmnopqrstuvwxyz'
+    const numberOfBase64Iterations = 9
+
+    for (let i = 0; i < numberOfBase64Iterations; i += 1) {
+        topo = Buffer.from(topo).toString('base64')
     };
 
-    topo = topo['substring'](0, 1) + _0x9748['charAt'](_0x9731) + topo['substring'](1, topo['length']);
+    const part1 = topo.substring(0, 1)
+    const part2 = secretNumberString.charAt(numberOfBase64Iterations)
+    const part3 = topo.substring(1, topo.length)
+    
+    const finalTopology = part1 + part2 + part3
 
-    return topo
+    return finalTopology
   }
 
   public async getChildren(): Promise<EtjanstChild[]> {
@@ -333,7 +339,7 @@ export class Api extends EventEmitter {
       headers: {
         Accept: 'application/json;odata=verbose',
       //  Auth: token,
-        topology: this.getTopology(),
+        topology: Api.getTopology(),
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },
