@@ -113,10 +113,6 @@ export class Api extends EventEmitter {
     this.headers[name] = value
   }
 
-  private getHeader(name: string): string {
-    return this.headers[name]
-  }
-
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
 
