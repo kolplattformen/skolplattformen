@@ -15,7 +15,8 @@
     // React included automatically in Next.js
     "react/react-in-jsx-scope": "off",
     // Allow unescaped characters like '
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }
 

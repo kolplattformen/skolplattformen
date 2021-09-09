@@ -8,7 +8,7 @@ interface LinkInternalProps {
 const Internal: React.FC<LinkInternalProps> = ({
   href,
   children,
-}): JSX.Element => {
+}) => {
   return (
     <Link href={href}>
       <a className="text-indigo-800 dark:text-indigo-400">{children}</a>
@@ -27,7 +27,7 @@ const External: React.FC<LinkExternalProps> = ({
   href,
   children,
   target = '_blank',
-}): JSX.Element => {
+}) => {
   return (
     <a
       className={classnames('text-indigo-800 dark:text-indigo-400', className)}

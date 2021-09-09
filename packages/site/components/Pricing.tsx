@@ -32,7 +32,7 @@ const baseFeatures = [
   },
 ]
 
-const Pricing = (): JSX.Element => {
+const Pricing = () => {
   return (
     <section className="px-5 py-8 md:px-0 md:py-32" id="vad-kostar-det">
       <div className="max-w-2xl mx-auto">

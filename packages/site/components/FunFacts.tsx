@@ -21,7 +21,7 @@ const FUNFACTS_DATA = [
   },
 ]
 
-const FunFacts = (): JSX.Element => {
+const FunFacts = () => {
   const [counter, setCounter] = React.useState({
     startCounter: false,
   })

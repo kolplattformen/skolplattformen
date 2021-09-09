@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react'
 import { ViewProps } from 'react-native'
-// @ts-expect-error No typescript defs
 import * as Animatable from 'react-native-animatable'
 
 interface TransitionViewPropsType extends ViewProps {

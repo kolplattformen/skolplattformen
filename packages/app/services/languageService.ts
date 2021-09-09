@@ -69,10 +69,8 @@ export const LanguageService = {
     return Strings
   },
 
-  // @ts-expect-error Fix later, Typecast callback
-  onChange: ({ key }: { key: string }, cb) => {
-    // @ts-expect-error Fix later, Typecast callback
-    changeListeners[`${key}`] = (langCode) => cb(langCode)
+  onChange: ({ key }: { key: string }, cb: (langCode: string) => void) => {
+    changeListeners[key] = (langCode: string) => cb(langCode)
   },
 }
 

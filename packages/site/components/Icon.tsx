@@ -1,4 +1,4 @@
-export const Check = (): JSX.Element => {
+export const Check = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,7 @@ export const Check = (): JSX.Element => {
   )
 }
 
-export const Times = (): JSX.Element => {
+export const Times = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ export const Times = (): JSX.Element => {
   )
 }
 
-export const Twitter = (): JSX.Element => {
+export const Twitter = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export const Twitter = (): JSX.Element => {
   )
 }
 
-export const Menu = (): JSX.Element => {
+export const Menu = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

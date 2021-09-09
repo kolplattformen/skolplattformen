@@ -11,7 +11,7 @@ import { pageview } from '../components/gtag'
 import messages, { Languages } from '../content/locale/'
 import { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const { locale = 'sv', defaultLocale } = router
 

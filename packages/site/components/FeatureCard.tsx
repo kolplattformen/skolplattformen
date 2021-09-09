@@ -7,12 +7,7 @@ interface FeatureCardProps {
   isActive: boolean
 }
 
-const FeatureCard = ({
-  image,
-  title,
-  text,
-  isActive,
-}: FeatureCardProps): JSX.Element => {
+const FeatureCard = ({ image, title, text, isActive }: FeatureCardProps) => {
   return (
     <div
       className={classnames(

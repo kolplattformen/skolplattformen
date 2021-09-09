@@ -4,7 +4,7 @@ import DownloadButtons from './DownloadButtons'
 import Section from './Section'
 import { H2 } from './Typography'
 
-const CtaThree = (): JSX.Element => {
+const CtaThree = () => {
   return (
     <Section bg="bg-white dark:bg-gray-900">
       <div>

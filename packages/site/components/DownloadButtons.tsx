@@ -1,6 +1,6 @@
 import ButtonLink, { ButtonLinkPatreon } from './ButtonLink'
 
-const DownloadButtons = (): JSX.Element => {
+const DownloadButtons = () => {
   return (
     <div className="space-x-4">
       <ButtonLink

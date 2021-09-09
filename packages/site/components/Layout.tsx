@@ -10,7 +10,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({
   children,
   pageTitle,
-}): JSX.Element => {
+}) => {
   return (
     <div>
       <Head>

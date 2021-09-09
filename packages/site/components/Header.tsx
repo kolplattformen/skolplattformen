@@ -28,7 +28,7 @@ const useMobile = (cb: UseMobileCallback) => {
   }, [])
 }
 
-const HeaderHome = (): JSX.Element => {
+const HeaderHome = () => {
   const [displayMobileMenu, setDisplayMobileMenu] = React.useState(false)
 
   useMobile((e) => {

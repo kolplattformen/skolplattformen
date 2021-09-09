@@ -13,7 +13,7 @@ interface LinkProps {
   to: string
 }
 
-const NavLinks = ({ onClick }: NavLinksProps): JSX.Element => {
+const NavLinks = ({ onClick }: NavLinksProps) => {
   const { pathname } = useRouter()
   const intl = useIntl()
 

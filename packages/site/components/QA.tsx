@@ -1,4 +1,4 @@
-const QA = (): JSX.Element => {
+const QA = () => {
   return (
     <div className="header">
       <div className="max-w-6xl px-5 mx-auto my-5 md:my-24 md:px-0 prose dark:prose-dark relative z-10">

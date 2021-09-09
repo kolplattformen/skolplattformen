@@ -8,7 +8,7 @@ import screenshotLogin from '../assets/img/screenshots/screenshot_login.png'
 import SectionTitle from './SectionTitle'
 import Image from 'next/image'
 
-const AppShots = (): JSX.Element => {
+const AppShots = () => {
   return (
     <section
       className="max-w-6xl px-5 py-8 mx-auto md:px-0 md:py-32"

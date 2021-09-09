@@ -37,7 +37,7 @@ export const testimonials = [
   },
 ]
 
-const Testimonials = (): JSX.Element => {
+const Testimonials = () => {
   return (
     <Section padding="py-8 md:pt-32 md:pb-20">
       {testimonials.map((testimonial) => (
@@ -58,7 +58,9 @@ const Testimonials = (): JSX.Element => {
               </div>
             </div>
             <div>
-              <p className="mt-2 text-gray-600 dark:text-gray-300">{testimonial.text}</p>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">
+                {testimonial.text}
+              </p>
             </div>
             <div className="flex flex-col mt-4 text-pink-600">
               {testimonial.name}

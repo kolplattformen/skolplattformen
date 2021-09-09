@@ -6,7 +6,7 @@ import { FEATURES_DATA } from './featureData'
 
 SwiperCore.use([Pagination, Autoplay])
 
-const Features = (): JSX.Element => {
+const Features = () => {
   const swiperParams: SwiperOptions = {
     slidesPerView: 3,
     slidesPerGroup: 3,

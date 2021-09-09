@@ -4,7 +4,6 @@ import { H1 } from '../components/Typography'
 import { GoogleSpreadsheet } from 'google-spreadsheet'
 import { ReactNode } from 'react'
 
-
 interface Event {
   date: string
   description: string
@@ -38,18 +37,26 @@ const CurrentEventsPage: NextPage<TimelineProps> = ({ events }) => {
 let cachedEvents: TimelineEvent[]
 type VoidCallback = () => void
 
-const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-const runOrTimeout = (fun: VoidCallback, ms: number) => Promise.race([fun(), timeout(ms).then(() => Promise.reject(new Error('Timout')))])
+const timeout = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))
 
-export const getServerSideProps = async (): Promise<{props: TimelineProps}> => {
+const runOrTimeout = (fun: VoidCallback, ms: number) =>
+  Promise.race([
+    fun(),
+    timeout(ms).then(() => Promise.reject(new Error('Timout'))),
+  ])
+
+export const getServerSideProps = async (): Promise<{
+  props: TimelineProps
+}> => {
   // This info has moved to Google Sheets instead
   // https://docs.google.com/spreadsheets/d/151I2PrWkhWKC8OW-GB_sbgtGDtf0Ta-WdVcUOo5sUDI/edit?usp=sharing
   const doc = new GoogleSpreadsheet(
     '151I2PrWkhWKC8OW-GB_sbgtGDtf0Ta-WdVcUOo5sUDI'
   )
   doc.useApiKey('AIzaSyB-ONvFoIE_LUu0sxWLaE8QfHfDSM5uBG8')
+
   try {
-    
     await runOrTimeout(() => doc.loadInfo(), 1000)
 
     const months = (
@@ -62,27 +69,24 @@ export const getServerSideProps = async (): Promise<{props: TimelineProps}> => {
       await doc.sheetsByTitle['importantDates'].getRows()
     ).map(({ date, description, link = null }) => ({ date, description, link }))
 
-    const events: TimelineEvent[] = months.map(
-      (month: { date: string; overview: string }) => ({
-        ...month,
-        media: media.filter((media: { date: string }) =>
-          media.date.startsWith(month.date.slice(0, 7))
-        ),
-        importantDates: importantDates.filter((importantDate: { date: string }) =>
-          importantDate.date.startsWith(month.date.slice(0, 7))
-        ),
-      })
-    )
+    const events: TimelineEvent[] = months.map((month) => ({
+      ...month,
+      media: media.filter(({ date }) =>
+        date.startsWith(month.date.slice(0, 7))
+      ),
+      importantDates: importantDates.filter(({ date }) =>
+        date.startsWith(month.date.slice(0, 7))
+      ),
+    }))
 
     cachedEvents = events
 
     return { props: { events } }
-  } catch(err) {
+  } catch (err) {
     console.error(err)
     if (!cachedEvents) throw err
-    return { props: { events: cachedEvents }} // sometimes we might run into rate limits in google sheets. Just return the old value until we get back again
+    return { props: { events: cachedEvents } } // sometimes we might run into rate limits in google sheets. Just return the old value until we get back again
   }
-
 }
 
 export default CurrentEventsPage

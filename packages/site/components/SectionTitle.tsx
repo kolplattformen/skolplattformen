@@ -1,11 +1,11 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode } from 'react'
 
 interface SectionTitleProps {
   text?: ReactNode
   title: ReactNode
 }
 
-const SectionTitle = ({ text, title }: SectionTitleProps): JSX.Element => {
+const SectionTitle = ({ text, title }: SectionTitleProps) => {
   return (
     <div className="mb-16 text-center space-y-5">
       <h2 className="text-4xl md:text-5xl font-bold leading-tight text-gray-800 dark:text-white">
