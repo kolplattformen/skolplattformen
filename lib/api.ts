@@ -113,6 +113,10 @@ export class Api extends EventEmitter {
     this.headers[name] = value
   }
 
+  private getHeader(name: string): void {
+    return this.headers[name]
+  }
+
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
 
@@ -305,13 +309,12 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
-  private static getTopology(): string {
+  private getTopology(): string {
     
     const currentTime = new Date().getTime() + 600000
     
-    let topo = 'make talk identify inside rubber title fold physical clump member pond divide hood' + 
-    ` churn put brief swap ride paddle solve enjoy home sound basket|${  currentTime}`
-    
+    let topo = `${this.getHeader('topology-key')}${currentTime}`
+
     const secretNumberString = 'hijklmnopqrstuvwxyz'
     const numberOfBase64Iterations = 9
 
@@ -340,7 +343,7 @@ export class Api extends EventEmitter {
       headers: {
         Accept: 'application/json;odata=verbose',
       //  Auth: token,
-        topology: Api.getTopology(),
+        topology: this.getTopology(),
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },
