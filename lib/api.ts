@@ -113,7 +113,7 @@ export class Api extends EventEmitter {
     this.headers[name] = value
   }
 
-  private getHeader(name: string): void {
+  private getHeader(name: string): string {
     return this.headers[name]
   }
 
