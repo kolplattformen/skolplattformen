@@ -1523,11 +1523,12 @@
   resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.1.tgz#f60b82276d61f731bf6c169826a4fb2a82e0a574"
   integrity sha512-tKJjB2KsOXhNGvtBTp3DsTVchdQbSU08AwAfK1KbmIGFUQLAz8Su3T6RqYsxXEpCcFKRV6poscBnUZrdgZQy3w==
 
-"@skolplattformen/embedded-api@5.1.4":
-  version "5.1.4"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.1.4.tgz#e54640b0201053ecdce8382d1e42479b90800108"
-  integrity sha512-s5Ee6tXYIAuMliaTjjEX8F83IG5z0Tu8D7ehu551Nu1NRExSxXTVjItuUIeCC/a3DaZ19uN18pciBs+rqtVSeg==
+"@skolplattformen/embedded-api@5.1.5":
+  version "5.1.5"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.1.5.tgz#629348e70321a41b09c51e01fdd2b5b872066ab8"
+  integrity sha512-vuMnF7HQj5eIzRnHsWO3clXqLXn6aVQ4k6J9hzk7dtC9YDRuQNuY3heXxspywRR12hY28sOwUX4osrFPj9OV0w==
   dependencies:
+    base-64 "^1.0.0"
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
     events "^3.3.0"
@@ -2539,6 +2540,11 @@ balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+
+base-64@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/base-64/-/base-64-1.0.0.tgz#09d0f2084e32a3fd08c2475b973788eee6ae8f4a"
+  integrity sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==
 
 base64-js@^1.1.2, base64-js@^1.3.1, base64-js@^1.5.1:
   version "1.5.1"
