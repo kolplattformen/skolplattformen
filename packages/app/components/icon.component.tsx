@@ -1,9 +1,8 @@
 import { Icon, IconProps } from '@ui-kitten/components'
 import React from 'react'
 
-const uiIcon = (name: string) => (props: IconProps) => (
+const uiIcon = (name: string) => (props: IconProps) =>
   <Icon {...props} name={name} />
-)
 
 export const AlertIcon = uiIcon('alert-circle-outline')
 export const BackIcon = uiIcon('arrow-back')
@@ -29,3 +28,4 @@ export const BookOpenIcon = uiIcon('book-open-outline')
 export const GlobeIcon = uiIcon('globe-outline')
 export const ExternalLinkIcon = uiIcon('external-link-outline')
 export const ClipboardIcon = uiIcon('clipboard-outline')
+export const RightArrowIcon = uiIcon('arrow-ios-forward-outline')

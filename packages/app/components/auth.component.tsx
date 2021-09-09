@@ -13,7 +13,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -63,7 +62,8 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
       <SafeAreaViewContainer>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={LayoutStyle.flex.full}>
-            <TouchableOpacity
+            <TouchableWithoutFeedback
+              hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
               onPress={() => navigation.navigate('SetLanguage')}
               accessibilityHint={translate(
                 'auth.a11y_navigate_to_change_language',
@@ -83,7 +83,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                 />
                 <Text style={styles.languageText}>{currentLanguageName}</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             <KeyboardAvoidingView>
               <View style={styles.content}>
                 <View style={styles.imageWrapper}>
@@ -104,7 +104,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                     adjustsFontSizeToFit
                     numberOfLines={2}
                   >
-                    {translate('general.title')}
+                    Öppna skolplattformen
                   </Text>
                   <Login />
                   <Text category="c2" style={styles.subtitle}>
@@ -139,7 +139,7 @@ const themeStyles = StyleService.create({
     ...LayoutStyle.flex.full,
   },
   header: {
-    width: '60%',
+    width: '100%',
     marginBottom: Sizing.t5,
     fontFamily: 'Poppins-Black',
     fontWeight: '900',

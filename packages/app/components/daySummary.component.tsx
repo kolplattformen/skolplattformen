@@ -9,10 +9,10 @@ import { translate } from '../utils/translation'
 
 interface DaySummaryProps {
   child: Child
-  date: Moment
+  date?: Moment
 }
 
-export const DaySummary = ({ child, date }: DaySummaryProps) => {
+export const DaySummary = ({ child, date = moment() }: DaySummaryProps) => {
   const styles = useStyleSheet(themedStyles)
   const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
   const { data: weekLessons } = useTimetable(
@@ -26,28 +26,58 @@ export const DaySummary = ({ child, date }: DaySummaryProps) => {
     .filter((lesson) => lesson.dayOfWeek === date.isoWeekday())
     .sort((a, b) => a.dateStart.localeCompare(b.dateStart))
 
-  const gymBag = lessons.some((lesson) => lesson.code === 'IDH')
-
   if (lessons.length <= 0) {
     return null
   }
+
+  const gymBag = lessons.some((lesson) => lesson.code === 'IDH')
+
   return (
     <View style={styles.summary}>
-      <Text category="h5">
-        {lessons[0].timeStart.slice(0, 5)}-
-        {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
-        {gymBag
-          ? ` (🤼‍♀️ ${translate('schedule.gymBag', {
-              defaultValue: 'Gympapåse',
-            })})`
-          : ''}
-      </Text>
+      <View style={styles.part}>
+        <View>
+          <Text category="c2" style={styles.label}>
+            {translate('schedule.start')}
+          </Text>
+          <Text category="h5">{lessons[0].timeStart.slice(0, 5)} - </Text>
+        </View>
+      </View>
+      <View style={styles.part}>
+        <View>
+          <Text category="c2" style={styles.label}>
+            {translate('schedule.end')}
+          </Text>
+          <Text category="h5">
+            {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
+          </Text>
+        </View>
+      </View>
+      <View style={styles.part}>
+        <View>
+          <Text category="c2" style={styles.label}>
+            &nbsp;
+          </Text>
+          <Text category="s2">
+            {gymBag
+              ? ` 🤼‍♀️ ${translate('schedule.gymBag', {
+                  defaultValue: 'Gympapåse',
+                })}`
+              : ''}
+          </Text>
+        </View>
+      </View>
     </View>
   )
 }
 
 const themedStyles = StyleService.create({
+  part: {
+    flexDirection: 'column',
+  },
   summary: {
     flexDirection: 'row',
+  },
+  label: {
+    marginTop: 10,
   },
 })

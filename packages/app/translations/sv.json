@@ -18,7 +18,7 @@
     "auth": {
         "bankid": {
             "OpenManually": "Öppna BankID manuellt",
-            "OpenOnAnotherDevice": "Öppna BankID på en annan enhet",
+            "OpenOnAnotherDevice": "Öppna BankID på annan enhet",
             "OpenOnThisDevice": "Logga in med BankID",
             "Waiting": "Väntar på BankID…"
         },

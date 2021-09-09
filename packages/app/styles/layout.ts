@@ -1,6 +1,7 @@
 import { ViewStyle } from 'react-native'
 
-type MainAxis = 'center' | 'flexStart'
+type MainAxis = 'center' | 'flexStart' | 'flexEnd'
+// @ts-expect-error Fix later
 export const mainAxis: Record<MainAxis, ViewStyle> = {
   center: {
     alignItems: 'center',

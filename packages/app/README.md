@@ -1,4 +1,4 @@
-# Öppna Skolplattformen App
+# Öppna skolplattformen App
 
 This is the app for Öppna skolplattformen.
 

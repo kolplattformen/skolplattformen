@@ -33,7 +33,7 @@ export const childenRouteOptions = (): NativeStackNavigationOptions => {
   return {
     ...defaultStackStyling,
     title: translate('children.title'),
-    headerLargeTitle: true,
+    headerLargeTitle: false,
     headerLargeTitleHideShadow: true,
   }
 }

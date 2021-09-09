@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   getFocusedRouteNameFromRoute,
   RouteProp,
+  useNavigation,
   useRoute,
 } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -10,11 +11,13 @@ import React from 'react'
 import { StyleProp, TextProps } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
+import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
 import { Menu } from './menu.component'
 import { RootStackParamList } from './navigation.component'
+import { NavigationTitle } from './navigationTitle.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 
@@ -43,7 +46,7 @@ const MenuScreen = () => <Menu />
 const TabNavigator = ({
   initialRouteName = 'News',
 }: {
-  initialRouteName: keyof ChildTabParamList
+  initialRouteName?: keyof ChildTabParamList
 }) => (
   <Navigator
     initialRouteName={initialRouteName}
@@ -108,9 +111,16 @@ export const childRouteOptions = ({
 }: {
   route: RouteProp<RootStackParamList, 'Child'>
 }): NativeStackNavigationOptions => {
+  const { child } = route.params
+
   return {
     ...defaultStackStyling,
-    title: getHeaderTitle(route),
+    headerCenter: () => (
+      <NavigationTitle
+        title={getHeaderTitle(route)}
+        subtitle={studentName(child?.name)}
+      />
+    ),
   }
 }
 
@@ -118,9 +128,14 @@ export const Child = () => {
   const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
 
+  const navigation = useNavigation()
+  navigation.setOptions({ title: getHeaderTitle(route) })
+
   return (
     <ChildProvider child={child}>
-      <TabNavigator initialRouteName={initialRouteName as any} />
+      <TabNavigator
+        initialRouteName={initialRouteName as keyof ChildTabParamList}
+      />
     </ChildProvider>
   )
 }
