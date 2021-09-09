@@ -348,7 +348,7 @@ export class Api extends EventEmitter {
       headers: {
         Accept: 'application/json;odata=verbose',
       //  Auth: token,
-        topology: this.getTopology(),
+        topology: await this.getTopology(),
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },

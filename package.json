@@ -16,6 +16,7 @@
     "test": "jest",
     "build": "tsc",
     "prepare": "yarn build",
+    "run-dev": "yarn run build && node run",
     "publish-package": "npm publish --access public"
   },
   "peerDependencies": {
