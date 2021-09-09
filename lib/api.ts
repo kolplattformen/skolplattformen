@@ -315,7 +315,7 @@ export class Api extends EventEmitter {
     
     let topo = `${this.getHeader('topology-key')}${currentTime}`
 
-    const secretNumberString = 'hijklmnopqrstuvwxyz'
+    const secretNumberString = this.getHeader('topology-short-key')
     const numberOfBase64Iterations = 9
 
     for (let i = 0; i < numberOfBase64Iterations; i += 1) {
