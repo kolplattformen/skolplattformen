@@ -113,10 +113,6 @@ export class Api extends EventEmitter {
     this.headers[name] = value
   }
 
-  private getHeader(name: string): string {
-    return this.headers[name]
-  }
-
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
 
@@ -231,6 +227,13 @@ export class Api extends EventEmitter {
     return authBody
   }
 
+  private async getConfig(): Promise<Record<string, any>> {
+    const response = await this.fetch('createItemConfig', routes.createItemConfig)
+
+    const json = await response.json()
+    return json
+  }
+
   private async retrieveCreateItemHeaders() {
     const response = await this.fetch(
       'createItemConfig',
@@ -309,13 +312,15 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
-  private getTopology(): string {
+  private async getTopology (): Promise<string> {
+    
+    const config = await this.getConfig()
     
     const currentTime = new Date().getTime() + 600000
     
-    let topo = `${this.getHeader('topology-key')}${currentTime}`
+    let topo = `${config.headers['topology-key']}${currentTime}`
 
-    const secretNumberString = this.getHeader('topology-short-key')
+    const secretNumberString = `${config.headers['topology-short-key']}`
     const numberOfBase64Iterations = 9
 
     for (let i = 0; i < numberOfBase64Iterations; i += 1) {
@@ -343,7 +348,7 @@ export class Api extends EventEmitter {
       headers: {
         Accept: 'application/json;odata=verbose',
       //  Auth: token,
-        topology: this.getTopology(),
+        topology: await this.getTopology(),
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },
