@@ -321,7 +321,12 @@ export class Api extends EventEmitter {
     let topo = `${config.headers['topology-key']}${currentTime}`
 
     const secretNumberString = `${config.headers['topology-short-key']}`
-    const numberOfBase64Iterations = 9
+
+    let numberOfBase64Iterations = 0;
+
+    if(config.headers['topology-base64-iterations']) {
+      numberOfBase64Iterations =  parseInt(config.headers['topology-base64-iterations']);
+    }
 
     for (let i = 0; i < numberOfBase64Iterations; i += 1) {
         topo = base64.encode(topo)
@@ -336,7 +341,7 @@ export class Api extends EventEmitter {
     return finalTopology
   }
 
-  public async getChildren(): Promise<EtjanstChild[]> {
+  public async async async getChildren(): Promise<EtjanstChild[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
   //  const cdnUrl = await this.retrieveCdnUrl()
