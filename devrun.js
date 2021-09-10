@@ -7,6 +7,9 @@
  * - Support for proxy (i recommend Burp Suite https://portswigger.net/burp/communitydownload)
  * - Saves sessionCoookie to a file and tries to use it again
  */
+
+const { DateTime } = require('luxon')
+const { inspect } = require('util')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
@@ -17,6 +20,7 @@ const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./agentFetchWrapper')
 const init = require('./dist').default
+
 
 const [, , personalNumber] = process.argv
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -61,11 +65,32 @@ async function run() {
       console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
-
-      console.log('schedule')
-      const schedule = await api.getSchedule(children[0], DateTime.local(), DateTime.local().plus({ week: 1 }))
-      console.log(schedule)
-
+*/
+      try {
+        console.log('schedule')
+        const schedule = await api.getSchedule(children[1], DateTime.local(), DateTime.local().plus({ week: 1 }))
+        console.log(schedule)
+      } catch (error) {
+        console.error(error)
+      }
+  
+      let skola24children
+      try {
+        skola24children = await api.getSkola24Children()
+        console.log(skola24children)
+      } catch (error) {
+        console.error(error)
+      }
+            
+      try {
+        console.log('timetable')
+            const timetable = await api.getTimetable(skola24children[0], 15, 2021, "sv")
+            console.log(inspect(timetable, false, 1000, true))
+      } catch (error) {
+        console.error(error)
+      }
+      
+/*
       console.log('news')
       const news = await api.getNews(children[0])
 */
