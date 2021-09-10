@@ -341,7 +341,7 @@ export class Api extends EventEmitter {
     return finalTopology
   }
 
-  public async async async getChildren(): Promise<EtjanstChild[]> {
+  public async getChildren(): Promise<EtjanstChild[]> {
     if (this.isFake) return fakeResponse(fake.children())
 
   //  const cdnUrl = await this.retrieveCdnUrl()
