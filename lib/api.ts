@@ -416,8 +416,13 @@ export class Api extends EventEmitter {
     return key as string
   }
 
-  public async getTimetable(child: Skola24Child, week: number, year: number, lang: Language): Promise<any> {
+  public async getTimetable(child: Skola24Child, week: number, year: number, lang: Language)
+    : Promise<TimetableEntry[]> {
     if (this.isFake) return fakeResponse(fake.timetable(child))
+
+    if(!child.timetableID) {
+      return new Array<TimetableEntry>()
+    }
     
     const url = routes.timetable
     const renderKey = await this.getRenderKey()
