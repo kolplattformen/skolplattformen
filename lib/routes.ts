@@ -76,3 +76,5 @@ export const samlResponseUrl = 'https://fnsservicesso1.stockholm.se/sso-ng/saml-
 export const timetables = 'https://fns.stockholm.se/ng/api/services/skola24/get/personal/timetables'
 export const renderKey = 'https://fns.stockholm.se/ng/api/get/timetable/render/key'
 export const timetable = 'https://fns.stockholm.se/ng/api/render/timetable'
+
+export const topologyConfigUrl = 'https://fantomenkrypto.vercel.app/api/getConfig'
