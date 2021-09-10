@@ -228,9 +228,11 @@ export class Api extends EventEmitter {
   }
 
   private async getTopologyConfig(): Promise<Record<string, any>> {
+
     const response = await this.fetch('topologyConfigUrl', routes.topologyConfigUrl)
 
     const json = await response.json()
+
     return json
   }
 
