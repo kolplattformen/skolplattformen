@@ -20,6 +20,7 @@ import {
   Skola24Child,
   EtjanstChild,
   SSOSystem,
+  TimetableEntry
 } from './types'
 import * as routes from './routes'
 import * as parse from './parse/index'
@@ -259,7 +260,7 @@ export class Api extends EventEmitter {
   ): Promise<ScheduleItem[]> {
     if (this.isFake) return fakeResponse(fake.schedule(child))
 
-    const url = routes.schedule(child.sdsId, from.toISODate(), to.toISODate())
+    const url = routes.schedule(child.id, from.toISODate(), to.toISODate())
     const session = this.getRequestInit()
     const response = await this.fetch('schedule', url, session)
     const data = await response.json()
