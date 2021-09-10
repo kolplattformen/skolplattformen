@@ -68,13 +68,13 @@ export const languages: Language[] = [
     langCode: 'la',
     languageName: 'Latin',
     languageLocalName: 'Latina',
-    active: true,
+    active: false,
   },
   {
     langCode: 'nb_NO',
     languageName: 'Norwegian Bokmål',
     languageLocalName: 'Norsk bokmål',
-    active: true,
+    active: false,
   },
   {
     langCode: 'pl',
@@ -92,7 +92,7 @@ export const languages: Language[] = [
     langCode: 'so',
     languageName: 'Somali',
     languageLocalName: 'af-Soomaali',
-    active: true,
+    active: false,
   },
   {
     langCode: 'es',
