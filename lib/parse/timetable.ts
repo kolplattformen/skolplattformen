@@ -7,7 +7,7 @@ const calculateDate = (year: number, weekNumber: number, weekday: number, time: 
   const [hours, minutes, seconds] = time.split(':')
   return DateTime.local()
     .set({
-      year,
+      weekYear: year,
       weekNumber,
       weekday,
       hour: parseInt(hours, 10),
