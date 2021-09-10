@@ -227,8 +227,8 @@ export class Api extends EventEmitter {
     return authBody
   }
 
-  private async getConfig(): Promise<Record<string, any>> {
-    const response = await this.fetch('createItemConfig', routes.createItemConfig)
+  private async getTopologyConfig(): Promise<Record<string, any>> {
+    const response = await this.fetch('topologyConfigUrl', routes.topologyConfigUrl)
 
     const json = await response.json()
     return json
@@ -314,19 +314,14 @@ export class Api extends EventEmitter {
 
   private async getTopology (): Promise<string> {
     
-    const config = await this.getConfig()
+    const configTopology = await this.getTopologyConfig()
     
     const currentTime = new Date().getTime() + 600000
     
-    let topo = `${config.headers['topology-key']}${currentTime}`
+    let topo = `${configTopology.topologyLongKey}${currentTime}`
 
-    const secretNumberString = `${config.headers['topology-short-key']}`
-
-    let numberOfBase64Iterations = 0;
-
-    if(config.headers['topology-base64-iterations']) {
-      numberOfBase64Iterations =  parseInt(config.headers['topology-base64-iterations']);
-    }
+    const secretNumberString = configTopology.topologyShortKey
+    const numberOfBase64Iterations = configTopology.topologyBase64Iterations
 
     for (let i = 0; i < numberOfBase64Iterations; i += 1) {
         topo = base64.encode(topo)
