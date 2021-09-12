@@ -49,7 +49,7 @@ async function run() {
       console.log('user')
       const user = await api.getUser()
       console.log(user)
-      /*
+      
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
@@ -115,7 +115,7 @@ async function Login(api) {
     console.log('Login with old cookie succeeded')
   } catch (error) {
     console.log('Could not login with old session cookie. Reverting to BankId')
-    console.error(error)
+    // console.error(error)
   }
 
   if (useBankId) {

@@ -3,7 +3,6 @@ import { EventEmitter } from 'events'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
 import { Language } from '@skolplattformen/curriculum/dist/translations'
-import * as base64 from 'base-64'
 import { URLSearchParams } from './URLSearchParams'
 import { checkStatus, LoginStatusChecker } from './loginStatus'
 import {
@@ -59,8 +58,6 @@ export class Api extends EventEmitter {
   public isLoggedIn: boolean = false
 
   public isFake: boolean = false
-
-  public childControllerUrl?: string
 
   private authorizedSystems: SSOSystems = {}
 
@@ -136,7 +133,6 @@ export class Api extends EventEmitter {
     status.on('OK', async () => {
       await this.retrieveSessionCookie()
       await this.retrieveXsrfToken()
-   //   await this.retrieveApiKey()
 
       this.isLoggedIn = true
       this.emit('login')
@@ -166,7 +162,6 @@ export class Api extends EventEmitter {
     }
 
     await this.retrieveXsrfToken()
-    await this.retrieveApiKey()
 
     this.isLoggedIn = true
     this.emit('login')
@@ -187,108 +182,8 @@ export class Api extends EventEmitter {
       doc
         .querySelector('input[name="__RequestVerificationToken"]')
         ?.getAttribute('value') || ''
-    const scriptTags = doc.querySelectorAll('script')
-    const childControllerScriptTag = scriptTags.find((elem) => {
-      const srcAttr = elem.getAttribute('src')
-      return srcAttr?.startsWith('/vardnadshavare/bundles/childcontroller')
-    })
-    this.childControllerUrl =
-      routes.baseEtjanst + childControllerScriptTag?.getAttribute('src')
+
     this.addHeader('x-xsrf-token', xsrfToken)
-  }
-
-  private async retrieveApiKey(): Promise<void> {
-    const url = routes.childcontrollerScript
-    const session = this.getRequestInit()
-    const response = await this.fetch('startBundle', url, session)
-    const text = await response.text()
-
-    const apiKeyRegex = /"API-Key": "([\w\d]+)"/gm
-    const apiKeyMatches = apiKeyRegex.exec(text)
-    const apiKey =
-      apiKeyMatches && apiKeyMatches.length > 1 ? apiKeyMatches[1] : ''
-
-    this.addHeader('API-Key', apiKey)
-  }
-
-  private async retrieveCdnUrl(): Promise<string> {
-    const url = routes.cdn
-    const session = this.getRequestInit()
-    const response = await this.fetch('cdn', url, session)
-    const cdnUrl = await response.text()
-    return cdnUrl
-  }
-
-  private async retrieveAuthBody(): Promise<string> {
-    const url = routes.auth
-    const session = this.getRequestInit()
-    const response = await this.fetch('auth', url, session)
-    const authBody = await response.text()
-    return authBody
-  }
-
-  private async getTopologyConfig(): Promise<Record<string, any>> {
-
-    const response = await this.fetch('topologyConfigUrl', routes.topologyConfigUrl)
-
-    const json = await response.json()
-
-    return json
-  }
-
-  private async retrieveCreateItemHeaders() {
-    const response = await this.fetch(
-      'createItemConfig',
-      routes.createItemConfig
-    )
-    const json = await response.json()
-    return json
-  }
-
-  private async retrieveAuthToken(
-    url: string,
-    authBody: string
-  ): Promise<string> {
-    const session = this.getRequestInit({
-      method: 'POST',
-      headers: {
-        Accept: 'text/plain',
-        Origin: 'https://etjanst.stockholm.se',
-        Referer: 'https://etjanst.stockholm.se/',
-        Connection: 'keep-alive',
-      },
-      body: authBody,
-    })
-    delete session.headers['API-Key']
-
-    // Temporarily remove cookies
-    const cookies = await this.cookieManager.getCookies(url)
-    this.cookieManager.clearAll()
-
-    // Perform request
-    let scriptUrl = this.childControllerUrl
-    if (!scriptUrl) {
-      scriptUrl = routes.childcontrollerScript
-    }
-    const createItemHeaders = await this.retrieveCreateItemHeaders()
-    const response = await this.fetch('createItem', url, {
-      method: 'POST',
-      ...createItemHeaders,
-      body: authBody,
-    })
-    // Restore cookies
-    cookies.forEach((cookie) => {
-      this.cookieManager.setCookie(cookie, url)
-    })
-
-    if (!response.ok) {
-      throw new Error(
-        `Server Error [${response.status}] [${response.statusText}] [${url}]`
-      )
-    }
-
-    const authData = await response.json()
-    return authData.token
   }
 
   private async fakeMode(): Promise<LoginStatusChecker> {
@@ -314,43 +209,13 @@ export class Api extends EventEmitter {
     return parse.user(data)
   }
 
-  private async getTopology (): Promise<string> {
-    
-    const configTopology = await this.getTopologyConfig()
-    
-    const currentTime = new Date().getTime() + 600000
-    
-    let topo = `${configTopology.topologyLongKey}${currentTime}`
-
-    const secretNumberString = configTopology.topologyShortKey
-    const numberOfBase64Iterations = configTopology.topologyBase64Iterations
-
-    for (let i = 0; i < numberOfBase64Iterations; i += 1) {
-        topo = base64.encode(topo)
-    };
-
-    const part1 = topo.substring(0, 1)
-    const part2 = secretNumberString.charAt(numberOfBase64Iterations)
-    const part3 = topo.substring(1, topo.length)
-    
-    const finalTopology = part1 + part2 + part3
-
-    return finalTopology
-  }
-
   public async getChildren(): Promise<EtjanstChild[]> {
     if (this.isFake) return fakeResponse(fake.children())
-
-  //  const cdnUrl = await this.retrieveCdnUrl()
-  //  const authBody = await this.retrieveAuthBody()
-  //  const token = await this.retrieveAuthToken(cdnUrl, authBody)
 
     const url = routes.children
     const session = this.getRequestInit({
       headers: {
         Accept: 'application/json;odata=verbose',
-      //  Auth: token,
-        topology: await this.getTopology(),
         Host: 'etjanst.stockholm.se',
         Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
       },

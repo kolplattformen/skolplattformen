@@ -522,10 +522,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/curriculum@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.3.0.tgz#841e2ff0095e39e174cffdd0b8a81a17956de7ed"
-  integrity sha512-nuwZX45gHe5JaiYfygDP1HmbhAJOEXuuWwR04tNAnl/PaDGqJscfzKt8YD2SL+MHqi3LARjSKLa4ms4SxVQFyw==
+"@skolplattformen/curriculum@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.1.tgz#f60b82276d61f731bf6c169826a4fb2a82e0a574"
+  integrity sha512-tKJjB2KsOXhNGvtBTp3DsTVchdQbSU08AwAfK1KbmIGFUQLAz8Su3T6RqYsxXEpCcFKRV6poscBnUZrdgZQy3w==
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.12"
@@ -990,11 +990,6 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.0.tgz"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
-
-base-64@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/base-64/-/base-64-1.0.0.tgz#09d0f2084e32a3fd08c2475b973788eee6ae8f4a"
-  integrity sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==
 
 base@^0.11.1:
   version "0.11.2"
