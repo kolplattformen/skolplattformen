@@ -1,3 +1,10 @@
+## [1.40.1](https://github.com/kolplattformen/skolplattformen/compare/v1.40.0...v1.40.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* 🐛 Bump embedded-api to 5.2.0 ([9f00ba4](https://github.com/kolplattformen/skolplattformen/commit/9f00ba4929226c8e97528d33da4ee0aa0e5dc87e))
+
 # [1.40.0](https://github.com/kolplattformen/skolplattformen/compare/v1.39.1...v1.40.0) (2021-09-09)
 
 
