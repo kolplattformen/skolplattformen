@@ -76,7 +76,7 @@ const Footer = () => {
       </div>
 
       <div className="py-8 text-center text-gray-500">
-        <p>© copyright 2021 by Not free beer HB</p>
+        <p>© copyright 2021 by Not free beer AB</p>
       </div>
     </footer>
   )
