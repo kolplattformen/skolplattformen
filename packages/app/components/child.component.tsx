@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Icon } from '@ui-kitten/components'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleProp, TextProps } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
@@ -20,6 +20,7 @@ import { RootStackParamList } from './navigation.component'
 import { NavigationTitle } from './navigationTitle.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
+import { TabBarLabel } from './tabBarLabel.component'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -52,6 +53,9 @@ const TabNavigator = ({
     initialRouteName={initialRouteName}
     screenOptions={({ route }) => {
       return {
+        tabBarLabel: ({ focused }) => (
+          <TabBarLabel label={route.name} focused={focused} />
+        ),
         tabBarIcon: ({ focused, color }) => {
           let iconName = 'news'
 
@@ -106,30 +110,35 @@ const getHeaderTitle = (route: any) => {
   }
 }
 
-export const childRouteOptions = ({
-  route,
-}: {
-  route: RouteProp<RootStackParamList, 'Child'>
-}): NativeStackNavigationOptions => {
-  const { child } = route.params
+export const childRouteOptions =
+  (darkMode: boolean) =>
+  ({
+    route,
+  }: {
+    route: RouteProp<RootStackParamList, 'Child'>
+  }): NativeStackNavigationOptions => {
+    const { child } = route.params
 
-  return {
-    ...defaultStackStyling,
-    headerCenter: () => (
-      <NavigationTitle
-        title={getHeaderTitle(route)}
-        subtitle={studentName(child?.name)}
-      />
-    ),
+    return {
+      ...defaultStackStyling(darkMode),
+      headerCenter: () => (
+        <NavigationTitle
+          title={getHeaderTitle(route)}
+          subtitle={studentName(child?.name)}
+        />
+      ),
+    }
   }
-}
 
 export const Child = () => {
   const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
 
   const navigation = useNavigation()
-  navigation.setOptions({ title: getHeaderTitle(route) })
+
+  useEffect(() => {
+    navigation.setOptions({ title: getHeaderTitle(route) })
+  }, [navigation, route])
 
   return (
     <ChildProvider child={child}>
