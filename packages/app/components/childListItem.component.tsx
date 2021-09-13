@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
+  useClassmates,
   useMenu,
   useNews,
   useNotifications,
@@ -42,6 +43,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const navigation = useNavigation<ChildListItemNavigationProp>()
   const { data: notifications } = useNotifications(child)
   const { data: news } = useNews(child)
+  const { data: classmates } = useClassmates(child)
   const { data: calendar } = useCalendar(child)
   const { data: menu } = useMenu(child)
   const { data: schedule } = useSchedule(
@@ -75,6 +77,16 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   }
 
   const getClassName = () => {
+    // hack: we can find the class name (ex. 8C) from the classmates.
+    // let's pick the first one and select theirs class
+    // hack 2: we can find school namn in skola24 if child data is there
+    if (classmates.length > 0) {
+      return (
+        classmates[0].className +
+        (child.schoolID == null ? '' : ' • ' + child.schoolID)
+      )
+    }
+
     // Taken from Skolverket
     // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
     const abbrevations = {
