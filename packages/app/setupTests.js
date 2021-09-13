@@ -1,4 +1,3 @@
-
 import moment from 'moment'
 import 'moment/locale/sv'
 import 'react-native-gesture-handler/jestSetup'
