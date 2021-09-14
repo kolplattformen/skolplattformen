@@ -15,6 +15,8 @@ export const TabBarLabel = ({ label, focused }: TabBarLabelProps) => {
       <Text
         style={[styles.label, focused ? styles.focused : null]}
         maxFontSizeMultiplier={2}
+        numberOfLines={1}
+        ellipsizeMode="tail"
       >
         {label}
       </Text>
