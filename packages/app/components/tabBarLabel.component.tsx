@@ -25,7 +25,7 @@ export const TabBarLabel = ({ label, focused }: TabBarLabelProps) => {
 
 const themedStyles = StyleService.create({
   label: {
-    fontWeight: '600',
+    fontWeight: '500',
     color: 'color-tab-default',
     ...fontSize.xxs,
   },
