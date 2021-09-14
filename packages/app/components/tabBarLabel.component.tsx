@@ -1,6 +1,7 @@
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
 import { View } from 'react-native'
+import { fontSize } from '../styles/typography'
 
 export type TabBarLabelProps = {
   label: string
@@ -15,6 +16,8 @@ export const TabBarLabel = ({ label, focused }: TabBarLabelProps) => {
       <Text
         style={[styles.label, focused ? styles.focused : null]}
         maxFontSizeMultiplier={2}
+        numberOfLines={1}
+        ellipsizeMode="tail"
       >
         {label}
       </Text>
@@ -24,9 +27,9 @@ export const TabBarLabel = ({ label, focused }: TabBarLabelProps) => {
 
 const themedStyles = StyleService.create({
   label: {
-    fontWeight: '600',
-    fontSize: 12,
+    fontWeight: '500',
     color: 'color-tab-default',
+    ...fontSize.xxs,
   },
   focused: {
     color: 'color-tab-focused',
