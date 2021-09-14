@@ -26,24 +26,26 @@ const displayDate = (date: string | undefined) => moment(date).format('lll')
 const dateIsValid = (date: string | undefined) =>
   moment(date, moment.ISO_8601).isValid()
 
-export const newsItemRouteOptions = ({
-  route,
-}: {
-  route: RouteProp<RootStackParamList, 'NewsItem'>
-}): NativeStackNavigationOptions => {
-  const newsItem = route.params.newsItem
-  const { child } = route.params
-  return {
-    ...defaultStackStyling,
-    headerCenter: () => (
-      <NavigationTitle
-        title={newsItem.header}
-        subtitle={studentName(child?.name)}
-      />
-    ),
-    headerLargeTitle: false,
+export const newsItemRouteOptions =
+  (darkMode: boolean) =>
+  ({
+    route,
+  }: {
+    route: RouteProp<RootStackParamList, 'NewsItem'>
+  }): NativeStackNavigationOptions => {
+    const newsItem = route.params.newsItem
+    const { child } = route.params
+    return {
+      ...defaultStackStyling(darkMode),
+      headerCenter: () => (
+        <NavigationTitle
+          title={newsItem.header}
+          subtitle={studentName(child?.name)}
+        />
+      ),
+      headerLargeTitle: false,
+    }
   }
-}
 
 export const NewsItem = ({ route }: NewsItemProps) => {
   const { newsItem, child } = route.params

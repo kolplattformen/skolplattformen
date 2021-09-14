@@ -146,7 +146,7 @@ const themedStyles = StyleService.create({
   },
   languageButtonSubtitle: {
     ...fontSize.sm,
-    opacity: 0.4,
+    color: 'text-hint-color',
   },
   button: { ...LayoutStyle.flex.full },
 })

@@ -16,6 +16,7 @@ import { View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import * as Yup from 'yup'
+import { defaultStackStyling } from '../design/navigationThemes'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
@@ -35,21 +36,24 @@ interface AbsenceFormValues {
   endTime: moment.Moment
 }
 
-export const absenceRouteOptions = ({
-  route,
-}: {
-  route: RouteProp<RootStackParamList, 'Absence'>
-}): NativeStackNavigationOptions => {
-  const child = route.params.child
-  return {
-    headerCenter: () => (
-      <NavigationTitle
-        title={translate('abscense.title')}
-        subtitle={studentName(child?.name)}
-      />
-    ),
+export const absenceRouteOptions =
+  (darkMode: boolean) =>
+  ({
+    route,
+  }: {
+    route: RouteProp<RootStackParamList, 'Absence'>
+  }): NativeStackNavigationOptions => {
+    const child = route.params.child
+    return {
+      ...defaultStackStyling(darkMode),
+      headerCenter: () => (
+        <NavigationTitle
+          title={translate('abscense.title')}
+          subtitle={studentName(child?.name)}
+        />
+      ),
+    }
   }
-}
 
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
@@ -142,6 +146,7 @@ const Absence = () => {
                 status={hasError('socialSecurityNumber') ? 'danger' : 'basic'}
                 value={values.socialSecurityNumber}
                 style={styles.input}
+                placeholder="YYYYMMDD-XXXX"
                 accessoryRight={
                   hasError('socialSecurityNumber') ? AlertIcon : undefined
                 }
@@ -254,16 +259,16 @@ const themedStyles = StyleService.create({
   inputHalf: { ...LayoutStyle.flex.full },
   input: {
     backgroundColor: 'background-basic-color-1',
+    borderColor: 'color-input-border',
   },
   // TODO: Refactor to use mapping.json in eva design
   pickerButton: {
     backgroundColor: 'background-basic-color-1',
   },
   label: {
-    ...Typography.fontSize.xs,
+    ...Typography.fontSize.sm,
     ...Typography.fontWeight.bold,
-    color: 'color-basic-600',
-    marginBottom: Sizing.t1,
+    marginBottom: Sizing.t2,
   },
   error: {
     color: 'color-primary-600',
