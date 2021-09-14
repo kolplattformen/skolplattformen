@@ -1,3 +1,6 @@
+IS_CI = ENV['CI']
+
+
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
@@ -17,11 +20,10 @@ target 'app' do
     # Pods for testing
   end
 
-  # Enables Flipper.
-  #
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable the next line.
-  use_flipper!()
+  # Enables Flipper, do not do it on CI enviroemnts, slows down the entire build on bitrise
+  if not IS_CI
+    use_flipper! ( { ... } )
+  end
 
   post_install do |installer|
     react_native_post_install(installer)
