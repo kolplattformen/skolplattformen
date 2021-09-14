@@ -1,3 +1,12 @@
+## [1.42.1](https://github.com/kolplattformen/skolplattformen/compare/v1.42.0...v1.42.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* 🐛 Fixes long navigation names in tab bar ([fe51923](https://github.com/kolplattformen/skolplattformen/commit/fe5192324961f0c2a941c4fa182637dbf9199c0e))
+* decrease font weight to 500 ([69ff3ff](https://github.com/kolplattformen/skolplattformen/commit/69ff3ff0e1c65747a7aa6ef469187f06e2b0274c))
+* fontSize on tabBarLabel decreased ([36bc627](https://github.com/kolplattformen/skolplattformen/commit/36bc62752a97b62597f3a368152fd86e5a98212f))
+
 # [1.42.0](https://github.com/kolplattformen/skolplattformen/compare/v1.41.0...v1.42.0) (2021-09-14)
 
 
