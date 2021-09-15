@@ -30,9 +30,9 @@ export const Classmates = () => {
   const renderItem = ({ item, index }: ListRenderItemInfo<Classmate>) => (
     <ListItem
       accessibilityLabel={`${translate('classmates.child')} ${index + 1}`}
-      accessibilityHint={`${translate('classmates.contactsForGuardianFor')} ${fullName(
-        item
-      )}`}
+      accessibilityHint={`${translate(
+        'classmates.contactsForGuardianFor'
+      )} ${fullName(item)}`}
       title={fullName(item)}
       onPress={() => setSelected(item)}
       description={guardians(item.guardians)}
@@ -53,7 +53,9 @@ export const Classmates = () => {
       ItemSeparatorComponent={Divider}
       ListHeaderComponent={
         <Text category="h5" style={styles.listHeader}>
-          {data?.length ? `${translate('classmates.class')} ${data[0].className}` : translate('classmates.class')}
+          {data?.length
+            ? `${translate('classmates.class')} ${data[0].className}`
+            : translate('classmates.class')}
         </Text>
       }
       renderItem={renderItem}
