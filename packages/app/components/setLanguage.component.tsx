@@ -8,8 +8,8 @@ import {
   useTheme,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { View } from 'react-native'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { View, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import RNRestart from 'react-native-restart'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
@@ -146,7 +146,7 @@ const themedStyles = StyleService.create({
   },
   languageButtonSubtitle: {
     ...fontSize.sm,
-    opacity: 0.4,
+    color: 'text-hint-color',
   },
   button: { ...LayoutStyle.flex.full },
 })

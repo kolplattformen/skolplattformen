@@ -18,14 +18,14 @@ import {
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, useColorScheme, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
-import { RootStackParamList } from './navigation.component'
-import { StudentAvatar } from './studentAvatar.component'
 import { DaySummary } from './daySummary.component'
 import { AlertIcon, RightArrowIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
+import { StudentAvatar } from './studentAvatar.component'
 
 interface ChildListItemProps {
   child: Child
@@ -110,6 +110,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
 
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
+  const isDarkMode = useColorScheme() === 'dark'
 
   return (
     <TouchableOpacity
@@ -127,7 +128,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           <View style={styles.cardHeaderRight}>
             <RightArrowIcon
               style={styles.icon}
-              fill={Colors.neutral.gray500}
+              fill={
+                isDarkMode ? Colors.neutral.gray200 : Colors.neutral.gray800
+              }
               name="star"
             />
           </View>
@@ -174,7 +177,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             accessibilityLabel={`${child.name}, ${translate('abscense.title')}`}
             appearance="ghost"
             accessoryLeft={AlertIcon}
-            status=""
+            status="primary"
             style={styles.absenceButton}
             onPress={() => navigation.navigate('Absence', { child })}
           >

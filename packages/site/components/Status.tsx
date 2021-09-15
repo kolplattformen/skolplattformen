@@ -4,15 +4,11 @@ const Status = () => {
       <h1>Status</h1>
       <h3>Funkar appen som den ska?</h3>
       <p>
-        Nej, tyvärr inte.
+       Appen fungerar!
         <br />
-        🛑 iPhone
+        🟩 iPhone
         <br />
-        🛑 Android
-      </p>
-      <p>
-        Vi har rapporter om att appen har problem för tillfället och har
-        lokaliserat felet samt jobbar på en lösning.
+        🟩 Android
       </p>
       <h3>Upptäckt några problem? Hjälp oss att fixa det</h3>
       <p>
