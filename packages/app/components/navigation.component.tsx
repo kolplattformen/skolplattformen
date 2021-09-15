@@ -91,22 +91,22 @@ export const AppNavigator = () => {
             <Screen
               name="Children"
               component={Children}
-              options={childenRouteOptions}
+              options={childenRouteOptions(colorScheme === 'dark')}
             />
             <Screen
               name="Child"
               component={Child}
-              options={childRouteOptions}
+              options={childRouteOptions(colorScheme === 'dark')}
             />
             <Screen
               name="NewsItem"
               component={NewsItem}
-              options={newsItemRouteOptions}
+              options={newsItemRouteOptions(colorScheme === 'dark')}
             />
             <Screen
               name="Absence"
               component={Absence}
-              options={absenceRouteOptions}
+              options={absenceRouteOptions(colorScheme === 'dark')}
             />
           </>
         ) : (

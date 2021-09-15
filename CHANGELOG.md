@@ -1,3 +1,31 @@
+## [1.42.2](https://github.com/kolplattformen/skolplattformen/compare/v1.42.1...v1.42.2) (2021-09-15)
+
+
+### Bug Fixes
+
+* 🐛 Välja språk på Android var trasigt ([#467](https://github.com/kolplattformen/skolplattformen/issues/467)) ([d431d68](https://github.com/kolplattformen/skolplattformen/commit/d431d68f5cee6f3550ba7937aa9d177ab083baba))
+
+## [1.42.1](https://github.com/kolplattformen/skolplattformen/compare/v1.42.0...v1.42.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* 🐛 Fixes long navigation names in tab bar ([fe51923](https://github.com/kolplattformen/skolplattformen/commit/fe5192324961f0c2a941c4fa182637dbf9199c0e))
+* decrease font weight to 500 ([69ff3ff](https://github.com/kolplattformen/skolplattformen/commit/69ff3ff0e1c65747a7aa6ef469187f06e2b0274c))
+* fontSize on tabBarLabel decreased ([36bc627](https://github.com/kolplattformen/skolplattformen/commit/36bc62752a97b62597f3a368152fd86e5a98212f))
+
+# [1.42.0](https://github.com/kolplattformen/skolplattformen/compare/v1.41.0...v1.42.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* update colors to reach AAA ([0140984](https://github.com/kolplattformen/skolplattformen/commit/0140984918e13f63b6302dc34d3ce163b3b697df))
+
+
+### Features
+
+* 🎸 Fixes status page and bump embedded ([7b65652](https://github.com/kolplattformen/skolplattformen/commit/7b6565296e3895c13384af571e2c60bf0ee4e24a))
+
 # [1.41.0](https://github.com/kolplattformen/skolplattformen/compare/v1.40.1...v1.41.0) (2021-09-13)
 
 
