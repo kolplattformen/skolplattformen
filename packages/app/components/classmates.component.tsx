@@ -13,6 +13,7 @@ import { useChild } from './childContext.component'
 import { useClassmates } from '@skolplattformen/api-hooks'
 import { ContactMenu } from './contactMenu.component'
 import { Classmate } from '@skolplattformen/embedded-api'
+import { translate } from '../utils/translation'
 
 interface ClassmatesProps {
   setSelected: (value?: number | null) => void
@@ -28,8 +29,8 @@ export const Classmates = () => {
   const [selected, setSelected] = React.useState()
   const renderItem = ({ item, index }: ListRenderItemInfo<Classmate>) => (
     <ListItem
-      accessibilityLabel={`Barn ${index + 1}`}
-      accessibilityHint={`Kontaktuppgifter för vårdnadshavare till ${fullName(
+      accessibilityLabel={`${translate('classmates.child')} ${index + 1}`}
+      accessibilityHint={`${translate('classmates.contactsForGuardianFor')} ${fullName(
         item
       )}`}
       title={fullName(item)}
@@ -52,7 +53,7 @@ export const Classmates = () => {
       ItemSeparatorComponent={Divider}
       ListHeaderComponent={
         <Text category="h5" style={styles.listHeader}>
-          {data?.length ? `Klass ${data[0].className}` : 'Klass'}
+          {data?.length ? `${translate('classmates.class')} ${data[0].className}` : translate('classmates.class')}
         </Text>
       }
       renderItem={renderItem}
@@ -76,7 +77,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   listHeader: {
-    // backgroundColor: '#fff',
     paddingTop: 10,
     paddingLeft: 15,
   },

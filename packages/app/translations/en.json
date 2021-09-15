@@ -90,7 +90,8 @@
         "calender": "Calendar",
         "menu": "Menu",
         "news": "News",
-        "notifications": "Notifications"
+        "notifications": "Notifications",
+        "classmates": "Classmates"
     },
     "news": {
         "backToChild": "Back to child",
@@ -112,7 +113,17 @@
         "lunch": "Lunch",
         "gymBag": "Gym bag"
     },
+    "classmates": {
+        "class": "Class",
+        "child": "Child",
+        "contactsForGuardiansFor": "Contact information for guardians for"
+    }, 
     "contact": {
-        "a11y_show_contact_info_button_hint": "Show contact info"
+        "a11y_show_contact_info_button_hint": "Shows contact information",
+        "a11y_show_contact_info_button_label": "Show contant information",
+        "call": "Call",
+        "sms": "SMS",
+        "email": "E-mail",
+        "home": "Home"
     }
 }
