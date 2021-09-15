@@ -1,3 +1,10 @@
+## [1.42.2](https://github.com/kolplattformen/skolplattformen/compare/v1.42.1...v1.42.2) (2021-09-15)
+
+
+### Bug Fixes
+
+* 🐛 Välja språk på Android var trasigt ([#467](https://github.com/kolplattformen/skolplattformen/issues/467)) ([d431d68](https://github.com/kolplattformen/skolplattformen/commit/d431d68f5cee6f3550ba7937aa9d177ab083baba))
+
 ## [1.42.1](https://github.com/kolplattformen/skolplattformen/compare/v1.42.0...v1.42.1) (2021-09-14)
 
 
