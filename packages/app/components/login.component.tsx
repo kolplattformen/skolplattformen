@@ -84,10 +84,9 @@ export const Login = () => {
       const storedPersonalIdNumber = await AppStorage.getSetting<string>(
         'cachedPersonalIdentityNumber'
       )
-      console.log('Got personalId from storage =>', storedPersonalIdNumber)
+
       if (storedPersonalIdNumber) {
         setPersonalIdNumber(storedPersonalIdNumber)
-        console.log('Setting state personal id =>', storedPersonalIdNumber)
       }
     }
 
