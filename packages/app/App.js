@@ -13,7 +13,6 @@ import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
-import { useBackgroundBlur } from './utils/blur'
 import { translations } from './utils/translation'
 const api = init(fetch, CookieManager)
 
@@ -28,7 +27,6 @@ const reporter = __DEV__
     }
 
 export default () => {
-  const FullBlurView = useBackgroundBlur()
   const colorScheme = useColorScheme()
 
   return (
@@ -49,7 +47,6 @@ export default () => {
             <LanguageProvider cache={true} data={translations}>
               <AppNavigator />
             </LanguageProvider>
-            {FullBlurView}
           </ApplicationProvider>
         </AppearanceProvider>
       </SafeAreaProvider>
