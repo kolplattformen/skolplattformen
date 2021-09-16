@@ -53,16 +53,22 @@ export const Children = () => {
     AppStorage.clearTemporaryItems().then(() => api.logout())
   }, [api])
 
+  const logoutAndClearPersonalData = useCallback(() => {
+    api
+      .getUser()
+      .then((user) => AppStorage.clearPersonalData(user))
+      .then(() => AppStorage.clearTemporaryItems().then(() => api.logout()))
+  }, [api])
+
   const logoutAndClearAll = useCallback(() => {
-    AppStorage.clearTemporaryItems()
-      .then(() => AppStorage.clearAllSettings())
-      .then(() => api.logout())
+    AppStorage.nukeAllStorage().then(() => api.logout())
   }, [api])
 
   const settingsOptions = useMemo(() => {
     return [
       translate('general.logout'),
-      'Logga ut och rensa allt',
+      'Logga ut och rensa all personlig data',
+      'Logga ut och rensa allt (inkl inställningar)',
       translate('general.cancel'),
     ]
   }, [])
@@ -70,9 +76,10 @@ export const Children = () => {
   const handleSettingSelection = useCallback(
     (index: number) => {
       if (index === 0) logout()
-      if (index === 1) logoutAndClearAll()
+      if (index === 1) logoutAndClearPersonalData()
+      if (index === 2) logoutAndClearAll()
     },
-    [logout, logoutAndClearAll]
+    [logout, logoutAndClearAll, logoutAndClearPersonalData]
   )
 
   const settings = useCallback(() => {
