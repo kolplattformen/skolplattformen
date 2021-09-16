@@ -63,12 +63,11 @@ const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
               <Text
                 style={styles.lessonDescription}
                 maxFontSizeMultiplier={1}
-              >{`${timeStart.slice(0, 5)}-${timeEnd.slice(
-                0,
-                5
-              )} (${location})`}</Text>
+              >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
+                location === '' ? '' : '(' + location + ')'
+              } `}</Text>
               <Text style={styles.lessonDescription} maxFontSizeMultiplier={1}>
-                {code === 'Lunch' ? lunch?.description : teacher}
+                {code?.toUpperCase() === 'LUNCH' ? lunch?.description : teacher}
               </Text>
             </View>
           )}
