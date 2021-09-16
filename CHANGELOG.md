@@ -1,3 +1,10 @@
+## [1.43.1](https://github.com/kolplattformen/skolplattformen/compare/v1.43.0...v1.43.1) (2021-09-16)
+
+
+### Bug Fixes
+
+* 🐛 Översättningar på menytabbarna ([#471](https://github.com/kolplattformen/skolplattformen/issues/471)) ([b7a732d](https://github.com/kolplattformen/skolplattformen/commit/b7a732d21b1a84c3a3a26b7eb680937384de4c93))
+
 # [1.43.0](https://github.com/kolplattformen/skolplattformen/compare/v1.42.2...v1.43.0) (2021-09-16)
 
 
