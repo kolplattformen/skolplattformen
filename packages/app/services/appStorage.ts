@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { User } from '@skolplattformen/embedded-api'
 
 export default class AppStorage {
   static settingsStorageKeyPrefix = 'appsetting_'
@@ -13,6 +14,21 @@ export default class AppStorage {
       this.settingsStorageKeyPrefix + key
     )
     return value ? (JSON.parse(value) as T) : null
+  }
+
+  static async setPersonalData<T>(user: User, key: string, value: T) {
+    const jsonValue = JSON.stringify(value)
+    if (user.personalNumber) {
+      await AsyncStorage.setItem(user.personalNumber + '_' + key, jsonValue)
+    }
+  }
+
+  static async getPersonalData<T>(user: User, key: string): Promise<T | null> {
+    if (user.personalNumber) {
+      const value = await AsyncStorage.getItem(user.personalNumber + '_' + key)
+      return value ? (JSON.parse(value) as T) : null
+    }
+    return null
   }
 
   static async setTemporaryItem<T>(key: string, value: T) {
@@ -31,7 +47,6 @@ export default class AppStorage {
       x.startsWith(this.settingsStorageKeyPrefix)
     )
     await AsyncStorage.multiRemove(settingsKeys)
-    console.log('Cleared all settings')
   }
 
   static async clearTemporaryItems() {
@@ -40,6 +55,15 @@ export default class AppStorage {
       (x) => !x.startsWith(this.settingsStorageKeyPrefix)
     )
     await AsyncStorage.multiRemove(notSettingsKeys)
-    console.log('Cleared all temp items')
+  }
+
+  static async clearPersonalData(user: User): Promise<void> {
+    if (!user.personalNumber) return
+
+    const allKeys = await AsyncStorage.getAllKeys()
+    const personalDataKeys = allKeys.filter((x) =>
+      x.startsWith(user.personalNumber ?? '')
+    )
+    await AsyncStorage.multiRemove(personalDataKeys)
   }
 }

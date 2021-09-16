@@ -1,8 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import AppStorage from '../appStorage'
+import { User } from '@skolplattformen/embedded-api'
 
 beforeEach(() => {
   jest.clearAllMocks()
+  AsyncStorage.clear()
 })
 
 const prefix = AppStorage.settingsStorageKeyPrefix
@@ -86,4 +88,67 @@ test('Get temporary object from AsyncStorage', async () => {
   await AppStorage.getTemporaryItem('tempkey')
 
   expect(AsyncStorage.getItem).toHaveBeenCalledWith('tempkey')
+})
+
+test('Set personal data with personal number prefix', async () => {
+  const obj = { a: 'gdpr', b: 'is fun' }
+  const user: User = { personalNumber: '201701012393' }
+  await AppStorage.setPersonalData(user, 'key', obj)
+
+  expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+    user.personalNumber + '_' + 'key',
+    JSON.stringify(obj)
+  )
+})
+
+test('Set personal data does nothing if personal number missing', async () => {
+  const obj = { a: 'gdpr', b: 'is fun' }
+  const user: User = { personalNumber: '' }
+  await AppStorage.setPersonalData(user, 'key', obj)
+
+  expect(AsyncStorage.setItem).not.toHaveBeenCalled()
+})
+
+test('Get personal data gets data if personal number matches', async () => {
+  const data = 'personal data'
+  const user: User = { personalNumber: '201701012393' }
+
+  await AppStorage.setPersonalData(user, 'key', data)
+  const storedData = await AppStorage.getPersonalData(user, 'key')
+
+  expect(storedData).toEqual(data)
+})
+
+test('Get no personal data gets data if personal number does not match', async () => {
+  const data = 'personal data'
+  const user: User = { personalNumber: '201701012393' }
+  const anotherAser: User = { personalNumber: '202112312380' }
+
+  await AppStorage.setPersonalData(user, 'key', data)
+  const storedData = await AppStorage.getPersonalData(anotherAser, 'key')
+
+  expect(user).not.toEqual(anotherAser)
+  expect(storedData).toEqual(null)
+})
+
+test('Clear only PersonalData', async () => {
+  await AppStorage.setSetting('settingKey1', 'settingValue1')
+  await AppStorage.setTemporaryItem('tempKey1', 'tempValue1')
+
+  const data = 'personal data'
+  const user: User = { personalNumber: '201701012393' }
+  await AppStorage.setPersonalData(user, 'key', data)
+
+  await AppStorage.clearPersonalData(user)
+
+  const allKeys = await AsyncStorage.getAllKeys()
+  expect(allKeys).toHaveLength(2)
+  expect(allKeys).not.toContain(user.personalNumber + '_key')
+})
+
+test('Clear PersonalData does nothing if personalnumber is empty', async () => {
+  const user: User = { personalNumber: '' }
+  await AppStorage.clearPersonalData(user)
+
+  expect(AsyncStorage.multiRemove).not.toHaveBeenCalled()
 })
