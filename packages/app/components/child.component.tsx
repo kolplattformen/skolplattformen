@@ -20,6 +20,7 @@ import { RootStackParamList } from './navigation.component'
 import { NavigationTitle } from './navigationTitle.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
+import { Classmates } from './classmates.component'
 import { TabBarLabel } from './tabBarLabel.component'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
@@ -30,6 +31,7 @@ export type ChildTabParamList = {
   Notifications: undefined
   Calendar: undefined
   Menu: undefined
+  Classmates: undefined
 }
 
 interface TabTitleProps {
@@ -43,6 +45,7 @@ const NewsScreen = () => <NewsList />
 const NotificationsScreen = () => <NotificationsList />
 const CalendarScreen = () => <Calendar />
 const MenuScreen = () => <Menu />
+const ClassmatesScreen = () => <Classmates />
 
 const TabNavigator = ({
   initialRouteName = 'News',
@@ -67,6 +70,8 @@ const TabNavigator = ({
             iconName = focused ? 'calendar' : 'calendar-outline'
           else if (route.name === 'Menu')
             iconName = focused ? 'clipboard' : 'clipboard-outline'
+          else if (route.name === 'Classmates')
+            iconName = focused ? 'people' : 'people-outline'
           return <Icon name={iconName} fill={color} height={24} width={24} />
         },
       }
@@ -92,6 +97,11 @@ const TabNavigator = ({
       component={MenuScreen}
       options={{ title: translate('navigation.menu') }}
     />
+    <Screen
+      name="Classmates"
+      component={ClassmatesScreen}
+      options={{ title: translate('navigation.classmates') }}
+    />
   </Navigator>
 )
 
@@ -107,6 +117,8 @@ const getHeaderTitle = (route: any) => {
       return translate('navigation.calender')
     case 'Menu':
       return translate('navigation.menu')
+    case 'Classmates':
+      return translate('navigation.classmates')
   }
 }
 
