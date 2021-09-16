@@ -3,6 +3,7 @@ import { User } from '@skolplattformen/embedded-api'
 
 export default class AppStorage {
   static settingsStorageKeyPrefix = 'appsetting_'
+  static tempStorageKeyPrefix = 'tempItem_'
 
   static async setSetting<T>(key: string, value: T) {
     const jsonValue = JSON.stringify(value)
@@ -19,7 +20,8 @@ export default class AppStorage {
   static async setPersonalData<T>(user: User, key: string, value: T) {
     const jsonValue = JSON.stringify(value)
     if (user.personalNumber) {
-      await AsyncStorage.setItem(user.personalNumber + '_' + key, jsonValue)
+      const storageKey = user.personalNumber + '_' + key
+      await AsyncStorage.setItem(storageKey, jsonValue)
     }
   }
 
@@ -33,11 +35,11 @@ export default class AppStorage {
 
   static async setTemporaryItem<T>(key: string, value: T) {
     const jsonValue = JSON.stringify(value)
-    await AsyncStorage.setItem(key, jsonValue)
+    await AsyncStorage.setItem(this.tempStorageKeyPrefix + key, jsonValue)
   }
 
   static async getTemporaryItem<T>(key: string): Promise<T | null> {
-    const value = await AsyncStorage.getItem(key)
+    const value = await AsyncStorage.getItem(this.tempStorageKeyPrefix + key)
     return value ? (JSON.parse(value) as T) : null
   }
 
@@ -51,8 +53,8 @@ export default class AppStorage {
 
   static async clearTemporaryItems() {
     const allKeys = await AsyncStorage.getAllKeys()
-    const notSettingsKeys = allKeys.filter(
-      (x) => !x.startsWith(this.settingsStorageKeyPrefix)
+    const notSettingsKeys = allKeys.filter((x) =>
+      x.startsWith(this.tempStorageKeyPrefix)
     )
     await AsyncStorage.multiRemove(notSettingsKeys)
   }
@@ -65,5 +67,9 @@ export default class AppStorage {
       x.startsWith(user.personalNumber ?? '')
     )
     await AsyncStorage.multiRemove(personalDataKeys)
+  }
+
+  static async nukeAllStorage() {
+    await AsyncStorage.clear()
   }
 }
