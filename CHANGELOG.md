@@ -1,3 +1,10 @@
+## [1.43.2](https://github.com/kolplattformen/skolplattformen/compare/v1.43.1...v1.43.2) (2021-09-16)
+
+
+### Bug Fixes
+
+* 🐛 Småfixar i schemat ([2c770c0](https://github.com/kolplattformen/skolplattformen/commit/2c770c08fb6e8adea558ec0af1be77978af843e0))
+
 ## [1.43.1](https://github.com/kolplattformen/skolplattformen/compare/v1.43.0...v1.43.1) (2021-09-16)
 
 
