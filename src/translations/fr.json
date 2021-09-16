@@ -1,1 +1,78 @@
-{}
+{
+    "languages": {
+        "VIE": "Vietnamien",
+        "UZB": "Ouzbek",
+        "URD": "Ourdou",
+        "HUN": "Hongrois",
+        "UKR": "Ukrainien",
+        "UIG": "Ouïghour",
+        "ZUL": "Zoulou",
+        "YOR": "Yorouba",
+        "WOL": "Wolof",
+        "SPK": "Autre langue",
+        "SQI": "Albanais"
+    },
+    "categories": {
+        "trainingSchool": "École obligatoire pour les enfants souffrant de graves difficultés d'apprentissage",
+        "motherTounge": "Cours de langue maternelle",
+        "modernLanguagesAlt": "Langue moderne Alt, CECR min. A2",
+        "modernLanguagesA2": "CECR min. A2",
+        "modernLanguagesA1": "CECR min. A1+",
+        "modernLanguages": "Langues modernes",
+        "misc": "Divers",
+        "unknown": "Inconnu"
+    },
+    "misc": {
+        "Rast": "Pause",
+        "MTID": "Tutorat",
+        "Prandium": "Déjeuner",
+        "Lunch": "Déjeuner"
+    },
+    "specialLanguages": {
+        "TY": "Allemand",
+        "TN": "Langue des signes",
+        "SVA": "Suédois comme deuxième langue",
+        "SV": "Suédois",
+        "SP": "Espagnol",
+        "SAM": "Same",
+        "RY": "Russe",
+        "PO": "Portugais",
+        "KI": "Chinois",
+        "JAP": "Japonais",
+        "IT": "Italien",
+        "FI": "Finnois",
+        "FR": "Français",
+        "EN": "Anglais"
+    },
+    "traningsskolaSubjects": {
+        "VEU": "Perception",
+        "VAA": "Activités quotidiennes",
+        "MOT": "Coordination physique",
+        "KOM": "Communication"
+    },
+    "subjects": {
+        "ES": "Esthétique",
+        "JU": "Études juives",
+        "DA": "Études préparatoires de danse",
+        "TK": "Technologie",
+        "TN": "Langue des signes",
+        "SVA": "Suédois comme deuxième langue",
+        "SV": "Suédois",
+        "SL": "Travaux manuels",
+        "SH": "Éducation civique",
+        "RE": "Religion",
+        "HI": "Histoire",
+        "GE": "Géographie",
+        "SO": "Sujets d'étude sociale",
+        "KE": "Chimie",
+        "FY": "Physique",
+        "BI": "Biologie",
+        "NO": "Études scientifiques",
+        "MU": "Musique",
+        "MA": "Mathématiques",
+        "IDH": "Éducation physique et santé",
+        "HKK": "Études économiques et domestiques",
+        "EN": "Anglais",
+        "BL": "Art"
+    }
+}

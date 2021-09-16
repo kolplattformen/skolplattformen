@@ -7,7 +7,8 @@
         "ISL": "Islandsk",
         "IND": "Indonesisk",
         "SPK": "Annet språk",
-        "FRA": "Fransk"
+        "FRA": "Fransk",
+        "DEU": "Tysk"
     },
     "traningsskolaSubjects": {
         "VAA": "Hverdagsaktiviteter",
@@ -18,7 +19,7 @@
     "subjects": {
         "ES": "Estetisk virksomhet",
         "NO": "Naturfag",
-        "HKK": "Hjem og konsumentlære",
+        "HKK": "Heimkunnskap",
         "JU": "Jødiske studier",
         "SO": "Samfunnsfag",
         "SH": "Samfunnslære",
@@ -42,12 +43,19 @@
     },
     "misc": {
         "Prandium": "Lunsj",
-        "Lunch": "Lunsj"
+        "Lunch": "Lunsj",
+        "Rast": "Pause",
+        "MTID": "Mentortid"
     },
     "categories": {
         "misc": "Ymse",
         "unknown": "Ukjent",
-        "modernLanguages": "Moderne språk"
+        "modernLanguages": "Moderne språk",
+        "motherTounge": "Morsmålsopplæring",
+        "modernLanguagesAlt": "Alt moderne språk, språkvalg",
+        "modernLanguagesA2": "Språkvalg",
+        "modernLanguagesA1": "Elevens valg",
+        "trainingSchool": "Grunnskole for elever med lærevansker"
     },
     "specialLanguages": {
         "TY": "Tysk",
