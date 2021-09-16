@@ -85,7 +85,6 @@ const Absence = () => {
         )
       }
 
-      console.log('Storing')
       await AppStorage.setPersonalData(
         user,
         `@childssn.${child.id}`,
@@ -104,7 +103,6 @@ const Absence = () => {
       )
       setSocialSecurityNumber(ssn || '')
     }
-    console.log(user)
     getSocialSecurityNumber()
   }, [child, user])
 

@@ -37,7 +37,7 @@ beforeAll(() => {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  useUser.mockReturnValueOnce({
+  useUser.mockReturnValue({
     data: user,
     status: 'loaded',
   })
