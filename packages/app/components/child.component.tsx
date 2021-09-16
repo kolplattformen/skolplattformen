@@ -57,7 +57,10 @@ const TabNavigator = ({
     screenOptions={({ route }) => {
       return {
         tabBarLabel: ({ focused }) => (
-          <TabBarLabel label={route.name} focused={focused} />
+          <TabBarLabel
+            label={getRouteTitleFromName(route.name)}
+            focused={focused}
+          />
         ),
         tabBarIcon: ({ focused, color }) => {
           let iconName = 'news'
@@ -107,7 +110,10 @@ const TabNavigator = ({
 
 const getHeaderTitle = (route: any) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'News'
+  return getRouteTitleFromName(routeName)
+}
 
+const getRouteTitleFromName = (routeName: string) => {
   switch (routeName) {
     case 'News':
       return translate('navigation.news')
