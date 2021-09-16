@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/kolplattformen/skolplattformen/compare/v1.42.2...v1.43.0) (2021-09-16)
+
+
+### Features
+
+* 🎸 Den nygamla klasslistan ([#462](https://github.com/kolplattformen/skolplattformen/issues/462)) ([f0d05a5](https://github.com/kolplattformen/skolplattformen/commit/f0d05a50000a2958db9c0abb9bd9d9d2546414e8)), closes [#441](https://github.com/kolplattformen/skolplattformen/issues/441)
+
 ## [1.42.2](https://github.com/kolplattformen/skolplattformen/compare/v1.42.1...v1.42.2) (2021-09-15)
 
 
