@@ -6,12 +6,15 @@ import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
 import AppStorage from '../../services/appStorage'
+import { useUser } from '@skolplattformen/api-hooks'
 
 jest.mock('@react-navigation/native')
+jest.mock('@skolplattformen/api-hooks')
 jest.mock('../../utils/SMS')
 jest.mock('../../services/appStorage')
 
 let sendSMS
+let user = { personalNumber: '201701092395' }
 
 const setup = (customProps = {}) => {
   sendSMS = jest.fn()
@@ -34,6 +37,10 @@ beforeAll(() => {
 
 beforeEach(() => {
   jest.clearAllMocks()
+  useUser.mockReturnValueOnce({
+    data: user,
+    status: 'loaded',
+  })
 })
 
 test('can fill out the form with full day absence', async () => {
@@ -51,7 +58,8 @@ test('can fill out the form with full day absence', async () => {
   expect(screen.queryByText(/sluttid/i)).toBeFalsy()
 
   expect(sendSMS).toHaveBeenCalledWith('121212-1212')
-  expect(AppStorage.setSetting).toHaveBeenCalledWith(
+  expect(AppStorage.setPersonalData).toHaveBeenCalledWith(
+    user,
     '@childssn.1',
     '1212121212'
   )

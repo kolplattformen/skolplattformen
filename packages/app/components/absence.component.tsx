@@ -23,6 +23,7 @@ import { AlertIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import AppStorage from '../services/appStorage'
 import { NavigationTitle } from './navigationTitle.component'
+import { useUser } from '@skolplattformen/api-hooks'
 
 type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
 
@@ -61,6 +62,7 @@ const Absence = () => {
     isFullDay: Yup.bool().required(),
   })
 
+  const { data: user } = useUser()
   const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
@@ -83,22 +85,28 @@ const Absence = () => {
         )
       }
 
-      await AppStorage.setSetting(
+      console.log('Storing')
+      await AppStorage.setPersonalData(
+        user,
         `@childssn.${child.id}`,
         values.socialSecurityNumber
       )
+      setSocialSecurityNumber(values.socialSecurityNumber)
     },
-    [child.id, sendSMS]
+    [child.id, sendSMS, user]
   )
 
   React.useEffect(() => {
     const getSocialSecurityNumber = async () => {
-      const ssn = await AppStorage.getSetting<string>(`@childssn.${child.id}`)
+      const ssn = await AppStorage.getPersonalData<string>(
+        user,
+        `@childssn.${child.id}`
+      )
       setSocialSecurityNumber(ssn || '')
     }
-
+    console.log(user)
     getSocialSecurityNumber()
-  }, [child])
+  }, [child, user])
 
   const initialValues: AbsenceFormValues = {
     displayStartTimePicker: false,
