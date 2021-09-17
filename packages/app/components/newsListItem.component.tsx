@@ -26,7 +26,7 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   const styles = useStyleSheet(themedStyles)
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
-  const hasDate = item.published || item.modified
+  const hasDate = item.modified || item.published
 
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
