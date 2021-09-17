@@ -1521,10 +1521,10 @@
   resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.1.tgz#f60b82276d61f731bf6c169826a4fb2a82e0a574"
   integrity sha512-tKJjB2KsOXhNGvtBTp3DsTVchdQbSU08AwAfK1KbmIGFUQLAz8Su3T6RqYsxXEpCcFKRV6poscBnUZrdgZQy3w==
 
-"@skolplattformen/embedded-api@5.2.1":
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.2.1.tgz#41bf65de10ac52bc799d94603f017deab910a8fb"
-  integrity sha512-QXMT4imYIEPBTGrw6VKguEj/rVoONe9QUdzsQIcYtNpGK/eVggQysKBrEeOiwuqGfEhKsu1i7JoSZ/cvhwB4Rg==
+"@skolplattformen/embedded-api@5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.3.0.tgz#75697bbe5059890f688854e63a917808dc12d2a4"
+  integrity sha512-Lo6riSMkBeW4JVWj9bP4tqzRljjy9lfu9qag53EsC7edHwHa8sTsEdnnT1JUprkdjmKYDAakkftsC+A2HWmSEA==
   dependencies:
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
