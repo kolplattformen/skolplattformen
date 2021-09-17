@@ -4,92 +4,182 @@ import { news, newsItemDetails } from '../news'
 let response: EtjanstResponse
 
 describe('news', () => {
-  beforeEach(() => {
-    response = {
-      Success: true,
-      Error: null,
-      Data: {
-        CurrentChild: null,
-        NewsItems: [
-          {
-            NewsId: 'news id',
-            SiteId:
-              'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700',
-            NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
-            NewsItemId:
-              'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
-            Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
-            PublicationDate: '/Date(1608304542000)/',
-            PubDateSE: '18 december 2020 16:15',
-            ModifiedDate: '/Date(1608304680000)/',
-            ModDateSE: '18 december 2020 16:18',
-            Source: 'Livets hårda skolklasser',
-            Preamble:
-              'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...',
-            BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
-            BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
-            BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
-            Body:
-              '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
-            BodyNoHtml: null,
-            AuthorDisplayName: 'Eva-Lotta Rönnberg',
-            altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-          },
-        ],
-        ViewGlobalTranslations: {},
-        ViewLocalTranslations: {},
-        Children: null,
-        Status: null,
-        GlobalTranslationIds: [
-          'InformationalHeader',
-          'ContactUsMessageLabel',
-          'Send',
-          'RequiredFieldMessageInfo',
-          'Sex',
-          'Male',
-          'Female',
-          'SSN',
-          'FirstName',
-          'LastName',
-          'Email',
-          'Zip',
-          'Address',
-          'ValidationRequiredFieldMessage',
-          'ValidationErrorMessage',
-        ],
-        LocalTranslationIds: ['IndexPageHeading1'],
-      },
-    }
-  })
-  it(' news items (except body) correctly', () => {
-    const [item] = news(response)
+  describe('parsing', () => {
+    beforeEach(() => {
+      response = {
+        Success: true,
+        Error: null,
+        Data: {
+          CurrentChild: null,
+          NewsItems: [
+            {
+              NewsId: 'news id',
+              SiteId:
+                'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700',
+              NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
+              NewsItemId:
+                'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
+              Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
+              PublicationDate: '/Date(1608304542000)/',
+              PubDateSE: '18 december 2020 16:15',
+              ModifiedDate: '/Date(1608304680000)/',
+              ModDateSE: '18 december 2020 16:18',
+              Source: 'Livets hårda skolklasser',
+              Preamble:
+                'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...',
+              BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
+              BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
+              BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
+              Body:
+                '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
+              BodyNoHtml: null,
+              AuthorDisplayName: 'Eva-Lotta Rönnberg',
+              altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
+            },
+          ],
+          ViewGlobalTranslations: {},
+          ViewLocalTranslations: {},
+          Children: null,
+          Status: null,
+          GlobalTranslationIds: [
+            'InformationalHeader',
+            'ContactUsMessageLabel',
+            'Send',
+            'RequiredFieldMessageInfo',
+            'Sex',
+            'Male',
+            'Female',
+            'SSN',
+            'FirstName',
+            'LastName',
+            'Email',
+            'Zip',
+            'Address',
+            'ValidationRequiredFieldMessage',
+            'ValidationErrorMessage',
+          ],
+          LocalTranslationIds: ['IndexPageHeading1'],
+        },
+      }
+    })
+    it(' news items (except body) correctly', () => {
+      const [item] = news(response)
 
-    expect(item.id).toEqual('news id')
-    expect(item.author).toEqual('Eva-Lotta Rönnberg')
-    expect(item.header).toEqual(
-      'Problemet med att se betyg i bild, slöjd och teknik löst!'
-    )
-    expect(item.imageUrl).toEqual('A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
-    expect(item.fullImageUrl).toEqual(
-      'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg'
-    )
-    expect(item.imageAltText).toEqual('Nyhetsbild. Bildtext ej tillgänglig.')
-    expect(item.intro).toEqual(
-      'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...'
-    )
-    expect(item.modified).toEqual('2020-12-18T15:18:00.000Z')
-    expect(item.published).toEqual('2020-12-18T15:15:42.000Z')
-  })
-  it(' body correctly', () => {
-    const [item] = news(response)
+      expect(item.id).toEqual('news id')
+      expect(item.author).toEqual('Eva-Lotta Rönnberg')
+      expect(item.header).toEqual(
+        'Problemet med att se betyg i bild, slöjd och teknik löst!'
+      )
+      expect(item.imageUrl).toEqual('A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
+      expect(item.fullImageUrl).toEqual(
+        'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg'
+      )
+      expect(item.imageAltText).toEqual('Nyhetsbild. Bildtext ej tillgänglig.')
+      expect(item.intro).toEqual(
+        'Hej, Nu är problemet löst! Alla betyg syns som de ska. God jul!...'
+      )
+      expect(item.modified).toEqual('2020-12-18T15:18:00.000Z')
+      expect(item.published).toEqual('2020-12-18T15:15:42.000Z')
+    })
+    it(' body correctly', () => {
+      const [item] = news(response)
 
-    const expected =
-      'Hej,  Nu är problemet löst! Alla betyg syns som de ska.  God jul!'
-    const trimmed = (item.body || '')
-      .split('\n')
-      .map((t) => t.trim())
-      .join(' ')
-    expect(trimmed).toEqual(expected)
+      const expected =
+        'Hej,  Nu är problemet löst! Alla betyg syns som de ska.  God jul!'
+      const trimmed = (item.body || '')
+        .split('\n')
+        .map((t) => t.trim())
+        .join(' ')
+      expect(trimmed).toEqual(expected)
+    })
+  })
+  describe('sorting', () => {
+    beforeEach(() => {
+      response = {
+        Success: true,
+        Error: null,
+        Data: {
+          CurrentChild: null,
+          NewsItems: [
+            {
+              NewsId: 'news id',
+              SiteId:
+                'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700',
+              NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
+              NewsItemId:
+                'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
+              Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
+              PublicationDate: '/Date(1608304542000)/',
+              PubDateSE: '18 december 2020 16:15',
+              ModifiedDate: '/Date(1608304680000)/',
+              ModDateSE: '18 december 2020 16:18',
+              Source: 'Livets hårda skolklasser',
+              Preamble:
+                'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...',
+              BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
+              BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
+              BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
+              Body:
+                '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
+              BodyNoHtml: null,
+              AuthorDisplayName: 'Eva-Lotta Rönnberg',
+              altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
+            },
+            {
+              NewsId: 'news id updated',
+              SiteId:
+                'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700',
+              NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
+              NewsItemId:
+                'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
+              Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
+              PublicationDate: '/Date(1608304542000)/',
+              PubDateSE: '18 november 2021 16:15',
+              ModifiedDate: '/Date(1608304680000)/',
+              ModDateSE: '18 december 2020 16:18',
+              Source: 'Livets hårda skolklasser',
+              Preamble:
+                'Hej,Nu är problemet löst! Alla betyg syns som de ska.God jul!...',
+              BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
+              BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
+              BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
+              Body:
+                '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
+              BodyNoHtml: null,
+              AuthorDisplayName: 'Eva-Lotta Rönnberg',
+              altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
+            },
+          ],
+          ViewGlobalTranslations: {},
+          ViewLocalTranslations: {},
+          Children: null,
+          Status: null,
+          GlobalTranslationIds: [
+            'InformationalHeader',
+            'ContactUsMessageLabel',
+            'Send',
+            'RequiredFieldMessageInfo',
+            'Sex',
+            'Male',
+            'Female',
+            'SSN',
+            'FirstName',
+            'LastName',
+            'Email',
+            'Zip',
+            'Address',
+            'ValidationRequiredFieldMessage',
+            'ValidationErrorMessage',
+          ],
+          LocalTranslationIds: ['IndexPageHeading1'],
+        },
+      }
+    })
+    it('sorts by modified date desc', () => {
+      const [item] = news(response)
+
+      expect(item.id).toEqual('news id updated')
+    })
   })
 })
 

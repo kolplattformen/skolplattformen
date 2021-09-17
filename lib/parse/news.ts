@@ -29,8 +29,14 @@ export const newsItem = ({
   body: toMarkdown(body),
 })
 
+const newsSort = (item1: NewsItem, item2: NewsItem): number => {
+  const m1 = item1.modified || item1.published
+  const m2 = item2.modified || item2.published
+  return m1 < m2 ? 1 : -1
+}
+
 export const news = (data: any): NewsItem[] =>
-  etjanst(data).newsItems.map(newsItem)
+  etjanst(data).newsItems.map(newsItem).sort(newsSort)
 
 export const newsItemDetails = (data: any): NewsItem =>
   newsItem(etjanst(data).currentNewsItem)
