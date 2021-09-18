@@ -1516,15 +1516,17 @@
     react-redux "^7.2.3"
     redux "^4.0.5"
 
-"@skolplattformen/curriculum@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.1.tgz#f60b82276d61f731bf6c169826a4fb2a82e0a574"
-  integrity sha512-tKJjB2KsOXhNGvtBTp3DsTVchdQbSU08AwAfK1KbmIGFUQLAz8Su3T6RqYsxXEpCcFKRV6poscBnUZrdgZQy3w==
+"@skolplattformen/curriculum@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.2.tgz#614e17d51e72f4656ad99cf008a610addb124a14"
+  integrity sha512-C81uSvKU5WxCkaAOmaz3qh0iYIOJKhufr0pT0VoMWWfySd9kLSu4Y/7VOgrdd1nAG9tEefDCju2yLBtV6UPAhw==
+  dependencies:
+    deepmerge "^4.2.2"
 
-"@skolplattformen/embedded-api@5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.3.0.tgz#75697bbe5059890f688854e63a917808dc12d2a4"
-  integrity sha512-Lo6riSMkBeW4JVWj9bP4tqzRljjy9lfu9qag53EsC7edHwHa8sTsEdnnT1JUprkdjmKYDAakkftsC+A2HWmSEA==
+"@skolplattformen/embedded-api@5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.3.1.tgz#5190f3319ac8e703803972032f5490221f28f1e8"
+  integrity sha512-Q//IVdjHaG4u+OY4QBUurJt9ZsMca5bJvnOcvBwLYmiZ5mBE9d2hDRpOWxL6wKf0QP4dbqfvCzQQSqolL7eqiw==
   dependencies:
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
