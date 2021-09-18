@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/kolplattformen/skolplattformen/compare/v1.44.0...v1.45.0) (2021-09-18)
+
+
+### Features
+
+* 🎸 Fler språk i schemat (uppd. curriculum) ([#476](https://github.com/kolplattformen/skolplattformen/issues/476)) ([6a30053](https://github.com/kolplattformen/skolplattformen/commit/6a3005330ccfffdc67c646ba212160cf6c87e6e2))
+
 # [1.44.0](https://github.com/kolplattformen/skolplattformen/compare/v1.43.2...v1.44.0) (2021-09-18)
 
 
