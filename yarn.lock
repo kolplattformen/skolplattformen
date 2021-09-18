@@ -522,10 +522,12 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/curriculum@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.1.tgz#f60b82276d61f731bf6c169826a4fb2a82e0a574"
-  integrity sha512-tKJjB2KsOXhNGvtBTp3DsTVchdQbSU08AwAfK1KbmIGFUQLAz8Su3T6RqYsxXEpCcFKRV6poscBnUZrdgZQy3w==
+"@skolplattformen/curriculum@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.4.2.tgz#614e17d51e72f4656ad99cf008a610addb124a14"
+  integrity sha512-C81uSvKU5WxCkaAOmaz3qh0iYIOJKhufr0pT0VoMWWfySd9kLSu4Y/7VOgrdd1nAG9tEefDCju2yLBtV6UPAhw==
+  dependencies:
+    deepmerge "^4.2.2"
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.12"
