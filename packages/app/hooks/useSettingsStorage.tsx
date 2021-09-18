@@ -24,8 +24,7 @@ export default function useSettingsStorage<T>(
     }
 
     getStoredValue()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [getItem])
 
   return [
     storageItem !== undefined ? storageItem : defaultValue,
