@@ -217,9 +217,9 @@
         "modernLanguages": "Języki nowożytne"
     },
     "misc": {
-        "Lunch": "Lunch",
+        "LUNCH": "Lunch",
         "MTID": "Czas z mentorem",
-        "Prandium": "Lunch",
-        "Rast": "Przerwa"
+        "PRANDIUM": "Lunch",
+        "RAST": "Przerwa"
     }
 }

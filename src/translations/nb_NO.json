@@ -42,9 +42,9 @@
         "BL": "Kunst"
     },
     "misc": {
-        "Prandium": "Lunsj",
-        "Lunch": "Lunsj",
-        "Rast": "Pause",
+        "PRANDIUM": "Lunsj",
+        "LUNCH": "Lunsj",
+        "RAST": "Pause",
         "MTID": "Mentortid"
     },
     "categories": {

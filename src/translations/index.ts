@@ -1,3 +1,5 @@
+import merge from 'deepmerge'
+
 type Repo = Record<string, string>
 export interface Translation {
   subjects: Repo
@@ -12,7 +14,13 @@ interface RawTranslation extends Translation {
 
 const translations: Translations = {
   sv: require('./sv.json'),
+  de: require('./de.json'),
   en: require('./en.json'),
+  es: require('./es.json'),
+  fr: require('./fr.json'),
+  it: require('./it.json'),
+  la: require('./la.json'),
+  nb_NO: require('./nb_NO.json'),
   pl: require('./pl.json'),
 }
 const languageList: string[] = Object.keys(translations)
@@ -28,7 +36,7 @@ const translate = (lang: Language): Translation => {
     languages,
     categories,
     misc,
-  } = translations[selectedLanguage]
+  } = merge(translations.sv,  translations[selectedLanguage])
 
   return {
     subjects,

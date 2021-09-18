@@ -23,10 +23,10 @@
         "unknown": "Inconnu"
     },
     "misc": {
-        "Rast": "Pause",
+        "RAST": "Pause",
         "MTID": "Tutorat",
-        "Prandium": "Déjeuner",
-        "Lunch": "Déjeuner"
+        "PRANDIUM": "Déjeuner",
+        "LUNCH": "Déjeuner"
     },
     "specialLanguages": {
         "TY": "Allemand",

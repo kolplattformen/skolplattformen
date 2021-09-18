@@ -1,7 +1,7 @@
 {
     "misc": {
-        "Prandium": "Pranzo",
-        "Lunch": "Pranzo"
+        "PRANDIUM": "Pranzo",
+        "LUNCH": "Pranzo"
     },
     "categories": {
         "unknown": "Sconosciuta",

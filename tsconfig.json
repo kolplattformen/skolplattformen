@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2015",
     "module": "CommonJS",
+    "esModuleInterop": true,
     "declaration": true,
     "outDir": "./dist",
     "resolveJsonModule": true,

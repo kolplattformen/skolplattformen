@@ -279,7 +279,7 @@ describe('parse', () => {
     expect(parse('MLAAR')).toEqual({
       code: 'MLAAR',
       category: 'Modersmål',
-      name: 'Afar, Danakil ',
+      name: 'Afar, Danakil',
     })
     expect(parse('MLAFR')).toEqual({
       code: 'MLAFR',

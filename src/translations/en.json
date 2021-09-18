@@ -217,9 +217,9 @@
         "misc": "Miscellaneous"
     },
     "misc": {
-        "Lunch": "Lunch",
-        "Prandium": "Lunch",
+        "LUNCH": "Lunch",
+        "PRANDIUM": "Lunch",
         "MTID": "Mentor time",
-        "Rast": "Break"
+        "RAST": "Break"
     }
 }

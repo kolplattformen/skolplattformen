@@ -70,12 +70,12 @@ const parseNativeLanguage: Parser = ({ categories, languages }, code) => {
 }
 
 const parseMisc: Parser = ({ categories, misc }, code) => {
-  if (!misc[code]) return null
+  if (!misc[code.toUpperCase()]) return null
 
   return {
     code,
     category: categories.misc,
-    name: misc[code] as string,
+    name: misc[code.toUpperCase()] as string,
   }
 }
 
