@@ -56,9 +56,10 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
   )
 
-  const newsThisWeek = news.filter(({ published }) =>
-    published ? moment(published).isSame(moment(), 'week') : false
-  )
+  const newsThisWeek = news.filter(({ modified, published }) => {
+    const date = modified || published
+    return date ? moment(date).isSame(moment(), 'week') : false
+  })
 
   const scheduleAndCalendarThisWeek = [
     ...(calendar ?? []),
