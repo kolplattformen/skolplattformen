@@ -1,3 +1,12 @@
+# [1.44.0](https://github.com/kolplattformen/skolplattformen/compare/v1.43.2...v1.44.0) (2021-09-18)
+
+
+### Features
+
+* 🎸 Changed newsListItem display date to modified ([c1da658](https://github.com/kolplattformen/skolplattformen/commit/c1da6583881e6813eb68118fc41706fc3b65be9e))
+* 🎸 Modified used for child overview as well ([0ad8bfe](https://github.com/kolplattformen/skolplattformen/commit/0ad8bfe15c544f2fe34a7d7b2bc4284dec70a6b3))
+* 🎸 Updated embedded for correct sorting ([9efef8d](https://github.com/kolplattformen/skolplattformen/commit/9efef8dad9e44e80422feb94ff7c68b22f3be51f))
+
 ## [1.43.2](https://github.com/kolplattformen/skolplattformen/compare/v1.43.1...v1.43.2) (2021-09-16)
 
 
