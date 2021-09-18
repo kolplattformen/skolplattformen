@@ -73,6 +73,8 @@
         "confirm": "Confirm",
         "loading": "Loading…",
         "logout": "Log out",
+        "logoutAndClearPersonalData": "Log out and clear personal data",
+        "logoutAndClearAllDataInclSettings": "Log out and clear all data including settings",
         "send": "Send",
         "settings": "Settings",
         "socialSecurityNumber": "Personal identity number",

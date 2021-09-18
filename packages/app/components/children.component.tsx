@@ -67,8 +67,8 @@ export const Children = () => {
   const settingsOptions = useMemo(() => {
     return [
       translate('general.logout'),
-      'Logga ut och rensa all personlig data',
-      'Logga ut och rensa allt (inkl inställningar)',
+      translate('general.logoutAndClearPersonalData'),
+      translate('general.logoutAndClearAllDataInclSettings'),
       translate('general.cancel'),
     ]
   }, [])
