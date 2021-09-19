@@ -89,7 +89,8 @@
         "notifications": "Nuntii",
         "news": "Nuntii",
         "menu": "Charta",
-        "calender": "Calendarium"
+        "calender": "Calendarium",
+        "classmates": "Discipuli"
     },
     "language": {
         "changeLanguageButton": "Servare",
@@ -113,6 +114,16 @@
         "end": "Finis"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Informationes contacti exhibere"
+        "a11y_show_contact_info_button_hint": "Notationes contactus exhibet",
+        "home": "Domus",
+        "email": "Nuntiare electrice",
+        "sms": "SMS",
+        "call": "Vocare",
+        "a11y_show_contact_info_button_label": "Notationes contactus exhibere"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Notationes contactus custodum",
+        "child": "Filius",
+        "class": "Classis"
     }
 }
