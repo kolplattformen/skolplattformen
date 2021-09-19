@@ -47,7 +47,7 @@
             "working": "funktionierende"
         },
         "a11y_select_login_method": "Wähle die Anmeldemethode",
-        "a11y_clear_social_security_input_field": "Sozialversicherungsnummer-Feld löschen",
+        "a11y_clear_social_security_input_field": "Personenkennziffer-Feld löschen",
         "a11y_image_two_boys": "Bild von zwei Personen, die ihre Mobiltelefon überprüfen",
         "a11y_change_language": "Wähle deine Sprache"
     },
@@ -90,7 +90,8 @@
         "calender": "Kalender",
         "menu": "Speisekarte",
         "news": "Nachrichten",
-        "notifications": "Mitteilungen"
+        "notifications": "Mitteilungen",
+        "classmates": "Klassengenossen"
     },
     "news": {
         "backToChild": "Zurück zu Kind",
@@ -113,6 +114,16 @@
         "start": "Anfang"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Kontaktinformationen anzeigen"
+        "a11y_show_contact_info_button_hint": "Zeigt kontaktinformationen an",
+        "home": "Heim",
+        "email": "Mailen",
+        "sms": "SMS",
+        "call": "Anrufen",
+        "a11y_show_contact_info_button_label": "Kontaktinformationen anzeigen"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Kontaktinformationen der Erziehungsberechtigte für",
+        "child": "Kind",
+        "class": "Klasse"
     }
 }
