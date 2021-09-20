@@ -116,7 +116,7 @@
     "contact": {
         "a11y_show_contact_info_button_hint": "Zeigt Kontaktinformation an",
         "home": "Heim",
-        "email": "Mailen",
+        "email": "E-Mail",
         "sms": "SMS",
         "call": "Anrufen",
         "a11y_show_contact_info_button_label": "Kontaktinformationen anzeigen"
