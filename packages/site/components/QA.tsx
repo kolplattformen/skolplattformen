@@ -86,7 +86,7 @@ const QA = () => {
         <p>
           Din information är lika säker som i Skolplattformen. Vi är
           integritetsfanatiker och redogör för vår syn på dataskydd i Öppna
-          skolplattformen i
+          skolplattformen i 
           <a href="https://skolplattformen.org/integritet">
             vår integritetspolicy
           </a>
@@ -146,7 +146,7 @@ const QA = () => {
           utifrån det. Om vi loggar in med ditt konto, till och med om du sitter
           med och sköter inloggningen, lär vi se information vi inte har rätt
           att se. Därför ser vi i dagsläget ingen möjlighet att hjälpa dig :( Vi
-          hoppas att Stockholms Stad kommer publicera dokumentation till sitt
+          hoppas att Stockholms stad kommer publicera dokumentation till sitt
           API och även tillhandahålla säkra testmiljöer så att vi och andra kan
           utveckla de stöd som fler målgrupper behöver.
         </p>
@@ -247,7 +247,7 @@ const QA = () => {
           de?
         </h3>
         <p>
-          Appen kostar 12 kronor. Intäkten registreras i handelsbolaget Not Free
+          Appen kostar 12 kronor. Intäkten registreras i aktiebolaget Not Free
           Beer som ägs av tre av utvecklarna och går till att täcka kostnader
           för inköp. Det täcker inte på långa vägar den tid vi lagt ner. Med en
           låg engångskostnad ökar vi chansen att vi orkar syssla med underhåll
@@ -275,12 +275,11 @@ const QA = () => {
           Vi är enormt tacksamma för alla buggrapporter och förslag vi får och
           satsar mycket på att så snabbt som möjligt fixa de saker som dyker
           upp. För att få lite ordning så försöker vi samla alla buggar och
-          önskemål på samma ställe, Github.
+          önskemål på samma ställe, Github. 
           <a href="https://github.com/kolplattformen/skolplattformen/issues">
-            Klicka här
-          </a>{' '}
+            Titta på Github 
           för att se vilka funktioner och buggar vi redan har tagit emot och
-          jobbar på.
+          jobbar på.</a>{' '}
         </p>
         <h3>Hur gick ni tillväga?</h3>
         <p>
@@ -312,7 +311,7 @@ const QA = () => {
         </p>
         <h3>Kontakta oss</h3>
         <p>
-          Tveka inte att kontakta oss. Skicka ett mail till
+          Tveka inte att kontakta oss. Skicka ett mail till 
           <a href="mailto:info@skolplattformen.org">dev@skolplattformen.org</a>.
         </p>
       </div>
