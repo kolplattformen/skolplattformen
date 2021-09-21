@@ -91,7 +91,7 @@
         "menu": "Speisekarte",
         "news": "Nachrichten",
         "notifications": "Mitteilungen",
-        "classmates": "Klassengenossen"
+        "classmates": "Mitschüler"
     },
     "news": {
         "backToChild": "Zurück zu Kind",
@@ -114,7 +114,7 @@
         "start": "Anfang"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Zeigt kontaktinformationen an",
+        "a11y_show_contact_info_button_hint": "Zeigt Kontaktinformation an",
         "home": "Heim",
         "email": "Mailen",
         "sms": "SMS",
