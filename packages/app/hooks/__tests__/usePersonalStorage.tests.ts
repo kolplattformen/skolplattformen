@@ -3,8 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import usePersonalStorage from '../usePersonalStorage'
 import { User } from '@skolplattformen/embedded-api'
 
-beforeEach(() => {
-  AsyncStorage.clear()
+beforeEach(async () => {
+  jest.clearAllMocks()
+  await AsyncStorage.clear()
 })
 
 const user: User = { personalNumber: '201701012393' }
@@ -44,10 +45,7 @@ test('update value', async () => {
   )
 
   const [initValue, setValue] = result.current
-
-  act(() => {
-    setValue('update')
-  })
+  setValue('update')
 
   await waitForNextUpdate()
 
@@ -59,4 +57,31 @@ test('update value', async () => {
   expect(await AsyncStorage.getItem(prefix + 'key')).toEqual(
     JSON.stringify('update')
   )
+})
+
+test('do nothing if personalId is empty', async () => {
+  const emptyUser: User = { personalNumber: '' }
+  let hookUser = emptyUser
+  const { result, rerender, waitForNextUpdate } = renderHook(() =>
+    usePersonalStorage(hookUser, 'key', '')
+  )
+
+  act(() => {
+    const [, setValue] = result.current
+    setValue('foo')
+  })
+
+  expect(AsyncStorage.setItem).not.toHaveBeenCalled()
+
+  hookUser = user
+  rerender()
+
+  act(() => {
+    const [, setValue] = result.current
+    setValue('foo')
+  })
+
+  await waitForNextUpdate()
+
+  expect(AsyncStorage.setItem).toHaveBeenCalled()
 })
