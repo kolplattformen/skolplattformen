@@ -1,15 +1,15 @@
 {
     "abbrevations": {
-        "compulsorySchool": "Compulsory school",
-        "leisureTimeCentre": "Leisure-time centre",
+        "compulsorySchool": "Primary/lower-secondary school",
+        "leisureTimeCentre": "After-school care",
         "preSchool": "Preschool",
-        "upperSecondarySchool": "Upper secondary school"
+        "upperSecondarySchool": "Upper-secondary school"
     },
     "abscense": {
         "endTime": "End time",
         "entireDay": "Whole day",
-        "invalidPersonalNumber": "Personal number invalid",
-        "personalNumberMissing": "Personal number missing",
+        "invalidPersonalNumber": "Personal identity number invalid",
+        "personalNumberMissing": "Personal identity number missing",
         "selectAbscenseEndTime": "Choose end time",
         "selectAbscenseStartTime": "Choose start time",
         "startTime": "Start time",
@@ -61,9 +61,9 @@
     "children": {
         "loadingErrorHeading": "Oops!",
         "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
-        "noKids_description": "There are no kids registered in the City of Stockholm for your personal identity number",
-        "noKids_title": "No kids",
-        "title": "Your kids",
+        "noKids_description": "There are no children registered in the City of Stockholm for your personal identity number",
+        "noKids_title": "No children",
+        "title": "Your children",
         "tryAgain": "Try again",
         "viewStatus": "View status on skolplattformen.org"
     },
@@ -85,25 +85,25 @@
         "changeLanguageButton": "Save"
     },
     "menu": {
-        "emptyHeadline": "The menu looks kinda empty",
+        "emptyHeadline": "The lunch menu looks kinda empty",
         "emptyText": "Couldn't find anything for this week"
     },
     "navigation": {
         "calender": "Calendar",
-        "menu": "Menu",
+        "menu": "Lunch",
         "news": "News",
         "notifications": "Notifications",
         "classmates": "Classmates"
     },
     "news": {
         "backToChild": "Back to child",
-        "noNewNewsItemsThisWeek": "No new news items this week.",
+        "noNewNewsItemsThisWeek": "No news this week.",
         "notificationTitle": "News: {{header}} ({{published}})",
         "published": "Published",
         "title": "News from Skolplattformen",
         "updated": "Updated",
         "search": {
-            "placeholder": "Search all news…"
+            "placeholder": "Search in news…"
         }
     },
     "notifications": {
