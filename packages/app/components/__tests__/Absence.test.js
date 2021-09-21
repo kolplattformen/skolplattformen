@@ -5,13 +5,12 @@ import React from 'react'
 import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
-import AppStorage from '../../services/appStorage'
 import { useUser } from '@skolplattformen/api-hooks'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 jest.mock('@react-navigation/native')
 jest.mock('@skolplattformen/api-hooks')
 jest.mock('../../utils/SMS')
-jest.mock('../../services/appStorage')
 
 let sendSMS
 let user = { personalNumber: '201701092395' }
@@ -41,6 +40,7 @@ beforeEach(() => {
     data: user,
     status: 'loaded',
   })
+  AsyncStorage.clear()
 })
 
 test('can fill out the form with full day absence', async () => {
@@ -48,7 +48,7 @@ test('can fill out the form with full day absence', async () => {
 
   await waitFor(() =>
     fireEvent.changeText(
-      screen.getByTestId('socialSecurityNumberInput'),
+      screen.getByTestId('personalIdentityNumberInput'),
       '1212121212'
     )
   )
@@ -58,14 +58,9 @@ test('can fill out the form with full day absence', async () => {
   expect(screen.queryByText(/sluttid/i)).toBeFalsy()
 
   expect(sendSMS).toHaveBeenCalledWith('121212-1212')
-  expect(AppStorage.setPersonalData).toHaveBeenCalledWith(
-    user,
-    '@childssn.1',
-    '1212121212'
-  )
 })
 
-test('handles missing social security number', async () => {
+test('handles missing personal identity number', async () => {
   const screen = setup()
 
   await waitFor(() => fireEvent.press(screen.getByText('Skicka')))
@@ -74,12 +69,12 @@ test('handles missing social security number', async () => {
   expect(sendSMS).not.toHaveBeenCalled()
 })
 
-test('validates social security number', async () => {
+test('validates personal identity number', async () => {
   const screen = setup()
 
   await waitFor(() =>
     fireEvent.changeText(
-      screen.getByTestId('socialSecurityNumberInput'),
+      screen.getByTestId('personalIdentityNumberInput'),
       '12121212'
     )
   )
@@ -96,7 +91,7 @@ test('can fill out the form with part of day absence', async () => {
 
   await waitFor(() =>
     fireEvent.changeText(
-      screen.getByTestId('socialSecurityNumberInput'),
+      screen.getByTestId('personalIdentityNumberInput'),
       '1212121212'
     )
   )
