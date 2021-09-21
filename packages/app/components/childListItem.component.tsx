@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
   useCalendar,
+  useClassmates,
   useMenu,
   useNews,
   useNotifications,
@@ -17,14 +18,14 @@ import {
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, useColorScheme, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
-import { RootStackParamList } from './navigation.component'
-import { StudentAvatar } from './studentAvatar.component'
 import { DaySummary } from './daySummary.component'
 import { AlertIcon, RightArrowIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
+import { StudentAvatar } from './studentAvatar.component'
 
 interface ChildListItemProps {
   child: Child
@@ -42,6 +43,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const navigation = useNavigation<ChildListItemNavigationProp>()
   const { data: notifications } = useNotifications(child)
   const { data: news } = useNews(child)
+  const { data: classmates } = useClassmates(child)
   const { data: calendar } = useCalendar(child)
   const { data: menu } = useMenu(child)
   const { data: schedule } = useSchedule(
@@ -54,9 +56,10 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
   )
 
-  const newsThisWeek = news.filter(({ published }) =>
-    published ? moment(published).isSame(moment(), 'week') : false
-  )
+  const newsThisWeek = news.filter(({ modified, published }) => {
+    const date = modified || published
+    return date ? moment(date).isSame(moment(), 'week') : false
+  })
 
   const scheduleAndCalendarThisWeek = [
     ...(calendar ?? []),
@@ -75,6 +78,16 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   }
 
   const getClassName = () => {
+    // hack: we can find the class name (ex. 8C) from the classmates.
+    // let's pick the first one and select theirs class
+    // hack 2: we can find school namn in skola24 if child data is there
+    if (classmates.length > 0) {
+      return (
+        classmates[0].className +
+        (child.schoolID == null ? '' : ' • ' + child.schoolID)
+      )
+    }
+
     // Taken from Skolverket
     // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
     const abbrevations = {
@@ -98,6 +111,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
 
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
+  const isDarkMode = useColorScheme() === 'dark'
 
   return (
     <TouchableOpacity
@@ -115,7 +129,9 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           <View style={styles.cardHeaderRight}>
             <RightArrowIcon
               style={styles.icon}
-              fill={Colors.neutral.gray500}
+              fill={
+                isDarkMode ? Colors.neutral.gray200 : Colors.neutral.gray800
+              }
               name="star"
             />
           </View>
@@ -162,7 +178,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             accessibilityLabel={`${child.name}, ${translate('abscense.title')}`}
             appearance="ghost"
             accessoryLeft={AlertIcon}
-            status=""
+            status="primary"
             style={styles.absenceButton}
             onPress={() => navigation.navigate('Absence', { child })}
           >

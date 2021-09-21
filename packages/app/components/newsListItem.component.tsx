@@ -4,7 +4,7 @@ import { NewsItem } from '@skolplattformen/embedded-api'
 import { StyleService, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React, { ReactNode } from 'react'
-import { Dimensions, Pressable, Text, View } from 'react-native'
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
 import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
@@ -26,12 +26,12 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
   const styles = useStyleSheet(themedStyles)
   const navigation = useNavigation<NewsListItemNavigationProp>()
   const child = useChild()
-  const hasDate = item.published || item.modified
+  const hasDate = item.modified || item.published
 
   const displayDate = hasDate ? moment(hasDate).fromNow() : null
 
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={() => navigation.navigate('NewsItem', { newsItem: item, child })}
     >
       <View style={styles.card}>
@@ -57,7 +57,7 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
           </View>
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 

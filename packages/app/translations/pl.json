@@ -90,7 +90,8 @@
         "calender": "Kalendarz",
         "menu": "Jadłospis",
         "news": "Wiadomości",
-        "notifications": "Powiadomienia"
+        "notifications": "Powiadomienia",
+        "classmates": "Klasa"
     },
     "news": {
         "backToChild": "Z powrotem do dzieci",
@@ -113,6 +114,16 @@
         "start": "Zaczyna"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Pokaż dane kontaktowe"
+        "a11y_show_contact_info_button_hint": "Pokaż dane kontaktowe",
+        "home": "Dom",
+        "email": "E-mail",
+        "sms": "SMS",
+        "call": "Zadzwoń",
+        "a11y_show_contact_info_button_label": "Pokaż dane kontaktowe"
+    },
+    "classmates": {
+        "child": "Dziecko",
+        "class": "Klasa",
+        "contactsForGuardiansFor": "Dane kontaktowe do opiekuna"
     }
 }

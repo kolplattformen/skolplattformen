@@ -29,14 +29,15 @@ import { CloseOutlineIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
-export const childenRouteOptions = (): NativeStackNavigationOptions => {
-  return {
-    ...defaultStackStyling,
-    title: translate('children.title'),
-    headerLargeTitle: false,
-    headerLargeTitleHideShadow: true,
+export const childenRouteOptions =
+  (darkMode: boolean) => (): NativeStackNavigationOptions => {
+    return {
+      ...defaultStackStyling(darkMode),
+      title: translate('children.title'),
+      headerLargeTitle: true,
+      headerLargeTitleHideShadow: true,
+    }
   }
-}
 
 export const Children = () => {
   const styles = useStyleSheet(themedStyles)

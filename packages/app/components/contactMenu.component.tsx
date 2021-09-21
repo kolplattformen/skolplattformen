@@ -77,34 +77,34 @@ export const ContactMenu = ({
           >
             <MenuItem
               testID="CallMenuItem"
-              accessibilityLabel="Ring"
+              accessibilityLabel={translate('contact.call')}
               accessoryLeft={CallIcon}
               style={{ display: shouldDisplay(mobile) }}
-              title="Ring"
+              title={translate('contact.call')}
               onPress={() => Linking.openURL(`tel:${mobile}`)}
             />
             <MenuItem
               testID="SMSMenuItem"
-              accessibilityLabel="SMS"
+              accessibilityLabel={translate('contact.sms')}
               accessoryLeft={SMSIcon}
               style={{ display: shouldDisplay(mobile) }}
-              title="SMS"
+              title={translate('contact.sms')}
               onPress={() => Linking.openURL(`sms:${mobile}`)}
             />
             <MenuItem
               testID="SendEmailMenuItem"
-              accessibilityLabel="Maila"
+              accessibilityLabel={translate('contact.email')}
               accessoryLeft={EmailIcon}
               style={{ display: shouldDisplay(email) }}
-              title="Maila"
+              title={translate('contact.email')}
               onPress={() => Linking.openURL(`mailto:${email}`)}
             />
             <MenuItem
               testID="ShowHomeMenuItem"
-              accessibilityLabel="Hem"
+              accessibilityLabel={translate('contact.home')}
               accessoryLeft={MapIcon}
               style={{ display: shouldDisplay(address) }}
-              title="Hem"
+              title={translate('contact.home')}
               onPress={() =>
                 Linking.openURL(`http://maps.apple.com/?daddr=${address}`)
               }

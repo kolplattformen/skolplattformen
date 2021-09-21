@@ -68,10 +68,15 @@
   "color-danger-transparent-600": "rgba(186, 50, 127, 0.48)",
   "background-basic-color-1": "#150A12",
   "background-basic-color-2": "#030200",
+  "text-hint-color": "#B3BBCB",
   "color-control-default": "#E5E7EB",
   "color-basic-default": "$color-primary-800",
   "color-basic-focus": "$color-primary-700",
   "color-basic-hover": "$color-primary-700",
   "color-basic-active": "$color-primary-700",
-  "color-basic-text": "$color-primary-100"
+  "color-basic-text": "$color-primary-100",
+  "color-input-border": "$color-basic-300",
+  "color-tab-default": "$color-primary-50",
+  "color-tab-focused": "$color-primary-200",
+  "color-button-ghost-text": "$color-primary-200"
 }

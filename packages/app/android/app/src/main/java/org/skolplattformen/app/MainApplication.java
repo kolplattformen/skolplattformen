@@ -9,18 +9,10 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.modules.network.ForwardingCookieHandler;
-import com.facebook.react.modules.network.NetworkingModule;
-import com.facebook.react.modules.network.OkHttpClientFactory;
-import com.facebook.react.modules.network.OkHttpClientProvider;
-import com.facebook.react.modules.network.ReactCookieJarContainer;
 import com.facebook.soloader.SoLoader;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,17 +54,6 @@ public class MainApplication extends Application implements ReactApplication {
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
         initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-
-        ReactCookieJarContainer reactCookieJarContainer = new ReactCookieJarContainer();
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        reactCookieJarContainer.setCookieJar(new SkolplattformenCookieJar(cookieManager));
-        NetworkingModule.setCustomClientBuilder(new NetworkingModule.CustomClientBuilder() {
-            @Override
-            public void apply(OkHttpClient.Builder builder) {
-                builder.cookieJar(reactCookieJarContainer);
-            }
-        });
     }
 
     /**

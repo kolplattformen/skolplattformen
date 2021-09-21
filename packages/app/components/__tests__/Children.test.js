@@ -7,6 +7,7 @@ import {
   useSchedule,
   useMenu,
   useTimetable,
+  useClassmates,
 } from '@skolplattformen/api-hooks'
 import { render } from '../../utils/testHelpers'
 import React from 'react'
@@ -37,6 +38,7 @@ beforeEach(() => {
   useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
   useMenu.mockReturnValueOnce({ data: [], status: 'loaded' })
   useTimetable.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useClassmates.mockReturnValueOnce({ data: [], status: 'loaded' })
   useNavigation.mockReturnValue({ navigate: jest.fn(), setOptions: jest.fn() })
 })
 
@@ -154,6 +156,33 @@ test('renders multiple children', () => {
   expect(
     screen.getByText(translate('abbrevations.compulsorySchool'))
   ).toBeTruthy()
+})
+
+test('renders child in class', () => {
+  useChildList.mockImplementationOnce(() => ({
+    data: [
+      {
+        name: 'Test Testsson',
+        status: 'G',
+        schoolID: 'Vallaskolan',
+      },
+    ],
+    status: 'loaded',
+  }))
+  useClassmates.mockReset()
+  useClassmates.mockImplementationOnce(() => ({
+    data: [
+      {
+        className: '8C',
+      },
+    ],
+    status: 'loaded',
+  }))
+
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText('8C • Vallaskolan')).toBeTruthy()
 })
 
 test('removes any parenthesis from name', () => {

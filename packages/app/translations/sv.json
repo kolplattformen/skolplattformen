@@ -90,7 +90,8 @@
         "calender": "Kalender",
         "menu": "Matsedel",
         "news": "Nyheter",
-        "notifications": "Aviseringar"
+        "notifications": "Aviseringar",
+        "classmates": "Klassen"
     },
     "news": {
         "backToChild": "Tillbaka till barn",
@@ -112,7 +113,17 @@
         "lunch": "Lunch",
         "gymBag": "Gympapåse"
     },
+    "classmates": {
+        "class": "Klass",
+        "child": "Barn",
+        "contactsForGuardiansFor": "Kontaktuppgifter för vårdnadshavare till"
+    }, 
     "contact": {
-        "a11y_show_contact_info_button_hint": "Visa kontaktinfo"
+        "a11y_show_contact_info_button_hint": "Visar kontaktinformation",
+        "a11y_show_contact_info_button_label": "Visa kontaktinformation",
+        "call": "Ring",
+        "sms": "SMS",
+        "email": "Maila",
+        "home": "Hem"
     }
 }
