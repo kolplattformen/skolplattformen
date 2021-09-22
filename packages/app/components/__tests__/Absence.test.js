@@ -15,9 +15,6 @@ jest.mock('../../utils/SMS')
 let sendSMS
 let user = { personalNumber: '201701092395' }
 
-// needed to skip tests due to bug in RN 0.65.1
-// https://github.com/facebook/react-native/issues/29849#issuecomment-734533635
-
 const setup = (customProps = {}) => {
   sendSMS = jest.fn()
 
@@ -37,17 +34,16 @@ beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {})
 })
 
-beforeEach(() => {
-  jest.useFakeTimers()
+beforeEach(async () => {
   jest.clearAllMocks()
   useUser.mockReturnValue({
     data: user,
     status: 'loaded',
   })
-  AsyncStorage.clear()
+  await AsyncStorage.clear()
 })
 
-test.skip('can fill out the form with full day absence', async () => {
+test('can fill out the form with full day absence', async () => {
   const screen = setup()
 
   await waitFor(() =>
@@ -64,7 +60,7 @@ test.skip('can fill out the form with full day absence', async () => {
   expect(sendSMS).toHaveBeenCalledWith('121212-1212')
 })
 
-test('handles missing personal identity number', async () => {
+test('handles missing social security number', async () => {
   const screen = setup()
 
   await waitFor(() => fireEvent.press(screen.getByText('Skicka')))
@@ -73,7 +69,7 @@ test('handles missing personal identity number', async () => {
   expect(sendSMS).not.toHaveBeenCalled()
 })
 
-test('validates personal identity number', async () => {
+test('validates social security number', async () => {
   const screen = setup()
 
   await waitFor(() =>
@@ -88,7 +84,7 @@ test('validates personal identity number', async () => {
   expect(sendSMS).not.toHaveBeenCalled()
 })
 
-test.skip('can fill out the form with part of day absence', async () => {
+test('can fill out the form with part of day absence', async () => {
   Mockdate.set('2021-02-18 15:30')
 
   const screen = setup()
