@@ -1,3 +1,10 @@
+## [1.45.1](https://github.com/kolplattformen/skolplattformen/compare/v1.45.0...v1.45.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* 🐛 Fixes crash in 2.0.1 (RN 0651 upgrade issue) ([#481](https://github.com/kolplattformen/skolplattformen/issues/481)) ([0f893b9](https://github.com/kolplattformen/skolplattformen/commit/0f893b9b6d6fd6e53ecd0cad79ef00fc9dbd68fc))
+
 # [1.45.0](https://github.com/kolplattformen/skolplattformen/compare/v1.44.0...v1.45.0) (2021-09-18)
 
 
