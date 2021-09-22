@@ -100,7 +100,6 @@ export const Login = () => {
           'cachedPersonalIdentityNumber',
           numberToSave
         )
-        console.log('Storing PersonalId =>', numberToSave)
       }
     }
 
