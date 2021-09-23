@@ -26,9 +26,13 @@ export const SettingsScreen = () => {
   const language = languages.find((l) => l.langCode === langCode)
   const { api } = useApi()
 
-  const logout = useCallback(() => {
-    AppStorage.clearTemporaryItems().then(() => api.logout())
-  }, [api])
+  const logout = useCallback(async () => {
+    await AppStorage.clearTemporaryItems()
+    await api.logout()
+    navigation.reset({
+      routes: [{ name: 'Login' }],
+    })
+  }, [api, navigation])
 
   return (
     <ScrollView
