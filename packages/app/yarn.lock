@@ -1348,10 +1348,10 @@
   dependencies:
     deepmerge "^4.2.2"
 
-"@skolplattformen/embedded-api@5.3.1":
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.3.1.tgz#5190f3319ac8e703803972032f5490221f28f1e8"
-  integrity sha512-Q//IVdjHaG4u+OY4QBUurJt9ZsMca5bJvnOcvBwLYmiZ5mBE9d2hDRpOWxL6wKf0QP4dbqfvCzQQSqolL7eqiw==
+"@skolplattformen/embedded-api@5.3.2":
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/@skolplattformen/embedded-api/-/embedded-api-5.3.2.tgz#13bf2192ecd5d7e4140c17183eab574988eb9e00"
+  integrity sha512-sh7NaImGDBfb5AO9igFVtTn1atWZ423yYU2HivsbcdDkFJgWXkwuTShWnV92bhV5qjUIF5ckNvdpV7FvJdp5WA==
   dependencies:
     camelcase-keys "^6.2.2"
     change-case "^4.1.2"
