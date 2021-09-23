@@ -40,7 +40,7 @@
         "placeholder_SocialSecurityNumber": "Votre numéro d'identité personnel",
         "subtitle": "L'alternative {{word}}",
         "bankid": {
-            "OpenManually": "En attente de BankID",
+            "OpenManually": "Ouvrir BankID manuellement",
             "OpenOnAnotherDevice": "Ouvrez BankID sur un autre appareil",
             "Waiting": "En attente de BankID…",
             "OpenOnThisDevice": "Ouvrez BankID sur cet appareil"
@@ -49,7 +49,7 @@
         "loginAsTestUser": "Connectez-vous en tant qu'utilisateur test",
         "chooseLoginMethod": "Choisissez la méthode de connexion",
         "a11y_select_login_method": "Sélectionnez la méthode de connexion",
-        "a11y_clear_social_security_input_field": "Effacer le champ du numéro de sécurité sociale",
+        "a11y_clear_social_security_input_field": "Effacer le champ du numéro national d’identité",
         "a11y_image_two_boys": "Photo de deux personnes consultant leur téléphone portable",
         "a11y_change_language": "Sélectionnez votre langue"
     },
@@ -81,7 +81,8 @@
         "notifications": "Notifications",
         "news": "Nouvelles",
         "menu": "Menu",
-        "calender": "Calendrier"
+        "calender": "Calendrier",
+        "classmates": "Camarades de classe"
     },
     "menu": {
         "emptyText": "Je n'ai rien trouvé pour cette semaine",
@@ -107,12 +108,22 @@
         "compulsorySchool": "École obligatoire"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Afficher les infos de contact"
+        "a11y_show_contact_info_button_hint": "Affiche les informations de contact",
+        "home": "Domicilr",
+        "email": "Courriel",
+        "sms": "Texto",
+        "call": "Appeler",
+        "a11y_show_contact_info_button_label": "Afficher les informations de contact"
     },
     "schedule": {
         "gymBag": "Sac de sport",
         "lunch": "Déjeuner",
         "end": "Fin",
         "start": "Début"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Coordonnées des tuteurs pour",
+        "child": "Enfant",
+        "class": "Classe"
     }
 }

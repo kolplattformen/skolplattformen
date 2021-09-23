@@ -9,7 +9,8 @@
     "navigation": {
         "notifications": "Notificaciones",
         "news": "Noticias",
-        "calender": "Calendario"
+        "calender": "Calendario",
+        "menu": "Menú"
     },
     "language": {
         "changeLanguage": "Cambiar idioma",
