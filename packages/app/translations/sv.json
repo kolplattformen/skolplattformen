@@ -76,7 +76,9 @@
         "settings": "Inställningar",
         "socialSecurityNumber": "Personnummer",
         "title": "Öppna skolplattformen",
-        "cancel": "Avbryt"
+        "cancel": "Avbryt",
+        "logoutAndClearAllDataInclSettings": "Logga ut och rensa all sparad data inkl inställningar",
+        "logoutAndClearPersonalData": "Logga ut och rensa all personlig data"
     },
     "language": {
         "changeLanguage": "Byt språk",
