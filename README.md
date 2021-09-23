@@ -18,7 +18,7 @@ This main repository for the project contains the source code for both the app a
 The sources for each can be found under [packages/app](packages/app) and [packages/site](packages/site). \
 The respective README files there contain more detailed descriptions.
 
-![Login screen](packages/site/assets/img/screenshots/screenshot_login.png) ![Child list screen](packages/site/assets/img/screenshots/screenshot_children.png)
+<img src="packages/site/assets/img/screenshots/screenshot_login.png" width="200"> <img src="packages/site/assets/img/screenshots/screenshot_children.png" width="200">
 
 ## Contents
 
