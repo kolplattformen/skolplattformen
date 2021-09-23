@@ -1,3 +1,10 @@
+## [1.46.1](https://github.com/kolplattformen/skolplattformen/compare/v1.46.0...v1.46.1) (2021-09-23)
+
+
+### Bug Fixes
+
+* 🐛 Bumped embedded to 5.3.2 ([4522298](https://github.com/kolplattformen/skolplattformen/commit/4522298d154d686a2840c05481ac53b2046b2b8e))
+
 # [1.46.0](https://github.com/kolplattformen/skolplattformen/compare/v1.45.1...v1.46.0) (2021-09-23)
 
 
