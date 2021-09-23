@@ -1,4 +1,3 @@
-import AppStorage from '../services/appStorage'
 import { useNavigation } from '@react-navigation/core'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
@@ -11,7 +10,7 @@ import {
   TopNavigationAction,
   useStyleSheet,
 } from '@ui-kitten/components'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import {
   Image,
   ImageStyle,
@@ -20,12 +19,12 @@ import {
   View,
 } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
-import ActionSheet from 'rn-actionsheet-module'
 import { defaultStackStyling } from '../design/navigationThemes'
+import AppStorage from '../services/appStorage'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
-import { CloseOutlineIcon } from './icon.component'
+import { SettingsIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -54,56 +53,18 @@ export const Children = () => {
     AppStorage.clearTemporaryItems().then(() => api.logout())
   }, [api])
 
-  const logoutAndClearPersonalData = useCallback(() => {
-    api
-      .getUser()
-      .then((user) => AppStorage.clearPersonalData(user))
-      .then(() => AppStorage.clearTemporaryItems().then(() => api.logout()))
-  }, [api])
-
-  const logoutAndClearAll = useCallback(() => {
-    AppStorage.nukeAllStorage().then(() => api.logout())
-  }, [api])
-
-  const settingsOptions = useMemo(() => {
-    return [
-      translate('general.logout'),
-      translate('general.logoutAndClearPersonalData'),
-      translate('general.logoutAndClearAllDataInclSettings'),
-      translate('general.cancel'),
-    ]
-  }, [])
-
-  const handleSettingSelection = useCallback(
-    (index: number) => {
-      if (index === 0) logout()
-      if (index === 1) logoutAndClearPersonalData()
-      if (index === 2) logoutAndClearAll()
-    },
-    [logout, logoutAndClearAll, logoutAndClearPersonalData]
-  )
-
-  const settings = useCallback(() => {
-    const options = {
-      cancelButtonIndex: settingsOptions.length - 1,
-      title: translate('general.settings'),
-      optionsIOS: settingsOptions,
-      optionsAndroid: settingsOptions,
-      onCancelAndroidIndex: handleSettingSelection,
-    }
-
-    ActionSheet(options, handleSettingSelection)
-  }, [handleSettingSelection, settingsOptions])
-
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => {
         return (
-          <TopNavigationAction icon={CloseOutlineIcon} onPress={settings} />
+          <TopNavigationAction
+            icon={SettingsIcon}
+            onPress={() => navigation.navigate('Settings')}
+          />
         )
       },
     })
-  }, [navigation, settings])
+  }, [navigation])
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.

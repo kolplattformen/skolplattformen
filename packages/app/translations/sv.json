@@ -95,6 +95,12 @@
         "notifications": "Aviseringar",
         "classmates": "Klassen"
     },
+    "settings": {
+        "settings": "Inställningar",
+        "appearance": "Utseende",
+        "licenses": "Licenser",
+        "language": "Språk"
+    },
     "news": {
         "backToChild": "Tillbaka till barn",
         "noNewNewsItemsThisWeek": "Inga nya inlägg denna vecka.",

@@ -56,7 +56,7 @@ export const SetLanguage = () => {
 
   const goBack = () => {
     // Need to reset the view so it updates the language
-    navigation.navigate('Login', { rand: Math.random() })
+    navigation.navigate('Settings', { rand: Math.random() })
   }
 
   const activeLanguages = languages.filter((language) => language.active)
