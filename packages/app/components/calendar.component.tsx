@@ -54,7 +54,9 @@ export const Calendar = () => {
                 </Text>
               )}
               accessoryLeft={CalendarOutlineIcon}
-              accessoryRight={() => <SaveToCalendar event={item} />}
+              accessoryRight={() => (
+                <SaveToCalendar event={item} child={child} />
+              )}
             />
           )}
         />

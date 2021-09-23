@@ -1,4 +1,4 @@
-import { CalendarItem } from '@skolplattformen/embedded-api'
+import { CalendarItem, Child } from '@skolplattformen/embedded-api'
 import { Button, MenuItem, OverflowMenu, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
@@ -11,12 +11,15 @@ import {
   MoreIcon,
   PlusSquareOutline,
 } from './icon.component'
+import * as AddCalendarEvent from 'react-native-add-calendar-event'
+import { studentName } from '../utils/peopleHelpers'
 
 interface SaveToCalendarProps {
   event: CalendarItem
+  child: Child
 }
 
-export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
+export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
   const [visible, setVisible] = React.useState(false)
 
   const renderToggleButton = () => (
@@ -62,11 +65,28 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
           location,
         }
 
+        const firstName = studentName(child.name)
+        const titleWithChildPrefix = `${firstName} - ${title}`
+
         const detailsWithoutEmpty = removeEmptyValues(details)
+        const eventConfig: AddCalendarEvent.CreateOptions = {
+          title: titleWithChildPrefix,
+          startDate: detailsWithoutEmpty.startDate,
+          endDate: detailsWithoutEmpty.endDate,
+          notes: event.description,
+          allDay: event.allDay,
+          location: event.location,
+        }
 
-        await RNCalendarEvents.saveEvent(title, detailsWithoutEmpty)
+        const result = await AddCalendarEvent.presentEventCreatingDialog(
+          eventConfig
+        )
 
-        toast(translate('calender.saveToCalenderSuccess'))
+        if (result.action === 'SAVED') {
+          toast(translate('calender.saveToCalenderSuccess'))
+        }
+
+        //await RNCalendarEvents.saveEvent(title, detailsWithoutEmpty)
       } catch (err) {
         toast(translate('calender.saveToCalenderError'))
       }
@@ -108,7 +128,7 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
         accessoryLeft={CalendarOutlineIcon}
         title={(evaProps) => (
           <Text {...evaProps} maxFontSizeMultiplier={2}>
-            {'Visa i telefonens kalender'}
+            {'Visa dagen i telefonens kalender'}
           </Text>
         )}
         onPress={() => openCalendarToDate(event.startDate)}
