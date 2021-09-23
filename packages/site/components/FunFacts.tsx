@@ -12,11 +12,11 @@ const FUNFACTS_DATA = [
     title: 'år att utveckla',
   },
   {
-    count: 0,
+    count: 11,
     title: 'kronor kostar vår app :)',
   },
   {
-    count: 27,
+    count: 39,
     title: 'utvecklare har bidragit',
   },
 ]
