@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/kolplattformen/skolplattformen/compare/v1.45.1...v1.46.0) (2021-09-23)
+
+
+### Features
+
+* 🎸 Use custom async storage ([#461](https://github.com/kolplattformen/skolplattformen/issues/461)) ([98f7c04](https://github.com/kolplattformen/skolplattformen/commit/98f7c04f1c1b88d621440c6190cf1223112fa03b))
+
 ## [1.45.1](https://github.com/kolplattformen/skolplattformen/compare/v1.45.0...v1.45.1) (2021-09-22)
 
 
