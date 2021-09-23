@@ -26,6 +26,36 @@ const reporter = __DEV__
       error: () => {},
     }
 
+if (__DEV__) {
+  const DevMenu = require('react-native-dev-menu')
+  DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
+}
+
+const safeJsonParse = (maybeJson) => {
+  if (maybeJson) {
+    try {
+      return JSON.parse(maybeJson)
+    } catch (error) {
+      return maybeJson
+    }
+  }
+  return 'null'
+}
+
+const logAsyncStorage = async () => {
+  const allKeys = await AsyncStorage.getAllKeys()
+  const keysAndValues = await AsyncStorage.multiGet(allKeys)
+  console.log('*** AsyncStorage contents:')
+  keysAndValues.forEach((keyAndValue) => {
+    console.log(
+      keyAndValue[0],
+      '=>',
+      keyAndValue[1] ? safeJsonParse(keyAndValue[1]) : 'null'
+    )
+  })
+  console.log('***')
+}
+
 export default () => {
   const colorScheme = useColorScheme()
 

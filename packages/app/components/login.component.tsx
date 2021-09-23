@@ -21,7 +21,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { useAsyncStorage } from 'use-async-storage'
+import useSettingsStorage from '../hooks/useSettingsStorage'
+import AppStorage from '../services/appStorage'
 import { schema } from '../app.json'
 import { Layout } from '../styles'
 import { translate } from '../utils/translation'
@@ -48,14 +49,11 @@ export const Login = () => {
   const [visible, showModal] = useState(false)
   const [showLoginMethod, setShowLoginMethod] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [cachedSsn, setCachedSsn] = useAsyncStorage('socialSecurityNumber', '')
-  const [socialSecurityNumber, setSocialSecurityNumber] = useState('')
+  const [personalIdNumber, setPersonalIdNumber] = useState('')
   const [valid, setValid] = useState(false)
   const [loginMethodIndex, setLoginMethodIndex] = useState(0)
-  const [cachedLoginMethodIndex, setCachedLoginMethodIndex] = useAsyncStorage(
-    'loginMethodIndex',
-    '0'
-  )
+  const [cachedLoginMethodIndex, setCachedLoginMethodIndex] =
+    useSettingsStorage('loginMethodIndex', '0')
 
   const loginMethods = [
     translate('auth.bankid.OpenOnThisDevice'),
@@ -69,6 +67,7 @@ export const Login = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginMethodIndex])
+
   useEffect(() => {
     if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
       setLoginMethodIndex(parseInt(cachedLoginMethodIndex, 10))
@@ -76,17 +75,36 @@ export const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cachedLoginMethodIndex])
 
-  /* Initial load functions */
   useEffect(() => {
-    setValid(Personnummer.valid(socialSecurityNumber))
-  }, [socialSecurityNumber])
+    setValid(Personnummer.valid(personalIdNumber))
+  }, [personalIdNumber])
 
   useEffect(() => {
-    if (cachedSsn && socialSecurityNumber !== cachedSsn) {
-      setSocialSecurityNumber(cachedSsn)
+    async function SetPersonalIdNumberIfSaved() {
+      const storedPersonalIdNumber = await AppStorage.getSetting<string>(
+        'cachedPersonalIdentityNumber'
+      )
+
+      if (storedPersonalIdNumber) {
+        setPersonalIdNumber(storedPersonalIdNumber)
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cachedSsn])
+
+    SetPersonalIdNumberIfSaved()
+  }, [])
+
+  useEffect(() => {
+    async function SavePersonalIdNumber(numberToSave: string) {
+      if (numberToSave) {
+        await AppStorage.setSetting(
+          'cachedPersonalIdentityNumber',
+          numberToSave
+        )
+      }
+    }
+
+    SavePersonalIdNumber(personalIdNumber)
+  }, [personalIdNumber])
 
   const loginHandler = async () => {
     showModal(false)
@@ -97,14 +115,12 @@ export const Login = () => {
     return () => {
       api.off('login', loginHandler)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [api])
 
   /* Helpers */
   const handleInput = (text: string) => {
     setValid(Personnummer.valid(text))
-    setCachedSsn(text)
-    setSocialSecurityNumber(text)
+    setPersonalIdNumber(text)
   }
 
   const openBankId = (token: string) => {
@@ -127,8 +143,7 @@ export const Login = () => {
       let ssn
       if (loginMethodIndex === 1) {
         ssn = Personnummer.parse(text).format(true)
-        setCachedSsn(ssn)
-        setSocialSecurityNumber(ssn)
+        setPersonalIdNumber(ssn)
       }
 
       const status = await api.login(ssn)
@@ -158,7 +173,7 @@ export const Login = () => {
             accessible={true}
             label={translate('general.socialSecurityNumber')}
             autoFocus
-            value={socialSecurityNumber}
+            value={personalIdNumber}
             style={styles.pnrInput}
             accessoryLeft={PersonIcon}
             accessoryRight={(props) => (
@@ -185,7 +200,7 @@ export const Login = () => {
         <ButtonGroup style={styles.loginButtonGroup} status="primary">
           <Button
             accessible={true}
-            onPress={() => startLogin(socialSecurityNumber)}
+            onPress={() => startLogin(personalIdNumber)}
             style={styles.loginButton}
             appearance="ghost"
             disabled={loginMethodIndex === 1 && !valid}

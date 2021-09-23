@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AppStorage from '../services/appStorage'
 import { useNavigation } from '@react-navigation/core'
 import { useApi, useChildList } from '@skolplattformen/api-hooks'
 import { Child } from '@skolplattformen/embedded-api'
@@ -51,24 +51,41 @@ export const Children = () => {
   }
 
   const logout = useCallback(() => {
-    api.logout()
-    AsyncStorage.clear()
+    AppStorage.clearTemporaryItems().then(() => api.logout())
+  }, [api])
+
+  const logoutAndClearPersonalData = useCallback(() => {
+    api
+      .getUser()
+      .then((user) => AppStorage.clearPersonalData(user))
+      .then(() => AppStorage.clearTemporaryItems().then(() => api.logout()))
+  }, [api])
+
+  const logoutAndClearAll = useCallback(() => {
+    AppStorage.nukeAllStorage().then(() => api.logout())
   }, [api])
 
   const settingsOptions = useMemo(() => {
-    return [translate('general.logout'), translate('general.cancel')]
+    return [
+      translate('general.logout'),
+      translate('general.logoutAndClearPersonalData'),
+      translate('general.logoutAndClearAllDataInclSettings'),
+      translate('general.cancel'),
+    ]
   }, [])
 
   const handleSettingSelection = useCallback(
     (index: number) => {
       if (index === 0) logout()
+      if (index === 1) logoutAndClearPersonalData()
+      if (index === 2) logoutAndClearAll()
     },
-    [logout]
+    [logout, logoutAndClearAll, logoutAndClearPersonalData]
   )
 
   const settings = useCallback(() => {
     const options = {
-      cancelButtonIndex: 1,
+      cancelButtonIndex: settingsOptions.length - 1,
       title: translate('general.settings'),
       optionsIOS: settingsOptions,
       optionsAndroid: settingsOptions,

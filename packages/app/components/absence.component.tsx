@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import {
   Button,
@@ -24,13 +23,15 @@ import { translate } from '../utils/translation'
 import { AlertIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import { NavigationTitle } from './navigationTitle.component'
+import { useUser } from '@skolplattformen/api-hooks'
+import usePersonalStorage from '../hooks/usePersonalStorage'
 
 type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
 
 interface AbsenceFormValues {
   displayStartTimePicker: boolean
   displayEndTimePicker: boolean
-  socialSecurityNumber: string
+  personalIdentityNumber: string
   isFullDay: boolean
   startTime: moment.Moment
   endTime: moment.Moment
@@ -57,7 +58,7 @@ export const absenceRouteOptions =
 
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
-    socialSecurityNumber: Yup.string()
+    personalIdentityNumber: Yup.string()
       .required(translate('abscense.personalNumberMissing'))
       .test('is-valid', translate('abscense.invalidPersonalNumber'), (value) =>
         value ? Personnummer.valid(value) : true
@@ -65,49 +66,50 @@ const Absence = () => {
     isFullDay: Yup.bool().required(),
   })
 
+  const { data: user } = useUser()
   const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
-  const [socialSecurityNumber, setSocialSecurityNumber] = React.useState('')
+  const [personalIdFromStorage, setPersonalIdInStorage] = usePersonalStorage(
+    user,
+    `@childssn.${child.id}`,
+    ''
+  )
+  const [personalIdentityNumber, setPersonalIdentityNumber] = React.useState('')
   const minumumDate = moment().hours(8).minute(0)
   const maximumDate = moment().hours(17).minute(0)
   const styles = useStyleSheet(themedStyles)
 
   const submit = useCallback(
     async (values: AbsenceFormValues) => {
-      const ssn = Personnummer.parse(values.socialSecurityNumber).format()
+      const personalIdNumber = Personnummer.parse(
+        values.personalIdentityNumber
+      ).format()
 
       if (values.isFullDay) {
-        sendSMS(ssn)
+        sendSMS(personalIdNumber)
       } else {
         sendSMS(
-          `${ssn} ${moment(values.startTime).format('HHmm')}-${moment(
-            values.endTime
-          ).format('HHmm')}`
+          `${personalIdNumber} ${moment(values.startTime).format(
+            'HHmm'
+          )}-${moment(values.endTime).format('HHmm')}`
         )
       }
 
-      await AsyncStorage.setItem(
-        `@childssn.${child.id}`,
-        values.socialSecurityNumber
-      )
+      setPersonalIdInStorage(values.personalIdentityNumber)
+      setPersonalIdentityNumber(values.personalIdentityNumber)
     },
-    [child.id, sendSMS]
+    [sendSMS, setPersonalIdInStorage]
   )
 
   React.useEffect(() => {
-    const getSocialSecurityNumber = async () => {
-      const ssn = await AsyncStorage.getItem(`@childssn.${child.id}`)
-      setSocialSecurityNumber(ssn || '')
-    }
-
-    getSocialSecurityNumber()
-  }, [child])
+    setPersonalIdentityNumber(personalIdFromStorage || '')
+  }, [child, personalIdFromStorage, user])
 
   const initialValues: AbsenceFormValues = {
     displayStartTimePicker: false,
     displayEndTimePicker: false,
-    socialSecurityNumber: socialSecurityNumber || '',
+    personalIdentityNumber: personalIdentityNumber || '',
     isFullDay: true,
     startTime: moment().hours(Math.max(8, new Date().getHours())).minute(0),
     endTime: maximumDate,
@@ -139,20 +141,22 @@ const Absence = () => {
                 {translate('general.socialSecurityNumber')}
               </Text>
               <Input
-                testID="socialSecurityNumberInput"
+                testID="personalIdentityNumberInput"
                 keyboardType="number-pad"
-                onChangeText={handleChange('socialSecurityNumber')}
-                onBlur={handleBlur('socialSecurityNumber')}
-                status={hasError('socialSecurityNumber') ? 'danger' : 'basic'}
-                value={values.socialSecurityNumber}
+                onChangeText={handleChange('personalIdentityNumber')}
+                onBlur={handleBlur('personalIdentityNumber')}
+                status={hasError('personalIdentityNumber') ? 'danger' : 'basic'}
+                value={values.personalIdentityNumber}
                 style={styles.input}
                 placeholder="YYYYMMDD-XXXX"
                 accessoryRight={
-                  hasError('socialSecurityNumber') ? AlertIcon : undefined
+                  hasError('personalIdentityNumber') ? AlertIcon : undefined
                 }
               />
-              {hasError('socialSecurityNumber') && (
-                <Text style={styles.error}>{errors.socialSecurityNumber}</Text>
+              {hasError('personalIdentityNumber') && (
+                <Text style={styles.error}>
+                  {errors.personalIdentityNumber}
+                </Text>
               )}
             </View>
             <View style={styles.field}>

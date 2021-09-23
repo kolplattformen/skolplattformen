@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRoute } from '@react-navigation/native'
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import Mockdate from 'mockdate'
@@ -6,15 +5,15 @@ import React from 'react'
 import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
+import { useUser } from '@skolplattformen/api-hooks'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 jest.mock('@react-navigation/native')
-jest.mock('@react-native-async-storage/async-storage')
+jest.mock('@skolplattformen/api-hooks')
 jest.mock('../../utils/SMS')
 
 let sendSMS
-
-// needed to skip tests due to bug in RN 0.65.1
-// https://github.com/facebook/react-native/issues/29849#issuecomment-734533635
+let user = { personalNumber: '201701092395' }
 
 const setup = (customProps = {}) => {
   sendSMS = jest.fn()
@@ -35,18 +34,21 @@ beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {})
 })
 
-beforeEach(() => {
-  jest.useFakeTimers()
+beforeEach(async () => {
   jest.clearAllMocks()
-  AsyncStorage.clear()
+  useUser.mockReturnValue({
+    data: user,
+    status: 'loaded',
+  })
+  await AsyncStorage.clear()
 })
 
-test.skip('can fill out the form with full day absence', async () => {
+test('can fill out the form with full day absence', async () => {
   const screen = setup()
 
   await waitFor(() =>
     fireEvent.changeText(
-      screen.getByTestId('socialSecurityNumberInput'),
+      screen.getByTestId('personalIdentityNumberInput'),
       '1212121212'
     )
   )
@@ -56,10 +58,9 @@ test.skip('can fill out the form with full day absence', async () => {
   expect(screen.queryByText(/sluttid/i)).toBeFalsy()
 
   expect(sendSMS).toHaveBeenCalledWith('121212-1212')
-  expect(AsyncStorage.setItem).toHaveBeenCalledWith('@childssn.1', '1212121212')
 })
 
-test.skip('handles missing social security number', async () => {
+test('handles missing social security number', async () => {
   const screen = setup()
 
   await waitFor(() => fireEvent.press(screen.getByText('Skicka')))
@@ -68,12 +69,12 @@ test.skip('handles missing social security number', async () => {
   expect(sendSMS).not.toHaveBeenCalled()
 })
 
-test.skip('validates social security number', async () => {
+test('validates social security number', async () => {
   const screen = setup()
 
   await waitFor(() =>
     fireEvent.changeText(
-      screen.getByTestId('socialSecurityNumberInput'),
+      screen.getByTestId('personalIdentityNumberInput'),
       '12121212'
     )
   )
@@ -83,14 +84,14 @@ test.skip('validates social security number', async () => {
   expect(sendSMS).not.toHaveBeenCalled()
 })
 
-test.skip('can fill out the form with part of day absence', async () => {
+test('can fill out the form with part of day absence', async () => {
   Mockdate.set('2021-02-18 15:30')
 
   const screen = setup()
 
   await waitFor(() =>
     fireEvent.changeText(
-      screen.getByTestId('socialSecurityNumberInput'),
+      screen.getByTestId('personalIdentityNumberInput'),
       '1212121212'
     )
   )
