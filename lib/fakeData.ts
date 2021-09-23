@@ -1089,6 +1089,7 @@ const data: any = {
 }
 
 export const user = (): User => ({
+  personalNumber: '195001182046', // Test personal number from Skatteverket
   firstName: 'Namn',
   lastName: 'Namnsson',
   isAuthenticated: true
