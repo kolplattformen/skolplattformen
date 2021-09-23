@@ -1,10 +1,16 @@
 import { CalendarItem } from '@skolplattformen/embedded-api'
 import { Button, MenuItem, OverflowMenu, Text } from '@ui-kitten/components'
+import moment from 'moment'
 import React from 'react'
+import { Linking, Platform } from 'react-native'
 import RNCalendarEvents from 'react-native-calendar-events'
 import Toast from 'react-native-simple-toast'
 import { translate } from '../utils/translation'
-import { CalendarOutlineIcon, MoreIcon } from './icon.component'
+import {
+  CalendarOutlineIcon,
+  MoreIcon,
+  PlusSquareOutline,
+} from './icon.component'
 
 interface SaveToCalendarProps {
   event: CalendarItem
@@ -70,6 +76,19 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
     }
   }
 
+  const openCalendarToDate = (dateToLinkTo: moment.MomentInput) => {
+    const calenderDate = moment(dateToLinkTo) // date is local time
+
+    if (Platform.OS === 'ios') {
+      const referenceDate = moment.utc('2001-01-01') // reference date is utc
+      const seconds = calenderDate.unix() - referenceDate.unix()
+      Linking.openURL('calshow:' + seconds)
+    } else if (Platform.OS === 'android') {
+      const msSinceEpoch = calenderDate.valueOf() // milliseconds since epoch
+      Linking.openURL('content://com.android.calendar/time/' + msSinceEpoch)
+    }
+  }
+
   return (
     <OverflowMenu
       visible={visible}
@@ -77,13 +96,22 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
       onBackdropPress={closeOverflowMenu}
     >
       <MenuItem
-        accessoryLeft={CalendarOutlineIcon}
+        accessoryLeft={PlusSquareOutline}
         title={(evaProps) => (
           <Text {...evaProps} maxFontSizeMultiplier={2}>
             {translate('calender.saveToCalender')}
           </Text>
         )}
         onPress={() => requestPermissionsAndSave(event)}
+      />
+      <MenuItem
+        accessoryLeft={CalendarOutlineIcon}
+        title={(evaProps) => (
+          <Text {...evaProps} maxFontSizeMultiplier={2}>
+            {'Visa i telefonens kalender'}
+          </Text>
+        )}
+        onPress={() => openCalendarToDate(event.startDate)}
       />
     </OverflowMenu>
   )
