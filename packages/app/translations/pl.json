@@ -76,7 +76,9 @@
         "settings": "Ustawienia",
         "socialSecurityNumber": "Personnummer",
         "title": "Öppna skolplattformen",
-        "cancel": "Anuluj"
+        "cancel": "Anuluj",
+        "logoutAndClearPersonalData": "Wyloguj i skasuj dane osobowe",
+        "logoutAndClearAllDataInclSettings": "Wyloguj i skasuj wszystkie dane łącznie z ustawieniami"
     },
     "language": {
         "changeLanguage": "Zmień język",
