@@ -5,11 +5,9 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
 import { Icon } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
-import { StyleProp, TextProps } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
@@ -23,7 +21,6 @@ import { NotificationsList } from './notificationsList.component'
 import { Classmates } from './classmates.component'
 import { TabBarLabel } from './tabBarLabel.component'
 
-type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
 
 export type ChildTabParamList = {
@@ -32,11 +29,6 @@ export type ChildTabParamList = {
   Calendar: undefined
   Menu: undefined
   Classmates: undefined
-}
-
-interface TabTitleProps {
-  children: string
-  style?: StyleProp<TextProps>
 }
 
 const { Navigator, Screen } = createBottomTabNavigator<ChildTabParamList>()
@@ -56,6 +48,7 @@ const TabNavigator = ({
     initialRouteName={initialRouteName}
     screenOptions={({ route }) => {
       return {
+        headerShown: false,
         tabBarLabel: ({ focused }) => (
           <TabBarLabel
             label={getRouteTitleFromName(route.name)}
@@ -126,6 +119,7 @@ const getRouteTitleFromName = (routeName: string) => {
     case 'Classmates':
       return translate('navigation.classmates')
   }
+  return ''
 }
 
 export const childRouteOptions =
@@ -139,7 +133,7 @@ export const childRouteOptions =
 
     return {
       ...defaultStackStyling(darkMode),
-      headerCenter: () => (
+      headerTitle: () => (
         <NavigationTitle
           title={getHeaderTitle(route)}
           subtitle={studentName(child?.name)}

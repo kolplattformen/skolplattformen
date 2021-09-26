@@ -13,7 +13,7 @@ import Personnummer from 'personnummer'
 import React, { useCallback } from 'react'
 import { View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import * as Yup from 'yup'
 import { defaultStackStyling } from '../design/navigationThemes'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -47,7 +47,7 @@ export const absenceRouteOptions =
     const child = route.params.child
     return {
       ...defaultStackStyling(darkMode),
-      headerCenter: () => (
+      headerTitle: () => (
         <NavigationTitle
           title={translate('abscense.title')}
           subtitle={studentName(child?.name)}

@@ -18,7 +18,7 @@ import {
   ListRenderItemInfo,
   View,
 } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
 import AppStorage from '../services/appStorage'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -34,7 +34,7 @@ export const childenRouteOptions =
       ...defaultStackStyling(darkMode),
       title: translate('children.title'),
       headerLargeTitle: true,
-      headerLargeTitleHideShadow: true,
+      headerLargeTitleShadowVisible: false,
     }
   }
 

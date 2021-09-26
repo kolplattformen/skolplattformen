@@ -1,5 +1,5 @@
 import React from 'react'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import libraries from '../libraries.json'
 import { translate } from '../utils/translation'
 import { LibraryList } from './libraryList.component'

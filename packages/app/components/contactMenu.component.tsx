@@ -21,14 +21,9 @@ import { translate } from '../utils/translation'
 interface ContactMenuProps {
   contact: Classmate
   selected: boolean
-  setSelected: (value?: number | null) => void
 }
 
-export const ContactMenu = ({
-  contact,
-  selected,
-  setSelected,
-}: ContactMenuProps) => {
+export const ContactMenu = ({ contact, selected }: ContactMenuProps) => {
   const [visible, setVisible] = React.useState(selected)
 
   const renderToggleButton = () => (
@@ -54,7 +49,6 @@ export const ContactMenu = ({
 
   const handleBackdropPress = () => {
     setVisible(false)
-    setSelected(null)
   }
 
   const shouldDisplay = (option?: string) => (option ? 'flex' : 'none')

@@ -8,7 +8,7 @@ import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'
 import React, { useEffect } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { schema } from '../app.json'
 import {
   darkNavigationTheme,
@@ -42,9 +42,9 @@ import {
 } from './settingsLicenses.component'
 
 export type RootStackParamList = {
-  Login: undefined
+  Login: { rand: number }
   Children: undefined
-  Settings: undefined
+  Settings: { rand: number } | undefined
   SettingsAppearance: undefined
   SettingsAppearanceTheme: undefined
   SettingsLicenses: undefined
@@ -59,6 +59,17 @@ export type RootStackParamList = {
   NewsItem: { newsItem: NewsItemType; child: ChildType }
   Absence: { child: ChildType }
   SetLanguage: undefined
+}
+
+/**
+ * This is for supporting useNavigation, Link, ref etc
+ * without the type annotation
+ * https://reactnavigation.org/docs/typescript#specifying-default-types-for-usenavigation-link-ref-etc
+ */
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
 }
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>()
@@ -121,6 +132,7 @@ export const AppNavigator = () => {
                 ? colors['background-basic-color-2']
                 : colors['background-basic-color-1'],
           },
+          headerTitleAlign: 'center',
           headerLargeStyle: {
             backgroundColor: colors['background-basic-color-2'],
           },

@@ -1,5 +1,5 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { darkTheme, lightTheme } from './themes'
 
 export const darkNavigationTheme: Theme = {
