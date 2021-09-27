@@ -98,8 +98,14 @@
     "settings": {
         "settings": "Inställningar",
         "appearance": "Utseende",
+        "theme": "Tema",
         "licenses": "Licenser",
-        "language": "Språk"
+        "language": "Språk",
+        "themeAuto": "Auto"
+    },
+    "themes": {
+        "light": "Ljust",
+        "dark": "Mörkt"
     },
     "news": {
         "backToChild": "Tillbaka till barn",

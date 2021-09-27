@@ -1,8 +1,11 @@
+import { NavigationProp, useNavigation } from '@react-navigation/core'
 import React from 'react'
-import { ScrollView, Switch } from 'react-native'
+import { ScrollView, StyleSheet, Switch } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import useSettingsStorage from '../hooks/useSettingsStorage'
 import { Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
+import { RootStackParamList } from './navigation.component'
 import {
   SettingGroup,
   SettingListItemText,
@@ -14,18 +17,38 @@ export const settingsAppearanceRouteOptions =
   })
 
 export const SettingsAppearanceScreen = () => {
+  const [isUsingSystemTheme, setUsingSystemTheme] =
+    useSettingsStorage('usingSystemTheme')
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+
+  const [settingsTheme] = useSettingsStorage('theme')
+
   return (
     <ScrollView
       style={LayoutStyle.flex.full}
-      contentContainerStyle={{
-        padding: Sizing.t4,
-      }}
+      contentContainerStyle={styles.container}
     >
       <SettingGroup>
         <SettingListItemText label="Use System Light/Dark Theme">
-          <Switch />
+          <Switch
+            value={isUsingSystemTheme}
+            onValueChange={setUsingSystemTheme}
+          />
         </SettingListItemText>
+        {!isUsingSystemTheme && (
+          <SettingListItemText
+            label="Theme"
+            value={translate(`themes.${settingsTheme}`)}
+            onNavigate={() => navigation.navigate('SettingsAppearanceTheme')}
+          />
+        )}
       </SettingGroup>
     </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: Sizing.t4,
+  },
+})

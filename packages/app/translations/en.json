@@ -98,8 +98,14 @@
     "settings": {
         "settings": "Settings",
         "appearance": "Appearance",
+        "theme": "Theme",
         "licenses": "Licenses",
-        "language": "Language"
+        "language": "Language",
+        "themeAuto": "Auto"
+    },
+    "themes": {
+        "light": "Light",
+        "dark": "Dark"
     },
     "news": {
         "backToChild": "Back to child",

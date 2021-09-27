@@ -15,6 +15,9 @@ import {
   lightNavigationTheme,
 } from '../design/navigationThemes'
 import { useAppState } from '../hooks/useAppState'
+import useSettingsStorage, {
+  initializeSettingsState,
+} from '../hooks/useSettingsStorage'
 import Absence, { absenceRouteOptions } from './absence.component'
 import { Auth, authRouteOptions } from './auth.component'
 import { Child, childRouteOptions } from './child.component'
@@ -28,6 +31,10 @@ import {
   SettingsAppearanceScreen,
 } from './settingsAppearance.component'
 import {
+  settingsAppearanceThemeRouteOptions,
+  SettingsAppearanceThemeScreen,
+} from './settingsAppearanceTheme.component'
+import {
   settingsLicensesRouteOptions,
   SettingsLicensesScreen,
 } from './settingsLicenses.component'
@@ -37,6 +44,7 @@ export type RootStackParamList = {
   Children: undefined
   Settings: undefined
   SettingsAppearance: undefined
+  SettingsAppearanceTheme: undefined
   SettingsLicenses: undefined
   Library: {
     library: Library
@@ -65,10 +73,18 @@ const linking = {
 export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
 
-  const colorScheme = useColorScheme()
+  const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
+  const [theme] = useSettingsStorage('theme')
+  const systemTheme = useColorScheme()
+  const colorScheme = usingSystemTheme ? systemTheme : theme
+
   const colors = useTheme()
 
   const currentAppState = useAppState()
+
+  useEffect(() => {
+    initializeSettingsState()
+  }, [])
 
   useEffect(() => {
     const checkUser = async () => {
@@ -151,6 +167,11 @@ export const AppNavigator = () => {
           name="SettingsAppearance"
           component={SettingsAppearanceScreen}
           options={settingsAppearanceRouteOptions}
+        />
+        <Screen
+          name="SettingsAppearanceTheme"
+          component={SettingsAppearanceThemeScreen}
+          options={settingsAppearanceThemeRouteOptions}
         />
         <Screen
           name="SettingsLicenses"

@@ -3,6 +3,7 @@ import { useApi } from '@skolplattformen/api-hooks'
 import React, { useCallback } from 'react'
 import { ScrollView } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import useSettingsStorage from '../hooks/useSettingsStorage'
 import AppStorage from '../services/appStorage'
 import { LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing } from '../styles'
@@ -21,6 +22,8 @@ export const settingsRouteOptions = (): NativeStackNavigationOptions => ({
 })
 
 export const SettingsScreen = () => {
+  const [isUsingSystemTheme] = useSettingsStorage('usingSystemTheme')
+  const [settingsTheme] = useSettingsStorage('theme')
   const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const langCode = LanguageService.getLanguageCode()
   const language = languages.find((l) => l.langCode === langCode)
@@ -44,7 +47,11 @@ export const SettingsScreen = () => {
       <SettingGroup>
         <SettingListItemText
           label={translate('settings.appearance')}
-          value="Auto"
+          value={
+            isUsingSystemTheme
+              ? translate('settings.themeAuto')
+              : translate(`themes.${settingsTheme}`)
+          }
           icon={BrushIcon}
           onNavigate={() => navigation.navigate('SettingsAppearance')}
         />

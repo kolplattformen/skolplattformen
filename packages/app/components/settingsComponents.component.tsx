@@ -6,10 +6,10 @@ import {
   useTheme,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { Pressable, View } from 'react-native'
+import { Pressable, TouchableOpacity, View } from 'react-native'
 import { Sizing } from '../styles'
 import { fontSize } from '../styles/typography'
-import { RightArrowIcon } from './icon.component'
+import { CheckIcon, RightArrowIcon } from './icon.component'
 
 export const SettingListItemText = ({
   label,
@@ -90,6 +90,35 @@ export const SettingGroup = ({ children }: { children?: React.ReactNode }) => {
   return <View style={styles.group}>{children}</View>
 }
 
+export const SettingListItemSelectable = ({
+  title,
+  subTitle,
+  isSelected,
+  onPress,
+}: {
+  title: string
+  subTitle?: string
+  isSelected?: boolean
+  onPress: () => void
+}) => {
+  const styles = useStyleSheet(themedStyles)
+  const colors = useTheme()
+
+  return (
+    <TouchableOpacity style={styles.selectableButton} onPress={onPress}>
+      <View>
+        <Text style={styles.selectableButtonTitle}>{title}</Text>
+        {subTitle && (
+          <Text style={styles.selectableButtonSubtitle}>{subTitle}</Text>
+        )}
+      </View>
+      {isSelected ? (
+        <CheckIcon height={24} width={24} fill={colors['color-success-600']} />
+      ) : null}
+    </TouchableOpacity>
+  )
+}
+
 const themedStyles = StyleService.create({
   group: {
     backgroundColor: 'background-basic-color-1',
@@ -136,4 +165,18 @@ const themedStyles = StyleService.create({
     marginRight: Sizing.t3,
   },
   arrow: { flexShrink: 0 },
+  selectableButton: {
+    paddingVertical: Sizing.t2,
+    minHeight: 45,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  selectableButtonTitle: {
+    ...fontSize.base,
+  },
+  selectableButtonSubtitle: {
+    ...fontSize.sm,
+    color: 'text-hint-color',
+  },
 })

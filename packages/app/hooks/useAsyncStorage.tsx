@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useEffect, useState } from 'react'
 
 export default function useAsyncStorage<T>(
   storageKey: string,
   defaultValue: T
 ): [T, (val: T) => void] {
   const [storageItem, setStorageItem] = useState(defaultValue)
+
+  useEffect(() => {
+    console.log({ storageItem })
+  }, [storageItem])
 
   async function setStoredValue(value: T) {
     try {

@@ -21,9 +21,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
+import { schema } from '../app.json'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import AppStorage from '../services/appStorage'
-import { schema } from '../app.json'
 import { Layout } from '../styles'
 import { translate } from '../utils/translation'
 import {
@@ -53,7 +53,7 @@ export const Login = () => {
   const [valid, setValid] = useState(false)
   const [loginMethodIndex, setLoginMethodIndex] = useState(0)
   const [cachedLoginMethodIndex, setCachedLoginMethodIndex] =
-    useSettingsStorage('loginMethodIndex', '0')
+    useSettingsStorage('loginMethodIndex')
 
   const loginMethods = [
     translate('auth.bankid.OpenOnThisDevice'),

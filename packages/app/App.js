@@ -13,6 +13,7 @@ import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
+import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
 const api = init(fetch, CookieManager)
 
@@ -57,7 +58,11 @@ const logAsyncStorage = async () => {
 }
 
 export default () => {
-  const colorScheme = useColorScheme()
+  const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
+  const [theme] = useSettingsStorage('theme')
+  const systemTheme = useColorScheme()
+
+  const colorScheme = usingSystemTheme ? systemTheme : theme
 
   return (
     <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>

@@ -64,6 +64,7 @@
     "react-native-webview": "11.4.2",
     "react-native-weekly-calendar": "^0.2.0",
     "rn-actionsheet-module": "https://github.com/kolplattformen/rn-actionsheet-module.git",
+    "valtio": "^1.2.3",
     "yup": "0.32.9"
   },
   "devDependencies": {
