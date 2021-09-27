@@ -16,10 +16,7 @@ export type Settings = typeof settingsState['settings']
 const SETTINGS_STORAGE_KEY = 'SETTINGS'
 
 subscribe(settingsState, () => {
-  AppStorage.setSetting(
-    SETTINGS_STORAGE_KEY,
-    JSON.stringify(settingsState.settings, null, 2)
-  )
+  AppStorage.setSetting(SETTINGS_STORAGE_KEY, settingsState.settings)
 })
 
 export const initializeSettingsState = async () => {
@@ -28,10 +25,9 @@ export const initializeSettingsState = async () => {
   settingsState.hydrated = true
 
   if (settings) {
-    const parsed = JSON.parse(settings)
     settingsState.settings = {
       ...settingsState.settings,
-      ...parsed,
+      ...settings,
     }
   }
 }
