@@ -6,7 +6,7 @@ import init from '@skolplattformen/embedded-api'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import React from 'react'
-import { AppearanceProvider, StatusBar, useColorScheme } from 'react-native'
+import { StatusBar, useColorScheme } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
@@ -66,23 +66,21 @@ export default () => {
   return (
     <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>
       <SafeAreaProvider>
-        <AppearanceProvider>
-          <StatusBar
-            backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
-            barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
-            translucent
-          />
-          <IconRegistry icons={EvaIconsPack} />
-          <ApplicationProvider
-            {...eva}
-            customMapping={customMapping}
-            theme={colorScheme === 'dark' ? darkTheme : lightTheme}
-          >
-            <LanguageProvider cache={true} data={translations}>
-              <AppNavigator />
-            </LanguageProvider>
-          </ApplicationProvider>
-        </AppearanceProvider>
+        <StatusBar
+          backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
+          barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+          translucent
+        />
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          customMapping={customMapping}
+          theme={colorScheme === 'dark' ? darkTheme : lightTheme}
+        >
+          <LanguageProvider cache={true} data={translations}>
+            <AppNavigator />
+          </LanguageProvider>
+        </ApplicationProvider>
       </SafeAreaProvider>
     </ApiProvider>
   )
