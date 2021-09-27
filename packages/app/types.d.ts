@@ -1,5 +1,3 @@
-declare module 'rn-actionsheet-module'
-
 declare module 'libraries.json' {
   export interface Library {
     libraryName: string
