@@ -3,7 +3,6 @@ import { Button, MenuItem, OverflowMenu, Text } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
 import { Linking, Platform } from 'react-native'
-import RNCalendarEvents from 'react-native-calendar-events'
 import Toast from 'react-native-simple-toast'
 import { translate } from '../utils/translation'
 import {
@@ -45,55 +44,53 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
     ) as { [K in keyof T]: any }
   }
 
-  const requestPermissionsAndSave = async ({
+  const openEventCreateDialog = async ({
     title,
     startDate,
     endDate,
     location,
   }: CalendarItem) => {
-    const auth = await RNCalendarEvents.requestPermissions()
+    const details = {
+      startDate: startDate
+        ? new Date(startDate).toISOString()
+        : new Date().toISOString(),
+      endDate: endDate
+        ? new Date(endDate).toISOString()
+        : new Date().toISOString(),
+      location,
+    }
 
-    if (auth === 'authorized') {
-      try {
-        const details = {
-          startDate: startDate
-            ? new Date(startDate).toISOString()
-            : new Date().toISOString(),
-          endDate: endDate
-            ? new Date(endDate).toISOString()
-            : new Date().toISOString(),
-          location,
-        }
+    const firstName = studentName(child.name)
+    const titleWithChildPrefix = `${firstName} - ${title}`
 
-        const firstName = studentName(child.name)
-        const titleWithChildPrefix = `${firstName} - ${title}`
+    const detailsWithoutEmpty = removeEmptyValues(details)
+    const eventConfig: AddCalendarEvent.CreateOptions = {
+      title: titleWithChildPrefix,
+      startDate: detailsWithoutEmpty.startDate,
+      endDate: detailsWithoutEmpty.endDate,
+      notes: event.description,
+      allDay: event.allDay,
+      location: event.location,
+    }
 
-        const detailsWithoutEmpty = removeEmptyValues(details)
-        const eventConfig: AddCalendarEvent.CreateOptions = {
-          title: titleWithChildPrefix,
-          startDate: detailsWithoutEmpty.startDate,
-          endDate: detailsWithoutEmpty.endDate,
-          notes: event.description,
-          allDay: event.allDay,
-          location: event.location,
-        }
+    try {
+      const result = await AddCalendarEvent.presentEventCreatingDialog(
+        eventConfig
+      )
 
-        const result = await AddCalendarEvent.presentEventCreatingDialog(
-          eventConfig
-        )
-
-        if (result.action === 'SAVED') {
-          toast(translate('calender.saveToCalenderSuccess'))
-        }
-
-        //await RNCalendarEvents.saveEvent(title, detailsWithoutEmpty)
-      } catch (err) {
+      if (result.action === 'SAVED') {
+        toast(translate('calender.saveToCalenderSuccess'))
+      }
+    } catch (error) {
+      console.log(error)
+      if (error === 'permissionNotGranted') {
+        toast(translate('calender.approveAccessToCalender'))
+      } else {
         toast(translate('calender.saveToCalenderError'))
       }
-      closeOverflowMenu()
-    } else {
-      toast(translate('calender.approveAccessToCalender'))
     }
+
+    closeOverflowMenu()
   }
 
   const openCalendarToDate = (dateToLinkTo: moment.MomentInput) => {
@@ -122,13 +119,13 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
             {translate('calender.saveToCalender')}
           </Text>
         )}
-        onPress={() => requestPermissionsAndSave(event)}
+        onPress={() => openEventCreateDialog(event)}
       />
       <MenuItem
         accessoryLeft={CalendarOutlineIcon}
         title={(evaProps) => (
           <Text {...evaProps} maxFontSizeMultiplier={2}>
-            {'Visa dagen i telefonens kalender'}
+            {translate('calender.openDayInDeviceCalendar')}
           </Text>
         )}
         onPress={() => openCalendarToDate(event.startDate)}

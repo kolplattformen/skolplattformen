@@ -56,7 +56,8 @@
         "saveToCalender": "Save in calendar",
         "saveToCalenderError": "Something went wrong",
         "saveToCalenderSuccess": "✔️ Saved in calendar",
-        "showCalenderActions": "Show calendar actions"
+        "showCalenderActions": "Show calendar actions",
+        "openDayInDeviceCalendar": "Open day in device calendar"
     },
     "children": {
         "loadingErrorHeading": "Oops!",

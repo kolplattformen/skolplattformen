@@ -56,7 +56,8 @@
         "saveToCalender": "Spara till kalender",
         "saveToCalenderError": "Något gick fel",
         "saveToCalenderSuccess": "✔️ Sparad till kalender",
-        "showCalenderActions": "Visa kalenderfunktioner"
+        "showCalenderActions": "Visa kalenderfunktioner",
+        "openDayInDeviceCalendar": "Öppna dagen i telefonens kalender"
     },
     "children": {
         "loadingErrorHeading": "Hoppsan!",
