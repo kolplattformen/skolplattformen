@@ -31,7 +31,7 @@ export const SettingsAppearanceThemeScreen = () => {
               <SettingListItemSelectable
                 key={theme}
                 onPress={() => setSettingsTheme(theme)}
-                title={theme}
+                title={translate(`themes.${theme}`)}
                 isSelected={theme === settingsTheme}
               />
             )
