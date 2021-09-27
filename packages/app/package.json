@@ -35,7 +35,7 @@
     "deepmerge": "^4.2.2",
     "fast-fuzzy": "^1.10.8",
     "formik": "2.2.6",
-    "hermes-engine": "0.7.2",
+    "hermes-engine": "0.8.1",
     "i18n-js": "^3.8.0",
     "moment": "^2.29.1",
     "personnummer": "3.1.3",
