@@ -153,5 +153,6 @@ const themeStyles = StyleService.create({
   },
   settingsLink: {
     alignSelf: 'flex-start',
+    zIndex: 1,
   },
 })
