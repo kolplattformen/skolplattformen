@@ -6,10 +6,7 @@ import useSettingsStorage from '../hooks/useSettingsStorage'
 import { Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { RootStackParamList } from './navigation.component'
-import {
-  SettingGroup,
-  SettingListItemText,
-} from './settingsComponents.component'
+import { SettingGroup, SettingListItem } from './settingsComponents.component'
 
 export const settingsAppearanceRouteOptions =
   (): NativeStackNavigationOptions => ({
@@ -29,14 +26,14 @@ export const SettingsAppearanceScreen = () => {
       contentContainerStyle={styles.container}
     >
       <SettingGroup>
-        <SettingListItemText label="Use System Light/Dark Theme">
+        <SettingListItem label="Use System Light/Dark Theme">
           <Switch
             value={isUsingSystemTheme}
             onValueChange={setUsingSystemTheme}
           />
-        </SettingListItemText>
+        </SettingListItem>
         {!isUsingSystemTheme && (
-          <SettingListItemText
+          <SettingListItem
             label={translate('settings.theme')}
             value={translate(`themes.${settingsTheme}`)}
             onNavigate={() => navigation.navigate('SettingsAppearanceTheme')}

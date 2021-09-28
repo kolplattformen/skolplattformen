@@ -11,7 +11,7 @@ import { Sizing } from '../styles'
 import { fontSize } from '../styles/typography'
 import { CheckIcon, RightArrowIcon } from './icon.component'
 
-export const SettingListItemText = ({
+export const SettingListItem = ({
   label,
   value,
   icon: Icon,
@@ -37,7 +37,9 @@ export const SettingListItemText = ({
       onPressIn={() => setIsPressing(true)}
       onPressOut={() => setIsPressing(false)}
     >
-      <SettingListItem isPressing={(onNavigate || onPress) && isPressing}>
+      <SettingListItemWrapper
+        isPressing={(onNavigate || onPress) && isPressing}
+      >
         {Icon && (
           <View style={styles.icon}>
             <Icon width="24" height="24" fill="#fff" />
@@ -60,7 +62,7 @@ export const SettingListItemText = ({
             <RightArrowIcon width="24" height="24" fill={textHintColor} />
           </View>
         )}
-      </SettingListItem>
+      </SettingListItemWrapper>
     </Pressable>
   )
 }
@@ -70,7 +72,7 @@ export const SettingListSeparator = () => {
   return <View style={styles.separator} />
 }
 
-export const SettingListItem = ({
+export const SettingListItemWrapper = ({
   children,
   isPressing = false,
 }: {

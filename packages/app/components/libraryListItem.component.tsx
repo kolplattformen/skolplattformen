@@ -5,13 +5,13 @@ import React from 'react'
 import { Platform, View } from 'react-native'
 import { fontSize } from '../styles/typography'
 import { RootStackParamList } from './navigation.component'
-import { SettingListItemText } from './settingsComponents.component'
+import { SettingListItem } from './settingsComponents.component'
 
 export const LibraryListItem = ({ library }: { library: Library }) => {
   const styles = useStyleSheet(themedStyles)
   const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   return (
-    <SettingListItemText
+    <SettingListItem
       onNavigate={() => navigation.navigate('Library', { library })}
     >
       <View style={styles.container}>
@@ -23,7 +23,7 @@ export const LibraryListItem = ({ library }: { library: Library }) => {
           </Text>
         </View>
       </View>
-    </SettingListItemText>
+    </SettingListItem>
   )
 }
 

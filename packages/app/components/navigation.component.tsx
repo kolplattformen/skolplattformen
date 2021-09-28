@@ -18,6 +18,7 @@ import { useAppState } from '../hooks/useAppState'
 import useSettingsStorage, {
   initializeSettingsState,
 } from '../hooks/useSettingsStorage'
+import { isRTL, useLangCode } from '../services/languageService'
 import Absence, { absenceRouteOptions } from './absence.component'
 import { Auth, authRouteOptions } from './auth.component'
 import { Child, childRouteOptions } from './child.component'
@@ -77,6 +78,7 @@ export const AppNavigator = () => {
   const [theme] = useSettingsStorage('theme')
   const systemTheme = useColorScheme()
   const colorScheme = usingSystemTheme ? systemTheme : theme
+  const langCode = useLangCode()
 
   const colors = useTheme()
 
@@ -111,6 +113,7 @@ export const AppNavigator = () => {
         screenOptions={() => ({
           headerLargeTitle: true,
           headerLargeTitleHideShadow: true,
+          direction: isRTL(langCode) ? 'rtl' : 'ltr',
           headerStyle: {
             backgroundColor:
               colorScheme === 'dark'

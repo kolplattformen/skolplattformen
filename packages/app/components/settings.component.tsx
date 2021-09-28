@@ -12,7 +12,7 @@ import { AwardIcon, BrushIcon, GlobeIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import {
   SettingGroup,
-  SettingListItemText,
+  SettingListItem,
   SettingListSeparator,
 } from './settingsComponents.component'
 import { VersionInfo } from './versionInfo.component'
@@ -45,7 +45,7 @@ export const SettingsScreen = () => {
       }}
     >
       <SettingGroup>
-        <SettingListItemText
+        <SettingListItem
           label={translate('settings.appearance')}
           value={
             isUsingSystemTheme
@@ -56,7 +56,7 @@ export const SettingsScreen = () => {
           onNavigate={() => navigation.navigate('SettingsAppearance')}
         />
         <SettingListSeparator />
-        <SettingListItemText
+        <SettingListItem
           label={translate('settings.language')}
           value={language?.languageLocalName}
           icon={GlobeIcon}
@@ -64,7 +64,7 @@ export const SettingsScreen = () => {
         />
       </SettingGroup>
       <SettingGroup>
-        <SettingListItemText
+        <SettingListItem
           label={translate('settings.licenses')}
           icon={AwardIcon}
           onNavigate={() => navigation.navigate('SettingsLicenses')}
@@ -72,7 +72,7 @@ export const SettingsScreen = () => {
       </SettingGroup>
       {api.isLoggedIn && (
         <SettingGroup>
-          <SettingListItemText
+          <SettingListItem
             label={translate('general.logout')}
             onPress={logout}
           />
