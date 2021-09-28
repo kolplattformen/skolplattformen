@@ -5,9 +5,9 @@ const Privacy = () => {
         <h1>Öppna Skolplattformen</h1>
         <h2>Integritetspolicy</h2>
         <p>
-          "Öppna Skolplattformen", hädanefter "appen", byggdes av "No free beer
-          HB" som en kommersiell app. Appen hämtar all information från
-          Stockholms Stads skolplattform, hädanefter Skolplattformen, efter
+          "Öppna Skolplattformen", hädanefter "appen", byggs av "Not Free Beer
+          AB" som en kommersiell app. Appen hämtar all information från
+          Stockholms stads skolplattform, hädanefter Skolplattformen, efter
           inloggning via BankID. Appens funktion är därmed direkt knuten till
           att Skolplattformen fungerar. Vi kan endast ta ansvar för att vår kod
           fungerar – inte deras.
@@ -82,7 +82,11 @@ const Privacy = () => {
           du vill vara på den säkra sidan kan du återbesöka den här sidan då och
           då.
         </p>
-        <p>Denna integritetspolicy gäller fr.o.m 2021-02-07</p>
+        <p>Denna integritetspolicy gäller fr.o.m. 2021-09-13. Ändringar i denna policy finns dokumenterade på vår </p>
+        <a href="https://github.com/kolplattformen/skolplattformen/">
+            Github
+          </a>
+        .
         <h3>Kontakta oss</h3>
         <p>
           Tveka inte att kontakta oss om du har några frågor eller förslag till
