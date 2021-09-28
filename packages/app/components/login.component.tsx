@@ -51,19 +51,16 @@ export const Login = () => {
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
-  const [valid, setValid] = useState(false)
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
+
+  const valid = Personnummer.valid(personalIdNumber)
 
   const loginMethods = [
     translate('auth.bankid.OpenOnThisDevice'),
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
   ]
-
-  useEffect(() => {
-    setValid(Personnummer.valid(personalIdNumber))
-  }, [personalIdNumber])
 
   const loginHandler = async () => {
     showModal(false)
@@ -78,7 +75,6 @@ export const Login = () => {
 
   /* Helpers */
   const handleInput = (text: string) => {
-    setValid(Personnummer.valid(text))
     setPersonalIdNumber(text)
   }
 
