@@ -11,7 +11,7 @@ import {
 
 export const settingsAppearanceThemeRouteOptions =
   (): NativeStackNavigationOptions => ({
-    title: translate('settings.appearance'),
+    title: translate('settings.theme'),
   })
 
 const themes = ['light', 'dark']

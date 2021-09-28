@@ -37,7 +37,7 @@ export const SettingsAppearanceScreen = () => {
         </SettingListItemText>
         {!isUsingSystemTheme && (
           <SettingListItemText
-            label="Theme"
+            label={translate('settings.theme')}
             value={translate(`themes.${settingsTheme}`)}
             onNavigate={() => navigation.navigate('SettingsAppearanceTheme')}
           />
