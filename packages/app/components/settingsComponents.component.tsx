@@ -7,6 +7,7 @@ import {
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import { Pressable, TouchableOpacity, View } from 'react-native'
+import { useLangRTL } from '../hooks/useLangRTL'
 import { Sizing } from '../styles'
 import { fontSize } from '../styles/typography'
 import { CheckIcon, RightArrowIcon } from './icon.component'
@@ -28,6 +29,7 @@ export const SettingListItem = ({
 }) => {
   const textHintColor = useTheme()['text-hint-color']
   const styles = useStyleSheet(themedStyles)
+  const isRTL = useLangRTL()
 
   const [isPressing, setIsPressing] = useState(false)
 
@@ -58,7 +60,12 @@ export const SettingListItem = ({
           {children}
         </View>
         {onNavigate && (
-          <View style={styles.arrow}>
+          <View
+            style={[
+              styles.arrow,
+              { transform: [{ rotateY: isRTL ? '180deg' : '0deg' }] },
+            ]}
+          >
             <RightArrowIcon width="24" height="24" fill={textHintColor} />
           </View>
         )}
@@ -176,9 +183,11 @@ const themedStyles = StyleService.create({
   },
   selectableButtonTitle: {
     ...fontSize.base,
+    textAlign: 'left',
   },
   selectableButtonSubtitle: {
     ...fontSize.sm,
     color: 'text-hint-color',
+    textAlign: 'left',
   },
 })

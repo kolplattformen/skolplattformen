@@ -14,7 +14,6 @@ import 'moment/locale/pl'
 import 'moment/locale/ru'
 import 'moment/locale/sv'
 import 'moment/locale/uz-latn'
-import { useEffect, useState } from 'react'
 import { I18nManager } from 'react-native'
 
 const changeListeners: Record<string, any> = {}
@@ -38,18 +37,6 @@ export const isRTL = (langCode: string) => {
     return false
   }
   return rtlList[langCode]
-}
-
-export const useLangCode = () => {
-  const [langCode, setLangCode] = useState(LanguageService.getLanguageCode())
-
-  useEffect(() => {
-    LanguageService.onChange({ key: 'useLanguage' }, (lang) => {
-      setLangCode(lang)
-    })
-  }, [])
-
-  return langCode
 }
 
 export const LanguageService = {

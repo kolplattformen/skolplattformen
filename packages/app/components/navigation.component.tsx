@@ -15,10 +15,11 @@ import {
   lightNavigationTheme,
 } from '../design/navigationThemes'
 import { useAppState } from '../hooks/useAppState'
+import { useLangCode } from '../hooks/useLangCode'
 import useSettingsStorage, {
   initializeSettingsState,
 } from '../hooks/useSettingsStorage'
-import { isRTL, useLangCode } from '../services/languageService'
+import { isRTL } from '../services/languageService'
 import Absence, { absenceRouteOptions } from './absence.component'
 import { Auth, authRouteOptions } from './auth.component'
 import { Child, childRouteOptions } from './child.component'

@@ -12,8 +12,8 @@ import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
+import { useLangCode } from './hooks/useLangCode'
 import useSettingsStorage from './hooks/useSettingsStorage'
-import { useLangCode } from './services/languageService'
 import { translations } from './utils/translation'
 const api = init(fetch, CookieManager)
 
