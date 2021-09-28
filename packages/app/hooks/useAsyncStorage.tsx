@@ -7,10 +7,6 @@ export default function useAsyncStorage<T>(
 ): [T, (val: T) => void] {
   const [storageItem, setStorageItem] = useState(defaultValue)
 
-  useEffect(() => {
-    console.log({ storageItem })
-  }, [storageItem])
-
   async function setStoredValue(value: T) {
     try {
       if (!storageKey) return

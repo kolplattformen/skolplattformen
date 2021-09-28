@@ -1,10 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { act, renderHook } from '@testing-library/react-hooks'
 import AppStorage from '../../services/appStorage'
-import useSettingsStorage from '../useSettingsStorage'
+import useSettingsStorage, { settingsState } from '../useSettingsStorage'
 
 beforeEach(() => {
   AsyncStorage.clear()
+  // TODO: This is a bit ugly. Should probably fix that.
+  settingsState.settings.theme = 'light'
 })
 
 const prefix = AppStorage.settingsStorageKeyPrefix
@@ -36,6 +38,7 @@ test('update value', async () => {
 
   await act(async () => {
     setValue('dark')
+
     await waitForNextUpdate()
 
     const [updateValue] = result.current
