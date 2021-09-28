@@ -4,7 +4,6 @@ import {
   ButtonGroup,
   StyleService,
   useStyleSheet,
-  useTheme,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import { View } from 'react-native'
@@ -28,7 +27,6 @@ export const setLanguageRouteOptions = (): NativeStackNavigationOptions => ({
 export const SetLanguage = () => {
   const navigation = useNavigation()
   const styles = useStyleSheet(themedStyles)
-  const colors = useTheme()
 
   const currentLanguage = LanguageService.getLanguageCode()
 
