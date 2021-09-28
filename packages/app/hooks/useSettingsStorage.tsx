@@ -5,7 +5,7 @@ import AppStorage from '../services/appStorage'
 export const settingsState = proxy({
   hydrated: false,
   settings: {
-    loginMethodIndex: '0',
+    loginMethodIndex: 0,
     usingSystemTheme: true,
     theme: 'light',
   },

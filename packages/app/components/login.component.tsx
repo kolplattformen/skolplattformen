@@ -51,8 +51,7 @@ export const Login = () => {
   const [error, setError] = useState<string | null>(null)
   const [personalIdNumber, setPersonalIdNumber] = useState('')
   const [valid, setValid] = useState(false)
-  const [loginMethodIndex, setLoginMethodIndex] = useState(0)
-  const [cachedLoginMethodIndex, setCachedLoginMethodIndex] =
+  const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
 
   const loginMethods = [
@@ -60,20 +59,6 @@ export const Login = () => {
     translate('auth.bankid.OpenOnAnotherDevice'),
     translate('auth.loginAsTestUser'),
   ]
-
-  useEffect(() => {
-    if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
-      setCachedLoginMethodIndex(loginMethodIndex.toString())
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loginMethodIndex])
-
-  useEffect(() => {
-    if (loginMethodIndex !== parseInt(cachedLoginMethodIndex, 10)) {
-      setLoginMethodIndex(parseInt(cachedLoginMethodIndex, 10))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cachedLoginMethodIndex])
 
   useEffect(() => {
     setValid(Personnummer.valid(personalIdNumber))
