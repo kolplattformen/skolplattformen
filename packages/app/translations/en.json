@@ -101,7 +101,9 @@
         "theme": "Theme",
         "licenses": "Licenses",
         "language": "Language",
-        "themeAuto": "Auto"
+        "themeAuto": "Auto",
+        "useSystemTheme": "Use System Light/Dark Theme"
+
     },
     "themes": {
         "light": "Light",

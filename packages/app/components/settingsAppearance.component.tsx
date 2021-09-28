@@ -30,7 +30,7 @@ export const SettingsAppearanceScreen = () => {
       contentContainerStyle={styles.container}
     >
       <SettingGroup>
-        <SettingListItem label="Use System Light/Dark Theme">
+        <SettingListItem label={translate('settings.useSystemTheme')}>
           <Switch
             value={isUsingSystemTheme}
             onValueChange={setUsingSystemTheme}

@@ -101,7 +101,8 @@
         "theme": "Tema",
         "licenses": "Licenser",
         "language": "Språk",
-        "themeAuto": "Auto"
+        "themeAuto": "Auto",
+        "useSystemTheme": "Använd telefonens inställning"
     },
     "themes": {
         "light": "Ljust",
