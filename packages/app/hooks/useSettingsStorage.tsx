@@ -8,6 +8,7 @@ export const settingsState = proxy({
     loginMethodIndex: 0,
     usingSystemTheme: true,
     theme: 'light',
+    cachedPersonalIdentityNumber: '',
   },
 })
 

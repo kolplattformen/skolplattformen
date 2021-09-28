@@ -23,7 +23,6 @@ import {
 } from 'react-native'
 import { schema } from '../app.json'
 import useSettingsStorage from '../hooks/useSettingsStorage'
-import AppStorage from '../services/appStorage'
 import { Layout } from '../styles'
 import { translate } from '../utils/translation'
 import {
@@ -49,7 +48,9 @@ export const Login = () => {
   const [visible, showModal] = useState(false)
   const [showLoginMethod, setShowLoginMethod] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [personalIdNumber, setPersonalIdNumber] = useState('')
+  const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
+    'cachedPersonalIdentityNumber'
+  )
   const [valid, setValid] = useState(false)
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
@@ -62,33 +63,6 @@ export const Login = () => {
 
   useEffect(() => {
     setValid(Personnummer.valid(personalIdNumber))
-  }, [personalIdNumber])
-
-  useEffect(() => {
-    async function SetPersonalIdNumberIfSaved() {
-      const storedPersonalIdNumber = await AppStorage.getSetting<string>(
-        'cachedPersonalIdentityNumber'
-      )
-
-      if (storedPersonalIdNumber) {
-        setPersonalIdNumber(storedPersonalIdNumber)
-      }
-    }
-
-    SetPersonalIdNumberIfSaved()
-  }, [])
-
-  useEffect(() => {
-    async function SavePersonalIdNumber(numberToSave: string) {
-      if (numberToSave) {
-        await AppStorage.setSetting(
-          'cachedPersonalIdentityNumber',
-          numberToSave
-        )
-      }
-    }
-
-    SavePersonalIdNumber(personalIdNumber)
   }, [personalIdNumber])
 
   const loginHandler = async () => {
