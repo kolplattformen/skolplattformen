@@ -1,3 +1,10 @@
+## [1.46.2](https://github.com/kolplattformen/skolplattformen/compare/v1.46.1...v1.46.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* 🐛 Correct font name so the font shows on Android ([#493](https://github.com/kolplattformen/skolplattformen/issues/493)) ([fd1ff0d](https://github.com/kolplattformen/skolplattformen/commit/fd1ff0dc718a4eaf9aacf3beccdfb0f8b3ba8117))
+
 ## [1.46.1](https://github.com/kolplattformen/skolplattformen/compare/v1.46.0...v1.46.1) (2021-09-23)
 
 
