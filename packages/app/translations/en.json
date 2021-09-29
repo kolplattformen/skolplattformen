@@ -95,6 +95,20 @@
         "notifications": "Notifications",
         "classmates": "Classmates"
     },
+    "settings": {
+        "settings": "Settings",
+        "appearance": "Appearance",
+        "theme": "Theme",
+        "licenses": "Licenses",
+        "language": "Language",
+        "themeAuto": "Auto",
+        "useSystemTheme": "Use System Light/Dark Theme"
+
+    },
+    "themes": {
+        "light": "Light",
+        "dark": "Dark"
+    },
     "news": {
         "backToChild": "Back to child",
         "noNewNewsItemsThisWeek": "No news this week.",

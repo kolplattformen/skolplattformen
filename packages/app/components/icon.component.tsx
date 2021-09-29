@@ -6,6 +6,7 @@ const uiIcon = (name: string) => (props: IconProps) =>
 
 export const AlertIcon = uiIcon('alert-circle-outline')
 export const BackIcon = uiIcon('arrow-back')
+export const BrushIcon = uiIcon('brush')
 export const CalendarOutlineIcon = uiIcon('calendar-outline')
 export const CallIcon = uiIcon('phone-outline')
 export const CheckIcon = uiIcon('checkmark-outline')
@@ -29,3 +30,5 @@ export const GlobeIcon = uiIcon('globe-outline')
 export const ExternalLinkIcon = uiIcon('external-link-outline')
 export const ClipboardIcon = uiIcon('clipboard-outline')
 export const RightArrowIcon = uiIcon('arrow-ios-forward-outline')
+export const QuestionMarkIcon = uiIcon('question-mark')
+export const AwardIcon = uiIcon('award')

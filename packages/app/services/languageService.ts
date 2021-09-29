@@ -1,6 +1,5 @@
-import { I18nManager } from 'react-native'
-import i18n from 'i18n-js'
 import merge from 'deepmerge'
+import i18n from 'i18n-js'
 import moment from 'moment'
 import 'moment/locale/ar'
 import 'moment/locale/de'
@@ -9,12 +8,13 @@ import 'moment/locale/fi'
 import 'moment/locale/fr'
 import 'moment/locale/it'
 import 'moment/locale/ja'
-import 'moment/locale/uz-latn'
 import 'moment/locale/nb'
 import 'moment/locale/nl'
 import 'moment/locale/pl'
 import 'moment/locale/ru'
 import 'moment/locale/sv'
+import 'moment/locale/uz-latn'
+import { I18nManager } from 'react-native'
 
 const changeListeners: Record<string, any> = {}
 
@@ -70,7 +70,12 @@ export const LanguageService = {
   },
 
   onChange: ({ key }: { key: string }, cb: (langCode: string) => void) => {
+    const unsubscribe = () => {
+      delete changeListeners[key]
+    }
     changeListeners[key] = (langCode: string) => cb(langCode)
+
+    return unsubscribe
   },
 }
 

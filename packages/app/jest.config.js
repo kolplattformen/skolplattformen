@@ -10,6 +10,6 @@ module.exports = {
   ],
   testPathIgnorePatterns: ['__tests__/Classmates.test.js'],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|react-navigation|@react-navigation/.*|@ui-kitten|rn-actionsheet-module/.*)',
+    'node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|react-navigation|@react-navigation/.*|@ui-kitten/.*)',
   ],
 }

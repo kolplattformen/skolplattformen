@@ -5,6 +5,7 @@ import {
   NewsItem as NewsItemType,
 } from '@skolplattformen/embedded-api'
 import { useTheme } from '@ui-kitten/components'
+import { Library } from 'libraries.json'
 import React, { useEffect } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
@@ -14,16 +15,42 @@ import {
   lightNavigationTheme,
 } from '../design/navigationThemes'
 import { useAppState } from '../hooks/useAppState'
+import { useLangCode } from '../hooks/useLangCode'
+import useSettingsStorage, {
+  initializeSettingsState,
+} from '../hooks/useSettingsStorage'
+import { isRTL } from '../services/languageService'
 import Absence, { absenceRouteOptions } from './absence.component'
 import { Auth, authRouteOptions } from './auth.component'
 import { Child, childRouteOptions } from './child.component'
 import { childenRouteOptions, Children } from './children.component'
+import { libraryRouteOptions, LibraryScreen } from './library.component'
 import { NewsItem, newsItemRouteOptions } from './newsItem.component'
 import { SetLanguage, setLanguageRouteOptions } from './setLanguage.component'
+import { settingsRouteOptions, SettingsScreen } from './settings.component'
+import {
+  settingsAppearanceRouteOptions,
+  SettingsAppearanceScreen,
+} from './settingsAppearance.component'
+import {
+  settingsAppearanceThemeRouteOptions,
+  SettingsAppearanceThemeScreen,
+} from './settingsAppearanceTheme.component'
+import {
+  settingsLicensesRouteOptions,
+  SettingsLicensesScreen,
+} from './settingsLicenses.component'
 
 export type RootStackParamList = {
   Login: undefined
   Children: undefined
+  Settings: undefined
+  SettingsAppearance: undefined
+  SettingsAppearanceTheme: undefined
+  SettingsLicenses: undefined
+  Library: {
+    library: Library
+  }
   Child: {
     child: ChildType
     color: string
@@ -48,10 +75,19 @@ const linking = {
 export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
 
-  const colorScheme = useColorScheme()
+  const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
+  const [theme] = useSettingsStorage('theme')
+  const systemTheme = useColorScheme()
+  const colorScheme = usingSystemTheme ? systemTheme : theme
+  const langCode = useLangCode()
+
   const colors = useTheme()
 
   const currentAppState = useAppState()
+
+  useEffect(() => {
+    initializeSettingsState()
+  }, [])
 
   useEffect(() => {
     const checkUser = async () => {
@@ -76,9 +112,16 @@ export const AppNavigator = () => {
       <StatusBar />
       <Navigator
         screenOptions={() => ({
-          headerLargeTitle: false,
+          headerLargeTitle: true,
           headerLargeTitleHideShadow: true,
+          direction: isRTL(langCode) ? 'rtl' : 'ltr',
           headerStyle: {
+            backgroundColor:
+              colorScheme === 'dark'
+                ? colors['background-basic-color-2']
+                : colors['background-basic-color-1'],
+          },
+          headerLargeStyle: {
             backgroundColor: colors['background-basic-color-2'],
           },
           headerLargeTitleStyle: {
@@ -112,13 +155,38 @@ export const AppNavigator = () => {
         ) : (
           <>
             <Screen name="Login" component={Auth} options={authRouteOptions} />
-            <Screen
-              name="SetLanguage"
-              component={SetLanguage}
-              options={setLanguageRouteOptions}
-            />
           </>
         )}
+        <Screen
+          name="SetLanguage"
+          component={SetLanguage}
+          options={setLanguageRouteOptions}
+        />
+        <Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={settingsRouteOptions}
+        />
+        <Screen
+          name="SettingsAppearance"
+          component={SettingsAppearanceScreen}
+          options={settingsAppearanceRouteOptions}
+        />
+        <Screen
+          name="SettingsAppearanceTheme"
+          component={SettingsAppearanceThemeScreen}
+          options={settingsAppearanceThemeRouteOptions}
+        />
+        <Screen
+          name="SettingsLicenses"
+          component={SettingsLicensesScreen}
+          options={settingsLicensesRouteOptions}
+        />
+        <Screen
+          name="Library"
+          component={LibraryScreen}
+          options={libraryRouteOptions}
+        />
       </Navigator>
     </NavigationContainer>
   )
