@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/kolplattformen/skolplattformen/compare/v1.46.2...v1.47.0) (2021-09-29)
+
+
+### Features
+
+* 🎸 add settings screen ([#492](https://github.com/kolplattformen/skolplattformen/issues/492)) ([3b307d2](https://github.com/kolplattformen/skolplattformen/commit/3b307d25b3218764d559c4e80e196f7758ca0244))
+
 ## [1.46.2](https://github.com/kolplattformen/skolplattformen/compare/v1.46.1...v1.46.2) (2021-09-29)
 
 
