@@ -23,8 +23,8 @@ import {
 } from 'react-native'
 import { schema } from '../app.json'
 import useSettingsStorage from '../hooks/useSettingsStorage'
+import { useTranslation } from '../hooks/useTranslation'
 import { Layout } from '../styles'
-import { translate } from '../utils/translation'
 import {
   CheckIcon,
   CloseOutlineIcon,
@@ -53,13 +53,14 @@ export const Login = () => {
   )
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
+  const { t } = useTranslation()
 
   const valid = Personnummer.valid(personalIdNumber)
 
   const loginMethods = [
-    translate('auth.bankid.OpenOnThisDevice'),
-    translate('auth.bankid.OpenOnAnotherDevice'),
-    translate('auth.loginAsTestUser'),
+    t('auth.bankid.OpenOnThisDevice'),
+    t('auth.bankid.OpenOnAnotherDevice'),
+    t('auth.loginAsTestUser'),
   ]
 
   const loginHandler = async () => {
@@ -87,7 +88,7 @@ export const Login = () => {
           : `bankid:///?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
-      setError(translate('auth.bankid.OpenManually'))
+      setError(t('auth.bankid.OpenManually'))
     }
   }
 
@@ -109,7 +110,7 @@ export const Login = () => {
       status.on('PENDING', () => console.log('BankID app not yet opened'))
       status.on('USER_SIGN', () => console.log('BankID app is open'))
       status.on('ERROR', () => {
-        setError(translate('auth.loginFailed'))
+        setError(t('auth.loginFailed'))
         showModal(false)
       })
       status.on('OK', () => console.log('BankID ok'))
@@ -126,7 +127,7 @@ export const Login = () => {
         {loginMethodIndex === 1 && (
           <Input
             accessible={true}
-            label={translate('general.socialSecurityNumber')}
+            label={t('general.socialSecurityNumber')}
             autoFocus
             value={personalIdNumber}
             style={styles.pnrInput}
@@ -135,7 +136,7 @@ export const Login = () => {
               <TouchableWithoutFeedback
                 accessible={true}
                 onPress={() => handleInput('')}
-                accessibilityHint={translate(
+                accessibilityHint={t(
                   'login.a11y_clear_social_security_input_field',
                   {
                     defaultValue: 'Rensa fältet för personnummer',
@@ -149,7 +150,7 @@ export const Login = () => {
             onSubmitEditing={(event) => startLogin(event.nativeEvent.text)}
             caption={error || ''}
             onChangeText={(text) => handleInput(text)}
-            placeholder={translate('auth.placeholder_SocialSecurityNumber')}
+            placeholder={t('auth.placeholder_SocialSecurityNumber')}
           />
         )}
         <ButtonGroup style={styles.loginButtonGroup} status="primary">
@@ -175,7 +176,7 @@ export const Login = () => {
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
-            accessibilityHint={translate('login.a11y_select_login_method', {
+            accessibilityHint={t('login.a11y_select_login_method', {
               defaultValue: 'Välj inloggningsmetod',
             })}
           />
@@ -189,7 +190,7 @@ export const Login = () => {
       >
         <Card>
           <Text category="h5" style={styles.bankIdLoading}>
-            {translate('auth.chooseLoginMethod')}
+            {t('auth.chooseLoginMethod')}
           </Text>
           <List
             data={loginMethods}
@@ -215,7 +216,7 @@ export const Login = () => {
               setShowLoginMethod(false)
             }}
           >
-            {translate('general.cancel')}
+            {t('general.cancel')}
           </Button>
         </Card>
       </Modal>
@@ -226,9 +227,7 @@ export const Login = () => {
         backdropStyle={styles.backdrop}
       >
         <Card disabled>
-          <Text style={styles.bankIdLoading}>
-            {translate('auth.bankid.Waiting')}
-          </Text>
+          <Text style={styles.bankIdLoading}>{t('auth.bankid.Waiting')}</Text>
 
           <Button
             status="primary"
@@ -238,7 +237,7 @@ export const Login = () => {
               showModal(false)
             }}
           >
-            {translate('general.cancel')}
+            {t('general.cancel')}
           </Button>
         </Card>
       </Modal>

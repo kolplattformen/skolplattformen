@@ -70,7 +70,12 @@ export const LanguageService = {
   },
 
   onChange: ({ key }: { key: string }, cb: (langCode: string) => void) => {
+    const unsubscribe = () => {
+      delete changeListeners[key]
+    }
     changeListeners[key] = (langCode: string) => cb(langCode)
+
+    return unsubscribe
   },
 }
 

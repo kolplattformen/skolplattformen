@@ -12,7 +12,6 @@ import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
-import { useLangCode } from './hooks/useLangCode'
 import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
 const api = init(fetch, CookieManager)
@@ -61,9 +60,6 @@ export default () => {
   const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
   const [theme] = useSettingsStorage('theme')
   const systemTheme = useColorScheme()
-
-  // For now, this hook is only used to rerender the whole app when the language change.
-  useLangCode()
 
   const colorScheme = usingSystemTheme ? systemTheme : theme
 
