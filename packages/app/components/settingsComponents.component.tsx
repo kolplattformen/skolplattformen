@@ -96,6 +96,7 @@ export const SettingListItemWrapper = ({
 
 export const SettingGroup = ({ children }: { children?: React.ReactNode }) => {
   const styles = useStyleSheet(themedStyles)
+
   return <View style={styles.group}>{children}</View>
 }
 
@@ -164,7 +165,7 @@ const themedStyles = StyleService.create({
   },
   separator: {
     height: 1,
-    marginLeft: 40,
+    marginLeft: Sizing.t4,
     backgroundColor: 'color-separator',
   },
   icon: {

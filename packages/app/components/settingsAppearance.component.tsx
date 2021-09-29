@@ -6,7 +6,11 @@ import useSettingsStorage from '../hooks/useSettingsStorage'
 import { Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'
 import { RootStackParamList } from './navigation.component'
-import { SettingGroup, SettingListItem } from './settingsComponents.component'
+import {
+  SettingGroup,
+  SettingListItem,
+  SettingListSeparator,
+} from './settingsComponents.component'
 
 export const settingsAppearanceRouteOptions =
   (): NativeStackNavigationOptions => ({
@@ -33,11 +37,14 @@ export const SettingsAppearanceScreen = () => {
           />
         </SettingListItem>
         {!isUsingSystemTheme && (
-          <SettingListItem
-            label={translate('settings.theme')}
-            value={translate(`themes.${settingsTheme}`)}
-            onNavigate={() => navigation.navigate('SettingsAppearanceTheme')}
-          />
+          <>
+            <SettingListSeparator />
+            <SettingListItem
+              label={translate('settings.theme')}
+              value={translate(`themes.${settingsTheme}`)}
+              onNavigate={() => navigation.navigate('SettingsAppearanceTheme')}
+            />
+          </>
         )}
       </SettingGroup>
     </ScrollView>
