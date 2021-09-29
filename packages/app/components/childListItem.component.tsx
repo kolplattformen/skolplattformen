@@ -21,7 +21,7 @@ import React from 'react'
 import { TouchableOpacity, useColorScheme, View } from 'react-native'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
-import { translate } from '../utils/translation'
+import { useTranslation } from '../hooks/useTranslation'
 import { DaySummary } from './daySummary.component'
 import { AlertIcon, RightArrowIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
@@ -41,6 +41,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   React.useEffect(() => {}, [child.id])
 
   const navigation = useNavigation<ChildListItemNavigationProp>()
+  const { t } = useTranslation()
   const { data: notifications } = useNotifications(child)
   const { data: news } = useNews(child)
   const { data: classmates } = useClassmates(child)
@@ -91,10 +92,10 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     // Taken from Skolverket
     // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
     const abbrevations = {
-      G: translate('abbrevations.upperSecondarySchool'),
-      GR: translate('abbrevations.compulsorySchool'),
-      F: translate('abbrevations.leisureTimeCentre'),
-      FS: translate('abbrevations.preSchool'),
+      G: t('abbrevations.upperSecondarySchool'),
+      GR: t('abbrevations.compulsorySchool'),
+      F: t('abbrevations.leisureTimeCentre'),
+      FS: t('abbrevations.preSchool'),
     }
 
     return child.status
@@ -143,7 +144,7 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           </Text>
         ))}
         <Text category="c2" style={styles.label}>
-          {translate('navigation.news')}
+          {t('navigation.news')}
         </Text>
         {notificationsThisWeek.slice(0, 3).map((notification, i) => (
           <Text category="p1" key={i}>
@@ -159,14 +160,14 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
         notificationsThisWeek.length ||
         newsThisWeek.length ? null : (
           <Text category="p1" style={styles.noNewNewsItemsText}>
-            {translate('news.noNewNewsItemsThisWeek')}
+            {t('news.noNewNewsItemsThisWeek')}
           </Text>
         )}
 
         {!menu[moment().isoWeekday() - 1] ? null : (
           <>
             <Text category="c2" style={styles.label}>
-              {translate('schedule.lunch')}
+              {t('schedule.lunch')}
             </Text>
             <Text>{menu[moment().isoWeekday() - 1]?.description}</Text>
           </>
@@ -175,14 +176,14 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
           <Button
             accessible
             accessibilityRole="button"
-            accessibilityLabel={`${child.name}, ${translate('abscense.title')}`}
+            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
             appearance="ghost"
             accessoryLeft={AlertIcon}
             status="primary"
             style={styles.absenceButton}
             onPress={() => navigation.navigate('Absence', { child })}
           >
-            {translate('abscense.title')}
+            {t('abscense.title')}
           </Button>
         </View>
       </View>
