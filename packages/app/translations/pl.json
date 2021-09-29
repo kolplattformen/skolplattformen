@@ -133,11 +133,11 @@
         "light": "Jasny"
     },
     "settings": {
-        "useSystemTheme": "Użyj jasnego/ciemnego motywu systemu",
+        "useSystemTheme": "Użyj ustawień systemu",
         "themeAuto": "Auto",
         "language": "Język",
         "licenses": "Licencje",
-        "theme": "Motyw",
+        "theme": "Tryb",
         "appearance": "Wygląd",
         "settings": "Ustawienia"
     }
