@@ -1,3 +1,10 @@
+## [1.47.1](https://github.com/kolplattformen/skolplattformen/compare/v1.47.0...v1.47.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* 🐛 Begränsa höjden på schemat ([#495](https://github.com/kolplattformen/skolplattformen/issues/495)) ([5c81ad3](https://github.com/kolplattformen/skolplattformen/commit/5c81ad3145764c2012f457eaa380d5f2885aaf1b))
+
 # [1.47.0](https://github.com/kolplattformen/skolplattformen/compare/v1.46.2...v1.47.0) (2021-09-29)
 
 
