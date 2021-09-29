@@ -122,8 +122,8 @@ export const Week = ({ child }: WeekProps) => {
   }, [lessons])
 
   return showSchema ? (
-    <TransitionView animation={'fadeInDown'}>
-      <TransitionView style={styles.view} animation={'fadeIn'}>
+    <TransitionView style={styles.view} animation={'fadeInDown'}>
+      <TransitionView style={styles.innerView} animation={'fadeIn'}>
         <TabBar
           selectedIndex={selectedIndex}
           onSelect={(index) => setSelectedIndex(index)}
@@ -157,6 +157,13 @@ export const Week = ({ child }: WeekProps) => {
 const themedStyles = StyleService.create({
   view: {
     backgroundColor: 'background-basic-color-1',
+    maxHeight: '60%',
+    paddingBottom: 0,
+    margin: 0,
+  },
+  innerView: {
+    paddingBottom: 60,
+    margin: 0,
   },
   part: {
     backgroundColor: 'transparent',
