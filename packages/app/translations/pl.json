@@ -127,5 +127,18 @@
         "child": "Dziecko",
         "class": "Klasa",
         "contactsForGuardiansFor": "Dane kontaktowe do opiekuna"
+    },
+    "themes": {
+        "dark": "Ciemny",
+        "light": "Jasny"
+    },
+    "settings": {
+        "useSystemTheme": "Użyj jasnego/ciemnego motywu systemu",
+        "themeAuto": "Auto",
+        "language": "Język",
+        "licenses": "Licencje",
+        "theme": "Motyw",
+        "appearance": "Wygląd",
+        "settings": "Ustawienia"
     }
 }
