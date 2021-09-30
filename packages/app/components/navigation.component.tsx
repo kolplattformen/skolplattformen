@@ -112,7 +112,7 @@ export const AppNavigator = () => {
       <StatusBar />
       <Navigator
         screenOptions={() => ({
-          headerLargeTitle: true,
+          headerLargeTitle: false,
           headerLargeTitleHideShadow: true,
           direction: isRTL(langCode) ? 'rtl' : 'ltr',
           headerStyle: {
