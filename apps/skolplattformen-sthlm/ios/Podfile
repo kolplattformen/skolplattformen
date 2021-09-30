@@ -1,0 +1,36 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '11.0'
+
+target 'app' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => true
+  )
+
+  target 'appTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  if !ENV['CI']
+    use_flipper!
+  end
+
+  post_install do |installer|
+    react_native_post_install(installer)
+  end
+end
+
+target 'app-tvOS' do
+  # Pods for app-tvOS
+
+  target 'app-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end

@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": ["prettier", "eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "env": { "browser": true, "node": true, "jest": true },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    // No typing in project
+    "react/prop-types": "off",
+    // React included automatically in Next.js
+    "react/react-in-jsx-scope": "off",
+    // Allow unescaped characters like '
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  }
+}
+

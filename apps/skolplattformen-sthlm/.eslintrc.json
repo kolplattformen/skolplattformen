@@ -1,0 +1,8 @@
+{
+  "root": true,
+  "extends": ["@react-native-community", "prettier", "plugin:react-native-a11y/ios"],
+  "plugins": ["prettier"],
+  "env": {
+    "jest": true
+  }
+}

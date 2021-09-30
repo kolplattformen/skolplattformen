@@ -1,0 +1,34 @@
+name: Run tests on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Europe/Stockholm
+
+      - name: Install dependencies
+        run: npx lerna bootstrap      
+        
+      - name: Run linting and tests
+        run: |
+          yarn lint
+          yarn test
+        env:
+          CI: true

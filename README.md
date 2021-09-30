@@ -1,94 +1,117 @@
+Give us a ⭐ if you appreciate what we do!
 
+# Öppna skolplattformen
 
-# Skolplattformen
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Patreon](https://img.shields.io/badge/dynamic/json?color=%23e85b46&label=Patreon&query=data.attributes.patron_count&suffix=%20patrons&url=https://www.patreon.com/api/campaigns/6649731)](https://www.patreon.com/oppnaskolplattformen)
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=skolplattformen)
+[![Translation status](https://hosted.weblate.org/widgets/skolplattformen/-/svg-badge.svg)](https://hosted.weblate.org/engage/skolplattformen/)
+[![Translation status](https://hosted.weblate.org/widgets/skolplattformen/-/svg-badge.svg)](https://hosted.weblate.org/engage/skolplattformen/)
+[![Build Status](https://app.bitrise.io/app/8e56bd02bc602da5/status.svg?token=h8gI2dB_jXLurj9EO_fXWw)](https://app.bitrise.io/app/8e56bd02bc602da5)
 
-This project was generated using [Nx](https://nx.dev).
+We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
+Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-🔎 **Smart, Extensible Build Framework**
+This main repository for the project contains the source code for both the app and its [website](https://skolplattformen.org/). \
+The sources for each can be found under [packages/app](packages/app) and [packages/site](packages/site). \
+The respective README files there contain more detailed descriptions.
 
-## Adding capabilities to your workspace
+<img src="packages/site/assets/img/screenshots/screenshot_login.png" width="200"> <img src="packages/site/assets/img/screenshots/screenshot_children.png" width="200">
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+## Contents
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+* [Architecture](#architecture)
+  * [App](#app)
+  * [Embedded API](#embedded-api)
+* [Development](#development)
+* [Contributions](#contributions)
+* [Money](#money)
+* [Disclaimer](#disclaimer)
+* [Contributors](#contributors)
+* [License](#license)
 
-Below are our core plugins:
+## Architecture
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+The project consists of two main parts: the app and the embedded API.
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+### App
 
-## Generate an application
+The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Our main goal with the app is to make it as fast and easy to use as possible. \
+We're starting small, with more features being added over time.
 
-> You can use any of the plugins above to generate applications as well.
+For more information, check out the [source code](packages/app).
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+### Embedded API
 
-## Generate a library
+We decided to encapsulate our API implementation into a separate npm package. \
+By not having to worry about the complex nature of the official API, the app becomes light-weight. \
+It also makes it easier for others to develop their own applications for the Skolplattformen API.
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+The embedded API has its own project page at [https://github.com/kolplattformen/embedded-api](https://github.com/kolplattformen/embedded-api). \
+To make it easier to use the embedded API in the app, we also created a set of React hooks, available at [https://github.com/kolplattformen/api-hooks](https://github.com/kolplattformen/api-hooks).
 
-> You can also use any of the plugins above to generate libraries as well.
+**Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
+Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
 
-Libraries are shareable across libraries and applications. They can be imported from `@skolplattformen/mylib`.
+## Development
 
-## Development server
+To clone and build the project, you first need to install the required dependencies:
+```bash
+$ sudo apt install git npm
+$ npx lerna bootstrap
+```
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Clone the repo with
+```bash
+$ git clone https://github.com/kolplattformen/skolplattformen.git
+```
 
-## Code scaffolding
+The README files for the [app](packages/app) and [website](packages/site) contain further instructions.
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+## Contributions
 
-## Build
+We want this project to be a citizen movement. If you find something you think needs fixing, we encourage you to do so yourself, and test it out on your machine first. \
+Once done, create a _pull request_ where you explain why we should incorporate your fix into the project. \
+If you're new to GitHub, there's a number of excellent guides available, such as [this one on forking projects and making pull requests](https://guides.github.com/activities/forking/).
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+There are many ways to contribute to the project. \
+If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know when something isn't working properly. \
+We're super duper happy for both issues and pull requests, and we try to answer all of them as soon as humanly possible.
 
-## Running unit tests
+Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen/) into a new language, or to improve existing translations.
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+_Working together leverages available skills and experience in improving the project, ultimately creating the best possible experience_.
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+## Money
 
-## Running end-to-end tests
+Even if we definitely stand by our claim that libre software doesn't mean gratis, we have now offered it free of charge on both the Apple App Store and on Google Play. With this different model, you can extend your appreciation to all our contributors. Send some köttbullar for the kids through voluntary donations on [https://patreon.com/oppnaskolplattformen](https://patreon.com/oppnaskolplattformen) ❤️.
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+## Disclaimer
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+This initiative was started by frustrated parents without any affiliation with the City of Stockholm. \
+We just want to find and read newsletters with greater ease, and register sick-leave in a convenient manner.
 
-## Understand your workspace
+If you're offended by this initiative, rest assured there is no reason to be — we come in peace.
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+## Contributors
 
-## Further help
+- [Christian Landgren](https://github.com/irony)
+- [Johan Öbrink](https://github.com/JohanObrink)
+- [Erik Hellman](https://github.com/ErikHellman)
+- [Rickard Natt och Dag](https://github.com/believer)
+- [Viktor Sarström](https://github.com/viktorlarsson)
+- [Andreas Eriksson](https://github.com/whyer)
+- [Kajetan Kazimierczak](https://github.com/kajetan-kazimierczak)
+- You?
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+## License
 
+Öppna skolplattformen is copyright 2020–2021 Not Free Beer AB.
 
+Licensed under the [Apache License, Version 2.0](LICENSE) (the "License"); you may use Öppna skolplattformen in compliance with the License. A copy of the License is included with this repository.
 
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the [License](LICENSE) for the specific language governing permissions and limitations under the License.
