@@ -5,23 +5,28 @@
  * @format
  */
 
-const MetroConfig = require('@ui-kitten/metro-config')
+const { withNxMetro } = require('@nrwl/react-native')
 
-/**
- * @see https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance
- */
-const evaConfig = {
-  evaPackage: '@eva-design/eva',
-  customMappingPath: './design/mapping.json',
-}
+// UI Kitten disabled for now
+// const MetroConfig = require('@ui-kitten/metro-config')
+// /**
+//  * @see https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance
+//  */
+// const evaConfig = {
+//   evaPackage: '@eva-design/eva',
+//   customMappingPath: './design/mapping.json',
+// }
+// const config = MetroConfig.create(evaConfig, {
+//   transformer: {
+//     getTransformOptions: async () => ({
+//       transform: {
+//         experimentalImportSupport: false,
+//         inlineRequires: true,
+//       },
+//     }),
+//   },
+// })
 
-module.exports = MetroConfig.create(evaConfig, {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
-})
+const config = {}
+
+module.exports = withNxMetro(config)
