@@ -1,3 +1,11 @@
+## [1.47.2](https://github.com/kolplattformen/skolplattformen/compare/v1.47.1...v1.47.2) (2021-09-30)
+
+
+### Bug Fixes
+
+* 🐛 Hämta alla aviseringar och sortera på senast ändrad ([71cb230](https://github.com/kolplattformen/skolplattformen/commit/71cb230b92901bf6c15f81126ed51a00c79afc4f))
+* 🐛 Tog bort headerLargeTitle från navigationComponent ([73019af](https://github.com/kolplattformen/skolplattformen/commit/73019af8f4b2321fbba5c8c4d996fdbda1086c5d))
+
 ## [1.47.1](https://github.com/kolplattformen/skolplattformen/compare/v1.47.0...v1.47.1) (2021-09-29)
 
 
