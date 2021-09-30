@@ -16,7 +16,9 @@ export const Notification = ({ item }: NotificationProps) => {
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
 
-  const displayDate = item.dateCreated
+  const displayDate = item.dateModified
+    ? moment(item.dateModified).fromNow()
+    : item.dateCreated
     ? moment(item.dateCreated).fromNow()
     : null
 
