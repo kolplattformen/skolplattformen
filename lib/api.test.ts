@@ -171,7 +171,8 @@ describe('api', () => {
         expect(user).toEqual({
           firstName: 'Namn',
           lastName: 'Namnsson',
-          isAuthenticated: true
+          isAuthenticated: true,
+          personalNumber: "195001182046",
         })
 
         const children = await api.getChildren()

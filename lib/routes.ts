@@ -32,7 +32,7 @@ export const newsDetails = (childId: string, newsId: string) =>
 export const image = (url: string) => `${urlLoggedIn}/NewsBanner?url=${url}`
 
 export const notifications = (childId: string) =>
-  `${urlLoggedIn}/Overview/GetNotification?childId=${childId}`
+ `${urlLoggedIn}/notifications/getnotifications?childId=${childId}`
 
 export const menuRss = (childId: string) =>
   `${urlLoggedIn}/Matsedel/GetMatsedelRSS?childId=${childId}`

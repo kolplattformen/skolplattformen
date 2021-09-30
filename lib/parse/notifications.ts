@@ -3,7 +3,7 @@ import { parseDate } from '../utils/dateHandling'
 import { Notification } from '../types'
 
 export const notification = ({
-  notification: { messageid, dateCreated },
+  notification: { messageid, dateCreated, dateModified },
   notificationMessage: {
     messages: {
       message: {
@@ -21,6 +21,7 @@ export const notification = ({
   sender: name,
   url: linkbackurl,
   dateCreated: parseDate(dateCreated) || '',
+  dateModified: parseDate(dateModified) || '',
   category,
   type,
 })

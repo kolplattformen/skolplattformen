@@ -22,7 +22,7 @@ exports[`handles route news 1`] = `"https://etjanst.stockholm.se/vardnadshavare/
 
 exports[`handles route newsDetails 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/News/GetNewsArticle?newsItemId=321&childId=123"`;
 
-exports[`handles route notifications 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Overview/GetNotification?childId=123"`;
+exports[`handles route notifications 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/notifications/getnotifications?childId=123"`;
 
 exports[`handles route schedule 1`] = `"https://etjanst.stockholm.se/vardnadshavare/inloggad2/Calender/GetSchema?childId=123&startDate=2021-01-01&endDate=2021-01-01"`;
 

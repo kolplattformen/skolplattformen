@@ -138,6 +138,7 @@ export interface Notification {
   id: string
   sender: string
   dateCreated: string
+  dateModified: string
   message: string
   url: string
   category: string | null

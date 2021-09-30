@@ -56,6 +56,7 @@ it(' notifications correctly', () => {
       sender: 'Elevdokumentation',
       url: 'https://elevdokumentation.stockholm.se/loa3/gradesStudent.do',
       dateCreated: '2020-12-18T14:59:46.340Z',
+      dateModified: "2020-12-18T15:59:46.340Z",
       category: null,
       type: 'webnotify',
     },
