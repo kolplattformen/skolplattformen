@@ -53,8 +53,11 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
     moment().add(7, 'days').toISOString()
   )
 
-  const notificationsThisWeek = notifications.filter(({ dateCreated }) =>
-    dateCreated ? moment(dateCreated).isSame(moment(), 'week') : false
+  const notificationsThisWeek = notifications.filter(
+    ({ dateCreated, dateModified }) => {
+      const date = dateModified || dateCreated
+      return date ? moment(date).isSame(moment(), 'week') : false
+    }
   )
 
   const newsThisWeek = news.filter(({ modified, published }) => {

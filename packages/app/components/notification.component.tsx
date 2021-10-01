@@ -16,11 +16,8 @@ export const Notification = ({ item }: NotificationProps) => {
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
 
-  const displayDate = item.dateModified
-    ? moment(item.dateModified).fromNow()
-    : item.dateCreated
-    ? moment(item.dateCreated).fromNow()
-    : null
+  const date = item.dateModified || item.dateCreated
+  const displayDate = date ? moment(date).fromNow() : null
 
   const sharedCookiesEnabled: boolean = Boolean(
     item.url && item.url.startsWith('https://start.unikum.net/')
