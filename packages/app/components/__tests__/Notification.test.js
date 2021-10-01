@@ -7,6 +7,7 @@ const defaultItem = {
   sender: 'Planering',
   category: 'Bedömning',
   dateCreated: '2021-02-15T09:13:28.484Z',
+  dateModified: '2021-02-15T09:14:28.484Z',
 }
 
 const setup = (customProps = {}) => {
@@ -22,8 +23,19 @@ beforeEach(() => {
   MockDate.set('2021-02-15T09:30:28.484Z')
 })
 
-test('renders subtitle with date', () => {
+test('renders subtitle with modified date', () => {
   const screen = setup()
+
+  expect(screen.getByText('Bedömning • för 16 minuter sedan')).toBeTruthy()
+})
+
+test('renders subtitle with created date', () => {
+  const itemWithoutModifiedDate = {
+    ...defaultItem,
+    dateModified: undefined,
+  }
+
+  const screen = setup({ item: itemWithoutModifiedDate })
 
   expect(screen.getByText('Bedömning • för 17 minuter sedan')).toBeTruthy()
 })
@@ -32,6 +44,7 @@ test('renders subtitle without date', () => {
   const itemWithoutDate = {
     ...defaultItem,
     dateCreated: undefined,
+    dateModified: undefined,
   }
 
   const screen = setup({ item: itemWithoutDate })
@@ -47,5 +60,5 @@ test('renders subtitle without category', () => {
 
   const screen = setup({ item: itemWithoutCategory })
 
-  expect(screen.getByText('för 17 minuter sedan')).toBeTruthy()
+  expect(screen.getByText('för 16 minuter sedan')).toBeTruthy()
 })

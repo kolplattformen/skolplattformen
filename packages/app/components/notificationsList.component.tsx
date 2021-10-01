@@ -10,14 +10,6 @@ export const NotificationsList = () => {
   const child = useChild()
   const { data } = useNotifications(child)
 
-  data.sort((a, b) =>
-    a.dateModified > b.dateModified
-      ? -1
-      : b.dateModified > a.dateModified
-      ? 1
-      : 0
-  )
-
   return (
     <List
       style={styles.container}
