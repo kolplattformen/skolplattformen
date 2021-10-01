@@ -1259,7 +1259,7 @@
     color "^3.1.3"
     react-native-iphone-x-helper "^1.3.0"
 
-"@react-navigation/core@^5.15.3":
+"@react-navigation/core@^5.16.1":
   version "5.16.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.16.1.tgz#e0d308bd9bbd930114ce55c4151806b6d7907f69"
   integrity sha512-3AToC7vPNeSNcHFLd1h71L6u34hfXoRAS1CxF9Fc4uC8uOrVqcNvphpeFbE0O9Bw6Zpl0BnMFl7E5gaL3KGzNA==
@@ -1270,12 +1270,12 @@
     query-string "^6.13.6"
     react-is "^16.13.0"
 
-"@react-navigation/native@5.9.4":
-  version "5.9.4"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.9.4.tgz#414c044423c58aa1cdde1b6494309e0b51da08b8"
-  integrity sha512-BUCrOXfZDdKWBqM8OhOKQhCX5we4HUo5XG6tCQtVqQAep+7UcApZmMUuemUXDxVe8NPESUpoUlB0RaEpyIdfTQ==
+"@react-navigation/native@5.9.8":
+  version "5.9.8"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.9.8.tgz#ac76ee6390ea7ce807486ca5c38d903e23433a97"
+  integrity sha512-DNbcDHXQPSFDLn51kkVVJjT3V7jJy2GztNYZe/2bEg29mi5QEcHHcpifjMCtyFKntAOWzKlG88UicIQ17UEghg==
   dependencies:
-    "@react-navigation/core" "^5.15.3"
+    "@react-navigation/core" "^5.16.1"
     escape-string-regexp "^4.0.0"
     nanoid "^3.1.15"
 
@@ -6893,10 +6893,10 @@ react-native-markdown-display@7.0.0-alpha.2:
     prop-types "^15.7.2"
     react-native-fit-image "^1.5.5"
 
-react-native-modal-datetime-picker@9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-9.2.0.tgz#6a5fe70dd0dc86e7f594b76c1c84bb2d9796619a"
-  integrity sha512-8/AB4UJ56oytw9UwrUf/VouI4TNmLUEedKnvfdybi8Nse3nanCN8LagEUR6tuFxFT6aM6bCJyARiReznqDIwHA==
+react-native-modal-datetime-picker@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-11.0.0.tgz#98322f6f69622e3a77e04400f60a759e1e7c0f70"
+  integrity sha512-oWzNpaYg1u6wBEi00kEBFBsbwD8RxMY2z+hHNf1OTcTCDKTJNanqSAEZTs2mkxHYeVlBJaTsqNCcF6tODJJhLg==
   dependencies:
     prop-types "^15.7.2"
 
