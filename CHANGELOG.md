@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/kolplattformen/skolplattformen/compare/v1.47.2...v1.48.0) (2021-10-01)
+
+
+### Features
+
+* 🎸 Notifications use modified, then created date ([a655bbc](https://github.com/kolplattformen/skolplattformen/commit/a655bbc590b2ac8016bc4ccb73030aa68ce1e891))
+
 ## [1.47.2](https://github.com/kolplattformen/skolplattformen/compare/v1.47.1...v1.47.2) (2021-09-30)
 
 
