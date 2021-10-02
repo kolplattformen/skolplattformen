@@ -104,6 +104,8 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
       const msSinceEpoch = calenderDate.valueOf() // milliseconds since epoch
       Linking.openURL('content://com.android.calendar/time/' + msSinceEpoch)
     }
+
+    closeOverflowMenu()
   }
 
   return (

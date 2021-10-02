@@ -50,6 +50,8 @@
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app can add calendar events</string>
+	<key>NSContactsUsageDescription</key>
+	<string>The app may need to access Contacts data to choose the correct display name or avatar for a contact in a calendar.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>

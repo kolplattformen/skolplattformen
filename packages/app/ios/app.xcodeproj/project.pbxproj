@@ -38,6 +38,7 @@
 		AC5E863985C04D72B5806B58 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02B78F6C72354B2D8171239D /* Poppins-Thin.ttf */; };
 		BB34E03413EB4CDFA59766B1 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB6EB5293E4C48098CBD53C2 /* Poppins-Regular.ttf */; };
 		D9ADC20976E0E72048A61C0F /* libPods-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD5B2AC9AE535CDC53E5ABC /* libPods-app.a */; };
+		E1798C752708A6C3002ACE28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1798C772708A6C3002ACE28 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		C662C3ABDE25EE4A48FF30A8 /* libPods-app-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-app-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9AC377D6B7744ECBBEA0A8A /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		CF1AED6E082594F63E0373C7 /* Pods-app-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-app-tvOS/Pods-app-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E1798C762708A6C3002ACE28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1798C782708A6CF002ACE28 /* sv-SE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sv-SE"; path = "sv-SE.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E251C7BB03F74441B4357419 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		E678719E4DD7E7281DC8F122 /* Pods-app-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-app-tvOSTests/Pods-app-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		EB6EB5293E4C48098CBD53C2 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -255,6 +258,7 @@
 				A9CB7679337840D3BD256A13 /* Poppins-SemiBoldItalic.ttf */,
 				02B78F6C72354B2D8171239D /* Poppins-Thin.ttf */,
 				E251C7BB03F74441B4357419 /* Poppins-ThinItalic.ttf */,
+				E1798C772708A6C3002ACE28 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -410,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				E1798C752708A6C3002ACE28 /* InfoPlist.strings in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6D069850985349ABB76BDD0A /* Poppins-Black.ttf in Resources */,
 				417D579C3DC24A9684D24EDD /* Poppins-BlackItalic.ttf in Resources */,
@@ -462,7 +467,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		153B30BF50DE0EA8EA07ACD9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -735,6 +740,18 @@
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E1798C772708A6C3002ACE28 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1798C762708A6C3002ACE28 /* en */,
+				E1798C782708A6CF002ACE28 /* sv-SE */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {

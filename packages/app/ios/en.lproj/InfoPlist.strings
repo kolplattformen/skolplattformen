@@ -1,0 +1,2 @@
+NSCalendarsUsageDescription = "This app can add calendar events";
+NSContactsUsageDescription = "The app may need to access Contacts data to choose the correct display name or avatar for a contact in a calendar";

@@ -1,0 +1,2 @@
+NSCalendarsUsageDescription = "Appen kan lägga till saker i kalendern";
+NSContactsUsageDescription = "Appen kan behöva komma åt kontakter för att visa namn eller avatar för en kontakt i kalendern";
