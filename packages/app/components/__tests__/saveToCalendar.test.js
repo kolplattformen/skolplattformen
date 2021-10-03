@@ -1,9 +1,14 @@
-import { fireEvent } from '@testing-library/react-native'
+import {
+  fireEvent,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react-native'
 import React from 'react'
-import RNCalendarEvents from 'react-native-calendar-events'
+import * as AddCalendarEvent from 'react-native-add-calendar-event'
 import { render } from '../../utils/testHelpers'
 import { SaveToCalendar } from '../saveToCalendar.component'
 import Toast from 'react-native-simple-toast'
+import { Linking, Platform } from 'react-native'
 
 jest.mock('react-native-simple-toast', () => ({
   SHORT: 'short',
@@ -25,9 +30,8 @@ jest.mock('react-native', () => {
   return RN
 })
 
-jest.mock('react-native-calendar-events', () => ({
-  saveEvent: jest.fn().mockResolvedValue('52'),
-  requestPermissions: jest.fn().mockResolvedValue('authorized'),
+jest.mock('react-native-add-calendar-event', () => ({
+  presentEventCreatingDialog: jest.fn().mockResolvedValue({ action: 'SAVED' }),
 }))
 
 const defaultEvent = {
@@ -35,10 +39,12 @@ const defaultEvent = {
   startDate: '2021-06-19 13:00',
   endDate: '2021-06-19 14:00',
   location: 'Gubbängsskolan',
+  allDay: false,
 }
 
 const defaultProps = {
   event: defaultEvent,
+  child: { name: 'Olle Testperson' },
 }
 
 const setup = (customProps = {}) => {
@@ -63,94 +69,116 @@ test('renders save to calendar', () => {
 
   fireEvent.press(screen.getByTestId('actionsButton'))
 
-  expect(screen.getByText(/Spara/i)).toBeTruthy()
-})
-
-test('requests calendar permissons', () => {
-  const screen = setup()
-
-  fireEvent.press(screen.getByTestId('actionsButton'))
-  fireEvent.press(screen.getByText(/Spara/i))
-
-  expect(RNCalendarEvents.requestPermissions).toHaveBeenCalled()
+  expect(screen.getByTestId('saveToCalendar')).toBeTruthy()
 })
 
 test('can save an event to the calendar', async () => {
+  const screen = setup()
+
+  fireEvent.press(screen.getByTestId('actionsButton'))
+  fireEvent.press(screen.getByTestId('saveToCalendar'))
+
+  expect(AddCalendarEvent.presentEventCreatingDialog).toHaveBeenCalledWith({
+    allDay: false,
+    endDate: '2021-06-19T12:00:00.000Z',
+    startDate: '2021-06-19T11:00:00.000Z',
+    title: 'Olle Testperson - Utvecklingssamtal',
+    location: defaultEvent.location,
+  })
+
+  await waitForElementToBeRemoved(() => screen.getByTestId('saveToCalendar'))
+})
+
+test('removes any null values from the event', async () => {
   const screen = setup({
     event: {
       ...defaultEvent,
       location: null,
-      description: null,
     },
   })
 
   fireEvent.press(screen.getByTestId('actionsButton'))
-  fireEvent.press(screen.getByText(/Spara/i))
-  await RNCalendarEvents.requestPermissions()
+  fireEvent.press(screen.getByTestId('saveToCalendar'))
 
-  expect(RNCalendarEvents.saveEvent).toHaveBeenCalledWith('Utvecklingssamtal', {
-    startDate: '2021-06-19T11:00:00.000Z',
+  expect(AddCalendarEvent.presentEventCreatingDialog).toHaveBeenCalledWith({
+    allDay: false,
     endDate: '2021-06-19T12:00:00.000Z',
-  })
-})
-
-test('removes any null values from the event', async () => {
-  const screen = setup()
-
-  fireEvent.press(screen.getByTestId('actionsButton'))
-  fireEvent.press(screen.getByText(/Spara/i))
-  await RNCalendarEvents.requestPermissions()
-
-  expect(RNCalendarEvents.saveEvent).toHaveBeenCalledWith('Utvecklingssamtal', {
     startDate: '2021-06-19T11:00:00.000Z',
-    endDate: '2021-06-19T12:00:00.000Z',
-    location: 'Gubbängsskolan',
+    title: 'Olle Testperson - Utvecklingssamtal',
   })
+
+  await waitForElementToBeRemoved(() => screen.getByTestId('saveToCalendar'))
 })
 
 test('calls toast with success', async () => {
   const screen = setup()
 
   fireEvent.press(screen.getByTestId('actionsButton'))
-  fireEvent.press(screen.getByText(/Spara/i))
-  await RNCalendarEvents.requestPermissions()
-  await RNCalendarEvents.saveEvent()
+  fireEvent.press(screen.getByTestId('saveToCalendar'))
 
-  expect(Toast.showWithGravity).toHaveBeenCalledWith(
-    '✔️ Sparad till kalender',
-    'short',
-    'bottom'
+  await waitFor(() =>
+    expect(Toast.showWithGravity).toHaveBeenCalledWith(
+      '✔️ Sparad till kalender',
+      'short',
+      'bottom'
+    )
   )
 })
 
 test('says if something goes wrong', async () => {
   const screen = setup()
-  RNCalendarEvents.saveEvent.mockRejectedValueOnce()
+
+  AddCalendarEvent.presentEventCreatingDialog.mockImplementationOnce(() => {
+    throw new Error('Error from test')
+  })
 
   fireEvent.press(screen.getByTestId('actionsButton'))
-  fireEvent.press(screen.getByText(/Spara/i))
-  await RNCalendarEvents.requestPermissions()
-  await RNCalendarEvents.saveEvent()
+  fireEvent.press(screen.getByTestId('saveToCalendar'))
 
-  expect(Toast.showWithGravity).toHaveBeenCalledWith(
-    'Något gick fel',
-    'short',
-    'bottom'
+  await waitFor(() =>
+    expect(Toast.showWithGravity).toHaveBeenCalledWith(
+      'Något gick fel',
+      'short',
+      'bottom'
+    )
   )
 })
 
 test('tells user if they havent authorized calendar', async () => {
   const screen = setup()
-  RNCalendarEvents.requestPermissions.mockResolvedValueOnce('not auth')
+
+  AddCalendarEvent.presentEventCreatingDialog.mockImplementationOnce(() => {
+    throw 'permissionNotGranted'
+  })
 
   fireEvent.press(screen.getByTestId('actionsButton'))
-  fireEvent.press(screen.getByText(/Spara/i))
-  await RNCalendarEvents.requestPermissions()
-  await RNCalendarEvents.saveEvent()
+  fireEvent.press(screen.getByTestId('saveToCalendar'))
 
   expect(Toast.showWithGravity).toHaveBeenCalledWith(
     'Du måste godkänna åtkomst till kalendern',
     'short',
     'bottom'
+  )
+})
+
+test('can open device calendar to day on IOS', async () => {
+  const screen = setup()
+
+  fireEvent.press(screen.getByTestId('actionsButton'))
+  fireEvent.press(screen.getByTestId('openDayInDeviceCalendar'))
+
+  expect(Linking.openURL).toHaveBeenCalledWith('calshow:645793200')
+})
+
+test('can open device calendar to day on Android', async () => {
+  const screen = setup()
+
+  Platform.OS = 'android'
+
+  fireEvent.press(screen.getByTestId('actionsButton'))
+  fireEvent.press(screen.getByTestId('openDayInDeviceCalendar'))
+
+  expect(Linking.openURL).toHaveBeenCalledWith(
+    'content://com.android.calendar/time/1624100400000'
   )
 })

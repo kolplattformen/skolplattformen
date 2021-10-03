@@ -43,8 +43,7 @@
     "react-native": "0.65.1",
     "react-native-add-calendar-event": "^4.0.0",
     "react-native-animatable": "^1.3.3",
- 
-	"react-native-dev-menu": "^4.0.2",
+	  "react-native-dev-menu": "^4.0.2",
     "react-native-device-info": "^8.3.3",
     "react-native-fix-image": "2.1.0",
     "react-native-gesture-handler": "^1.10.3",

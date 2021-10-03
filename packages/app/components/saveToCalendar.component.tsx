@@ -46,6 +46,8 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
 
   const openEventCreateDialog = async ({
     title,
+    description,
+    allDay,
     startDate,
     endDate,
     location,
@@ -63,26 +65,26 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
     const firstName = studentName(child.name)
     const titleWithChildPrefix = `${firstName} - ${title}`
 
-    const detailsWithoutEmpty = removeEmptyValues(details)
     const eventConfig: AddCalendarEvent.CreateOptions = {
       title: titleWithChildPrefix,
-      startDate: detailsWithoutEmpty.startDate,
-      endDate: detailsWithoutEmpty.endDate,
-      notes: event.description,
-      allDay: event.allDay,
-      location: event.location,
+      startDate: details.startDate,
+      endDate: details.endDate,
+      notes: description,
+      allDay: allDay,
+      location: location,
     }
+
+    const configWithoutEmptyVals = removeEmptyValues(eventConfig)
 
     try {
       const result = await AddCalendarEvent.presentEventCreatingDialog(
-        eventConfig
+        configWithoutEmptyVals
       )
 
       if (result.action === 'SAVED') {
         toast(translate('calender.saveToCalenderSuccess'))
       }
     } catch (error) {
-      console.log(error)
       if (error === 'permissionNotGranted') {
         toast(translate('calender.approveAccessToCalender'))
       } else {
@@ -116,6 +118,7 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
     >
       <MenuItem
         accessoryLeft={PlusSquareOutline}
+        testID="saveToCalendar"
         title={(evaProps) => (
           <Text {...evaProps} maxFontSizeMultiplier={2}>
             {translate('calender.saveToCalender')}
@@ -125,6 +128,7 @@ export const SaveToCalendar = ({ event, child }: SaveToCalendarProps) => {
       />
       <MenuItem
         accessoryLeft={CalendarOutlineIcon}
+        testID="openDayInDeviceCalendar"
         title={(evaProps) => (
           <Text {...evaProps} maxFontSizeMultiplier={2}>
             {translate('calender.openDayInDeviceCalendar')}
