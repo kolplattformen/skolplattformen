@@ -123,7 +123,7 @@ workflows:
         title: Do anything with Script step
     - yarn@0:
         inputs:
-        - workdir: packages/app
+        - workdir: apps/skolplattformen-sthlm
         - command: install
     - install-missing-android-tools@2:
         inputs:
@@ -152,11 +152,11 @@ workflows:
         title: Do anything with Script step
     - yarn@0:
         inputs:
-        - workdir: packages/app
+        - workdir: apps/skolplattformen-sthlm
         - command: install
     - yarn@0:
         inputs:
-        - workdir: packages/app
+        - workdir: apps/skolplattformen-sthlm
         - command: test
     - deploy-to-bitrise-io@1: {}
     description: Build and deploy
@@ -164,7 +164,7 @@ app:
   envs:
   - opts:
       is_expand: false
-    PROJECT_LOCATION: packages/app/android
+    PROJECT_LOCATION: apps/skolplattformen-sthlm/android
   - opts:
       is_expand: false
     MODULE: app
@@ -173,7 +173,7 @@ app:
     VARIANT: debug
   - opts:
       is_expand: false
-    BITRISE_PROJECT_PATH: packages/app/ios/app.xcworkspace
+    BITRISE_PROJECT_PATH: apps/skolplattformen-sthlm/ios/app.xcworkspace
   - opts:
       is_expand: false
     BITRISE_SCHEME: app
