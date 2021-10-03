@@ -1,0 +1,23 @@
+{
+    "subjects": {
+        "TN": "Zei­chen­spra­che",
+        "SVA": "Schewdishe als främdsprache",
+        "SV": "Schwedish",
+        "SL": "Handwerk",
+        "SH": "Staats­bür­ger­kun­de",
+        "RE": "Re­li­gi­on",
+        "HI": "Historie",
+        "GE": "Geografie",
+        "NO": "Naturwissenschaftlichen Themen",
+        "SO": "Gesellschaftsorientierte Themen",
+        "KE": "Chemie",
+        "FY": "Physik",
+        "BI": "Biologie",
+        "MU": "Musik",
+        "MA": "Mathematik",
+        "IDH": "Sport und Gesundheit",
+        "HKK": "Hauswirtschaft",
+        "EN": "Englisch",
+        "BL": "Kunst"
+    }
+}
