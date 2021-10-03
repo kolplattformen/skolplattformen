@@ -125,6 +125,8 @@ const getRouteTitleFromName = (routeName: string) => {
       return translate('navigation.menu')
     case 'Classmates':
       return translate('navigation.classmates')
+    default:
+      return routeName
   }
 }
 

@@ -21,7 +21,7 @@ import { translate } from '../utils/translation'
 interface ContactMenuProps {
   contact: Classmate
   selected: boolean
-  setSelected: (value?: number | null) => void
+  setSelected: (value?: Classmate | undefined) => void
 }
 
 export const ContactMenu = ({
@@ -54,7 +54,7 @@ export const ContactMenu = ({
 
   const handleBackdropPress = () => {
     setVisible(false)
-    setSelected(null)
+    setSelected(undefined)
   }
 
   const shouldDisplay = (option?: string) => (option ? 'flex' : 'none')
