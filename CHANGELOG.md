@@ -1,3 +1,155 @@
+# [2.0.0](https://github.com/kolplattformen/skolplattformen/compare/v1.48.0...v2.0.0) (2021-10-03)
+
+
+### Bug Fixes
+
+* 🐛 add 2 to xsrf header and use nav controller script again ([d1a4877](https://github.com/kolplattformen/skolplattformen/commit/d1a4877ff457d908710020d81071955f33794ad9))
+* 🐛 add missing headers for fetching children ([68c99cb](https://github.com/kolplattformen/skolplattformen/commit/68c99cb1fbecd28340d1da639759fc11cb156e8c))
+* 🐛 Add personal identity number to test user ([f977143](https://github.com/kolplattformen/skolplattformen/commit/f97714346e671eab0a6c44b1fb5d3779d5d09d37))
+* 🐛 added "Rast" to misc words in sv,en,pl translations ([#11](https://github.com/kolplattformen/skolplattformen/issues/11)) ([4da06bb](https://github.com/kolplattformen/skolplattformen/commit/4da06bb16ee04674c5552ec37048f52a0e2a95b3))
+* 🐛 Added build step ([#38](https://github.com/kolplattformen/skolplattformen/issues/38)) ([db0faf2](https://github.com/kolplattformen/skolplattformen/commit/db0faf28bfccf8b057cf94e4b4544d52194ba6e6))
+* 🐛 Added isAuthenticated to test user ([#119](https://github.com/kolplattformen/skolplattformen/issues/119)) ([766f4ff](https://github.com/kolplattformen/skolplattformen/commit/766f4fff52ef438e79095772a0214140b0aec99e))
+* 🐛 Added luxon to fix getSchedule ([#13](https://github.com/kolplattformen/skolplattformen/issues/13)) ([fe1729c](https://github.com/kolplattformen/skolplattformen/commit/fe1729c8729d54e82edc6f287456ffc582e1bdb4))
+* 🐛 Added missing types ([3d59035](https://github.com/kolplattformen/skolplattformen/commit/3d59035a20a5eef2aea7f00fab09ec894a442c1d))
+* 🐛 Adjusted cookie handling ([#79](https://github.com/kolplattformen/skolplattformen/issues/79)) ([16020a3](https://github.com/kolplattformen/skolplattformen/commit/16020a3d3c9e378c2f3aec64a59d288673058473))
+* 🐛 Autopublish (I hope) ([#37](https://github.com/kolplattformen/skolplattformen/issues/37)) ([ed8f8a7](https://github.com/kolplattformen/skolplattformen/commit/ed8f8a7f5ce39a803e89b6a17972cb1aab0a266d))
+* 🐛 Build before publish ([e934950](https://github.com/kolplattformen/skolplattformen/commit/e934950470f4021d15f4ba424030aed47e8cbf24))
+* 🐛 Cache is no longer called in fake mode ([#3](https://github.com/kolplattformen/skolplattformen/issues/3)) ([f89f143](https://github.com/kolplattformen/skolplattformen/commit/f89f1431df4a9c24a7fc746186b78b53489eb6c6))
+* 🐛 Changed build settings ([7a7c2a1](https://github.com/kolplattformen/skolplattformen/commit/7a7c2a1734e24800d600a3215a2bad9016d45ed3))
+* 🐛 Cleanup on logout ([#6](https://github.com/kolplattformen/skolplattformen/issues/6)) ([644cbcd](https://github.com/kolplattformen/skolplattformen/commit/644cbcd46466491d9e9a7a35c5dca301d4403e1c))
+* 🐛 Correct format of fakeData.js ([c2adf00](https://github.com/kolplattformen/skolplattformen/commit/c2adf004d3da992d9380b114bed4f5f6cea91cee))
+* 🐛 Fake data included through ts ([663be5c](https://github.com/kolplattformen/skolplattformen/commit/663be5cc351491cf7f654f4caffea9d8537c21b1))
+* 🐛 Fix för login block 24mars ([7667a5e](https://github.com/kolplattformen/skolplattformen/commit/7667a5e25a9f6f79f2bb07ea8b010679a3b4528d))
+* 🐛 fix latest security "fix" ([d795458](https://github.com/kolplattformen/skolplattformen/commit/d7954587d5245730e504ceaa6501596962068831))
+* 🐛 fix the previous fix with a fixed json ([eefd791](https://github.com/kolplattformen/skolplattformen/commit/eefd79155bb436bd00233bdebf51f240640e88ae))
+* 🐛 Fixa markdownkonvertering av hårresande html ([#120](https://github.com/kolplattformen/skolplattformen/issues/120)) ([4991f91](https://github.com/kolplattformen/skolplattformen/commit/4991f910a3782545381ffabdbba89d152dfbf278))
+* 🐛 Fixar links med mellanslag ([#63](https://github.com/kolplattformen/skolplattformen/issues/63)) ([3edbf8c](https://github.com/kolplattformen/skolplattformen/commit/3edbf8c2c6ed8c34ba9e6b5d894e52e904de9662))
+* 🐛 Fixar senaste blocken ([#81](https://github.com/kolplattformen/skolplattformen/issues/81)) ([1ccdc9f](https://github.com/kolplattformen/skolplattformen/commit/1ccdc9f42ea6a11c695f12d7ef3054ffe3cdd859))
+* 🐛 Fixed fake data for notifications ([#40](https://github.com/kolplattformen/skolplattformen/issues/40)) ([b8621b9](https://github.com/kolplattformen/skolplattformen/commit/b8621b94f1131671933fa90ef12c355d92ad92e7))
+* 🐛 Fixed parsing bug for classmates ([5f07259](https://github.com/kolplattformen/skolplattformen/commit/5f07259ddc6dd24ed29dbff81dc03f8ae7159e81))
+* 🐛 Fixes base64 iterations ([52d7341](https://github.com/kolplattformen/skolplattformen/commit/52d7341e2b85ddddd9df2070cffc3322a3c58476))
+* 🐛 Fixes configuration fetch ([7bf8f1c](https://github.com/kolplattformen/skolplattformen/commit/7bf8f1c2a8abbc9986a016f7d6d44a3dec84da43))
+* 🐛 Fixes more sabotage from sthlm stad ([ab62ab6](https://github.com/kolplattformen/skolplattformen/commit/ab62ab6d356309c284a192cd63939cbc3b76ecf5))
+* 🐛 Fixes schedule ([fb65a33](https://github.com/kolplattformen/skolplattformen/commit/fb65a33d829e3843e6a168243e3057b988d58081))
+* 🐛 Flytta mellanslag utanför taggarna ([#124](https://github.com/kolplattformen/skolplattformen/issues/124)) ([79e2a75](https://github.com/kolplattformen/skolplattformen/commit/79e2a7577b482b2904a5aa20f3150ef1d9e5055a))
+* 🐛 Förbättrad parsning av nyhetsbrev ([#125](https://github.com/kolplattformen/skolplattformen/issues/125)) ([82fa2dc](https://github.com/kolplattformen/skolplattformen/commit/82fa2dcc844a019e71284ddae4d7cf67a2804e37))
+* 🐛 Force release ([#115](https://github.com/kolplattformen/skolplattformen/issues/115)) ([5c170dc](https://github.com/kolplattformen/skolplattformen/commit/5c170dc070752d3671afcff1d5a7b21f4af99525))
+* 🐛 Get all notifications. Add modified date to notifications ([#150](https://github.com/kolplattformen/skolplattformen/issues/150)) ([4a0841a](https://github.com/kolplattformen/skolplattformen/commit/4a0841a704cf43ba300f7be1085ff746fce972ac))
+* 🐛 hämta API key från server ([9bde441](https://github.com/kolplattformen/skolplattformen/commit/9bde441907dc90daa3ab001acbd243dfb3323a17))
+* 🐛 implemented XSRF token support ([1ecfdaf](https://github.com/kolplattformen/skolplattformen/commit/1ecfdafede92dfffe302ab6dea46c63b05bb60ea))
+* 🐛 Moved topologykey to config, also added getHeader() ([2823547](https://github.com/kolplattformen/skolplattformen/commit/28235478041ad3f38fcecc5ebbcf236e2530e018))
+* 🐛 News item details now gets parsed ([#55](https://github.com/kolplattformen/skolplattformen/issues/55)) ([50ce985](https://github.com/kolplattformen/skolplattformen/commit/50ce985edcc92205f39f9fa126fb25fb746aaf23))
+* 🐛 Ny version av curriculum ([#148](https://github.com/kolplattformen/skolplattformen/issues/148)) ([e54ed25](https://github.com/kolplattformen/skolplattformen/commit/e54ed25d9ff7df7baf78c8356a8682d5ad75bb92))
+* 🐛 Parse old aspnet dates instead of unreliable format strings ([#108](https://github.com/kolplattformen/skolplattformen/issues/108)) ([3c33c75](https://github.com/kolplattformen/skolplattformen/commit/3c33c75956dc401338b64acf6d946b64d7dfce5c)), closes [#105](https://github.com/kolplattformen/skolplattformen/issues/105)
+* 🐛 Parsning ([83ec383](https://github.com/kolplattformen/skolplattformen/commit/83ec3833c3d8d966e27ffb976ab655410a2630ac))
+* 🐛 read xsrf token from script for createItem call ([1deb424](https://github.com/kolplattformen/skolplattformen/commit/1deb42430ce8eb76b2a3956c9a9fba87ba70443f))
+* 🐛 Reload anropar bara apiet om den inte redan laddar ([#9](https://github.com/kolplattformen/skolplattformen/issues/9)) ([c329283](https://github.com/kolplattformen/skolplattformen/commit/c32928369be6be104ede4c7090ed98246795fe87))
+* 🐛 reload inaktivt i fejk ([#10](https://github.com/kolplattformen/skolplattformen/issues/10)) ([9fa63e8](https://github.com/kolplattformen/skolplattformen/commit/9fa63e84fea5e9ede12f955ff11041504c4f1292))
+* 🐛 Removed dynamic require ([#8](https://github.com/kolplattformen/skolplattformen/issues/8)) ([a3421b8](https://github.com/kolplattformen/skolplattformen/commit/a3421b8772b522cdb36bc3b0de87e13507ab976c))
+* 🐛 Removed superfluous property in en.json ([#5](https://github.com/kolplattformen/skolplattformen/issues/5)) ([b6137ab](https://github.com/kolplattformen/skolplattformen/commit/b6137abb059ba2e6a57f594b77befc0881d7ebbf))
+* 🐛 rensa upp getChildren anropet och ny release ([2336861](https://github.com/kolplattformen/skolplattformen/commit/2336861a71881fdb08d3a57b0b5fbe072dc08f0e))
+* 🐛 Repaired login ([#11](https://github.com/kolplattformen/skolplattformen/issues/11)) ([83a4737](https://github.com/kolplattformen/skolplattformen/commit/83a47375945472c3c6809ed5e24ca481d2577f34))
+* 🐛 Replaced named capture group for compatibility reasons ([#112](https://github.com/kolplattformen/skolplattformen/issues/112)) ([66b23fa](https://github.com/kolplattformen/skolplattformen/commit/66b23faf4392c942467334664d32a57be72e9758))
+* 🐛 Replaces non breaking space with simple space ([#57](https://github.com/kolplattformen/skolplattformen/issues/57)) ([58d5676](https://github.com/kolplattformen/skolplattformen/commit/58d56764d3bdc10a5681d288c47b68d1cc9aa936))
+* 🐛 Return a empty array if backend returns a specific error ([1e944ad](https://github.com/kolplattformen/skolplattformen/commit/1e944adf24482fef472174d14c9d76fc9e3bf78b))
+* 🐛 semikolonviolation! ([46c6260](https://github.com/kolplattformen/skolplattformen/commit/46c62601a2a56bf9966594a2842434701213dd27))
+* 🐛 Silly stockholm stad protection ([cd19abd](https://github.com/kolplattformen/skolplattformen/commit/cd19abdd0f7f16ffc7b2a4e2de598e00e832f8c3))
+* 🐛 Tog bort radbrytning i bold ([#66](https://github.com/kolplattformen/skolplattformen/issues/66)) ([ca0117c](https://github.com/kolplattformen/skolplattformen/commit/ca0117ce64fbf1ce7eb6f476c37fc769e3df561e))
+* 🐛 Trims tag content to fix some markdown issues ([#56](https://github.com/kolplattformen/skolplattformen/issues/56)) ([f9dc391](https://github.com/kolplattformen/skolplattformen/commit/f9dc39128e1af21c4aaa23ca68cd81dcb9935448))
+* 🐛 URLSearchParams compatible with both node and RN ([#111](https://github.com/kolplattformen/skolplattformen/issues/111)) ([fd919a0](https://github.com/kolplattformen/skolplattformen/commit/fd919a0b5e961af00050e6c12a997bb6aa60d9ad))
+* 🐛 use childcontroller script for XSRF header to CreateItem ([2796875](https://github.com/kolplattformen/skolplattformen/commit/2796875fe2593d5dc8f1be573f0f27ddb3216342))
+* 🐛 Working notification url:s ([#41](https://github.com/kolplattformen/skolplattformen/issues/41)) ([3a808f9](https://github.com/kolplattformen/skolplattformen/commit/3a808f9ccd67994a615339223539fe8c5f51fc0a))
+* add date handler ([a3e0eba](https://github.com/kolplattformen/skolplattformen/commit/a3e0eba706dd855af0e06775e913000c531b9f6e))
+* correct fake data dates ([d88bfcf](https://github.com/kolplattformen/skolplattformen/commit/d88bfcf5641e4dff89d6af6709fea00cae5a4c5b))
+* handle iso date strings ([ca0a3e4](https://github.com/kolplattformen/skolplattformen/commit/ca0a3e49aca34edab2881eb38349d866928c29ab))
+* handle long dates with time ([3ba96fe](https://github.com/kolplattformen/skolplattformen/commit/3ba96feec9804cb945d9a09d709461ac4c61d902))
+* handle missing spaces in intro after certain characters ([#99](https://github.com/kolplattformen/skolplattformen/issues/99)) ([2926de3](https://github.com/kolplattformen/skolplattformen/commit/2926de31fe938cc5dd8284d47119454e4dee14a1))
+* links ([#64](https://github.com/kolplattformen/skolplattformen/issues/64)) ([905b893](https://github.com/kolplattformen/skolplattformen/commit/905b893ca735ffe9f7625d9eae18dbb2c12f1b1f))
+* parse calendar dates as utc before iso ([#100](https://github.com/kolplattformen/skolplattformen/issues/100)) ([73f6d8b](https://github.com/kolplattformen/skolplattformen/commit/73f6d8ba72bfdbb018fb564abcd4ad55bf288a3e))
+* parse intro without positive lookbehind regex ([#102](https://github.com/kolplattformen/skolplattformen/issues/102)) ([f8b3df2](https://github.com/kolplattformen/skolplattformen/commit/f8b3df2936c0eed0dec226c56cbd062272629655))
+* Translations update from Weblate ([#16](https://github.com/kolplattformen/skolplattformen/issues/16)) ([94a3883](https://github.com/kolplattformen/skolplattformen/commit/94a38833c14124c84277ca9a79cb7630226b2948))
+* use date constructor instead of luxon ([74ea878](https://github.com/kolplattformen/skolplattformen/commit/74ea878073bc72934793604b00797264ca252afa))
+* use parseDate for all date handling ([6cd92ac](https://github.com/kolplattformen/skolplattformen/commit/6cd92acbe326e6622df49832e3a46cb57e6f92a1))
+
+
+### Features
+
+* 🎸 Added .author and .imageAltText on NewsItem ([#42](https://github.com/kolplattformen/skolplattformen/issues/42)) ([6e84a63](https://github.com/kolplattformen/skolplattformen/commit/6e84a6391a9702503ceda89f1399a9c600b2315d))
+* 🎸 Added getter for logged in personal number ([#39](https://github.com/kolplattformen/skolplattformen/issues/39)) ([a860d12](https://github.com/kolplattformen/skolplattformen/commit/a860d1208c5d79f0d06034ebd993bc1f3cf2eb5e))
+* 🎸 Added language support ([#121](https://github.com/kolplattformen/skolplattformen/issues/121)) ([9dcdf78](https://github.com/kolplattformen/skolplattformen/commit/9dcdf78515a944bb48fffecc9af5072dab8fe851))
+* 🎸 Alla nyhetsbrev ([#67](https://github.com/kolplattformen/skolplattformen/issues/67)) ([f3f658f](https://github.com/kolplattformen/skolplattformen/commit/f3f658fdd33300304f9969bae7d892359859293f))
+* 🎸 API call retries and support for error reporting ([#5](https://github.com/kolplattformen/skolplattformen/issues/5)) ([9ed5df2](https://github.com/kolplattformen/skolplattformen/commit/9ed5df2e45e8d368d3d4df1c992a0901a512ff6a))
+* 🎸 Build, tag and release ([b71adc5](https://github.com/kolplattformen/skolplattformen/commit/b71adc57fbdd4ff4d6fe1b87e7afac90a9d6628c))
+* 🎸 cache busting ([5ce4ddd](https://github.com/kolplattformen/skolplattformen/commit/5ce4ddd9d04501a15ce37c9f3378e36b3f3dabfe))
+* 🎸 Cache prefixas med personnummer ([#8](https://github.com/kolplattformen/skolplattformen/issues/8)) ([fc146ea](https://github.com/kolplattformen/skolplattformen/commit/fc146ea7fc9f705b88bbc75a6cc01b6f2235bfaa))
+* 🎸 Classmates ([#14](https://github.com/kolplattformen/skolplattformen/issues/14)) ([a6ce6ea](https://github.com/kolplattformen/skolplattformen/commit/a6ce6ea9f6468ad5c1e26df4228706a1055e241a)), closes [#7](https://github.com/kolplattformen/skolplattformen/issues/7)
+* 🎸 Code cleanup, refactoring, linting and tests ([d0a0314](https://github.com/kolplattformen/skolplattformen/commit/d0a0314ae6f058c617227d28d738bff9fc85e966))
+* 🎸 Curriculum as peer dependency ([#122](https://github.com/kolplattformen/skolplattformen/issues/122)) ([e24a9b3](https://github.com/kolplattformen/skolplattformen/commit/e24a9b3c5e0d64a395e4b576975cc2b3e6832bab))
+* 🎸 Exporting all types in index ([#45](https://github.com/kolplattformen/skolplattformen/issues/45)) ([8351ef2](https://github.com/kolplattformen/skolplattformen/commit/8351ef275f1ac87da00fdeaa86a3f4e17a1e15b1))
+* 🎸 Exporting LoginStatusChecker interface ([#46](https://github.com/kolplattformen/skolplattformen/issues/46)) ([20e18e5](https://github.com/kolplattformen/skolplattformen/commit/20e18e5e23e1a1def00667a3f23e9992511a708b))
+* 🎸 Fake mode for 121212121212, 201212121212 and 1212121212 ([#35](https://github.com/kolplattformen/skolplattformen/issues/35)) ([8d264b9](https://github.com/kolplattformen/skolplattformen/commit/8d264b9787f20c2c93348f9538d1775a8b931d05))
+* 🎸 Fakedata laggar 0.2-1 sekund ([#68](https://github.com/kolplattformen/skolplattformen/issues/68)) ([018d600](https://github.com/kolplattformen/skolplattformen/commit/018d60099dffbb57c387367a31a091620f5132a7))
+* 🎸 Fallback language ([#7](https://github.com/kolplattformen/skolplattformen/issues/7)) ([e944468](https://github.com/kolplattformen/skolplattformen/commit/e94446873429438b79a81542caf8f4f4f1882ce0))
+* 🎸 First implementation ([e5438b0](https://github.com/kolplattformen/skolplattformen/commit/e5438b0f264afb564efec7aca46adad0db6bd6e2))
+* 🎸 First release ([d37f3db](https://github.com/kolplattformen/skolplattformen/commit/d37f3db3e8df421bb1ed8848ab63220a9b461b24))
+* 🎸 Forcing release ([d4151fa](https://github.com/kolplattformen/skolplattformen/commit/d4151fa26faa3017d5c36ca3eef4966db6d7267b))
+* 🎸 getSessionCookie and removed News object ([#24](https://github.com/kolplattformen/skolplattformen/issues/24)) ([91ba683](https://github.com/kolplattformen/skolplattformen/commit/91ba6833b456dd446948c886c80768d2af360a25)), closes [#22](https://github.com/kolplattformen/skolplattformen/issues/22) [#23](https://github.com/kolplattformen/skolplattformen/issues/23)
+* 🎸 getUser ([#19](https://github.com/kolplattformen/skolplattformen/issues/19)) ([39b62b7](https://github.com/kolplattformen/skolplattformen/commit/39b62b7b371b0990e9c4594603e8e95219234dd5)), closes [#9](https://github.com/kolplattformen/skolplattformen/issues/9)
+* 🎸 Hämta lektionsschema ([#110](https://github.com/kolplattformen/skolplattformen/issues/110)) ([c288449](https://github.com/kolplattformen/skolplattformen/commit/c2884497bf66fccbae79883e3e1d9470d7c9fc55))
+* 🎸 Image ([#21](https://github.com/kolplattformen/skolplattformen/issues/21)) ([2ad7523](https://github.com/kolplattformen/skolplattformen/commit/2ad7523a1ded17bbb20b491cd54cd9c960c825a3)), closes [#10](https://github.com/kolplattformen/skolplattformen/issues/10)
+* 🎸 It now handles comments ([065e0e9](https://github.com/kolplattformen/skolplattformen/commit/065e0e968276bc385ecec314a5577a5be44bfaf6))
+* 🎸 Loads schedule ([#16](https://github.com/kolplattformen/skolplattformen/issues/16)) ([53d42de](https://github.com/kolplattformen/skolplattformen/commit/53d42de62cae311e28decf50591e521128c9bfcb)), closes [#13](https://github.com/kolplattformen/skolplattformen/issues/13) [#8](https://github.com/kolplattformen/skolplattformen/issues/8)
+* 🎸 Made User properties optional for hook convenience ([#31](https://github.com/kolplattformen/skolplattformen/issues/31)) ([0e0e996](https://github.com/kolplattformen/skolplattformen/commit/0e0e9965892e69819e9b49dfcdf2afdddacccb47))
+* 🎸 Misc codes (Lunch, Prandium, MTID) ([59e350b](https://github.com/kolplattformen/skolplattformen/commit/59e350b6ab6d1164d64b84428226a0c6e078c622))
+* 🎸 Multilang support for useTimetable ([#14](https://github.com/kolplattformen/skolplattformen/issues/14)) ([be6c9d1](https://github.com/kolplattformen/skolplattformen/commit/be6c9d1302a8f098bf1d57058285c90745ca9626))
+* 🎸 Names from curriculum ([#116](https://github.com/kolplattformen/skolplattformen/issues/116)) ([504503f](https://github.com/kolplattformen/skolplattformen/commit/504503f7a0c243b5d24f1784ad83af2e9d01feee))
+* 🎸 New properties on NewsItem and updated fake data ([#44](https://github.com/kolplattformen/skolplattformen/issues/44)) ([dea899b](https://github.com/kolplattformen/skolplattformen/commit/dea899bd17d43bf95936065bb92a523dd3da79f2))
+* 🎸 News are sorted, desc, by modified date ([#147](https://github.com/kolplattformen/skolplattformen/issues/147)) ([a4b7b7f](https://github.com/kolplattformen/skolplattformen/commit/a4b7b7f6a942e2bdedd82c50e16f5336bb6fc1ec))
+* 🎸 News images that do not require login ([#43](https://github.com/kolplattformen/skolplattformen/issues/43)) ([5daf186](https://github.com/kolplattformen/skolplattformen/commit/5daf186d5cd6ff7084ea7bbc38d9586c1ec9b59e))
+* 🎸 Notifications ([#20](https://github.com/kolplattformen/skolplattformen/issues/20)) ([348e437](https://github.com/kolplattformen/skolplattformen/commit/348e43778df7e7336148b327a0ce2363bca05fa4)), closes [#11](https://github.com/kolplattformen/skolplattformen/issues/11)
+* 🎸 Notifications sorted by modified, then created date ([#151](https://github.com/kolplattformen/skolplattformen/issues/151)) ([91f63e8](https://github.com/kolplattformen/skolplattformen/commit/91f63e8d2ac060692090d8f75379a3a7c6a1a074))
+* 🎸 Polish ([#9](https://github.com/kolplattformen/skolplattformen/issues/9)) ([18c8126](https://github.com/kolplattformen/skolplattformen/commit/18c81264a08123526989d33ee1dd1ade08c38d8d))
+* 🎸 Possibly first working version ([0e4acba](https://github.com/kolplattformen/skolplattformen/commit/0e4acba776558aa25f00347ac38cdd2d873da657))
+* 🎸 Remove all obsolete login obstacles ([#146](https://github.com/kolplattformen/skolplattformen/issues/146)) ([befb073](https://github.com/kolplattformen/skolplattformen/commit/befb073a322823dfad2b29e8ab03488b68f2a16c))
+* 🎸 Remove required personal number in route ([#118](https://github.com/kolplattformen/skolplattformen/issues/118)) ([c3b4b15](https://github.com/kolplattformen/skolplattformen/commit/c3b4b153c34de34d85681f41dbdfd0c1f5d356bd))
+* 🎸 Removed getImage() and added .fullImageUrl to NewsItem ([#33](https://github.com/kolplattformen/skolplattformen/issues/33)) ([5c3929d](https://github.com/kolplattformen/skolplattformen/commit/5c3929d9d171f720b60369b4f5fe105da83af6b0))
+* 🎸 Replaced Moment with Luxon ([#30](https://github.com/kolplattformen/skolplattformen/issues/30)) ([e41f0bf](https://github.com/kolplattformen/skolplattformen/commit/e41f0bf4357ddb762667c6837d54726addc8fd44))
+* 🎸 Släpp sargen - nu kör vi ([#60](https://github.com/kolplattformen/skolplattformen/issues/60)) ([c5e9992](https://github.com/kolplattformen/skolplattformen/commit/c5e9992f9ab204799aad5d040b26d62e33703aff))
+* 🎸 Switched to Markdown Extra converter ([#58](https://github.com/kolplattformen/skolplattformen/issues/58)) ([3b7b067](https://github.com/kolplattformen/skolplattformen/commit/3b7b0677a457673d225511c43ca00add73498930))
+* 🎸 Timetables ([#12](https://github.com/kolplattformen/skolplattformen/issues/12)) ([2ae212d](https://github.com/kolplattformen/skolplattformen/commit/2ae212d46a7c8c333101f39e76435721c8d0d00e))
+* 🎸 Updated curriculum and fake data with new codes ([#117](https://github.com/kolplattformen/skolplattformen/issues/117)) ([0a02ffa](https://github.com/kolplattformen/skolplattformen/commit/0a02ffa04d7d7e6610bf2f2fffa83a683fc23726))
+* 🎸 useNewsDetails(child, news) ([5d4f751](https://github.com/kolplattformen/skolplattformen/commit/5d4f7515cd7af66e5a192520bf7d96aab72e8bf5))
+* add newsItemDetails ([1826b80](https://github.com/kolplattformen/skolplattformen/commit/1826b80d4bd2ee97fedb1f04f70a95bb478878de))
+* call newsItemDetails to get details for a news item. Resolves [#28](https://github.com/kolplattformen/skolplattformen/issues/28) ([5dcc42e](https://github.com/kolplattformen/skolplattformen/commit/5dcc42eeac0b4acda11515271b63aeb42e3773d9))
+* Improve menu ([#109](https://github.com/kolplattformen/skolplattformen/issues/109)) ([9c4fcb2](https://github.com/kolplattformen/skolplattformen/commit/9c4fcb2d251d71ec076e3b1725ae74b497535d66))
+* Ombyggd parsning av nyhetsbrev ([#65](https://github.com/kolplattformen/skolplattformen/issues/65)) ([a5dfb70](https://github.com/kolplattformen/skolplattformen/commit/a5dfb704f4c7428b148cd26f94eceb9567bfb35e))
+* update typings for ScheduleItem ([9c87535](https://github.com/kolplattformen/skolplattformen/commit/9c87535c5bd8e1c9ed8e66d03c13cb6dc8cce8fb))
+
+
+* Rebuilt session handling and login (#78) ([c62dab9](https://github.com/kolplattformen/skolplattformen/commit/c62dab9e2e9be4b208f0cb2fc9bb6253beb2b403)), closes [#78](https://github.com/kolplattformen/skolplattformen/issues/78)
+
+
+### BREAKING CHANGES
+
+* 🧨 useTimetable now requires lang
+* 🧨 getTimetable requires language
+* 🧨 Child -> EtjanstChild
+
+* feat: 🎸 Test data for skola24Children and timetable
+
+* docs: ✏️ Updated instructions
+
+Co-authored-by: Johan Öbrink <johan.obrink@gmail.com>
+* This updates the `startDate` and `endDate` to be
+potentially `undefined`
+* 🧨 Major update of peer dependency embedded-api
+* 🧨 Cookie and Session handling reworked
+* 🧨 Nä... egentligen inte
+* 🧨 api no longer exposes getImage()
+* 🧨 Change to types (moment -> strings) and api.getSchedule (moment ->
+luxon.DateTime)
+* 🧨 Call signature of getNews changed
+
 # [1.48.0](https://github.com/kolplattformen/skolplattformen/compare/v1.47.2...v1.48.0) (2021-10-01)
 
 
