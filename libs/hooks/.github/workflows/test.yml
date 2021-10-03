@@ -1,0 +1,20 @@
+# This workflow will do a clean install of node dependencies and run tests
+
+name: Test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js and run tests
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 14.x
+      - run: yarn install --immutable --silent --non-interactive 2> >(grep -v warning 1>&2)
+      - run: yarn lint
+      - run: yarn test
