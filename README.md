@@ -73,7 +73,7 @@ Do so by logging in using 12121212121212 or 1212121212 as your personal identity
 Check out the documentation [here](libs/api-skolplattformen).
 #### curriculum
 
-documentation coming soon.
+Translations of curriculum codes (sv: ämneskoder på schemat) to clear text descriptions
 #### hooks
 
 To make it easier to use the the api in the app, we also created a set of React hooks.
