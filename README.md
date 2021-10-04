@@ -15,10 +15,10 @@ If you're simply looking for information about the app, our website can be found
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
 This main repository for the project contains the source code for both the app and its [website](https://skolplattformen.org/). \
-The sources for each can be found under [packages/app](packages/app) and [packages/site](packages/site). \
+The sources for each can be found under [apps](apps), [libs](libs) and [apps/website](packages/website). \
 The respective README files there contain more detailed descriptions.
 
-<img src="packages/site/assets/img/screenshots/screenshot_login.png" width="200"> <img src="packages/site/assets/img/screenshots/screenshot_children.png" width="200">
+<img src="apps/website/assets/img/screenshots/screenshot_login.png" width="200"> <img src="apps/website/assets/img/screenshots/screenshot_children.png" width="200">
 
 ## Contents
 
@@ -34,7 +34,7 @@ The respective README files there contain more detailed descriptions.
 
 ## Architecture
 
-The project consists of two main parts: the app and the embedded API.
+The project consists of several parts inside [an NX](https://nx.dev/) monorepo.
 
 ### App
 
@@ -43,16 +43,16 @@ The central part of the project is the app itself. It is written in [TypeScript]
 Our main goal with the app is to make it as fast and easy to use as possible. \
 We're starting small, with more features being added over time.
 
-For more information, check out the [source code](packages/app).
+For more information, check out the [source code](apps/skolplattformen-sthlm).
 
-### Embedded API
+### API Skolplattformen
 
 We decided to encapsulate our API implementation into a separate npm package. \
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
 
-The embedded API has its own project page at [https://github.com/kolplattformen/embedded-api](https://github.com/kolplattformen/embedded-api). \
-To make it easier to use the embedded API in the app, we also created a set of React hooks, available at [https://github.com/kolplattformen/api-hooks](https://github.com/kolplattformen/api-hooks).
+The embedded API is located within [libs/api-skolplattformen](https:/libs/api-skolplattformen). \
+To make it easier to use the embedded API in the app, we also created a set of React hooks, available at [hooks](hooks).
 
 **Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
 Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
@@ -70,7 +70,7 @@ Clone the repo with
 $ git clone https://github.com/kolplattformen/skolplattformen.git
 ```
 
-The README files for the [app](packages/app) and [website](packages/site) contain further instructions.
+The README files for the [app](apps/skolplattformen-sthlm) and [website](apps/website) contain further instructions.
 
 ## Contributions
 
