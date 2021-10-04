@@ -109,6 +109,10 @@ export const Login = () => {
       }
       status.on('PENDING', () => console.log('BankID app not yet opened'))
       status.on('USER_SIGN', () => console.log('BankID app is open'))
+      status.on('CANCELLED', () => {
+        console.log('User pressed cancel in BankID')
+        showModal(false)
+      })
       status.on('ERROR', () => {
         setError(t('auth.loginFailed'))
         showModal(false)
@@ -247,7 +251,7 @@ export const Login = () => {
 
 const themedStyles = StyleService.create({
   backdrop: {
-    backgroundColor: 'color-basic-transparent-600',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   loginForm: {
     ...Layout.mainAxis.flexStart,
