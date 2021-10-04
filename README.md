@@ -39,7 +39,7 @@ The respective README files there contain more detailed descriptions.
 
 ## Architecture
 
-The project consists of several parts inside [an NX](https://nx.dev/) monorepo.
+The project consists of several apps and libraries inside [an NX](https://nx.dev/) monorepo.
 
 ### Apps 
 /apps/ contains the application projects. This is the main entry point for a runnable application. 
