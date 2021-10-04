@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/kolplattformen/skolplattformen/compare/v2.0.0...v2.1.0) (2021-10-04)
+
+
+### Features
+
+* 🎸 Use fade on the backdrop on login modal ([e99494b](https://github.com/kolplattformen/skolplattformen/commit/e99494bc77cf7037ca1a5076effc68c4cc3ed4ea))
+
 # [2.0.0](https://github.com/kolplattformen/skolplattformen/compare/v1.48.0...v2.0.0) (2021-10-03)
 
 
