@@ -14,7 +14,7 @@ We are parents who got fed up with Skolplattformen, the City of Stockholm's scho
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-This main repository for the project contains the source code for both the app and its [website](https://skolplattformen.org/). \
+This main repository for the project contains the source code for both the [app](apps/skolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
 The sources for each can be found under [apps](apps), [libs](libs).
 The respective README files there contain more detailed descriptions.
 
