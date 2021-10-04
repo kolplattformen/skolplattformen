@@ -23,8 +23,13 @@ The respective README files there contain more detailed descriptions.
 ## Contents
 
 * [Architecture](#architecture)
-  * [App](#app)
-  * [Embedded API](#embedded-api)
+  * [Apps](#apps)
+    * [skolplattformen-sthlm](#skolplattformen-sthlm)
+    * [website](#website)
+  * [Libs](#embedded-api)
+    * [api-skolplattformen](#api-skolplattformen)
+    * [curriculum](#curriculum)
+    * [hooks](#hooks)
 * [Development](#development)
 * [Contributions](#contributions)
 * [Money](#money)
@@ -36,7 +41,10 @@ The respective README files there contain more detailed descriptions.
 
 The project consists of several parts inside [an NX](https://nx.dev/) monorepo.
 
-### App
+### Apps 
+/apps/ contains the application projects. This is the main entry point for a runnable application. 
+
+#### skolplattformen-sthlm
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
@@ -45,17 +53,30 @@ We're starting small, with more features being added over time.
 
 For more information, check out the [source code](apps/skolplattformen-sthlm).
 
-### API Skolplattformen
+#### website
 
-We decided to encapsulate our API implementation into a separate npm package. \
+The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
+
+Our main goal with the app is to make it as fast and easy to use as possible. \
+We're starting small, with more features being added over time.
+
+For more information, check out the [source code](apps/skolplattformen-sthlm).
+### Libs 
+
+/libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
+#### api-skolplattformen
+
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
 
-The embedded API is located within [libs/api-skolplattformen](https:/libs/api-skolplattformen). \
-To make it easier to use the embedded API in the app, we also created a set of React hooks, available at [hooks](hooks).
-
 **Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
 Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
+#### curriculum
+
+documentation coming soon.
+#### hooks
+
+To make it easier to use the the api in the app, we also created a set of React hooks
 
 ## Development
 
