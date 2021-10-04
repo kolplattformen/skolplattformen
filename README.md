@@ -15,7 +15,7 @@ If you're simply looking for information about the app, our website can be found
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
 This main repository for the project contains the source code for both the [app](apps/skolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
-The sources for each can be found under [apps](apps), [libs](libs).
+The sources for each can be found under [apps](apps) and [libs](libs).
 The respective README files there contain more detailed descriptions.
 
 <img src="apps/website/assets/img/screenshots/screenshot_login.png" width="200"> <img src="apps/website/assets/img/screenshots/screenshot_children.png" width="200">
@@ -39,7 +39,7 @@ The respective README files there contain more detailed descriptions.
 
 ## Architecture
 
-The project consists of several apps and libraries inside [an NX](https://nx.dev/) monorepo.
+The project consists of several apps and libraries inside [a NX](https://nx.dev/) monorepo.
 
 ### Apps 
 /apps/ contains the application projects. This is the main entry point for a runnable application. 
@@ -55,28 +55,29 @@ For more information, check out the [source code](apps/skolplattformen-sthlm).
 
 #### website
 
-The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
+The code for the website at www.skolplattformen.org. It's built using Next.js.
 
-Our main goal with the app is to make it as fast and easy to use as possible. \
-We're starting small, with more features being added over time.
-
-For more information, check out the [source code](apps/skolplattformen-sthlm).
+For more information, check out the [source code](apps/website).
 ### Libs 
 
 /libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
 #### api-skolplattformen
+
+(renamed from embedded-api)
 
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
 
 **Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
 Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
+Check out the documentation [here](libs/api-skolplattformen).
 #### curriculum
 
 documentation coming soon.
 #### hooks
 
-To make it easier to use the the api in the app, we also created a set of React hooks
+To make it easier to use the the api in the app, we also created a set of React hooks.
+Check out the documentation [here](libs/hooks).
 
 ## Development
 
