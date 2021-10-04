@@ -14,17 +14,22 @@ We are parents who got fed up with Skolplattformen, the City of Stockholm's scho
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-This main repository for the project contains the source code for both the app and its [website](https://skolplattformen.org/). \
-The sources for each can be found under [packages/app](packages/app) and [packages/site](packages/site). \
+This main repository for the project contains the source code for both the [app](apps/skolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
+The sources for each can be found under [apps](apps), [libs](libs).
 The respective README files there contain more detailed descriptions.
 
-<img src="packages/site/assets/img/screenshots/screenshot_login.png" width="200"> <img src="packages/site/assets/img/screenshots/screenshot_children.png" width="200">
+<img src="apps/website/assets/img/screenshots/screenshot_login.png" width="200"> <img src="apps/website/assets/img/screenshots/screenshot_children.png" width="200">
 
 ## Contents
 
 * [Architecture](#architecture)
-  * [App](#app)
-  * [Embedded API](#embedded-api)
+  * [Apps](#apps)
+    * [skolplattformen-sthlm](#skolplattformen-sthlm)
+    * [website](#website)
+  * [Libs](#embedded-api)
+    * [api-skolplattformen](#api-skolplattformen)
+    * [curriculum](#curriculum)
+    * [hooks](#hooks)
 * [Development](#development)
 * [Contributions](#contributions)
 * [Money](#money)
@@ -34,28 +39,44 @@ The respective README files there contain more detailed descriptions.
 
 ## Architecture
 
-The project consists of two main parts: the app and the embedded API.
+The project consists of several apps and libraries inside [an NX](https://nx.dev/) monorepo.
 
-### App
+### Apps 
+/apps/ contains the application projects. This is the main entry point for a runnable application. 
+
+#### skolplattformen-sthlm
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
 Our main goal with the app is to make it as fast and easy to use as possible. \
 We're starting small, with more features being added over time.
 
-For more information, check out the [source code](packages/app).
+For more information, check out the [source code](apps/skolplattformen-sthlm).
 
-### Embedded API
+#### website
 
-We decided to encapsulate our API implementation into a separate npm package. \
+The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
+
+Our main goal with the app is to make it as fast and easy to use as possible. \
+We're starting small, with more features being added over time.
+
+For more information, check out the [source code](apps/skolplattformen-sthlm).
+### Libs 
+
+/libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
+#### api-skolplattformen
+
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
 
-The embedded API has its own project page at [https://github.com/kolplattformen/embedded-api](https://github.com/kolplattformen/embedded-api). \
-To make it easier to use the embedded API in the app, we also created a set of React hooks, available at [https://github.com/kolplattformen/api-hooks](https://github.com/kolplattformen/api-hooks).
-
 **Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
 Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
+#### curriculum
+
+documentation coming soon.
+#### hooks
+
+To make it easier to use the the api in the app, we also created a set of React hooks
 
 ## Development
 
@@ -70,7 +91,7 @@ Clone the repo with
 $ git clone https://github.com/kolplattformen/skolplattformen.git
 ```
 
-The README files for the [app](packages/app) and [website](packages/site) contain further instructions.
+The README files for the [app](apps/skolplattformen-sthlm) and [website](apps/website) contain further instructions.
 
 ## Contributions
 
