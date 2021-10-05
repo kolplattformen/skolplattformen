@@ -1,5 +1,9 @@
-import { useMenu, useTimetable } from '@skolplattformen/api-hooks'
-import { Child, MenuItem, TimetableEntry } from '@skolplattformen/embedded-api'
+import {
+  Child,
+  MenuItem,
+  TimetableEntry,
+} from '@skolplattformen/api-skolplattformen'
+import { useMenu, useTimetable } from '@skolplattformen/hooks'
 import {
   List,
   ListItem,

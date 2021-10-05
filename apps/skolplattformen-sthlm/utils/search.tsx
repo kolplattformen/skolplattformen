@@ -1,13 +1,13 @@
-import React, { useMemo, ReactNode } from 'react'
+import { NewsItem } from '@skolplattformen/api-skolplattformen'
+import { useNews } from '@skolplattformen/hooks'
+import { MatchData, Searcher } from 'fast-fuzzy'
+import React, { ReactNode, useMemo } from 'react'
 import { Text } from 'react-native'
-import { useNews } from '@skolplattformen/api-hooks'
-import { NewsItem } from '@skolplattformen/embedded-api'
-import { Typography } from '../styles'
 import { useChild } from '../components/childContext.component'
+import { Typography } from '../styles'
 
 // https://github.com/facebook/react-native/issues/14796#issuecomment-389743259
 global.Buffer = global.Buffer || require('buffer').Buffer
-import { Searcher, MatchData } from 'fast-fuzzy'
 
 const NUM_CHARS_AROUND_SEARCH_MATCH = 20
 

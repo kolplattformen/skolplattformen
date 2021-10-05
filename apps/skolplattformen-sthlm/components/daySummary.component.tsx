@@ -1,5 +1,5 @@
-import { useTimetable } from '@skolplattformen/api-hooks'
-import { Child } from '@skolplattformen/embedded-api'
+import { Child } from '@skolplattformen/api-skolplattformen'
+import { useTimetable } from '@skolplattformen/hooks'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment, { Moment } from 'moment'
 import React from 'react'

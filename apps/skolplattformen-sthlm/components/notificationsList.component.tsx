@@ -1,4 +1,4 @@
-import { useNotifications } from '@skolplattformen/api-hooks'
+import { useNotifications } from '@skolplattformen/hooks'
 import { List, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
 import { Sizing } from '../styles'

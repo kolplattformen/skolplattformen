@@ -1,11 +1,11 @@
-import { useCalendar } from '@skolplattformen/api-hooks'
-import { CalendarItem } from '@skolplattformen/embedded-api'
+import { CalendarItem } from '@skolplattformen/api-skolplattformen'
+import { useCalendar } from '@skolplattformen/hooks'
 import {
   Divider,
   List,
   ListItem,
-  Text,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components'
 import moment from 'moment'

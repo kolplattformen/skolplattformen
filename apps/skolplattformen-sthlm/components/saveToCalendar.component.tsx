@@ -1,4 +1,4 @@
-import { CalendarItem } from '@skolplattformen/embedded-api'
+import { CalendarItem } from '@skolplattformen/api-skolplattformen'
 import { Button, MenuItem, OverflowMenu, Text } from '@ui-kitten/components'
 import React from 'react'
 import RNCalendarEvents from 'react-native-calendar-events'

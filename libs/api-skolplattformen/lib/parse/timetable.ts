@@ -1,9 +1,13 @@
-import parse from '@skolplattformen/curriculum'
-import { Language } from '@skolplattformen/curriculum/dist/translations'
+import parse, { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
 import { TimetableEntry } from '../types'
 
-const calculateDate = (year: number, weekNumber: number, weekday: number, time: string): string => {
+const calculateDate = (
+  year: number,
+  weekNumber: number,
+  weekday: number,
+  time: string
+): string => {
   const [hours, minutes, seconds] = time.split(':')
   return DateTime.local()
     .set({
@@ -14,7 +18,8 @@ const calculateDate = (year: number, weekNumber: number, weekday: number, time: 
       minute: parseInt(minutes, 10),
       second: parseInt(seconds, 10),
       millisecond: 0,
-    }).toISO()
+    })
+    .toISO()
 }
 
 interface TimetableResponseEntry {
@@ -38,11 +43,26 @@ export interface TimetableResponse {
 }
 
 interface EntryParser {
-  (args: TimetableResponseEntry, year: number, week: number, lang: Language): TimetableEntry
+  (
+    args: TimetableResponseEntry,
+    year: number,
+    week: number,
+    lang: Language
+  ): TimetableEntry
 }
-export const timetableEntry: EntryParser = ({
-  guidId, texts: [code, teacher, location], timeStart, timeEnd, dayOfWeekNumber, blockName,
-}, year, week, lang) => ({
+export const timetableEntry: EntryParser = (
+  {
+    guidId,
+    texts: [code, teacher, location],
+    timeStart,
+    timeEnd,
+    dayOfWeekNumber,
+    blockName,
+  },
+  year,
+  week,
+  lang
+) => ({
   ...parse(code, lang),
   id: guidId,
   blockName,
@@ -55,9 +75,16 @@ export const timetableEntry: EntryParser = ({
   dateEnd: calculateDate(year, week, dayOfWeekNumber, timeEnd),
 })
 
-export const timetable = (response: TimetableResponse, year: number, week: number, lang: Language) => {
+export const timetable = (
+  response: TimetableResponse,
+  year: number,
+  week: number,
+  lang: Language
+) => {
   if (response.error) {
     throw new Error(response.error)
   }
-  return response.data.lessonInfo.map((entry) => timetableEntry(entry, year, week, lang))
+  return response.data.lessonInfo.map((entry) =>
+    timetableEntry(entry, year, week, lang)
+  )
 }

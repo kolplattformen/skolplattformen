@@ -1,15 +1,15 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRoute } from '@react-navigation/native'
+import { useUser } from '@skolplattformen/hooks'
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import Mockdate from 'mockdate'
 import React from 'react'
 import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
-import { useUser } from '@skolplattformen/api-hooks'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 jest.mock('@react-navigation/native')
-jest.mock('@skolplattformen/api-hooks')
+jest.mock('@skolplattformen/hooks')
 jest.mock('../../utils/SMS')
 
 let sendSMS

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { User } from '@skolplattformen/api-skolplattformen'
 import AppStorage from '../appStorage'
-import { User } from '@skolplattformen/embedded-api'
 
 beforeEach(() => {
   jest.clearAllMocks()

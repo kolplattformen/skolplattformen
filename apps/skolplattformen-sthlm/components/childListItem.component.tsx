@@ -1,6 +1,7 @@
 /* eslint-disable react-native-a11y/has-accessibility-hint */
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { Child } from '@skolplattformen/api-skolplattformen'
 import {
   useCalendar,
   useClassmates,
@@ -8,8 +9,7 @@ import {
   useNews,
   useNotifications,
   useSchedule,
-} from '@skolplattformen/api-hooks'
-import { Child } from '@skolplattformen/embedded-api'
+} from '@skolplattformen/hooks'
 import {
   Button,
   StyleService,
@@ -19,9 +19,9 @@ import {
 import moment from 'moment'
 import React from 'react'
 import { TouchableOpacity, useColorScheme, View } from 'react-native'
+import { useTranslation } from '../hooks/useTranslation'
 import { Colors, Layout, Sizing } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
-import { useTranslation } from '../hooks/useTranslation'
 import { DaySummary } from './daySummary.component'
 import { AlertIcon, RightArrowIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'

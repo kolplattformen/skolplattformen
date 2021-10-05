@@ -1304,9 +1304,9 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@skolplattformen/curriculum@^1.3.0":
+"curriculum@^1.3.0":
   version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@skolplattformen/curriculum/-/curriculum-1.3.0.tgz#841e2ff0095e39e174cffdd0b8a81a17956de7ed"
+  resolved "https://registry.yarnpkg.com/curriculum/-/curriculum-1.3.0.tgz#841e2ff0095e39e174cffdd0b8a81a17956de7ed"
   integrity sha512-nuwZX45gHe5JaiYfygDP1HmbhAJOEXuuWwR04tNAnl/PaDGqJscfzKt8YD2SL+MHqi3LARjSKLa4ms4SxVQFyw==
 
 "@skolplattformen/embedded-api@^5.1.0":

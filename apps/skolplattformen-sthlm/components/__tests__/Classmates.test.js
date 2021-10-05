@@ -1,11 +1,11 @@
-import { useClassmates } from '@skolplattformen/api-hooks'
+import { useClassmates } from '@skolplattformen/hooks'
 import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { ChildProvider } from '../childContext.component'
 import { Classmates } from '../classmates.component'
 
 jest.mock('@react-navigation/native')
-jest.mock('@skolplattformen/api-hooks')
+jest.mock('@skolplattformen/hooks')
 
 const defaultClassmates = [
   {

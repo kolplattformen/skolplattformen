@@ -1,31 +1,31 @@
-import { DateTime } from 'luxon'
+import { Language } from '@skolplattformen/curriculum'
 import { EventEmitter } from 'events'
 import { decode } from 'he'
+import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
-import { Language } from '@skolplattformen/curriculum/dist/translations'
-import { URLSearchParams } from './URLSearchParams'
+import * as fake from './fakeData'
+import wrap, { Fetcher, FetcherOptions } from './fetcher'
 import { checkStatus, LoginStatusChecker } from './loginStatus'
+import * as parse from './parse/index'
+import * as routes from './routes'
 import {
   AuthTicket,
   CalendarItem,
   Classmate,
   CookieManager,
+  EtjanstChild,
   Fetch,
   MenuItem,
   NewsItem,
   Notification,
   RequestInit,
   ScheduleItem,
-  User,
   Skola24Child,
-  EtjanstChild,
   SSOSystem,
-  TimetableEntry
+  TimetableEntry,
+  User,
 } from './types'
-import * as routes from './routes'
-import * as parse from './parse/index'
-import wrap, { Fetcher, FetcherOptions } from './fetcher'
-import * as fake from './fakeData'
+import { URLSearchParams } from './URLSearchParams'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
   new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))
@@ -33,7 +33,8 @@ const fakeResponse = <T>(data: T): Promise<T> =>
 const s24Init = {
   headers: {
     accept: 'application/json, text/javascript, */*; q=0.01',
-    referer: 'https://fns.stockholm.se/ng/timetable/timetable-viewer/fns.stockholm.se/',
+    referer:
+      'https://fns.stockholm.se/ng/timetable/timetable-viewer/fns.stockholm.se/',
     'accept-language': 'en-US,en;q=0.9,sv;q=0.8',
     'cache-control': 'no-cache',
     'content-type': 'application/json',
@@ -112,7 +113,8 @@ export class Api extends EventEmitter {
   }
 
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
-    if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
+    if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
+      return this.fakeMode()
 
     this.isFake = false
 
@@ -256,7 +258,7 @@ export class Api extends EventEmitter {
   public async getSchedule(
     child: EtjanstChild,
     from: DateTime,
-    to: DateTime,
+    to: DateTime
   ): Promise<ScheduleItem[]> {
     if (this.isFake) return fakeResponse(fake.schedule(child))
 
@@ -277,7 +279,10 @@ export class Api extends EventEmitter {
     return parse.news(data)
   }
 
-  public async getNewsDetails(child: EtjanstChild, item: NewsItem): Promise<any> {
+  public async getNewsDetails(
+    child: EtjanstChild,
+    item: NewsItem
+  ): Promise<any> {
     if (this.isFake) {
       return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
     }
@@ -329,11 +334,13 @@ export class Api extends EventEmitter {
   private async readSAMLRequest(targetSystem: string): Promise<string> {
     const url = routes.ssoRequestUrl(targetSystem)
     const session = this.getRequestInit({
-      redirect: 'follow', 
+      redirect: 'follow',
     })
     const response = await this.fetch('samlRequest', url, session)
     const text = await response.text()
-    const samlRequest = /name="SAMLRequest" value="(\S+)">/gm.exec(text || '')?.[1]
+    const samlRequest = /name="SAMLRequest" value="(\S+)">/gm.exec(
+      text || ''
+    )?.[1]
     if (!samlRequest) {
       throw new Error('Could not parse SAML Request')
     } else {
@@ -345,12 +352,14 @@ export class Api extends EventEmitter {
     const body = new URLSearchParams({ SAMLRequest: samlRequest }).toString()
     const url = routes.ssoResponseUrl
     const session = this.getRequestInit({
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-      redirect: 'follow', 
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      redirect: 'follow',
       method: 'POST',
       body,
     })
-    const response = await this.fetch('samlResponse',  url, session)
+    const response = await this.fetch('samlResponse', url, session)
     const text = await response.text()
     const samlResponse = /name="SAMLResponse" value="(\S+)">/gm.exec(text)?.[1]
     if (!samlResponse) {
@@ -366,14 +375,14 @@ export class Api extends EventEmitter {
     }
     const samlRequest = await this.readSAMLRequest(targetSystem)
     const samlResponse = await this.submitSAMLRequest(samlRequest)
-    
+
     const body = new URLSearchParams({ SAMLResponse: samlResponse }).toString()
     const url = routes.samlResponseUrl
     const session = this.getRequestInit({
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
-      redirect: 'follow', 
+      redirect: 'follow',
       method: 'POST',
       body,
     })
@@ -383,13 +392,15 @@ export class Api extends EventEmitter {
     return text
   }
 
-  public async getSkola24Children(): Promise<Skola24Child[]>{
+  public async getSkola24Children(): Promise<Skola24Child[]> {
     if (this.isFake) return fakeResponse(fake.skola24Children())
 
     await this.ssoAuthorize('TimetableViewer')
-    const body = { getPersonalTimetablesRequest: {
-      hostName: 'fns.stockholm.se'
-    }}
+    const body = {
+      getPersonalTimetablesRequest: {
+        hostName: 'fns.stockholm.se',
+      },
+    }
     const session = this.getRequestInit({
       ...s24Init,
       body: JSON.stringify(body),
@@ -400,10 +411,8 @@ export class Api extends EventEmitter {
     const response = await this.fetch('s24children', url, session)
     const {
       data: {
-        getPersonalTimetablesResponse: {
-          childrenTimetables
-        }
-      }
+        getPersonalTimetablesResponse: { childrenTimetables },
+      },
     } = await response.json()
 
     return childrenTimetables as Skola24Child[]
@@ -413,18 +422,24 @@ export class Api extends EventEmitter {
     const url = routes.renderKey
     const session = this.getRequestInit(s24Init)
     const response = await this.fetch('renderKey', url, session)
-    const { data: { key } } = await response.json()
+    const {
+      data: { key },
+    } = await response.json()
     return key as string
   }
 
-  public async getTimetable(child: Skola24Child, week: number, year: number, lang: Language)
-    : Promise<TimetableEntry[]> {
+  public async getTimetable(
+    child: Skola24Child,
+    week: number,
+    year: number,
+    lang: Language
+  ): Promise<TimetableEntry[]> {
     if (this.isFake) return fakeResponse(fake.timetable(child))
 
-    if(!child.timetableID) {
+    if (!child.timetableID) {
       return new Array<TimetableEntry>()
     }
-    
+
     const url = routes.timetable
     const renderKey = await this.getRenderKey()
     const params = {
@@ -452,7 +467,11 @@ export class Api extends EventEmitter {
       method: 'POST',
       body: JSON.stringify(params),
     })
-    const response = await this.fetch(`timetable_${child.personGuid}_${year}_${week}`, url, session)
+    const response = await this.fetch(
+      `timetable_${child.personGuid}_${year}_${week}`,
+      url,
+      session
+    )
     const json = await response.json()
 
     return parse.timetable(json, year, week, lang)

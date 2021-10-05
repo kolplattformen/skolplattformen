@@ -1,16 +1,15 @@
-# @skolplattformen/api-hooks
+# hooks
 
 1. [Installing](#installing)
 1. [Login / logout](#login--logout)
 1. [Get data](#get-data)
 1. [Fake mode](#fake-mode)
 
-
 ## Installing
 
-```npm i -S @skolplattformen/api-hooks @skolplattformen/embedded-api```
+`npm i -S hooks @skolplattformen/embedded-api`
 
-```yarn add @skolplattformen/api-hooks @skolplattformen/embedded-api```
+`yarn add hooks @skolplattformen/embedded-api`
 
 ## ApiProvider
 
@@ -18,8 +17,8 @@ In order to use api hooks, you must wrap your app in an ApiProvider
 
 ```javascript
 import React from 'react'
-import { ApiProvider } from '@skolplattformen/api-hooks'
-import init from '@skolplattformen/embedded-api'
+import { ApiProvider } from '@skolplattformen/hooks'
+import init from '@skolplattformen/api-skolplattformen'
 import { CookieManager } from '@react-native-community/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RootComponent } from './components/root'
@@ -41,7 +40,7 @@ export default () => (
 ## Login / logout
 
 ```javascript
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 
 export default function LoginController () {
   const { api, isLoggedIn } = useApi()
@@ -90,12 +89,12 @@ export default function LoginController () {
 
 The data hooks return a `State<T>` object exposing the following properties:
 
-| Property | Description                      |
-|----------|----------------------------------|
-| `status` | `pending` `loading` `loaded`     |
-| `data`   | The requested data               |
-| `error`  | Error from the API call if any   |
-| `reload` | Function that triggers a reload  |
+| Property | Description                     |
+| -------- | ------------------------------- |
+| `status` | `pending` `loading` `loaded`    |
+| `data`   | The requested data              |
+| `error`  | Error from the API call if any  |
+| `reload` | Function that triggers a reload |
 
 The hook will return a useable default for data at first (usually empty `[]`).
 It then checks the cache (`AsyncStorage`) for any value and, if exists, updates data.
@@ -108,11 +107,11 @@ their `status`, `data` and `error` updated.
 ### useCalendar
 
 ```javascript
-import { useCalendar } from '@skolplattformen/api-hooks'
+import { useCalendar } from '@skolplattformen/hooks'
 
 export default function CalendarComponent ({ selectedChild }) => {
   const { status, data, error, reload } = useCalendar(selectedChild)
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -129,11 +128,11 @@ export default function CalendarComponent ({ selectedChild }) => {
 ### useChildList
 
 ```javascript
-import { useChildList } from '@skolplattformen/api-hooks'
+import { useChildList } from '@skolplattformen/hooks'
 
 export default function ChildListComponent () => {
   const { status, data, error, reload } = useChildList()
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -150,11 +149,11 @@ export default function ChildListComponent () => {
 ### useClassmates
 
 ```javascript
-import { useClassmates } from '@skolplattformen/api-hooks'
+import { useClassmates } from '@skolplattformen/hooks'
 
 export default function ClassmatesComponent ({ selectedChild }) => {
   const { status, data, error, reload } = useClassmates(selectedChild)
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -171,11 +170,11 @@ export default function ClassmatesComponent ({ selectedChild }) => {
 ### useMenu
 
 ```javascript
-import { useMenu } from '@skolplattformen/api-hooks'
+import { useMenu } from '@skolplattformen/hooks'
 
 export default function MenuComponent ({ selectedChild }) => {
   const { status, data, error, reload } = useMenu(selectedChild)
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -192,11 +191,11 @@ export default function MenuComponent ({ selectedChild }) => {
 ### useNews
 
 ```javascript
-import { useNews } from '@skolplattformen/api-hooks'
+import { useNews } from '@skolplattformen/hooks'
 
 export default function NewsComponent ({ selectedChild }) => {
   const { status, data, error, reload } = useNews(selectedChild)
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -213,12 +212,12 @@ export default function NewsComponent ({ selectedChild }) => {
 To display image from `NewsItem`:
 
 ```javascript
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 
 export default function NewsItem ({ item }) => {
   const { api } = useApi()
   const cookie = api.getSessionCookie()
-  
+
   return (
     <View>
       { cookie &&
@@ -231,11 +230,11 @@ export default function NewsItem ({ item }) => {
 ### useNotifications
 
 ```javascript
-import { useNotifications } from '@skolplattformen/api-hooks'
+import { useNotifications } from '@skolplattformen/hooks'
 
 export default function NotificationsComponent ({ selectedChild }) => {
   const { status, data, error, reload } = useNotifications(selectedChild)
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -252,12 +251,12 @@ export default function NotificationsComponent ({ selectedChild }) => {
 To show content of `NotificationItem` url:
 
 ```javascript
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 import { WebView } from 'react-native-webview'
 
 export default function Notification ({ item }) => {
   const { cookie } = useApi()
-  
+
   return (
     <View>
       <WebView source={{ uri: item.url, headers: { cookie }}} />
@@ -270,13 +269,13 @@ export default function Notification ({ item }) => {
 
 ```javascript
 import { DateTime } from 'luxon'
-import { useSchedule } from '@skolplattformen/api-hooks'
+import { useSchedule } from '@skolplattformen/hooks'
 
 export default function ScheduleComponent ({ selectedChild }) => {
   const from = DateTime.local()
   const to = DateTime.local.plus({ week: 1 })
   const { status, data, error, reload } = useSchedule(selectedChild, from, to)
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -293,11 +292,11 @@ export default function ScheduleComponent ({ selectedChild }) => {
 ### useUser
 
 ```javascript
-import { useUser } from '@skolplattformen/api-hooks'
+import { useUser } from '@skolplattformen/hooks'
 
 export default function UserComponent () => {
   const { status, data, error, reload } = useUser()
-  
+
   return (
     <View>
       { status === 'loading' && <Spinner />}
@@ -321,10 +320,10 @@ personal numbers: `12121212121212`, `201212121212` or `1212121212`.
 The returned login status will have `token` set to `'fake'`.
 
 ```javascript
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 
 
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 
 export default function LoginController () {
   const { api, isLoggedIn } = useApi()

@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from '@react-navigation/core'
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 import React, { useCallback } from 'react'
 import { ScrollView } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'

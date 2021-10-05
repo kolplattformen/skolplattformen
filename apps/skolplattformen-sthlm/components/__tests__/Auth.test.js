@@ -1,9 +1,9 @@
-import { useApi } from '@skolplattformen/api-hooks'
-import { render } from '../../utils/testHelpers'
+import { useApi } from '@skolplattformen/hooks'
 import React from 'react'
+import { render } from '../../utils/testHelpers'
 import { Auth } from '../auth.component'
 
-jest.mock('@skolplattformen/api-hooks')
+jest.mock('@skolplattformen/hooks')
 jest.mock('react-native-localize')
 
 const setup = () => {

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { NewsItem } from '@skolplattformen/embedded-api'
+import { NewsItem } from '@skolplattformen/api-skolplattformen'
 import { StyleService, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React, { ReactNode } from 'react'

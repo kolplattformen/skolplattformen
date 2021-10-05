@@ -1,5 +1,5 @@
 {
-  "name": "@skolplattformen/api-hooks",
+  "name": "@skolplattformen/hooks",
   "description": "React hooks for accessing api with cached results",
   "version": "0.0.1",
   "main": "src/index.ts",

@@ -1,5 +1,5 @@
 /* eslint-disable react-native-a11y/has-accessibility-hint */
-import { Classmate } from '@skolplattformen/embedded-api'
+import { Classmate } from '@skolplattformen/api-skolplattformen'
 import {
   Button,
   MenuGroup,
@@ -9,6 +9,7 @@ import {
 import React from 'react'
 import { Linking, StyleSheet } from 'react-native'
 import { fullName } from '../utils/peopleHelpers'
+import { translate } from '../utils/translation'
 import {
   CallIcon,
   EmailIcon,
@@ -16,7 +17,6 @@ import {
   MoreIcon,
   SMSIcon,
 } from './icon.component'
-import { translate } from '../utils/translation'
 
 interface ContactMenuProps {
   contact: Classmate

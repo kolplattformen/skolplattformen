@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { User } from '@skolplattformen/embedded-api'
+import { User } from '@skolplattformen/api-skolplattformen'
 
 export default class AppStorage {
   static settingsStorageKeyPrefix = 'appsetting_'
