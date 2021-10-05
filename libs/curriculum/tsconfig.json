@@ -1,20 +1,23 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "CommonJS",
+    "jsx": "react-jsx",
+    "allowJs": true,
     "esModuleInterop": true,
-    "declaration": true,
-    "outDir": "./dist",
-    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "sourceMap": true
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src",
-    "src/**/*.json"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts"
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
   ]
 }

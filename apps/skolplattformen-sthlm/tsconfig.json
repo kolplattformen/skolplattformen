@@ -1,21 +1,23 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "lib": [ "es2019"],
-    "allowJs": true,
-    "jsx": "react-native",
-    "noEmit": true,
-    "isolatedModules": true,
-    "strict": true,
-    "moduleResolution": "node", 
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "exclude": [
-    "node_modules", "babel.config.js", "metro.config.js", "jest.config.js"
-  ]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "exclude": ["node_modules"]
 }
-

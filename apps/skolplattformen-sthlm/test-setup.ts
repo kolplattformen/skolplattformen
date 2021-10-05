@@ -1,6 +1,7 @@
-import moment from 'moment'
-import 'moment/locale/sv'
-import 'react-native-gesture-handler/jestSetup'
+import '@testing-library/jest-native/extend-expect';
+import moment from 'moment';
+import 'moment/locale/sv';
+import 'react-native-gesture-handler/jestSetup';
 
 moment.locale('sv')
 
@@ -16,3 +17,4 @@ jest.mock('react-native-reanimated', () => {
 
   return Reanimated
 })
+

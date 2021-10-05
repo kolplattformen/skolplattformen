@@ -370,7 +370,7 @@ PODS:
     - React
   - RNDateTimePicker (3.4.3):
     - React-Core
-  - RNDeviceInfo (8.3.3):
+  - RNDeviceInfo (8.4.0):
     - React-Core
   - RNDevMenu (4.0.2):
     - React-Core
@@ -378,7 +378,7 @@ PODS:
     - React-RCTNetwork
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNLocalize (2.1.4):
+  - RNLocalize (2.1.5):
     - React-Core
   - RNReanimated (2.2.2):
     - DoubleConversion
@@ -409,7 +409,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.6.0):
+  - RNScreens (3.8.0):
     - React-Core
     - React-RCTImage
   - RNSVG (12.1.0):
@@ -420,9 +420,9 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
-  - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
-  - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
+  - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
+  - FBReactNativeSpec (from `../../../node_modules/react-native/React/FBReactNativeSpec`)
   - Flipper (= 0.93.0)
   - Flipper-Boost-iOSX (= 1.76.0.1.11)
   - Flipper-DoubleConversion (= 3.1.7)
@@ -444,52 +444,52 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitReactPlugin (= 0.93.0)
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.93.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.93.0)
-  - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (~> 0.8.1)
   - libevent (~> 2.1.12)
-  - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
-  - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
-  - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
-  - React (from `../node_modules/react-native/`)
-  - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
-  - React-Core (from `../node_modules/react-native/`)
-  - React-Core/DevSupport (from `../node_modules/react-native/`)
-  - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
-  - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
-  - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
-  - React-hermes (from `../node_modules/react-native/ReactCommon/hermes`)
-  - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
-  - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
-  - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - "react-native-cookies (from `../node_modules/@react-native-community/cookies`)"
-  - react-native-restart (from `../node_modules/react-native-restart`)
-  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
-  - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
-  - react-native-webview (from `../node_modules/react-native-webview`)
-  - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
-  - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
-  - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
-  - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
-  - React-RCTImage (from `../node_modules/react-native/Libraries/Image`)
-  - React-RCTLinking (from `../node_modules/react-native/Libraries/LinkingIOS`)
-  - React-RCTNetwork (from `../node_modules/react-native/Libraries/Network`)
-  - React-RCTSettings (from `../node_modules/react-native/Libraries/Settings`)
-  - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
-  - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
-  - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
-  - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - RNCalendarEvents (from `../node_modules/react-native-calendar-events`)
-  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
-  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
-  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
-  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
-  - RNDevMenu (from `../node_modules/react-native-dev-menu`)
-  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNLocalize (from `../node_modules/react-native-localize`)
-  - RNReanimated (from `../node_modules/react-native-reanimated`)
-  - RNScreens (from `../node_modules/react-native-screens`)
-  - RNSVG (from `../node_modules/react-native-svg`)
-  - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+  - RCT-Folly (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
+  - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
+  - RCTTypeSafety (from `../../../node_modules/react-native/Libraries/TypeSafety`)
+  - React (from `../../../node_modules/react-native/`)
+  - React-callinvoker (from `../../../node_modules/react-native/ReactCommon/callinvoker`)
+  - React-Core (from `../../../node_modules/react-native/`)
+  - React-Core/DevSupport (from `../../../node_modules/react-native/`)
+  - React-Core/RCTWebSocket (from `../../../node_modules/react-native/`)
+  - React-CoreModules (from `../../../node_modules/react-native/React/CoreModules`)
+  - React-cxxreact (from `../../../node_modules/react-native/ReactCommon/cxxreact`)
+  - React-hermes (from `../../../node_modules/react-native/ReactCommon/hermes`)
+  - React-jsi (from `../../../node_modules/react-native/ReactCommon/jsi`)
+  - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
+  - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
+  - "react-native-cookies (from `../../../node_modules/@react-native-community/cookies`)"
+  - react-native-restart (from `../../../node_modules/react-native-restart`)
+  - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
+  - react-native-simple-toast (from `../../../node_modules/react-native-simple-toast`)
+  - react-native-webview (from `../../../node_modules/react-native-webview`)
+  - React-perflogger (from `../../../node_modules/react-native/ReactCommon/reactperflogger`)
+  - React-RCTActionSheet (from `../../../node_modules/react-native/Libraries/ActionSheetIOS`)
+  - React-RCTAnimation (from `../../../node_modules/react-native/Libraries/NativeAnimation`)
+  - React-RCTBlob (from `../../../node_modules/react-native/Libraries/Blob`)
+  - React-RCTImage (from `../../../node_modules/react-native/Libraries/Image`)
+  - React-RCTLinking (from `../../../node_modules/react-native/Libraries/LinkingIOS`)
+  - React-RCTNetwork (from `../../../node_modules/react-native/Libraries/Network`)
+  - React-RCTSettings (from `../../../node_modules/react-native/Libraries/Settings`)
+  - React-RCTText (from `../../../node_modules/react-native/Libraries/Text`)
+  - React-RCTVibration (from `../../../node_modules/react-native/Libraries/Vibration`)
+  - React-runtimeexecutor (from `../../../node_modules/react-native/ReactCommon/runtimeexecutor`)
+  - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
+  - RNCalendarEvents (from `../../../node_modules/react-native-calendar-events`)
+  - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
+  - "RNDateTimePicker (from `../../../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../../../node_modules/react-native-device-info`)
+  - RNDevMenu (from `../../../node_modules/react-native-dev-menu`)
+  - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
+  - RNLocalize (from `../../../node_modules/react-native-localize`)
+  - RNReanimated (from `../../../node_modules/react-native-reanimated`)
+  - RNScreens (from `../../../node_modules/react-native-screens`)
+  - RNSVG (from `../../../node_modules/react-native-svg`)
+  - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
@@ -513,95 +513,95 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   DoubleConversion:
-    :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+    :podspec: "../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
-    :path: "../node_modules/react-native/Libraries/FBLazyVector"
+    :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
-    :path: "../node_modules/react-native/React/FBReactNativeSpec"
+    :path: "../../../node_modules/react-native/React/FBReactNativeSpec"
   glog:
-    :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+    :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   RCT-Folly:
-    :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
+    :podspec: "../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
-    :path: "../node_modules/react-native/Libraries/RCTRequired"
+    :path: "../../../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
-    :path: "../node_modules/react-native/Libraries/TypeSafety"
+    :path: "../../../node_modules/react-native/Libraries/TypeSafety"
   React:
-    :path: "../node_modules/react-native/"
+    :path: "../../../node_modules/react-native/"
   React-callinvoker:
-    :path: "../node_modules/react-native/ReactCommon/callinvoker"
+    :path: "../../../node_modules/react-native/ReactCommon/callinvoker"
   React-Core:
-    :path: "../node_modules/react-native/"
+    :path: "../../../node_modules/react-native/"
   React-CoreModules:
-    :path: "../node_modules/react-native/React/CoreModules"
+    :path: "../../../node_modules/react-native/React/CoreModules"
   React-cxxreact:
-    :path: "../node_modules/react-native/ReactCommon/cxxreact"
+    :path: "../../../node_modules/react-native/ReactCommon/cxxreact"
   React-hermes:
-    :path: "../node_modules/react-native/ReactCommon/hermes"
+    :path: "../../../node_modules/react-native/ReactCommon/hermes"
   React-jsi:
-    :path: "../node_modules/react-native/ReactCommon/jsi"
+    :path: "../../../node_modules/react-native/ReactCommon/jsi"
   React-jsiexecutor:
-    :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
+    :path: "../../../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
-    :path: "../node_modules/react-native/ReactCommon/jsinspector"
+    :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
   react-native-cookies:
-    :path: "../node_modules/@react-native-community/cookies"
+    :path: "../../../node_modules/@react-native-community/cookies"
   react-native-restart:
-    :path: "../node_modules/react-native-restart"
+    :path: "../../../node_modules/react-native-restart"
   react-native-safe-area-context:
-    :path: "../node_modules/react-native-safe-area-context"
+    :path: "../../../node_modules/react-native-safe-area-context"
   react-native-simple-toast:
-    :path: "../node_modules/react-native-simple-toast"
+    :path: "../../../node_modules/react-native-simple-toast"
   react-native-webview:
-    :path: "../node_modules/react-native-webview"
+    :path: "../../../node_modules/react-native-webview"
   React-perflogger:
-    :path: "../node_modules/react-native/ReactCommon/reactperflogger"
+    :path: "../../../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
-    :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
+    :path: "../../../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
-    :path: "../node_modules/react-native/Libraries/NativeAnimation"
+    :path: "../../../node_modules/react-native/Libraries/NativeAnimation"
   React-RCTBlob:
-    :path: "../node_modules/react-native/Libraries/Blob"
+    :path: "../../../node_modules/react-native/Libraries/Blob"
   React-RCTImage:
-    :path: "../node_modules/react-native/Libraries/Image"
+    :path: "../../../node_modules/react-native/Libraries/Image"
   React-RCTLinking:
-    :path: "../node_modules/react-native/Libraries/LinkingIOS"
+    :path: "../../../node_modules/react-native/Libraries/LinkingIOS"
   React-RCTNetwork:
-    :path: "../node_modules/react-native/Libraries/Network"
+    :path: "../../../node_modules/react-native/Libraries/Network"
   React-RCTSettings:
-    :path: "../node_modules/react-native/Libraries/Settings"
+    :path: "../../../node_modules/react-native/Libraries/Settings"
   React-RCTText:
-    :path: "../node_modules/react-native/Libraries/Text"
+    :path: "../../../node_modules/react-native/Libraries/Text"
   React-RCTVibration:
-    :path: "../node_modules/react-native/Libraries/Vibration"
+    :path: "../../../node_modules/react-native/Libraries/Vibration"
   React-runtimeexecutor:
-    :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
+    :path: "../../../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
-    :path: "../node_modules/react-native/ReactCommon"
+    :path: "../../../node_modules/react-native/ReactCommon"
   RNCalendarEvents:
-    :path: "../node_modules/react-native-calendar-events"
+    :path: "../../../node_modules/react-native-calendar-events"
   RNCAsyncStorage:
-    :path: "../node_modules/@react-native-async-storage/async-storage"
+    :path: "../../../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
-    :path: "../node_modules/@react-native-community/masked-view"
+    :path: "../../../node_modules/@react-native-community/masked-view"
   RNDateTimePicker:
-    :path: "../node_modules/@react-native-community/datetimepicker"
+    :path: "../../../node_modules/@react-native-community/datetimepicker"
   RNDeviceInfo:
-    :path: "../node_modules/react-native-device-info"
+    :path: "../../../node_modules/react-native-device-info"
   RNDevMenu:
-    :path: "../node_modules/react-native-dev-menu"
+    :path: "../../../node_modules/react-native-dev-menu"
   RNGestureHandler:
-    :path: "../node_modules/react-native-gesture-handler"
+    :path: "../../../node_modules/react-native-gesture-handler"
   RNLocalize:
-    :path: "../node_modules/react-native-localize"
+    :path: "../../../node_modules/react-native-localize"
   RNReanimated:
-    :path: "../node_modules/react-native-reanimated"
+    :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
-    :path: "../node_modules/react-native-screens"
+    :path: "../../../node_modules/react-native-screens"
   RNSVG:
-    :path: "../node_modules/react-native-svg"
+    :path: "../../../node_modules/react-native-svg"
   Yoga:
-    :path: "../node_modules/react-native/ReactCommon/yoga"
+    :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -656,12 +656,12 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 9b7605e899f9acb2fba33e87952c529731265453
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: d943800c936fb01c352fcfb70439550d2cb57092
-  RNDeviceInfo: cc7de0772378f85d8f36ae439df20f05c590a651
+  RNDeviceInfo: 8a06046616c6b5c03787b04f265fa3b52b37c80b
   RNDevMenu: fd325b5554b61fe7f48d9205a3877cf5ee88cd7c
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNLocalize: 7f1e5792b65a839af55a9552d05b3558b66d017e
+  RNLocalize: 74b82db20cc3895ccc25af992c644879bcec2815
   RNReanimated: ad24db8af24e3fe1b5c462785bc3db8d5baae2ee
-  RNScreens: eb0dfb2d6b21d2d7f980ad46b14eb306d2f1062e
+  RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
@@ -669,4 +669,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 85f5a2dfa1de342b427eecb6e9652410ad153247
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

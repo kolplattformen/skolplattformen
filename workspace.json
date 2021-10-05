@@ -1,0 +1,221 @@
+{
+  "version": 2,
+  "projects": {
+    "api-skolplattformen": {
+      "root": "libs/api-skolplattformen",
+      "sourceRoot": "libs/api-skolplattformen/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/api-skolplattformen/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api-skolplattformen"],
+          "options": {
+            "jestConfig": "libs/api-skolplattformen/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "curriculum": {
+      "root": "libs/curriculum",
+      "sourceRoot": "libs/curriculum/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/curriculum/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/curriculum"],
+          "options": {
+            "jestConfig": "libs/curriculum/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hooks": {
+      "root": "libs/hooks",
+      "sourceRoot": "libs/hooks/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/hooks/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hooks"],
+          "options": {
+            "jestConfig": "libs/hooks/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "skolplattformen-sthlm": {
+      "root": "apps/skolplattformen-sthlm",
+      "sourceRoot": "apps/skolplattformen-sthlm/src",
+      "projectType": "application",
+      "targets": {
+        "start": {
+          "executor": "@nrwl/react-native:start",
+          "options": {
+            "port": 8081
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "nx start skolplattformen-sthlm"
+          }
+        },
+        "run-ios": {
+          "executor": "@nrwl/react-native:run-ios",
+          "options": {}
+        },
+        "bundle-ios": {
+          "executor": "@nrwl/react-native:bundle",
+          "outputs": ["apps/skolplattformen-sthlm/build"],
+          "options": {
+            "entryFile": "apps/skolplattformen-sthlm/src/main.tsx",
+            "platform": "ios",
+            "bundleOutput": "dist/apps/skolplattformen-sthlm/ios/main.jsbundle"
+          }
+        },
+        "run-android": {
+          "executor": "@nrwl/react-native:run-android",
+          "options": {}
+        },
+        "build-android": {
+          "executor": "@nrwl/react-native:build-android",
+          "outputs": [
+            "apps/skolplattformen-sthlm/android/app/build/outputs/bundle",
+            "apps/skolplattformen-sthlm/android/app/build/outputs/apk"
+          ],
+          "options": {}
+        },
+        "bundle-android": {
+          "executor": "@nrwl/react-native:bundle",
+          "options": {
+            "entryFile": "apps/skolplattformen-sthlm/src/main.tsx",
+            "platform": "android",
+            "bundleOutput": "dist/apps/skolplattformen-sthlm/android/main.jsbundle"
+          }
+        },
+        "sync-deps": {
+          "executor": "@nrwl/react-native:sync-deps",
+          "options": {}
+        },
+        "ensure-symlink": {
+          "executor": "@nrwl/react-native:ensure-symlink",
+          "options": {}
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "apps/skolplattformen-sthlm/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/skolplattformen-sthlm"],
+          "options": {
+            "jestConfig": "apps/skolplattformen-sthlm/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "skolplattformen-sthlm-e2e": {
+      "root": "apps/skolplattformen-sthlm-e2e",
+      "sourceRoot": "apps/skolplattformen-sthlm-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "build-ios": {
+          "executor": "@nrwl/detox:build",
+          "options": {
+            "detoxConfiguration": "ios.sim.debug"
+          },
+          "configurations": {
+            "production": {
+              "detoxConfiguration": "ios.sim.release"
+            }
+          }
+        },
+        "test-ios": {
+          "executor": "@nrwl/detox:test",
+          "options": {
+            "detoxConfiguration": "ios.sim.debug"
+          },
+          "configurations": {
+            "production": {
+              "detoxConfiguration": "ios.sim.release"
+            }
+          }
+        },
+        "build-android": {
+          "executor": "@nrwl/detox:build",
+          "options": {
+            "detoxConfiguration": "android.emu.debug"
+          },
+          "configurations": {
+            "production": {
+              "detoxConfiguration": "android.emu.release"
+            }
+          }
+        },
+        "test-android": {
+          "executor": "@nrwl/detox:test",
+          "options": {
+            "detoxConfiguration": "android.emu.debug"
+          },
+          "configurations": {
+            "production": {
+              "detoxConfiguration": "android.emu.release"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "apps/skolplattformen-sthlm-e2e/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react-native"
+  },
+  "defaultProject": "skolplattformen-sthlm",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    }
+  }
+}

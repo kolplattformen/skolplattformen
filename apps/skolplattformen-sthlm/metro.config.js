@@ -1,27 +1,36 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
+const { withNxMetro } = require('@nrwl/react-native')
 
 const MetroConfig = require('@ui-kitten/metro-config')
-
-/**
- * @see https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance
- */
 const evaConfig = {
   evaPackage: '@eva-design/eva',
   customMappingPath: './design/mapping.json',
 }
 
-module.exports = MetroConfig.create(evaConfig, {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
+// const evaMetroConfig = MetroConfig.create(evaConfig, {transformer: {
+//       getTransformOptions: async () => ({
+//         transform: {
+//           experimentalImportSupport: false,
+//           inlineRequires: true,
+//         },
+//       }),
+//     },})
+
+module.exports = withNxMetro(
+  {
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+        },
+      }),
+    },
   },
-})
+  {
+    // Change this to true to see debugging info.
+    // Useful if you have issues resolving modules
+    debug: false,
+    // all the file extensions used for imports other than 'ts', 'tsx', 'js', 'jsx'
+    extensions: [],
+  }
+)
