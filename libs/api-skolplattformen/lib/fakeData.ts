@@ -8,7 +8,9 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  SchoolContact,
   Skola24Child,
+  Teacher,
   TimetableEntry,
   User,
 } from './types'
@@ -232,6 +234,56 @@ const data: any = {
         ],
         className: '2B',
       },
+    ],
+    teachers: [
+      {
+        id: 15662220,
+        firstname: "Cecilia",
+        lastname: "Test",
+        email: "cecilia.test@edu.stockholm.se",
+        phoneWork: null,
+        active: true,
+        status: " S",
+        timeTableAbbreviation: 'CTE',
+      },
+      {
+        id: 15662221,
+        firstname: "Anna",
+        lastname: "Test",
+        email: "anna.test@edu.stockholm.se",
+        phoneWork: '08000000',
+        active: true,
+        status: " GR",
+        timeTableAbbreviation: 'ATE',
+      },
+      {
+        id: 15662221,
+        firstname: "Greta",
+        lastname: "Test",
+        email: null,
+        phoneWork: '08000001',
+        active: true,
+        status: " F",
+        timeTableAbbreviation: 'GTE',
+      }
+    ],
+    schoolContacts: [
+      {
+        title: "Expedition",
+        name: null,
+        phone: "508 000 00",
+        email: "",
+        schoolName: "Vallaskolan",
+        className: null,
+      },
+      {
+        title: "Rektor",
+        name: "Alvar Sträng",
+        phone: "08-50800001",
+        email: "alvar.strang@edu.stockholm.se",
+        schoolName: null,
+        className: null,
+      }
     ],
     news: [
       {
@@ -1126,6 +1178,12 @@ export const skola24Children = (): Skola24Child[] => [
 export const classmates = (child: EtjanstChild): Classmate[] =>
   data[child.id].classmates
 
+export const teachers = (child:EtjanstChild): Teacher[] =>
+  data[child.id].teachers
+
+export const schoolContacts = (child: EtjanstChild): SchoolContact[] =>
+  data[child.id].schoolContacts  
+
 export const news = (child: Child): NewsItem[] => data[child.id].news
 
 export const calendar = (child: Child): CalendarItem[] =>
@@ -1599,5 +1657,5 @@ export const timetable = (child: Skola24Child): TimetableEntry[] => {
       dateStart: '2021-04-16T10:40:00.000+02:00',
       dateEnd: '2021-04-16T11:35:00.000+02:00',
     }
-  ]
+  ]  
 }

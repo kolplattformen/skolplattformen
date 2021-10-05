@@ -66,6 +66,15 @@ async function run() {
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
 */
+      console.log('teachers')
+      const teachers = await api.getTeachers(children[0])
+      console.log(teachers)
+
+      console.log('schoolContacts')
+      const schoolContacts = await api.getSchoolContacts(children[0])
+      console.log(schoolContacts)
+
+      /*
       try {
         console.log('schedule')
         const schedule = await api.getSchedule(children[1], DateTime.local(), DateTime.local().plus({ week: 1 }))
@@ -89,7 +98,7 @@ async function run() {
       } catch (error) {
         console.error(error)
       }
-      
+      */
 /*
       console.log('news')
       const news = await api.getNews(children[0])

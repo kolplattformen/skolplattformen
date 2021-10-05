@@ -113,6 +113,35 @@ export interface Guardian {
 }
 
 /**
+ * @export
+ * @interface Teacher
+ */
+export interface Teacher {
+  id: number
+  sisId: string
+  firstname: string
+  lastname: string
+  email?: string
+  phoneWork?: string
+  active: boolean
+  status: string
+  timeTableAbbreviation: string
+}
+
+/**
+ * @export
+ * @interface SchoolContact
+ */
+export interface SchoolContact {
+  title?: string
+  name?: string
+  phone?: string
+  email?: string
+  schoolName: string
+  className: string
+}
+
+/**
  * <p>A news item from the school, for example a weekly news letter</p>
  * @export
  * @interface NewsItem
