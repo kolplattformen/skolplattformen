@@ -145,66 +145,6 @@
           }
         }
       }
-    },
-    "skolplattformen-sthlm-e2e": {
-      "root": "apps/skolplattformen-sthlm-e2e",
-      "sourceRoot": "apps/skolplattformen-sthlm-e2e/src",
-      "projectType": "application",
-      "targets": {
-        "build-ios": {
-          "executor": "@nrwl/detox:build",
-          "options": {
-            "detoxConfiguration": "ios.sim.debug"
-          },
-          "configurations": {
-            "production": {
-              "detoxConfiguration": "ios.sim.release"
-            }
-          }
-        },
-        "test-ios": {
-          "executor": "@nrwl/detox:test",
-          "options": {
-            "detoxConfiguration": "ios.sim.debug"
-          },
-          "configurations": {
-            "production": {
-              "detoxConfiguration": "ios.sim.release"
-            }
-          }
-        },
-        "build-android": {
-          "executor": "@nrwl/detox:build",
-          "options": {
-            "detoxConfiguration": "android.emu.debug"
-          },
-          "configurations": {
-            "production": {
-              "detoxConfiguration": "android.emu.release"
-            }
-          }
-        },
-        "test-android": {
-          "executor": "@nrwl/detox:test",
-          "options": {
-            "detoxConfiguration": "android.emu.debug"
-          },
-          "configurations": {
-            "production": {
-              "detoxConfiguration": "android.emu.release"
-            }
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": [
-              "apps/skolplattformen-sthlm-e2e/**/*.{ts,tsx,js,jsx}"
-            ]
-          }
-        }
-      }
     }
   },
   "cli": {

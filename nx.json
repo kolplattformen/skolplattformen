@@ -38,10 +38,6 @@
     },
     "skolplattformen-sthlm": {
       "tags": []
-    },
-    "skolplattformen-sthlm-e2e": {
-      "tags": [],
-      "implicitDependencies": ["skolplattformen-sthlm"]
     }
   }
 }
