@@ -1,11 +1,10 @@
-import React from 'react'
 import { act, renderHook } from '@testing-library/react-hooks'
+import React from 'react'
 import { ApiProvider } from '.'
-import createStorage from './__mocks__/AsyncStorage'
 import {
   useCalendar,
-  useEtjanstChildren,
   useClassmates,
+  useEtjanstChildren,
   useMenu,
   useNews,
   useNotifications,
@@ -13,8 +12,11 @@ import {
   useUser,
 } from './hooks'
 import store from './store'
+import createStorage from './__mocks__/AsyncStorage'
 
-const { default: init } = jest.requireActual('@skolplattformen/embedded-api')
+const { default: init } = jest.requireActual(
+  '@skolplattformen/api-skolplattformen'
+)
 
 const wait = (ms) => new Promise((res) => setTimeout(res, ms))
 
@@ -22,10 +24,15 @@ describe('hooks with fake data', () => {
   let api
   let storage
   const wrapper = ({ children }) => (
-    <ApiProvider api={api} storage={storage}>{children}</ApiProvider>
+    <ApiProvider api={api} storage={storage}>
+      {children}
+    </ApiProvider>
   )
   beforeEach(async () => {
-    api = init(() => { }, () => { })
+    api = init(
+      () => {},
+      () => {}
+    )
     await api.login('121212121212')
 
     storage = createStorage({})
@@ -33,10 +40,9 @@ describe('hooks with fake data', () => {
   it('does not use cache', async () => {
     storage.cache.user = JSON.stringify({ user: 'cached' })
     await act(async () => {
-      const {
-        result,
-        waitForNextUpdate,
-      } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -46,15 +52,15 @@ describe('hooks with fake data', () => {
         firstName: 'Namn',
         lastName: 'Namnsson',
         isAuthenticated: true,
+        personalNumber: '195001182046',
       })
     })
   })
   it('returns user', async () => {
     await act(async () => {
-      const {
-        result,
-        waitForNextUpdate,
-      } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -63,15 +69,16 @@ describe('hooks with fake data', () => {
         firstName: 'Namn',
         lastName: 'Namnsson',
         isAuthenticated: true,
+        personalNumber: '195001182046',
       })
     })
   })
   it('returns child list', async () => {
     await act(async () => {
-      const {
-        result,
-        waitForNextUpdate,
-      } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -83,14 +90,14 @@ describe('hooks with fake data', () => {
   describe('data belonging to one child', () => {
     let child
     beforeEach(async () => {
-      [child] = await api.getChildren()
+      ;[child] = await api.getChildren()
     })
     it('returns calendar', async () => {
       await act(async () => {
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(() => useCalendar(child), { wrapper })
+        const { result, waitForNextUpdate } = renderHook(
+          () => useCalendar(child),
+          { wrapper }
+        )
 
         await waitForNextUpdate()
         await waitForNextUpdate()
@@ -100,10 +107,10 @@ describe('hooks with fake data', () => {
     })
     it('returns classmates', async () => {
       await act(async () => {
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(() => useClassmates(child), { wrapper })
+        const { result, waitForNextUpdate } = renderHook(
+          () => useClassmates(child),
+          { wrapper }
+        )
 
         await waitForNextUpdate()
         await waitForNextUpdate()
@@ -113,10 +120,9 @@ describe('hooks with fake data', () => {
     })
     it('returns menu', async () => {
       await act(async () => {
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(() => useMenu(child), { wrapper })
+        const { result, waitForNextUpdate } = renderHook(() => useMenu(child), {
+          wrapper,
+        })
 
         await waitForNextUpdate()
         await waitForNextUpdate()
@@ -126,10 +132,9 @@ describe('hooks with fake data', () => {
     })
     it('returns news', async () => {
       await act(async () => {
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(() => useNews(child), { wrapper })
+        const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+          wrapper,
+        })
 
         await waitForNextUpdate()
         await waitForNextUpdate()
@@ -139,10 +144,10 @@ describe('hooks with fake data', () => {
     })
     it('returns notifications', async () => {
       await act(async () => {
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(() => useNotifications(child), { wrapper })
+        const { result, waitForNextUpdate } = renderHook(
+          () => useNotifications(child),
+          { wrapper }
+        )
 
         await waitForNextUpdate()
         await waitForNextUpdate()
@@ -154,10 +159,10 @@ describe('hooks with fake data', () => {
       const from = '2021-01-01'
       const to = '2021-01-08'
       await act(async () => {
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(() => useSchedule(child, from, to), { wrapper })
+        const { result, waitForNextUpdate } = renderHook(
+          () => useSchedule(child, from, to),
+          { wrapper }
+        )
 
         await waitForNextUpdate()
         await waitForNextUpdate()
@@ -173,10 +178,10 @@ describe('hooks with fake data', () => {
 
       const [child] = await api.getChildren()
 
-      const {
-        result,
-        waitForNextUpdate,
-      } = renderHook(() => useNotifications(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useNotifications(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       expect(result.current.status).toEqual('loaded')
