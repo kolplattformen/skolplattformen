@@ -14,11 +14,7 @@ describe('useSkola24Children()', () => {
   let storage
   let response
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -26,14 +22,18 @@ describe('useSkola24Children()', () => {
     response = [{ personGuid: '1' }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getSkola24Children.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_skola24_children': [{ personGuid: '2' }],
-    }, 2)
+    api.getSkola24Children.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_skola24_children': [{ personGuid: '2' }],
+      },
+      2
+    )
   })
   afterEach(async () => {
     await act(async () => {
@@ -49,7 +49,9 @@ describe('useSkola24Children()', () => {
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -61,7 +63,9 @@ describe('useSkola24Children()', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useSkola24Children(), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       renderHook(() => useSkola24Children(), { wrapper })
@@ -78,7 +82,10 @@ describe('useSkola24Children()', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSkola24Children(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -89,7 +96,10 @@ describe('useSkola24Children()', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSkola24Children(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -100,7 +110,10 @@ describe('useSkola24Children()', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSkola24Children(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -114,14 +127,18 @@ describe('useSkola24Children()', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['123_skola24_children']).toEqual('[{"personGuid":"1"}]')
+      expect(storage.cache['123_skola24_children']).toEqual(
+        '[{"personGuid":"1"}]'
+      )
     })
   })
   it('does not store in cache if fake', async () => {
@@ -129,13 +146,17 @@ describe('useSkola24Children()', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useSkola24Children(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['123_skola24_children']).toEqual('[{"personGuid":"2"}]')
+      expect(storage.cache['123_skola24_children']).toEqual(
+        '[{"personGuid":"2"}]'
+      )
     })
   })
   it('retries if api fails', async () => {
@@ -144,7 +165,10 @@ describe('useSkola24Children()', () => {
       const error = new Error('fail')
       api.getSkola24Children.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSkola24Children(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -172,7 +196,10 @@ describe('useSkola24Children()', () => {
       api.getSkola24Children.mockRejectedValueOnce(error)
       api.getSkola24Children.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSkola24Children(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -199,7 +226,10 @@ describe('useSkola24Children()', () => {
       const error = new Error('fail')
       api.getSkola24Children.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useSkola24Children(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSkola24Children(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -207,7 +237,10 @@ describe('useSkola24Children()', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting SKOLA24_CHILDREN from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting SKOLA24_CHILDREN from API'
+      )
     })
   })
 })

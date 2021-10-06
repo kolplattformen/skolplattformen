@@ -19,7 +19,7 @@ export const Notification = ({ item }: NotificationProps) => {
   const date = item.dateModified || item.dateCreated
   const displayDate = date ? moment(date).fromNow() : null
 
-  const sharedCookiesEnabled: boolean = Boolean(
+  const sharedCookiesEnabled = Boolean(
     item.url && item.url.startsWith('https://start.unikum.net/')
   )
 

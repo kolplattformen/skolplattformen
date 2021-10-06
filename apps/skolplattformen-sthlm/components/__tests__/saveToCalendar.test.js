@@ -1,9 +1,9 @@
 import { fireEvent } from '@testing-library/react-native'
 import React from 'react'
 import RNCalendarEvents from 'react-native-calendar-events'
+import Toast from 'react-native-simple-toast'
 import { render } from '../../utils/testHelpers'
 import { SaveToCalendar } from '../saveToCalendar.component'
-import Toast from 'react-native-simple-toast'
 
 jest.mock('react-native-simple-toast', () => ({
   SHORT: 'short',
@@ -53,7 +53,9 @@ const setup = (customProps = {}) => {
 beforeAll(() => {
   // Hide errors from state illegal state transition
   // Probably due to mock
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => {
+    // noop
+  })
 })
 
 beforeEach(jest.clearAllMocks)

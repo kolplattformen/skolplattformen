@@ -30,8 +30,12 @@ describe('hooks with fake data', () => {
   )
   beforeEach(async () => {
     api = init(
-      () => {},
-      () => {}
+      () => {
+        // noop
+      },
+      () => {
+        //noop
+      }
     )
     await api.login('121212121212')
 

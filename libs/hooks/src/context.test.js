@@ -23,7 +23,9 @@ describe('useApi()', () => {
     expect(result.current.isLoggedIn).toBe(false)
   })
   it('updates isLoggedIn', async () => {
-    const { result, waitForValueToChange } = renderHook(() => useApi(), { wrapper })
+    const { result, waitForValueToChange } = renderHook(() => useApi(), {
+      wrapper,
+    })
     await act(async () => {
       api.isLoggedIn = true
       api.emitter.emit('login')
@@ -33,7 +35,9 @@ describe('useApi()', () => {
     expect(result.current.isLoggedIn).toBe(true)
   })
   it('updates isFake', async () => {
-    const { result, waitForValueToChange } = renderHook(() => useApi(), { wrapper })
+    const { result, waitForValueToChange } = renderHook(() => useApi(), {
+      wrapper,
+    })
     await act(async () => {
       api.isFake = true
       api.emitter.emit('login')

@@ -31,7 +31,9 @@ const setup = (customProps = {}) => {
 beforeAll(() => {
   // Hide errors from act
   // https://github.com/callstack/react-native-testing-library/issues/379
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => {
+    // noop
+  })
 })
 
 beforeEach(async () => {

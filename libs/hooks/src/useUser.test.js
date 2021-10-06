@@ -14,11 +14,7 @@ describe('useUser()', () => {
   let storage
   let response
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -26,14 +22,18 @@ describe('useUser()', () => {
     response = { id: 1 }
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getUser.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_user': { id: 2 },
-    }, 2)
+    api.getUser.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_user': { id: 2 },
+      },
+      2
+    )
   })
   afterEach(async () => {
     await act(async () => {
@@ -78,7 +78,9 @@ describe('useUser()', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -89,7 +91,9 @@ describe('useUser()', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -100,7 +104,9 @@ describe('useUser()', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -144,7 +150,9 @@ describe('useUser()', () => {
       const error = new Error('fail')
       api.getUser.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -172,7 +180,9 @@ describe('useUser()', () => {
       api.getUser.mockRejectedValueOnce(error)
       api.getUser.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -199,7 +209,9 @@ describe('useUser()', () => {
       const error = new Error('fail')
       api.getUser.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useUser(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -207,7 +219,10 @@ describe('useUser()', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting USER from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting USER from API'
+      )
     })
   })
 })

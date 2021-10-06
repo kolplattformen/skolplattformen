@@ -38,7 +38,9 @@ type ChildListItemNavigationProp = StackNavigationProp<
 
 export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   // Forces rerender when child.id changes
-  React.useEffect(() => {}, [child.id])
+  React.useEffect(() => {
+    // noop
+  }, [child.id])
 
   const navigation = useNavigation<ChildListItemNavigationProp>()
   const { t } = useTranslation()

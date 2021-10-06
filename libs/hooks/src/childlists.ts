@@ -4,7 +4,6 @@ import {
   Skola24Child,
 } from '@skolplattformen/api-skolplattformen'
 
-// eslint-disable-next-line import/prefer-default-export
 export const merge = (
   etjanstChildren: EtjanstChild[],
   skola24Children: Skola24Child[]

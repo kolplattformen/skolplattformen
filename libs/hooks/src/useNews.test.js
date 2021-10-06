@@ -15,11 +15,7 @@ describe('useNews(child)', () => {
   let response
   let child
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -27,14 +23,18 @@ describe('useNews(child)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getNews.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_news_10': [{ id: 2 }],
-    }, 2)
+    api.getNews.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_news_10': [{ id: 2 }],
+      },
+      2
+    )
     child = { id: 10 }
   })
   afterEach(async () => {
@@ -51,7 +51,9 @@ describe('useNews(child)', () => {
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -63,7 +65,9 @@ describe('useNews(child)', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useNews(child), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       renderHook(() => useNews(child), { wrapper })
@@ -80,7 +84,9 @@ describe('useNews(child)', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -91,7 +97,9 @@ describe('useNews(child)', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -102,7 +110,9 @@ describe('useNews(child)', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -116,7 +126,9 @@ describe('useNews(child)', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -131,7 +143,9 @@ describe('useNews(child)', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -146,7 +160,9 @@ describe('useNews(child)', () => {
       const error = new Error('fail')
       api.getNews.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -174,7 +190,9 @@ describe('useNews(child)', () => {
       api.getNews.mockRejectedValueOnce(error)
       api.getNews.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -201,7 +219,9 @@ describe('useNews(child)', () => {
       const error = new Error('fail')
       api.getNews.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useNews(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -209,7 +229,10 @@ describe('useNews(child)', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting NEWS from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting NEWS from API'
+      )
     })
   })
 })

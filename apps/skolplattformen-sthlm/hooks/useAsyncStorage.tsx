@@ -12,7 +12,9 @@ export default function useAsyncStorage<T>(
       if (!storageKey) return
       await AsyncStorage.setItem(storageKey, JSON.stringify(value))
       setStorageItem(value)
-    } catch (e) {}
+    } catch (e) {
+      // noop
+    }
   }
 
   useEffect(() => {
@@ -20,7 +22,9 @@ export default function useAsyncStorage<T>(
       try {
         const data = await AsyncStorage.getItem(storageKey)
         if (typeof data === 'string') setStorageItem(JSON.parse(data))
-      } catch (e) {}
+      } catch (e) {
+        // noop
+      }
     }
 
     getStoredValue()

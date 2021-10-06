@@ -57,9 +57,9 @@ export class Api extends EventEmitter {
 
   private cookieManager: CookieManager
 
-  public isLoggedIn: boolean = false
+  public isLoggedIn = false
 
-  public isFake: boolean = false
+  public isFake = false
 
   private authorizedSystems: SSOSystems = {}
 

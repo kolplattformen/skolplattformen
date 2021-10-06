@@ -21,10 +21,7 @@ const reporter = __DEV__
       log: (message) => console.log(message),
       error: (error, label) => console.error(label, error),
     }
-  : {
-      log: () => {},
-      error: () => {},
-    }
+  : undefined
 
 if (__DEV__) {
   const DevMenu = require('react-native-dev-menu')

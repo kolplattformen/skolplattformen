@@ -14,9 +14,14 @@ export default (init = {}, delay = 0) => {
     cache[key] = val
   }
   const clear = () => {
-    Object.keys(cache).forEach((key) => { cache[key] = undefined })
+    Object.keys(cache).forEach((key) => {
+      cache[key] = undefined
+    })
   }
   return {
-    getItem, setItem, cache, clear,
+    getItem,
+    setItem,
+    cache,
+    clear,
   }
 }

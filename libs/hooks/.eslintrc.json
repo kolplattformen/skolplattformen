@@ -1,5 +1,10 @@
 {
-  "extends": ["plugin:@nrwl/nx/react", "../../.eslintrc.json"],
+  "extends": [
+    "@react-native-community",
+    "plugin:react-native-a11y/all",
+    "plugin:@nrwl/nx/react",
+    "../../.eslintrc.json"
+  ],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {

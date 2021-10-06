@@ -28,7 +28,7 @@ class Checker extends EventEmitter {
 
   private url: string
 
-  private cancelled: boolean = false
+  private cancelled = false
 
   constructor(fetcher: Fetcher, ticket: AuthTicket) {
     super()

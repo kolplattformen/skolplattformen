@@ -30,7 +30,7 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
   const toast = (text: string) =>
     Toast.showWithGravity(text, Toast.SHORT, Toast.BOTTOM)
 
-  function removeEmptyValues<T extends object>(obj: T) {
+  function removeEmptyValues<T extends Record<string, unknown>>(obj: T) {
     return Object.fromEntries(
       Object.entries(obj).filter(([_, v]) => v != null)
     ) as { [K in keyof T]: any }

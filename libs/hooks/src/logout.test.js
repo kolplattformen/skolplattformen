@@ -14,11 +14,7 @@ describe('logout - cleanup', () => {
   let storage
   let response
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -26,14 +22,18 @@ describe('logout - cleanup', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getChildren.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_etjanst_children': [{ id: 2 }],
-    }, 2)
+    api.getChildren.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_etjanst_children': [{ id: 2 }],
+      },
+      2
+    )
   })
   afterEach(async () => {
     await act(async () => {
@@ -46,7 +46,10 @@ describe('logout - cleanup', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate: wait1 } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { waitForNextUpdate: wait1 } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await wait1()
       await wait1()
@@ -63,7 +66,10 @@ describe('logout - cleanup', () => {
       api.isLoggedIn = true
       api.emitter.emit('login')
 
-      const { result: result2, waitForNextUpdate: wait2 } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result: result2, waitForNextUpdate: wait2 } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await wait2()
 

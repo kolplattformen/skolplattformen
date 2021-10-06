@@ -44,7 +44,9 @@ const setup = (customProps = {}) => {
 beforeAll(() => {
   // Hide errors from state illegal state transition
   // Probably due to mock
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => {
+    // noop
+  })
 })
 
 beforeEach(jest.clearAllMocks)

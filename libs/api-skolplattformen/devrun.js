@@ -21,7 +21,6 @@ const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./agentFetchWrapper')
 const init = require('./dist').default
 
-
 const [, , personalNumber] = process.argv
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
@@ -53,11 +52,11 @@ async function run() {
       console.log('user')
       const user = await api.getUser()
       console.log(user)
-      
+
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-/*
+      /*
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
@@ -68,12 +67,16 @@ async function run() {
 */
       try {
         console.log('schedule')
-        const schedule = await api.getSchedule(children[1], DateTime.local(), DateTime.local().plus({ week: 1 }))
+        const schedule = await api.getSchedule(
+          children[1],
+          DateTime.local(),
+          DateTime.local().plus({ week: 1 })
+        )
         console.log(schedule)
       } catch (error) {
         console.error(error)
       }
-  
+
       let skola24children
       try {
         skola24children = await api.getSkola24Children()
@@ -81,16 +84,21 @@ async function run() {
       } catch (error) {
         console.error(error)
       }
-            
+
       try {
         console.log('timetable')
-            const timetable = await api.getTimetable(skola24children[0], 15, 2021, "sv")
-            console.log(inspect(timetable, false, 1000, true))
+        const timetable = await api.getTimetable(
+          skola24children[0],
+          15,
+          2021,
+          'sv'
+        )
+        console.log(inspect(timetable, false, 1000, true))
       } catch (error) {
         console.error(error)
       }
-      
-/*
+
+      /*
       console.log('news')
       const news = await api.getNews(children[0])
 */
@@ -216,7 +224,9 @@ const record = async (info, data) => {
 }
 
 // Hack to keep it running while wating for await
-const timer = setTimeout(() => {}, 999999)
+const timer = setTimeout(() => {
+  // noop
+}, 999999)
 
 run()
   .then(() => {

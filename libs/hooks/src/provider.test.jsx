@@ -18,7 +18,11 @@ describe('ApiProvider', () => {
     api = init()
   })
   it('enables useApi()', () => {
-    const { getByTestId } = render(<ApiProvider api={api}><Login /></ApiProvider>)
+    const { getByTestId } = render(
+      <ApiProvider api={api}>
+        <Login />
+      </ApiProvider>
+    )
 
     expect(getByTestId('isLoggedIn').textContent).toEqual('n')
   })

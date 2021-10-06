@@ -7,6 +7,7 @@ import { useChild } from '../components/childContext.component'
 import { Typography } from '../styles'
 
 // https://github.com/facebook/react-native/issues/14796#issuecomment-389743259
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 global.Buffer = global.Buffer || require('buffer').Buffer
 
 const NUM_CHARS_AROUND_SEARCH_MATCH = 20

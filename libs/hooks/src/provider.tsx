@@ -15,8 +15,12 @@ type TApiProvider = FC<
   }>
 >
 const noopReporter: Reporter = {
-  log: () => {},
-  error: () => {},
+  log: () => {
+    // noop
+  },
+  error: () => {
+    // noop
+  },
 }
 export const ApiProvider: TApiProvider = ({
   children,

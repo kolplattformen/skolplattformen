@@ -3,8 +3,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 export class URLSearchParams {
-  
-  private dict: {[key: string]: string[]} = {}
+  private dict: { [key: string]: string[] } = {}
 
   constructor(search: string | string[] | any | URLSearchParams = '') {
     if (search instanceof URLSearchParams) {
@@ -70,21 +69,25 @@ export class URLSearchParams {
    *
    */
   parseToDict(search: string | string[] | any): any {
-      const dict = {}
+    const dict = {}
 
-      if (typeof search === 'object') {
+    if (typeof search === 'object') {
       // if 'search' is an array, treat it as a sequence
       if (Array.isArray(search)) {
-        for (let i=0; i<search.length; i++) {
+        for (let i = 0; i < search.length; i++) {
           const item = search[i]
           if (Array.isArray(item) && item.length === 2) {
             this.appendTo(dict, item[0], item[1])
           } else {
-            throw new TypeError("Failed to construct 'URLSearchParams': Sequence initalizer must only contain pair elements")
+            throw new TypeError(
+              "Failed to construct 'URLSearchParams': Sequence initalizer must only contain pair elements"
+            )
           }
         }
       } else {
-        Object.entries(search).forEach(([key, value]) => this.appendTo(dict, key, value))
+        Object.entries(search).forEach(([key, value]) =>
+          this.appendTo(dict, key, value)
+        )
       }
     } else {
       // remove 1st ?
@@ -93,11 +96,15 @@ export class URLSearchParams {
       }
 
       const pairs = search.split('&')
-      for (let j=0; j<pairs.length; j++) {
+      for (let j = 0; j < pairs.length; j++) {
         const value = pairs[j]
         const index = value.indexOf('=')
         if (index > -1) {
-          this.appendTo(dict, this.decode(value.slice(0, index)), this.decode(value.slice(index+1)))
+          this.appendTo(
+            dict,
+            this.decode(value.slice(0, index)),
+            this.decode(value.slice(index + 1))
+          )
         } else if (value) {
           this.appendTo(dict, this.decode(value), '')
         }
@@ -107,11 +114,16 @@ export class URLSearchParams {
     return dict
   }
 
-  appendTo(dict: any, name: string, value: string | Function | any): void {
+  appendTo(dict: any, name: string, value: string | (() => void) | any): void {
     // eslint-disable-next-line no-nested-ternary
-    const val = typeof value === 'string' ? value: (
-      value !== null && value !== undefined && typeof value.toString === 'function' ? value.toString() : JSON.stringify(value)
-    )
+    const val =
+      typeof value === 'string'
+        ? value
+        : value !== null &&
+          value !== undefined &&
+          typeof value.toString === 'function'
+        ? value.toString()
+        : JSON.stringify(value)
 
     if (name in dict) {
       dict[name].push(value)
@@ -123,20 +135,23 @@ export class URLSearchParams {
   decode(str: string): string {
     return str
       .replace(/[ +]/g, '%20')
-      .replace(/(%[a-f0-9]{2})+/ig, (match) => decodeURIComponent(match))
+      .replace(/(%[a-f0-9]{2})+/gi, (match) => decodeURIComponent(match))
   }
 
   encode(str: string[]): string {
-      const replace: {[key: string]: string} = {
-        '!': '%21',
-        "'": '%27',
-        '(': '%28',
-        ')': '%29',
-        '~': '%7E',
-        '%20': '+',
-        '%00': '\x00'
-      }
+    const replace: { [key: string]: string } = {
+      '!': '%21',
+      "'": '%27',
+      '(': '%28',
+      ')': '%29',
+      '~': '%7E',
+      '%20': '+',
+      '%00': '\x00',
+    }
+    return encodeURIComponent(str.join(',')).replace(
       // eslint-disable-next-line no-useless-escape
-      return encodeURIComponent(str.join(',')).replace(/[!'\(\)~]|%20|%00/g, (match) => replace[match] || '')
+      /[!'\(\)~]|%20|%00/g,
+      (match) => replace[match] || ''
+    )
   }
 }

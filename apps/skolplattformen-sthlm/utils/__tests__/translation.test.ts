@@ -3,7 +3,7 @@ import { translate, translations } from '../translation'
 
 describe('translation in swedish', () => {
   beforeAll(() => {
-    i18n.translations = { ['sv']: translations.sv }
+    i18n.translations = { sv: translations.sv }
     i18n.locale = 'sv'
   })
   it('should be able to translate the word settings', () => {
@@ -13,7 +13,7 @@ describe('translation in swedish', () => {
 
 describe('translation in english', () => {
   beforeAll(() => {
-    i18n.translations = { ['en']: translations.en }
+    i18n.translations = { en: translations.en }
     i18n.locale = 'en'
   })
   it('should be able to translate the word settings', () => {

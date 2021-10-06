@@ -14,11 +14,7 @@ describe('useEtjanstChildren()', () => {
   let storage
   let response
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -26,14 +22,18 @@ describe('useEtjanstChildren()', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getChildren.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_etjanst_children': [{ id: 2 }],
-    }, 2)
+    api.getChildren.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_etjanst_children': [{ id: 2 }],
+      },
+      2
+    )
   })
   afterEach(async () => {
     await act(async () => {
@@ -49,7 +49,9 @@ describe('useEtjanstChildren()', () => {
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -61,7 +63,9 @@ describe('useEtjanstChildren()', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useEtjanstChildren(), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       renderHook(() => useEtjanstChildren(), { wrapper })
@@ -78,7 +82,10 @@ describe('useEtjanstChildren()', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -89,7 +96,10 @@ describe('useEtjanstChildren()', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -100,7 +110,10 @@ describe('useEtjanstChildren()', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -114,7 +127,9 @@ describe('useEtjanstChildren()', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -129,7 +144,9 @@ describe('useEtjanstChildren()', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useEtjanstChildren(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -144,7 +161,10 @@ describe('useEtjanstChildren()', () => {
       const error = new Error('fail')
       api.getChildren.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -172,7 +192,10 @@ describe('useEtjanstChildren()', () => {
       api.getChildren.mockRejectedValueOnce(error)
       api.getChildren.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -199,7 +222,10 @@ describe('useEtjanstChildren()', () => {
       const error = new Error('fail')
       api.getChildren.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useEtjanstChildren(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useEtjanstChildren(),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -207,7 +233,10 @@ describe('useEtjanstChildren()', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting ETJANST_CHILDREN from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting ETJANST_CHILDREN from API'
+      )
     })
   })
 })
