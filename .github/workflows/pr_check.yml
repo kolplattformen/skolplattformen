@@ -24,11 +24,11 @@ jobs:
           timezone: Europe/Stockholm
 
       - name: Install dependencies
-        run: npx lerna bootstrap      
-        
+        run: yarn
+
       - name: Run linting and tests
         run: |
-          yarn lint
-          yarn test
+          nx run-many --all --target=lint
+          nx run-many --all --target=test
         env:
           CI: true
