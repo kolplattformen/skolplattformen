@@ -12,9 +12,7 @@
     "test:watch": "jest --watch",
     "typecheck": "tsc --watch",
     "i18n": "sync-i18n --files '**/translations/*.json' --primary en --languages ar de pl so sv --space 2",
-    "check-i18n": "npm run i18n -- --check",
-    "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json",
-    "postinstall": "yarn extract-licenses"
+    "check-i18n": "npm run i18n -- --check"
   },
   "dependencies": {
     "react": "*",
