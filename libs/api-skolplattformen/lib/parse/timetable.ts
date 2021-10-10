@@ -1,7 +1,7 @@
 import parse from '@skolplattformen/curriculum'
 import { Language } from '@skolplattformen/curriculum/dist/translations'
 import { DateTime } from 'luxon'
-import { TimetableEntry } from '../types'
+import { TimetableEntry } from '../../../api/lib/types'
 
 const calculateDate = (year: number, weekNumber: number, weekday: number, time: string): string => {
   const [hours, minutes, seconds] = time.split(':')

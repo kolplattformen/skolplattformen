@@ -1,0 +1,25 @@
+{
+  "headers": {
+    "accept": "text/plain",
+    "accept-language": "en-GB,en-SE;q=0.9,en;q=0.8,sv-SE;q=0.7,sv;q=0.6,en-US;q=0.5",
+    "access-control-allow-origin": "*",
+    "cache-control": "no-cache",
+    "content-type": "text/plain",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Google Chrome\";v=\"89\", \"Chromium\";v=\"89\", \";Not A Brand\";v=\"99\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "x-xsrf-token": "SfONpuvKXD1XHML3Kelvm3easB6Xn3xtbVPG52jdpc3Q7sRxJv7_6wfjo1qS3NOQWkfCvfPkJpJg0QIBmo358o7FdQY2aWvUOxA9MU2Fl0E1",
+    "y-xsrf-token11": "FyXUbtZUE2iT09J7FOLTpfZ_onjbj3WEIO6jOY9B1KaZzMrAs4WS03AuWbQhmKyCEX2inTPVDzyPc58tN2EM4L1vYD6aH_zhlc7gVo9jaPdLKQc4qnE6ue184cSamKE0",
+    "topology-key": "labor matter federal|",
+    "topology-short-key": "assumeoutside",
+    "topology-base64-iterations": "8"
+  },
+  "referrer": "https://etjanst.stockholm.se/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "XVDf/EliJ/oZH9BRlRCMNds2jCRcTL8/isnpuj2wD6wH1lxX/cHY/AM6XJ8nweGne+FAPgcpj+blQ+dQvvmiJfK4t0u66tg8L60ysfDs/eBeoA794lvvtwRwJ946VUahZG89Al7UFkx5Ew1AGp4yuJ38drNDK4J5RAUGvzOWTmniZnSYs9P5UR2SWP39NcOoovwZsce7tRigdusI8sSDSUh+lVDkwfERfQqe3oG+FPiGQsfeFd2y/5f8chxU9VQz4oF7BLiP69xBPJr2KFkQc7MJaqEQy87loe0vwehRN/lOP858pPiVfc96M2jc0+yQEgnUBXPgQmFVC6CIHfQ0Mg==",
+  "method": "POST",
+  "mode": "cors"
+}
