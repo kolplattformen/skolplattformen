@@ -1,0 +1,61 @@
+{
+  "name": "@skolplattformen/embedded-api",
+  "version": "0.15.0",
+  "description": "Since the proxy was blocked (and also deemed a bad idea by some), this is a reboot of the API running in process in the app(s).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": "git@github.com:kolplattformen/embedded-api.git",
+  "author": "Johan Öbrink <johan.obrink@gmail.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "lint": "eslint 'lib/**/*.{js,ts}' --quiet --fix",
+    "test": "jest",
+    "build": "tsc",
+    "prepare": "yarn build",
+    "run-dev": "yarn run build && node run",
+    "publish-package": "npm publish --access public"
+  },
+  "peerDependencies": {
+    "@skolplattformen/curriculum": "^1.3.0"
+  },
+  "devDependencies": {
+    "@react-native-cookies/cookies": "^6.0.7",
+    "@skolplattformen/curriculum": "^1.4.2",
+    "@types/base-64": "^1.0.0",
+    "@types/he": "^1.1.1",
+    "@types/jest": "^26.0.22",
+    "@types/luxon": "^1.26.4",
+    "@types/node-fetch": "^2.5.10",
+    "@types/tough-cookie": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "fetch-cookie": "^0.11.0",
+    "https-proxy-agent": "^5.0.0",
+    "jest": "^26.6.3",
+    "node-blob": "^0.0.2",
+    "node-fetch": "^2.6.1",
+    "prettier": "^2.2.1",
+    "tough-cookie": "^4.0.0",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "camelcase-keys": "^6.2.2",
+    "change-case": "^4.1.2",
+    "events": "^3.3.0",
+    "h2m": "^0.7.0",
+    "he": "^1.2.0",
+    "js-htmlencode": "^0.3.0",
+    "luxon": "^1.26.0",
+    "node-html-parser": "^2.1.0"
+  }
+}

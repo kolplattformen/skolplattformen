@@ -1,7 +1,7 @@
-import CookieManager from '@react-native-cookies/cookies'
 import init from './'
 import { Api } from './api'
-import { Fetch, Headers, Response } from './types'
+import { Fetch, Headers, Response } from '../../api/lib/types'
+import CookieManager from '@react-native-cookies/cookies'
 
 describe('api', () => {
   let fetch: jest.Mocked<Fetch>

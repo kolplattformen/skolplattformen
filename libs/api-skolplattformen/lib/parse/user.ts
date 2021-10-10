@@ -1,4 +1,4 @@
-import { User } from '../types'
+import { User } from '../../../api/lib/types'
 
 export const user = ({
   socialSecurityNumber,

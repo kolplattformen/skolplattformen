@@ -1,6 +1,6 @@
 import { etjanst } from './etjanst'
-import { toMarkdown } from '../parseHtml'
-import { MenuItem, MenuList } from '../types'
+import { toMarkdown } from '../../../api/lib/parseHtml'
+import { MenuItem, MenuList } from '../../../api/lib/types'
 
 export const menuItem = ({ title, description }: any): MenuItem => ({
   title,

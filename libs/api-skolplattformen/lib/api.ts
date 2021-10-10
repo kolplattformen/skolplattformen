@@ -1,13 +1,9 @@
-import { Language } from '@skolplattformen/curriculum'
 import { EventEmitter } from 'events'
 import { decode } from 'he'
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
-import * as fake from './fakeData'
-import wrap, { Fetcher, FetcherOptions } from './fetcher'
-import { checkStatus, LoginStatusChecker } from './loginStatus'
-import * as parse from './parse/index'
-import * as routes from './routes'
+import { Language } from '@skolplattformen/curriculum'
+import { LoginStatusChecker } from '../../api/lib/loginStatus'
 import {
   AuthTicket,
   CalendarItem,
@@ -24,9 +20,13 @@ import {
   SSOSystem,
   TimetableEntry,
   User,
-  Response,
-} from './types'
-import { URLSearchParams } from './URLSearchParams'
+  Response
+} from '../../api/lib/types'
+import * as routes from './routes'
+import * as parse from './parse/index'
+import wrap, { Fetcher, FetcherOptions } from '../../api/lib/fetcher'
+import * as fake from './fakeData'
+import { checkStatus } from './loginStatusChecker'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
   new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))

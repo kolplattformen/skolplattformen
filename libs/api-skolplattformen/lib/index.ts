@@ -1,16 +1,16 @@
 import { Api } from './api'
+import { FetcherOptions } from '../../api/lib/fetcher'
+import { Fetch } from '../../api/lib/types'
 import {
   RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
   wrapToughCookie,
-} from './cookies'
-import { FetcherOptions } from './fetcher'
-import { Fetch } from './types'
+} from '../../api/lib/cookies'
 
-export { LoginStatusChecker } from './loginStatus'
-export * from './types'
 export { Api, FetcherOptions }
+export * from '../../api/lib/types'
+export { LoginStatusChecker } from '../../api/lib/loginStatus'
 
 const init = (
   fetchImpl: Fetch,

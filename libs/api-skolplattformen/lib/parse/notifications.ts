@@ -1,6 +1,6 @@
 import { etjanst } from './etjanst'
-import { parseDate } from '../utils/dateHandling'
-import { Notification } from '../types'
+import { parseDate } from '../../../api/lib/utils/dateHandling'
+import { Notification } from '../../../api/lib/types'
 
 export const notification = ({
   notification: { messageid, dateCreated, dateModified },

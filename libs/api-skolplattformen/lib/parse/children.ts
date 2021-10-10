@@ -1,5 +1,5 @@
 import { etjanst } from './etjanst'
-import { Child } from '../types'
+import { Child } from '../../../api/lib/types'
 
 export const child = ({ id, sdsId, name, status, schoolId }: any): Child => ({
   id,

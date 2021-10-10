@@ -1,6 +1,6 @@
 import parse, { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
-import { TimetableEntry } from '../types'
+import { TimetableEntry } from '../../../api/lib/types'
 
 const calculateDate = (
   year: number,

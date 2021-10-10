@@ -1,5 +1,5 @@
 import { etjanst } from './etjanst'
-import { Classmate, Guardian } from '../types'
+import { Classmate, Guardian } from '../../../api/lib/types'
 
 export const guardian = ({
   emailhome,
