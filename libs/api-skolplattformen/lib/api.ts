@@ -48,7 +48,7 @@ interface SSOSystems {
   [name: string]: boolean | undefined
 }
 
-export class Api extends EventEmitter {
+export class ApiSkolplattformen extends EventEmitter {
   private fetch: Fetcher
 
   private personalNumber?: string
