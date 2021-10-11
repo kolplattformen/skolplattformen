@@ -31,7 +31,7 @@ export class HjarntorgetChecker extends EventEmitter {
             console.log("polling bankid signature")
             // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
             
-            const pollStatusResponse = await this.fetcher('poll-status', pollStatusUrl(this.basePollingUrl))
+            const pollStatusResponse = await this.fetcher('poll-bankid-status', pollStatusUrl(this.basePollingUrl))
             const pollStatusResponseJson = await pollStatusResponse.json()
 
             const keepPolling = pollStatusResponseJson.infotext !== ''
@@ -41,7 +41,7 @@ export class HjarntorgetChecker extends EventEmitter {
                 // follow response location to get back to auth.goteborg.se
                 // r.location is something like:
                 //  'https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/signature'
-                const signatureResponse = await this.fetcher('signature', pollStatusResponseJson.location, {
+                const signatureResponse = await this.fetcher('confirm-signature-redirect', pollStatusResponseJson.location, {
                     redirect: "follow"
                 })
                 const signatureResponseText = await signatureResponse.text()
@@ -49,7 +49,7 @@ export class HjarntorgetChecker extends EventEmitter {
                 const authGbgLoginBody = extractAuthGbgLoginRequestBody(signatureResponseText)
                 
                 console.log("authGbg saml login")
-                const authGbgLoginResponse = await this.fetcher('samlLogin', authGbgLoginUrl, {
+                const authGbgLoginResponse = await this.fetcher('authgbg-saml-login', authGbgLoginUrl, {
                     redirect: 'follow',
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -61,7 +61,7 @@ export class HjarntorgetChecker extends EventEmitter {
                 
                 console.log("hjarntorget saml login")
 
-                await this.fetcher('samlLogin', hjarntorgetSAMLLoginUrl, {
+                await this.fetcher('hjarntorget-saml-login', hjarntorgetSAMLLoginUrl, {
                     method: 'POST',
                     redirect: 'follow',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -75,6 +75,7 @@ export class HjarntorgetChecker extends EventEmitter {
                 this.emit('ERROR')
             } else if (!this.cancelled && keepPolling) {
                 console.log("keep on polling...")
+                this.emit('PENDING')
                 setTimeout(() => this.check(), 3000)
             }
         } catch (er) {

@@ -38,7 +38,7 @@ export const extractInitBankIdParams = (shibbolethRedirectUrl: any) => {
 
 export const mvghostUrl = 'https://m00-mg-local.idp.funktionstjanster.se/samlv2/idp/req/0/34?mgvhostparam=0'
 
-export const beingBankIdUrl = (beingBankIdUrlBase:) => `${beingBankIdUrlBase}/ssn`
+export const beginBankIdUrl = (beingBankIdUrlBase: string) => `${beingBankIdUrlBase}/ssn`
 
 export const verifyUrlBase = (verifyUrl: string) => verifyUrl.substring(0, verifyUrl.length - 'verify'.length)
 
