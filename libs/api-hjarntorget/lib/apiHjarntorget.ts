@@ -23,7 +23,7 @@ import { Api } from '../../api/lib/api'
 import { toMarkdown } from '../../api/lib/parseHtml'
 import { checkStatus } from './loginStatus'
 import { extractMvghostRequestBody } from './parse/parsers'
-import { beginLoginUrl, beingBankIdUrl, currentUserUrl, extractInitBankIdParams as initBankIdUrl, fullImageUrl, hjarntorgetEventsUrl, hjarntorgetUrl, infoSetReadUrl, infoUrl, lessonsUrl, membersWithRoleUrl, mvghostUrl, myChildrenUrl, returnUrlFromUrlParam, returnUrlFromUrlParam as shibbolethLoginUrlBase, rolesInEventUrl, shibbolethLoginUrl, verifyUrlBase, wallMessagesUrl } from './routes'
+import { beginLoginUrl, beginBankIdUrl, currentUserUrl, extractInitBankIdParams as initBankIdUrl, fullImageUrl, hjarntorgetEventsUrl, hjarntorgetUrl, infoSetReadUrl, infoUrl, lessonsUrl, membersWithRoleUrl, mvghostUrl, myChildrenUrl, returnUrlFromUrlParam, returnUrlFromUrlParam as shibbolethLoginUrlBase, rolesInEventUrl, shibbolethLoginUrl, verifyUrlBase, wallMessagesUrl } from './routes'
 
 
 function getDateOfISOWeek(week: number, year: number,) {
@@ -37,18 +37,15 @@ function getDateOfISOWeek(week: number, year: number,) {
   return ISOweekStart
 }
 
+
 export class ApiHjarntorget extends EventEmitter implements Api {
   private fetch: Fetcher
 
   private personalNumber?: string
 
-  private headers: any
-
   private cookieManager: CookieManager
 
   public isLoggedIn: boolean = false
-
-  public isFake: boolean = false
 
   constructor(
     fetch: Fetch,
@@ -58,7 +55,10 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     super()
     this.fetch = wrap(fetch, options)
     this.cookieManager = cookieManager
-    this.headers = {}
+  }
+
+  public replaceFetcher(fetcher: Fetcher) {
+    this.fetch = fetcher;
   }
 
   async getSchedule(child: EtjanstChild, from: DateTime, to: DateTime): Promise<(CalendarItem & ScheduleItem)[]> {
@@ -292,12 +292,13 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   async logout(): Promise<void> {
     this.isLoggedIn = false
+    this.personalNumber = undefined
     this.cookieManager.clearAll()
+    this.emit('logout')
   }
 
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
     console.log("initiating login to hjarntorget")
-
     const beginLoginRedirectResponse = await this.fetch('begin-login', beginLoginUrl, {
       redirect: 'follow'
     })
@@ -307,7 +308,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     }
     const shibbolethLoginUrlBase = returnUrlFromUrlParam((beginLoginRedirectResponse as any).url)
     console.log("prepping??? shibboleth")
-    const shibbolethLoginResponse = await this.fetch('begin-login', shibbolethLoginUrl(shibbolethLoginUrlBase, shibbolethLoginParam), {
+    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase, shibbolethLoginParam), {
       redirect: 'follow'
     })
 
@@ -321,7 +322,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const mvghostRequestBody = extractMvghostRequestBody(initBankIdResponseText)
 
     console.log("picking auth server???")
-    const mvghostResponse = await this.fetch('mvghost', mvghostUrl, {
+    const mvghostResponse = await this.fetch('pick-mvghost', mvghostUrl, {
       redirect: 'follow',
       method: 'POST',
       body: mvghostRequestBody,
@@ -336,7 +337,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
 
     const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
-    const beginBankIdResponse = await this.fetch('being-bankid', beingBankIdUrl((mvghostResponse as any).url), {
+    const beginBankIdResponse = await this.fetch('start-bankId', beginBankIdUrl((mvghostResponse as any).url), {
       redirect: 'follow',
       method: 'POST',
       body: ssnBody,
