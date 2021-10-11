@@ -22,7 +22,8 @@ import { URLSearchParams } from '../../api/lib/URLSearchParams'
 import { Api } from '../../api/lib/api'
 import { toMarkdown } from '../../api/lib/parseHtml'
 import { checkStatus } from './loginStatus'
-import { extractInitBankIdParams, extractMvghostRequestBody } from './parse/parsers'
+import { extractMvghostRequestBody } from './parse/parsers'
+import { beginLoginUrl, beingBankIdUrl, currentUserUrl, extractInitBankIdParams as initBankIdUrl, fullImageUrl, hjarntorgetEventsUrl, hjarntorgetUrl, infoSetReadUrl, infoUrl, lessonsUrl, membersWithRoleUrl, mvghostUrl, myChildrenUrl, returnUrlFromUrlParam, returnUrlFromUrlParam as shibbolethLoginUrlBase, rolesInEventUrl, shibbolethLoginUrl, verifyUrlBase, wallMessagesUrl } from './routes'
 
 
 function getDateOfISOWeek(week: number, year: number,) {
@@ -61,14 +62,13 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getSchedule(child: EtjanstChild, from: DateTime, to: DateTime): Promise<(CalendarItem & ScheduleItem)[]> {
-    const lessonsUrl = 'https://hjarntorget.goteborg.se/api/schema/lessons?'
-    const lessonParams = new URLSearchParams({
+
+    const lessonParams = {
       forUser: child.id,
       startDateIso: from.toISODate(),
       endDateIso: to.toISODate(),
-    }).toString()
-
-    const lessonsResponse = await this.fetch('info', lessonsUrl + lessonParams)
+    }
+    const lessonsResponse = await this.fetch('info', lessonsUrl(lessonParams))
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
     return lessonsResponseJson.map(l => {
@@ -96,7 +96,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async setSessionCookie(sessionCookie: string): Promise<void> {
-    const hjarntorgetUrl = 'https://hjarntorget.goteborg.se'
+
     await this.fetch('login-cookie', hjarntorgetUrl, {
       headers: {
         cookie: sessionCookie,
@@ -114,7 +114,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getUser(): Promise<User> {
-    const currentUserUrl = 'https://hjarntorget.goteborg.se/api/core/current-user'
+
     const currentUserResponse = await this.fetch('myChildren', currentUserUrl)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
@@ -129,7 +129,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
 
-    const myChildrenUrl = 'https://hjarntorget.goteborg.se/api/person/children'
+
     const myChildrenResponse = await this.fetch('myChildren', myChildrenUrl)
     const myChildrenResponseJson: any[] = await myChildrenResponse.json()
 
@@ -162,7 +162,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
 
-    const infoUrl = 'https://hjarntorget.goteborg.se/api/information/messages-by-date-desc?messageStatus=CURRENT&offset=0&limit=10&language=en'
+
     const infoResponse = await this.fetch('info', infoUrl)
     const infoResponseJson: any[] = await infoResponse.json()
     // TODO: Filter out read messages?
@@ -181,14 +181,14 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         body: bodyText,
         published: publishedDate.toISOString(),
         modified: publishedDate.toISOString(),
-        fullImageUrl: i.creator && `https://hjarntorget.goteborg.se${i.creator.imagePath}`
+        fullImageUrl: i.creator && fullImageUrl(i.creator.imagePath)
       }
     })
   }
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
-    const infoSetReadUrl = `https://hjarntorget.goteborg.se/api/information/set-message-read?messageId=${item.id}`
-    this.fetch('info', infoSetReadUrl, {
+
+    this.fetch('info', infoSetReadUrl(item), {
       method: 'POST',
     })
 
@@ -205,22 +205,19 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getNotifications(child: EtjanstChild): Promise<Notification[]> {
-    const hjarntorgetEventsUrl = 'https://hjarntorget.goteborg.se/api/events/events-sorted-by-name?offset=0&limit=100'
+
     const hjarntorgetEventsResponse = await this.fetch('events', hjarntorgetEventsUrl)
     const hjarntorgetEventsResponseJson: any[] = await hjarntorgetEventsResponse.json()
     const membersInEvents = await Promise.all(hjarntorgetEventsResponseJson.filter(e => e.state === 'ONGOING')
       .map(async e => {
         const eventId = e.id as number
-        const rolesInEventUrl =
-          `https://hjarntorget.goteborg.se/api/event-members/roles?eventId=${eventId}&language=en`
-        const rolesInEvenResponse = await this.fetch('roles-in-event', rolesInEventUrl)
+
+        const rolesInEvenResponse = await this.fetch('roles-in-event', rolesInEventUrl(eventId))
         const rolesInEvenResponseJson: any[] = await rolesInEvenResponse.json()
 
         const eventMembers = await Promise.all(rolesInEvenResponseJson.map(async r => {
           const roleId = r.id
-          const membersWithRoleUrl =
-            `https://hjarntorget.goteborg.se/api/event-members/members-having-role?eventId=${eventId}&roleId=${roleId}`
-          const membersWithRoleResponse = await this.fetch('event-role-members', membersWithRoleUrl)
+          const membersWithRoleResponse = await this.fetch('event-role-members', membersWithRoleUrl(eventId, roleId))
           const membersWithRoleResponseJson: any[] = await membersWithRoleResponse.json()
           return membersWithRoleResponseJson
         }))
@@ -230,7 +227,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       .filter(e => e.eventMembers.find(p => p.id === child.id))
       .reduce((acc, e) => acc.concat(e.eventMembers), ([] as any[]))
 
-    const wallMessagesUrl = 'https://hjarntorget.goteborg.se/api/wall/events?language=en&limit=500'
+
     const wallMessagesResponse = await this.fetch('wall-events', wallMessagesUrl)
     const wallMessagesResponseJson: any[] = await wallMessagesResponse.json()
     return wallMessagesResponseJson.filter(message =>
@@ -262,14 +259,13 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
     const startDate = DateTime.fromJSDate(getDateOfISOWeek(week, year))
     const endDate = startDate.plus({ days: 7 })
-    const lessonsUrl = 'https://hjarntorget.goteborg.se/api/schema/lessons?'
-    const lessonParams = new URLSearchParams({
-      forUser: child.personGuid, // This is a bit of a hack due to how we map things...
+
+    const lessonParams = {
+      forUser: child.personGuid!, // This is a bit of a hack due to how we map things...
       startDateIso: startDate.toISODate(),
       endDateIso: endDate.toISODate(),
-    }).toString()
-
-    const lessonsResponse = await this.fetch('info', lessonsUrl + lessonParams)
+    }
+    const lessonsResponse = await this.fetch('info', lessonsUrl(lessonParams))
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
     return lessonsResponseJson.map(l => {
@@ -301,28 +297,23 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
     console.log("initiating login to hjarntorget")
-    const beginLoginUrl = 'https://hjarntorget.goteborg.se'
+
     const beginLoginRedirectResponse = await this.fetch('begin-login', beginLoginUrl, {
       redirect: 'follow'
     })
 
-    const beginLoginRedirectUrl = (beginLoginRedirectResponse as any).url
-    const shibolethLoginParam = new URLSearchParams({
+    const shibbolethLoginParam = {
       entityID: 'https://auth.goteborg.se/FIM/sps/HjarntorgetEID/saml20'
-    }).toString()
-    const returnUrlStart = beginLoginRedirectUrl.indexOf('return=') + 'return='.length
-    const returnUrl = decodeURIComponent(beginLoginRedirectUrl.substring(returnUrlStart))
-    const shibbolethLoginUrl = `${returnUrl}&${shibolethLoginParam}`
-
+    }
+    const shibbolethLoginUrlBase = returnUrlFromUrlParam((beginLoginRedirectResponse as any).url)
     console.log("prepping??? shibboleth")
-    const shibbolethLoginResponse = await this.fetch('begin-login', shibbolethLoginUrl, {
+    const shibbolethLoginResponse = await this.fetch('begin-login', shibbolethLoginUrl(shibbolethLoginUrlBase, shibbolethLoginParam), {
       redirect: 'follow'
     })
 
     const shibbolethRedirectUrl = (shibbolethLoginResponse as any).url
-    const { initBankIdUrl, initBankIdParams } = extractInitBankIdParams(shibbolethRedirectUrl)
     console.log("initiating bankid...")
-    const initBankIdResponse = await this.fetch('init-bankId', initBankIdUrl + initBankIdParams, {
+    const initBankIdResponse = await this.fetch('init-bankId', initBankIdUrl(shibbolethRedirectUrl), {
       redirect: 'follow'
     })
 
@@ -330,7 +321,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const mvghostRequestBody = extractMvghostRequestBody(initBankIdResponseText)
 
     console.log("picking auth server???")
-    const mvghostUrl = 'https://m00-mg-local.idp.funktionstjanster.se/samlv2/idp/req/0/34?mgvhostparam=0'
     const mvghostResponse = await this.fetch('mvghost', mvghostUrl, {
       redirect: 'follow',
       method: 'POST',
@@ -343,10 +333,10 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     console.log("start bankid sign in")
     // We may get redirected to some other subdomain i.e. not 'm00-mg-local':
     // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/other
-    const beingBankIdUrlBase = (mvghostResponse as any).url
-    const beingBankIdUrl = `${beingBankIdUrlBase}/ssn`
+
+
     const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
-    const beginBankIdResponse = await this.fetch('being-bankid', beingBankIdUrl, {
+    const beginBankIdResponse = await this.fetch('being-bankid', beingBankIdUrl((mvghostResponse as any).url), {
       redirect: 'follow',
       method: 'POST',
       body: ssnBody,
@@ -356,10 +346,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     })
 
     console.log("start polling")
-    // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/verify
-    const verifyUrl = (beginBankIdResponse as any).url
-    const verifyUrlBase = verifyUrl.substring(0, verifyUrl.length - 'verify'.length)
-    const statusChecker = checkStatus(this.fetch, verifyUrlBase)
+
+    const statusChecker = checkStatus(this.fetch, verifyUrlBase((beginBankIdResponse as any).url))
 
     statusChecker.on('OK', async () => {
       // setting these similar to how the sthlm api does it

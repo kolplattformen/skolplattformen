@@ -2,19 +2,6 @@ import * as html from 'node-html-parser'
 import { decode } from 'he'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
-export function extractInitBankIdParams(shibbolethRedirectUrl: any) {
-  const targetParamIndex = shibbolethRedirectUrl.indexOf('Target=') + 'Target='.length
-  const targetParam = decodeURIComponent(shibbolethRedirectUrl.substring(targetParamIndex))
-  const initBankIdUrl = 'https://auth.goteborg.se/FIM/sps/BankID/saml20/logininitial?'
-  const initBankIdParams = new URLSearchParams({
-    ITFIM_WAYF_IDP: 'https://m00-mg-local.idp.funktionstjanster.se/samlv2/idp/metadata/0/34',
-    submit: 'Mobilt BankID',
-    ResponseBinding: 'HTTPPost',
-    RequestBinding: 'HTTPPost',
-    Target: targetParam,
-  }).toString()
-  return { initBankIdUrl, initBankIdParams }
-}
 
 export const extractInputField = (sought: string, attrs: string[]) => {
   // there must be a better way to do this...
