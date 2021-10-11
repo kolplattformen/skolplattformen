@@ -10,7 +10,7 @@
   },
   "include": [
     "lib"
-, "../api/lib/types.ts", "../api/lib/loginStatus.ts"  ],
+, "../api/lib/types.ts", "../api/lib/loginStatus.ts", "../api/lib/URLSearchParams.ts"  ],
   "exclude": [
     "node_modules",
     "**/__tests__/*",

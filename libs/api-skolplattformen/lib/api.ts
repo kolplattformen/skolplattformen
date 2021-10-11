@@ -3,7 +3,7 @@ import { EventEmitter } from 'events'
 import { decode } from 'he'
 import * as html from 'node-html-parser'
 import { Language } from '@skolplattformen/curriculum/dist/translations'
-import { URLSearchParams } from './URLSearchParams'
+import { URLSearchParams } from '../../api/lib/URLSearchParams'
 import { Api } from '../../api/lib/api'
 import { LoginStatusChecker } from '../../api/lib/loginStatus'
 import {

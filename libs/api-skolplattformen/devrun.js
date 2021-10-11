@@ -19,7 +19,7 @@ const path = require('path')
 const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./agentFetchWrapper')
-const init = require('./dist').default
+const init = require('./dist/api-skolplattformen/lib').default
 
 
 const [, , personalNumber] = process.argv
