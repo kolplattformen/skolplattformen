@@ -4,6 +4,7 @@ import { decode } from 'he'
 import * as html from 'node-html-parser'
 import { Language } from '@skolplattformen/curriculum/dist/translations'
 import { URLSearchParams } from './URLSearchParams'
+import { Api } from '../../api/lib/api'
 import { LoginStatusChecker } from '../../api/lib/loginStatus'
 import {
   AuthTicket,
@@ -48,7 +49,7 @@ interface SSOSystems {
   [name: string]: boolean | undefined
 }
 
-export class ApiSkolplattformen extends EventEmitter {
+export class ApiSkolplattformen extends EventEmitter implements Api {
   private fetch: Fetcher
 
   private personalNumber?: string
