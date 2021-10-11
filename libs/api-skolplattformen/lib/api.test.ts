@@ -1,5 +1,5 @@
 import init from './'
-import { Api } from './api'
+import { ApiSkolplattformen } from './api'
 import { Fetch, Headers, Response } from '../../api/lib/types'
 import CookieManager from '@react-native-cookies/cookies'
 
@@ -7,7 +7,7 @@ describe('api', () => {
   let fetch: jest.Mocked<Fetch>
   let response: jest.Mocked<Response>
   let headers: jest.Mocked<Headers>
-  let api: Api
+  let api: ApiSkolplattformen
   beforeEach(() => {
     headers = { get: jest.fn() }
     response = {
