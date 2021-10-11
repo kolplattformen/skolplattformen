@@ -5,6 +5,7 @@ import {
     extractAuthGbgLoginRequestBody, 
     extractHjarntorgetSAMLLogin
 } from './parse/parsers'
+import { authGbgLoginUrl, hjarntorgetSAMLLoginUrl, pollStatusUrl } from './routes'
 
 export class HjarntorgetChecker extends EventEmitter {
 
@@ -29,8 +30,8 @@ export class HjarntorgetChecker extends EventEmitter {
         try {
             console.log("polling bankid signature")
             // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
-            const pollStatusUrl = `${this.basePollingUrl}pollstatus`
-            const pollStatusResponse = await this.fetcher('poll-status', pollStatusUrl)
+            
+            const pollStatusResponse = await this.fetcher('poll-status', pollStatusUrl(this.basePollingUrl))
             const pollStatusResponseJson = await pollStatusResponse.json()
 
             const keepPolling = pollStatusResponseJson.infotext !== ''
@@ -46,7 +47,7 @@ export class HjarntorgetChecker extends EventEmitter {
                 const signatureResponseText = await signatureResponse.text()
 
                 const authGbgLoginBody = extractAuthGbgLoginRequestBody(signatureResponseText)
-                const authGbgLoginUrl = 'https://auth.goteborg.se/FIM/sps/BankID/saml20/login'
+                
                 console.log("authGbg saml login")
                 const authGbgLoginResponse = await this.fetcher('samlLogin', authGbgLoginUrl, {
                     redirect: 'follow',
@@ -56,15 +57,15 @@ export class HjarntorgetChecker extends EventEmitter {
                 })
                 const authGbgLoginResponseText = await authGbgLoginResponse.text()
 
-                const hjarntorgetSAMLLogin = extractHjarntorgetSAMLLogin(authGbgLoginResponseText)
-                const hjarntorgetSAMLLoginUrl = 'https://hjarntorget.goteborg.se/Shibboleth.sso/SAML2/POST'
+                const hjarntorgetSAMLLoginBody = extractHjarntorgetSAMLLogin(authGbgLoginResponseText)
+                
                 console.log("hjarntorget saml login")
 
                 await this.fetcher('samlLogin', hjarntorgetSAMLLoginUrl, {
                     method: 'POST',
                     redirect: 'follow',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: hjarntorgetSAMLLogin,
+                    body: hjarntorgetSAMLLoginBody,
                 })
 
                 // TODO: add some checks to see if everything is actually 'OK'...
