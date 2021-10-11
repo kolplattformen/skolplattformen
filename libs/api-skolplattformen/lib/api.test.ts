@@ -21,7 +21,7 @@ describe('api', () => {
     fetch = jest.fn().mockResolvedValue(response)
     response.text.mockResolvedValue('<html></html>')
     CookieManager.clearAll()
-    api = init(fetch, CookieManager)
+    api = init(fetch, CookieManager) as ApiSkolplattformen
   })
   describe('#login', () => {
     it('exposes token', async () => {

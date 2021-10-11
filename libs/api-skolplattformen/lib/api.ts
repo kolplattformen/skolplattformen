@@ -27,6 +27,7 @@ import * as parse from './parse/index'
 import wrap, { Fetcher, FetcherOptions } from '../../api/lib/fetcher'
 import * as fake from './fakeData'
 import { checkStatus } from './loginStatusChecker'
+import { Api } from '../../api/lib/api'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
   new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))
@@ -49,7 +50,7 @@ interface SSOSystems {
   [name: string]: boolean | undefined
 }
 
-export class ApiSkolplattformen extends EventEmitter {
+export class ApiSkolplattformen extends EventEmitter implements Api {
   private fetch: Fetcher
 
   private personalNumber?: string

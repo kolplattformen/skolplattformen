@@ -11,7 +11,7 @@ import {
   Skola24Child,
   EtjanstChild,
   TimetableEntry,
-  ScheduleItem
+  ScheduleItem,
 } from './types'
 
 export interface Api {
