@@ -76,7 +76,9 @@
         "settings": "Einstellungen",
         "socialSecurityNumber": "Personenkennziffer",
         "title": "Öppna skolplattformen",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "logoutAndClearPersonalData": "Ausloggen und persönliche Daten löschen",
+        "logoutAndClearAllDataInclSettings": "Ausloggen und alle Daten inkl. Einstellungen löschen"
     },
     "language": {
         "changeLanguage": "Sprache ändern",
@@ -94,7 +96,7 @@
         "classmates": "Mitschüler"
     },
     "news": {
-        "backToChild": "Zurück zu Kind",
+        "backToChild": "Zurück zum Kind",
         "noNewNewsItemsThisWeek": "Keine neuen Nachrichten diese Woche.",
         "notificationTitle": "Nachricht: {{header}} ({{published}})",
         "published": "Veröffentlicht",
@@ -108,22 +110,35 @@
         "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
     },
     "schedule": {
-        "gymBag": "Sporttasche",
+        "gymBag": "Turnbeutel",
         "lunch": "Mittagessen",
         "end": "Ende",
         "start": "Anfang"
     },
     "contact": {
         "a11y_show_contact_info_button_hint": "Zeigt Kontaktinformation an",
-        "home": "Heim",
+        "home": "Adresse",
         "email": "E-Mail",
         "sms": "SMS",
         "call": "Anrufen",
         "a11y_show_contact_info_button_label": "Kontaktinformationen anzeigen"
     },
     "classmates": {
-        "contactsForGuardiansFor": "Kontaktinformationen der Erziehungsberechtigte für",
+        "contactsForGuardiansFor": "Kontaktinformationen der Erziehungsberechtigten für",
         "child": "Kind",
         "class": "Klasse"
+    },
+    "settings": {
+        "appearance": "Modus",
+        "licenses": "Lizenzen",
+        "language": "Sprache",
+        "themeAuto": "Automatisch",
+        "useSystemTheme": "Systemmodus benutzen",
+        "settings": "Einstellungen",
+        "theme": "Modus"
+    },
+    "themes": {
+        "light": "Hell",
+        "dark": "Dunkel"
     }
 }
