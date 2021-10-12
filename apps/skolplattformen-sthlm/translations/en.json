@@ -103,7 +103,6 @@
         "language": "Language",
         "themeAuto": "Auto",
         "useSystemTheme": "Use System Light/Dark Theme"
-
     },
     "themes": {
         "light": "Light",
@@ -140,6 +139,6 @@
         "call": "Call",
         "sms": "SMS",
         "email": "E-mail",
-        "home": "Home"
+        "home": "Address"
     }
 }
