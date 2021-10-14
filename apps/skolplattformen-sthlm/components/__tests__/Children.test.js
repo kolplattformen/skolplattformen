@@ -16,9 +16,6 @@ import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
 import { Children } from '../children.component'
 
-jest.mock('@skolplattformen/hooks')
-jest.mock('@react-navigation/core')
-jest.mock('react-native-localize')
 const setup = () => {
   return render(<Children />)
 }

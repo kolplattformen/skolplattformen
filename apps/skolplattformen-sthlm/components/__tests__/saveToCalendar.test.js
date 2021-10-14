@@ -5,31 +5,6 @@ import Toast from 'react-native-simple-toast'
 import { render } from '../../utils/testHelpers'
 import { SaveToCalendar } from '../saveToCalendar.component'
 
-jest.mock('react-native-simple-toast', () => ({
-  SHORT: 'short',
-  BOTTOM: 'bottom',
-  showWithGravity: jest.fn(),
-}))
-
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native')
-
-  RN.UIManager.measureInWindow = (_node, callback) => {
-    callback(0, 0, 42, 42)
-  }
-
-  RN.Linking = {
-    openURL: jest.fn(),
-  }
-
-  return RN
-})
-
-jest.mock('react-native-calendar-events', () => ({
-  saveEvent: jest.fn().mockResolvedValue('52'),
-  requestPermissions: jest.fn().mockResolvedValue('authorized'),
-}))
-
 const defaultEvent = {
   title: 'Utvecklingssamtal',
   startDate: '2021-06-19 13:00',

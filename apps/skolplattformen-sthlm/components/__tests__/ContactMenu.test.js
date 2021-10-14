@@ -4,19 +4,6 @@ import { Linking } from 'react-native'
 import { render } from '../../utils/testHelpers'
 import { ContactMenu } from '../contactMenu.component'
 
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native')
-
-  RN.UIManager.measureInWindow = (_node, callback) => {
-    callback(0, 0, 42, 42)
-  }
-
-  RN.Linking = {
-    openURL: jest.fn(),
-  }
-
-  return RN
-})
 
 const defaultGuardian = {
   address: 'Testgatan',

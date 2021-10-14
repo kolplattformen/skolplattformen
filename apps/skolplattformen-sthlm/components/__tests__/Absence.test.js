@@ -8,10 +8,6 @@ import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
 
-jest.mock('@react-navigation/native')
-jest.mock('@skolplattformen/hooks')
-jest.mock('../../utils/SMS')
-
 let sendSMS
 let user = { personalNumber: '201701092395' }
 

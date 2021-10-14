@@ -10,4 +10,7 @@ module.exports = {
       'react-native/jest/assetFileTransformer.js'
     ),
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!(@react-native|react-native|react-native-markdown-display|react-native-webview|react-native-calendar-events|react-native-simple-toast|react-native-modal-datetime-picker|@react-native-community/datetimepicker)/)"
+  ]
 }

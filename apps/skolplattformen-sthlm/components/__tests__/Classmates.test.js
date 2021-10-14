@@ -4,9 +4,6 @@ import { render } from '../../utils/testHelpers'
 import { ChildProvider } from '../childContext.component'
 import { Classmates } from '../classmates.component'
 
-jest.mock('@react-navigation/native')
-jest.mock('@skolplattformen/hooks')
-
 const defaultClassmates = [
   {
     className: '2B',

@@ -6,11 +6,6 @@ import { render } from '../../utils/testHelpers'
 import { ChildProvider } from '../childContext.component'
 import { NewsListItem } from '../newsListItem.component'
 
-jest.mock('@react-navigation/native')
-jest.mock('@skolplattformen/hooks', () => ({
-  useApi: jest.fn().mockReturnValue({ api: { getSessionCookie: jest.fn() } }),
-}))
-
 const defaultItem = {
   author: 'Köket',
   intro: 'Nu blir det köttbullar',
