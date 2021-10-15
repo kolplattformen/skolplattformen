@@ -24,8 +24,8 @@ jest.mock('react-native-reanimated', () => {
 jest.mock('@react-navigation/native')
 jest.mock('@react-navigation/core')
 jest.mock('react-native-localize')
-jest.mock("react-native/Libraries/Linking/Linking", () => ({
-	openURL: jest.fn(() => Promise.resolve("mockResolve")),
+jest.mock('react-native/Libraries/Linking/Linking', () => ({
+  openURL: jest.fn(() => Promise.resolve('mockResolve')),
 }))
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')

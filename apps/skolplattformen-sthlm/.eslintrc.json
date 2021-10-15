@@ -1,5 +1,4 @@
 {
-  "parser": "@babel/eslint-parser",
   "extends": [
     "@react-native-community",
     "plugin:react-native-a11y/all",
