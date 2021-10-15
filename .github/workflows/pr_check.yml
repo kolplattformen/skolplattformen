@@ -28,7 +28,7 @@ jobs:
 
       - name: Run linting and tests
         run: |
-          yarn nx run-many --all --target=lint
-          yarn nx run-many --all --target=test
+          yarn run lint
+          yarn run test
         env:
           CI: true
