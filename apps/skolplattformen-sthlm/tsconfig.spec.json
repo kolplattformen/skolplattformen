@@ -14,6 +14,7 @@
     "**/*.test.tsx",
     "**/*.test.js",
     "**/*.test.jsx",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/test-setup.ts"
   ]
 }
