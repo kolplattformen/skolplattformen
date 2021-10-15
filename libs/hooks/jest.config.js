@@ -8,5 +8,5 @@ module.exports = {
   coverageDirectory: '../../coverage/libs/hooks',
   testEnvironment: 'jsdom',
   clearMocks: true,
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
 }
