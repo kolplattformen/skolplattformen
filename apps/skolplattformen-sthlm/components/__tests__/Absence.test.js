@@ -14,7 +14,6 @@ let user = { personalNumber: '201701092395' }
 jest.mock('../../utils/SMS')
 jest.mock('@skolplattformen/hooks')
 
-
 const setup = (customProps = {}) => {
   sendSMS = jest.fn()
 
