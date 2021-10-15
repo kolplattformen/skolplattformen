@@ -36,3 +36,4 @@ jest.mock('react-native', () => {
 
   return RN
 })
+
