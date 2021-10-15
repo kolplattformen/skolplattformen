@@ -18,12 +18,12 @@ const { default: init } = jest.requireActual(
   '@skolplattformen/api-skolplattformen'
 )
 
-const wait = (ms) => new Promise((res) => setTimeout(res, ms))
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
 describe('hooks with fake data', () => {
-  let api
-  let storage
-  const wrapper = ({ children }) => (
+  let api: any
+  let storage: any
+  const wrapper = ({ children }: { children: React.ReactNode }) => (
     <ApiProvider api={api} storage={storage}>
       {children}
     </ApiProvider>
@@ -92,7 +92,7 @@ describe('hooks with fake data', () => {
     })
   })
   describe('data belonging to one child', () => {
-    let child
+    let child: any
     beforeEach(async () => {
       ;[child] = await api.getChildren()
     })
@@ -178,7 +178,7 @@ describe('hooks with fake data', () => {
   })
   it('handles reloads', async () => {
     await act(async () => {
-      store.dispatch({ type: 'CLEAR' })
+      store.dispatch({ type: 'CLEAR' } as any) // fixes test for invalid type
 
       const [child] = await api.getChildren()
 

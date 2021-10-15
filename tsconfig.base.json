@@ -20,6 +20,5 @@
       "@skolplattformen/curriculum": ["libs/curriculum/src/index.ts"],
       "@skolplattformen/hooks": ["libs/hooks/src/index.ts"]
     }
-  },
-  "exclude": ["node_modules", "tmp"]
+  }
 }
