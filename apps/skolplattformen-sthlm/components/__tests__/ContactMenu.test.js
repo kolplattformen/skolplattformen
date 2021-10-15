@@ -4,7 +4,6 @@ import { Linking } from 'react-native'
 import { render } from '../../utils/testHelpers'
 import { ContactMenu } from '../contactMenu.component'
 
-
 const defaultGuardian = {
   address: 'Testgatan',
   email: 'adam@adamsson.se',

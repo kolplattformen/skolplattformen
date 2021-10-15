@@ -8,8 +8,14 @@ import { useSMS } from '../../utils/SMS'
 import { render } from '../../utils/testHelpers'
 import Absence from '../absence.component'
 
+jest.mock('../../utils/SMS')
+jest.mock('@skolplattformen/hooks')
+
 let sendSMS
 let user = { personalNumber: '201701092395' }
+
+
+
 
 const setup = (customProps = {}) => {
   sendSMS = jest.fn()

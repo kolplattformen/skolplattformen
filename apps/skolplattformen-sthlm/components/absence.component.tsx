@@ -20,6 +20,7 @@ import { defaultStackStyling } from '../design/navigationThemes'
 import usePersonalStorage from '../hooks/usePersonalStorage'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
+// @ts-expect-error Fix when migrating to TSX
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
 import { AlertIcon } from './icon.component'

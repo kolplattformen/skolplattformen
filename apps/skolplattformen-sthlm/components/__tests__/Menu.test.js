@@ -4,6 +4,8 @@ import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
 import { Menu } from '../menu.component'
 
+jest.mock('@skolplattformen/hooks')
+
 const defaultItemList = [
   {
     title: 'Måndag vecka 10',

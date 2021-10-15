@@ -3,6 +3,8 @@ import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { NewsItem } from '../newsItem.component'
 
+jest.mock('@skolplattformen/hooks')
+
 const defaultNewsItem = {
   author: 'Köket',
   fullImageUrl: 'test.png',

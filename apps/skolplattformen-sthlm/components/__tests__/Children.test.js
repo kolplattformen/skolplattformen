@@ -16,6 +16,8 @@ import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
 import { Children } from '../children.component'
 
+jest.mock('@skolplattformen/hooks')
+
 const setup = () => {
   return render(<Children />)
 }
