@@ -1,7 +1,7 @@
+import CookieManager from '@react-native-cookies/cookies'
 import init from './'
 import { Api } from './api'
 import { Fetch, Headers, Response } from './types'
-import CookieManager from '@react-native-cookies/cookies'
 
 describe('api', () => {
   let fetch: jest.Mocked<Fetch>
@@ -37,7 +37,7 @@ describe('api', () => {
       expect(status.token).toEqual(data.token)
       status.cancel()
     })
-    it('emits PENDING', async (done) => {
+    it('emits PENDING', (done) => {
       const data = {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
@@ -46,14 +46,14 @@ describe('api', () => {
       response.text.mockResolvedValue('PENDING')
 
       const personalNumber = 'my personal number'
-      const status = await api.login(personalNumber)
-
-      status.on('PENDING', async () => {
-        status.cancel()
-        done()
+      api.login(personalNumber).then((status) => {
+        status.on('PENDING', async () => {
+          status.cancel()
+          done()
+        })
       })
     })
-    it('retries on PENDING', async (done) => {
+    it('retries on PENDING', (done) => {
       const data = {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
@@ -63,11 +63,11 @@ describe('api', () => {
       response.text.mockResolvedValueOnce('OK')
 
       const personalNumber = 'my personal number'
-      const status = await api.login(personalNumber)
-
-      status.on('OK', () => {
-        expect(fetch).toHaveBeenCalledTimes(4)
-        done()
+      api.login(personalNumber).then((status) => {
+        status.on('OK', () => {
+          expect(fetch).toHaveBeenCalledTimes(4)
+          done()
+        })
       })
     })
     it('remembers used personal number', async () => {
@@ -82,7 +82,7 @@ describe('api', () => {
 
       expect(api.getPersonalNumber()).toEqual(personalNumber)
     })
-    it('forgets used personal number if sign in is unsuccessful', async (done) => {
+    it('forgets used personal number if sign in is unsuccessful', (done) => {
       const data = {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
@@ -91,11 +91,11 @@ describe('api', () => {
       response.text.mockResolvedValueOnce('ERROR')
 
       const personalNumber = 'my personal number'
-      const status = await api.login(personalNumber)
-
-      status.on('ERROR', () => {
-        expect(api.getPersonalNumber()).toEqual(undefined)
-        done()
+      api.login(personalNumber).then((status) => {
+        status.on('ERROR', () => {
+          expect(api.getPersonalNumber()).toEqual(undefined)
+          done()
+        })
       })
     })
     it('throws error on external api error', async () => {
@@ -110,7 +110,7 @@ describe('api', () => {
       const personalNumber = 'my personal number'
       try {
         await api.login(personalNumber)
-      } catch (error) {
+      } catch (error: any) {
         expect(error.message).toEqual(expect.stringContaining('Server Error'))
       }
     })
@@ -165,14 +165,14 @@ describe('api', () => {
       status = await api.login('1212121212')
       expect(status.token).toEqual('fake')
     })
-    it('delivers fake data', async (done) => {
+    it('delivers fake data', (done) => {
       api.on('login', async () => {
         const user = await api.getUser()
         expect(user).toEqual({
           firstName: 'Namn',
           lastName: 'Namnsson',
           isAuthenticated: true,
-          personalNumber: "195001182046",
+          personalNumber: '195001182046',
         })
 
         const children = await api.getChildren()
@@ -186,12 +186,18 @@ describe('api', () => {
         const skola24Children = await api.getSkola24Children()
         expect(skola24Children).toHaveLength(1)
 
-        const timetable = await api.getTimetable(skola24Children[0], 2021, 15, 'sv')
+        const timetable = await api.getTimetable(
+          skola24Children[0],
+          2021,
+          15,
+          'sv'
+        )
         expect(timetable).toHaveLength(32)
 
         done()
       })
-      await api.login('121212121212')
+
+      api.login('121212121212')
     })
   })
 })
