@@ -5,6 +5,9 @@ import 'react-native-gesture-handler/jestSetup'
 
 moment.locale('sv')
 
+// Mock hooks
+jest.mock('@skolplattformen/hooks')
+
 // Silence useNativeDriver error
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 
@@ -36,3 +39,14 @@ jest.mock('react-native', () => {
 
   return RN
 })
+
+jest.mock('react-native-simple-toast', () => ({
+  SHORT: 'short',
+  BOTTOM: 'bottom',
+  showWithGravity: jest.fn(),
+}))
+
+jest.mock('react-native-calendar-events', () => ({
+  saveEvent: jest.fn().mockResolvedValue('52'),
+  requestPermissions: jest.fn().mockResolvedValue('authorized'),
+}))
