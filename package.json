@@ -9,8 +9,5 @@
     "test": "npx lerna run test --stream",
     "lint": "npx lerna run lint --stream"
   },
-  "version": "2.1.0",
-  "resolutions": {
-    "fbjs": "3.0.1"
-  }
+  "version": "2.1.0"
 }
