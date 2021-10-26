@@ -8,6 +8,7 @@
     }
   ],
   "compilerOptions": {
-    "allowJs": true
-  }
+    "allowJs": true,
+    "esModuleInterop": true,
+  },
 }

@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-
 /**
  * A more elaborated test file for local development
  * - Support for proxy (i recommend Burp Suite https://portswigger.net/burp/communitydownload)
@@ -13,13 +9,12 @@ const { inspect } = require('util')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
-// eslint-disable-next-line import/no-unresolved
 const { writeFile, readFile } = require('fs/promises')
 const path = require('path')
 const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
-const agentWrapper = require('./agentFetchWrapper')
-const init = require('./dist/api-skolplattformen/lib').default
+const agentWrapper = require('./app/agentFetchWrapper')
+const init = require('@skolplattformen/api-skolplattformen').default
 
 const [, , personalNumber] = process.argv
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
