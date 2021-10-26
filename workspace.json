@@ -49,6 +49,49 @@
         }
       }
     },
+    "api-test-app": {
+      "root": "apps/api-test-app",
+      "sourceRoot": "apps/api-test-app/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api-test-app",
+            "main": "apps/api-test-app/src/main.js",
+            "tsConfig": "apps/api-test-app/tsconfig.app.json",
+            "assets": ["apps/api-test-app/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api-test-app/src/environments/environment.js",
+                  "with": "apps/api-test-app/src/environments/environment.prod.js"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-test-app:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/api-test-app/**/*.js"]
+          }
+        }
+      }
+    },
     "api": {
       "root": "libs/api",
       "sourceRoot": "libs/api",
