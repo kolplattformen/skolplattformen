@@ -2015,13 +2015,6 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
-"@react-native-community/cookies@5.0.1":
-  version "5.0.1"
-  resolved "https://registry.npmjs.org/@react-native-community/cookies/-/cookies-5.0.1.tgz"
-  integrity sha512-Is/kWBmYBFtX4DOImfglK5Bz2w3PdpgMGTqdVQSbZlFdSDw32lwFMk1mLSAzL5EcUEDwJJbcEATbU3JGSZSVXw==
-  dependencies:
-    invariant "^2.2.4"
-
 "@react-native-community/datetimepicker@3.4.3":
   version "3.4.3"
   resolved "https://registry.npmjs.org/@react-native-community/datetimepicker/-/datetimepicker-3.4.3.tgz"

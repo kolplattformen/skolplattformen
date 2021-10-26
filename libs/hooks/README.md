@@ -19,7 +19,7 @@ In order to use api hooks, you must wrap your app in an ApiProvider
 import React from 'react'
 import { ApiProvider } from '@skolplattformen/hooks'
 import init from '@skolplattformen/api-skolplattformen'
-import { CookieManager } from '@react-native-community/cookies'
+import { CookieManager } from '@react-native-cookies/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RootComponent } from './components/root'
 import crashlytics from '@react-native-firebase/crashlytics'

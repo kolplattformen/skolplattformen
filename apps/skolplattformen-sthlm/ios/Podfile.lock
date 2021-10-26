@@ -287,7 +287,7 @@ PODS:
     - React-jsi (= 0.65.1)
     - React-perflogger (= 0.65.1)
   - React-jsinspector (0.65.1)
-  - react-native-cookies (5.0.1):
+  - react-native-cookies (6.0.11):
     - React-Core
   - react-native-restart (0.0.22):
     - React-Core
@@ -461,7 +461,7 @@ DEPENDENCIES:
   - React-jsi (from `../../../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
-  - "react-native-cookies (from `../../../node_modules/@react-native-community/cookies`)"
+  - "react-native-cookies (from `../../../node_modules/@react-native-cookies/cookies`)"
   - react-native-restart (from `../../../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../../../node_modules/react-native-simple-toast`)
@@ -545,7 +545,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
   react-native-cookies:
-    :path: "../../../node_modules/@react-native-community/cookies"
+    :path: "../../../node_modules/@react-native-cookies/cookies"
   react-native-restart:
     :path: "../../../node_modules/react-native-restart"
   react-native-safe-area-context:
@@ -635,7 +635,7 @@ SPEC CHECKSUMS:
   React-jsi: 12913c841713a15f64eabf5c9ad98592c0ec5940
   React-jsiexecutor: 43f2542aed3c26e42175b339f8d37fe3dd683765
   React-jsinspector: 41e58e5b8e3e0bf061fdf725b03f2144014a8fb0
-  react-native-cookies: ce50e42ace7cf0dd47769260ca5bbe8eee607e4e
+  react-native-cookies: cd92f3824ed1e32a20802e8185101e14bb5b76da
   react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f

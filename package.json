@@ -17,7 +17,6 @@
     "@eva-design/eva": "2.0.0",
     "@eva-design/material": "2.0.0",
     "@react-native-async-storage/async-storage": "1.15.9",
-    "@react-native-community/cookies": "5.0.1",
     "@react-native-community/datetimepicker": "3.4.3",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-cookies/cookies": "^6.0.7",
