@@ -287,7 +287,7 @@ PODS:
     - React-jsi (= 0.65.1)
     - React-perflogger (= 0.65.1)
   - React-jsinspector (0.65.1)
-  - react-native-cookies (5.0.1):
+  - react-native-cookies (6.0.11):
     - React-Core
   - react-native-restart (0.0.22):
     - React-Core
@@ -364,7 +364,7 @@ PODS:
     - React-perflogger (= 0.65.1)
   - RNCalendarEvents (2.2.0):
     - React
-  - RNCAsyncStorage (1.15.2):
+  - RNCAsyncStorage (1.15.9):
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
@@ -461,7 +461,7 @@ DEPENDENCIES:
   - React-jsi (from `../../../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
-  - "react-native-cookies (from `../../../node_modules/@react-native-community/cookies`)"
+  - "react-native-cookies (from `../../../node_modules/@react-native-cookies/cookies`)"
   - react-native-restart (from `../../../node_modules/react-native-restart`)
   - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
   - react-native-simple-toast (from `../../../node_modules/react-native-simple-toast`)
@@ -545,7 +545,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
   react-native-cookies:
-    :path: "../../../node_modules/@react-native-community/cookies"
+    :path: "../../../node_modules/@react-native-cookies/cookies"
   react-native-restart:
     :path: "../../../node_modules/react-native-restart"
   react-native-safe-area-context:
@@ -635,7 +635,7 @@ SPEC CHECKSUMS:
   React-jsi: 12913c841713a15f64eabf5c9ad98592c0ec5940
   React-jsiexecutor: 43f2542aed3c26e42175b339f8d37fe3dd683765
   React-jsinspector: 41e58e5b8e3e0bf061fdf725b03f2144014a8fb0
-  react-native-cookies: ce50e42ace7cf0dd47769260ca5bbe8eee607e4e
+  react-native-cookies: cd92f3824ed1e32a20802e8185101e14bb5b76da
   react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
@@ -653,7 +653,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 85187f19dd9c47a7c102f9994f9d14e4dc2110de
   ReactCommon: eafed38eec7b591c31751bfa7494801618460459
   RNCalendarEvents: 7e65eb4a94f53c1744d1e275f7fafcfaa619f7a3
-  RNCAsyncStorage: 9b7605e899f9acb2fba33e87952c529731265453
+  RNCAsyncStorage: 26f25150da507524a7815f2ada06ca0967f65633
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: d943800c936fb01c352fcfb70439550d2cb57092
   RNDeviceInfo: 8a06046616c6b5c03787b04f265fa3b52b37c80b

@@ -1,6 +1,6 @@
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import CookieManager from '@react-native-community/cookies'
+import CookieManager from '@react-native-cookies/cookies'
 import init from '@skolplattformen/api-skolplattformen'
 import { ApiProvider } from '@skolplattformen/hooks'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
