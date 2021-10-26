@@ -64,7 +64,6 @@
     "tough-cookie": "*",
     "fetch-cookie": "*",
     "https-proxy-agent": "*",
-    "@react-native-cookies/cookies": "*",
     "events": "*",
     "he": "*",
     "node-html-parser": "*",
@@ -76,7 +75,8 @@
     "regenerator-runtime": "*",
     "react-redux": "*",
     "redux": "*",
-    "@testing-library/react": "*"
+    "@testing-library/react": "*",
+    "@react-native-cookies/cookies": "*"
   },
   "devDependencies": {},
   "private": true
