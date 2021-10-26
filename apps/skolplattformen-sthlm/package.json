@@ -68,46 +68,14 @@
     "react-native-svg": "*",
     "react-native-typography": "*",
     "react-native-webview": "*",
-<<<<<<< HEAD
-    "formik": "*",
-    "moment": "*",
-    "personnummer": "*",
-    "yup": "*",
-    "@testing-library/react-hooks": "*",
-    "valtio": "*",
-    "i18n-js": "*",
-    "deepmerge": "*",
-    "buffer": "*",
-    "fast-fuzzy": "*",
-    "luxon": "*",
-    "node-fetch": "*",
-    "tough-cookie": "*",
-    "fetch-cookie": "*",
-    "https-proxy-agent": "*",
-    "events": "*",
-    "he": "*",
-    "node-html-parser": "*",
-    "change-case": "*",
-    "node-blob": "*",
-    "camelcase-keys": "*",
-    "h2m": "*",
-    "js-htmlencode": "*",
-    "regenerator-runtime": "*",
-=======
     "react-native": "*",
->>>>>>> 1ef5dd58bcec89cb16249459d30502a5b8a14681
     "react-redux": "*",
     "react": "*",
     "redux": "*",
-<<<<<<< HEAD
-    "@testing-library/react": "*",
-    "@react-native-cookies/cookies": "*"
-=======
     "regenerator-runtime": "*",
     "tough-cookie": "*",
     "valtio": "*",
     "yup": "*"
->>>>>>> 1ef5dd58bcec89cb16249459d30502a5b8a14681
   },
   "devDependencies": {},
   "private": true
