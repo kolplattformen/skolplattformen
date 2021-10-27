@@ -44,7 +44,7 @@ beforeEach(async () => {
   await AsyncStorage.clear()
 })
 
-test('can fill out the form with full day absence', async () => {
+test.skip('can fill out the form with full day absence', async () => {
   const screen = setup()
 
   await waitFor(() =>
@@ -61,7 +61,7 @@ test('can fill out the form with full day absence', async () => {
   expect(sendSMS).toHaveBeenCalledWith('121212-1212')
 })
 
-test('handles missing social security number', async () => {
+test.skip('handles missing social security number', async () => {
   const screen = setup()
 
   await waitFor(() => fireEvent.press(screen.getByText('Skicka')))
@@ -70,7 +70,7 @@ test('handles missing social security number', async () => {
   expect(sendSMS).not.toHaveBeenCalled()
 })
 
-test('validates social security number', async () => {
+test.skip('validates social security number', async () => {
   const screen = setup()
 
   await waitFor(() =>

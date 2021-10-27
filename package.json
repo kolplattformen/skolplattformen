@@ -7,8 +7,8 @@
     "ios": "nx run-ios",
     "android": "nx run-android",
     "build": "nx build",
-    "test": "nx test",
-    "lint": "nx lint",
+    "test": "nx run-many --all --target=test",
+    "lint": "nx run-many --all --target=lint",
     "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json && mv libraries.json apps/skolplattformen-sthlm",
     "postinstall": "yarn extract-licenses"
   },
