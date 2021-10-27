@@ -1,15 +1,10 @@
+import { useNavigation } from '@react-navigation/native'
+import { fireEvent } from '@testing-library/react-native'
+import MockDate from 'mockdate'
 import React from 'react'
 import { render } from '../../utils/testHelpers'
-import { NewsListItem } from '../newsListItem.component'
-import MockDate from 'mockdate'
-import { fireEvent } from '@testing-library/react-native'
-import { useNavigation } from '@react-navigation/native'
 import { ChildProvider } from '../childContext.component'
-
-jest.mock('@react-navigation/native')
-jest.mock('@skolplattformen/api-hooks', () => ({
-  useApi: jest.fn().mockReturnValue({ api: { getSessionCookie: jest.fn() } }),
-}))
+import { NewsListItem } from '../newsListItem.component'
 
 const defaultItem = {
   author: 'Köket',

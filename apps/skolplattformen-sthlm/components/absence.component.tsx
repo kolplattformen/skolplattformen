@@ -1,4 +1,5 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
+import { useUser } from '@skolplattformen/hooks'
 import {
   Button,
   CheckBox,
@@ -16,15 +17,15 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import * as Yup from 'yup'
 import { defaultStackStyling } from '../design/navigationThemes'
+import usePersonalStorage from '../hooks/usePersonalStorage'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
+// @ts-expect-error Fix when migrating to TSX
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
 import { AlertIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
 import { NavigationTitle } from './navigationTitle.component'
-import { useUser } from '@skolplattformen/api-hooks'
-import usePersonalStorage from '../hooks/usePersonalStorage'
 
 type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
 

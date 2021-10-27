@@ -26,8 +26,16 @@ describe('childlists', () => {
       ]
 
       const children = [
-        { name: 'Uwe Übrink (elev)', firstName: 'Uwe', lastName: 'Vredstein Übrink' },
-        { name: 'Cassius Übrink (elev)', firstName: 'Cassius', lastName: 'Vredstein Übrink' },
+        {
+          name: 'Uwe Übrink (elev)',
+          firstName: 'Uwe',
+          lastName: 'Vredstein Übrink',
+        },
+        {
+          name: 'Cassius Übrink (elev)',
+          firstName: 'Cassius',
+          lastName: 'Vredstein Übrink',
+        },
       ]
       expect(merge(etjanstChildren, skola24Children)).toEqual(children)
     })
@@ -41,7 +49,11 @@ describe('childlists', () => {
       ]
 
       const children = [
-        { name: 'Uwe Übrink (elev)', firstName: 'Uwe', lastName: 'Vredstein Übrink' },
+        {
+          name: 'Uwe Übrink (elev)',
+          firstName: 'Uwe',
+          lastName: 'Vredstein Übrink',
+        },
         { name: 'Cassius Übrink (elev)' },
       ]
       expect(merge(etjanstChildren, skola24Children)).toEqual(children)
@@ -57,7 +69,11 @@ describe('childlists', () => {
       ]
 
       const children = [
-        { name: 'Uwe Übrink (elev)', firstName: 'Uwe', lastName: 'Vredstein Übrink' },
+        {
+          name: 'Uwe Übrink (elev)',
+          firstName: 'Uwe',
+          lastName: 'Vredstein Übrink',
+        },
         { name: 'Cassius Übrink (elev)' },
       ]
       expect(merge(etjanstChildren, skola24Children)).toEqual(children)

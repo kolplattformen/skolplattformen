@@ -1,19 +1,19 @@
-import React from 'react'
-import { StyleSheet, ListRenderItemInfo } from 'react-native'
+import { Classmate } from '@skolplattformen/api-skolplattformen'
+import { useClassmates } from '@skolplattformen/hooks'
 import {
   Divider,
-  List,
-  ListItem,
   Icon,
   IconProps,
+  List,
+  ListItem,
   Text,
 } from '@ui-kitten/components'
+import React from 'react'
+import { ListRenderItemInfo, StyleSheet } from 'react-native'
 import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
-import { useChild } from './childContext.component'
-import { useClassmates } from '@skolplattformen/api-hooks'
-import { ContactMenu } from './contactMenu.component'
-import { Classmate } from '@skolplattformen/embedded-api'
 import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { ContactMenu } from './contactMenu.component'
 
 interface ClassmatesProps {
   setSelected: (value?: number | null) => void

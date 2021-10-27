@@ -1,20 +1,23 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
-    "declaration": true,
-    "outDir": "./dist",
-    "strict": true,
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "lib"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__/*",
-    "**/__mocks__/*",
-    "**/*.test.ts"
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
   ]
 }

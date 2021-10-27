@@ -1,4 +1,4 @@
-import { CalendarItem } from '@skolplattformen/embedded-api'
+import { CalendarItem } from '@skolplattformen/api-skolplattformen'
 import { Button, MenuItem, OverflowMenu, Text } from '@ui-kitten/components'
 import React from 'react'
 import RNCalendarEvents from 'react-native-calendar-events'
@@ -30,7 +30,7 @@ export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
   const toast = (text: string) =>
     Toast.showWithGravity(text, Toast.SHORT, Toast.BOTTOM)
 
-  function removeEmptyValues<T extends object>(obj: T) {
+  function removeEmptyValues<T extends Record<string, unknown>>(obj: T) {
     return Object.fromEntries(
       Object.entries(obj).filter(([_, v]) => v != null)
     ) as { [K in keyof T]: any }

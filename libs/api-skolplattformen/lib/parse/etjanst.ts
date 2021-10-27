@@ -1,4 +1,4 @@
-const camel = require('camelcase-keys')
+import camel from 'camelcase-keys'
 
 export interface EtjanstResponse {
   Success: boolean

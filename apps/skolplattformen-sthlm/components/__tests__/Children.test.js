@@ -1,24 +1,23 @@
+import { useNavigation } from '@react-navigation/core'
 import {
   useApi,
-  useChildList,
   useCalendar,
+  useChildList,
+  useClassmates,
+  useMenu,
   useNews,
   useNotifications,
   useSchedule,
-  useMenu,
   useTimetable,
-  useClassmates,
-} from '@skolplattformen/api-hooks'
-import { render } from '../../utils/testHelpers'
+} from '@skolplattformen/hooks'
 import React from 'react'
-import { Children } from '../children.component'
-import { useNavigation } from '@react-navigation/core'
 import * as RNLocalize from 'react-native-localize'
+import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
+import { Children } from '../children.component'
 
-jest.mock('@skolplattformen/api-hooks')
-jest.mock('@react-navigation/core')
-jest.mock('react-native-localize')
+jest.mock('@skolplattformen/hooks')
+
 const setup = () => {
   return render(<Children />)
 }

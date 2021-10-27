@@ -18,11 +18,7 @@ describe('useTimetable(child, week, year, lang)', () => {
   let year
   let lang
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -30,14 +26,18 @@ describe('useTimetable(child, week, year, lang)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getTimetable.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_timetable_10_15_2021_sv': [{ id: 2 }],
-    }, 2)
+    api.getTimetable.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_timetable_10_15_2021_sv': [{ id: 2 }],
+      },
+      2
+    )
     child = { personGuid: '10' }
     week = 15
     year = 2021
@@ -50,14 +50,19 @@ describe('useTimetable(child, week, year, lang)', () => {
     })
   })
   it('returns correct initial value', () => {
-    const { result } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+    const { result } = renderHook(() => useTimetable(child, week, year, lang), {
+      wrapper,
+    })
 
     expect(result.current.status).toEqual('pending')
   })
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -69,7 +74,10 @@ describe('useTimetable(child, week, year, lang)', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useTimetable(child, week, year, lang), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       renderHook(() => useTimetable(child, week, year, lang), { wrapper })
@@ -77,7 +85,10 @@ describe('useTimetable(child, week, year, lang)', () => {
       renderHook(() => useTimetable(child, week, year, lang), { wrapper })
       await waitForNextUpdate()
 
-      const { result } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       expect(api.getTimetable).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
@@ -86,7 +97,10 @@ describe('useTimetable(child, week, year, lang)', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -97,7 +111,10 @@ describe('useTimetable(child, week, year, lang)', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -108,7 +125,10 @@ describe('useTimetable(child, week, year, lang)', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -122,7 +142,10 @@ describe('useTimetable(child, week, year, lang)', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -137,7 +160,10 @@ describe('useTimetable(child, week, year, lang)', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -152,7 +178,10 @@ describe('useTimetable(child, week, year, lang)', () => {
       const error = new Error('fail')
       api.getTimetable.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -180,7 +209,10 @@ describe('useTimetable(child, week, year, lang)', () => {
       api.getTimetable.mockRejectedValueOnce(error)
       api.getTimetable.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -207,7 +239,10 @@ describe('useTimetable(child, week, year, lang)', () => {
       const error = new Error('fail')
       api.getTimetable.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useTimetable(child, week, year, lang), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useTimetable(child, week, year, lang),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -215,7 +250,10 @@ describe('useTimetable(child, week, year, lang)', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting TIMETABLE from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting TIMETABLE from API'
+      )
     })
   })
 })

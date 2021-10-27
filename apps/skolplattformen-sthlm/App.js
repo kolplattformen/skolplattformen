@@ -1,8 +1,8 @@
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import CookieManager from '@react-native-community/cookies'
-import { ApiProvider } from '@skolplattformen/api-hooks'
-import init from '@skolplattformen/embedded-api'
+import CookieManager from '@react-native-cookies/cookies'
+import init from '@skolplattformen/api-skolplattformen'
+import { ApiProvider } from '@skolplattformen/hooks'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import React from 'react'
@@ -21,10 +21,7 @@ const reporter = __DEV__
       log: (message) => console.log(message),
       error: (error, label) => console.error(label, error),
     }
-  : {
-      log: () => {},
-      error: () => {},
-    }
+  : undefined
 
 if (__DEV__) {
   const DevMenu = require('react-native-dev-menu')

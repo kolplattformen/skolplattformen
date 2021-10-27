@@ -1,4 +1,4 @@
-import { Child } from '@skolplattformen/embedded-api'
+import { Child } from '@skolplattformen/api-skolplattformen'
 import React, { createContext, useContext } from 'react'
 
 interface ChildProviderProps {

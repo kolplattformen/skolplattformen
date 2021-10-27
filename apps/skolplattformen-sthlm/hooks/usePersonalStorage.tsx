@@ -1,4 +1,4 @@
-import { User } from '@skolplattformen/embedded-api'
+import { User } from '@skolplattformen/api-skolplattformen'
 import useAsyncStorage from './useAsyncStorage'
 
 export default function usePersonalStorage<T>(

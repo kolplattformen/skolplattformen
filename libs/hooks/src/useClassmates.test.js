@@ -15,11 +15,7 @@ describe('useClassmates(child)', () => {
   let response
   let child
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -27,14 +23,18 @@ describe('useClassmates(child)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getClassmates.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_classmates_10': [{ id: 2 }],
-    }, 2)
+    api.getClassmates.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_classmates_10': [{ id: 2 }],
+      },
+      2
+    )
     child = { id: 10 }
   })
   afterEach(async () => {
@@ -51,7 +51,9 @@ describe('useClassmates(child)', () => {
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useClassmates(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -63,7 +65,9 @@ describe('useClassmates(child)', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useClassmates(child), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useClassmates(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       renderHook(() => useClassmates(child), { wrapper })
@@ -80,7 +84,10 @@ describe('useClassmates(child)', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useClassmates(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -91,7 +98,10 @@ describe('useClassmates(child)', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useClassmates(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -102,7 +112,10 @@ describe('useClassmates(child)', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useClassmates(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -116,7 +129,9 @@ describe('useClassmates(child)', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useClassmates(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -131,7 +146,9 @@ describe('useClassmates(child)', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useClassmates(child), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -146,7 +163,10 @@ describe('useClassmates(child)', () => {
       const error = new Error('fail')
       api.getClassmates.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useClassmates(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -174,7 +194,10 @@ describe('useClassmates(child)', () => {
       api.getClassmates.mockRejectedValueOnce(error)
       api.getClassmates.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useClassmates(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -201,7 +224,10 @@ describe('useClassmates(child)', () => {
       const error = new Error('fail')
       api.getClassmates.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useClassmates(child), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useClassmates(child),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -209,7 +235,10 @@ describe('useClassmates(child)', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting CLASSMATES from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting CLASSMATES from API'
+      )
     })
   })
 })

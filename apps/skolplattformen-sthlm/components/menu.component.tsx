@@ -1,5 +1,5 @@
-import { useMenu } from '@skolplattformen/api-hooks'
-import { MenuItem } from '@skolplattformen/embedded-api'
+import { MenuItem } from '@skolplattformen/api-skolplattformen'
+import { useMenu } from '@skolplattformen/hooks'
 import {
   Divider,
   List,

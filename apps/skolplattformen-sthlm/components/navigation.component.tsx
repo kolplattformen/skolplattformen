@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native'
-import { useApi } from '@skolplattformen/api-hooks'
 import {
   Child as ChildType,
   NewsItem as NewsItemType,
-} from '@skolplattformen/embedded-api'
+} from '@skolplattformen/api-skolplattformen'
+import { useApi } from '@skolplattformen/hooks'
 import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'
 import React, { useEffect } from 'react'
@@ -153,9 +153,7 @@ export const AppNavigator = () => {
             />
           </>
         ) : (
-          <>
-            <Screen name="Login" component={Auth} options={authRouteOptions} />
-          </>
+          <Screen name="Login" component={Auth} options={authRouteOptions} />
         )}
         <Screen
           name="SetLanguage"

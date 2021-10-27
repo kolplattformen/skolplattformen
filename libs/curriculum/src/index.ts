@@ -1,4 +1,5 @@
 import translate, { Language, Translation } from './translations'
+export { Language } from './translations'
 
 export interface Subject {
   code: string

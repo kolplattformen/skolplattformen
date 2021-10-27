@@ -4,20 +4,6 @@ import { Linking } from 'react-native'
 import { render } from '../../utils/testHelpers'
 import { ContactMenu } from '../contactMenu.component'
 
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native')
-
-  RN.UIManager.measureInWindow = (_node, callback) => {
-    callback(0, 0, 42, 42)
-  }
-
-  RN.Linking = {
-    openURL: jest.fn(),
-  }
-
-  return RN
-})
-
 const defaultGuardian = {
   address: 'Testgatan',
   email: 'adam@adamsson.se',
@@ -44,7 +30,9 @@ const setup = (customProps = {}) => {
 beforeAll(() => {
   // Hide errors from state illegal state transition
   // Probably due to mock
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => {
+    // noop
+  })
 })
 
 beforeEach(jest.clearAllMocks)

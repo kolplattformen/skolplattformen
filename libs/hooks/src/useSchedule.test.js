@@ -17,11 +17,7 @@ describe('useSchedule(child, from, to)', () => {
   let from
   let to
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
@@ -29,14 +25,18 @@ describe('useSchedule(child, from, to)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getSchedule.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_schedule_10_2021-01-01_2021-01-08': [{ id: 2 }],
-    }, 2)
+    api.getSchedule.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_schedule_10_2021-01-01_2021-01-08': [{ id: 2 }],
+      },
+      2
+    )
     child = { id: 10 }
     from = '2021-01-01'
     to = '2021-01-08'
@@ -48,14 +48,19 @@ describe('useSchedule(child, from, to)', () => {
     })
   })
   it('returns correct initial value', () => {
-    const { result } = renderHook(() => useSchedule(child, from, to), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
 
     expect(result.current.status).toEqual('pending')
   })
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -67,7 +72,10 @@ describe('useSchedule(child, from, to)', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useSchedule(child, from, to), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       renderHook(() => useSchedule(child, from, to), { wrapper })
@@ -75,7 +83,9 @@ describe('useSchedule(child, from, to)', () => {
       renderHook(() => useSchedule(child, from, to), { wrapper })
       await waitForNextUpdate()
 
-      const { result } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result } = renderHook(() => useSchedule(child, from, to), {
+        wrapper,
+      })
 
       expect(api.getSchedule).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
@@ -84,7 +94,10 @@ describe('useSchedule(child, from, to)', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -95,7 +108,10 @@ describe('useSchedule(child, from, to)', () => {
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -106,7 +122,10 @@ describe('useSchedule(child, from, to)', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -120,14 +139,19 @@ describe('useSchedule(child, from, to)', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":1}]')
+      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual(
+        '[{"id":1}]'
+      )
     })
   })
   it('does not store in cache if fake', async () => {
@@ -135,13 +159,18 @@ describe('useSchedule(child, from, to)', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual('[{"id":2}]')
+      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual(
+        '[{"id":2}]'
+      )
     })
   })
   it('retries if api fails', async () => {
@@ -150,7 +179,10 @@ describe('useSchedule(child, from, to)', () => {
       const error = new Error('fail')
       api.getSchedule.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -178,7 +210,10 @@ describe('useSchedule(child, from, to)', () => {
       api.getSchedule.mockRejectedValueOnce(error)
       api.getSchedule.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -205,7 +240,10 @@ describe('useSchedule(child, from, to)', () => {
       const error = new Error('fail')
       api.getSchedule.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useSchedule(child, from, to), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(
+        () => useSchedule(child, from, to),
+        { wrapper }
+      )
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -213,7 +251,10 @@ describe('useSchedule(child, from, to)', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting SCHEDULE from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting SCHEDULE from API'
+      )
     })
   })
 })

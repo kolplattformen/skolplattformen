@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
-import { useApi, useChildList } from '@skolplattformen/api-hooks'
-import { Child } from '@skolplattformen/embedded-api'
+import { Child } from '@skolplattformen/api-skolplattformen'
+import { useApi, useChildList } from '@skolplattformen/hooks'
 import {
   Button,
   List,
@@ -44,7 +44,7 @@ export const Children = () => {
   const navigation = useNavigation()
 
   const { api } = useApi()
-  let { data: childList, status, reload } = useChildList()
+  const { data: childList, status, reload } = useChildList()
   const reloadChildren = () => {
     reload()
   }

@@ -1,4 +1,4 @@
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 import {
   Button,
   ButtonGroup,

@@ -1,7 +1,7 @@
-import { renderHook, act } from '@testing-library/react-hooks'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { User } from '@skolplattformen/api-skolplattformen'
+import { act, renderHook } from '@testing-library/react-hooks'
 import usePersonalStorage from '../usePersonalStorage'
-import { User } from '@skolplattformen/embedded-api'
 
 beforeEach(async () => {
   jest.clearAllMocks()

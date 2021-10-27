@@ -33,7 +33,7 @@ const rtlList: { [key: string]: boolean } = {
 }
 
 export const isRTL = (langCode: string) => {
-  if (!rtlList.hasOwnProperty(langCode)) {
+  if (!Object.prototype.hasOwnProperty.call(rtlList, langCode)) {
     return false
   }
   return rtlList[langCode]

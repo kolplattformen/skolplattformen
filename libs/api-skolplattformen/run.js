@@ -62,10 +62,11 @@ const record = async (info, data) => {
       case 'text':
         content.text = data
         break
-      case 'blob':
+      case 'blob': {
         const buffer = await data.arrayBuffer()
         content.blob = Buffer.from(buffer).toString('base64')
         break
+      }
     }
   } else if (info.error) {
     const { message, stack } = info.error
@@ -103,11 +104,11 @@ async function run() {
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-      
+
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
-/*
+      /*
       console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)

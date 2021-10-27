@@ -1,9 +1,9 @@
-import { useApi, useNewsDetails } from '@skolplattformen/api-hooks'
+import { useApi, useNewsDetails } from '@skolplattformen/hooks'
 import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { NewsItem } from '../newsItem.component'
 
-jest.mock('@skolplattformen/api-hooks')
+jest.mock('@skolplattformen/hooks')
 
 const defaultNewsItem = {
   author: 'Köket',

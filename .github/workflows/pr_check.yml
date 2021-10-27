@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: '14.17.6'
 
       - name: Setup timezone
         uses: zcong1993/setup-timezone@master
@@ -24,11 +24,11 @@ jobs:
           timezone: Europe/Stockholm
 
       - name: Install dependencies
-        run: npx lerna bootstrap      
-        
+        run: yarn
+
       - name: Run linting and tests
         run: |
-          yarn lint
-          yarn test
+          yarn nx run-many --all --target=lint
+          yarn nx run-many --all --target=test
         env:
           CI: true

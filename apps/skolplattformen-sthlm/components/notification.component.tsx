@@ -1,4 +1,4 @@
-import { Notification as NotificationType } from '@skolplattformen/embedded-api'
+import { Notification as NotificationType } from '@skolplattformen/api-skolplattformen'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
@@ -19,7 +19,7 @@ export const Notification = ({ item }: NotificationProps) => {
   const date = item.dateModified || item.dateCreated
   const displayDate = date ? moment(date).fromNow() : null
 
-  const sharedCookiesEnabled: boolean = Boolean(
+  const sharedCookiesEnabled = Boolean(
     item.url && item.url.startsWith('https://start.unikum.net/')
   )
 

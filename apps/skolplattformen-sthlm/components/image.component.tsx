@@ -1,4 +1,4 @@
-import { useApi } from '@skolplattformen/api-hooks'
+import { useApi } from '@skolplattformen/hooks'
 import React, { useEffect, useState } from 'react'
 import { Image as ImageBase, ImageStyle, StyleProp } from 'react-native'
 

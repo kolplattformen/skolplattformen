@@ -2,14 +2,14 @@ import {
   CalendarItem,
   Classmate,
   EtjanstChild,
-  Skola24Child,
   MenuItem,
   NewsItem,
   Notification,
   ScheduleItem,
-  User,
+  Skola24Child,
   TimetableEntry,
-} from '@skolplattformen/embedded-api'
+  User,
+} from '@skolplattformen/api-skolplattformen'
 import { EntityName, EntityReducer, EntityState } from './types'
 
 const createReducer = <T>(entity: EntityName): EntityReducer<T> => {

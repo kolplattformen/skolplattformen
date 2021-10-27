@@ -18,38 +18,43 @@ describe('useChildList()', () => {
   let echildrenResponse
   let skola24Response
   const wrapper = ({ children }) => (
-    <ApiProvider
-      api={api}
-      storage={storage}
-      reporter={reporter}
-    >
+    <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
   beforeEach(() => {
     echildrenCache = [{ id: 2, name: 'Uwe Übrink (elev)' }]
-    skola24Cache = [{ personGuid: '2', firstName: 'Uwe', lastName: 'Vredstein Übrink' }]
+    skola24Cache = [
+      { personGuid: '2', firstName: 'Uwe', lastName: 'Vredstein Übrink' },
+    ]
 
     echildrenResponse = [{ id: 1, name: 'Uwe Übrink (elev)' }]
-    skola24Response = [{ personGuid: '1', firstName: 'Uwe', lastName: 'Vredstein Übrink' }]
+    skola24Response = [
+      { personGuid: '1', firstName: 'Uwe', lastName: 'Vredstein Übrink' },
+    ]
 
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
 
-    api.getChildren.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(echildrenResponse), 50)
-      })
-    ))
-    api.getSkola24Children.mockImplementation(() => (
-      new Promise((res) => {
-        setTimeout(() => res(skola24Response), 50)
-      })
-    ))
-    storage = createStorage({
-      '123_etjanst_children': echildrenCache,
-      '123_skola24_children': skola24Cache,
-    }, 2)
+    api.getChildren.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(echildrenResponse), 50)
+        })
+    )
+    api.getSkola24Children.mockImplementation(
+      () =>
+        new Promise((res) => {
+          setTimeout(() => res(skola24Response), 50)
+        })
+    )
+    storage = createStorage(
+      {
+        '123_etjanst_children': echildrenCache,
+        '123_skola24_children': skola24Cache,
+      },
+      2
+    )
   })
   afterEach(async () => {
     await act(async () => {
@@ -65,7 +70,9 @@ describe('useChildList()', () => {
   it('calls api', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -78,7 +85,9 @@ describe('useChildList()', () => {
     await act(async () => {
       api.isLoggedIn = true
       renderHook(() => useChildList(), { wrapper })
-      const { waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       renderHook(() => useChildList(), { wrapper })
@@ -97,7 +106,9 @@ describe('useChildList()', () => {
   it('calls cache', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -105,19 +116,23 @@ describe('useChildList()', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
 
-      expect(result.current.data).toEqual([{
-        id: 2,
-        name: 'Uwe Übrink (elev)',
-        personGuid: '2',
-        firstName: 'Uwe',
-        lastName: 'Vredstein Übrink',
-      }])
+      expect(result.current.data).toEqual([
+        {
+          id: 2,
+          name: 'Uwe Übrink (elev)',
+          personGuid: '2',
+          firstName: 'Uwe',
+          lastName: 'Vredstein Übrink',
+        },
+      ])
     })
   })
   it('updates status to loading', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -128,7 +143,9 @@ describe('useChildList()', () => {
   it('updates status to loaded', async () => {
     await act(async () => {
       api.isLoggedIn = true
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -145,7 +162,9 @@ describe('useChildList()', () => {
       api.isLoggedIn = true
       api.isFake = false
 
-      const { waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -155,8 +174,12 @@ describe('useChildList()', () => {
       await waitForNextUpdate()
       await pause(20)
 
-      expect(storage.cache['123_etjanst_children']).toEqual(JSON.stringify(echildrenResponse))
-      expect(storage.cache['123_skola24_children']).toEqual(JSON.stringify(skola24Response))
+      expect(storage.cache['123_etjanst_children']).toEqual(
+        JSON.stringify(echildrenResponse)
+      )
+      expect(storage.cache['123_skola24_children']).toEqual(
+        JSON.stringify(skola24Response)
+      )
     })
   })
   it('does not store in cache if fake', async () => {
@@ -164,7 +187,9 @@ describe('useChildList()', () => {
       api.isLoggedIn = true
       api.isFake = true
 
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -172,8 +197,12 @@ describe('useChildList()', () => {
       await pause(20)
 
       expect(result.current.status).toEqual('loaded')
-      expect(storage.cache['123_etjanst_children']).toEqual(JSON.stringify(echildrenCache))
-      expect(storage.cache['123_skola24_children']).toEqual(JSON.stringify(skola24Cache))
+      expect(storage.cache['123_etjanst_children']).toEqual(
+        JSON.stringify(echildrenCache)
+      )
+      expect(storage.cache['123_skola24_children']).toEqual(
+        JSON.stringify(skola24Cache)
+      )
     })
   })
   it('retries if etjanst-api fails', async () => {
@@ -182,7 +211,9 @@ describe('useChildList()', () => {
       const error = new Error('fail')
       api.getChildren.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -202,13 +233,15 @@ describe('useChildList()', () => {
       await waitForNextUpdate()
 
       expect(result.current.status).toEqual('loaded')
-      expect(result.current.data).toEqual([{
-        id: 1,
-        name: 'Uwe Übrink (elev)',
-        personGuid: '1',
-        firstName: 'Uwe',
-        lastName: 'Vredstein Übrink',
-      }])
+      expect(result.current.data).toEqual([
+        {
+          id: 1,
+          name: 'Uwe Übrink (elev)',
+          personGuid: '1',
+          firstName: 'Uwe',
+          lastName: 'Vredstein Übrink',
+        },
+      ])
     })
   })
   it('gives up after 3 retries', async () => {
@@ -219,7 +252,9 @@ describe('useChildList()', () => {
       api.getChildren.mockRejectedValueOnce(error)
       api.getChildren.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -240,13 +275,15 @@ describe('useChildList()', () => {
 
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
-      expect(result.current.data).toEqual([{
-        id: 2,
-        name: 'Uwe Übrink (elev)',
-        personGuid: '1',
-        firstName: 'Uwe',
-        lastName: 'Vredstein Übrink',
-      }])
+      expect(result.current.data).toEqual([
+        {
+          id: 2,
+          name: 'Uwe Übrink (elev)',
+          personGuid: '1',
+          firstName: 'Uwe',
+          lastName: 'Vredstein Übrink',
+        },
+      ])
     })
   })
   it('reports if api fails', async () => {
@@ -255,7 +292,9 @@ describe('useChildList()', () => {
       const error = new Error('fail')
       api.getChildren.mockRejectedValueOnce(error)
 
-      const { result, waitForNextUpdate } = renderHook(() => useChildList(), { wrapper })
+      const { result, waitForNextUpdate } = renderHook(() => useChildList(), {
+        wrapper,
+      })
 
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -263,7 +302,10 @@ describe('useChildList()', () => {
 
       expect(result.current.error).toEqual(error)
 
-      expect(reporter.error).toHaveBeenCalledWith(error, 'Error getting ETJANST_CHILDREN from API')
+      expect(reporter.error).toHaveBeenCalledWith(
+        error,
+        'Error getting ETJANST_CHILDREN from API'
+      )
     })
   })
 })

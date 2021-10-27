@@ -1,34 +1,9 @@
 import { fireEvent } from '@testing-library/react-native'
 import React from 'react'
 import RNCalendarEvents from 'react-native-calendar-events'
+import Toast from 'react-native-simple-toast'
 import { render } from '../../utils/testHelpers'
 import { SaveToCalendar } from '../saveToCalendar.component'
-import Toast from 'react-native-simple-toast'
-
-jest.mock('react-native-simple-toast', () => ({
-  SHORT: 'short',
-  BOTTOM: 'bottom',
-  showWithGravity: jest.fn(),
-}))
-
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native')
-
-  RN.UIManager.measureInWindow = (_node, callback) => {
-    callback(0, 0, 42, 42)
-  }
-
-  RN.Linking = {
-    openURL: jest.fn(),
-  }
-
-  return RN
-})
-
-jest.mock('react-native-calendar-events', () => ({
-  saveEvent: jest.fn().mockResolvedValue('52'),
-  requestPermissions: jest.fn().mockResolvedValue('authorized'),
-}))
 
 const defaultEvent = {
   title: 'Utvecklingssamtal',
@@ -53,7 +28,9 @@ const setup = (customProps = {}) => {
 beforeAll(() => {
   // Hide errors from state illegal state transition
   // Probably due to mock
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => {
+    // noop
+  })
 })
 
 beforeEach(jest.clearAllMocks)

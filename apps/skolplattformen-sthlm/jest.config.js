@@ -1,15 +1,16 @@
 module.exports = {
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
+  displayName: 'skolplattformen-sthlm',
   preset: 'react-native',
-  setupFilesAfterEnv: [
-    '<rootDir>/setupTests.js',
-    '@testing-library/jest-native/extend-expect',
-  ],
-  testPathIgnorePatterns: ['__tests__/Classmates.test.js'],
+  resolver: '@nrwl/jest/plugins/resolver',
+  moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
+  setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
+  transform: {
+    '\\.(js|ts|tsx)$': require.resolve('react-native/jest/preprocessor.js'),
+    '^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp)$': require.resolve(
+      'react-native/jest/assetFileTransformer.js'
+    ),
+  },
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|react-navigation|@react-navigation/.*|@ui-kitten/.*)',
+    'node_modules/(?!(@react-native|react-native|react-native-markdown-display|react-native-webview|react-native-calendar-events|react-native-simple-toast|react-native-modal-datetime-picker|@react-native-community/datetimepicker)/)',
   ],
 }
