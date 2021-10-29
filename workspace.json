@@ -94,7 +94,7 @@
           "executor": "@nrwl/react-native:bundle",
           "outputs": ["apps/skolplattformen-sthlm/build"],
           "options": {
-            "entryFile": "apps/skolplattformen-sthlm/src/main.tsx",
+            "entryFile": "apps/skolplattformen-sthlm/index.js",
             "platform": "ios",
             "bundleOutput": "dist/apps/skolplattformen-sthlm/ios/main.jsbundle"
           }
@@ -114,7 +114,7 @@
         "bundle-android": {
           "executor": "@nrwl/react-native:bundle",
           "options": {
-            "entryFile": "apps/skolplattformen-sthlm/src/main.tsx",
+            "entryFile": "apps/skolplattformen-sthlm/index.js",
             "platform": "android",
             "bundleOutput": "dist/apps/skolplattformen-sthlm/android/main.jsbundle"
           }
