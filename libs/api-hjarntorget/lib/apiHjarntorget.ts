@@ -22,8 +22,29 @@ import { URLSearchParams } from '../../api/lib/URLSearchParams'
 import { Api } from '../../api/lib/api'
 import { toMarkdown } from '../../api/lib/parseHtml'
 import { checkStatus } from './loginStatus'
-import { extractMvghostRequestBody } from './parse/parsers'
-import { beginLoginUrl, beginBankIdUrl, currentUserUrl, extractInitBankIdParams as initBankIdUrl, fullImageUrl, hjarntorgetEventsUrl, hjarntorgetUrl, infoSetReadUrl, infoUrl, lessonsUrl, membersWithRoleUrl, mvghostUrl, myChildrenUrl, returnUrlFromUrlParam, returnUrlFromUrlParam as shibbolethLoginUrlBase, rolesInEventUrl, shibbolethLoginUrl, verifyUrlBase, wallMessagesUrl } from './routes'
+import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
+import {
+  beginLoginUrl,
+  beginBankIdUrl,
+  currentUserUrl,
+  initBankIdUrl,
+  fullImageUrl,
+  hjarntorgetEventsUrl,
+  hjarntorgetUrl,
+  infoSetReadUrl,
+  infoUrl,
+  lessonsUrl,
+  membersWithRoleUrl,
+  mvghostUrl,
+  myChildrenUrl,
+  shibbolethLoginUrlBase,
+  rolesInEventUrl,
+  shibbolethLoginUrl,
+  verifyUrlBase,
+  wallMessagesUrl,
+  calendarsUrl,
+  calendarEventUrl
+} from './routes'
 
 
 function getDateOfISOWeek(week: number, year: number,) {
@@ -144,8 +165,44 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
-    const schedule = await this.getSchedule(child, DateTime.now(), DateTime.now().plus({ months: 1 }))
-    return schedule
+    const childEventsAndMembers = await this.getChildEventsWithAssociatedMembers(child)
+
+    // This fetches the calendars search page on Hjärntorget. 
+    // It is used (at least at one school) for homework schedule
+    // The Id for the "event" that the calendar belongs to is not the same as the ones 
+    // fetched using the API... So we match them by name :/
+    const calendarsResponse = await this.fetch('calendars', calendarsUrl)
+    const calendarsResponseText = await calendarsResponse.text()
+    const calendarsDoc = html.parse(decode(calendarsResponseText))
+    const calendarCheckboxes = Array.from(calendarsDoc.querySelectorAll('.calendarPageContainer input.checkbox'))
+
+    let calendarItems: CalendarItem[] = []
+    for (let i = 0; i < calendarCheckboxes.length; i++) {
+      const calendarId = calendarCheckboxes[i].getAttribute('value') || ""
+
+      const today = DateTime.fromJSDate(new Date())
+      const start = today.toISODate()
+      const end = today.plus({ days: 30 }).toISODate()
+      const calendarResponse = await this.fetch('calendar', calendarEventUrl(calendarId, start, end))
+      const calendarResponseText = await calendarResponse.text()
+      const calendarDoc = html.parse(decode(calendarResponseText))
+
+      const calendarRows = Array.from(calendarDoc.querySelectorAll('.default-table tr'))
+      if (!calendarRows.length) {
+        continue
+      }
+
+      calendarRows.shift()
+      const eventName = calendarRows.shift()?.textContent
+      if (childEventsAndMembers.some(e => e.name === eventName)) {
+
+        const items: CalendarItem[] = calendarRows.map(parseCalendarItem)
+
+        calendarItems = calendarItems.concat(items)
+      }
+    }
+
+    return calendarItems;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -204,8 +261,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return Promise.resolve([])
   }
 
-  async getNotifications(child: EtjanstChild): Promise<Notification[]> {
-
+  async getChildEventsWithAssociatedMembers(child: EtjanstChild) {
     const hjarntorgetEventsResponse = await this.fetch('events', hjarntorgetEventsUrl)
     const hjarntorgetEventsResponseJson: any[] = await hjarntorgetEventsResponse.json()
     const membersInEvents = await Promise.all(hjarntorgetEventsResponseJson.filter(e => e.state === 'ONGOING')
@@ -221,12 +277,16 @@ export class ApiHjarntorget extends EventEmitter implements Api {
           const membersWithRoleResponseJson: any[] = await membersWithRoleResponse.json()
           return membersWithRoleResponseJson
         }))
-        return { eventId, eventMembers: ([] as any[]).concat(...eventMembers) }
+        return { eventId, name: e.name as string, eventMembers: ([] as any[]).concat(...eventMembers) }
       }))
-    const membersInChildsEvents = membersInEvents
+    return membersInEvents
       .filter(e => e.eventMembers.find(p => p.id === child.id))
-      .reduce((acc, e) => acc.concat(e.eventMembers), ([] as any[]))
+  }
 
+  async getNotifications(child: EtjanstChild): Promise<Notification[]> {
+
+    const childEventsAndMembers = await this.getChildEventsWithAssociatedMembers(child)
+    const membersInChildsEvents = childEventsAndMembers.reduce((acc, e) => acc.concat(e.eventMembers), ([] as any[]))
 
     const wallMessagesResponse = await this.fetch('wall-events', wallMessagesUrl)
     const wallMessagesResponseJson: any[] = await wallMessagesResponse.json()
@@ -306,9 +366,9 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const shibbolethLoginParam = {
       entityID: 'https://auth.goteborg.se/FIM/sps/HjarntorgetEID/saml20'
     }
-    const shibbolethLoginUrlBase = returnUrlFromUrlParam((beginLoginRedirectResponse as any).url)
+
     console.log("prepping??? shibboleth")
-    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase, shibbolethLoginParam), {
+    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url), shibbolethLoginParam), {
       redirect: 'follow'
     })
 

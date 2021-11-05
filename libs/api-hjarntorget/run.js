@@ -89,21 +89,24 @@ function requestLogger(httpModule) {
         const children = await api.getChildren()
         console.table(children)
 
-        const news = await api.getNews()
-        //console.table(news.map(n => ({ id: n.id, author: n.author, published: n.published})))
-        //news.length && console.log(news[0])
+        const seb = children.filter(c => c.name.startsWith('Seb'))[0];
+        const resp = await api.getCalendar(seb)
+        console.table(resp);
+        // const news = await api.getNews()
+        // //console.table(news.map(n => ({ id: n.id, author: n.author, published: n.published})))
+        // //news.length && console.log(news[0])
 
-        const notifications = await api.getNotifications(children[2])
-        //const ns = notifications.map(n => ({id: n.id, sender: n.sender, type: n.type}))
-        //console.table(ns)
-        console.log("notifications count", notifications.length)
-        notifications.slice(0, 10).forEach(console.log)
+        // const notifications = await api.getNotifications(children[2])
+        // //const ns = notifications.map(n => ({id: n.id, sender: n.sender, type: n.type}))
+        // //console.table(ns)
+        // console.log("notifications count", notifications.length)
+        // notifications.slice(0, 10).forEach(console.log)
 
-        await api.getCalendar(children[1])
+        // await api.getCalendar(children[1])
 
-        await api.getTimetable(children[1], 38, 2021, "en")
+        // await api.getTimetable(children[1], 38, 2021, "en")
 
-        await api.getClassmates()
+        // await api.getClassmates()
         // console.table(schema)
 
       });
