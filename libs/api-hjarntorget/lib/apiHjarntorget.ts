@@ -207,6 +207,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getClassmates(_child: EtjanstChild): Promise<Classmate[]> {
+    // TODO: We could get this from the events a child is associated with...
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
