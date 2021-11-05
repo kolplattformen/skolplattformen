@@ -1,5 +1,6 @@
 import * as html from 'node-html-parser'
 import { decode } from 'he'
+import { CalendarItem } from '..'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
 
@@ -53,4 +54,15 @@ export function extractAuthGbgLoginRequestBody(signatureResponseText: string) {
     'RelayState': RelayStateText || '',
   }).toString()
   return authGbgLoginBody
+}
+
+export const parseCalendarItem = (x: html.HTMLElement): { id: number; title: string; startDate: string; endDate: string } => {
+  const info = Array.from(x.querySelectorAll('a'))
+  // TODO: the identifier is realy on this format: '\d+:\d+' currently we only take the first part so Id will clash between items
+  const id = info[0].getAttribute("onClick")?.replace(new RegExp("return viewEvent\\('(\\d+).+"), "$1") || NaN
+  const day = info[1].textContent
+  const timeSpan = info[2].textContent
+  const [startTime, endTime] = timeSpan.replace(".", ":").split("-")
+
+  return { id: +id, title: info[0].textContent, startDate: `${day} ${startTime}`, endDate: `${day} ${endTime}` }
 }
