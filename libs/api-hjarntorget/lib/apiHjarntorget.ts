@@ -89,7 +89,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       startDateIso: from.toISODate(),
       endDateIso: to.toISODate(),
     }
-    const lessonsResponse = await this.fetch('info', lessonsUrl(lessonParams))
+    const lessonsResponse = await this.fetch('lessons', lessonsUrl(lessonParams))
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
     return lessonsResponseJson.map(l => {
@@ -136,7 +136,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   async getUser(): Promise<User> {
 
-    const currentUserResponse = await this.fetch('myChildren', currentUserUrl)
+    const currentUserResponse = await this.fetch('currentUser', currentUserUrl)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
     }
@@ -245,7 +245,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
 
-    this.fetch('info', infoSetReadUrl(item), {
+    this.fetch('infoSetReadUrl', infoSetReadUrl(item), {
       method: 'POST',
     })
 
@@ -325,7 +325,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       startDateIso: startDate.toISODate(),
       endDateIso: endDate.toISODate(),
     }
-    const lessonsResponse = await this.fetch('info', lessonsUrl(lessonParams))
+    const lessonsResponse = await this.fetch('lessons', lessonsUrl(lessonParams))
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
     return lessonsResponseJson.map(l => {
