@@ -86,11 +86,17 @@ function requestLogger(httpModule) {
 
       api.on('login', async () => {
         console.log("Loged in!")
+        await api.getUser()
         const children = await api.getChildren()
-        console.table(children)
-
         const seb = children.filter(c => c.name.startsWith('Seb'))[0];
         const resp = await api.getCalendar(seb)
+        const news = await api.getNews()
+        await api.getNewsDetails(seb, news[0])
+        await api.getNotifications(seb)
+        const now = DateTime.fromJSDate(new Date)
+        await api.getSchedule(seb, now, now.plus({days: 7}))
+        await api.getTimetable(seb, 44, 2021, 'ignored')
+
         console.table(resp);
         // const news = await api.getNews()
         // //console.table(news.map(n => ({ id: n.id, author: n.author, published: n.published})))
