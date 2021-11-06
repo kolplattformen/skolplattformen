@@ -14,7 +14,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test"]
       }
     }
   },
@@ -37,7 +37,8 @@
       "tags": []
     },
     "skolplattformen-sthlm": {
-      "tags": []
+      "tags": [],
+       "implicitDependencies": ["api-skolplattformen", "hooks", "curriculum"]
     }
   }
 }

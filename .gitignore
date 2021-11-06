@@ -101,7 +101,7 @@ apps/skolplattformen-sthlm-e2e/artifacts
 node_modules/
 ## Nested node_modules
 
-node_modules/
+node_modules
 
 .vscode
 output.json
