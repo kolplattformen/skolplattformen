@@ -24,6 +24,7 @@ import {
   SSOSystem,
   TimetableEntry,
   User,
+  Response,
 } from './types'
 import { URLSearchParams } from './URLSearchParams'
 
@@ -275,20 +276,35 @@ export class Api extends EventEmitter {
     const url = routes.news(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('news', url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     return parse.news(data)
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  private CheckResponseForCorrectChildStatus(response: Response, child: EtjanstChild) {
+       const setCookieResp = response.headers.get("Set-Cookie")
+
+    if (child.status !== 'FS' && setCookieResp && setCookieResp.includes("Status=FS")) {
+      throw new Error('Wrong child in response')
+    }
   }
 
   public async getNewsDetails(
     child: EtjanstChild,
     item: NewsItem
-  ): Promise<any> {
+  ): Promise<NewsItem | undefined > {
     if (this.isFake) {
       return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
     }
     const url = routes.newsDetails(child.id, item.id)
     const session = this.getRequestInit()
     const response = await this.fetch(`news_${item.id}`, url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     return parse.newsItemDetails(data)
   }
@@ -301,6 +317,9 @@ export class Api extends EventEmitter {
       const url = routes.menuRss(child.id)
       const session = this.getRequestInit()
       const response = await this.fetch('menu-rss', url, session)
+
+      this.CheckResponseForCorrectChildStatus(response, child)
+
       const data = await response.json()
       return parse.menu(data)
     }
@@ -308,6 +327,9 @@ export class Api extends EventEmitter {
     const url = routes.menuList(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('menu-list', url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     return parse.menuList(data)
   }
@@ -316,6 +338,9 @@ export class Api extends EventEmitter {
     const url = routes.menuChoice(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('menu-choice', url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     const etjanstResponse = parse.etjanst(data)
     return etjanstResponse
