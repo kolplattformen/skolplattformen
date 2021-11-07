@@ -136,7 +136,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   async getUser(): Promise<User> {
 
-    const currentUserResponse = await this.fetch('currentUser', currentUserUrl)
+    const currentUserResponse = await this.fetch('current-user', currentUserUrl)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
     }
@@ -151,7 +151,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     }
 
 
-    const myChildrenResponse = await this.fetch('myChildren', myChildrenUrl)
+    const myChildrenResponse = await this.fetch('my-children', myChildrenUrl)
     const myChildrenResponseJson: any[] = await myChildrenResponse.json()
 
     return myChildrenResponseJson.map(c => ({
@@ -183,7 +183,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       const today = DateTime.fromJSDate(new Date())
       const start = today.toISODate()
       const end = today.plus({ days: 30 }).toISODate()
-      const calendarResponse = await this.fetch('calendar', calendarEventUrl(calendarId, start, end))
+      const calendarResponse = await this.fetch(`calendar-${calendarId}`, calendarEventUrl(calendarId, start, end))
       const calendarResponseText = await calendarResponse.text()
       const calendarDoc = html.parse(decode(calendarResponseText))
 
@@ -269,12 +269,12 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       .map(async e => {
         const eventId = e.id as number
 
-        const rolesInEvenResponse = await this.fetch('roles-in-event', rolesInEventUrl(eventId))
+        const rolesInEvenResponse = await this.fetch(`roles-in-event-${eventId}`, rolesInEventUrl(eventId))
         const rolesInEvenResponseJson: any[] = await rolesInEvenResponse.json()
 
         const eventMembers = await Promise.all(rolesInEvenResponseJson.map(async r => {
           const roleId = r.id
-          const membersWithRoleResponse = await this.fetch('event-role-members', membersWithRoleUrl(eventId, roleId))
+          const membersWithRoleResponse = await this.fetch(`event-role-members-${eventId}`, membersWithRoleUrl(eventId, roleId))
           const membersWithRoleResponseJson: any[] = await membersWithRoleResponse.json()
           return membersWithRoleResponseJson
         }))
