@@ -75,7 +75,8 @@
     "regenerator-runtime": "*",
     "tough-cookie": "*",
     "valtio": "*",
-    "yup": "*"
+    "yup": "*",
+    "@react-navigation/native-stack": "*"
   },
   "devDependencies": {},
   "private": true

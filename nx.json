@@ -26,19 +26,15 @@
       }
     ]
   },
-  "projects": {
-    "api-skolplattformen": {
-      "tags": []
-    },
-    "curriculum": {
-      "tags": []
-    },
-    "hooks": {
-      "tags": []
-    },
-    "skolplattformen-sthlm": {
-      "tags": [],
-       "implicitDependencies": ["api-skolplattformen", "hooks", "curriculum"]
+  "cli": {
+    "defaultCollection": "@nrwl/react-native"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
     }
-  }
+  },
+  "defaultProject": "skolplattformen-sthlm"
 }

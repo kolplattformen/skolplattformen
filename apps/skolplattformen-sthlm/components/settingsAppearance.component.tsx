@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { ScrollView, StyleSheet, Switch } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { Layout as LayoutStyle, Sizing } from '../styles'
 import { translate } from '../utils/translation'

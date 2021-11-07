@@ -23,7 +23,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "curriculum": {
       "root": "libs/curriculum",
@@ -45,7 +46,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "hooks": {
       "root": "libs/hooks",
@@ -67,7 +69,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "skolplattformen-sthlm": {
       "root": "apps/skolplattformen-sthlm",
@@ -144,18 +147,9 @@
             "passWithNoTests": true
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/react-native"
-  },
-  "defaultProject": "skolplattformen-sthlm",
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "babel": true
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["api-skolplattformen", "hooks", "curriculum"]
     }
   }
 }
