@@ -54,7 +54,7 @@ For more information, check out the [source code](apps/skolplattformen-sthlm).
 
 #### website
 
-The code for the website at www.skolplattformen.org. It's built using Next.js.
+The code for the website at https://skolplattformen.org/. It's built using Next.js.
 
 For more information, check out the [source code](apps/website).
 ### Libs 
