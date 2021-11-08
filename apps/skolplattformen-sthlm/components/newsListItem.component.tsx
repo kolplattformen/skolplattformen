@@ -4,7 +4,13 @@ import { NewsItem } from '@skolplattformen/api-skolplattformen'
 import { StyleService, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React, { ReactNode } from 'react'
-import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Dimensions,
+  ImageStyle,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { Layout, Sizing, Typography } from '../styles'
 import { useChild } from './childContext.component'
 import { Image } from './image.component'
@@ -39,8 +45,8 @@ export const NewsListItem = ({ item, children }: NewsListItemProps) => {
           <Image
             accessibilityIgnoresInvertColors={false}
             src={item.fullImageUrl}
-            // @ts-expect-error Don't know why this linter breaks
-            style={styles.image}
+            resizeMode="cover"
+            style={styles.image as ImageStyle}
           />
         ) : null}
         <View style={styles.text}>
