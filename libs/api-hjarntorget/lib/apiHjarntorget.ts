@@ -45,6 +45,7 @@ import {
   calendarsUrl,
   calendarEventUrl
 } from './routes'
+import { fakeFetcher } from './fake/fakeFetcher'
 
 
 function getDateOfISOWeek(week: number, year: number,) {
@@ -61,6 +62,7 @@ function getDateOfISOWeek(week: number, year: number,) {
 
 export class ApiHjarntorget extends EventEmitter implements Api {
   private fetch: Fetcher
+  private realFetcher: Fetcher 
 
   private personalNumber?: string
 
@@ -68,13 +70,28 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   public isLoggedIn: boolean = false
 
+  private _isFake: boolean = false;
+
+  public set isFake(fake: boolean) {
+    this._isFake = fake
+    if(this._isFake) {
+      this.fetch = fakeFetcher
+    } else {
+      this.fetch = this.realFetcher
+    }
+  }
+
+  public get isFake() {
+    return this._isFake
+  }
+
   constructor(
     fetch: Fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {
     super()
-    this.fetch = wrap(fetch, options)
+    this.realFetcher = this.fetch = wrap(fetch, options)
     this.cookieManager = cookieManager
   }
 
@@ -89,7 +106,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       startDateIso: from.toISODate(),
       endDateIso: to.toISODate(),
     }
-    const lessonsResponse = await this.fetch('lessons', lessonsUrl(lessonParams))
+    const lessonsResponse = await this.fetch(`lessons-${lessonParams.forUser}`, lessonsUrl(lessonParams))
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
     return lessonsResponseJson.map(l => {
@@ -220,7 +237,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
 
-
     const infoResponse = await this.fetch('info', infoUrl)
     const infoResponseJson: any[] = await infoResponse.json()
     // TODO: Filter out read messages?
@@ -246,7 +262,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
 
-    this.fetch('infoSetReadUrl', infoSetReadUrl(item), {
+    await this.fetch('infoSetReadUrl', infoSetReadUrl(item), {
       method: 'POST',
     })
 
@@ -274,7 +290,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
         const eventMembers = await Promise.all(rolesInEvenResponseJson.map(async r => {
           const roleId = r.id
-          const membersWithRoleResponse = await this.fetch(`event-role-members-${eventId}`, membersWithRoleUrl(eventId, roleId))
+          const membersWithRoleResponse = await this.fetch(`event-role-members-${eventId}-${roleId}`, membersWithRoleUrl(eventId, roleId))
           const membersWithRoleResponseJson: any[] = await membersWithRoleResponse.json()
           return membersWithRoleResponseJson
         }))
@@ -326,7 +342,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       startDateIso: startDate.toISODate(),
       endDateIso: endDate.toISODate(),
     }
-    const lessonsResponse = await this.fetch('lessons', lessonsUrl(lessonParams))
+    const lessonsResponse = await this.fetch(`lessons-${lessonParams.forUser}`, lessonsUrl(lessonParams))
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
     return lessonsResponseJson.map(l => {
@@ -359,6 +375,11 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
+    // short circut the bank-id login if in fake mode
+    if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
+
+    this.isFake = false
+
     console.log("initiating login to hjarntorget")
     const beginLoginRedirectResponse = await this.fetch('begin-login', beginLoginUrl, {
       redirect: 'follow'
@@ -423,5 +444,18 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     })
 
     return statusChecker
+  }
+
+  private async fakeMode(): Promise<LoginStatusChecker> {
+    this.isFake = true
+
+    setTimeout(() => {
+      this.isLoggedIn = true
+      this.emit('login')
+    }, 50)
+
+    const emitter: any = new EventEmitter()
+    emitter.token = 'fake'
+    return emitter
   }
 }

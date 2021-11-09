@@ -15,6 +15,7 @@ import {
 } from './types'
 
 export interface Api {
+  isFake:boolean
   getPersonalNumber(): string | undefined
   login(personalNumber?: string): Promise<LoginStatusChecker>
   setSessionCookie(sessionCookie: string): Promise<void>
