@@ -35,26 +35,39 @@ export const Image = ({
   const { width: windowWidth } = useWindowDimensions()
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
+  const debugImageName = getDebugImageName(src)
+
   const prefetchImageInformation = useCallback(
     async (url: string) => {
+      if (!url) return
       const { headers: newHeaders } = await api.getSession(url)
 
-      console.log('[IMAGE] Getting image dimensions with headers', newHeaders)
+      console.log('[IMAGE] Getting image dimensions with headers', {
+        debugImageName,
+        newHeaders,
+      })
 
       ImageBase.getSizeWithHeaders(
         url,
         newHeaders,
         (w, h) => {
-          console.log('[IMAGE] Received image dimensions', { w, h })
+          console.log('[IMAGE] Received image dimensions', {
+            debugImageName,
+            w,
+            h,
+          })
           setDimensions({ width: w, height: h })
           setHeaders(newHeaders)
         },
         (error) => {
-          console.error('[Image] Failed to get image dimensions', error)
+          console.error('[Image] Failed to get image dimensions', {
+            debugImageName,
+            error,
+          })
         }
       )
     },
-    [api]
+    [api, debugImageName]
   )
 
   useEffect(() => {
@@ -82,4 +95,14 @@ export const Image = ({
   ) : (
     <View style={style} />
   )
+}
+
+const getDebugImageName = (src: string) => {
+  try {
+    const split = src.split('/')
+    return split[split.length - 1]
+  } catch (e: any) {
+    console.log('FAILED', e.message)
+    return null
+  }
 }
