@@ -1,5 +1,5 @@
 {
-  "name": "@skolplattformen/embedded-api",
+  "name": "@skolplattformen/api-hjarntorget",
   "version": "0.15.0",
   "description": "Since the proxy was blocked (and also deemed a bad idea by some), this is a reboot of the API running in process in the app(s).",
   "main": "dist/index.js",
