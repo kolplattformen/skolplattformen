@@ -23,7 +23,7 @@ const rules: RenderRules = {
         src={url}
         // TODO: Sizing.t5 should not be hardcoded here...
         //       Maybe measure the width from inside the component instead?
-        componentWidth={Dimensions.get('window').width - Sizing.t5}
+        componentWidth={Dimensions.get('window').width - Sizing.t5 * 2}
         style={styles.markdownImage}
       />
     )
@@ -56,5 +56,5 @@ export const Markdown = ({ style, children }: MarkdownProps) => {
 }
 
 const styles = StyleSheet.create({
-  markdownImage: { width: '100%' },
+  markdownImage: { width: '100%', borderRadius: 15 },
 })
