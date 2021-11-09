@@ -122,6 +122,16 @@
       "sourceRoot": "apps/skolplattformen-sthlm/src",
       "projectType": "application",
       "targets": {
+
+        "build": {
+          "executor": "@nrwl/react-native:bundle",
+          "outputs": ["apps/skolplattformen-sthlm/build"],
+          "options": {
+            "entryFile": "apps/skolplattformen-sthlm/index.js",
+            "platform": "ios",
+            "bundleOutput": "dist/apps/skolplattformen-sthlm/ios/main.jsbundle"
+          }
+        },
         "start": {
           "executor": "@nrwl/react-native:start",
           "options": {

@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events'
-import { Fetcher } from './fetcher'
 import { loginStatus } from './routes'
-import { AuthTicket } from './types'
+import { Fetcher } from '../../api/lib/fetcher'
+import { AuthTicket } from '../..//api/lib/types'
 
 /*
 export enum LoginEvent {

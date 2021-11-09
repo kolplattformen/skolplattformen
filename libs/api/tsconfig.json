@@ -9,9 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true
   },
-  "include": [
-    "lib"
-  ],
+  "include": ["lib", "../../__mocks__"  ],
   "exclude": [
     "node_modules",
     "**/__tests__/*",
