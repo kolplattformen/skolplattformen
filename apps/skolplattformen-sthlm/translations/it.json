@@ -22,7 +22,9 @@
         "loading": "Caricamento in corso…",
         "confirm": "Conferma",
         "changeLanguage": "Cambia lingua",
-        "cancel": "Interrompere"
+        "cancel": "Interrompere",
+        "logoutAndClearPersonalData": "Esci ed elimina i dati personali",
+        "logoutAndClearAllDataInclSettings": "Esci ed elimina tutti i dati, comprese le impostazioni"
     },
     "schedule": {
         "end": "Finische",
@@ -34,7 +36,8 @@
         "notifications": "Notifiche",
         "news": "Novità",
         "menu": "Menù pranzo",
-        "calender": "Calendario"
+        "calender": "Calendario",
+        "classmates": "Compagni di classe"
     },
     "language": {
         "changeLanguageButton": "Salva",
@@ -113,6 +116,29 @@
         "emptyText": "Non ho trovato nulla per questa settimana"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Mostra le informazioni di contatto"
+        "a11y_show_contact_info_button_hint": "Mostra le informazioni di contatto",
+        "call": "Chiama",
+        "sms": "SMS",
+        "email": "E-mail",
+        "home": "Indirizzo",
+        "a11y_show_contact_info_button_label": "Mostra le informazioni di contatto"
+    },
+    "settings": {
+        "settings": "Impostazioni",
+        "theme": "Tema",
+        "themeAuto": "Automatico",
+        "licenses": "Licenze",
+        "language": "Lingua",
+        "appearance": "Aspetto",
+        "useSystemTheme": "Usa il tema chiaro/scuro del sistema"
+    },
+    "themes": {
+        "light": "Chiaro",
+        "dark": "Scuro"
+    },
+    "classmates": {
+        "class": "Classe",
+        "child": "Bambino",
+        "contactsForGuardiansFor": "Informazioni di contatto per i tutori per"
     }
 }
