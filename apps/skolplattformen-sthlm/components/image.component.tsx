@@ -6,6 +6,7 @@ import {
   ImageStyle,
   StyleProp,
   useWindowDimensions,
+  View,
 } from 'react-native'
 
 interface ImageProps {
@@ -38,14 +39,19 @@ export const Image = ({
     async (url: string) => {
       const { headers: newHeaders } = await api.getSession(url)
 
+      console.log('[IMAGE] Getting image dimensions with headers', newHeaders)
+
       ImageBase.getSizeWithHeaders(
         url,
         newHeaders,
         (w, h) => {
+          console.log('[IMAGE] Received image dimensions', { w, h })
           setDimensions({ width: w, height: h })
           setHeaders(newHeaders)
         },
-        (error) => console.error(error)
+        (error) => {
+          console.error('[Image] Failed to get image dimensions', error)
+        }
       )
     },
     [api]
@@ -73,5 +79,7 @@ export const Image = ({
       resizeMode={resizeMode}
       style={style}
     />
-  ) : null
+  ) : (
+    <View style={style} />
+  )
 }
