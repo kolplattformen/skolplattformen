@@ -20,6 +20,10 @@ const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./agentFetchWrapper')
 const init = require('./dist/api-skolplattformen/lib').default
+<<<<<<< HEAD
+=======
+
+>>>>>>> 79502a4f09450068527dadf7fd83e2a0386610d9
 
 const [, , personalNumber] = process.argv
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'

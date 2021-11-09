@@ -2,7 +2,6 @@ import { EventEmitter } from 'events'
 import { decode } from 'he'
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
-import { Language } from '@skolplattformen/curriculum'
 import { LoginStatusChecker } from '../../api/lib/loginStatus'
 import {
   AuthTicket,
@@ -28,6 +27,7 @@ import wrap, { Fetcher, FetcherOptions } from '../../api/lib/fetcher'
 import * as fake from './fakeData'
 import { checkStatus } from './loginStatusChecker'
 import { Api } from '../../api/lib/api'
+import { Language } from '@skolplattformen/curriculum'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
   new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))
