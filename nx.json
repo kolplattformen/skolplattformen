@@ -30,6 +30,12 @@
     "api-skolplattformen": {
       "tags": []
     },
+    "api-hjarntorget": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
     "curriculum": {
       "tags": []
     },
