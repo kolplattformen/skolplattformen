@@ -1,14 +1,13 @@
 {
-  "name": "@skolplattformen/embedded-api",
+  "name": "@skolplattformen/api",
   "version": "0.15.0",
-  "description": "Since the proxy was blocked (and also deemed a bad idea by some), this is a reboot of the API running in process in the app(s).",
+  "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],
-  "repository": "git@github.com:kolplattformen/embedded-api.git",
-  "author": "Johan Öbrink <johan.obrink@gmail.com>",
+  "repository": "git@github.com:kolplattformen/skolplatformen.git",
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
