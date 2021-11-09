@@ -1,4 +1,4 @@
-import { Language } from '@skolplattformen/curriculum/dist/translations'
+import { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
 import { LoginStatusChecker } from './loginStatus'
 import {
