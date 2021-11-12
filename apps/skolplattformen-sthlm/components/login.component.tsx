@@ -24,7 +24,7 @@ import {
 import { schema } from '../app.json'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { useTranslation } from '../hooks/useTranslation'
-import { Layout } from '../styles'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import {
   CheckIcon,
   CloseOutlineIcon,
@@ -47,12 +47,17 @@ export const Login = () => {
   >(() => () => null)
   const [visible, showModal] = useState(false)
   const [showLoginMethod, setShowLoginMethod] = useState(false)
+  const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
+
+  const [schoolPlatform, setSchoolPlatform] =
+    useSettingsStorage('currentSchoolPlatform')
+
   const { t } = useTranslation()
 
   const valid = Personnummer.valid(personalIdNumber)
@@ -61,6 +66,17 @@ export const Login = () => {
     t('auth.bankid.OpenOnThisDevice'),
     t('auth.bankid.OpenOnAnotherDevice'),
     t('auth.loginAsTestUser'),
+  ]
+
+  const schoolPlatforms = [
+    {
+      id: 'stockholm-skolplattformen',
+      displayName: 'Stockholm stad'
+    },
+    {
+      id: 'goteborg-hjarnkontoret',
+      displayName: 'Göteborg stad'
+    }
   ]
 
   const loginHandler = async () => {
@@ -77,6 +93,10 @@ export const Login = () => {
   /* Helpers */
   const handleInput = (text: string) => {
     setPersonalIdNumber(text)
+  }
+
+  const getSchoolPlatformName = () => {
+    return schoolPlatforms.find(item => item.id === schoolPlatform)?.displayName;
   }
 
   const openBankId = (token: string) => {
@@ -185,6 +205,18 @@ export const Login = () => {
             })}
           />
         </ButtonGroup>
+        <View style={styles.platformPicker}>
+          <Button
+          appearance='ghost'
+          status='basic'
+          size="small"
+          accessoryRight={SelectIcon}
+          onPress={() => {
+            setShowSchoolPlatformPicker(true)
+          }}>
+            {getSchoolPlatformName()}
+          </Button>
+        </View>
       </View>
       <Modal
         visible={showLoginMethod}
@@ -245,6 +277,31 @@ export const Login = () => {
           </Button>
         </Card>
       </Modal>
+      <Modal
+        visible={showSchoolPlatformPicker}
+        style={styles.modal}
+        onBackdropPress={() => setShowSchoolPlatformPicker(false)}
+        backdropStyle={styles.backdrop}>
+          <Card>
+          <List
+            data={schoolPlatforms}
+            ItemSeparatorComponent={Divider}
+            renderItem={({ item }) => (
+              <ListItem
+                title={item.displayName}
+                accessible={true}
+                accessoryRight={
+                  schoolPlatform === item.id ? CheckIcon : undefined
+                }
+                onPress={() => {
+                  setSchoolPlatform(item.id)
+                  setShowSchoolPlatformPicker(false)
+                }}
+              />
+            )}
+          />
+          </Card>
+      </Modal>
     </>
   )
 }
@@ -254,13 +311,14 @@ const themedStyles = StyleService.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   loginForm: {
-    ...Layout.mainAxis.flexStart,
+    ...LayoutStyle.mainAxis.flexStart,
+    width: '100%',
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
     minHeight: 45,
   },
-  loginButton: { ...Layout.flex.full },
+  loginButton: { ...LayoutStyle.flex.full },
   loginMethodButton: { width: 45 },
   modal: {
     width: '90%',
@@ -271,4 +329,7 @@ const themedStyles = StyleService.create({
     width: 20,
     height: 20,
   },
+  platformPicker: {
+    width: '100%',
+  }
 })
