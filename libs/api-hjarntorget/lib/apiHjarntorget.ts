@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DateTime, FixedOffsetZone } from 'luxon'
 import { EventEmitter } from 'events'
 import * as html from 'node-html-parser'
 import { decode } from 'he'
-import wrap, { Fetcher, FetcherOptions } from '../../api/lib/fetcher'
-import {
-  CalendarItem,
+import { toMarkdown, Api, URLSearchParams, LoginStatusChecker,  CalendarItem,
   Classmate,
   CookieManager,
   EtjanstChild,
@@ -15,12 +14,11 @@ import {
   ScheduleItem,
   Skola24Child,
   TimetableEntry,
-  User
-} from "../../api/lib/types"
-import { LoginStatusChecker } from '../../api/lib/loginStatus'
-import { URLSearchParams } from '../../api/lib/URLSearchParams'
-import { Api } from '../../api/lib/api'
-import { toMarkdown } from '../../api/lib/parseHtml'
+  User,
+  Fetcher, 
+  FetcherOptions, 
+  wrap
+} from '@skolplattformen/api'
 import { checkStatus } from './loginStatus'
 import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
 import {
@@ -91,7 +89,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     options?: FetcherOptions
   ) {
     super()
-    this.realFetcher = this.fetch = wrap(fetch, options)
+    this.fetch = wrap(fetch, options);
+    this.realFetcher = this.fetch;
     this.cookieManager = cookieManager
   }
 

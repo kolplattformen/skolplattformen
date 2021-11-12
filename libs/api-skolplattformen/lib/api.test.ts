@@ -1,6 +1,6 @@
 import init from './'
 import { ApiSkolplattformen } from './api'
-import { Fetch, Headers, Response } from '../../api/lib/types'
+import { Fetch, Headers, Response } from '@skolplattformen/api'
 import CookieManager from '@react-native-cookies/cookies'
 
 describe('api', () => {
@@ -110,6 +110,7 @@ describe('api', () => {
       const personalNumber = 'my personal number'
       try {
         await api.login(personalNumber)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         expect(error.message).toEqual(expect.stringContaining('Server Error'))
       }

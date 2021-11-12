@@ -14,6 +14,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@skolplattformen/api": [
+        "libs/api/lib/index.ts"
+      ],
       "@skolplattformen/api-skolplattformen": [
         "libs/api-skolplattformen/lib/index.ts"
       ],

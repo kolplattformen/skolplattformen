@@ -2,7 +2,7 @@ import { EventEmitter } from 'events'
 import { decode } from 'he'
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
-import { LoginStatusChecker } from '../../api/lib/loginStatus'
+import { LoginStatusChecker, FetcherOptions, Fetcher, wrap } from '@skolplattformen/api'
 import {
   AuthTicket,
   CalendarItem,
@@ -20,13 +20,12 @@ import {
   TimetableEntry,
   User,
   Response
-} from '../../api/lib/types'
+} from '@skolplattformen/api'
 import * as routes from './routes'
 import * as parse from './parse/index'
-import wrap, { Fetcher, FetcherOptions } from '../../api/lib/fetcher'
 import * as fake from './fakeData'
 import { checkStatus } from './loginStatusChecker'
-import { Api } from '../../api/lib/api'
+import { Api } from '@skolplattformen/api'
 import { Language } from '@skolplattformen/curriculum'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
@@ -55,6 +54,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
   private personalNumber?: string
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private headers: any
 
   private cookieManager: CookieManager
@@ -199,6 +199,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       this.emit('login')
     }, 50)
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const emitter: any = new EventEmitter()
     emitter.token = 'fake'
     return emitter

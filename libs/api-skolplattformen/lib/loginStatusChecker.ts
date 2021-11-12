@@ -1,8 +1,6 @@
 import { EventEmitter } from 'events';
 import { loginStatus } from './routes';
-import { AuthTicket } from '../../api/lib/types';
-import { Fetcher } from '../../api/lib/fetcher';
-import { LoginStatusChecker } from '.';
+import { AuthTicket, Fetcher, LoginStatusChecker } from '@skolplattformen/api';
 
 export class Checker extends EventEmitter {
   public token: string;
@@ -11,7 +9,7 @@ export class Checker extends EventEmitter {
 
   private url: string;
 
-  private cancelled: boolean = false;
+  private cancelled = false;
 
   constructor(fetcher: Fetcher, ticket: AuthTicket) {
     super();

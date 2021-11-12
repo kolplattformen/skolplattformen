@@ -1,9 +1,6 @@
-import init from './'
 import { ApiHjarntorget } from './apiHjarntorget'
-import { Fetcher } from '../../api/lib/fetcher'
 import { checkStatus } from './loginStatus'
-
-import { wrapToughCookie } from '../../api/lib/cookies'
+import { wrapToughCookie } from '@skolplattformen/api'
 import { CookieJar } from 'tough-cookie'
 
 const setupSuccessfullLoginInitiation = (fetcherMock: jest.Mock) => {
@@ -83,7 +80,7 @@ describe('api', () => {
         fetcherMock = fetcher as jest.Mock
         
         const cookieManager = wrapToughCookie(new CookieJar())
-        cookieManager.clearAll
+        cookieManager.clearAll();
         api = new ApiHjarntorget(jest.fn(), cookieManager)
         api.replaceFetcher(fetcher)
     })
@@ -210,6 +207,7 @@ describe('api', () => {
             expect(api.isLoggedIn).toBe(false)
         })
         it('forgets personalNumber', async () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (api as any).personalNumber = 'my personal number'
             api.isLoggedIn = true
 

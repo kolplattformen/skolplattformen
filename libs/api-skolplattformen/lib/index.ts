@@ -1,16 +1,8 @@
 import { ApiSkolplattformen } from './api'
-import { Api } from '../../api/lib/api'
-import { FetcherOptions } from '../../api/lib/fetcher'
-import { Fetch } from '../../api/lib/types'
-import {
-  RNCookieManager,
+import { Api, FetcherOptions, Fetch, RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
-  wrapToughCookie,
-} from '../../api/lib/cookies'
-
-export * from '../../api/lib/types'
-export { LoginStatusChecker } from '../../api/lib/loginStatus'
+  wrapToughCookie } from '@skolplattformen/api'
 
 const init = (
   fetchImpl: Fetch,

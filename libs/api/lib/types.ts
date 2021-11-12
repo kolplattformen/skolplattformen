@@ -17,6 +17,7 @@ export interface CookieManager {
   setCookieString: (cookieString: string, url: string) => Promise<void>
   getCookieString: (url: string) => Promise<string>
   clearAll: () => Promise<void>
+  removeAllCookies?: () => Promise<void>
 }
 
 export interface RequestInit {

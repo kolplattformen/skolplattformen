@@ -11,7 +11,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from '../../api/lib/types'
+} from '@skolplattformen/api';
 
 const data: any = {
   '39b59e-bf4b9f-f68ac25321-977218-bf0': {
