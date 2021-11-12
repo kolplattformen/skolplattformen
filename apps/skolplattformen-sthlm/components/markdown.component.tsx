@@ -1,7 +1,8 @@
 import { Text } from '@ui-kitten/components'
 import React from 'react'
-import { Linking, StyleSheet } from 'react-native'
+import { Dimensions, Linking, StyleSheet } from 'react-native'
 import MarkdownBase, { RenderRules } from 'react-native-markdown-display'
+import { Sizing } from '../styles'
 import { Image } from './image.component'
 
 interface MarkdownProps {
@@ -20,6 +21,9 @@ const rules: RenderRules = {
         accessibilityIgnoresInvertColors
         key={src}
         src={url}
+        // TODO: Sizing.t5 should not be hardcoded here...
+        //       Maybe measure the width from inside the component instead?
+        componentWidth={Dimensions.get('window').width - Sizing.t5 * 2}
         style={styles.markdownImage}
       />
     )
@@ -52,5 +56,5 @@ export const Markdown = ({ style, children }: MarkdownProps) => {
 }
 
 const styles = StyleSheet.create({
-  markdownImage: { width: '100%', minHeight: 300 },
+  markdownImage: { width: '100%', borderRadius: 15 },
 })
