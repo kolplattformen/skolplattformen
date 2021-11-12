@@ -6,7 +6,7 @@ import { Api, FetcherOptions, Fetch, RNCookieManager,
 
 const init = (
   fetchImpl: Fetch,
-  cookieManagerImpl: any,
+  cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions
 ): Api => {
   // prettier-ignore

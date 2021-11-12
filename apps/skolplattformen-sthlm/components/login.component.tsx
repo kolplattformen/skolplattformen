@@ -47,7 +47,8 @@ export const Login = () => {
   >(() => () => null)
   const [visible, showModal] = useState(false)
   const [showLoginMethod, setShowLoginMethod] = useState(false)
-  const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] = useState(false)
+  const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] =
+    useState(false)
   const [error, setError] = useState<string | null>(null)
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
@@ -55,8 +56,9 @@ export const Login = () => {
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
 
-  const [schoolPlatform, setSchoolPlatform] =
-    useSettingsStorage('currentSchoolPlatform')
+  const [schoolPlatform, setSchoolPlatform] = useSettingsStorage(
+    'currentSchoolPlatform'
+  )
 
   const { t } = useTranslation()
 
@@ -71,12 +73,12 @@ export const Login = () => {
   const schoolPlatforms = [
     {
       id: 'stockholm-skolplattformen',
-      displayName: 'Stockholm stad'
+      displayName: 'Stockholm stad',
     },
     {
       id: 'goteborg-hjarnkontoret',
-      displayName: 'Göteborg stad'
-    }
+      displayName: 'Göteborg stad',
+    },
   ]
 
   const loginHandler = async () => {
@@ -96,7 +98,8 @@ export const Login = () => {
   }
 
   const getSchoolPlatformName = () => {
-    return schoolPlatforms.find(item => item.id === schoolPlatform)?.displayName;
+    return schoolPlatforms.find((item) => item.id === schoolPlatform)
+      ?.displayName
   }
 
   const openBankId = (token: string) => {
@@ -207,13 +210,14 @@ export const Login = () => {
         </ButtonGroup>
         <View style={styles.platformPicker}>
           <Button
-          appearance='ghost'
-          status='basic'
-          size="small"
-          accessoryRight={SelectIcon}
-          onPress={() => {
-            setShowSchoolPlatformPicker(true)
-          }}>
+            appearance="ghost"
+            status="basic"
+            size="small"
+            accessoryRight={SelectIcon}
+            onPress={() => {
+              setShowSchoolPlatformPicker(true)
+            }}
+          >
             {getSchoolPlatformName()}
           </Button>
         </View>
@@ -281,8 +285,9 @@ export const Login = () => {
         visible={showSchoolPlatformPicker}
         style={styles.modal}
         onBackdropPress={() => setShowSchoolPlatformPicker(false)}
-        backdropStyle={styles.backdrop}>
-          <Card>
+        backdropStyle={styles.backdrop}
+      >
+        <Card>
           <List
             data={schoolPlatforms}
             ItemSeparatorComponent={Divider}
@@ -300,7 +305,7 @@ export const Login = () => {
               />
             )}
           />
-          </Card>
+        </Card>
       </Modal>
     </>
   )
@@ -331,5 +336,5 @@ const themedStyles = StyleService.create({
   },
   platformPicker: {
     width: '100%',
-  }
+  },
 })

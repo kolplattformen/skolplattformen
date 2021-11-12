@@ -83,7 +83,6 @@ Check out the documentation [here](libs/hooks).
 To clone and build the project, you first need to install the required dependencies:
 ```bash
 $ sudo apt install git npm
-$ npx lerna bootstrap
 ```
 
 Clone the repo with

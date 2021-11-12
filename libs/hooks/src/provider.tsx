@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable import/prefer-default-export */
-import { Api } from '@skolplattformen/api-skolplattformen'
+import { Api } from '@skolplattformen/api'
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import { ApiContext } from './context'
@@ -56,6 +54,7 @@ export const ApiProvider: TApiProvider = ({
       api.off('login', handler)
       api.off('logout', handler)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [api.isLoggedIn, api.isFake])
 
   return (

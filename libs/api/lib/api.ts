@@ -1,4 +1,5 @@
 import { Language } from '@skolplattformen/curriculum'
+import { EventEmitter } from 'events'
 import { DateTime } from 'luxon'
 import { LoginStatusChecker } from './loginStatus'
 import {
@@ -14,8 +15,9 @@ import {
   ScheduleItem,
 } from './types'
 
-export interface Api {
-  isFake:boolean
+export interface Api extends EventEmitter {
+  isFake: boolean
+  isLoggedIn: boolean
   getPersonalNumber(): string | undefined
   login(personalNumber?: string): Promise<LoginStatusChecker>
   setSessionCookie(sessionCookie: string): Promise<void>

@@ -12,7 +12,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from '@skolplattformen/api-skolplattformen'
+} from '@skolplattformen/api'
 import { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
 import { useEffect, useState } from 'react'

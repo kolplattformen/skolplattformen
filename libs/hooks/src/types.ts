@@ -10,7 +10,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from '@skolplattformen/api-skolplattformen'
+} from '@skolplattformen/api'
 import { Action, Reducer } from 'redux'
 
 export interface Reporter {
