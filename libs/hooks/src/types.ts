@@ -14,8 +14,8 @@ import {
 import { Action, Reducer } from 'redux'
 
 export interface Reporter {
-  log: (message: string) => void
-  error: (error: Error, label?: string) => void
+  log?: (message: string) => void
+  error?: (error: Error, label?: string) => void
 }
 
 export interface IApiContext {

@@ -20,7 +20,7 @@ export const LanguageContext = React.createContext<LanguageContextProps>({
 interface Props {
   children: ReactNode
   data: any
-  initialLanguageCode: string
+  initialLanguageCode?: string
   cache: any
 }
 

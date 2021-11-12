@@ -2,12 +2,11 @@ import useSettingsStorage from '../../hooks/useSettingsStorage'
 import React, { createContext } from 'react'
 
 interface SchoolPlatformProps {
-  currentSchoolPlatform: string
+  currentSchoolPlatform?: string
   changeSchoolPlatform: (platform: string) => void
 }
 
 const defaultState: SchoolPlatformProps = {
-  currentSchoolPlatform: 'stockholm-skolplattformen',
   changeSchoolPlatform: (platform: string) =>
     console.log('DEBUG ONLY: changing to', platform),
 }

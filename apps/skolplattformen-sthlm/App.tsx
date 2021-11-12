@@ -7,36 +7,40 @@ import initHjarntorget from '@skolplattformen/api-hjarntorget'
 import { ApiProvider } from '@skolplattformen/hooks'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
-import React, { useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
-import {
-  SchoolPlatformProvider,
-  SchoolPlatformContext,
-} from './context/schoolPlatform/schoolPlatformContext'
+import { SchoolPlatformProvider } from './context/schoolPlatform/schoolPlatformContext'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
 import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
+import { Reporter } from '@skolplattformen/hooks'
+import { Api } from '@skolplattformen/api'
 
-const apiSkolplattformen = initSkolplattformen(fetch, CookieManager)
-const apiHjarntorget = initHjarntorget(fetch, CookieManager)
+const ApiList = new Map<string, Api>([
+  // @ts-expect-error Why is fetch failing here?
+  ['stockholm-skolplattformen', initSkolplattformen(fetch, CookieManager)],
+  // @ts-expect-error Why is fetch failing here?
+  ['goteborg-hjarntorget', initHjarntorget(fetch, CookieManager)],
+])
 
-const reporter = __DEV__
+const reporter: Reporter | undefined = __DEV__
   ? {
-      log: (message) => console.log(message),
-      error: (error, label) => console.error(label, error),
+      log: (message: string) => console.log(message),
+      error: (error: Error, label?: string) => console.error(label, error),
     }
   : undefined
 
 if (__DEV__) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const DevMenu = require('react-native-dev-menu')
   DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
 }
 
-const safeJsonParse = (maybeJson) => {
+const safeJsonParse = (maybeJson: string) => {
   if (maybeJson) {
     try {
       return JSON.parse(maybeJson)
@@ -63,17 +67,18 @@ const logAsyncStorage = async () => {
 
 export default () => {
   const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
+  const [currentSchoolPlatform] = useSettingsStorage('currentSchoolPlatform')
   const [theme] = useSettingsStorage('theme')
   const systemTheme = useColorScheme()
-
   const colorScheme = usingSystemTheme ? systemTheme : theme
+
+  //const api = ApiList.get(currentSchoolPlatform)!
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const api = ApiList.get('goteborg-hjarntorget')!
+
   return (
     <SchoolPlatformProvider>
-      <ApiProvider
-        api={apiSkolplattformen}
-        storage={AsyncStorage}
-        reporter={reporter}
-      >
+      <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>
         <SafeAreaProvider>
           <StatusBar
             backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
@@ -83,6 +88,7 @@ export default () => {
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider
             {...eva}
+            // @ts-expect-error Unknown error
             customMapping={customMapping}
             theme={colorScheme === 'dark' ? darkTheme : lightTheme}
           >
