@@ -2,8 +2,7 @@
   "name": "@skolplattformen/api",
   "version": "0.15.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.ts",
   "files": [
     "dist/**/*"
   ],

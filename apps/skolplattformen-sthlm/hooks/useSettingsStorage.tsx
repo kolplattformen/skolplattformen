@@ -9,7 +9,7 @@ export const settingsState = proxy({
     usingSystemTheme: true,
     theme: 'light',
     cachedPersonalIdentityNumber: '',
-    currentSchoolPlatform: 'stockholm-skolplattformen'
+    currentSchoolPlatform: 'stockholm-skolplattformen',
   },
 })
 

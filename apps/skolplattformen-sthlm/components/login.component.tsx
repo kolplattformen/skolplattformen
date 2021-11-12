@@ -13,7 +13,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
   Linking,
@@ -22,6 +22,7 @@ import {
   View,
 } from 'react-native'
 import { schema } from '../app.json'
+import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { useTranslation } from '../hooks/useTranslation'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -56,8 +57,8 @@ export const Login = () => {
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
 
-  const [schoolPlatform, setSchoolPlatform] = useSettingsStorage(
-    'currentSchoolPlatform'
+  const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
+    SchoolPlatformContext
   )
 
   const { t } = useTranslation()
@@ -73,11 +74,11 @@ export const Login = () => {
   const schoolPlatforms = [
     {
       id: 'stockholm-skolplattformen',
-      displayName: 'Stockholm stad',
+      displayName: 'Stockholm stad (Skolplattformen)',
     },
     {
       id: 'goteborg-hjarnkontoret',
-      displayName: 'Göteborg stad',
+      displayName: 'Göteborg stad (Hjärntorget)',
     },
   ]
 
@@ -98,7 +99,7 @@ export const Login = () => {
   }
 
   const getSchoolPlatformName = () => {
-    return schoolPlatforms.find((item) => item.id === schoolPlatform)
+    return schoolPlatforms.find((item) => item.id === currentSchoolPlatform)
       ?.displayName
   }
 
@@ -296,10 +297,10 @@ export const Login = () => {
                 title={item.displayName}
                 accessible={true}
                 accessoryRight={
-                  schoolPlatform === item.id ? CheckIcon : undefined
+                  currentSchoolPlatform === item.id ? CheckIcon : undefined
                 }
                 onPress={() => {
-                  setSchoolPlatform(item.id)
+                  changeSchoolPlatform(item.id)
                   setShowSchoolPlatformPicker(false)
                 }}
               />

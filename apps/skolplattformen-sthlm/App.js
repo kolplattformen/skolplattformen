@@ -1,20 +1,28 @@
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import CookieManager from '@react-native-cookies/cookies'
-import init from '@skolplattformen/api-hjarntorget'
+import initSkolplattformen from '@skolplattformen/api-skolplattformen'
+import initHjarntorget from '@skolplattformen/api-hjarntorget'
+
 import { ApiProvider } from '@skolplattformen/hooks'
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AppNavigator } from './components/navigation.component'
 import { LanguageProvider } from './context/language/languageContext'
+import {
+  SchoolPlatformProvider,
+  SchoolPlatformContext,
+} from './context/schoolPlatform/schoolPlatformContext'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
 import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
-const api = init(fetch, CookieManager)
+
+const apiSkolplattformen = initSkolplattformen(fetch, CookieManager)
+const apiHjarntorget = initHjarntorget(fetch, CookieManager)
 
 const reporter = __DEV__
   ? {
@@ -59,26 +67,31 @@ export default () => {
   const systemTheme = useColorScheme()
 
   const colorScheme = usingSystemTheme ? systemTheme : theme
-
   return (
-    <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>
-      <SafeAreaProvider>
-        <StatusBar
-          backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
-          barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
-          translucent
-        />
-        <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider
-          {...eva}
-          customMapping={customMapping}
-          theme={colorScheme === 'dark' ? darkTheme : lightTheme}
-        >
-          <LanguageProvider cache={true} data={translations}>
-            <AppNavigator />
-          </LanguageProvider>
-        </ApplicationProvider>
-      </SafeAreaProvider>
-    </ApiProvider>
+    <SchoolPlatformProvider>
+      <ApiProvider
+        api={apiSkolplattformen}
+        storage={AsyncStorage}
+        reporter={reporter}
+      >
+        <SafeAreaProvider>
+          <StatusBar
+            backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
+            barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+            translucent
+          />
+          <IconRegistry icons={EvaIconsPack} />
+          <ApplicationProvider
+            {...eva}
+            customMapping={customMapping}
+            theme={colorScheme === 'dark' ? darkTheme : lightTheme}
+          >
+            <LanguageProvider cache={true} data={translations}>
+              <AppNavigator />
+            </LanguageProvider>
+          </ApplicationProvider>
+        </SafeAreaProvider>
+      </ApiProvider>
+    </SchoolPlatformProvider>
   )
 }

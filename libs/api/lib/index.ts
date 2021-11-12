@@ -14,3 +14,4 @@ export {
 export { URLSearchParams } from './URLSearchParams'
 
 export { wrap };
+export { Feature } from './features'
