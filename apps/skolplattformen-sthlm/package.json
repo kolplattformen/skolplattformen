@@ -77,6 +77,8 @@
     "valtio": "*",
     "yup": "*"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "react-native-clean-project": "*"
+  },
   "private": true
 }
