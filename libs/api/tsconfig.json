@@ -7,7 +7,8 @@
     "outDir": "./dist",
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "esModuleInterop": true
   },
   "include": ["lib", "../../__mocks__"  ],
   "exclude": [
