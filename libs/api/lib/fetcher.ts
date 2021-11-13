@@ -66,7 +66,6 @@ export default function wrap(
       },
     }
     const response = await fetch(url, config)
-
     const wrapMethod = (res: Response, methodName: string): void => {
       // @ts-ignore
       const original = res[methodName].bind(res)

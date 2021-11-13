@@ -18,7 +18,7 @@ import { toMarkdown, Api, URLSearchParams, LoginStatusChecker,  CalendarItem,
   Fetcher, 
   FetcherOptions, 
   wrap
-} from '@skolplattformen/api'
+} from '../../api/lib'
 import { checkStatus } from './loginStatus'
 import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
 import {
@@ -89,6 +89,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     options?: FetcherOptions
   ) {
     super()
+    
     this.fetch = wrap(fetch, options);
     this.realFetcher = this.fetch;
     this.cookieManager = cookieManager
@@ -427,7 +428,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       }
     })
 
-    console.log("start polling")
+    console.log("start polling", (beginBankIdResponse as any).url)
 
     const statusChecker = checkStatus(this.fetch, verifyUrlBase((beginBankIdResponse as any).url))
 

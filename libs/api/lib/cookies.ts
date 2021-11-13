@@ -98,21 +98,28 @@ export interface RNCookieManager {
 export const wrapReactNativeCookieManager = (
   rnc: RNCookieManager
 ): CookieManager => ({
-  clearAll: () => rnc.clearAll().then(),
+  clearAll: () => {
+    console.log("clearAll")
+    return rnc.clearAll().then()
+  },
   getCookieString: async (url) => {
     const cookies = await rnc.get(url)
+    console.log("getCookieString", url, cookies)
     return Object.values(cookies)
       .map((c) => `${c.name}=${c.value}`)
       .join('; ')
   },
   getCookies: async (url) => {
     const cookies = await rnc.get(url)
+    console.log("getCookies", url, cookies)
     return Object.values(cookies)
   },
   setCookie: async (cookie, url) => {
+    console.log("setting cookie", url, cookie)
     await rnc.setFromResponse(url, serialize(cookie))
   },
   setCookieString: async (cookieString, url) => {
+    console.log("setting cookieString", url, cookieString)
     await rnc.setFromResponse(url, cookieString)
   },
 })

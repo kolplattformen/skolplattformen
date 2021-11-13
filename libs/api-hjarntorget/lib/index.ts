@@ -1,8 +1,11 @@
 import { ApiHjarntorget } from './apiHjarntorget'
-import { Api, FetcherOptions, Fetch, RNCookieManager,
+import { FetcherOptions } from '../../api/lib/fetcher'
+import { Fetch } from '../../api/lib/types'
+import { Api } from '../../api/lib/api'
+import { RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
-  wrapToughCookie } from '@skolplattformen/api'
+  wrapToughCookie } from '../../api/lib/cookies'
 
 const init = (
   fetchImpl: Fetch,

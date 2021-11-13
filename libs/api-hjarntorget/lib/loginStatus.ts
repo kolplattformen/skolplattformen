@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { LoginStatusChecker, Fetcher} from '@skolplattformen/api'
+import { LoginStatusChecker, Fetcher} from '../../api/lib'
 import { 
     extractAuthGbgLoginRequestBody, 
     extractHjarntorgetSAMLLogin

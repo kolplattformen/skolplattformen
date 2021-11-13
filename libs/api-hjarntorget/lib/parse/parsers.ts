@@ -1,6 +1,5 @@
 import * as html from 'node-html-parser'
 import { decode } from 'he'
-import { CalendarItem } from '..'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
 

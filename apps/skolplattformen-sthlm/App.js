@@ -21,7 +21,7 @@ import { darkTheme, lightTheme } from './design/themes'
 import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
 
-const apiSkolplattformen = initSkolplattformen(fetch, CookieManager)
+//const apiSkolplattformen = initSkolplattformen(fetch, CookieManager)
 const apiHjarntorget = initHjarntorget(fetch, CookieManager)
 
 const reporter = __DEV__
@@ -70,7 +70,7 @@ export default () => {
   return (
     <SchoolPlatformProvider>
       <ApiProvider
-        api={apiSkolplattformen}
+        api={apiHjarntorget}
         storage={AsyncStorage}
         reporter={reporter}
       >

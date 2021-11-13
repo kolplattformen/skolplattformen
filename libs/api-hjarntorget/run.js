@@ -23,7 +23,7 @@ function requestLogger(httpModule) {
   const path = require('path')
   const fs = require('fs')
   const { inspect } = require('util')
-  const init = require('./dist/api-hjarntorget/lib').default
+  const init = require('./dist/libs/api-hjarntorget/lib').default
   
   const [, , personalNumber] = process.argv
   
@@ -78,13 +78,13 @@ function requestLogger(httpModule) {
   
   async function run() {
     const cookieJar = new CookieJar()
-    const fetch = fetchCookie(nodeFetch, cookieJar)
+    const fetch = nodeFetch //fetchCookie(nodeFetch, cookieJar)
   
     try {
       const api = init(fetch, cookieJar, { record })
       console.log("inited...")
-
       api.on('login', async () => {
+
         console.log("Loged in!")
         await api.getUser()
         const children = await api.getChildren()
