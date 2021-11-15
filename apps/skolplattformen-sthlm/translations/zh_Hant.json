@@ -1,0 +1,144 @@
+{
+    "abbrevations": {
+        "compulsorySchool": "小學/初中",
+        "leisureTimeCentre": "課後託管",
+        "preSchool": "學前班",
+        "upperSecondarySchool": "高中"
+    },
+    "abscense": {
+        "endTime": "結束時間",
+        "entireDay": "全天",
+        "invalidPersonalNumber": "個人身份號碼無效",
+        "personalNumberMissing": "缺少個人身份號碼",
+        "selectAbscenseEndTime": "選擇結束時間",
+        "selectAbscenseStartTime": "選擇開始時間",
+        "startTime": "開始時間",
+        "title": "報告缺席情況"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "手動開啟 BankID",
+            "OpenOnAnotherDevice": "在另一臺裝置上開啟 BankID",
+            "OpenOnThisDevice": "在本裝置上開啟 BankID",
+            "Waiting": "正在等待 BankID 響應…"
+        },
+        "chooseLoginMethod": "選擇登入方式",
+        "loginAsTestUser": "以測試使用者身份登入",
+        "loginFailed": "無法登入。請重試。",
+        "placeholder_SocialSecurityNumber": "你的個人身份號碼",
+        "subtitle": "{{word}}之選",
+        "words": {
+            "agile": "輕快",
+            "awaited": "久違",
+            "better": "更佳",
+            "cheap": "價廉",
+            "cooler": "酷樂",
+            "enlightened": "開明",
+            "fantastic": "匪夷",
+            "fast": "迅捷",
+            "first": "一流",
+            "free": "自由",
+            "fun": "樂趣",
+            "homemade": "手製",
+            "imperfect": "有瑕",
+            "open": "開放",
+            "rebellious": "逆流",
+            "simple": "簡單",
+            "working": "可用"
+        },
+        "a11y_change_language": "選擇您的語言",
+        "a11y_image_two_boys": "兩個人看手機的圖片",
+        "a11y_clear_social_security_input_field": "清空個人身份號碼欄",
+        "a11y_select_login_method": "選擇登入方式"
+    },
+    "calender": {
+        "approveAccessToCalender": "您必須允許訪問日曆",
+        "saveToCalender": "儲存到日曆中",
+        "saveToCalenderError": "出了點問題",
+        "saveToCalenderSuccess": "✔️ 已儲存到日曆中",
+        "showCalenderActions": "顯示日曆操作"
+    },
+    "children": {
+        "loadingErrorHeading": "啊噢！",
+        "loadingErrorInformationText": "這個頁面無法載入。請重試或在 skolplattformen.org 網站上檢視當前狀態。",
+        "noKids_description": "您的個人身份號碼下沒有註冊在斯德哥爾摩市的孩子",
+        "noKids_title": "沒有找到孩子",
+        "title": "您的孩子",
+        "tryAgain": "請重試",
+        "viewStatus": "在 skolplattformen.org 網站上檢視狀態"
+    },
+    "general": {
+        "cancel": "取消",
+        "changeLanguage": "更改語言",
+        "confirm": "確認",
+        "loading": "正在載入…",
+        "logout": "登出",
+        "logoutAndClearPersonalData": "登出並清除個人資料",
+        "logoutAndClearAllDataInclSettings": "登出並清除包括設定在內的所有資料",
+        "send": "傳送",
+        "settings": "設定",
+        "socialSecurityNumber": "個人身份號碼",
+        "title": "開放學校平臺"
+    },
+    "language": {
+        "changeLanguage": "更改語言",
+        "changeLanguageButton": "儲存"
+    },
+    "menu": {
+        "emptyHeadline": "午餐選單看起來有點空",
+        "emptyText": "找不到有關這個星期的任何內容"
+    },
+    "navigation": {
+        "calender": "日曆",
+        "menu": "午餐",
+        "news": "新聞",
+        "notifications": "通知",
+        "classmates": "同班同學"
+    },
+    "settings": {
+        "settings": "設定",
+        "appearance": "外觀",
+        "theme": "主題",
+        "licenses": "許可證",
+        "language": "語言",
+        "themeAuto": "自動",
+        "useSystemTheme": "使用系統亮色/暗色主題"
+    },
+    "themes": {
+        "light": "亮色",
+        "dark": "暗色"
+    },
+    "news": {
+        "backToChild": "返回到孩子頁面",
+        "noNewNewsItemsThisWeek": "這個星期沒有新聞。",
+        "notificationTitle": "新聞：{{header}}（{{published}}）",
+        "published": "已釋出",
+        "title": "來自學校平臺的新聞",
+        "updated": "已更新",
+        "search": {
+            "placeholder": "在新聞中搜索…"
+        }
+    },
+    "notifications": {
+        "notificationTitle": "通知：{{message}}（{{dateCreated}}）"
+    },
+    "schedule": {
+        "start": "開始",
+        "end": "結束",
+        "lunch": "午餐",
+        "gymBag": "健身袋"
+    },
+    "classmates": {
+        "class": "課堂",
+        "child": "孩子",
+        "contactsForGuardiansFor": "監護人的聯絡資訊"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "顯示聯絡資訊",
+        "a11y_show_contact_info_button_label": "顯示聯絡資訊",
+        "call": "電話",
+        "sms": "簡訊",
+        "email": "電子郵箱",
+        "home": "家庭地址"
+    }
+}

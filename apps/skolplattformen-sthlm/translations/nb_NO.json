@@ -60,7 +60,9 @@
         "changeLanguage": "Endre språk",
         "settings": "Innstillinger",
         "send": "Send",
-        "cancel": "Avbryt"
+        "cancel": "Avbryt",
+        "logoutAndClearPersonalData": "Logg ut og tøm personlig data",
+        "logoutAndClearAllDataInclSettings": "Logg ut og tøm all data, inkludert innstillinger"
     },
     "news": {
         "updated": "Oppdatert",
@@ -96,7 +98,8 @@
         "notifications": "Merknader",
         "news": "Nyheter",
         "menu": "Meny",
-        "calender": "Kalender"
+        "calender": "Kalender",
+        "classmates": "Klassekamerater"
     },
     "menu": {
         "emptyText": "Fant ikke noe denne uken",
@@ -113,6 +116,27 @@
         "start": "Start"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Vis kontaktinfo"
+        "a11y_show_contact_info_button_hint": "Vis kontaktinfo",
+        "call": "Ring",
+        "a11y_show_contact_info_button_label": "Vis kontaktinfo",
+        "sms": "SMS",
+        "email": "E-post",
+        "home": "Hjem"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Foresattes kontaktinfo for",
+        "class": "Klasse",
+        "child": "Barn"
+    },
+    "settings": {
+        "settings": "Innstillinger",
+        "appearance": "Utseende",
+        "themeAuto": "Auto",
+        "theme": "Drakt",
+        "language": "Språk"
+    },
+    "themes": {
+        "light": "Lys",
+        "dark": "Mørk"
     }
 }
