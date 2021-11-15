@@ -295,9 +295,9 @@ export class Api extends EventEmitter {
   public async getNewsDetails(
     child: EtjanstChild,
     item: NewsItem
-  ): Promise<NewsItem | undefined > {
+  ): Promise<NewsItem> {
     if (this.isFake) {
-      return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
+      return fakeResponse(fake.news(child).find((ni) => ni.id === item.id) || {id: "", published: ""})
     }
     const url = routes.newsDetails(child.id, item.id)
     const session = this.getRequestInit()
