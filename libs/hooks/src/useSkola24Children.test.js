@@ -178,8 +178,6 @@ describe('useSkola24Children()', () => {
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ personGuid: '2' }])
 
-      jest.advanceTimersToNextTimer()
-
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -208,8 +206,6 @@ describe('useSkola24Children()', () => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ personGuid: '2' }])
-
-      jest.advanceTimersToNextTimer()
 
       await waitForNextUpdate()
       await waitForNextUpdate()
