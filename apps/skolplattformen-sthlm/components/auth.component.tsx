@@ -33,7 +33,6 @@ const randomWord = (
   const randomIndex: number = Math.floor(Math.random() * keys.length)
   const argumentKey: string = keys[randomIndex]
 
-  // @ts-expect-error Fix this later
   return words[argumentKey]
 }
 
