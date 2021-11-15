@@ -127,6 +127,7 @@ If you're offended by this initiative, rest assured there is no reason to be —
 - [Viktor Sarström](https://github.com/viktorlarsson)
 - [Andreas Eriksson](https://github.com/whyer)
 - [Kajetan Kazimierczak](https://github.com/kajetan-kazimierczak)
+- [Karin Nygårds (artwork)](https://github.com/grishund)
 - You?
 
 ## License
