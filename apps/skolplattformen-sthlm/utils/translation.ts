@@ -21,6 +21,18 @@ export const languages: Language[] = [
     active: true,
   },
   {
+    langCode: 'zh_Hant',
+    languageName: 'Chinese (traditional)',
+    languageLocalName: '中國傳統的',
+    active: true,
+  },
+  {
+    langCode: 'zh_Hans',
+    languageName: 'Chinese (simplified)',
+    languageLocalName: '简体中文',
+    active: true,
+  },
+  {
     langCode: 'nl',
     languageName: 'Dutch',
     languageLocalName: 'Nederlands',
@@ -118,6 +130,8 @@ export const translations = {
   ru: require('../translations/ru.json'),
   so: require('../translations/so.json'),
   sv: require('../translations/sv.json'),
+  zh_Hans: require('../translations/zh_Hans.json'),
+  zh_Hant: require('../translations/zh_Hant.json')
 }
 
 export const translate = (key: string, options?: TranslateOptions) => {

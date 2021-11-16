@@ -14,6 +14,7 @@ import 'moment/locale/pl'
 import 'moment/locale/ru'
 import 'moment/locale/sv'
 import 'moment/locale/uz-latn'
+import 'moment/locale/zh-cn'
 import { I18nManager } from 'react-native'
 
 const changeListeners: Record<string, any> = {}
