@@ -74,7 +74,7 @@ export const languages: Language[] = [
     langCode: 'ja',
     languageName: 'Japanese',
     languageLocalName: '日本語',
-    active: false,
+    active: true,
   },
   {
     langCode: 'la',
