@@ -8,6 +8,7 @@
     "abscense": {
         "endTime": "Czas zakończenia",
         "entireDay": "Cały dzień",
+        "childsPersonalNumber": "Personnummer dziecka",
         "invalidPersonalNumber": "Błąd w personnumerze",
         "personalNumberMissing": "Brak personnumeru",
         "selectAbscenseEndTime": "Wybierz czas zakończenia",
