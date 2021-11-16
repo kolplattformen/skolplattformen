@@ -26,8 +26,15 @@ export const newsItem = ({
   imageUrl: bannerImageUrl,
   fullImageUrl: `${IMAGE_HOST}${bannerImageUrl}`,
   imageAltText: altText,
-  body: toMarkdown(body),
+  body: toNonEmptyMarkdownString(body),
 })
+
+// Fixes https://github.com/kolplattformen/skolplattformen/issues/525
+const toNonEmptyMarkdownString = (str: string): string => {
+  const res = toMarkdown(str);
+  if(res?.length == 0 ) return ' ' 
+  return res
+}
 
 const newsSort = (item1: NewsItem, item2: NewsItem): number => {
   const m1 = item1.modified || item1.published
