@@ -138,7 +138,7 @@ const Absence = () => {
           <View style={styles.wrap}>
             <View style={styles.field}>
               <Text style={styles.label}>
-                {translate('general.socialSecurityNumber')}
+                {translate('abscense.childsPersonalNumber')}
               </Text>
               <Input
                 testID="personalIdentityNumberInput"
