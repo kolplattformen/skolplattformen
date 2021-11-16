@@ -41,6 +41,7 @@ export const isRTL = (langCode: string) => {
 
 const getCorrespondingMomentLocale = (langCode?: string): string => {
   if(langCode === 'la') return 'sv'
+  if(langCode === 'so') return 'sv'
   if(langCode === 'nb_NO') return 'nb'
   if(langCode === 'zh_Hant' || langCode === 'zh_Hans') return 'zh-cn'
   return langCode!

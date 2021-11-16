@@ -104,7 +104,7 @@ export const languages: Language[] = [
     langCode: 'so',
     languageName: 'Somali',
     languageLocalName: 'af-Soomaali',
-    active: false,
+    active: true,
   },
   {
     langCode: 'es',
