@@ -74,7 +74,7 @@ export const languages: Language[] = [
     langCode: 'nb_NO',
     languageName: 'Norwegian Bokmål',
     languageLocalName: 'Norsk bokmål',
-    active: false,
+    active: true,
   },
   {
     langCode: 'pl',
