@@ -80,7 +80,7 @@ export const languages: Language[] = [
     langCode: 'la',
     languageName: 'Latin',
     languageLocalName: 'Latina',
-    active: false,
+    active: true,
   },
   {
     langCode: 'nb_NO',
