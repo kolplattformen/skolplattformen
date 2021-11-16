@@ -95,6 +95,12 @@ export const languages: Language[] = [
     active: true,
   },
   {
+    langCode: 'pt',
+    languageName: 'Portuguese',
+    languageLocalName: 'Português',
+    active: true,
+  },
+  {
     langCode: 'ru',
     languageName: 'Russian',
     languageLocalName: 'русский',
@@ -127,6 +133,7 @@ export const translations = {
   nb_NO: require('../translations/nb_NO.json'),
   nl: require('../translations/nl.json'),
   pl: require('../translations/pl.json'),
+  pt: require('../translations/pt.json'),
   ru: require('../translations/ru.json'),
   so: require('../translations/so.json'),
   sv: require('../translations/sv.json'),
