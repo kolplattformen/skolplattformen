@@ -21,6 +21,18 @@ export const languages: Language[] = [
     active: true,
   },
   {
+    langCode: 'zh_Hant',
+    languageName: 'Chinese (traditional)',
+    languageLocalName: '中國傳統的',
+    active: true,
+  },
+  {
+    langCode: 'zh_Hans',
+    languageName: 'Chinese (simplified)',
+    languageLocalName: '简体中文',
+    active: true,
+  },
+  {
     langCode: 'nl',
     languageName: 'Dutch',
     languageLocalName: 'Nederlands',
@@ -62,24 +74,30 @@ export const languages: Language[] = [
     langCode: 'ja',
     languageName: 'Japanese',
     languageLocalName: '日本語',
-    active: false,
+    active: true,
   },
   {
     langCode: 'la',
     languageName: 'Latin',
     languageLocalName: 'Latina',
-    active: false,
+    active: true,
   },
   {
     langCode: 'nb_NO',
     languageName: 'Norwegian Bokmål',
     languageLocalName: 'Norsk bokmål',
-    active: false,
+    active: true,
   },
   {
     langCode: 'pl',
     languageName: 'Polish',
     languageLocalName: 'Polski',
+    active: true,
+  },
+  {
+    langCode: 'pt',
+    languageName: 'Portuguese',
+    languageLocalName: 'Português',
     active: true,
   },
   {
@@ -92,7 +110,7 @@ export const languages: Language[] = [
     langCode: 'so',
     languageName: 'Somali',
     languageLocalName: 'af-Soomaali',
-    active: false,
+    active: true,
   },
   {
     langCode: 'es',
@@ -115,9 +133,12 @@ export const translations = {
   nb_NO: require('../translations/nb_NO.json'),
   nl: require('../translations/nl.json'),
   pl: require('../translations/pl.json'),
+  pt: require('../translations/pt.json'),
   ru: require('../translations/ru.json'),
   so: require('../translations/so.json'),
   sv: require('../translations/sv.json'),
+  zh_Hans: require('../translations/zh_Hans.json'),
+  zh_Hant: require('../translations/zh_Hant.json'),
 }
 
 export const translate = (key: string, options?: TranslateOptions) => {
