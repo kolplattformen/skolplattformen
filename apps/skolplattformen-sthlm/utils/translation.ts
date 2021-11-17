@@ -138,7 +138,7 @@ export const translations = {
   so: require('../translations/so.json'),
   sv: require('../translations/sv.json'),
   zh_Hans: require('../translations/zh_Hans.json'),
-  zh_Hant: require('../translations/zh_Hant.json')
+  zh_Hant: require('../translations/zh_Hant.json'),
 }
 
 export const translate = (key: string, options?: TranslateOptions) => {
