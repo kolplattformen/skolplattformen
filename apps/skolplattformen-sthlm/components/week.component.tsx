@@ -104,7 +104,7 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 }
 
 export const Week = ({ child }: WeekProps) => {
-  moment.locale(LanguageService.getLanguageCode())
+  moment.locale(LanguageService.getLocale())
   const days = moment.weekdaysShort().slice(1, 6)
   const currentDayIndex = Math.min(moment().isoWeekday() - 1, 5)
   const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
