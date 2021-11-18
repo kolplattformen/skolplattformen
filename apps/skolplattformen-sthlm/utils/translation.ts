@@ -4,6 +4,7 @@ interface Language {
   langCode: string
   languageName: string
   languageLocalName: string
+  locale: string
   active: boolean
 }
 
@@ -12,36 +13,42 @@ export const languages: Language[] = [
     langCode: 'sv',
     languageName: 'Swedish',
     languageLocalName: 'Svenska',
+    locale: 'sv',
     active: true,
   },
   {
     langCode: 'ar',
     languageName: 'Arabic',
     languageLocalName: 'اَلْعَرَبِيَّةُ',
+    locale: 'ar',
     active: true,
   },
   {
     langCode: 'zh_Hant',
     languageName: 'Chinese (traditional)',
     languageLocalName: '中國傳統的',
+    locale: 'zh-cn',
     active: true,
   },
   {
     langCode: 'zh_Hans',
     languageName: 'Chinese (simplified)',
     languageLocalName: '简体中文',
+    locale: 'zh-cn',
     active: true,
   },
   {
     langCode: 'nl',
     languageName: 'Dutch',
     languageLocalName: 'Nederlands',
+    locale: 'nl',
     active: true,
   },
   {
     langCode: 'en',
     languageName: 'English',
     languageLocalName: 'English',
+    locale: 'en',
     active: true,
   },
 
@@ -49,6 +56,7 @@ export const languages: Language[] = [
     langCode: 'de',
     languageName: 'German',
     languageLocalName: 'Deutsch',
+    locale: 'de',
     active: true,
   },
 
@@ -56,66 +64,77 @@ export const languages: Language[] = [
     langCode: 'fi',
     languageName: 'Finnish',
     languageLocalName: 'Suomi',
+    locale: 'fi',
     active: true,
   },
   {
     langCode: 'fr',
     languageName: 'French',
     languageLocalName: 'Français',
+    locale: 'fr',
     active: true,
   },
   {
     langCode: 'it',
     languageName: 'Italian',
     languageLocalName: 'Italiano',
+    locale: 'it',
     active: true,
   },
   {
     langCode: 'ja',
     languageName: 'Japanese',
     languageLocalName: '日本語',
+    locale: 'ja',
     active: true,
   },
   {
     langCode: 'la',
     languageName: 'Latin',
     languageLocalName: 'Latina',
+    locale: 'sv',
     active: true,
   },
   {
     langCode: 'nb_NO',
     languageName: 'Norwegian Bokmål',
     languageLocalName: 'Norsk bokmål',
+    locale: 'nb',
     active: true,
   },
   {
     langCode: 'pl',
     languageName: 'Polish',
     languageLocalName: 'Polski',
+    locale: 'pl',
     active: true,
   },
   {
     langCode: 'pt',
     languageName: 'Portuguese',
     languageLocalName: 'Português',
+    locale: 'pt',
     active: true,
   },
   {
     langCode: 'ru',
     languageName: 'Russian',
     languageLocalName: 'русский',
+    locale: 'ru',
     active: false,
   },
   {
     langCode: 'so',
     languageName: 'Somali',
     languageLocalName: 'af-Soomaali',
+    locale: 'sv',
     active: true,
   },
   {
     langCode: 'es',
     languageName: 'Spanish',
     languageLocalName: 'Español',
+    locale: 'es',
     active: true,
   },
 ]
