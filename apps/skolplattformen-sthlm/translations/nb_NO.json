@@ -83,7 +83,8 @@
         "personalNumberMissing": "Personnummer mangler",
         "invalidPersonalNumber": "Ugyldig personnummer",
         "entireDay": "Hele dagen",
-        "endTime": "Slutt"
+        "endTime": "Slutt",
+        "childsPersonalNumber": "Barnets personnummer"
     },
     "abbrevations": {
         "upperSecondarySchool": "Videregående",
@@ -133,7 +134,9 @@
         "appearance": "Utseende",
         "themeAuto": "Auto",
         "theme": "Drakt",
-        "language": "Språk"
+        "language": "Språk",
+        "licenses": "Lisenser",
+        "useSystemTheme": "Ifør systemets drakt"
     },
     "themes": {
         "light": "Lys",
