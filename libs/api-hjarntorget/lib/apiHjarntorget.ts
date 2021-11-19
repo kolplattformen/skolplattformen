@@ -416,12 +416,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     console.log("start bankid sign in")
     // We may get redirected to some other subdomain i.e. not 'm00-mg-local':
     // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/other
-    console.log("waiting abit so next call doesn't redirect back to 'other' instead of 'verify'")
-    // Need a short wait otherwise we end up in the wrong place!
-    const waitabit = new Promise((resolve) => {
-      setTimeout(() => resolve('foo'), 500)
-    });
-    await waitabit
+    
     console.log("done waiting....")
     const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
     const beginBankIdResponse = await this.fetch('start-bankId', beginBankIdUrl((mvghostResponse as any).url), {
@@ -446,7 +441,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     statusChecker.on('ERROR', () => {
       this.personalNumber = undefined
     })
-
+    
     return statusChecker
   }
 
