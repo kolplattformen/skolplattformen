@@ -29,6 +29,12 @@ class CookieInterceptor implements Interceptor {
   @NotNull
   @Override
   public Response intercept(@NotNull Chain chain) throws IOException {
+    // TODO: Clean up the code so only the necessary feeding of cookies to
+    // the cookie jar remains. That is needed because of:
+    // https://reactnative.dev/docs/0.64/network#known-issues-with-fetch-and-cookie-based-authentication
+    // Specifically react native's fetch does not respect multiple `set-cookie` headers and only
+    // seem to set one cookie per request. Some of the login calls in the api-hjarntorget lib
+    // receives multiple `set-cookie` headers.
     String domain = chain.request().url().topPrivateDomain();
     Log.d("Skolplattformen", "requseting resource on domain: " + domain);
     if(domain == null || !domain.contains("goteborg.se") && !domain.contains("funktionstjanster.se")) {
@@ -43,11 +49,7 @@ class CookieInterceptor implements Interceptor {
       Pair<String, String> header = iterator.next();
       Log.d("Skolplattformen", "SENT " + header.getFirst() + ": " + header.getSecond() + "");
     }
-    String originalCookie = chain.request().header("Cookie");
-    originalCookie = originalCookie == null ? "" : originalCookie;
-    Log.d("Skolplattformen", "OriginalCookie: " + originalCookie);
     Request request = chain.request();
-
     Response response = chain.proceed(request);
 
     String location = response.header("Location");
@@ -56,10 +58,6 @@ class CookieInterceptor implements Interceptor {
     Log.d("Skolplattformen", "isRedirect=" + response.isRedirect());
     Log.d("Skolplattformen", "responseCode=" + response.code());
     Log.d("Skolplattformen", "redirectUri has length=" + location.length());
-
-    for (int i = 0; i < location.length(); i += 100) {
-      Log.d("Skolplattformen", "location>" + location.substring(i, Math.min(i + 100, location.length())));
-    }
 
     iterator = response.headers().iterator();
     cookies.clear();
@@ -72,9 +70,8 @@ class CookieInterceptor implements Interceptor {
       }
     }
 
-    HttpUrl url = new HttpUrl.Builder().host(domain).scheme("https").build();
+    HttpUrl url = new HttpUrl.Builder().host(request.url().host()).scheme("https").build();
     cookieJar.saveFromResponse(url, cookies);
-
     Log.d("Skolplattformen", "<<<<<<<<<<<<<<<<<<<<< END >>>>>>>>>>>>>>>>>>\n\n");
     return response;
 

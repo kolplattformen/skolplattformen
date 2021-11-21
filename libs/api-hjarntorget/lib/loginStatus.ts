@@ -31,7 +31,7 @@ export class HjarntorgetChecker extends EventEmitter {
             // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
             
             const pollStatusResponse = await this.fetcher('poll-bankid-status', pollStatusUrl(this.basePollingUrl))
-            console.log("poll-bankid-status", pollStatusResponse)
+            console.log("poll-bankid-status")
             const pollStatusResponseJson = await pollStatusResponse.json()
 
             const keepPolling = pollStatusResponseJson.infotext !== ''
@@ -48,10 +48,9 @@ export class HjarntorgetChecker extends EventEmitter {
                     throw new Error("Bad signature response")
                 }
                 const signatureResponseText = await signatureResponse.text()
-
                 const authGbgLoginBody = extractAuthGbgLoginRequestBody(signatureResponseText)
                 
-                console.log("authGbg saml login", authGbgLoginBody.length)
+                console.log("authGbg saml login")
                 const authGbgLoginResponse = await this.fetcher('authgbg-saml-login', authGbgLoginUrl, {
                     redirect: 'follow',
                     method: 'POST',
@@ -62,11 +61,9 @@ export class HjarntorgetChecker extends EventEmitter {
                     throw new Error("Bad augGbgLogin response")
                 }
                 const authGbgLoginResponseText = await authGbgLoginResponse.text()
-                console.log('authGbgLoginResponseText',authGbgLoginResponseText)
                 const hjarntorgetSAMLLoginBody = extractHjarntorgetSAMLLogin(authGbgLoginResponseText)
                 
                 console.log("hjarntorget saml login")
-
                 const hjarntorgetSAMLLoginResponse = await this.fetcher('hjarntorget-saml-login', hjarntorgetSAMLLoginUrl, {
                     method: 'POST',
                     redirect: 'follow',
@@ -76,7 +73,7 @@ export class HjarntorgetChecker extends EventEmitter {
                 if(!hjarntorgetSAMLLoginResponse.ok) {
                     throw new Error("Bad hjarntorgetSAMLLogin response")
                 }
-                // TODO: add some checks to see if everything is actually 'OK'...
+                // TODO: add more checks above between calls to see if everything is actually 'OK'...
                 this.emit('OK')
             } else if (isError) {
                 console.log("polling error")

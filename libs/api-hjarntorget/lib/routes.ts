@@ -20,21 +20,20 @@ export const shibbolethLoginUrlBase = (beginLoginRedirectUrl: string) => {
     const returnUrlStart = beginLoginRedirectUrl.indexOf('return=') + 'return='.length
     return decodeURIComponent(beginLoginRedirectUrl.substring(returnUrlStart))
 }
-export const shibbolethLoginUrl = (returnUrl: string, shibolethLoginParam: {entityID:string}) => {
-    const encodedLoginParams = new URLSearchParams(shibolethLoginParam).toString()
-    return `${returnUrl}&${encodedLoginParams}`
+
+export const shibbolethLoginUrl = (returnUrl: string) => {
+    return `${returnUrl}&entityID=${encodeURIComponent('https://auth.goteborg.se/FIM/sps/HjarntorgetEID/saml20')}`
 }
+
 export const initBankIdUrl = (shibbolethRedirectUrl: any) => {
     const targetParamIndex = shibbolethRedirectUrl.indexOf('Target=') + 'Target='.length
     const targetParam = decodeURIComponent(shibbolethRedirectUrl.substring(targetParamIndex))
     const initBankIdUrl = 'https://auth.goteborg.se/FIM/sps/BankID/saml20/logininitial?'
-    const initBankIdParams = new URLSearchParams({
-      ITFIM_WAYF_IDP: 'https://m00-mg-local.idp.funktionstjanster.se/samlv2/idp/metadata/0/34',
-      submit: 'Mobilt BankID',
-      ResponseBinding: 'HTTPPost',
-      RequestBinding: 'HTTPPost',
-      Target: targetParam,
-    }).toString()
+    const initBankIdParams =  `ITFIM_WAYF_IDP=${encodeURIComponent('https://m00-mg-local.idp.funktionstjanster.se/samlv2/idp/metadata/0/34')}` +
+      `&submit=Mobilt+BankID` +
+      `&ResponseBinding=HTTPPost` +
+      `&RequestBinding=HTTPPost` +
+      `&Target=${encodeURIComponent(targetParam)}` 
     return initBankIdUrl + initBankIdParams
   }
 

@@ -384,12 +384,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       redirect: 'follow'
     })
 
-    const shibbolethLoginParam = {
-      entityID: 'https://auth.goteborg.se/FIM/sps/HjarntorgetEID/saml20'
-    }
-
     console.log("prepping??? shibboleth")
-    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url), shibbolethLoginParam), {
+    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url)), {
       redirect: 'follow'
     })
 
@@ -403,7 +399,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const mvghostRequestBody = extractMvghostRequestBody(initBankIdResponseText)
 
     console.log("picking auth server???")
-
     let mvghostResponse = await this.fetch('pick-mvghost', mvghostUrl, {
       redirect: 'follow',
       method: 'POST',
@@ -417,7 +412,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     // We may get redirected to some other subdomain i.e. not 'm00-mg-local':
     // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/other
     
-    console.log("done waiting....")
     const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
     const beginBankIdResponse = await this.fetch('start-bankId', beginBankIdUrl((mvghostResponse as any).url), {
       redirect: 'follow',
