@@ -51,8 +51,6 @@ public class ReactNativeFlipper {
             public void apply(OkHttpClient.Builder builder) {
               builder.callTimeout(5000, TimeUnit.MILLISECONDS);
               builder.addNetworkInterceptor(new FlipperOkhttpInterceptor(networkFlipperPlugin));
-              @SuppressWarnings("KotlinInternalInJava") CookieJar cookieJar = builder.getCookieJar$okhttp();
-              builder.addNetworkInterceptor(new CookieInterceptor(cookieJar));
             }
           });
       client.addPlugin(networkFlipperPlugin);

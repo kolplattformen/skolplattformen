@@ -1,4 +1,4 @@
-package com.app;
+package org.skolplattformen.app;
 
 import android.util.Log;
 
