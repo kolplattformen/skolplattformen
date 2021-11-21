@@ -63,7 +63,8 @@
         "endTime": "Heure de fin",
         "selectAbscenseEndTime": "Choisissez l'heure de la fin",
         "entireDay": "Toute la journée",
-        "title": "Signaler une absence"
+        "title": "Signaler une absence",
+        "childsPersonalNumber": "Numéro national d’identité de l'enfant"
     },
     "notifications": {
         "notificationTitle": "Notification : {{message}} ({{dateCreated}})"
