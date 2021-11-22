@@ -157,7 +157,7 @@ export const Login = () => {
   return (
     <>
       <View style={styles.loginForm}>
-        {loginMethodIndex === 1 && (
+        {loginMethodIndex === 0 && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}

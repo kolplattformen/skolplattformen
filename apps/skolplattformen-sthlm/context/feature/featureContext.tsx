@@ -3,6 +3,7 @@ import React from 'react'
 
 export const FeatureFlagsContext = React.createContext<Features>({
   LOGIN_BANK_ID_SAME_DEVICE: false,
+  FOOD_MENU: false,
 })
 
 interface Props {
