@@ -31,6 +31,7 @@ export class HjarntorgetChecker extends EventEmitter {
             // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
             
             const pollStatusResponse = await this.fetcher('poll-bankid-status', pollStatusUrl(this.basePollingUrl))
+            console.log("poll-bankid-status")
             const pollStatusResponseJson = await pollStatusResponse.json()
 
             const keepPolling = pollStatusResponseJson.infotext !== ''
@@ -43,8 +44,10 @@ export class HjarntorgetChecker extends EventEmitter {
                 const signatureResponse = await this.fetcher('confirm-signature-redirect', pollStatusResponseJson.location, {
                     redirect: "follow"
                 })
+                if(!signatureResponse.ok) {
+                    throw new Error("Bad signature response")
+                }
                 const signatureResponseText = await signatureResponse.text()
-
                 const authGbgLoginBody = extractAuthGbgLoginRequestBody(signatureResponseText)
                 
                 console.log("authGbg saml login")
@@ -54,20 +57,23 @@ export class HjarntorgetChecker extends EventEmitter {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: authGbgLoginBody
                 })
+                if(!authGbgLoginResponse.ok) {
+                    throw new Error("Bad augGbgLogin response")
+                }
                 const authGbgLoginResponseText = await authGbgLoginResponse.text()
-
                 const hjarntorgetSAMLLoginBody = extractHjarntorgetSAMLLogin(authGbgLoginResponseText)
                 
                 console.log("hjarntorget saml login")
-
-                await this.fetcher('hjarntorget-saml-login', hjarntorgetSAMLLoginUrl, {
+                const hjarntorgetSAMLLoginResponse = await this.fetcher('hjarntorget-saml-login', hjarntorgetSAMLLoginUrl, {
                     method: 'POST',
                     redirect: 'follow',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: hjarntorgetSAMLLoginBody,
                 })
-
-                // TODO: add some checks to see if everything is actually 'OK'...
+                if(!hjarntorgetSAMLLoginResponse.ok) {
+                    throw new Error("Bad hjarntorgetSAMLLogin response")
+                }
+                // TODO: add more checks above between calls to see if everything is actually 'OK'...
                 this.emit('OK')
             } else if (isError) {
                 console.log("polling error")

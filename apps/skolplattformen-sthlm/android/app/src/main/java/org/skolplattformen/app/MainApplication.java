@@ -9,6 +9,9 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.modules.network.OkHttpClientProvider;
+import com.facebook.react.modules.network.ReactCookieJarContainer;
 import com.facebook.soloader.SoLoader;
 
 import java.io.IOException;
@@ -16,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
 
+import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -54,6 +58,14 @@ public class MainApplication extends Application implements ReactApplication {
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
         initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+        OkHttpClientProvider.setOkHttpClientFactory(() -> {
+            ReactContext currentReactContext = mReactNativeHost.getReactInstanceManager().getCurrentReactContext();
+            OkHttpClient.Builder builder = OkHttpClientProvider.createClientBuilder(currentReactContext);
+            @SuppressWarnings("KotlinInternalInJava") CookieJar cookieJar = builder.getCookieJar$okhttp();
+            builder.addNetworkInterceptor(new CookieInterceptor(cookieJar));
+            return builder.build();
+        });
     }
 
     /**
