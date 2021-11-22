@@ -3,6 +3,7 @@ import { Api, FetcherOptions, Fetch, RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
   wrapToughCookie } from '@skolplattformen/api'
+export { features } from './features'
 
 const init = (
   fetchImpl: Fetch,

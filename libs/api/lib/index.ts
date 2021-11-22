@@ -9,9 +9,9 @@ export {
     RNCookieManager,
     ToughCookieJar,
     wrapReactNativeCookieManager,
-    wrapToughCookie,
+    wrapToughCookie, 
 } from './cookies'
 export { URLSearchParams } from './URLSearchParams'
 
 export { wrap };
-export { Feature } from './features'
+export { FeatureType, Features } from './features'

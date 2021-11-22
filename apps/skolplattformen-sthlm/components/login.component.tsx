@@ -23,6 +23,7 @@ import {
 } from 'react-native'
 import { schema } from '../app.json'
 import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
+import { useFeature } from '../hooks/useFeature'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { useTranslation } from '../hooks/useTranslation'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -57,6 +58,7 @@ export const Login = () => {
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
 
+  const loginBankIdSameDevice = useFeature('LOGIN_BANK_ID_SAME_DEVICE')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
   )
@@ -66,10 +68,13 @@ export const Login = () => {
   const valid = Personnummer.valid(personalIdNumber)
 
   const loginMethods = [
-    t('auth.bankid.OpenOnThisDevice'),
     t('auth.bankid.OpenOnAnotherDevice'),
     t('auth.loginAsTestUser'),
   ]
+
+  if (loginBankIdSameDevice) {
+    loginMethods.unshift(t('auth.bankid.OpenOnThisDevice'))
+  }
 
   const schoolPlatforms = [
     {
