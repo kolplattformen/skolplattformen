@@ -23,7 +23,7 @@ function requestLogger(httpModule) {
   const path = require('path')
   const fs = require('fs')
   const { inspect } = require('util')
-  const init = require('./dist/api-hjarntorget/lib').default
+  const init = require('./dist/libs/api-hjarntorget/lib').default
   
   const [, , personalNumber] = process.argv
   
@@ -85,7 +85,7 @@ function requestLogger(httpModule) {
       console.log("inited...")
 
       api.on('login', async () => {
-        console.log("Loged in!")
+        console.log("Logged in!")
         await api.getUser()
         const children = await api.getChildren()
         const now = DateTime.fromJSDate(new Date)

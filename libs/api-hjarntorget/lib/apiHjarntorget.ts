@@ -151,7 +151,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getUser(): Promise<User> {
-
+    console.log("fetching user")
     const currentUserResponse = await this.fetch('current-user', currentUserUrl)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
@@ -165,7 +165,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
-
+    console.log("fetching children")
 
     const myChildrenResponse = await this.fetch('my-children', myChildrenUrl)
     const myChildrenResponseJson: any[] = await myChildrenResponse.json()
@@ -384,12 +384,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       redirect: 'follow'
     })
 
-    const shibbolethLoginParam = {
-      entityID: 'https://auth.goteborg.se/FIM/sps/HjarntorgetEID/saml20'
-    }
-
     console.log("prepping??? shibboleth")
-    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url), shibbolethLoginParam), {
+    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url)), {
       redirect: 'follow'
     })
 
@@ -403,20 +399,19 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const mvghostRequestBody = extractMvghostRequestBody(initBankIdResponseText)
 
     console.log("picking auth server???")
-    const mvghostResponse = await this.fetch('pick-mvghost', mvghostUrl, {
+    let mvghostResponse = await this.fetch('pick-mvghost', mvghostUrl, {
       redirect: 'follow',
       method: 'POST',
       body: mvghostRequestBody,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',    
       }
     })
 
     console.log("start bankid sign in")
     // We may get redirected to some other subdomain i.e. not 'm00-mg-local':
     // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/other
-
-
+    
     const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
     const beginBankIdResponse = await this.fetch('start-bankId', beginBankIdUrl((mvghostResponse as any).url), {
       redirect: 'follow',
@@ -428,7 +423,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     })
 
     console.log("start polling")
-
     const statusChecker = checkStatus(this.fetch, verifyUrlBase((beginBankIdResponse as any).url))
 
     statusChecker.on('OK', async () => {
@@ -441,7 +435,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     statusChecker.on('ERROR', () => {
       this.personalNumber = undefined
     })
-
+    
     return statusChecker
   }
 

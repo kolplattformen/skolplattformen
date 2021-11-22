@@ -15,23 +15,18 @@ export function extractMvghostRequestBody(initBankIdResponseText: string) {
   const inputAttrs = doc.querySelectorAll('input').map(i => (i as any).rawAttrs)
   const relayState = extractInputField('RelayState', inputAttrs)
   const samlRequest = extractInputField("SAMLRequest", inputAttrs)
-  const mvghostRequestBody = new URLSearchParams({ 
-    RelayState: relayState, 
-    SAMLRequest: samlRequest 
-  }).toString()
+  const mvghostRequestBody = `RelayState=${encodeURIComponent(relayState)}&SAMLRequest=${encodeURIComponent(samlRequest)}`
+  
   return mvghostRequestBody
 }
 
 export function extractHjarntorgetSAMLLogin(authGbgLoginResponseText: string) {
   const authGbgLoginDoc = html.parse(decode(authGbgLoginResponseText))
   const inputAttrs = authGbgLoginDoc.querySelectorAll('input').map(i => (i as any).rawAttrs)
-  const relayState = extractInputField('RelayState', inputAttrs)
-  const samlResponse = extractInputField("SAMLResponse", inputAttrs)
-  const hjarntorgetSAMLLoginRequestBody = new URLSearchParams({ 
-    RelayState: relayState, 
-    SAMLResponse: samlResponse 
-  }).toString()
-  return hjarntorgetSAMLLoginRequestBody
+  const RelayStateText = extractInputField('RelayState', inputAttrs)
+  const SAMLResponseText = extractInputField("SAMLResponse", inputAttrs)
+
+  return `SAMLResponse=${encodeURIComponent(SAMLResponseText || '')}&RelayState=${encodeURIComponent(RelayStateText || '')}`
 }
 
 export function extractAuthGbgLoginRequestBody(signatureResponseText: string) {
@@ -42,16 +37,12 @@ export function extractAuthGbgLoginRequestBody(signatureResponseText: string) {
     return nameAttr === 'SAMLResponse'
   })
   const SAMLResponseText = SAMLResponseElem?.rawText
-
   const RelayStateElem = signatureResponseTextAreas.find(ta => {
     const nameAttr = ta.getAttribute("name")
     return nameAttr === 'RelayState'
   })
   const RelayStateText = RelayStateElem?.rawText
-  const authGbgLoginBody = new URLSearchParams({
-    'SAMLResponse': SAMLResponseText || '',
-    'RelayState': RelayStateText || '',
-  }).toString()
+  const authGbgLoginBody = `SAMLResponse=${encodeURIComponent(SAMLResponseText || '')}&RelayState=${encodeURIComponent(RelayStateText || '')}`
   return authGbgLoginBody
 }
 
