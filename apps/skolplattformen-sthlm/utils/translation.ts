@@ -26,7 +26,7 @@ export const languages: Language[] = [
   {
     langCode: 'zh_Hant',
     languageName: 'Chinese (traditional)',
-    languageLocalName: '中國傳統的',
+    languageLocalName: '繁體中文',
     locale: 'zh-cn',
     active: true,
   },
