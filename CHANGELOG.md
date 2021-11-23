@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/kolplattformen/skolplattformen/compare/v2.2.0...v2.2.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* 🐛 spelling of chinese traditional in chinese traditional ([a28fd97](https://github.com/kolplattformen/skolplattformen/commit/a28fd97fe7907a591dc92f5ddeccf1045b4f794b))
+
 # [2.2.0](https://github.com/kolplattformen/skolplattformen/compare/v2.1.0...v2.2.0) (2021-11-23)
 
 
