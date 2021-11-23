@@ -42,6 +42,18 @@ const BankId = () => (
   />
 )
 
+interface Logins {
+  BANKID_SAME_DEVICE: number
+  BANKID_ANOTHER_DEVICE: number
+  TEST_USER: number
+}
+
+const LoginMethods: Logins = {
+  BANKID_SAME_DEVICE: 0,
+  BANKID_ANOTHER_DEVICE: 2,
+  TEST_USER: 3,
+}
+
 export const Login = () => {
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
@@ -68,14 +80,16 @@ export const Login = () => {
   const valid = Personnummer.valid(personalIdNumber)
 
   const loginMethods = [
+    t('auth.bankid.OpenOnThisDevice'),
     t('auth.bankid.OpenOnAnotherDevice'),
     t('auth.loginAsTestUser'),
   ]
 
-  if (loginBankIdSameDevice) {
-    loginMethods.unshift(t('auth.bankid.OpenOnThisDevice'))
-  }
+  //if (loginBankIdSameDevice) {
+  //    loginMethods.unshift(t('auth.bankid.OpenOnThisDevice'))
+  //}
 
+  // move this to a central location?
   const schoolPlatforms = [
     {
       id: 'stockholm-skolplattformen',
@@ -316,31 +330,3 @@ export const Login = () => {
     </>
   )
 }
-
-const themedStyles = StyleService.create({
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  loginForm: {
-    ...LayoutStyle.mainAxis.flexStart,
-    width: '100%',
-  },
-  pnrInput: { minHeight: 70 },
-  loginButtonGroup: {
-    minHeight: 45,
-  },
-  loginButton: { ...LayoutStyle.flex.full },
-  loginMethodButton: { width: 45 },
-  modal: {
-    width: '90%',
-  },
-  bankIdLoading: { margin: 10 },
-  cancelButtonStyle: { marginTop: 15 },
-  icon: {
-    width: 20,
-    height: 20,
-  },
-  platformPicker: {
-    width: '100%',
-  },
-})

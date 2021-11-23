@@ -77,6 +77,7 @@ export default () => {
   const systemTheme = useColorScheme()
   const colorScheme = usingSystemTheme ? systemTheme : theme
 
+  // Crash
   //const api = ApiList.get(currentSchoolPlatform)!
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const api = ApiList.get('goteborg-hjarntorget')!
