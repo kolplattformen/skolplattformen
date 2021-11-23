@@ -23,6 +23,7 @@ import {
 } from 'react-native'
 import { schema } from '../app.json'
 import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
+import { useFeature } from '../hooks/useFeature'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { useTranslation } from '../hooks/useTranslation'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
@@ -41,6 +42,18 @@ const BankId = () => (
   />
 )
 
+interface Logins {
+  BANKID_SAME_DEVICE: number
+  BANKID_ANOTHER_DEVICE: number
+  TEST_USER: number
+}
+
+const LoginMethods: Logins = {
+  BANKID_SAME_DEVICE: 0,
+  BANKID_ANOTHER_DEVICE: 2,
+  TEST_USER: 3,
+}
+
 export const Login = () => {
   const { api } = useApi()
   const [cancelLoginRequest, setCancelLoginRequest] = useState<
@@ -57,6 +70,7 @@ export const Login = () => {
   const [loginMethodIndex, setLoginMethodIndex] =
     useSettingsStorage('loginMethodIndex')
 
+  const loginBankIdSameDevice = useFeature('LOGIN_BANK_ID_SAME_DEVICE')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
   )
@@ -71,6 +85,11 @@ export const Login = () => {
     t('auth.loginAsTestUser'),
   ]
 
+  //if (loginBankIdSameDevice) {
+  //    loginMethods.unshift(t('auth.bankid.OpenOnThisDevice'))
+  //}
+
+  // move this to a central location?
   const schoolPlatforms = [
     {
       id: 'stockholm-skolplattformen',
@@ -152,7 +171,7 @@ export const Login = () => {
   return (
     <>
       <View style={styles.loginForm}>
-        {loginMethodIndex === 1 && (
+        {loginMethodIndex === 0 && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}
@@ -311,31 +330,3 @@ export const Login = () => {
     </>
   )
 }
-
-const themedStyles = StyleService.create({
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  loginForm: {
-    ...LayoutStyle.mainAxis.flexStart,
-    width: '100%',
-  },
-  pnrInput: { minHeight: 70 },
-  loginButtonGroup: {
-    minHeight: 45,
-  },
-  loginButton: { ...LayoutStyle.flex.full },
-  loginMethodButton: { width: 45 },
-  modal: {
-    width: '90%',
-  },
-  bankIdLoading: { margin: 10 },
-  cancelButtonStyle: { marginTop: 15 },
-  icon: {
-    width: 20,
-    height: 20,
-  },
-  platformPicker: {
-    width: '100%',
-  },
-})
