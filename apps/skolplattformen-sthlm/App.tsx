@@ -1,36 +1,20 @@
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import CookieManager from '@react-native-cookies/cookies'
-import initSkolplattformen, {
-  features as featuresSkolplattformen,
-} from '@skolplattformen/api-skolplattformen'
-import initHjarntorget, {
-  features as featuresHjarntorget,
-} from '@skolplattformen/api-hjarntorget'
-
-import { ApiProvider } from '@skolplattformen/hooks'
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
+import { ApiProvider, Reporter } from '@skolplattformen/hooks'
+import { ApplicationProvider, IconRegistry, Text } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
-import React, { useEffect, useState } from 'react'
-import { StatusBar, useColorScheme } from 'react-native'
+import React from 'react'
+import { StatusBar, useColorScheme, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AppNavigator } from './components/navigation.component'
+import { FeatureProvider } from './context/feature/featureContext'
 import { LanguageProvider } from './context/language/languageContext'
 import { SchoolPlatformProvider } from './context/schoolPlatform/schoolPlatformContext'
+import { schoolPlatforms } from './data/schoolPlatforms'
 import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
 import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
-import { Reporter } from '@skolplattformen/hooks'
-import { Api } from '@skolplattformen/api'
-import { FeatureProvider } from './context/feature/featureContext'
-
-const ApiList = new Map<string, Api>([
-  // @ts-expect-error Why is fetch failing here?
-  ['stockholm-skolplattformen', initSkolplattformen(fetch, CookieManager)],
-  // @ts-expect-error Why is fetch failing here?
-  ['goteborg-hjarntorget', initHjarntorget(fetch, CookieManager)],
-])
 
 const reporter: Reporter | undefined = __DEV__
   ? {
@@ -77,15 +61,23 @@ export default () => {
   const systemTheme = useColorScheme()
   const colorScheme = usingSystemTheme ? systemTheme : theme
 
-  // Crash
-  //const api = ApiList.get(currentSchoolPlatform)!
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const api = ApiList.get('goteborg-hjarntorget')!
+  const platform = schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform)
+
+  if (!platform)
+    return (
+      <View>
+        <Text>ERROR</Text>
+      </View>
+    )
 
   return (
-    <FeatureProvider features={featuresHjarntorget}>
+    <FeatureProvider features={platform.features}>
       <SchoolPlatformProvider>
-        <ApiProvider api={api} storage={AsyncStorage} reporter={reporter}>
+        <ApiProvider
+          api={platform.api}
+          storage={AsyncStorage}
+          reporter={reporter}
+        >
           <SafeAreaProvider>
             <StatusBar
               backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
