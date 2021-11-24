@@ -20,15 +20,6 @@ export interface CookieManager {
   removeAllCookies?: () => Promise<void>
 }
 
-export interface RequestInit {
-  headers?: any
-  method?: string
-  body?: string
-  /**
-   * Set to `manual` to extract redirect headers, `error` to reject redirect */
-  redirect?: string
-}
-
 export interface Headers {
   get(name: string): string | null
 }
@@ -40,10 +31,6 @@ export interface Response {
   statusText: string
   text: () => Promise<string>
   json: () => Promise<any>
-}
-
-export interface Fetch {
-  (url: string, init?: RequestInit): Promise<Response>
 }
 
 export interface AuthTicket {

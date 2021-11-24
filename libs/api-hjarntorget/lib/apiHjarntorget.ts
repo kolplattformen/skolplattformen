@@ -1,78 +1,78 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DateTime, FixedOffsetZone } from 'luxon'
-import { EventEmitter } from 'events'
-import * as html from 'node-html-parser'
-import { decode } from 'he'
-import { toMarkdown, Api, URLSearchParams, LoginStatusChecker,  CalendarItem,
+import {
+  Api,
+  CalendarItem,
   Classmate,
   CookieManager,
   EtjanstChild,
-  Fetch,
+  Fetcher,
+  FetcherOptions,
+  LoginStatusChecker,
   MenuItem,
   NewsItem,
   Notification,
   ScheduleItem,
   Skola24Child,
   TimetableEntry,
+  toMarkdown,
+  URLSearchParams,
   User,
-  Fetcher, 
-  FetcherOptions, 
-  wrap
+  wrap,
 } from '@skolplattformen/api'
+import { EventEmitter } from 'events'
+import { decode } from 'he'
+import { DateTime, FixedOffsetZone } from 'luxon'
+import * as html from 'node-html-parser'
+import { fakeFetcher } from './fake/fakeFetcher'
 import { checkStatus } from './loginStatus'
 import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
 import {
-  beginLoginUrl,
   beginBankIdUrl,
+  beginLoginUrl,
+  calendarEventUrl,
+  calendarsUrl,
   currentUserUrl,
-  initBankIdUrl,
   fullImageUrl,
   hjarntorgetEventsUrl,
   hjarntorgetUrl,
   infoSetReadUrl,
   infoUrl,
+  initBankIdUrl,
   lessonsUrl,
   membersWithRoleUrl,
   mvghostUrl,
   myChildrenUrl,
-  shibbolethLoginUrlBase,
   rolesInEventUrl,
   shibbolethLoginUrl,
+  shibbolethLoginUrlBase,
   verifyUrlBase,
   wallMessagesUrl,
-  calendarsUrl,
-  calendarEventUrl
 } from './routes'
-import { fakeFetcher } from './fake/fakeFetcher'
 
-
-function getDateOfISOWeek(week: number, year: number,) {
+function getDateOfISOWeek(week: number, year: number) {
   const simple = new Date(year, 0, 1 + (week - 1) * 7)
   const dow = simple.getDay()
   const ISOweekStart = simple
-  if (dow <= 4)
-    ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
-  else
-    ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
+  if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
+  else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
   return ISOweekStart
 }
 
-
 export class ApiHjarntorget extends EventEmitter implements Api {
   private fetch: Fetcher
-  private realFetcher: Fetcher 
+  private realFetcher: Fetcher
 
   private personalNumber?: string
 
   private cookieManager: CookieManager
 
-  public isLoggedIn: boolean = false
+  public isLoggedIn = false
 
-  private _isFake: boolean = false;
+  private _isFake = false
 
   public set isFake(fake: boolean) {
     this._isFake = fake
-    if(this._isFake) {
+    if (this._isFake) {
       this.fetch = fakeFetcher
     } else {
       this.fetch = this.realFetcher
@@ -84,36 +84,42 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   constructor(
-    fetch: Fetch,
+    fetch: typeof global.fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {
     super()
-    this.fetch = wrap(fetch, options);
-    this.realFetcher = this.fetch;
+    this.fetch = wrap(fetch, options)
+    this.realFetcher = this.fetch
     this.cookieManager = cookieManager
   }
 
   public replaceFetcher(fetcher: Fetcher) {
-    this.fetch = fetcher;
+    this.fetch = fetcher
   }
 
-  async getSchedule(child: EtjanstChild, from: DateTime, to: DateTime): Promise<(CalendarItem & ScheduleItem)[]> {
-
+  async getSchedule(
+    child: EtjanstChild,
+    from: DateTime,
+    to: DateTime
+  ): Promise<(CalendarItem & ScheduleItem)[]> {
     const lessonParams = {
       forUser: child.id,
       startDateIso: from.toISODate(),
       endDateIso: to.toISODate(),
     }
-    const lessonsResponse = await this.fetch(`lessons-${lessonParams.forUser}`, lessonsUrl(lessonParams))
+    const lessonsResponse = await this.fetch(
+      `lessons-${lessonParams.forUser}`,
+      lessonsUrl(lessonParams)
+    )
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
-    return lessonsResponseJson.map(l => {
+    return lessonsResponseJson.map((l) => {
       const start = DateTime.fromMillis(l.startDate.ts, {
-        zone: FixedOffsetZone.instance(l.startDate.timezoneOffsetMinutes)
+        zone: FixedOffsetZone.instance(l.startDate.timezoneOffsetMinutes),
       })
       const end = DateTime.fromMillis(l.endDate.ts, {
-        zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes)
+        zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes),
       })
       return {
         id: l.id,
@@ -133,7 +139,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async setSessionCookie(sessionCookie: string): Promise<void> {
-
     await this.fetch('login-cookie', hjarntorgetUrl, {
       headers: {
         cookie: sessionCookie,
@@ -151,7 +156,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getUser(): Promise<User> {
-    console.log("fetching user")
+    console.log('fetching user')
     const currentUserResponse = await this.fetch('current-user', currentUserUrl)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
@@ -165,60 +170,70 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
-    console.log("fetching children")
+    console.log('fetching children')
 
     const myChildrenResponse = await this.fetch('my-children', myChildrenUrl)
     const myChildrenResponseJson: any[] = await myChildrenResponse.json()
 
-    return myChildrenResponseJson.map(c => ({
-      id: c.id,
-      sdsId: c.id,
-      personGuid: c.id,
-      firstName: c.firstName,
-      lastName: c.lastName,
-      name: `${c.firstName} ${c.lastName}`,
-    } as (Skola24Child & EtjanstChild)))
+    return myChildrenResponseJson.map(
+      (c) =>
+        ({
+          id: c.id,
+          sdsId: c.id,
+          personGuid: c.id,
+          firstName: c.firstName,
+          lastName: c.lastName,
+          name: `${c.firstName} ${c.lastName}`,
+        } as Skola24Child & EtjanstChild)
+    )
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
-    const childEventsAndMembers = await this.getChildEventsWithAssociatedMembers(child)
+    const childEventsAndMembers =
+      await this.getChildEventsWithAssociatedMembers(child)
 
-    // This fetches the calendars search page on Hjärntorget. 
+    // This fetches the calendars search page on Hjärntorget.
     // It is used (at least at one school) for homework schedule
-    // The Id for the "event" that the calendar belongs to is not the same as the ones 
+    // The Id for the "event" that the calendar belongs to is not the same as the ones
     // fetched using the API... So we match them by name :/
     const calendarsResponse = await this.fetch('calendars', calendarsUrl)
     const calendarsResponseText = await calendarsResponse.text()
     const calendarsDoc = html.parse(decode(calendarsResponseText))
-    const calendarCheckboxes = Array.from(calendarsDoc.querySelectorAll('.calendarPageContainer input.checkbox'))
+    const calendarCheckboxes = Array.from(
+      calendarsDoc.querySelectorAll('.calendarPageContainer input.checkbox')
+    )
 
     let calendarItems: CalendarItem[] = []
     for (let i = 0; i < calendarCheckboxes.length; i++) {
-      const calendarId = calendarCheckboxes[i].getAttribute('value') || ""
+      const calendarId = calendarCheckboxes[i].getAttribute('value') || ''
 
       const today = DateTime.fromJSDate(new Date())
       const start = today.toISODate()
       const end = today.plus({ days: 30 }).toISODate()
-      const calendarResponse = await this.fetch(`calendar-${calendarId}`, calendarEventUrl(calendarId, start, end))
+      const calendarResponse = await this.fetch(
+        `calendar-${calendarId}`,
+        calendarEventUrl(calendarId, start, end)
+      )
       const calendarResponseText = await calendarResponse.text()
       const calendarDoc = html.parse(decode(calendarResponseText))
 
-      const calendarRows = Array.from(calendarDoc.querySelectorAll('.default-table tr'))
+      const calendarRows = Array.from(
+        calendarDoc.querySelectorAll('.default-table tr')
+      )
       if (!calendarRows.length) {
         continue
       }
 
       calendarRows.shift()
       const eventName = calendarRows.shift()?.textContent
-      if (childEventsAndMembers.some(e => e.name === eventName)) {
-
+      if (childEventsAndMembers.some((e) => e.name === eventName)) {
         const items: CalendarItem[] = calendarRows.map(parseCalendarItem)
 
         calendarItems = calendarItems.concat(items)
       }
     }
 
-    return calendarItems;
+    return calendarItems
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -239,11 +254,11 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const infoResponse = await this.fetch('info', infoUrl)
     const infoResponseJson: any[] = await infoResponse.json()
     // TODO: Filter out read messages?
-    return infoResponseJson.map(i => {
-      const body = html.parse(decode(i.body || ""))
+    return infoResponseJson.map((i) => {
+      const body = html.parse(decode(i.body || ''))
       const bodyText = toMarkdown(i.body)
 
-      const introText = body.innerText || ""
+      const introText = body.innerText || ''
       const publishedDate = new Date(i.created.ts)
 
       return {
@@ -254,13 +269,12 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         body: bodyText,
         published: publishedDate.toISOString(),
         modified: publishedDate.toISOString(),
-        fullImageUrl: i.creator && fullImageUrl(i.creator.imagePath)
+        fullImageUrl: i.creator && fullImageUrl(i.creator.imagePath),
       }
     })
   }
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
-
     await this.fetch('infoSetReadUrl', infoSetReadUrl(item), {
       method: 'POST',
     })
@@ -278,41 +292,73 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getChildEventsWithAssociatedMembers(child: EtjanstChild) {
-    const hjarntorgetEventsResponse = await this.fetch('events', hjarntorgetEventsUrl)
-    const hjarntorgetEventsResponseJson: any[] = await hjarntorgetEventsResponse.json()
-    const membersInEvents = await Promise.all(hjarntorgetEventsResponseJson.filter(e => e.state === 'ONGOING')
-      .map(async e => {
-        const eventId = e.id as number
+    const hjarntorgetEventsResponse = await this.fetch(
+      'events',
+      hjarntorgetEventsUrl
+    )
+    const hjarntorgetEventsResponseJson: any[] =
+      await hjarntorgetEventsResponse.json()
+    const membersInEvents = await Promise.all(
+      hjarntorgetEventsResponseJson
+        .filter((e) => e.state === 'ONGOING')
+        .map(async (e) => {
+          const eventId = e.id as number
 
-        const rolesInEvenResponse = await this.fetch(`roles-in-event-${eventId}`, rolesInEventUrl(eventId))
-        const rolesInEvenResponseJson: any[] = await rolesInEvenResponse.json()
+          const rolesInEvenResponse = await this.fetch(
+            `roles-in-event-${eventId}`,
+            rolesInEventUrl(eventId)
+          )
+          const rolesInEvenResponseJson: any[] =
+            await rolesInEvenResponse.json()
 
-        const eventMembers = await Promise.all(rolesInEvenResponseJson.map(async r => {
-          const roleId = r.id
-          const membersWithRoleResponse = await this.fetch(`event-role-members-${eventId}-${roleId}`, membersWithRoleUrl(eventId, roleId))
-          const membersWithRoleResponseJson: any[] = await membersWithRoleResponse.json()
-          return membersWithRoleResponseJson
-        }))
-        return { eventId, name: e.name as string, eventMembers: ([] as any[]).concat(...eventMembers) }
-      }))
-    return membersInEvents
-      .filter(e => e.eventMembers.find(p => p.id === child.id))
+          const eventMembers = await Promise.all(
+            rolesInEvenResponseJson.map(async (r) => {
+              const roleId = r.id
+              const membersWithRoleResponse = await this.fetch(
+                `event-role-members-${eventId}-${roleId}`,
+                membersWithRoleUrl(eventId, roleId)
+              )
+              const membersWithRoleResponseJson: any[] =
+                await membersWithRoleResponse.json()
+              return membersWithRoleResponseJson
+            })
+          )
+          return {
+            eventId,
+            name: e.name as string,
+            eventMembers: ([] as any[]).concat(...eventMembers),
+          }
+        })
+    )
+    return membersInEvents.filter((e) =>
+      e.eventMembers.find((p) => p.id === child.id)
+    )
   }
 
   async getNotifications(child: EtjanstChild): Promise<Notification[]> {
+    const childEventsAndMembers =
+      await this.getChildEventsWithAssociatedMembers(child)
+    const membersInChildsEvents = childEventsAndMembers.reduce(
+      (acc, e) => acc.concat(e.eventMembers),
+      [] as any[]
+    )
 
-    const childEventsAndMembers = await this.getChildEventsWithAssociatedMembers(child)
-    const membersInChildsEvents = childEventsAndMembers.reduce((acc, e) => acc.concat(e.eventMembers), ([] as any[]))
-
-    const wallMessagesResponse = await this.fetch('wall-events', wallMessagesUrl)
+    const wallMessagesResponse = await this.fetch(
+      'wall-events',
+      wallMessagesUrl
+    )
     const wallMessagesResponseJson: any[] = await wallMessagesResponse.json()
-    return wallMessagesResponseJson.filter(message =>
-      membersInChildsEvents.find(member => member.id === message.creator.id))
-      .map(message => {
+    return wallMessagesResponseJson
+      .filter((message) =>
+        membersInChildsEvents.find((member) => member.id === message.creator.id)
+      )
+      .map((message) => {
         const createdDate = new Date(message.created.ts)
         return {
           id: message.id,
-          sender: message.creator && `${message.creator.firstName} ${message.creator.lastName}`,
+          sender:
+            message.creator &&
+            `${message.creator.firstName} ${message.creator.lastName}`,
           dateCreated: createdDate.toISOString(),
           message: message.body,
           url: message.url,
@@ -323,7 +369,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       })
   }
 
-  async getSkola24Children(): Promise<(Skola24Child)[]> {
+  async getSkola24Children(): Promise<Skola24Child[]> {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
@@ -331,8 +377,12 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getTimetable(child: Skola24Child, week: number, year: number, _lang: string): Promise<TimetableEntry[]> {
-
+  async getTimetable(
+    child: Skola24Child,
+    week: number,
+    year: number,
+    _lang: string
+  ): Promise<TimetableEntry[]> {
     const startDate = DateTime.fromJSDate(getDateOfISOWeek(week, year))
     const endDate = startDate.plus({ days: 7 })
 
@@ -341,15 +391,18 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       startDateIso: startDate.toISODate(),
       endDateIso: endDate.toISODate(),
     }
-    const lessonsResponse = await this.fetch(`lessons-${lessonParams.forUser}`, lessonsUrl(lessonParams))
+    const lessonsResponse = await this.fetch(
+      `lessons-${lessonParams.forUser}`,
+      lessonsUrl(lessonParams)
+    )
     const lessonsResponseJson: any[] = await lessonsResponse.json()
 
-    return lessonsResponseJson.map(l => {
+    return lessonsResponseJson.map((l) => {
       const start = DateTime.fromMillis(l.startDate.ts, {
-        zone: FixedOffsetZone.instance(l.startDate.timezoneOffsetMinutes)
+        zone: FixedOffsetZone.instance(l.startDate.timezoneOffsetMinutes),
       })
       const end = DateTime.fromMillis(l.endDate.ts, {
-        zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes)
+        zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes),
       })
       return {
         id: l.id,
@@ -363,7 +416,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         dateEnd: start.toISODate(),
       } as TimetableEntry
     })
-
   }
 
   async logout(): Promise<void> {
@@ -375,55 +427,77 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
   public async login(personalNumber?: string): Promise<LoginStatusChecker> {
     // short circut the bank-id login if in fake mode
-    if (personalNumber !== undefined && personalNumber.endsWith('1212121212')) return this.fakeMode()
+    if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
+      return this.fakeMode()
 
     this.isFake = false
 
-    console.log("initiating login to hjarntorget")
-    const beginLoginRedirectResponse = await this.fetch('begin-login', beginLoginUrl, {
-      redirect: 'follow'
-    })
+    console.log('initiating login to hjarntorget')
+    const beginLoginRedirectResponse = await this.fetch(
+      'begin-login',
+      beginLoginUrl,
+      {
+        redirect: 'follow',
+      }
+    )
 
-    console.log("prepping??? shibboleth")
-    const shibbolethLoginResponse = await this.fetch('init-shibboleth-login', shibbolethLoginUrl(shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url)), {
-      redirect: 'follow'
-    })
+    console.log('prepping??? shibboleth')
+    const shibbolethLoginResponse = await this.fetch(
+      'init-shibboleth-login',
+      shibbolethLoginUrl(
+        shibbolethLoginUrlBase((beginLoginRedirectResponse as any).url)
+      ),
+      {
+        redirect: 'follow',
+      }
+    )
 
     const shibbolethRedirectUrl = (shibbolethLoginResponse as any).url
-    console.log("initiating bankid...")
-    const initBankIdResponse = await this.fetch('init-bankId', initBankIdUrl(shibbolethRedirectUrl), {
-      redirect: 'follow'
-    })
+    console.log('initiating bankid...')
+    const initBankIdResponse = await this.fetch(
+      'init-bankId',
+      initBankIdUrl(shibbolethRedirectUrl),
+      {
+        redirect: 'follow',
+      }
+    )
 
     const initBankIdResponseText = await initBankIdResponse.text()
     const mvghostRequestBody = extractMvghostRequestBody(initBankIdResponseText)
 
-    console.log("picking auth server???")
-    let mvghostResponse = await this.fetch('pick-mvghost', mvghostUrl, {
+    console.log('picking auth server???')
+    const mvghostResponse = await this.fetch('pick-mvghost', mvghostUrl, {
       redirect: 'follow',
       method: 'POST',
       body: mvghostRequestBody,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',    
-      }
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
     })
 
-    console.log("start bankid sign in")
+    console.log('start bankid sign in')
     // We may get redirected to some other subdomain i.e. not 'm00-mg-local':
     // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/other
-    
-    const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
-    const beginBankIdResponse = await this.fetch('start-bankId', beginBankIdUrl((mvghostResponse as any).url), {
-      redirect: 'follow',
-      method: 'POST',
-      body: ssnBody,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
 
-    console.log("start polling")
-    const statusChecker = checkStatus(this.fetch, verifyUrlBase((beginBankIdResponse as any).url))
+    const ssnBody = new URLSearchParams({ ssn: personalNumber }).toString()
+    const beginBankIdResponse = await this.fetch(
+      'start-bankId',
+      beginBankIdUrl((mvghostResponse as any).url),
+      {
+        redirect: 'follow',
+        method: 'POST',
+        body: ssnBody,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    )
+
+    console.log('start polling')
+    const statusChecker = checkStatus(
+      this.fetch,
+      verifyUrlBase((beginBankIdResponse as any).url)
+    )
 
     statusChecker.on('OK', async () => {
       // setting these similar to how the sthlm api does it
@@ -435,7 +509,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     statusChecker.on('ERROR', () => {
       this.personalNumber = undefined
     })
-    
+
     return statusChecker
   }
 
