@@ -23,6 +23,7 @@
             "Waiting": "Väntar på BankID…"
         },
         "chooseLoginMethod": "Välj inloggningsmetod",
+        "chooseSchoolPlatform": "Välj plattform",
         "loginAsTestUser": "Logga in som testanvändare",
         "loginFailed": "Inloggningen misslyckades, försök igen!",
         "placeholder_SocialSecurityNumber": "Ditt personnummer",

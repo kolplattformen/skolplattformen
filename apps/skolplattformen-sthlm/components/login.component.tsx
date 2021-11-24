@@ -309,6 +309,9 @@ export const Login = () => {
         backdropStyle={styles.backdrop}
       >
         <Card>
+          <Text category="h5" style={styles.bankIdLoading}>
+            {t('auth.chooseSchoolPlatform')}
+          </Text>
           <List
             data={schoolPlatforms}
             ItemSeparatorComponent={Divider}
@@ -326,6 +329,13 @@ export const Login = () => {
               />
             )}
           />
+          <Button
+            status="basic"
+            style={styles.cancelButtonStyle}
+            onPress={() => setShowSchoolPlatformPicker(false)}
+          >
+            {t('general.cancel')}
+          </Button>
         </Card>
       </Modal>
     </>
