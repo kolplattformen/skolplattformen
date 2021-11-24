@@ -23,10 +23,11 @@ import {
 } from 'react-native'
 import { schema } from '../app.json'
 import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
+import { schoolPlatforms } from '../data/schoolPlatforms'
 import { useFeature } from '../hooks/useFeature'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { useTranslation } from '../hooks/useTranslation'
-import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { Layout } from '../styles'
 import {
   CheckIcon,
   CloseOutlineIcon,
@@ -67,39 +68,32 @@ export const Login = () => {
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
-  const [loginMethodIndex, setLoginMethodIndex] =
-    useSettingsStorage('loginMethodIndex')
+  const [loginMethodId, setLoginMethodId] = useSettingsStorage('loginMethodId')
 
   const loginBankIdSameDevice = useFeature('LOGIN_BANK_ID_SAME_DEVICE')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
   )
 
+  console.log({ loginBankIdSameDevice })
+
   const { t } = useTranslation()
 
   const valid = Personnummer.valid(personalIdNumber)
 
   const loginMethods = [
-    t('auth.bankid.OpenOnThisDevice'),
-    t('auth.bankid.OpenOnAnotherDevice'),
-    t('auth.loginAsTestUser'),
-  ]
-
-  //if (loginBankIdSameDevice) {
-  //    loginMethods.unshift(t('auth.bankid.OpenOnThisDevice'))
-  //}
-
-  // move this to a central location?
-  const schoolPlatforms = [
     {
-      id: 'stockholm-skolplattformen',
-      displayName: 'Stockholm stad (Skolplattformen)',
+      id: 'thisdevice',
+      title: t('auth.bankid.OpenOnThisDevice'),
+      enabled: loginBankIdSameDevice,
     },
     {
-      id: 'goteborg-hjarnkontoret',
-      displayName: 'Göteborg stad (Hjärntorget)',
+      id: 'otherdevice',
+      title: t('auth.bankid.OpenOnAnotherDevice'),
+      enabled: true,
     },
-  ]
+    { id: 'testuser', title: t('auth.loginAsTestUser'), enabled: true },
+  ] as const
 
   const loginHandler = async () => {
     showModal(false)
@@ -124,7 +118,8 @@ export const Login = () => {
 
   const openBankId = (token: string) => {
     try {
-      const redirect = loginMethodIndex === 0 ? encodeURIComponent(schema) : ''
+      const redirect =
+        loginMethodId === 'thisdevice' ? encodeURIComponent(schema) : ''
       const bankIdUrl =
         Platform.OS === 'ios'
           ? `https://app.bankid.com/?autostarttoken=${token}&redirect=${redirect}`
@@ -136,18 +131,18 @@ export const Login = () => {
   }
 
   const startLogin = async (text: string) => {
-    if (loginMethodIndex < 2) {
+    if (loginMethodId === 'thisdevice' || loginMethodId === 'otherdevice') {
       showModal(true)
 
       let ssn
-      if (loginMethodIndex === 1) {
+      if (loginMethodId === 'otherdevice') {
         ssn = Personnummer.parse(text).format(true)
         setPersonalIdNumber(ssn)
       }
 
       const status = await api.login(ssn)
       setCancelLoginRequest(() => () => status.cancel())
-      if (status.token !== 'fake' && loginMethodIndex === 0) {
+      if (status.token !== 'fake' && loginMethodId === 'thisdevice') {
         openBankId(status.token)
       }
       status.on('PENDING', () => console.log('BankID app not yet opened'))
@@ -168,10 +163,16 @@ export const Login = () => {
 
   const styles = useStyleSheet(themedStyles)
 
+  const enabledLoginMethods = loginMethods.filter((method) => method.enabled)
+
+  const currentLoginMethod =
+    enabledLoginMethods.find((method) => method.id === loginMethodId) ||
+    enabledLoginMethods[0]
+
   return (
     <>
       <View style={styles.loginForm}>
-        {loginMethodIndex === 0 && (
+        {loginMethodId === 'otherdevice' && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}
@@ -206,12 +207,12 @@ export const Login = () => {
             onPress={() => startLogin(personalIdNumber)}
             style={styles.loginButton}
             appearance="ghost"
-            disabled={loginMethodIndex === 1 && !valid}
+            disabled={loginMethodId === 'otherdevice' && !valid}
             status="primary"
             accessoryLeft={BankId}
             size="medium"
           >
-            {loginMethods[loginMethodIndex]}
+            {currentLoginMethod.title}
           </Button>
           <Button
             accessible={true}
@@ -253,17 +254,17 @@ export const Login = () => {
             {t('auth.chooseLoginMethod')}
           </Text>
           <List
-            data={loginMethods}
+            data={enabledLoginMethods}
             ItemSeparatorComponent={Divider}
             renderItem={({ item, index }) => (
               <ListItem
-                title={item}
+                title={item.title}
                 accessible={true}
                 accessoryRight={
-                  loginMethodIndex === index ? CheckIcon : undefined
+                  loginMethodId === item.id ? CheckIcon : undefined
                 }
                 onPress={() => {
-                  setLoginMethodIndex(index)
+                  setLoginMethodId(item.id)
                   setShowLoginMethod(false)
                 }}
               />
@@ -330,3 +331,30 @@ export const Login = () => {
     </>
   )
 }
+
+const themedStyles = StyleService.create({
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  loginForm: {
+    ...Layout.mainAxis.flexStart,
+  },
+  pnrInput: { minHeight: 70 },
+  loginButtonGroup: {
+    minHeight: 45,
+  },
+  loginButton: { ...Layout.flex.full },
+  loginMethodButton: { width: 45 },
+  modal: {
+    width: '90%',
+  },
+  bankIdLoading: { margin: 10 },
+  cancelButtonStyle: { marginTop: 15 },
+  icon: {
+    width: 20,
+    height: 20,
+  },
+  platformPicker: {
+    width: '100%',
+  },
+})

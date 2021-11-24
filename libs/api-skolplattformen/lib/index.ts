@@ -1,12 +1,16 @@
-import { ApiSkolplattformen } from './api'
-import { Api, FetcherOptions, Fetch, RNCookieManager,
+import {
+  Api,
+  FetcherOptions,
+  RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
-  wrapToughCookie } from '@skolplattformen/api'
+  wrapToughCookie,
+} from '@skolplattformen/api'
+import { ApiSkolplattformen } from './api'
 export { features } from './features'
 
 const init = (
-  fetchImpl: Fetch,
+  fetchImpl: typeof fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions
 ): Api => {

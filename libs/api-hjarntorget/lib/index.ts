@@ -1,12 +1,16 @@
-import { ApiHjarntorget } from './apiHjarntorget'
-import { Api, FetcherOptions, Fetch, RNCookieManager,
+import {
+  Api,
+  FetcherOptions,
+  RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
-  wrapToughCookie } from '@skolplattformen/api'
+  wrapToughCookie,
+} from '@skolplattformen/api'
+import { ApiHjarntorget } from './apiHjarntorget'
 export { features } from './features'
 
 const init = (
-  fetchImpl: Fetch,
+  fetchImpl: typeof fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions
 ): Api => {

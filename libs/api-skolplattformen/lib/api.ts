@@ -1,32 +1,33 @@
-import { EventEmitter } from 'events'
-import { decode } from 'he'
-import { DateTime } from 'luxon'
-import * as html from 'node-html-parser'
-import { LoginStatusChecker, FetcherOptions, Fetcher, wrap } from '@skolplattformen/api'
 import {
+  Api,
   AuthTicket,
   CalendarItem,
   Classmate,
   CookieManager,
   EtjanstChild,
-  Fetch,
+  Fetcher,
+  FetcherOptions,
+  LoginStatusChecker,
   MenuItem,
   NewsItem,
   Notification,
-  RequestInit,
+  Response,
   ScheduleItem,
   Skola24Child,
   SSOSystem,
   TimetableEntry,
   User,
-  Response
+  wrap,
 } from '@skolplattformen/api'
-import * as routes from './routes'
-import * as parse from './parse/index'
+import { Language } from '@skolplattformen/curriculum'
+import { EventEmitter } from 'events'
+import { decode } from 'he'
+import { DateTime } from 'luxon'
+import * as html from 'node-html-parser'
 import * as fake from './fakeData'
 import { checkStatus } from './loginStatusChecker'
-import { Api } from '@skolplattformen/api'
-import { Language } from '@skolplattformen/curriculum'
+import * as parse from './parse/index'
+import * as routes from './routes'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
   new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))
@@ -66,7 +67,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   private authorizedSystems: SSOSystems = {}
 
   constructor(
-    fetch: Fetch,
+    fetch: typeof global.fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {
@@ -286,10 +287,17 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private CheckResponseForCorrectChildStatus(response: Response, child: EtjanstChild) {
-       const setCookieResp = response.headers.get("Set-Cookie")
+  private CheckResponseForCorrectChildStatus(
+    response: Response,
+    child: EtjanstChild
+  ) {
+    const setCookieResp = response.headers.get('Set-Cookie')
 
-    if (child.status !== 'FS' && setCookieResp && setCookieResp.includes("Status=FS")) {
+    if (
+      child.status !== 'FS' &&
+      setCookieResp &&
+      setCookieResp.includes('Status=FS')
+    ) {
       throw new Error('Wrong child in response')
     }
   }
@@ -297,7 +305,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   public async getNewsDetails(
     child: EtjanstChild,
     item: NewsItem
-  ): Promise<NewsItem | undefined > {
+  ): Promise<NewsItem | undefined> {
     if (this.isFake) {
       return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
     }
