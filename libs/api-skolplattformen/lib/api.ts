@@ -5,17 +5,20 @@ import {
   Classmate,
   CookieManager,
   EtjanstChild,
+  Fetch,
   Fetcher,
   FetcherOptions,
   LoginStatusChecker,
   MenuItem,
   NewsItem,
   Notification,
+  RequestInit,
   Response,
   ScheduleItem,
   Skola24Child,
   SSOSystem,
   TimetableEntry,
+  URLSearchParams,
   User,
   wrap,
 } from '@skolplattformen/api'
@@ -67,7 +70,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   private authorizedSystems: SSOSystems = {}
 
   constructor(
-    fetch: typeof global.fetch,
+    fetch: Fetch, // typeof global.fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {

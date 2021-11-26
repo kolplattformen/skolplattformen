@@ -1,4 +1,4 @@
-import { Response } from './types'
+import { Response, Fetch, RequestInit } from './types'
 
 export interface CallInfo extends RequestInit {
   name: string
@@ -48,7 +48,7 @@ const record = async (
 }
 
 export default function wrap(
-  fetch: typeof global.fetch,
+  fetch: Fetch,
   options: FetcherOptions = {}
 ): Fetcher {
   return async (
