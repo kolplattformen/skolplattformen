@@ -52,10 +52,10 @@ import {
 function getDateOfISOWeek(week: number, year: number) {
   const simple = new Date(year, 0, 1 + (week - 1) * 7)
   const dow = simple.getDay()
-  const ISOweekStart = simple
-  if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
-  else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
-  return ISOweekStart
+  const isoWeekStart = simple
+  if (dow <= 4) isoWeekStart.setDate(simple.getDate() - simple.getDay() + 1)
+  else isoWeekStart.setDate(simple.getDate() + 8 - simple.getDay())
+  return isoWeekStart
 }
 
 export class ApiHjarntorget extends EventEmitter implements Api {
