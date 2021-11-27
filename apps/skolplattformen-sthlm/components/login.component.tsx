@@ -70,29 +70,21 @@ export const Login = () => {
   )
   const [loginMethodId, setLoginMethodId] = useSettingsStorage('loginMethodId')
 
-  const loginBankIdSameDevice = useFeature('LOGIN_BANK_ID_SAME_DEVICE')
+  const loginBankIdSameDeviceWithoutId = useFeature(
+    'LOGIN_BANK_ID_SAME_DEVICE_WITHOUT_ID'
+  )
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
   )
-
-  console.log({ loginBankIdSameDevice })
 
   const { t } = useTranslation()
 
   const valid = Personnummer.valid(personalIdNumber)
 
   const loginMethods = [
-    {
-      id: 'thisdevice',
-      title: t('auth.bankid.OpenOnThisDevice'),
-      enabled: loginBankIdSameDevice,
-    },
-    {
-      id: 'otherdevice',
-      title: t('auth.bankid.OpenOnAnotherDevice'),
-      enabled: true,
-    },
-    { id: 'testuser', title: t('auth.loginAsTestUser'), enabled: true },
+    { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
+    { id: 'otherdevice', title: t('auth.bankid.OpenOnAnotherDevice') },
+    { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
 
   const loginHandler = async () => {
@@ -105,11 +97,6 @@ export const Login = () => {
       api.off('login', loginHandler)
     }
   }, [api])
-
-  /* Helpers */
-  const handleInput = (text: string) => {
-    setPersonalIdNumber(text)
-  }
 
   const getSchoolPlatformName = () => {
     return schoolPlatforms.find((item) => item.id === currentSchoolPlatform)
@@ -163,16 +150,18 @@ export const Login = () => {
 
   const styles = useStyleSheet(themedStyles)
 
-  const enabledLoginMethods = loginMethods.filter((method) => method.enabled)
-
   const currentLoginMethod =
-    enabledLoginMethods.find((method) => method.id === loginMethodId) ||
-    enabledLoginMethods[0]
+    loginMethods.find((method) => method.id === loginMethodId) ||
+    loginMethods[0]
+
+  const showInputField =
+    loginMethodId === 'otherdevice' ||
+    (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
 
   return (
     <>
       <View style={styles.loginForm}>
-        {loginMethodId === 'otherdevice' && (
+        {showInputField && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}
@@ -183,12 +172,10 @@ export const Login = () => {
             accessoryRight={(props) => (
               <TouchableWithoutFeedback
                 accessible={true}
-                onPress={() => handleInput('')}
+                onPress={() => setPersonalIdNumber('')}
                 accessibilityHint={t(
                   'login.a11y_clear_social_security_input_field',
-                  {
-                    defaultValue: 'Rensa fältet för personnummer',
-                  }
+                  { defaultValue: 'Rensa fältet för personnummer' }
                 )}
               >
                 <CloseOutlineIcon {...props} />
@@ -197,7 +184,7 @@ export const Login = () => {
             keyboardType="numeric"
             onSubmitEditing={(event) => startLogin(event.nativeEvent.text)}
             caption={error || ''}
-            onChangeText={(text) => handleInput(text)}
+            onChangeText={setPersonalIdNumber}
             placeholder={t('auth.placeholder_SocialSecurityNumber')}
           />
         )}
@@ -254,7 +241,7 @@ export const Login = () => {
             {t('auth.chooseLoginMethod')}
           </Text>
           <List
-            data={enabledLoginMethods}
+            data={loginMethods}
             ItemSeparatorComponent={Divider}
             renderItem={({ item, index }) => (
               <ListItem

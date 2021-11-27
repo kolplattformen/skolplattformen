@@ -1,5 +1,5 @@
+import { Features, FeatureType } from '@skolplattformen/api'
 import React from 'react'
-import { FeatureType, Features } from '@skolplattformen/api'
 import { FeatureFlagsContext } from '../context/feature/featureContext'
 
 export const useFeature = (name: FeatureType) => {
