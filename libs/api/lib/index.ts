@@ -15,3 +15,4 @@ export { URLSearchParams } from './URLSearchParams'
 
 export { wrap };
 export { FeatureType, Features } from './features'
+export * from './utils/dateHandling';
