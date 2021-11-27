@@ -251,10 +251,49 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
 
+    const children = await this.getChildren()
+    const eventsAndMembersForChildren = await this.getEventsWithAssociatedMembersForChildren(children)
+    const membersInChildensEvents = eventsAndMembersForChildren.reduce(
+      (acc, e) => acc.concat(e.eventMembers),
+      [] as any[]
+    )
+
+    const wallMessagesResponse = await this.fetch(
+      'wall-events',
+      wallMessagesUrl
+    )
+    const wallMessagesResponseJson: any[] = await wallMessagesResponse.json()
+    const nonChildSpecificMessages = wallMessagesResponseJson
+      .filter((message) =>
+        // Ignore "Alarm" messages from the calendar
+        message.creator.id !== '__system$virtual$calendar__' && 
+        // Only include messages that can not reliably be associated with one of the children
+        !membersInChildensEvents.some((member) => member.id === message.creator.id)
+      )
+      .map(message => {
+        const createdDate = new Date(message.created.ts)
+        const body = message.body as string
+        const trimmedBody = body.trim()
+        const firstNewline = trimmedBody.indexOf('\n')
+        const title = trimmedBody.substring(0, firstNewline).trim() || message.title 
+        const intro = trimmedBody.substring(firstNewline).trim()
+        return {
+          id: message.id,
+          author: message.creator && `${message.creator.firstName} ${message.creator.lastName}`,
+          header: title,
+          intro: intro,
+          body: body,
+          published: createdDate.toISOString(),
+          modified: createdDate.toISOString(),
+          fullImageUrl: message.creator && fullImageUrl(message.creator.imagePath),
+          timestamp: message.created.ts,
+        }
+      })
+
     const infoResponse = await this.fetch('info', infoUrl)
     const infoResponseJson: any[] = await infoResponse.json()
     // TODO: Filter out read messages?
-    return infoResponseJson.map((i) => {
+    const officialInfoMessages = infoResponseJson.map((i) => {
       const body = html.parse(decode(i.body || ''))
       const bodyText = toMarkdown(i.body)
 
@@ -270,15 +309,16 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         published: publishedDate.toISOString(),
         modified: publishedDate.toISOString(),
         fullImageUrl: i.creator && fullImageUrl(i.creator.imagePath),
+        timestamp: i.created.ts,
       }
     })
+
+    const newsMessages = officialInfoMessages.concat(nonChildSpecificMessages)
+    newsMessages.sort((a,b) => b.timestamp - a.timestamp)
+    return newsMessages
   }
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
-    await this.fetch('infoSetReadUrl', infoSetReadUrl(item), {
-      method: 'POST',
-    })
-
     return { ...item }
   }
 
@@ -292,6 +332,10 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getChildEventsWithAssociatedMembers(child: EtjanstChild) {
+    return this.getEventsWithAssociatedMembersForChildren([child])
+  }
+
+  async getEventsWithAssociatedMembersForChildren(children: EtjanstChild[]) {
     const hjarntorgetEventsResponse = await this.fetch(
       'events',
       hjarntorgetEventsUrl
@@ -330,8 +374,9 @@ export class ApiHjarntorget extends EventEmitter implements Api {
           }
         })
     )
+    
     return membersInEvents.filter((e) =>
-      e.eventMembers.find((p) => p.id === child.id)
+      e.eventMembers.find((p) => children.some(c => c.id === p.id))
     )
   }
 
@@ -440,6 +485,17 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         redirect: 'follow',
       }
     )
+
+    if((beginLoginRedirectResponse as any).url.endsWith("startPage.do")) {
+      // already logged in!
+      const emitter = new EventEmitter()
+      setTimeout(() => {
+        this.isLoggedIn = true
+        emitter.emit('OK')
+        this.emit('login')
+      }, 50)
+      return emitter;
+    }
 
     console.log('prepping??? shibboleth')
     const shibbolethLoginResponse = await this.fetch(
