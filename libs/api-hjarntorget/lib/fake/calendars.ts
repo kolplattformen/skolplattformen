@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export const calendars = () => ({
   "url": "https://hjarntorget.goteborg.se/pp/system/calendar/cal_events.jsp",
   "headers": {

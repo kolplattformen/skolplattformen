@@ -62,6 +62,7 @@ function requestLogger(httpModule) {
           content.text = data
           break
         case 'blob':
+          // eslint-disable-next-line no-case-declarations
           const buffer = await data.arrayBuffer()
           content.blob = Buffer.from(buffer).toString('base64')
           break

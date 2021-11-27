@@ -1,5 +1,4 @@
-import { Fetcher } from '../../../api/lib/fetcher'
-import { Response } from '../../../api/lib/types'
+import { Fetcher, Response } from '@skolplattformen/api'
 import { calendars, calendar_14241345 } from './calendars';
 import { currentUser } from './current-user';
 import { events } from './events';
