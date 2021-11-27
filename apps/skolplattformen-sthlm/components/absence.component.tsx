@@ -20,7 +20,6 @@ import { defaultStackStyling } from '../design/navigationThemes'
 import usePersonalStorage from '../hooks/usePersonalStorage'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
-// @ts-expect-error Fix when migrating to TSX
 import { useSMS } from '../utils/SMS'
 import { translate } from '../utils/translation'
 import { AlertIcon } from './icon.component'
@@ -139,7 +138,7 @@ const Absence = () => {
           <View style={styles.wrap}>
             <View style={styles.field}>
               <Text style={styles.label}>
-                {translate('general.socialSecurityNumber')}
+                {translate('abscense.childsPersonalNumber')}
               </Text>
               <Input
                 testID="personalIdentityNumberInput"
@@ -240,7 +239,7 @@ const Absence = () => {
                 </View>
               </View>
             )}
-            <Button onPress={handleSubmit} status="primary">
+            <Button onPress={() => handleSubmit()} status="primary">
               {translate('general.send')}
             </Button>
           </View>

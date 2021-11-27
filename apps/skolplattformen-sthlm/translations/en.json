@@ -8,6 +8,7 @@
     "abscense": {
         "endTime": "End time",
         "entireDay": "Whole day",
+        "childsPersonalNumber": "Child's personal identity number",
         "invalidPersonalNumber": "Personal identity number invalid",
         "personalNumberMissing": "Personal identity number missing",
         "selectAbscenseEndTime": "Choose end time",
@@ -104,7 +105,6 @@
         "language": "Language",
         "themeAuto": "Auto",
         "useSystemTheme": "Use System Light/Dark Theme"
-
     },
     "themes": {
         "light": "Light",
@@ -141,6 +141,6 @@
         "call": "Call",
         "sms": "SMS",
         "email": "E-mail",
-        "home": "Home"
+        "home": "Address"
     }
 }

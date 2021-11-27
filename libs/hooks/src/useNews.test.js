@@ -172,8 +172,6 @@ describe('useNews(child)', () => {
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
 
-      jest.advanceTimersToNextTimer()
-
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -201,8 +199,6 @@ describe('useNews(child)', () => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
-
-      jest.advanceTimersToNextTimer()
 
       await waitForNextUpdate()
       await waitForNextUpdate()

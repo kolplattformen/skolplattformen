@@ -5,7 +5,7 @@ import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
-import { ScrollView, View } from 'react-native'
+import { Dimensions, ImageStyle, ScrollView, View } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
 import { Layout, Sizing, Typography } from '../styles'
@@ -79,8 +79,8 @@ export const NewsItem = ({ route }: NewsItemProps) => {
           <Image
             accessibilityIgnoresInvertColors={false}
             src={newsItem.fullImageUrl}
-            // @ts-expect-error Fix later on
-            style={styles.image}
+            style={styles.image as ImageStyle}
+            componentWidth={Dimensions.get('screen').width - Sizing.t5 * 2}
           />
         )}
       </View>
@@ -119,7 +119,6 @@ const themedStyles = StyleService.create({
   },
   image: {
     width: '100%',
-    minHeight: 300,
     marginTop: Sizing.t4,
     borderRadius: 15,
   },

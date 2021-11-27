@@ -11,10 +11,12 @@ import 'moment/locale/ja'
 import 'moment/locale/nb'
 import 'moment/locale/nl'
 import 'moment/locale/pl'
+import 'moment/locale/pt'
 import 'moment/locale/ru'
 import 'moment/locale/sv'
-import 'moment/locale/uz-latn'
+import 'moment/locale/zh-cn'
 import { I18nManager } from 'react-native'
+import { languages } from '../utils/translation'
 
 const changeListeners: Record<string, any> = {}
 
@@ -22,6 +24,7 @@ let allString: Record<string, any> = {}
 
 let Strings: Record<string, any> = {}
 let languageCode: string
+let momentLocale: string
 
 const rtlList: { [key: string]: boolean } = {
   en: false,
@@ -39,9 +42,15 @@ export const isRTL = (langCode: string) => {
   return rtlList[langCode]
 }
 
+const getCorrespondingMomentLocale = (languageCode?: string): string => {
+  const lang = languages.find(({ langCode }) => langCode === languageCode)
+  return lang?.locale || 'sv'
+}
+
 export const LanguageService = {
   get: () => Strings,
   getLanguageCode: () => languageCode,
+  getLocale: () => momentLocale,
   setAllData: ({ data }: { data: Record<string, any> }) => {
     allString = data
   },
@@ -52,11 +61,12 @@ export const LanguageService = {
       i18n.locale = langCode
       I18nManager.forceRTL(isRTL(langCode))
     }
-    moment.locale(langCode)
+    moment.locale(momentLocale)
   },
   setLanguageCode: ({ langCode }: { langCode?: string }) => {
     if (langCode && allString[langCode]) {
       languageCode = langCode
+      momentLocale = getCorrespondingMomentLocale(langCode)
       Strings = merge(allString.sv, allString[langCode])
     } else {
       const dataKeys = Object.keys(allString)
@@ -68,7 +78,6 @@ export const LanguageService = {
     })
     return Strings
   },
-
   onChange: ({ key }: { key: string }, cb: (langCode: string) => void) => {
     const unsubscribe = () => {
       delete changeListeners[key]

@@ -8,7 +8,9 @@
         "logout": "Se déconnecter",
         "confirm": "Confirmer",
         "changeLanguage": "Changer de langue",
-        "cancel": "Annuler"
+        "cancel": "Annuler",
+        "logoutAndClearPersonalData": "Se déconnecter et effacer les données personnelles",
+        "logoutAndClearAllDataInclSettings": "Se déconnecter et effacer toutes les données, y compris les paramètres"
     },
     "calender": {
         "saveToCalenderError": "Un problème est survenu",
@@ -61,7 +63,8 @@
         "endTime": "Heure de fin",
         "selectAbscenseEndTime": "Choisissez l'heure de la fin",
         "entireDay": "Toute la journée",
-        "title": "Signaler une absence"
+        "title": "Signaler une absence",
+        "childsPersonalNumber": "Numéro national d’identité de l'enfant"
     },
     "notifications": {
         "notificationTitle": "Notification : {{message}} ({{dateCreated}})"
@@ -109,7 +112,7 @@
     },
     "contact": {
         "a11y_show_contact_info_button_hint": "Affiche les informations de contact",
-        "home": "Domicilr",
+        "home": "Adresse",
         "email": "Courriel",
         "sms": "Texto",
         "call": "Appeler",
@@ -125,5 +128,18 @@
         "contactsForGuardiansFor": "Coordonnées des tuteurs pour",
         "child": "Enfant",
         "class": "Classe"
+    },
+    "settings": {
+        "settings": "Paramètres",
+        "useSystemTheme": "Utiliser le thème clair/sombre du système",
+        "language": "Langue",
+        "appearance": "Apparence",
+        "theme": "Thème",
+        "licenses": "Licences",
+        "themeAuto": "Automatique"
+    },
+    "themes": {
+        "light": "Clair",
+        "dark": "Sombre"
     }
 }

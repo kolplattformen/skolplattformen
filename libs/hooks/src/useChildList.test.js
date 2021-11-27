@@ -223,8 +223,6 @@ describe('useChildList()', () => {
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual(echildrenCache)
 
-      jest.advanceTimersToNextTimer()
-
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -263,8 +261,6 @@ describe('useChildList()', () => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual(echildrenCache)
-
-      jest.advanceTimersToNextTimer()
 
       await waitForNextUpdate()
       await waitForNextUpdate()

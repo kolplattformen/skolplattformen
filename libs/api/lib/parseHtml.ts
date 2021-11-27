@@ -105,6 +105,9 @@ const overides = {
 }
 
 export const toMarkdown = (html?: string): string => {
+
+  if(html?.length == 0) return ''
+
   const rearranged = rearrangeWhitespace(html)
   const trimmed = clean(rearranged)
   const markdown = h2m(trimmed, { overides, converter })

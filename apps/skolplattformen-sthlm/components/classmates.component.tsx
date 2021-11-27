@@ -26,7 +26,7 @@ export const Classmates = () => {
   const renderItemIcon = (props: IconProps) => (
     <Icon {...props} name="people-outline" />
   )
-  const [selected, setSelected] = React.useState()
+  const [selected, setSelected] = React.useState<Classmate>()
   const renderItem = ({ item, index }: ListRenderItemInfo<Classmate>) => (
     <ListItem
       accessibilityLabel={`${translate('classmates.child')} ${index + 1}`}
@@ -41,7 +41,7 @@ export const Classmates = () => {
         <ContactMenu
           contact={item}
           selected={item === selected}
-          setSelected={setSelected}
+          setSelected={() => setSelected(undefined)}
         />
       )}
     />

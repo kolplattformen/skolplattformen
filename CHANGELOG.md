@@ -1,3 +1,49 @@
+## [2.2.1](https://github.com/kolplattformen/skolplattformen/compare/v2.2.0...v2.2.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* 🐛 spelling of chinese traditional in chinese traditional ([a28fd97](https://github.com/kolplattformen/skolplattformen/commit/a28fd97fe7907a591dc92f5ddeccf1045b4f794b))
+
+# [2.2.0](https://github.com/kolplattformen/skolplattformen/compare/v2.1.0...v2.2.0) (2021-11-23)
+
+
+### Bug Fixes
+
+* 🐛 Add languages to curriculum config ([b9302f9](https://github.com/kolplattformen/skolplattformen/commit/b9302f96faaf71c797ec335018d9952e26e9d267))
+* 🐛 Clarify who's personal identity number to enter ([5028a85](https://github.com/kolplattformen/skolplattformen/commit/5028a85824f4d73ab8007caaeca32a439f4f360e)), closes [#526](https://github.com/kolplattformen/skolplattformen/issues/526)
+* 🐛 fix crash when moment locale and language code differ ([623bf48](https://github.com/kolplattformen/skolplattformen/commit/623bf483b52a54a6199e6607248b948b775b6e7b))
+* 🐛 Fixes crash when body od newItem is empty ([3e0fd14](https://github.com/kolplattformen/skolplattformen/commit/3e0fd1474a719382627270a1305110692f9ff99b))
+* 🐛 Fixes failing tests (added skip), fixes lint + test ([d71c106](https://github.com/kolplattformen/skolplattformen/commit/d71c10607f6a4b89b582b81258fc9c0fc20bf2a8))
+* 🐛 Fixes merge with main ([c54f2ff](https://github.com/kolplattformen/skolplattformen/commit/c54f2ffd05589ffbebba5e50b9aef4649bfa9b58))
+* 🐛 Fixes tests ([d451cf1](https://github.com/kolplattformen/skolplattformen/commit/d451cf13afbf5e4d1fca43c45d3938d11503d394))
+* 🐛 Upgraded async-storage from 1.5.2 to 1.5.9 ([0cd72f5](https://github.com/kolplattformen/skolplattformen/commit/0cd72f5d84bd76b846d99ac7995eba3bec154866))
+* add missing package references ([d41e2e3](https://github.com/kolplattformen/skolplattformen/commit/d41e2e3efe278415f3afc462b721afbec4b6f1e2))
+* failing html parsing ([2a2259a](https://github.com/kolplattformen/skolplattformen/commit/2a2259a2608ef7e9420d9d3fa59f55530d662ae9))
+* images cropping on different devices ([#524](https://github.com/kolplattformen/skolplattformen/issues/524)) ([7c50988](https://github.com/kolplattformen/skolplattformen/commit/7c5098859b71f13ffdb9441b81e149b983355d9f))
+* licenses extractor is used on the correct package.json ([d1de447](https://github.com/kolplattformen/skolplattformen/commit/d1de44775b9df6132af9974f6aaef09c5f2d678f))
+* lint and prettier fixes ([169b536](https://github.com/kolplattformen/skolplattformen/commit/169b5365e94cd0ff5fe2aa9f28a7baebaeba899a))
+* package.json name for app changed ([a867b11](https://github.com/kolplattformen/skolplattformen/commit/a867b116c802956b5f5a8b6ec55e64e6821eb475))
+* remove unused e2e files ([97b4380](https://github.com/kolplattformen/skolplattformen/commit/97b438069a589abc37a96fe8c10ce23078b30e7b))
+* rename and fix imports ([18ed862](https://github.com/kolplattformen/skolplattformen/commit/18ed8620af5b396eeed740058531ebafda4f8d64))
+* some failing tests in hooks now works ([c122f28](https://github.com/kolplattformen/skolplattformen/commit/c122f281a9607d7a52b3a25718e93151ddd7768a))
+* ui-kitten metro config ([5fdc3d7](https://github.com/kolplattformen/skolplattformen/commit/5fdc3d71adb8d9364c8c6b345de841f0f3f1de7c))
+* update github workflow to run nx instead of lerna ([289c2f8](https://github.com/kolplattformen/skolplattformen/commit/289c2f848aec44da03692d4119aa9e1544dc9292))
+
+
+### Features
+
+* 🎸 activate norwegian ([cec7ddd](https://github.com/kolplattformen/skolplattformen/commit/cec7ddd8601309f752f9fe49298fcc96643599b7))
+* 🎸 bump to version 2.0.4 ([6d762e7](https://github.com/kolplattformen/skolplattformen/commit/6d762e70076c292d952f1b626ea2925caaac78f9))
+* 🎸 bump to version 2.0.4 ([078c946](https://github.com/kolplattformen/skolplattformen/commit/078c946a441a4227033c24acbb17807ea19a4dae))
+* 🎸 Chinese (simplified and traditional) ([eed2a75](https://github.com/kolplattformen/skolplattformen/commit/eed2a7579c23629c0e8dbd8350fa971cec3753fb))
+* 🎸 Japanese ([e5deadd](https://github.com/kolplattformen/skolplattformen/commit/e5deadd88084fba26a7b8dbc83664be376b76a51))
+* 🎸 language updates for curriculum ([4d62d9e](https://github.com/kolplattformen/skolplattformen/commit/4d62d9e26987ae4840f81e1c1ad958a6905746c0))
+* 🎸 Latin and fix for locales ([1c05196](https://github.com/kolplattformen/skolplattformen/commit/1c051961d695ebb2546f2a30991d01015e7c48fb))
+* 🎸 Portuguese ([2f45cbd](https://github.com/kolplattformen/skolplattformen/commit/2f45cbdeb639cd43c6b13cff0a2f86a934b950dd))
+* 🎸 Somali ([df8f2e3](https://github.com/kolplattformen/skolplattformen/commit/df8f2e378e76d1f4b8f4b0cfd55aba82626ccaa8))
+* add nx build system ([d90cfd2](https://github.com/kolplattformen/skolplattformen/commit/d90cfd2a3b94b9845f809b65a96a72b10447651c))
+
 # [2.1.0](https://github.com/kolplattformen/skolplattformen/compare/v2.0.0...v2.1.0) (2021-10-04)
 
 

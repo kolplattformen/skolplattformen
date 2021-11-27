@@ -810,7 +810,7 @@ const data: any = {
         intro:
           'Vi kommer efter att förskoleklassen är slut arrangera olika vinteraktiviteter genom fridtidsverksamheten.',
         body:
-          '##  Vänligen ta med hjälm, skridskor eller stjärtlapp. Alla barn måste ha hjälm på sig samt varma kläder. Vi kommer åka i backen bakom skolbyggnaden samt använda isen som spolats vid Mullsjöskolan. Personal kommer finnas på plats samt att vi erbjuda varm dryck, frukt och lek för de barn som ej har hjälm eller lämpligt åkdon.',
+          '##  Vänligen ta med hjälm, skridskor eller stjärtlapp.\n\n ![Bild](https://images.unsplash.com/photo-1495377701095-00261b767581?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80)\n\n Alla barn måste ha hjälm på sig samt varma kläder. Vi kommer åka i backen bakom skolbyggnaden samt använda isen som spolats vid Mullsjöskolan. Personal kommer finnas på plats samt att vi erbjuda varm dryck, frukt och lek för de barn som ej har hjälm eller lämpligt åkdon.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/yB_aiAWkm40',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',

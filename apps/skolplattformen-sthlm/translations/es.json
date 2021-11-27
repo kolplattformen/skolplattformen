@@ -54,7 +54,9 @@
             "agile": "ágil",
             "fantastic": "fantástica",
             "cheap": "barato",
-            "better": "mejor"
+            "better": "mejor",
+            "homemade": "artesanal",
+            "open": "abierto"
         },
         "subtitle": "La alternativa {{word}}",
         "placeholder_SocialSecurityNumber": "Tu personnummer",
@@ -66,7 +68,9 @@
             "OpenOnAnotherDevice": "Abra BankID en otro dispositivo",
             "OpenManually": "Abrir BankID manualmente"
         },
-        "loginAsTestUser": "Inicie sesión como usuario de pruebas"
+        "loginAsTestUser": "Inicie sesión como usuario de pruebas",
+        "a11y_change_language": "Elija su idioma",
+        "a11y_image_two_boys": "Fotografia de dos personas mirando su telefono movil"
     },
     "abscense": {
         "title": "Informar ausencia",

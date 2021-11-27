@@ -1,45 +1,45 @@
-# name: Release
+name: Release
 
-# on:
-#   push:
-#     branches: 
-#       - main
+on:
+  push:
+    branches: 
+      - main
 
-# jobs:
-#   build:
+jobs:
+  build:
 
-#     runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest 
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#       - name: Setup Node
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: '14.17.6'
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.17.6'
 
-#       - name: Setup timezone
-#         uses: zcong1993/setup-timezone@master
-#         with:
-#           timezone: Europe/Stockholm
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Europe/Stockholm
 
-#       - name: Install dependencies
-#         run: npx lerna bootstrap
+      - name: Install dependencies
+        run: yarn
 
-#       - name: Run linting and tests
-#         run: |
-#           yarn lint
-#           yarn test
-#         env:
-#           CI: true
+      - name: Run linting and tests
+        run: |
+          yarn lint
+          yarn test
+        env:
+          CI: true
 
-#       - name: Create release using semantic-release
-#         uses: cycjimmy/semantic-release-action@v2
-#         with:
-#           semantic_version: 17.1.1
-#           extra_plugins: |
-#             @semantic-release/changelog@5.0.1
-#             @semantic-release/git@9.0
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create release using semantic-release
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          semantic_version: 17.1.1
+          extra_plugins: |
+            @semantic-release/changelog@5.0.1
+            @semantic-release/git@9.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

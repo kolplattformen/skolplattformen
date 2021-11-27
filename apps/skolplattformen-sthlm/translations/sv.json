@@ -8,6 +8,7 @@
     "abscense": {
         "endTime": "Sluttid",
         "entireDay": "Heldag",
+        "childsPersonalNumber": "Barnets personnummer",
         "invalidPersonalNumber": "Personnumret är ogiltigt",
         "personalNumberMissing": "Personnummer saknas",
         "selectAbscenseEndTime": "Välj sluttid",
@@ -140,6 +141,6 @@
         "call": "Ring",
         "sms": "SMS",
         "email": "Maila",
-        "home": "Hem"
+        "home": "Adress"
     }
 }
