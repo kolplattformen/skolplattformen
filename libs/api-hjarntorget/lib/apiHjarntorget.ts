@@ -319,10 +319,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
-    await this.fetch('infoSetReadUrl', infoSetReadUrl(item), {
-      method: 'POST',
-    })
-
     return { ...item }
   }
 
