@@ -10,7 +10,7 @@ import { ApiSkolplattformen } from './api'
 export { features } from './features'
 
 const init = (
-  fetchImpl: typeof fetch,
+  fetchImpl: Fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions
 ): Api => {

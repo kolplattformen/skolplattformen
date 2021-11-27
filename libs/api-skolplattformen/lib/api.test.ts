@@ -3,6 +3,8 @@ import { ApiSkolplattformen } from './api'
 import { Fetch, Headers, Response } from '@skolplattformen/api'
 import CookieManager from '@react-native-cookies/cookies'
 
+jest.mock('@react-native-cookies/cookies')
+
 describe('api', () => {
   let fetch: jest.Mocked<Fetch>
   let response: jest.Mocked<Response>

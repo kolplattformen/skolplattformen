@@ -3,6 +3,10 @@ import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { Auth } from '../auth.component'
 
+jest.mock('.../../data/schoolPlatforms', () => ({
+  ...jest.requireActual('../../data/schoolPlatforms'),
+}))
+
 const setup = () => {
   useApi.mockReturnValue({
     api: { on: jest.fn(), off: jest.fn() },

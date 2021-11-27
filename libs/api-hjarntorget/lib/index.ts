@@ -1,5 +1,6 @@
 import {
   Api,
+  Fetch,
   FetcherOptions,
   RNCookieManager,
   ToughCookieJar,
@@ -10,7 +11,7 @@ import { ApiHjarntorget } from './apiHjarntorget'
 export { features } from './features'
 
 const init = (
-  fetchImpl: typeof fetch,
+  fetchImpl: Fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions
 ): Api => {
