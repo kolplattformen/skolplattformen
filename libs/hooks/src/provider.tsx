@@ -38,7 +38,7 @@ export const ApiProvider: TApiProvider = ({
   }
 
   useEffect(() => {
-    const handler = () => {
+    const handler = async () => {
       setIsLoggedIn(api.isLoggedIn)
       setIsFake(api.isFake)
 
@@ -55,7 +55,7 @@ export const ApiProvider: TApiProvider = ({
       api.off('logout', handler)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [api.isLoggedIn, api.isFake])
+  }, [api])
 
   return (
     <ApiContext.Provider value={value}>
