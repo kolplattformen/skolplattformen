@@ -80,7 +80,9 @@
         "serve": {
           "executor": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "api-test-app:build"
+            "buildTarget": "api-test-app:build",
+            "watch": false,
+            "inspect": false
           }
         },
         "lint": {
