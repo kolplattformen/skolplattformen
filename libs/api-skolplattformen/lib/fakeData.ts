@@ -1234,7 +1234,7 @@ export const timetable = (child: Skola24Child): TimetableEntry[] => {
       category: 'Moderna språk, språkval',
       blockName: '',
       dayOfWeek: 2,
-      location: '302,Fjärr',
+      location: '302,Fjärr asd asdasd asdad aasdds',
       teacher: 'DNi',
       timeEnd: '09:50:00',
       timeStart: '09:05:00',

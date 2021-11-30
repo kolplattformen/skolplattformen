@@ -70,7 +70,12 @@ const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
               >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
                 location === '' ? '' : '(' + location + ')'
               } `}</Text>
-              <Text style={styles.lessonDescription} maxFontSizeMultiplier={1}>
+              <Text
+                style={styles.lessonDescription}
+                maxFontSizeMultiplier={1}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
                 {code?.toUpperCase() === 'LUNCH' ? lunch?.description : teacher}
               </Text>
             </View>
@@ -178,7 +183,7 @@ const themedStyles = StyleService.create({
     padding: 0,
   },
   item: {
-    height: 55,
+    height: 90,
     backgroundColor: 'background-basic-color-2',
     paddingHorizontal: 0,
     borderRadius: 2,
