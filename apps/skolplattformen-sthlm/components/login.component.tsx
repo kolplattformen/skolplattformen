@@ -117,15 +117,17 @@ export const Login = () => {
     }
   }
 
+  const isUsingPersonalIdNumber =
+    loginMethodId === 'otherdevice' ||
+    (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
+
   const startLogin = async (text: string) => {
     if (loginMethodId === 'thisdevice' || loginMethodId === 'otherdevice') {
       showModal(true)
 
       let ssn
-      if (
-        loginMethodId === 'otherdevice' ||
-        (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
-      ) {
+
+      if (isUsingPersonalIdNumber) {
         ssn = Personnummer.parse(text).format(true)
         setPersonalIdNumber(ssn)
       }
@@ -157,14 +159,10 @@ export const Login = () => {
     loginMethods.find((method) => method.id === loginMethodId) ||
     loginMethods[0]
 
-  const showInputField =
-    loginMethodId === 'otherdevice' ||
-    (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
-
   return (
     <>
       <View style={styles.loginForm}>
-        {showInputField && (
+        {isUsingPersonalIdNumber && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}
@@ -197,7 +195,7 @@ export const Login = () => {
             onPress={() => startLogin(personalIdNumber)}
             style={styles.loginButton}
             appearance="ghost"
-            disabled={loginMethodId === 'otherdevice' && !valid}
+            disabled={isUsingPersonalIdNumber && !valid}
             status="primary"
             accessoryLeft={BankId}
             size="medium"
