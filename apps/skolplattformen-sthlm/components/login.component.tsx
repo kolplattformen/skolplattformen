@@ -122,7 +122,10 @@ export const Login = () => {
       showModal(true)
 
       let ssn
-      if (loginMethodId === 'otherdevice') {
+      if (
+        loginMethodId === 'otherdevice' ||
+        (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
+      ) {
         ssn = Personnummer.parse(text).format(true)
         setPersonalIdNumber(ssn)
       }
