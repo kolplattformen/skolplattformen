@@ -175,6 +175,8 @@ export const Child = () => {
   const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
   const useFoodMenu = useFeature('FOOD_MENU')
+  const useClassList = useFeature('CLASS_LIST')
+
   const navigation = useNavigation()
 
   useEffect(() => {
@@ -186,7 +188,7 @@ export const Child = () => {
     NOTIFICATIONS_SCREEN: true,
     CALENDER_SCREEN: true,
     MENU_SCREEN: useFoodMenu,
-    CLASSMATES_SCREEN: true,
+    CLASSMATES_SCREEN: useClassList,
   }
   return (
     <ChildProvider child={child}>
