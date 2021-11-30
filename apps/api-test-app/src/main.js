@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-
 /**
  * A more elaborated test file for local development
  * - Support for proxy (i recommend Burp Suite https://portswigger.net/burp/communitydownload)
@@ -13,18 +9,18 @@ const { inspect } = require('util')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
-// eslint-disable-next-line import/no-unresolved
 const { writeFile, readFile } = require('fs/promises')
 const path = require('path')
 const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
-const agentWrapper = require('./agentFetchWrapper')
-const init = require('./dist/api-skolplattformen/lib').default
+const agentWrapper = require('./app/agentFetchWrapper')
+const init = require('@skolplattformen/api-skolplattformen').default
 
 const [, , personalNumber] = process.argv
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
 let bankIdUsed = false
+const recordFolder = `${__dirname}/record`
 
 async function run() {
   const agent = new HttpProxyAgent('http://localhost:8080')
@@ -40,16 +36,16 @@ async function run() {
 
       if (bankIdUsed) {
         const sessionCookie = getSessionCookieFromCookieJar()
-        ensureDirectoryExistence('./record')
+        ensureDirectoryExistence(recordFolder)
         await writeFile(
-          './record/latestSessionCookie.txt',
+          `${recordFolder}/latestSessionCookie.txt`,
           JSON.stringify(sessionCookie)
         )
         console.log(
-          'Session cookie saved to file ./record/latesSessionCookie.txt'
+          `Session cookie saved to file ${recordFolder}/latesSessionCookie.txt`
         )
       }
-      console.log('user')
+      console.log('user') //-
       const user = await api.getUser()
       console.log(user)
 
@@ -64,7 +60,7 @@ async function run() {
       console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
-*/
+
       try {
         console.log('schedule')
         const schedule = await api.getSchedule(
@@ -139,7 +135,7 @@ async function Login(api) {
 
   try {
     console.log('Attempt to use saved session cookie to login')
-    const rawContent = await readFile('./record/latestSessionCookie.txt')
+    const rawContent = await readFile(`${recordFolder}/latestSessionCookie.txt`)
     const sessionCookie = JSON.parse(rawContent)
 
     await api.setSessionCookie(`${sessionCookie.key}=${sessionCookie.value}`)
@@ -155,7 +151,7 @@ async function Login(api) {
     console.log('*** BankId login - open BankId app ***')
     if (!personalNumber) {
       console.error(
-        'You must pass in a valid personal number, eg `node run 197001011111`'
+        'You must pass in a valid personal number, eg `nx serve api-test-app --args=197001011111,`'
       )
       process.exit(1)
     }
@@ -189,7 +185,7 @@ function getSessionCookieFromCookieJar() {
 
 const record = async (info, data) => {
   const name = info.error ? `${info.name}_error` : info.name
-  const filename = `./record/${name}.json`
+  const filename = `${recordFolder}/${name}.json`
   ensureDirectoryExistence(filename)
   const content = {
     url: info.url,

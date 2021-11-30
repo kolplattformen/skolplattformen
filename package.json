@@ -79,6 +79,7 @@
     "@nrwl/eslint-plugin-nx": "^12.10.0",
     "@nrwl/jest": "12.10.0",
     "@nrwl/linter": "12.10.0",
+    "@nrwl/node": "12.10.0",
     "@nrwl/react": "12.10.0",
     "@nrwl/react-native": "^12.10.0",
     "@nrwl/tao": "12.10.0",
