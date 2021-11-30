@@ -151,7 +151,7 @@ async function Login(api) {
     console.log('*** BankId login - open BankId app ***')
     if (!personalNumber) {
       console.error(
-        'You must pass in a valid personal number, eg `node run 197001011111`'
+        'You must pass in a valid personal number, eg `nx serve api-test-app --args=197001011111,`'
       )
       process.exit(1)
     }
