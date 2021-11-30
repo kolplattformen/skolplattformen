@@ -1,3 +1,42 @@
+# [2.3.0](https://github.com/kolplattformen/skolplattformen/compare/v2.2.1...v2.3.0) (2021-11-30)
+
+
+### Bug Fixes
+
+* 🐛 added dist to ignore ([1230825](https://github.com/kolplattformen/skolplattformen/commit/1230825571462a69d00b24f8bae0d6d82f0f5784))
+* 🐛 Added projects to nx ([c88b25a](https://github.com/kolplattformen/skolplattformen/commit/c88b25aa102549d8a59fd9e7e0b6af293620378b))
+* 🐛 error loading SKOLA24_CHILDREN SAML ([508b079](https://github.com/kolplattformen/skolplattformen/commit/508b0792a10eeac065dd798182f3f4dcf20a27ca))
+* 🐛 Fix failing tests ([8d9cfe2](https://github.com/kolplattformen/skolplattformen/commit/8d9cfe2de4ebc2b21584d2cbf930e83857b24263))
+* 🐛 Fixes inheritance from [@skolplattformen-api](https://github.com/skolplattformen-api) ([ba45cfd](https://github.com/kolplattformen/skolplattformen/commit/ba45cfd79685fc61b2477f5a3aa9416ba11a1200))
+* 🐛 Fixes issue with package.json in hjarntorget ([e2e1ff8](https://github.com/kolplattformen/skolplattformen/commit/e2e1ff82787f967b8c1e8845363291732cae59be))
+* 🐛 Fixes lint errors ([e19c8a7](https://github.com/kolplattformen/skolplattformen/commit/e19c8a7747153bbc204efd6cef42b3929cf376d0))
+* 🐛 Fixes news title, lowered font size on header ([7df15d3](https://github.com/kolplattformen/skolplattformen/commit/7df15d36b12a82484e903ecb39e38795013ce72c))
+* 🐛 Fixes tests, added esModuleInterop true to tsconfig ([6383795](https://github.com/kolplattformen/skolplattformen/commit/63837955a33e3e913b6c88a72ae3c37d95d6b321))
+* 🐛 Fixes TS config + lint etc ([4663269](https://github.com/kolplattformen/skolplattformen/commit/46632691bf506199e3e51696e1e26a8c53c42e37))
+* 🐛 Fixes TSconfig for all projects ([24c1624](https://github.com/kolplattformen/skolplattformen/commit/24c162419b4768564052fcab662c9aa81d46e8f3))
+* 🐛 Fixes tsconfig in api-hjarntorget ([b641486](https://github.com/kolplattformen/skolplattformen/commit/b641486768323baf60a0100b838689cb7a6bee77))
+* 🐛 merge ([d26fd62](https://github.com/kolplattformen/skolplattformen/commit/d26fd62e5c7640148f6ba3ef65db1ea3aa6fb274))
+* 🐛 merge conflict ([cafe6ec](https://github.com/kolplattformen/skolplattformen/commit/cafe6ec990087dffe828f03be7c9b003709e2197))
+* 🐛 Merge with master ([9d21341](https://github.com/kolplattformen/skolplattformen/commit/9d213413bee88a126134557f654bbb7edab4ad46))
+* 🐛 Readded mock, ts config to api ([82e0c6f](https://github.com/kolplattformen/skolplattformen/commit/82e0c6f961301c9241cf2ecacb657dbf53326f4f))
+* 🐛 Removed auth-test ([06c29d7](https://github.com/kolplattformen/skolplattformen/commit/06c29d75da5e6b503b98c949bf32f78027ee7548))
+* 🐛 removed dist prior to ignore, more lint errors fix ([78f7577](https://github.com/kolplattformen/skolplattformen/commit/78f757783f7c3215eae7cdbbb3a33dd5063a1d2a))
+* 🐛 Week component height and cap text ([9874dda](https://github.com/kolplattformen/skolplattformen/commit/9874dda30eefca652685419668374e1b460ffc51))
+* auth issues ([ae369c2](https://github.com/kolplattformen/skolplattformen/commit/ae369c204c2b6dccdb84c85fd2c6f10dd76bdc8e))
+* fetch typings ([97e131d](https://github.com/kolplattformen/skolplattformen/commit/97e131d30d1c021ecf88aafc98820cdaec70fa67))
+
+
+### Features
+
+* 🎸 Added food menu to features ([bec62fa](https://github.com/kolplattformen/skolplattformen/commit/bec62fa21b9503927b44ad956314a888fa6923e1))
+* 🎸 Feature toggle context ([ce05682](https://github.com/kolplattformen/skolplattformen/commit/ce056821a1b1d562e4c36d7ff30dfcb5e3ad3aeb))
+* 🎸 fixes ts issues ([3f62016](https://github.com/kolplattformen/skolplattformen/commit/3f62016d6add2f5f234d6125c002b4d4603a5783))
+* 🎸 Merged with main, also added api to nx ([4f1f66f](https://github.com/kolplattformen/skolplattformen/commit/4f1f66fcbbf3682004e781d058ff43a7eb3b57ce))
+* 🎸 Started on provider for selecting platform + feature to ([1aaaeb6](https://github.com/kolplattformen/skolplattformen/commit/1aaaeb64e31531185c0ef75bff61c97f0cf942c4))
+* 🎸 Toggled class list in hjärntorget ([33440bc](https://github.com/kolplattformen/skolplattformen/commit/33440bcc32d0ea466662cdf167406b0dd503b251))
+* 🎸 wip feagture toggle ([1601c4f](https://github.com/kolplattformen/skolplattformen/commit/1601c4f83c75bc98ec1084725f9b126e871024b2))
+* 🎸 WIP Switch school platform ([916ebc5](https://github.com/kolplattformen/skolplattformen/commit/916ebc5e25b52eebf45a147f971356d8bd9e2e11))
+
 ## [2.2.1](https://github.com/kolplattformen/skolplattformen/compare/v2.2.0...v2.2.1) (2021-11-23)
 
 
