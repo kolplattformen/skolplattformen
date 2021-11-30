@@ -20,6 +20,7 @@ const [, , personalNumber] = process.argv
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
 let bankIdUsed = false
+const recordFolder = `${__dirname}/record`
 
 async function run() {
   const agent = new HttpProxyAgent('http://localhost:8080')
@@ -35,16 +36,16 @@ async function run() {
 
       if (bankIdUsed) {
         const sessionCookie = getSessionCookieFromCookieJar()
-        ensureDirectoryExistence('./record')
+        ensureDirectoryExistence(recordFolder)
         await writeFile(
-          './record/latestSessionCookie.txt',
+          `${recordFolder}/latestSessionCookie.txt`,
           JSON.stringify(sessionCookie)
         )
         console.log(
-          'Session cookie saved to file ./record/latesSessionCookie.txt'
+          `Session cookie saved to file ${recordFolder}/latesSessionCookie.txt`
         )
       }
-      console.log('user')
+      console.log('user') //-
       const user = await api.getUser()
       console.log(user)
 
@@ -59,7 +60,7 @@ async function run() {
       console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
-*/
+
       try {
         console.log('schedule')
         const schedule = await api.getSchedule(
@@ -134,7 +135,7 @@ async function Login(api) {
 
   try {
     console.log('Attempt to use saved session cookie to login')
-    const rawContent = await readFile('./record/latestSessionCookie.txt')
+    const rawContent = await readFile(`${recordFolder}/latestSessionCookie.txt`)
     const sessionCookie = JSON.parse(rawContent)
 
     await api.setSessionCookie(`${sessionCookie.key}=${sessionCookie.value}`)
@@ -184,7 +185,7 @@ function getSessionCookieFromCookieJar() {
 
 const record = async (info, data) => {
   const name = info.error ? `${info.name}_error` : info.name
-  const filename = `./record/${name}.json`
+  const filename = `${recordFolder}/${name}.json`
   ensureDirectoryExistence(filename)
   const content = {
     url: info.url,
