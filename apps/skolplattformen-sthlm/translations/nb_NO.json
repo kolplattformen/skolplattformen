@@ -42,7 +42,8 @@
         "a11y_select_login_method": "Velg innloggingsmetode",
         "a11y_clear_social_security_input_field": "Tøm personnummerfeltet",
         "a11y_image_two_boys": "Bilde av to folk som sjekker mobiltelefonene sine",
-        "a11y_change_language": "Velg språk"
+        "a11y_change_language": "Velg språk",
+        "chooseSchoolPlatform": "Velg plattform"
     },
     "calender": {
         "saveToCalender": "Lagre i kalender",
@@ -122,7 +123,7 @@
         "a11y_show_contact_info_button_label": "Vis kontaktinfo",
         "sms": "SMS",
         "email": "E-post",
-        "home": "Hjem"
+        "home": "Adresse"
     },
     "classmates": {
         "contactsForGuardiansFor": "Foresattes kontaktinfo for",
