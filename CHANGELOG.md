@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/kolplattformen/skolplattformen/compare/v2.3.0...v2.3.1) (2021-11-30)
+
+
+### Bug Fixes
+
+* 🐛 Show subject name on Hjärntorget timetable ([b3df527](https://github.com/kolplattformen/skolplattformen/commit/b3df527d44904b7838bcb0a9aaef69c276c9c5b7))
+
 # [2.3.0](https://github.com/kolplattformen/skolplattformen/compare/v2.2.1...v2.3.0) (2021-11-30)
 
 
