@@ -6,14 +6,14 @@
   "files": [
     "dist/**/*"
   ],
-  "repository": "git@github.com:kolplattformen/embedded-api.git",
-  "author": "Johan Öbrink <johan.obrink@gmail.com>",
+  "repository": "git@github.com:kolplattformen/skolplattformen.git",
+  "author": "ÖS <info@skolplattformen.org>",
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
     "lint": "eslint 'lib/**/*.{js,ts}' --quiet --fix",
     "test": "jest",
-    "build": "tsc",
+    "build": "tsc --build",
     "prepare": "yarn build",
     "run-dev": "yarn run build && node run",
     "publish-package": "npm publish --access public"

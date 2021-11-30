@@ -17,15 +17,7 @@ export interface CookieManager {
   setCookieString: (cookieString: string, url: string) => Promise<void>
   getCookieString: (url: string) => Promise<string>
   clearAll: () => Promise<void>
-}
-
-export interface RequestInit {
-  headers?: any
-  method?: string
-  body?: string
-  /**
-   * Set to `manual` to extract redirect headers, `error` to reject redirect */
-  redirect?: string
+  removeAllCookies?: () => Promise<void>
 }
 
 export interface Headers {
@@ -39,10 +31,6 @@ export interface Response {
   statusText: string
   text: () => Promise<string>
   json: () => Promise<any>
-}
-
-export interface Fetch {
-  (url: string, init?: RequestInit): Promise<Response>
 }
 
 export interface AuthTicket {
@@ -100,6 +88,12 @@ export interface Classmate {
   guardians: Guardian[]
 }
 
+
+
+export interface Fetch {
+  (url: string, init?: RequestInit): Promise<Response>
+}
+
 /**
  * @export
  * @interface Guardian
@@ -144,6 +138,16 @@ export interface Notification {
   category: string | null
   type: string
 }
+
+export interface RequestInit {
+  headers?: any
+  method?: string
+  body?: string
+  /**
+   * Set to `manual` to extract redirect headers, `error` to reject redirect */
+  redirect?: string
+}
+
 
 /**
  * @export

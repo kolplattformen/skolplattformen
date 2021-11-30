@@ -30,6 +30,12 @@
     "api-skolplattformen": {
       "tags": []
     },
+    "api-hjarntorget": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
     "curriculum": {
       "tags": []
     },
@@ -38,7 +44,7 @@
     },
     "skolplattformen-sthlm": {
       "tags": [],
-       "implicitDependencies": ["api-skolplattformen", "hooks", "curriculum"]
+       "implicitDependencies": ["api-skolplattformen", "api-hjarntorget", "api",  "hooks", "curriculum"]
     }
   }
 }

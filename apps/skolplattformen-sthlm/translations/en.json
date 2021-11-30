@@ -24,6 +24,7 @@
             "Waiting": "Waiting for BankID…"
         },
         "chooseLoginMethod": "Choose login method",
+        "chooseSchoolPlatform": "Choose platform",
         "loginAsTestUser": "Log in as a test user",
         "loginFailed": "Could not log in. Please try again.",
         "placeholder_SocialSecurityNumber": "Your personal identity number",

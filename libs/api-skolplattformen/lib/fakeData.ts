@@ -11,7 +11,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from './types'
+} from '@skolplattformen/api';
 
 const data: any = {
   '39b59e-bf4b9f-f68ac25321-977218-bf0': {
@@ -1234,7 +1234,7 @@ export const timetable = (child: Skola24Child): TimetableEntry[] => {
       category: 'Moderna språk, språkval',
       blockName: '',
       dayOfWeek: 2,
-      location: '302,Fjärr',
+      location: '302,Fjärr asd asdasd asdad aasdds',
       teacher: 'DNi',
       timeEnd: '09:50:00',
       timeStart: '09:05:00',

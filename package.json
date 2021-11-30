@@ -111,6 +111,7 @@
     "babel-jest": "^27.2.5",
     "detox": "18.20.2",
     "eslint": "7.32.0",
+    "eslint-config-airbnb-typescript": "^16.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.4.1",

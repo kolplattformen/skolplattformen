@@ -9,7 +9,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from '@skolplattformen/api-skolplattformen'
+} from '@skolplattformen/api'
 import { EntityName, EntityReducer, EntityState } from './types'
 
 const createReducer = <T>(entity: EntityName): EntityReducer<T> => {

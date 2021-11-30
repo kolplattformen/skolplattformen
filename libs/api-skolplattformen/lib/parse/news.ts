@@ -1,7 +1,6 @@
+import { NewsItem, parseDate, toMarkdown } from '@skolplattformen/api';
 import { etjanst } from './etjanst'
-import { toMarkdown } from '../parseHtml'
-import { NewsItem } from '../types'
-import { parseDate } from '../utils/dateHandling'
+
 
 const IMAGE_HOST =
   'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='

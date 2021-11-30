@@ -1,16 +1,13 @@
-import { Api } from './api'
 import {
+  Api,
+  FetcherOptions,
   RNCookieManager,
   ToughCookieJar,
   wrapReactNativeCookieManager,
   wrapToughCookie,
-} from './cookies'
-import { FetcherOptions } from './fetcher'
-import { Fetch } from './types'
-
-export { LoginStatusChecker } from './loginStatus'
-export * from './types'
-export { Api, FetcherOptions }
+} from '@skolplattformen/api'
+import { ApiSkolplattformen } from './api'
+export { features } from './features'
 
 const init = (
   fetchImpl: Fetch,
@@ -21,7 +18,7 @@ const init = (
   const cookieManager = ((cookieManagerImpl as RNCookieManager).get)
     ? wrapReactNativeCookieManager(cookieManagerImpl as RNCookieManager)
     : wrapToughCookie(cookieManagerImpl as ToughCookieJar)
-  return new Api(fetchImpl, cookieManager, options)
+  return new ApiSkolplattformen(fetchImpl as any, cookieManager, options)
 }
 
 export default init

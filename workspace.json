@@ -25,6 +25,54 @@
         }
       }
     },
+    "api-hjarntorget": {
+      "root": "libs/api-hjarntorget",
+      "sourceRoot": "libs/api-hjarntorget/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/api-hjarntorget/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api-skolplattformen"],
+          "options": {
+            "jestConfig": "libs/api-skolplattformen/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "libs/api",
+      "sourceRoot": "libs/api",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/api/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api-skolplattformen"],
+          "options": {
+            "jestConfig": "libs/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "curriculum": {
       "root": "libs/curriculum",
       "sourceRoot": "libs/curriculum/src",
@@ -74,6 +122,16 @@
       "sourceRoot": "apps/skolplattformen-sthlm/src",
       "projectType": "application",
       "targets": {
+
+        "build": {
+          "executor": "@nrwl/react-native:bundle",
+          "outputs": ["apps/skolplattformen-sthlm/build"],
+          "options": {
+            "entryFile": "apps/skolplattformen-sthlm/index.js",
+            "platform": "ios",
+            "bundleOutput": "dist/apps/skolplattformen-sthlm/ios/main.jsbundle"
+          }
+        },
         "start": {
           "executor": "@nrwl/react-native:start",
           "options": {

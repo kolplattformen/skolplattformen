@@ -22,6 +22,7 @@ import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 import { Classmates } from './classmates.component'
 import { TabBarLabel } from './tabBarLabel.component'
+import { useFeature } from '../hooks/useFeature'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -47,10 +48,20 @@ const CalendarScreen = () => <Calendar />
 const MenuScreen = () => <Menu />
 const ClassmatesScreen = () => <Classmates />
 
+interface ScreenSettings {
+  NEWS_SCREEN: boolean
+  NOTIFICATIONS_SCREEN: boolean
+  CALENDER_SCREEN: boolean
+  MENU_SCREEN: boolean
+  CLASSMATES_SCREEN: boolean
+}
+
 const TabNavigator = ({
   initialRouteName = 'News',
+  screenSettings,
 }: {
   initialRouteName?: keyof ChildTabParamList
+  screenSettings: ScreenSettings
 }) => (
   <Navigator
     initialRouteName={initialRouteName}
@@ -80,31 +91,41 @@ const TabNavigator = ({
       }
     }}
   >
-    <Screen
-      name="News"
-      component={NewsScreen}
-      options={{ title: translate('navigation.news') }}
-    />
-    <Screen
-      name="Notifications"
-      component={NotificationsScreen}
-      options={{ title: translate('navigation.notifications') }}
-    />
-    <Screen
-      name="Calendar"
-      component={CalendarScreen}
-      options={{ title: translate('navigation.calender') }}
-    />
-    <Screen
-      name="Menu"
-      component={MenuScreen}
-      options={{ title: translate('navigation.menu') }}
-    />
-    <Screen
-      name="Classmates"
-      component={ClassmatesScreen}
-      options={{ title: translate('navigation.classmates') }}
-    />
+    {screenSettings.NEWS_SCREEN && (
+      <Screen
+        name="News"
+        component={NewsScreen}
+        options={{ title: translate('navigation.news') }}
+      />
+    )}
+    {screenSettings.NOTIFICATIONS_SCREEN && (
+      <Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={{ title: translate('navigation.notifications') }}
+      />
+    )}
+    {screenSettings.CALENDER_SCREEN && (
+      <Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{ title: translate('navigation.calender') }}
+      />
+    )}
+    {screenSettings.MENU_SCREEN && (
+      <Screen
+        name="Menu"
+        component={MenuScreen}
+        options={{ title: translate('navigation.menu') }}
+      />
+    )}
+    {screenSettings.CLASSMATES_SCREEN && (
+      <Screen
+        name="Classmates"
+        component={ClassmatesScreen}
+        options={{ title: translate('navigation.classmates') }}
+      />
+    )}
   </Navigator>
 )
 
@@ -153,6 +174,8 @@ export const childRouteOptions =
 export const Child = () => {
   const route = useRoute<ChildRouteProps>()
   const { child, initialRouteName } = route.params
+  const useFoodMenu = useFeature('FOOD_MENU')
+  const useClassList = useFeature('CLASS_LIST')
 
   const navigation = useNavigation()
 
@@ -160,9 +183,17 @@ export const Child = () => {
     navigation.setOptions({ title: getHeaderTitle(route) })
   }, [navigation, route])
 
+  const screenSettings: ScreenSettings = {
+    NEWS_SCREEN: true,
+    NOTIFICATIONS_SCREEN: true,
+    CALENDER_SCREEN: true,
+    MENU_SCREEN: useFoodMenu,
+    CLASSMATES_SCREEN: useClassList,
+  }
   return (
     <ChildProvider child={child}>
       <TabNavigator
+        screenSettings={screenSettings}
         initialRouteName={initialRouteName as keyof ChildTabParamList}
       />
     </ChildProvider>

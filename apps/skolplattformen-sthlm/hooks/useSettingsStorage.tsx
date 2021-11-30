@@ -5,10 +5,13 @@ import AppStorage from '../services/appStorage'
 export const settingsState = proxy({
   hydrated: false,
   settings: {
-    loginMethodIndex: 0,
+    loginMethodId: 'thisdevice' as 'thisdevice' | 'otherdevice' | 'testuser',
     usingSystemTheme: true,
     theme: 'light',
     cachedPersonalIdentityNumber: '',
+    currentSchoolPlatform: 'stockholm-skolplattformen' as
+      | 'stockholm-skolplattformen'
+      | 'goteborg-hjarntorget',
   },
 })
 

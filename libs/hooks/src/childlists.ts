@@ -1,8 +1,4 @@
-import {
-  Child,
-  EtjanstChild,
-  Skola24Child,
-} from '@skolplattformen/api-skolplattformen'
+import { Child, EtjanstChild, Skola24Child } from '@skolplattformen/api'
 
 export const merge = (
   etjanstChildren: EtjanstChild[],

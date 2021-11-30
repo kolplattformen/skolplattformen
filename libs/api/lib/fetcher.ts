@@ -1,4 +1,4 @@
-import { Fetch, RequestInit, Response } from './types'
+import { Response, Fetch, RequestInit } from './types'
 
 export interface CallInfo extends RequestInit {
   name: string
