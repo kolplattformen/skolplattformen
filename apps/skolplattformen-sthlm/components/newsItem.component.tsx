@@ -38,10 +38,7 @@ export const newsItemRouteOptions =
     return {
       ...defaultStackStyling(darkMode),
       headerCenter: () => (
-        <NavigationTitle
-          title={newsItem.header}
-          subtitle={studentName(child?.name)}
-        />
+        <NavigationTitle subtitle={studentName(child?.name)} />
       ),
       headerLargeTitle: false,
     }
@@ -58,6 +55,9 @@ export const NewsItem = ({ route }: NewsItemProps) => {
       contentContainerStyle={styles.article}
       style={styles.scrollView}
     >
+      <Text maxFontSizeMultiplier={2} style={styles.title}>
+        {newsItem.header}
+      </Text>
       {dateIsValid(newsItem.published) && (
         <Text
           maxFontSizeMultiplier={2}

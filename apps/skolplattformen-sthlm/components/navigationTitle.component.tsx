@@ -14,7 +14,11 @@ interface NavigationTitleProps {
 export const NavigationTitle = ({ title, subtitle }: NavigationTitleProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      {title && (
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+          {title}
+        </Text>
+      )}
       <Text style={styles.subtitle}>{subtitle}</Text>
     </View>
   )
@@ -25,7 +29,7 @@ const styles = StyleSheet.create({
     ...Layout.center,
   },
   title: {
-    ...fontSize.base,
+    ...fontSize.sm,
     fontWeight: '500',
   },
   subtitle: { ...fontSize.xxs },
