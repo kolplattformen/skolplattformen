@@ -26,7 +26,9 @@ The respective README files there contain more detailed descriptions.
     * [skolplattformen-sthlm](#skolplattformen-sthlm)
     * [website](#website)
   * [Libs](#embedded-api)
+    * [api](#api)
     * [api-skolplattformen](#api-skolplattformen)
+    * [api-hjarntorget](#api-hjarntorget)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
 * [Development](#development)
@@ -48,6 +50,7 @@ The project consists of several apps and libraries inside [a NX](https://nx.dev/
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
 Our main goal with the app is to make it as fast and easy to use as possible. \
+
 We're starting small, with more features being added over time.
 
 For more information, check out the [source code](apps/skolplattformen-sthlm).
@@ -60,9 +63,16 @@ For more information, check out the [source code](apps/website).
 ### Libs 
 
 /libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
-#### api-skolplattformen
 
-(renamed from embedded-api)
+#### api
+
+The base for all api implementations
+
+#### api-hjarntorget
+
+The implementation for the school platform in Gothenburg called Hjärntorget
+
+#### api-skolplattformen
 
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
@@ -73,6 +83,7 @@ Check out the documentation [here](libs/api-skolplattformen).
 #### curriculum
 
 Translations of curriculum codes (sv: ämneskoder på schemat) to clear text descriptions
+
 #### hooks
 
 To make it easier to use the the api in the app, we also created a set of React hooks.
@@ -88,6 +99,31 @@ $ sudo apt install git npm
 Clone the repo with
 ```bash
 $ git clone https://github.com/kolplattformen/skolplattformen.git
+```
+
+Install dependencies
+```
+cd skolplattformen && yarn
+```
+
+Start the iOS app
+```
+yarn run ios
+```
+
+Start the Android app
+```
+yarn run android
+```
+
+Run all tests
+```
+yarn run test
+```
+
+Run a specific test
+```
+yarn run test:api-skolplattformen
 ```
 
 The README files for the [app](apps/skolplattformen-sthlm) and [website](apps/website) contain further instructions.
@@ -127,6 +163,8 @@ If you're offended by this initiative, rest assured there is no reason to be —
 - [Andreas Eriksson](https://github.com/whyer)
 - [Kajetan Kazimierczak](https://github.com/kajetan-kazimierczak)
 - [Karin Nygårds (artwork)](https://github.com/grishund)
+- [Jonathan Edenström](https://github.com/edenstrom)
+- [Emil Hellman](https://github.com/archevel)
 - You?
 
 ## License
