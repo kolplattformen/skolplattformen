@@ -8,7 +8,9 @@
         "confirm": "Bevestigen",
         "changeLanguage": "Taal wijzigen",
         "socialSecurityNumber": "Burgerservicenummer",
-        "cancel": "Annuleren"
+        "cancel": "Annuleren",
+        "logoutAndClearAllDataInclSettings": "Log uit en wis alle gegevens inclusief instellingen",
+        "logoutAndClearPersonalData": "Uitloggen en persoonlijke gegevens wissen"
     },
     "auth": {
         "placeholder_SocialSecurityNumber": "Jouw burgerservicenummer",
@@ -60,7 +62,8 @@
         "personalNumberMissing": "Burgerservicenummer ontbreekt",
         "selectAbscenseEndTime": "Kies eindtijd",
         "selectAbscenseStartTime": "Kies starttijd",
-        "entireDay": "Hele dag"
+        "entireDay": "Hele dag",
+        "childsPersonalNumber": "Kinds burgerservicenummer"
     },
     "children": {
         "noKids_description": "Er zijn geen kinderen geregistreerd in de stad Stockholm voor jouw burgerservicenummer",
@@ -104,7 +107,8 @@
         "notifications": "Meldingen",
         "calender": "Agenda",
         "menu": "Menu",
-        "news": "Nieuws"
+        "news": "Nieuws",
+        "classmates": "Klasgenoten"
     },
     "schedule": {
         "end": "Eind",
@@ -113,6 +117,29 @@
         "start": "Start"
     },
     "contact": {
-        "a11y_show_contact_info_button_hint": "Toon contactgegevens"
+        "a11y_show_contact_info_button_hint": "Toon contactgegevens",
+        "email": "E-mail",
+        "home": "Adres",
+        "call": "Telefoongesprek",
+        "sms": "SMS",
+        "a11y_show_contact_info_button_label": "Toon contactgegevens"
+    },
+    "settings": {
+        "useSystemTheme": "Gebruik systeem licht/donker thema",
+        "appearance": "Verschijning",
+        "theme": "Thema",
+        "licenses": "Licenties",
+        "language": "Taal",
+        "themeAuto": "Auto",
+        "settings": "Instellingen"
+    },
+    "classmates": {
+        "class": "Klas",
+        "child": "Kind",
+        "contactsForGuardiansFor": "Contactgegevens voor voogden voor"
+    },
+    "themes": {
+        "light": "Licht",
+        "dark": "Donker"
     }
 }
