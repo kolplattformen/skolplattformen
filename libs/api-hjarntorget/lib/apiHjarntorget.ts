@@ -266,7 +266,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const nonChildSpecificMessages = wallMessagesResponseJson
       .filter((message) =>
         // Ignore "Alarm" messages from the calendar
-        message.creator.id !== '__system$virtual$calendar__' && 
+        message.creator.id !== '__system$virtual$calendar__' &&
         // Only include messages that can not reliably be associated with one of the children
         !membersInChildensEvents.some((member) => member.id === message.creator.id)
       )
@@ -275,7 +275,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         const body = message.body as string
         const trimmedBody = body.trim()
         const firstNewline = trimmedBody.indexOf('\n')
-        const title = trimmedBody.substring(0, firstNewline).trim() || message.title 
+        const title = trimmedBody.substring(0, firstNewline).trim() || message.title
         const intro = trimmedBody.substring(firstNewline).trim()
         return {
           id: message.id,
@@ -374,7 +374,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
           }
         })
     )
-    
+
     return membersInEvents.filter((e) =>
       e.eventMembers.find((p) => children.some(c => c.id === p.id))
     )
@@ -451,6 +451,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       })
       return {
         id: l.id,
+        code: l.title,
+        name: l.title,
         teacher: l.bookedTeacherNames && l.bookedTeacherNames[0],
         location: l.location,
         timeStart: start.toISOTime().substring(0, 5),
