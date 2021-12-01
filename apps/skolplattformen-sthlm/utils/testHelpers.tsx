@@ -5,6 +5,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import React, { ReactElement } from 'react'
 import { LanguageProvider } from '../context/language/languageContext'
 import { translations } from './translation'
+import { lightTheme } from '../design/themes'
 
 export const render = (
   ui: ReactElement<any, string>,
@@ -14,7 +15,7 @@ export const render = (
     return (
       <>
         <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={eva.light}>
+        <ApplicationProvider {...eva} theme={lightTheme}>
           <LanguageProvider
             cache={false}
             data={translations}
