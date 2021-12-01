@@ -162,19 +162,19 @@
         }
       }
     },
-    "skolplattformen": {
-      "root": "apps/skolplattformen",
-      "sourceRoot": "apps/skolplattformen/src",
+    "skolplattformen-app": {
+      "root": "apps/skolplattformen-app",
+      "sourceRoot": "apps/skolplattformen-app/src",
       "projectType": "application",
       "targets": {
 
         "build": {
           "executor": "@nrwl/react-native:bundle",
-          "outputs": ["apps/skolplattformen/build"],
+          "outputs": ["apps/skolplattformen-app/build"],
           "options": {
-            "entryFile": "apps/skolplattformen/index.js",
+            "entryFile": "apps/skolplattformen-app/index.js",
             "platform": "ios",
-            "bundleOutput": "dist/apps/skolplattformen/ios/main.jsbundle"
+            "bundleOutput": "dist/apps/skolplattformen-app/ios/main.jsbundle"
           }
         },
         "start": {
@@ -195,11 +195,11 @@
         },
         "bundle-ios": {
           "executor": "@nrwl/react-native:bundle",
-          "outputs": ["apps/skolplattformen/build"],
+          "outputs": ["apps/skolplattformen-app/build"],
           "options": {
-            "entryFile": "apps/skolplattformen/index.js",
+            "entryFile": "apps/skolplattformen-app/index.js",
             "platform": "ios",
-            "bundleOutput": "dist/apps/skolplattformen/ios/main.jsbundle"
+            "bundleOutput": "dist/apps/skolplattformen-app/ios/main.jsbundle"
           }
         },
         "run-android": {
@@ -209,17 +209,17 @@
         "build-android": {
           "executor": "@nrwl/react-native:build-android",
           "outputs": [
-            "apps/skolplattformen/android/app/build/outputs/bundle",
-            "apps/skolplattformen/android/app/build/outputs/apk"
+            "apps/skolplattformen-app/android/app/build/outputs/bundle",
+            "apps/skolplattformen-app/android/app/build/outputs/apk"
           ],
           "options": {}
         },
         "bundle-android": {
           "executor": "@nrwl/react-native:bundle",
           "options": {
-            "entryFile": "apps/skolplattformen/index.js",
+            "entryFile": "apps/skolplattformen-app/index.js",
             "platform": "android",
-            "bundleOutput": "dist/apps/skolplattformen/android/main.jsbundle"
+            "bundleOutput": "dist/apps/skolplattformen-app/android/main.jsbundle"
           }
         },
         "sync-deps": {
@@ -235,15 +235,15 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": [
-              "apps/skolplattformen/**/*.{ts,tsx,js,jsx}"
+              "apps/skolplattformen-app/**/*.{ts,tsx,js,jsx}"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/skolplattformen"],
+          "outputs": ["coverage/apps/skolplattformen-app"],
           "options": {
-            "jestConfig": "apps/skolplattformen/jest.config.js",
+            "jestConfig": "apps/skolplattformen-app/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -253,7 +253,7 @@
   "cli": {
     "defaultCollection": "@nrwl/react-native"
   },
-  "defaultProject": "skolplattformen",
+  "defaultProject": "skolplattformen-app",
   "generators": {
     "@nrwl/react": {
       "application": {

@@ -1,7 +1,7 @@
 {
   "npmScope": "skolplattformen",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "implicitDependencies": {
     "package.json": {
@@ -37,15 +37,15 @@
       "tags": []
     },
     "api-test-app": {
-	  "tags": []
-	},
+	    "tags": []
+	  },
     "curriculum": {
       "tags": []
     },
     "hooks": {
       "tags": []
     },
-    "skolplattformen": {
+    "skolplattformen-app": {
       "tags": [],
        "implicitDependencies": ["api-skolplattformen", "api-hjarntorget", "api",  "hooks", "curriculum"]
     }

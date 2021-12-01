@@ -74,7 +74,7 @@ const Banner = () => {
             <p className="flex items-center py-4 sm:flex-row space-x-2 lg:space-x-4">
               <Link.External
                 className="inline-block"
-                href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
+                href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen-app/id1543853468"
                 target="_blank"
               >
                 <img

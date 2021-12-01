@@ -44,7 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
 
                 @Override
                 protected String getJSMainModuleName() {
-                    return "apps/skolplattformen/index";
+                    return "apps/skolplattformen-app/index";
                 }
             };
 
