@@ -1,7 +1,7 @@
 {
   "npmScope": "skolplattformen",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "implicitDependencies": {
     "package.json": {
