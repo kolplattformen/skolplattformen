@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import { loginStatus } from './routes';
 import { AuthTicket, Fetcher, LoginStatusChecker } from '@skolplattformen/api';
 
-export class Checker extends EventEmitter {
+export class Checker extends EventEmitter implements LoginStatusChecker {
   public token: string;
 
   private fetcher: Fetcher;
@@ -41,3 +41,10 @@ export const checkStatus = (
   fetch: Fetcher,
   ticket: AuthTicket
 ): LoginStatusChecker => new Checker(fetch, ticket)
+
+export class DummyStatusChecker extends EventEmitter implements LoginStatusChecker {
+  token = ""
+  async cancel(): Promise<void> {
+    // do nothing
+  }
+}

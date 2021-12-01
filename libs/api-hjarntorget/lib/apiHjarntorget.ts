@@ -25,7 +25,7 @@ import { decode } from 'he'
 import { DateTime, FixedOffsetZone } from 'luxon'
 import * as html from 'node-html-parser'
 import { fakeFetcher } from './fake/fakeFetcher'
-import { checkStatus } from './loginStatus'
+import { checkStatus, DummyStatusChecker } from './loginStatus'
 import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
 import {
   beginBankIdUrl,
@@ -498,13 +498,13 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
     if((beginLoginRedirectResponse as any).url.endsWith("startPage.do")) {
       // already logged in!
-      const emitter: any = new EventEmitter()
+      const emitter = new DummyStatusChecker()
       setTimeout(() => {
         this.isLoggedIn = true
         emitter.emit('OK')
         this.emit('login')
       }, 50)
-      return emitter;
+      return emitter as LoginStatusChecker;
     }
 
     console.log('prepping??? shibboleth')

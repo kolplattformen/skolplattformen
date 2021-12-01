@@ -10,7 +10,7 @@ import {
   pollStatusUrl,
 } from './routes'
 
-export class HjarntorgetChecker extends EventEmitter {
+export class HjarntorgetChecker extends EventEmitter implements LoginStatusChecker {
   private fetcher: Fetcher
 
   private basePollingUrl: string
@@ -120,3 +120,10 @@ export const checkStatus = (
   fetch: Fetcher,
   basePollingUrl: string
 ): LoginStatusChecker => new HjarntorgetChecker(fetch, basePollingUrl)
+
+export class DummyStatusChecker extends EventEmitter implements LoginStatusChecker {
+  token = ""
+  async cancel(): Promise<void> {
+    // do nothing
+  }
+}
