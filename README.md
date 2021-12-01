@@ -23,7 +23,7 @@ The respective README files there contain more detailed descriptions.
 
 * [Architecture](#architecture)
   * [Apps](#apps)
-    * [skolplattformen-sthlm](#skolplattformen-sthlm)
+    * [skolplattformen](#skolplattformen)
     * [website](#website)
   * [Libs](#embedded-api)
     * [api](#api)
@@ -49,7 +49,7 @@ The project consists of several apps and libraries inside [a NX](https://nx.dev/
 ### Apps 
 /apps/ contains the application projects. This is the main entry point for a runnable application. 
 
-#### skolplattformen-sthlm
+#### skolplattformen
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
@@ -57,7 +57,7 @@ Our main goal with the app is to make it as fast and easy to use as possible. \
 
 We're starting small, with more features being added over time.
 
-For more information, check out the [source code](apps/skolplattformen-sthlm).
+For more information, check out the [source code](apps/skolplattformen).
 
 #### website
 

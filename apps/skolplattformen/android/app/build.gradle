@@ -78,7 +78,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "apps/skolplattformen-sthlm/index.js",
+    entryFile: "apps/skolplattformen/index.js",
     enableHermes: true,  // clean and rebuild if changing
 ]
 

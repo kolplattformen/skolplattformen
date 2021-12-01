@@ -45,7 +45,7 @@
     "hooks": {
       "tags": []
     },
-    "skolplattformen-sthlm": {
+    "skolplattformen": {
       "tags": [],
        "implicitDependencies": ["api-skolplattformen", "api-hjarntorget", "api",  "hooks", "curriculum"]
     }
