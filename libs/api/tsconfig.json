@@ -10,7 +10,7 @@
     "sourceMap": true,
     "esModuleInterop": true
   },
-  "include": ["lib", "../../__mocks__"  ],
+  "include": ["lib" ],
   "exclude": [
     "node_modules",
     "**/__tests__/*",

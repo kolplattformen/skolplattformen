@@ -24,7 +24,7 @@ const path = require('path')
 const fs = require('fs')
 const { inspect } = require('util')
 
-const init = require('./dist/api-skolplattformen/lib').default
+const init = require('./dist/api-skolplattformen-app/lib').default
 
 const [, , personalNumber] = process.argv
 

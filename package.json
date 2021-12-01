@@ -1,6 +1,6 @@
 {
   "name": "skolplattformen",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "license": "MIT",
   "scripts": {
     "start": "nx start",
@@ -11,7 +11,7 @@
     "build": "nx build",
     "test": "nx run-many --all --target=test",
     "lint": "nx run-many --all --target=lint",
-    "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json && mv libraries.json apps/skolplattformen-sthlm",
+    "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json && mv libraries.json apps/skolplattformen-app",
     "postinstall": "yarn extract-licenses"
   },
   "private": true,
@@ -79,6 +79,7 @@
     "@nrwl/eslint-plugin-nx": "^12.10.0",
     "@nrwl/jest": "12.10.0",
     "@nrwl/linter": "12.10.0",
+    "@nrwl/node": "12.10.0",
     "@nrwl/react": "12.10.0",
     "@nrwl/react-native": "^12.10.0",
     "@nrwl/tao": "12.10.0",
