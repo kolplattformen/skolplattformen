@@ -94,6 +94,16 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     }
   }
 
+  public async getSessionHeaders(url: string): Promise<{ [index: string]: string }> {
+    const init = this.getRequestInit()
+    const cookie = await this.cookieManager.getCookieString(url)
+    return {
+        ...init.headers,
+        cookie,
+    }
+  }
+
+
   public async getSession(
     url: string,
     options?: RequestInit

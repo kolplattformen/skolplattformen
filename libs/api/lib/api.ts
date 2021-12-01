@@ -21,7 +21,7 @@ export interface Api extends EventEmitter {
   getPersonalNumber(): string | undefined
   login(personalNumber?: string): Promise<LoginStatusChecker>
   setSessionCookie(sessionCookie: string): Promise<void>
-  getSessionHeaders(url: string): { [index: string]: string }
+  getSessionHeaders(url: string): Promise<{ [index: string]: string }>
   getUser(): Promise<User>
   getChildren(): Promise<EtjanstChild[]>
   getCalendar(child: EtjanstChild): Promise<CalendarItem[]>

@@ -138,6 +138,13 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return this.personalNumber
   }
 
+  public async getSessionHeaders(url: string): Promise<{ [index: string]: string }> {
+    const cookie = await this.cookieManager.getCookieString(url)
+    return {
+        cookie,
+    }
+  }
+
   async setSessionCookie(sessionCookie: string): Promise<void> {
     await this.fetch('login-cookie', hjarntorgetUrl, {
       headers: {
