@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/kolplattformen/skolplattformen/compare/v2.3.1...v2.3.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* 🐛 Readded keystore ([47c2ca3](https://github.com/kolplattformen/skolplattformen/commit/47c2ca30dcd780437e4f71af317da1c89258ad3d))
+
 ## [2.3.1](https://github.com/kolplattformen/skolplattformen-app/compare/v2.3.0...v2.3.1) (2021-11-30)
 
 
