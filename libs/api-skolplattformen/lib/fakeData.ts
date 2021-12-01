@@ -534,7 +534,7 @@ const data: any = {
         dateCreated: '2020-03-24T13:48:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
         url:
-          'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen-app/lmsau!5338007/',
+          'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen/lmsau!5338007/',
         category: 'Bedömning',
         type: 'avisering',
       },

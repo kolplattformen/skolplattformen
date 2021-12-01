@@ -28,7 +28,7 @@ export const newsItem = ({
   body: toNonEmptyMarkdownString(body),
 })
 
-// Fixes https://github.com/kolplattformen/skolplattformen-app/issues/525
+// Fixes https://github.com/kolplattformen/skolplattformen/issues/525
 const toNonEmptyMarkdownString = (str: string): string => {
   const res = toMarkdown(str);
   if(res?.length == 0 ) return ' ' 

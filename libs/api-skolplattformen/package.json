@@ -1,5 +1,5 @@
 {
-  "name": "@skolplattformen-app/api-skolplattformen",
+  "name": "@skolplattformen/api-skolplattformen",
   "version": "0.15.0",
   "description": "Since the proxy was blocked (and also deemed a bad idea by some), this is a reboot of the API running in process in the app(s).",
   "main": "lib/index.ts",

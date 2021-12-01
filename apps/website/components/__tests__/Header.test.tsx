@@ -21,7 +21,7 @@ const setup = (customProps = {}) => {
 test('displays logo linked to start page', () => {
   setup()
 
-  const logo = screen.getByAltText(/skolplattformen-app/i)
+  const logo = screen.getByAltText(/skolplattformen/i)
 
   expect(logo).toBeInTheDocument()
   expect(logo.parentNode).toHaveAttribute('href', '/')

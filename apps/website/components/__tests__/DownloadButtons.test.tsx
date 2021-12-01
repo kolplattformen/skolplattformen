@@ -15,7 +15,7 @@ test('renders a link to app store', () => {
 
   expect(screen.getByRole('link', { name: /app store/i })).toHaveAttribute(
     'href',
-    'https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen-app/id1543853468'
+    'https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468'
   )
 })
 

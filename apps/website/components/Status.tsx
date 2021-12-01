@@ -16,13 +16,13 @@ const Status = () => {
         <ul>
           <li>Skicka en tweet 🥉</li>
           <li>
-            <a href="https://github.com/kolplattformen/skolplattformen-app/issues">
+            <a href="https://github.com/kolplattformen/skolplattformen/issues">
               Lägg en buggrapport här
             </a>{' '}
             🥈
           </li>
           <li>
-            <a href="https://github.com/kolplattformen/skolplattformen-app/pulls">
+            <a href="https://github.com/kolplattformen/skolplattformen/pulls">
               Skicka en PR
             </a>{' '}
             🥇

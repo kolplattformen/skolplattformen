@@ -4,7 +4,7 @@ const DownloadButtons = () => {
   return (
     <div className="space-x-4">
       <ButtonLink
-        href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen-app/id1543853468"
+        href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen/id1543853468"
         target="_blank"
       >
         App Store

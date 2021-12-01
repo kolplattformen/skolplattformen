@@ -13,7 +13,7 @@ P
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-This main repository for the project contains the source code for both the [app](apps/skolplattformen-app) and its [website](https://skolplattformen.org/). \
+This main repository for the project contains the source code for both the [app](apps/sPkolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
 The sources for each can be found under [apps](apps) and [libs](libs).
 The respective README files there contain more detailed descriptions.
 
@@ -23,7 +23,7 @@ The respective README files there contain more detailed descriptions.
 
 * [Architecture](#architecture)
   * [Apps](#apps)
-    * [skolplattformen](#skolplattformen)
+    * [skolplattformen-sthlm](#skolplattformen-sthlm)
     * [website](#website)
   * [Libs](#embedded-api)
     * [api](#api)
@@ -49,7 +49,7 @@ The project consists of several apps and libraries inside [a NX](https://nx.dev/
 ### Apps 
 /apps/ contains the application projects. This is the main entry point for a runnable application. 
 
-#### skolplattformen
+#### skolplattformen-sthlm
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
@@ -57,7 +57,7 @@ Our main goal with the app is to make it as fast and easy to use as possible. \
 
 We're starting small, with more features being added over time.
 
-For more information, check out the [source code](apps/skolplattformen-app).
+For more information, check out the [source code](apps/skolplattformen-sthlm).
 
 #### website
 
@@ -157,10 +157,10 @@ Once done, create a _pull request_ where you explain why we should incorporate y
 If you're new to GitHub, there's a number of excellent guides available, such as [this one on forking projects and making pull requests](https://guides.github.com/activities/forking/).
 
 There are many ways to contribute to the project. \
-If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen-app/issues/new) to let us know when something isn't working properly. \
+If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know when something isn't working properly. \
 We're super duper happy for both issues and pull requests, and we try to answer all of them as soon as humanly possible.
 
-Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen-app/) into a new language, or to improve existing translations.
+Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen/) into a new language, or to improve existing translations.
 
 _Working together leverages available skills and experience in improving the project, ultimately creating the best possible experience_.
 
