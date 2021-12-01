@@ -3,7 +3,7 @@ const { withNxMetro } = require('@nrwl/react-native')
 const MetroConfig = require('@ui-kitten/metro-config')
 const evaConfig = {
   evaPackage: '@eva-design/eva',
-  customMappingPath: './apps/skolplattformen-sthlm/design/mapping.json',
+  customMappingPath: './apps/skolplattformen-app/design/mapping.json',
 }
 
 const evaMetroConfig = MetroConfig.create(evaConfig, {

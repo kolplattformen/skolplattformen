@@ -23,9 +23,6 @@
       "@skolplattformen/api-hjarntorget": [
         "libs/api-hjarntorget/lib/index.ts"
       ],
-      "@skolplattformen/api": [
-        "libs/api/lib/index.ts"
-      ],
       "@skolplattformen/curriculum": ["libs/curriculum/src/index.ts"],
       "@skolplattformen/hooks": ["libs/hooks/src/index.ts"]
     }

@@ -87,7 +87,7 @@ const Privacy = () => {
         <p>
           Denna integritetspolicy gäller fr.o.m. 2021-09-13. Ändringar i denna
           policy finns dokumenterade på vår{' '}
-          <Link.External href="https://github.com/kolplattformen/skolplattformen/">
+          <Link.External href="https://github.com/kolplattformen/skolplattformen-app/">
             GitHub
           </Link.External>
           .

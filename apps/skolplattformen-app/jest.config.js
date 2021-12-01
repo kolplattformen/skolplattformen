@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'skolplattformen-sthlm',
+  displayName: 'skolplattformen',
   preset: 'react-native',
   resolver: '@nrwl/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],

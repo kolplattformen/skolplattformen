@@ -11,7 +11,7 @@
     "build": "nx build",
     "test": "nx run-many --all --target=test",
     "lint": "nx run-many --all --target=lint",
-    "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json && mv libraries.json apps/skolplattformen-sthlm",
+    "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json && mv libraries.json apps/skolplattformen-app",
     "postinstall": "yarn extract-licenses"
   },
   "private": true,
