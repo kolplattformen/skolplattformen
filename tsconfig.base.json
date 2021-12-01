@@ -25,12 +25,6 @@
       ],
       "@skolplattformen/curriculum": ["libs/curriculum/src/index.ts"],
       "@skolplattformen/hooks": ["libs/hooks/src/index.ts"]
-    },
-    "exclude": [
-      "node_modules",
-      "**/__tests__/*",
-      "**/__mocks__/*",
-      "**/*.test.ts"
-    ]
+    }
   }
 }
