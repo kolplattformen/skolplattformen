@@ -107,7 +107,7 @@ const hook = <T>(
 
       if (newState.error) {
         const description = `Error getting ${entityName} from API`
-        reporter.error(newState.error, description)
+        reporter.error && reporter.error(newState.error, description)
       }
     }
   }

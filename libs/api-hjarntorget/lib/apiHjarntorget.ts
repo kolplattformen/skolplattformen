@@ -5,6 +5,7 @@ import {
   Classmate,
   CookieManager,
   EtjanstChild,
+  Fetch,
   Fetcher,
   FetcherOptions,
   LoginStatusChecker,
@@ -84,7 +85,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   constructor(
-    fetch: typeof global.fetch,
+    fetch: Fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {
@@ -497,7 +498,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
     if((beginLoginRedirectResponse as any).url.endsWith("startPage.do")) {
       // already logged in!
-      const emitter = new EventEmitter()
+      const emitter: any = new EventEmitter()
       setTimeout(() => {
         this.isLoggedIn = true
         emitter.emit('OK')

@@ -10,13 +10,13 @@ export const schoolPlatforms = [
   {
     id: 'stockholm-skolplattformen',
     displayName: 'Stockholm stad (Skolplattformen)',
-    api: initSkolplattformen(fetch, CookieManager),
+    api: initSkolplattformen(fetch as any, CookieManager),
     features: featuresSkolPlattformen,
   },
   {
     id: 'goteborg-hjarntorget',
     displayName: 'Göteborg stad (Hjärntorget)',
-    api: initHjarntorget(fetch, CookieManager),
+    api: initHjarntorget(fetch as any, CookieManager),
     features: featuresHjarntorget,
   },
 ]
