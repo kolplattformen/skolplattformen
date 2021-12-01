@@ -1,8 +1,4 @@
-import {
-  Child,
-  MenuItem,
-  TimetableEntry,
-} from '@skolplattformen/api-skolplattformen'
+import { Child, MenuItem, TimetableEntry } from '@skolplattformen/api'
 import { useMenu, useTimetable } from '@skolplattformen/hooks'
 import {
   List,

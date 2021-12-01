@@ -18,7 +18,7 @@ In order to use api hooks, you must wrap your app in an ApiProvider
 ```javascript
 import React from 'react'
 import { ApiProvider } from '@skolplattformen/hooks'
-import init from '@skolplattformen/api-skolplattformen'
+import init from '@skolplattformen/api'
 import { CookieManager } from '@react-native-cookies/cookies'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RootComponent } from './components/root'

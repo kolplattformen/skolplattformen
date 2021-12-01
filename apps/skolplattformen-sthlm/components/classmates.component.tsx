@@ -1,4 +1,4 @@
-import { Classmate } from '@skolplattformen/api-skolplattformen'
+import { Classmate } from '@skolplattformen/api'
 import { useClassmates } from '@skolplattformen/hooks'
 import {
   Divider,

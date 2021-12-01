@@ -1,5 +1,6 @@
 import {
   Api,
+  Fetch,
   FetcherOptions,
   RNCookieManager,
   ToughCookieJar,

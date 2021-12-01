@@ -1,5 +1,5 @@
 /* eslint-disable react-native-a11y/has-accessibility-hint */
-import { Classmate } from '@skolplattformen/api-skolplattformen'
+import { Classmate } from '@skolplattformen/api'
 import {
   Button,
   MenuGroup,

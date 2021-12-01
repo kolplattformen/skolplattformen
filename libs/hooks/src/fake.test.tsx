@@ -15,7 +15,7 @@ import store from './store'
 import createStorage from './__mocks__/AsyncStorage'
 
 const { default: init } = jest.requireActual(
-  '@skolplattformen/api-skolplattformen'
+  '@skolplattformen/api'
 )
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms))

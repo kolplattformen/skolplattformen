@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core'
-import { Child } from '@skolplattformen/api-skolplattformen'
+import { Child } from '@skolplattformen/api'
 import { useApi, useChildList } from '@skolplattformen/hooks'
 import {
   Button,

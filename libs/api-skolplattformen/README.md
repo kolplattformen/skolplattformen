@@ -16,7 +16,7 @@ the concrete implementation of fetch and cookie handler must be injected.
 #### react-native
 
 ```javascript
-import init from '@skolplattformen/api-skolplattformen'
+import init from '@skolplattformen/api'
 import CookieManager from '@react-native-cookies/cookies'
 
 const api = init(fetch, () => CookieManager.clearAll())
@@ -25,7 +25,7 @@ const api = init(fetch, () => CookieManager.clearAll())
 #### node
 
 ```javascript
-import init from '@skolplattformen/api-skolplattformen'
+import init from '@skolplattformen/api'
 import nodeFetch from 'node-fetch'
 import fetchCookie from 'fetch-cookie/node-fetch'
 import { CookieJar } from 'tough-cookie'

@@ -1,4 +1,4 @@
-import { CalendarItem } from '@skolplattformen/api-skolplattformen'
+import { CalendarItem } from '@skolplattformen/api'
 import { useCalendar } from '@skolplattformen/hooks'
 import {
   Divider,

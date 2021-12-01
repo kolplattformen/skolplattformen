@@ -1,4 +1,4 @@
-import { Child } from '@skolplattformen/api-skolplattformen'
+import { Child } from '@skolplattformen/api'
 import { useTimetable } from '@skolplattformen/hooks'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment, { Moment } from 'moment'
