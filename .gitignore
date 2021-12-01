@@ -70,8 +70,6 @@ DerivedData
 
 buck-out/
 \.buckd/
-*.keystore
-!debug.keystore
 
 ## fastlane
 #
