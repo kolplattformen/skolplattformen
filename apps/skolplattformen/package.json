@@ -1,5 +1,5 @@
 {
-  "name": "skolplattformen",
+  "name": "skolplattformen-app",
   "version": "0.0.1",
   "scripts": {
     "android": "react-native run-android",
