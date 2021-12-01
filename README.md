@@ -9,11 +9,11 @@ Give us a ⭐ if you appreciate what we do!
 [![Build Status](https://app.bitrise.io/app/8e56bd02bc602da5/status.svg?token=h8gI2dB_jXLurj9EO_fXWw)](https://app.bitrise.io/app/8e56bd02bc602da5)
 
 We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians.
-
+P
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-This main repository for the project contains the source code for both the [app](apps/skolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
+This main repository for the project contains the source code for both the [app](apps/sPkolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
 The sources for each can be found under [apps](apps) and [libs](libs).
 The respective README files there contain more detailed descriptions.
 
@@ -31,7 +31,11 @@ The respective README files there contain more detailed descriptions.
     * [api-hjarntorget](#api-hjarntorget)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
-* [Development](#development)
+* [Getting started with development](#getting-started-with-development)
+    * [iOS](#ios)
+    * [Android](#android)
+    * [Website](#website)
+    * [Tests](#tests)
 * [Contributions](#contributions)
 * [Money](#money)
 * [Disclaimer](#disclaimer)
@@ -89,12 +93,9 @@ Translations of curriculum codes (sv: ämneskoder på schemat) to clear text des
 To make it easier to use the the api in the app, we also created a set of React hooks.
 Check out the documentation [here](libs/hooks).
 
-## Development
+## Getting started with Development
 
-To clone and build the project, you first need to install the required dependencies:
-```bash
-$ sudo apt install git npm
-```
+To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/). 
 
 Clone the repo with
 ```bash
@@ -102,19 +103,42 @@ $ git clone https://github.com/kolplattformen/skolplattformen.git
 ```
 
 Install dependencies
-```
+```bash
 cd skolplattformen && yarn
 ```
+
+### iOS
+
+If you wanna run the iOS app, you need to setup a couple of things first, we have a guide that will assist you in getting started with the iOS app. A Mac is required to build projects with native code for iOS so we do not have support for Linux / Windows.
+
+* [Mac OS](/docs/ios_mac.md)
+
+If you already setup everything, you just need to run the following command in the project root:
 
 Start the iOS app
 ```
 yarn run ios
 ```
 
-Start the Android app
+### Android
+
+If you wanna run the Android app, you need to setup a couple of things first, we have created three different guides depending on your operating system.
+
+* [Mac OS](/docs/android_mac.md)
+* [Windows](/docs/android_windows.md)
+* [Linux](/docs/android_linux.md)
+
+If you already setup everything, you just need to run the following command in the project root:
+
 ```
 yarn run android
 ```
+
+### Website
+
+Documentation coming soon.
+
+### Tests
 
 Run all tests
 ```
@@ -125,8 +149,6 @@ Run a specific test
 ```
 yarn run test:api-skolplattformen
 ```
-
-The README files for the [app](apps/skolplattformen-sthlm) and [website](apps/website) contain further instructions.
 
 ## Contributions
 
