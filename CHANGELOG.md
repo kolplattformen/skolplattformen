@@ -1,3 +1,11 @@
+# [2.4.0](https://github.com/kolplattformen/skolplattformen/compare/v2.3.2...v2.4.0) (2021-12-02)
+
+
+### Features
+
+* 🎸 Clear personal cache on login and logout ([#572](https://github.com/kolplattformen/skolplattformen/issues/572)) ([bf29ab5](https://github.com/kolplattformen/skolplattformen/commit/bf29ab58edd13db62b34f873a3429d319c0e7297))
+* 🎸 Fix image load and typescript errors ([#570](https://github.com/kolplattformen/skolplattformen/issues/570)) ([933a884](https://github.com/kolplattformen/skolplattformen/commit/933a8840a3ebd049711a000ca6faf3e534f77ace))
+
 ## [2.3.2](https://github.com/kolplattformen/skolplattformen/compare/v2.3.1...v2.3.2) (2021-12-01)
 
 
