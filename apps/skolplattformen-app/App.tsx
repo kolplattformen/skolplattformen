@@ -19,7 +19,7 @@ import { translations } from './utils/translation'
 const reporter: Reporter | undefined = __DEV__
   ? {
       log: (message: string) => console.log(message),
-      error: (error: Error, label?: string) => console.error(label, error),
+      error: (error: Error, label?: string) => console.log(label, error),
     }
   : undefined
 
