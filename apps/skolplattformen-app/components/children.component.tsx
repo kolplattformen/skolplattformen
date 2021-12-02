@@ -1,4 +1,5 @@
-import { useNavigation } from '@react-navigation/core'
+import { NavigationProp, useNavigation } from '@react-navigation/core'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { Child } from '@skolplattformen/api'
 import { useApi, useChildList } from '@skolplattformen/hooks'
 import {
@@ -18,13 +19,13 @@ import {
   ListRenderItemInfo,
   View,
 } from 'react-native'
-import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
 import AppStorage from '../services/appStorage'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -34,14 +35,14 @@ export const childenRouteOptions =
       ...defaultStackStyling(darkMode),
       title: translate('children.title'),
       headerLargeTitle: true,
-      headerLargeTitleHideShadow: true,
+      headerLargeTitleShadowVisible: false,
     }
   }
 
 export const Children = () => {
   const styles = useStyleSheet(themedStyles)
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
@@ -68,77 +69,71 @@ export const Children = () => {
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
-  return (
-    <>
-      {status === 'loaded' ? (
-        <List
-          contentContainerStyle={styles.childListContainer}
-          data={childList}
-          style={styles.childList}
-          ListEmptyComponent={
-            <View style={styles.emptyState}>
-              <Text category="h2">{translate('children.noKids_title')}</Text>
-              <Text style={styles.emptyStateDescription}>
-                {translate('children.noKids_description')}
-              </Text>
-              <Image
-                accessibilityIgnoresInvertColors={false}
-                source={require('../assets/children.png')}
-                style={styles.emptyStateImage as ImageStyle}
-              />
-            </View>
-          }
-          renderItem={({ item: child, index }: ListRenderItemInfo<Child>) => (
-            <ChildListItem
-              child={child}
-              color={colors[index % colors.length]}
-              key={child.id}
-            />
-          )}
-        />
-      ) : (
-        <View style={styles.loading}>
+  return status === 'loaded' ? (
+    <List
+      contentContainerStyle={styles.childListContainer}
+      data={childList}
+      style={styles.childList}
+      ListEmptyComponent={
+        <View style={styles.emptyState}>
+          <Text category="h2">{translate('children.noKids_title')}</Text>
+          <Text style={styles.emptyStateDescription}>
+            {translate('children.noKids_description')}
+          </Text>
           <Image
             accessibilityIgnoresInvertColors={false}
-            source={require('../assets/girls.png')}
-            style={styles.loadingImage as ImageStyle}
+            source={require('../assets/children.png')}
+            style={styles.emptyStateImage as ImageStyle}
           />
-          {status === 'error' ? (
-            <View style={styles.errorMessage}>
-              <Text category="h5">
-                {translate('children.loadingErrorHeading')}
-              </Text>
-              <Text style={{ fontSize: Sizing.t4 }}>
-                {translate('children.loadingErrorInformationText')}
-              </Text>
-              <View style={styles.errorButtons}>
-                <Button status="success" onPress={() => reloadChildren()}>
-                  {translate('children.tryAgain')}
-                </Button>
-                <Button
-                  status="basic"
-                  onPress={() =>
-                    Linking.openURL('https://skolplattformen.org/status')
-                  }
-                >
-                  {translate('children.viewStatus')}
-                </Button>
-                <Button onPress={() => logout()}>
-                  {translate('general.logout')}
-                </Button>
-              </View>
-            </View>
-          ) : (
-            <View style={styles.loadingMessage}>
-              <Spinner size="large" status="primary" />
-              <Text category="h1" style={styles.loadingText}>
-                {translate('general.loading')}
-              </Text>
-            </View>
-          )}
+        </View>
+      }
+      renderItem={({ item: child, index }: ListRenderItemInfo<Child>) => (
+        <ChildListItem
+          child={child}
+          color={colors[index % colors.length]}
+          key={child.id}
+        />
+      )}
+    />
+  ) : (
+    <View style={styles.loading}>
+      <Image
+        accessibilityIgnoresInvertColors={false}
+        source={require('../assets/girls.png')}
+        style={styles.loadingImage as ImageStyle}
+      />
+      {status === 'error' ? (
+        <View style={styles.errorMessage}>
+          <Text category="h5">{translate('children.loadingErrorHeading')}</Text>
+          <Text style={{ fontSize: Sizing.t4 }}>
+            {translate('children.loadingErrorInformationText')}
+          </Text>
+          <View style={styles.errorButtons}>
+            <Button status="success" onPress={() => reloadChildren()}>
+              {translate('children.tryAgain')}
+            </Button>
+            <Button
+              status="basic"
+              onPress={() =>
+                Linking.openURL('https://skolplattformen.org/status')
+              }
+            >
+              {translate('children.viewStatus')}
+            </Button>
+            <Button onPress={() => logout()}>
+              {translate('general.logout')}
+            </Button>
+          </View>
+        </View>
+      ) : (
+        <View style={styles.loadingMessage}>
+          <Spinner size="large" status="primary" />
+          <Text category="h1" style={styles.loadingText}>
+            {translate('general.loading')}
+          </Text>
         </View>
       )}
-    </>
+    </View>
   )
 }
 

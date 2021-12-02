@@ -2,8 +2,9 @@ import { Guardian } from '@skolplattformen/api'
 
 export const studentName = (name?: string) => name?.replace(/\s?\(\w+\)$/, '')
 
-export const sortByFirstName = (data: Guardian[]) =>
-  data.sort((a, b) => a.firstname.localeCompare(b.firstname))
+export const sortByFirstName = <T extends { firstname: string }>(
+  data: T[]
+): T[] => data.sort((a, b) => a.firstname.localeCompare(b.firstname))
 
 export const guardians = (data: Guardian[]) =>
   sortByFirstName(data).map(fullName).join(', ')
