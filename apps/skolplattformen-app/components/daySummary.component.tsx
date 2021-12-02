@@ -2,7 +2,7 @@ import { Child } from '@skolplattformen/api'
 import { useTimetable } from '@skolplattformen/hooks'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment, { Moment } from 'moment'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { LanguageService } from '../services/languageService'
 import { translate } from '../utils/translation'
@@ -12,9 +12,13 @@ interface DaySummaryProps {
   date?: Moment
 }
 
-export const DaySummary = ({ child, date = moment() }: DaySummaryProps) => {
+export const DaySummary = ({
+  child,
+  date: currentDate = moment(),
+}: DaySummaryProps) => {
   const styles = useStyleSheet(themedStyles)
-  const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
+  const [week, year] = [currentDate.isoWeek(), currentDate.isoWeekYear()]
+
   const { data: weekLessons } = useTimetable(
     child,
     week,
@@ -23,7 +27,7 @@ export const DaySummary = ({ child, date = moment() }: DaySummaryProps) => {
   )
 
   const lessons = weekLessons
-    .filter((lesson) => lesson.dayOfWeek === date.isoWeekday())
+    .filter((lesson) => lesson.dayOfWeek === currentDate.isoWeekday())
     .sort((a, b) => a.dateStart.localeCompare(b.dateStart))
 
   if (lessons.length <= 0) {
@@ -53,15 +57,21 @@ export const DaySummary = ({ child, date = moment() }: DaySummaryProps) => {
             </Text>
           </View>
         </View>
+        <View style={styles.part}>
+          <View>
+            <Text category="c2" style={styles.label}>
+              &nbsp;
+            </Text>
+            <Text category="s2">
+              {gymBag
+                ? ` 🤼‍♀️ ${translate('schedule.gymBag', {
+                    defaultValue: 'Gympapåse',
+                  })}`
+                : ''}
+            </Text>
+          </View>
+        </View>
       </View>
-
-      <Text category="s2">
-        {gymBag
-          ? ` 🤼‍♀️ ${translate('schedule.gymBag', {
-              defaultValue: 'Gympapåse',
-            })}`
-          : ''}
-      </Text>
     </View>
   )
 }
@@ -75,5 +85,8 @@ const themedStyles = StyleService.create({
   },
   label: {
     marginTop: 10,
+  },
+  heading: {
+    marginBottom: -10,
   },
 })

@@ -16,6 +16,7 @@ import { View } from 'react-native'
 import { LanguageService } from '../services/languageService'
 import { Sizing, Typography } from '../styles'
 import { TransitionView } from './transitionView.component'
+import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 
 interface WeekProps {
   child: Child
@@ -107,10 +108,12 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 export const Week = ({ child }: WeekProps) => {
   moment.locale(LanguageService.getLocale())
   const days = moment.weekdaysShort().slice(1, 6)
-  const currentDayIndex = Math.min(moment().isoWeekday() - 1, 5)
+  const displayDate = getMeaningfulStartingDate()
+
+  const currentDayIndex = Math.min(moment(displayDate).isoWeekday() - 1, 5)
   const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
   const [showSchema, setShowSchema] = useState(false)
-  const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
+  const [year, week] = [displayDate.isoWeekYear(), displayDate.isoWeek()]
   const { data: lessons } = useTimetable(
     child,
     week,
