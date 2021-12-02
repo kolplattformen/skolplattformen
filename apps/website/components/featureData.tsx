@@ -66,7 +66,7 @@ export const FEATURES_DATA = [
   {
     title: 'Kan byggas ut till fler skolsystem',
     text:
-      'Just nu stöds bara Stockholm Stads skolplattform men med din hjälp kan fler skolplattformar integreras så att du slipper logga in i flera appar om du har barn i olika skolor.',
+      'Just nu stöds Stockholms och Göteborgs stads skolplattformar. Med din hjälp kan fler integreras så att du slipper använda flera appar om du har barn i olika skolor.',
     image: (
       <svg
         className="fill-current"

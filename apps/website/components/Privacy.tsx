@@ -9,7 +9,7 @@ const Privacy = () => {
         <p>
           "Öppna Skolplattformen", hädanefter "appen", byggs av "Not free beer
           AB" som en kommersiell app. Appen hämtar all information från
-          Stockholms stads skolplattform, hädanefter Skolplattformen, efter
+          respektive skolplattform, hädanefter Skolplattformen, efter
           inloggning via BankID. Appens funktion är därmed direkt knuten till
           att Skolplattformen fungerar. Vi kan endast ta ansvar för att vår kod
           fungerar – inte deras.
