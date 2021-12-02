@@ -133,7 +133,6 @@
     "node-fetch": "^3.0.0",
     "prettier": "^2.3.1",
     "react-native-clean-project": "^3.6.7",
-    "react-native-codegen": "0.0.7",
     "react-native-oss-license": "^0.4.1",
     "react-native-svg": "12.1.1",
     "react-native-svg-transformer": "0.14.3",
