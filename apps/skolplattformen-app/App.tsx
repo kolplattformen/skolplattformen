@@ -1,5 +1,10 @@
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ThemeProvider } from '@shopify/restyle'
+import {
+  defaultThemeDark,
+  defaultThemeLight,
+} from '@skolplattformen/design-system'
 import { ApiProvider, Reporter } from '@skolplattformen/hooks'
 import { ApplicationProvider, IconRegistry, Text } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
@@ -74,35 +79,39 @@ export default () => {
     )
 
   return (
-    <FeatureProvider features={platform.features}>
-      <SchoolPlatformProvider>
-        <ApiProvider
-          api={platform.api}
-          storage={AsyncStorage}
-          reporter={reporter}
-        >
-          <SafeAreaProvider>
-            <StatusBar
-              backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
-              barStyle={
-                colorScheme === 'dark' ? 'light-content' : 'dark-content'
-              }
-              translucent
-            />
-            <IconRegistry icons={EvaIconsPack} />
-            <ApplicationProvider
-              {...eva}
-              // @ts-expect-error Unknown error
-              customMapping={customMapping}
-              theme={colorScheme === 'dark' ? darkTheme : lightTheme}
-            >
-              <LanguageProvider cache={true} data={translations}>
-                <AppNavigator />
-              </LanguageProvider>
-            </ApplicationProvider>
-          </SafeAreaProvider>
-        </ApiProvider>
-      </SchoolPlatformProvider>
-    </FeatureProvider>
+    <ThemeProvider
+      theme={colorScheme === 'dark' ? defaultThemeDark : defaultThemeLight}
+    >
+      <FeatureProvider features={platform.features}>
+        <SchoolPlatformProvider>
+          <ApiProvider
+            api={platform.api}
+            storage={AsyncStorage}
+            reporter={reporter}
+          >
+            <SafeAreaProvider>
+              <StatusBar
+                backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
+                barStyle={
+                  colorScheme === 'dark' ? 'light-content' : 'dark-content'
+                }
+                translucent
+              />
+              <IconRegistry icons={EvaIconsPack} />
+              <ApplicationProvider
+                {...eva}
+                // @ts-expect-error Unknown error
+                customMapping={customMapping}
+                theme={colorScheme === 'dark' ? darkTheme : lightTheme}
+              >
+                <LanguageProvider cache={true} data={translations}>
+                  <AppNavigator />
+                </LanguageProvider>
+              </ApplicationProvider>
+            </SafeAreaProvider>
+          </ApiProvider>
+        </SchoolPlatformProvider>
+      </FeatureProvider>
+    </ThemeProvider>
   )
 }

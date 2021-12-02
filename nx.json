@@ -27,13 +27,13 @@
     ]
   },
   "projects": {
-    "api-skolplattformen": {
+    "api": {
       "tags": []
     },
     "api-hjarntorget": {
       "tags": []
     },
-    "api": {
+    "api-skolplattformen": {
       "tags": []
     },
     "api-test-app": {
@@ -42,12 +42,21 @@
     "curriculum": {
       "tags": []
     },
+    "design-system": {
+      "tags": []
+    },
     "hooks": {
       "tags": []
     },
     "skolplattformen-app": {
       "tags": [],
-       "implicitDependencies": ["api-skolplattformen", "api-hjarntorget", "api",  "hooks", "curriculum"]
+      "implicitDependencies": [
+        "api-skolplattformen",
+        "api-hjarntorget",
+        "api",
+        "hooks",
+        "curriculum"
+      ]
     }
   }
 }

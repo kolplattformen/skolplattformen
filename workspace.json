@@ -1,25 +1,23 @@
 {
   "version": 2,
   "projects": {
-    "api-skolplattformen": {
-      "root": "libs/api-skolplattformen",
-      "sourceRoot": "libs/api-skolplattformen/src",
+    "api": {
+      "root": "libs/api",
+      "sourceRoot": "libs/api",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "libs/api-skolplattformen/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/api/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/api-skolplattformen"],
           "options": {
-            "jestConfig": "libs/api-skolplattformen/jest.config.js",
+            "jestConfig": "libs/api/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -34,9 +32,7 @@
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "libs/api-hjarntorget/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/api-hjarntorget/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -94,9 +90,9 @@
         }
       }
     },
-    "api": {
-      "root": "libs/api",
-      "sourceRoot": "libs/api",
+    "api-skolplattformen": {
+      "root": "libs/api-skolplattformen",
+      "sourceRoot": "libs/api-skolplattformen/src",
       "projectType": "library",
       "targets": {
         "lint": {
@@ -104,7 +100,7 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": [
-              "libs/api/**/*.{ts,tsx,js,jsx}"
+              "libs/api-skolplattformen/**/*.{ts,tsx,js,jsx}"
             ]
           }
         },
@@ -112,7 +108,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/api-skolplattformen"],
           "options": {
-            "jestConfig": "libs/api/jest.config.js",
+            "jestConfig": "libs/api-skolplattformen/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -135,6 +131,28 @@
           "outputs": ["coverage/libs/curriculum"],
           "options": {
             "jestConfig": "libs/curriculum/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "design-system": {
+      "root": "libs/design-system",
+      "sourceRoot": "libs/design-system/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/design-system/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/design-system"],
+          "options": {
+            "jestConfig": "libs/design-system/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -167,7 +185,6 @@
       "sourceRoot": "apps/skolplattformen-app/src",
       "projectType": "application",
       "targets": {
-
         "build": {
           "executor": "@nrwl/react-native:bundle",
           "outputs": ["apps/skolplattformen-app/build"],
