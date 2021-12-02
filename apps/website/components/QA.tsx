@@ -317,7 +317,7 @@ const QA = () => {
         <h3>Kontakta oss</h3>
         <p>
           Tveka inte att kontakta oss. Skicka ett mail till{' '}
-          <a href="mailto:info@skolplattformen.org">dev@skolplattformen.org</a>.
+          <a href="mailto:info@skolplattformen.org">info@skolplattformen.org</a>.
         </p>
       </div>
     </div>
