@@ -157,14 +157,6 @@ export const ChildListItem = ({
           </Text>
         ) : null}
         <DaySummary child={child} date={currentDate} />
-        {!menu[currentDate.isoWeekday() - 1] ? null : (
-          <>
-            <Text category="c2" style={styles.label}>
-              {t('schedule.lunch')}
-            </Text>
-            <Text>{menu[currentDate.isoWeekday() - 1]?.description}</Text>
-          </>
-        )}
 
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
@@ -195,14 +187,15 @@ export const ChildListItem = ({
           </Text>
         )}
 
-        {!menu[moment().isoWeekday() - 1] ? null : (
+        {!menu[currentDate.isoWeekday() - 1] ? null : (
           <>
             <Text category="c2" style={styles.label}>
               {t('schedule.lunch')}
             </Text>
-            <Text>{menu[moment().isoWeekday() - 1]?.description}</Text>
+            <Text>{menu[currentDate.isoWeekday() - 1]?.description}</Text>
           </>
         )}
+
         <View style={styles.itemFooterAbsence}>
           <Button
             accessible
