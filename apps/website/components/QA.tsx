@@ -1,5 +1,7 @@
 import Link from './Link'
 
+import { price } from './Pricing'
+
 const QA = () => {
   return (
     <div className="header">
@@ -249,7 +251,7 @@ const QA = () => {
           de?
         </h3>
         <p>
-          Appen kostar 12 kronor. Intäkten registreras i aktiebolaget Not Free
+          Appen kostar {price} kronor. Intäkten registreras i aktiebolaget Not Free
           Beer som ägs av tre av utvecklarna och går till att täcka kostnader
           för inköp. Det täcker inte på långa vägar den tid vi lagt ner. Med en
           låg engångskostnad ökar vi chansen att vi orkar syssla med underhåll

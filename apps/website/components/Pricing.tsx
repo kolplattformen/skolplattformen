@@ -3,7 +3,7 @@ import DownloadButtons from './DownloadButtons'
 import Icon from './Icon'
 import SectionTitle from './SectionTitle'
 
-const price = 12
+export const price = 11
 
 const baseFeatures = [
   {
