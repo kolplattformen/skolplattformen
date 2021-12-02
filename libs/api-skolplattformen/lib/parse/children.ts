@@ -1,5 +1,5 @@
+import { Child } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
-import { Child } from '../types'
 
 export const child = ({ id, sdsId, name, status, schoolId }: any): Child => ({
   id,

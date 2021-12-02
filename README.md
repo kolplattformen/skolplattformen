@@ -9,11 +9,11 @@ Give us a ⭐ if you appreciate what we do!
 [![Build Status](https://app.bitrise.io/app/8e56bd02bc602da5/status.svg?token=h8gI2dB_jXLurj9EO_fXWw)](https://app.bitrise.io/app/8e56bd02bc602da5)
 
 We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians.
-
+P
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-This main repository for the project contains the source code for both the [app](apps/skolplattformen-sthlm) and its [website](https://skolplattformen.org/). \
+This main repository for the project contains the source code for both the [app](apps/skolplattformen-app) and its [website](https://skolplattformen.org/). \
 The sources for each can be found under [apps](apps) and [libs](libs).
 The respective README files there contain more detailed descriptions.
 
@@ -23,13 +23,19 @@ The respective README files there contain more detailed descriptions.
 
 * [Architecture](#architecture)
   * [Apps](#apps)
-    * [skolplattformen-sthlm](#skolplattformen-sthlm)
+    * [skolplattformen](#skolplattformen)
     * [website](#website)
   * [Libs](#embedded-api)
+    * [api](#api)
     * [api-skolplattformen](#api-skolplattformen)
+    * [api-hjarntorget](#api-hjarntorget)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
-* [Development](#development)
+* [Getting started with development](#getting-started-with-development)
+    * [iOS](#ios)
+    * [Android](#android)
+    * [Website](#website)
+    * [Tests](#tests)
 * [Contributions](#contributions)
 * [Money](#money)
 * [Disclaimer](#disclaimer)
@@ -43,26 +49,34 @@ The project consists of several apps and libraries inside [a NX](https://nx.dev/
 ### Apps 
 /apps/ contains the application projects. This is the main entry point for a runnable application. 
 
-#### skolplattformen-sthlm
+#### skolplattformen
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
 Our main goal with the app is to make it as fast and easy to use as possible. \
+
 We're starting small, with more features being added over time.
 
-For more information, check out the [source code](apps/skolplattformen-sthlm).
+For more information, check out the [source code](apps/skolplattformen-app).
 
 #### website
 
-The code for the website at www.skolplattformen.org. It's built using Next.js.
+The code for the website at https://skolplattformen.org/. It's built using Next.js.
 
 For more information, check out the [source code](apps/website).
 ### Libs 
 
 /libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
-#### api-skolplattformen
 
-(renamed from embedded-api)
+#### api
+
+The base for all api implementations
+
+#### api-hjarntorget
+
+The implementation for the school platform in Gothenburg called Hjärntorget
+
+#### api-skolplattformen
 
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
@@ -73,25 +87,68 @@ Check out the documentation [here](libs/api-skolplattformen).
 #### curriculum
 
 Translations of curriculum codes (sv: ämneskoder på schemat) to clear text descriptions
+
 #### hooks
 
 To make it easier to use the the api in the app, we also created a set of React hooks.
 Check out the documentation [here](libs/hooks).
 
-## Development
+## Getting started with Development
 
-To clone and build the project, you first need to install the required dependencies:
-```bash
-$ sudo apt install git npm
-$ npx lerna bootstrap
-```
+To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/). 
 
 Clone the repo with
 ```bash
 $ git clone https://github.com/kolplattformen/skolplattformen.git
 ```
 
-The README files for the [app](apps/skolplattformen-sthlm) and [website](apps/website) contain further instructions.
+Install dependencies
+```bash
+cd skolplattformen && yarn
+```
+
+### iOS
+
+If you wanna run the iOS app, you need to setup a couple of things first, we have a guide that will assist you in getting started with the iOS app. A Mac is required to build projects with native code for iOS so we do not have support for Linux / Windows.
+
+* [Mac OS](/docs/ios_mac.md)
+
+If you already setup everything, you just need to run the following command in the project root:
+
+Start the iOS app
+```
+yarn run ios
+```
+
+### Android
+
+If you wanna run the Android app, you need to setup a couple of things first, we have created three different guides depending on your operating system.
+
+* [Mac OS](/docs/android_mac.md)
+* [Windows](/docs/android_windows.md)
+* [Linux](/docs/android_linux.md)
+
+If you already setup everything, you just need to run the following command in the project root:
+
+```
+yarn run android
+```
+
+### Website
+
+Documentation coming soon.
+
+### Tests
+
+Run all tests
+```
+yarn run test
+```
+
+Run a specific test
+```
+yarn run test:api-skolplattformen
+```
 
 ## Contributions
 
@@ -100,10 +157,10 @@ Once done, create a _pull request_ where you explain why we should incorporate y
 If you're new to GitHub, there's a number of excellent guides available, such as [this one on forking projects and making pull requests](https://guides.github.com/activities/forking/).
 
 There are many ways to contribute to the project. \
-If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know when something isn't working properly. \
+If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen-app/issues/new) to let us know when something isn't working properly. \
 We're super duper happy for both issues and pull requests, and we try to answer all of them as soon as humanly possible.
 
-Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen/) into a new language, or to improve existing translations.
+Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen-app/) into a new language, or to improve existing translations.
 
 _Working together leverages available skills and experience in improving the project, ultimately creating the best possible experience_.
 
@@ -127,6 +184,9 @@ If you're offended by this initiative, rest assured there is no reason to be —
 - [Viktor Sarström](https://github.com/viktorlarsson)
 - [Andreas Eriksson](https://github.com/whyer)
 - [Kajetan Kazimierczak](https://github.com/kajetan-kazimierczak)
+- [Karin Nygårds (artwork)](https://github.com/grishund)
+- [Jonathan Edenström](https://github.com/edenstrom)
+- [Emil Hellman](https://github.com/archevel)
 - You?
 
 ## License

@@ -1,13 +1,15 @@
-import CookieManager from '@react-native-cookies/cookies'
 import init from './'
-import { Api } from './api'
-import { Fetch, Headers, Response } from './types'
+import { ApiSkolplattformen } from './api'
+import { Fetch, Headers, Response } from '@skolplattformen/api'
+import CookieManager from '@react-native-cookies/cookies'
+
+jest.mock('@react-native-cookies/cookies')
 
 describe('api', () => {
   let fetch: jest.Mocked<Fetch>
   let response: jest.Mocked<Response>
   let headers: jest.Mocked<Headers>
-  let api: Api
+  let api: ApiSkolplattformen
   beforeEach(() => {
     headers = { get: jest.fn() }
     response = {
@@ -21,7 +23,7 @@ describe('api', () => {
     fetch = jest.fn().mockResolvedValue(response)
     response.text.mockResolvedValue('<html></html>')
     CookieManager.clearAll()
-    api = init(fetch, CookieManager)
+    api = init(fetch, CookieManager) as ApiSkolplattformen
   })
   describe('#login', () => {
     it('exposes token', async () => {
@@ -110,6 +112,7 @@ describe('api', () => {
       const personalNumber = 'my personal number'
       try {
         await api.login(personalNumber)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         expect(error.message).toEqual(expect.stringContaining('Server Error'))
       }

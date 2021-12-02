@@ -1,31 +1,36 @@
-import { Language } from '@skolplattformen/curriculum'
-import { EventEmitter } from 'events'
-import { decode } from 'he'
-import { DateTime } from 'luxon'
-import * as html from 'node-html-parser'
-import * as fake from './fakeData'
-import wrap, { Fetcher, FetcherOptions } from './fetcher'
-import { checkStatus, LoginStatusChecker } from './loginStatus'
-import * as parse from './parse/index'
-import * as routes from './routes'
 import {
+  Api,
   AuthTicket,
   CalendarItem,
   Classmate,
   CookieManager,
   EtjanstChild,
   Fetch,
+  Fetcher,
+  FetcherOptions,
+  LoginStatusChecker,
   MenuItem,
   NewsItem,
   Notification,
   RequestInit,
+  Response,
   ScheduleItem,
   Skola24Child,
   SSOSystem,
   TimetableEntry,
+  URLSearchParams,
   User,
-} from './types'
-import { URLSearchParams } from './URLSearchParams'
+  wrap,
+} from '@skolplattformen/api'
+import { Language } from '@skolplattformen/curriculum'
+import { EventEmitter } from 'events'
+import { decode } from 'he'
+import { DateTime } from 'luxon'
+import * as html from 'node-html-parser'
+import * as fake from './fakeData'
+import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
+import * as parse from './parse/index'
+import * as routes from './routes'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
   new Promise((res) => setTimeout(() => res(data), 200 + Math.random() * 800))
@@ -48,11 +53,12 @@ interface SSOSystems {
   [name: string]: boolean | undefined
 }
 
-export class Api extends EventEmitter {
+export class ApiSkolplattformen extends EventEmitter implements Api {
   private fetch: Fetcher
 
   private personalNumber?: string
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private headers: any
 
   private cookieManager: CookieManager
@@ -64,7 +70,7 @@ export class Api extends EventEmitter {
   private authorizedSystems: SSOSystems = {}
 
   constructor(
-    fetch: Fetch,
+    fetch: Fetch, // typeof global.fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {
@@ -87,6 +93,16 @@ export class Api extends EventEmitter {
       },
     }
   }
+
+  public async getSessionHeaders(url: string): Promise<{ [index: string]: string }> {
+    const init = this.getRequestInit()
+    const cookie = await this.cookieManager.getCookieString(url)
+    return {
+        ...init.headers,
+        cookie,
+    }
+  }
+
 
   public async getSession(
     url: string,
@@ -197,7 +213,7 @@ export class Api extends EventEmitter {
       this.emit('login')
     }, 50)
 
-    const emitter: any = new EventEmitter()
+    const emitter = new DummyStatusChecker()
     emitter.token = 'fake'
     return emitter
   }
@@ -275,20 +291,42 @@ export class Api extends EventEmitter {
     const url = routes.news(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('news', url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     return parse.news(data)
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  private CheckResponseForCorrectChildStatus(
+    response: Response,
+    child: EtjanstChild
+  ) {
+    const setCookieResp = response.headers.get('Set-Cookie')
+
+    if (
+      child.status !== 'FS' &&
+      setCookieResp &&
+      setCookieResp.includes('Status=FS')
+    ) {
+      throw new Error('Wrong child in response')
+    }
   }
 
   public async getNewsDetails(
     child: EtjanstChild,
     item: NewsItem
-  ): Promise<any> {
+  ): Promise<NewsItem | undefined> {
     if (this.isFake) {
-      return fakeResponse(fake.news(child).find((ni) => ni.id === item.id))
+      return fakeResponse(fake.news(child).find((ni) => ni.id === item.id) || {id: "", published: ""})
     }
     const url = routes.newsDetails(child.id, item.id)
     const session = this.getRequestInit()
     const response = await this.fetch(`news_${item.id}`, url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     return parse.newsItemDetails(data)
   }
@@ -301,6 +339,9 @@ export class Api extends EventEmitter {
       const url = routes.menuRss(child.id)
       const session = this.getRequestInit()
       const response = await this.fetch('menu-rss', url, session)
+
+      this.CheckResponseForCorrectChildStatus(response, child)
+
       const data = await response.json()
       return parse.menu(data)
     }
@@ -308,6 +349,9 @@ export class Api extends EventEmitter {
     const url = routes.menuList(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('menu-list', url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     return parse.menuList(data)
   }
@@ -316,6 +360,9 @@ export class Api extends EventEmitter {
     const url = routes.menuChoice(child.id)
     const session = this.getRequestInit()
     const response = await this.fetch('menu-choice', url, session)
+
+    this.CheckResponseForCorrectChildStatus(response, child)
+
     const data = await response.json()
     const etjanstResponse = parse.etjanst(data)
     return etjanstResponse

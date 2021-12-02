@@ -26,9 +26,14 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Run linting and tests
+      - name: Run lint
         run: |
-          yarn nx run-many --all --target=lint
-          yarn nx run-many --all --target=test
+          yarn lint
+        env:
+          CI: true
+  
+      - name: Run tests
+        run: |
+          yarn test
         env:
           CI: true

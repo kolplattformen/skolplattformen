@@ -1,6 +1,7 @@
 import React from 'react'
 import CountUp from 'react-countup'
 import VisibilitySensor from 'react-visibility-sensor'
+import { price } from './Pricing'
 
 const FUNFACTS_DATA = [
   {
@@ -12,7 +13,7 @@ const FUNFACTS_DATA = [
     title: 'år att utveckla',
   },
   {
-    count: 11,
+    count: price,
     title: 'kronor kostar vår app :)',
   },
   {

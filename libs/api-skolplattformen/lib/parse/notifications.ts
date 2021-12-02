@@ -1,6 +1,5 @@
+import { parseDate, Notification } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
-import { parseDate } from '../utils/dateHandling'
-import { Notification } from '../types'
 
 export const notification = ({
   notification: { messageid, dateCreated, dateModified },

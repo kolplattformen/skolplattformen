@@ -1,6 +1,5 @@
 import { etjanst } from './etjanst'
-import { CalendarItem } from '../types'
-import { parseDate } from '../utils/dateHandling'
+import { CalendarItem, parseDate } from '@skolplattformen/api'
 
 export const calendarItem = ({
   id,

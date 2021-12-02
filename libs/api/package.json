@@ -1,0 +1,20 @@
+{
+  "name": "@skolplattformen/api",
+  "version": "0.15.0",
+  "description": "",
+  "main": "lib/index.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": "git@github.com:kolplattformen/skolplatformen.git",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "lint": "eslint 'lib/**/*.{js,ts}' --quiet --fix",
+    "test": "jest",
+    "build": "tsc",
+    "prepare": "yarn build",
+    "run-dev": "yarn run build && node run",
+    "publish-package": "npm publish --access public"
+  }
+}

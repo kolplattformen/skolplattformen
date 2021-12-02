@@ -11,7 +11,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from './types'
+} from '@skolplattformen/api';
 
 const data: any = {
   '39b59e-bf4b9f-f68ac25321-977218-bf0': {
@@ -534,7 +534,7 @@ const data: any = {
         dateCreated: '2020-03-24T13:48:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
         url:
-          'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen/lmsau!5338007/',
+          'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen-app/lmsau!5338007/',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -810,7 +810,7 @@ const data: any = {
         intro:
           'Vi kommer efter att förskoleklassen är slut arrangera olika vinteraktiviteter genom fridtidsverksamheten.',
         body:
-          '##  Vänligen ta med hjälm, skridskor eller stjärtlapp. Alla barn måste ha hjälm på sig samt varma kläder. Vi kommer åka i backen bakom skolbyggnaden samt använda isen som spolats vid Mullsjöskolan. Personal kommer finnas på plats samt att vi erbjuda varm dryck, frukt och lek för de barn som ej har hjälm eller lämpligt åkdon.',
+          '##  Vänligen ta med hjälm, skridskor eller stjärtlapp.\n\n ![Bild](https://images.unsplash.com/photo-1495377701095-00261b767581?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80)\n\n Alla barn måste ha hjälm på sig samt varma kläder. Vi kommer åka i backen bakom skolbyggnaden samt använda isen som spolats vid Mullsjöskolan. Personal kommer finnas på plats samt att vi erbjuda varm dryck, frukt och lek för de barn som ej har hjälm eller lämpligt åkdon.',
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/yB_aiAWkm40',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -1234,7 +1234,7 @@ export const timetable = (child: Skola24Child): TimetableEntry[] => {
       category: 'Moderna språk, språkval',
       blockName: '',
       dayOfWeek: 2,
-      location: '302,Fjärr',
+      location: '302,Fjärr asd asdasd asdad aasdds',
       teacher: 'DNi',
       timeEnd: '09:50:00',
       timeStart: '09:05:00',

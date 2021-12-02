@@ -1,6 +1,6 @@
+import { MenuItem, MenuList, toMarkdown } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
-import { toMarkdown } from '../parseHtml'
-import { MenuItem, MenuList } from '../types'
+
 
 export const menuItem = ({ title, description }: any): MenuItem => ({
   title,

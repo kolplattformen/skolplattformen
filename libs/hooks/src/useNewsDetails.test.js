@@ -192,8 +192,6 @@ describe('useNewsDetails(child, newsItem)', () => {
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual({ ...cached })
 
-      jest.advanceTimersToNextTimer()
-
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
@@ -222,8 +220,6 @@ describe('useNewsDetails(child, newsItem)', () => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual({ ...cached })
-
-      jest.advanceTimersToNextTimer()
 
       await waitForNextUpdate()
       await waitForNextUpdate()

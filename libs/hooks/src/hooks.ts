@@ -12,7 +12,7 @@ import {
   Skola24Child,
   TimetableEntry,
   User,
-} from '@skolplattformen/api-skolplattformen'
+} from '@skolplattformen/api'
 import { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
 import { useEffect, useState } from 'react'
@@ -107,7 +107,7 @@ const hook = <T>(
 
       if (newState.error) {
         const description = `Error getting ${entityName} from API`
-        reporter.error(newState.error, description)
+        reporter.error && reporter.error(newState.error, description)
       }
     }
   }

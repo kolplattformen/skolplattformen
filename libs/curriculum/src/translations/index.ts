@@ -22,6 +22,8 @@ const translations: Translations = {
   la: require('./la.json'),
   nb_NO: require('./nb_NO.json'),
   pl: require('./pl.json'),
+  pt: require('./pt.json'),
+  zh_Hans: require('./zh_Hans.json'),
 }
 const languageList: string[] = Object.keys(translations)
 export type Language = typeof languageList[number]

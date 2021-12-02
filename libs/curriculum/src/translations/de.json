@@ -1,15 +1,15 @@
 {
     "subjects": {
         "TN": "Zei­chen­spra­che",
-        "SVA": "Schewdishe als främdsprache",
-        "SV": "Schwedish",
-        "SL": "Handwerk",
+        "SVA": "Schwedisch als Fremdsprache",
+        "SV": "Schwedisch",
+        "SL": "Werken",
         "SH": "Staats­bür­ger­kun­de",
         "RE": "Re­li­gi­on",
-        "HI": "Historie",
+        "HI": "Geschichte",
         "GE": "Geografie",
-        "NO": "Naturwissenschaftlichen Themen",
-        "SO": "Gesellschaftsorientierte Themen",
+        "NO": "Naturwissenschaften",
+        "SO": "Gesellschaftslehre",
         "KE": "Chemie",
         "FY": "Physik",
         "BI": "Biologie",
@@ -18,6 +18,12 @@
         "IDH": "Sport und Gesundheit",
         "HKK": "Hauswirtschaft",
         "EN": "Englisch",
-        "BL": "Kunst"
+        "BL": "Kunst",
+        "TK": "Technik"
+    },
+    "misc": {
+        "PRANDIUM": "Mittagspause",
+        "LUNCH": "Mittagspause",
+        "RAST": "Pause"
     }
 }

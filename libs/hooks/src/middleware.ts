@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 import { Middleware } from 'redux'
 import { EntityAction, EntityStoreRootState, ExtraActionProps } from './types'
 

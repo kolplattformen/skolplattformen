@@ -1,6 +1,5 @@
+import { parseDate, ScheduleItem } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
-import { ScheduleItem } from '../types'
-import { parseDate } from '../utils/dateHandling'
 
 export const scheduleItem = ({
   title,
