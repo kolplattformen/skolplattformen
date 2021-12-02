@@ -88,6 +88,10 @@ export const ChildListItem = ({
     return moment(inputDate).fromNow()
   }
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
+
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates.
     // let's pick the first one and select theirs class
@@ -149,7 +153,7 @@ export const ChildListItem = ({
         </View>
         {currentDate.hour() > 17 && currentDate.hour() <= 23 ? (
           <Text category="c2" style={styles.weekday}>
-            {currentDate.format('[' + t('general.tomorrow') + '] dddd')}
+            {capitalizeFirstLetter(currentDate.format('dddd'))}
           </Text>
         ) : null}
         <DaySummary child={child} date={currentDate} />
