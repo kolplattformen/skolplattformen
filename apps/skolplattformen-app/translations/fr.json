@@ -53,7 +53,8 @@
         "a11y_select_login_method": "Sélectionnez la méthode de connexion",
         "a11y_clear_social_security_input_field": "Effacer le champ du numéro national d’identité",
         "a11y_image_two_boys": "Photo de deux personnes consultant leur téléphone portable",
-        "a11y_change_language": "Sélectionnez votre langue"
+        "a11y_change_language": "Sélectionnez votre langue",
+        "chooseSchoolPlatform": "Choisir la plateforme"
     },
     "abscense": {
         "startTime": "Heure de début",
