@@ -15,6 +15,7 @@ export const wallMessagesUrl = 'https://hjarntorget.goteborg.se/api/wall/events?
 export const beginLoginUrl = 'https://hjarntorget.goteborg.se'
 export const calendarsUrl = 'https://hjarntorget.goteborg.se/pp/system/calendar/cal_events.jsp'
 export const calendarEventUrl = (calendarId: string, startDate: string, endDate: string) =>  `${calendarsUrl}?order_by=start_date&show_cal_ids=${calendarId}&mode=separate&filter_start_date=${startDate}&filter_end_date=${endDate}&search_for=`
+export const abscenseRegistrationUrl = 'https://hjarntorget.goteborg.se/attendanceParentSubmitAbsence.do'
 
 export const shibbolethLoginUrlBase = (beginLoginRedirectUrl: string) => {
     const returnUrlStart = beginLoginRedirectUrl.indexOf('return=') + 'return='.length

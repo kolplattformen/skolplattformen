@@ -47,6 +47,7 @@ import {
   shibbolethLoginUrlBase,
   verifyUrlBase,
   wallMessagesUrl,
+  abscenseRegistrationUrl
 } from './routes'
 
 function getDateOfISOWeek(week: number, year: number) {
@@ -571,6 +572,22 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return statusChecker
   }
 
+  public async registerAbscense(child: EtjanstChild, startDate: Date, endDate: Date): Promise<void> {
+
+      const body = {
+        attendeeId: child.id,
+        startDate: startDate,
+        endDate: endDate,
+        statusId: 27433608,
+        _submit: 'Register+the+whole+day'
+      }
+
+     this.fetch('register-abscense', abscenseRegistrationUrl, {
+        method: 'POST',
+        body: new URLSearchParams(body).toString(),
+      })
+  }
+
   private async fakeMode(): Promise<LoginStatusChecker> {
     this.isFake = true
 
@@ -583,4 +600,5 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     emitter.token = 'fake'
     return emitter
   }
+
 }
