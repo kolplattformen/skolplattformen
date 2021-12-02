@@ -34,6 +34,7 @@ import {
   PersonIcon,
   SelectIcon,
 } from './icon.component'
+import AppStorage from '../services/appStorage'
 
 const BankId = () => (
   <Image
@@ -88,6 +89,8 @@ export const Login = () => {
   ] as const
 
   const loginHandler = async () => {
+    const user = await api.getUser()
+    await AppStorage.clearPersonalData(user)
     showModal(false)
   }
 
