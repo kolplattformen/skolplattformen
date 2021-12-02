@@ -31,7 +31,7 @@ export const Image = ({
   resizeMode = 'contain',
 }: ImageProps) => {
   const { api } = useApi()
-  const [headers, setHeaders] = useState()
+  const [headers, setHeaders] = useState<{ [index: string]: string }>()
   const { width: windowWidth } = useWindowDimensions()
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
@@ -40,7 +40,7 @@ export const Image = ({
   const prefetchImageInformation = useCallback(
     async (url: string) => {
       if (!url) return
-      const { headers: newHeaders } = await api.getSession(url)
+      const newHeaders = await api.getSessionHeaders(url)
 
       console.log('[IMAGE] Getting image dimensions with headers', {
         debugImageName,

@@ -1,4 +1,4 @@
-import { Guardian } from '@skolplattformen/api-skolplattformen'
+import { Guardian } from '@skolplattformen/api'
 
 export const studentName = (name?: string) => name?.replace(/\s?\(\w+\)$/, '')
 

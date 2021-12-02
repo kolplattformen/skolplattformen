@@ -1,4 +1,4 @@
-import { NewsItem } from '@skolplattformen/api-skolplattformen'
+import { NewsItem } from '@skolplattformen/api'
 import { useNews } from '@skolplattformen/hooks'
 import { MatchData, Searcher } from 'fast-fuzzy'
 import React, { ReactNode, useMemo } from 'react'

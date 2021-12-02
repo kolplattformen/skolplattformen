@@ -28,7 +28,7 @@ import { decode } from 'he'
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
 import * as fake from './fakeData'
-import { checkStatus } from './loginStatusChecker'
+import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
 import * as parse from './parse/index'
 import * as routes from './routes'
 
@@ -93,6 +93,16 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       },
     }
   }
+
+  public async getSessionHeaders(url: string): Promise<{ [index: string]: string }> {
+    const init = this.getRequestInit()
+    const cookie = await this.cookieManager.getCookieString(url)
+    return {
+        ...init.headers,
+        cookie,
+    }
+  }
+
 
   public async getSession(
     url: string,
@@ -203,8 +213,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       this.emit('login')
     }, 50)
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const emitter: any = new EventEmitter()
+    const emitter = new DummyStatusChecker()
     emitter.token = 'fake'
     return emitter
   }

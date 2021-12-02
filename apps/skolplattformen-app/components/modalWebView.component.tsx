@@ -20,12 +20,12 @@ export const ModalWebView = ({
   const [modalVisible, setModalVisible] = React.useState(true)
   const { api } = useApi()
   const [title, setTitle] = React.useState('...')
-  const [headers, setHeaders] = useState()
+  const [headers, setHeaders] = useState<{ [index: string]: string }>()
 
   useEffect(() => {
     const getHeaders = async (urlToGetSessionFor: string) => {
       if (sharedCookiesEnabled) return
-      const { headers: newHeaders } = await api.getSession(urlToGetSessionFor)
+      const newHeaders = await api.getSessionHeaders(urlToGetSessionFor)
       setHeaders(newHeaders)
     }
 

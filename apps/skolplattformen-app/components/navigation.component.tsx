@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import {
   Child as ChildType,
   NewsItem as NewsItemType,
-} from '@skolplattformen/api-skolplattformen'
+} from '@skolplattformen/api'
 import { useApi } from '@skolplattformen/hooks'
 import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'

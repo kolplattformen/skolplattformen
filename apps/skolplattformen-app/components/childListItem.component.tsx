@@ -1,7 +1,7 @@
 /* eslint-disable react-native-a11y/has-accessibility-hint */
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Child } from '@skolplattformen/api-skolplattformen'
+import { Child } from '@skolplattformen/api'
 import {
   useCalendar,
   useClassmates,
