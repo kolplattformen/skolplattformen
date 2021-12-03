@@ -1,6 +1,7 @@
 import { useNotifications } from '@skolplattformen/hooks'
 import { List, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
+import { RefreshControl } from 'react-native'
 import { Sizing } from '../styles'
 import { useChild } from './childContext.component'
 import { Notification } from './notification.component'
@@ -8,7 +9,7 @@ import { Notification } from './notification.component'
 export const NotificationsList = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()
-  const { data } = useNotifications(child)
+  const { data, status, reload } = useNotifications(child)
 
   return (
     <List
@@ -18,6 +19,9 @@ export const NotificationsList = () => {
       renderItem={(info) => (
         <Notification key={info.item.id} item={info.item} />
       )}
+      refreshControl={
+        <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
+      }
     />
   )
 }
