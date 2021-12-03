@@ -17,7 +17,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import moment, { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity, useColorScheme, View } from 'react-native'
 import { useTranslation } from '../hooks/useTranslation'
 import { Colors, Layout, Sizing } from '../styles'
@@ -30,6 +30,7 @@ import { StudentAvatar } from './studentAvatar.component'
 interface ChildListItemProps {
   child: Child
   color: string
+  updated: string
   currentDate?: Moment
 }
 type ChildListItemNavigationProp = StackNavigationProp<
@@ -40,6 +41,7 @@ type ChildListItemNavigationProp = StackNavigationProp<
 export const ChildListItem = ({
   child,
   color,
+  updated,
   currentDate = moment(),
 }: ChildListItemProps) => {
   // Forces rerender when child.id changes
@@ -49,16 +51,35 @@ export const ChildListItem = ({
 
   const navigation = useNavigation<ChildListItemNavigationProp>()
   const { t } = useTranslation()
-  const { data: notifications } = useNotifications(child)
-  const { data: news } = useNews(child)
-  const { data: classmates } = useClassmates(child)
-  const { data: calendar } = useCalendar(child)
-  const { data: menu } = useMenu(child)
-  const { data: schedule } = useSchedule(
+  const { data: notifications, reload: notificationsReload } =
+    useNotifications(child)
+  const { data: news, status: newsStatus, reload: newsReload } = useNews(child)
+  const { data: classmates, reload: classmatesReload } = useClassmates(child)
+  const { data: calendar, reload: calendarReload } = useCalendar(child)
+  const { data: menu, reload: menuReload } = useMenu(child)
+  const { data: schedule, reload: scheduleReload } = useSchedule(
     child,
     moment(currentDate).toISOString(),
     moment(currentDate).add(7, 'days').toISOString()
   )
+
+  useEffect(() => {
+    // Do not refresh if updated is empty (first render of component)
+    if (updated === '') return
+
+    newsReload()
+    classmatesReload()
+    notificationsReload()
+    calendarReload()
+    menuReload()
+    scheduleReload()
+
+    // Without eslint-disable below we get into a forever loop
+    // because the function pointers to reload functions change on every reload.
+    // I do not know a workaround for this.
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updated])
 
   const notificationsThisWeek = notifications.filter(
     ({ dateCreated, dateModified }) => {
@@ -186,7 +207,6 @@ export const ChildListItem = ({
             {t('news.noNewNewsItemsThisWeek')}
           </Text>
         )}
-
         {!menu[currentDate.isoWeekday() - 1] ? null : (
           <>
             <Text category="c2" style={styles.label}>
@@ -196,7 +216,7 @@ export const ChildListItem = ({
           </>
         )}
 
-        <View style={styles.itemFooterAbsence}>
+        <View style={styles.itemFooter}>
           <Button
             accessible
             accessibilityRole="button"
@@ -251,14 +271,15 @@ const themeStyles = StyleService.create({
   },
   itemFooter: {
     ...Layout.flex.row,
-    marginTop: Sizing.t4,
-  },
-  itemFooterAbsence: {
-    ...Layout.mainAxis.flexStart,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     marginTop: Sizing.t4,
   },
   absenceButton: {
     marginLeft: -20,
+  },
+  itemFooterSpinner: {
+    alignSelf: 'flex-end',
   },
   item: {
     marginRight: 12,

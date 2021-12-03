@@ -1,5 +1,5 @@
-import { CalendarItem } from '@skolplattformen/api'
 import { useCalendar } from '@skolplattformen/hooks'
+import { CalendarItem } from '@skolplattformen/api'
 import {
   Divider,
   List,
@@ -10,8 +10,9 @@ import {
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { ListRenderItemInfo, View } from 'react-native'
-import { Typography } from '../styles'
+import { ListRenderItemInfo, RefreshControl, View } from 'react-native'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { SaveToCalendar } from './saveToCalendar.component'
@@ -19,7 +20,7 @@ import { Week } from './week.component'
 
 export const Calendar = () => {
   const child = useChild()
-  const { data } = useCalendar(child)
+  const { data, status, reload } = useCalendar(child)
   const styles = useStyleSheet(themedStyles)
 
   const formatStartDate = (startDate: moment.MomentInput) => {
@@ -28,37 +29,55 @@ export const Calendar = () => {
       'll'
     )} • ${date.fromNow()}`
 
-    // Hack to remove yarn if it is this year
+    // Hack to remove year if it is this year
     const currentYear = moment().year().toString(10)
     return output.replace(currentYear, '')
+  }
+
+  const sortedData = () => {
+    if (!data) return []
+
+    return data.sort((a, b) =>
+      a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0
+    )
   }
 
   return (
     <View style={styles.container}>
       <Week child={child} />
-      {data && data.length > 0 && (
-        <List
-          data={data.sort((a, b) =>
-            a.startDate && b.startDate
-              ? a.startDate.localeCompare(b.startDate)
-              : 0
-          )}
-          ItemSeparatorComponent={Divider}
-          renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
-            <ListItem
-              disabled={true}
-              title={`${item.title}`}
-              description={(props) => (
-                <Text style={[props?.style, styles.description]}>
-                  {formatStartDate(item.startDate)}
-                </Text>
-              )}
-              accessoryLeft={CalendarOutlineIcon}
-              accessoryRight={() => <SaveToCalendar event={item} />}
-            />
-          )}
-        />
-      )}
+      <List
+        data={sortedData()}
+        ItemSeparatorComponent={Divider}
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyStateHeadline} category="h6">
+              {translate('calender.emptyHeadline')}
+            </Text>
+            <Text style={styles.emptyStateDescription}>
+              {translate('calender.emptyText')}
+            </Text>
+          </View>
+        }
+        renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
+          <ListItem
+            disabled={true}
+            title={`${item.title}`}
+            description={(props) => (
+              <Text style={[props?.style, styles.description]}>
+                {formatStartDate(item.startDate)}
+              </Text>
+            )}
+            accessoryLeft={CalendarOutlineIcon}
+            accessoryRight={() => <SaveToCalendar event={item} />}
+          />
+        )}
+        refreshControl={
+          <RefreshControl
+            refreshing={status === 'loading'}
+            onRefresh={reload}
+          />
+        }
+      />
     </View>
   )
 }
@@ -72,5 +91,19 @@ const themedStyles = StyleService.create({
   description: {
     ...Typography.fontSize.xs,
     color: 'text-hint-color',
+  },
+  emptyState: {
+    ...LayoutStyle.center,
+    ...LayoutStyle.flex.full,
+  },
+  emptyStateHeadline: {
+    ...Typography.align.center,
+    margin: Sizing.t4,
+  },
+  emptyStateDescription: {
+    ...Typography.align.center,
+    lineHeight: 21,
+    paddingHorizontal: Sizing.t3,
+    margin: Sizing.t4,
   },
 })

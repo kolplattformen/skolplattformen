@@ -10,7 +10,8 @@ import {
   TopNavigationAction,
   useStyleSheet,
 } from '@ui-kitten/components'
-import React, { useCallback, useEffect } from 'react'
+import moment from 'moment'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Image,
   ImageStyle,
@@ -24,7 +25,7 @@ import AppStorage from '../services/appStorage'
 import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
-import { SettingsIcon } from './icon.component'
+import { SettingsIcon, RefreshIcon } from './icon.component'
 import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
@@ -46,9 +47,12 @@ export const Children = () => {
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()
-  const reloadChildren = () => {
+  const reloadChildren = useCallback(() => {
     reload()
-  }
+    setUpdated(moment().toISOString())
+  }, [reload])
+
+  const [updatedAt, setUpdated] = useState('')
 
   const logout = useCallback(() => {
     AppStorage.clearTemporaryItems().then(() => api.logout())
@@ -64,8 +68,18 @@ export const Children = () => {
           />
         )
       },
+      headerRight: () => {
+        return (
+          <TopNavigationAction
+            icon={RefreshIcon}
+            onPress={() => reloadChildren()}
+            accessibilityHint="Reload"
+            accessibilityLabel="Reload"
+          />
+        )
+      },
     })
-  }, [navigation])
+  }, [navigation, reloadChildren])
 
   const currentDate = getMeaningfulStartingDate()
 
@@ -94,6 +108,7 @@ export const Children = () => {
           child={child}
           color={colors[index % colors.length]}
           currentDate={currentDate}
+          updated={updatedAt}
           key={child.id}
         />
       )}

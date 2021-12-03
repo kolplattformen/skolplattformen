@@ -9,7 +9,7 @@ import {
   Text,
 } from '@ui-kitten/components'
 import React from 'react'
-import { ListRenderItemInfo, StyleSheet } from 'react-native'
+import { ListRenderItemInfo, RefreshControl, StyleSheet } from 'react-native'
 import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
@@ -22,7 +22,7 @@ interface ClassmatesProps {
 export const Classmates = () => {
   const child = useChild()
 
-  const { data } = useClassmates(child)
+  const { data, status, reload } = useClassmates(child)
   const renderItemIcon = (props: IconProps) => (
     <Icon {...props} name="people-outline" />
   )
@@ -60,6 +60,9 @@ export const Classmates = () => {
       }
       renderItem={renderItem}
       contentContainerStyle={styles.contentContainer}
+      refreshControl={
+        <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
+      }
     />
   )
 }

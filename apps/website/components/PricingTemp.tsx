@@ -2,8 +2,7 @@ import { formatPrice } from '../utils/intl'
 import DownloadButtons from './DownloadButtons'
 import Icon from './Icon'
 import SectionTitle from './SectionTitle'
-
-const price = 12
+import { price } from './Pricing'
 
 const baseFeatures = [
   {
