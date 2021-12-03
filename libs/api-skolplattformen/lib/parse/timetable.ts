@@ -84,6 +84,11 @@ export const timetable = (
   if (response.error) {
     throw new Error(response.error)
   }
+
+  if(!response.data.lessonInfo){
+    throw new Error("Empty lessonInfo received")
+  }
+
   return response.data.lessonInfo.map((entry) =>
     timetableEntry(entry, year, week, lang)
   )

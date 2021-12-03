@@ -9,7 +9,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "rules": {"no-console":"warn"}
     },
     {
       "files": ["*.ts", "*.tsx"],

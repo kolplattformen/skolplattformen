@@ -80,7 +80,8 @@
         "send": "Send",
         "settings": "Settings",
         "socialSecurityNumber": "Personal identity number",
-        "title": "Öppna skolplattformen"
+        "title": "Öppna skolplattformen",
+        "tomorrow": "Tomorrow"
     },
     "language": {
         "changeLanguage": "Change language",

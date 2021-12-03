@@ -82,7 +82,8 @@
         "title": "Öppna skolplattformen",
         "cancel": "Avbryt",
         "logoutAndClearAllDataInclSettings": "Logga ut och rensa all sparad data inkl inställningar",
-        "logoutAndClearPersonalData": "Logga ut och rensa all personlig data"
+        "logoutAndClearPersonalData": "Logga ut och rensa all personlig data",
+        "tomorrow": "Imorgon"
     },
     "language": {
         "changeLanguage": "Byt språk",
