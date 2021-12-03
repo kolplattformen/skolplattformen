@@ -172,7 +172,7 @@ export const ChildListItem = ({
             />
           </View>
         </View>
-        {currentDate.hour() > 17 && currentDate.hour() <= 23 ? (
+        {moment().weekday() !== currentDate.weekday() ? (
           <Text category="c2" style={styles.weekday}>
             {capitalizeFirstLetter(currentDate.format('dddd'))}
           </Text>
