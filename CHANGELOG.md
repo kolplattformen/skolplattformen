@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/kolplattformen/skolplattformen/compare/v2.5.0...v2.5.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* 🐛 Show the weekday on startpage if not today ([df28066](https://github.com/kolplattformen/skolplattformen/commit/df2806648ab6b573d277a338f76fb199cdd307a2))
+
 # [2.5.0](https://github.com/kolplattformen/skolplattformen/compare/v2.4.0...v2.5.0) (2021-12-03)
 
 
