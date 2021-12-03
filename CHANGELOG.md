@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/kolplattformen/skolplattformen/compare/v2.4.0...v2.5.0) (2021-12-03)
+
+
+### Features
+
+* 🎸 Skip to the next day in calendar ([#425](https://github.com/kolplattformen/skolplattformen/issues/425)) ([fce1d98](https://github.com/kolplattformen/skolplattformen/commit/fce1d98847f4cc7c27bfa359b1d2b1bdc86e12ea))
+
 # [2.4.0](https://github.com/kolplattformen/skolplattformen/compare/v2.3.2...v2.4.0) (2021-12-02)
 
 
