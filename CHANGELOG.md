@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/kolplattformen/skolplattformen/compare/v2.5.1...v2.6.0) (2021-12-04)
+
+
+### Features
+
+* Frontpage date tweaks ([#582](https://github.com/kolplattformen/skolplattformen/issues/582)) ([66e7811](https://github.com/kolplattformen/skolplattformen/commit/66e7811b83e96f9fb83aa82cb34736f38a3bf16a))
+
 ## [2.5.1](https://github.com/kolplattformen/skolplattformen/compare/v2.5.0...v2.5.1) (2021-12-03)
 
 
