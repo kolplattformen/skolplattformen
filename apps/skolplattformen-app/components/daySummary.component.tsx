@@ -12,6 +12,10 @@ interface DaySummaryProps {
   date?: Moment
 }
 
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 export const DaySummary = ({
   child,
   date: currentDate = moment(),
@@ -38,6 +42,11 @@ export const DaySummary = ({
 
   return (
     <View>
+      {moment().weekday() !== currentDate.weekday() ? (
+        <Text category="c2" style={styles.weekday}>
+          {capitalizeFirstLetter(currentDate.format('dddd'))}
+        </Text>
+      ) : null}
       <View style={styles.summary}>
         <View style={styles.part}>
           <View>
@@ -88,5 +97,9 @@ const themedStyles = StyleService.create({
   },
   heading: {
     marginBottom: -10,
+  },
+  weekday: {
+    marginBottom: -10,
+    padding: 0,
   },
 })
