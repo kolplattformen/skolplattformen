@@ -26,7 +26,6 @@ import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
 import { SettingsIcon, RefreshIcon } from './icon.component'
-import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -81,8 +80,6 @@ export const Children = () => {
     })
   }, [navigation, reloadChildren])
 
-  const currentDate = getMeaningfulStartingDate()
-
   // We need to skip safe area view here, due to the reason that it's adding a white border
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
   return status === 'loaded' ? (
@@ -107,7 +104,6 @@ export const Children = () => {
         <ChildListItem
           child={child}
           color={colors[index % colors.length]}
-          currentDate={currentDate}
           updated={updatedAt}
           key={child.id}
         />

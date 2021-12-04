@@ -21,6 +21,7 @@ import React, { useEffect } from 'react'
 import { TouchableOpacity, useColorScheme, View } from 'react-native'
 import { useTranslation } from '../hooks/useTranslation'
 import { Colors, Layout, Sizing } from '../styles'
+import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 import { studentName } from '../utils/peopleHelpers'
 import { DaySummary } from './daySummary.component'
 import { AlertIcon, RightArrowIcon } from './icon.component'
@@ -109,10 +110,6 @@ export const ChildListItem = ({
     return moment(inputDate).fromNow()
   }
 
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1)
-  }
-
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates.
     // let's pick the first one and select theirs class
@@ -148,7 +145,7 @@ export const ChildListItem = ({
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
   const isDarkMode = useColorScheme() === 'dark'
-
+  const meaningfulStartingDate = getMeaningfulStartingDate(currentDate)
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Child', { child, color })}
@@ -172,12 +169,8 @@ export const ChildListItem = ({
             />
           </View>
         </View>
-        {moment().weekday() !== currentDate.weekday() ? (
-          <Text category="c2" style={styles.weekday}>
-            {capitalizeFirstLetter(currentDate.format('dddd'))}
-          </Text>
-        ) : null}
-        <DaySummary child={child} date={currentDate} />
+
+        <DaySummary child={child} date={meaningfulStartingDate} />
 
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
@@ -288,8 +281,4 @@ const themeStyles = StyleService.create({
     marginBottom: 0,
   },
   noNewNewsItemsText: {},
-  weekday: {
-    marginBottom: -5,
-    padding: 0,
-  },
 })

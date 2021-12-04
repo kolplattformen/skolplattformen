@@ -9,6 +9,14 @@ const saturdayEvening = moment('2021-12-04T19:20:26+0100')
 const sundayEvening = moment('2021-12-05T19:20:26+0100')
 const mondayEvening = moment('2021-12-06T19:20:26+0100')
 
+describe('getMeaningfulStartingDate should not touch inputdate', () => {
+  const origDate = moment()
+  const origDateClone = origDate.clone()
+  getMeaningfulStartingDate(origDate)
+
+  expect(origDate).toEqual(origDateClone)
+})
+
 describe('getMeaningfulStartingDate on weekends', () => {
   it('should give next monday if on friday evening', () => {
     const startDate = getMeaningfulStartingDate(fridayEvening)
