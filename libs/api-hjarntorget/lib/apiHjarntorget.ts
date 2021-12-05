@@ -162,11 +162,9 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     console.log('fetching user')
     const currentUserResponse = await this.fetch('current-user', currentUserUrl)
     if (currentUserResponse.status !== 200) {
-      console.log('is not authenticated!')
       return { isAuthenticated: false }
     }
 
-    console.log('fetching user worked...')
     const retrivedUser = await currentUserResponse.json()
     return { ...retrivedUser, isAuthenticated: true }
   }
