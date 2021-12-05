@@ -10,7 +10,8 @@
         "changeLanguage": "Changer de langue",
         "cancel": "Annuler",
         "logoutAndClearPersonalData": "Se déconnecter et effacer les données personnelles",
-        "logoutAndClearAllDataInclSettings": "Se déconnecter et effacer toutes les données, y compris les paramètres"
+        "logoutAndClearAllDataInclSettings": "Se déconnecter et effacer toutes les données, y compris les paramètres",
+        "tomorrow": "Demain"
     },
     "calender": {
         "saveToCalenderError": "Un problème est survenu",
