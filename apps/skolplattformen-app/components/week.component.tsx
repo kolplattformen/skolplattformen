@@ -108,7 +108,7 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 export const Week = ({ child }: WeekProps) => {
   moment.locale(LanguageService.getLocale())
   const days = moment.weekdaysShort().slice(1, 6)
-  const displayDate = getMeaningfulStartingDate()
+  const displayDate = getMeaningfulStartingDate(moment())
 
   const currentDayIndex = Math.min(moment(displayDate).isoWeekday() - 1, 5)
   const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
@@ -129,15 +129,30 @@ export const Week = ({ child }: WeekProps) => {
     setShowSchema(shouldShowSchema)
   }, [lessons])
 
+  const getWeekText = (date = moment()) => {
+    return `Vecka ${date.isoWeek()}`
+  }
+
   return showSchema ? (
     <TransitionView style={styles.view} animation={'fadeInDown'}>
       <TransitionView style={styles.innerView} animation={'fadeIn'}>
+        <Text style={styles.weekNumber}>{getWeekText(displayDate)}</Text>
         <TabBar
           selectedIndex={selectedIndex}
           onSelect={(index) => setSelectedIndex(index)}
         >
-          {days.map((weekDay) => (
-            <Tab key={weekDay} title={weekDay} />
+          {days.map((weekDay, index) => (
+            <Tab
+              key={weekDay}
+              title={(_) => (
+                <>
+                  <Text style={styles.tabTitle}>{weekDay}</Text>
+                  <Text style={styles.tabTitleDate}>
+                    {displayDate.startOf('week').add(index, 'day').format('D')}
+                  </Text>
+                </>
+              )}
+            />
           ))}
         </TabBar>
 
@@ -231,5 +246,16 @@ const themedStyles = StyleService.create({
   },
   lesson: {
     flexDirection: 'column',
+  },
+  weekNumber: {
+    marginLeft: 10,
+    marginTop: 10,
+    ...Typography.fontWeight.bold,
+  },
+  tabTitle: {
+    textAlign: 'center',
+  },
+  tabTitleDate: {
+    textAlign: 'center',
   },
 })

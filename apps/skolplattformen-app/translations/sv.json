@@ -131,7 +131,8 @@
         "start": "Börjar",
         "end": "Slutar",
         "lunch": "Lunch",
-        "gymBag": "Gympapåse"
+        "gymBag": "Gympapåse",
+        "week": "Vecka"
     },
     "classmates": {
         "class": "Klass",
