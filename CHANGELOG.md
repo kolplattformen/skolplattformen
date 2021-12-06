@@ -1,3 +1,10 @@
+## [2.7.1](https://github.com/kolplattformen/skolplattformen/compare/v2.7.0...v2.7.1) (2021-12-06)
+
+
+### Bug Fixes
+
+* 🐛 Add translation to week ([cfa39de](https://github.com/kolplattformen/skolplattformen/commit/cfa39de3934e2386d90f37ad2c3dc830106e175a))
+
 # [2.7.0](https://github.com/kolplattformen/skolplattformen/compare/v2.6.0...v2.7.0) (2021-12-06)
 
 
