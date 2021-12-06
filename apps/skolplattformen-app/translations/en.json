@@ -58,7 +58,9 @@
         "saveToCalender": "Save in calendar",
         "saveToCalenderError": "Something went wrong",
         "saveToCalenderSuccess": "✔️ Saved in calendar",
-        "showCalenderActions": "Show calendar actions"
+        "showCalenderActions": "Show calendar actions",
+        "emptyHeadline": "The calendar looks kinda empty",
+        "emptyText": "Couldn't find anything for this week"
     },
     "children": {
         "loadingErrorHeading": "Oops!",
