@@ -1,3 +1,10 @@
+## [2.7.2](https://github.com/kolplattformen/skolplattformen/compare/v2.7.1...v2.7.2) (2021-12-06)
+
+
+### Bug Fixes
+
+* 🐛 Add missing translations for calendar ([7ada994](https://github.com/kolplattformen/skolplattformen/commit/7ada9945dfc7dd5766cd7a3208d62cf4c1a2659f))
+
 ## [2.7.1](https://github.com/kolplattformen/skolplattformen/compare/v2.7.0...v2.7.1) (2021-12-06)
 
 
