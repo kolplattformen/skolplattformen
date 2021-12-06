@@ -60,7 +60,7 @@
         "saveToCalenderSuccess": "✔️ Saved in calendar",
         "showCalenderActions": "Show calendar actions",
         "emptyHeadline": "The calendar looks kinda empty",
-        "emptyText": "Couldn't find anything for this week"
+        "emptyText": "Couldn't find anything to show"
     },
     "children": {
         "loadingErrorHeading": "Oops!",

@@ -59,8 +59,8 @@
         "saveToCalenderError": "Något gick fel",
         "saveToCalenderSuccess": "✔️ Sparad till kalender",
         "showCalenderActions": "Visa kalenderfunktioner",
-        "emptyHeadline": "Det ser lite tomt ut i kalendern",
-        "emptyText": "Hittade ingenting att visa"
+        "emptyText": "Hittade ingenting att visa",
+        "emptyHeadline": "Det ser lite tomt ut i kalendern"
     },
     "children": {
         "loadingErrorHeading": "Hoppsan!",
