@@ -129,7 +129,8 @@
         "start": "Start",
         "end": "End",
         "lunch": "Lunch",
-        "gymBag": "Gym bag"
+        "gymBag": "Gym bag",
+        "week": "Week"
     },
     "classmates": {
         "class": "Class",
