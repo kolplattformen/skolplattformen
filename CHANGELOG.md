@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/kolplattformen/skolplattformen/compare/v2.6.0...v2.7.0) (2021-12-06)
+
+
+### Features
+
+* 🎸 Add week number and calendar dates to timetable ([6fbbcc8](https://github.com/kolplattformen/skolplattformen/commit/6fbbcc803e92e288904be1ffba5e380bd9523100))
+
 # [2.6.0](https://github.com/kolplattformen/skolplattformen/compare/v2.5.1...v2.6.0) (2021-12-04)
 
 
