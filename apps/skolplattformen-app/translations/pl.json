@@ -58,7 +58,9 @@
         "saveToCalender": "Zapisz w kalendarzu",
         "saveToCalenderError": "Coś poszło nie tak",
         "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
-        "showCalenderActions": "Pokaż opcje kalendarza"
+        "showCalenderActions": "Pokaż opcje kalendarza",
+        "emptyHeadline": "Kalendarz jest pusty",
+        "emptyText": "Nie znaleziono nic do pokazania"
     },
     "children": {
         "loadingErrorHeading": "Oj!",
@@ -116,7 +118,8 @@
         "gymBag": "Ubrania do WF",
         "lunch": "Lunch",
         "end": "Kończy",
-        "start": "Zaczyna"
+        "start": "Zaczyna",
+        "week": "Tydzień"
     },
     "contact": {
         "a11y_show_contact_info_button_hint": "Pokazuje dane kontaktowe",
