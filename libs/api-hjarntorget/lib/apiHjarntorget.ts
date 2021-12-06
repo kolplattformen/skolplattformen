@@ -147,13 +147,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async setSessionCookie(sessionCookie: string): Promise<void> {
-    await this.fetch('login-cookie', hjarntorgetUrl, {
-      headers: {
-        cookie: sessionCookie,
-      },
-      redirect: 'manual',
-    })
-
+    this.cookieManager.setCookieString(sessionCookie, hjarntorgetUrl)
+    
     const user = await this.getUser()
     if (!user.isAuthenticated) {
       throw new Error('Session cookie is expired')

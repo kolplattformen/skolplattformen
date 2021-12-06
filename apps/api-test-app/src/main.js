@@ -14,9 +14,13 @@ const path = require('path')
 const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./app/agentFetchWrapper')
-const init = require('@skolplattformen/api-skolplattformen').default
+const initSkolplattformen = require('@skolplattformen/api-skolplattformen').default
+const initHjarntorget = require('@skolplattformen/api-hjarntorget').default
 
-const [, , personalNumber] = process.argv
+const [, , personalNumber, platform] = process.argv
+const isHjarntorget = platform && platform.startsWith('hj')
+const init = isHjarntorget ? initHjarntorget : initSkolplattformen;
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
 let bankIdUsed = false
@@ -136,10 +140,9 @@ async function Login(api) {
   try {
     console.log('Attempt to use saved session cookie to login')
     const rawContent = await readFile(`${recordFolder}/latestSessionCookie.txt`)
-    const sessionCookie = JSON.parse(rawContent)
-
-    await api.setSessionCookie(`${sessionCookie.key}=${sessionCookie.value}`)
-
+    const sessionCookies = JSON.parse(rawContent)
+    await api.setSessionCookie(`${sessionCookies[0].key}=${sessionCookies[0].value}`)
+    
     useBankId = false
     console.log('Login with old cookie succeeded')
   } catch (error) {
@@ -177,10 +180,12 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dirname)
 }
 
+
 function getSessionCookieFromCookieJar() {
-  const cookies = cookieJar.getCookiesSync('https://etjanst.stockholm.se')
-  const sessionCookie = cookies.find((c) => c.key === 'SMSESSION')
-  return sessionCookie
+  const cookieUrl = isHjarntorget ? 'https://hjarntorget.goteborg.se' : 'https://etjanst.stockholm.se'
+  const cookies = cookieJar.getCookiesSync(cookieUrl)
+  const sessionCookieKey =  isHjarntorget  ? 'JSESSIONID' : 'SMSESSION'
+  return cookies.find(c => c.key === sessionCookieKey)
 }
 
 const record = async (info, data) => {
