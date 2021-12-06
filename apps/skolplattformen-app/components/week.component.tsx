@@ -17,6 +17,7 @@ import { LanguageService } from '../services/languageService'
 import { Sizing, Typography } from '../styles'
 import { TransitionView } from './transitionView.component'
 import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
+import { translate } from '../utils/translation'
 
 interface WeekProps {
   child: Child
@@ -130,7 +131,7 @@ export const Week = ({ child }: WeekProps) => {
   }, [lessons])
 
   const getWeekText = (date = moment()) => {
-    return `Vecka ${date.isoWeek()}`
+    return `${translate('schedule.week')} ${date.isoWeek()}`
   }
 
   return showSchema ? (
