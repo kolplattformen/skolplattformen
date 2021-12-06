@@ -146,6 +146,16 @@ export const ChildListItem = ({
   const styles = useStyleSheet(themeStyles)
   const isDarkMode = useColorScheme() === 'dark'
   const meaningfulStartingDate = getMeaningfulStartingDate(currentDate)
+
+  // Hide menu if we want to show monday but it is not monday yet.
+  // The menu for next week is not available until monday
+  const shouldShowLunchMenu =
+    menu[meaningfulStartingDate.isoWeekday() - 1] &&
+    !(
+      meaningfulStartingDate.isoWeekday() === 1 &&
+      currentDate.isoWeekday() !== 1
+    )
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Child', { child, color })}
@@ -200,14 +210,18 @@ export const ChildListItem = ({
             {t('news.noNewNewsItemsThisWeek')}
           </Text>
         )}
-        {!menu[currentDate.isoWeekday() - 1] ? null : (
+        {shouldShowLunchMenu ? (
           <>
             <Text category="c2" style={styles.label}>
-              {t('schedule.lunch')}
+              {meaningfulStartingDate.format(
+                '[' + t('schedule.lunch') + '] dddd'
+              )}
             </Text>
-            <Text>{menu[currentDate.isoWeekday() - 1]?.description}</Text>
+            <Text>
+              {menu[meaningfulStartingDate.isoWeekday() - 1]?.description}
+            </Text>
           </>
-        )}
+        ) : null}
 
         <View style={styles.itemFooter}>
           <Button
