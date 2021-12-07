@@ -5,12 +5,12 @@ import { HTMLElement, parse, TextNode } from 'node-html-parser'
 
 const noChildren = ['strong', 'b', 'em', 'i', 'u', 's']
 const trimNodes = [...noChildren, 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'a']
-const cleanText = (node: TextNode, parentType: string): TextNode => {
+
+const cleanText = (node: TextNode, parent: HTMLElement): TextNode => {
+  const tagName = parent.tagName.toLowerCase()
   const text =
-    parentType && trimNodes.includes(parentType.toLowerCase())
-      ? node.rawText.trim()
-      : node.rawText
-  return new TextNode(text)
+    parent && trimNodes.includes(tagName) ? node.rawText.trim() : node.rawText
+  return new TextNode(text, parent)
 }
 
 const deepClean = (node: HTMLElement): HTMLElement => {
@@ -28,13 +28,13 @@ const deepClean = (node: HTMLElement): HTMLElement => {
     if (childNode instanceof HTMLElement) {
       if (node.tagName && noChildren.includes(node.tagName.toLowerCase())) {
         cleaned.childNodes.push(
-          cleanText(new TextNode(childNode.innerText), node.tagName)
+          cleanText(new TextNode(childNode.innerText, node), node)
         )
       } else {
         cleaned.childNodes.push(deepClean(childNode))
       }
     } else if (childNode instanceof TextNode) {
-      cleaned.childNodes.push(cleanText(childNode, node.tagName))
+      cleaned.childNodes.push(cleanText(childNode, node))
     }
   })
   return cleaned
@@ -105,8 +105,7 @@ const overides = {
 }
 
 export const toMarkdown = (html?: string): string => {
-
-  if(html?.length == 0) return ''
+  if (html?.length === 0) return ''
 
   const rearranged = rearrangeWhitespace(html)
   const trimmed = clean(rearranged)
