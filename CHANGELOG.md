@@ -1,3 +1,10 @@
+## [2.7.3](https://github.com/kolplattformen/skolplattformen/compare/v2.7.2...v2.7.3) (2021-12-07)
+
+
+### Bug Fixes
+
+* 🐛 Store childs personalIdNumbers in settings ([cc3fd86](https://github.com/kolplattformen/skolplattformen/commit/cc3fd8670c37be2b5f3e9f642bb3b1882350e2f6))
+
 ## [2.7.2](https://github.com/kolplattformen/skolplattformen/compare/v2.7.1...v2.7.2) (2021-12-06)
 
 
