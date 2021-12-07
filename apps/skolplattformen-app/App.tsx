@@ -26,6 +26,9 @@ const reporter: Reporter | undefined = __DEV__
 if (__DEV__) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const DevMenu = require('react-native-dev-menu')
+  DevMenu.addItem('Clear AsyncStorage from all contents', () =>
+    AsyncStorage.clear().then(() => logAsyncStorage())
+  )
   DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
 }
 
