@@ -18,6 +18,11 @@
   "dependencies": {
     "@eva-design/eva": "^2.1.1",
     "@eva-design/material": "^2.1.1",
+    "@formatjs/intl-datetimeformat": "^4.2.6",
+    "@formatjs/intl-getcanonicallocales": "^1.8.0",
+    "@formatjs/intl-locale": "^2.4.41",
+    "@formatjs/intl-numberformat": "^7.2.6",
+    "@formatjs/intl-pluralrules": "^4.1.6",
     "@react-native-async-storage/async-storage": "^1.15.14",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-community/masked-view": "^0.1.11",
