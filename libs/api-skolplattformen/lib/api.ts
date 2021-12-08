@@ -17,7 +17,9 @@ import {
   ScheduleItem,
   Skola24Child,
   SSOSystem,
+  Teacher,
   TimetableEntry,
+  SchoolContact,
   URLSearchParams,
   User,
   wrap,
@@ -269,6 +271,39 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     const response = await this.fetch('classmates', url, session)
     const data = await response.json()
     return parse.classmates(data)
+  }
+
+  public async getTeachers(child: EtjanstChild): Promise<Teacher[]> {
+    if (this.isFake) return fakeResponse(fake.teachers(child))
+
+    const session = this.getRequestInit()
+
+    const schoolForms = (child.status || '').split(';')
+    let teachers: Teacher[] = []
+
+    for(let i = 0; i< schoolForms.length; i+=1){
+      const url = routes.teachers(child.sdsId, schoolForms[i])
+      // eslint-disable-next-line no-await-in-loop
+      const response = await this.fetch(`teachers_${schoolForms[i]}`, url, session)
+      // eslint-disable-next-line no-await-in-loop
+      const data = await response.json()
+      teachers = [
+        ...teachers,
+        ...parse.teachers(data)
+      ]
+    }
+
+    return teachers
+  }
+
+  public async getSchoolContacts(child: EtjanstChild): Promise<SchoolContact[]> {
+    if(this.isFake) return fakeResponse(fake.schoolContacts(child))
+
+    const url = routes.schoolContacts(child.sdsId, child.schoolId || '')
+    const session = this.getRequestInit()
+    const response = await this.fetch('schoolContacts', url, session)
+    const data = await response.json()
+    return parse.schoolContacts(data)
   }
 
   public async getSchedule(
@@ -523,6 +558,8 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     return parse.timetable(json, year, week, lang)
   }
+
+
 
   public async logout() {
     this.isFake = false
