@@ -1,3 +1,15 @@
+# [2.8.0](https://github.com/kolplattformen/skolplattformen/compare/v2.7.3...v2.8.0) (2021-12-08)
+
+
+### Bug Fixes
+
+* 🐛 Ingen text syns i dark mode när inga barn hittas ([bce1165](https://github.com/kolplattformen/skolplattformen/commit/bce1165f300749502351fe28ee8f0c5f3ce7ee3c)), closes [#571](https://github.com/kolplattformen/skolplattformen/issues/571)
+
+
+### Features
+
+* 🎸 bumped to 3.0.2 for new version releasea ([2af189e](https://github.com/kolplattformen/skolplattformen/commit/2af189ef0fb23723dae982382bee169e2c7ed8f6))
+
 ## [2.7.3](https://github.com/kolplattformen/skolplattformen/compare/v2.7.2...v2.7.3) (2021-12-07)
 
 
