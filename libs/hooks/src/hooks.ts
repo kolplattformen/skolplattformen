@@ -203,7 +203,7 @@ export const useSchedule = (child: Child, from: string, to: string) =>
       api.getSchedule(child, DateTime.fromISO(from), DateTime.fromISO(to))
   )
 
-  export const useSchoolContacts = (child: Child) =>
+export const useSchoolContacts = (child: Child) =>
   hook<SchoolContact[]>(
     'SCHOOL_CONTACTS',
     `schoolContacts_${child.id}`,
@@ -212,7 +212,7 @@ export const useSchedule = (child: Child, from: string, to: string) =>
     (api) => () => api.getSchoolContacts(child)
   )
 
-  export const useTeachers = (child: Child) =>
+export const useTeachers = (child: Child) =>
   hook<Teacher[]>(
     'TEACHERS',
     `teachers_${child.id}`,
@@ -220,7 +220,6 @@ export const useSchedule = (child: Child, from: string, to: string) =>
     (s) => s.teachers,
     (api) => () => api.getTeachers(child)
   )
-
 
 export const useTimetable = (
   child: Skola24Child,
