@@ -196,7 +196,6 @@ const themedStyles = StyleService.create({
   emptyState: {
     ...LayoutStyle.center,
     ...LayoutStyle.flex.full,
-    backgroundColor: Colors.neutral.white,
     paddingHorizontal: Sizing.t5,
   },
   emptyStateDescription: {
