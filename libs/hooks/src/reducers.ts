@@ -6,7 +6,9 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  SchoolContact,
   Skola24Child,
+  Teacher,
   TimetableEntry,
   User,
 } from '@skolplattformen/api'
@@ -77,3 +79,5 @@ export const newsDetails = createReducer<NewsItem[]>('NEWS_DETAILS')
 export const notifications = createReducer<Notification[]>('NOTIFICATIONS')
 export const schedule = createReducer<ScheduleItem[]>('SCHEDULE')
 export const timetable = createReducer<TimetableEntry[]>('TIMETABLE')
+export const teachers = createReducer<Teacher[]>('TEACHERS')
+export const schoolContacts = createReducer<SchoolContact[]>('SCHOOL_CONTACTS')
