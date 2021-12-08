@@ -187,11 +187,6 @@ const Absence = () => {
                     confirmTextIOS={translate('general.confirm')}
                     date={moment(values.startTime).toDate()}
                     isVisible={values.displayStartTimePicker}
-                    customHeaderIOS={() => (
-                      <Text>
-                        {translate('abscense.selectAbscenseStartTime')}
-                      </Text>
-                    )}
                     locale="sv-SE"
                     maximumDate={maximumDate.toDate()}
                     minimumDate={minumumDate.toDate()}
@@ -223,9 +218,6 @@ const Absence = () => {
                     confirmTextIOS={translate('general.confirm')}
                     date={moment(values.endTime).toDate()}
                     isVisible={values.displayEndTimePicker}
-                    customHeaderIOS={() => (
-                      <Text>{translate('abscense.selectAbscenseEndTime')}</Text>
-                    )}
                     // Todo fix this
                     locale="sv-SE"
                     maximumDate={maximumDate.toDate()}
