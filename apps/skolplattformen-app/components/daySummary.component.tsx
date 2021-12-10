@@ -32,7 +32,7 @@ export const DaySummary = ({
 
   const lessons = weekLessons
     .filter((lesson) => lesson.dayOfWeek === currentDate.isoWeekday())
-    .sort((a, b) => a.dateStart.localeCompare(b.dateStart))
+    .sort((a, b) => a.timeStart.localeCompare(b.timeStart))
 
   if (lessons.length <= 0) {
     return null
@@ -62,7 +62,9 @@ export const DaySummary = ({
               {translate('schedule.end')}
             </Text>
             <Text category="h5">
-              {lessons[lessons.length - 1].timeEnd.slice(0, 5)}
+              {lessons
+                .sort((a, b) => a.timeEnd.localeCompare(b.timeEnd))
+                [lessons.length - 1].timeEnd.slice(0, 5)}
             </Text>
           </View>
         </View>
