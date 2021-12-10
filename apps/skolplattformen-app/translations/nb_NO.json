@@ -50,7 +50,9 @@
         "saveToCalenderSuccess": "✔️ Lagret i kalender",
         "showCalenderActions": "Vis kalenderhandlinger",
         "saveToCalenderError": "Noe gikk galt",
-        "approveAccessToCalender": "Du må innvilge tilgang til kalenderen din"
+        "approveAccessToCalender": "Du må innvilge tilgang til kalenderen din",
+        "emptyHeadline": "Kalenderen ser tom ut",
+        "emptyText": "Ingenting å vise"
     },
     "general": {
         "loading": "Laster inn …",
@@ -63,7 +65,8 @@
         "send": "Send",
         "cancel": "Avbryt",
         "logoutAndClearPersonalData": "Logg ut og tøm personlig data",
-        "logoutAndClearAllDataInclSettings": "Logg ut og tøm all data, inkludert innstillinger"
+        "logoutAndClearAllDataInclSettings": "Logg ut og tøm all data, inkludert innstillinger",
+        "tomorrow": "I morgen"
     },
     "news": {
         "updated": "Oppdatert",
@@ -115,7 +118,8 @@
         "gymBag": "Gym-bag",
         "lunch": "Lunsj",
         "end": "Slutt",
-        "start": "Start"
+        "start": "Start",
+        "week": "Uke"
     },
     "contact": {
         "a11y_show_contact_info_button_hint": "Vis kontaktinfo",

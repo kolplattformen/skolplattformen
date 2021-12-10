@@ -7,7 +7,8 @@
         "selectAbscenseEndTime": "Indique a hora de fim",
         "endTime": "Hora de fim",
         "invalidPersonalNumber": "Número de identidade pessoal inválido",
-        "personalNumberMissing": "Falta o número de identidade pessoal"
+        "personalNumberMissing": "Falta o número de identidade pessoal",
+        "childsPersonalNumber": "Número de identidade pessoal da criança"
     },
     "auth": {
         "bankid": {
