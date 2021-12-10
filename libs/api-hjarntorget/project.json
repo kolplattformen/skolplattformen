@@ -1,0 +1,23 @@
+{
+  "root": "libs/api-hjarntorget",
+  "sourceRoot": "libs/api-hjarntorget/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api-hjarntorget/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api-skolplattformen"],
+      "options": {
+        "jestConfig": "libs/api-skolplattformen/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
