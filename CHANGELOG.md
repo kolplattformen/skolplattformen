@@ -1,3 +1,10 @@
+# [2.10.0](https://github.com/kolplattformen/skolplattformen/compare/v2.9.1...v2.10.0) (2021-12-10)
+
+
+### Features
+
+* 🎸 Ämnesnamn syns nu i schemat i Hjärntorget. ([#596](https://github.com/kolplattformen/skolplattformen/issues/596)) ([14ff985](https://github.com/kolplattformen/skolplattformen/commit/14ff985b0c7a0c9ab9c8547679caff66c7b5aa1f))
+
 ## [2.9.1](https://github.com/kolplattformen/skolplattformen/compare/v2.9.0...v2.9.1) (2021-12-10)
 
 
