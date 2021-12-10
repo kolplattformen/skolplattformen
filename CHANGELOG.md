@@ -1,3 +1,10 @@
+## [2.10.1](https://github.com/kolplattformen/skolplattformen/compare/v2.10.0...v2.10.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* 🐛 scroll in timetable ([#597](https://github.com/kolplattformen/skolplattformen/issues/597)) ([f844a3c](https://github.com/kolplattformen/skolplattformen/commit/f844a3cdd4ea26b6a4b76e4236debec7e6e83986))
+
 # [2.10.0](https://github.com/kolplattformen/skolplattformen/compare/v2.9.1...v2.10.0) (2021-12-10)
 
 
