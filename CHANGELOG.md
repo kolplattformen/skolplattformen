@@ -1,3 +1,10 @@
+## [2.9.1](https://github.com/kolplattformen/skolplattformen/compare/v2.9.0...v2.9.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* 🐛 Felaktig sortering av lektioner ([#595](https://github.com/kolplattformen/skolplattformen/issues/595)) ([ed3a27b](https://github.com/kolplattformen/skolplattformen/commit/ed3a27bba185b39fd8581b639ac7efc03b050d6e)), closes [#591](https://github.com/kolplattformen/skolplattformen/issues/591)
+
 # [2.9.0](https://github.com/kolplattformen/skolplattformen/compare/v2.8.0...v2.9.0) (2021-12-10)
 
 
