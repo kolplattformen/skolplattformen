@@ -62,7 +62,9 @@ export const DaySummary = ({
               {translate('schedule.end')}
             </Text>
             <Text category="h5">
-              {lessons.sort((a, b) => a.timeEnd.localeCompare(b.timeEnd))[lessons.length - 1].timeEnd.slice(0, 5)}
+              {lessons
+                .sort((a, b) => a.timeEnd.localeCompare(b.timeEnd))
+                [lessons.length - 1].timeEnd.slice(0, 5)}
             </Text>
           </View>
         </View>
