@@ -384,34 +384,6 @@ PODS:
     - React-Core
   - RNLocalize (2.1.5):
     - React-Core
-  - RNReanimated (2.3.0):
-    - DoubleConversion
-    - FBLazyVector
-    - FBReactNativeSpec
-    - glog
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
-    - React
-    - React-callinvoker
-    - React-Core
-    - React-Core/DevSupport
-    - React-Core/RCTWebSocket
-    - React-CoreModules
-    - React-cxxreact
-    - React-jsi
-    - React-jsiexecutor
-    - React-jsinspector
-    - React-RCTActionSheet
-    - React-RCTAnimation
-    - React-RCTBlob
-    - React-RCTImage
-    - React-RCTLinking
-    - React-RCTNetwork
-    - React-RCTSettings
-    - React-RCTText
-    - ReactCommon/turbomodule/core
-    - Yoga
   - RNScreens (3.10.1):
     - React-Core
     - React-RCTImage
@@ -491,7 +463,6 @@ DEPENDENCIES:
   - RNDevMenu (from `../../../node_modules/react-native-dev-menu`)
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../../../node_modules/react-native-localize`)
-  - RNReanimated (from `../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -602,8 +573,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-gesture-handler"
   RNLocalize:
     :path: "../../../node_modules/react-native-localize"
-  RNReanimated:
-    :path: "../../../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
   RNSVG:
@@ -669,7 +638,6 @@ SPEC CHECKSUMS:
   RNDevMenu: fd325b5554b61fe7f48d9205a3877cf5ee88cd7c
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNLocalize: 74b82db20cc3895ccc25af992c644879bcec2815
-  RNReanimated: 569c269480a76e39196aa17a5df08ef1561db5ff
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
