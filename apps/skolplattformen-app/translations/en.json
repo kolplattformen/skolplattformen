@@ -58,7 +58,9 @@
         "saveToCalender": "Save in calendar",
         "saveToCalenderError": "Something went wrong",
         "saveToCalenderSuccess": "✔️ Saved in calendar",
-        "showCalenderActions": "Show calendar actions"
+        "showCalenderActions": "Show calendar actions",
+        "emptyHeadline": "The calendar looks kinda empty",
+        "emptyText": "Couldn't find anything to show"
     },
     "children": {
         "loadingErrorHeading": "Oops!",
@@ -80,7 +82,8 @@
         "send": "Send",
         "settings": "Settings",
         "socialSecurityNumber": "Personal identity number",
-        "title": "Öppna skolplattformen"
+        "title": "Öppna skolplattformen",
+        "tomorrow": "Tomorrow"
     },
     "language": {
         "changeLanguage": "Change language",
@@ -128,7 +131,8 @@
         "start": "Start",
         "end": "End",
         "lunch": "Lunch",
-        "gymBag": "Gym bag"
+        "gymBag": "Gym bag",
+        "week": "Week"
     },
     "classmates": {
         "class": "Class",

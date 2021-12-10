@@ -13,7 +13,9 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  SchoolContact,
   Skola24Child,
+  Teacher,
   TimetableEntry,
   toMarkdown,
   URLSearchParams,
@@ -147,13 +149,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   async setSessionCookie(sessionCookie: string): Promise<void> {
-    await this.fetch('login-cookie', hjarntorgetUrl, {
-      headers: {
-        cookie: sessionCookie,
-      },
-      redirect: 'manual',
-    })
-
+    this.cookieManager.setCookieString(sessionCookie, hjarntorgetUrl)
+    
     const user = await this.getUser()
     if (!user.isAuthenticated) {
       throw new Error('Session cookie is expired')
@@ -252,6 +249,21 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     }
     return Promise.resolve([])
   }
+
+  public async getTeachers(child: EtjanstChild): Promise<Teacher[]> {
+    if (!this.isLoggedIn) {
+      throw new Error('Not logged in...')
+    }
+    return Promise.resolve([])
+  }
+
+  public async getSchoolContacts(child: EtjanstChild): Promise<SchoolContact[]> {
+    if (!this.isLoggedIn) {
+      throw new Error('Not logged in...')
+    }
+    return Promise.resolve([])
+  }
+
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getNews(_child: EtjanstChild): Promise<NewsItem[]> {

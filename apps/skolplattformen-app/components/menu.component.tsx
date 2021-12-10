@@ -9,7 +9,13 @@ import {
 } from '@ui-kitten/components'
 import 'moment/locale/sv'
 import React from 'react'
-import { Image, ImageStyle, ListRenderItemInfo, View } from 'react-native'
+import {
+  Image,
+  ImageStyle,
+  ListRenderItemInfo,
+  RefreshControl,
+  View,
+} from 'react-native'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
@@ -18,7 +24,7 @@ import { MenuListItem } from './menuListItem.component'
 export const Menu = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()
-  const { data } = useMenu(child)
+  const { data, status, reload } = useMenu(child)
 
   return (
     <List
@@ -42,6 +48,9 @@ export const Menu = () => {
         <MenuListItem key={item.title} item={item} />
       )}
       style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
+      }
     />
   )
 }

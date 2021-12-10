@@ -20,6 +20,12 @@ export const calendar = (childId: string) =>
 export const classmates = (childId: string) =>
   `${urlLoggedIn}/contacts/GetStudentsByClass?studentId=${childId}`
 
+export const teachers = (childId: string, schoolForm: string) =>
+  `${urlLoggedIn}/contacts/GetTeachersByStudent?studentId=${childId}&schoolForm=${schoolForm}`
+
+export const schoolContacts = (childId: string, schoolId: string) =>
+  `${urlLoggedIn}/contacts/GetSchoolContacts?schoolId=${schoolId}&studentId=${childId}&schoolForm=Klasslista`
+
 export const user =
   'https://etjanst.stockholm.se/vardnadshavare/base/getuserdata'
 

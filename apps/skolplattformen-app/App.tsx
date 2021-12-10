@@ -19,13 +19,16 @@ import { translations } from './utils/translation'
 const reporter: Reporter | undefined = __DEV__
   ? {
       log: (message: string) => console.log(message),
-      error: (error: Error, label?: string) => console.error(label, error),
+      error: (error: Error, label?: string) => console.log(label, error),
     }
   : undefined
 
 if (__DEV__) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const DevMenu = require('react-native-dev-menu')
+  DevMenu.addItem('Clear AsyncStorage from all contents', () =>
+    AsyncStorage.clear().then(() => logAsyncStorage())
+  )
   DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
 }
 

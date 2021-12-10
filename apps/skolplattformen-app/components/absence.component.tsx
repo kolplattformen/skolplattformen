@@ -18,6 +18,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import * as Yup from 'yup'
 import { defaultStackStyling } from '../design/navigationThemes'
 import usePersonalStorage from '../hooks/usePersonalStorage'
+import useSettingsStorage from '../hooks/useSettingsStorage'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
 import { useSMS } from '../utils/SMS'
@@ -70,12 +71,11 @@ const Absence = () => {
   const route = useRoute<AbsenceRouteProps>()
   const { sendSMS } = useSMS()
   const { child } = route.params
-  const [personalIdFromStorage, setPersonalIdInStorage] = usePersonalStorage(
-    user,
-    `@childssn.${child.id}`,
-    ''
-  )
   const [personalIdentityNumber, setPersonalIdentityNumber] = React.useState('')
+  const [personalIdsFromStorage, setPersonalIdInStorage] = useSettingsStorage(
+    'childPersonalIdentityNumber'
+  )
+  const personalIdKey = `@childPersonalIdNumber.${child.id}`
   const minumumDate = moment().hours(8).minute(0)
   const maximumDate = moment().hours(17).minute(0)
   const styles = useStyleSheet(themedStyles)
@@ -96,15 +96,19 @@ const Absence = () => {
         )
       }
 
-      setPersonalIdInStorage(values.personalIdentityNumber)
-      setPersonalIdentityNumber(values.personalIdentityNumber)
+      const toStore = {
+        ...personalIdsFromStorage,
+        ...{ [personalIdKey]: personalIdNumber },
+      }
+      setPersonalIdInStorage(toStore)
     },
-    [sendSMS, setPersonalIdInStorage]
+    [personalIdKey, personalIdsFromStorage, sendSMS, setPersonalIdInStorage]
   )
 
   React.useEffect(() => {
+    const personalIdFromStorage = personalIdsFromStorage[personalIdKey] || ''
     setPersonalIdentityNumber(personalIdFromStorage || '')
-  }, [child, personalIdFromStorage, user])
+  }, [child, personalIdKey, personalIdsFromStorage, user])
 
   const initialValues: AbsenceFormValues = {
     displayStartTimePicker: false,

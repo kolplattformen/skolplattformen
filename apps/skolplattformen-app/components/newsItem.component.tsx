@@ -6,8 +6,14 @@ import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
-import { ScrollView, View } from 'react-native'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
+import {
+  Dimensions,
+  ImageStyle,
+  RefreshControl,
+  ScrollView,
+  View,
+} from 'react-native'
 import { defaultStackStyling } from '../design/navigationThemes'
 import { Layout, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
@@ -44,7 +50,7 @@ export const newsItemRouteOptions =
 
 export const NewsItem = ({ route }: NewsItemProps) => {
   const { newsItem, child } = route.params
-  const { data } = useNewsDetails(child, newsItem)
+  const { data, status, reload } = useNewsDetails(child, newsItem)
   const styles = useStyleSheet(themedStyles)
   const stylesMarkdown = useStyleSheet(themedStylesMarkdown)
 
@@ -52,6 +58,9 @@ export const NewsItem = ({ route }: NewsItemProps) => {
     <ScrollView
       contentContainerStyle={styles.article}
       style={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
+      }
     >
       <Text maxFontSizeMultiplier={2} style={styles.title}>
         {newsItem.header}

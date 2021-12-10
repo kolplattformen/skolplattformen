@@ -16,6 +16,8 @@ import { View } from 'react-native'
 import { LanguageService } from '../services/languageService'
 import { Sizing, Typography } from '../styles'
 import { TransitionView } from './transitionView.component'
+import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
+import { translate } from '../utils/translation'
 
 interface WeekProps {
   child: Child
@@ -107,10 +109,12 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 export const Week = ({ child }: WeekProps) => {
   moment.locale(LanguageService.getLocale())
   const days = moment.weekdaysShort().slice(1, 6)
-  const currentDayIndex = Math.min(moment().isoWeekday() - 1, 5)
+  const displayDate = getMeaningfulStartingDate(moment())
+
+  const currentDayIndex = Math.min(moment(displayDate).isoWeekday() - 1, 5)
   const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
   const [showSchema, setShowSchema] = useState(false)
-  const [year, week] = [moment().isoWeekYear(), moment().isoWeek()]
+  const [year, week] = [displayDate.isoWeekYear(), displayDate.isoWeek()]
   const { data: lessons } = useTimetable(
     child,
     week,
@@ -126,15 +130,30 @@ export const Week = ({ child }: WeekProps) => {
     setShowSchema(shouldShowSchema)
   }, [lessons])
 
+  const getWeekText = (date = moment()) => {
+    return `${translate('schedule.week')} ${date.isoWeek()}`
+  }
+
   return showSchema ? (
     <TransitionView style={styles.view} animation={'fadeInDown'}>
       <TransitionView style={styles.innerView} animation={'fadeIn'}>
+        <Text style={styles.weekNumber}>{getWeekText(displayDate)}</Text>
         <TabBar
           selectedIndex={selectedIndex}
           onSelect={(index) => setSelectedIndex(index)}
         >
-          {days.map((weekDay) => (
-            <Tab key={weekDay} title={weekDay} />
+          {days.map((weekDay, index) => (
+            <Tab
+              key={weekDay}
+              title={(_) => (
+                <>
+                  <Text style={styles.tabTitle}>{weekDay}</Text>
+                  <Text style={styles.tabTitleDate}>
+                    {displayDate.startOf('week').add(index, 'day').format('D')}
+                  </Text>
+                </>
+              )}
+            />
           ))}
         </TabBar>
 
@@ -228,5 +247,16 @@ const themedStyles = StyleService.create({
   },
   lesson: {
     flexDirection: 'column',
+  },
+  weekNumber: {
+    marginLeft: 10,
+    marginTop: 10,
+    ...Typography.fontWeight.bold,
+  },
+  tabTitle: {
+    textAlign: 'center',
+  },
+  tabTitleDate: {
+    textAlign: 'center',
   },
 })
