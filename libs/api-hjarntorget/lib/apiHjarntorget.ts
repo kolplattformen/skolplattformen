@@ -51,6 +51,7 @@ import {
   verifyUrlBase,
   wallMessagesUrl,
 } from './routes'
+import parse from '@skolplattformen/curriculum'
 
 function getDateOfISOWeek(week: number, year: number) {
   const simple = new Date(year, 0, 1 + (week - 1) * 7)
@@ -441,6 +442,16 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return []
   }
 
+  // async getTimetable(child: Skola24Child,
+  //   week: number,
+  //   year: number,
+  //   _lang: string
+  //   ): Promise<TimetableEntry[]> {
+
+  //     const json = await  this.getTimetable2(child, week, year,_lang)
+  //     return parse.timetable(json, year, week, _lang)
+  //   }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getTimetable(
     child: Skola24Child,
@@ -470,9 +481,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes),
       })
       return {
+        ...parse(l.title, _lang),
         id: l.id,
-        code: l.title,
-        name: l.title,
         teacher: l.bookedTeacherNames && l.bookedTeacherNames[0],
         location: l.location,
         timeStart: start.toISOTime().substring(0, 5),
@@ -480,7 +490,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         dayOfWeek: start.toJSDate().getDay(),
         blockName: l.title,
         dateStart: start.toISODate(),
-        dateEnd: start.toISODate(),
+        dateEnd: end.toISODate(),
       } as TimetableEntry
     })
   }
