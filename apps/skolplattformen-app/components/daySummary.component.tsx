@@ -32,7 +32,7 @@ export const DaySummary = ({
 
   const lessons = weekLessons
     .filter((lesson) => lesson.dayOfWeek === currentDate.isoWeekday())
-    .sort((a, b) => a.dateStart.localeCompare(b.dateStart))
+    .sort((a, b) => a.timeStart.localeCompare(b.timeStart))
 
   if (lessons.length <= 0) {
     return null
