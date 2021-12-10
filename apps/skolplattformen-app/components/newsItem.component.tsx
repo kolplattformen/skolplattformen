@@ -1,12 +1,11 @@
-import { Dimensions, ImageStyle } from 'react-native'
 import { RouteProp } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useNewsDetails } from '@skolplattformen/hooks'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
 import React from 'react'
-import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import {
   Dimensions,
   ImageStyle,

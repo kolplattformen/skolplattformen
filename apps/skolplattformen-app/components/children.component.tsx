@@ -22,12 +22,11 @@ import {
 } from 'react-native'
 import { defaultStackStyling } from '../design/navigationThemes'
 import AppStorage from '../services/appStorage'
-import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
-import { SettingsIcon } from './icon.component'
+import { RefreshIcon, SettingsIcon } from './icon.component'
 import { RootStackParamList } from './navigation.component'
-import { SettingsIcon, RefreshIcon } from './icon.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
