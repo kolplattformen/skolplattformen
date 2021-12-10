@@ -442,16 +442,6 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return []
   }
 
-  // async getTimetable(child: Skola24Child,
-  //   week: number,
-  //   year: number,
-  //   _lang: string
-  //   ): Promise<TimetableEntry[]> {
-
-  //     const json = await  this.getTimetable2(child, week, year,_lang)
-  //     return parse.timetable(json, year, week, _lang)
-  //   }
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getTimetable(
     child: Skola24Child,
