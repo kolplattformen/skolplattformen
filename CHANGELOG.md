@@ -1,3 +1,10 @@
+# [2.9.0](https://github.com/kolplattformen/skolplattformen/compare/v2.8.0...v2.9.0) (2021-12-10)
+
+
+### Features
+
+* 🎸 Hämta lärare och skolkontakter från api-skolplattfomen och visa lärarens namn i schemat ([#589](https://github.com/kolplattformen/skolplattformen/issues/589)) ([b7dbd35](https://github.com/kolplattformen/skolplattformen/commit/b7dbd356c652bf53a9d73dd38f11744ff364470b))
+
 # [2.8.0](https://github.com/kolplattformen/skolplattformen/compare/v2.7.3...v2.8.0) (2021-12-08)
 
 
