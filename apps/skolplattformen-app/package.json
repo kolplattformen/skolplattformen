@@ -76,7 +76,12 @@
     "tough-cookie": "*",
     "valtio": "*",
     "yup": "*",
-    "@react-navigation/native-stack": "*"
+    "@react-navigation/native-stack": "*",
+    "@formatjs/intl-getcanonicallocales": "*",
+    "@formatjs/intl-locale": "*",
+    "@formatjs/intl-numberformat": "*",
+    "@formatjs/intl-pluralrules": "*",
+    "@formatjs/intl-datetimeformat": "*"
   },
   "devDependencies": {
     "react-native-clean-project": "*"
