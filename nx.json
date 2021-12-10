@@ -37,8 +37,8 @@
       "tags": []
     },
     "api-test-app": {
-	    "tags": []
-	  },
+      "tags": []
+    },
     "curriculum": {
       "tags": []
     },
@@ -47,8 +47,14 @@
     },
     "skolplattformen-app": {
       "tags": [],
-       "implicitDependencies": ["api-skolplattformen", "api-hjarntorget", "api",  "hooks", "curriculum"]
+      "implicitDependencies": [
+        "api-skolplattformen",
+        "api-hjarntorget",
+        "api",
+        "hooks",
+        "curriculum"
+      ]
     }
   },
-  "defaultProject": "skolplattformen-sthlm"
+  "defaultProject": "skolplattformen-app"
 }
