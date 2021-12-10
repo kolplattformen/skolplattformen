@@ -9,7 +9,9 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  SchoolContact,
   Skola24Child,
+  Teacher,
   TimetableEntry,
   User,
 } from '@skolplattformen/api'
@@ -201,8 +203,26 @@ export const useSchedule = (child: Child, from: string, to: string) =>
       api.getSchedule(child, DateTime.fromISO(from), DateTime.fromISO(to))
   )
 
+export const useSchoolContacts = (child: Child) =>
+  hook<SchoolContact[]>(
+    'SCHOOL_CONTACTS',
+    `schoolContacts_${child.id}`,
+    [],
+    (s) => s.schoolContacts,
+    (api) => () => api.getSchoolContacts(child)
+  )
+
+export const useTeachers = (child: Child) =>
+  hook<Teacher[]>(
+    'TEACHERS',
+    `teachers_${child.id}`,
+    [],
+    (s) => s.teachers,
+    (api) => () => api.getTeachers(child)
+  )
+
 export const useTimetable = (
-  child: Skola24Child,
+  child: Child,
   week: number,
   year: number,
   lang: Language
@@ -212,8 +232,30 @@ export const useTimetable = (
     `timetable_${child.personGuid}_${week}_${year}_${lang}`,
     [],
     (s) => s.timetable,
-    (api) => () => api.getTimetable(child, week, year, lang)
+    (api) => async () => {
+      const tt = await api.getTimetable(child, week, year, lang)
+      const ts = await api.getTeachers(child)
+      tt.forEach((element) => {
+        element.teacher = replaceTeacherInitials(element.teacher, ts)
+      })
+      return tt
+    }
   )
+
+const replaceTeacherInitials = (
+  initials: string,
+  teachers: Teacher[]
+): string => {
+  if (!initials || teachers?.length == 0) return initials
+  const arr = initials.split(',') || [initials]
+  const arr2 = arr.map((element) => {
+    const t = teachers.find(
+      (t) => t.timeTableAbbreviation === element.trim().toUpperCase()
+    )
+    return t ? `${t.firstname} ${t.lastname}` : element
+  })
+  return arr2.join(', ')
+}
 
 export const useUser = () =>
   hook<User>(

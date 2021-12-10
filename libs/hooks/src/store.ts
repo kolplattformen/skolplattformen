@@ -9,7 +9,9 @@ import {
   newsDetails,
   notifications,
   schedule,
+  schoolContacts,
   skola24Children,
+  teachers,
   timetable,
   user,
 } from './reducers'
@@ -23,7 +25,9 @@ const appReducer = combineReducers({
   newsDetails,
   notifications,
   schedule,
+  schoolContacts,
   skola24Children,
+  teachers,
   timetable,
   user,
 })
