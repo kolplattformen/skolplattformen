@@ -181,12 +181,12 @@ export const Week = ({ child }: WeekProps) => {
 const themedStyles = StyleService.create({
   view: {
     backgroundColor: 'background-basic-color-1',
-    maxHeight: '60%',
+    maxHeight: '65%',
     paddingBottom: 0,
     margin: 0,
   },
   innerView: {
-    paddingBottom: 60,
+    paddingBottom: 170,
     margin: 0,
   },
   part: {
