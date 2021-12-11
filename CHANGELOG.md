@@ -1,3 +1,10 @@
+## [2.10.2](https://github.com/kolplattformen/skolplattformen/compare/v2.10.1...v2.10.2) (2021-12-11)
+
+
+### Bug Fixes
+
+* 🐛 adjust fakeData lessons offset in ht ([#598](https://github.com/kolplattformen/skolplattformen/issues/598)) ([3f69bc8](https://github.com/kolplattformen/skolplattformen/commit/3f69bc89aaa7eb1cf4ade789551667b960ff8825))
+
 ## [2.10.1](https://github.com/kolplattformen/skolplattformen/compare/v2.10.0...v2.10.1) (2021-12-10)
 
 
