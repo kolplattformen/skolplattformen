@@ -47,6 +47,7 @@
     "i18n-js": "^3.8.0",
     "js-htmlencode": "^0.3.0",
     "luxon": "^2.1.1",
+    "mockdate": "^3.0.5",
     "moment": "^2.29.1",
     "node-html-parser": "^2.1.0",
     "personnummer": "^3.1.4",
