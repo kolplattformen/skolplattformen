@@ -5,6 +5,7 @@ import {
   Classmate,
   CookieManager,
   EtjanstChild,
+  Fetch,
   Fetcher,
   FetcherOptions,
   LoginStatusChecker,
@@ -85,7 +86,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   constructor(
-    fetch: typeof global.fetch,
+    fetch: Fetch,
     cookieManager: CookieManager,
     options?: FetcherOptions
   ) {
@@ -497,7 +498,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         emitter.emit('OK')
         this.emit('login')
       }, 50)
-      return emitter;
+      return emitter as unknown as LoginStatusChecker;
     }
 
     console.log('prepping??? shibboleth')
@@ -572,20 +573,23 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return statusChecker
   }
 
-  public async registerAbscense(child: EtjanstChild, startDate: Date, endDate: Date): Promise<void> {
+  public async registerAbscense(child: EtjanstChild, startDate: DateTime, endDate: DateTime): Promise<void> {
+    const body = {
+      attendeeId: child.id,
+      startDate: startDate.toFormat("yyyy-MM-dd HH:mm"),
+      endDate: endDate.toFormat("yyyy-MM-dd HH:mm"),
+      statusId: 27433608,
+      _submit: 'Save'
+    }
 
-      const body = {
-        attendeeId: child.id,
-        startDate: startDate,
-        endDate: endDate,
-        statusId: 27433608,
-        _submit: 'Register+the+whole+day'
-      }
-
-     this.fetch('register-abscense', abscenseRegistrationUrl, {
-        method: 'POST',
-        body: new URLSearchParams(body).toString(),
-      })
+    await this.fetch('register-abscense', abscenseRegistrationUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Referer': "https://hjarntorget.goteborg.se/attendanceParentRegisterAbsence.do?attendeeId=" + child.id,
+      },
+      body: new URLSearchParams(body).toString(),
+    })
   }
 
   private async fakeMode(): Promise<LoginStatusChecker> {
