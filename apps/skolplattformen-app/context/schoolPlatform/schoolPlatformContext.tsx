@@ -16,7 +16,7 @@ export const SchoolPlatformProvider: React.FC = ({ children }) => {
     'currentSchoolPlatform'
   )
 
-  const changeSchoolPlatform = (platform: string) => {
+  const changeSchoolPlatform = (platform) => {
     setCurrentSchoolPlatform(platform)
   }
 

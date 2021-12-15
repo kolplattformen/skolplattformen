@@ -58,7 +58,9 @@
         "saveToCalender": "Spara till kalender",
         "saveToCalenderError": "Något gick fel",
         "saveToCalenderSuccess": "✔️ Sparad till kalender",
-        "showCalenderActions": "Visa kalenderfunktioner"
+        "showCalenderActions": "Visa kalenderfunktioner",
+        "emptyText": "Hittade ingenting att visa",
+        "emptyHeadline": "Det ser lite tomt ut i kalendern"
     },
     "children": {
         "loadingErrorHeading": "Hoppsan!",
@@ -80,7 +82,8 @@
         "title": "Öppna skolplattformen",
         "cancel": "Avbryt",
         "logoutAndClearAllDataInclSettings": "Logga ut och rensa all sparad data inkl inställningar",
-        "logoutAndClearPersonalData": "Logga ut och rensa all personlig data"
+        "logoutAndClearPersonalData": "Logga ut och rensa all personlig data",
+        "tomorrow": "Imorgon"
     },
     "language": {
         "changeLanguage": "Byt språk",
@@ -128,7 +131,8 @@
         "start": "Börjar",
         "end": "Slutar",
         "lunch": "Lunch",
-        "gymBag": "Gympapåse"
+        "gymBag": "Gympapåse",
+        "week": "Vecka"
     },
     "classmates": {
         "class": "Klass",

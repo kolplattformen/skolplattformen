@@ -2,6 +2,8 @@ import { useCallback } from 'react'
 import { proxy, subscribe, useSnapshot } from 'valtio'
 import AppStorage from '../services/appStorage'
 
+export type ChildPersonalNumbers = Record<string, string>
+
 export const settingsState = proxy({
   hydrated: false,
   settings: {
@@ -12,6 +14,7 @@ export const settingsState = proxy({
     currentSchoolPlatform: 'stockholm-skolplattformen' as
       | 'stockholm-skolplattformen'
       | 'goteborg-hjarntorget',
+    childPersonalIdentityNumber: {} as ChildPersonalNumbers,
   },
 })
 

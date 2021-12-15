@@ -13,7 +13,9 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  SchoolContact,
   Skola24Child,
+  Teacher,
   TimetableEntry,
   toMarkdown,
   URLSearchParams,
@@ -25,7 +27,7 @@ import { decode } from 'he'
 import { DateTime, FixedOffsetZone } from 'luxon'
 import * as html from 'node-html-parser'
 import { fakeFetcher } from './fake/fakeFetcher'
-import { checkStatus } from './loginStatus'
+import { checkStatus, DummyStatusChecker } from './loginStatus'
 import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
 import {
   beginBankIdUrl,
@@ -50,6 +52,7 @@ import {
   wallMessagesUrl,
   abscenseRegistrationUrl
 } from './routes'
+import parse from '@skolplattformen/curriculum'
 
 function getDateOfISOWeek(week: number, year: number) {
   const simple = new Date(year, 0, 1 + (week - 1) * 7)
@@ -140,14 +143,16 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return this.personalNumber
   }
 
-  async setSessionCookie(sessionCookie: string): Promise<void> {
-    await this.fetch('login-cookie', hjarntorgetUrl, {
-      headers: {
-        cookie: sessionCookie,
-      },
-      redirect: 'manual',
-    })
+  public async getSessionHeaders(url: string): Promise<{ [index: string]: string }> {
+    const cookie = await this.cookieManager.getCookieString(url)
+    return {
+        cookie,
+    }
+  }
 
+  async setSessionCookie(sessionCookie: string): Promise<void> {
+    this.cookieManager.setCookieString(sessionCookie, hjarntorgetUrl)
+    
     const user = await this.getUser()
     if (!user.isAuthenticated) {
       throw new Error('Session cookie is expired')
@@ -246,6 +251,21 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     }
     return Promise.resolve([])
   }
+
+  public async getTeachers(child: EtjanstChild): Promise<Teacher[]> {
+    if (!this.isLoggedIn) {
+      throw new Error('Not logged in...')
+    }
+    return Promise.resolve([])
+  }
+
+  public async getSchoolContacts(child: EtjanstChild): Promise<SchoolContact[]> {
+    if (!this.isLoggedIn) {
+      throw new Error('Not logged in...')
+    }
+    return Promise.resolve([])
+  }
+
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getNews(_child: EtjanstChild): Promise<NewsItem[]> {
@@ -452,9 +472,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes),
       })
       return {
+        ...parse(l.title, _lang),
         id: l.id,
-        code: l.title,
-        name: l.title,
         teacher: l.bookedTeacherNames && l.bookedTeacherNames[0],
         location: l.location,
         timeStart: start.toISOTime().substring(0, 5),
@@ -462,7 +481,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         dayOfWeek: start.toJSDate().getDay(),
         blockName: l.title,
         dateStart: start.toISODate(),
-        dateEnd: start.toISODate(),
+        dateEnd: end.toISODate(),
       } as TimetableEntry
     })
   }
@@ -492,13 +511,13 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
     if((beginLoginRedirectResponse as any).url.endsWith("startPage.do")) {
       // already logged in!
-      const emitter = new EventEmitter()
+      const emitter = new DummyStatusChecker()
       setTimeout(() => {
         this.isLoggedIn = true
         emitter.emit('OK')
         this.emit('login')
       }, 50)
-      return emitter as unknown as LoginStatusChecker;
+      return emitter as LoginStatusChecker;
     }
 
     console.log('prepping??? shibboleth')

@@ -1,4 +1,4 @@
-import { Notification as NotificationType } from '@skolplattformen/api-skolplattformen'
+import { Notification as NotificationType } from '@skolplattformen/api'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'

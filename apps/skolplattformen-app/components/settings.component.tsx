@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from '@react-navigation/core'
-import { useApi } from '@skolplattformen/hooks'
+import { useApi, useUser } from '@skolplattformen/hooks'
 import React, { useCallback } from 'react'
 import { ScrollView } from 'react-native'
 import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
@@ -28,14 +28,16 @@ export const SettingsScreen = () => {
   const langCode = LanguageService.getLanguageCode()
   const language = languages.find((l) => l.langCode === langCode)
   const { api } = useApi()
+  const { data: user } = useUser()
 
   const logout = useCallback(async () => {
     await AppStorage.clearTemporaryItems()
+    await AppStorage.clearPersonalData(user)
     await api.logout()
     navigation.reset({
       routes: [{ name: 'Login' }],
     })
-  }, [api, navigation])
+  }, [api, navigation, user])
 
   return (
     <ScrollView

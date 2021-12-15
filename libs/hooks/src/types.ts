@@ -7,7 +7,9 @@ import {
   NewsItem,
   Notification,
   ScheduleItem,
+  SchoolContact,
   Skola24Child,
+  Teacher,
   TimetableEntry,
   User,
 } from '@skolplattformen/api'
@@ -64,6 +66,8 @@ export type EntityName =
   | 'NEWS_DETAILS'
   | 'NOTIFICATIONS'
   | 'SCHEDULE'
+  | 'SCHOOL_CONTACTS'
+  | 'TEACHERS'
   | 'TIMETABLE'
   | 'ALL'
 export interface EntityAction<T> extends Action<EntityActionType> {
@@ -88,6 +92,8 @@ export interface EntityStoreRootState {
   newsDetails: EntityMap<NewsItem>
   notifications: EntityMap<Notification[]>
   schedule: EntityMap<ScheduleItem[]>
+  schoolContacts: EntityMap<SchoolContact[]>
+  teachers: EntityMap<Teacher[]>
   timetable: EntityMap<TimetableEntry[]>
 }
 

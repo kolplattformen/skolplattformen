@@ -1,3 +1,107 @@
+## [2.10.2](https://github.com/kolplattformen/skolplattformen/compare/v2.10.1...v2.10.2) (2021-12-11)
+
+
+### Bug Fixes
+
+* 🐛 adjust fakeData lessons offset in ht ([#598](https://github.com/kolplattformen/skolplattformen/issues/598)) ([3f69bc8](https://github.com/kolplattformen/skolplattformen/commit/3f69bc89aaa7eb1cf4ade789551667b960ff8825))
+
+## [2.10.1](https://github.com/kolplattformen/skolplattformen/compare/v2.10.0...v2.10.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* 🐛 scroll in timetable ([#597](https://github.com/kolplattformen/skolplattformen/issues/597)) ([f844a3c](https://github.com/kolplattformen/skolplattformen/commit/f844a3cdd4ea26b6a4b76e4236debec7e6e83986))
+
+# [2.10.0](https://github.com/kolplattformen/skolplattformen/compare/v2.9.1...v2.10.0) (2021-12-10)
+
+
+### Features
+
+* 🎸 Ämnesnamn syns nu i schemat i Hjärntorget. ([#596](https://github.com/kolplattformen/skolplattformen/issues/596)) ([14ff985](https://github.com/kolplattformen/skolplattformen/commit/14ff985b0c7a0c9ab9c8547679caff66c7b5aa1f))
+
+## [2.9.1](https://github.com/kolplattformen/skolplattformen/compare/v2.9.0...v2.9.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* 🐛 Felaktig sortering av lektioner ([#595](https://github.com/kolplattformen/skolplattformen/issues/595)) ([ed3a27b](https://github.com/kolplattformen/skolplattformen/commit/ed3a27bba185b39fd8581b639ac7efc03b050d6e)), closes [#591](https://github.com/kolplattformen/skolplattformen/issues/591)
+
+# [2.9.0](https://github.com/kolplattformen/skolplattformen/compare/v2.8.0...v2.9.0) (2021-12-10)
+
+
+### Features
+
+* 🎸 Hämta lärare och skolkontakter från api-skolplattfomen och visa lärarens namn i schemat ([#589](https://github.com/kolplattformen/skolplattformen/issues/589)) ([b7dbd35](https://github.com/kolplattformen/skolplattformen/commit/b7dbd356c652bf53a9d73dd38f11744ff364470b))
+
+# [2.8.0](https://github.com/kolplattformen/skolplattformen/compare/v2.7.3...v2.8.0) (2021-12-08)
+
+
+### Bug Fixes
+
+* 🐛 Ingen text syns i dark mode när inga barn hittas ([bce1165](https://github.com/kolplattformen/skolplattformen/commit/bce1165f300749502351fe28ee8f0c5f3ce7ee3c)), closes [#571](https://github.com/kolplattformen/skolplattformen/issues/571)
+
+
+### Features
+
+* 🎸 bumped to 3.0.2 for new version releasea ([2af189e](https://github.com/kolplattformen/skolplattformen/commit/2af189ef0fb23723dae982382bee169e2c7ed8f6))
+
+## [2.7.3](https://github.com/kolplattformen/skolplattformen/compare/v2.7.2...v2.7.3) (2021-12-07)
+
+
+### Bug Fixes
+
+* 🐛 Store childs personalIdNumbers in settings ([cc3fd86](https://github.com/kolplattformen/skolplattformen/commit/cc3fd8670c37be2b5f3e9f642bb3b1882350e2f6))
+
+## [2.7.2](https://github.com/kolplattformen/skolplattformen/compare/v2.7.1...v2.7.2) (2021-12-06)
+
+
+### Bug Fixes
+
+* 🐛 Add missing translations for calendar ([7ada994](https://github.com/kolplattformen/skolplattformen/commit/7ada9945dfc7dd5766cd7a3208d62cf4c1a2659f))
+
+## [2.7.1](https://github.com/kolplattformen/skolplattformen/compare/v2.7.0...v2.7.1) (2021-12-06)
+
+
+### Bug Fixes
+
+* 🐛 Add translation to week ([cfa39de](https://github.com/kolplattformen/skolplattformen/commit/cfa39de3934e2386d90f37ad2c3dc830106e175a))
+
+# [2.7.0](https://github.com/kolplattformen/skolplattformen/compare/v2.6.0...v2.7.0) (2021-12-06)
+
+
+### Features
+
+* 🎸 Add week number and calendar dates to timetable ([6fbbcc8](https://github.com/kolplattformen/skolplattformen/commit/6fbbcc803e92e288904be1ffba5e380bd9523100))
+
+# [2.6.0](https://github.com/kolplattformen/skolplattformen/compare/v2.5.1...v2.6.0) (2021-12-04)
+
+
+### Features
+
+* Frontpage date tweaks ([#582](https://github.com/kolplattformen/skolplattformen/issues/582)) ([66e7811](https://github.com/kolplattformen/skolplattformen/commit/66e7811b83e96f9fb83aa82cb34736f38a3bf16a))
+
+## [2.5.1](https://github.com/kolplattformen/skolplattformen/compare/v2.5.0...v2.5.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* 🐛 Show the weekday on startpage if not today ([df28066](https://github.com/kolplattformen/skolplattformen/commit/df2806648ab6b573d277a338f76fb199cdd307a2))
+
+# [2.5.0](https://github.com/kolplattformen/skolplattformen/compare/v2.4.0...v2.5.0) (2021-12-03)
+
+
+### Features
+
+* 🎸 Skip to the next day in calendar ([#425](https://github.com/kolplattformen/skolplattformen/issues/425)) ([fce1d98](https://github.com/kolplattformen/skolplattformen/commit/fce1d98847f4cc7c27bfa359b1d2b1bdc86e12ea))
+
+# [2.4.0](https://github.com/kolplattformen/skolplattformen/compare/v2.3.2...v2.4.0) (2021-12-02)
+
+
+### Features
+
+* 🎸 Clear personal cache on login and logout ([#572](https://github.com/kolplattformen/skolplattformen/issues/572)) ([bf29ab5](https://github.com/kolplattformen/skolplattformen/commit/bf29ab58edd13db62b34f873a3429d319c0e7297))
+* 🎸 Fix image load and typescript errors ([#570](https://github.com/kolplattformen/skolplattformen/issues/570)) ([933a884](https://github.com/kolplattformen/skolplattformen/commit/933a8840a3ebd049711a000ca6faf3e534f77ace))
+
 ## [2.3.2](https://github.com/kolplattformen/skolplattformen/compare/v2.3.1...v2.3.2) (2021-12-01)
 
 

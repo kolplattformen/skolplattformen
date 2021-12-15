@@ -1,13 +1,22 @@
+import { toNamespacedPath } from "path";
+
 // TODO: fix the startDate/endDate of all lessons 
 export const lessons_133700_goteborgsstad = () => {
   const baseTime = 1636357800000;
   const baseDate = new Date(baseTime)
   const today = new Date()
+  const currentHour = today.getHours()
   today.setHours(baseDate.getHours())
   today.setMinutes(baseDate.getMinutes())
   today.setSeconds(0)
 
-  const offset = Math.abs(baseTime - today.getTime())
+  let offset = Math.abs(baseTime - today.getTime())
+  const weekDay = today.getDay()
+
+  if(weekDay == 6 || (weekDay == 5 && currentHour >= 18)) offset = offset + 2 * 86400000
+  if(weekDay == 0) offset = offset + 86400000
+  if(weekDay > 0 && weekDay < 6 && currentHour >= 18) offset = offset + 86400000
+
   return {
     "url": "https://hjarntorget.goteborg.se/api/schema/lessons?forUser=133700_goteborgsstad&startDateIso=2021-11-01&endDateIso=2021-11-08",
     "headers": {
@@ -206,14 +215,21 @@ export const lessons_133700_goteborgsstad = () => {
 }
 
 export const lessons_123456_goteborgsstad = () => {
-  const baseTime = 1636355400000;
+  const baseTime = 1636357800000;
   const baseDate = new Date(baseTime)
   const today = new Date()
+  const currentHour = today.getHours()
   today.setHours(baseDate.getHours())
   today.setMinutes(baseDate.getMinutes())
   today.setSeconds(0)
-  
-  const offset = Math.abs(baseTime - today.getTime())
+
+  let offset = Math.abs(baseTime - today.getTime())
+  const weekDay = today.getDay()
+
+  if(weekDay == 6 || (weekDay == 5 && currentHour >= 18)) offset = offset + 2 * 86400000
+  if(weekDay == 0) offset = offset + 86400000
+  if(weekDay > 0 && weekDay < 6 && currentHour >= 18) offset = offset + 86400000
+
   return {
   "url": "https://hjarntorget.goteborg.se/api/schema/lessons?forUser=123456_goteborgsstad&startDateIso=2021-11-01&endDateIso=2021-11-08",
   "headers": {

@@ -1,7 +1,7 @@
 /* eslint-disable react-native-a11y/has-accessibility-hint */
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Child } from '@skolplattformen/api-skolplattformen'
+import { Child } from '@skolplattformen/api'
 import {
   useCalendar,
   useClassmates,
@@ -16,11 +16,12 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components'
-import moment from 'moment'
-import React from 'react'
+import moment, { Moment } from 'moment'
+import React, { useEffect } from 'react'
 import { TouchableOpacity, useColorScheme, View } from 'react-native'
 import { useTranslation } from '../hooks/useTranslation'
 import { Colors, Layout, Sizing } from '../styles'
+import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 import { studentName } from '../utils/peopleHelpers'
 import { DaySummary } from './daySummary.component'
 import { AlertIcon, RightArrowIcon } from './icon.component'
@@ -30,13 +31,20 @@ import { StudentAvatar } from './studentAvatar.component'
 interface ChildListItemProps {
   child: Child
   color: string
+  updated: string
+  currentDate?: Moment
 }
 type ChildListItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Children'
 >
 
-export const ChildListItem = ({ child, color }: ChildListItemProps) => {
+export const ChildListItem = ({
+  child,
+  color,
+  updated,
+  currentDate = moment(),
+}: ChildListItemProps) => {
   // Forces rerender when child.id changes
   React.useEffect(() => {
     // noop
@@ -44,16 +52,35 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
 
   const navigation = useNavigation<ChildListItemNavigationProp>()
   const { t } = useTranslation()
-  const { data: notifications } = useNotifications(child)
-  const { data: news } = useNews(child)
-  const { data: classmates } = useClassmates(child)
-  const { data: calendar } = useCalendar(child)
-  const { data: menu } = useMenu(child)
-  const { data: schedule } = useSchedule(
+  const { data: notifications, reload: notificationsReload } =
+    useNotifications(child)
+  const { data: news, status: newsStatus, reload: newsReload } = useNews(child)
+  const { data: classmates, reload: classmatesReload } = useClassmates(child)
+  const { data: calendar, reload: calendarReload } = useCalendar(child)
+  const { data: menu, reload: menuReload } = useMenu(child)
+  const { data: schedule, reload: scheduleReload } = useSchedule(
     child,
-    moment().toISOString(),
-    moment().add(7, 'days').toISOString()
+    moment(currentDate).toISOString(),
+    moment(currentDate).add(7, 'days').toISOString()
   )
+
+  useEffect(() => {
+    // Do not refresh if updated is empty (first render of component)
+    if (updated === '') return
+
+    newsReload()
+    classmatesReload()
+    notificationsReload()
+    calendarReload()
+    menuReload()
+    scheduleReload()
+
+    // Without eslint-disable below we get into a forever loop
+    // because the function pointers to reload functions change on every reload.
+    // I do not know a workaround for this.
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updated])
 
   const notificationsThisWeek = notifications.filter(
     ({ dateCreated, dateModified }) => {
@@ -63,8 +90,8 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   )
 
   const newsThisWeek = news.filter(({ modified, published }) => {
-    const date = modified || published
-    return date ? moment(date).isSame(moment(), 'week') : false
+    const newsDate = modified || published
+    return newsDate ? moment(newsDate).isSame(currentDate, 'week') : false
   })
 
   const scheduleAndCalendarThisWeek = [
@@ -73,14 +100,14 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   ].filter(({ startDate }) =>
     startDate
       ? moment(startDate).isBetween(
-          moment().startOf('day'),
-          moment().add(7, 'days')
+          moment(currentDate).startOf('day'),
+          moment(currentDate).add(7, 'days')
         )
       : false
   )
 
-  const displayDate = (date: moment.MomentInput) => {
-    return moment(date).fromNow()
+  const displayDate = (inputDate: moment.MomentInput) => {
+    return moment(inputDate).fromNow()
   }
 
   const getClassName = () => {
@@ -118,6 +145,16 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
   const className = getClassName()
   const styles = useStyleSheet(themeStyles)
   const isDarkMode = useColorScheme() === 'dark'
+  const meaningfulStartingDate = getMeaningfulStartingDate(currentDate)
+
+  // Hide menu if we want to show monday but it is not monday yet.
+  // The menu for next week is not available until monday
+  const shouldShowLunchMenu =
+    menu[meaningfulStartingDate.isoWeekday() - 1] &&
+    !(
+      meaningfulStartingDate.isoWeekday() === 1 &&
+      currentDate.isoWeekday() !== 1
+    )
 
   return (
     <TouchableOpacity
@@ -142,12 +179,15 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             />
           </View>
         </View>
-        <DaySummary child={child} />
+
+        <DaySummary child={child} date={meaningfulStartingDate} />
+
         {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
           </Text>
         ))}
+
         <Text category="c2" style={styles.label}>
           {t('navigation.news')}
         </Text>
@@ -156,11 +196,13 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             {notification.message}
           </Text>
         ))}
+
         {newsThisWeek.slice(0, 3).map((newsItem, i) => (
           <Text category="p1" key={i}>
             {newsItem.header ?? ''}
           </Text>
         ))}
+
         {scheduleAndCalendarThisWeek.length ||
         notificationsThisWeek.length ||
         newsThisWeek.length ? null : (
@@ -168,16 +210,20 @@ export const ChildListItem = ({ child, color }: ChildListItemProps) => {
             {t('news.noNewNewsItemsThisWeek')}
           </Text>
         )}
-
-        {!menu[moment().isoWeekday() - 1] ? null : (
+        {shouldShowLunchMenu ? (
           <>
             <Text category="c2" style={styles.label}>
-              {t('schedule.lunch')}
+              {meaningfulStartingDate.format(
+                '[' + t('schedule.lunch') + '] dddd'
+              )}
             </Text>
-            <Text>{menu[moment().isoWeekday() - 1]?.description}</Text>
+            <Text>
+              {menu[meaningfulStartingDate.isoWeekday() - 1]?.description}
+            </Text>
           </>
-        )}
-        <View style={styles.itemFooterAbsence}>
+        ) : null}
+
+        <View style={styles.itemFooter}>
           <Button
             accessible
             accessibilityRole="button"
@@ -232,14 +278,15 @@ const themeStyles = StyleService.create({
   },
   itemFooter: {
     ...Layout.flex.row,
-    marginTop: Sizing.t4,
-  },
-  itemFooterAbsence: {
-    ...Layout.mainAxis.flexStart,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     marginTop: Sizing.t4,
   },
   absenceButton: {
     marginLeft: -20,
+  },
+  itemFooterSpinner: {
+    alignSelf: 'flex-end',
   },
   item: {
     marginRight: 12,

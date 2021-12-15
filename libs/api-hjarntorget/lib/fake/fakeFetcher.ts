@@ -28,10 +28,9 @@ const fetchMappings: { [name:string]: () => Response} = {
     'event-role-members-24-821': eventRoleMembers24,
     'calendars': calendars,
     'calendar-14241345': calendar_14241345,
-
 }
 
 export const fakeFetcher: Fetcher  = (name: string, url: string, init?: any): Promise<Response> => {
     const responder = fetchMappings[name] ?? (() => {throw new Error("Request not faked for name: " + name)})
     return Promise.resolve(responder());
-} 
+}
