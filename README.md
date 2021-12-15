@@ -29,6 +29,7 @@ The respective README files there contain more detailed descriptions.
     * [api](#api)
     * [api-skolplattformen](#api-skolplattformen)
     * [api-hjarntorget](#api-hjarntorget)
+    * [api-vklass](#api-vklass)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
 * [Getting started with development](#getting-started-with-development)
@@ -46,8 +47,8 @@ The respective README files there contain more detailed descriptions.
 
 The project consists of several apps and libraries inside [a NX](https://nx.dev/) monorepo.
 
-### Apps 
-/apps/ contains the application projects. This is the main entry point for a runnable application. 
+### Apps
+/apps/ contains the application projects. This is the main entry point for a runnable application.
 
 #### skolplattformen
 
@@ -64,7 +65,7 @@ For more information, check out the [source code](apps/skolplattformen-app).
 The code for the website at https://skolplattformen.org/. It's built using Next.js.
 
 For more information, check out the [source code](apps/website).
-### Libs 
+### Libs
 
 /libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
 
@@ -74,7 +75,11 @@ The base for all api implementations
 
 #### api-hjarntorget
 
-The implementation for the school platform in Gothenburg called Hjärntorget
+The implementation for the school platform in Gothenburg called Hjärntorget.
+
+#### api-vklass
+
+The implementation for the school platform Vklass.
 
 #### api-skolplattformen
 
@@ -84,6 +89,7 @@ It also makes it easier for others to develop their own applications for the Sko
 **Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
 Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
 Check out the documentation [here](libs/api-skolplattformen).
+
 #### curriculum
 
 Translations of curriculum codes (sv: ämneskoder på schemat) to clear text descriptions
@@ -95,7 +101,7 @@ Check out the documentation [here](libs/hooks).
 
 ## Getting started with Development
 
-To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/). 
+To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
 
 Clone the repo with
 ```bash
