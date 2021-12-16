@@ -109,3 +109,4 @@ requests
 xcshareddata
 xcuserdata
 /.vs
+*.hprof

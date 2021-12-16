@@ -1,4 +1,5 @@
-import { useNavigation } from '@react-navigation/native'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import {
   Button,
   ButtonGroup,
@@ -10,11 +11,11 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import RNRestart from 'react-native-restart'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
 import { Layout as LayoutStyle, Sizing } from '../styles'
 import { languages, translate } from '../utils/translation'
+import { RootStackParamList } from './navigation.component'
 import {
   SettingGroup,
   SettingListItemSelectable,
@@ -25,7 +26,7 @@ export const setLanguageRouteOptions = (): NativeStackNavigationOptions => ({
 })
 
 export const SetLanguage = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const styles = useStyleSheet(themedStyles)
 
   const currentLanguage = LanguageService.getLanguageCode()

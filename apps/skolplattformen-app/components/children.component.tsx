@@ -1,4 +1,5 @@
-import { useNavigation } from '@react-navigation/core'
+import { NavigationProp, useNavigation } from '@react-navigation/core'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { Child } from '@skolplattformen/api'
 import { useApi, useChildList } from '@skolplattformen/hooks'
 import {
@@ -19,13 +20,13 @@ import {
   ListRenderItemInfo,
   View,
 } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
 import AppStorage from '../services/appStorage'
-import { Colors, Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { ChildListItem } from './childListItem.component'
-import { SettingsIcon, RefreshIcon } from './icon.component'
+import { RefreshIcon, SettingsIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
@@ -35,14 +36,14 @@ export const childenRouteOptions =
       ...defaultStackStyling(darkMode),
       title: translate('children.title'),
       headerLargeTitle: true,
-      headerLargeTitleHideShadow: true,
+      headerLargeTitleShadowVisible: false,
     }
   }
 
 export const Children = () => {
   const styles = useStyleSheet(themedStyles)
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
   const { api } = useApi()
   const { data: childList, status, reload } = useChildList()

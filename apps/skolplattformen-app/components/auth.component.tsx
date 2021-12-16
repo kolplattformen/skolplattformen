@@ -1,3 +1,4 @@
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
   StyleService,
@@ -14,7 +15,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { useTranslation } from '../hooks/useTranslation'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { fontSize } from '../styles/typography'
@@ -43,8 +43,8 @@ interface AuthProps {
 export const authRouteOptions = (): NativeStackNavigationOptions => {
   return {
     headerShown: false,
-    replaceAnimation: 'push',
-    stackAnimation: 'fade',
+    animationTypeForReplace: 'push',
+    animation: 'fade',
   }
 }
 

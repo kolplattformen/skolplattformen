@@ -1,4 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {
   Child as ChildType,
   NewsItem as NewsItemType,
@@ -8,7 +9,6 @@ import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'
 import React, { useEffect } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import { schema } from '../app.json'
 import {
   darkNavigationTheme,
@@ -44,7 +44,7 @@ import {
 export type RootStackParamList = {
   Login: undefined
   Children: undefined
-  Settings: undefined
+  Settings: { rand?: number } | undefined
   SettingsAppearance: undefined
   SettingsAppearanceTheme: undefined
   SettingsLicenses: undefined

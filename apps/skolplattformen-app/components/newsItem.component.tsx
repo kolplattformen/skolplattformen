@@ -1,4 +1,5 @@
 import { RouteProp } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useNewsDetails } from '@skolplattformen/hooks'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
@@ -12,7 +13,6 @@ import {
   ScrollView,
   View,
 } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
 import { Layout, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'
@@ -43,10 +43,7 @@ export const newsItemRouteOptions =
     const { child } = route.params
     return {
       ...defaultStackStyling(darkMode),
-      headerCenter: () => (
-        <NavigationTitle subtitle={studentName(child?.name)} />
-      ),
-      headerLargeTitle: false,
+      headerTitle: () => <NavigationTitle title={studentName(child?.name)} />,
     }
   }
 

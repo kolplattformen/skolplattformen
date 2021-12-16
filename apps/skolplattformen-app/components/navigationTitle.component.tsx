@@ -19,7 +19,7 @@ export const NavigationTitle = ({ title, subtitle }: NavigationTitleProps) => {
           {title}
         </Text>
       )}
-      <Text style={styles.subtitle}>{subtitle}</Text>
+      {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
     </View>
   )
 }

@@ -60,7 +60,6 @@
     "react-native-localize": "*",
     "react-native-markdown-display": "7.0.*",
     "react-native-modal-datetime-picker": "*",
-    "react-native-reanimated": "*",
     "react-native-restart": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
@@ -75,7 +74,15 @@
     "regenerator-runtime": "*",
     "tough-cookie": "*",
     "valtio": "*",
-    "yup": "*"
+    "yup": "*",
+    "@react-navigation/native-stack": "*",
+    "@formatjs/intl-getcanonicallocales": "*",
+    "@formatjs/intl-locale": "*",
+    "@formatjs/intl-numberformat": "*",
+    "@formatjs/intl-pluralrules": "*",
+    "@formatjs/intl-datetimeformat": "*",
+    "jest": "*",
+    "react-native-clean-project": "*"
   },
   "devDependencies": {
     "react-native-clean-project": "*"

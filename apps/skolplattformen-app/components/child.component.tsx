@@ -5,24 +5,24 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Icon } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
 import { StyleProp, TextProps } from 'react-native'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import { defaultStackStyling } from '../design/navigationThemes'
+import { useFeature } from '../hooks/useFeature'
 import { studentName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { Calendar } from './calendar.component'
 import { ChildProvider } from './childContext.component'
+import { Classmates } from './classmates.component'
 import { Menu } from './menu.component'
 import { RootStackParamList } from './navigation.component'
 import { NavigationTitle } from './navigationTitle.component'
 import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
-import { Classmates } from './classmates.component'
 import { TabBarLabel } from './tabBarLabel.component'
-import { useFeature } from '../hooks/useFeature'
 
 type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
@@ -95,35 +95,44 @@ const TabNavigator = ({
       <Screen
         name="News"
         component={NewsScreen}
-        options={{ title: translate('navigation.news') }}
+        options={{ title: translate('navigation.news'), headerShown: false }}
       />
     )}
     {screenSettings.NOTIFICATIONS_SCREEN && (
       <Screen
         name="Notifications"
         component={NotificationsScreen}
-        options={{ title: translate('navigation.notifications') }}
+        options={{
+          title: translate('navigation.notifications'),
+          headerShown: false,
+        }}
       />
     )}
     {screenSettings.CALENDER_SCREEN && (
       <Screen
         name="Calendar"
         component={CalendarScreen}
-        options={{ title: translate('navigation.calender') }}
+        options={{
+          title: translate('navigation.calender'),
+          headerShown: false,
+        }}
       />
     )}
     {screenSettings.MENU_SCREEN && (
       <Screen
         name="Menu"
         component={MenuScreen}
-        options={{ title: translate('navigation.menu') }}
+        options={{ title: translate('navigation.menu'), headerShown: false }}
       />
     )}
     {screenSettings.CLASSMATES_SCREEN && (
       <Screen
         name="Classmates"
         component={ClassmatesScreen}
-        options={{ title: translate('navigation.classmates') }}
+        options={{
+          title: translate('navigation.classmates'),
+          headerShown: false,
+        }}
       />
     )}
   </Navigator>
@@ -162,7 +171,7 @@ export const childRouteOptions =
 
     return {
       ...defaultStackStyling(darkMode),
-      headerCenter: () => (
+      headerTitle: () => (
         <NavigationTitle
           title={getHeaderTitle(route)}
           subtitle={studentName(child?.name)}

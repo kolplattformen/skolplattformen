@@ -1,4 +1,5 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { useUser } from '@skolplattformen/hooks'
 import {
   Button,
@@ -14,7 +15,6 @@ import Personnummer from 'personnummer'
 import React, { useCallback } from 'react'
 import { View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
-import { NativeStackNavigationOptions } from 'react-native-screens/native-stack'
 import * as Yup from 'yup'
 import { defaultStackStyling } from '../design/navigationThemes'
 import usePersonalStorage from '../hooks/usePersonalStorage'
@@ -48,7 +48,7 @@ export const absenceRouteOptions =
     const child = route.params.child
     return {
       ...defaultStackStyling(darkMode),
-      headerCenter: () => (
+      headerTitle: () => (
         <NavigationTitle
           title={translate('abscense.title')}
           subtitle={studentName(child?.name)}
@@ -191,9 +191,6 @@ const Absence = () => {
                     confirmTextIOS={translate('general.confirm')}
                     date={moment(values.startTime).toDate()}
                     isVisible={values.displayStartTimePicker}
-                    headerTextIOS={translate(
-                      'abscense.selectAbscenseStartTime'
-                    )}
                     locale="sv-SE"
                     maximumDate={maximumDate.toDate()}
                     minimumDate={minumumDate.toDate()}
@@ -225,7 +222,6 @@ const Absence = () => {
                     confirmTextIOS={translate('general.confirm')}
                     date={moment(values.endTime).toDate()}
                     isVisible={values.displayEndTimePicker}
-                    headerTextIOS={translate('abscense.selectAbscenseEndTime')}
                     // Todo fix this
                     locale="sv-SE"
                     maximumDate={maximumDate.toDate()}

@@ -26,28 +26,15 @@
       }
     ]
   },
-  "projects": {
-    "api-skolplattformen": {
-      "tags": []
-    },
-    "api-hjarntorget": {
-      "tags": []
-    },
-    "api": {
-      "tags": []
-    },
-    "api-test-app": {
-	    "tags": []
-	  },
-    "curriculum": {
-      "tags": []
-    },
-    "hooks": {
-      "tags": []
-    },
-    "skolplattformen-app": {
-      "tags": [],
-       "implicitDependencies": ["api-skolplattformen", "api-hjarntorget", "api",  "hooks", "curriculum"]
+  "defaultProject": "skolplattformen-app",
+  "cli": {
+    "defaultCollection": "@nrwl/react-native"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
     }
   }
 }

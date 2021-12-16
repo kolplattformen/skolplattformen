@@ -105,8 +105,7 @@ const overides = {
 }
 
 export const toMarkdown = (html?: string): string => {
-
-  if(html?.length == 0) return ''
+  if (html?.length == 0) return ''
 
   const rearranged = rearrangeWhitespace(html)
   const trimmed = clean(rearranged)
