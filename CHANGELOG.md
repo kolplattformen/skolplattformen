@@ -1,3 +1,10 @@
+# [2.11.0](https://github.com/kolplattformen/skolplattformen/compare/v2.10.2...v2.11.0) (2021-12-16)
+
+
+### Features
+
+* 🎸 bump to RN 0.66 + upgrade dependencies ([#521](https://github.com/kolplattformen/skolplattformen/issues/521)) ([f05ff64](https://github.com/kolplattformen/skolplattformen/commit/f05ff646870c441717ca23f7fbe17a931c3ad452))
+
 ## [2.10.2](https://github.com/kolplattformen/skolplattformen/compare/v2.10.1...v2.10.2) (2021-12-11)
 
 
