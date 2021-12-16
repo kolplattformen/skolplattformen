@@ -1,9 +1,13 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
+  displayName: 'api-hjarntorget',
+  preset: 'react-native',
+  resolver: '@nrwl/jest/plugins/resolver',
+  moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
+  setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
   transform: {
-    '.(ts|tsx)': 'ts-jest',
+    '\\.(js|ts|tsx)$': require.resolve('react-native/jest/preprocessor.js'),
+    '^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp)$': require.resolve(
+      'react-native/jest/assetFileTransformer.js'
+    ),
   },
-  testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
-  moduleFileExtensions: ['ts', 'tsx', 'js'],
 }
