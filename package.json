@@ -99,7 +99,7 @@
     "@testing-library/jest-native": "4.0.4",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",
-    "@testing-library/react-native": "9.0.0",
+    "@testing-library/react-native": "^8.0.0",
     "@types/base-64": "^1.0.0",
     "@types/he": "^1.1.1",
     "@types/i18n-js": "^3.8.2",
