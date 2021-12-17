@@ -1,3 +1,13 @@
+## [2.11.1](https://github.com/kolplattformen/skolplattformen/compare/v2.11.0...v2.11.1) (2021-12-17)
+
+
+### Bug Fixes
+
+* change jest config for api's ([e50b991](https://github.com/kolplattformen/skolplattformen/commit/e50b991f54443beaaf9d4390f6efe0ff111ca033))
+* fix failing tests in `api` ([57f38f5](https://github.com/kolplattformen/skolplattformen/commit/57f38f5b84537b35f13d0c4a6b72c7d2c80074b5))
+* fix test configuration ([e6f213a](https://github.com/kolplattformen/skolplattformen/commit/e6f213a89f84b1eb3aafdd3d5d0971aceb10dbca))
+* remove deps/lock file for vklass ([ffd73e8](https://github.com/kolplattformen/skolplattformen/commit/ffd73e8362edcebb2e0f02944c3ebf560e96b33d))
+
 # [2.11.0](https://github.com/kolplattformen/skolplattformen/compare/v2.10.2...v2.11.0) (2021-12-16)
 
 
