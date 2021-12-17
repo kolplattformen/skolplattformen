@@ -8,14 +8,14 @@ Give us a ⭐ if you appreciate what we do!
 [![Translation status](https://hosted.weblate.org/widgets/skolplattformen/-/svg-badge.svg)](https://hosted.weblate.org/engage/skolplattformen/)
 [![Build Status](https://app.bitrise.io/app/8e56bd02bc602da5/status.svg?token=h8gI2dB_jXLurj9EO_fXWw)](https://app.bitrise.io/app/8e56bd02bc602da5)
 
-We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians.
-P
+We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians.
+
 If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
-Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
+Check out [the changelog](CHANGELOG.md) to see what new features have been added and what bugs have been fixed.
 
 This main repository for the project contains the source code for both the [app](apps/skolplattformen-app) and its [website](https://skolplattformen.org/). \
 The sources for each can be found under [apps](apps) and [libs](libs).
-The respective README files there contain more detailed descriptions.
+The respective README files there contain more detailed information.
 
 <img src="apps/website/assets/img/screenshots/screenshot_login.png" width="200"> <img src="apps/website/assets/img/screenshots/screenshot_children.png" width="200">
 
@@ -54,7 +54,7 @@ The project consists of several apps and libraries inside [a NX](https://nx.dev/
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
-Our main goal with the app is to make it as fast and easy to use as possible. \
+Our main goal with the app is to make it as fast and easy to use as possible.
 
 We're starting small, with more features being added over time.
 
@@ -71,7 +71,7 @@ For more information, check out the [source code](apps/website).
 
 #### api
 
-The base for all api implementations
+The base for all api implementations.
 
 #### api-hjarntorget
 
@@ -83,23 +83,23 @@ The implementation for the school platform Vklass.
 
 #### api-skolplattformen
 
-By not having to worry about the complex nature of the official API, the app becomes light-weight. \
+By not having to worry about the complex nature of the official API, the app becomes lightweight. \
 It also makes it easier for others to develop their own applications for the Skolplattformen API.
 
 **Pro tip:** If you don't want the API to make requests to the back-end, you can turn on _fake mode_ to return static data instead. \
 Do so by logging in using 12121212121212 or 1212121212 as your personal identity number.
-Check out the documentation [here](libs/api-skolplattformen).
+[Check out the api documentation](libs/api-skolplattformen).
 
 #### curriculum
 
-Translations of curriculum codes (sv: ämneskoder på schemat) to clear text descriptions
+Translations of curriculum codes (sv: ämneskoder på schemat) to understandable text descriptions.
 
 #### hooks
 
 To make it easier to use the the api in the app, we also created a set of React hooks.
-Check out the documentation [here](libs/hooks).
+[Check out the hooks documentation](libs/hooks).
 
-## Getting started with Development
+## Getting started with development
 
 To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
 
@@ -172,7 +172,8 @@ _Working together leverages available skills and experience in improving the pro
 
 ## Money
 
-Even if we definitely stand by our claim that libre software doesn't mean gratis, we have now offered it free of charge on both the Apple App Store and on Google Play. With this different model, you can extend your appreciation to all our contributors. Send some köttbullar for the kids through voluntary donations on [https://patreon.com/oppnaskolplattformen](https://patreon.com/oppnaskolplattformen) ❤️.
+We stand by our claim that libre software does not mean gratis, and so our app is available for a low fee on the [Apple App Store](https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen-app/id1543853468) and on [Google Play](https://play.google.com/store/apps/details?id=org.skolplattformen.app). With this financing model, you can extend your appreciation to all our contributors. \
+You can also send some köttbullar for the kids through voluntary donations on [https://patreon.com/oppnaskolplattformen](https://patreon.com/oppnaskolplattformen) ❤️.
 
 ## Disclaimer
 
