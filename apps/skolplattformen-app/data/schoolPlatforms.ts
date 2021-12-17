@@ -9,13 +9,13 @@ import initSkolplattformen, {
 export const schoolPlatforms = [
   {
     id: 'stockholm-skolplattformen',
-    displayName: 'Stockholm stad (Skolplattformen)',
+    displayName: 'Stockholms stad (Skolplattformen)',
     api: initSkolplattformen(fetch as any, CookieManager),
     features: featuresSkolPlattformen,
   },
   {
     id: 'goteborg-hjarntorget',
-    displayName: 'Göteborg stad (Hjärntorget)',
+    displayName: 'Göteborgs Stad (Hjärntorget)',
     api: initHjarntorget(fetch as any, CookieManager),
     features: featuresHjarntorget,
   },
