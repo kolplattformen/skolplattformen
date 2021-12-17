@@ -12,7 +12,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api-skolplattformen"],
+      "outputs": ["coverage/libs/api-vklass"],
       "options": {
         "jestConfig": "libs/api-vklass/jest.config.js",
         "passWithNoTests": true

@@ -1,9 +1,6 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  transform: {
-    '.(ts|tsx)': 'ts-jest',
-  },
-  testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
-  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  displayName: 'api',
+  resolver: '@nrwl/jest/plugins/resolver',
+  moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
+  setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
 }
