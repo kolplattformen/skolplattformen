@@ -5,7 +5,6 @@ const team = [
   { name: 'Christian Landgren', twitter: 'landgren' },
   { name: 'Erik Hellman', twitter: 'erikhellman' },
   { name: 'Johan Öbrink', twitter: 'johanobrink' },
-  { name: 'Rickard Natt och Dag', twitter: 'rnattochdag' },
   { name: 'Viktor Sarström', twitter: 'viktorsarstrom' },
   { name: 'Kajetan Kazimierczak', twitter: 'kajetanek' },
   { name: 'Jonathan Edenström', twitter: 'edenstroem' },

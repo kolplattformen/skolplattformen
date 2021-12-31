@@ -186,7 +186,6 @@ If you're offended by this initiative, rest assured there is no reason to be —
 - [Christian Landgren](https://github.com/irony)
 - [Johan Öbrink](https://github.com/JohanObrink)
 - [Erik Hellman](https://github.com/ErikHellman)
-- [Rickard Natt och Dag](https://github.com/believer)
 - [Viktor Sarström](https://github.com/viktorlarsson)
 - [Andreas Eriksson](https://github.com/whyer)
 - [Kajetan Kazimierczak](https://github.com/kajetan-kazimierczak)
