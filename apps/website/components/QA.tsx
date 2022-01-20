@@ -280,7 +280,7 @@ const QA = () => {
           satsar mycket på att så snabbt som möjligt fixa de saker som dyker
           upp. För att få lite ordning så försöker vi samla alla buggar och
           önskemål på samma ställe, Github.{' '}
-          <Link.External href="https://github.com/kolplattformen/skolplattformen-app/issues">
+          <Link.External href="https://github.com/kolplattformen/skolplattformen/issues">
             Klicka här
           </Link.External>{' '}
           för att se vilka funktioner och buggar vi redan har tagit emot och
