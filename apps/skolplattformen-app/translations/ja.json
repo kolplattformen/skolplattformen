@@ -12,7 +12,8 @@
         "title": "不在を報告する",
         "selectAbscenseEndTime": "終了時間を選択します",
         "selectAbscenseStartTime": "開始時間を選択します",
-        "startTime": "開始時間"
+        "startTime": "開始時間",
+        "childsPersonalNumber": "子供の個人識別番号"
     },
     "abbrevations": {
         "upperSecondarySchool": "ギムナジウム",
