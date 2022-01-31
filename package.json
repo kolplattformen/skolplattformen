@@ -1,6 +1,6 @@
 {
   "name": "skolplattformen",
-  "version": "2.11.2",
+  "version": "2.11.3",
   "license": "MIT",
   "scripts": {
     "start": "nx start",

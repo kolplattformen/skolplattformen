@@ -1,3 +1,10 @@
+## [2.11.3](https://github.com/kolplattformen/skolplattformen/compare/v2.11.2...v2.11.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* 🐛 Hide lunch in timetable if not showing current week ([#613](https://github.com/kolplattformen/skolplattformen/issues/613)) ([a40af3e](https://github.com/kolplattformen/skolplattformen/commit/a40af3e94d236bd61272319f0b1e8e5e19cd3a2c)), closes [#599](https://github.com/kolplattformen/skolplattformen/issues/599)
+
 ## [2.11.2](https://github.com/kolplattformen/skolplattformen/compare/v2.11.1...v2.11.2) (2022-01-31)
 
 
