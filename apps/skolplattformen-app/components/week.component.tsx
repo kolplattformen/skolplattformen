@@ -121,7 +121,17 @@ export const Week = ({ child }: WeekProps) => {
     year,
     LanguageService.getLanguageCode()
   )
-  const { data: menu } = useMenu(child)
+  let { data: menu } = useMenu(child)
+
+  // Hide menu if we want to show next week but it is not monday yet.
+  // The menu for next week is not available until monday
+  const currentDate = moment()
+  const shouldShowLunchMenu =
+    menu[displayDate.isoWeekday() - 1] &&
+    !(displayDate.isoWeekday() === 1 && currentDate.isoWeekday() !== 1)
+  if (!shouldShowLunchMenu) {
+    menu = []
+  }
 
   const styles = useStyleSheet(themedStyles)
 

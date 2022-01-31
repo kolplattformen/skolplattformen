@@ -82,7 +82,8 @@
     "@formatjs/intl-pluralrules": "*",
     "@formatjs/intl-datetimeformat": "*",
     "jest": "*",
-    "react-native-clean-project": "*"
+    "react-native-clean-project": "*",
+    "mockdate": "*"
   },
   "devDependencies": {
     "react-native-clean-project": "*"
