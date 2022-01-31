@@ -1,3 +1,10 @@
+## [2.11.2](https://github.com/kolplattformen/skolplattformen/compare/v2.11.1...v2.11.2) (2022-01-31)
+
+
+### Bug Fixes
+
+* 🐛 translations for curriculum ([#614](https://github.com/kolplattformen/skolplattformen/issues/614)) ([93c1c2d](https://github.com/kolplattformen/skolplattformen/commit/93c1c2d0b0831b44d20991be270172caccce195c))
+
 ## [2.11.1](https://github.com/kolplattformen/skolplattformen/compare/v2.11.0...v2.11.1) (2021-12-17)
 
 
