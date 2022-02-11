@@ -17,7 +17,7 @@ export interface FetcherOptions {
 }
 
 export interface Fetcher {
-  (name: string, url: string, init?: RequestInit): Promise<Response>
+  (name: string, url: string, init?: RequestInit, childId?: string): Promise<Response>
 }
 
 export interface Recorder {

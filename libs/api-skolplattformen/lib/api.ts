@@ -32,6 +32,7 @@ import * as html from 'node-html-parser'
 import * as fake from './fakeData'
 import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
 import * as parse from './parse/index'
+import queueFetcherWrapper from './queueFetcherWrapper'
 import * as routes from './routes'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
@@ -77,7 +78,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     options?: FetcherOptions
   ) {
     super()
-    this.fetch = wrap(fetch, options)
+    this.fetch = queueFetcherWrapper(wrap(fetch, options), (childId) => this.selectChildById(childId))
     this.cookieManager = cookieManager
     this.headers = {}
   }
@@ -559,7 +560,32 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     return parse.timetable(json, year, week, lang)
   }
 
+  public async selectChild(child : EtjanstChild): Promise<EtjanstChild> {
+    const response = await this.selectChildById(child.id)
 
+    const data = await response.json()
+    return parse.child(parse.etjanst(data))
+  }
+
+  private async selectChildById(childId: string) {
+    const requestInit = this.getRequestInit({
+      method: 'POST',
+      headers: {
+        host: 'etjanst.stockholm.se',
+        accept: 'application/json, text/plain, */*',
+        'accept-Encoding': 'gzip, deflate',
+        'content-Type': 'application/json;charset=UTF-8',
+        origin: 'https://etjanst.stockholm.se',
+        referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
+      },
+      body: JSON.stringify({
+        id: childId,
+      }),
+    })
+
+    const response = await this.fetch('selectChild', routes.selectChild, requestInit)
+    return response
+  }
 
   public async logout() {
     this.isFake = false
