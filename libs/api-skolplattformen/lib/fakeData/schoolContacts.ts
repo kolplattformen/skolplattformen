@@ -10,38 +10,38 @@ const schoolContactData = new Map<string, SchoolContact[]>([
     child1.id, [
       {
         title: "Expedition",
-        name: null,
+        name: undefined,
         phone: "508 000 00",
         email: "",
         schoolName: "Vallaskolan",
-        className: null,
+        className: '',
       },
       {
         title: "Rektor",
         name: "Alvar Sträng",
         phone: "08-50800001",
         email: "alvar.strang@edu.stockholm.se",
-        schoolName: null,
-        className: null,
+        schoolName: '',
+        className: '',
       }
   ]],
   [
     child2.id, [
     {
       title: "Expedition",
-      name: null,
+      name: undefined,
       phone: "508 000 00",
       email: "",
       schoolName: "Vallaskolan",
-      className: null,
+      className: '',
     },
     {
       title: "Rektor",
       name: "Alvar Sträng",
       phone: "08-50800001",
       email: "alvar.strang@edu.stockholm.se",
-      schoolName: null,
-      className: null,
+      schoolName: '',
+      className: '',
     }
 ]]
 ])
