@@ -1,4 +1,3 @@
-import { child } from './parse/children';
 import {
   Api,
   AuthTicket,
@@ -79,7 +78,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     options?: FetcherOptions
   ) {
     super()
-    this.fetch = queueFetcherWrapper(wrap(fetch, options), (childId) => this.selectChildById(childId))
+    this.fetch = wrap(fetch, options)
     this.cookieManager = cookieManager
     this.headers = {}
   }
@@ -252,7 +251,15 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     }
 
     const data = await response.json()
-    return parse.children(data)
+
+    const parsed = parse.children(data)
+    const useSpecialQueueModeForFSChildren = parsed.some((c) => (c.status || '').includes('FS'))
+
+    if(useSpecialQueueModeForFSChildren) {
+      this.fetch = queueFetcherWrapper(this.fetch, (childId) => this.selectChildById(childId))
+    }
+
+    return parsed
   }
 
   public async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {

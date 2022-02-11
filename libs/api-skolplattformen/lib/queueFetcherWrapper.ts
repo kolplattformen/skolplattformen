@@ -5,7 +5,7 @@ import {Fetcher, RequestInit, Response } from '@skolplattformen/api'
 export default function queueFetcherWrapper(fetch: Fetcher,
   changeChildFunc: ((childId: string) => Promise<Response>)) : Fetcher {
   const queue = new QueueFetcher(changeChildFunc)
-  queue.verboseDebug = true
+  queue.verboseDebug = false
 
   return async (name: string, url: string, init: RequestInit = { headers: {} }, childId? : string)
   : Promise<Response> => {
