@@ -134,14 +134,13 @@ export default class QueueFetcher {
     const { id: childId, queue } = queueToRun
     this.debug('About to run', childId, queue.getQueueInfo())
 
+
     if (this.lastChildId === childId) {
       this.debug('Child already selected, skipping select call')
     } else {
       this.debug('Initiating change child')
       await this.changeChildFunc(childId)
       this.lastChildId = childId
-      this.debug('Waiting a while...')
-      await delay(5000)
       this.debug('Change child done')
     }
 

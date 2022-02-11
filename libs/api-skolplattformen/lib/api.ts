@@ -1,3 +1,4 @@
+import { child } from './parse/children';
 import {
   Api,
   AuthTicket,
@@ -259,7 +260,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     const url = routes.calendar(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('calendar', url, session)
+    const response = await this.fetch('calendar', url, session, child.id)
     const data = await response.json()
     return parse.calendar(data)
   }
@@ -326,7 +327,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     const url = routes.news(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('news', url, session)
+    const response = await this.fetch('news', url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -359,7 +360,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     }
     const url = routes.newsDetails(child.id, item.id)
     const session = this.getRequestInit()
-    const response = await this.fetch(`news_${item.id}`, url, session)
+    const response = await this.fetch(`news_${item.id}`, url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -374,7 +375,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     if (menuService === 'rss') {
       const url = routes.menuRss(child.id)
       const session = this.getRequestInit()
-      const response = await this.fetch('menu-rss', url, session)
+      const response = await this.fetch('menu-rss', url, session, child.id)
 
       this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -384,7 +385,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     const url = routes.menuList(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('menu-list', url, session)
+    const response = await this.fetch('menu-list', url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -395,7 +396,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   private async getMenuChoice(child: EtjanstChild): Promise<string> {
     const url = routes.menuChoice(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('menu-choice', url, session)
+    const response = await this.fetch('menu-choice', url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
