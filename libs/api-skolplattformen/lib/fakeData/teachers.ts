@@ -6,15 +6,15 @@ export const teachers = (child: Child): Teacher[] => teacherData.get(child.id) ?
 const [child1,child2] = children()
 
 const teacherData = new Map<string, Teacher[]>([
-  [  
+  [
     child1.id, [
       {
         id: 15662220,
         firstname: "Cecilia",
-        sisId: null,
+        sisId: '',
         lastname: "Test",
         email: "cecilia.test@edu.stockholm.se",
-        phoneWork: null,
+        phoneWork: undefined,
         active: true,
         status: " S",
         timeTableAbbreviation: 'CTE',
@@ -23,7 +23,7 @@ const teacherData = new Map<string, Teacher[]>([
         id: 15662221,
         firstname: "Anna",
         lastname: "Test",
-        sisId: null,
+        sisId: '',
         email: "anna.test@edu.stockholm.se",
         phoneWork: '08000000',
         active: true,
@@ -34,8 +34,8 @@ const teacherData = new Map<string, Teacher[]>([
         id: 15662221,
         firstname: "Greta",
         lastname: "Test",
-        sisId: null,
-        email: null,
+        sisId: '',
+        email: undefined,
         phoneWork: '08000001',
         active: true,
         status: " F",
@@ -47,10 +47,10 @@ const teacherData = new Map<string, Teacher[]>([
     {
       id: 15662220,
       firstname: "Cecilia",
-      sisId: null,
+      sisId: '',
       lastname: "Test",
       email: "cecilia.test@edu.stockholm.se",
-      phoneWork: null,
+      phoneWork: undefined,
       active: true,
       status: " S",
       timeTableAbbreviation: 'CTE',
@@ -59,7 +59,7 @@ const teacherData = new Map<string, Teacher[]>([
       id: 15662221,
       firstname: "Anna",
       lastname: "Test",
-      sisId: null,
+      sisId: '',
       email: "anna.test@edu.stockholm.se",
       phoneWork: '08000000',
       active: true,
@@ -70,8 +70,8 @@ const teacherData = new Map<string, Teacher[]>([
       id: 15662221,
       firstname: "Greta",
       lastname: "Test",
-      sisId: null,
-      email: null,
+      sisId: '',
+      email: undefined,
       phoneWork: '08000001',
       active: true,
       status: " F",

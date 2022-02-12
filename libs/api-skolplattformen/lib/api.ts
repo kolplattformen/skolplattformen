@@ -32,6 +32,7 @@ import * as html from 'node-html-parser'
 import * as fake from './fakeData'
 import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
 import * as parse from './parse/index'
+import queueFetcherWrapper from './queueFetcherWrapper'
 import * as routes from './routes'
 
 const fakeResponse = <T>(data: T): Promise<T> =>
@@ -250,7 +251,15 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     }
 
     const data = await response.json()
-    return parse.children(data)
+
+    const parsed = parse.children(data)
+    const useSpecialQueueModeForFSChildren = parsed.some((c) => (c.status || '').includes('FS'))
+
+    if(useSpecialQueueModeForFSChildren) {
+      this.fetch = queueFetcherWrapper(this.fetch, (childId) => this.selectChildById(childId))
+    }
+
+    return parsed
   }
 
   public async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
@@ -258,7 +267,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     const url = routes.calendar(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('calendar', url, session)
+    const response = await this.fetch('calendar', url, session, child.id)
     const data = await response.json()
     return parse.calendar(data)
   }
@@ -325,7 +334,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     const url = routes.news(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('news', url, session)
+    const response = await this.fetch('news', url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -358,7 +367,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     }
     const url = routes.newsDetails(child.id, item.id)
     const session = this.getRequestInit()
-    const response = await this.fetch(`news_${item.id}`, url, session)
+    const response = await this.fetch(`news_${item.id}`, url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -373,7 +382,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     if (menuService === 'rss') {
       const url = routes.menuRss(child.id)
       const session = this.getRequestInit()
-      const response = await this.fetch('menu-rss', url, session)
+      const response = await this.fetch('menu-rss', url, session, child.id)
 
       this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -383,7 +392,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     const url = routes.menuList(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('menu-list', url, session)
+    const response = await this.fetch('menu-list', url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -394,7 +403,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   private async getMenuChoice(child: EtjanstChild): Promise<string> {
     const url = routes.menuChoice(child.id)
     const session = this.getRequestInit()
-    const response = await this.fetch('menu-choice', url, session)
+    const response = await this.fetch('menu-choice', url, session, child.id)
 
     this.CheckResponseForCorrectChildStatus(response, child)
 
@@ -559,7 +568,32 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     return parse.timetable(json, year, week, lang)
   }
 
+  public async selectChild(child : EtjanstChild): Promise<EtjanstChild> {
+    const response = await this.selectChildById(child.id)
 
+    const data = await response.json()
+    return parse.child(parse.etjanst(data))
+  }
+
+  private async selectChildById(childId: string) {
+    const requestInit = this.getRequestInit({
+      method: 'POST',
+      headers: {
+        host: 'etjanst.stockholm.se',
+        accept: 'application/json, text/plain, */*',
+        'accept-Encoding': 'gzip, deflate',
+        'content-Type': 'application/json;charset=UTF-8',
+        origin: 'https://etjanst.stockholm.se',
+        referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
+      },
+      body: JSON.stringify({
+        id: childId,
+      }),
+    })
+
+    const response = await this.fetch('selectChild', routes.selectChild, requestInit)
+    return response
+  }
 
   public async logout() {
     this.isFake = false

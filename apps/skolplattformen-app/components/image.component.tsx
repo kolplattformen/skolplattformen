@@ -42,20 +42,23 @@ export const Image = ({
       if (!url) return
       const newHeaders = await api.getSessionHeaders(url)
 
+      /*
       console.log('[IMAGE] Getting image dimensions with headers', {
         debugImageName,
         newHeaders,
       })
-
+*/
       ImageBase.getSizeWithHeaders(
         url,
         newHeaders,
         (w, h) => {
+          /*
           console.log('[IMAGE] Received image dimensions', {
             debugImageName,
             w,
             h,
           })
+          */
           setDimensions({ width: w, height: h })
           setHeaders(newHeaders)
         },
