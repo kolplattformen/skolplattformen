@@ -1,5 +1,5 @@
 import AutoQueue from './autoQueue'
-import RoundRobinArray from './roundRobinArrray'
+import RoundRobinArray from './roundRobinArray'
 
 export interface QueueEntry {
   id : string
