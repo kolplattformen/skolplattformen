@@ -122,7 +122,7 @@ export default class QueueFetcher {
       return
     }
 
-    this.debug('Queue is not idle, wating for it ...')
+    this.debug('Queue is not idle, waiting for it ...')
 
     queueToPause.getQueueStatus().once('IDLE', async () => {
       this.debug('Got IDLE from queue')
