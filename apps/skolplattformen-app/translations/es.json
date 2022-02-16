@@ -56,7 +56,9 @@
             "cheap": "barato",
             "better": "mejor",
             "homemade": "artesanal",
-            "open": "abierto"
+            "open": "abierto",
+            "fast": "rápida",
+            "fun": "divertido"
         },
         "subtitle": "La alternativa {{word}}",
         "placeholder_SocialSecurityNumber": "Tu personnummer",

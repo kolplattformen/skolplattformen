@@ -44,7 +44,8 @@
         "a11y_image_two_boys": "Fotografia de duas pessoas a verem os seus telemóveis",
         "a11y_clear_social_security_input_field": "Limpar o campo do número de identificação pessoal",
         "chooseLoginMethod": "Escolha o método de autenticação",
-        "a11y_select_login_method": "Selecione o método de autenticação"
+        "a11y_select_login_method": "Selecione o método de autenticação",
+        "chooseSchoolPlatform": "Escolha a plataforma"
     },
     "abbrevations": {
         "compulsorySchool": "Escola primária / secundária inferior",
@@ -57,7 +58,9 @@
         "saveToCalenderError": "Algo correu mal",
         "saveToCalenderSuccess": "✔️ Guardado no calendário",
         "approveAccessToCalender": "Tem de autorizar o acesso ao seu calendário",
-        "saveToCalender": "Guardar no calendário"
+        "saveToCalender": "Guardar no calendário",
+        "emptyHeadline": "O calendário parece um pouco vazio",
+        "emptyText": "Não encontrei nada para mostrar"
     },
     "children": {
         "loadingErrorHeading": "Ups!",
@@ -79,7 +82,8 @@
         "title": "Öppna skolplattformen",
         "logoutAndClearPersonalData": "Sair e limpar dados pessoais",
         "cancel": "Cancelar",
-        "settings": "Configurações"
+        "settings": "Configurações",
+        "tomorrow": "Amanhã"
     },
     "language": {
         "changeLanguage": "Alterar idioma",
@@ -124,7 +128,8 @@
         "start": "Início",
         "end": "Fim",
         "lunch": "Almoço",
-        "gymBag": "Saco de ginástica"
+        "gymBag": "Saco de ginástica",
+        "week": "Semana"
     },
     "classmates": {
         "class": "Turma",
