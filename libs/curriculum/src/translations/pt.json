@@ -91,7 +91,14 @@
         "SPA": "Espanhol",
         "CES": "Checo",
         "TUR": "Turco",
-        "SPK": "Outro idioma"
+        "SPK": "Outro idioma",
+        "ACE": "Acenésico",
+        "ACH": "Acoli",
+        "AAR": "Afar, Danakil",
+        "AII": "Assírico, Novo arameico",
+        "AZE": "Azerbaijano",
+        "BEN": "Bengalês",
+        "BER": "Berbere"
     },
     "specialLanguages": {
         "SVA": "O sueco como segunda língua",
