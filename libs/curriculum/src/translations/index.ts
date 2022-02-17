@@ -19,6 +19,7 @@ const translations: Translations = {
   es: require('./es.json'),
   fr: require('./fr.json'),
   it: require('./it.json'),
+  ja: require('./ja.json'),
   la: require('./la.json'),
   nb_NO: require('./nb_NO.json'),
   pl: require('./pl.json'),
