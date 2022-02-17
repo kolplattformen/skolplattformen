@@ -1,3 +1,10 @@
+# [2.12.0](https://github.com/kolplattformen/skolplattformen/compare/v2.11.4...v2.12.0) (2022-02-17)
+
+
+### Features
+
+* 🎸 japanese in curriculum ([#617](https://github.com/kolplattformen/skolplattformen/issues/617)) ([1d1e871](https://github.com/kolplattformen/skolplattformen/commit/1d1e8713f4f2861e994158ff5830615e6d1e7727))
+
 ## [2.11.4](https://github.com/kolplattformen/skolplattformen/compare/v2.11.3...v2.11.4) (2022-02-16)
 
 
