@@ -1188,7 +1188,7 @@ luxon.DateTime)
 
 ### Features
 
-* 🎸 relase 1.4.2 ([8bea63f](https://github.com/kolplattformen/skolplattformen-app/commit/8bea63f75ce40215cd595e87b7d874e94a6cf821))
+* 🎸 release 1.4.2 ([8bea63f](https://github.com/kolplattformen/skolplattformen-app/commit/8bea63f75ce40215cd595e87b7d874e94a6cf821))
 * 🎸 release 1.5.3 ([2ce7f01](https://github.com/kolplattformen/skolplattformen-app/commit/2ce7f01c8d552ac6ecc86110e20aeaf2b15a7066))
 
 ## [1.1.3](https://github.com/kolplattformen/skolplattformen-app/compare/v1.1.2...v1.1.3) (2021-03-10)
