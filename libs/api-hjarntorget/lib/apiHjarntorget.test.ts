@@ -187,7 +187,7 @@ describe('api', () => {
   //         }))
   //         // 'confirm-signature-redirect'
   //         fetcherMock.mockReturnValueOnce(Promise.resolve({
-  //             text: Promise.resolve("some error occured")
+  //             text: Promise.resolve("some error occurred")
   //         }))
 
   //         const personalNumber = 'my personal number'
