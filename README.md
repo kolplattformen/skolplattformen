@@ -96,7 +96,7 @@ Translations of curriculum codes (sv: ämneskoder på schemat) to clear text des
 
 #### hooks
 
-To make it easier to use the the api in the app, we also created a set of React hooks.
+To make it easier to use the api in the app, we also created a set of React hooks.
 Check out the documentation [here](libs/hooks).
 
 ## Getting started with Development
