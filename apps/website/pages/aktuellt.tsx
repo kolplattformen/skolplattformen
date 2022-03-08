@@ -43,7 +43,7 @@ const timeout = (ms: number) =>
 const runOrTimeout = (fun: VoidCallback, ms: number) =>
   Promise.race([
     fun(),
-    timeout(ms).then(() => Promise.reject(new Error('Timout'))),
+    timeout(ms).then(() => Promise.reject(new Error('Timeout'))),
   ])
 
 export const getServerSideProps = async (): Promise<{
