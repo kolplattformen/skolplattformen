@@ -76,7 +76,7 @@ const Absence = () => {
     'childPersonalIdentityNumber'
   )
   const personalIdKey = `@childPersonalIdNumber.${child.id}`
-  const minumumDate = moment().hours(8).minute(0)
+  const minimumDate = moment().hours(8).minute(0)
   const maximumDate = moment().hours(17).minute(0)
   const styles = useStyleSheet(themedStyles)
 
@@ -193,7 +193,7 @@ const Absence = () => {
                     isVisible={values.displayStartTimePicker}
                     locale="sv-SE"
                     maximumDate={maximumDate.toDate()}
-                    minimumDate={minumumDate.toDate()}
+                    minimumDate={minimumDate.toDate()}
                     minuteInterval={10}
                     mode="time"
                     onConfirm={(date) => {
@@ -225,7 +225,7 @@ const Absence = () => {
                     // Todo fix this
                     locale="sv-SE"
                     maximumDate={maximumDate.toDate()}
-                    minimumDate={minumumDate.toDate()}
+                    minimumDate={minimumDate.toDate()}
                     minuteInterval={10}
                     mode="time"
                     onConfirm={(date) => {
