@@ -336,7 +336,7 @@
 * 🎸 API call retries and support for error reporting ([#5](https://github.com/kolplattformen/skolplattformen-app/issues/5)) ([9ed5df2](https://github.com/kolplattformen/skolplattformen-app/commit/9ed5df2e45e8d368d3d4df1c992a0901a512ff6a))
 * 🎸 Build, tag and release ([b71adc5](https://github.com/kolplattformen/skolplattformen-app/commit/b71adc57fbdd4ff4d6fe1b87e7afac90a9d6628c))
 * 🎸 cache busting ([5ce4ddd](https://github.com/kolplattformen/skolplattformen-app/commit/5ce4ddd9d04501a15ce37c9f3378e36b3f3dabfe))
-* 🎸 Cache prefixas med personnummer ([#8](https://github.com/kolplattformen/skolplattformen-app/issues/8)) ([fc146ea](https://github.com/kolplattformen/skolplattformen-app/commit/fc146ea7fc9f705b88bbc75a6cc01b6f2235bfaa))
+* 🎸 Cache prefixes med personnummer ([#8](https://github.com/kolplattformen/skolplattformen-app/issues/8)) ([fc146ea](https://github.com/kolplattformen/skolplattformen-app/commit/fc146ea7fc9f705b88bbc75a6cc01b6f2235bfaa))
 * 🎸 Classmates ([#14](https://github.com/kolplattformen/skolplattformen-app/issues/14)) ([a6ce6ea](https://github.com/kolplattformen/skolplattformen-app/commit/a6ce6ea9f6468ad5c1e26df4228706a1055e241a)), closes [#7](https://github.com/kolplattformen/skolplattformen-app/issues/7)
 * 🎸 Code cleanup, refactoring, linting and tests ([d0a0314](https://github.com/kolplattformen/skolplattformen-app/commit/d0a0314ae6f058c617227d28d738bff9fc85e966))
 * 🎸 Curriculum as peer dependency ([#122](https://github.com/kolplattformen/skolplattformen-app/issues/122)) ([e24a9b3](https://github.com/kolplattformen/skolplattformen-app/commit/e24a9b3c5e0d64a395e4b576975cc2b3e6832bab))
