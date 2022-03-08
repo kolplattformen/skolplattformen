@@ -65,7 +65,7 @@ const parseNativeLanguage: Parser = ({ categories, languages }, code) => {
 
   return {
     code,
-    category: categories.motherTounge,
+    category: categories.motherTongue,
     name: languages[language] || categories.unknown,
   }
 }
