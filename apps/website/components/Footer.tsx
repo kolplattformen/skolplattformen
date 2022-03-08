@@ -21,7 +21,7 @@ const Footer = () => {
             Skolplattformen utvecklas av föräldrar för föräldrar. Vill du hjälpa
             till? Kom till vår{' '}
             <Link.External href="https://github.com/kolplattformen">
-              Github
+              GitHub
             </Link.External>
             , där finns all källkod och även uppgifter att ta tag i, vi behöver
             hjälp med allt från illustrationer, UX, design och programmering. Vi
