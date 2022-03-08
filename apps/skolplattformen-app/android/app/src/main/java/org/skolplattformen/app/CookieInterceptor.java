@@ -36,7 +36,7 @@ class CookieInterceptor implements Interceptor {
     // seem to set one cookie per request. Some of the login calls in the api-hjarntorget lib
     // receives multiple `set-cookie` headers.
     String domain = chain.request().url().topPrivateDomain();
-    Log.d("Skolplattformen", "requseting resource on domain: " + domain);
+    Log.d("Skolplattformen", "requesting resource on domain: " + domain);
     if(domain == null || !domain.contains("goteborg.se") && !domain.contains("funktionstjanster.se")) {
       return chain.proceed(chain.request());
     }
