@@ -5,7 +5,7 @@
         "preSchool": "Preschool",
         "upperSecondarySchool": "Upper-secondary school"
     },
-    "abscense": {
+    "absence": {
         "endTime": "End time",
         "entireDay": "Whole day",
         "childsPersonalNumber": "Child's personal identity number",

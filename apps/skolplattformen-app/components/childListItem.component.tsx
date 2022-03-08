@@ -227,14 +227,14 @@ export const ChildListItem = ({
           <Button
             accessible
             accessibilityRole="button"
-            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
+            accessibilityLabel={`${child.name}, ${t('absence.title')}`}
             appearance="ghost"
             accessoryLeft={AlertIcon}
             status="primary"
             style={styles.absenceButton}
             onPress={() => navigation.navigate('Absence', { child })}
           >
-            {t('abscense.title')}
+            {t('absence.title')}
           </Button>
         </View>
       </View>

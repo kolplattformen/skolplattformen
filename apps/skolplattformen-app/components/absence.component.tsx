@@ -50,7 +50,7 @@ export const absenceRouteOptions =
       ...defaultStackStyling(darkMode),
       headerTitle: () => (
         <NavigationTitle
-          title={translate('abscense.title')}
+          title={translate('absence.title')}
           subtitle={studentName(child?.name)}
         />
       ),
@@ -60,8 +60,8 @@ export const absenceRouteOptions =
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
     personalIdentityNumber: Yup.string()
-      .required(translate('abscense.personalNumberMissing'))
-      .test('is-valid', translate('abscense.invalidPersonalNumber'), (value) =>
+      .required(translate('absence.personalNumberMissing'))
+      .test('is-valid', translate('absence.invalidPersonalNumber'), (value) =>
         value ? Personnummer.valid(value) : true
       ),
     isFullDay: Yup.bool().required(),
@@ -142,7 +142,7 @@ const Absence = () => {
           <View style={styles.wrap}>
             <View style={styles.field}>
               <Text style={styles.label}>
-                {translate('abscense.childsPersonalNumber')}
+                {translate('absence.childsPersonalNumber')}
               </Text>
               <Input
                 testID="personalIdentityNumberInput"
@@ -168,14 +168,14 @@ const Absence = () => {
                 checked={values.isFullDay}
                 onChange={(checked) => setFieldValue('isFullDay', checked)}
               >
-                {translate('abscense.entireDay')}
+                {translate('absence.entireDay')}
               </CheckBox>
             </View>
             {!values.isFullDay && (
               <View style={styles.partOfDay}>
                 <View style={styles.inputHalf}>
                   <Text style={styles.label}>
-                    {translate('abscense.startTime')}
+                    {translate('absence.startTime')}
                   </Text>
                   <Button
                     status="basic"
@@ -208,7 +208,7 @@ const Absence = () => {
                 <View style={styles.spacer} />
                 <View style={styles.inputHalf}>
                   <Text style={styles.label}>
-                    {translate('abscense.endTime')}
+                    {translate('absence.endTime')}
                   </Text>
                   <Button
                     status="basic"
