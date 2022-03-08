@@ -125,7 +125,7 @@ test('renders child in high school', () => {
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
   expect(
-    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+    screen.getByText(translate('abbreviations.upperSecondarySchool'))
   ).toBeTruthy()
 })
 
@@ -148,12 +148,12 @@ test('renders multiple children', () => {
 
   expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
   expect(
-    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+    screen.getByText(translate('abbreviations.upperSecondarySchool'))
   ).toBeTruthy()
 
   expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
   expect(
-    screen.getByText(translate('abbrevations.compulsorySchool'))
+    screen.getByText(translate('abbreviations.compulsorySchool'))
   ).toBeTruthy()
 })
 
@@ -214,9 +214,9 @@ test('handles multiple statuses for a child', () => {
   const screen = setup()
 
   var multipleStatusesRendered = `${translate(
-    'abbrevations.upperSecondarySchool'
-  )}, ${translate('abbrevations.compulsorySchool')}, ${translate(
-    'abbrevations.leisureTimeCentre'
+    'abbreviations.upperSecondarySchool'
+  )}, ${translate('abbreviations.compulsorySchool')}, ${translate(
+    'abbreviations.leisureTimeCentre'
   )}`
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
