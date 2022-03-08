@@ -197,7 +197,7 @@
 * 🎸 Merged with main, also added api to nx ([4f1f66f](https://github.com/kolplattformen/skolplattformen-app/commit/4f1f66fcbbf3682004e781d058ff43a7eb3b57ce))
 * 🎸 Started on provider for selecting platform + feature to ([1aaaeb6](https://github.com/kolplattformen/skolplattformen-app/commit/1aaaeb64e31531185c0ef75bff61c97f0cf942c4))
 * 🎸 Toggled class list in hjärntorget ([33440bc](https://github.com/kolplattformen/skolplattformen-app/commit/33440bcc32d0ea466662cdf167406b0dd503b251))
-* 🎸 wip feagture toggle ([1601c4f](https://github.com/kolplattformen/skolplattformen-app/commit/1601c4f83c75bc98ec1084725f9b126e871024b2))
+* 🎸 wip feature toggle ([1601c4f](https://github.com/kolplattformen/skolplattformen-app/commit/1601c4f83c75bc98ec1084725f9b126e871024b2))
 * 🎸 WIP Switch school platform ([916ebc5](https://github.com/kolplattformen/skolplattformen-app/commit/916ebc5e25b52eebf45a147f971356d8bd9e2e11))
 
 ## [2.2.1](https://github.com/kolplattformen/skolplattformen-app/compare/v2.2.0...v2.2.1) (2021-11-23)
