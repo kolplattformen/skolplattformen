@@ -168,8 +168,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       return { isAuthenticated: false }
     }
 
-    const retrivedUser = await currentUserResponse.json()
-    return { ...retrivedUser, isAuthenticated: true }
+    const retrievedUser = await currentUserResponse.json()
+    return { ...retrievedUser, isAuthenticated: true }
   }
 
   async getChildren(): Promise<(Skola24Child & EtjanstChild)[]> {
