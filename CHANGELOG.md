@@ -88,7 +88,7 @@
 
 ### Features
 
-* 🎸 bumped to 3.0.2 for new version releasea ([2af189e](https://github.com/kolplattformen/skolplattformen/commit/2af189ef0fb23723dae982382bee169e2c7ed8f6))
+* 🎸 bumped to 3.0.2 for new version releases ([2af189e](https://github.com/kolplattformen/skolplattformen/commit/2af189ef0fb23723dae982382bee169e2c7ed8f6))
 
 ## [2.7.3](https://github.com/kolplattformen/skolplattformen/compare/v2.7.2...v2.7.3) (2021-12-07)
 
