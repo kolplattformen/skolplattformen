@@ -1,1 +1,99 @@
-{}
+{
+    "abscense": {
+        "entireDay": "ทั้งวัน",
+        "childsPersonalNumber": "เลขบัตรประชาชนของลูก",
+        "invalidPersonalNumber": "เลขบัตรประชาชนผิด",
+        "personalNumberMissing": "เลขบัตรประชาชนหายไป"
+    },
+    "abbrevations": {
+        "preSchool": "อนุบาล",
+        "upperSecondarySchool": "มัธยมปลาย",
+        "compulsorySchool": "ประถม/มัธยมต้น"
+    },
+    "auth": {
+        "bankid": {
+            "OpenOnAnotherDevice": "เปิด BankID ในเครื่องอื่น",
+            "OpenOnThisDevice": "เปิด BankID ในเครื่องนี้",
+            "Waiting": "กำลังรอ BankID…"
+        },
+        "words": {
+            "cooler": "เจ๋งขึ้น",
+            "fast": "เร็ว",
+            "first": "แรก",
+            "free": "ฟรี",
+            "fun": "สนุก",
+            "imperfect": "ไม่สมบูรณ์",
+            "open": "โอเพ่น",
+            "better": "ดีกว่า",
+            "cheap": "ถูก",
+            "simple": "ง่าย"
+        },
+        "loginFailed": "เข้าสู่ระบบไม่ได้ กรุณาลองใหม่อีกครั้ง",
+        "subtitle": "ทางเลือกที่{{word}}",
+        "placeholder_SocialSecurityNumber": "เลขบัตรประชาชนของคุณ",
+        "a11y_change_language": "เลือกภาษา"
+    },
+    "language": {
+        "changeLanguageButton": "บันทึก",
+        "changeLanguage": "เปลี่ยนภาษา"
+    },
+    "navigation": {
+        "calender": "ปฏิทิน",
+        "news": "ข่าว",
+        "notifications": "การแจ้งเตือน",
+        "classmates": "เพื่อนร่วมชั้น",
+        "menu": "อาหารเที่ยง"
+    },
+    "general": {
+        "send": "ส่ง",
+        "cancel": "ยกเลิก",
+        "loading": "กำลังโหลด…",
+        "settings": "การตั้งค่า",
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "เลขบัตรประชาชน",
+        "tomorrow": "พรุ่งนี้",
+        "confirm": "ยืนยัน",
+        "changeLanguage": "เปลี่ยนภาษา"
+    },
+    "children": {
+        "title": "ลูกของคุณ",
+        "tryAgain": "ลองอีกครั้ง",
+        "noKids_title": "ไม่มีลูก"
+    },
+    "settings": {
+        "settings": "การตั้งค่า",
+        "language": "ภาษา",
+        "themeAuto": "อัตโนมัติ"
+    },
+    "contact": {
+        "email": "อีเมล",
+        "call": "โทร",
+        "sms": "ข้อความ",
+        "home": "ที่อยู่"
+    },
+    "themes": {
+        "dark": "มืด",
+        "light": "แสง"
+    },
+    "news": {
+        "noNewNewsItemsThisWeek": "อาทิตย์นี้ไม่มีข่าว",
+        "notificationTitle": "ข่าว: {{header}} ({{published}})",
+        "title": "ข่าวจาก Skolplattformen",
+        "search": {
+            "placeholder": "ค้นหาในข่าว…"
+        }
+    },
+    "schedule": {
+        "week": "อาทิตย์",
+        "lunch": "อาหารเที่ยง"
+    },
+    "classmates": {
+        "child": "ลูก"
+    },
+    "notifications": {
+        "notificationTitle": "การแจ้งเตือน: {{message}} ({{dateCreated}})"
+    },
+    "calender": {
+        "saveToCalender": "บันทึกไว้ในปฏิทิน"
+    }
+}
