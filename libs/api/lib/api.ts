@@ -1,7 +1,7 @@
 import { Language } from '@skolplattformen/curriculum'
 import { EventEmitter } from 'events'
 import { DateTime } from 'luxon'
-import { LoginStatusChecker } from './loginStatus'
+import { LoginStatusChecker, FrejaLoginStatusChecker } from './loginStatus'
 import {
   CalendarItem,
   Classmate,
@@ -22,6 +22,7 @@ export interface Api extends EventEmitter {
   isLoggedIn: boolean
   getPersonalNumber(): string | undefined
   login(personalNumber?: string): Promise<LoginStatusChecker>
+  loginFreja(): Promise<FrejaLoginStatusChecker>
   setSessionCookie(sessionCookie: string): Promise<void>
   getSessionHeaders(url: string): Promise<{ [index: string]: string }>
   getUser(): Promise<User>

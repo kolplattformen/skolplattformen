@@ -2,7 +2,7 @@ import wrap from './fetcher'
 
 export { toMarkdown } from './parseHtml'
 export * from './types'
-export { LoginStatusChecker } from './loginStatus'
+export { LoginStatusChecker, FrejaLoginStatusChecker } from './loginStatus'
 export { Api } from './api'
 export { FetcherOptions, Fetcher } from './fetcher'
 export {

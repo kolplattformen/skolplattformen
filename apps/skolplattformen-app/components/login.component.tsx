@@ -54,6 +54,7 @@ const LoginMethods: Logins = {
   BANKID_SAME_DEVICE: 0,
   BANKID_ANOTHER_DEVICE: 2,
   TEST_USER: 3,
+
 }
 
 export const Login = () => {
@@ -86,6 +87,7 @@ export const Login = () => {
     { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
     { id: 'otherdevice', title: t('auth.bankid.OpenOnAnotherDevice') },
     { id: 'testuser', title: t('auth.loginAsTestUser') },
+    { id: 'freja', title: t('auth.freja.OpenOnThisDevice') },
   ] as const
 
   const loginHandler = async () => {
@@ -120,12 +122,40 @@ export const Login = () => {
     }
   }
 
+  const openFreja = (token:string) => {
+    try {
+      const originAppScheme = encodeURIComponent(schema);
+      const frejaUrl =
+        Platform.OS === 'ios' 
+          ? `${token}&originAppScheme=${originAppScheme}`
+          : `${token}&originAppScheme=${originAppScheme}`
+      Linking.openURL(frejaUrl)
+    } catch (err) {
+      setError(t('auth.freja.OpenManually'))
+    }
+  }
+
   const isUsingPersonalIdNumber =
     loginMethodId === 'otherdevice' ||
     (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
 
   const startLogin = async (text: string) => {
-    if (loginMethodId === 'thisdevice' || loginMethodId === 'otherdevice') {
+
+    if(loginMethodId === 'freja'){
+      showModal(true)
+      const status = await api.loginFreja();
+      setCancelLoginRequest(() => () => status.cancel())
+      openFreja(status.token)
+      status.on('STARTED', () => console.log('Freja eID app not yet opened'))
+      status.on('DELIVERED_TO_MOBILE', () => console.log('Freja eID app is open'))
+      status.on('CANCELLED', () => { 
+        console.log('User pressed cancel in Freja eID')
+        showModal(false)
+      })
+      status.on('APPROVED', () => console.log('Freja eID ok'))
+    }
+
+    else if (loginMethodId === 'thisdevice' || loginMethodId === 'otherdevice') {
       showModal(true)
 
       let ssn

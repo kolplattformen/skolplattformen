@@ -15,3 +15,12 @@ export interface LoginStatusChecker {
   ) => LoginStatusChecker
   cancel: () => Promise<void>
 }
+
+export interface FrejaLoginStatusChecker {
+  token: string
+  on: (
+    event: 'APPROVED' | 'STARTED' | 'DELIVERED_TO_MOBILE' | 'CANCELLED',
+    listener: (...args: any[]) => void
+  ) => FrejaLoginStatusChecker
+  cancel: () => Promise<void>
+}

@@ -8,6 +8,7 @@ import {
   Fetch,
   Fetcher,
   FetcherOptions,
+  FrejaLoginStatusChecker,
   LoginStatusChecker,
   MenuItem,
   NewsItem,
@@ -31,6 +32,7 @@ import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
 import * as fake from './fakeData'
 import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
+import { checkStatus as checkFrejaStatus } from './frejaLoginStatusChecker'
 import * as parse from './parse/index'
 import queueFetcherWrapper from './queueFetcherWrapper'
 import * as routes from './routes'
@@ -166,6 +168,45 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     return status
   }
 
+  public async loginFreja(): Promise<FrejaLoginStatusChecker> {
+
+    const loginUrl = routes.frejaLogin
+    const loginResponse = await this.fetch('auth-ticket', loginUrl)
+
+
+
+    // if (!ticketResponse.ok) {
+    //   throw new Error(
+    //     `Server Error [${ticketResponse.status}] [${ticketResponse.statusText}] [${ticketUrl}]`
+    //   )
+    // }
+
+    const appSwitchUrl: string = await loginResponse.text()
+    const cleanAppSwitchUrl = this.cleanFrejaAppSwitchUrl(appSwitchUrl)
+
+    console.log('getting freja login url: ' + cleanAppSwitchUrl)
+
+    const status = checkFrejaStatus(this.fetch, cleanAppSwitchUrl)
+    status.on('APPROVED', async () => {
+      //await this.retrieveFrejaSessionCookie()
+      await this.retrieveXsrfToken()
+
+      this.isLoggedIn = true
+      this.emit('login')
+    })
+    // status.on('ERROR', () => {
+    //   this.personalNumber = undefined
+    // })
+
+    return status
+  }
+
+  private cleanFrejaAppSwitchUrl(url: string): string {
+    const parts = url.split('&')
+    return parts[0]
+  }
+
+
   public async setSessionCookie(sessionCookie: string): Promise<void> {
     // Manually set cookie in this call and let the cookieManager
     // handle it from here
@@ -190,9 +231,32 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   }
 
   private async retrieveSessionCookie(): Promise<void> {
+    
     const url = routes.loginCookie
     await this.fetch('login-cookie', url)
   }
+
+  private async retrieveFrejaSessionCookie(): Promise<void> {
+    const url = routes.frejaLoginCookie
+    const session = await this.getSession(url, {
+      redirect: 'manual', 
+    })
+    //const session = this.getRequestInit()
+    
+   
+console.log(JSON.stringify(session))    
+
+    const response = await  this.fetch('freja-login-return-url', url, session)
+    console.log(response.status)
+    console.log(response.text())
+
+    console.log(JSON.stringify(response))    
+
+    const response2 = await this.fetch('freja-login-cookie', url, session)
+    console.log(response2.status)
+    console.log(response2.text())
+  }
+
 
   private async retrieveXsrfToken(): Promise<void> {
     const url = routes.hemPage
