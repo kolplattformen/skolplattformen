@@ -27,12 +27,15 @@
             "better": "ดีกว่า",
             "cheap": "ถูก",
             "simple": "ง่าย",
-            "fantastic": "มหัศจรรย์"
+            "fantastic": "มหัศจรรย์",
+            "agile": "เปรียว",
+            "working": "ใช้งานได้"
         },
         "loginFailed": "เข้าสู่ระบบไม่ได้ กรุณาลองใหม่อีกครั้ง",
         "subtitle": "ทางเลือกที่{{word}}",
         "placeholder_SocialSecurityNumber": "เลขบัตรประจำตัวประชาชนของคุณ",
-        "a11y_change_language": "เลือกภาษา"
+        "a11y_change_language": "เลือกภาษา",
+        "a11y_select_login_method": "เลือกวิธีการเข้าสู่ระบบ"
     },
     "language": {
         "changeLanguageButton": "บันทึก",
@@ -54,23 +57,28 @@
         "socialSecurityNumber": "เลขบัตรประชาชน",
         "tomorrow": "พรุ่งนี้",
         "confirm": "ยืนยัน",
-        "changeLanguage": "เปลี่ยนภาษา"
+        "changeLanguage": "เปลี่ยนภาษา",
+        "logout": "ออกจากระบบ"
     },
     "children": {
         "title": "ลูกของคุณ",
         "tryAgain": "ลองอีกครั้ง",
-        "noKids_title": "ไม่มีลูก"
+        "noKids_title": "ไม่มีลูก",
+        "viewStatus": "ดูสถานะบน skolplattformen.org"
     },
     "settings": {
         "settings": "การตั้งค่า",
         "language": "ภาษา",
-        "themeAuto": "อัตโนมัติ"
+        "themeAuto": "อัตโนมัติ",
+        "licenses": "ใบอนุญาต"
     },
     "contact": {
         "email": "อีเมล",
         "call": "โทร",
         "sms": "ข้อความ",
-        "home": "ที่อยู่"
+        "home": "ที่อยู่",
+        "a11y_show_contact_info_button_hint": "แสดงข้อมูลการติดต่อ",
+        "a11y_show_contact_info_button_label": "แสดงข้อมูลการติดต่อ"
     },
     "themes": {
         "dark": "มืด",
@@ -82,14 +90,19 @@
         "title": "ข่าวจาก Skolplattformen",
         "search": {
             "placeholder": "ค้นหาในข่าว…"
-        }
+        },
+        "backToChild": "กลับไปหาลูก",
+        "published": "ที่ตีพิมพ์"
     },
     "schedule": {
         "week": "อาทิตย์",
-        "lunch": "อาหารเที่ยง"
+        "lunch": "อาหารเที่ยง",
+        "start": "เริ่ม",
+        "end": "สุด"
     },
     "classmates": {
-        "child": "ลูก"
+        "child": "ลูก",
+        "class": "ชั้นเรียน"
     },
     "notifications": {
         "notificationTitle": "การแจ้งเตือน: {{message}} ({{dateCreated}})"
