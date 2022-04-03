@@ -23,11 +23,11 @@
             "free": "ฟรี",
             "fun": "สนุก",
             "imperfect": "ไม่สมบูรณ์",
-            "open": "โอเพ่น",
+            "open": "เปิด",
             "better": "ดีกว่า",
             "cheap": "ถูก",
             "simple": "ง่าย",
-            "fantastic": "มหัศจรรย์",
+            "fantastic": "ดีเยี่ยม",
             "agile": "เปรียว",
             "working": "ใช้งานได้"
         },
@@ -43,7 +43,7 @@
     },
     "navigation": {
         "calender": "ปฏิทิน",
-        "news": "ข่าว",
+        "news": "ข่าวใหม่",
         "notifications": "การแจ้งเตือน",
         "classmates": "เพื่อนร่วมชั้น",
         "menu": "อาหารเที่ยง"
@@ -54,7 +54,7 @@
         "loading": "กำลังโหลด…",
         "settings": "การตั้งค่า",
         "title": "Öppna skolplattformen",
-        "socialSecurityNumber": "เลขบัตรประชาชน",
+        "socialSecurityNumber": "เลขบัตรประจำตัวประชาชน",
         "tomorrow": "พรุ่งนี้",
         "confirm": "ยืนยัน",
         "changeLanguage": "เปลี่ยนภาษา",
@@ -70,7 +70,7 @@
         "settings": "การตั้งค่า",
         "language": "ภาษา",
         "themeAuto": "อัตโนมัติ",
-        "licenses": "ใบอนุญาต"
+        "licenses": "ได้รับอนุญาต"
     },
     "contact": {
         "email": "อีเมล",
@@ -82,23 +82,23 @@
     },
     "themes": {
         "dark": "มืด",
-        "light": "แสง"
+        "light": "แสงสว่าง"
     },
     "news": {
         "noNewNewsItemsThisWeek": "อาทิตย์นี้ไม่มีข่าว",
         "notificationTitle": "ข่าว: {{header}} ({{published}})",
         "title": "ข่าวจาก Skolplattformen",
         "search": {
-            "placeholder": "ค้นหาในข่าว…"
+            "placeholder": "ค้นหาข่าวต่างๆๆ…"
         },
-        "backToChild": "กลับไปหาลูก",
-        "published": "ที่ตีพิมพ์"
+        "backToChild": "กลับไปหน้าหลักของลูก",
+        "published": "สิ่งที่ตีพิมพ์"
     },
     "schedule": {
         "week": "อาทิตย์",
         "lunch": "อาหารเที่ยง",
-        "start": "เริ่ม",
-        "end": "สุด"
+        "start": "เริ่มต้น",
+        "end": "สิ้นสุด"
     },
     "classmates": {
         "child": "ลูก",
