@@ -1,9 +1,9 @@
 {
     "abscense": {
         "entireDay": "ทั้งวัน",
-        "childsPersonalNumber": "เลขบัตรประชาชนของลูก",
-        "invalidPersonalNumber": "เลขบัตรประชาชนผิด",
-        "personalNumberMissing": "เลขบัตรประชาชนหายไป"
+        "childsPersonalNumber": "เลขบัตรประจำตัวประชาชนของลูก",
+        "invalidPersonalNumber": "เลขบัตรประจำตัวประชาชนผิด",
+        "personalNumberMissing": "เลขบัตรประจำตัวประชาชนหายไป"
     },
     "abbrevations": {
         "preSchool": "อนุบาล",
@@ -31,7 +31,7 @@
         },
         "loginFailed": "เข้าสู่ระบบไม่ได้ กรุณาลองใหม่อีกครั้ง",
         "subtitle": "ทางเลือกที่{{word}}",
-        "placeholder_SocialSecurityNumber": "เลขบัตรประชาชนของคุณ",
+        "placeholder_SocialSecurityNumber": "เลขบัตรประจำตัวประชาชนของคุณ",
         "a11y_change_language": "เลือกภาษา"
     },
     "language": {
