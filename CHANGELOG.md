@@ -1,3 +1,10 @@
+# [2.13.0](https://github.com/kolplattformen/skolplattformen/compare/v2.12.0...v2.13.0) (2022-04-06)
+
+
+### Features
+
+* 🎸 Added Thai translation ([#621](https://github.com/kolplattformen/skolplattformen/issues/621)) ([9e2f94d](https://github.com/kolplattformen/skolplattformen/commit/9e2f94d8532af4b427aaea8335c4c3775ecb853b))
+
 # [2.12.0](https://github.com/kolplattformen/skolplattformen/compare/v2.11.4...v2.12.0) (2022-02-17)
 
 
