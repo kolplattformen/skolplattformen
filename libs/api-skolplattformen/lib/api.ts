@@ -170,6 +170,8 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
   public async loginFreja(): Promise<FrejaLoginStatusChecker> {
 
+    await this.clearSession()
+
     const loginUrl = routes.frejaLogin
     const loginResponse = await this.fetch('auth-ticket', loginUrl)
 
@@ -186,9 +188,14 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     console.log('getting freja login url: ' + cleanAppSwitchUrl)
 
-    const status = checkFrejaStatus(this.fetch, cleanAppSwitchUrl)
+    const checkStatusSession  = await this.getSession(loginUrl, {
+      redirect: 'manual', 
+    })
+
+
+    const status = checkFrejaStatus(this.fetch, cleanAppSwitchUrl, checkStatusSession)
     status.on('APPROVED', async () => {
-      //await this.retrieveFrejaSessionCookie()
+      await this.retrieveFrejaSessionCookie()
       await this.retrieveXsrfToken()
 
       this.isLoggedIn = true

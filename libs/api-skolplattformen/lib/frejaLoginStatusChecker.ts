@@ -1,25 +1,26 @@
 import { EventEmitter } from 'events';
 import { frejaLoginStatus } from './routes';
-import { Fetcher, FrejaLoginStatusChecker } from '@skolplattformen/api';
+import { Fetcher, FrejaLoginStatusChecker, RequestInit } from '@skolplattformen/api';
 export class FrejaChecker extends EventEmitter implements FrejaLoginStatusChecker {
     public token: string;
   
-    private fetcher: Fetcher;
-    private url: string;
+    private fetcher: Fetcher
+    private url: string
+    private session: RequestInit
   
     private cancelled = false;
   
-    constructor(fetcher: Fetcher, token: string) {
+    constructor(fetcher: Fetcher, token: string, session: RequestInit) {
       super();
       this.fetcher = fetcher
-      
+      this.session = session
       this.token = token
       this.url = frejaLoginStatus;
            this.check();
     }
   
     async check(): Promise<void> {
-      const response = await this.fetcher('freja-login-status', this.url);
+      const response = await this.fetcher('freja-login-status', this.url, this.session);
       const status = await response.text();
       this.emit(status);
       if (!this.cancelled &&
@@ -41,5 +42,6 @@ export class FrejaChecker extends EventEmitter implements FrejaLoginStatusChecke
   export const checkStatus = (
     fetch: Fetcher,
     token: string,
-  ): FrejaLoginStatusChecker => new FrejaChecker(fetch, token)
+    session: RequestInit
+  ): FrejaLoginStatusChecker => new FrejaChecker(fetch, token, session)
     
