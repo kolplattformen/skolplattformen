@@ -137,6 +137,20 @@ export const languages: Language[] = [
     locale: 'es',
     active: true,
   },
+  {
+    langCode: 'th',
+    languageName: 'Thai',
+    languageLocalName: 'ไทย',
+    locale: 'th',
+    active: true,
+  },
+  {
+    langCode: 'uk',
+    languageName: 'Ukrainian',
+    languageLocalName: 'український',
+    locale: 'uk',
+    active: false,
+  },
 ]
 
 export const translations = {
@@ -156,6 +170,8 @@ export const translations = {
   ru: require('../translations/ru.json'),
   so: require('../translations/so.json'),
   sv: require('../translations/sv.json'),
+  th: require('../translations/th.json'),
+  uk: require('../translations/uk.json'),
   zh_Hans: require('../translations/zh_Hans.json'),
   zh_Hant: require('../translations/zh_Hant.json'),
 }
