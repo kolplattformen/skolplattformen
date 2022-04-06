@@ -1,0 +1,14 @@
+{
+    "abbrevations": {
+        "preSchool": "дитячий сад",
+        "upperSecondarySchool": "Старша школа",
+        "compulsorySchool": "Початкова/середня школа"
+    },
+    "abscense": {
+        "entireDay": "Повний день",
+        "childsPersonalNumber": "Ідентифікаційний номер дитини",
+        "endTime": "кінцевий час",
+        "invalidPersonalNumber": "Невірний ідентифікаційний номер",
+        "personalNumberMissing": "Ідентифікаційний код відсутній"
+    }
+}

@@ -33,7 +33,8 @@
         "a11y_select_login_method": "Methodum nomen dare legere",
         "a11y_change_language": "Linguam legere",
         "a11y_image_two_boys": "Pictura duobus hominibus telephona sua specientibus",
-        "a11y_clear_social_security_input_field": "Cellam numeri personalis vacuare"
+        "a11y_clear_social_security_input_field": "Cellam numeri personalis vacuare",
+        "chooseSchoolPlatform": "Rostra legere"
     },
     "abscense": {
         "title": "Absentiam referre",
@@ -43,7 +44,8 @@
         "personalNumberMissing": "Numerus personalis absens est",
         "invalidPersonalNumber": "Numerus personalis irritus est",
         "entireDay": "Totus dies",
-        "endTime": "Hora terminalis"
+        "endTime": "Hora terminalis",
+        "childsPersonalNumber": "Numerus personalis filii"
     },
     "abbrevations": {
         "upperSecondarySchool": "Lyceum superius",
@@ -58,14 +60,16 @@
         "tryAgain": "Denuo conare",
         "title": "Filii tui",
         "noKids_title": "Nulli filii",
-        "noKids_description": "Nulli filii pro numero personali tuo in Urbe Holmiente censi sunt"
+        "noKids_description": "Nulli filii pro numero personali tuo in Urbe Holmiense censi sunt"
     },
     "calender": {
         "showCalenderActions": "Actiones calendarii exhibere",
         "saveToCalenderSuccess": "✔️ In calendarium servatus",
         "saveToCalender": "In calendarium servare",
         "approveAccessToCalender": "Aditum in calendarium approbare debes",
-        "saveToCalenderError": "Aliquis deerat"
+        "saveToCalenderError": "Aliquis deerat",
+        "emptyHeadline": "Calendarium vacuum videtur",
+        "emptyText": "Nihil invenitur ostendere"
     },
     "menu": {
         "emptyText": "Hac septimana nihil invenire poterat",
@@ -86,7 +90,7 @@
         "notificationTitle": "Nuntius: {{message}} ({{dateCreated}})"
     },
     "navigation": {
-        "notifications": "Nuntii",
+        "notifications": "Eventa",
         "news": "Nuntii",
         "menu": "Charta",
         "calender": "Calendarium",
@@ -105,13 +109,17 @@
         "loading": "Carricans…",
         "confirm": "Confirmare",
         "changeLanguage": "Linguam permutare",
-        "cancel": "Rescindere"
+        "cancel": "Rescindere",
+        "tomorrow": "Cras",
+        "logoutAndClearPersonalData": "Secedere et informationes personales purgare",
+        "logoutAndClearAllDataInclSettings": "Secedere et omnes informationes configurationesque purgare"
     },
     "schedule": {
         "start": "Exordium",
         "gymBag": "Saccus gymnasticus",
         "lunch": "Prandium",
-        "end": "Finis"
+        "end": "Finis",
+        "week": "Septimana"
     },
     "contact": {
         "a11y_show_contact_info_button_hint": "Notationes contactus exhibet",
@@ -125,5 +133,18 @@
         "contactsForGuardiansFor": "Notationes contactus custodum",
         "child": "Filius",
         "class": "Classis"
+    },
+    "settings": {
+        "licenses": "Licentiae",
+        "appearance": "Species",
+        "language": "Lingua",
+        "themeAuto": "Automatus",
+        "useSystemTheme": "Themate lucido/obscuro systemae uti",
+        "settings": "Configurationes",
+        "theme": "Thema"
+    },
+    "themes": {
+        "light": "Lucidus",
+        "dark": "Obscurus"
     }
 }

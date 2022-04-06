@@ -13,7 +13,8 @@
         "title": "报告缺席情况",
         "invalidPersonalNumber": "个人身份号码无效",
         "personalNumberMissing": "缺少个人身份号码",
-        "startTime": "开始时间"
+        "startTime": "开始时间",
+        "childsPersonalNumber": "孩子的个人身份号码"
     },
     "auth": {
         "bankid": {
@@ -49,7 +50,8 @@
         "chooseLoginMethod": "选择登录方式",
         "a11y_change_language": "选择您的语言",
         "a11y_image_two_boys": "两个人看手机的图片",
-        "a11y_select_login_method": "选择登录方式"
+        "a11y_select_login_method": "选择登录方式",
+        "chooseSchoolPlatform": "选择平台"
     },
     "calender": {
         "saveToCalender": "保存到日历中",

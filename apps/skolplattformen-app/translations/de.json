@@ -13,7 +13,8 @@
         "selectAbscenseEndTime": "Endzeit wählen",
         "selectAbscenseStartTime": "Startzeit wählen",
         "startTime": "Startzeit",
-        "title": "Abwesenheit anmelden"
+        "title": "Abwesenheit anmelden",
+        "childsPersonalNumber": "Personenkennziffer des Kindes"
     },
     "auth": {
         "bankid": {
@@ -49,14 +50,17 @@
         "a11y_select_login_method": "Wähle die Anmeldemethode",
         "a11y_clear_social_security_input_field": "Personenkennziffer-Feld löschen",
         "a11y_image_two_boys": "Bild von zwei Personen, die ihre Mobiltelefon überprüfen",
-        "a11y_change_language": "Wähle deine Sprache"
+        "a11y_change_language": "Wähle deine Sprache",
+        "chooseSchoolPlatform": "Plattform wählen"
     },
     "calender": {
         "approveAccessToCalender": "Du musst Zugriff auf deinen Kalender erlauben",
         "saveToCalender": "Im Kalender speichern",
         "saveToCalenderError": "Ein Fehler ist aufgetreten",
         "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
-        "showCalenderActions": "Kalender-Actions zeigen"
+        "showCalenderActions": "Kalender-Actions zeigen",
+        "emptyHeadline": "Der Kalender sieht leer aus",
+        "emptyText": "Nichts wurde gefunden"
     },
     "children": {
         "loadingErrorHeading": "Hoppla!",
@@ -78,7 +82,8 @@
         "title": "Öppna skolplattformen",
         "cancel": "Abbrechen",
         "logoutAndClearPersonalData": "Ausloggen und persönliche Daten löschen",
-        "logoutAndClearAllDataInclSettings": "Ausloggen und alle Daten inkl. Einstellungen löschen"
+        "logoutAndClearAllDataInclSettings": "Ausloggen und alle Daten inkl. Einstellungen löschen",
+        "tomorrow": "Morgen"
     },
     "language": {
         "changeLanguage": "Sprache ändern",
@@ -113,7 +118,8 @@
         "gymBag": "Turnbeutel",
         "lunch": "Mittagessen",
         "end": "Ende",
-        "start": "Anfang"
+        "start": "Anfang",
+        "week": "Woche"
     },
     "contact": {
         "a11y_show_contact_info_button_hint": "Zeigt Kontaktinformation an",
