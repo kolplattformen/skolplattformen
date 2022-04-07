@@ -1,3 +1,17 @@
+# [2.14.0](https://github.com/kolplattformen/skolplattformen/compare/v2.13.0...v2.14.0) (2022-04-06)
+
+
+### Features
+
+* 🎸 Add Thai curriculum ([#622](https://github.com/kolplattformen/skolplattformen/issues/622)) ([bd02b37](https://github.com/kolplattformen/skolplattformen/commit/bd02b378c0d73f116baa716d05786c5d5d5cfbd9))
+
+# [2.13.0](https://github.com/kolplattformen/skolplattformen/compare/v2.12.0...v2.13.0) (2022-04-06)
+
+
+### Features
+
+* 🎸 Added Thai translation ([#621](https://github.com/kolplattformen/skolplattformen/issues/621)) ([9e2f94d](https://github.com/kolplattformen/skolplattformen/commit/9e2f94d8532af4b427aaea8335c4c3775ecb853b))
+
 # [2.12.0](https://github.com/kolplattformen/skolplattformen/compare/v2.11.4...v2.12.0) (2022-02-17)
 
 
