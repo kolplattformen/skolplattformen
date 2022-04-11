@@ -54,7 +54,6 @@ const LoginMethods: Logins = {
   BANKID_SAME_DEVICE: 0,
   BANKID_ANOTHER_DEVICE: 2,
   TEST_USER: 3,
-
 }
 
 export const Login = () => {
@@ -122,11 +121,11 @@ export const Login = () => {
     }
   }
 
-  const openFreja = (token:string) => {
+  const openFreja = (token: string) => {
     try {
-      const originAppScheme = encodeURIComponent(schema);
+      const originAppScheme = encodeURIComponent(schema)
       const frejaUrl =
-        Platform.OS === 'ios' 
+        Platform.OS === 'ios'
           ? `${token}&originAppScheme=${originAppScheme}`
           : `${token}&originAppScheme=${originAppScheme}`
       Linking.openURL(frejaUrl)
@@ -140,22 +139,24 @@ export const Login = () => {
     (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
 
   const startLogin = async (text: string) => {
-
-    if(loginMethodId === 'freja'){
+    if (loginMethodId === 'freja') {
       showModal(true)
-      const status = await api.loginFreja();
+      const status = await api.loginFreja()
       setCancelLoginRequest(() => () => status.cancel())
       openFreja(status.token)
       status.on('STARTED', () => console.log('Freja eID app not yet opened'))
-      status.on('DELIVERED_TO_MOBILE', () => console.log('Freja eID app is open'))
-      status.on('CANCELLED', () => { 
+      status.on('DELIVERED_TO_MOBILE', () =>
+        console.log('Freja eID app is open')
+      )
+      status.on('CANCELLED', () => {
         console.log('User pressed cancel in Freja eID')
         showModal(false)
       })
       status.on('APPROVED', () => console.log('Freja eID ok'))
-    }
-
-    else if (loginMethodId === 'thisdevice' || loginMethodId === 'otherdevice') {
+    } else if (
+      loginMethodId === 'thisdevice' ||
+      loginMethodId === 'otherdevice'
+    ) {
       showModal(true)
 
       let ssn

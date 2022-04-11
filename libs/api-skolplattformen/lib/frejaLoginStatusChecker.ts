@@ -25,7 +25,7 @@ export class FrejaChecker extends EventEmitter implements FrejaLoginStatusChecke
       this.emit(status);
       if (!this.cancelled &&
         status !== 'APPROVED'  && 
-        // status !== 'ERROR!' &&
+        status !== 'ERROR' &&
         status !== 'CANCELLED'
         ){
         setTimeout(() => this.check(), 1000);

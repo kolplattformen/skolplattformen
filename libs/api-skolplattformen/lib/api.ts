@@ -201,10 +201,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       this.isLoggedIn = true
       this.emit('login')
     })
-    // status.on('ERROR', () => {
-    //   this.personalNumber = undefined
-    // })
-
+   
     return status
   }
 
@@ -244,26 +241,27 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   }
 
   private async retrieveFrejaSessionCookie(): Promise<void> {
-    const url = routes.frejaLoginCookie
-    const session = await this.getSession(url, {
-      redirect: 'manual', 
-    })
-    //const session = this.getRequestInit()
-    
-   
-console.log(JSON.stringify(session))    
-
-    const response = await  this.fetch('freja-login-return-url', url, session)
-    console.log(response.status)
-    console.log(response.text())
-
-    console.log(JSON.stringify(response))    
-
-    const response2 = await this.fetch('freja-login-cookie', url, session)
-    console.log(response2.status)
-    console.log(response2.text())
+  
+    try{
+      const url = routes.frejaReturnUrl
+      const session = await this.getSession(url, {
+        redirect: 'manual', 
+      })
+      await this.fetch('freja-login-return-url', url, session)
+    } catch(error){
+      console.log(JSON.stringify(error))
+    }
+      
+    try{
+      const url2 = routes.frejaLoginCookie
+      const session = await this.getSession(url2, {
+        redirect: 'manual', 
+      })
+        await this.fetch('freja-login-cookie', url2, session)
+    }    catch(error2){
+      console.log(JSON.stringify(error2))
+    }
   }
-
 
   private async retrieveXsrfToken(): Promise<void> {
     const url = routes.hemPage

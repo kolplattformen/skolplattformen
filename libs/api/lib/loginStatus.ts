@@ -19,7 +19,7 @@ export interface LoginStatusChecker {
 export interface FrejaLoginStatusChecker {
   token: string
   on: (
-    event: 'APPROVED' | 'STARTED' | 'DELIVERED_TO_MOBILE' | 'CANCELLED',
+    event: 'APPROVED' | 'STARTED' | 'UNKNOWN' | 'DELIVERED_TO_MOBILE' | 'CANCELLED' | 'EXPIRED' | 'RP_CANCELED' | 'ERROR',
     listener: (...args: any[]) => void
   ) => FrejaLoginStatusChecker
   cancel: () => Promise<void>
