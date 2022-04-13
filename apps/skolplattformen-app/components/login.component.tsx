@@ -16,6 +16,7 @@ import Personnummer from 'personnummer'
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
+  ImageProps,
   Linking,
   Platform,
   TouchableWithoutFeedback,
@@ -43,6 +44,15 @@ const BankId = () => (
     accessibilityIgnoresInvertColors
   />
 )
+const FrejaEid = () => (
+  <Image
+    style={themedStyles.icon}
+   source={require('../assets/freja_eid_low.png')}
+    accessibilityIgnoresInvertColors
+  />
+)
+
+
 
 interface Logins {
   BANKID_SAME_DEVICE: number
@@ -101,6 +111,12 @@ export const Login = () => {
       api.off('login', loginHandler)
     }
   }, [api])
+
+  const LoginProviderImage  = () => {
+    //if(loginMethodId == 'testuser') return undefined
+    if(loginMethodId == 'freja') return FrejaEid()
+    return BankId() 
+  }
 
   const getSchoolPlatformName = () => {
     return schoolPlatforms.find((item) => item.id === currentSchoolPlatform)
@@ -231,7 +247,7 @@ export const Login = () => {
             appearance="ghost"
             disabled={isUsingPersonalIdNumber && !valid}
             status="primary"
-            accessoryLeft={BankId}
+            accessoryLeft={LoginProviderImage}
             size="medium"
           >
             {currentLoginMethod.title}
