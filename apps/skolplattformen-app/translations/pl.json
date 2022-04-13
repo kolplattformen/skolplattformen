@@ -23,6 +23,11 @@
             "OpenOnThisDevice": "Otwórz BankID na tym urządzeniu",
             "Waiting": "Oczekiwanie na BankID…"
         },
+        "freja": {
+            "OpenManually": "Otwórz Freja eID+ manualnie",
+            "OpenOnThisDevice": "Otwórz Freja eID+ na tym urządzeniu",
+            "Waiting": "Oczekiwanie na Freja eID+…"
+        },
         "chooseLoginMethod": "Wybierz sposób logowania",
         "loginAsTestUser": "Zaloguj się jako użytkownik testowy",
         "loginFailed": "Logowanie nie powiodło się. Spróbuj ponownie.",

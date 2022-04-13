@@ -24,9 +24,9 @@
             "Waiting": "Waiting for BankID…"
         },
         "freja": {
-            "OpenManually": "Open Freja eID manually",
-            "OpenOnThisDevice": "Freja eID",
-            "Waiting": "Waiting for Freja eID…"
+            "OpenManually": "Open Freja eID+ manually",
+            "OpenOnThisDevice": "Freja eID+",
+            "Waiting": "Waiting for Freja eID+…"
         },
         "chooseLoginMethod": "Choose login method",
         "chooseSchoolPlatform": "Choose platform",
