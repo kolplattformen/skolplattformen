@@ -8,6 +8,7 @@ import {
   Fetch,
   Fetcher,
   FetcherOptions,
+  FrejaLoginStatusChecker,
   LoginStatusChecker,
   MenuItem,
   NewsItem,
@@ -602,5 +603,9 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     const emitter: any = new EventEmitter()
     emitter.token = 'fake'
     return emitter
+  }
+
+  async loginFreja(): Promise<FrejaLoginStatusChecker> {
+    throw new Error('Not implemented...')
   }
 }
