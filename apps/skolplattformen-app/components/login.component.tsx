@@ -321,7 +321,11 @@ export const Login = () => {
         backdropStyle={styles.backdrop}
       >
         <Card disabled>
-          <Text style={styles.bankIdLoading}>{t('auth.bankid.Waiting')}</Text>
+          <Text style={styles.bankIdLoading}>
+            {loginMethodId === 'freja'
+              ? t('auth.freja.Waiting')
+              : t('auth.bankid.Waiting')}
+          </Text>
 
           <Button
             status="primary"
