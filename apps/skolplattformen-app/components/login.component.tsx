@@ -134,7 +134,7 @@ export const Login = () => {
       const frejaUrl =
         Platform.OS === 'ios'
           ? `${token}&originAppScheme=${originAppScheme}`
-          : `${token}&originAppScheme=${originAppScheme}`
+          : `${token}`
       Linking.openURL(frejaUrl)
     } catch (err) {
       setError(t('auth.freja.OpenManually'))
