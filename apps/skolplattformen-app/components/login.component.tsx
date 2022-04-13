@@ -47,24 +47,10 @@ const BankId = () => (
 const FrejaEid = () => (
   <Image
     style={themedStyles.icon}
-   source={require('../assets/freja_eid_low.png')}
+    source={require('../assets/freja_eid_low.png')}
     accessibilityIgnoresInvertColors
   />
 )
-
-
-
-interface Logins {
-  BANKID_SAME_DEVICE: number
-  BANKID_ANOTHER_DEVICE: number
-  TEST_USER: number
-}
-
-const LoginMethods: Logins = {
-  BANKID_SAME_DEVICE: 0,
-  BANKID_ANOTHER_DEVICE: 2,
-  TEST_USER: 3,
-}
 
 export const Login = () => {
   const { api } = useApi()
@@ -84,6 +70,7 @@ export const Login = () => {
   const loginBankIdSameDeviceWithoutId = useFeature(
     'LOGIN_BANK_ID_SAME_DEVICE_WITHOUT_ID'
   )
+  const loginWithFrejaEnabled = useFeature('LOGIN_FREJA_EID')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
   )
@@ -95,9 +82,13 @@ export const Login = () => {
   const loginMethods = [
     { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
     { id: 'otherdevice', title: t('auth.bankid.OpenOnAnotherDevice') },
-    { id: 'testuser', title: t('auth.loginAsTestUser') },
     { id: 'freja', title: t('auth.freja.OpenOnThisDevice') },
+    { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
+
+  if (loginMethodId === 'freja' && !loginWithFrejaEnabled) {
+    setLoginMethodId('thisdevice')
+  }
 
   const loginHandler = async () => {
     const user = await api.getUser()
@@ -112,10 +103,10 @@ export const Login = () => {
     }
   }, [api])
 
-  const LoginProviderImage  = () => {
+  const LoginProviderImage = () => {
     //if(loginMethodId == 'testuser') return undefined
-    if(loginMethodId == 'freja') return FrejaEid()
-    return BankId() 
+    if (loginMethodId == 'freja') return FrejaEid()
+    return BankId()
   }
 
   const getSchoolPlatformName = () => {
@@ -292,7 +283,11 @@ export const Login = () => {
             {t('auth.chooseLoginMethod')}
           </Text>
           <List
-            data={loginMethods}
+            data={
+              loginWithFrejaEnabled
+                ? loginMethods
+                : loginMethods.filter((f) => f.id != 'freja')
+            }
             ItemSeparatorComponent={Divider}
             renderItem={({ item, index }) => (
               <ListItem
