@@ -82,6 +82,9 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     this.cookieManager = cookieManager
     this.headers = {}
   }
+  registerAbscense(child: EtjanstChild, startDate: DateTime, endDate: DateTime): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
 
   public getPersonalNumber(): string | undefined {
     return this.personalNumber

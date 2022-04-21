@@ -50,6 +50,7 @@ import {
   shibbolethLoginUrlBase,
   verifyUrlBase,
   wallMessagesUrl,
+  abscenseRegistrationUrl
 } from './routes'
 import parse from '@skolplattformen/curriculum'
 
@@ -591,6 +592,25 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return statusChecker
   }
 
+  public async registerAbscense(child: EtjanstChild, startDate: DateTime, endDate: DateTime): Promise<void> {
+    const body = {
+      attendeeId: child.id,
+      startDate: startDate.toFormat("yyyy-MM-dd HH:mm"),
+      endDate: endDate.toFormat("yyyy-MM-dd HH:mm"),
+      statusId: 27433608,
+      _submit: 'Save'
+    }
+
+    await this.fetch('register-abscense', abscenseRegistrationUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Referer': "https://hjarntorget.goteborg.se/attendanceParentRegisterAbsence.do?attendeeId=" + child.id,
+      },
+      body: new URLSearchParams(body).toString(),
+    })
+  }
+
   private async fakeMode(): Promise<LoginStatusChecker> {
     this.isFake = true
 
@@ -603,4 +623,5 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     emitter.token = 'fake'
     return emitter
   }
+
 }

@@ -19,7 +19,7 @@ const init = (
   const cookieManager = ((cookieManagerImpl as RNCookieManager).get)
     ? wrapReactNativeCookieManager(cookieManagerImpl as RNCookieManager)
     : wrapToughCookie(cookieManagerImpl as ToughCookieJar)
-  return new ApiHjarntorget(fetchImpl as any, cookieManager, options)
+  return new ApiHjarntorget(fetchImpl, cookieManager, options)
 }
 
 export default init

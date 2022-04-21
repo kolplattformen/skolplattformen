@@ -37,5 +37,6 @@ export interface Api extends EventEmitter {
   getSchoolContacts(child: EtjanstChild): Promise<SchoolContact[]>
   getSkola24Children(): Promise<Skola24Child[]>
   getTimetable(child: Skola24Child, week: number, year: number, lang: Language): Promise<TimetableEntry[]>
+  registerAbscense(child: EtjanstChild, startDate: DateTime, endDate: DateTime): Promise<void>
   logout(): Promise<void>
 }
