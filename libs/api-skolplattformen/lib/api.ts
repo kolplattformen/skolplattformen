@@ -170,7 +170,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
   public async loginFreja(): Promise<FrejaLoginStatusChecker> {
 
-    await this.clearSession()
+  //  await this.clearSession()
 
     const loginUrl = routes.frejaLogin
     const loginResponse = await this.fetch('auth-ticket', loginUrl)
@@ -244,10 +244,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   
     try{
       const url = routes.frejaReturnUrl
-      const session = await this.getSession(url, {
-        redirect: 'manual', 
-      })
-      await this.fetch('freja-login-return-url', url, session)
+      await this.fetch('freja-login-return-url', url)
     } catch(error){
       console.log(JSON.stringify(error))
     }
@@ -257,12 +254,12 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       const session = await this.getSession(url2, {
         redirect: 'manual', 
       })
-        await this.fetch('freja-login-cookie', url2, session)
+        await this.fetch('freja-login-cookie', url2)
     }    catch(error2){
       console.log(JSON.stringify(error2))
     }
   }
-
+ 
   private async retrieveXsrfToken(): Promise<void> {
     const url = routes.hemPage
     const session = this.getRequestInit()
