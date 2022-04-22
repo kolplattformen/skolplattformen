@@ -25,6 +25,7 @@ const translations: Translations = {
   pl: require('./pl.json'),
   pt: require('./pt.json'),
   th: require('./th.json'),
+  uk: require('./uk.json'),
   zh_Hans: require('./zh_Hans.json'),
 }
 const languageList: string[] = Object.keys(translations)

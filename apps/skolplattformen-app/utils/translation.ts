@@ -149,7 +149,7 @@ export const languages: Language[] = [
     languageName: 'Ukrainian',
     languageLocalName: 'український',
     locale: 'uk',
-    active: false,
+    active: true,
   },
 ]
 
