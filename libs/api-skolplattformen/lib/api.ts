@@ -170,7 +170,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
   public async loginFreja(): Promise<FrejaLoginStatusChecker> {
 
-  //  await this.clearSession()
+    await this.clearSession()
 
     const loginUrl = routes.frejaLogin
     const loginResponse = await this.fetch('auth-ticket', loginUrl)
