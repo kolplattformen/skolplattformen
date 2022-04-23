@@ -62,6 +62,7 @@ export const Login = () => {
   const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] =
     useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [loginStatusText, setLoginStatusText] = useState('')
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
@@ -105,7 +106,7 @@ export const Login = () => {
 
   const LoginProviderImage = () => {
     //if(loginMethodId == 'testuser') return undefined
-    if (loginMethodId == 'freja') return FrejaEid()
+    if (loginMethodId === 'freja') return FrejaEid()
     return BankId()
   }
 
@@ -147,6 +148,7 @@ export const Login = () => {
 
   const startLogin = async (text: string) => {
     if (loginMethodId === 'freja') {
+      setLoginStatusText(t('auth.freja.Waiting'))
       showModal(true)
       const status = await api.loginFreja()
       setCancelLoginRequest(() => () => status.cancel())
@@ -159,11 +161,15 @@ export const Login = () => {
         console.log('User pressed cancel in Freja eID')
         showModal(false)
       })
-      status.on('APPROVED', () => console.log('Freja eID ok'))
+      status.on('APPROVED', () => {
+        console.log('Freja eID ok')
+        setLoginStatusText(t('auth.loginSuccessful'))
+      })
     } else if (
       loginMethodId === 'thisdevice' ||
       loginMethodId === 'otherdevice'
     ) {
+      setLoginStatusText(t('auth.bankid.Waiting'))
       showModal(true)
 
       let ssn
@@ -188,7 +194,10 @@ export const Login = () => {
         setError(t('auth.loginFailed'))
         showModal(false)
       })
-      status.on('OK', () => console.log('BankID ok'))
+      status.on('OK', () => {
+        console.log('BankID ok')
+        setLoginStatusText(t('auth.loginSuccessful'))
+      })
     } else {
       await api.login('201212121212')
     }
@@ -286,7 +295,7 @@ export const Login = () => {
             data={
               loginWithFrejaEnabled
                 ? loginMethods
-                : loginMethods.filter((f) => f.id != 'freja')
+                : loginMethods.filter((f) => f.id !== 'freja')
             }
             ItemSeparatorComponent={Divider}
             renderItem={({ item, index }) => (
@@ -321,12 +330,7 @@ export const Login = () => {
         backdropStyle={styles.backdrop}
       >
         <Card disabled>
-          <Text style={styles.bankIdLoading}>
-            {loginMethodId === 'freja'
-              ? t('auth.freja.Waiting')
-              : t('auth.bankid.Waiting')}
-          </Text>
-
+          <Text style={styles.bankIdLoading}>{loginStatusText}</Text>
           <Button
             status="primary"
             accessible={true}

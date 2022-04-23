@@ -32,6 +32,7 @@
         "chooseSchoolPlatform": "Välj plattform",
         "loginAsTestUser": "Logga in som testanvändare",
         "loginFailed": "Inloggningen misslyckades, försök igen!",
+        "loginSuccessful": "Du är inloggad! - laddar…",
         "placeholder_SocialSecurityNumber": "Ditt personnummer",
         "subtitle": "Det {{word}} alternativet",
         "words": {

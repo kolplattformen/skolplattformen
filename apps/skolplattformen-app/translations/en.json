@@ -32,6 +32,7 @@
         "chooseSchoolPlatform": "Choose platform",
         "loginAsTestUser": "Log in as a test user",
         "loginFailed": "Could not log in. Please try again.",
+        "loginSuccessful": "Login successful, loading…",
         "placeholder_SocialSecurityNumber": "Your personal identity number",
         "subtitle": "The {{word}} alternative",
         "words": {
