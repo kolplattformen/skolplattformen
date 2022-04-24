@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useApi } from '@skolplattformen/hooks'
 import {
   Button,
@@ -47,7 +48,7 @@ const BankId = () => (
 const FrejaEid = () => (
   <Image
     style={themedStyles.icon}
-    source={require('../assets/freja_eid_low.png')}
+    source={require('../assets/freja_eid_logo.png')}
     accessibilityIgnoresInvertColors
   />
 )
@@ -91,13 +92,14 @@ export const Login = () => {
     setLoginMethodId('thisdevice')
   }
 
-  const loginHandler = async () => {
-    const user = await api.getUser()
-    await AppStorage.clearPersonalData(user)
-    showModal(false)
-  }
-
   useEffect(() => {
+    const loginHandler = async () => {
+      console.debug('Runnning loginHandler')
+      const user = await api.getUser()
+      await AppStorage.clearPersonalData(user)
+      showModal(false)
+    }
+
     api.on('login', loginHandler)
     return () => {
       api.off('login', loginHandler)
