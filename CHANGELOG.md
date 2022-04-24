@@ -1,3 +1,10 @@
+## [2.15.2](https://github.com/kolplattformen/skolplattformen/compare/v2.15.1...v2.15.2) (2022-04-24)
+
+
+### Bug Fixes
+
+* 🐛 Add better logo image for Freja eID ([051df2d](https://github.com/kolplattformen/skolplattformen/commit/051df2da3955c87df3b75fe11a83c5dd966519e0))
+
 ## [2.15.1](https://github.com/kolplattformen/skolplattformen/compare/v2.15.0...v2.15.1) (2022-04-24)
 
 
