@@ -1,13 +1,13 @@
-import { fourDaysAgo, oneDayAgo, oneWeekAgo } from './dates';
-/* eslint-disable max-len */
+import { fourDaysAgo, oneDayAgo, oneWeekAgo } from './dates'
+
 import {
   CalendarItem,
   Child,
   Notification,
   ScheduleItem,
   User,
-} from '@skolplattformen/api';
-import { oneDayForward, oneWeekForward, twoDaysForward } from './dates';
+} from '@skolplattformen/api'
+import { oneDayForward, oneWeekForward, twoDaysForward } from './dates'
 
 const data: any = {
   '39b59e-bf4b9f-f68ac25321-977218-bf0': {
@@ -203,18 +203,17 @@ const data: any = {
         allDayEvent: false,
         startDate: oneDayForward.startOf('day').toISO(),
         endDate: oneDayForward.endOf('day').toISO(),
-        oneDayEvent: true
-      } as ScheduleItem
+        oneDayEvent: true,
+      } as ScheduleItem,
     ],
     notifications: [
       {
         id: 'bfe19b-766db3-b38d99d321-bbed3d-506',
         sender: 'Planering och Bedömning',
-        dateCreated: oneDayAgo.minus({months: 6}).toISO(),
+        dateCreated: oneDayAgo.minus({ months: 6 }).toISO(),
         dateModified: fourDaysAgo.toISO(),
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url:
-          'https://www.breakit.se/artikel/21423/har-ar-it-bolaget-bakom-haveriet-pa-skolplattformen',
+        url: 'https://www.breakit.se/artikel/21423/har-ar-it-bolaget-bakom-haveriet-pa-skolplattformen',
         category: 'Lärlogg',
         type: 'avisering',
       },
@@ -224,8 +223,7 @@ const data: any = {
         dateCreated: '2020-12-10T14:31:29.966Z',
         message:
           'Nu kan du ta del av ditt barns dokumentation av utvecklingssamtal',
-        url:
-          'https://www.breakit.se/artikel/21404/kodaren-slog-larm-nu-akutstoppas-skolplattformen-i-stockholm',
+        url: 'https://www.breakit.se/artikel/21404/kodaren-slog-larm-nu-akutstoppas-skolplattformen-i-stockholm',
         category: null,
         type: 'webnotify',
       },
@@ -234,8 +232,7 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-06-10T12:18:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
-        url:
-          'https://www.svt.se/nyheter/lokalt/stockholm/skolplattformen-i-stockholm-beratta-om-era-erfarenheter',
+        url: 'https://www.svt.se/nyheter/lokalt/stockholm/skolplattformen-i-stockholm-beratta-om-era-erfarenheter',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -244,8 +241,7 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-03-24T14:28:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
-        url:
-          'https://www.breakit.se/artikel/18120/skolplattformen-kostade-700-miljoner-strid-med-entreprenor-om-varumarket',
+        url: 'https://www.breakit.se/artikel/18120/skolplattformen-kostade-700-miljoner-strid-med-entreprenor-om-varumarket',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -254,8 +250,7 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-03-24T13:48:00.000Z',
         message: 'Nu finns det en bedömning att titta på.',
-        url:
-          'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen-app/lmsau!5338007/',
+        url: 'https://www.mitti.se/nyheter/forskolans-tur-att-fa-kritiserade-skolplattformen-app/lmsau!5338007/',
         category: 'Bedömning',
         type: 'avisering',
       },
@@ -434,8 +429,8 @@ const data: any = {
         allDayEvent: false,
         startDate: twoDaysForward.startOf('day').toISO(),
         endDate: twoDaysForward.endOf('day').toISO(),
-        oneDayEvent: false
-      } as ScheduleItem
+        oneDayEvent: false,
+      } as ScheduleItem,
     ],
     notifications: [
       {
@@ -444,8 +439,7 @@ const data: any = {
         dateCreated: fourDaysAgo.toISO(),
         dateModified: fourDaysAgo.toISO(),
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url:
-          'https://www.mitti.se/nyheter/rekorddyr-skolplattform-kostar-258-miljoner-till/lmsao!5381301/',
+        url: 'https://www.mitti.se/nyheter/rekorddyr-skolplattform-kostar-258-miljoner-till/lmsao!5381301/',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -454,8 +448,7 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-12-01T12:43:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url:
-          'https://computersweden.idg.se/2.2683/1.722561/lacka-skolplattformen-datainspektionen',
+        url: 'https://computersweden.idg.se/2.2683/1.722561/lacka-skolplattformen-datainspektionen',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -473,8 +466,7 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-11-16T13:24:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url:
-          'https://www.breakit.se/artikel/27075/skolplattformen-kostade-1-miljard-att-bygga-nu-tvingas-stockholm-bota',
+        url: 'https://www.breakit.se/artikel/27075/skolplattformen-kostade-1-miljard-att-bygga-nu-tvingas-stockholm-bota',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -483,8 +475,7 @@ const data: any = {
         sender: 'Planering och Bedömning',
         dateCreated: '2020-11-12T13:27:00.000Z',
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
-        url:
-          'https://www.nyteknik.se/sakerhet/ygeman-om-datalackan-i-skolplattformen-det-ar-upprorande-6968853',
+        url: 'https://www.nyteknik.se/sakerhet/ygeman-om-datalackan-i-skolplattformen-det-ar-upprorande-6968853',
         category: 'Lärlogg',
         messageType: 'avisering',
       },
@@ -496,7 +487,7 @@ export const user = (): User => ({
   personalNumber: '195001182046', // Test personal number from Skatteverket
   firstName: 'Namn',
   lastName: 'Namnsson',
-  isAuthenticated: true
+  isAuthenticated: true,
 })
 
 export const calendar = (child: Child): CalendarItem[] =>

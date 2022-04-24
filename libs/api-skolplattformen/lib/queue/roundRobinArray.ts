@@ -3,7 +3,7 @@ export default class RoundRobinArray<T> {
 
   array: T[]
 
-  constructor(array : Array<T>, index?: number | undefined) {
+  constructor(array: Array<T>, index?: number | undefined) {
     this.index = index || 0
 
     if (array === undefined || array === null) {
@@ -20,11 +20,15 @@ export default class RoundRobinArray<T> {
     return this.array[this.index]
   }
 
-  add(item : T) {
+  add(item: T) {
     this.array.push(item)
   }
 
-  get first() { return this.array[0] }
+  get first() {
+    return this.array[0]
+  }
 
-  get size() { return this.array.length }
+  get size() {
+    return this.array.length
+  }
 }

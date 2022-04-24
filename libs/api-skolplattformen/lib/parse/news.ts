@@ -1,6 +1,5 @@
-import { NewsItem, parseDate, toMarkdown } from '@skolplattformen/api';
+import { NewsItem, parseDate, toMarkdown } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
-
 
 const IMAGE_HOST =
   'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
@@ -30,8 +29,8 @@ export const newsItem = ({
 
 // Fixes https://github.com/kolplattformen/skolplattformen-app/issues/525
 const toNonEmptyMarkdownString = (str: string): string => {
-  const res = toMarkdown(str);
-  if(res?.length == 0 ) return ' ' 
+  const res = toMarkdown(str)
+  if (res?.length == 0) return ' '
   return res
 }
 

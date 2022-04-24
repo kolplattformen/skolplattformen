@@ -112,7 +112,7 @@ describe('api', () => {
       const personalNumber = 'my personal number'
       try {
         await api.login(personalNumber)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         expect(error.message).toEqual(expect.stringContaining('Server Error'))
       }

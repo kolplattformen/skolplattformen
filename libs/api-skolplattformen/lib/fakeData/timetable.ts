@@ -1,5 +1,4 @@
-import { Skola24Child, TimetableEntry } from "@skolplattformen/api"
-
+import { Skola24Child, TimetableEntry } from '@skolplattformen/api'
 
 export const timetable = (child: Skola24Child): TimetableEntry[] => {
   if (!child.personGuid || !child.unitGuid) return []
@@ -460,6 +459,6 @@ export const timetable = (child: Skola24Child): TimetableEntry[] => {
       timeStart: '10:40:00',
       dateStart: '2021-04-16T10:40:00.000+02:00',
       dateEnd: '2021-04-16T11:35:00.000+02:00',
-    }
+    },
   ]
 }

@@ -1,4 +1,4 @@
-import { EtjanstChild, Skola24Child } from "@skolplattformen/api"
+import { EtjanstChild, Skola24Child } from '@skolplattformen/api'
 
 export const children = (): EtjanstChild[] => [
   {
@@ -24,6 +24,6 @@ export const skola24Children = (): Skola24Child[] => [
     schoolGuid: 'def456',
     schoolID: 'Superskolan',
     timetableID: 'jkl012',
-    unitGuid: 'mno345'
+    unitGuid: 'mno345',
   },
 ]

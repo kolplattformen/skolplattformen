@@ -18,7 +18,7 @@ describe('Timetable', () => {
             italic: false,
             id: 9,
             parentId: 6,
-            type: 'ClockAxisBox'
+            type: 'ClockAxisBox',
           },
           {
             x: 11,
@@ -30,7 +30,7 @@ describe('Timetable', () => {
             italic: false,
             id: 12,
             parentId: 6,
-            type: 'ClockAxisBox'
+            type: 'ClockAxisBox',
           },
         ],
         boxList: [
@@ -44,7 +44,7 @@ describe('Timetable', () => {
             id: 0,
             parentId: null,
             type: 'Footer',
-            lessonGuids: null
+            lessonGuids: null,
           },
           {
             x: 56,
@@ -56,7 +56,7 @@ describe('Timetable', () => {
             id: 1,
             parentId: null,
             type: 'HeadingDay',
-            lessonGuids: null
+            lessonGuids: null,
           },
         ],
         lineList: [
@@ -68,7 +68,7 @@ describe('Timetable', () => {
             color: '#000000',
             id: 7,
             parentId: 6,
-            type: 'ClockAxisGradiation'
+            type: 'ClockAxisGradiation',
           },
           {
             p1x: 0,
@@ -78,35 +78,27 @@ describe('Timetable', () => {
             color: '#000000',
             id: 8,
             parentId: 6,
-            type: 'ClockAxisGradiation'
+            type: 'ClockAxisGradiation',
           },
         ],
         lessonInfo: [
           {
             guidId: 'N2FjMDc1NjYtZmM2Yy0wZDQyLTY3M2YtZWI5NGNiZDA3ZGU4',
-            texts: [
-              'Lunch',
-              '',
-              'Ö5'
-            ],
+            texts: ['Lunch', '', 'Ö5'],
             timeStart: '11:40:00',
             timeEnd: '12:05:00',
             dayOfWeekNumber: 1,
-            blockName: ''
+            blockName: '',
           },
           {
             guidId: 'ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw',
-            texts: [
-              'BL',
-              'KUr',
-              '221'
-            ],
+            texts: ['BL', 'KUr', '221'],
             timeStart: '09:40:00',
             timeEnd: '11:35:00',
             dayOfWeekNumber: 1,
-            blockName: 'block'
+            blockName: 'block',
           },
-        ]
+        ],
       },
       exception: null,
       validation: [],
@@ -116,7 +108,9 @@ describe('Timetable', () => {
     it('parses basic timeTableEntry data correctly', () => {
       const entry = timetableEntry(response.data.lessonInfo[1], 2021, 15, 'sv')
 
-      expect(entry.id).toEqual('ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw')
+      expect(entry.id).toEqual(
+        'ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw'
+      )
       expect(entry.code).toEqual('BL')
       expect(entry.name).toEqual('Bild')
       expect(entry.teacher).toEqual('KUr')
@@ -142,8 +136,12 @@ describe('Timetable', () => {
       const table = timetable(response, 2021, 15, 'sv')
 
       expect(table).toHaveLength(2)
-      expect(table[0].id).toEqual('N2FjMDc1NjYtZmM2Yy0wZDQyLTY3M2YtZWI5NGNiZDA3ZGU4')
-      expect(table[1].id).toEqual('ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw')
+      expect(table[0].id).toEqual(
+        'N2FjMDc1NjYtZmM2Yy0wZDQyLTY3M2YtZWI5NGNiZDA3ZGU4'
+      )
+      expect(table[1].id).toEqual(
+        'ZTQ1NWE0N2EtNzAwOS0wZTAzLTQ1ZDYtNTA1NWI4Y2JhNDYw'
+      )
     })
   })
 })

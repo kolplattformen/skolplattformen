@@ -99,15 +99,16 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     }
   }
 
-  public async getSessionHeaders(url: string): Promise<{ [index: string]: string }> {
+  public async getSessionHeaders(
+    url: string
+  ): Promise<{ [index: string]: string }> {
     const init = this.getRequestInit()
     const cookie = await this.cookieManager.getCookieString(url)
     return {
-        ...init.headers,
-        cookie,
+      ...init.headers,
+      cookie,
     }
   }
-
 
   public async getSession(
     url: string,
@@ -157,7 +158,10 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     status.on('OK', async () => {
       await this.retrieveSessionCookie()
 
-      const [user, ] = await Promise.all([this.getUser(), this.retrieveXsrfToken()])
+      const [user] = await Promise.all([
+        this.getUser(),
+        this.retrieveXsrfToken(),
+      ])
       this.personalNumber = user.personalNumber
 
       this.isLoggedIn = true
@@ -171,13 +175,10 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   }
 
   public async loginFreja(): Promise<FrejaLoginStatusChecker> {
-
     await this.clearSession()
 
     const loginUrl = routes.frejaLogin
     const loginResponse = await this.fetch('auth-ticket', loginUrl)
-
-
 
     // if (!ticketResponse.ok) {
     //   throw new Error(
@@ -190,15 +191,21 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
 
     console.log('getting freja login url: ' + cleanAppSwitchUrl)
 
-    const checkStatusSession  = await this.getSession(loginUrl, {
+    const checkStatusSession = await this.getSession(loginUrl, {
       redirect: 'manual',
     })
 
-
-    const status = checkFrejaStatus(this.fetch, cleanAppSwitchUrl, checkStatusSession)
+    const status = checkFrejaStatus(
+      this.fetch,
+      cleanAppSwitchUrl,
+      checkStatusSession
+    )
     status.on('APPROVED', async () => {
       await this.retrieveFrejaSessionCookie()
-      const [user, ] = await Promise.all([this.getUser(), this.retrieveXsrfToken()])
+      const [user] = await Promise.all([
+        this.getUser(),
+        this.retrieveXsrfToken(),
+      ])
       this.personalNumber = user.personalNumber
 
       this.isLoggedIn = true
@@ -212,7 +219,6 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     const parts = url.split('&')
     return parts[0]
   }
-
 
   public async setSessionCookie(sessionCookie: string): Promise<void> {
     // Manually set cookie in this call and let the cookieManager
@@ -238,27 +244,22 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
   }
 
   private async retrieveSessionCookie(): Promise<void> {
-
     const url = routes.loginCookie
     await this.fetch('login-cookie', url)
   }
 
   private async retrieveFrejaSessionCookie(): Promise<void> {
-
-    try{
+    try {
       const url = routes.frejaReturnUrl
       await this.fetch('freja-login-return-url', url)
-    } catch(error){
+    } catch (error) {
       console.log(JSON.stringify(error))
     }
 
-    try{
+    try {
       const url2 = routes.frejaLoginCookie
-      const session = await this.getSession(url2, {
-        redirect: 'manual',
-      })
-        await this.fetch('freja-login-cookie', url2)
-    }    catch(error2){
+      await this.fetch('freja-login-cookie', url2)
+    } catch (error2) {
       console.log(JSON.stringify(error2))
     }
   }
@@ -322,10 +323,14 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     const data = await response.json()
 
     const parsed = parse.children(data)
-    const useSpecialQueueModeForFSChildren = parsed.some((c) => (c.status || '').includes('FS'))
+    const useSpecialQueueModeForFSChildren = parsed.some((c) =>
+      (c.status || '').includes('FS')
+    )
 
-    if(useSpecialQueueModeForFSChildren) {
-      this.fetch = queueFetcherWrapper(this.fetch, (childId) => this.selectChildById(childId))
+    if (useSpecialQueueModeForFSChildren) {
+      this.fetch = queueFetcherWrapper(this.fetch, (childId) =>
+        this.selectChildById(childId)
+      )
     }
 
     return parsed
@@ -359,23 +364,26 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     const schoolForms = (child.status || '').split(';')
     let teachers: Teacher[] = []
 
-    for(let i = 0; i< schoolForms.length; i+=1){
+    for (let i = 0; i < schoolForms.length; i += 1) {
       const url = routes.teachers(child.sdsId, schoolForms[i])
-      // eslint-disable-next-line no-await-in-loop
-      const response = await this.fetch(`teachers_${schoolForms[i]}`, url, session)
-      // eslint-disable-next-line no-await-in-loop
+
+      const response = await this.fetch(
+        `teachers_${schoolForms[i]}`,
+        url,
+        session
+      )
+
       const data = await response.json()
-      teachers = [
-        ...teachers,
-        ...parse.teachers(data)
-      ]
+      teachers = [...teachers, ...parse.teachers(data)]
     }
 
     return teachers
   }
 
-  public async getSchoolContacts(child: EtjanstChild): Promise<SchoolContact[]> {
-    if(this.isFake) return fakeResponse(fake.schoolContacts(child))
+  public async getSchoolContacts(
+    child: EtjanstChild
+  ): Promise<SchoolContact[]> {
+    if (this.isFake) return fakeResponse(fake.schoolContacts(child))
 
     const url = routes.schoolContacts(child.sdsId, child.schoolId || '')
     const session = this.getRequestInit()
@@ -411,7 +419,6 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     return parse.news(data)
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private CheckResponseForCorrectChildStatus(
     response: Response,
     child: EtjanstChild
@@ -432,7 +439,12 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     item: NewsItem
   ): Promise<NewsItem | undefined> {
     if (this.isFake) {
-      return fakeResponse(fake.news(child).find((ni) => ni.id === item.id) || {id: "", published: ""})
+      return fakeResponse(
+        fake.news(child).find((ni) => ni.id === item.id) || {
+          id: '',
+          published: '',
+        }
+      )
     }
     const url = routes.newsDetails(child.id, item.id)
     const session = this.getRequestInit()
@@ -637,7 +649,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     return parse.timetable(json, year, week, lang)
   }
 
-  public async selectChild(child : EtjanstChild): Promise<EtjanstChild> {
+  public async selectChild(child: EtjanstChild): Promise<EtjanstChild> {
     const response = await this.selectChildById(child.id)
 
     const data = await response.json()
@@ -660,7 +672,11 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       }),
     })
 
-    const response = await this.fetch('selectChild', routes.selectChild, requestInit)
+    const response = await this.fetch(
+      'selectChild',
+      routes.selectChild,
+      requestInit
+    )
     return response
   }
 

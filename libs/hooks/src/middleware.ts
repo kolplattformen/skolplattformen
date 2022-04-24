@@ -70,7 +70,6 @@ export const apiMiddleware: IMiddleware =
         }
       }
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error(err)
     }
     return next(action)
@@ -105,7 +104,6 @@ export const cacheMiddleware: IMiddleware =
         }
       }
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error(err)
     }
     return next(action)

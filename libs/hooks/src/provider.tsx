@@ -54,7 +54,6 @@ export const ApiProvider: TApiProvider = ({
       api.off('login', handler)
       api.off('logout', handler)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [api])
 
   return (

@@ -10,9 +10,9 @@ const week = getDate().weekNumber.toString()
 const [child1, child2] = children()
 
 const menuData = new Map<string, MenuItem[]>([
-[
-  child1.id,
-     [
+  [
+    child1.id,
+    [
       {
         title: 'Måndag - Vecka ' + week,
         description: 'Kebabgryta ris<br/>Ratatouille med kikärter',
@@ -37,28 +37,33 @@ const menuData = new Map<string, MenuItem[]>([
       },
     ],
   ],
-  [child2.id,
+  [
+    child2.id,
     [
       {
-        title: "Måndag - Vecka " + week,
-        description: "Thailändsk kycklinggryta med kokosmjölk, rödcurry och jasminris<br/>Thailänsk grönsaksgryta med kokosmjölk, rödcurry och jasminris"
+        title: 'Måndag - Vecka ' + week,
+        description:
+          'Thailändsk kycklinggryta med kokosmjölk, rödcurry och jasminris<br/>Thailänsk grönsaksgryta med kokosmjölk, rödcurry och jasminris',
       },
       {
-        title: "Tisdag - Vecka " + week,
-        description: "Örtomlett med potatis , medelhavsost och olivtapenad"
+        title: 'Tisdag - Vecka ' + week,
+        description: 'Örtomlett med potatis , medelhavsost och olivtapenad',
       },
       {
-        title: "Onsdag - Vecka " + week,
-        description: "Spagetti med rökt kalkon , grädde, dijon och persilja<br/>Spagetti med rostade bönor , grädde , dijon och persilja"
+        title: 'Onsdag - Vecka ' + week,
+        description:
+          'Spagetti med rökt kalkon , grädde, dijon och persilja<br/>Spagetti med rostade bönor , grädde , dijon och persilja',
       },
       {
-        title: "Torsdag - Vecka " + week,
-        description: "Panerad flundra med dansk remoulad och koktåotatis<br/>morot och linsbiff med danska remoulad och koktpotatis"
+        title: 'Torsdag - Vecka ' + week,
+        description:
+          'Panerad flundra med dansk remoulad och koktåotatis<br/>morot och linsbiff med danska remoulad och koktpotatis',
       },
       {
-        title: "Fredag - Vecka " + week,
-        description: "Texaschili på högrev med picklad rödlök och bulgur<br/>Texaschili på svartabönor picklad rödlök och bulgur"
-      }
+        title: 'Fredag - Vecka ' + week,
+        description:
+          'Texaschili på högrev med picklad rödlök och bulgur<br/>Texaschili på svartabönor picklad rödlök och bulgur',
+      },
     ],
-  ]
+  ],
 ])

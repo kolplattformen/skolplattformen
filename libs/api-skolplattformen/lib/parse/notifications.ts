@@ -25,7 +25,10 @@ export const notification = ({
   type,
 })
 
-const notificationsSort = (item1: Notification, item2: Notification): number => {
+const notificationsSort = (
+  item1: Notification,
+  item2: Notification
+): number => {
   const m1 = item1.dateModified || item1.dateCreated
   const m2 = item2.dateModified || item2.dateCreated
   return m1 < m2 ? 1 : -1

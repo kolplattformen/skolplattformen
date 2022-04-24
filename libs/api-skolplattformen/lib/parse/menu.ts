@@ -1,7 +1,6 @@
 import { MenuItem, MenuList, toMarkdown } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
 
-
 export const menuItem = ({ title, description }: any): MenuItem => ({
   title,
   description: toMarkdown(description),
@@ -24,7 +23,7 @@ export const menuList = (data: any): MenuItem[] => {
   const menuItemsFS = [
     {
       title: `Måndag - Vecka ${currentWeek.week}`,
-      description: toMarkdown(currentWeek.mon) ,
+      description: toMarkdown(currentWeek.mon),
     },
     {
       title: `Tisdag - Vecka ${currentWeek.week}`,

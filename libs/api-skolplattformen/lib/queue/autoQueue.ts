@@ -29,13 +29,19 @@ export default class AutoQueue extends Queue {
   }
 
   public async dequeue() {
-    if (this.runningTasks >= this.maxConcurrentTasks) { return false }
+    if (this.runningTasks >= this.maxConcurrentTasks) {
+      return false
+    }
 
-    if (this.isPaused) { return false }
+    if (this.isPaused) {
+      return false
+    }
 
     const item = super.dequeue()
 
-    if (!item) { return false }
+    if (!item) {
+      return false
+    }
 
     try {
       this.runningTasks += 1
@@ -60,13 +66,15 @@ export default class AutoQueue extends Queue {
 
   public async start() {
     this.isPaused = false
-    // eslint-disable-next-line no-await-in-loop
+
     while (await this.dequeue()) {
       // do nothing
     }
   }
 
-  public get runningTaskCount() { return this.runningTasks }
+  public get runningTaskCount() {
+    return this.runningTasks
+  }
 
   public getQueueStatus() {
     return this.queueStatus

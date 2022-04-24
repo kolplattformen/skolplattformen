@@ -2,12 +2,12 @@ import AutoQueue from './autoQueue'
 import RoundRobinArray from './roundRobinArray'
 
 export interface QueueEntry {
-  id : string
-  queue : AutoQueue
+  id: string
+  queue: AutoQueue
 }
 
-function delay(time : any) {
-  return new Promise(resolve => setTimeout(resolve, time))
+function delay(time: any) {
+  return new Promise((resolve) => setTimeout(resolve, time))
 }
 
 /**
@@ -17,15 +17,15 @@ function delay(time : any) {
  * Why? The external api uses state where the child must be selected
  * before any calls to News etc can be done.
  *
-*/
+ */
 export default class QueueFetcher {
   private queues: RoundRobinArray<QueueEntry>
 
-  private currentRunningQueue : QueueEntry | undefined
+  private currentRunningQueue: QueueEntry | undefined
 
-  private changeChildFunc : (childId : string) => Promise<any>
+  private changeChildFunc: (childId: string) => Promise<any>
 
-  private lastChildId  = ''
+  private lastChildId = ''
 
   private scheduleTimeout: any
 
@@ -40,7 +40,7 @@ export default class QueueFetcher {
    * @param changeChildFunc function that is called to change the current
    * selected child on the server
    */
-  constructor(changeChildFunc : (childId : string) => Promise<any>) {
+  constructor(changeChildFunc: (childId: string) => Promise<any>) {
     this.changeChildFunc = changeChildFunc
     this.queues = new RoundRobinArray(new Array<QueueEntry>())
   }
@@ -54,7 +54,7 @@ export default class QueueFetcher {
    * @returns a Promise that resolves when the Promise created by the func is resolved
    * (i.e. is dequeued and executed)
    */
-  public async fetch<T>(func : () => Promise<T>, id : string) : Promise<T> {
+  public async fetch<T>(func: () => Promise<T>, id: string): Promise<T> {
     if (!this.queues.array.some((e) => e.id === id)) {
       const newQueue = new AutoQueue(10)
       this.queues.add({ id, queue: newQueue })
@@ -73,7 +73,9 @@ export default class QueueFetcher {
     return promise
   }
 
-  public get Queues() { return this.queues.array }
+  public get Queues() {
+    return this.queues.array
+  }
 
   /**
    * Method to schedule next queue
@@ -81,10 +83,9 @@ export default class QueueFetcher {
    */
   async schedule() {
     // Debug print info for all queues
-    this.queues.array.forEach(({ id: childId, queue }) => this.debug(
-      'Schedule: ',
-      childId, '=>', queue.getQueueInfo(),
-    ))
+    this.queues.array.forEach(({ id: childId, queue }) =>
+      this.debug('Schedule: ', childId, '=>', queue.getQueueInfo())
+    )
 
     if (this.queues.size === 0) {
       this.debug('No queues created yet')
@@ -130,10 +131,9 @@ export default class QueueFetcher {
     })
   }
 
-  private async runNext(queueToRun : QueueEntry) {
+  private async runNext(queueToRun: QueueEntry) {
     const { id: childId, queue } = queueToRun
     this.debug('About to run', childId, queue.getQueueInfo())
-
 
     if (this.lastChildId === childId) {
       this.debug('Child already selected, skipping select call')
@@ -154,20 +154,21 @@ export default class QueueFetcher {
     this.scheduleTimeout = setTimeout(async () => this.schedule(), 3000)
   }
 
-  private findNextQueueToRun() : QueueEntry | undefined {
+  private findNextQueueToRun(): QueueEntry | undefined {
     // Iterate all queues and look for next queue with work to do
     for (let i = 0; i < this.queues.size; i += 1) {
       const { id: childId, queue } = this.queues.next()
 
       // If queue has items to execute, return it
-      if (queue.size > 0 || queue.runningTaskCount > 0) return { id: childId, queue }
+      if (queue.size > 0 || queue.runningTaskCount > 0)
+        return { id: childId, queue }
     }
 
     // Nothing more to do
     return undefined
   }
 
-  private debug(message : any, ...args : any[]) {
+  private debug(message: any, ...args: any[]) {
     if (this.verboseDebug) {
       console.debug(message, ...args)
     }

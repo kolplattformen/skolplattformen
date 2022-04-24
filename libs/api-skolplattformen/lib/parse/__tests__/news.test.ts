@@ -19,7 +19,8 @@ describe('news', () => {
               NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
               NewsItemId:
                 'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
-              Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
+              Header:
+                'Problemet med att se betyg i bild, slöjd och teknik löst!',
               PublicationDate: '/Date(1608304542000)/',
               PubDateSE: '18 december 2020 16:15',
               ModifiedDate: '/Date(1608304680000)/',
@@ -30,8 +31,7 @@ describe('news', () => {
               BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
               BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
               BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
-              Body:
-                '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
+              Body: '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
               BodyNoHtml: null,
               AuthorDisplayName: 'Eva-Lotta Rönnberg',
               altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -108,7 +108,8 @@ describe('news', () => {
               NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
               NewsItemId:
                 'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
-              Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
+              Header:
+                'Problemet med att se betyg i bild, slöjd och teknik löst!',
               PublicationDate: '/Date(1608304542000)/',
               PubDateSE: '18 december 2020 16:15',
               ModifiedDate: '/Date(1608304680000)/',
@@ -119,8 +120,7 @@ describe('news', () => {
               BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
               BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
               BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
-              Body:
-                '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
+              Body: '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
               BodyNoHtml: null,
               AuthorDisplayName: 'Eva-Lotta Rönnberg',
               altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -132,7 +132,8 @@ describe('news', () => {
               NewsListId: '3EC323A1-EA16-4D24-84C8-DAA49E76F9F4',
               NewsItemId:
                 'elevstockholm.sharepoint.com,27892ACC-BA2E-4DEC-97B8-25F7098C3BF6,A239466A-9A52-42FF-8A3F-D94C342F2700_99',
-              Header: 'Problemet med att se betyg i bild, slöjd och teknik löst!',
+              Header:
+                'Problemet med att se betyg i bild, slöjd och teknik löst!',
               PublicationDate: '/Date(1608304542000)/',
               PubDateSE: '18 november 2021 16:15',
               ModifiedDate: '/Date(1608304680000)/',
@@ -143,8 +144,7 @@ describe('news', () => {
               BannerImageUrl: 'A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg',
               BannerImageGuid: 'A703552D-DBF3-45B0-8E67-6E062105A0C5',
               BannerImageListId: 'FFBE49E9-BDE1-4C75-BA0E-D98D4E2FCF21',
-              Body:
-                '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
+              Body: '<div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;1212fc8d-dd6b-408a-8d5d-9f1cc787efbb&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;2,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;zoneIndex&quot;&#58;1,&quot;layoutIndex&quot;&#58;1&#125;,&quot;addedFromPersistedData&quot;&#58;true,&quot;emphasis&quot;&#58;&#123;&#125;&#125;"><div data-sp-rte=""><p>Hej,</p><p>Nu är problemet löst! Alla betyg syns som de ska.&#160;</p><p>God jul!</p></div></div><div data-sp-canvascontrol="" data-sp-canvasdataversion="1.0" data-sp-controldata="&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;"></div></div>',
               BodyNoHtml: null,
               AuthorDisplayName: 'Eva-Lotta Rönnberg',
               altText: 'Nyhetsbild. Bildtext ej tillgänglig.',
@@ -206,8 +206,7 @@ describe('newsItem', () => {
           BannerImageUrl: '123123.jpeg',
           BannerImageGuid: '7a8142d9d9d54cf090e8457e4c629227',
           BannerImageListId: 'a88c22e8-7094-4a71-b4fd-8792c62a7b4a',
-          Body:
-            '<div data-sp-rte=""><p><span><span><span>Kära vårdnadshavare!</span></span></span></p><p><span><span><span>I helgen är det avlusningsdagar! Ta <strong>tillfället </strong>i akt att luskamma ditt barn </span></span></span></p><p><span><span><span>Du finner all info du behöver på <a href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-cke-saved-href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-interception="on" title="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/">1177 hemsida </a></span></span></span><span><span><span>​​​​​​​</span></span></span></p><p><span><span><span>Trevlig helg!</span></span></span></p><p><span><span><span>​​​​​​​</span></span></span></p></div>',
+          Body: '<div data-sp-rte=""><p><span><span><span>Kära vårdnadshavare!</span></span></span></p><p><span><span><span>I helgen är det avlusningsdagar! Ta <strong>tillfället </strong>i akt att luskamma ditt barn </span></span></span></p><p><span><span><span>Du finner all info du behöver på <a href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-cke-saved-href="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/" data-interception="on" title="https&#58;//www.1177.se/sjukdomar--besvar/hud-har-och-naglar/harbotten-och-harsackar/huvudloss/">1177 hemsida </a></span></span></span><span><span><span>​​​​​​​</span></span></span></p><p><span><span><span>Trevlig helg!</span></span></span></p><p><span><span><span>​​​​​​​</span></span></span></p></div>',
           BodyNoHtml: null,
           AuthorDisplayName: 'Tieto Evry',
           altText: null,
@@ -264,7 +263,6 @@ describe('newsItem', () => {
   })
 })
 
-
 describe('newsItem', () => {
   beforeEach(() => {
     response = {
@@ -288,8 +286,7 @@ describe('newsItem', () => {
           BannerImageUrl: '123123.jpeg',
           BannerImageGuid: '7a8142d9d9d54cf090e8457e4c629227',
           BannerImageListId: 'a88c22e8-7094-4a71-b4fd-8792c62a7b4a',
-          Body:
-            '<i>italic</i>  <b>bold</b>  <em>emphasis </em><br/><strong>strong</strong><strong>nbsp&#160;</strong>',
+          Body: '<i>italic</i>  <b>bold</b>  <em>emphasis </em><br/><strong>strong</strong><strong>nbsp&#160;</strong>',
           BodyNoHtml: null,
           AuthorDisplayName: 'Tieto Evry',
           altText: null,

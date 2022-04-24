@@ -1,6 +1,6 @@
 import QueueFetcher from '../queue/queueFetcher'
 
-let sut : QueueFetcher
+let sut: QueueFetcher
 beforeEach(() => {
   jest.useFakeTimers('legacy')
   sut = new QueueFetcher(async () => '')

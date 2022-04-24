@@ -33,7 +33,6 @@ const appReducer = combineReducers({
 })
 const rootReducer: typeof appReducer = (state, action) => {
   if (action.type === 'CLEAR') {
-    // eslint-disable-next-line no-param-reassign
     state = undefined
   }
   return appReducer(state, action)
