@@ -25,7 +25,7 @@
         },
         "freja": {
             "OpenManually": "Open Freja eID+ manually",
-            "OpenOnThisDevice": "Freja eID+",
+            "OpenOnThisDevice": "Open Freja eID+ on this device",
             "Waiting": "Waiting for Freja eID+…"
         },
         "chooseLoginMethod": "Choose login method",
