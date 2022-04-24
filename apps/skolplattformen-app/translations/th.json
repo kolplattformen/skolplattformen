@@ -35,7 +35,10 @@
         "subtitle": "ทางเลือกที่{{word}}",
         "placeholder_SocialSecurityNumber": "เลขบัตรประจำตัวประชาชนของคุณ",
         "a11y_change_language": "เลือกภาษา",
-        "a11y_select_login_method": "เลือกวิธีการเข้าสู่ระบบ"
+        "a11y_select_login_method": "เลือกวิธีการเข้าสู่ระบบ",
+        "freja": {
+            "Waiting": "กำลังรอ Freja eID+…"
+        }
     },
     "language": {
         "changeLanguageButton": "บันทึก",
