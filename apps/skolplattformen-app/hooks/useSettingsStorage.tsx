@@ -7,7 +7,11 @@ export type ChildPersonalNumbers = Record<string, string>
 export const settingsState = proxy({
   hydrated: false,
   settings: {
-    loginMethodId: 'thisdevice' as 'thisdevice' | 'otherdevice' | 'testuser',
+    loginMethodId: 'thisdevice' as
+      | 'thisdevice'
+      | 'otherdevice'
+      | 'testuser'
+      | 'freja',
     usingSystemTheme: true,
     theme: 'light',
     cachedPersonalIdentityNumber: '',

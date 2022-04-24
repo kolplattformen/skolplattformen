@@ -23,10 +23,16 @@
             "OpenOnThisDevice": "Open BankID on this device",
             "Waiting": "Waiting for BankID…"
         },
+        "freja": {
+            "OpenManually": "Open Freja eID+ manually",
+            "OpenOnThisDevice": "Freja eID+",
+            "Waiting": "Waiting for Freja eID+…"
+        },
         "chooseLoginMethod": "Choose login method",
         "chooseSchoolPlatform": "Choose platform",
         "loginAsTestUser": "Log in as a test user",
         "loginFailed": "Could not log in. Please try again.",
+        "loginSuccessful": "Login successful, loading…",
         "placeholder_SocialSecurityNumber": "Your personal identity number",
         "subtitle": "The {{word}} alternative",
         "words": {

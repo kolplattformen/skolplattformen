@@ -16,6 +16,7 @@ import Personnummer from 'personnummer'
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
+  ImageProps,
   Linking,
   Platform,
   TouchableWithoutFeedback,
@@ -43,18 +44,13 @@ const BankId = () => (
     accessibilityIgnoresInvertColors
   />
 )
-
-interface Logins {
-  BANKID_SAME_DEVICE: number
-  BANKID_ANOTHER_DEVICE: number
-  TEST_USER: number
-}
-
-const LoginMethods: Logins = {
-  BANKID_SAME_DEVICE: 0,
-  BANKID_ANOTHER_DEVICE: 2,
-  TEST_USER: 3,
-}
+const FrejaEid = () => (
+  <Image
+    style={themedStyles.icon}
+    source={require('../assets/freja_eid_low.png')}
+    accessibilityIgnoresInvertColors
+  />
+)
 
 export const Login = () => {
   const { api } = useApi()
@@ -66,6 +62,7 @@ export const Login = () => {
   const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] =
     useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [loginStatusText, setLoginStatusText] = useState('')
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
@@ -74,6 +71,7 @@ export const Login = () => {
   const loginBankIdSameDeviceWithoutId = useFeature(
     'LOGIN_BANK_ID_SAME_DEVICE_WITHOUT_ID'
   )
+  const loginWithFrejaEnabled = useFeature('LOGIN_FREJA_EID')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
   )
@@ -85,8 +83,13 @@ export const Login = () => {
   const loginMethods = [
     { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
     { id: 'otherdevice', title: t('auth.bankid.OpenOnAnotherDevice') },
+    { id: 'freja', title: t('auth.freja.OpenOnThisDevice') },
     { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
+
+  if (loginMethodId === 'freja' && !loginWithFrejaEnabled) {
+    setLoginMethodId('thisdevice')
+  }
 
   const loginHandler = async () => {
     const user = await api.getUser()
@@ -100,6 +103,12 @@ export const Login = () => {
       api.off('login', loginHandler)
     }
   }, [api])
+
+  const LoginProviderImage = () => {
+    //if(loginMethodId == 'testuser') return undefined
+    if (loginMethodId === 'freja') return FrejaEid()
+    return BankId()
+  }
 
   const getSchoolPlatformName = () => {
     return schoolPlatforms.find((item) => item.id === currentSchoolPlatform)
@@ -120,12 +129,47 @@ export const Login = () => {
     }
   }
 
+  const openFreja = (token: string) => {
+    try {
+      const originAppScheme = encodeURIComponent(schema)
+      const frejaUrl =
+        Platform.OS === 'ios'
+          ? `${token}&originAppScheme=${originAppScheme}`
+          : `${token}`
+      Linking.openURL(frejaUrl)
+    } catch (err) {
+      setError(t('auth.freja.OpenManually'))
+    }
+  }
+
   const isUsingPersonalIdNumber =
     loginMethodId === 'otherdevice' ||
     (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
 
   const startLogin = async (text: string) => {
-    if (loginMethodId === 'thisdevice' || loginMethodId === 'otherdevice') {
+    if (loginMethodId === 'freja') {
+      setLoginStatusText(t('auth.freja.Waiting'))
+      showModal(true)
+      const status = await api.loginFreja()
+      setCancelLoginRequest(() => () => status.cancel())
+      openFreja(status.token)
+      status.on('STARTED', () => console.log('Freja eID app not yet opened'))
+      status.on('DELIVERED_TO_MOBILE', () =>
+        console.log('Freja eID app is open')
+      )
+      status.on('CANCELLED', () => {
+        console.log('User pressed cancel in Freja eID')
+        showModal(false)
+      })
+      status.on('APPROVED', () => {
+        console.log('Freja eID ok')
+        setLoginStatusText(t('auth.loginSuccessful'))
+      })
+    } else if (
+      loginMethodId === 'thisdevice' ||
+      loginMethodId === 'otherdevice'
+    ) {
+      setLoginStatusText(t('auth.bankid.Waiting'))
       showModal(true)
 
       let ssn
@@ -150,7 +194,10 @@ export const Login = () => {
         setError(t('auth.loginFailed'))
         showModal(false)
       })
-      status.on('OK', () => console.log('BankID ok'))
+      status.on('OK', () => {
+        console.log('BankID ok')
+        setLoginStatusText(t('auth.loginSuccessful'))
+      })
     } else {
       await api.login('201212121212')
     }
@@ -200,7 +247,7 @@ export const Login = () => {
             appearance="ghost"
             disabled={isUsingPersonalIdNumber && !valid}
             status="primary"
-            accessoryLeft={BankId}
+            accessoryLeft={LoginProviderImage}
             size="medium"
           >
             {currentLoginMethod.title}
@@ -245,7 +292,11 @@ export const Login = () => {
             {t('auth.chooseLoginMethod')}
           </Text>
           <List
-            data={loginMethods}
+            data={
+              loginWithFrejaEnabled
+                ? loginMethods
+                : loginMethods.filter((f) => f.id !== 'freja')
+            }
             ItemSeparatorComponent={Divider}
             renderItem={({ item, index }) => (
               <ListItem
@@ -279,8 +330,7 @@ export const Login = () => {
         backdropStyle={styles.backdrop}
       >
         <Card disabled>
-          <Text style={styles.bankIdLoading}>{t('auth.bankid.Waiting')}</Text>
-
+          <Text style={styles.bankIdLoading}>{loginStatusText}</Text>
           <Button
             status="primary"
             accessible={true}

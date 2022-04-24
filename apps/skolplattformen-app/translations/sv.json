@@ -23,10 +23,16 @@
             "OpenOnThisDevice": "Logga in med BankID",
             "Waiting": "Väntar på BankID…"
         },
+        "freja": {
+            "OpenManually": "Öppna Freja eID+ manuellt",
+            "OpenOnThisDevice": "Logga in med Freja eID+",
+            "Waiting": "Väntar på Freja eID+…"
+        },
         "chooseLoginMethod": "Välj inloggningsmetod",
         "chooseSchoolPlatform": "Välj plattform",
         "loginAsTestUser": "Logga in som testanvändare",
         "loginFailed": "Inloggningen misslyckades, försök igen!",
+        "loginSuccessful": "Du är inloggad! - laddar…",
         "placeholder_SocialSecurityNumber": "Ditt personnummer",
         "subtitle": "Det {{word}} alternativet",
         "words": {
