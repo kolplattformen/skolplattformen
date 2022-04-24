@@ -51,8 +51,8 @@ export const apiMiddleware: IMiddleware =
                 }
                 storeApi.dispatch(errorAction)
 
-                // Retry 3 times
-                if (retries < 3) {
+                // Retry 7 times
+                if (retries < 7) {
                   const retryAction: EntityAction<any> = {
                     ...action,
                     type: 'GET_FROM_API',
@@ -63,7 +63,7 @@ export const apiMiddleware: IMiddleware =
                   }
                   setTimeout(() => {
                     storeApi.dispatch(retryAction)
-                  }, retries * 500)
+                  }, 2 ** retries * 100)
                 }
               })
           }
