@@ -1,3 +1,10 @@
+## [2.15.1](https://github.com/kolplattformen/skolplattformen/compare/v2.15.0...v2.15.1) (2022-04-24)
+
+
+### Bug Fixes
+
+* 🐛 Tweak retry in Hooks lib to exponential with 7 retries ([5577c7f](https://github.com/kolplattformen/skolplattformen/commit/5577c7fe425c2f2700ff32b39185a40e62952b87))
+
 # [2.15.0](https://github.com/kolplattformen/skolplattformen/compare/v2.14.0...v2.15.0) (2022-04-24)
 
 
