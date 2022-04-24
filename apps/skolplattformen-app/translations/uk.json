@@ -51,7 +51,12 @@
         "a11y_change_language": "Оберіть вашу мову",
         "a11y_image_two_boys": "Зображення двох людей, які перевіряють свої телефони",
         "a11y_clear_social_security_input_field": "Очистити поле вводу ідентифікаційного номера",
-        "a11y_select_login_method": "Оберіть як увійти"
+        "a11y_select_login_method": "Оберіть як увійти",
+        "freja": {
+            "Waiting": "Очікую на Freja eID+…",
+            "OpenManually": "Відкрити Freja eID+ власноруч",
+            "OpenOnThisDevice": "Відкрити Freja eID+ на цьому пристрої"
+        }
     },
     "calender": {
         "approveAccessToCalender": "Вам потрібно дозволити доступ до вашого календаря",
