@@ -1,3 +1,25 @@
+# [2.15.0](https://github.com/kolplattformen/skolplattformen/compare/v2.14.0...v2.15.0) (2022-04-24)
+
+
+### Bug Fixes
+
+* 🐛 Bytte ut Freja eID till Freja eID+. Lade till polska ([a611460](https://github.com/kolplattformen/skolplattformen/commit/a6114608edfc464aa3bca4b13733d10c11bb934d))
+* 🐛 dummy login i hjarntorget ([38cc762](https://github.com/kolplattformen/skolplattformen/commit/38cc7626adcbb79bf2dcb74c6a98666c44b37f69))
+* 🐛 Fix failing test in Curriculum ([8724fa4](https://github.com/kolplattformen/skolplattformen/commit/8724fa46b714d8ad2804c23e39c801cadc21d488))
+* 🐛 fix for iOS ([8e3a9c1](https://github.com/kolplattformen/skolplattformen/commit/8e3a9c139034bdec50d3f9df0f41dd79d49abb8b))
+* 🐛 Fulfix. Login funkar ([c5bec5f](https://github.com/kolplattformen/skolplattformen/commit/c5bec5f9eee06fd1c47b7993ff9aab3d10771276))
+* 🐛 Öppna på Android utan originAppScheme ([30b5bbb](https://github.com/kolplattformen/skolplattformen/commit/30b5bbb51efb31f67ffc5c4665d6933ec51fba5a))
+* 🐛 Rensa sessionen innan Freja login ([bc2625d](https://github.com/kolplattformen/skolplattformen/commit/bc2625dc598594f004c9d193a653514020533866))
+
+
+### Features
+
+* 🎸 Bara visa Freja om det finns tillgängligt i api ([0c64f5a](https://github.com/kolplattformen/skolplattformen/commit/0c64f5ae35d1a2d1a8cd0b16bda942e9fd619e3f))
+* 🎸 Freja logo om login button ([170b4da](https://github.com/kolplattformen/skolplattformen/commit/170b4da39ae771953824a5c9be72c843ede96714))
+* 🎸 Logga in med Freja eID+ ([d9c62a6](https://github.com/kolplattformen/skolplattformen/commit/d9c62a6d91abc30b376fc9233108655a0da9fd5b))
+* 🎸 Rätt text för rätt inloggning i modal ([be22fd8](https://github.com/kolplattformen/skolplattformen/commit/be22fd8cd35b4086b80758df132036f2d5957382))
+* 🎸 Ukrainska ([8b2b680](https://github.com/kolplattformen/skolplattformen/commit/8b2b680c175f95c54fb945fba06d798cc881c809))
+
 # [2.14.0](https://github.com/kolplattformen/skolplattformen/compare/v2.13.0...v2.14.0) (2022-04-06)
 
 
