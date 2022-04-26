@@ -24,8 +24,8 @@
             "Waiting": "Väntar på BankID…"
         },
         "freja": {
-            "OpenManually": "Öppna Freja eID+ manuellt",
-            "OpenOnThisDevice": "Öppna Freja eID+ på denna enhet",
+            "OpenManually": "Logga in med Freja eID+",
+            "OpenOnThisDevice": "Logga in med Freja eID+",
             "Waiting": "Väntar på Freja eID+…"
         },
         "chooseLoginMethod": "Välj inloggningsmetod",
