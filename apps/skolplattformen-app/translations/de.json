@@ -19,8 +19,8 @@
     "auth": {
         "bankid": {
             "OpenManually": "BankID manuell öffnen",
-            "OpenOnAnotherDevice": "BankID auf einem anderen Gerät benutzen",
-            "OpenOnThisDevice": "BankID auf diesem Gerät benutzen",
+            "OpenOnAnotherDevice": "BankID auf einem anderen Gerät öffnen",
+            "OpenOnThisDevice": "BankID auf diesem Gerät öffnen",
             "Waiting": "Wartet auf BankID…"
         },
         "chooseLoginMethod": "Anmeldemethode auswählen",
@@ -51,7 +51,13 @@
         "a11y_clear_social_security_input_field": "Personenkennziffer-Feld löschen",
         "a11y_image_two_boys": "Bild von zwei Personen, die ihre Mobiltelefon überprüfen",
         "a11y_change_language": "Wähle deine Sprache",
-        "chooseSchoolPlatform": "Plattform wählen"
+        "chooseSchoolPlatform": "Plattform wählen",
+        "freja": {
+            "Waiting": "Wartet auf Freja eID+…",
+            "OpenManually": "Freja eID+ manuell öffnen",
+            "OpenOnThisDevice": "Freja eID+ auf diesem Gerät öffnen"
+        },
+        "loginSuccessful": "Eingeloggt, wird geladen…"
     },
     "calender": {
         "approveAccessToCalender": "Du musst Zugriff auf deinen Kalender erlauben",

@@ -4,29 +4,29 @@
         "loginFailed": "Nomen dare non possibilis erat. Denuo conare.",
         "chooseLoginMethod": "Methodum nomen dare legere",
         "bankid": {
-            "Waiting": "Pro BankID exspectans…",
+            "Waiting": "BankID exspectans…",
             "OpenOnThisDevice": "In hac machina BankID aperire",
             "OpenOnAnotherDevice": "In machina differenti BankID aperire",
-            "OpenManually": "Manu BankID aperire"
+            "OpenManually": "Manualiter BankID aperire"
         },
         "words": {
-            "awaited": "exspectatus",
+            "awaited": "exspectata",
             "agile": "agilis",
             "better": "melior",
             "cheap": "vilis",
             "cooler": "amatior",
             "working": "operans",
-            "simple": "simplus",
+            "simple": "simplex",
             "rebellious": "rebellis",
-            "open": "apertus",
-            "imperfect": "imperfectus",
+            "open": "aperta",
+            "imperfect": "imperfecta",
             "fun": "oblectans",
-            "free": "liber",
-            "fast": "celer",
-            "fantastic": "mirificus",
-            "enlightened": "illuminatus",
-            "first": "primus",
-            "homemade": "domi factus"
+            "free": "libera",
+            "fast": "celeris",
+            "fantastic": "mirifica",
+            "enlightened": "illuminata",
+            "first": "prima",
+            "homemade": "domi facta"
         },
         "subtitle": "Optio {{word}}",
         "loginAsTestUser": "In parte investigatoris nomen dare",
@@ -34,7 +34,13 @@
         "a11y_change_language": "Linguam legere",
         "a11y_image_two_boys": "Pictura duobus hominibus telephona sua specientibus",
         "a11y_clear_social_security_input_field": "Cellam numeri personalis vacuare",
-        "chooseSchoolPlatform": "Rostra legere"
+        "chooseSchoolPlatform": "Rostra legere",
+        "loginSuccessful": "Nomen tuum datum est, carricans…",
+        "freja": {
+            "OpenManually": "Manualiter Freja eID+ aperire",
+            "Waiting": "Freja eID+ exspectans…",
+            "OpenOnThisDevice": "In hac machina Freja eID+ aperire"
+        }
     },
     "abscense": {
         "title": "Absentiam referre",
@@ -138,7 +144,7 @@
         "licenses": "Licentiae",
         "appearance": "Species",
         "language": "Lingua",
-        "themeAuto": "Automatus",
+        "themeAuto": "Automato",
         "useSystemTheme": "Themate lucido/obscuro systemae uti",
         "settings": "Configurationes",
         "theme": "Thema"
