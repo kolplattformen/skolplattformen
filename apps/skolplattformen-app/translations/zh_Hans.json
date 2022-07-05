@@ -51,14 +51,22 @@
         "a11y_change_language": "选择您的语言",
         "a11y_image_two_boys": "两个人看手机的图片",
         "a11y_select_login_method": "选择登录方式",
-        "chooseSchoolPlatform": "选择平台"
+        "chooseSchoolPlatform": "选择平台",
+        "freja": {
+            "OpenManually": "手动打开 Freja eID+",
+            "OpenOnThisDevice": "在此设备上打开 Freja eID+",
+            "Waiting": "正在等待 Freja eID+ 响应…"
+        },
+        "loginSuccessful": "登录成功，正在加载…"
     },
     "calender": {
         "saveToCalender": "保存到日历中",
         "saveToCalenderError": "出了点问题",
         "saveToCalenderSuccess": "✔️ 已保存到日历中",
         "showCalenderActions": "显示日历操作",
-        "approveAccessToCalender": "您必须允许访问日历"
+        "approveAccessToCalender": "您必须允许访问日历",
+        "emptyHeadline": "日历看起来有点空",
+        "emptyText": "找不到任何可以显示的东西"
     },
     "children": {
         "loadingErrorHeading": "啊噢！",
@@ -80,7 +88,8 @@
         "send": "发送",
         "socialSecurityNumber": "个人身份号码",
         "title": "开放学校平台",
-        "settings": "设置"
+        "settings": "设置",
+        "tomorrow": "明天"
     },
     "language": {
         "changeLanguage": "更改语言",
@@ -128,7 +137,8 @@
         "start": "开始",
         "end": "结束",
         "lunch": "午餐",
-        "gymBag": "健身袋"
+        "gymBag": "健身袋",
+        "week": "星期"
     },
     "classmates": {
         "class": "课堂",
