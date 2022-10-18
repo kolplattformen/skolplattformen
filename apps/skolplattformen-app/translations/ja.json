@@ -83,6 +83,7 @@
     "calender": {
         "approveAccessToCalender": "カレンダーのアクセスを許可する必要があります",
         "saveToCalenderError": "エラーが発生しました",
-        "saveToCalender": "カレンダーに保存する"
+        "saveToCalender": "カレンダーに保存する",
+        "saveToCalenderSuccess": "✔️ カレンダーへに保存しました"
     }
 }
