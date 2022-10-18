@@ -54,16 +54,25 @@
             "awaited": "待ち受ける"
         },
         "subtitle": "{{word}}の選択肢",
-        "chooseLoginMethod": "ログイン方法を選択してください",
+        "chooseLoginMethod": "ログインする方法を選ぶ",
         "loginAsTestUser": "テスト・ユーザーでログインしてください",
         "bankid": {
-            "OpenManually": "BankIDを手動で開く",
+            "OpenManually": "手動でBankIDを開ける",
             "OpenOnAnotherDevice": "別のデバイスでBankIDを使用する",
             "Waiting": "BankIDを待っています…",
             "OpenOnThisDevice": "このデバイスでBankIDを使用する"
         },
         "loginFailed": "ログインできませんでした。再試行してください。",
-        "placeholder_SocialSecurityNumber": "あなたの個人番号"
+        "placeholder_SocialSecurityNumber": "あなたの個人番号",
+        "freja": {
+            "OpenOnThisDevice": "このデバイスで Freja eID+を使用する",
+            "OpenManually": "手動でFreja eID+を開ける",
+            "Waiting": "Freja eID+を待っている。。。"
+        },
+        "a11y_clear_social_security_input_field": "個人識別番号のフィールドを空にする",
+        "chooseSchoolPlatform": "プラットフォームを選ぶ",
+        "loginSuccessful": "ログインは完成した、よみこんでいる。。。",
+        "a11y_select_login_method": "ログインする方法を選ぶ"
     },
     "language": {
         "changeLanguage": "他の言語を選択"
@@ -73,6 +82,7 @@
     },
     "calender": {
         "approveAccessToCalender": "カレンダーのアクセスを許可する必要があります",
-        "saveToCalenderError": "エラーが発生しました"
+        "saveToCalenderError": "エラーが発生しました",
+        "saveToCalender": "カレンダーに保存する"
     }
 }
