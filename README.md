@@ -8,9 +8,7 @@ Give us a ⭐ if you appreciate what we do!
 [![Translation status](https://hosted.weblate.org/widgets/skolplattformen/-/svg-badge.svg)](https://hosted.weblate.org/engage/skolplattformen/)
 [![Build Status](https://app.bitrise.io/app/8e56bd02bc602da5/status.svg?token=h8gI2dB_jXLurj9EO_fXWw)](https://app.bitrise.io/app/8e56bd02bc602da5)
 
-We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians.
-P
-If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
+We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
 This main repository for the project contains the source code for both the [app](apps/skolplattformen-app) and its [website](https://skolplattformen.org/). \
