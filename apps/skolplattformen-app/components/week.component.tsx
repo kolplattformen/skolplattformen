@@ -107,11 +107,11 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 }
 
 export const Week = ({ child }: WeekProps) => {
-  const locale = LanguageService.getLocale();
+  const locale = LanguageService.getLocale()
   moment.updateLocale(locale, {
     week: {
-      dow : 1, // Monday is the first day of the week.
-    }
+      dow: 1, // Monday is the first day of the week.
+    },
   })
   moment.locale(locale)
   const days = moment.weekdaysShort().slice(1, 6)
