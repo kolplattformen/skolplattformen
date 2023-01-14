@@ -1,3 +1,10 @@
+## [2.15.3](https://github.com/kolplattformen/skolplattformen/compare/v2.15.2...v2.15.3) (2023-01-14)
+
+
+### Bug Fixes
+
+* 🐛 Week starts on monday regardless of selected locale ([#642](https://github.com/kolplattformen/skolplattformen/issues/642)) ([7e8ee95](https://github.com/kolplattformen/skolplattformen/commit/7e8ee956f4c638c9b51e033b75d808c2d8d8e62d))
+
 ## [2.15.2](https://github.com/kolplattformen/skolplattformen/compare/v2.15.1...v2.15.2) (2022-04-24)
 
 
