@@ -1,3 +1,10 @@
+## [2.15.4](https://github.com/kolplattformen/skolplattformen/compare/v2.15.3...v2.15.4) (2023-01-14)
+
+
+### Bug Fixes
+
+* 🐛 Better fix for the isoWeek bug in Timetable ([ea6b385](https://github.com/kolplattformen/skolplattformen/commit/ea6b385b4f56a4565796fab15afa71e00cea2a9e))
+
 ## [2.15.3](https://github.com/kolplattformen/skolplattformen/compare/v2.15.2...v2.15.3) (2023-01-14)
 
 
