@@ -107,13 +107,7 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 }
 
 export const Week = ({ child }: WeekProps) => {
-  const locale = LanguageService.getLocale()
-  moment.updateLocale(locale, {
-    week: {
-      dow: 1, // Monday is the first day of the week.
-    },
-  })
-  moment.locale(locale)
+  moment.locale(LanguageService.getLocale())
   const days = moment.weekdaysShort().slice(1, 6)
   const displayDate = getMeaningfulStartingDate(moment())
 
@@ -165,7 +159,10 @@ export const Week = ({ child }: WeekProps) => {
                 <>
                   <Text style={styles.tabTitle}>{weekDay}</Text>
                   <Text style={styles.tabTitleDate}>
-                    {displayDate.startOf('week').add(index, 'day').format('D')}
+                    {displayDate
+                      .startOf('isoWeek')
+                      .add(index, 'day')
+                      .format('D')}
                   </Text>
                 </>
               )}
