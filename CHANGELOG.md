@@ -1,3 +1,10 @@
+## [2.15.5](https://github.com/kolplattformen/skolplattformen/compare/v2.15.4...v2.15.5) (2023-01-18)
+
+
+### Bug Fixes
+
+* Bitrise build ([10e993a](https://github.com/kolplattformen/skolplattformen/commit/10e993ab9dc375d813479efae6b5d30a6fc06b60))
+
 ## [2.15.4](https://github.com/kolplattformen/skolplattformen/compare/v2.15.3...v2.15.4) (2023-01-14)
 
 
