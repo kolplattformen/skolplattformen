@@ -1,3 +1,10 @@
+## [2.15.6](https://github.com/kolplattformen/skolplattformen/compare/v2.15.5...v2.15.6) (2023-03-21)
+
+
+### Bug Fixes
+
+* 🐛 BankID urls changed ([#646](https://github.com/kolplattformen/skolplattformen/issues/646)) ([25a2d7f](https://github.com/kolplattformen/skolplattformen/commit/25a2d7f3f5c9fd8fc32f0cdbdab37ffce64da44b))
+
 ## [2.15.5](https://github.com/kolplattformen/skolplattformen/compare/v2.15.4...v2.15.5) (2023-01-18)
 
 
