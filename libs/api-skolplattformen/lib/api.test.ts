@@ -44,7 +44,7 @@ describe('api', () => {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
-      const pending = {"state":"PENDING"}
+      const pending = { state: 'PENDING' }
       response.json.mockResolvedValue(data)
       response.json.mockResolvedValue(pending)
 
@@ -61,8 +61,8 @@ describe('api', () => {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
-      const pending = {"state":"PENDING"}
-      const ok = {"state":"OK"}
+      const pending = { state: 'PENDING' }
+      const ok = { state: 'OK' }
       response.json.mockResolvedValue(data)
       response.json.mockResolvedValueOnce(pending)
       response.json.mockResolvedValueOnce(ok)
@@ -92,7 +92,7 @@ describe('api', () => {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
-      const error = {"state":"ERROR"}
+      const error = { state: 'ERROR' }
       response.json.mockResolvedValue(data)
       response.json.mockResolvedValue(error)
 
