@@ -26,7 +26,7 @@ export class Checker extends EventEmitter implements LoginStatusChecker {
     if (
       !this.cancelled &&
       status.state !== 'OK' &&
-      status.state !== 'ERROR!' &&
+      status.state !== 'ERROR' &&
       status.state !== 'CANCELLED'
     ) {
       setTimeout(() => this.check(), 1000)
