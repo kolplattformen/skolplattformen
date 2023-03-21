@@ -21,13 +21,13 @@ export class Checker extends EventEmitter implements LoginStatusChecker {
 
   async check(): Promise<void> {
     const response = await this.fetcher('login-status', this.url)
-    const status = await response.text()
-    this.emit(status)
+    const status = await response.json()
+    this.emit(status.state)
     if (
       !this.cancelled &&
-      status !== 'OK' &&
-      status !== 'ERROR!' &&
-      status !== 'CANCELLED'
+      status.state !== 'OK' &&
+      status.state !== 'ERROR' &&
+      status.state !== 'CANCELLED'
     ) {
       setTimeout(() => this.check(), 1000)
     }

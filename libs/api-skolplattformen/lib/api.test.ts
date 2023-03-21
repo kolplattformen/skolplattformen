@@ -44,8 +44,9 @@ describe('api', () => {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
+      const pending = { state: 'PENDING' }
       response.json.mockResolvedValue(data)
-      response.text.mockResolvedValue('PENDING')
+      response.json.mockResolvedValue(pending)
 
       const personalNumber = 'my personal number'
       api.login(personalNumber).then((status) => {
@@ -60,14 +61,16 @@ describe('api', () => {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
+      const pending = { state: 'PENDING' }
+      const ok = { state: 'OK' }
       response.json.mockResolvedValue(data)
-      response.text.mockResolvedValueOnce('PENDING')
-      response.text.mockResolvedValueOnce('OK')
+      response.json.mockResolvedValueOnce(pending)
+      response.json.mockResolvedValueOnce(ok)
 
       const personalNumber = 'my personal number'
       api.login(personalNumber).then((status) => {
         status.on('OK', () => {
-          expect(fetch).toHaveBeenCalledTimes(4)
+          expect(fetch).toHaveBeenCalledTimes(3)
           done()
         })
       })
@@ -89,8 +92,9 @@ describe('api', () => {
         token: '9462cf77-bde9-4029-bb41-e599f3094613',
         order: '5fe57e4c-9ad2-4b52-b794-48adef2f6663',
       }
+      const error = { state: 'ERROR' }
       response.json.mockResolvedValue(data)
-      response.text.mockResolvedValueOnce('ERROR')
+      response.json.mockResolvedValue(error)
 
       const personalNumber = 'my personal number'
       api.login(personalNumber).then((status) => {
