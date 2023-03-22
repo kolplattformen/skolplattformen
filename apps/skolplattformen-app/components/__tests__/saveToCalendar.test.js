@@ -43,7 +43,7 @@ test('renders save to calendar', () => {
   expect(screen.getByText(/Spara/i)).toBeTruthy()
 })
 
-test('requests calendar permissons', () => {
+test('requests calendar permissions', () => {
   const screen = setup()
 
   fireEvent.press(screen.getByTestId('actionsButton'))

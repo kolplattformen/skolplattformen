@@ -80,7 +80,7 @@ export class URLSearchParams {
             this.appendTo(dict, item[0], item[1])
           } else {
             throw new TypeError(
-              "Failed to construct 'URLSearchParams': Sequence initalizer must only contain pair elements"
+              "Failed to construct 'URLSearchParams': Sequence initializer must only contain pair elements"
             )
           }
         }

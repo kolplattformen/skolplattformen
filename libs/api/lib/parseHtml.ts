@@ -91,7 +91,7 @@ interface Node {
   md: string
 }
 const converter = 'MarkdownExtra'
-const overides = {
+const overrides = {
   a: (node: Node) => `[${node.md}](${node.attrs.href})`,
   img: (node: Node) => `![${node.attrs.title || ''}](${node.attrs.src})`,
   i: (node: Node) => `*${node.md}*`,
@@ -109,7 +109,7 @@ export const toMarkdown = (html?: string): string => {
 
   const rearranged = rearrangeWhitespace(html)
   const trimmed = clean(rearranged)
-  const markdown = h2m(trimmed, { overides, converter })
+  const markdown = h2m(trimmed, { overrides, converter })
   const decoded = htmlDecode(markdown)
   return decoded
 }

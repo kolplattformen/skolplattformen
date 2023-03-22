@@ -169,8 +169,8 @@ export class ApiHjarntorget extends EventEmitter implements Api {
       return { isAuthenticated: false }
     }
 
-    const retrivedUser = await currentUserResponse.json()
-    return { ...retrivedUser, isAuthenticated: true }
+    const retrievedUser = await currentUserResponse.json()
+    return { ...retrievedUser, isAuthenticated: true }
   }
 
   async getChildren(): Promise<(Skola24Child & EtjanstChild)[]> {
@@ -275,7 +275,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
 
     const children = await this.getChildren()
     const eventsAndMembersForChildren = await this.getEventsWithAssociatedMembersForChildren(children)
-    const membersInChildensEvents = eventsAndMembersForChildren.reduce(
+    const membersInChildrensEvents = eventsAndMembersForChildren.reduce(
       (acc, e) => acc.concat(e.eventMembers),
       [] as any[]
     )
@@ -290,7 +290,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
         // Ignore "Alarm" messages from the calendar
         message.creator.id !== '__system$virtual$calendar__' &&
         // Only include messages that can not reliably be associated with one of the children
-        !membersInChildensEvents.some((member) => member.id === message.creator.id)
+        !membersInChildrensEvents.some((member) => member.id === message.creator.id)
       )
       .map(message => {
         const createdDate = new Date(message.created.ts)

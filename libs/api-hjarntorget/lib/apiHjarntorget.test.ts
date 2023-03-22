@@ -2,7 +2,7 @@ import { wrapToughCookie } from '@skolplattformen/api'
 import { CookieJar } from 'tough-cookie'
 import { ApiHjarntorget } from './apiHjarntorget'
 
-const setupSuccessfullLoginInitiation = (fetcherMock: jest.Mock) => {
+const setupSuccessfulLoginInitiation = (fetcherMock: jest.Mock) => {
   // 'begin-login'
   fetcherMock.mockReturnValueOnce(
     Promise.resolve({
@@ -47,7 +47,7 @@ const setupSuccessfullLoginInitiation = (fetcherMock: jest.Mock) => {
   )
 }
 
-const setupSuccessfullBankIdLogin = (fetcherMock: jest.Mock) => {
+const setupSuccessfulBankIdLogin = (fetcherMock: jest.Mock) => {
   // 'poll-bankid-status'
   fetcherMock.mockReturnValueOnce(
     Promise.resolve({
@@ -112,8 +112,8 @@ describe('api', () => {
   })
   // describe('#login', () => {
   //     it('goes through single sing-on steps', async (done) => {
-  //         setupSuccessfullLoginInitiation(fetcherMock)
-  //         setupSuccessfullBankIdLogin(fetcherMock)
+  //         setupSuccessfulLoginInitiation(fetcherMock)
+  //         setupSuccessfulBankIdLogin(fetcherMock)
   //         const personalNumber = 'my personal number'
 
   //         const loginComplete = new Promise((resolve, reject) => {
@@ -167,8 +167,8 @@ describe('api', () => {
   //         })
   //     })
   //     it('remembers used personal number', async (done) => {
-  //         setupSuccessfullLoginInitiation(fetcherMock)
-  //         setupSuccessfullBankIdLogin(fetcherMock)
+  //         setupSuccessfulLoginInitiation(fetcherMock)
+  //         setupSuccessfulBankIdLogin(fetcherMock)
   //         const personalNumber = 'my personal number'
   //         await api.login(personalNumber)
   //         api.on('login', () => {
@@ -177,7 +177,7 @@ describe('api', () => {
   //         })
   //     })
   //     it('forgets used personal number if sign in is unsuccessful', async (done) => {
-  //         setupSuccessfullLoginInitiation(fetcherMock)
+  //         setupSuccessfulLoginInitiation(fetcherMock)
   //         // 'poll-bankid-status'
   //         fetcherMock.mockReturnValueOnce(Promise.resolve({
   //             json: jest.fn().mockReturnValue(Promise.resolve({
@@ -187,7 +187,7 @@ describe('api', () => {
   //         }))
   //         // 'confirm-signature-redirect'
   //         fetcherMock.mockReturnValueOnce(Promise.resolve({
-  //             text: Promise.resolve("some error occured")
+  //             text: Promise.resolve("some error occurred")
   //         }))
 
   //         const personalNumber = 'my personal number'

@@ -23,7 +23,7 @@ import { isRTL } from '../services/languageService'
 import Absence, { absenceRouteOptions } from './absence.component'
 import { Auth, authRouteOptions } from './auth.component'
 import { Child, childRouteOptions } from './child.component'
-import { childenRouteOptions, Children } from './children.component'
+import { childrenRouteOptions, Children } from './children.component'
 import { libraryRouteOptions, LibraryScreen } from './library.component'
 import { NewsItem, newsItemRouteOptions } from './newsItem.component'
 import { SetLanguage, setLanguageRouteOptions } from './setLanguage.component'
@@ -134,7 +134,7 @@ export const AppNavigator = () => {
             <Screen
               name="Children"
               component={Children}
-              options={childenRouteOptions(colorScheme === 'dark')}
+              options={childrenRouteOptions(colorScheme === 'dark')}
             />
             <Screen
               name="Child"

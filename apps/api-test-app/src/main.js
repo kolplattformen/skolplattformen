@@ -1,7 +1,7 @@
 /**
  * A more elaborated test file for local development
  * - Support for proxy (i recommend Burp Suite https://portswigger.net/burp/communitydownload)
- * - Saves sessionCoookie to a file and tries to use it again
+ * - Saves sessionCookie to a file and tries to use it again
  */
 
 const { DateTime } = require('luxon')

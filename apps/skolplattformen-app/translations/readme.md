@@ -6,6 +6,6 @@ We are using Weblate to translate our app. You can find the project [here](https
 
 ## OSS License
 
-Weblate is sponsering this project through their open source license and we would be very happy if you donated to them!
+Weblate is sponsoring this project through their open source license and we would be very happy if you donated to them!
 
 [Contribute to Weblate](https://weblate.org/sv/contribute/)

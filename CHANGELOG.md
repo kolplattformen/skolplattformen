@@ -166,7 +166,7 @@
 
 ### Features
 
-* 🎸 bumped to 3.0.2 for new version releasea ([2af189e](https://github.com/kolplattformen/skolplattformen/commit/2af189ef0fb23723dae982382bee169e2c7ed8f6))
+* 🎸 bumped to 3.0.2 for new version releases ([2af189e](https://github.com/kolplattformen/skolplattformen/commit/2af189ef0fb23723dae982382bee169e2c7ed8f6))
 
 ## [2.7.3](https://github.com/kolplattformen/skolplattformen/compare/v2.7.2...v2.7.3) (2021-12-07)
 
@@ -275,7 +275,7 @@
 * 🎸 Merged with main, also added api to nx ([4f1f66f](https://github.com/kolplattformen/skolplattformen-app/commit/4f1f66fcbbf3682004e781d058ff43a7eb3b57ce))
 * 🎸 Started on provider for selecting platform + feature to ([1aaaeb6](https://github.com/kolplattformen/skolplattformen-app/commit/1aaaeb64e31531185c0ef75bff61c97f0cf942c4))
 * 🎸 Toggled class list in hjärntorget ([33440bc](https://github.com/kolplattformen/skolplattformen-app/commit/33440bcc32d0ea466662cdf167406b0dd503b251))
-* 🎸 wip feagture toggle ([1601c4f](https://github.com/kolplattformen/skolplattformen-app/commit/1601c4f83c75bc98ec1084725f9b126e871024b2))
+* 🎸 wip feature toggle ([1601c4f](https://github.com/kolplattformen/skolplattformen-app/commit/1601c4f83c75bc98ec1084725f9b126e871024b2))
 * 🎸 WIP Switch school platform ([916ebc5](https://github.com/kolplattformen/skolplattformen-app/commit/916ebc5e25b52eebf45a147f971356d8bd9e2e11))
 
 ## [2.2.1](https://github.com/kolplattformen/skolplattformen-app/compare/v2.2.0...v2.2.1) (2021-11-23)
@@ -414,7 +414,7 @@
 * 🎸 API call retries and support for error reporting ([#5](https://github.com/kolplattformen/skolplattformen-app/issues/5)) ([9ed5df2](https://github.com/kolplattformen/skolplattformen-app/commit/9ed5df2e45e8d368d3d4df1c992a0901a512ff6a))
 * 🎸 Build, tag and release ([b71adc5](https://github.com/kolplattformen/skolplattformen-app/commit/b71adc57fbdd4ff4d6fe1b87e7afac90a9d6628c))
 * 🎸 cache busting ([5ce4ddd](https://github.com/kolplattformen/skolplattformen-app/commit/5ce4ddd9d04501a15ce37c9f3378e36b3f3dabfe))
-* 🎸 Cache prefixas med personnummer ([#8](https://github.com/kolplattformen/skolplattformen-app/issues/8)) ([fc146ea](https://github.com/kolplattformen/skolplattformen-app/commit/fc146ea7fc9f705b88bbc75a6cc01b6f2235bfaa))
+* 🎸 Cache prefixes med personnummer ([#8](https://github.com/kolplattformen/skolplattformen-app/issues/8)) ([fc146ea](https://github.com/kolplattformen/skolplattformen-app/commit/fc146ea7fc9f705b88bbc75a6cc01b6f2235bfaa))
 * 🎸 Classmates ([#14](https://github.com/kolplattformen/skolplattformen-app/issues/14)) ([a6ce6ea](https://github.com/kolplattformen/skolplattformen-app/commit/a6ce6ea9f6468ad5c1e26df4228706a1055e241a)), closes [#7](https://github.com/kolplattformen/skolplattformen-app/issues/7)
 * 🎸 Code cleanup, refactoring, linting and tests ([d0a0314](https://github.com/kolplattformen/skolplattformen-app/commit/d0a0314ae6f058c617227d28d738bff9fc85e966))
 * 🎸 Curriculum as peer dependency ([#122](https://github.com/kolplattformen/skolplattformen-app/issues/122)) ([e24a9b3](https://github.com/kolplattformen/skolplattformen-app/commit/e24a9b3c5e0d64a395e4b576975cc2b3e6832bab))
@@ -924,8 +924,8 @@ luxon.DateTime)
 * first working schema ui ([8b69a20](https://github.com/kolplattformen/skolplattformen-app/commit/8b69a20ab2dc9fde5ae90b716a1646ab606fbd02))
 * first working version in test ([0a8be80](https://github.com/kolplattformen/skolplattformen-app/commit/0a8be80a1d12885bca5599bbb9376d710dd3e150))
 * first working version in test ([4bf571b](https://github.com/kolplattformen/skolplattformen-app/commit/4bf571b5d8c7cb5da2453330ef22e3e4b8ae2c7d))
-* use curriculun lib ([8b700e5](https://github.com/kolplattformen/skolplattformen-app/commit/8b700e5516414d4e0c4e70a2ff64a245645d1cd3))
-* use curriculun lib ([0e61c16](https://github.com/kolplattformen/skolplattformen-app/commit/0e61c16aa94761c6eb48c61cbd368ea288bd5b9d))
+* use curriculum lib ([8b700e5](https://github.com/kolplattformen/skolplattformen-app/commit/8b700e5516414d4e0c4e70a2ff64a245645d1cd3))
+* use curriculum lib ([0e61c16](https://github.com/kolplattformen/skolplattformen-app/commit/0e61c16aa94761c6eb48c61cbd368ea288bd5b9d))
 * visa summering per dag inkl indikation om gymnastik ([ea18203](https://github.com/kolplattformen/skolplattformen-app/commit/ea182035d8960316a34f5fdd9c3a4769b3d1aa57))
 * visa summering per dag inkl indikation om gymnastik ([02eb7dc](https://github.com/kolplattformen/skolplattformen-app/commit/02eb7dcf92df6f25e28bc146255a7f4dc785ac58))
 
@@ -976,7 +976,7 @@ luxon.DateTime)
 
 ### Bug Fixes
 
-* 🐛 Adress call turned off everywhere ([b95c9e7](https://github.com/kolplattformen/skolplattformen-app/commit/b95c9e77cf9adb4d1521cff1af992dba34325641))
+* 🐛 Address call turned off everywhere ([b95c9e7](https://github.com/kolplattformen/skolplattformen-app/commit/b95c9e77cf9adb4d1521cff1af992dba34325641))
 
 # [1.21.0](https://github.com/kolplattformen/skolplattformen-app/compare/v1.20.1...v1.21.0) (2021-04-20)
 
@@ -1266,7 +1266,7 @@ luxon.DateTime)
 
 ### Features
 
-* 🎸 relase 1.4.2 ([8bea63f](https://github.com/kolplattformen/skolplattformen-app/commit/8bea63f75ce40215cd595e87b7d874e94a6cf821))
+* 🎸 release 1.4.2 ([8bea63f](https://github.com/kolplattformen/skolplattformen-app/commit/8bea63f75ce40215cd595e87b7d874e94a6cf821))
 * 🎸 release 1.5.3 ([2ce7f01](https://github.com/kolplattformen/skolplattformen-app/commit/2ce7f01c8d552ac6ecc86110e20aeaf2b15a7066))
 
 ## [1.1.3](https://github.com/kolplattformen/skolplattformen-app/compare/v1.1.2...v1.1.3) (2021-03-10)

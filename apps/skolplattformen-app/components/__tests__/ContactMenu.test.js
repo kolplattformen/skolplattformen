@@ -112,7 +112,7 @@ test('displays address of guardian', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  fireEvent.press(screen.getByText(/adress/i))
+  fireEvent.press(screen.getByText(/address/i))
   expect(Linking.openURL).toHaveBeenCalledWith(
     'http://maps.apple.com/?daddr=Testgatan'
   )

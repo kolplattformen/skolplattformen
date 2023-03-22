@@ -43,7 +43,7 @@ export class HjarntorgetChecker extends EventEmitter implements LoginStatusCheck
       const keepPolling = pollStatusResponseJson.infotext !== ''
       const isError = pollStatusResponseJson.location.indexOf('error') >= 0
       if (!keepPolling && !isError) {
-        console.log('bankid successfull! follow to location...')
+        console.log('bankid successful! follow to location...')
         // follow response location to get back to auth.goteborg.se
         // r.location is something like:
         //  'https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/signature'

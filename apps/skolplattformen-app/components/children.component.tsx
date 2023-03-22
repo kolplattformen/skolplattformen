@@ -30,7 +30,7 @@ import { RootStackParamList } from './navigation.component'
 
 const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
-export const childenRouteOptions =
+export const childrenRouteOptions =
   (darkMode: boolean) => (): NativeStackNavigationOptions => {
     return {
       ...defaultStackStyling(darkMode),

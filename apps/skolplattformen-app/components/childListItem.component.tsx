@@ -123,20 +123,20 @@ export const ChildListItem = ({
 
     // Taken from Skolverket
     // https://www.skolverket.se/skolutveckling/anordna-och-administrera-utbildning/administrera-utbildning/skoltermer-pa-engelska
-    const abbrevations = {
-      G: t('abbrevations.upperSecondarySchool'),
-      GR: t('abbrevations.compulsorySchool'),
-      F: t('abbrevations.leisureTimeCentre'),
-      FS: t('abbrevations.preSchool'),
+    const abbreviations = {
+      G: t('abbreviations.upperSecondarySchool'),
+      GR: t('abbreviations.compulsorySchool'),
+      F: t('abbreviations.leisureTimeCentre'),
+      FS: t('abbreviations.preSchool'),
     }
 
     return child.status
       ? child.status
           .split(';')
           .map((status) => {
-            const statusAsAbbreviation = status as keyof typeof abbrevations
+            const statusAsAbbreviation = status as keyof typeof abbreviations
 
-            return abbrevations[statusAsAbbreviation] || status
+            return abbreviations[statusAsAbbreviation] || status
           })
           .join(', ')
       : null
@@ -227,14 +227,14 @@ export const ChildListItem = ({
           <Button
             accessible
             accessibilityRole="button"
-            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
+            accessibilityLabel={`${child.name}, ${t('absence.title')}`}
             appearance="ghost"
             accessoryLeft={AlertIcon}
             status="primary"
             style={styles.absenceButton}
             onPress={() => navigation.navigate('Absence', { child })}
           >
-            {t('abscense.title')}
+            {t('absence.title')}
           </Button>
         </View>
       </View>

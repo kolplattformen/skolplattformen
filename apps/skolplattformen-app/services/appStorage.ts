@@ -99,7 +99,7 @@ export default class AppStorage {
   }
 
   /**
-   * Clears all personal identififieble data (GDPR)
+   * Clears all personal identifiable data (GDPR)
    * @param user
    * @returns
    */

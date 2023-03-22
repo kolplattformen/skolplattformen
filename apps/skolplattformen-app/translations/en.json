@@ -1,18 +1,18 @@
 {
-    "abbrevations": {
+    "abbreviations": {
         "compulsorySchool": "Primary/lower-secondary school",
         "leisureTimeCentre": "After-school care",
         "preSchool": "Preschool",
         "upperSecondarySchool": "Upper-secondary school"
     },
-    "abscense": {
+    "absence": {
         "endTime": "End time",
         "entireDay": "Whole day",
         "childsPersonalNumber": "Child's personal identity number",
         "invalidPersonalNumber": "Personal identity number invalid",
         "personalNumberMissing": "Personal identity number missing",
-        "selectAbscenseEndTime": "Choose end time",
-        "selectAbscenseStartTime": "Choose start time",
+        "selectAbsenceEndTime": "Choose end time",
+        "selectAbsenceStartTime": "Choose start time",
         "startTime": "Start time",
         "title": "Report absence"
     },
