@@ -39,7 +39,7 @@ spec:
           ports:
             - containerPort: 3000
 
-          livelinessProbe:
+          livenessProbe:
             httpGet:
               path: /
               port: 3000
@@ -65,9 +65,15 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: '500m'
     nginx.ingress.kubernetes.io/proxy-pass-headers: 'Location'
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header X-Frame-Options "sameorigin";
-      add_header X-Content-Type-Options nosniff;
-      add_header Referrer-Policy 'same-origin';
+      more_set_headers "Content-Security-Policy: default-src 'self'; script-src https://new.skolplattformen.org https://matomo.iteam.services; style-src https://new.skolplattformen.org; font-src https://new.skolplattformen.org; img-src https://new.skolplattformen.org; connect-src https://new.skolplattformen.org https://matomo.iteam.services; manifest-src data:; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; ";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Xss-Protection: 0";
+      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
+      more_set_headers "Cross-Origin-Resource-Policy: same-site";
+      more_set_headers "Referrer-Policy strict-origin";
+    external-dns.alpha.kubernetes.io/hostname: new.skolplattformen.org.
+
 spec:
   ingressClassName: nginx
   tls:
