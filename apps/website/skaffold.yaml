@@ -1,0 +1,13 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: skolplattformen-web
+build:
+  artifacts:
+    - image: skolplattformen/web
+      context: .
+manifests:
+  rawYaml:
+    - k8s/web.yaml
+deploy:
+  kubectl: {}
