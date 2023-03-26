@@ -32,15 +32,26 @@ spec:
       containers:
         - name: skolplattformen-web
           resources:
-            limits:
-              cpu: 100m
-              memory: 100Mi
             requests:
               cpu: 100m
               memory: 100Mi
           image: skolplattformen/web
           ports:
             - containerPort: 3000
+
+          livelinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
