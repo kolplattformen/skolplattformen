@@ -7,10 +7,7 @@ interface LayoutProps {
   pageTitle: string
 }
 
-const Layout: React.FC<LayoutProps> = ({
-  children,
-  pageTitle,
-}) => {
+const Layout: React.FC<LayoutProps> = ({ children, pageTitle }) => {
   return (
     <div>
       <Head>
@@ -27,11 +24,6 @@ const Layout: React.FC<LayoutProps> = ({
         <meta property="og:image" content={logo} />
         <title>{pageTitle}</title>
         <link rel="shortcut icon" type="image/png" href={favImg} />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}

@@ -41,8 +41,8 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
         {children}
       </ScrollLink>
     ) : (
-      <NavLink href={href}>
-        <a onClick={() => onClick?.()}>{children}</a>
+      <NavLink href={href} onClick={() => onClick?.()}>
+        {children}
       </NavLink>
     )
 

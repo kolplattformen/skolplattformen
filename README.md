@@ -19,33 +19,34 @@ The respective README files there contain more detailed descriptions.
 
 ## Contents
 
-* [Architecture](#architecture)
-  * [Apps](#apps)
-    * [skolplattformen](#skolplattformen)
-    * [website](#website)
-  * [Libs](#embedded-api)
-    * [api](#api)
-    * [api-skolplattformen](#api-skolplattformen)
-    * [api-hjarntorget](#api-hjarntorget)
-    * [api-vklass](#api-vklass)
-    * [curriculum](#curriculum)
-    * [hooks](#hooks)
-* [Getting started with development](#getting-started-with-development)
-    * [iOS](#ios)
-    * [Android](#android)
-    * [Website](#website)
-    * [Tests](#tests)
-* [Contributions](#contributions)
-* [Money](#money)
-* [Disclaimer](#disclaimer)
-* [Contributors](#contributors)
-* [License](#license)
+- [Architecture](#architecture)
+  - [Apps](#apps)
+    - [skolplattformen](#skolplattformen)
+    - [website](#website)
+  - [Libs](#embedded-api)
+    - [api](#api)
+    - [api-skolplattformen](#api-skolplattformen)
+    - [api-hjarntorget](#api-hjarntorget)
+    - [api-vklass](#api-vklass)
+    - [curriculum](#curriculum)
+    - [hooks](#hooks)
+- [Getting started with development](#getting-started-with-development)
+  - [iOS](#ios)
+  - [Android](#android)
+  - [Website](#website)
+  - [Tests](#tests)
+- [Contributions](#contributions)
+- [Money](#money)
+- [Disclaimer](#disclaimer)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## Architecture
 
 The project consists of several apps and libraries inside [a NX](https://nx.dev/) monorepo.
 
 ### Apps
+
 /apps/ contains the application projects. This is the main entry point for a runnable application.
 
 #### skolplattformen
@@ -63,6 +64,7 @@ For more information, check out the [source code](apps/skolplattformen-app).
 The code for the website at https://skolplattformen.org/. It's built using Next.js.
 
 For more information, check out the [source code](apps/website).
+
 ### Libs
 
 /libs/ contains the library projects. There are many different kinds of libraries, and each library defines its own external API so that boundaries between libraries remain clear.
@@ -102,11 +104,13 @@ Check out the documentation [here](libs/hooks).
 To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
 
 Clone the repo with
+
 ```bash
 $ git clone https://github.com/kolplattformen/skolplattformen.git
 ```
 
 Install dependencies
+
 ```bash
 cd skolplattformen && yarn
 ```
@@ -115,11 +119,12 @@ cd skolplattformen && yarn
 
 If you wanna run the iOS app, you need to setup a couple of things first, we have a guide that will assist you in getting started with the iOS app. A Mac is required to build projects with native code for iOS so we do not have support for Linux / Windows.
 
-* [Mac OS](/docs/ios_mac.md)
+- [Mac OS](/docs/ios_mac.md)
 
 If you already setup everything, you just need to run the following command in the project root:
 
 Start the iOS app
+
 ```
 yarn run ios
 ```
@@ -128,9 +133,9 @@ yarn run ios
 
 If you wanna run the Android app, you need to setup a couple of things first, we have created three different guides depending on your operating system.
 
-* [Mac OS](/docs/android_mac.md)
-* [Windows](/docs/android_windows.md)
-* [Linux](/docs/android_linux.md)
+- [Mac OS](/docs/android_mac.md)
+- [Windows](/docs/android_windows.md)
+- [Linux](/docs/android_linux.md)
 
 If you already setup everything, you just need to run the following command in the project root:
 
@@ -145,11 +150,13 @@ Documentation coming soon.
 ### Tests
 
 Run all tests
+
 ```
 yarn run test
 ```
 
 Run a specific test
+
 ```
 yarn run test:api-skolplattformen
 ```
@@ -194,7 +201,7 @@ If you're offended by this initiative, rest assured there is no reason to be —
 
 ## License
 
-Öppna skolplattformen is copyright 2020–2021 Not Free Beer AB.
+Öppna skolplattformen is copyright 2020–2023 Not Free Beer AB.
 
 Licensed under the [Apache License, Version 2.0](LICENSE) (the "License"); you may use Öppna skolplattformen in compliance with the License. A copy of the License is included with this repository.
 

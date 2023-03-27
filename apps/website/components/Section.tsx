@@ -4,6 +4,7 @@ interface SectionProps {
   bg?: string
   id?: string
   padding?: string
+  children?: React.ReactNode | React.ReactNode[]
 }
 
 const Section: React.FC<SectionProps> = ({
