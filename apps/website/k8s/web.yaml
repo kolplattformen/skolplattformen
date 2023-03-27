@@ -12,6 +12,8 @@ spec:
   ports:
     - port: 3000
   type: LoadBalancer
+  #dualstack:
+  ipFamilyPolicy: PreferDualStack
   selector:
     app: skolplattformen-web
 ---
@@ -65,7 +67,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: '500m'
     nginx.ingress.kubernetes.io/proxy-pass-headers: 'Location'
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "Content-Security-Policy: default-src 'self'; script-src https://new.skolplattformen.org https://matomo.iteam.services https://www.googletagmanager.com; style-src https://new.skolplattformen.org unsafe-inline; font-src https://new.skolplattformen.org unsafe-inline; img-src https://new.skolplattformen.org unsafe-inline; connect-src https://new.skolplattformen.org https://matomo.iteam.services; manifest-src data:; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; ";
+      more_set_headers "Content-Security-Policy: default-src 'self'; script-src https://new.skolplattformen.org https://matomo.iteam.services https://www.googletagmanager.com; style-src 'unsafe-inline' https://new.skolplattformen.org; font-src 'unsafe-inline' https://new.skolplattformen.org; img-src https://new.skolplattformen.org 'unsafe-inline'; connect-src https://new.skolplattformen.org https://matomo.iteam.services; manifest-src data:; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; ";
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "X-Frame-Options: DENY";
       more_set_headers "X-Xss-Protection: 0";
