@@ -1,3 +1,10 @@
+## [2.15.7](https://github.com/kolplattformen/skolplattformen/compare/v2.15.6...v2.15.7) (2023-03-28)
+
+
+### Bug Fixes
+
+* 🐛 Change broken links caused by name change of repo ([#649](https://github.com/kolplattformen/skolplattformen/issues/649)) ([61d47b4](https://github.com/kolplattformen/skolplattformen/commit/61d47b44406b6af3585c933ef0f964311026be09))
+
 ## [2.15.6](https://github.com/kolplattformen/skolplattformen/compare/v2.15.5...v2.15.6) (2023-03-21)
 
 
