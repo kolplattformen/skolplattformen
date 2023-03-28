@@ -161,7 +161,7 @@ Once done, create a _pull request_ where you explain why we should incorporate y
 If you're new to GitHub, there's a number of excellent guides available, such as [this one on forking projects and making pull requests](https://guides.github.com/activities/forking/).
 
 There are many ways to contribute to the project. \
-If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen-app/issues/new) to let us know when something isn't working properly. \
+If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know when something isn't working properly. \
 We're super duper happy for both issues and pull requests, and we try to answer all of them as soon as humanly possible.
 
 Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen-app/) into a new language, or to improve existing translations.
