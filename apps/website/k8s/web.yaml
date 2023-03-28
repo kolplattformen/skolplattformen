@@ -11,9 +11,7 @@ metadata:
 spec:
   ports:
     - port: 3000
-  type: LoadBalancer
-  #dualstack:
-  ipFamilyPolicy: PreferDualStack
+  type: ClusterIP
   selector:
     app: skolplattformen-web
 ---
