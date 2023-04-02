@@ -78,6 +78,7 @@ spec:
   tls:
     - hosts:
         - skolplattformen.org
+        - www.skolplattformen.org
       secretName: web-secret-tls
   rules:
     - host: skolplattformen.org
