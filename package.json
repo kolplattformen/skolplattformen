@@ -128,7 +128,7 @@
     "metro-react-native-babel-preset": "^0.66.2",
     "metro-resolver": "0.66.2",
     "node-blob": "^0.0.2",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^2.0.0",
     "prettier": "^2.3.1",
     "react-native-clean-project": "^3.6.7",
     "react-native-oss-license": "^0.4.1",

@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api-hjarntorget": "libs/api-hjarntorget",
+    "api-admentum": "libs/api-admentum",
     "api-skolplattformen": "libs/api-skolplattformen",
     "api-vklass": "libs/api-vklass",
     "api": "libs/api",

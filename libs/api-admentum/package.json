@@ -1,0 +1,18 @@
+{
+  "name": "@skolplattformen/api-admentum",
+  "version": "0.1.0",
+  "description": "Admentum API wrapper",
+  "main": "lib/index.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": "git@github.com:kolplattformen/skolplattformen.git",
+  "author": "Erik Eng <erik@eng.se>",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "lint": "eslint 'lib/**/*.{js,ts}' --quiet --fix",
+    "test": "jest",
+    "build": "tsc --build"
+  }
+}
