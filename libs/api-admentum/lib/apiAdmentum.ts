@@ -29,7 +29,12 @@ import * as html from 'node-html-parser'
 import { fakeFetcher } from './fake/fakeFetcher'
 import { checkStatus, DummyStatusChecker } from './loginStatus'
 import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
-import { bankIdInitUrl, bankIdCheckUrl, apiUrls } from './routes'
+import {
+  bankIdInitUrl,
+  bankIdCheckUrl,
+  bankIdSessionUrl,
+  apiUrls,
+} from './routes'
 import parse from '@skolplattformen/curriculum'
 
 function getDateOfISOWeek(week: number, year: number) {
@@ -281,11 +286,19 @@ export class ApiAdmentum extends EventEmitter implements Api {
       return this.fakeMode()
 
     this.isFake = false
-    const sessionId = await this.fetch('init-session', bankIdInitUrl(''))
-      .then((res) => res.text())
-      .then((text) => /sessionsid=(.)/.exec(text)?.[0])
+    const sessionId = await this.fetch('get-session', bankIdSessionUrl(''))
+      .then((res) => {
+        console.log('got res', res, (res as any).url)
+        return (res as any).url
+      })
+      .then((url) => url.split('=').pop()) // https://login.grandid.com/?sessionid=234324
 
     if (!sessionId) throw new Error('No session provided')
+
+    this.fetch('bankid-init', bankIdInitUrl(sessionId), {
+      method: 'POST',
+      body: 'ssn=' + personalNumber,
+    })
 
     console.log('start polling', sessionId)
     const statusChecker = checkStatus(this.fetch, bankIdCheckUrl(sessionId))
