@@ -28,10 +28,7 @@ let bankIdUsed = false
 const recordFolder = `${__dirname}/record`
 
 async function run() {
-  const agent = new HttpProxyAgent('http://localhost:8080')
-  const agentEnabledFetch = agentWrapper(nodeFetch, agent)
-
-  const fetch = fetchCookie(agentEnabledFetch, cookieJar)
+  const fetch = fetchCookie(nodeFetch, cookieJar)
 
   try {
     const api = init(fetch, cookieJar, { record })
