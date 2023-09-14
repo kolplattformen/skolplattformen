@@ -251,13 +251,11 @@ const QA = () => {
           de?
         </h3>
         <p>
-          Appen kostar {price} kronor. Intäkten registreras i aktiebolaget Not Free
-          Beer som ägs av tre av utvecklarna och går till att täcka kostnader
-          för inköp. Det täcker inte på långa vägar den tid vi lagt ner. Med en
-          låg engångskostnad ökar vi chansen att vi orkar syssla med underhåll
-          och uppdateringar. Vi vill ju ha en stabil lösning som håller. Just nu
-          jobbar vi på egen fritid med något som förbättrar det kommunen lagt en
-          miljard av allmänna medel på.
+          Vi har en Patreon där summan är synlig. Intäkten registreras i
+          aktiebolaget Not Free Beer som ägs av tre av utvecklarna och går till
+          att täcka kostnader för inköp. Det täcker inte på långa vägar den tid
+          vi lagt ner. Just nu jobbar vi på egen fritid med något som förbättrar
+          det kommunen lagt en miljard av allmänna medel på.
         </p>
         <h3>
           Är det moraliskt att tjäna pengar på något som kommunen borde erbjuda
@@ -317,7 +315,8 @@ const QA = () => {
         <h3>Kontakta oss</h3>
         <p>
           Tveka inte att kontakta oss. Skicka ett mail till{' '}
-          <a href="mailto:info@skolplattformen.org">info@skolplattformen.org</a>.
+          <a href="mailto:info@skolplattformen.org">info@skolplattformen.org</a>
+          .
         </p>
       </div>
     </div>
