@@ -21,23 +21,33 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
   }
 
   async check(): Promise<void> {
-    // try {
-    //   console.log('polling bankid signature')
-    //   // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
-    //   if (true)
-    //     this.emit('OK')
-    //   } else if (isError) {
-    //     console.log('polling error')
-    //     this.emit('ERROR')
-    //   } else if (!this.cancelled && keepPolling) {
-    //     console.log('keep on polling...')
-    //     this.emit('PENDING')
-    //     setTimeout(() => this.check(), 3000)
-    //   }
-    // } catch (er) {
-    //   console.log('Error validating login to Hjärntorget', er)
-    //   this.emit('ERROR')
-    // }
+    try {
+      console.log('polling bankid signature', this.basePollingUrl)
+      const result = await this.fetcher(
+        'bankid-checker',
+        bankIdCheckUrl(this.basePollingUrl)
+      ).then((res) => {
+        console.log('checker response', res)
+        return res.text()
+      })
+      console.log('bankid result', result)
+      const ok = result.includes('OK')
+      const isError = result.includes('Unauthorized')
+      // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
+      if (ok) {
+        this.emit('OK')
+      } else if (isError) {
+        console.log('polling error')
+        this.emit('ERROR')
+      } else if (!this.cancelled) {
+        console.log('keep on polling...')
+        this.emit('PENDING')
+        setTimeout(() => this.check(), 3000)
+      }
+    } catch (err) {
+      console.log('Error validating login to Hjärntorget', err)
+      this.emit('ERROR')
+    }
   }
 
   async cancel(): Promise<void> {

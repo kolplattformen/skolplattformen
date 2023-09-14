@@ -286,17 +286,26 @@ export class ApiAdmentum extends EventEmitter implements Api {
       return this.fakeMode()
 
     this.isFake = false
-    const sessionId = await this.fetch('get-session', bankIdSessionUrl(''))
-      .then((res) => {
-        console.log('got res', res, (res as any).url)
+    const url = await this.fetch('get-session', bankIdSessionUrl('')).then(
+      (res) => {
+        console.log('got res', res, (res as any).url, res.headers)
         return (res as any).url
-      })
-      .then((url) => url.split('=').pop()) // https://login.grandid.com/?sessionid=234324
+      }
+    )
+    await this.fetch('get-cookies', url)
+
+    // https://login.grandid.com/?sessionid=234324
+    // => 234324
+    const sessionId = url.split('=').pop()
 
     if (!sessionId) throw new Error('No session provided')
 
+    console.log('url', bankIdInitUrl(sessionId))
     this.fetch('bankid-init', bankIdInitUrl(sessionId), {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       body: 'ssn=' + personalNumber,
     })
 

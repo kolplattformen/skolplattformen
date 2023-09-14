@@ -44,7 +44,7 @@ export const apiUrls = {
 }
 
 export const bankIdCheckUrl = (sessionId: string) =>
-  `https://login.grandid.com/?sessionid=${sessionId}&eleg=1&bankid=1`
+  `https://login.grandid.com/?sessionid=${sessionId}&collect=1`
 
 export const bankIdSessionUrl = (returnUrl: string) =>
   `https://auth.admentum.se/larande${returnUrl ? `?next=${returnUrl}` : ''}`
