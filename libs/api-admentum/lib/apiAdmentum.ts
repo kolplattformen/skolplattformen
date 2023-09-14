@@ -292,16 +292,15 @@ export class ApiAdmentum extends EventEmitter implements Api {
         return (res as any).url
       }
     )
-    await this.fetch('get-cookies', url)
-
     // https://login.grandid.com/?sessionid=234324
     // => 234324
     const sessionId = url.split('=').pop()
+    console.log('sessionId', sessionId)
 
     if (!sessionId) throw new Error('No session provided')
 
     console.log('url', bankIdInitUrl(sessionId))
-    this.fetch('bankid-init', bankIdInitUrl(sessionId), {
+    await this.fetch('bankid-init', bankIdInitUrl(sessionId), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

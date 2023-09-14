@@ -181,8 +181,8 @@ function ensureDirectoryExistence(filePath) {
 }
 
 function getSessionCookieFromCookieJar() {
-  const cookieUrl = isHjarntorget
-    ? 'https://admentum.goteborg.se'
+  const cookieUrl = isAdmentum
+    ? 'https://admentum.se'
     : 'https://etjanst.stockholm.se'
   const cookies = cookieJar.getCookiesSync(cookieUrl)
   const sessionCookieKey = isAdmentum ? 'JSESSIONID' : 'SMSESSION'
@@ -193,6 +193,7 @@ const record = async (info, data) => {
   const name = info.error ? `${info.name}_error` : info.name
   const filename = `${recordFolder}/${name}.json`
   ensureDirectoryExistence(filename)
+  console.log('recording session', filename)
   const content = {
     url: info.url,
     headers: info.headers,

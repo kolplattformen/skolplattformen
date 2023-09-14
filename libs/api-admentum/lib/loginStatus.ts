@@ -23,16 +23,16 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
   async check(): Promise<void> {
     try {
       console.log('polling bankid signature', this.basePollingUrl)
-      const result = await this.fetcher(
-        'bankid-checker',
-        bankIdCheckUrl(this.basePollingUrl)
-      ).then((res) => {
-        console.log('checker response', res)
-        return res.text()
+      const result = await this.fetcher('bankid-checker', this.basePollingUrl, {
+        headers: {
+          'x-requested-with': 'XMLHttpRequest',
+        },
+      }).then((res) => {
+        return res.json()
       })
       console.log('bankid result', result)
-      const ok = result.includes('OK')
-      const isError = result.includes('Unauthorized')
+      const ok = result.response?.status === 'complete'
+      const isError = result.response?.status === 'error'
       // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
       if (ok) {
         this.emit('OK')
