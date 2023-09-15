@@ -155,16 +155,12 @@ export class ApiAdmentum extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
     const testUserId = '436838'
-    const fetchUrl = apiUrls.users + '/' + testUserId
-    console.log('v3.1 fetching children for user id', testUserId, 'from', fetchUrl)
-    const currentUserResponse = await this.fetch('current-user', getUserUrl(testUserId), {
+    const fetchUrl = getUserUrl(testUserId)
+    console.log('v3.2 fetching children for user id', testUserId, 'from', fetchUrl)
+    const currentUserResponse = await this.fetch('current-user', fetchUrl, {
       method: 'GET',
       headers: {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'en-GB,en;q=0.8',
-        'Cookie': 'active_school_id=X; csrftoken=Y; sessionid=Z',
-        'Referer': 'https://skola.admentum.se/api/v1/users/436838/',
+        'Accept': 'application/json, text/plain, */*',
       },
     }) 
 
