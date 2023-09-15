@@ -40,7 +40,8 @@ export const apiUrls = {
   subjects: baseUrl + 'subjects',
   teachers: baseUrl + 'teachers',
   upper_secondary_subjects: baseUrl + 'upper_secondary_subjects',
-  users: baseUrl + 'users',
+  users: baseUrl + 'users?format=json',
+  user: (userId: string) => baseUrl + `users/${userId}/?format=json`,
 }
 
 export const bankIdCheckUrl = (sessionId: string) =>
@@ -51,3 +52,6 @@ export const bankIdSessionUrl = (returnUrl: string) =>
 
 export const bankIdInitUrl = (sessionId: string) =>
   `https://login.grandid.com/?sessionid=${sessionId}&eleg=1&bankid=1&bChoice=other`
+
+export const bankIdCallbackUrl = (grandSessionId: string) =>
+  `https://auth.admentum.se/larande/callback?grandidsession=${grandSessionId}`

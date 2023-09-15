@@ -36,18 +36,9 @@ async function run() {
     api.on('login', async () => {
       console.log('Logged in')
 
-      if (bankIdUsed) {
-        const sessionCookie = getSessionCookieFromCookieJar()
-        ensureDirectoryExistence(recordFolder)
-        await writeFile(
-          `${recordFolder}/latestSessionCookie.txt`,
-          JSON.stringify(sessionCookie)
-        )
-        console.log(
-          `Session cookie saved to file ${recordFolder}/latesSessionCookie.txt`
-        )
-      }
-      console.log('user') //-
+      const cookies = cookieJar.toJSON()
+
+      console.log('cookies', cookies)
       const user = await api.getUser()
       console.log(user)
 
