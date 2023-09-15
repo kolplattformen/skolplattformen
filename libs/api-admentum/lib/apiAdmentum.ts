@@ -290,19 +290,27 @@ export class ApiAdmentum extends EventEmitter implements Api {
     const testChildren = await this.getChildren()
     console.log('login adentum', personalNumber)
     this.isFake = false
-    const sessionId = await this.fetch('get-session', bankIdSessionUrl(''))
-      .then((res) => {
-        console.log('got res', res, (res as any).url)
+    const url = await this.fetch('get-session', bankIdSessionUrl('')).then(
+      (res) => {
+        console.log('got res', res, (res as any).url, res.headers)
         return (res as any).url
-      })
-      .then((url) => url.split('=').pop()) // https://login.grandid.com/?sessionid=234324
+      }
+    )
+    // https://login.grandid.com/?sessionid=234324
+    // => 234324
+    const sessionId = url.split('=').pop()
+    console.log('sessionId', sessionId)
 
     console.log('test children', testChildren)
     console.log('adentum session id', sessionId)
     if (!sessionId) throw new Error('No session provided')
 
-    this.fetch('bankid-init', bankIdInitUrl(sessionId), {
+    console.log('url', bankIdInitUrl(sessionId))
+    await this.fetch('bankid-init', bankIdInitUrl(sessionId), {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       body: 'ssn=' + personalNumber,
     })
 
