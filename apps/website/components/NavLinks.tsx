@@ -66,6 +66,11 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
           {intl.formatMessage({ id: 'navigation.screenshots' })}
         </Link>
       </li>
+      <li>
+        <Link to="vad-kostar-det" href="/#vad-kostar-det">
+          {intl.formatMessage({ id: 'navigation.whatdoesitcost' })}
+        </Link>
+      </li>
     </ul>
   )
 }
