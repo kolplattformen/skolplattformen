@@ -51,3 +51,6 @@ export const bankIdSessionUrl = (returnUrl: string) =>
 
 export const bankIdInitUrl = (sessionId: string) =>
   `https://login.grandid.com/?sessionid=${sessionId}&eleg=1&bankid=1&bChoice=other`
+
+export const getUserUrl = (userId: string) =>
+  `https://skola.admentum.se/api/v1/users/${userId}`

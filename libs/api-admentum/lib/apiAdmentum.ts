@@ -34,6 +34,7 @@ import {
   bankIdCheckUrl,
   bankIdSessionUrl,
   apiUrls,
+  getUserUrl,
 } from './routes'
 import parse from '@skolplattformen/curriculum'
 
@@ -153,21 +154,22 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
-    console.log('fetching children')
-
-    const myChildrenResponseJson: any[] = []
-
-    return myChildrenResponseJson.map(
-      (c) =>
-        ({
-          id: c.id,
-          sdsId: c.id,
-          personGuid: c.id,
-          firstName: c.firstName,
-          lastName: c.lastName,
-          name: `${c.firstName} ${c.lastName}`,
-        } as Skola24Child & EtjanstChild)
-    )
+    const testUserId = '436838'
+    const fetchUrl = apiUrls.users + '/' + testUserId
+    console.log('fetching children for user id', testUserId, 'from', fetchUrl)
+    const currentUserResponse = await this.fetch('current-user', fetchUrl) 
+    if (currentUserResponse.status !== 200) {
+      throw new Error('Could not fetch children. Response code: ' + currentUserResponse.status)
+    }
+    const myChildrenResponseJson = await currentUserResponse.json();
+    return myChildrenResponseJson.students.map((student: { id: any; first_name: any; last_name: any }) => ({
+      id: student.id,
+      sdsId: student.id,
+      personGuid: student.id,
+      firstName: student.first_name,
+      lastName: student.last_name,
+      name: `${student.first_name} ${student.last_name}`,
+    }) as Skola24Child & EtjanstChild);
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
@@ -285,6 +287,8 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
       return this.fakeMode()
 
+    const testChildren = await this.getChildren()
+    console.log('login adentum', personalNumber)
     this.isFake = false
     const sessionId = await this.fetch('get-session', bankIdSessionUrl(''))
       .then((res) => {
@@ -293,6 +297,8 @@ export class ApiAdmentum extends EventEmitter implements Api {
       })
       .then((url) => url.split('=').pop()) // https://login.grandid.com/?sessionid=234324
 
+    console.log('test children', testChildren)
+    console.log('adentum session id', sessionId)
     if (!sessionId) throw new Error('No session provided')
 
     this.fetch('bankid-init', bankIdInitUrl(sessionId), {
