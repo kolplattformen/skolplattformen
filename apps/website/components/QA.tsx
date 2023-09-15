@@ -309,8 +309,7 @@ const QA = () => {
           Det är en anspelning på hur GNU-projektet beskriver fri programvara:
           To understand the concept, you should think of “free” as in “free
           speech,” not as in “free beer”. Då vi har valt att tillgängliggöra all
-          kod som öppen källkod (Apache 2.0) men ändå ta betalt för appen,
-          tyckte vi att namnet var passande.
+          kod som öppen källkod (Apache 2.0), tyckte vi att namnet var passande.
         </p>
         <h3>Kontakta oss</h3>
         <p>
