@@ -35,7 +35,6 @@ import {
   bankIdSessionUrl,
   bankIdCallbackUrl,
   apiUrls,
-  getUserUrl,
 } from './routes'
 import parse from '@skolplattformen/curriculum'
 
@@ -162,7 +161,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
     const testUserId = '436838'
-    const fetchUrl = getUserUrl(testUserId)
+    const fetchUrl = apiUrls.user(testUserId)
     console.log('v3.2 fetching children for user id', testUserId, 'from', fetchUrl)
     const currentUserResponse = await this.fetch('current-user', fetchUrl, {
       method: 'GET',
