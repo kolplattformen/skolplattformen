@@ -156,9 +156,21 @@ export class ApiAdmentum extends EventEmitter implements Api {
     }
     const testUserId = '436838'
     const fetchUrl = apiUrls.users + '/' + testUserId
-    console.log('fetching children for user id', testUserId, 'from', fetchUrl)
-    const currentUserResponse = await this.fetch('current-user', fetchUrl) 
+    console.log('v3.1 fetching children for user id', testUserId, 'from', fetchUrl)
+    const currentUserResponse = await this.fetch('current-user', getUserUrl(testUserId), {
+      method: 'GET',
+      headers: {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'en-GB,en;q=0.8',
+        'Cookie': 'active_school_id=X; csrftoken=Y; sessionid=Z',
+        'Referer': 'https://skola.admentum.se/api/v1/users/436838/',
+      },
+    }) 
+
+
     if (currentUserResponse.status !== 200) {
+      console.error('Error headers', currentUserResponse.headers)
       throw new Error('Could not fetch children. Response code: ' + currentUserResponse.status)
     }
     const myChildrenResponseJson = await currentUserResponse.json();
@@ -287,7 +299,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
       return this.fakeMode()
 
-    const testChildren = await this.getChildren()
+    
     console.log('login adentum', personalNumber)
     this.isFake = false
     const url = await this.fetch('get-session', bankIdSessionUrl('')).then(
@@ -300,8 +312,6 @@ export class ApiAdmentum extends EventEmitter implements Api {
     // => 234324
     const sessionId = url.split('=').pop()
     console.log('sessionId', sessionId)
-
-    console.log('test children', testChildren)
     console.log('adentum session id', sessionId)
     if (!sessionId) throw new Error('No session provided')
 
@@ -322,6 +332,8 @@ export class ApiAdmentum extends EventEmitter implements Api {
       // not sure if it is needed or if the cookies are enough for fetching all info...
       this.isLoggedIn = true
       this.personalNumber = personalNumber
+      const testChildren = await this.getChildren()
+      console.log('test children', testChildren)
       this.emit('login')
     })
     statusChecker.on('ERROR', () => {
