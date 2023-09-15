@@ -33,6 +33,7 @@ import {
   bankIdInitUrl,
   bankIdCheckUrl,
   bankIdSessionUrl,
+  bankIdCallbackUrl,
   apiUrls,
   getUserUrl,
 } from './routes'
@@ -128,20 +129,26 @@ export class ApiAdmentum extends EventEmitter implements Api {
   }
 
   async setSessionCookie(sessionCookie: string): Promise<void> {
-    //    this.cookieManager.setCookieString(sessionCookie, admentumUrl)
+    if (!sessionCookie) throw Error('cookie required')
+    this.cookieManager.setCookieString(
+      `sessionid=${sessionCookie}; Path=/;`,
+      'skola.admentum.se'
+    )
 
     const user = await this.getUser()
     if (!user.isAuthenticated) {
       throw new Error('Session cookie is expired')
     }
-
-    this.isLoggedIn = true
-    this.emit('login')
   }
 
   async getUser(): Promise<User> {
     console.log('fetching user')
-    const currentUserResponse = await this.fetch('current-user', apiUrls.users) // + /id?
+    const userId = '437302'
+    const currentUserResponse = await this.fetch(
+      'current-user',
+      apiUrls.user(userId)
+    ) // + /id?
+    console.log('current-user', currentUserResponse)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
     }
@@ -324,12 +331,11 @@ export class ApiAdmentum extends EventEmitter implements Api {
     const statusChecker = checkStatus(this.fetch, bankIdCheckUrl(sessionId))
 
     statusChecker.on('OK', async () => {
-      // setting these similar to how the sthlm api does it
-      // not sure if it is needed or if the cookies are enough for fetching all info...
       this.isLoggedIn = true
       this.personalNumber = personalNumber
-      const testChildren = await this.getChildren()
-      console.log('test children', testChildren)
+      this.setSessionCookie(sessionId)
+      //const testChildren = await this.getChildren()
+      //console.log('test children', testChildren)
       this.emit('login')
     })
     statusChecker.on('ERROR', () => {

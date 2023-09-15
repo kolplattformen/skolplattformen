@@ -88,8 +88,6 @@ export interface Classmate {
   guardians: Guardian[]
 }
 
-
-
 export interface Fetch {
   (url: string, init?: RequestInit): Promise<Response>
 }
@@ -146,8 +144,8 @@ export interface RequestInit {
   /**
    * Set to `manual` to extract redirect headers, `error` to reject redirect */
   redirect?: string
+  follow?: number // how many redirects should we allow to follow?
 }
-
 
 /**
  * @export
@@ -215,7 +213,7 @@ export interface TimetableEntry extends Subject {
   dateEnd: string
 }
 
- export interface Teacher {
+export interface Teacher {
   id: number
   sisId: string
   firstname: string
