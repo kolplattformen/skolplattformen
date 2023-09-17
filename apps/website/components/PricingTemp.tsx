@@ -18,6 +18,14 @@ const baseFeatures = [
     title: 'Se notifieringar',
   },
   {
+    included: true,
+    title: 'Se klasslista',
+  },
+  {
+    included: true,
+    title: 'Se schema',
+  },
+  {
     included: false,
     title: 'Gratis support',
   },
