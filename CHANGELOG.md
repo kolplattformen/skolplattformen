@@ -1,3 +1,10 @@
+## [2.15.8](https://github.com/kolplattformen/skolplattformen/compare/v2.15.7...v2.15.8) (2023-09-17)
+
+
+### Bug Fixes
+
+*  removed price components. Altered QA. ([#653](https://github.com/kolplattformen/skolplattformen/issues/653)) ([fef71c7](https://github.com/kolplattformen/skolplattformen/commit/fef71c7923c1f406c57ed0e15cde4df2d8ff9676))
+
 ## [2.15.7](https://github.com/kolplattformen/skolplattformen/compare/v2.15.6...v2.15.7) (2023-03-28)
 
 
