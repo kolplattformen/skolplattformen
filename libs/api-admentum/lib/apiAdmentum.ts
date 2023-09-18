@@ -321,7 +321,6 @@ export class ApiAdmentum extends EventEmitter implements Api {
     statusChecker.on('OK', async () => {
       this.isLoggedIn = true
       this.personalNumber = personalNumber
-      this.setSessionCookie(sessionId)
       this.emit('login')
     })
     statusChecker.on('ERROR', () => {
