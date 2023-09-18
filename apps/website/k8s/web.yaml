@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: skolplattformen-web
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skolplattformen-web
+  namespace: skolplattformen-web
+spec:
+  ports:
+    - port: 3000
+  type: ClusterIP
+  selector:
+    app: skolplattformen-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skolplattformen-web
+  namespace: skolplattformen-web
+spec:
+  selector:
+    matchLabels:
+      app: skolplattformen-web
+  template:
+    metadata:
+      labels:
+        app: skolplattformen-web
+    spec:
+      containers:
+        - name: skolplattformen-web
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          image: skolplattformen/web
+          ports:
+            - containerPort: 3000
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: skolplattformen-web
+  namespace: skolplattformen-web
+  annotations:
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
+    nginx.ingress.kubernetes.io/http2-push-preload: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: '500m'
+    nginx.ingress.kubernetes.io/proxy-pass-headers: 'Location'
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Xss-Protection: 0";
+      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload";
+      more_set_headers "Cross-Origin-Resource-Policy: same-site";
+      more_set_headers "Referrer-Policy strict-origin";
+    external-dns.alpha.kubernetes.io/hostname: new.skolplattformen.org.
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - skolplattformen.org
+        - www.skolplattformen.org
+      secretName: web-secret-tls
+  rules:
+    - host: skolplattformen.org
+      http:
+        paths:
+          - pathType: Prefix
+            path: '/'
+            backend:
+              service:
+                name: skolplattformen-web
+                port:
+                  number: 3000
