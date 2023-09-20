@@ -35,6 +35,7 @@ import {
   bankIdCheckUrl,
   bankIdSessionUrl,
   bankIdCallbackUrl,
+  redirectLocomotive,
   apiUrls,
 } from './routes'
 import parse from '@skolplattformen/curriculum'
@@ -336,8 +337,15 @@ export class ApiAdmentum extends EventEmitter implements Api {
       this.isLoggedIn = true
       this.personalNumber = personalNumber
 
-      console.log('callback url', bankIdCallbackUrl(sessionId));
-      const callbackResponse = await this.followRedirects(bankIdCallbackUrl(sessionId));
+
+      const locomotiveUrl = redirectLocomotive(sessionId)
+      const response = await this.fetch('follow-locomotive', locomotiveUrl, {
+        method: 'GET',
+        redirect: 'follow',
+      });
+      console.log('locomotive response', response)
+      console.log('locomotive url', locomotiveUrl);
+      const callbackResponse = await this.followRedirects(locomotiveUrl);
       console.log('final response:', callbackResponse);
       //const testChildren = await this.getChildren()
       //console.log('test children', testChildren)
