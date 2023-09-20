@@ -335,11 +335,10 @@ export class ApiAdmentum extends EventEmitter implements Api {
     statusChecker.on('OK', async () => {
       this.isLoggedIn = true
       this.personalNumber = personalNumber
-      this.setSessionCookie(sessionId)
 
       console.log('callback url', bankIdCallbackUrl(sessionId));
       const callbackResponse = await this.followRedirects(bankIdCallbackUrl(sessionId));
-      console.log('Final response:', callbackResponse);
+      console.log('final response:', callbackResponse);
       //const testChildren = await this.getChildren()
       //console.log('test children', testChildren)
       this.emit('login')
@@ -360,7 +359,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
       console.log('fetching (redirect number ' + redirectCount + ')', currentUrl);
       const response = await this.fetch('follow-redirect', currentUrl, {
         method: 'GET',
-        redirect: 'manual', // Disable automatic redirection
+        redirect: 'manual', // Disable automatic redirects
       });
 
       if (response.status >= 300 && response.status < 400) {
