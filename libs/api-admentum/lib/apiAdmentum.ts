@@ -13,6 +13,7 @@ import {
   MenuItem,
   NewsItem,
   Notification,
+  Response,
   ScheduleItem,
   SchoolContact,
   Skola24Child,
@@ -134,10 +135,10 @@ export class ApiAdmentum extends EventEmitter implements Api {
       'skola.admentum.se'
     )
 
-    const user = await this.getUser()
-    if (!user.isAuthenticated) {
-      throw new Error('Session cookie is expired')
-    }
+    //const user = await this.getUser()
+    //if (!user.isAuthenticated) {
+    //  throw new Error('Session cookie is expired')
+   // }
   }
 
   async getUser(): Promise<User> {
@@ -160,9 +161,11 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
+    console.log("get no children")
+    return []
     const testUserId = '436838'
     const fetchUrl = apiUrls.user(testUserId)
-    console.log('v3.2 fetching children for user id', testUserId, 'from', fetchUrl)
+    console.log('v3.3 fetching children for user id', testUserId, 'from', fetchUrl)
     const currentUserResponse = await this.fetch('current-user', fetchUrl, {
       method: 'GET',
       headers: {
@@ -333,6 +336,10 @@ export class ApiAdmentum extends EventEmitter implements Api {
       this.isLoggedIn = true
       this.personalNumber = personalNumber
       this.setSessionCookie(sessionId)
+
+      console.log('callback url', bankIdCallbackUrl(sessionId));
+      const callbackResponse = await this.followRedirects(bankIdCallbackUrl(sessionId));
+      console.log('Final response:', callbackResponse);
       //const testChildren = await this.getChildren()
       //console.log('test children', testChildren)
       this.emit('login')
@@ -343,6 +350,33 @@ export class ApiAdmentum extends EventEmitter implements Api {
 
     return statusChecker
   }
+  
+  async followRedirects(initialUrl: string): Promise<Response> {
+    let currentUrl = initialUrl;
+    let redirectCount = 0;
+    const maxRedirects = 10;
+
+    while (redirectCount < maxRedirects) {
+      console.log('fetching (redirect number ' + redirectCount + ')', currentUrl);
+      const response = await this.fetch('follow-redirect', currentUrl, {
+        method: 'GET',
+        redirect: 'manual', // Disable automatic redirection
+      });
+
+      if (response.status >= 300 && response.status < 400) {
+        const newLocation = response.headers.get('location');
+        if (!newLocation) {
+          throw new Error('Redirect response missing location header');
+        }
+        currentUrl = newLocation;
+        redirectCount++;
+      } else {
+        // The response is not a redirect, return it
+        return response;
+      }
+    }
+  throw new Error('Max redirects reached'); 
+  };
 
   private async fakeMode(): Promise<LoginStatusChecker> {
     this.isFake = true
