@@ -1,3 +1,10 @@
+## [2.15.9](https://github.com/kolplattformen/skolplattformen/compare/v2.15.8...v2.15.9) (2023-09-21)
+
+
+### Bug Fixes
+
+* copyright year ([#657](https://github.com/kolplattformen/skolplattformen/issues/657)) ([20ae87f](https://github.com/kolplattformen/skolplattformen/commit/20ae87fee165d9c4c9f9b77c28003226e5255e92))
+
 ## [2.15.8](https://github.com/kolplattformen/skolplattformen/compare/v2.15.7...v2.15.8) (2023-09-17)
 
 
