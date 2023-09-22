@@ -10,6 +10,13 @@ import { IntlProvider } from 'react-intl'
 import { pageview } from '../components/gtag'
 import messages, { Languages } from '../content/locale/'
 import { AppProps } from 'next/app'
+import { Poppins } from 'next/font/google'
+
+const poppins = Poppins({
+  weight: '400',
+  style: 'normal',
+  subsets: ['latin'],
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -33,6 +40,11 @@ export default function App({ Component, pageProps }: AppProps) {
       defaultLocale={defaultLocale}
       messages={currentMessages}
     >
+      <style jsx global>{`
+        html {
+          font-family: ${poppins.style.fontFamily};
+        }
+      `}</style>
       <Layout pageTitle="Skolplattformen">
         <Header />
         <Component {...pageProps} />

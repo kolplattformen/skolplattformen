@@ -1,5 +1,4 @@
 import ButtonLink from './ButtonLink'
-import Timeline from './Timeline'
 
 const TimelineLatest = () => {
   return (

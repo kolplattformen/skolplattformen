@@ -24,37 +24,37 @@ const Banner = () => {
           <div className="pl-0 md:pl-4 xl:pl-0">
             <div className="hidden select-none lg:block">
               <div>
-                <img
+                <Image
                   src={shape1}
                   alt=""
                   className="absolute left-64 top-8 motion-safe:animate-pulse"
                 />
-                <img
+                <Image
                   src={shape2}
                   alt=""
                   className="absolute left-9 top-20 motion-safe:animate-pulse"
                 />
-                <img
+                <Image
                   src={shape3}
                   alt=""
                   className="absolute left-48 top-18 motion-safe:animate-pulse"
                 />
-                <img
+                <Image
                   src={shape4}
                   alt=""
                   className="absolute top-20 right-20 motion-safe:animate-bounce-slow"
                 />
-                <img
+                <Image
                   src={shape5}
                   alt=""
                   className="absolute top-1/2 left-1/2 motion-safe:animate-pulse"
                 />
-                <img
+                <Image
                   src={shape6}
                   alt=""
                   className="absolute left-96 top-32 motion-safe:animate-bounce-slow"
                 />
-                <img
+                <Image
                   src={shape7}
                   alt=""
                   className="absolute bottom-48 right-8 motion-safe:animate-bounce-slow"
@@ -77,7 +77,7 @@ const Banner = () => {
                 href="https://apps.apple.com/se/app/%C3%B6ppna-skolplattformen-app/id1543853468"
                 target="_blank"
               >
-                <img
+                <Image
                   alt="Ladda ner i App Store"
                   src={appstore}
                   className="w-auto h-12"
@@ -88,10 +88,10 @@ const Banner = () => {
                 href="https://play.google.com/store/apps/details?id=org.skolplattformen.app"
                 target="_blank"
               >
-                <img
+                <Image
                   alt="Ladda ner i Google Play Store"
                   src={playstore}
-                  className="h-12"
+                  className="w-auto h-12"
                 />
               </Link.External>
             </p>

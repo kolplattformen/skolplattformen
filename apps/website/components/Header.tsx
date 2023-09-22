@@ -4,6 +4,7 @@ import React from 'react'
 import NavLinks from './NavLinks'
 import classnames from 'classnames'
 import Icon from './Icon'
+import Image from 'next/image'
 
 type UseMobileCallback = (ev: MediaQueryListEvent) => any
 
@@ -47,13 +48,11 @@ const HeaderHome = () => {
         >
           <div className="flex items-center justify-between max-w-6xl px-5 py-4 mx-auto md:px-2">
             <Link href="/">
-              <a>
-                <img
-                  className="h-12 md:h-24"
-                  src={headerLogo}
-                  alt="Skolplattformen"
-                />
-              </a>
+              <Image
+                className="h-12 md:h-24"
+                src={headerLogo}
+                alt="Skolplattformen"
+              />
             </Link>
             <nav className="hidden md:block">
               <NavLinks />

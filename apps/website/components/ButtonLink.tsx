@@ -2,7 +2,9 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { AnchorHTMLAttributes, DetailedHTMLProps } from 'react'
 
-type ButtonLinkProps = DetailedHTMLProps<
+type ButtonLinkProps = {
+  children: string
+} & DetailedHTMLProps<
   AnchorHTMLAttributes<HTMLAnchorElement>,
   HTMLAnchorElement
 >
@@ -34,13 +36,13 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   }
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       {inner}
     </Link>
   )
 }
 
-export const ButtonLinkPatreon: React.FC = ({ children }) => {
+export const ButtonLinkPatreon: React.FC<ButtonLinkProps> = ({ children }) => {
   return (
     <ButtonLink
       href="https://www.patreon.com/oppnaskolplattformen"
