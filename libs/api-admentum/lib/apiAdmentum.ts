@@ -316,6 +316,17 @@ export class ApiAdmentum extends EventEmitter implements Api {
     )
     // https://login.grandid.com/?sessionid=234324
     // => 234324
+    console.log('url', url)
+
+    // Logged in: https://skola.admentum.se/overview
+    if (url.includes('overview')) {
+      console.log('already logged in to admentum')
+      this.isLoggedIn = true
+      this.personalNumber = personalNumber
+      this.emit('login')
+      return new DummyStatusChecker()
+    }
+
     const sessionId = url.split('=').pop()
     console.log('sessionId', sessionId)
     console.log('adentum session id', sessionId)
@@ -339,12 +350,12 @@ export class ApiAdmentum extends EventEmitter implements Api {
 
 
       const locomotiveUrl = redirectLocomotive(sessionId)
-      const response = await this.fetch('follow-locomotive', locomotiveUrl, {
+      console.log('calling locomotive url: ', locomotiveUrl);
+      /*const response = await this.fetch('follow-locomotive', locomotiveUrl, {
         method: 'GET',
         redirect: 'follow',
-      });
-      console.log('locomotive response', response)
-      console.log('locomotive url', locomotiveUrl);
+      });*/
+      //console.log('locomotive response', response)
       const callbackResponse = await this.followRedirects(locomotiveUrl);
       console.log('final response:', callbackResponse);
       //const testChildren = await this.getChildren()
@@ -369,8 +380,9 @@ export class ApiAdmentum extends EventEmitter implements Api {
         method: 'GET',
         redirect: 'manual', // Disable automatic redirects
       });
-
+      console.log('follow-redirect response', response);
       if (response.status >= 300 && response.status < 400) {
+        console.log('response status:', response.status);
         const newLocation = response.headers.get('location');
         if (!newLocation) {
           throw new Error('Redirect response missing location header');
@@ -378,6 +390,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
         currentUrl = newLocation;
         redirectCount++;
       } else {
+        console.log('response status, not reidrect:', response.status);
         // The response is not a redirect, return it
         return response;
       }

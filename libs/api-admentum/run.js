@@ -9,6 +9,15 @@ const admentum = new Admentum(fetch, {})
 
 const run = async () => {
   const sessionId = await admentum.login('7612040233')
+
+  admentum.on('login', async () => {
+    console.log('login YEAYEAY', )
+
+    // ITerate and log all cookies
+    cookieJar.getCookies('https://www.admentum.se').forEach((cookie) => {
+      console.log(cookie.toString())
+    })
+  })
 }
 
 run()

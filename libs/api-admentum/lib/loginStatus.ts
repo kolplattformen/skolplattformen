@@ -1,6 +1,6 @@
 import { Fetcher, LoginStatusChecker } from '@skolplattformen/api'
 import { EventEmitter } from 'events'
-import { bankIdCheckUrl } from './routes'
+import { bankIdCheckUrl, redirectLocomotive } from './routes'
 
 export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
   private fetcher: Fetcher
@@ -28,6 +28,7 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
           'x-requested-with': 'XMLHttpRequest',
         },
       }).then((res) => {
+        console.log('bankid full result', res)
         return res.json()
       })
       console.log('bankid result', result)
@@ -35,6 +36,28 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
       const isError = result.response?.status === 'error'
       // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
       if (ok) {
+        //===
+        /*const parts = this.basePollingUrl.split('?');
+        let locoUrl = '';
+        if (parts.length === 2) {
+          const queryString = parts[1];
+          const queryParams = queryString.split('&');
+          for (const param of queryParams) {
+            const [key, value] = param.split('=');
+            if (key === 'sessionid') {
+              locoUrl = redirectLocomotive(value);
+            }
+          }
+        } else {
+          console.log("Invalid URL format.");
+        }
+
+        console.log('calling fff locomotive url: ', locoUrl)
+        const response = await this.fetcher('follow-locomotive', locoUrl, {
+          method: 'GET',
+          redirect: 'manual',
+        });
+        console.log('locomotive response', response)*/
         this.emit('OK')
       } else if (isError) {
         console.log('polling error')
@@ -45,7 +68,7 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
         setTimeout(() => this.check(), 3000)
       }
     } catch (err) {
-      console.log('Error validating login to Hjärntorget', err)
+      console.log('Error validating login to Admentum', err)
       this.emit('ERROR')
     }
   }
