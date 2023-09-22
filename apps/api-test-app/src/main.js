@@ -24,7 +24,7 @@ const init = isAdmentum ? initAdmentum : initSkolplattformen
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
-let bankIdUsed = false
+let bankIdUsed = true
 const recordFolder = `${__dirname}/record`
 
 async function run() {
@@ -45,12 +45,12 @@ async function run() {
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-      /*
+      
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
 
-      console.log('classmates')
+      /*console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
 

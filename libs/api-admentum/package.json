@@ -7,7 +7,7 @@
     "dist/**/*"
   ],
   "repository": "git@github.com:kolplattformen/skolplattformen.git",
-  "author": "Erik Eng <erik@eng.se>",
+  "author": "Christian Landgren, William Ryder <info@iteam.se>",
   "license": "Apache-2.0",
   "private": false,
   "scripts": {

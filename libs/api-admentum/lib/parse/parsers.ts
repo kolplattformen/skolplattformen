@@ -46,13 +46,113 @@ export function extractAuthGbgLoginRequestBody(signatureResponseText: string) {
   return authGbgLoginBody
 }
 
-export const parseCalendarItem = (x: html.HTMLElement): { id: number; title: string; startDate: string; endDate: string } => {
-  const info = Array.from(x.querySelectorAll('a'))
-  // TODO: the identifier is realy on this format: '\d+:\d+' currently we only take the first part so Id will clash between items
-  const id = info[0].getAttribute("onClick")?.replace(new RegExp("return viewEvent\\('(\\d+).+"), "$1") || NaN
-  const day = info[1].textContent
-  const timeSpan = info[2].textContent
-  const [startTime, endTime] = timeSpan.replace(".", ":").split("-")
-
-  return { id: +id, title: info[0].textContent, startDate: `${day} ${startTime}`, endDate: `${day} ${endTime}` }
+export const parseCalendarItem = (jsonRow: any): any => {
+  
+  return {} 
+  
 }
+
+/*
+{
+    "week_number": 40,
+    "days": [
+        {
+            "date": "2023-10-02",
+            "formated_date": "2 okt",
+            "name": "Måndag",
+            "lessons": [
+                {
+                    "title": "BI",
+                    "tooltip_title": "Biologi",
+                    "subject_name": "Biologi",
+                    "subject_code": "BI",
+                    "teachers": "FCa",
+                    "intervals": 3.0,
+                    "overlaps": 1,
+                    "start_pos": 4.0,
+                    "color": "#e97f23",
+                    "time": "10:00 - 11:30",
+                    "room": "",
+                    "groups": "6 A BI",
+                    "tooltip": "10:00 - 11:30<br>6 A BI",
+                    "lesson_id": 14998270,
+                    "lesson_info": "",
+                    "lesson_groups": "6 A BI",
+                    "body": "BI",
+                    "information": null
+                }
+            ],
+            "breaks": [],
+            "events": []
+        },
+        {
+            "date": "2023-10-03",
+            "formated_date": "3 okt",
+            "name": "Tisdag",
+            "lessons": [],
+            "breaks": [],
+            "events": []
+        },
+        {
+            "date": "2023-10-04",
+            "formated_date": "4 okt",
+            "name": "Onsdag",
+            "lessons": [],
+            "breaks": [],
+            "events": []
+        },
+        {
+            "date": "2023-10-05",
+            "formated_date": "5 okt",
+            "name": "Torsdag",
+            "lessons": [],
+            "breaks": [],
+            "events": []
+        },
+        {
+            "date": "2023-10-06",
+            "formated_date": "6 okt",
+            "name": "Fredag",
+            "lessons": [],
+            "breaks": [],
+            "events": []
+        }
+    ],
+    "query": "week=40&user_id=437235",
+    "time_range": [
+        "8:00",
+        "8:30",
+        "9:00",
+        "9:30",
+        "10:00",
+        "10:30",
+        "11:00",
+        "11:30",
+        "12:00",
+        "12:30",
+        "13:00",
+        "13:30",
+        "14:00",
+        "14:30",
+        "15:00",
+        "15:30",
+        "16:00",
+        "16:30",
+        "17:00"
+    ],
+    "section_count": 18,
+    "breaks": [],
+    "schedule_event_instances": [],
+    "schedule": {
+        "id": 4385,
+        "start_week": 31,
+        "start_year": 2023,
+        "end_week": 22,
+        "end_year": 2024
+    },
+    "next_week": 41,
+    "prev_week": 39,
+    "weeks_amount": 52,
+    "break_week": 27
+}
+*/

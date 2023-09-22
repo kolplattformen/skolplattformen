@@ -144,7 +144,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
 
   async getUser(): Promise<User> {
     console.log('fetching user')
-    const userId = '437302'
+    const userId = '437236'
     const currentUserResponse = await this.fetch(
       'current-user',
       apiUrls.user(userId)
@@ -162,18 +162,16 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
-    console.log("get no children")
-    return []
-    const testUserId = '436838'
+    console.log("get children")
+    const testUserId = '437236'
     const fetchUrl = apiUrls.user(testUserId)
-    console.log('v3.3 fetching children for user id', testUserId, 'from', fetchUrl)
+    console.log('v3.4 fetching children for user id', testUserId, 'from', fetchUrl)
     const currentUserResponse = await this.fetch('current-user', fetchUrl, {
       method: 'GET',
       headers: {
         'Accept': 'application/json, text/plain, */*',
       },
     }) 
-
 
     if (currentUserResponse.status !== 200) {
       console.error('Error headers', currentUserResponse.headers)
@@ -191,7 +189,15 @@ export class ApiAdmentum extends EventEmitter implements Api {
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
-    return Promise.resolve([])
+    if (!this.isLoggedIn) {
+      throw new Error('Not logged in...')
+    }
+
+    const [year, week] = new DateTime().toISOWeekDate().split('-')
+    const isoWeek = week.replace('W','')
+    const fetchUrl = apiUrls.schedule(year, isoWeek)
+    const calendarResponse = await this.fetch('get-calendar', fetchUrl) 
+    return calendarResponse.map(parseCalendarItem)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
