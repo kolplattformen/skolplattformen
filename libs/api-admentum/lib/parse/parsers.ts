@@ -1,5 +1,7 @@
 import * as html from 'node-html-parser'
 import { decode } from 'he'
+import { CalendarItem, TimetableEntry } from 'libs/api/lib/types'
+import { DateTime, FixedOffsetZone } from 'luxon'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
 
@@ -46,10 +48,60 @@ export function extractAuthGbgLoginRequestBody(signatureResponseText: string) {
   return authGbgLoginBody
 }
 
-export const parseCalendarItem = (jsonRow: any): any => {
-  
-  return {} 
-  
+/*
+return myChildrenResponseJson.students.map((student: { id: any; first_name: any; last_name: any }) => ({
+      id: student.id,
+      sdsId: student.id,
+      personGuid: student.id,
+      firstName: student.first_name,
+      lastName: student.last_name,
+      name: `${student.first_name} ${student.last_name}`,
+    }) as Skola24Child & EtjanstChild);
+*/
+/*
+export const parseScheduleEvent = (({
+  url, id, eid, school_id, schedule_id, name, start_time, end_time, rooms: [room], teachers, schedule_groups, primary_groups, weekly_interval
+})): CalendarItem => ({
+    id
+  title: name
+  location?: room?.name
+  startDate?: start_time
+  endDate?: end_time
+  allDay?: start_time === '00:00:00' && end_time === '23:59:00'
+})
+  */
+
+enum DayOfWeek {
+  'Måndag'= 1,
+  'Tisdag'= 2,
+  'Onsdag'= 3,
+  'Torsdag'= 4,
+  'Fredag'= 5,
+  'Lördag'= 6,
+  'Söndag'= 7,
+}
+
+export const parseCalendarItem = (jsonData: any): any => {
+  const timetableEntries: TimetableEntry[] = []
+  if (jsonData && jsonData.days && Array.isArray(jsonData.days) && jsonData.days.length > 0) {
+    jsonData.days.forEach((day: { name: string, lessons: any[] }) => {
+      day.lessons.forEach(lesson => {
+        const dayOfWeek = DayOfWeek[day.name as keyof typeof DayOfWeek]
+        timetableEntries.push({
+          id: lesson.id,
+          teacher: lesson.bookedTeacherNames && lesson.bookedTeacherNames[0],
+          location: lesson.location,
+          timeStart: lesson.time.substring(0, 5),
+          timeEnd: lesson.time.substring(9),
+          dayOfWeek,
+          blockName: lesson.title || lesson.subject_name
+        } as TimetableEntry)
+    });
+    })
+  } else {
+    console.error("Failed to parse calendar item, no days found in json data.")
+  }
+  return timetableEntries;
 }
 
 /*

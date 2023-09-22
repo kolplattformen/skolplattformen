@@ -27,6 +27,10 @@ const cookieJar = new CookieJar()
 let bankIdUsed = true
 const recordFolder = `${__dirname}/record`
 
+const now = DateTime.local()
+const [year, week] = now.toISOWeekDate().split('-')
+const isoWeek = week.replace('W','')
+
 async function run() {
   const fetch = fetchCookie(nodeFetch, cookieJar)
 
@@ -45,7 +49,26 @@ async function run() {
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-      
+
+
+      try {
+        console.log('timetable')
+        const timetable = await api.getTimetable(
+          children[0],
+          isoWeek,
+          year,
+          'sv'
+        )
+        console.log(inspect(timetable, false, 1000, true))
+      } catch (error) {
+        console.error(error)
+      }
+
+      console.log('menu')
+      const menu = await api.getMenu(children[0])
+      console.log(menu)
+
+      /*
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
@@ -74,18 +97,6 @@ async function run() {
         console.error(error)
       }
 
-      try {
-        console.log('timetable')
-        const timetable = await api.getTimetable(
-          skola24children[0],
-          15,
-          2021,
-          'sv'
-        )
-        console.log(inspect(timetable, false, 1000, true))
-      } catch (error) {
-        console.error(error)
-      }
 
       /*
       console.log('news')
@@ -100,9 +111,7 @@ async function run() {
       )
       console.log(newsItems) */
 
-      /* console.log('menu')
-      const menu = await api.getMenu(children[0])
-      console.log(menu) */
+    
 
       // console.log('notifications')
       // const notifications = await api.getNotifications(children[0])

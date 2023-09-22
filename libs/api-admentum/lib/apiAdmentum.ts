@@ -54,6 +54,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
   private realFetcher: Fetcher
 
   private personalNumber?: string
+  private userId: string
 
   private cookieManager: CookieManager
 
@@ -83,6 +84,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
     this.fetch = wrap(fetch, options)
     this.realFetcher = this.fetch
     this.cookieManager = cookieManager
+    this.userId = ''
   }
 
   public replaceFetcher(fetcher: Fetcher) {
@@ -143,12 +145,15 @@ export class ApiAdmentum extends EventEmitter implements Api {
   }
 
   async getUser(): Promise<User> {
+    const user = await this.fetch('fetch-me', apiUrls.me);
+    const userJson = await user.json();
+    this.userId = userJson.user?.id;
+    console.log('userId: ', this.userId);
     console.log('fetching user')
-    const userId = '437236'
     const currentUserResponse = await this.fetch(
       'current-user',
-      apiUrls.user(userId)
-    ) // + /id?
+      apiUrls.user(this.userId)
+    )
     console.log('current-user', currentUserResponse)
     if (currentUserResponse.status !== 200) {
       return { isAuthenticated: false }
@@ -163,9 +168,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
     console.log("get children")
-    const testUserId = '437236'
-    const fetchUrl = apiUrls.user(testUserId)
-    console.log('v3.4 fetching children for user id', testUserId, 'from', fetchUrl)
+    const fetchUrl = apiUrls.user(this.userId)
     const currentUserResponse = await this.fetch('current-user', fetchUrl, {
       method: 'GET',
       headers: {
@@ -193,11 +196,19 @@ export class ApiAdmentum extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
 
-    const [year, week] = new DateTime().toISOWeekDate().split('-')
-    const isoWeek = week.replace('W','')
-    const fetchUrl = apiUrls.schedule(year, isoWeek)
-    const calendarResponse = await this.fetch('get-calendar', fetchUrl) 
-    return calendarResponse.map(parseCalendarItem)
+    return []
+    //  const fetchUrl = apiUrls.schedule_events
+    // const events = await this.fetch('scheduled-events', fetchUrl, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Accept': 'application/json, text/plain, */*',
+    //   },
+    // }).then(res => res.json()).then(json => json.results)
+
+
+    
+
+    // return events.map(parseScheduleEvent)*/
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -236,14 +247,45 @@ export class ApiAdmentum extends EventEmitter implements Api {
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
     return { ...item }
   }
-
+/*
+  "data": {
+    "food_week": {
+      "id": 12846,
+      "week": 38,
+      "year": 2023,
+      "food_days": [
+        {
+          "id": 60620,
+          "date": "2023-09-18",
+          "menu": "Förrätt: Morotssoppa med knäckebröd\r\nHuvudrätt: Kycklinggryta med ris och grönsaker\r\nEfterrätt: Fruktkompott",
+          "weekday": "Måndag",
+          "weekday_nbr": 0
+        },
+        {
+          "id": 60621,
+          "date": "2023-09-19",
+          "menu": "Förrätt: Gurksallad\
+*/
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getMenu(_child: EtjanstChild): Promise<MenuItem[]> {
+  async getMenu(_child: EtjanstChild): Promise<MenuItem[]> {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
-    // Have not found this available on hjärntorget. Perhaps do a mapping to https://www.skolmaten.se/ ?
-    return Promise.resolve([])
+    const now = DateTime.local()
+    const [year, week] = now.toISOWeekDate().split('-')
+    const isoWeek = week.replace('W','')
+
+    const fetchUrl = apiUrls.menu(year.toString(), isoWeek.toString())
+    
+    const menuResponse = (await this.fetch('get-menu', fetchUrl))
+    const menuResponseJson = await menuResponse.json()
+    console.log('menu response', menuResponseJson)
+    const days = (await menuResponseJson)?.data?.food_week?.food_days
+
+    return Promise.resolve(days.map(({ menu, date } : any) => ({
+      title: date,
+      description: menu
+    })))
   }
 
   async getChildEventsWithAssociatedMembers(child: EtjanstChild) {
@@ -272,31 +314,13 @@ export class ApiAdmentum extends EventEmitter implements Api {
     year: number,
     _lang: string
   ): Promise<TimetableEntry[]> {
-    const startDate = DateTime.fromJSDate(getDateOfISOWeek(week, year))
-    const endDate = startDate.plus({ days: 7 })
 
-    const lessonsResponseJson: any[] = []
-
-    return lessonsResponseJson.map((l) => {
-      const start = DateTime.fromMillis(l.startDate.ts, {
-        zone: FixedOffsetZone.instance(l.startDate.timezoneOffsetMinutes),
-      })
-      const end = DateTime.fromMillis(l.endDate.ts, {
-        zone: FixedOffsetZone.instance(l.endDate.timezoneOffsetMinutes),
-      })
-      return {
-        ...parse(l.title, _lang),
-        id: l.id,
-        teacher: l.bookedTeacherNames && l.bookedTeacherNames[0],
-        location: l.location,
-        timeStart: start.toISOTime().substring(0, 5),
-        timeEnd: end.toISOTime().substring(0, 5),
-        dayOfWeek: start.toJSDate().getDay(),
-        blockName: l.title,
-        dateStart: start.toISODate(),
-        dateEnd: end.toISODate(),
-      } as TimetableEntry
-    })
+    const fetchUrl = apiUrls.schedule(year.toString(), week.toString())
+    console.log('fetching timetable', fetchUrl)
+    const calendarResponse = await this.fetch('get-calendar', fetchUrl) 
+    const calendarResponseJson = await calendarResponse.json()
+    const timetableEntries = parseCalendarItem(calendarResponseJson)
+    return timetableEntries;
   }
 
   async logout(): Promise<void> {
@@ -314,6 +338,16 @@ export class ApiAdmentum extends EventEmitter implements Api {
     
     console.log('login adentum', personalNumber)
     this.isFake = false
+
+    const authenticatedUser = await this.getUser();
+    if (authenticatedUser && authenticatedUser.isAuthenticated) {
+      console.log('already logged in to admentum')
+      this.isLoggedIn = true
+      this.personalNumber = personalNumber
+      this.emit('login')
+      return new DummyStatusChecker()
+    }
+
     const url = await this.fetch('get-session', bankIdSessionUrl('')).then(
       (res) => {
         console.log('got res', res, (res as any).url, res.headers)
@@ -357,15 +391,8 @@ export class ApiAdmentum extends EventEmitter implements Api {
 
       const locomotiveUrl = redirectLocomotive(sessionId)
       console.log('calling locomotive url: ', locomotiveUrl);
-      /*const response = await this.fetch('follow-locomotive', locomotiveUrl, {
-        method: 'GET',
-        redirect: 'follow',
-      });*/
-      //console.log('locomotive response', response)
       const callbackResponse = await this.followRedirects(locomotiveUrl);
       console.log('final response:', callbackResponse);
-      //const testChildren = await this.getChildren()
-      //console.log('test children', testChildren)
       this.emit('login')
     })
     statusChecker.on('ERROR', () => {
