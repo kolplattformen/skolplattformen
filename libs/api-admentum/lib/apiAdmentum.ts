@@ -29,7 +29,12 @@ import { DateTime, FixedOffsetZone } from 'luxon'
 import * as html from 'node-html-parser'
 import { fakeFetcher } from './fake/fakeFetcher'
 import { checkStatus, DummyStatusChecker } from './loginStatus'
-import { extractMvghostRequestBody, parseCalendarItem } from './parse/parsers'
+import { 
+  extractMvghostRequestBody, 
+  parseTimetableData,
+  parseScheduleEventData,
+  parseBreaksData,
+ } from './parse/parsers'
 import {
   bankIdInitUrl,
   bankIdCheckUrl,
@@ -204,7 +209,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
       const now = DateTime.local()
       const [year, week] = now.toISOWeekDate().split('-')
       const isoWeek = week.replace('W', '')
-
+      
       const fetchUrl = apiUrls.overview(
         'get-week-data',
         year.toString(),
@@ -216,92 +221,23 @@ export class ApiAdmentum extends EventEmitter implements Api {
           'x-requested-with': 'XMLHttpRequest',
         },
       })
+      const calendarItems: CalendarItem[] = []
+      
       const overviewJson = await overviewResponse.json()
-      console.log('get-week-data response', overviewJson)
-      const schedule_events = (await overviewJson)?.data?.schedule_events // .breaks: [] | .assignments: []
-      if (!schedule_events) {
-        return Promise.resolve([])
-      }
-      /*
-"url": "https://skola.admentum.se/api/v1/schedule_event_instances/2990834/",
-    "id": 2990834,
-    "school_id": 824,
-    "start_date": "2023-08-07",
-    "end_date": "2023-08-07",
-    "schedule_event": {
-        "url": "https://skola.admentum.se/api/v1/schedule_events/148722/",
-        "id": 148722,
-        "eid": null,
-        "schedule_id": 4385,
-        "name": "Engelska",
-        "start_time": "08:00:00",
-        "end_time": "09:30:00",
-        "rooms": [
-            {
-                "url": "https://skola.admentum.se/api/v1/rooms/7200/",
-                "id": 7200
-            }
-        ],
-        "teachers": [
-            {
-                "url": "https://skola.admentum.se/api/v1/users/437302/",
-                "id": 437302
-            }
-        ],
-        "schedule_groups": [],
-        "primary_groups": [
-            {
-                "url": "https://skola.admentum.se/api/v1/primary_groups/36874/",
-                "id": 36874
-            }
-        ],
-        "weekly_interval": ""
-    }
-      */
-      return Promise.resolve([])
+      
+      const scheduleEventJson = (await overviewJson)?.data?.schedule_events // .breaks: [] | .assignments: []
+      const schedule_events = parseScheduleEventData(scheduleEventJson)
+      calendarItems.push(...schedule_events)
+      
+      const breaks = (await overviewJson)?.data?.breaks
+      const break_events = parseBreaksData(breaks);
+      calendarItems.push(...break_events)
+
+      return calendarItems
     } catch (e) {
       console.error('Error fetching overview', e)
       return Promise.resolve([])
     }
-  }
-
-  async getScheduledEvents(child: EtjanstChild): Promise<CalendarItem[]> {
-    if (!this.isLoggedIn) {
-      throw new Error('Not logged in...')
-    }
-    console.log('get calendar')
-    const fetchUrl = apiUrls.schedule_events
-    console.log('fetching calendar', fetchUrl)
-    const eventsResponse = await this.fetch('scheduled-events', fetchUrl, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-      },
-    })
-
-    if (eventsResponse.status === 403) {
-      console.error('Not allwed. Error headers', eventsResponse.headers)
-      return []
-    }
-    if (eventsResponse.status !== 200) {
-      console.error('Error headers', eventsResponse.headers)
-      throw new Error(
-        'Could not fetch children. Response code: ' + eventsResponse.status
-      )
-    }
-
-    const eventsResponseJson = await eventsResponse.json()
-    console.log('eventsResponseJson', eventsResponseJson)
-    return []
-    //  const fetchUrl = apiUrls.schedule_events
-    // const events = await this.fetch('scheduled-events', fetchUrl, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Accept': 'application/json, text/plain, */*',
-    //   },
-    // }).then(res => res.json()).then(json => json.results)
-
-    // return events.map(parseScheduleEvent)*/
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -463,7 +399,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
     console.log('fetching timetable', fetchUrl)
     const calendarResponse = await this.fetch('get-calendar', fetchUrl)
     const calendarResponseJson = await calendarResponse.json()
-    const timetableEntries = parseCalendarItem(calendarResponseJson)
+    const timetableEntries = parseTimetableData(calendarResponseJson)
     return timetableEntries
   }
 

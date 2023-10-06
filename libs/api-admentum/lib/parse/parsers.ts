@@ -71,6 +71,69 @@ export const parseScheduleEvent = (({
   allDay?: start_time === '00:00:00' && end_time === '23:59:00'
 })
   */
+/* OVERVIEW:
+"status": 200,
+    "data": {
+        "year": 2023,
+        "week": 38,
+        "assignments": [],
+        "breaks": [
+            {
+                "id": 11031,
+                "break_type": 1,
+                "break_period": 1,
+                "name": "Studiedag",
+                "date": "2023-09-21",
+                "week": null,
+                "start_date": null,
+                "end_date": null
+            }
+        ],
+        "schedule_events": [
+            {
+                "id": 3110610,
+                "name": "Utvecklingssamtal",
+                "formatted_time": "Heldag",
+                "formatted_date": "2023-09-22"
+            }
+        ]
+    }
+}
+*/
+export const parseBreaksData = (jsonData: any): CalendarItem[] => {
+  const breakItems: CalendarItem[] = []
+  if (jsonData) {
+    jsonData.forEach((event: { id: any; name: any; date: any, start_date: any; end_date: any }) => {
+      breakItems.push({
+        id: event.id,
+        title: event.name,
+        startDate: event.start_date || event.date,
+        endDate: event.end_date || event.date,
+      } as CalendarItem)
+    });
+  } else {
+    console.error("Failed to parse breaks, no breaks found in json data.")
+  }
+  return breakItems;
+}
+
+export const parseScheduleEventData = (jsonData: any): CalendarItem[] => {
+  const calendarItems: CalendarItem[] = []
+  if (jsonData) {
+    jsonData.forEach((event: { id: any; name: any; formatted_date: any; formatted_time: any }) => {
+      calendarItems.push({
+        id: event.id,
+        title: event.name,
+        startDate: event.formatted_date,
+        endDate: event.formatted_date,
+        allDay: event.formatted_time === 'Heldag',
+      } as CalendarItem)
+    });
+  } else {
+    console.error("Failed to parse schedule events, no schedule events found in json data.")
+  }
+  return calendarItems;
+}
 
 enum DayOfWeek {
   'Måndag'= 1,
@@ -82,7 +145,7 @@ enum DayOfWeek {
   'Söndag'= 7,
 }
 
-export const parseCalendarItem = (jsonData: any): any => {
+export const parseTimetableData = (jsonData: any): any => {
   const timetableEntries: TimetableEntry[] = []
   if (jsonData && jsonData.days && Array.isArray(jsonData.days) && jsonData.days.length > 0) {
     jsonData.days.forEach((day: { name: string, lessons: any[] }) => {
@@ -100,7 +163,7 @@ export const parseCalendarItem = (jsonData: any): any => {
     });
     })
   } else {
-    console.error("Failed to parse calendar item, no days found in json data.")
+    console.error("Failed to parse timetable, no days found in json data.")
   }
   return timetableEntries;
 }
