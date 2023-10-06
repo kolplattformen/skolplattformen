@@ -3,49 +3,61 @@ import { decode } from 'he'
 import { CalendarItem, NewsItem, TimetableEntry } from 'libs/api/lib/types'
 import { DateTime, FixedOffsetZone } from 'luxon'
 import { news, teacher } from 'libs/api-skolplattformen/lib/parse'
+import { toMarkdown } from '@skolplattformen/api'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
 
 export const extractInputField = (sought: string, attrs: string[]) => {
   // there must be a better way to do this...
-  const s = attrs.find(e => e.indexOf(sought) >= 0) || ""
+  const s = attrs.find((e) => e.indexOf(sought) >= 0) || ''
   const v = s.substring(s.indexOf('value="') + 'value="'.length)
   return v.substring(0, v.length - 2)
 }
 
 export function extractMvghostRequestBody(initBankIdResponseText: string) {
   const doc = html.parse(decode(initBankIdResponseText))
-  const inputAttrs = doc.querySelectorAll('input').map(i => (i as any).rawAttrs)
+  const inputAttrs = doc
+    .querySelectorAll('input')
+    .map((i) => (i as any).rawAttrs)
   const relayState = extractInputField('RelayState', inputAttrs)
-  const samlRequest = extractInputField("SAMLRequest", inputAttrs)
-  const mvghostRequestBody = `RelayState=${encodeURIComponent(relayState)}&SAMLRequest=${encodeURIComponent(samlRequest)}`
-  
+  const samlRequest = extractInputField('SAMLRequest', inputAttrs)
+  const mvghostRequestBody = `RelayState=${encodeURIComponent(
+    relayState
+  )}&SAMLRequest=${encodeURIComponent(samlRequest)}`
+
   return mvghostRequestBody
 }
 
 export function extractHjarntorgetSAMLLogin(authGbgLoginResponseText: string) {
   const authGbgLoginDoc = html.parse(decode(authGbgLoginResponseText))
-  const inputAttrs = authGbgLoginDoc.querySelectorAll('input').map(i => (i as any).rawAttrs)
+  const inputAttrs = authGbgLoginDoc
+    .querySelectorAll('input')
+    .map((i) => (i as any).rawAttrs)
   const RelayStateText = extractInputField('RelayState', inputAttrs)
-  const SAMLResponseText = extractInputField("SAMLResponse", inputAttrs)
+  const SAMLResponseText = extractInputField('SAMLResponse', inputAttrs)
 
-  return `SAMLResponse=${encodeURIComponent(SAMLResponseText || '')}&RelayState=${encodeURIComponent(RelayStateText || '')}`
+  return `SAMLResponse=${encodeURIComponent(
+    SAMLResponseText || ''
+  )}&RelayState=${encodeURIComponent(RelayStateText || '')}`
 }
 
 export function extractAuthGbgLoginRequestBody(signatureResponseText: string) {
   const signatureResponseDoc = html.parse(decode(signatureResponseText))
-  const signatureResponseTextAreas = signatureResponseDoc.querySelectorAll('textarea')
-  const SAMLResponseElem = signatureResponseTextAreas.find(ta => {
-    const nameAttr = ta.getAttribute("name")
+  const signatureResponseTextAreas =
+    signatureResponseDoc.querySelectorAll('textarea')
+  const SAMLResponseElem = signatureResponseTextAreas.find((ta) => {
+    const nameAttr = ta.getAttribute('name')
     return nameAttr === 'SAMLResponse'
   })
   const SAMLResponseText = SAMLResponseElem?.rawText
-  const RelayStateElem = signatureResponseTextAreas.find(ta => {
-    const nameAttr = ta.getAttribute("name")
+  const RelayStateElem = signatureResponseTextAreas.find((ta) => {
+    const nameAttr = ta.getAttribute('name')
     return nameAttr === 'RelayState'
   })
   const RelayStateText = RelayStateElem?.rawText
-  const authGbgLoginBody = `SAMLResponse=${encodeURIComponent(SAMLResponseText || '')}&RelayState=${encodeURIComponent(RelayStateText || '')}`
+  const authGbgLoginBody = `SAMLResponse=${encodeURIComponent(
+    SAMLResponseText || ''
+  )}&RelayState=${encodeURIComponent(RelayStateText || '')}`
   return authGbgLoginBody
 }
 
@@ -103,36 +115,53 @@ export const parseScheduleEvent = (({
 export const parseBreaksData = (jsonData: any): CalendarItem[] => {
   const breakItems: CalendarItem[] = []
   if (jsonData) {
-    jsonData.forEach((event: { id: any; name: any; date: any, start_date: any; end_date: any }) => {
-      breakItems.push({
-        id: event.id,
-        title: event.name,
-        startDate: event.start_date || event.date,
-        endDate: event.end_date || event.date,
-      } as CalendarItem)
-    });
+    jsonData.forEach(
+      (event: {
+        id: any
+        name: any
+        date: any
+        start_date: any
+        end_date: any
+      }) => {
+        breakItems.push({
+          id: event.id,
+          title: event.name,
+          startDate: event.start_date || event.date,
+          endDate: event.end_date || event.date,
+        } as CalendarItem)
+      }
+    )
   } else {
-    console.error("Failed to parse breaks, no breaks found in json data.")
+    console.error('Failed to parse breaks, no breaks found in json data.')
   }
-  return breakItems;
+  return breakItems
 }
 
 export const parseScheduleEventData = (jsonData: any): CalendarItem[] => {
   const calendarItems: CalendarItem[] = []
   if (jsonData) {
-    jsonData.forEach((event: { id: any; name: any; formatted_date: any; formatted_time: any }) => {
-      calendarItems.push({
-        id: event.id,
-        title: event.name,
-        startDate: event.formatted_date,
-        endDate: event.formatted_date,
-        allDay: event.formatted_time === 'Heldag',
-      } as CalendarItem)
-    });
+    jsonData.forEach(
+      (event: {
+        id: any
+        name: any
+        formatted_date: any
+        formatted_time: any
+      }) => {
+        calendarItems.push({
+          id: event.id,
+          title: event.name,
+          startDate: event.formatted_date,
+          endDate: event.formatted_date,
+          allDay: event.formatted_time === 'Heldag',
+        } as CalendarItem)
+      }
+    )
   } else {
-    console.error("Failed to parse schedule events, no schedule events found in json data.")
+    console.error(
+      'Failed to parse schedule events, no schedule events found in json data.'
+    )
   }
-  return calendarItems;
+  return calendarItems
 }
 
 /*
@@ -175,37 +204,48 @@ export const parseScheduleEventData = (jsonData: any): CalendarItem[] => {
 */
 export const parseNewsData = (jsonData: any): NewsItem[] => {
   const newsItems: NewsItem[] = []
-  if (jsonData && jsonData.conversations && Array.isArray(jsonData.conversations) && jsonData.conversations.length > 0) {
+  if (
+    jsonData &&
+    jsonData.conversations &&
+    Array.isArray(jsonData.conversations) &&
+    jsonData.conversations.length > 0
+  ) {
     jsonData.conversations.forEach((item: any) => {
+      const bodyText = toMarkdown(item.latest_message?.content)
       newsItems.push({
         id: item.id,
         author: item.creator?.first_name + ' ' + item.creator?.last_name,
         header: item.title,
-        body: item.latest_message?.content,
-        published: item.latest_message?.created_at.split(" ")[0],
-      } as NewsItem);
-    });
+        body: bodyText,
+        published: item.latest_message?.created_at.split(' ')[0],
+      } as NewsItem)
+    })
   } else {
-    console.error("Failed to parse news, no news found in json data.")
+    console.error('Failed to parse news, no news found in json data.')
   }
-  return newsItems;
+  return newsItems
 }
 
 enum DayOfWeek {
-  'Måndag'= 1,
-  'Tisdag'= 2,
-  'Onsdag'= 3,
-  'Torsdag'= 4,
-  'Fredag'= 5,
-  'Lördag'= 6,
-  'Söndag'= 7,
+  'Måndag' = 1,
+  'Tisdag' = 2,
+  'Onsdag' = 3,
+  'Torsdag' = 4,
+  'Fredag' = 5,
+  'Lördag' = 6,
+  'Söndag' = 7,
 }
 
 export const parseTimetableData = (jsonData: any): any => {
   const timetableEntries: TimetableEntry[] = []
-  if (jsonData && jsonData.days && Array.isArray(jsonData.days) && jsonData.days.length > 0) {
-    jsonData.days.forEach((day: { name: string, lessons: any[] }) => {
-      day.lessons.forEach(lesson => {
+  if (
+    jsonData &&
+    jsonData.days &&
+    Array.isArray(jsonData.days) &&
+    jsonData.days.length > 0
+  ) {
+    jsonData.days.forEach((day: { name: string; lessons: any[] }) => {
+      day.lessons.forEach((lesson) => {
         const dayOfWeek = DayOfWeek[day.name as keyof typeof DayOfWeek]
         timetableEntries.push({
           id: lesson.id,
@@ -216,12 +256,12 @@ export const parseTimetableData = (jsonData: any): any => {
           dayOfWeek,
           blockName: lesson.title || lesson.subject_name,
         } as TimetableEntry)
-    });
+      })
     })
   } else {
-    console.error("Failed to parse timetable, no days found in json data.")
+    console.error('Failed to parse timetable, no days found in json data.')
   }
-  return timetableEntries;
+  return timetableEntries
 }
 
 /*
