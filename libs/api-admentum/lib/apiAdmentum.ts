@@ -400,19 +400,18 @@ export class ApiAdmentum extends EventEmitter implements Api {
       const fetchUrl = apiUrls.menu(year.toString(), isoWeek.toString())
       console.log('fetching menu', fetchUrl)
       const menuResponse = (await this.fetch('get-menu', fetchUrl))
-      console.log('menu response', menuResponse)
-      const menuResponseJson = await menuResponse.text()
+      const menuResponseJson = await menuResponse.json()
       console.log('menu response', menuResponseJson)
-      const days = (await menuResponseJson)
-      //if (!days) {
-      return Promise.resolve([])
-      //}
-      /*return Promise.resolve(
+      const days = (await menuResponseJson)?.data?.food_week?.food_days
+      if (!days) {
+        return Promise.resolve([])
+      }
+      return Promise.resolve(
         days.map(({ menu, date }: any) => ({
           title: date,
           description: menu,
         }))
-      )*/
+      )
     } catch (e) {
       console.error('Error fetching menu', e)
       return Promise.resolve([])
