@@ -366,12 +366,18 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
+    const token = await this.fetch('get-messages', apiUrls.messages)
+      .then((res) => res.text())
+      .then((html) => /token:\s+'(.*)'/.exec(html)?.pop()) // HACK: this could probably be found at a better place than the html code..
 
-    const fetchUrl = apiUrls.messages(this.userId, '1')
+    console.log('token', token)
+
+    const fetchUrl = apiUrls.conversations(this.userId, '1')
     console.log('fetching messages', fetchUrl)
     const messagesResponse = await this.fetch('get-messages', fetchUrl, {
       headers: {
         'x-requested-with': 'XMLHttpRequest',
+        'user-info': token,
       },
     })
     const messagesResponseJson = await messagesResponse.json()
