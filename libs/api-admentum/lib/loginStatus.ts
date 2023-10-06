@@ -33,7 +33,7 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
       })
       console.log('bankid result', result)
       const ok = result.response?.status === 'complete'
-      const isError = result.response?.status === 'error'
+      const isError = result.response?.status === 'failed'
       // https://mNN-mg-local.idp.funktionstjanster.se/mg-local/auth/ccp11/grp/pollstatus
       if (ok) {
         //===
@@ -60,7 +60,7 @@ export class GrandidChecker extends EventEmitter implements LoginStatusChecker {
         console.log('locomotive response', response)*/
         this.emit('OK')
       } else if (isError) {
-        console.log('polling error')
+        console.log('polling error', result.response?.hintCode)
         this.emit('ERROR')
       } else if (!this.cancelled) {
         console.log('keep on polling...')
