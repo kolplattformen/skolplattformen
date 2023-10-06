@@ -2,6 +2,7 @@ import * as html from 'node-html-parser'
 import { decode } from 'he'
 import { CalendarItem, TimetableEntry } from 'libs/api/lib/types'
 import { DateTime, FixedOffsetZone } from 'luxon'
+import { teacher } from 'libs/api-skolplattformen/lib/parse'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
 
@@ -89,12 +90,12 @@ export const parseCalendarItem = (jsonData: any): any => {
         const dayOfWeek = DayOfWeek[day.name as keyof typeof DayOfWeek]
         timetableEntries.push({
           id: lesson.id,
-          teacher: lesson.bookedTeacherNames && lesson.bookedTeacherNames[0],
-          location: lesson.location,
+          teacher: lesson.teachers,
+          location: lesson.room || lesson.title || lesson.subject_name,
           timeStart: lesson.time.substring(0, 5),
           timeEnd: lesson.time.substring(9),
           dayOfWeek,
-          blockName: lesson.title || lesson.subject_name 
+          blockName: lesson.title || lesson.subject_name,
         } as TimetableEntry)
     });
     })

@@ -211,8 +211,6 @@ export class ApiAdmentum extends EventEmitter implements Api {
         isoWeek.toString()
       )
       console.log('fetching calendar', fetchUrl)
-      //const calendarResponse = await this.fetch('get-calendar', fetchUrl)
-      //const calendarResponseJson = await calendarResponse.json()
       const overviewResponse = await this.fetch('get-week-data', fetchUrl, {
         headers: {
           'x-requested-with': 'XMLHttpRequest',
@@ -260,14 +258,9 @@ export class ApiAdmentum extends EventEmitter implements Api {
         "weekly_interval": ""
     }
       */
-      return Promise.resolve(
-        schedule_events.map(({ menu, date }: any) => ({
-          title: date,
-          description: menu,
-        }))
-      )
+      return Promise.resolve([])
     } catch (e) {
-      console.error('Error fetching menu', e)
+      console.error('Error fetching overview', e)
       return Promise.resolve([])
     }
   }
@@ -373,6 +366,17 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
+
+    const fetchUrl = apiUrls.messages(this.userId, '1')
+    console.log('fetching messages', fetchUrl)
+    const messagesResponse = await this.fetch('get-messages', fetchUrl, {
+      headers: {
+        'x-requested-with': 'XMLHttpRequest',
+      },
+    })
+    const messagesResponseJson = await messagesResponse.json()
+    console.log('messages response', messagesResponseJson)
+
     return Promise.resolve([])
   }
 

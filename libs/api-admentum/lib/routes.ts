@@ -15,6 +15,9 @@ export const apiUrls = {
   leisure_groups: api + 'leisure_groups',
   lesson_infos: api + 'lesson_infos',
   lessons: api + 'lessons',
+  // start at page 1
+  messages: (userId: string, page: string) => 
+  `https://messages.admentum.se/api/users/${userId}/conversations?page=${page}`, // unread_only=1
   organisations: api + 'organisations',
   orientations: api + 'orientations',
   overview: (action: string, year: string, week: string) =>
