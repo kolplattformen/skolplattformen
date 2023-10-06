@@ -141,14 +141,14 @@ export class ApiAdmentum extends EventEmitter implements Api {
     //const user = await this.getUser()
     //if (!user.isAuthenticated) {
     //  throw new Error('Session cookie is expired')
-   // }
+    // }
   }
 
   async getUser(): Promise<User> {
-    const user = await this.fetch('fetch-me', apiUrls.me);
-    const userJson = await user.json();
-    this.userId = userJson.user?.id;
-    console.log('userId: ', this.userId);
+    const user = await this.fetch('fetch-me', apiUrls.me)
+    const userJson = await user.json()
+    this.userId = userJson.user?.id
+    console.log('userId: ', this.userId)
     console.log('fetching user')
     const currentUserResponse = await this.fetch(
       'current-user',
@@ -167,31 +167,34 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
-    console.log("get children")
+    console.log('get children')
     const fetchUrl = apiUrls.user(this.userId)
     const currentUserResponse = await this.fetch('current-user', fetchUrl, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
+        Accept: 'application/json, text/plain, */*',
       },
-    }) 
+    })
 
     if (currentUserResponse.status !== 200) {
       console.error('Error headers', currentUserResponse.headers)
-      throw new Error('Could not fetch children. Response code: ' + currentUserResponse.status)
+      throw new Error(
+        'Could not fetch children. Response code: ' + currentUserResponse.status
+      )
     }
-    const myChildrenResponseJson = await currentUserResponse.json();
-    return myChildrenResponseJson.students.map((student: { id: any; first_name: any; last_name: any }) => ({
-      id: student.id,
-      sdsId: student.id,
-      personGuid: student.id,
-      firstName: student.first_name,
-      lastName: student.last_name,
-      name: `${student.first_name} ${student.last_name}`,
-    }) as Skola24Child & EtjanstChild);
+    const myChildrenResponseJson = await currentUserResponse.json()
+    return myChildrenResponseJson.students.map(
+      (student: { id: any; first_name: any; last_name: any }) =>
+        ({
+          id: student.id,
+          sdsId: student.id,
+          personGuid: student.id,
+          firstName: student.first_name,
+          lastName: student.last_name,
+          name: `${student.first_name} ${student.last_name}`,
+        } as Skola24Child & EtjanstChild)
+    )
   }
-
-
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
     try {
@@ -200,16 +203,23 @@ export class ApiAdmentum extends EventEmitter implements Api {
       }
       const now = DateTime.local()
       const [year, week] = now.toISOWeekDate().split('-')
-      const isoWeek = week.replace('W','')
+      const isoWeek = week.replace('W', '')
 
-      const fetchUrl = apiUrls.overview(year.toString(), isoWeek.toString())
+      const fetchUrl = apiUrls.overview(
+        'get-week-data',
+        year.toString(),
+        isoWeek.toString()
+      )
       console.log('fetching calendar', fetchUrl)
-      //const calendarResponse = await this.fetch('get-calendar', fetchUrl) 
+      //const calendarResponse = await this.fetch('get-calendar', fetchUrl)
       //const calendarResponseJson = await calendarResponse.json()
-      const overviewResponse = await this.fetch('get-overview', fetchUrl)
-      console.log('overview response', overviewResponse)
+      const overviewResponse = await this.fetch('get-week-data', fetchUrl, {
+        headers: {
+          'x-requested-with': 'XMLHttpRequest',
+        },
+      })
       const overviewJson = await overviewResponse.json()
-      console.log('overview response', overviewJson)
+      console.log('get-week-data response', overviewJson)
       const schedule_events = (await overviewJson)?.data?.schedule_events // .breaks: [] | .assignments: []
       if (!schedule_events) {
         return Promise.resolve([])
@@ -250,10 +260,12 @@ export class ApiAdmentum extends EventEmitter implements Api {
         "weekly_interval": ""
     }
       */
-      return Promise.resolve(schedule_events.map(({ menu, date } : any) => ({
-        title: date,
-        description: menu
-      })))
+      return Promise.resolve(
+        schedule_events.map(({ menu, date }: any) => ({
+          title: date,
+          description: menu,
+        }))
+      )
     } catch (e) {
       console.error('Error fetching menu', e)
       return Promise.resolve([])
@@ -265,12 +277,12 @@ export class ApiAdmentum extends EventEmitter implements Api {
       throw new Error('Not logged in...')
     }
     console.log('get calendar')
-    const fetchUrl = apiUrls.schedule_events;
+    const fetchUrl = apiUrls.schedule_events
     console.log('fetching calendar', fetchUrl)
     const eventsResponse = await this.fetch('scheduled-events', fetchUrl, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
+        Accept: 'application/json, text/plain, */*',
       },
     })
 
@@ -280,10 +292,12 @@ export class ApiAdmentum extends EventEmitter implements Api {
     }
     if (eventsResponse.status !== 200) {
       console.error('Error headers', eventsResponse.headers)
-      throw new Error('Could not fetch children. Response code: ' + eventsResponse.status)
+      throw new Error(
+        'Could not fetch children. Response code: ' + eventsResponse.status
+      )
     }
 
-    const eventsResponseJson = await eventsResponse.json();
+    const eventsResponseJson = await eventsResponse.json()
     console.log('eventsResponseJson', eventsResponseJson)
     return []
     //  const fetchUrl = apiUrls.schedule_events
@@ -293,9 +307,6 @@ export class ApiAdmentum extends EventEmitter implements Api {
     //     'Accept': 'application/json, text/plain, */*',
     //   },
     // }).then(res => res.json()).then(json => json.results)
-
-
-    
 
     // return events.map(parseScheduleEvent)*/
   }
@@ -368,7 +379,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
     return { ...item }
   }
-/*
+  /*
   "data": {
     "food_week": {
       "id": 12846,
@@ -399,7 +410,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
 
       const fetchUrl = apiUrls.menu(year.toString(), isoWeek.toString())
       console.log('fetching menu', fetchUrl)
-      const menuResponse = (await this.fetch('get-menu', fetchUrl))
+      const menuResponse = await this.fetch('get-menu', fetchUrl)
       const menuResponseJson = await menuResponse.json()
       console.log('menu response', menuResponseJson)
       const days = (await menuResponseJson)?.data?.food_week?.food_days
@@ -444,13 +455,12 @@ export class ApiAdmentum extends EventEmitter implements Api {
     year: number,
     _lang: string
   ): Promise<TimetableEntry[]> {
-
     const fetchUrl = apiUrls.schedule(year.toString(), week.toString())
     console.log('fetching timetable', fetchUrl)
-    const calendarResponse = await this.fetch('get-calendar', fetchUrl) 
+    const calendarResponse = await this.fetch('get-calendar', fetchUrl)
     const calendarResponseJson = await calendarResponse.json()
     const timetableEntries = parseCalendarItem(calendarResponseJson)
-    return timetableEntries;
+    return timetableEntries
   }
 
   async logout(): Promise<void> {
@@ -465,11 +475,10 @@ export class ApiAdmentum extends EventEmitter implements Api {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
       return this.fakeMode()
 
-    
     console.log('login adentum', personalNumber)
     this.isFake = false
 
-    const authenticatedUser = await this.getUser();
+    const authenticatedUser = await this.getUser()
     if (authenticatedUser && authenticatedUser.isAuthenticated) {
       console.log('already logged in to admentum')
       this.isLoggedIn = true
@@ -518,11 +527,10 @@ export class ApiAdmentum extends EventEmitter implements Api {
       this.isLoggedIn = true
       this.personalNumber = personalNumber
 
-
       const locomotiveUrl = redirectLocomotive(sessionId)
-      console.log('calling locomotive url: ', locomotiveUrl);
-      const callbackResponse = await this.followRedirects(locomotiveUrl);
-      console.log('final response:', callbackResponse);
+      console.log('calling locomotive url: ', locomotiveUrl)
+      const callbackResponse = await this.followRedirects(locomotiveUrl)
+      console.log('final response:', callbackResponse)
       this.emit('login')
     })
     statusChecker.on('ERROR', () => {
@@ -531,35 +539,38 @@ export class ApiAdmentum extends EventEmitter implements Api {
 
     return statusChecker
   }
-  
+
   async followRedirects(initialUrl: string): Promise<Response> {
-    let currentUrl = initialUrl;
-    let redirectCount = 0;
-    const maxRedirects = 10;
+    let currentUrl = initialUrl
+    let redirectCount = 0
+    const maxRedirects = 10
 
     while (redirectCount < maxRedirects) {
-      console.log('fetching (redirect number ' + redirectCount + ')', currentUrl);
+      console.log(
+        'fetching (redirect number ' + redirectCount + ')',
+        currentUrl
+      )
       const response = await this.fetch('follow-redirect', currentUrl, {
         method: 'GET',
         redirect: 'manual', // Disable automatic redirects
-      });
-      console.log('follow-redirect response', response);
+      })
+      console.log('follow-redirect response', response)
       if (response.status >= 300 && response.status < 400) {
-        console.log('response status:', response.status);
-        const newLocation = response.headers.get('location');
+        console.log('response status:', response.status)
+        const newLocation = response.headers.get('location')
         if (!newLocation) {
-          throw new Error('Redirect response missing location header');
+          throw new Error('Redirect response missing location header')
         }
-        currentUrl = newLocation;
-        redirectCount++;
+        currentUrl = newLocation
+        redirectCount++
       } else {
-        console.log('response status, not reidrect:', response.status);
+        console.log('response status, not reidrect:', response.status)
         // The response is not a redirect, return it
-        return response;
+        return response
       }
     }
-  throw new Error('Max redirects reached'); 
-  };
+    throw new Error('Max redirects reached')
+  }
 
   private async fakeMode(): Promise<LoginStatusChecker> {
     this.isFake = true

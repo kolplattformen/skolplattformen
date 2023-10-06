@@ -17,7 +17,8 @@ export const apiUrls = {
   lessons: api + 'lessons',
   organisations: api + 'organisations',
   orientations: api + 'orientations',
-  overview: (year: string, week: string) => baseUrl + `overview?week=${week}&year=${year}`,
+  overview: (action: string, year: string, week: string) =>
+    baseUrl + `overview?action=${action}&week=${week}&year=${year}`,
   permission_groups: api + 'permission_groups',
   primary_group_enrollments: api + 'primary_group_enrollments',
   primary_group_municipality_statistics:
@@ -35,14 +36,16 @@ export const apiUrls = {
     api + 'schedule_group_teacher_enrollments',
   schedule_groups: api + 'schedule_groups',
   schedules: api + 'schedules',
-  schedule: (year: string, week: string) => baseUrl + `schedule/schedule?week=${week}&year=${year}`,
+  schedule: (year: string, week: string) =>
+    baseUrl + `schedule/schedule?week=${week}&year=${year}`,
   school_enrollments: `${api}school_enrollments`,
   school_years: api + 'school_years',
   schools: api + 'schools',
   sickness: api + 'sickness',
   subjects: api + 'subjects',
   teachers: api + 'teachers',
-  menu: (year: string, week: string) => baseUrl + `api/food/week/${week}/${year}`,
+  menu: (year: string, week: string) =>
+    baseUrl + `api/food/week/${week}/${year}`,
   upper_secondary_subjects: api + 'upper_secondary_subjects',
   users: api + 'users?format=json',
   user: (userId: string) => api + `users/${userId}/?format=json`,
