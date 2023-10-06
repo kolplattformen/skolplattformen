@@ -32,5 +32,5 @@ const styles = StyleSheet.create({
     ...fontSize.sm,
     fontWeight: '500',
   },
-  subtitle: { ...fontSize.sm },
+  subtitle: { ...fontSize.base },
 })
