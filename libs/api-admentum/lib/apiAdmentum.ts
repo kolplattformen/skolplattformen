@@ -29,13 +29,13 @@ import { DateTime, FixedOffsetZone } from 'luxon'
 import * as html from 'node-html-parser'
 import { fakeFetcher } from './fake/fakeFetcher'
 import { checkStatus, DummyStatusChecker } from './loginStatus'
-import { 
-  extractMvghostRequestBody, 
+import {
+  extractMvghostRequestBody,
   parseTimetableData,
   parseScheduleEventData,
   parseBreaksData,
   parseNewsData,
- } from './parse/parsers'
+} from './parse/parsers'
 import {
   bankIdInitUrl,
   bankIdCheckUrl,
@@ -210,7 +210,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
       const now = DateTime.local()
       const [year, week] = now.toISOWeekDate().split('-')
       const isoWeek = week.replace('W', '')
-      
+
       const fetchUrl = apiUrls.overview(
         'get-week-data',
         year.toString(),
@@ -223,15 +223,15 @@ export class ApiAdmentum extends EventEmitter implements Api {
         },
       })
       const calendarItems: CalendarItem[] = []
-      
+
       const overviewJson = await overviewResponse.json()
-      
+
       const scheduleEventJson = (await overviewJson)?.data?.schedule_events // .breaks: [] | .assignments: []
       const schedule_events = parseScheduleEventData(scheduleEventJson)
       calendarItems.push(...schedule_events)
-      
+
       const breaks = (await overviewJson)?.data?.breaks
-      const break_events = parseBreaksData(breaks);
+      const break_events = parseBreaksData(breaks)
       calendarItems.push(...break_events)
 
       return calendarItems
@@ -408,6 +408,7 @@ export class ApiAdmentum extends EventEmitter implements Api {
     console.log('fetching timetable', fetchUrl)
     const calendarResponse = await this.fetch('get-calendar', fetchUrl)
     const calendarResponseJson = await calendarResponse.json()
+    console.log('calendar json', calendarResponseJson)
     const timetableEntries = parseTimetableData(calendarResponseJson)
     return timetableEntries
   }

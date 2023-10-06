@@ -251,8 +251,8 @@ export const parseTimetableData = (jsonData: any): any => {
           id: lesson.id,
           teacher: lesson.teachers,
           location: lesson.room || lesson.title || lesson.subject_name,
-          timeStart: lesson.time.substring(0, 5),
-          timeEnd: lesson.time.substring(9),
+          timeStart: lesson.time.split(' - ')[0].padStart(5, '0'), // 8:00 - 9:30
+          timeEnd: lesson.time.split(' - ')[1].padStart(5, '0'),
           dayOfWeek,
           blockName: lesson.title || lesson.subject_name,
         } as TimetableEntry)
