@@ -68,11 +68,11 @@ async function run() {
       const menu = await api.getMenu(children[0])
       console.log(menu)
 
-      /*
+      
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
-
+/*
       /*console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)

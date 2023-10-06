@@ -191,11 +191,100 @@ export class ApiAdmentum extends EventEmitter implements Api {
     }) as Skola24Child & EtjanstChild);
   }
 
+
+
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
+    try {
+      if (!this.isLoggedIn) {
+        throw new Error('Not logged in...')
+      }
+      const now = DateTime.local()
+      const [year, week] = now.toISOWeekDate().split('-')
+      const isoWeek = week.replace('W','')
+
+      const fetchUrl = apiUrls.overview(year.toString(), isoWeek.toString())
+      console.log('fetching calendar', fetchUrl)
+      //const calendarResponse = await this.fetch('get-calendar', fetchUrl) 
+      //const calendarResponseJson = await calendarResponse.json()
+      const overviewResponse = await this.fetch('get-overview', fetchUrl)
+      console.log('overview response', overviewResponse)
+      const overviewJson = await overviewResponse.json()
+      console.log('overview response', overviewJson)
+      const schedule_events = (await overviewJson)?.data?.schedule_events // .breaks: [] | .assignments: []
+      if (!schedule_events) {
+        return Promise.resolve([])
+      }
+      /*
+"url": "https://skola.admentum.se/api/v1/schedule_event_instances/2990834/",
+    "id": 2990834,
+    "school_id": 824,
+    "start_date": "2023-08-07",
+    "end_date": "2023-08-07",
+    "schedule_event": {
+        "url": "https://skola.admentum.se/api/v1/schedule_events/148722/",
+        "id": 148722,
+        "eid": null,
+        "schedule_id": 4385,
+        "name": "Engelska",
+        "start_time": "08:00:00",
+        "end_time": "09:30:00",
+        "rooms": [
+            {
+                "url": "https://skola.admentum.se/api/v1/rooms/7200/",
+                "id": 7200
+            }
+        ],
+        "teachers": [
+            {
+                "url": "https://skola.admentum.se/api/v1/users/437302/",
+                "id": 437302
+            }
+        ],
+        "schedule_groups": [],
+        "primary_groups": [
+            {
+                "url": "https://skola.admentum.se/api/v1/primary_groups/36874/",
+                "id": 36874
+            }
+        ],
+        "weekly_interval": ""
+    }
+      */
+      return Promise.resolve(schedule_events.map(({ menu, date } : any) => ({
+        title: date,
+        description: menu
+      })))
+    } catch (e) {
+      console.error('Error fetching menu', e)
+      return Promise.resolve([])
+    }
+  }
+
+  async getScheduledEvents(child: EtjanstChild): Promise<CalendarItem[]> {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
+    console.log('get calendar')
+    const fetchUrl = apiUrls.schedule_events;
+    console.log('fetching calendar', fetchUrl)
+    const eventsResponse = await this.fetch('scheduled-events', fetchUrl, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+      },
+    })
 
+    if (eventsResponse.status === 403) {
+      console.error('Not allwed. Error headers', eventsResponse.headers)
+      return []
+    }
+    if (eventsResponse.status !== 200) {
+      console.error('Error headers', eventsResponse.headers)
+      throw new Error('Could not fetch children. Response code: ' + eventsResponse.status)
+    }
+
+    const eventsResponseJson = await eventsResponse.json();
+    console.log('eventsResponseJson', eventsResponseJson)
     return []
     //  const fetchUrl = apiUrls.schedule_events
     // const events = await this.fetch('scheduled-events', fetchUrl, {
@@ -214,6 +303,38 @@ export class ApiAdmentum extends EventEmitter implements Api {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getClassmates(_child: EtjanstChild): Promise<Classmate[]> {
     // TODO: We could get this from the events a child is associated with...
+    /*
+    GET /api/v1/schedule_groups/423145/
+{
+    "url": "https://skola.admentum.se/api/v1/schedule_groups/423145/",
+    "id": 423145,
+    "eid": null,
+    "schedule": {
+        "url": "https://skola.admentum.se/api/v1/schedules/4385/",
+        "id": 4385,
+        "school_year": "23/24"
+    },
+    "name": "1 A SV",
+    "guid": null,
+    "users": [
+        {
+            "url": "https://skola.admentum.se/api/v1/users/436741/",
+            "id": 436741,
+            "email": null,
+            "first_name": "Arvid",
+            "last_name": "Forslin",
+            "role": 1
+        },
+        {
+            "url": "https://skola.admentum.se/api/v1/users/436747/",
+            "id": 436747,
+            "email": null,
+            "first_name": "Emmy",
+            "last_name": "Granström",
+            "role": 1
+        }
+        ...
+    */
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
@@ -268,24 +389,34 @@ export class ApiAdmentum extends EventEmitter implements Api {
 */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getMenu(_child: EtjanstChild): Promise<MenuItem[]> {
-    if (!this.isLoggedIn) {
-      throw new Error('Not logged in...')
+    try {
+      if (!this.isLoggedIn) {
+        throw new Error('Not logged in...')
+      }
+      const now = DateTime.local()
+      const [year, week] = now.toISOWeekDate().split('-')
+      const isoWeek = week.replace('W', '')
+
+      const fetchUrl = apiUrls.menu(year.toString(), isoWeek.toString())
+      console.log('fetching menu', fetchUrl)
+      const menuResponse = (await this.fetch('get-menu', fetchUrl))
+      console.log('menu response', menuResponse)
+      const menuResponseJson = await menuResponse.text()
+      console.log('menu response', menuResponseJson)
+      const days = (await menuResponseJson)
+      //if (!days) {
+      return Promise.resolve([])
+      //}
+      /*return Promise.resolve(
+        days.map(({ menu, date }: any) => ({
+          title: date,
+          description: menu,
+        }))
+      )*/
+    } catch (e) {
+      console.error('Error fetching menu', e)
+      return Promise.resolve([])
     }
-    const now = DateTime.local()
-    const [year, week] = now.toISOWeekDate().split('-')
-    const isoWeek = week.replace('W','')
-
-    const fetchUrl = apiUrls.menu(year.toString(), isoWeek.toString())
-    
-    const menuResponse = (await this.fetch('get-menu', fetchUrl))
-    const menuResponseJson = await menuResponse.json()
-    console.log('menu response', menuResponseJson)
-    const days = (await menuResponseJson)?.data?.food_week?.food_days
-
-    return Promise.resolve(days.map(({ menu, date } : any) => ({
-      title: date,
-      description: menu
-    })))
   }
 
   async getChildEventsWithAssociatedMembers(child: EtjanstChild) {

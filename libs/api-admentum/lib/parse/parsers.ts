@@ -94,7 +94,7 @@ export const parseCalendarItem = (jsonData: any): any => {
           timeStart: lesson.time.substring(0, 5),
           timeEnd: lesson.time.substring(9),
           dayOfWeek,
-          blockName: lesson.title || lesson.subject_name
+          blockName: lesson.title || lesson.subject_name 
         } as TimetableEntry)
     });
     })

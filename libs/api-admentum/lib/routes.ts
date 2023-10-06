@@ -17,6 +17,7 @@ export const apiUrls = {
   lessons: api + 'lessons',
   organisations: api + 'organisations',
   orientations: api + 'orientations',
+  overview: (year: string, week: string) => baseUrl + `overview?week=${week}&year=${year}`,
   permission_groups: api + 'permission_groups',
   primary_group_enrollments: api + 'primary_group_enrollments',
   primary_group_municipality_statistics:
