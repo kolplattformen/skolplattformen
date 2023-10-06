@@ -1,8 +1,8 @@
 import * as html from 'node-html-parser'
 import { decode } from 'he'
-import { CalendarItem, TimetableEntry } from 'libs/api/lib/types'
+import { CalendarItem, NewsItem, TimetableEntry } from 'libs/api/lib/types'
 import { DateTime, FixedOffsetZone } from 'luxon'
-import { teacher } from 'libs/api-skolplattformen/lib/parse'
+import { news, teacher } from 'libs/api-skolplattformen/lib/parse'
 
 // TODO: Move this into the parse folder and convert it to follow the pattern of other parsers (include tests).
 
@@ -133,6 +133,62 @@ export const parseScheduleEventData = (jsonData: any): CalendarItem[] => {
     console.error("Failed to parse schedule events, no schedule events found in json data.")
   }
   return calendarItems;
+}
+
+/*
+"conversations": [
+        {
+            "id": "14b643b9-fd09-4b4a-9313-b1e75a94a0a8",
+            "latest_message": {
+                "id": "72bb3c4b-efb9-4056-822b-9fbd93c7905c",
+                "content": "text",
+                "message_type": 1,
+                "meta_id": "",
+                "created_at": "2023-10-06 10:57:54.795854+00:00",
+                "formatted_created_at": "Idag, 10:57"
+            },
+            "recipients": [],
+            "title": "Veckobrev v 40",
+            "json_recipients": {
+                "names": {
+                    "primary_groups": {
+                        "36886": "6 A",
+                        "36887": "6 B"
+                    }
+                },
+                "parents": {
+                    "primary_groups": [
+                        36886,
+                        36887
+                    ]
+                },
+                "is_information": true
+            },
+            "is_unread": false,
+            "creator": {
+                "id": 437302,
+                "first_name": "Christian",
+                "last_name": "Landgren"
+            },
+            "flag": 0
+        },
+*/
+export const parseNewsData = (jsonData: any): NewsItem[] => {
+  const newsItems: NewsItem[] = []
+  if (jsonData && jsonData.conversations && Array.isArray(jsonData.conversations) && jsonData.conversations.length > 0) {
+    jsonData.conversations.forEach((item: any) => {
+      newsItems.push({
+        id: item.id,
+        author: item.creator?.first_name + ' ' + item.creator?.last_name,
+        header: item.title,
+        body: item.latest_message?.content,
+        published: item.latest_message?.created_at.split(" ")[0],
+      } as NewsItem);
+    });
+  } else {
+    console.error("Failed to parse news, no news found in json data.")
+  }
+  return newsItems;
 }
 
 enum DayOfWeek {

@@ -34,6 +34,7 @@ import {
   parseTimetableData,
   parseScheduleEventData,
   parseBreaksData,
+  parseNewsData,
  } from './parse/parsers'
 import {
   bankIdInitUrl,
@@ -319,7 +320,9 @@ export class ApiAdmentum extends EventEmitter implements Api {
     const messagesResponseJson = await messagesResponse.json()
     console.log('messages response', messagesResponseJson)
 
-    return Promise.resolve([])
+    const newsItems = parseNewsData(messagesResponseJson)
+    console.log('newsItems', newsItems)
+    return newsItems
   }
 
   async getNewsDetails(_child: EtjanstChild, item: NewsItem): Promise<any> {
