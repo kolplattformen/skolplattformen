@@ -1,3 +1,10 @@
+## [2.15.10](https://github.com/kolplattformen/skolplattformen/compare/v2.15.9...v2.15.10) (2023-10-07)
+
+
+### Bug Fixes
+
+* 🐛 Updated Timetable URLs ([#659](https://github.com/kolplattformen/skolplattformen/issues/659)) ([e6ba622](https://github.com/kolplattformen/skolplattformen/commit/e6ba622fa9d5c7ec533a71fe5b1fab6687a8fefe))
+
 ## [2.15.9](https://github.com/kolplattformen/skolplattformen/compare/v2.15.8...v2.15.9) (2023-09-21)
 
 
