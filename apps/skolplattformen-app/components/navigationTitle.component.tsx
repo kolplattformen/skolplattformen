@@ -19,7 +19,11 @@ export const NavigationTitle = ({ title, subtitle }: NavigationTitleProps) => {
           {title}
         </Text>
       )}
-      {subtitle && <Text style={styles.subtitle}>{subtitle.substring(0, subtitle.indexOf(' '))}</Text>}
+      {subtitle && (
+        <Text style={styles.subtitle}>
+          {subtitle.substring(0, subtitle.indexOf(' '))}
+        </Text>
+      )}
     </View>
   )
 }
