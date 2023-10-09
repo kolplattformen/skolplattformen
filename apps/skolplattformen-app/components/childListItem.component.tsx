@@ -18,7 +18,7 @@ import {
 } from '@ui-kitten/components'
 import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
-import { Pressable, TouchableOpacity, useColorScheme, View } from 'react-native'
+import { Pressable, useColorScheme, View } from 'react-native'
 import { useTranslation } from '../hooks/useTranslation'
 import { Colors, Layout, Sizing } from '../styles'
 import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
@@ -157,126 +157,122 @@ export const ChildListItem = ({
     )
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Child', { child, color })}
-    >
-      <View style={styles.card}>
-        <View style={styles.cardHeader}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.cardHeaderLeft || {},
-              { opacity: pressed ? 0.5 : 1 },
-            ]}
-            onPress={() => navigation.navigate('Child', { child, color })}
-          >
-            <View style={styles.cardHeaderLeft}>
-              <StudentAvatar name={studentName(child.name)} color={color} />
-              <View style={styles.cardHeaderText}>
-                <Text category="h6">{studentName(child.name)}</Text>
-                {className ? <Text category="s1">{className}</Text> : null}
-              </View>
-            </View>
-            <View style={styles.cardHeaderRight}>
-              <RightArrowIcon
-                style={styles.icon}
-                fill={
-                  isDarkMode ? Colors.neutral.gray200 : Colors.neutral.gray800
-                }
-                name="star"
-              />
-            </View>
-          </Pressable>
-        </View>
-
+    <View style={styles.card}>
+      <View style={styles.cardHeader}>
         <Pressable
-          style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
-          onPress={() =>
-            navigation.navigate('Child', {
-              child,
-              color,
-              initialRouteName: 'Calendar',
-            })
-          }
+          style={({ pressed }) => [
+            styles.cardHeaderLeft || {},
+            { opacity: pressed ? 0.5 : 1 },
+          ]}
+          onPress={() => navigation.navigate('Child', { child, color })}
         >
-          <DaySummary child={child} date={meaningfulStartingDate} />
-          {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
-            <Text category="p1" key={i}>
-              {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
-            </Text>
-          ))}
+          <View style={styles.cardHeaderLeft}>
+            <StudentAvatar name={studentName(child.name)} color={color} />
+            <View style={styles.cardHeaderText}>
+              <Text category="h6">{studentName(child.name)}</Text>
+              {className ? <Text category="s1">{className}</Text> : null}
+            </View>
+          </View>
+          <View style={styles.cardHeaderRight}>
+            <RightArrowIcon
+              style={styles.icon}
+              fill={
+                isDarkMode ? Colors.neutral.gray200 : Colors.neutral.gray800
+              }
+              name="star"
+            />
+          </View>
         </Pressable>
+      </View>
 
+      <Pressable
+        style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'Calendar',
+          })
+        }
+      >
+        <DaySummary child={child} date={meaningfulStartingDate} />
+        {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
+          <Text category="p1" key={i}>
+            {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
+          </Text>
+        ))}
+      </Pressable>
+
+      <Pressable
+        style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
+        onPress={() =>
+          navigation.navigate('Child', {
+            child,
+            color,
+            initialRouteName: 'News',
+          })
+        }
+      >
+        <Text category="c2" style={styles.label}>
+          {t('navigation.news')}
+        </Text>
+        {notificationsThisWeek.slice(0, 3).map((notification, i) => (
+          <Text category="p1" key={i}>
+            {notification.message}
+          </Text>
+        ))}
+
+        {newsThisWeek.slice(0, 3).map((newsItem, i) => (
+          <Text category="p1" key={i}>
+            {newsItem.header ?? ''}
+          </Text>
+        ))}
+      </Pressable>
+
+      {scheduleAndCalendarThisWeek.length ||
+      notificationsThisWeek.length ||
+      newsThisWeek.length ? null : (
+        <Text category="p1" style={styles.noNewNewsItemsText}>
+          {t('news.noNewNewsItemsThisWeek')}
+        </Text>
+      )}
+      {shouldShowLunchMenu ? (
         <Pressable
           style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
               color,
-              initialRouteName: 'News',
+              initialRouteName: 'Menu',
             })
           }
         >
           <Text category="c2" style={styles.label}>
-            {t('navigation.news')}
+            {meaningfulStartingDate.format(
+              '[' + t('schedule.lunch') + '] dddd'
+            )}
           </Text>
-          {notificationsThisWeek.slice(0, 3).map((notification, i) => (
-            <Text category="p1" key={i}>
-              {notification.message}
-            </Text>
-          ))}
-
-          {newsThisWeek.slice(0, 3).map((newsItem, i) => (
-            <Text category="p1" key={i}>
-              {newsItem.header ?? ''}
-            </Text>
-          ))}
+          <Text>
+            {menu[meaningfulStartingDate.isoWeekday() - 1]?.description}
+          </Text>
         </Pressable>
+      ) : null}
 
-        {scheduleAndCalendarThisWeek.length ||
-        notificationsThisWeek.length ||
-        newsThisWeek.length ? null : (
-          <Text category="p1" style={styles.noNewNewsItemsText}>
-            {t('news.noNewNewsItemsThisWeek')}
-          </Text>
-        )}
-        {shouldShowLunchMenu ? (
-          <Pressable
-            style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
-            onPress={() =>
-              navigation.navigate('Child', {
-                child,
-                color,
-                initialRouteName: 'Menu',
-              })
-            }
-          >
-            <Text category="c2" style={styles.label}>
-              {meaningfulStartingDate.format(
-                '[' + t('schedule.lunch') + '] dddd'
-              )}
-            </Text>
-            <Text>
-              {menu[meaningfulStartingDate.isoWeekday() - 1]?.description}
-            </Text>
-          </Pressable>
-        ) : null}
-
-        <View style={styles.itemFooter}>
-          <Button
-            accessible
-            accessibilityRole="button"
-            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
-            appearance="ghost"
-            accessoryLeft={AlertIcon}
-            status="primary"
-            style={styles.absenceButton}
-            onPress={() => navigation.navigate('Absence', { child })}
-          >
-            {t('abscense.title')}
-          </Button>
-        </View>
+      <View style={styles.itemFooter}>
+        <Button
+          accessible
+          accessibilityRole="button"
+          accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
+          appearance="ghost"
+          accessoryLeft={AlertIcon}
+          status="primary"
+          style={styles.absenceButton}
+          onPress={() => navigation.navigate('Absence', { child })}
+        >
+          {t('abscense.title')}
+        </Button>
       </View>
-    </TouchableOpacity>
+    </View>
   )
 }
 
