@@ -25,33 +25,42 @@ export const Menu = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()
   const { data, status, reload } = useMenu(child)
+  const weekNr = data[0].title.split('Vecka')[1]
 
   return (
-    <List
-      contentContainerStyle={styles.contentContainer}
-      data={data}
-      ItemSeparatorComponent={Divider}
-      ListEmptyComponent={
-        <View style={styles.emptyState}>
-          <Text category="h4">{translate('menu.emptyHeadline')}</Text>
-          <Text style={styles.emptyStateDescription}>
-            {translate('menu.emptyText')}
-          </Text>
-          <Image
-            accessibilityIgnoresInvertColors={false}
-            source={require('../assets/children.png')}
-            style={styles.emptyStateImage as ImageStyle}
+    <>
+      <Text category="h5" style={styles.listHeader}>
+        {`${translate('menu.week')} ${weekNr}`}
+      </Text>
+      <List
+        contentContainerStyle={styles.contentContainer}
+        data={data}
+        ItemSeparatorComponent={Divider}
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <Text category="h4">{translate('menu.emptyHeadline')}</Text>
+            <Text style={styles.emptyStateDescription}>
+              {translate('menu.emptyText')}
+            </Text>
+            <Image
+              accessibilityIgnoresInvertColors={false}
+              source={require('../assets/children.png')}
+              style={styles.emptyStateImage as ImageStyle}
+            />
+          </View>
+        }
+        renderItem={({ item }: ListRenderItemInfo<MenuItem>) => (
+          <MenuListItem key={item.title} item={item} />
+        )}
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={status === 'loading'}
+            onRefresh={reload}
           />
-        </View>
-      }
-      renderItem={({ item }: ListRenderItemInfo<MenuItem>) => (
-        <MenuListItem key={item.title} item={item} />
-      )}
-      style={styles.container}
-      refreshControl={
-        <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
-      }
-    />
+        }
+      />
+    </>
   )
 }
 
@@ -80,5 +89,9 @@ const themedStyles = StyleService.create({
   emptyStateImage: {
     ...Sizing.aspectRatio(0.8),
     marginTop: 50,
+  },
+  listHeader: {
+    paddingTop: 10,
+    paddingLeft: 15,
   },
 })
