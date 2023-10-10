@@ -6,7 +6,9 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Getting started with Development
 
-To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
+### Please use node version 16 or higher
+
+To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [npm](https://docs.npmjs.com/cli/v8/commands/npm-install).
 
 Clone the repo with
 ```bash
@@ -15,7 +17,7 @@ $ git clone https://github.com/Home-Biz-LLS/skolplattformen-react-native
 
 Install dependencies
 ```bash
-cd skolplattformen/app && yarn
+cd apps/skolplattformen-app-new/ && npm i
 ```
 
 ### iOS
@@ -24,12 +26,47 @@ If you wanna run the iOS app, you need to setup a couple of things first, we hav
 
 * [Mac OS](https://reactnative.dev/docs/environment-setup)
 
-If you already setup everything, you just need to run the following command in the project root:
+#### Step 1
+Make sure you have **Xcode** installed
 
-Start the iOS app
+
+#### Step 2
+Make sure **CocoaPods** is installed (you can do it easily with homebrew)
+
+* [CocoaPods homebrew](https://formulae.brew.sh/formula/cocoapods)
+* [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
+
+
+#### Step 3
+```bash
+cd apps/skolplattformen-app-new/ios && pod install
 ```
-yarn run ios
+
+If you already setup everything, go into the 
+
+"skolplattformen-app-new" directory
+
+Start the metro 
+
 ```
+npm run start
+```
+
+then
+
+```
+i
+```
+to Start iOS app
+
+OR
+
+Start the iOS app directly
+```
+npm run ios
+```
+
+
 
 ### Android
 
