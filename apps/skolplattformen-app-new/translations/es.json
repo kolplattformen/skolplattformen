@@ -1,0 +1,96 @@
+{
+    "news": {
+        "notificationTitle": "Noticia: {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "No hay noticias nuevas esta semana.",
+        "backToChild": "Volver al niño",
+        "title": "Noticias de Skolplattformen",
+        "published": "Publicada"
+    },
+    "navigation": {
+        "notifications": "Notificaciones",
+        "news": "Noticias",
+        "calender": "Calendario",
+        "menu": "Menú"
+    },
+    "language": {
+        "changeLanguage": "Cambiar idioma",
+        "changeLanguageButton": "Guardar"
+    },
+    "general": {
+        "send": "Enviar",
+        "logout": "Cerrar sesión",
+        "changeLanguage": "Cambiar idioma",
+        "socialSecurityNumber": "Personnummer",
+        "settings": "Configuración",
+        "loading": "Cargando…",
+        "confirm": "Confirmar",
+        "title": "Öppna skolplattformen",
+        "cancel": "Anular"
+    },
+    "children": {
+        "viewStatus": "Ver estado en skolplattformen.org",
+        "tryAgain": "Intentar otra vez",
+        "title": "Tus hijos",
+        "noKids_title": "Sin niños"
+    },
+    "calender": {
+        "showCalenderActions": "Mostrar acciones de calendario",
+        "saveToCalenderSuccess": "✔️ Guardado en el calendario",
+        "saveToCalenderError": "Algo salió mal",
+        "saveToCalender": "Guardar en calendario",
+        "approveAccessToCalender": "Tienes que aprobar el acceso a tu calendario"
+    },
+    "auth": {
+        "words": {
+            "simple": "fácil",
+            "rebellious": "rebelde",
+            "free": "libre",
+            "cooler": "más guay",
+            "working": "funcional",
+            "imperfect": "imperfecto",
+            "first": "el primero",
+            "enlightened": "ilustrada",
+            "awaited": "esperado",
+            "agile": "ágil",
+            "fantastic": "fantástica",
+            "cheap": "barato",
+            "better": "mejor",
+            "homemade": "artesanal",
+            "open": "abierto",
+            "fast": "rápida",
+            "fun": "divertido"
+        },
+        "subtitle": "La alternativa {{word}}",
+        "placeholder_SocialSecurityNumber": "Tu personnummer",
+        "loginFailed": "No se pudo iniciar sesión. Vuelva a intentarlo.",
+        "chooseLoginMethod": "Elija el método de inicio de sesión",
+        "bankid": {
+            "Waiting": "Esperando BankID…",
+            "OpenOnThisDevice": "Abra BankID en este dispositivo",
+            "OpenOnAnotherDevice": "Abra BankID en otro dispositivo",
+            "OpenManually": "Abrir BankID manualmente"
+        },
+        "loginAsTestUser": "Inicie sesión como usuario de pruebas",
+        "a11y_change_language": "Elija su idioma",
+        "a11y_image_two_boys": "Fotografia de dos personas mirando su telefono movil"
+    },
+    "abscense": {
+        "title": "Informar ausencia",
+        "startTime": "hora de inicio",
+        "selectAbscenseStartTime": "Elige la hora de inicio",
+        "personalNumberMissing": "Falta el personnummer",
+        "invalidPersonalNumber": "El personnumer no es válido",
+        "entireDay": "Día completo",
+        "endTime": "hora de finalización",
+        "selectAbscenseEndTime": "Elige la hora de finalización"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Escuela Secundaria Obligatoria",
+        "preSchool": "Guardería (förskola)",
+        "leisureTimeCentre": "Extraexcolar (fritids)",
+        "compulsorySchool": "Escuela obligatoria"
+    },
+    "notifications": {
+        "notificationTitle": "Notificación: {{message}} ({{dateCreated}})"
+    }
+}

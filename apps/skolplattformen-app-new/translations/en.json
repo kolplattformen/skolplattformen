@@ -1,0 +1,156 @@
+{
+    "abbrevations": {
+        "compulsorySchool": "Primary/lower-secondary school",
+        "leisureTimeCentre": "After-school care",
+        "preSchool": "Preschool",
+        "upperSecondarySchool": "Upper-secondary school"
+    },
+    "abscense": {
+        "endTime": "End time",
+        "entireDay": "Whole day",
+        "childsPersonalNumber": "Child's personal identity number",
+        "invalidPersonalNumber": "Personal identity number invalid",
+        "personalNumberMissing": "Personal identity number missing",
+        "selectAbscenseEndTime": "Choose end time",
+        "selectAbscenseStartTime": "Choose start time",
+        "startTime": "Start time",
+        "title": "Report absence"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Open BankID manually",
+            "OpenOnAnotherDevice": "Open BankID on another device",
+            "OpenOnThisDevice": "Open BankID on this device",
+            "Waiting": "Waiting for BankID…"
+        },
+        "freja": {
+            "OpenManually": "Open Freja eID+ manually",
+            "OpenOnThisDevice": "Open Freja eID+ on this device",
+            "Waiting": "Waiting for Freja eID+…"
+        },
+        "chooseLoginMethod": "Choose login method",
+        "chooseSchoolPlatform": "Choose platform",
+        "loginAsTestUser": "Log in as a test user",
+        "loginFailed": "Could not log in. Please try again.",
+        "loginSuccessful": "Login successful, loading…",
+        "placeholder_SocialSecurityNumber": "Your personal identity number",
+        "subtitle": "The {{word}} alternative",
+        "words": {
+            "agile": "agile",
+            "awaited": "awaited",
+            "better": "better",
+            "cheap": "cheap",
+            "cooler": "cooler",
+            "enlightened": "enlightened",
+            "fantastic": "fantastic",
+            "fast": "fast",
+            "first": "first",
+            "free": "free",
+            "fun": "fun",
+            "homemade": "homemade",
+            "imperfect": "imperfect",
+            "open": "open",
+            "rebellious": "rebellious",
+            "simple": "simple",
+            "working": "working"
+        },
+        "a11y_change_language": "Select your language",
+        "a11y_image_two_boys": "Picture of two people checking their mobile phones",
+        "a11y_clear_social_security_input_field": "Clear the personal identity number field",
+        "a11y_select_login_method": "Select the login method"
+    },
+    "calender": {
+        "approveAccessToCalender": "You have to approve access to your calendar",
+        "saveToCalender": "Save in calendar",
+        "saveToCalenderError": "Something went wrong",
+        "saveToCalenderSuccess": "✔️ Saved in calendar",
+        "showCalenderActions": "Show calendar actions",
+        "emptyHeadline": "The calendar looks kinda empty",
+        "emptyText": "Couldn't find anything to show"
+    },
+    "children": {
+        "loadingErrorHeading": "Oops!",
+        "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
+        "noKids_description": "There are no children registered in the City of Stockholm for your personal identity number",
+        "noKids_title": "No children",
+        "title": "Your children",
+        "tryAgain": "Try again",
+        "viewStatus": "View status on skolplattformen.org"
+    },
+    "general": {
+        "cancel": "Cancel",
+        "changeLanguage": "Change language",
+        "confirm": "Confirm",
+        "loading": "Loading…",
+        "logout": "Log out",
+        "logoutAndClearPersonalData": "Log out and clear personal data",
+        "logoutAndClearAllDataInclSettings": "Log out and clear all data including settings",
+        "send": "Send",
+        "settings": "Settings",
+        "socialSecurityNumber": "Personal identity number",
+        "title": "Öppna skolplattformen",
+        "tomorrow": "Tomorrow"
+    },
+    "language": {
+        "changeLanguage": "Change language",
+        "changeLanguageButton": "Save"
+    },
+    "menu": {
+        "emptyHeadline": "The lunch menu looks kinda empty",
+        "emptyText": "Couldn't find anything for this week"
+    },
+    "navigation": {
+        "calender": "Calendar",
+        "menu": "Lunch",
+        "news": "News",
+        "notifications": "Notifications",
+        "classmates": "Classmates"
+    },
+    "settings": {
+        "settings": "Settings",
+        "appearance": "Appearance",
+        "theme": "Theme",
+        "licenses": "Licenses",
+        "language": "Language",
+        "themeAuto": "Auto",
+        "useSystemTheme": "Use System Light/Dark Theme"
+    },
+    "themes": {
+        "light": "Light",
+        "dark": "Dark"
+    },
+    "news": {
+        "backToChild": "Back to child",
+        "noNewNewsItemsThisWeek": "No news this week.",
+        "notificationTitle": "News: {{header}} ({{published}})",
+        "published": "Published",
+        "title": "News from Skolplattformen",
+        "updated": "Updated",
+        "search": {
+            "placeholder": "Search in news…"
+        }
+    },
+    "notifications": {
+        "notificationTitle": "Notification: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "start": "Start",
+        "end": "End",
+        "lunch": "Lunch",
+        "gymBag": "Gym bag",
+        "week": "Week"
+    },
+    "classmates": {
+        "class": "Class",
+        "child": "Child",
+        "contactsForGuardiansFor": "Contact information for guardians for"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Shows contact information",
+        "a11y_show_contact_info_button_label": "Show contact information",
+        "call": "Call",
+        "sms": "SMS",
+        "email": "E-mail",
+        "home": "Address"
+    }
+}
