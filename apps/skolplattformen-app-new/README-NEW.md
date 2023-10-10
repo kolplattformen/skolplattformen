@@ -59,7 +59,7 @@ cd apps/skolplattformen-app-new/ && npm i
 
 * Option 1: Using Metro Bundler
 
-  ![metro bundler example](image.png)
+  ![metro bundler example](/docs/assets/image.png)
     ```bash
     cd apps/skolplattformen-app-new && npm run start
     ```
@@ -87,7 +87,7 @@ cd apps/skolplattformen-app-new/ && npm i
 
 * Option 1: Using Metro Bundler
 
-  ![metro bundler example](image.png)
+  ![metro bundler example](/docs/assets/image.png)
     ```bash
     cd apps/skolplattformen-app-new && npm run start
     ```
