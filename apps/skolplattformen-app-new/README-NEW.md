@@ -59,7 +59,7 @@ cd apps/skolplattformen-app-new/ && npm i
 
 * Option 1: Using Metro Bundler
 
-  ![metro bundler example](/docs/assets/image.png)
+  ![metro bundler example](/apps/skolplattformen-app-new/docs/assets/MetroBundlerExample.png)
     ```bash
     cd apps/skolplattformen-app-new && npm run start
     ```
@@ -79,15 +79,15 @@ cd apps/skolplattformen-app-new/ && npm i
 
 **Note**: Choose an appropriate guide based on your operating system:
 
-* [Mac OS](/docs/android_mac.md)
-* [Windows](/docs/android_windows.md)
-* [Linux](/docs/android_linux.md)
+* [Mac OS](/apps/skolplattformen-app-new/docs/android_mac.md)
+* [Windows](/apps/skolplattformen-app-new//docs/android_windows.md)
+* [Linux](/apps/skolplattformen-app-new//docs/android_linux.md)
 
 #### Running the Android App
 
 * Option 1: Using Metro Bundler
 
-  ![metro bundler example](/docs/assets/image.png)
+  ![metro bundler example](/apps/skolplattformen-app-new/docs/assets/MetroBundlerExample.png)
     ```bash
     cd apps/skolplattformen-app-new && npm run start
     ```

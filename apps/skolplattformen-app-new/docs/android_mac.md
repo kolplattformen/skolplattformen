@@ -53,7 +53,7 @@ Android Studio installs the latest Android SDK by default. Additional Android SD
 
 To do that, open Android Studio, click on "Configure" button and select "SDK Manager".
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
+![Android Studio Welcome](/apps/skolplattformen-app-new/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
 
 > The SDK Manager can also be found within the Android Studio "Preferences" dialog, under **Appearance & Behavior** → **System Settings** → **Android SDK**.
 
@@ -97,7 +97,7 @@ If you have a physical Android device, you can use it for development in place o
 
 If you use Android Studio to open `./apps/skolplattformen-app-new/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
 
-![Android Studio AVD Manager](/docs/assets/avd_icon.png)
+![Android Studio AVD Manager](/apps/skolplattformen-app-new/docs/assets/avd_icon.png)
 
 If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **Q** API Level 29 image.
 

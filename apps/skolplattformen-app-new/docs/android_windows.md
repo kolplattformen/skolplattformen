@@ -51,7 +51,7 @@ Android Studio installs the latest Android SDK by default. Additional Android SD
 
 To do that, open Android Studio, click on "Configure" button and select "SDK Manager".
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeWindows.png)
+![Android Studio Welcome](/apps/skolplattformen-app-new/docs/assets/GettingStartedAndroidStudioWelcomeWindows.png)
 
 > The SDK Manager can also be found within the Android Studio "Preferences" dialog, under **Appearance & Behavior** → **System Settings** → **Android SDK**.
 
@@ -68,7 +68,7 @@ The React Native tools require some environment variables to be set up in order 
 3. Click on **Change my environment variables**
 4. Click on **New...** to create a new `ANDROID_HOME` user variable that points to the path to your Android SDK:
 
-![ANDROID_HOME Environment Variable](/docs/assets/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
+![ANDROID_HOME Environment Variable](/apps/skolplattformen-app-new/docs/assets/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
 
 The SDK is installed, by default, at the following location:
 
@@ -113,7 +113,7 @@ If you have a physical Android device, you can use it for development in place o
 
 If you use Android Studio to open `./apps/skolplattformen-app-new/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
 
-![Android Studio AVD Manager](/docs/assets/avd_icon.png)
+![Android Studio AVD Manager](/apps/skolplattformen-app-new/docs/assets/avd_icon.png)
 
 If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list.
 
