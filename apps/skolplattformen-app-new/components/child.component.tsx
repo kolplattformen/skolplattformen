@@ -140,7 +140,10 @@ const TabNavigator = ({
 );
 
 const getHeaderTitle = (route: any) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'News';
+  const routeName =
+    getFocusedRouteNameFromRoute(route) ??
+    route.params.initialRouteName ??
+    'News';
   return getRouteTitleFromName(routeName);
 };
 

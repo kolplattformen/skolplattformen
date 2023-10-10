@@ -13,7 +13,7 @@ import {
 import {Button, StyleService, Text, useStyleSheet} from '@ui-kitten/components';
 import moment, {Moment} from 'moment';
 import React, {useEffect} from 'react';
-import {TouchableOpacity, useColorScheme, View} from 'react-native';
+import {Pressable, useColorScheme, View} from 'react-native';
 import {useTranslation} from '../hooks/useTranslation';
 import {Colors, Layout, Sizing} from '../styles';
 import {getMeaningfulStartingDate} from '../utils/calendarHelpers';
@@ -153,50 +153,73 @@ export const ChildListItem = ({
     );
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Child', {child, color})}>
+    <>
       <View style={styles.card}>
         <View style={styles.cardHeader}>
-          <View style={styles.cardHeaderLeft}>
-            <StudentAvatar name={studentName(child.name)} color={color} />
-            <View style={styles.cardHeaderText}>
-              <Text category="h6">{studentName(child.name)}</Text>
-              {className ? <Text category="s1">{className}</Text> : null}
+          <Pressable
+            style={({pressed}) => [
+              styles.cardHeaderLeft || {},
+              {opacity: pressed ? 0.5 : 1},
+            ]}
+            onPress={() => navigation.navigate('Child', {child, color})}>
+            <View style={styles.cardHeaderLeft}>
+              <StudentAvatar name={studentName(child.name)} color={color} />
+              <View style={styles.cardHeaderText}>
+                <Text category="h6">{studentName(child.name)}</Text>
+                {className ? <Text category="s1">{className}</Text> : null}
+              </View>
             </View>
-          </View>
-          <View style={styles.cardHeaderRight}>
-            <RightArrowIcon
-              style={styles.icon}
-              fill={
-                isDarkMode ? Colors.neutral.gray200 : Colors.neutral.gray800
-              }
-              name="star"
-            />
-          </View>
+            <View style={styles.cardHeaderRight}>
+              <RightArrowIcon
+                style={styles.icon}
+                fill={
+                  isDarkMode ? Colors.neutral.gray200 : Colors.neutral.gray800
+                }
+                name="star"
+              />
+            </View>
+          </Pressable>
         </View>
+        <Pressable
+          style={({pressed}) => ['' || {}, {opacity: pressed ? 0.5 : 1}]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'Calendar',
+            })
+          }>
+          <DaySummary child={child} date={meaningfulStartingDate} />
 
-        <DaySummary child={child} date={meaningfulStartingDate} />
-
-        {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
-          <Text category="p1" key={i}>
-            {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
+          {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
+            <Text category="p1" key={i}>
+              {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
+            </Text>
+          ))}
+        </Pressable>
+        <Pressable
+          style={({pressed}) => ['' || {}, {opacity: pressed ? 0.5 : 1}]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'News',
+            })
+          }>
+          <Text category="c2" style={styles.label}>
+            {t('navigation.news')}
           </Text>
-        ))}
-
-        <Text category="c2" style={styles.label}>
-          {t('navigation.news')}
-        </Text>
-        {notificationsThisWeek.slice(0, 3).map((notification, i) => (
-          <Text category="p1" key={i}>
-            {notification.message}
-          </Text>
-        ))}
-
-        {newsThisWeek.slice(0, 3).map((newsItem, i) => (
-          <Text category="p1" key={i}>
-            {newsItem.header ?? ''}
-          </Text>
-        ))}
+          {notificationsThisWeek.slice(0, 3).map((notification, i) => (
+            <Text category="p1" key={i}>
+              {notification.message}
+            </Text>
+          ))}
+          {newsThisWeek.slice(0, 3).map((newsItem, i) => (
+            <Text category="p1" key={i}>
+              {newsItem.header ?? ''}
+            </Text>
+          ))}
+        </Pressable>
 
         {scheduleAndCalendarThisWeek.length ||
         notificationsThisWeek.length ||
@@ -205,8 +228,17 @@ export const ChildListItem = ({
             {t('news.noNewNewsItemsThisWeek')}
           </Text>
         )}
+
         {shouldShowLunchMenu ? (
-          <>
+          <Pressable
+            style={({pressed}) => ['' || {}, {opacity: pressed ? 0.5 : 1}]}
+            onPress={() =>
+              navigation.navigate('Child', {
+                child,
+                color,
+                initialRouteName: 'Menu',
+              })
+            }>
             <Text category="c2" style={styles.label}>
               {meaningfulStartingDate.format(
                 '[' + t('schedule.lunch') + '] dddd',
@@ -215,7 +247,7 @@ export const ChildListItem = ({
             <Text>
               {menu[meaningfulStartingDate.isoWeekday() - 1]?.description}
             </Text>
-          </>
+          </Pressable>
         ) : null}
 
         <View style={styles.itemFooter}>
@@ -232,7 +264,7 @@ export const ChildListItem = ({
           </Button>
         </View>
       </View>
-    </TouchableOpacity>
+    </>
   );
 };
 
