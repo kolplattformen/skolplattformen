@@ -11132,10 +11132,10 @@ react-native-typography@1.4.1:
   resolved "https://registry.yarnpkg.com/react-native-typography/-/react-native-typography-1.4.1.tgz#2d05cb5935a2f7fdb6b43bbde93d60f1324578e3"
   integrity sha512-dc9Zfs4jUdq4ygx4/KwO6jKTERBu6cRrfPJGntw/pA+D6BMjlWfMNuhZ/69vf4Zpsnt9s4AGe+Z/V1QFYaCXAA==
 
-react-native-webview@^11.15.0:
-  version "11.15.0"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.15.0.tgz#b5aea9da579ca17fb9fd324e5202b1b5b8ce9fa8"
-  integrity sha512-0Wv+8qu8XuACx1xZwzc2Yfl+rOvxUouLcPxUKdkhaMVNpwoM5/ePpczCQZ3LpiRnSoEtjaUkfyQHbJQ+x4dDJQ==
+react-native-webview@^12.1.0:
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-12.4.0.tgz#421db8e5601b4851c5796c5d4736b6b8439d1469"
+  integrity sha512-wYzTfNADidmqv6bY+x6NUfX8+uBR9mmF1CO1NOvY4oD2vv+D4rA0XwcwAe2D7RevXUy3fmuTT93kFQcgo8fEhg==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
