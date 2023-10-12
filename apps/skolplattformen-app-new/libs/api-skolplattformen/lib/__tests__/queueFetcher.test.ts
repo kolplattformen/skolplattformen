@@ -48,8 +48,17 @@ test('can run many tasks', async () => {
   expect(result).toEqual(['one', 'two', 'three']);
 });
 
-test.skip('sets up timer on fetch', () => {
-  sut.fetch(async () => 'one', 'one');
+// test('sets up timer on fetch', () => {
+//   sut.fetch(async () => 'one', 'one');
 
-  expect(setTimeout).toHaveBeenCalledTimes(1);
+//   expect(setTimeout).toHaveBeenCalledTimes(1);
+// });
+
+test('sets up timer on fetch', () => {
+  const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
+  sut.fetch(async () => 'one', 'one');
+  expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
+
+  // Restore the original setTimeout function
+  setTimeoutSpy.mockRestore();
 });
