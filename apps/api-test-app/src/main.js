@@ -14,23 +14,25 @@ const path = require('path')
 const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./app/agentFetchWrapper')
-const initSkolplattformen = require('@skolplattformen/api-skolplattformen').default
-const initHjarntorget = require('@skolplattformen/api-hjarntorget').default
+const initSkolplattformen =
+  require('@skolplattformen/api-skolplattformen').default
+const initAdmentum = require('@skolplattformen/api-admentum').default
 
 const [, , personalNumber, platform] = process.argv
-const isHjarntorget = platform && platform.startsWith('hj')
-const init = isHjarntorget ? initHjarntorget : initSkolplattformen;
+const isAdmentum = platform && platform.startsWith('ad')
+const init = isAdmentum ? initAdmentum : initSkolplattformen
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
-let bankIdUsed = false
+let bankIdUsed = true
 const recordFolder = `${__dirname}/record`
 
-async function run() {
-  const agent = new HttpProxyAgent('http://localhost:8080')
-  const agentEnabledFetch = agentWrapper(nodeFetch, agent)
+const now = DateTime.local()
+const [year, week] = now.toISOWeekDate().split('-')
+const isoWeek = week.replace('W','')
 
-  const fetch = fetchCookie(agentEnabledFetch, cookieJar)
+async function run() {
+  const fetch = fetchCookie(nodeFetch, cookieJar)
 
   try {
     const api = init(fetch, cookieJar, { record })
@@ -38,30 +40,43 @@ async function run() {
     api.on('login', async () => {
       console.log('Logged in')
 
-      if (bankIdUsed) {
-        const sessionCookie = getSessionCookieFromCookieJar()
-        ensureDirectoryExistence(recordFolder)
-        await writeFile(
-          `${recordFolder}/latestSessionCookie.txt`,
-          JSON.stringify(sessionCookie)
-        )
-        console.log(
-          `Session cookie saved to file ${recordFolder}/latesSessionCookie.txt`
-        )
-      }
-      console.log('user') //-
+      const cookies = cookieJar.toJSON()
+
+      console.log('cookies', cookies)
       const user = await api.getUser()
       console.log(user)
 
       console.log('children')
       const children = await api.getChildren()
       console.log(children)
-      /*
+
+
+      try {
+        console.log('timetable')
+        const timetable = await api.getTimetable(
+          children[0],
+          isoWeek,
+          year,
+          'sv'
+        )
+        console.log(inspect(timetable, false, 1000, true))
+      } catch (error) {
+        console.error(error)
+      }
+
+      console.log('menu')
+      const menu = await api.getMenu(children[0])
+      console.log(menu)
+
+      
       console.log('calendar')
       const calendar = await api.getCalendar(children[0])
       console.log(calendar)
-
-      console.log('classmates')
+      
+      console.log('news')
+      const news = await api.getNews(children[0])
+/*
+      /*console.log('classmates')
       const classmates = await api.getClassmates(children[0])
       console.log(classmates)
 
@@ -85,23 +100,6 @@ async function run() {
         console.error(error)
       }
 
-      try {
-        console.log('timetable')
-        const timetable = await api.getTimetable(
-          skola24children[0],
-          15,
-          2021,
-          'sv'
-        )
-        console.log(inspect(timetable, false, 1000, true))
-      } catch (error) {
-        console.error(error)
-      }
-
-      /*
-      console.log('news')
-      const news = await api.getNews(children[0])
-*/
       /* console.log('news details')
       const newsItems = await Promise.all(
         news.map((newsItem) =>
@@ -111,9 +109,7 @@ async function run() {
       )
       console.log(newsItems) */
 
-      /* console.log('menu')
-      const menu = await api.getMenu(children[0])
-      console.log(menu) */
+    
 
       // console.log('notifications')
       // const notifications = await api.getNotifications(children[0])
@@ -141,8 +137,10 @@ async function Login(api) {
     console.log('Attempt to use saved session cookie to login')
     const rawContent = await readFile(`${recordFolder}/latestSessionCookie.txt`)
     const sessionCookies = JSON.parse(rawContent)
-    await api.setSessionCookie(`${sessionCookies[0].key}=${sessionCookies[0].value}`)
-    
+    await api.setSessionCookie(
+      `${sessionCookies[0].key}=${sessionCookies[0].value}`
+    )
+
     useBankId = false
     console.log('Login with old cookie succeeded')
   } catch (error) {
@@ -180,18 +178,20 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dirname)
 }
 
-
 function getSessionCookieFromCookieJar() {
-  const cookieUrl = isHjarntorget ? 'https://hjarntorget.goteborg.se' : 'https://etjanst.stockholm.se'
+  const cookieUrl = isAdmentum
+    ? 'https://admentum.se'
+    : 'https://etjanst.stockholm.se'
   const cookies = cookieJar.getCookiesSync(cookieUrl)
-  const sessionCookieKey =  isHjarntorget  ? 'JSESSIONID' : 'SMSESSION'
-  return cookies.find(c => c.key === sessionCookieKey)
+  const sessionCookieKey = isAdmentum ? 'JSESSIONID' : 'SMSESSION'
+  return cookies.find((c) => c.key === sessionCookieKey)
 }
 
 const record = async (info, data) => {
   const name = info.error ? `${info.name}_error` : info.name
   const filename = `${recordFolder}/${name}.json`
   ensureDirectoryExistence(filename)
+  console.log('recording session', filename)
   const content = {
     url: info.url,
     headers: info.headers,

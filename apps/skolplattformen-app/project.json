@@ -85,6 +85,7 @@
   "implicitDependencies": [
     "api-skolplattformen",
     "api-hjarntorget",
+    "api-admentum",
     "api",
     "hooks",
     "curriculum"

@@ -1,13 +1,14 @@
 {
   "version": 2,
   "projects": {
+    "api": "libs/api",
+    "api-admentum": "libs/api-admentum",
     "api-hjarntorget": "libs/api-hjarntorget",
     "api-skolplattformen": "libs/api-skolplattformen",
+    "api-test-app": "apps/api-test-app",
     "api-vklass": "libs/api-vklass",
-    "api": "libs/api",
     "curriculum": "libs/curriculum",
     "hooks": "libs/hooks",
-    "api-test-app": "apps/api-test-app",
     "skolplattformen-app": "apps/skolplattformen-app"
   }
 }
