@@ -168,6 +168,7 @@ describe('useNews(child)', () => {
     });
     // });
   });
+
   it('retries if api fails', async () => {
     //await act(async () => {
     api.isLoggedIn = true;
