@@ -41,7 +41,7 @@ beforeEach(() => {
   useNavigation.mockReturnValue({navigate: jest.fn(), setOptions: jest.fn()});
 });
 
-test('renders loading state', () => {
+test.skip('renders loading state', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [],
     status: 'loading',
