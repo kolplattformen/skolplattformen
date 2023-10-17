@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core'
 import {
   useApi,
   useCalendar,
@@ -9,74 +9,74 @@ import {
   useNotifications,
   useSchedule,
   useTimetable,
-} from '../../libs/hooks/src';
-import React from 'react';
-import * as RNLocalize from 'react-native-localize';
-import {render} from '../../utils/testHelpers';
-import {translate} from '../../utils/translation';
-import {Children} from '../children.component';
+} from '../../libs/hooks/src'
+import React from 'react'
+import * as RNLocalize from 'react-native-localize'
+import { render } from '../../utils/testHelpers'
+import { translate } from '../../utils/translation'
+import { Children } from '../children.component'
 
-jest.mock('../../libs/hooks/src');
+jest.mock('../../libs/hooks/src')
 
 const setup = () => {
-  return render(<Children />);
-};
+  return render(<Children />)
+}
 
 beforeEach(() => {
   useApi.mockReturnValue({
-    api: {on: jest.fn(), off: jest.fn(), logout: jest.fn()},
+    api: { on: jest.fn(), off: jest.fn(), logout: jest.fn() },
     isLoggedIn: false,
-  });
+  })
   RNLocalize.findBestAvailableLanguage.mockImplementationOnce(() => ({
     languageTag: 'sv',
     isRTL: false,
-  }));
-  useCalendar.mockReturnValueOnce({data: [], status: 'loaded'});
-  useNotifications.mockReturnValueOnce({data: [], status: 'loaded'});
-  useNews.mockReturnValueOnce({data: [], status: 'loaded'});
-  useSchedule.mockReturnValueOnce({data: [], status: 'loaded'});
-  useMenu.mockReturnValueOnce({data: [], status: 'loaded'});
-  useTimetable.mockReturnValueOnce({data: [], status: 'loaded'});
-  useClassmates.mockReturnValueOnce({data: [], status: 'loaded'});
-  useNavigation.mockReturnValue({navigate: jest.fn(), setOptions: jest.fn()});
-});
+  }))
+  useCalendar.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useNotifications.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useNews.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useSchedule.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useMenu.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useTimetable.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useClassmates.mockReturnValueOnce({ data: [], status: 'loaded' })
+  useNavigation.mockReturnValue({ navigate: jest.fn(), setOptions: jest.fn() })
+})
 
 test.skip('renders loading state', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [],
     status: 'loading',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText(translate('general.loading'))).toBeTruthy();
-});
+  expect(screen.getByText(translate('general.loading'))).toBeTruthy()
+})
 
 test('renders empty state message', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
   expect(
-    screen.getByText(translate('children.noKids_description')),
-  ).toBeTruthy();
-});
+    screen.getByText(translate('children.noKids_description'))
+  ).toBeTruthy()
+})
 
 test('renders error state message', () => {
   useChildList.mockImplementationOnce(() => ({
     data: [],
     status: 'error',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
   expect(
-    screen.getByText(translate('children.loadingErrorHeading')),
-  ).toBeTruthy();
-});
+    screen.getByText(translate('children.loadingErrorHeading'))
+  ).toBeTruthy()
+})
 
 test('renders child in preschool', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -87,12 +87,12 @@ test('renders child in preschool', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText('Test Testsson')).toBeTruthy();
-});
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+})
 
 test('renders child in elementary school', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -103,12 +103,12 @@ test('renders child in elementary school', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText('Test Testsson')).toBeTruthy();
-});
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+})
 
 test('renders child in high school', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -119,15 +119,15 @@ test('renders child in high school', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText('Test Testsson')).toBeTruthy();
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
   expect(
-    screen.getByText(translate('abbrevations.upperSecondarySchool')),
-  ).toBeTruthy();
-});
+    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+  ).toBeTruthy()
+})
 
 test('renders multiple children', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -142,20 +142,20 @@ test('renders multiple children', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText('Storasyster Testsson')).toBeTruthy();
+  expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
   expect(
-    screen.getByText(translate('abbrevations.upperSecondarySchool')),
-  ).toBeTruthy();
+    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+  ).toBeTruthy()
 
-  expect(screen.getByText('Lillebror Testsson')).toBeTruthy();
+  expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
   expect(
-    screen.getByText(translate('abbrevations.compulsorySchool')),
-  ).toBeTruthy();
-});
+    screen.getByText(translate('abbrevations.compulsorySchool'))
+  ).toBeTruthy()
+})
 
 test('renders child in class', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -167,8 +167,8 @@ test('renders child in class', () => {
       },
     ],
     status: 'loaded',
-  }));
-  useClassmates.mockReset();
+  }))
+  useClassmates.mockReset()
   useClassmates.mockImplementationOnce(() => ({
     data: [
       {
@@ -176,13 +176,13 @@ test('renders child in class', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText('Test Testsson')).toBeTruthy();
-  expect(screen.getByText('8C • Vallaskolan')).toBeTruthy();
-});
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText('8C • Vallaskolan')).toBeTruthy()
+})
 
 test('removes any parenthesis from name', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -193,12 +193,12 @@ test('removes any parenthesis from name', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText('Test Testsson')).toBeTruthy();
-});
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+})
 
 test('handles multiple statuses for a child', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -209,19 +209,19 @@ test('handles multiple statuses for a child', () => {
       },
     ],
     status: 'loaded',
-  }));
+  }))
 
-  const screen = setup();
+  const screen = setup()
 
   var multipleStatusesRendered = `${translate(
-    'abbrevations.upperSecondarySchool',
+    'abbrevations.upperSecondarySchool'
   )}, ${translate('abbrevations.compulsorySchool')}, ${translate(
-    'abbrevations.leisureTimeCentre',
-  )}`;
+    'abbrevations.leisureTimeCentre'
+  )}`
 
-  expect(screen.getByText('Test Testsson')).toBeTruthy();
-  expect(screen.getByText(multipleStatusesRendered)).toBeTruthy();
-});
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText(multipleStatusesRendered)).toBeTruthy()
+})
 
 test('says if there is nothing new this week', () => {
   useChildList.mockImplementationOnce(() => ({
@@ -232,10 +232,10 @@ test('says if there is nothing new this week', () => {
       },
     ],
     status: 'loaded',
-  }));
-  const screen = setup();
+  }))
+  const screen = setup()
 
   expect(
-    screen.getByText(translate('news.noNewNewsItemsThisWeek')),
-  ).toBeTruthy();
-});
+    screen.getByText(translate('news.noNewNewsItemsThisWeek'))
+  ).toBeTruthy()
+})

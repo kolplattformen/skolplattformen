@@ -1,12 +1,12 @@
-import {Child} from '../../../api/lib';
-import {etjanst} from './etjanst';
+import { Child } from '../../../api/lib'
+import { etjanst } from './etjanst'
 
-export const child = ({id, sdsId, name, status, schoolId}: any): Child => ({
+export const child = ({ id, sdsId, name, status, schoolId }: any): Child => ({
   id,
   sdsId,
   name,
   status,
   schoolId,
-});
+})
 
-export const children = (data: any): Child[] => etjanst(data).map(child);
+export const children = (data: any): Child[] => etjanst(data).map(child)

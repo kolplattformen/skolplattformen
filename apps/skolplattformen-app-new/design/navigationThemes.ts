@@ -1,6 +1,6 @@
-import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {darkTheme, lightTheme} from './themes';
+import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
+import { darkTheme, lightTheme } from './themes'
 
 export const darkNavigationTheme: Theme = {
   ...DarkTheme,
@@ -12,7 +12,7 @@ export const darkNavigationTheme: Theme = {
     primary: darkTheme['color-primary-200'],
     text: '#ddd',
   },
-};
+}
 
 export const lightNavigationTheme: Theme = {
   ...DefaultTheme,
@@ -23,10 +23,10 @@ export const lightNavigationTheme: Theme = {
     card: lightTheme['background-basic-color-1'],
     primary: lightTheme['color-primary-500'],
   },
-};
+}
 
 export const defaultStackStyling = (
-  darkMode: boolean,
+  darkMode: boolean
 ): NativeStackNavigationOptions => {
   return {
     headerStyle: {
@@ -45,5 +45,5 @@ export const defaultStackStyling = (
     headerBackTitleStyle: {
       fontFamily: 'Poppins-Regular',
     },
-  };
-};
+  }
+}

@@ -1,6 +1,6 @@
-import {ViewStyle} from 'react-native';
+import { ViewStyle } from 'react-native'
 
-type MainAxis = 'center' | 'flexStart' | 'flexEnd';
+type MainAxis = 'center' | 'flexStart' | 'flexEnd'
 // @ts-expect-error Fix later
 export const mainAxis: Record<MainAxis, ViewStyle> = {
   center: {
@@ -9,9 +9,9 @@ export const mainAxis: Record<MainAxis, ViewStyle> = {
   flexStart: {
     alignItems: 'flex-start',
   },
-};
+}
 
-type CrossAxis = 'center' | 'flexEnd' | 'evenly' | 'spaceBetween';
+type CrossAxis = 'center' | 'flexEnd' | 'evenly' | 'spaceBetween'
 export const crossAxis: Record<CrossAxis, ViewStyle> = {
   center: {
     justifyContent: 'center',
@@ -25,14 +25,14 @@ export const crossAxis: Record<CrossAxis, ViewStyle> = {
   spaceBetween: {
     justifyContent: 'space-between',
   },
-};
+}
 
 export const center: ViewStyle = {
   ...mainAxis.center,
   ...crossAxis.center,
-};
+}
 
-type Flex = 'full' | 'row';
+type Flex = 'full' | 'row'
 export const flex: Record<Flex, ViewStyle> = {
   full: {
     flex: 1,
@@ -40,4 +40,4 @@ export const flex: Record<Flex, ViewStyle> = {
   row: {
     flexDirection: 'row',
   },
-};
+}

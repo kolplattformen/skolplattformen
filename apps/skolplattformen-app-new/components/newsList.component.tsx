@@ -1,38 +1,38 @@
-import {useNews} from '../libs/hooks/src';
-import {Input, List, StyleService, useStyleSheet} from '@ui-kitten/components';
-import React, {useMemo, useState} from 'react';
-import {TouchableOpacity, View, RefreshControl} from 'react-native';
-import {Sizing} from '../styles';
+import { useNews } from '../libs/hooks/src'
+import { Input, List, StyleService, useStyleSheet } from '@ui-kitten/components'
+import React, { useMemo, useState } from 'react'
+import { TouchableOpacity, View, RefreshControl } from 'react-native'
+import { Sizing } from '../styles'
 import {
   renderSearchResultPreview,
   useNewsListSearchResults,
-} from '../utils/search';
-import {translate} from '../utils/translation';
-import {useChild} from './childContext.component';
-import {CloseOutlineIcon, SearchIcon} from './icon.component';
-import {NewsListItem} from './newsListItem.component';
+} from '../utils/search'
+import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { CloseOutlineIcon, SearchIcon } from './icon.component'
+import { NewsListItem } from './newsListItem.component'
 
 // const translate = (key: string) => key;
 
 export const NewsList = () => {
-  const styles = useStyleSheet(themedStyles);
-  const child = useChild();
-  const {data, status, reload} = useNews(child);
+  const styles = useStyleSheet(themedStyles)
+  const child = useChild()
+  const { data, status, reload } = useNews(child)
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const searchResults = useNewsListSearchResults(searchQuery);
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchResults = useNewsListSearchResults(searchQuery)
 
   const header = useMemo(
     () => (
       <Input
         accessibilityHint={translate(
-          'news.search.placeholder',
+          'news.search.placeholder'
           // {
           //   defaultValue: 'Sök alla nyheter...',
           // }
         )}
         placeholder={translate(
-          'news.search.placeholder',
+          'news.search.placeholder'
           // {
           //   defaultValue: 'Sök alla nyheter...',
           // }
@@ -43,7 +43,7 @@ export const NewsList = () => {
         onChangeText={setSearchQuery}
         value={searchQuery}
         style={styles.search}
-        accessoryRight={props =>
+        accessoryRight={(props) =>
           searchQuery.length > 0 ? (
             <TouchableOpacity onPress={() => setSearchQuery('')}>
               <CloseOutlineIcon {...props} />
@@ -54,8 +54,8 @@ export const NewsList = () => {
         }
       />
     ),
-    [searchQuery, styles.search],
-  );
+    [searchQuery, styles.search]
+  )
 
   if (searchQuery) {
     return (
@@ -65,7 +65,7 @@ export const NewsList = () => {
         keyboardDismissMode="on-drag"
         data={searchResults}
         ListHeaderComponent={header}
-        renderItem={({item: searchResult}) => (
+        renderItem={({ item: searchResult }) => (
           <NewsListItem key={searchResult.item.id} item={searchResult.item}>
             {renderSearchResultPreview(searchResult)}
           </NewsListItem>
@@ -78,7 +78,7 @@ export const NewsList = () => {
           />
         }
       />
-    );
+    )
   }
 
   return (
@@ -88,7 +88,7 @@ export const NewsList = () => {
       keyboardDismissMode="on-drag"
       data={data}
       ListHeaderComponent={header}
-      renderItem={({item}) => <NewsListItem key={item.id} item={item} />}
+      renderItem={({ item }) => <NewsListItem key={item.id} item={item} />}
       refreshControl={
         <RefreshControl
           refreshing={status === 'loading'}
@@ -97,8 +97,8 @@ export const NewsList = () => {
         />
       }
     />
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   container: {
@@ -114,4 +114,4 @@ const themedStyles = StyleService.create({
     borderRadius: 40,
     marginBottom: Sizing.t2,
   },
-});
+})

@@ -1,23 +1,27 @@
-import {toNamespacedPath} from 'path';
+import { toNamespacedPath } from 'path'
 
 // TODO: fix the startDate/endDate of all lessons
 export const lessons_133700_goteborgsstad = () => {
-  const baseTime = 1636357800000;
-  const baseDate = new Date(baseTime);
-  const today = new Date();
-  const currentHour = today.getHours();
-  today.setHours(baseDate.getHours());
-  today.setMinutes(baseDate.getMinutes());
-  today.setSeconds(0);
+  const baseTime = 1636357800000
+  const baseDate = new Date(baseTime)
+  const today = new Date()
+  const currentHour = today.getHours()
+  today.setHours(baseDate.getHours())
+  today.setMinutes(baseDate.getMinutes())
+  today.setSeconds(0)
 
-  let offset = Math.abs(baseTime - today.getTime());
-  const weekDay = today.getDay();
+  let offset = Math.abs(baseTime - today.getTime())
+  const weekDay = today.getDay()
 
-  if (weekDay == 6 || (weekDay == 5 && currentHour >= 18))
-    offset = offset + 2 * 86400000;
-  if (weekDay == 0) offset = offset + 86400000;
-  if (weekDay > 0 && weekDay < 6 && currentHour >= 18)
-    offset = offset + 86400000;
+  if (weekDay == 6 || (weekDay == 5 && currentHour >= 18)) {
+    offset = offset + 2 * 86400000
+  }
+  if (weekDay == 0) {
+    offset = offset + 86400000
+  }
+  if (weekDay > 0 && weekDay < 6 && currentHour >= 18) {
+    offset = offset + 86400000
+  }
 
   return {
     url: 'https://hjarntorget.goteborg.se/api/schema/lessons?forUser=133700_goteborgsstad&startDateIso=2021-11-01&endDateIso=2021-11-08',
@@ -193,26 +197,30 @@ export const lessons_133700_goteborgsstad = () => {
           note: '',
         },
       ]),
-  } as any as Response;
-};
+  } as any as Response
+}
 
 export const lessons_123456_goteborgsstad = () => {
-  const baseTime = 1636357800000;
-  const baseDate = new Date(baseTime);
-  const today = new Date();
-  const currentHour = today.getHours();
-  today.setHours(baseDate.getHours());
-  today.setMinutes(baseDate.getMinutes());
-  today.setSeconds(0);
+  const baseTime = 1636357800000
+  const baseDate = new Date(baseTime)
+  const today = new Date()
+  const currentHour = today.getHours()
+  today.setHours(baseDate.getHours())
+  today.setMinutes(baseDate.getMinutes())
+  today.setSeconds(0)
 
-  let offset = Math.abs(baseTime - today.getTime());
-  const weekDay = today.getDay();
+  let offset = Math.abs(baseTime - today.getTime())
+  const weekDay = today.getDay()
 
-  if (weekDay == 6 || (weekDay == 5 && currentHour >= 18))
-    offset = offset + 2 * 86400000;
-  if (weekDay == 0) offset = offset + 86400000;
-  if (weekDay > 0 && weekDay < 6 && currentHour >= 18)
-    offset = offset + 86400000;
+  if (weekDay == 6 || (weekDay == 5 && currentHour >= 18)) {
+    offset = offset + 2 * 86400000
+  }
+  if (weekDay == 0) {
+    offset = offset + 86400000
+  }
+  if (weekDay > 0 && weekDay < 6 && currentHour >= 18) {
+    offset = offset + 86400000
+  }
 
   return {
     url: 'https://hjarntorget.goteborg.se/api/schema/lessons?forUser=123456_goteborgsstad&startDateIso=2021-11-01&endDateIso=2021-11-08',
@@ -414,8 +422,8 @@ export const lessons_123456_goteborgsstad = () => {
         note: '',
       },
     ],
-  } as any as Response;
-};
+  } as any as Response
+}
 
 export const lessons_133737_goteborgsstad = () =>
   ({
@@ -428,4 +436,4 @@ export const lessons_133737_goteborgsstad = () =>
     status: 200,
     statusText: '200',
     json: () => Promise.resolve([] as any[]),
-  } as any as Response);
+  } as any as Response)

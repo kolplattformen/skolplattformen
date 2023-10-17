@@ -1,7 +1,7 @@
-import {isRTL} from '../services/languageService';
-import {useLangCode} from './useLangCode';
+import { isRTL } from '../services/languageService'
+import { useLangCode } from './useLangCode'
 
 export const useLangRTL = () => {
-  const langCode = useLangCode();
-  return isRTL(langCode);
-};
+  const langCode = useLangCode()
+  return isRTL(langCode)
+}

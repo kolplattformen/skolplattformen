@@ -1,44 +1,44 @@
-import {Child} from '../libs/api/lib';
-import {useTimetable} from '../libs/hooks/src';
-import {StyleService, Text, useStyleSheet} from '@ui-kitten/components';
-import moment, {Moment} from 'moment';
-import React, {useCallback, useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {LanguageService} from '../services/languageService';
-import {translate} from '../utils/translation';
+import { Child } from '../libs/api/lib'
+import { useTimetable } from '../libs/hooks/src'
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
+import moment, { Moment } from 'moment'
+import React, { useCallback, useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { LanguageService } from '../services/languageService'
+import { translate } from '../utils/translation'
 
 interface DaySummaryProps {
-  child: Child;
-  date?: Moment;
+  child: Child
+  date?: Moment
 }
 
 const capitalizeFirstLetter = (string: string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 export const DaySummary = ({
   child,
   date: currentDate = moment(),
 }: DaySummaryProps) => {
-  const styles = useStyleSheet(themedStyles);
-  const [week, year] = [currentDate.isoWeek(), currentDate.isoWeekYear()];
+  const styles = useStyleSheet(themedStyles)
+  const [week, year] = [currentDate.isoWeek(), currentDate.isoWeekYear()]
 
-  const {data: weekLessons} = useTimetable(
+  const { data: weekLessons } = useTimetable(
     child,
     week,
     year,
-    LanguageService.getLanguageCode(),
-  );
+    LanguageService.getLanguageCode()
+  )
 
   const lessons = weekLessons
-    .filter(lesson => lesson.dayOfWeek === currentDate.isoWeekday())
-    .sort((a, b) => a.timeStart.localeCompare(b.timeStart));
+    .filter((lesson) => lesson.dayOfWeek === currentDate.isoWeekday())
+    .sort((a, b) => a.timeStart.localeCompare(b.timeStart))
 
   if (lessons.length <= 0) {
-    return null;
+    return null
   }
 
-  const gymBag = lessons.some(lesson => lesson.code === 'IDH');
+  const gymBag = lessons.some((lesson) => lesson.code === 'IDH')
 
   return (
     <View>
@@ -84,8 +84,8 @@ export const DaySummary = ({
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   part: {
@@ -104,4 +104,4 @@ const themedStyles = StyleService.create({
     marginBottom: -10,
     padding: 0,
   },
-});
+})

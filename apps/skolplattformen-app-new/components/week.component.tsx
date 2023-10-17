@@ -1,5 +1,5 @@
-import {Child, MenuItem, TimetableEntry} from '../libs/api/lib';
-import {useMenu, useTimetable} from '../libs/hooks/src';
+import { Child, MenuItem, TimetableEntry } from '../libs/api/lib'
+import { useMenu, useTimetable } from '../libs/hooks/src'
 import {
   List,
   ListItem,
@@ -9,34 +9,34 @@ import {
   Text,
   useStyleSheet,
   ViewPager,
-} from '@ui-kitten/components';
-import moment from 'moment';
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {LanguageService} from '../services/languageService';
-import {Sizing, Typography} from '../styles';
-import {TransitionView} from './transitionView.component';
-import {getMeaningfulStartingDate} from '../utils/calendarHelpers';
-import {translate} from '../utils/translation';
+} from '@ui-kitten/components'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { LanguageService } from '../services/languageService'
+import { Sizing, Typography } from '../styles'
+import { TransitionView } from './transitionView.component'
+import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
+import { translate } from '../utils/translation'
 
 interface WeekProps {
-  child: Child;
+  child: Child
 }
 
 interface LessonListProps {
-  lessons: TimetableEntry[];
-  lunch?: MenuItem;
-  header: string;
+  lessons: TimetableEntry[]
+  lunch?: MenuItem
+  header: string
 }
 
 interface DayProps {
-  weekDay: string;
-  lunch?: MenuItem;
-  lessons: TimetableEntry[];
+  weekDay: string
+  lunch?: MenuItem
+  lessons: TimetableEntry[]
 }
 
-const LessonList = ({lessons, header, lunch}: LessonListProps) => {
-  const styles = useStyleSheet(themedStyles);
+const LessonList = ({ lessons, header, lunch }: LessonListProps) => {
+  const styles = useStyleSheet(themedStyles)
 
   return (
     <List
@@ -48,7 +48,7 @@ const LessonList = ({lessons, header, lunch}: LessonListProps) => {
         </Text>
       )}
       renderItem={({
-        item: {id, code, name, timeStart, timeEnd, teacher, location},
+        item: { id, code, name, timeStart, timeEnd, teacher, location },
       }) => (
         <ListItem
           key={id}
@@ -64,17 +64,16 @@ const LessonList = ({lessons, header, lunch}: LessonListProps) => {
             <View style={styles.lesson}>
               <Text
                 style={styles.lessonDescription}
-                maxFontSizeMultiplier={1}>{`${timeStart.slice(
-                0,
-                5,
-              )}-${timeEnd.slice(0, 5)} ${
+                maxFontSizeMultiplier={1}
+              >{`${timeStart.slice(0, 5)}-${timeEnd.slice(0, 5)} ${
                 location === '' ? '' : '(' + location + ')'
               } `}</Text>
               <Text
                 style={styles.lessonDescription}
                 maxFontSizeMultiplier={1}
                 numberOfLines={2}
-                ellipsizeMode="tail">
+                ellipsizeMode="tail"
+              >
                 {code?.toUpperCase() === 'LUNCH' ? lunch?.description : teacher}
               </Text>
             </View>
@@ -82,70 +81,70 @@ const LessonList = ({lessons, header, lunch}: LessonListProps) => {
         />
       )}
     />
-  );
-};
+  )
+}
 
-export const Day = ({weekDay, lunch, lessons}: DayProps) => {
-  const styles = useStyleSheet(themedStyles);
+export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
+  const styles = useStyleSheet(themedStyles)
 
   if (lessons.length <= 0) {
-    return null;
+    return null
   }
   return (
     <View style={styles.tab} key={weekDay}>
       <LessonList
         header="FM"
         lunch={lunch}
-        lessons={lessons.filter(({timeStart}) => timeStart < '12:00')}
+        lessons={lessons.filter(({ timeStart }) => timeStart < '12:00')}
       />
       <LessonList
         header="EM"
         lunch={lunch}
-        lessons={lessons.filter(({timeStart}) => timeStart >= '12:00')}
+        lessons={lessons.filter(({ timeStart }) => timeStart >= '12:00')}
       />
     </View>
-  );
-};
+  )
+}
 
-export const Week = ({child}: WeekProps) => {
+export const Week = ({ child }: WeekProps) => {
   // const translate = (key: string) => key;
 
-  moment.locale(LanguageService.getLocale());
-  const days = moment.weekdaysShort().slice(1, 6);
-  const displayDate = getMeaningfulStartingDate(moment());
+  moment.locale(LanguageService.getLocale())
+  const days = moment.weekdaysShort().slice(1, 6)
+  const displayDate = getMeaningfulStartingDate(moment())
 
-  const currentDayIndex = Math.min(moment(displayDate).isoWeekday() - 1, 5);
-  const [selectedIndex, setSelectedIndex] = useState(currentDayIndex);
-  const [showSchema, setShowSchema] = useState(false);
-  const [year, week] = [displayDate.isoWeekYear(), displayDate.isoWeek()];
-  const {data: lessons} = useTimetable(
+  const currentDayIndex = Math.min(moment(displayDate).isoWeekday() - 1, 5)
+  const [selectedIndex, setSelectedIndex] = useState(currentDayIndex)
+  const [showSchema, setShowSchema] = useState(false)
+  const [year, week] = [displayDate.isoWeekYear(), displayDate.isoWeek()]
+  const { data: lessons } = useTimetable(
     child,
     week,
     year,
-    LanguageService.getLanguageCode(),
-  );
-  let {data: menu} = useMenu(child);
+    LanguageService.getLanguageCode()
+  )
+  let { data: menu } = useMenu(child)
 
   // Hide menu if we want to show next week but it is not monday yet.
   // The menu for next week is not available until monday
-  const currentDate = moment();
+  const currentDate = moment()
   const shouldShowLunchMenu =
     menu[displayDate.isoWeekday() - 1] &&
-    !(displayDate.isoWeekday() === 1 && currentDate.isoWeekday() !== 1);
+    !(displayDate.isoWeekday() === 1 && currentDate.isoWeekday() !== 1)
   if (!shouldShowLunchMenu) {
-    menu = [];
+    menu = []
   }
 
-  const styles = useStyleSheet(themedStyles);
+  const styles = useStyleSheet(themedStyles)
 
   useEffect(() => {
-    const shouldShowSchema = lessons.length > 0;
-    setShowSchema(shouldShowSchema);
-  }, [lessons]);
+    const shouldShowSchema = lessons.length > 0
+    setShowSchema(shouldShowSchema)
+  }, [lessons])
 
   const getWeekText = (date = moment()) => {
-    return `${translate('schedule.week')} ${date.isoWeek()}`;
-  };
+    return `${translate('schedule.week')} ${date.isoWeek()}`
+  }
 
   return showSchema ? (
     <TransitionView style={styles.view} animation={'fadeInDown'}>
@@ -153,11 +152,12 @@ export const Week = ({child}: WeekProps) => {
         <Text style={styles.weekNumber}>{getWeekText(displayDate)}</Text>
         <TabBar
           selectedIndex={selectedIndex}
-          onSelect={index => setSelectedIndex(index)}>
+          onSelect={(index) => setSelectedIndex(index)}
+        >
           {days.map((weekDay, index) => (
             <Tab
               key={weekDay}
-              title={_ => (
+              title={(_) => (
                 <>
                   <Text style={styles.tabTitle}>{weekDay}</Text>
                   <Text style={styles.tabTitleDate}>
@@ -175,22 +175,23 @@ export const Week = ({child}: WeekProps) => {
         <ViewPager
           selectedIndex={selectedIndex}
           style={styles.pager}
-          onSelect={index => setSelectedIndex(index)}>
+          onSelect={(index) => setSelectedIndex(index)}
+        >
           {days.map((weekDay, index) => (
             <Day
               key={weekDay}
               weekDay={weekDay}
               lunch={menu[index] || {}}
               lessons={lessons
-                .filter(lesson => days[lesson.dayOfWeek - 1] === weekDay)
+                .filter((lesson) => days[lesson.dayOfWeek - 1] === weekDay)
                 .sort((a, b) => a.timeStart.localeCompare(b.timeStart))}
             />
           ))}
         </ViewPager>
       </TransitionView>
     </TransitionView>
-  ) : null;
-};
+  ) : null
+}
 
 const themedStyles = StyleService.create({
   view: {
@@ -273,4 +274,4 @@ const themedStyles = StyleService.create({
   tabTitleDate: {
     textAlign: 'center',
   },
-});
+})

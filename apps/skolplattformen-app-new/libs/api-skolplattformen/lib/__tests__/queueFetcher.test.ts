@@ -1,52 +1,52 @@
-import QueueFetcher from '../queue/queueFetcher';
+import QueueFetcher from '../queue/queueFetcher'
 
-let sut: QueueFetcher;
+let sut: QueueFetcher
 beforeEach(() => {
-  jest.useFakeTimers('legacy');
-  sut = new QueueFetcher(async () => '');
-});
+  jest.useFakeTimers('legacy')
+  sut = new QueueFetcher(async () => '')
+})
 
 test('creates queues for each id', () => {
-  sut.fetch(async () => '', 'one');
-  sut.fetch(async () => '', 'two');
-  sut.fetch(async () => '', 'three');
+  sut.fetch(async () => '', 'one')
+  sut.fetch(async () => '', 'two')
+  sut.fetch(async () => '', 'three')
 
-  expect(sut.Queues).toHaveLength(3);
-});
+  expect(sut.Queues).toHaveLength(3)
+})
 
 test('add same id to same queue', () => {
-  sut.fetch(async () => '', 'one');
-  sut.fetch(async () => '', 'one');
-  sut.fetch(async () => '', 'one');
+  sut.fetch(async () => '', 'one')
+  sut.fetch(async () => '', 'one')
+  sut.fetch(async () => '', 'one')
 
-  expect(sut.Queues).toHaveLength(1);
-  expect(sut.Queues[0].id).toEqual('one');
-});
+  expect(sut.Queues).toHaveLength(1)
+  expect(sut.Queues[0].id).toEqual('one')
+})
 
 test('can run a task', async () => {
-  const func = async () => 'output';
-  const promise = sut.fetch(func, 'one');
+  const func = async () => 'output'
+  const promise = sut.fetch(func, 'one')
 
-  jest.runOnlyPendingTimers();
+  jest.runOnlyPendingTimers()
 
-  const result = await promise;
+  const result = await promise
 
-  expect(result).toEqual('output');
-});
+  expect(result).toEqual('output')
+})
 
 test('can run many tasks', async () => {
-  const promise1 = sut.fetch(async () => 'one', 'one');
-  const promise2 = sut.fetch(async () => 'two', 'two');
-  const promise3 = sut.fetch(async () => 'three', 'three');
+  const promise1 = sut.fetch(async () => 'one', 'one')
+  const promise2 = sut.fetch(async () => 'two', 'two')
+  const promise3 = sut.fetch(async () => 'three', 'three')
 
-  await sut.schedule();
-  await sut.schedule();
-  await sut.schedule();
+  await sut.schedule()
+  await sut.schedule()
+  await sut.schedule()
 
-  const result = await Promise.all([promise1, promise2, promise3]);
+  const result = await Promise.all([promise1, promise2, promise3])
 
-  expect(result).toEqual(['one', 'two', 'three']);
-});
+  expect(result).toEqual(['one', 'two', 'three'])
+})
 
 // test('sets up timer on fetch', () => {
 //   sut.fetch(async () => 'one', 'one');
@@ -55,10 +55,10 @@ test('can run many tasks', async () => {
 // });
 
 test('sets up timer on fetch', () => {
-  const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
-  sut.fetch(async () => 'one', 'one');
-  expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
+  const setTimeoutSpy = jest.spyOn(global, 'setTimeout')
+  sut.fetch(async () => 'one', 'one')
+  expect(setTimeoutSpy).toHaveBeenCalledTimes(1)
 
   // Restore the original setTimeout function
-  setTimeoutSpy.mockRestore();
-});
+  setTimeoutSpy.mockRestore()
+})

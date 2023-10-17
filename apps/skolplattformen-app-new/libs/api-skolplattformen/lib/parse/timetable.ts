@@ -1,14 +1,14 @@
-import {TimetableEntry} from '../../../../libs/api/lib';
-import parse, {Language} from '../../../curriculum/src';
-import {DateTime} from 'luxon';
+import { TimetableEntry } from '../../../../libs/api/lib'
+import parse, { Language } from '../../../curriculum/src'
+import { DateTime } from 'luxon'
 
 const calculateDate = (
   year: number,
   weekNumber: number,
   weekday: number,
-  time: string,
+  time: string
 ): string => {
-  const [hours, minutes, seconds] = time.split(':');
+  const [hours, minutes, seconds] = time.split(':')
   return DateTime.local()
     .set({
       weekYear: year,
@@ -19,27 +19,27 @@ const calculateDate = (
       second: parseInt(seconds, 10),
       millisecond: 0,
     })
-    .toISO() as string;
-};
+    .toISO() as string
+}
 
 interface TimetableResponseEntry {
-  guidId: string;
-  texts: string[];
-  timeStart: string;
-  timeEnd: string;
-  dayOfWeekNumber: number;
-  blockName: string;
+  guidId: string
+  texts: string[]
+  timeStart: string
+  timeEnd: string
+  dayOfWeekNumber: number
+  blockName: string
 }
 export interface TimetableResponse {
-  error: string | null;
+  error: string | null
   data: {
-    textList: any[];
-    boxList: any[];
-    lineList: any[];
-    lessonInfo: TimetableResponseEntry[];
-  };
-  exception: any;
-  validation: any[];
+    textList: any[]
+    boxList: any[]
+    lineList: any[]
+    lessonInfo: TimetableResponseEntry[]
+  }
+  exception: any
+  validation: any[]
 }
 
 interface EntryParser {
@@ -47,8 +47,8 @@ interface EntryParser {
     args: TimetableResponseEntry,
     year: number,
     week: number,
-    lang: Language,
-  ): TimetableEntry;
+    lang: Language
+  ): TimetableEntry
 }
 export const timetableEntry: EntryParser = (
   {
@@ -61,7 +61,7 @@ export const timetableEntry: EntryParser = (
   },
   year,
   week,
-  lang,
+  lang
 ) => ({
   ...parse(code, lang),
   id: guidId,
@@ -73,23 +73,23 @@ export const timetableEntry: EntryParser = (
   timeStart,
   dateStart: calculateDate(year, week, dayOfWeekNumber, timeStart),
   dateEnd: calculateDate(year, week, dayOfWeekNumber, timeEnd),
-});
+})
 
 export const timetable = (
   response: TimetableResponse,
   year: number,
   week: number,
-  lang: Language,
+  lang: Language
 ) => {
   if (response.error) {
-    throw new Error(response.error);
+    throw new Error(response.error)
   }
 
   if (!response.data.lessonInfo) {
-    throw new Error('Empty lessonInfo received');
+    throw new Error('Empty lessonInfo received')
   }
 
-  return response.data.lessonInfo.map(entry =>
-    timetableEntry(entry, year, week, lang),
-  );
-};
+  return response.data.lessonInfo.map((entry) =>
+    timetableEntry(entry, year, week, lang)
+  )
+}

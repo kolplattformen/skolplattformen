@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 export const information = () =>
   ({
     url: 'https://hjarntorget.goteborg.se/api/information/messages-by-date-desc?messageStatus=CURRENT&offset=0&limit=10&language=en',
@@ -115,4 +114,4 @@ export const information = () =>
           archivedByUser: false,
         },
       ]),
-  } as any as Response);
+  } as any as Response)

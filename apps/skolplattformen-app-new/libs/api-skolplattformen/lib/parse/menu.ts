@@ -1,23 +1,23 @@
-import {MenuItem, MenuList, toMarkdown} from '../../../../libs/api/lib';
-import {etjanst} from './etjanst';
+import { MenuItem, MenuList, toMarkdown } from '../../../../libs/api/lib'
+import { etjanst } from './etjanst'
 
-export const menuItem = ({title, description}: any): MenuItem => ({
+export const menuItem = ({ title, description }: any): MenuItem => ({
   title,
   description: toMarkdown(description),
-});
+})
 
-export const menu = (data: any): MenuItem[] => etjanst(data).map(menuItem);
+export const menu = (data: any): MenuItem[] => etjanst(data).map(menuItem)
 
 export const menuList = (data: any): MenuItem[] => {
-  const etjanstData = etjanst(data);
-  const menuFS = etjanstData as MenuList;
+  const etjanstData = etjanst(data)
+  const menuFS = etjanstData as MenuList
 
   const currentWeek = menuFS.menus.find(
-    item => menuFS.selectedWeek === Number.parseInt(item.week, 10),
-  );
+    (item) => menuFS.selectedWeek === Number.parseInt(item.week, 10)
+  )
 
   if (!currentWeek) {
-    return [];
+    return []
   }
 
   const menuItemsFS = [
@@ -41,7 +41,7 @@ export const menuList = (data: any): MenuItem[] => {
       title: `Fredag - Vecka ${currentWeek.week}`,
       description: toMarkdown(currentWeek.fri),
     },
-  ];
+  ]
 
-  return menuItemsFS;
-};
+  return menuItemsFS
+}

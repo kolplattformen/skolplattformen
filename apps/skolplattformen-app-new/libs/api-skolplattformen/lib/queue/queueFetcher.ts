@@ -1,9 +1,9 @@
-import AutoQueue from './autoQueue';
-import RoundRobinArray from './roundRobinArray';
+import AutoQueue from './autoQueue'
+import RoundRobinArray from './roundRobinArray'
 
 export interface QueueEntry {
-  id: string;
-  queue: AutoQueue;
+  id: string
+  queue: AutoQueue
 }
 
 // function delay(time: any) {
@@ -19,21 +19,21 @@ export interface QueueEntry {
  *
  */
 export default class QueueFetcher {
-  private queues: RoundRobinArray<QueueEntry>;
+  private queues: RoundRobinArray<QueueEntry>
 
-  private currentRunningQueue: QueueEntry | undefined;
+  private currentRunningQueue: QueueEntry | undefined
 
-  private changeChildFunc: (childId: string) => Promise<any>;
+  private changeChildFunc: (childId: string) => Promise<any>
 
-  private lastChildId = '';
+  private lastChildId = ''
 
-  private scheduleTimeout: any;
+  private scheduleTimeout: any
 
   /**
    * Set to true to console.log verbose information
    * For debugging mostly
    */
-  verboseDebug = false;
+  verboseDebug = false
 
   /**
    * Creates a new QueueFetcher
@@ -41,8 +41,8 @@ export default class QueueFetcher {
    * selected child on the server
    */
   constructor(changeChildFunc: (childId: string) => Promise<any>) {
-    this.changeChildFunc = changeChildFunc;
-    this.queues = new RoundRobinArray(new Array<QueueEntry>());
+    this.changeChildFunc = changeChildFunc
+    this.queues = new RoundRobinArray(new Array<QueueEntry>())
   }
 
   /**
@@ -55,26 +55,26 @@ export default class QueueFetcher {
    * (i.e. is dequeued and executed)
    */
   public async fetch<T>(func: () => Promise<T>, id: string): Promise<T> {
-    if (!this.queues.array.some(e => e.id === id)) {
-      const newQueue = new AutoQueue(10);
-      this.queues.add({id, queue: newQueue});
+    if (!this.queues.array.some((e) => e.id === id)) {
+      const newQueue = new AutoQueue(10)
+      this.queues.add({ id, queue: newQueue })
     }
 
-    const queueEntry = this.queues.array.find(e => e.id === id);
+    const queueEntry = this.queues.array.find((e) => e.id === id)
     if (queueEntry === undefined) {
-      throw new Error(`No queue found for id: ${id}`);
+      throw new Error(`No queue found for id: ${id}`)
     }
-    const promise = queueEntry.queue.enqueue(func, false);
+    const promise = queueEntry.queue.enqueue(func, false)
 
     if (this.scheduleTimeout === undefined || this.scheduleTimeout === null) {
-      this.scheduleTimeout = setTimeout(async () => this.schedule(), 0);
+      this.scheduleTimeout = setTimeout(async () => this.schedule(), 0)
     }
 
-    return promise;
+    return promise
   }
 
   public get Queues() {
-    return this.queues.array;
+    return this.queues.array
   }
 
   /**
@@ -83,94 +83,95 @@ export default class QueueFetcher {
    */
   async schedule() {
     // Debug print info for all queues
-    this.queues.array.forEach(({id: childId, queue}) =>
-      this.debug('Schedule: ', childId, '=>', queue.getQueueInfo()),
-    );
+    this.queues.array.forEach(({ id: childId, queue }) =>
+      this.debug('Schedule: ', childId, '=>', queue.getQueueInfo())
+    )
 
     if (this.queues.size === 0) {
-      this.debug('No queues created yet');
-      return;
+      this.debug('No queues created yet')
+      return
     }
 
     if (this.currentRunningQueue === undefined || this.queues.size === 1) {
-      this.debug('First run schedule or only one queue');
-      const firstQueue = this.queues.first;
-      await this.runNext(firstQueue);
-      return;
+      this.debug('First run schedule or only one queue')
+      const firstQueue = this.queues.first
+      await this.runNext(firstQueue)
+      return
     }
 
-    const nextToRun = this.findNextQueueToRun();
+    const nextToRun = this.findNextQueueToRun()
 
     if (nextToRun === undefined) {
-      this.debug('Nothing to do right now');
-      this.scheduleTimeout = null;
-      return;
+      this.debug('Nothing to do right now')
+      this.scheduleTimeout = null
+      return
     }
 
     if (nextToRun.id === this.currentRunningQueue.id) {
-      this.debug('Same queue as before was scheduled');
-      this.runNext(nextToRun);
-      return;
+      this.debug('Same queue as before was scheduled')
+      this.runNext(nextToRun)
+      return
     }
 
-    const {id: queueToPauseId, queue: queueToPause} = this.currentRunningQueue;
-    this.debug('Queue to pause', queueToPauseId, queueToPause.getQueueInfo());
+    const { id: queueToPauseId, queue: queueToPause } = this.currentRunningQueue
+    this.debug('Queue to pause', queueToPauseId, queueToPause.getQueueInfo())
 
-    queueToPause.pause();
+    queueToPause.pause()
 
     if (queueToPause.runningTaskCount === 0) {
-      await this.runNext(nextToRun);
-      return;
+      await this.runNext(nextToRun)
+      return
     }
 
-    this.debug('Queue is not idle, waiting for it ...');
+    this.debug('Queue is not idle, waiting for it ...')
 
     queueToPause.getQueueStatus().once('IDLE', async () => {
-      this.debug('Got IDLE from queue');
-      await this.runNext(nextToRun);
-    });
+      this.debug('Got IDLE from queue')
+      await this.runNext(nextToRun)
+    })
   }
 
   private async runNext(queueToRun: QueueEntry) {
-    const {id: childId, queue} = queueToRun;
-    this.debug('About to run', childId, queue.getQueueInfo());
+    const { id: childId, queue } = queueToRun
+    this.debug('About to run', childId, queue.getQueueInfo())
 
     if (this.lastChildId === childId) {
-      this.debug('Child already selected, skipping select call');
+      this.debug('Child already selected, skipping select call')
     } else {
-      this.debug('Initiating change child');
-      await this.changeChildFunc(childId);
-      this.lastChildId = childId;
-      this.debug('Change child done');
+      this.debug('Initiating change child')
+      await this.changeChildFunc(childId)
+      this.lastChildId = childId
+      this.debug('Change child done')
     }
 
-    this.currentRunningQueue = queueToRun;
+    this.currentRunningQueue = queueToRun
 
-    this.setupTimerForSchedule();
-    await queue.start();
+    this.setupTimerForSchedule()
+    await queue.start()
   }
 
   private setupTimerForSchedule() {
-    this.scheduleTimeout = setTimeout(async () => this.schedule(), 3000);
+    this.scheduleTimeout = setTimeout(async () => this.schedule(), 3000)
   }
 
   private findNextQueueToRun(): QueueEntry | undefined {
     // Iterate all queues and look for next queue with work to do
     for (let i = 0; i < this.queues.size; i += 1) {
-      const {id: childId, queue} = this.queues.next();
+      const { id: childId, queue } = this.queues.next()
 
       // If queue has items to execute, return it
-      if (queue.size > 0 || queue.runningTaskCount > 0)
-        return {id: childId, queue};
+      if (queue.size > 0 || queue.runningTaskCount > 0) {
+        return { id: childId, queue }
+      }
     }
 
     // Nothing more to do
-    return undefined;
+    return undefined
   }
 
   private debug(message: any, ...args: any[]) {
     if (this.verboseDebug) {
-      console.debug(message, ...args);
+      console.debug(message, ...args)
     }
   }
 }

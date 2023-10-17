@@ -1,10 +1,10 @@
-import {SchoolContact, Child} from '../../../../libs/api/lib';
-import {children} from './children';
+import { SchoolContact, Child } from '../../../../libs/api/lib'
+import { children } from './children'
 
 export const schoolContacts = (child: Child): SchoolContact[] =>
-  schoolContactData.get(child.id) ?? [];
+  schoolContactData.get(child.id) ?? []
 
-const [child1, child2] = children();
+const [child1, child2] = children()
 
 const schoolContactData = new Map<string, SchoolContact[]>([
   [
@@ -49,4 +49,4 @@ const schoolContactData = new Map<string, SchoolContact[]>([
       },
     ],
   ],
-]);
+])

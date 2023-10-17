@@ -1,12 +1,12 @@
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 import {
   StyleService,
   Text,
   useStyleSheet,
   useTheme,
-} from '@ui-kitten/components';
-import React from 'react';
+} from '@ui-kitten/components'
+import React from 'react'
 import {
   Image,
   ImageStyle,
@@ -14,30 +14,30 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from 'react-native';
-import {useTranslation} from '../hooks/useTranslation';
-import {Layout as LayoutStyle, Sizing, Typography} from '../styles';
-import {fontSize} from '../styles/typography';
-import {KeyboardAvoidingView} from '../ui/keyboardAvoidingView.component';
-import {SafeAreaView} from '../ui/safeAreaView.component';
-import {SettingsIcon} from './icon.component';
-import {Login} from './login.component';
-import {RootStackParamList} from './navigation.component';
+} from 'react-native'
+import { useTranslation } from '../hooks/useTranslation'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { fontSize } from '../styles/typography'
+import { KeyboardAvoidingView } from '../ui/keyboardAvoidingView.component'
+import { SafeAreaView } from '../ui/safeAreaView.component'
+import { SettingsIcon } from './icon.component'
+import { Login } from './login.component'
+import { RootStackParamList } from './navigation.component'
 
 const randomWord = (
-  t: (scope: I18n.Scope, options?: I18n.TranslateOptions | undefined) => string,
+  t: (scope: I18n.Scope, options?: I18n.TranslateOptions | undefined) => string
 ) => {
-  const words = t('auth.words');
-  const keys = Object.keys(words);
+  const words = t('auth.words')
+  const keys = Object.keys(words)
 
-  const randomIndex: number = Math.floor(Math.random() * keys.length);
-  const argumentKey: string = keys[randomIndex];
+  const randomIndex: number = Math.floor(Math.random() * keys.length)
+  const argumentKey: string = keys[randomIndex]
 
-  return words[argumentKey];
-};
+  return words[argumentKey]
+}
 
 interface AuthProps {
-  navigation: StackNavigationProp<RootStackParamList, 'Login'>;
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>
 }
 
 export const authRouteOptions = (): NativeStackNavigationOptions => {
@@ -45,13 +45,13 @@ export const authRouteOptions = (): NativeStackNavigationOptions => {
     headerShown: false,
     animationTypeForReplace: 'push',
     animation: 'fade',
-  };
-};
+  }
+}
 
-export const Auth: React.FC<AuthProps> = ({navigation}) => {
-  const styles = useStyleSheet(themeStyles);
-  const colors = useTheme();
-  const {t} = useTranslation();
+export const Auth: React.FC<AuthProps> = ({ navigation }) => {
+  const styles = useStyleSheet(themeStyles)
+  const colors = useTheme()
+  const { t } = useTranslation()
   // const t = (key: string) => key;
 
   return (
@@ -62,15 +62,16 @@ export const Auth: React.FC<AuthProps> = ({navigation}) => {
             style={styles.settingsLink}
             onPress={() => navigation.navigate('Settings')}
             accessibilityHint={t(
-              'auth.a11y_navigate_to_settings',
+              'auth.a11y_navigate_to_settings'
               // defaultValue: 'Navigerar till vyn för inställningar',
             )}
             accessibilityLabel={t(
-              'auth.a11y_settings',
+              'auth.a11y_settings'
               //   {
               //   // defaultValue: 'Inställningar',
               // }
-            )}>
+            )}
+          >
             <View style={styles.language}>
               <SettingsIcon
                 height={28}
@@ -87,7 +88,7 @@ export const Auth: React.FC<AuthProps> = ({navigation}) => {
                   source={require('../assets/boys.png')}
                   style={styles.image as ImageStyle}
                   accessibilityHint={t(
-                    'login.a11y_image_two_boys',
+                    'login.a11y_image_two_boys'
                     // {
                     //   defaultValue: 'Bild på två personer som kollar i mobilen',
                     // }
@@ -101,7 +102,8 @@ export const Auth: React.FC<AuthProps> = ({navigation}) => {
                   category="h1"
                   style={styles.header}
                   adjustsFontSizeToFit
-                  numberOfLines={2}>
+                  numberOfLines={2}
+                >
                   Öppna skolplattformen
                 </Text>
                 <Login />
@@ -116,8 +118,8 @@ export const Auth: React.FC<AuthProps> = ({navigation}) => {
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const themeStyles = StyleService.create({
   container: {
@@ -161,4 +163,4 @@ const themeStyles = StyleService.create({
     alignSelf: 'flex-start',
     zIndex: 1,
   },
-});
+})

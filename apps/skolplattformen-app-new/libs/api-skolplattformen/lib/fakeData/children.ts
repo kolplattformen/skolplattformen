@@ -1,4 +1,4 @@
-import {EtjanstChild, Skola24Child} from '../../../../libs/api/lib';
+import { EtjanstChild, Skola24Child } from '../../../../libs/api/lib'
 
 export const children = (): EtjanstChild[] => [
   {
@@ -15,7 +15,7 @@ export const children = (): EtjanstChild[] => [
     status: 'GR',
     schoolId: '8e6b13b-3116-e66c39b-a4c3fa5-a1d72d9',
   },
-];
+]
 export const skola24Children = (): Skola24Child[] => [
   {
     firstName: 'Shanel',
@@ -26,4 +26,4 @@ export const skola24Children = (): Skola24Child[] => [
     timetableID: 'jkl012',
     unitGuid: 'mno345',
   },
-];
+]

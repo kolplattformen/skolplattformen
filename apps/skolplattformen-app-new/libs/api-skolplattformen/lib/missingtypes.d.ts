@@ -1,1 +1,1 @@
-declare module 'h2m';
+declare module 'h2m'

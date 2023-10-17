@@ -5,7 +5,7 @@ type Neutral =
   | 'gray500'
   | 'gray600'
   | 'gray700'
-  | 'gray800';
+  | 'gray800'
 export const neutral: Record<Neutral, string> = {
   white: '#ffffff',
   gray200: '#E5E7EB',
@@ -14,9 +14,9 @@ export const neutral: Record<Neutral, string> = {
   gray700: '#374151', // 10.31 (AAA) on white
   gray800: '#1F2937', // 14.68 (AAA) on white
   black: '#000000', // 21 (AAA) on white
-};
+}
 
-type Primary = 'primary600';
+type Primary = 'primary600'
 export const primary: Record<Primary, string> = {
   primary600: '#DB2575',
-};
+}

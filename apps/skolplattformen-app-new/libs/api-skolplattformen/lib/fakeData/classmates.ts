@@ -1,10 +1,10 @@
-import {Child, Classmate} from '../../../../libs/api/lib';
-import {children} from './children';
+import { Child, Classmate } from '../../../../libs/api/lib'
+import { children } from './children'
 
 export const classmates = (child: Child): Classmate[] =>
-  classmatesData.get(child.id) ?? [];
+  classmatesData.get(child.id) ?? []
 
-const [child1, child2] = children();
+const [child1, child2] = children()
 
 const classmatesData = new Map<string, Classmate[]>([
   [
@@ -449,4 +449,4 @@ const classmatesData = new Map<string, Classmate[]>([
       },
     ],
   ],
-]);
+])

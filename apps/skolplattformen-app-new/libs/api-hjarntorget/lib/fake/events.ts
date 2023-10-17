@@ -35,4 +35,4 @@ export const events = () =>
           state: 'ONGOING',
         },
       ]),
-  } as any as Response);
+  } as any as Response)

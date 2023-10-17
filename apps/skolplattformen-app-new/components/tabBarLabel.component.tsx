@@ -1,15 +1,15 @@
-import {StyleService, Text, useStyleSheet} from '@ui-kitten/components';
-import React from 'react';
-import {View} from 'react-native';
-import {fontSize} from '../styles/typography';
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
+import React from 'react'
+import { View } from 'react-native'
+import { fontSize } from '../styles/typography'
 
 export type TabBarLabelProps = {
-  label: string;
-  focused: boolean;
-};
+  label: string
+  focused: boolean
+}
 
-export const TabBarLabel = ({label, focused}: TabBarLabelProps) => {
-  const styles = useStyleSheet(themedStyles);
+export const TabBarLabel = ({ label, focused }: TabBarLabelProps) => {
+  const styles = useStyleSheet(themedStyles)
 
   return (
     <View>
@@ -17,12 +17,13 @@ export const TabBarLabel = ({label, focused}: TabBarLabelProps) => {
         style={[styles.label, focused ? styles.focused : null]}
         maxFontSizeMultiplier={2}
         numberOfLines={1}
-        ellipsizeMode="tail">
+        ellipsizeMode="tail"
+      >
         {label}
       </Text>
     </View>
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   label: {
@@ -33,4 +34,4 @@ const themedStyles = StyleService.create({
   focused: {
     color: 'color-tab-focused',
   },
-});
+})

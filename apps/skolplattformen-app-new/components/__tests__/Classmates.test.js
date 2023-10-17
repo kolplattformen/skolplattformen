@@ -1,10 +1,10 @@
-import {useClassmates} from '../../libs/hooks/src';
-import React from 'react';
-import {render} from '../../utils/testHelpers';
-import {ChildProvider} from '../childContext.component';
-import {Classmates} from '../classmates.component';
+import { useClassmates } from '../../libs/hooks/src'
+import React from 'react'
+import { render } from '../../utils/testHelpers'
+import { ChildProvider } from '../childContext.component'
+import { Classmates } from '../classmates.component'
 
-jest.mock('../../libs/hooks/src');
+jest.mock('../../libs/hooks/src')
 
 const defaultClassmates = [
   {
@@ -33,54 +33,54 @@ const defaultClassmates = [
       },
     ],
   },
-];
+]
 
-const setup = ({classmates} = {classmates: defaultClassmates}) => {
+const setup = ({ classmates } = { classmates: defaultClassmates }) => {
   useClassmates.mockReturnValue({
     data: classmates,
-  });
+  })
 
   return render(
-    <ChildProvider child={{id: 1}}>
+    <ChildProvider child={{ id: 1 }}>
       <Classmates />
-    </ChildProvider>,
-  );
-};
+    </ChildProvider>
+  )
+}
 
 test('gets the classmates for a child from context', () => {
-  setup();
+  setup()
 
-  expect(useClassmates).toHaveBeenCalledWith({id: 1});
-});
+  expect(useClassmates).toHaveBeenCalledWith({ id: 1 })
+})
 
 test('renders class name', () => {
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText(/^klass 2b$/i)).toBeTruthy();
-});
+  expect(screen.getByText(/^klass 2b$/i)).toBeTruthy()
+})
 
 test('renders class without name', () => {
   const screen = setup({
     classmates: [],
-  });
+  })
 
-  expect(screen.getByText(/^klass$/i)).toBeTruthy();
-});
+  expect(screen.getByText(/^klass$/i)).toBeTruthy()
+})
 
 test('renders classmates sorted by first name', () => {
-  const screen = setup();
+  const screen = setup()
 
   expect(screen.getByLabelText('Barn 1')).toContainElement(
-    screen.getByText(/adam svensson/i),
-  );
+    screen.getByText(/adam svensson/i)
+  )
   expect(screen.getByLabelText('Barn 2')).toContainElement(
-    screen.getByText(/tyrell eriksson/i),
-  );
-});
+    screen.getByText(/tyrell eriksson/i)
+  )
+})
 
 test('renders guardians sorted by first name', () => {
-  const screen = setup();
+  const screen = setup()
 
-  expect(screen.getByText(/eva svensson/i)).toBeTruthy();
-  expect(screen.getByText(/^loras eriksson, margaery eriksson$/i)).toBeTruthy();
-});
+  expect(screen.getByText(/eva svensson/i)).toBeTruthy()
+  expect(screen.getByText(/^loras eriksson, margaery eriksson$/i)).toBeTruthy()
+})

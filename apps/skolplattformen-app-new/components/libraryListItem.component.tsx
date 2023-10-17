@@ -1,18 +1,19 @@
-import {NavigationProp, useNavigation} from '@react-navigation/core';
-import {StyleService, Text, useStyleSheet} from '@ui-kitten/components';
-import {Library} from 'libraries.json';
-import React from 'react';
-import {Platform, View} from 'react-native';
-import {fontSize} from '../styles/typography';
-import {RootStackParamList} from './navigation.component';
-import {SettingListItem} from './settingsComponents.component';
+import { NavigationProp, useNavigation } from '@react-navigation/core'
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
+import { Library } from 'libraries.json'
+import React from 'react'
+import { Platform, View } from 'react-native'
+import { fontSize } from '../styles/typography'
+import { RootStackParamList } from './navigation.component'
+import { SettingListItem } from './settingsComponents.component'
 
-export const LibraryListItem = ({library}: {library: Library}) => {
-  const styles = useStyleSheet(themedStyles);
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+export const LibraryListItem = ({ library }: { library: Library }) => {
+  const styles = useStyleSheet(themedStyles)
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   return (
     <SettingListItem
-      onNavigate={() => navigation.navigate('Library', {library})}>
+      onNavigate={() => navigation.navigate('Library', { library })}
+    >
       <View style={styles.container}>
         <Text style={styles.name}>{library.libraryName}</Text>
         <View style={styles.bottomRow}>
@@ -23,8 +24,8 @@ export const LibraryListItem = ({library}: {library: Library}) => {
         </View>
       </View>
     </SettingListItem>
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   container: {},
@@ -50,4 +51,4 @@ const themedStyles = StyleService.create({
     marginTop: 4,
     flexDirection: 'row',
   },
-});
+})

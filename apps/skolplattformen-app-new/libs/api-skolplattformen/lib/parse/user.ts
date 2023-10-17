@@ -1,4 +1,4 @@
-import {User} from '../../../../libs/api/lib';
+import { User } from '../../../../libs/api/lib'
 
 export const user = ({
   socialSecurityNumber,
@@ -14,4 +14,4 @@ export const user = ({
   email: userEmail,
   isAuthenticated,
   notificationId,
-});
+})

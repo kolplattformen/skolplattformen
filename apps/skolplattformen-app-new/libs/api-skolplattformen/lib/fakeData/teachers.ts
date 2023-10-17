@@ -1,10 +1,10 @@
-import {Teacher, Child} from '../../../../libs/api/lib';
-import {children} from './children';
+import { Teacher, Child } from '../../../../libs/api/lib'
+import { children } from './children'
 
 export const teachers = (child: Child): Teacher[] =>
-  teacherData.get(child.id) ?? [];
+  teacherData.get(child.id) ?? []
 
-const [child1, child2] = children();
+const [child1, child2] = children()
 
 const teacherData = new Map<string, Teacher[]>([
   [
@@ -83,4 +83,4 @@ const teacherData = new Map<string, Teacher[]>([
       },
     ],
   ],
-]);
+])

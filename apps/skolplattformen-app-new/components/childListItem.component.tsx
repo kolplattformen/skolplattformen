@@ -1,7 +1,7 @@
 /* eslint-disable react-native-a11y/has-accessibility-hint */
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {Child} from '../libs/api/lib';
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { Child } from '../libs/api/lib'
 import {
   useCalendar,
   useClassmates,
@@ -9,30 +9,35 @@ import {
   useNews,
   useNotifications,
   useSchedule,
-} from '../libs/hooks/src';
-import {Button, StyleService, Text, useStyleSheet} from '@ui-kitten/components';
-import moment, {Moment} from 'moment';
-import React, {useEffect} from 'react';
-import {Pressable, useColorScheme, View} from 'react-native';
-import {useTranslation} from '../hooks/useTranslation';
-import {Colors, Layout, Sizing} from '../styles';
-import {getMeaningfulStartingDate} from '../utils/calendarHelpers';
-import {studentName} from '../utils/peopleHelpers';
-import {DaySummary} from './daySummary.component';
-import {AlertIcon, RightArrowIcon} from './icon.component';
-import {RootStackParamList} from './navigation.component';
-import {StudentAvatar} from './studentAvatar.component';
+} from '../libs/hooks/src'
+import {
+  Button,
+  StyleService,
+  Text,
+  useStyleSheet,
+} from '@ui-kitten/components'
+import moment, { Moment } from 'moment'
+import React, { useEffect } from 'react'
+import { Pressable, useColorScheme, View } from 'react-native'
+import { useTranslation } from '../hooks/useTranslation'
+import { Colors, Layout, Sizing } from '../styles'
+import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
+import { studentName } from '../utils/peopleHelpers'
+import { DaySummary } from './daySummary.component'
+import { AlertIcon, RightArrowIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
+import { StudentAvatar } from './studentAvatar.component'
 
 interface ChildListItemProps {
-  child: Child;
-  color: string;
-  updated: string;
-  currentDate?: Moment;
+  child: Child
+  color: string
+  updated: string
+  currentDate?: Moment
 }
 type ChildListItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Children'
->;
+>
 
 export const ChildListItem = ({
   child,
@@ -43,68 +48,70 @@ export const ChildListItem = ({
   // Forces rerender when child.id changes
   React.useEffect(() => {
     // noop
-  }, [child.id]);
+  }, [child.id])
 
-  const navigation = useNavigation<ChildListItemNavigationProp>();
-  const {t} = useTranslation();
+  const navigation = useNavigation<ChildListItemNavigationProp>()
+  const { t } = useTranslation()
   // const t = (key: string) => key;
-  const {data: notifications, reload: notificationsReload} =
-    useNotifications(child);
-  const {data: news, status: newsStatus, reload: newsReload} = useNews(child);
-  const {data: classmates, reload: classmatesReload} = useClassmates(child);
-  const {data: calendar, reload: calendarReload} = useCalendar(child);
-  const {data: menu, reload: menuReload} = useMenu(child);
-  const {data: schedule, reload: scheduleReload} = useSchedule(
+  const { data: notifications, reload: notificationsReload } =
+    useNotifications(child)
+  const { data: news, status: newsStatus, reload: newsReload } = useNews(child)
+  const { data: classmates, reload: classmatesReload } = useClassmates(child)
+  const { data: calendar, reload: calendarReload } = useCalendar(child)
+  const { data: menu, reload: menuReload } = useMenu(child)
+  const { data: schedule, reload: scheduleReload } = useSchedule(
     child,
     moment(currentDate).toISOString(),
-    moment(currentDate).add(7, 'days').toISOString(),
-  );
+    moment(currentDate).add(7, 'days').toISOString()
+  )
 
   useEffect(() => {
     // Do not refresh if updated is empty (first render of component)
-    if (updated === '') return;
+    if (updated === '') {
+      return
+    }
 
-    newsReload();
-    classmatesReload();
-    notificationsReload();
-    calendarReload();
-    menuReload();
-    scheduleReload();
+    newsReload()
+    classmatesReload()
+    notificationsReload()
+    calendarReload()
+    menuReload()
+    scheduleReload()
 
     // Without eslint-disable below we get into a forever loop
     // because the function pointers to reload functions change on every reload.
     // I do not know a workaround for this.
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updated]);
+  }, [updated])
 
   const notificationsThisWeek = notifications.filter(
-    ({dateCreated, dateModified}) => {
-      const date = dateModified || dateCreated;
-      return date ? moment(date).isSame(moment(), 'week') : false;
-    },
-  );
+    ({ dateCreated, dateModified }) => {
+      const date = dateModified || dateCreated
+      return date ? moment(date).isSame(moment(), 'week') : false
+    }
+  )
 
-  const newsThisWeek = news.filter(({modified, published}) => {
-    const newsDate = modified || published;
-    return newsDate ? moment(newsDate).isSame(currentDate, 'week') : false;
-  });
+  const newsThisWeek = news.filter(({ modified, published }) => {
+    const newsDate = modified || published
+    return newsDate ? moment(newsDate).isSame(currentDate, 'week') : false
+  })
 
   const scheduleAndCalendarThisWeek = [
     ...(calendar ?? []),
     ...(schedule ?? []),
-  ].filter(({startDate}) =>
+  ].filter(({ startDate }) =>
     startDate
       ? moment(startDate).isBetween(
           moment(currentDate).startOf('day'),
-          moment(currentDate).add(7, 'days'),
+          moment(currentDate).add(7, 'days')
         )
-      : false,
-  );
+      : false
+  )
 
   const displayDate = (inputDate: moment.MomentInput) => {
-    return moment(inputDate).fromNow();
-  };
+    return moment(inputDate).fromNow()
+  }
 
   const getClassName = () => {
     // hack: we can find the class name (ex. 8C) from the classmates.
@@ -114,7 +121,7 @@ export const ChildListItem = ({
       return (
         classmates[0].className +
         (child.schoolID == null ? '' : ' • ' + child.schoolID)
-      );
+      )
     }
 
     // Taken from Skolverket
@@ -124,24 +131,24 @@ export const ChildListItem = ({
       GR: t('abbrevations.compulsorySchool'),
       F: t('abbrevations.leisureTimeCentre'),
       FS: t('abbrevations.preSchool'),
-    };
+    }
 
     return child.status
       ? child.status
           .split(';')
-          .map(status => {
-            const statusAsAbbreviation = status as keyof typeof abbrevations;
+          .map((status) => {
+            const statusAsAbbreviation = status as keyof typeof abbrevations
 
-            return abbrevations[statusAsAbbreviation] || status;
+            return abbrevations[statusAsAbbreviation] || status
           })
           .join(', ')
-      : null;
-  };
+      : null
+  }
 
-  const className = getClassName();
-  const styles = useStyleSheet(themeStyles);
-  const isDarkMode = useColorScheme() === 'dark';
-  const meaningfulStartingDate = getMeaningfulStartingDate(currentDate);
+  const className = getClassName()
+  const styles = useStyleSheet(themeStyles)
+  const isDarkMode = useColorScheme() === 'dark'
+  const meaningfulStartingDate = getMeaningfulStartingDate(currentDate)
 
   // Hide menu if we want to show monday but it is not monday yet.
   // The menu for next week is not available until monday
@@ -150,18 +157,19 @@ export const ChildListItem = ({
     !(
       meaningfulStartingDate.isoWeekday() === 1 &&
       currentDate.isoWeekday() !== 1
-    );
+    )
 
   return (
     <>
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <Pressable
-            style={({pressed}) => [
+            style={({ pressed }) => [
               styles.cardHeaderLeft || {},
-              {opacity: pressed ? 0.5 : 1},
+              { opacity: pressed ? 0.5 : 1 },
             ]}
-            onPress={() => navigation.navigate('Child', {child, color})}>
+            onPress={() => navigation.navigate('Child', { child, color })}
+          >
             <View style={styles.cardHeaderLeft}>
               <StudentAvatar name={studentName(child.name)} color={color} />
               <View style={styles.cardHeaderText}>
@@ -181,14 +189,15 @@ export const ChildListItem = ({
           </Pressable>
         </View>
         <Pressable
-          style={({pressed}) => ['' || {}, {opacity: pressed ? 0.5 : 1}]}
+          style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
               color,
               initialRouteName: 'Calendar',
             })
-          }>
+          }
+        >
           <DaySummary child={child} date={meaningfulStartingDate} />
 
           {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
@@ -198,14 +207,15 @@ export const ChildListItem = ({
           ))}
         </Pressable>
         <Pressable
-          style={({pressed}) => ['' || {}, {opacity: pressed ? 0.5 : 1}]}
+          style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
           onPress={() =>
             navigation.navigate('Child', {
               child,
               color,
               initialRouteName: 'News',
             })
-          }>
+          }
+        >
           <Text category="c2" style={styles.label}>
             {t('navigation.news')}
           </Text>
@@ -231,17 +241,18 @@ export const ChildListItem = ({
 
         {shouldShowLunchMenu ? (
           <Pressable
-            style={({pressed}) => ['' || {}, {opacity: pressed ? 0.5 : 1}]}
+            style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
             onPress={() =>
               navigation.navigate('Child', {
                 child,
                 color,
                 initialRouteName: 'Menu',
               })
-            }>
+            }
+          >
             <Text category="c2" style={styles.label}>
               {meaningfulStartingDate.format(
-                '[' + t('schedule.lunch') + '] dddd',
+                '[' + t('schedule.lunch') + '] dddd'
               )}
             </Text>
             <Text>
@@ -259,14 +270,15 @@ export const ChildListItem = ({
             accessoryLeft={AlertIcon}
             status="primary"
             style={styles.absenceButton}
-            onPress={() => navigation.navigate('Absence', {child})}>
+            onPress={() => navigation.navigate('Absence', { child })}
+          >
             {t('abscense.title')}
           </Button>
         </View>
       </View>
     </>
-  );
-};
+  )
+}
 
 const themeStyles = StyleService.create({
   card: {
@@ -321,4 +333,4 @@ const themeStyles = StyleService.create({
     marginBottom: 0,
   },
   noNewNewsItemsText: {},
-});
+})

@@ -1,17 +1,17 @@
-import {Text} from '@ui-kitten/components';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Layout} from '../styles';
-import {fontSize} from '../styles/typography';
+import { Text } from '@ui-kitten/components'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Layout } from '../styles'
+import { fontSize } from '../styles/typography'
 
 interface NavigationTitleProps {
-  title?: string;
-  subtitle?: string;
+  title?: string
+  subtitle?: string
 }
 /**
  * Navigation Title with a smaller subtitle.
  */
-export const NavigationTitle = ({title, subtitle}: NavigationTitleProps) => {
+export const NavigationTitle = ({ title, subtitle }: NavigationTitleProps) => {
   return (
     <View style={styles.container}>
       {title && (
@@ -25,8 +25,8 @@ export const NavigationTitle = ({title, subtitle}: NavigationTitleProps) => {
         </Text>
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -36,5 +36,5 @@ const styles = StyleSheet.create({
     ...fontSize.sm,
     fontWeight: '500',
   },
-  subtitle: {...fontSize.base},
-});
+  subtitle: { ...fontSize.base },
+})

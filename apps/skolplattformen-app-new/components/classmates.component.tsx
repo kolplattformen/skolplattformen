@@ -1,5 +1,5 @@
-import {Classmate} from '../libs/api/lib';
-import {useClassmates} from '../libs/hooks/src';
+import { Classmate } from '../libs/api/lib'
+import { useClassmates } from '../libs/hooks/src'
 import {
   Divider,
   Icon,
@@ -7,13 +7,13 @@ import {
   List,
   ListItem,
   Text,
-} from '@ui-kitten/components';
-import React from 'react';
-import {ListRenderItemInfo, RefreshControl, StyleSheet} from 'react-native';
-import {fullName, guardians, sortByFirstName} from '../utils/peopleHelpers';
-import {translate} from '../utils/translation';
-import {useChild} from './childContext.component';
-import {ContactMenu} from './contactMenu.component';
+} from '@ui-kitten/components'
+import React from 'react'
+import { ListRenderItemInfo, RefreshControl, StyleSheet } from 'react-native'
+import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
+import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { ContactMenu } from './contactMenu.component'
 
 // const translate = (key: string) => key;
 
@@ -22,18 +22,18 @@ import {ContactMenu} from './contactMenu.component';
 // }
 
 export const Classmates = () => {
-  const child = useChild();
+  const child = useChild()
 
-  const {data, status, reload} = useClassmates(child);
+  const { data, status, reload } = useClassmates(child)
   const renderItemIcon = (props: IconProps) => (
     <Icon {...props} name="people-outline" />
-  );
-  const [selected, setSelected] = React.useState<Classmate>();
-  const renderItem = ({item, index}: ListRenderItemInfo<Classmate>) => (
+  )
+  const [selected, setSelected] = React.useState<Classmate>()
+  const renderItem = ({ item, index }: ListRenderItemInfo<Classmate>) => (
     <ListItem
       accessibilityLabel={`${translate('classmates.child')} ${index + 1}`}
       accessibilityHint={`${translate(
-        'classmates.contactsForGuardianFor',
+        'classmates.contactsForGuardianFor'
       )} ${fullName(item)}`}
       title={fullName(item)}
       onPress={() => setSelected(item)}
@@ -47,7 +47,7 @@ export const Classmates = () => {
         />
       )}
     />
-  );
+  )
   return (
     <List
       style={styles.container}
@@ -66,8 +66,8 @@ export const Classmates = () => {
         <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
       }
     />
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingLeft: 15,
   },
-});
+})

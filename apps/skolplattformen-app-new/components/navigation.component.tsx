@@ -1,65 +1,65 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Child as ChildType, NewsItem as NewsItemType} from '../libs/api/lib';
-import {useApi} from '../libs/hooks/src';
-import {useTheme} from '@ui-kitten/components';
-import {Library} from 'libraries.json';
-import React, {useEffect} from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
-import {schema} from '../app.json';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Child as ChildType, NewsItem as NewsItemType } from '../libs/api/lib'
+import { useApi } from '../libs/hooks/src'
+import { useTheme } from '@ui-kitten/components'
+import { Library } from 'libraries.json'
+import React, { useEffect } from 'react'
+import { StatusBar, useColorScheme } from 'react-native'
+import { schema } from '../app.json'
 import {
   darkNavigationTheme,
   lightNavigationTheme,
-} from '../design/navigationThemes';
-import {useAppState} from '../hooks/useAppState';
-import {useLangCode} from '../hooks/useLangCode';
+} from '../design/navigationThemes'
+import { useAppState } from '../hooks/useAppState'
+import { useLangCode } from '../hooks/useLangCode'
 import useSettingsStorage, {
   initializeSettingsState,
-} from '../hooks/useSettingsStorage';
-import {isRTL} from '../services/languageService';
-import Absence, {absenceRouteOptions} from './absence.component';
-import {Auth, authRouteOptions} from './auth.component';
-import {Child, childRouteOptions} from './child.component';
-import {childenRouteOptions, Children} from './children.component';
-import {libraryRouteOptions, LibraryScreen} from './library.component';
-import {NewsItem, newsItemRouteOptions} from './newsItem.component';
-import {SetLanguage, setLanguageRouteOptions} from './setLanguage.component';
-import {settingsRouteOptions, SettingsScreen} from './settings.component';
+} from '../hooks/useSettingsStorage'
+import { isRTL } from '../services/languageService'
+import Absence, { absenceRouteOptions } from './absence.component'
+import { Auth, authRouteOptions } from './auth.component'
+import { Child, childRouteOptions } from './child.component'
+import { childenRouteOptions, Children } from './children.component'
+import { libraryRouteOptions, LibraryScreen } from './library.component'
+import { NewsItem, newsItemRouteOptions } from './newsItem.component'
+import { SetLanguage, setLanguageRouteOptions } from './setLanguage.component'
+import { settingsRouteOptions, SettingsScreen } from './settings.component'
 import {
   settingsAppearanceRouteOptions,
   SettingsAppearanceScreen,
-} from './settingsAppearance.component';
+} from './settingsAppearance.component'
 import {
   settingsAppearanceThemeRouteOptions,
   SettingsAppearanceThemeScreen,
-} from './settingsAppearanceTheme.component';
+} from './settingsAppearanceTheme.component'
 import {
   settingsLicensesRouteOptions,
   SettingsLicensesScreen,
-} from './settingsLicenses.component';
+} from './settingsLicenses.component'
 
 export type RootStackParamList = {
-  Login: undefined;
-  IsLoggedIn: undefined;
-  Children: undefined;
-  Settings: {rand?: number} | undefined;
-  SettingsAppearance: undefined;
-  SettingsAppearanceTheme: undefined;
-  SettingsLicenses: undefined;
+  Login: undefined
+  IsLoggedIn: undefined
+  Children: undefined
+  Settings: { rand?: number } | undefined
+  SettingsAppearance: undefined
+  SettingsAppearanceTheme: undefined
+  SettingsLicenses: undefined
   Library: {
-    library: Library;
-  };
+    library: Library
+  }
   Child: {
-    child: ChildType;
-    color: string;
-    initialRouteName?: string;
-  };
-  NewsItem: {newsItem: NewsItemType; child: ChildType};
-  Absence: {child: ChildType};
-  SetLanguage: undefined;
-};
+    child: ChildType
+    color: string
+    initialRouteName?: string
+  }
+  NewsItem: { newsItem: NewsItemType; child: ChildType }
+  Absence: { child: ChildType }
+  SetLanguage: undefined
+}
 
-const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
+const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>()
 
 const linking = {
   prefixes: [schema],
@@ -68,44 +68,45 @@ const linking = {
       Login: 'login',
     },
   },
-};
+}
 
 export const AppNavigator = () => {
-  const {isLoggedIn, api} = useApi();
+  const { isLoggedIn, api } = useApi()
 
-  const [usingSystemTheme] = useSettingsStorage('usingSystemTheme');
-  const [theme] = useSettingsStorage('theme');
-  const systemTheme = useColorScheme();
-  const colorScheme = usingSystemTheme ? systemTheme : theme;
-  const langCode = useLangCode();
+  const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
+  const [theme] = useSettingsStorage('theme')
+  const systemTheme = useColorScheme()
+  const colorScheme = usingSystemTheme ? systemTheme : theme
+  const langCode = useLangCode()
 
-  const colors = useTheme();
+  const colors = useTheme()
 
-  const currentAppState = useAppState();
+  const currentAppState = useAppState()
 
   useEffect(() => {
-    initializeSettingsState();
-  }, []);
+    initializeSettingsState()
+  }, [])
 
   useEffect(() => {
     const checkUser = async () => {
       if (currentAppState === 'active' && isLoggedIn) {
-        const {isAuthenticated} = await api.getUser();
+        const { isAuthenticated } = await api.getUser()
 
         if (!isAuthenticated) {
-          await api.logout();
+          await api.logout()
         }
       }
-    };
-    checkUser();
-  }, [currentAppState, isLoggedIn, api]);
+    }
+    checkUser()
+  }, [currentAppState, isLoggedIn, api])
 
   return (
     <NavigationContainer
       linking={linking}
       theme={
         colorScheme === 'dark' ? darkNavigationTheme : lightNavigationTheme
-      }>
+      }
+    >
       <StatusBar />
 
       <Navigator
@@ -125,7 +126,8 @@ export const AppNavigator = () => {
           headerLargeTitleStyle: {
             fontFamily: 'Poppins-ExtraBold',
           },
-        })}>
+        })}
+      >
         {isLoggedIn ? (
           <>
             <Screen
@@ -184,5 +186,5 @@ export const AppNavigator = () => {
         />
       </Navigator>
     </NavigationContainer>
-  );
-};
+  )
+}

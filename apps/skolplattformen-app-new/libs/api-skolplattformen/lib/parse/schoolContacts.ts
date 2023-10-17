@@ -1,5 +1,5 @@
-import {etjanst} from './etjanst';
-import {SchoolContact} from '../../../../libs/api/lib';
+import { etjanst } from './etjanst'
+import { SchoolContact } from '../../../../libs/api/lib'
 
 export const schoolContact = ({
   title,
@@ -15,7 +15,7 @@ export const schoolContact = ({
   email,
   schoolName,
   className,
-});
+})
 
 export const schoolContacts = (data: any): SchoolContact[] =>
-  etjanst(data).map(schoolContact);
+  etjanst(data).map(schoolContact)

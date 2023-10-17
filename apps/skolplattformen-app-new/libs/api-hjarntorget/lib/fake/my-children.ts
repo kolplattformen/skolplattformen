@@ -44,4 +44,4 @@ export const myChildren = () =>
           extraInfoInCatalog: '',
         },
       ]),
-  } as any as Response);
+  } as any as Response)

@@ -1,19 +1,19 @@
 export class Queue {
-  private items: any[];
+  private items: any[]
 
   constructor() {
-    this.items = [];
+    this.items = []
   }
 
   enqueue(item: any) {
-    this.items.push(item);
+    this.items.push(item)
   }
 
   dequeue() {
-    return this.items.shift();
+    return this.items.shift()
   }
 
   get size() {
-    return this.items.length;
+    return this.items.length
   }
 }

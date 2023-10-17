@@ -1,53 +1,56 @@
-import {useApi} from '../libs/hooks/src';
-import {StyleService, Text, useStyleSheet} from '@ui-kitten/components';
-import React, {useEffect, useState} from 'react';
-import {Linking, Modal, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {WebView} from 'react-native-webview';
-import {Layout, Sizing} from '../styles';
-import {BackIcon, ExternalLinkIcon} from './icon.component';
+import { useApi } from '../libs/hooks/src'
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
+import React, { useEffect, useState } from 'react'
+import { Linking, Modal, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { WebView } from 'react-native-webview'
+import { Layout, Sizing } from '../styles'
+import { BackIcon, ExternalLinkIcon } from './icon.component'
 
 interface ModalWebViewProps {
-  url: string;
-  sharedCookiesEnabled: boolean;
-  onClose: () => void;
+  url: string
+  sharedCookiesEnabled: boolean
+  onClose: () => void
 }
 export const ModalWebView = ({
   url,
   onClose,
   sharedCookiesEnabled,
 }: ModalWebViewProps) => {
-  const [modalVisible, setModalVisible] = React.useState(true);
-  const {api} = useApi();
-  const [title, setTitle] = React.useState('...');
-  const [headers, setHeaders] = useState<{[index: string]: string}>();
+  const [modalVisible, setModalVisible] = React.useState(true)
+  const { api } = useApi()
+  const [title, setTitle] = React.useState('...')
+  const [headers, setHeaders] = useState<{ [index: string]: string }>()
 
   useEffect(() => {
     const getHeaders = async (urlToGetSessionFor: string) => {
-      if (sharedCookiesEnabled) return;
-      const newHeaders = await api.getSessionHeaders(urlToGetSessionFor);
-      setHeaders(newHeaders);
-    };
+      if (sharedCookiesEnabled) {
+        return
+      }
+      const newHeaders = await api.getSessionHeaders(urlToGetSessionFor)
+      setHeaders(newHeaders)
+    }
 
-    getHeaders(url);
-  }, [url, sharedCookiesEnabled, api]);
+    getHeaders(url)
+  }, [url, sharedCookiesEnabled, api])
 
   const closeModal = () => {
-    setModalVisible(false);
-    onClose();
-  };
+    setModalVisible(false)
+    onClose()
+  }
   const openInApp = () => {
-    Linking.openURL(url);
-  };
+    Linking.openURL(url)
+  }
 
-  const styles = useStyleSheet(themedStyles);
+  const styles = useStyleSheet(themedStyles)
 
   return (
     <Modal
       animationType="slide"
       statusBarTranslucent={true}
       visible={modalVisible}
-      onRequestClose={closeModal}>
+      onRequestClose={closeModal}
+    >
       <SafeAreaView style={styles.container}>
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
@@ -71,18 +74,18 @@ export const ModalWebView = ({
         {(headers || sharedCookiesEnabled) && (
           <WebView
             style={styles.webview}
-            source={{uri: url, headers}}
+            source={{ uri: url, headers }}
             sharedCookiesEnabled={sharedCookiesEnabled}
             thirdPartyCookiesEnabled={sharedCookiesEnabled}
-            onLoad={event => {
-              setTitle(event.nativeEvent.title);
+            onLoad={(event) => {
+              setTitle(event.nativeEvent.title)
             }}
           />
         )}
       </SafeAreaView>
     </Modal>
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   container: {
@@ -124,4 +127,4 @@ const themedStyles = StyleService.create({
     shadowColor: 'color-basic-600',
   },
   webview: {},
-});
+})

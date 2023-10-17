@@ -18,4 +18,4 @@ export const currentUser = () =>
         imagePath: '/pp/lookAndFeel/skins/hjarntorget/icons/monalisa_large.png',
         extraInfoInCatalog: '',
       }),
-  } as any as Response);
+  } as any as Response)

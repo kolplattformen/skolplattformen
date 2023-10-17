@@ -1,7 +1,7 @@
-import {NavigationProp, useNavigation} from '@react-navigation/core';
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {Child} from '../libs/api/lib';
-import {useApi, useChildList} from '../libs/hooks/src';
+import { NavigationProp, useNavigation } from '@react-navigation/core'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
+import { Child } from '../libs/api/lib'
+import { useApi, useChildList } from '../libs/hooks/src'
 import {
   Button,
   List,
@@ -10,25 +10,25 @@ import {
   Text,
   TopNavigationAction,
   useStyleSheet,
-} from '@ui-kitten/components';
-import moment from 'moment';
-import React, {useCallback, useEffect, useState} from 'react';
+} from '@ui-kitten/components'
+import moment from 'moment'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Image,
   ImageStyle,
   Linking,
   ListRenderItemInfo,
   View,
-} from 'react-native';
-import {defaultStackStyling} from '../design/navigationThemes';
-import AppStorage from '../services/appStorage';
-import {Layout as LayoutStyle, Sizing, Typography} from '../styles';
-import {translate} from '../utils/translation';
-import {ChildListItem} from './childListItem.component';
-import {RefreshIcon, SettingsIcon} from './icon.component';
-import {RootStackParamList} from './navigation.component';
+} from 'react-native'
+import { defaultStackStyling } from '../design/navigationThemes'
+import AppStorage from '../services/appStorage'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { translate } from '../utils/translation'
+import { ChildListItem } from './childListItem.component'
+import { RefreshIcon, SettingsIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
 
-const colors = ['primary', 'success', 'info', 'warning', 'danger'];
+const colors = ['primary', 'success', 'info', 'warning', 'danger']
 
 export const childenRouteOptions =
   (darkMode: boolean) => (): NativeStackNavigationOptions => {
@@ -37,26 +37,26 @@ export const childenRouteOptions =
       title: translate('children.title'),
       headerLargeTitle: false,
       headerLargeTitleShadowVisible: false,
-    };
-  };
+    }
+  }
 
 export const Children = () => {
-  const styles = useStyleSheet(themedStyles);
+  const styles = useStyleSheet(themedStyles)
 
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
-  const {api} = useApi();
-  const {data: childList, status, reload} = useChildList();
+  const { api } = useApi()
+  const { data: childList, status, reload } = useChildList()
   const reloadChildren = useCallback(() => {
-    reload();
-    setUpdated(moment().toISOString());
-  }, [reload]);
+    reload()
+    setUpdated(moment().toISOString())
+  }, [reload])
 
-  const [updatedAt, setUpdated] = useState('');
+  const [updatedAt, setUpdated] = useState('')
 
   const logout = useCallback(() => {
-    AppStorage.clearTemporaryItems().then(() => api.logout());
-  }, [api]);
+    AppStorage.clearTemporaryItems().then(() => api.logout())
+  }, [api])
 
   useEffect(() => {
     navigation.setOptions({
@@ -66,7 +66,7 @@ export const Children = () => {
             icon={SettingsIcon}
             onPress={() => navigation.navigate('Settings')}
           />
-        );
+        )
       },
       headerRight: () => {
         return (
@@ -76,10 +76,10 @@ export const Children = () => {
             accessibilityHint="Reload"
             accessibilityLabel="Reload"
           />
-        );
+        )
       },
-    });
-  }, [navigation, reloadChildren]);
+    })
+  }, [navigation, reloadChildren])
 
   // We need to skip safe area view here, due to the reason that it's adding a white border
   // when this view is actually lightgrey. Taking the padding top value from the use inset hook.
@@ -101,7 +101,7 @@ export const Children = () => {
           />
         </View>
       }
-      renderItem={({item: child, index}: ListRenderItemInfo<Child>) => (
+      renderItem={({ item: child, index }: ListRenderItemInfo<Child>) => (
         <ChildListItem
           child={child}
           color={colors[index % colors.length]}
@@ -120,7 +120,7 @@ export const Children = () => {
       {status === 'error' ? (
         <View style={styles.errorMessage}>
           <Text category="h5">{translate('children.loadingErrorHeading')}</Text>
-          <Text style={{fontSize: Sizing.t4}}>
+          <Text style={{ fontSize: Sizing.t4 }}>
             {translate('children.loadingErrorInformationText')}
           </Text>
           <View style={styles.errorButtons}>
@@ -131,7 +131,8 @@ export const Children = () => {
               status="basic"
               onPress={() =>
                 Linking.openURL('https://skolplattformen.org/status')
-              }>
+              }
+            >
               {translate('children.viewStatus')}
             </Button>
             <Button onPress={() => logout()}>
@@ -149,8 +150,8 @@ export const Children = () => {
         </View>
       )}
     </View>
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   topContainer: {
@@ -211,4 +212,4 @@ const themedStyles = StyleService.create({
   topNavigationTitle: {
     ...Typography.fontWeight.semibold,
   },
-});
+})

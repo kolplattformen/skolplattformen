@@ -1,5 +1,5 @@
-import {Classmate, Guardian} from '../../../api/lib';
-import {etjanst} from './etjanst';
+import { Classmate, Guardian } from '../../../api/lib'
+import { etjanst } from './etjanst'
 
 export const guardian = ({
   emailhome,
@@ -13,7 +13,7 @@ export const guardian = ({
   address,
   mobile: telmobile,
   email: emailhome,
-});
+})
 
 export const classmate = ({
   sisId,
@@ -27,7 +27,7 @@ export const classmate = ({
   lastname,
   className,
   guardians: guardians.map(guardian),
-});
+})
 
 export const classmates = (data: any): Classmate[] =>
-  etjanst(data).map(classmate);
+  etjanst(data).map(classmate)

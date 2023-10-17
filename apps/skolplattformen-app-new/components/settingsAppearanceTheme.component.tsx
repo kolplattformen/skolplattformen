@@ -1,31 +1,32 @@
-import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import useSettingsStorage from '../hooks/useSettingsStorage';
-import {Layout as LayoutStyle, Sizing} from '../styles';
-import {translate} from '../utils/translation';
+import React from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
+import useSettingsStorage from '../hooks/useSettingsStorage'
+import { Layout as LayoutStyle, Sizing } from '../styles'
+import { translate } from '../utils/translation'
 import {
   SettingGroup,
   SettingListItemSelectable,
-} from './settingsComponents.component';
+} from './settingsComponents.component'
 
 export const settingsAppearanceThemeRouteOptions =
   (): NativeStackNavigationOptions => ({
     title: translate('settings.theme'),
-  });
+  })
 
-const themes = ['light', 'dark'];
+const themes = ['light', 'dark']
 
 export const SettingsAppearanceThemeScreen = () => {
-  const [settingsTheme, setSettingsTheme] = useSettingsStorage('theme');
+  const [settingsTheme, setSettingsTheme] = useSettingsStorage('theme')
 
   return (
     <ScrollView
       style={LayoutStyle.flex.full}
-      contentContainerStyle={styles.container}>
+      contentContainerStyle={styles.container}
+    >
       <SettingGroup>
         <View style={styles.themeList}>
-          {themes.map(theme => {
+          {themes.map((theme) => {
             return (
               <SettingListItemSelectable
                 key={theme}
@@ -33,13 +34,13 @@ export const SettingsAppearanceThemeScreen = () => {
                 title={translate(`themes.${theme}`)}
                 isSelected={theme === settingsTheme}
               />
-            );
+            )
           })}
         </View>
       </SettingGroup>
     </ScrollView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -48,4 +49,4 @@ const styles = StyleSheet.create({
   themeList: {
     paddingHorizontal: Sizing.t4,
   },
-});
+})

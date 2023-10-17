@@ -1,15 +1,15 @@
-import merge from 'deepmerge';
+import merge from 'deepmerge'
 
-type Repo = Record<string, string>;
+type Repo = Record<string, string>
 export interface Translation {
-  subjects: Repo;
-  traningsskolaSubjects: Repo;
-  languages: Repo;
-  categories: Repo;
-  misc: Repo;
+  subjects: Repo
+  traningsskolaSubjects: Repo
+  languages: Repo
+  categories: Repo
+  misc: Repo
 }
 interface RawTranslation extends Translation {
-  specialLanguages: Repo;
+  specialLanguages: Repo
 }
 
 const translations: Translations = {
@@ -27,13 +27,13 @@ const translations: Translations = {
   th: require('./th.json'),
   uk: require('./uk.json'),
   zh_Hans: require('./zh_Hans.json'),
-};
-const languageList: string[] = Object.keys(translations);
-export type Language = (typeof languageList)[number];
-type Translations = Record<Language, RawTranslation>;
+}
+const languageList: string[] = Object.keys(translations)
+export type Language = (typeof languageList)[number]
+type Translations = Record<Language, RawTranslation>
 
 const translate = (lang: Language): Translation => {
-  const selectedLanguage = languageList.includes(lang) ? lang : languageList[0];
+  const selectedLanguage = languageList.includes(lang) ? lang : languageList[0]
   const {
     subjects,
     traningsskolaSubjects,
@@ -41,7 +41,7 @@ const translate = (lang: Language): Translation => {
     languages,
     categories,
     misc,
-  } = merge(translations.sv, translations[selectedLanguage]);
+  } = merge(translations.sv, translations[selectedLanguage])
 
   return {
     subjects,
@@ -52,7 +52,7 @@ const translate = (lang: Language): Translation => {
       ...specialLanguages,
       ...languages,
     },
-  };
-};
+  }
+}
 
-export default translate;
+export default translate

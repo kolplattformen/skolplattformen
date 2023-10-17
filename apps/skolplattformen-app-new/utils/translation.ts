@@ -1,13 +1,13 @@
-import i18n, {TranslateOptions} from 'i18n-js';
+import i18n, { TranslateOptions } from 'i18n-js'
 
 // const i18n = new I18n();
 
 interface Language {
-  langCode: string;
-  languageName: string;
-  languageLocalName: string;
-  locale: string;
-  active: boolean;
+  langCode: string
+  languageName: string
+  languageLocalName: string
+  locale: string
+  active: boolean
 }
 
 export const languages: Language[] = [
@@ -153,7 +153,7 @@ export const languages: Language[] = [
     locale: 'uk',
     active: true,
   },
-];
+]
 
 export const translations = {
   ar: require('../translations/ar.json'),
@@ -176,8 +176,8 @@ export const translations = {
   uk: require('../translations/uk.json'),
   zh_Hans: require('../translations/zh_Hans.json'),
   zh_Hant: require('../translations/zh_Hant.json'),
-};
+}
 
 export const translate = (key: string, options?: TranslateOptions) => {
-  return i18n.t(key, options);
-};
+  return i18n.t(key, options)
+}

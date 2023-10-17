@@ -1,8 +1,8 @@
-import {useCallback} from 'react';
-import {proxy, subscribe, useSnapshot} from 'valtio';
-import AppStorage from '../services/appStorage';
+import { useCallback } from 'react'
+import { proxy, subscribe, useSnapshot } from 'valtio'
+import AppStorage from '../services/appStorage'
 
-export type ChildPersonalNumbers = Record<string, string>;
+export type ChildPersonalNumbers = Record<string, string>
 
 export const settingsState = proxy({
   hydrated: false,
@@ -20,41 +20,41 @@ export const settingsState = proxy({
       | 'goteborg-hjarntorget',
     childPersonalIdentityNumber: {} as ChildPersonalNumbers,
   },
-});
+})
 
-export type Settings = (typeof settingsState)['settings'];
+export type Settings = (typeof settingsState)['settings']
 
-const SETTINGS_STORAGE_KEY = 'SETTINGS';
+const SETTINGS_STORAGE_KEY = 'SETTINGS'
 
 subscribe(settingsState, () => {
-  AppStorage.setSetting(SETTINGS_STORAGE_KEY, settingsState.settings);
-});
+  AppStorage.setSetting(SETTINGS_STORAGE_KEY, settingsState.settings)
+})
 
 export const initializeSettingsState = async () => {
-  const settings = await AppStorage.getSetting<any>(SETTINGS_STORAGE_KEY);
+  const settings = await AppStorage.getSetting<any>(SETTINGS_STORAGE_KEY)
 
-  settingsState.hydrated = true;
+  settingsState.hydrated = true
 
   if (settings) {
     settingsState.settings = {
       ...settingsState.settings,
       ...settings,
-    };
+    }
   }
-};
+}
 
 export default function useSettingsStorage<
   TKey extends keyof Settings,
-  TValue = Settings[TKey],
+  TValue = Settings[TKey]
 >(key: TKey) {
-  const {settings} = useSnapshot(settingsState);
+  const { settings } = useSnapshot(settingsState)
 
   const setter = useCallback(
     (value: TValue) => {
-      settingsState.settings[key] = value as any;
+      settingsState.settings[key] = value as any
     },
-    [key],
-  );
+    [key]
+  )
 
-  return [settings[key], setter] as const;
+  return [settings[key], setter] as const
 }

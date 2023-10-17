@@ -15,4 +15,4 @@ export const genericRolesInEvent = () =>
           name: 'SINGLE ROLE',
         },
       ]),
-  } as any as Response);
+  } as any as Response)

@@ -1,5 +1,5 @@
-import {etjanst} from './etjanst';
-import {CalendarItem, parseDate} from '../../../api/lib';
+import { etjanst } from './etjanst'
+import { CalendarItem, parseDate } from '../../../api/lib'
 
 export const calendarItem = ({
   id,
@@ -17,7 +17,7 @@ export const calendarItem = ({
   allDay: allDayEvent,
   startDate: parseDate(longEventDateTime),
   endDate: parseDate(longEndDateTime),
-});
+})
 
 export const calendar = (data: any): CalendarItem[] =>
-  etjanst(data).map(calendarItem);
+  etjanst(data).map(calendarItem)

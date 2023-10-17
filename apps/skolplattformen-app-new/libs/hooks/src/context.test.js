@@ -1,51 +1,51 @@
-import React from 'react';
-import {act, renderHook, waitFor} from '@testing-library/react';
-import {ApiProvider} from './provider';
-import init from './__mocks__/@skolplattformen/embedded-api';
-import {useApi} from './context';
+import React from 'react'
+import { act, renderHook, waitFor } from '@testing-library/react'
+import { ApiProvider } from './provider'
+import init from './__mocks__/@skolplattformen/embedded-api'
+import { useApi } from './context'
 
 describe('useApi()', () => {
-  let api;
+  let api
   beforeEach(() => {
-    api = init();
-  });
-  const wrapper = ({children}) => (
+    api = init()
+  })
+  const wrapper = ({ children }) => (
     <ApiProvider api={api}>{children}</ApiProvider>
-  );
+  )
 
   it('exposes api', () => {
-    const {result} = renderHook(() => useApi(), {wrapper});
+    const { result } = renderHook(() => useApi(), { wrapper })
 
-    expect(result.current.api).toBeTruthy();
-  });
+    expect(result.current.api).toBeTruthy()
+  })
 
   it('exposes isLoggedIn', () => {
-    const {result} = renderHook(() => useApi(), {wrapper});
+    const { result } = renderHook(() => useApi(), { wrapper })
 
-    expect(result.current.isLoggedIn).toBe(false);
-  });
+    expect(result.current.isLoggedIn).toBe(false)
+  })
 
   it('updates isLoggedIn', async () => {
-    const {result} = renderHook(() => useApi(), {
+    const { result } = renderHook(() => useApi(), {
       wrapper,
-    });
+    })
     await act(async () => {
-      api.isLoggedIn = true;
-      api.emitter.emit('login');
+      api.isLoggedIn = true
+      api.emitter.emit('login')
       // await waitForValueToChange(() => result.current.isLoggedIn);
-    });
-    await waitFor(() => expect(result.current.isLoggedIn).toBe(true));
-  });
+    })
+    await waitFor(() => expect(result.current.isLoggedIn).toBe(true))
+  })
 
   it('updates isFake', async () => {
-    const {result} = renderHook(() => useApi(), {
+    const { result } = renderHook(() => useApi(), {
       wrapper,
-    });
+    })
     await act(async () => {
-      api.isFake = true;
-      api.emitter.emit('login');
+      api.isFake = true
+      api.emitter.emit('login')
       // await waitForValueToChange(() => result.current.isFake);
-    });
-    await waitFor(() => expect(result.current.isFake).toBe(true));
-  });
-});
+    })
+    await waitFor(() => expect(result.current.isFake).toBe(true))
+  })
+})

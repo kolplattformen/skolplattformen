@@ -1,6 +1,6 @@
-import * as routes from '../routes';
+import * as routes from '../routes'
 
-Date.now = jest.fn(() => 1618404258782);
+Date.now = jest.fn(() => 1618404258782)
 
 test.each([
   ['children', routes.children],
@@ -18,5 +18,5 @@ test.each([
   ['login with personal number', routes.login('201701012393')],
   ['login without personal number', routes.login()],
 ])('handles route %s', (_name, input) => {
-  expect(input).toMatchSnapshot();
-});
+  expect(input).toMatchSnapshot()
+})

@@ -1,5 +1,5 @@
-import {useCalendar} from '../libs/hooks/src';
-import {CalendarItem} from '../libs/api/lib';
+import { useCalendar } from '../libs/hooks/src'
+import { CalendarItem } from '../libs/api/lib'
 import {
   Divider,
   List,
@@ -7,43 +7,45 @@ import {
   StyleService,
   Text,
   useStyleSheet,
-} from '@ui-kitten/components';
-import moment from 'moment';
-import React from 'react';
-import {Layout as LayoutStyle, Sizing, Typography} from '../styles';
-import {ListRenderItemInfo, RefreshControl, View} from 'react-native';
+} from '@ui-kitten/components'
+import moment from 'moment'
+import React from 'react'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { ListRenderItemInfo, RefreshControl, View } from 'react-native'
 
-import {translate} from '../utils/translation';
-import {useChild} from './childContext.component';
-import {CalendarOutlineIcon} from './icon.component';
-import {SaveToCalendar} from './saveToCalendar.component';
-import {Week} from './week.component';
+import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { CalendarOutlineIcon } from './icon.component'
+import { SaveToCalendar } from './saveToCalendar.component'
+import { Week } from './week.component'
 
 // const translate = (key: string) => key;
 
 export const Calendar = () => {
-  const child = useChild();
-  const {data, status, reload} = useCalendar(child);
-  const styles = useStyleSheet(themedStyles);
+  const child = useChild()
+  const { data, status, reload } = useCalendar(child)
+  const styles = useStyleSheet(themedStyles)
 
   const formatStartDate = (startDate: moment.MomentInput) => {
-    const date = moment(startDate);
+    const date = moment(startDate)
     const output = `${date.format('dddd')} ${date.format(
-      'll',
-    )} • ${date.fromNow()}`;
+      'll'
+    )} • ${date.fromNow()}`
 
     // Hack to remove year if it is this year
-    const currentYear = moment().year().toString(10);
-    return output.replace(currentYear, '');
-  };
+    const currentYear = moment().year().toString(10)
+    return output.replace(currentYear, '')
+  }
 
   const sortedData = () => {
-    if (!data) return [];
+    if (!data) {
+      return []
+    }
 
     return data.sort((a, b) =>
-      a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0,
-    );
-  };
+      a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -61,11 +63,11 @@ export const Calendar = () => {
             </Text>
           </View>
         }
-        renderItem={({item}: ListRenderItemInfo<CalendarItem>) => (
+        renderItem={({ item }: ListRenderItemInfo<CalendarItem>) => (
           <ListItem
             disabled={true}
             title={`${item.title}`}
-            description={props => (
+            description={(props) => (
               <Text style={[props?.style, styles.description]}>
                 {formatStartDate(item.startDate)}
               </Text>
@@ -82,8 +84,8 @@ export const Calendar = () => {
         }
       />
     </View>
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   container: {
@@ -109,4 +111,4 @@ const themedStyles = StyleService.create({
     paddingHorizontal: Sizing.t3,
     margin: Sizing.t4,
   },
-});
+})

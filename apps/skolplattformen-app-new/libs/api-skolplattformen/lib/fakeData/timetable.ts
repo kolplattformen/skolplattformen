@@ -1,7 +1,9 @@
-import {Skola24Child, TimetableEntry} from '../../../../libs/api/lib';
+import { Skola24Child, TimetableEntry } from '../../../../libs/api/lib'
 
 export const timetable = (child: Skola24Child): TimetableEntry[] => {
-  if (!child.personGuid || !child.unitGuid) return [];
+  if (!child.personGuid || !child.unitGuid) {
+    return []
+  }
   return [
     {
       id: 'N2FjMDc1NjYtZmM2Yy0wZDQyLTY3M2YtZWI5NGNiZDA3ZGU4',
@@ -460,5 +462,5 @@ export const timetable = (child: Skola24Child): TimetableEntry[] => {
       dateStart: '2021-04-16T10:40:00.000+02:00',
       dateEnd: '2021-04-16T11:35:00.000+02:00',
     },
-  ];
-};
+  ]
+}

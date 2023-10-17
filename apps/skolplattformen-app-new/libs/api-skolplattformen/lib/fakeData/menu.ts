@@ -1,13 +1,13 @@
-import {Child, MenuItem} from '../../../../libs/api/lib';
-import {DateTime} from 'luxon';
-import {children} from './children';
+import { Child, MenuItem } from '../../../../libs/api/lib'
+import { DateTime } from 'luxon'
+import { children } from './children'
 
-export const menu = (child: Child): MenuItem[] => menuData.get(child.id) ?? [];
+export const menu = (child: Child): MenuItem[] => menuData.get(child.id) ?? []
 
-const getDate = () => DateTime.now();
-const week = getDate().weekNumber.toString();
+const getDate = () => DateTime.now()
+const week = getDate().weekNumber.toString()
 
-const [child1, child2] = children();
+const [child1, child2] = children()
 
 const menuData = new Map<string, MenuItem[]>([
   [
@@ -66,4 +66,4 @@ const menuData = new Map<string, MenuItem[]>([
       },
     ],
   ],
-]);
+])

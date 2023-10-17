@@ -1,4 +1,4 @@
-import {fourDaysAgo, oneDayAgo} from './dates';
+import { fourDaysAgo, oneDayAgo } from './dates'
 
 import {
   CalendarItem,
@@ -6,8 +6,8 @@ import {
   Notification,
   ScheduleItem,
   User,
-} from '../../../../libs/api/lib';
-import {oneDayForward, oneWeekForward, twoDaysForward} from './dates';
+} from '../../../../libs/api/lib'
+import { oneDayForward, oneWeekForward, twoDaysForward } from './dates'
 
 const data: any = {
   '39b59e-bf4b9f-f68ac25321-977218-bf0': {
@@ -210,7 +210,7 @@ const data: any = {
       {
         id: 'bfe19b-766db3-b38d99d321-bbed3d-506',
         sender: 'Planering och Bedömning',
-        dateCreated: oneDayAgo.minus({months: 6}).toISO(),
+        dateCreated: oneDayAgo.minus({ months: 6 }).toISO(),
         dateModified: fourDaysAgo.toISO(),
         message: 'Ett nytt inlägg i en lärlogg har skapats.',
         url: 'https://www.breakit.se/artikel/21423/har-ar-it-bolaget-bakom-haveriet-pa-skolplattformen',
@@ -481,20 +481,20 @@ const data: any = {
       },
     ],
   },
-};
+}
 
 export const user = (): User => ({
   personalNumber: '195001182046', // Test personal number from Skatteverket
   firstName: 'Namn',
   lastName: 'Namnsson',
   isAuthenticated: true,
-});
+})
 
 export const calendar = (child: Child): CalendarItem[] =>
-  data[child.id].calendar;
+  data[child.id].calendar
 
 export const schedule = (child: Child): ScheduleItem[] =>
-  data[child.id].schedule;
+  data[child.id].schedule
 
 export const notifications = (child: Child): Notification[] =>
-  data[child.id].notifications;
+  data[child.id].notifications

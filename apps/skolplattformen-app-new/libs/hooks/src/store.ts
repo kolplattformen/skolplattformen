@@ -1,5 +1,5 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import {apiMiddleware, cacheMiddleware} from './middleware';
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { apiMiddleware, cacheMiddleware } from './middleware'
 import {
   calendar,
   classmates,
@@ -14,7 +14,7 @@ import {
   teachers,
   timetable,
   user,
-} from './reducers';
+} from './reducers'
 
 const appReducer = combineReducers({
   calendar,
@@ -30,14 +30,14 @@ const appReducer = combineReducers({
   teachers,
   timetable,
   user,
-});
+})
 const rootReducer: typeof appReducer = (state, action) => {
   if (action.type === 'CLEAR') {
-    state = undefined;
+    state = undefined
   }
-  return appReducer(state, action);
-};
-const enhancers = applyMiddleware(apiMiddleware, cacheMiddleware);
-const store = createStore(rootReducer, enhancers);
+  return appReducer(state, action)
+}
+const enhancers = applyMiddleware(apiMiddleware, cacheMiddleware)
+const store = createStore(rootReducer, enhancers)
 
-export default store;
+export default store

@@ -1,10 +1,10 @@
-import {children} from './children';
-import {Child, NewsItem} from '../../../../libs/api/lib';
-import * as dates from './dates';
+import { children } from './children'
+import { Child, NewsItem } from '../../../../libs/api/lib'
+import * as dates from './dates'
 
-export const news = (child: Child): NewsItem[] => newsData.get(child.id) ?? [];
+export const news = (child: Child): NewsItem[] => newsData.get(child.id) ?? []
 
-const [child1, child2] = children();
+const [child1, child2] = children()
 
 const newsData = new Map<string, NewsItem[]>([
   [
@@ -21,7 +21,7 @@ const newsData = new Map<string, NewsItem[]>([
           'https://cdn.breakit.se/assets/article/6607f9b923edb6f85aa4417bab43c0f8.jpg?d=980x500',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: dates.twoDaysAgo.toISO(),
-        modified: dates.twoDaysAgo.plus({hours: 1}).toISO(),
+        modified: dates.twoDaysAgo.plus({ hours: 1 }).toISO(),
       },
       {
         id: 'asdfabbuasdfs',
@@ -47,7 +47,7 @@ const newsData = new Map<string, NewsItem[]>([
           'https://images.unsplash.com/photo-1629652487043-fb2825838f8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2671&q=80',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: dates.oneWeekAgo.toISO(),
-        modified: dates.oneWeekAgo.minus({hours: 3}).toISO(),
+        modified: dates.oneWeekAgo.minus({ hours: 3 }).toISO(),
       },
     ],
   ],
@@ -80,7 +80,7 @@ const newsData = new Map<string, NewsItem[]>([
           'https://live.staticflickr.com/4063/4369776892_5cd42d27ba.jpg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
         published: dates.fourDaysAgo.toISO(),
-        modified: dates.fourDaysAgo.plus({minutes: 45}).toISO(),
+        modified: dates.fourDaysAgo.plus({ minutes: 45 }).toISO(),
       },
       {
         id: 'asdfasdfasdfs',
@@ -105,8 +105,8 @@ const newsData = new Map<string, NewsItem[]>([
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/yB_aiAWkm40',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: dates.oneWeekAgo.minus({weeks: 2}).toISO(),
-        modified: dates.oneWeekAgo.minus({weeks: 1}).toISO(),
+        published: dates.oneWeekAgo.minus({ weeks: 2 }).toISO(),
+        modified: dates.oneWeekAgo.minus({ weeks: 1 }).toISO(),
       },
       {
         id: 'asdfasdfasdfdsa',
@@ -117,8 +117,8 @@ const newsData = new Map<string, NewsItem[]>([
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/7K17MvT8qBg',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: dates.oneWeekAgo.minus({weeks: 3}).toISO(),
-        modified: dates.oneWeekAgo.minus({days: 2}).toISO(),
+        published: dates.oneWeekAgo.minus({ weeks: 3 }).toISO(),
+        modified: dates.oneWeekAgo.minus({ days: 2 }).toISO(),
       },
       {
         id: 'asdfasdfasdfbvdsa',
@@ -130,9 +130,9 @@ const newsData = new Map<string, NewsItem[]>([
         imageUrl: '6607f9b923edb6f85aa4417bab43c0f8.jpg',
         fullImageUrl: 'https://unsplash.com/photos/SkbEZ16VywM',
         imageAltText: 'Nyhetsbild. Bildtext ej tillgänglig.',
-        published: dates.oneWeekAgo.minus({weeks: 4}).toISO(),
-        modified: dates.oneWeekAgo.minus({weeks: 2}).toISO(),
+        published: dates.oneWeekAgo.minus({ weeks: 4 }).toISO(),
+        modified: dates.oneWeekAgo.minus({ weeks: 2 }).toISO(),
       },
     ],
   ],
-]);
+])

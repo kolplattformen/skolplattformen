@@ -1,6 +1,6 @@
-import {RouteProp, useRoute} from '@react-navigation/native';
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {useUser} from '../libs/hooks/src';
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
+import { useUser } from '../libs/hooks/src'
 import {
   Button,
   CheckBox,
@@ -8,34 +8,34 @@ import {
   StyleService,
   Text,
   useStyleSheet,
-} from '@ui-kitten/components';
-import {Formik} from 'formik';
-import moment from 'moment';
-import Personnummer from 'personnummer';
-import React, {useCallback} from 'react';
-import {View} from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import * as Yup from 'yup';
-import {defaultStackStyling} from '../design/navigationThemes';
+} from '@ui-kitten/components'
+import { Formik } from 'formik'
+import moment from 'moment'
+import Personnummer from 'personnummer'
+import React, { useCallback } from 'react'
+import { View } from 'react-native'
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import * as Yup from 'yup'
+import { defaultStackStyling } from '../design/navigationThemes'
 // import usePersonalStorage from '../hooks/usePersonalStorage';
-import useSettingsStorage from '../hooks/useSettingsStorage';
-import {Layout as LayoutStyle, Sizing, Typography} from '../styles';
-import {studentName} from '../utils/peopleHelpers';
-import {useSMS} from '../utils/SMS';
-import {translate} from '../utils/translation';
-import {AlertIcon} from './icon.component';
-import {RootStackParamList} from './navigation.component';
-import {NavigationTitle} from './navigationTitle.component';
+import useSettingsStorage from '../hooks/useSettingsStorage'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { studentName } from '../utils/peopleHelpers'
+import { useSMS } from '../utils/SMS'
+import { translate } from '../utils/translation'
+import { AlertIcon } from './icon.component'
+import { RootStackParamList } from './navigation.component'
+import { NavigationTitle } from './navigationTitle.component'
 
-type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>;
+type AbsenceRouteProps = RouteProp<RootStackParamList, 'Absence'>
 
 interface AbsenceFormValues {
-  displayStartTimePicker: boolean;
-  displayEndTimePicker: boolean;
-  personalIdentityNumber: string;
-  isFullDay: boolean;
-  startTime: moment.Moment;
-  endTime: moment.Moment;
+  displayStartTimePicker: boolean
+  displayEndTimePicker: boolean
+  personalIdentityNumber: string
+  isFullDay: boolean
+  startTime: moment.Moment
+  endTime: moment.Moment
 }
 
 export const absenceRouteOptions =
@@ -43,9 +43,9 @@ export const absenceRouteOptions =
   ({
     route,
   }: {
-    route: RouteProp<RootStackParamList, 'Absence'>;
+    route: RouteProp<RootStackParamList, 'Absence'>
   }): NativeStackNavigationOptions => {
-    const child = route.params.child;
+    const child = route.params.child
     return {
       ...defaultStackStyling(darkMode),
       headerTitle: () => (
@@ -54,62 +54,61 @@ export const absenceRouteOptions =
           subtitle={studentName(child?.name)}
         />
       ),
-    };
-  };
+    }
+  }
 
 const Absence = () => {
   const AbsenceSchema = Yup.object().shape({
     personalIdentityNumber: Yup.string()
       .required(translate('abscense.personalNumberMissing'))
-      .test('is-valid', translate('abscense.invalidPersonalNumber'), value =>
-        value ? Personnummer.valid(value) : true,
+      .test('is-valid', translate('abscense.invalidPersonalNumber'), (value) =>
+        value ? Personnummer.valid(value) : true
       ),
     isFullDay: Yup.bool().required(),
-  });
+  })
 
-  const {data: user} = useUser();
-  const route = useRoute<AbsenceRouteProps>();
-  const {sendSMS} = useSMS();
-  const {child} = route.params;
-  const [personalIdentityNumber, setPersonalIdentityNumber] =
-    React.useState('');
+  const { data: user } = useUser()
+  const route = useRoute<AbsenceRouteProps>()
+  const { sendSMS } = useSMS()
+  const { child } = route.params
+  const [personalIdentityNumber, setPersonalIdentityNumber] = React.useState('')
   const [personalIdsFromStorage, setPersonalIdInStorage] = useSettingsStorage(
-    'childPersonalIdentityNumber',
-  );
-  const personalIdKey = `@childPersonalIdNumber.${child.id}`;
-  const minumumDate = moment().hours(8).minute(0);
-  const maximumDate = moment().hours(17).minute(0);
-  const styles = useStyleSheet(themedStyles);
+    'childPersonalIdentityNumber'
+  )
+  const personalIdKey = `@childPersonalIdNumber.${child.id}`
+  const minumumDate = moment().hours(8).minute(0)
+  const maximumDate = moment().hours(17).minute(0)
+  const styles = useStyleSheet(themedStyles)
 
   const submit = useCallback(
     async (values: AbsenceFormValues) => {
       const personalIdNumber = Personnummer.parse(
-        values.personalIdentityNumber,
-      ).format();
+        values.personalIdentityNumber
+      ).format()
 
       if (values.isFullDay) {
-        sendSMS(personalIdNumber);
+        sendSMS(personalIdNumber)
       } else {
         sendSMS(
           `${personalIdNumber} ${moment(values.startTime).format(
-            'HHmm',
-          )}-${moment(values.endTime).format('HHmm')}`,
-        );
+            'HHmm'
+          )}-${moment(values.endTime).format('HHmm')}`
+        )
       }
 
       const toStore = {
         ...personalIdsFromStorage,
-        ...{[personalIdKey]: personalIdNumber},
-      };
-      setPersonalIdInStorage(toStore);
+        ...{ [personalIdKey]: personalIdNumber },
+      }
+      setPersonalIdInStorage(toStore)
     },
-    [personalIdKey, personalIdsFromStorage, sendSMS, setPersonalIdInStorage],
-  );
+    [personalIdKey, personalIdsFromStorage, sendSMS, setPersonalIdInStorage]
+  )
 
   React.useEffect(() => {
-    const personalIdFromStorage = personalIdsFromStorage[personalIdKey] || '';
-    setPersonalIdentityNumber(personalIdFromStorage || '');
-  }, [child, personalIdKey, personalIdsFromStorage, user]);
+    const personalIdFromStorage = personalIdsFromStorage[personalIdKey] || ''
+    setPersonalIdentityNumber(personalIdFromStorage || '')
+  }, [child, personalIdKey, personalIdsFromStorage, user])
 
   const initialValues: AbsenceFormValues = {
     displayStartTimePicker: false,
@@ -118,14 +117,15 @@ const Absence = () => {
     isFullDay: true,
     startTime: moment().hours(Math.max(8, new Date().getHours())).minute(0),
     endTime: maximumDate,
-  };
+  }
 
   return (
     <Formik
       enableReinitialize
       validationSchema={AbsenceSchema}
       initialValues={initialValues}
-      onSubmit={submit}>
+      onSubmit={submit}
+    >
       {({
         handleChange,
         handleBlur,
@@ -136,7 +136,7 @@ const Absence = () => {
         errors,
       }) => {
         const hasError = (field: keyof typeof values) =>
-          errors[field] && touched[field];
+          errors[field] && touched[field]
 
         return (
           <View style={styles.wrap}>
@@ -166,7 +166,8 @@ const Absence = () => {
             <View style={styles.field}>
               <CheckBox
                 checked={values.isFullDay}
-                onChange={checked => setFieldValue('isFullDay', checked)}>
+                onChange={(checked) => setFieldValue('isFullDay', checked)}
+              >
                 {translate('abscense.entireDay')}
               </CheckBox>
             </View>
@@ -181,7 +182,8 @@ const Absence = () => {
                     style={styles.pickerButton}
                     onPress={() =>
                       setFieldValue('displayStartTimePicker', true)
-                    }>
+                    }
+                  >
                     {moment(values.startTime).format('LT')}
                   </Button>
                   <DateTimePickerModal
@@ -194,9 +196,9 @@ const Absence = () => {
                     minimumDate={minumumDate.toDate()}
                     minuteInterval={10}
                     mode="time"
-                    onConfirm={date => {
-                      setFieldValue('startTime', date);
-                      setFieldValue('displayStartTimePicker', false);
+                    onConfirm={(date) => {
+                      setFieldValue('startTime', date)
+                      setFieldValue('displayStartTimePicker', false)
                     }}
                     onCancel={() =>
                       setFieldValue('displayStartTimePicker', false)
@@ -211,7 +213,8 @@ const Absence = () => {
                   <Button
                     status="basic"
                     style={styles.pickerButton}
-                    onPress={() => setFieldValue('displayEndTimePicker', true)}>
+                    onPress={() => setFieldValue('displayEndTimePicker', true)}
+                  >
                     {moment(values.endTime).format('LT')}
                   </Button>
                   <DateTimePickerModal
@@ -225,9 +228,9 @@ const Absence = () => {
                     minimumDate={minumumDate.toDate()}
                     minuteInterval={10}
                     mode="time"
-                    onConfirm={date => {
-                      setFieldValue('endTime', date);
-                      setFieldValue('displayEndTimePicker', false);
+                    onConfirm={(date) => {
+                      setFieldValue('endTime', date)
+                      setFieldValue('displayEndTimePicker', false)
                     }}
                     onCancel={() =>
                       setFieldValue('displayEndTimePicker', false)
@@ -240,13 +243,13 @@ const Absence = () => {
               {translate('general.send')}
             </Button>
           </View>
-        );
+        )
       }}
     </Formik>
-  );
-};
+  )
+}
 
-export default Absence;
+export default Absence
 
 const themedStyles = StyleService.create({
   wrap: {
@@ -254,10 +257,10 @@ const themedStyles = StyleService.create({
     padding: Sizing.t4,
     backgroundColor: 'background-basic-color-2',
   },
-  field: {marginBottom: Sizing.t4},
-  partOfDay: {...LayoutStyle.flex.row, marginBottom: Sizing.t4},
-  spacer: {width: Sizing.t2},
-  inputHalf: {...LayoutStyle.flex.full},
+  field: { marginBottom: Sizing.t4 },
+  partOfDay: { ...LayoutStyle.flex.row, marginBottom: Sizing.t4 },
+  spacer: { width: Sizing.t2 },
+  inputHalf: { ...LayoutStyle.flex.full },
   input: {
     backgroundColor: 'background-basic-color-1',
     borderColor: 'color-input-border',
@@ -274,4 +277,4 @@ const themedStyles = StyleService.create({
   error: {
     color: 'color-primary-600',
   },
-});
+})

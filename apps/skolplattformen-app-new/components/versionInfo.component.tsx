@@ -1,7 +1,7 @@
-import {Text} from '@ui-kitten/components';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {getBuildNumber, getVersion} from 'react-native-device-info';
+import { Text } from '@ui-kitten/components'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { getBuildNumber, getVersion } from 'react-native-device-info'
 
 export const VersionInfo = () => {
   return (
@@ -10,11 +10,11 @@ export const VersionInfo = () => {
         v{getVersion()} ({getBuildNumber()})
       </Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
-});
+})

@@ -8,16 +8,16 @@ export enum LoginEvent {
 */
 
 export interface LoginStatusChecker {
-  token: string;
+  token: string
   on: (
     event: 'OK' | 'PENDING' | 'ERROR' | 'USER_SIGN' | 'CANCELLED',
-    listener: (...args: any[]) => void,
-  ) => LoginStatusChecker;
-  cancel: () => Promise<void>;
+    listener: (...args: any[]) => void
+  ) => LoginStatusChecker
+  cancel: () => Promise<void>
 }
 
 export interface FrejaLoginStatusChecker {
-  token: string;
+  token: string
   on: (
     event:
       | 'APPROVED'
@@ -28,7 +28,7 @@ export interface FrejaLoginStatusChecker {
       | 'EXPIRED'
       | 'RP_CANCELED'
       | 'ERROR',
-    listener: (...args: any[]) => void,
-  ) => FrejaLoginStatusChecker;
-  cancel: () => Promise<void>;
+    listener: (...args: any[]) => void
+  ) => FrejaLoginStatusChecker
+  cancel: () => Promise<void>
 }

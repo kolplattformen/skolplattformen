@@ -31,7 +31,7 @@ export const eventRoleMembers21 = () =>
           extraInfoInCatalog: '',
         },
       ]),
-  } as any as Response);
+  } as any as Response)
 
 export const eventRoleMembers14 = () =>
   ({
@@ -97,7 +97,7 @@ export const eventRoleMembers14 = () =>
           extraInfoInCatalog: '',
         },
       ]),
-  } as any as Response);
+  } as any as Response)
 
 export const eventRoleMembers18 = () =>
   ({
@@ -173,7 +173,7 @@ export const eventRoleMembers18 = () =>
           extraInfoInCatalog: '',
         },
       ]),
-  } as any as Response);
+  } as any as Response)
 
 export const eventRoleMembers24 = () =>
   ({
@@ -239,4 +239,4 @@ export const eventRoleMembers24 = () =>
           extraInfoInCatalog: '',
         },
       ]),
-  } as any as Response);
+  } as any as Response)

@@ -1,23 +1,23 @@
-import {StyleService, useStyleSheet} from '@ui-kitten/components';
-import {Library} from 'libraries.json';
-import React, {useCallback} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
-import {Layout as LayoutStyle, Sizing} from '../styles';
-import {LibraryListItem} from './libraryListItem.component';
-import {SettingListSeparator} from './settingsComponents.component';
+import { StyleService, useStyleSheet } from '@ui-kitten/components'
+import { Library } from 'libraries.json'
+import React, { useCallback } from 'react'
+import { FlatList, ListRenderItemInfo } from 'react-native'
+import { Layout as LayoutStyle, Sizing } from '../styles'
+import { LibraryListItem } from './libraryListItem.component'
+import { SettingListSeparator } from './settingsComponents.component'
 
-export const LibraryList = ({libraries}: {libraries: Library[]}) => {
-  const styles = useStyleSheet(themedStyles);
+export const LibraryList = ({ libraries }: { libraries: Library[] }) => {
+  const styles = useStyleSheet(themedStyles)
   const renderItem = useCallback(
-    ({item: library}: ListRenderItemInfo<Library>) => (
+    ({ item: library }: ListRenderItemInfo<Library>) => (
       <LibraryListItem library={library} />
     ),
-    [],
-  );
+    []
+  )
 
   const keyExtractor = useCallback((library: Library) => {
-    return `${library.libraryName}:${library.version}`;
-  }, []);
+    return `${library.libraryName}:${library.version}`
+  }, [])
 
   return (
     <FlatList
@@ -29,8 +29,8 @@ export const LibraryList = ({libraries}: {libraries: Library[]}) => {
       contentContainerStyle={styles.container}
       initialNumToRender={15}
     />
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   list: {
@@ -43,4 +43,4 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-1',
     overflow: 'hidden',
   },
-});
+})

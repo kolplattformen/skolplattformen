@@ -1136,4 +1136,4 @@ export const wallEvents = () =>
           unread: false,
         },
       ]),
-  } as any as Response);
+  } as any as Response)

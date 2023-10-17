@@ -1,32 +1,32 @@
-import {MenuItem} from '../libs/api/lib';
-import {useMenu} from '../libs/hooks/src';
+import { MenuItem } from '../libs/api/lib'
+import { useMenu } from '../libs/hooks/src'
 import {
   Divider,
   List,
   StyleService,
   Text,
   useStyleSheet,
-} from '@ui-kitten/components';
-import 'moment/locale/sv';
-import React from 'react';
+} from '@ui-kitten/components'
+import 'moment/locale/sv'
+import React from 'react'
 import {
   Image,
   ImageStyle,
   ListRenderItemInfo,
   RefreshControl,
   View,
-} from 'react-native';
-import {Layout as LayoutStyle, Sizing, Typography} from '../styles';
-import {translate} from '../utils/translation';
-import {useChild} from './childContext.component';
-import {MenuListItem} from './menuListItem.component';
+} from 'react-native'
+import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { translate } from '../utils/translation'
+import { useChild } from './childContext.component'
+import { MenuListItem } from './menuListItem.component'
 
 // const translate = (key: string) => key;
 
 export const Menu = () => {
-  const styles = useStyleSheet(themedStyles);
-  const child = useChild();
-  const {data, status, reload} = useMenu(child);
+  const styles = useStyleSheet(themedStyles)
+  const child = useChild()
+  const { data, status, reload } = useMenu(child)
 
   return (
     <List
@@ -46,7 +46,7 @@ export const Menu = () => {
           />
         </View>
       }
-      renderItem={({item}: ListRenderItemInfo<MenuItem>) => (
+      renderItem={({ item }: ListRenderItemInfo<MenuItem>) => (
         <MenuListItem key={item.title} item={item} />
       )}
       style={styles.container}
@@ -54,8 +54,8 @@ export const Menu = () => {
         <RefreshControl refreshing={status === 'loading'} onRefresh={reload} />
       }
     />
-  );
-};
+  )
+}
 
 const themedStyles = StyleService.create({
   container: {
@@ -83,4 +83,4 @@ const themedStyles = StyleService.create({
     ...Sizing.aspectRatio(0.8),
     marginTop: 50,
   },
-});
+})

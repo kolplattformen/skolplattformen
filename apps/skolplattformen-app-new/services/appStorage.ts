@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {User} from '../libs/api/lib';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { User } from '../libs/api/lib'
 
 export default class AppStorage {
-  static settingsStorageKeyPrefix = 'appsetting_';
-  static tempStorageKeyPrefix = 'tempItem_';
+  static settingsStorageKeyPrefix = 'appsetting_'
+  static tempStorageKeyPrefix = 'tempItem_'
 
   /**
    * Stores a setting
@@ -11,8 +11,8 @@ export default class AppStorage {
    * @param value
    */
   static async setSetting<T>(key: string, value: T) {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(this.settingsStorageKeyPrefix + key, jsonValue);
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem(this.settingsStorageKeyPrefix + key, jsonValue)
   }
 
   /**
@@ -22,9 +22,9 @@ export default class AppStorage {
    */
   static async getSetting<T>(key: string): Promise<T | null> {
     const value = await AsyncStorage.getItem(
-      this.settingsStorageKeyPrefix + key,
-    );
-    return value ? (JSON.parse(value) as T) : null;
+      this.settingsStorageKeyPrefix + key
+    )
+    return value ? (JSON.parse(value) as T) : null
   }
 
   /**
@@ -34,10 +34,10 @@ export default class AppStorage {
    * @param value
    */
   static async setPersonalData<T>(user: User, key: string, value: T) {
-    const jsonValue = JSON.stringify(value);
+    const jsonValue = JSON.stringify(value)
     if (user.personalNumber) {
-      const storageKey = user.personalNumber + '_' + key;
-      await AsyncStorage.setItem(storageKey, jsonValue);
+      const storageKey = user.personalNumber + '_' + key
+      await AsyncStorage.setItem(storageKey, jsonValue)
     }
   }
 
@@ -49,10 +49,10 @@ export default class AppStorage {
    */
   static async getPersonalData<T>(user: User, key: string): Promise<T | null> {
     if (user.personalNumber) {
-      const value = await AsyncStorage.getItem(user.personalNumber + '_' + key);
-      return value ? (JSON.parse(value) as T) : null;
+      const value = await AsyncStorage.getItem(user.personalNumber + '_' + key)
+      return value ? (JSON.parse(value) as T) : null
     }
-    return null;
+    return null
   }
 
   /**
@@ -62,8 +62,8 @@ export default class AppStorage {
    * @param value
    */
   static async setTemporaryItem<T>(key: string, value: T) {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(this.tempStorageKeyPrefix + key, jsonValue);
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem(this.tempStorageKeyPrefix + key, jsonValue)
   }
 
   /**
@@ -72,30 +72,30 @@ export default class AppStorage {
    * @returns
    */
   static async getTemporaryItem<T>(key: string): Promise<T | null> {
-    const value = await AsyncStorage.getItem(this.tempStorageKeyPrefix + key);
-    return value ? (JSON.parse(value) as T) : null;
+    const value = await AsyncStorage.getItem(this.tempStorageKeyPrefix + key)
+    return value ? (JSON.parse(value) as T) : null
   }
 
   /**
    *  Clears all settings
    */
   static async clearAllSettings(): Promise<void> {
-    const allKeys = await AsyncStorage.getAllKeys();
-    const settingsKeys = allKeys.filter(x =>
-      x.startsWith(this.settingsStorageKeyPrefix),
-    );
-    await AsyncStorage.multiRemove(settingsKeys);
+    const allKeys = await AsyncStorage.getAllKeys()
+    const settingsKeys = allKeys.filter((x) =>
+      x.startsWith(this.settingsStorageKeyPrefix)
+    )
+    await AsyncStorage.multiRemove(settingsKeys)
   }
 
   /**
    * Clear all temporary items
    */
   static async clearTemporaryItems() {
-    const allKeys = await AsyncStorage.getAllKeys();
-    const notSettingsKeys = allKeys.filter(x =>
-      x.startsWith(this.tempStorageKeyPrefix),
-    );
-    await AsyncStorage.multiRemove(notSettingsKeys);
+    const allKeys = await AsyncStorage.getAllKeys()
+    const notSettingsKeys = allKeys.filter((x) =>
+      x.startsWith(this.tempStorageKeyPrefix)
+    )
+    await AsyncStorage.multiRemove(notSettingsKeys)
   }
 
   /**
@@ -105,20 +105,20 @@ export default class AppStorage {
    */
   static async clearPersonalData(user: User): Promise<void> {
     if (!user.personalNumber) {
-      return;
+      return
     }
 
-    const allKeys = await AsyncStorage.getAllKeys();
-    const personalDataKeys = allKeys.filter(x =>
-      x.startsWith(user.personalNumber ?? ''),
-    );
-    await AsyncStorage.multiRemove(personalDataKeys);
+    const allKeys = await AsyncStorage.getAllKeys()
+    const personalDataKeys = allKeys.filter((x) =>
+      x.startsWith(user.personalNumber ?? '')
+    )
+    await AsyncStorage.multiRemove(personalDataKeys)
   }
 
   /**
    * Clears all async storage for this app and all libs that it uses
    */
   static async nukeAllStorage() {
-    await AsyncStorage.clear();
+    await AsyncStorage.clear()
   }
 }

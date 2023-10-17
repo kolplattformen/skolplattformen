@@ -1,51 +1,51 @@
-import {renderHook, act} from '@testing-library/react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import useTempStorage from '../useTempStorage';
-import AppStorage from '../../services/appStorage';
+import { renderHook, act } from '@testing-library/react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import useTempStorage from '../useTempStorage'
+import AppStorage from '../../services/appStorage'
 
 beforeEach(() => {
-  AsyncStorage.clear();
-});
+  AsyncStorage.clear()
+})
 
-const prefix = AppStorage.tempStorageKeyPrefix;
+const prefix = AppStorage.tempStorageKeyPrefix
 
 test('use key prefix on set', async () => {
-  const {result} = renderHook(() => useTempStorage('key', ''));
+  const { result } = renderHook(() => useTempStorage('key', ''))
 
   await act(() => {
-    const [, setValue] = result.current;
-    setValue('foo');
-  });
+    const [, setValue] = result.current
+    setValue('foo')
+  })
 
   expect(await AsyncStorage.getItem(prefix + 'key')).toEqual(
-    JSON.stringify('foo'),
-  );
-});
+    JSON.stringify('foo')
+  )
+})
 
 test('return inital value if no set', async () => {
-  const {result} = renderHook(() => useTempStorage('key', 'initialValue'));
+  const { result } = renderHook(() => useTempStorage('key', 'initialValue'))
 
-  const [value] = result.current;
+  const [value] = result.current
 
-  expect(value).toEqual('initialValue');
-  expect(await AsyncStorage.getItem(prefix + 'key')).toEqual(null);
-});
+  expect(value).toEqual('initialValue')
+  expect(await AsyncStorage.getItem(prefix + 'key')).toEqual(null)
+})
 
 test('update value', async () => {
-  const {result} = renderHook(() => useTempStorage('key', 'initialValue'));
+  const { result } = renderHook(() => useTempStorage('key', 'initialValue'))
 
-  const [initValue, setValue] = result.current;
+  const [initValue, setValue] = result.current
 
   await act(() => {
-    setValue('update');
-  });
+    setValue('update')
+  })
 
-  const [updateValue] = result.current;
+  const [updateValue] = result.current
 
-  expect(initValue).toEqual('initialValue');
-  expect(updateValue).toEqual('update');
+  expect(initValue).toEqual('initialValue')
+  expect(updateValue).toEqual('update')
 
   expect(await AsyncStorage.getItem(prefix + 'key')).toEqual(
-    JSON.stringify('update'),
-  );
-});
+    JSON.stringify('update')
+  )
+})
