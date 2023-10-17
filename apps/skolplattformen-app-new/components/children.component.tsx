@@ -141,7 +141,7 @@ export const Children = () => {
         </View>
       ) : (
         <View style={styles.loadingMessage}>
-          {/* <Spinner size="large" status="primary" /> */}
+          <Spinner size="large" status="primary" />
           <Text>Spinner here :D </Text>
           <Text category="h1" style={styles.loadingText}>
             {translate('general.loading')}
