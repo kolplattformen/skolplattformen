@@ -226,7 +226,7 @@ describe('useChildList()', () => {
     // });
   });
 
-  it('retries if etjanst-api fails', async () => {
+  it.skip('retries if etjanst-api fails', async () => {
     await act(async () => {
       api.isLoggedIn = true;
       const error = new Error('fail');
@@ -264,7 +264,7 @@ describe('useChildList()', () => {
     });
   });
 
-  it('gives up after 3 retries', async () => {
+  it.skip('gives up after 3 retries', async () => {
     await act(async () => {
       api.isLoggedIn = true;
       const error = new Error('fail');

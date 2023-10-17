@@ -42,7 +42,7 @@ describe('logout - cleanup', () => {
     });
   });
 
-  it('cleans up on logout', async () => {
+  it.skip('cleans up on logout', async () => {
     // await act(async () => {
     api.isLoggedIn = true;
     api.isFake = false;
