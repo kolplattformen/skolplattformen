@@ -3,6 +3,7 @@ import React from 'react';
 import {Linking} from 'react-native';
 import {render} from '../../utils/testHelpers';
 import {ContactMenu} from '../contactMenu.component';
+import {act} from 'react-test-renderer';
 
 const defaultGuardian = {
   address: 'Testgatan',
@@ -39,8 +40,9 @@ beforeEach(jest.clearAllMocks);
 
 test('renders a parent', () => {
   const screen = setup();
-
+  // act(() => {
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'));
+  // });
 
   expect(screen.getByText(/adam adamsson/i)).toBeTruthy();
 });
