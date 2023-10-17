@@ -26,14 +26,14 @@ jobs:
         run: npm install -g npm@10.2.0
 
       - name: install node modules
-        run: cd app/apps/skolplattformen-app-new && npm ci
+        run: cd apps/skolplattformen-app-new && npm ci
 
       - name: Run tests
-        run: cd app/apps/skolplattformen-app-new && npm test
+        run: cd apps/skolplattformen-app-new && npm test
         env:
           CI: true
 
       - name: Check linting
-        run: cd app/apps/skolplattformen-app-new && npm run lint
+        run: cd apps/skolplattformen-app-new && npm run lint
         env:
           CI: true
