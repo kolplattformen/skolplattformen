@@ -13,20 +13,24 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/app/Gemfile
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN_PAT }}
+          # changed this from GITHUB_PERSONAL_ACCESS_TOKEN_PATH to GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true
       - name: Set up our JDK environment
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 11
-      - uses: ruby/setup-ruby@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
           bundler-cache: true
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: '18.13'
           cache: 'npm'
