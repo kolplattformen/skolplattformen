@@ -41,8 +41,8 @@ const fetchMappings: { [name: string]: () => Response } = {
 
 export const fakeFetcher: Fetcher = (
   name: string,
-  url: string,
-  init?: any
+  _url: string,
+  _init?: any
 ): Promise<Response> => {
   const responder =
     fetchMappings[name] ??

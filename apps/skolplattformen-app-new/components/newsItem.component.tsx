@@ -41,6 +41,7 @@ export const newsItemRouteOptions =
   }: {
     route: RouteProp<RootStackParamList, 'NewsItem'>
   }): NativeStackNavigationOptions => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newsItem = route.params.newsItem
     const { child } = route.params
     return {

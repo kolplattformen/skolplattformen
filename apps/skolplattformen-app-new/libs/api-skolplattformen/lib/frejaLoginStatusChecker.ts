@@ -55,5 +55,5 @@ export class FrejaChecker
 export const checkStatus = (
   fetch: Fetcher,
   token: string,
-  session: RequestInit
+  _session: RequestInit
 ): FrejaLoginStatusChecker => new FrejaChecker(fetch, token)

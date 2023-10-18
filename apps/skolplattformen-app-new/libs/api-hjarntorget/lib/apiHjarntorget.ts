@@ -38,7 +38,6 @@ import {
   fullImageUrl,
   hjarntorgetEventsUrl,
   hjarntorgetUrl,
-  infoSetReadUrl,
   infoUrl,
   initBankIdUrl,
   lessonsUrl,
@@ -255,7 +254,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
     return Promise.resolve([])
   }
 
-  public async getTeachers(child: EtjanstChild): Promise<Teacher[]> {
+  public async getTeachers(_child: EtjanstChild): Promise<Teacher[]> {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')
     }
@@ -263,7 +262,7 @@ export class ApiHjarntorget extends EventEmitter implements Api {
   }
 
   public async getSchoolContacts(
-    child: EtjanstChild
+    _child: EtjanstChild
   ): Promise<SchoolContact[]> {
     if (!this.isLoggedIn) {
       throw new Error('Not logged in...')

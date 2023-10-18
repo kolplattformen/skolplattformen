@@ -64,6 +64,7 @@ const record = async (info, data) => {
         break
       case 'blob': {
         const buffer = await data.arrayBuffer()
+        // eslint-disable-next-line no-undef
         content.blob = Buffer.from(buffer).toString('base64')
         break
       }

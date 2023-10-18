@@ -1,5 +1,3 @@
-import { toNamespacedPath } from 'path'
-
 // TODO: fix the startDate/endDate of all lessons
 export const lessons_133700_goteborgsstad = () => {
   const baseTime = 1636357800000

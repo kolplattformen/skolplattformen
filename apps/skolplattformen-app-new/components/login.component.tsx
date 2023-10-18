@@ -311,7 +311,7 @@ export const Login = () => {
                 : loginMethods.filter((f) => f.id !== 'freja')
             }
             ItemSeparatorComponent={Divider}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <ListItem
                 title={item.title}
                 accessible={true}

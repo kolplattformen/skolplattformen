@@ -1,4 +1,3 @@
-/* eslint-disable react-native-a11y/has-accessibility-hint */
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Child } from '../libs/api/lib'
@@ -51,10 +50,12 @@ export const ChildListItem = ({
   }, [child.id])
 
   const navigation = useNavigation<ChildListItemNavigationProp>()
+
   const { t } = useTranslation()
-  // const t = (key: string) => key;
+
   const { data: notifications, reload: notificationsReload } =
     useNotifications(child)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: news, status: newsStatus, reload: newsReload } = useNews(child)
   const { data: classmates, reload: classmatesReload } = useClassmates(child)
   const { data: calendar, reload: calendarReload } = useCalendar(child)

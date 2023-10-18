@@ -86,10 +86,12 @@ const hook = <T>(
   }
   useEffect(() => {
     load()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn])
 
   let mounted: boolean
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     mounted = true
     return () => {
       mounted = false
@@ -115,6 +117,7 @@ const hook = <T>(
       }
     }
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => store.subscribe(listener), [])
 
   return {

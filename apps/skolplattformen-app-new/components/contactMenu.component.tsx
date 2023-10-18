@@ -1,4 +1,3 @@
-/* eslint-disable react-native-a11y/has-accessibility-hint */
 import { Classmate } from '../libs/api/lib'
 import {
   Button,
