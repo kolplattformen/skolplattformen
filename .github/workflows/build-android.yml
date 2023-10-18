@@ -11,7 +11,7 @@ jobs:
   build-and-ship-android:
     runs-on: ubuntu-latest
     env:
-      BUNDLE_GEMFILE: ${{ github.workspace }}/apps/skolplattformen-app-new/Gemfile
+      BUNDLE_GEMFILE: /apps/skolplattformen-app-new/Gemfile
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
