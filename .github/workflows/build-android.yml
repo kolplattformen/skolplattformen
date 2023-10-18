@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: '18.13'
           cache: 'npm'
-          cache-dependency-path: ${{ github.workspace }}/app/package-lock.json
+          cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app-new/package-lock.json
       - name: set npm version
         run: npm install -g npm@9.6.0
       - name: install node modules
