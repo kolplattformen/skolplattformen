@@ -1,0 +1,63 @@
+# If setting a specific version, wrap it with single quotes like '12.0'
+# to pass it as string because GitHub trimmes trailing .0 from numbers
+# due to https://github.com/actions/runner/issues/849
+
+name: build-and-ship-android
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build-and-ship-android:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/app/Gemfile
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN_PAT }}
+          submodules: true
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler-cache: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.13'
+          cache: 'npm'
+          cache-dependency-path: ${{ github.workspace }}/app/package-lock.json
+      - name: set npm version
+        run: npm install -g npm@9.6.0
+      - name: install node modules
+        run: cd app && npm ci
+      - name: Setup local.properties
+        run: echo "MAPS_API_KEY=${{ env.MAPS_API_KEY }}" > ${{ github.workspace }}/app/android/local.properties
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+      - name: Setup key.json
+        run: echo "${KEY_JSON}" > ${{ github.workspace }}/app/android/key.json
+        env:
+          KEY_JSON: ${{ secrets.KEY_JSON }}
+      - run: cd app/android && bundle exec fastlane android beta
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          ALIAS_KEY_PASSWORD: ${{ secrets.ALIAS_KEY_PASSWORD }}
+      - name: 'Store artifact native_debug_symbols.zip'
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: native_debug_symbols.zip
+          path: ${{ github.workspace }}/app/android/native_debug_symbols.zip
+          retention-days: 5
+      - name: 'Store build mappings for difficult crashlytics traces'
+        uses: actions/upload-artifact@v3
+        if: ${{ success() }}
+        with:
+          name: mapping.txt
+          path: ${{ github.workspace }}/app/android/app/build/outputs/mapping/release/mapping.txt
+          retention-days: 500
