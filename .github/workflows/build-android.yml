@@ -40,11 +40,11 @@ jobs:
       - name: install node modules
         run: cd apps/skolplattformen-app-new && npm ci
       - name: Setup local.properties
-        run: echo "MAPS_API_KEY=${{ env.MAPS_API_KEY }}" > ${{ github.workspace }}/app/android/local.properties
+        run: echo "MAPS_API_KEY=${{ env.MAPS_API_KEY }}" > ${{ github.workspace }}/apps/skolplattformen-app-new/android/local.properties
         env:
           MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
       - name: Setup key.json
-        run: echo "${KEY_JSON}" > ${{ github.workspace }}/app/android/key.json
+        run: echo "${KEY_JSON}" > ${{ github.workspace }}/apps/skolplattformen-app-new/android/key.json
         env:
           KEY_JSON: ${{ secrets.KEY_JSON }}
       - run: cd app/android && bundle exec fastlane android beta
@@ -56,12 +56,12 @@ jobs:
         if: ${{ failure() }}
         with:
           name: native_debug_symbols.zip
-          path: ${{ github.workspace }}/app/android/native_debug_symbols.zip
+          path: ${{ github.workspace }}/apps/skolplattformen-app-new/android/native_debug_symbols.zip
           retention-days: 5
       - name: 'Store build mappings for difficult crashlytics traces'
         uses: actions/upload-artifact@v3
         if: ${{ success() }}
         with:
           name: mapping.txt
-          path: ${{ github.workspace }}/app/android/app/build/outputs/mapping/release/mapping.txt
+          path: ${{ github.workspace }}/apps/skolplattformen-app-new/android/app/build/outputs/mapping/release/mapping.txt
           retention-days: 500
