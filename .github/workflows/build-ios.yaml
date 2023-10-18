@@ -1,0 +1,51 @@
+# If setting a specific version, wrap it with single quotes like '12.0'
+# to pass it as string because GitHub trimmes trailing .0 from numbers
+# due to https://github.com/actions/runner/issues/849
+
+name: build-and-ship-ios
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build-and-ship-ios:
+    runs-on: macos-13
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/apps/skolplattformen-app-new/Gemfile
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # changed this from GITHUB_PERSONAL_ACCESS_TOKEN_PATH to GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '14.3.1'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler-cache: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.13'
+          cache: 'npm'
+          cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app-new/package-lock.json
+      - uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/apps/skolplattformen-app-new/ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: set npm version
+        run: npm install -g npm@9.6.0
+      - name: install node modules
+        run: cd apps/skolplattformen-app-new && npm ci
+      - run: cd apps/skolplattformen-app-new/ios && bundle install
+      - run: cd apps/skolplattformen-app-new/ios && npx pod-install
+      - run: cd apps/skolplattformen-app-new/ios && bundle exec pod update hermes-engine --no-repo-update
+      - run: cd apps/skolplattformen-app-new/ios && export && bundle exec fastlane ios beta version:patch
+        env:
+          ASCAPI_KEY_CONTENT: ${{ secrets.ASCAPI_KEY_CONTENT }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          ENVFILE: ${{env.ENVFILE}}
