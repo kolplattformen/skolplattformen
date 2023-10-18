@@ -38,7 +38,7 @@ jobs:
       - name: set npm version
         run: npm install -g npm@9.6.0
       - name: install node modules
-        run: cd app && npm ci
+        run: cd apps/skolplattformen-app-new && npm ci
       - name: Setup local.properties
         run: echo "MAPS_API_KEY=${{ env.MAPS_API_KEY }}" > ${{ github.workspace }}/app/android/local.properties
         env:
