@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        run: echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} echo "workspace= ${{ github.workspace }}""
         with:
           # changed this from GITHUB_PERSONAL_ACCESS_TOKEN_PATH to GITHUB_TOKEN
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +36,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app-new/package-lock.json
       - name: set npm version
-        run: npm install -g npm@9.6.0
+        run: npm install -g npm@9.6.0 && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} echo "workspace= ${{ github.workspace }}""
       - name: install node modules
         run: cd apps/skolplattformen-app-new && npm ci
       - name: Setup local.properties
