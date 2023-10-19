@@ -36,7 +36,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app-new/package-lock.json
       - name: set npm version
-        run: npm install -g npm@9.6.0 && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} echo "workspace= ${{ github.workspace }}""
+        run: npm install -g npm@9.6.0 && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" &&" echo "workspace= ${{ github.workspace }}" && echo "secrets.MAPS_API_KEY=${{secrets.MAPS_API_KEY}}""
       - name: install node modules
         run: cd apps/skolplattformen-app-new && npm ci
       - name: Setup local.properties
