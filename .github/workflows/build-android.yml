@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        run: echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" && echo echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} echo "workspace= ${{ github.workspace }}""
+        run: echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} echo "workspace= ${{ github.workspace }}""
         with:
           # changed this from GITHUB_PERSONAL_ACCESS_TOKEN_PATH to GITHUB_TOKEN
           token: ${{ secrets.GITHUB_TOKEN }}
