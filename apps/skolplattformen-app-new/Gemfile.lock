@@ -286,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods (~> 1.12)
+  dotenv
   fastlane
 
 RUBY VERSION

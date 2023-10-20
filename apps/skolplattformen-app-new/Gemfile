@@ -5,3 +5,4 @@ ruby ">= 3.2.2"
 
 gem 'cocoapods', '~> 1.12'
 gem 'fastlane'
+gem 'dotenv'
