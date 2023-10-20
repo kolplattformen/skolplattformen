@@ -42,25 +42,29 @@ describe('logout - cleanup', () => {
     })
   })
 
-  it.skip('cleans up on logout', async () => {
+  it('cleans up on logout', async () => {
     // await act(async () => {
-    api.isLoggedIn = true
-    api.isFake = false
+
+    act(() => {
+      api.isLoggedIn = true
+      api.isFake = false
+    })
 
     renderHook(() => useEtjanstChildren(), { wrapper })
-
-    await act(async () => {
+    act(() => {
       api.isLoggedIn = false
       api.emitter.emit('logout')
     })
 
-    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
-
-    await waitFor(() => {
-      expect(result.current.data).toHaveLength(0)
+    const { result: result1 } = renderHook(() => useEtjanstChildren(), {
+      wrapper,
     })
 
-    await act(async () => {
+    await waitFor(() => {
+      expect(result1.current.data).toHaveLength(0)
+    })
+
+    act(() => {
       api.isLoggedIn = true
       api.emitter.emit('login')
     })
@@ -69,9 +73,7 @@ describe('logout - cleanup', () => {
       wrapper,
     })
 
-    await waitFor(async () => {
-      expect(result2.current.data).toHaveLength(1)
-    })
+    await waitFor(() => expect(result2.current.data).toHaveLength(1))
   })
-  // });
+  // })
 })
