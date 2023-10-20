@@ -285,6 +285,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   cocoapods (~> 1.12)
   dotenv
   fastlane
