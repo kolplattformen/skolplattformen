@@ -123,7 +123,7 @@ describe('api', () => {
     })
   })
   describe('#logout', () => {
-    it.skip('clears session', async () => {
+    it('clears session', async () => {
       await api.logout()
       const session = await api.getSession('')
       expect(session).toEqual({
