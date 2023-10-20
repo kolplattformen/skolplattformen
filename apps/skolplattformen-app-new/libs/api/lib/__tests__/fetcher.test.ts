@@ -1,5 +1,5 @@
-import wrap, { CallInfo, Fetcher, Recorder } from './fetcher'
-import { Fetch, Headers, Response } from './types'
+import wrap, { CallInfo, Fetcher, Recorder } from '../fetcher'
+import { Fetch, Headers, Response } from '../types'
 
 const Blob = require('node-blob')
 Blob.prototype.arrayBuffer = async function () {

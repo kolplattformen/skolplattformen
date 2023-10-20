@@ -1,8 +1,8 @@
 import React from 'react'
 import { act, renderHook, waitFor } from '@testing-library/react'
-import { ApiProvider } from './provider'
-import init from './__mocks__/@skolplattformen/embedded-api'
-import { useApi } from './context'
+import { ApiProvider } from '../provider'
+import init from '../__mocks__/@skolplattformen/embedded-api'
+import { useApi } from '../context'
 
 describe('useApi()', () => {
   let api

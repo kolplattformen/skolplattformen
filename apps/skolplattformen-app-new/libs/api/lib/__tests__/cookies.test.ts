@@ -3,8 +3,8 @@ import {
   serialize,
   wrapToughCookie,
   wrapReactNativeCookieManager,
-} from './cookies'
-import { Cookie, CookieManager } from './types'
+} from '../cookies'
+import { Cookie, CookieManager } from '../types'
 import { CookieJar } from 'tough-cookie'
 import RNCookieManager from '@react-native-cookies/cookies'
 

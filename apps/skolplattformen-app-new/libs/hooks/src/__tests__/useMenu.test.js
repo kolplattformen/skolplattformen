@@ -1,15 +1,15 @@
 import React from 'react'
 import { renderHook, act, waitFor } from '@testing-library/react'
-import { ApiProvider } from './provider'
-import { useNews } from './hooks'
-import store from './store'
-import init from './__mocks__/@skolplattformen/embedded-api'
-import createStorage from './__mocks__/AsyncStorage'
-import reporter from './__mocks__/reporter'
+import { ApiProvider } from '../provider'
+import { useMenu } from '../hooks'
+import store from '../store'
+import init from '../__mocks__/@skolplattformen/embedded-api'
+import createStorage from '../__mocks__/AsyncStorage'
+import reporter from '../__mocks__/reporter'
 
 const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
-describe('useNews(child)', () => {
+describe('useMenu(child)', () => {
   let api
   let storage
   let response
@@ -23,7 +23,7 @@ describe('useNews(child)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getNews.mockImplementation(
+    api.getMenu.mockImplementation(
       () =>
         new Promise((res) => {
           setTimeout(() => res(response), 50)
@@ -31,7 +31,7 @@ describe('useNews(child)', () => {
     )
     storage = createStorage(
       {
-        '123_news_10': [{ id: 2 }],
+        '123_menu_10': [{ id: 2 }],
       },
       2
     )
@@ -43,44 +43,41 @@ describe('useNews(child)', () => {
       store.dispatch({ entity: 'ALL', type: 'CLEAR' })
     })
   })
-
   it('returns correct initial value', () => {
-    const { result } = renderHook(() => useNews(child), { wrapper })
+    const { result } = renderHook(() => useMenu(child), { wrapper })
 
     expect(result.current.status).toEqual('pending')
   })
-
   it('calls api', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    renderHook(() => useNews(child), {
+    renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    await waitFor(() => expect(api.getNews).toHaveBeenCalled())
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
 
+    expect(api.getMenu).toHaveBeenCalled()
     // });
   })
-
   it('only calls api once', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    renderHook(() => useNews(child), { wrapper })
-    renderHook(() => useNews(child), {
+    renderHook(() => useMenu(child), { wrapper })
+    renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    renderHook(() => useNews(child), { wrapper })
-    //await waitFornextUpdate();
-    renderHook(() => useNews(child), { wrapper })
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    renderHook(() => useMenu(child), { wrapper })
+    // await waitForNextUpdate();
+    renderHook(() => useMenu(child), { wrapper })
+    // await waitForNextUpdate();
 
-    const { result } = renderHook(() => useNews(child), { wrapper })
+    const { result } = renderHook(() => useMenu(child), { wrapper })
     await waitFor(() => {
-      expect(api.getNews).toHaveBeenCalledTimes(1)
+      expect(api.getMenu).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
 
@@ -90,26 +87,25 @@ describe('useNews(child)', () => {
   it('calls cache', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+    const { result } = renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
 
     // });
   })
-
   it('updates status to loading', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
+    const { result } = renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
 
     // });
@@ -118,15 +114,14 @@ describe('useNews(child)', () => {
   it('updates status to loaded', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useNews(child), {
+    const { result } = renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    await waitFor(() => expect(result.current.status).toEqual('loading'))
     // });
   })
 
@@ -135,16 +130,16 @@ describe('useNews(child)', () => {
     api.isLoggedIn = true
     api.isFake = false
 
-    renderHook(() => useNews(child), {
+    renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
     // await pause(20);
     await waitFor(() =>
-      expect(storage.cache['123_news_10']).toEqual('[{"id":1}]')
+      expect(storage.cache['123_menu_10']).toEqual('[{"id":1}]')
     )
 
     // });
@@ -155,46 +150,41 @@ describe('useNews(child)', () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    renderHook(() => useNews(child), {
+    renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
     // await pause(20);
 
     await waitFor(() => {
-      expect(storage.cache['123_news_10']).toEqual('[{"id":2}]')
+      expect(storage.cache['123_menu_10']).toEqual('[{"id":2}]')
     })
     // });
   })
-
   it('retries if api fails', async () => {
     //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getNews.mockRejectedValueOnce(error)
+    api.getMenu.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(() => useNews(child), {
-    //   wrapper,
-    // });
-
-    const { result } = renderHook(() => useNews(child), {
+    const { result } = renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual([{ id: 1 }])
@@ -205,30 +195,28 @@ describe('useNews(child)', () => {
     //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getNews.mockRejectedValueOnce(error)
-    api.getNews.mockRejectedValueOnce(error)
-    api.getNews.mockRejectedValueOnce(error)
+    api.getMenu.mockRejectedValueOnce(error)
+    api.getMenu.mockRejectedValueOnce(error)
+    api.getMenu.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(() => useNews(child), {
-    //   wrapper,
-    // });
-
-    const { result } = renderHook(() => useNews(child), {
+    const { result } = renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
@@ -240,26 +228,22 @@ describe('useNews(child)', () => {
     //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getNews.mockRejectedValueOnce(error)
+    api.getMenu.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(() => useNews(child), {
-    //   wrapper,
-    // });
-
-    const { result } = renderHook(() => useNews(child), {
+    const { result } = renderHook(() => useMenu(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
+    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
 
       expect(reporter.error).toHaveBeenCalledWith(
         error,
-        'Error getting NEWS from API'
+        'Error getting MENU from API'
       )
     })
     // });

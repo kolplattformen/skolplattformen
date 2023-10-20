@@ -1,4 +1,4 @@
-import { merge } from './childlists'
+import { merge } from '../childlists'
 
 describe('childlists', () => {
   describe('merge', () => {

@@ -1,19 +1,18 @@
 import React from 'react'
 import { renderHook, act, waitFor } from '@testing-library/react'
-import { ApiProvider } from './provider'
-import { useCalendar } from './hooks'
-import store from './store'
-import init from './__mocks__/@skolplattformen/embedded-api'
-import createStorage from './__mocks__/AsyncStorage'
-import reporter from './__mocks__/reporter'
+import { ApiProvider } from '../provider'
+import { useEtjanstChildren } from '../hooks'
+import store from '../store'
+import init from '../__mocks__/@skolplattformen/embedded-api'
+import createStorage from '../__mocks__/AsyncStorage'
+import reporter from '../__mocks__/reporter'
 
 const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
-describe('useCalendar(child)', () => {
+describe('useEtjanstChildren()', () => {
   let api
   let storage
   let response
-  let child
   const wrapper = ({ children }) => (
     <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
@@ -23,7 +22,7 @@ describe('useCalendar(child)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getCalendar.mockImplementation(
+    api.getChildren.mockImplementation(
       () =>
         new Promise((res) => {
           setTimeout(() => res(response), 50)
@@ -31,11 +30,10 @@ describe('useCalendar(child)', () => {
     )
     storage = createStorage(
       {
-        '123_calendar_10': [{ id: 2 }],
+        '123_etjanst_children': [{ id: 2 }],
       },
       2
     )
-    child = { id: 10 }
   })
   afterEach(async () => {
     await act(async () => {
@@ -43,9 +41,8 @@ describe('useCalendar(child)', () => {
       store.dispatch({ entity: 'ALL', type: 'CLEAR' })
     })
   })
-
   it('returns correct initial value', () => {
-    const { result } = renderHook(() => useCalendar(child), { wrapper })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
     expect(result.current.status).toEqual('pending')
   })
@@ -53,75 +50,54 @@ describe('useCalendar(child)', () => {
   it('calls api', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    renderHook(() => useCalendar(child), {
+    renderHook(() => useEtjanstChildren(), {
       wrapper,
     })
 
     //await waitForNextUpdate();
     //await waitForNextUpdate();
-    await waitFor(() => expect(api.getCalendar).toHaveBeenCalled())
+    await waitFor(() => expect(api.getChildren).toHaveBeenCalled())
 
     // });
   })
-
   it('only calls api once', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    renderHook(() => useCalendar(child), { wrapper })
-    renderHook(() => useCalendar(child), {
+    renderHook(() => useEtjanstChildren(), { wrapper })
+    renderHook(() => useEtjanstChildren(), {
       wrapper,
     })
 
     //await waitForNextUpdate();
-    renderHook(() => useCalendar(child), { wrapper })
+    renderHook(() => useEtjanstChildren(), { wrapper })
     //await waitForNextUpdate();
-    renderHook(() => useCalendar(child), { wrapper })
+    renderHook(() => useEtjanstChildren(), { wrapper })
     //await waitForNextUpdate();
 
-    const { result } = renderHook(() => useCalendar(child), { wrapper })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
     await waitFor(() => {
-      expect(api.getCalendar).toHaveBeenCalledTimes(1)
+      expect(api.getChildren).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
 
-    // })
+    // });
   })
 
-  it('retrieves data from cache', async () => {
+  it('calls cache', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
-    })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
     //await waitForNextUpdate();
     //await waitForNextUpdate();
-
     await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
-    // });
-  })
-
-  it('works when cache is empty', async () => {
-    storage.clear()
-    //await act(async () => {
-    api.isLoggedIn = true
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
-    })
-
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    await waitFor(() => expect(result.current.data).toEqual([{ id: 1 }]))
 
     // });
   })
-
   it('updates status to loading', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
-    })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
     //await waitForNextUpdate();
     //await waitForNextUpdate();
@@ -133,15 +109,15 @@ describe('useCalendar(child)', () => {
   it('updates status to loaded', async () => {
     //await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
+
+    //await waitForNextUpdate();
+    //await waitForNextUpdate();
+    //await waitForNextUpdate();
+
+    await waitFor(() => {
+      expect(result.current.status).toEqual('loaded')
     })
-
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
     // });
   })
 
@@ -150,7 +126,7 @@ describe('useCalendar(child)', () => {
     api.isLoggedIn = true
     api.isFake = false
 
-    renderHook(() => useCalendar(child), {
+    renderHook(() => useEtjanstChildren(), {
       wrapper,
     })
 
@@ -158,10 +134,10 @@ describe('useCalendar(child)', () => {
     //await waitForNextUpdate();
     //await waitForNextUpdate();
     // await pause(20);
-    await waitFor(() =>
-      expect(storage.cache['123_calendar_10']).toEqual('[{"id":1}]')
-    )
 
+    await waitFor(() => {
+      expect(storage.cache['123_etjanst_children']).toEqual('[{"id":1}]')
+    })
     // });
   })
 
@@ -170,17 +146,20 @@ describe('useCalendar(child)', () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    renderHook(() => useCalendar(child), {
+    // renderHook(() => useEtjanstChildren(), {
+    //   wrapper,
+    // });
+
+    renderHook(() => useEtjanstChildren(), {
       wrapper,
     })
 
     //await waitForNextUpdate();
     //await waitForNextUpdate();
     // await pause(20);
-    await waitFor(() =>
-      expect(storage.cache['123_calendar_10']).toEqual('[{"id":2}]')
-    )
-
+    await waitFor(() => {
+      expect(storage.cache['123_etjanst_children']).toEqual('[{"id":2}]')
+    })
     // });
   })
 
@@ -188,11 +167,9 @@ describe('useCalendar(child)', () => {
     //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getCalendar.mockRejectedValueOnce(error)
+    api.getChildren.mockRejectedValueOnce(error)
 
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
-    })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
     //await waitForNextUpdate();
     //await waitForNextUpdate();
@@ -217,13 +194,11 @@ describe('useCalendar(child)', () => {
     //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getCalendar.mockRejectedValueOnce(error)
-    api.getCalendar.mockRejectedValueOnce(error)
-    api.getCalendar.mockRejectedValueOnce(error)
+    api.getChildren.mockRejectedValueOnce(error)
+    api.getChildren.mockRejectedValueOnce(error)
+    api.getChildren.mockRejectedValueOnce(error)
 
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
-    })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
     //await waitForNextUpdate();
     //await waitForNextUpdate();
@@ -249,23 +224,22 @@ describe('useCalendar(child)', () => {
     //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getCalendar.mockRejectedValueOnce(error)
+    api.getChildren.mockRejectedValueOnce(error)
 
-    const { result } = renderHook(() => useCalendar(child), {
-      wrapper,
-    })
+    const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
+    // //await waitForNextUpdate();
+    // //await waitForNextUpdate();
+    // //await waitForNextUpdate();
+
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
 
       expect(reporter.error).toHaveBeenCalledWith(
         error,
-        'Error getting CALENDAR from API'
+        'Error getting ETJANST_CHILDREN from API'
       )
     })
+    // });
   })
-  // });
 })

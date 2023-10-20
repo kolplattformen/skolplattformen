@@ -1,4 +1,4 @@
-import { clean, toMarkdown } from './parseHtml'
+import { clean, toMarkdown } from '../parseHtml'
 
 describe('parseHtml', () => {
   describe('clean', () => {

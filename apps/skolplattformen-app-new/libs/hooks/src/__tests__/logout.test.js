@@ -1,11 +1,11 @@
 import React from 'react'
 import { renderHook, act, waitFor } from '@testing-library/react'
-import { ApiProvider } from './provider'
-import { useEtjanstChildren } from './hooks'
-import store from './store'
-import init from './__mocks__/@skolplattformen/embedded-api'
-import createStorage from './__mocks__/AsyncStorage'
-import reporter from './__mocks__/reporter'
+import { ApiProvider } from '../provider'
+import { useEtjanstChildren } from '../hooks'
+import store from '../store'
+import init from '../__mocks__/@skolplattformen/embedded-api'
+import createStorage from '../__mocks__/AsyncStorage'
+import reporter from '../__mocks__/reporter'
 
 const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 

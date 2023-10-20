@@ -1,28 +1,29 @@
 import React from 'react'
 import { renderHook, act, waitFor } from '@testing-library/react'
-import { ApiProvider } from './provider'
-import { useSkola24Children } from './hooks'
-import store from './store'
-import init from './__mocks__/@skolplattformen/embedded-api'
-import createStorage from './__mocks__/AsyncStorage'
-import reporter from './__mocks__/reporter'
+import { ApiProvider } from '../provider'
+import { useNotifications } from '../hooks'
+import store from '../store'
+import init from '../__mocks__/@skolplattformen/embedded-api'
+import createStorage from '../__mocks__/AsyncStorage'
+import reporter from '../__mocks__/reporter'
 
 const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
-describe('useSkola24Children()', () => {
+describe('useNotifications(child)', () => {
   let api
   let storage
   let response
+  let child
   const wrapper = ({ children }) => (
     <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
     </ApiProvider>
   )
   beforeEach(() => {
-    response = [{ personGuid: '1' }]
+    response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getSkola24Children.mockImplementation(
+    api.getNotifications.mockImplementation(
       () =>
         new Promise((res) => {
           setTimeout(() => res(response), 50)
@@ -30,10 +31,11 @@ describe('useSkola24Children()', () => {
     )
     storage = createStorage(
       {
-        '123_skola24_children': [{ personGuid: '2' }],
+        '123_notifications_10': [{ id: 2 }],
       },
       2
     )
+    child = { id: 10 }
   })
   afterEach(async () => {
     await act(async () => {
@@ -42,21 +44,20 @@ describe('useSkola24Children()', () => {
     })
   })
   it('returns correct initial value', () => {
-    const { result } = renderHook(() => useSkola24Children(), { wrapper })
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     expect(result.current.status).toEqual('pending')
   })
-
   it('calls api', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { waitForNextUpdate } = renderHook(() => useSkola24Children(), {
+    renderHook(() => useNotifications(child), {
       wrapper,
     })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
-    await waitFor(() => expect(api.getSkola24Children).toHaveBeenCalled())
+    await waitFor(() => expect(api.getNotifications).toHaveBeenCalled())
 
     // });
   })
@@ -64,20 +65,20 @@ describe('useSkola24Children()', () => {
   it('only calls api once', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    renderHook(() => useSkola24Children(), { wrapper })
-    renderHook(() => useSkola24Children(), {
+    renderHook(() => useNotifications(child), { wrapper })
+    renderHook(() => useNotifications(child), {
       wrapper,
     })
 
     // await waitForNextUpdate();
-    renderHook(() => useSkola24Children(), { wrapper })
+    renderHook(() => useNotifications(child), { wrapper })
     // await waitForNextUpdate();
-    renderHook(() => useSkola24Children(), { wrapper })
+    renderHook(() => useNotifications(child), { wrapper })
     // await waitForNextUpdate();
 
-    const { result } = renderHook(() => useSkola24Children(), { wrapper })
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
     await waitFor(() => {
-      expect(api.getSkola24Children).toHaveBeenCalledTimes(1)
+      expect(api.getNotifications).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
 
@@ -87,31 +88,31 @@ describe('useSkola24Children()', () => {
   it('calls cache', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useSkola24Children(), { wrapper })
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
-    await waitFor(() =>
-      expect(result.current.data).toEqual([{ personGuid: '2' }])
-    )
+    await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
 
     // });
   })
+
   it('updates status to loading', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useSkola24Children(), { wrapper })
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
+
     // });
   })
 
   it('updates status to loaded', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useSkola24Children(), { wrapper })
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -126,7 +127,7 @@ describe('useSkola24Children()', () => {
     api.isLoggedIn = true
     api.isFake = false
 
-    renderHook(() => useSkola24Children(), {
+    renderHook(() => useNotifications(child), {
       wrapper,
     })
 
@@ -135,75 +136,78 @@ describe('useSkola24Children()', () => {
     // await waitForNextUpdate();
     // await pause(20);
     await waitFor(() =>
-      expect(storage.cache['123_skola24_children']).toEqual(
-        '[{"personGuid":"1"}]'
-      )
+      expect(storage.cache['123_notifications_10']).toEqual('[{"id":1}]')
     )
 
     // });
   })
+
   it('does not store in cache if fake', async () => {
     // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    renderHook(() => useSkola24Children(), {
+    // const {waitForNextUpdate} = renderHook(() => useNotifications(child), {
+    //   wrapper,
+    // });
+    renderHook(() => useNotifications(child), {
       wrapper,
     })
-
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await pause(20);
-    await waitFor(() =>
-      expect(storage.cache['123_skola24_children']).toEqual(
-        '[{"personGuid":"2"}]'
-      )
-    )
 
+    await waitFor(() => {
+      expect(storage.cache['123_notifications_10']).toEqual('[{"id":2}]')
+    })
     // });
   })
-
   it('retries if api fails', async () => {
     // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getSkola24Children.mockRejectedValueOnce(error)
+    api.getNotifications.mockRejectedValueOnce(error)
 
-    const { result } = renderHook(() => useSkola24Children(), {
-      wrapper,
-    })
+    // const {result, waitForNextUpdate} = renderHook(
+    //   () => useNotifications(child),
+    //   {wrapper},
+    // );
+
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await waitForNextUpdate();
+
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
-      expect(result.current.data).toEqual([{ personGuid: '2' }])
+      expect(result.current.data).toEqual([{ id: 2 }])
     })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await waitForNextUpdate();
-
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
-      expect(result.current.data).toEqual([{ personGuid: '1' }])
+      expect(result.current.data).toEqual([{ id: 1 }])
     })
     // });
   })
-
   it('gives up after 3 retries', async () => {
     // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getSkola24Children.mockRejectedValueOnce(error)
-    api.getSkola24Children.mockRejectedValueOnce(error)
-    api.getSkola24Children.mockRejectedValueOnce(error)
+    api.getNotifications.mockRejectedValueOnce(error)
+    api.getNotifications.mockRejectedValueOnce(error)
+    api.getNotifications.mockRejectedValueOnce(error)
 
-    const { result } = renderHook(() => useSkola24Children(), {
-      wrapper,
-    })
+    // const {result, waitForNextUpdate} = renderHook(
+    //   () => useNotifications(child),
+    //   {wrapper},
+    // );
+
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -212,7 +216,7 @@ describe('useSkola24Children()', () => {
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
-      expect(result.current.data).toEqual([{ personGuid: '2' }])
+      expect(result.current.data).toEqual([{ id: 2 }])
     })
 
     // await waitForNextUpdate();
@@ -222,22 +226,22 @@ describe('useSkola24Children()', () => {
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
-      expect(result.current.data).toEqual([{ personGuid: '2' }])
+      expect(result.current.data).toEqual([{ id: 2 }])
     })
     // });
   })
-
   it('reports if api fails', async () => {
     // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getSkola24Children.mockRejectedValueOnce(error)
+    api.getNotifications.mockRejectedValueOnce(error)
 
     // const {result, waitForNextUpdate} = renderHook(
-    //   () => useSkola24Children(),
+    //   () => useNotifications(child),
     //   {wrapper},
     // );
-    const { result } = renderHook(() => useSkola24Children(), { wrapper })
+
+    const { result } = renderHook(() => useNotifications(child), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -248,7 +252,7 @@ describe('useSkola24Children()', () => {
 
       expect(reporter.error).toHaveBeenCalledWith(
         error,
-        'Error getting SKOLA24_CHILDREN from API'
+        'Error getting NOTIFICATIONS from API'
       )
     })
     // });

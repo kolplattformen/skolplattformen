@@ -1,19 +1,21 @@
 import React from 'react'
 import { renderHook, act, waitFor } from '@testing-library/react'
-import { ApiProvider } from './provider'
-import { useNotifications } from './hooks'
-import store from './store'
-import init from './__mocks__/@skolplattformen/embedded-api'
-import createStorage from './__mocks__/AsyncStorage'
-import reporter from './__mocks__/reporter'
+import { ApiProvider } from '../provider'
+import { useSchedule } from '../hooks'
+import store from '../store'
+import init from '../__mocks__/@skolplattformen/embedded-api'
+import createStorage from '../__mocks__/AsyncStorage'
+import reporter from '../__mocks__/reporter'
 
 const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
-describe('useNotifications(child)', () => {
+describe('useSchedule(child, from, to)', () => {
   let api
   let storage
   let response
   let child
+  let from
+  let to
   const wrapper = ({ children }) => (
     <ApiProvider api={api} storage={storage} reporter={reporter}>
       {children}
@@ -23,7 +25,7 @@ describe('useNotifications(child)', () => {
     response = [{ id: 1 }]
     api = init()
     api.getPersonalNumber.mockReturnValue('123')
-    api.getNotifications.mockImplementation(
+    api.getSchedule.mockImplementation(
       () =>
         new Promise((res) => {
           setTimeout(() => res(response), 50)
@@ -31,11 +33,13 @@ describe('useNotifications(child)', () => {
     )
     storage = createStorage(
       {
-        '123_notifications_10': [{ id: 2 }],
+        '123_schedule_10_2021-01-01_2021-01-08': [{ id: 2 }],
       },
       2
     )
     child = { id: 10 }
+    from = '2021-01-01'
+    to = '2021-01-08'
   })
   afterEach(async () => {
     await act(async () => {
@@ -44,20 +48,21 @@ describe('useNotifications(child)', () => {
     })
   })
   it('returns correct initial value', () => {
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
-
-    expect(result.current.status).toEqual('pending')
-  })
-  it('calls api', async () => {
-    // await act(async () => {
-    api.isLoggedIn = true
-    renderHook(() => useNotifications(child), {
+    const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
 
+    expect(result.current.status).toEqual('pending')
+  })
+
+  it('calls api', async () => {
+    // await act(async () => {
+    api.isLoggedIn = true
+    renderHook(() => useSchedule(child, from, to), { wrapper })
+
     // await waitForNextUpdate();
     // await waitForNextUpdate();
-    await waitFor(() => expect(api.getNotifications).toHaveBeenCalled())
+    await waitFor(() => expect(api.getSchedule).toHaveBeenCalled())
 
     // });
   })
@@ -65,20 +70,23 @@ describe('useNotifications(child)', () => {
   it('only calls api once', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    renderHook(() => useNotifications(child), { wrapper })
-    renderHook(() => useNotifications(child), {
+    renderHook(() => useSchedule(child, from, to), { wrapper })
+    renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
 
     // await waitForNextUpdate();
-    renderHook(() => useNotifications(child), { wrapper })
+    renderHook(() => useSchedule(child, from, to), { wrapper })
     // await waitForNextUpdate();
-    renderHook(() => useNotifications(child), { wrapper })
+    renderHook(() => useSchedule(child, from, to), { wrapper })
     // await waitForNextUpdate();
 
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
+
     await waitFor(() => {
-      expect(api.getNotifications).toHaveBeenCalledTimes(1)
+      expect(api.getSchedule).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
 
@@ -88,7 +96,10 @@ describe('useNotifications(child)', () => {
   it('calls cache', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result, waitForNextUpdate } = renderHook(
+      () => useSchedule(child, from, to),
+      { wrapper }
+    )
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -100,7 +111,9 @@ describe('useNotifications(child)', () => {
   it('updates status to loading', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -108,11 +121,12 @@ describe('useNotifications(child)', () => {
 
     // });
   })
-
   it('updates status to loaded', async () => {
     // await act(async () => {
     api.isLoggedIn = true
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -127,38 +141,38 @@ describe('useNotifications(child)', () => {
     api.isLoggedIn = true
     api.isFake = false
 
-    renderHook(() => useNotifications(child), {
-      wrapper,
-    })
+    renderHook(() => useSchedule(child, from, to), { wrapper })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await pause(20);
     await waitFor(() =>
-      expect(storage.cache['123_notifications_10']).toEqual('[{"id":1}]')
+      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual(
+        '[{"id":1}]'
+      )
     )
 
     // });
   })
-
   it('does not store in cache if fake', async () => {
     // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    // const {waitForNextUpdate} = renderHook(() => useNotifications(child), {
-    //   wrapper,
-    // });
-    renderHook(() => useNotifications(child), {
-      wrapper,
-    })
+    // const {waitForNextUpdate} = renderHook(
+    //   () => useSchedule(child, from, to),
+    //   {wrapper},
+    // );
+    renderHook(() => useSchedule(child, from, to), { wrapper })
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await pause(20);
 
     await waitFor(() => {
-      expect(storage.cache['123_notifications_10']).toEqual('[{"id":2}]')
+      expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual(
+        '[{"id":2}]'
+      )
     })
     // });
   })
@@ -166,14 +180,16 @@ describe('useNotifications(child)', () => {
     // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getNotifications.mockRejectedValueOnce(error)
+    api.getSchedule.mockRejectedValueOnce(error)
 
     // const {result, waitForNextUpdate} = renderHook(
-    //   () => useNotifications(child),
+    //   () => useSchedule(child, from, to),
     //   {wrapper},
     // );
 
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -198,16 +214,18 @@ describe('useNotifications(child)', () => {
     // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getNotifications.mockRejectedValueOnce(error)
-    api.getNotifications.mockRejectedValueOnce(error)
-    api.getNotifications.mockRejectedValueOnce(error)
+    api.getSchedule.mockRejectedValueOnce(error)
+    api.getSchedule.mockRejectedValueOnce(error)
+    api.getSchedule.mockRejectedValueOnce(error)
 
     // const {result, waitForNextUpdate} = renderHook(
-    //   () => useNotifications(child),
+    //   () => useSchedule(child, from, to),
     //   {wrapper},
     // );
 
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -222,7 +240,6 @@ describe('useNotifications(child)', () => {
     // await waitForNextUpdate();
     // await waitForNextUpdate();
     // await waitForNextUpdate();
-
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
@@ -234,14 +251,15 @@ describe('useNotifications(child)', () => {
     // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
-    api.getNotifications.mockRejectedValueOnce(error)
+    api.getSchedule.mockRejectedValueOnce(error)
 
     // const {result, waitForNextUpdate} = renderHook(
-    //   () => useNotifications(child),
+    //   () => useSchedule(child, from, to),
     //   {wrapper},
     // );
-
-    const { result } = renderHook(() => useNotifications(child), { wrapper })
+    const { result } = renderHook(() => useSchedule(child, from, to), {
+      wrapper,
+    })
 
     // await waitForNextUpdate();
     // await waitForNextUpdate();
@@ -252,7 +270,7 @@ describe('useNotifications(child)', () => {
 
       expect(reporter.error).toHaveBeenCalledWith(
         error,
-        'Error getting NOTIFICATIONS from API'
+        'Error getting SCHEDULE from API'
       )
     })
     // });
