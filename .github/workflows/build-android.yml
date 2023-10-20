@@ -13,10 +13,6 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/apps/skolplattformen-app-new/Gemfile
     steps:
-      - name: Set ENVFILE
-          run: echo "$MAPS_API_KEY" > .env
-          env:
-            MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -39,6 +35,10 @@ jobs:
           node-version: '18.13'
           cache: 'npm'
           cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app-new/package-lock.json
+      - name: Set ENVFILE
+        run: echo "$MAPS_API_KEY" > .env
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
       - name: set npm version
         run: npm install -g npm@9.6.0 && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} workspace= ${{ github.workspace }} secrets.MAPS_API_KEY=${{secrets.MAPS_API_KEY}}"
       - name: install node modules
