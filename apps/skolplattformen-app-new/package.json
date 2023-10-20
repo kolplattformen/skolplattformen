@@ -7,7 +7,7 @@
     "ios": "react-native run-ios --simulator \"iPhone 15\"",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest ./apps/skolplattformen-app-new/libs/api-skolplattformen/lib/__tests__/api.test.ts",
+    "test": "jest",
     "extract-licenses": "react-native-oss-license --json > licenses-oss.json && node library-extractor.js && rm licenses-oss.json",
     "postinstall": "yarn extract-licenses"
   },
