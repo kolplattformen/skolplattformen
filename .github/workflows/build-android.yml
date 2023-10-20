@@ -13,10 +13,10 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/apps/skolplattformen-app-new/Gemfile
     steps:
-    - name: Set ENVFILE
-        run: echo "$MAPS_API_KEY" > .env
-        env:
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+      - name: Set ENVFILE
+          run: echo "$MAPS_API_KEY" > .env
+          env:
+            MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
       - name: Checkout code
         uses: actions/checkout@v3
         with:
