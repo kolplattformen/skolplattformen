@@ -15,8 +15,6 @@ import * as RNLocalize from 'react-native-localize'
 import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
 import { Children } from '../children.component'
-import { setImmediate } from 'timers/promises'
-import { set } from 'mockdate'
 
 jest.mock('../../libs/hooks/src')
 
@@ -51,10 +49,8 @@ test('renders loading state', async () => {
     status: 'loading',
   }))
 
-  setImmediate(() => {
-    const screen = setup()
-    expect(screen.getByText(translate('general.loading'))).toBeTruthy()
-  })  
+  const screen = setup()
+  expect(screen.getByText(translate('general.loading'))).toBeTruthy()
 })
 
 test('renders empty state message', () => {
@@ -62,14 +58,11 @@ test('renders empty state message', () => {
     data: [],
     status: 'loaded',
   }))
-setImmediate(()=> {
   const screen = setup()
 
   expect(
     screen.getByText(translate('children.noKids_description'))
   ).toBeTruthy()
-})
- 
 })
 
 test('renders error state message', () => {
@@ -78,13 +71,11 @@ test('renders error state message', () => {
     status: 'error',
   }))
 
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(
-      screen.getByText(translate('children.loadingErrorHeading'))
-    ).toBeTruthy()
-  })
+  const screen = setup()
+
+  expect(
+    screen.getByText(translate('children.loadingErrorHeading'))
+  ).toBeTruthy()
 })
 
 test('renders child in preschool', () => {
@@ -98,11 +89,9 @@ test('renders child in preschool', () => {
     status: 'loaded',
   }))
 
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(screen.getByText('Test Testsson')).toBeTruthy()
-  })
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
 })
 
 test('renders child in elementary school', () => {
@@ -116,11 +105,9 @@ test('renders child in elementary school', () => {
     status: 'loaded',
   }))
 
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(screen.getByText('Test Testsson')).toBeTruthy()
-  })
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
 })
 
 test('renders child in high school', () => {
@@ -134,14 +121,12 @@ test('renders child in high school', () => {
     status: 'loaded',
   }))
 
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(screen.getByText('Test Testsson')).toBeTruthy()
-    expect(
-      screen.getByText(translate('abbrevations.upperSecondarySchool'))
-    ).toBeTruthy()
-  })
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(
+    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+  ).toBeTruthy()
 })
 
 test('renders multiple children', () => {
@@ -159,19 +144,17 @@ test('renders multiple children', () => {
     status: 'loaded',
   }))
 
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
-    expect(
-      screen.getByText(translate('abbrevations.upperSecondarySchool'))
-    ).toBeTruthy()
-  
-    expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
-    expect(
-      screen.getByText(translate('abbrevations.compulsorySchool'))
-    ).toBeTruthy()
-  })
+  const screen = setup()
+
+  expect(screen.getByText('Storasyster Testsson')).toBeTruthy()
+  expect(
+    screen.getByText(translate('abbrevations.upperSecondarySchool'))
+  ).toBeTruthy()
+
+  expect(screen.getByText('Lillebror Testsson')).toBeTruthy()
+  expect(
+    screen.getByText(translate('abbrevations.compulsorySchool'))
+  ).toBeTruthy()
 })
 
 test('renders child in class', () => {
@@ -194,13 +177,10 @@ test('renders child in class', () => {
     ],
     status: 'loaded',
   }))
-  setImmediate(() => {
-    
-    const screen = setup()
-  
-    expect(screen.getByText('Test Testsson')).toBeTruthy()
-    expect(screen.getByText('8C • Vallaskolan')).toBeTruthy()
-  })
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText('8C • Vallaskolan')).toBeTruthy()
 })
 
 test('removes any parenthesis from name', () => {
@@ -213,12 +193,9 @@ test('removes any parenthesis from name', () => {
     ],
     status: 'loaded',
   }))
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(screen.getByText('Test Testsson')).toBeTruthy()
-    
-  })
+  const screen = setup()
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
 })
 
 test('handles multiple statuses for a child', () => {
@@ -231,19 +208,16 @@ test('handles multiple statuses for a child', () => {
     ],
     status: 'loaded',
   }))
-  setImmediate(() => {
-    const screen = setup()
-  
-    var multipleStatusesRendered = `${translate(
-      'abbrevations.upperSecondarySchool'
-    )}, ${translate('abbrevations.compulsorySchool')}, ${translate(
-      'abbrevations.leisureTimeCentre'
-    )}`
-  
-    expect(screen.getByText('Test Testsson')).toBeTruthy()
-    expect(screen.getByText(multipleStatusesRendered)).toBeTruthy()
-    
-  })
+  const screen = setup()
+
+  var multipleStatusesRendered = `${translate(
+    'abbrevations.upperSecondarySchool'
+  )}, ${translate('abbrevations.compulsorySchool')}, ${translate(
+    'abbrevations.leisureTimeCentre'
+  )}`
+
+  expect(screen.getByText('Test Testsson')).toBeTruthy()
+  expect(screen.getByText(multipleStatusesRendered)).toBeTruthy()
 })
 
 test('says if there is nothing new this week', () => {
@@ -256,12 +230,9 @@ test('says if there is nothing new this week', () => {
     ],
     status: 'loaded',
   }))
-  setImmediate(() => {
-    const screen = setup()
-  
-    expect(
-      screen.getByText(translate('news.noNewNewsItemsThisWeek'))
-    ).toBeTruthy()
-    
-  })
+  const screen = setup()
+
+  expect(
+    screen.getByText(translate('news.noNewNewsItemsThisWeek'))
+  ).toBeTruthy()
 })
