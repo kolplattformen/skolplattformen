@@ -2133,6 +2133,11 @@
   resolved "https://registry.npmjs.org/@types/semver/-/semver-7.5.3.tgz"
   integrity sha512-OxepLK9EuNEIPxWNME+C6WwbRAOOI2o2BaQEGzz5Lu2e4Z5eDnEo+/aVEDMIXywoJitJ7xWd641wrGLZdtwRyw==
 
+"@types/setimmediate@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/@types/setimmediate/-/setimmediate-1.0.3.tgz"
+  integrity sha512-7rA5Bn966dGsImZj0FLh7Vy0GG2IO3mXIv1zyZu7aJv2fqmV01I6FCYB3CH7AX+lZseP6a0glKrVblWKZuNBvQ==
+
 "@types/stack-utils@^2.0.0":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@types/stack-utils/-/stack-utils-2.0.1.tgz"
@@ -7550,6 +7555,11 @@ set-function-name@^2.0.0, set-function-name@^2.0.1:
     define-data-property "^1.0.1"
     functions-have-names "^1.2.3"
     has-property-descriptors "^1.0.0"
+
+setimmediate@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/setimmediate/-/setimmediate-1.0.5.tgz"
+  integrity sha512-MATJdZp8sLqDl/68LfQmbP8zKPLQNV6BIZoIgrscFDQ+RsvK/BxeDQOgyxKKoh0y/8h3BqVFnCqQ/gd+reiIXA==
 
 setprototypeof@1.2.0:
   version "1.2.0"
