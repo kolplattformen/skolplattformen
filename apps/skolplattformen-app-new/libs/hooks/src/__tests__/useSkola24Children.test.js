@@ -48,81 +48,55 @@ describe('useSkola24Children()', () => {
   })
 
   it('calls api', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { waitForNextUpdate } = renderHook(() => useSkola24Children(), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(api.getSkola24Children).toHaveBeenCalled())
-
-    // });
   })
 
   it('only calls api once', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useSkola24Children(), { wrapper })
     renderHook(() => useSkola24Children(), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
     renderHook(() => useSkola24Children(), { wrapper })
-    // await waitForNextUpdate();
+
     renderHook(() => useSkola24Children(), { wrapper })
-    // await waitForNextUpdate();
 
     const { result } = renderHook(() => useSkola24Children(), { wrapper })
     await waitFor(() => {
       expect(api.getSkola24Children).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // });
   })
 
   it('calls cache', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useSkola24Children(), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() =>
       expect(result.current.data).toEqual([{ personGuid: '2' }])
     )
-
-    // });
   })
   it('updates status to loading', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useSkola24Children(), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-    // });
   })
 
   it('updates status to loaded', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useSkola24Children(), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // });
   })
 
   it('stores in cache if not fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
@@ -130,20 +104,13 @@ describe('useSkola24Children()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_skola24_children']).toEqual(
         '[{"personGuid":"1"}]'
       )
     )
-
-    // });
   })
   it('does not store in cache if fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
@@ -151,20 +118,14 @@ describe('useSkola24Children()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_skola24_children']).toEqual(
         '[{"personGuid":"2"}]'
       )
     )
-
-    // });
   })
 
   it('retries if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getSkola24Children.mockRejectedValueOnce(error)
@@ -173,28 +134,19 @@ describe('useSkola24Children()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ personGuid: '2' }])
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual([{ personGuid: '1' }])
     })
-    // });
   })
 
   it('gives up after 3 retries', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getSkola24Children.mockRejectedValueOnce(error)
@@ -205,43 +157,25 @@ describe('useSkola24Children()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ personGuid: '2' }])
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual([{ personGuid: '2' }])
     })
-    // });
   })
 
   it('reports if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getSkola24Children.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useSkola24Children(),
-    //   {wrapper},
-    // );
     const { result } = renderHook(() => useSkola24Children(), { wrapper })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -251,6 +185,5 @@ describe('useSkola24Children()', () => {
         'Error getting SKOLA24_CHILDREN from API'
       )
     })
-    // });
   })
 })

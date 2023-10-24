@@ -51,87 +51,60 @@ describe('useNews(child)', () => {
   })
 
   it('calls api', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => expect(api.getNews).toHaveBeenCalled())
-
-    // });
   })
 
   it('only calls api once', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useNews(child), { wrapper })
     renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
     renderHook(() => useNews(child), { wrapper })
-    //await waitFornextUpdate();
+
     renderHook(() => useNews(child), { wrapper })
-    //await waitFornextUpdate();
 
     const { result } = renderHook(() => useNews(child), { wrapper })
     await waitFor(() => {
       expect(api.getNews).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // });
   })
 
   it('calls cache', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
-
-    // });
   })
 
   it('updates status to loading', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result, waitForNextUpdate } = renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-
-    // });
   })
 
   it('updates status to loaded', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // });
   })
 
   it('stores in cache if not fake', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
@@ -139,19 +112,12 @@ describe('useNews(child)', () => {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_news_10']).toEqual('[{"id":1}]')
     )
-
-    // });
   })
 
   it('does not store in cache if fake', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
@@ -159,100 +125,62 @@ describe('useNews(child)', () => {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    // await pause(20);
-
     await waitFor(() => {
       expect(storage.cache['123_news_10']).toEqual('[{"id":2}]')
     })
-    // });
   })
 
   it('retries if api fails', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getNews.mockRejectedValueOnce(error)
-
-    // const {result, waitForNextUpdate} = renderHook(() => useNews(child), {
-    //   wrapper,
-    // });
 
     const { result } = renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual([{ id: 1 }])
     })
-    // });
   })
   it('gives up after 3 retries', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getNews.mockRejectedValueOnce(error)
     api.getNews.mockRejectedValueOnce(error)
     api.getNews.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(() => useNews(child), {
-    //   wrapper,
-    // });
-
     const { result } = renderHook(() => useNews(child), {
       wrapper,
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
-    // });
   })
   it('reports if api fails', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getNews.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(() => useNews(child), {
-    //   wrapper,
-    // });
-
     const { result } = renderHook(() => useNews(child), {
       wrapper,
     })
-
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
-    //await waitFornextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -262,6 +190,5 @@ describe('useNews(child)', () => {
         'Error getting NEWS from API'
       )
     })
-    // });
   })
 })

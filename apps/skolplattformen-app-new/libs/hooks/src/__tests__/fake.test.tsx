@@ -43,14 +43,10 @@ describe('hooks with fake data', () => {
   })
   it('does not use cache', async () => {
     storage.cache.user = JSON.stringify({ user: 'cached' })
-    // await act(async () => {
+
     const { result } = renderHook(() => useUser(), {
       wrapper,
     })
-
-    //await waitForNextUpdate()
-    //await waitForNextUpdate()
-    //await waitForNextUpdate()
 
     await waitFor(() =>
       expect(result.current.data).toEqual({
@@ -60,16 +56,12 @@ describe('hooks with fake data', () => {
         personalNumber: '195001182046',
       })
     )
-    // })
   })
   it('returns user', async () => {
-    // await act(async () => {
     const { result } = renderHook(() => useUser(), {
       wrapper,
     })
 
-    //await waitForNextUpdate()
-    //await waitForNextUpdate()
     await waitFor(() =>
       expect(result.current.data).toEqual({
         firstName: 'Namn',
@@ -78,19 +70,11 @@ describe('hooks with fake data', () => {
         personalNumber: '195001182046',
       })
     )
-
-    // })
   })
   it('returns child list', async () => {
-    // await act(async () => {
     const { result } = renderHook(() => useEtjanstChildren(), { wrapper })
 
-    //await waitForNextUpdate()
-    //await waitForNextUpdate()
-    //await waitForNextUpdate()
     await waitFor(() => expect(result.current.data).toHaveLength(2))
-
-    // })
   })
   describe('data belonging to one child', () => {
     let child: any
@@ -98,95 +82,61 @@ describe('hooks with fake data', () => {
       ;[child] = await api.getChildren()
     })
     it('returns calendar', async () => {
-      // await act(async () => {
       const { result } = renderHook(() => useCalendar(child), { wrapper })
 
-      //await waitForNextUpdate()
-      //await waitForNextUpdate()
       await waitFor(() => expect(result.current.data.length).toBeGreaterThan(1))
-
-      // })
     })
     it('returns classmates', async () => {
-      // await act(async () => {
       const { result } = renderHook(() => useClassmates(child), { wrapper })
 
-      //await waitForNextUpdate()
-      //await waitForNextUpdate()
       await waitFor(() => expect(result.current.data.length).toBeGreaterThan(1))
-
-      // })
     })
     it('returns menu', async () => {
-      // await act(async () => {
       const { result } = renderHook(() => useMenu(child), {
         wrapper,
       })
 
-      //await waitForNextUpdate()
-      //await waitForNextUpdate()
       await waitFor(() => expect(result.current.data.length).toBeGreaterThan(1))
-
-      // })
     })
     it('returns news', async () => {
-      // await act(async () => {
       const { result } = renderHook(() => useNews(child), {
         wrapper,
       })
 
-      //await waitForNextUpdate()
-      //await waitForNextUpdate()
       await waitFor(() => expect(result.current.data.length).toBeGreaterThan(1))
-
-      // })
     })
     it('returns notifications', async () => {
-      // await act(async () => {
       const { result } = renderHook(() => useNotifications(child), {
         wrapper,
       })
 
-      //await waitForNextUpdate()
-      //await waitForNextUpdate()
       await waitFor(() => expect(result.current.data.length).toBeGreaterThan(1))
-
-      // })
     })
     it('returns schedule', async () => {
       const from = '2021-01-01'
       const to = '2021-01-08'
-      // await act(async () => {
       const { result } = renderHook(() => useSchedule(child, from, to), {
         wrapper,
       })
 
-      //await waitForNextUpdate()
-      //await waitForNextUpdate()
       await waitFor(() =>
         // No fake schedule in embedded-api yet
         expect(result.current.data.length).not.toBeGreaterThan(1)
       )
-
-      // })
     })
   })
   it('handles reloads', async () => {
-    // await act(async () => {
     store.dispatch({ type: 'CLEAR' } as any) // fixes test for invalid type
 
     const [child] = await api.getChildren()
 
     const { result } = renderHook(() => useNotifications(child), { wrapper })
 
-    //await waitForNextUpdate()
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
     })
 
     result.current.reload()
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // })
   })
 })

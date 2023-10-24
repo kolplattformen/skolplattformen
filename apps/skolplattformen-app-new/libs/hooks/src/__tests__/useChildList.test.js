@@ -70,36 +70,27 @@ describe('useChildList()', () => {
   })
 
   it('calls api', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useChildList(), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => {
       expect(api.getChildren).toHaveBeenCalled()
       expect(api.getSkola24Children).toHaveBeenCalled()
     })
-
-    // });
   })
 
   it('only calls api once', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useChildList(), { wrapper })
     renderHook(() => useChildList(), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
     renderHook(() => useChildList(), { wrapper })
-    //await waitForNextUpdate();
+
     renderHook(() => useChildList(), { wrapper })
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
 
     const { result } = renderHook(() => useChildList(), { wrapper })
     await waitFor(() => {
@@ -107,22 +98,14 @@ describe('useChildList()', () => {
       expect(api.getSkola24Children).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // });
   })
 
   it('calls cache', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useChildList(), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() =>
       expect(result.current.data).toEqual([
         {
@@ -134,58 +117,33 @@ describe('useChildList()', () => {
         },
       ])
     )
-
-    // });
   })
 
   it('updates status to loading', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useChildList(), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-
-    // });
   })
 
   it('updates status to loaded', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useChildList(), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // });
   })
 
   it('stores in cache if not fake', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
     renderHook(() => useChildList(), {
       wrapper,
     })
-
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    // await pause(20);
 
     await waitFor(() => {
       expect(storage.cache['123_etjanst_children']).toEqual(
@@ -195,23 +153,15 @@ describe('useChildList()', () => {
         JSON.stringify(skola24Response)
       )
     })
-
-    // });
   })
 
   it('does not store in cache if fake', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
     const { result } = renderHook(() => useChildList(), {
       wrapper,
     })
-
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    // await pause(20);
 
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
@@ -222,8 +172,6 @@ describe('useChildList()', () => {
         JSON.stringify(skola24Cache)
       )
     })
-
-    // });
   })
 
   it.skip('retries if etjanst-api fails', async () => {
@@ -306,22 +254,13 @@ describe('useChildList()', () => {
   })
 
   it('reports if api fails', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getChildren.mockRejectedValueOnce(error)
 
-    // const {result} = renderHook(() => useChildList(), {
-    //   wrapper,
-    // });
-
     const { result } = renderHook(() => useChildList(), {
       wrapper,
     })
-
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -331,6 +270,5 @@ describe('useChildList()', () => {
         'Error getting ETJANST_CHILDREN from API'
       )
     })
-    // });
   })
 })

@@ -40,9 +40,8 @@ beforeEach(jest.clearAllMocks)
 
 test('renders a parent', () => {
   const screen = setup()
-  // act(() => {
+
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
-  // });
 
   expect(screen.getByText(/adam adamsson/i)).toBeTruthy()
 })
@@ -75,10 +74,6 @@ test('hides options to call and text if no phone number', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  // expect(screen.getByTestId('CallMenuItem')).toHaveStyle({display: 'none'});
-  // expect(screen.getByTestId('CallMenuItem')).toBeFalsy();
-  // expect(screen.getByTestId('SMSMenuItem')).toHaveStyle({display: 'none'});
-  // expect(screen.getByTestId('SMSMenuItem')).toBeFalsy();
   expect(screen.queryByTestId('CallMenuItem')).toBeNull()
   expect(screen.queryByTestId('SMSMenuItem')).toBeNull()
 })
@@ -108,9 +103,6 @@ test('hides options to email phone number', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  // expect(screen.getByTestId('SendEmailMenuItem')).toHaveStyle({
-  //   display: 'none',
-  // });
   expect(screen.queryByTestId('SendEmailMenuItem')).toBeNull()
 })
 
@@ -141,8 +133,5 @@ test('hides address if it does not exist', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  // expect(screen.getByTestId('ShowHomeMenuItem')).toHaveStyle({
-  //   display: 'none',
-  // });
   expect(screen.queryByTestId('ShowHomeMenuItem')).toBeNull()
 })

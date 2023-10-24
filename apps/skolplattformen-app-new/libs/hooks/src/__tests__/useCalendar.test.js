@@ -51,102 +51,71 @@ describe('useCalendar(child)', () => {
   })
 
   it('calls api', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useCalendar(child), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => expect(api.getCalendar).toHaveBeenCalled())
-
-    // });
   })
 
   it('only calls api once', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useCalendar(child), { wrapper })
     renderHook(() => useCalendar(child), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
     renderHook(() => useCalendar(child), { wrapper })
-    //await waitForNextUpdate();
+
     renderHook(() => useCalendar(child), { wrapper })
-    //await waitForNextUpdate();
 
     const { result } = renderHook(() => useCalendar(child), { wrapper })
     await waitFor(() => {
       expect(api.getCalendar).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // })
   })
 
   it('retrieves data from cache', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useCalendar(child), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-
     await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
-    // });
   })
 
   it('works when cache is empty', async () => {
     storage.clear()
-    //await act(async () => {
+
     api.isLoggedIn = true
     const { result } = renderHook(() => useCalendar(child), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => expect(result.current.data).toEqual([{ id: 1 }]))
-
-    // });
   })
 
   it('updates status to loading', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useCalendar(child), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-
-    // });
   })
 
   it('updates status to loaded', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useCalendar(child), {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // });
   })
 
   it('stores in cache if not fake', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
@@ -154,19 +123,12 @@ describe('useCalendar(child)', () => {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_calendar_10']).toEqual('[{"id":1}]')
     )
-
-    // });
   })
 
   it('does not store in cache if fake', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
@@ -174,18 +136,13 @@ describe('useCalendar(child)', () => {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_calendar_10']).toEqual('[{"id":2}]')
     )
-
-    // });
   })
 
   it('retries if api fails', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getCalendar.mockRejectedValueOnce(error)
@@ -194,27 +151,19 @@ describe('useCalendar(child)', () => {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual([{ id: 1 }])
     })
-    // });
   })
 
   it('gives up after 3 retries', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getCalendar.mockRejectedValueOnce(error)
@@ -225,28 +174,20 @@ describe('useCalendar(child)', () => {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
-    // });
   })
 
   it('reports if api fails', async () => {
-    //await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getCalendar.mockRejectedValueOnce(error)
@@ -255,9 +196,6 @@ describe('useCalendar(child)', () => {
       wrapper,
     })
 
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
-    //await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
 
@@ -267,5 +205,4 @@ describe('useCalendar(child)', () => {
       )
     })
   })
-  // });
 })

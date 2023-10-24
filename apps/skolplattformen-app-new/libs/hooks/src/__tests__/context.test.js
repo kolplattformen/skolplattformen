@@ -32,7 +32,6 @@ describe('useApi()', () => {
     await act(async () => {
       api.isLoggedIn = true
       api.emitter.emit('login')
-      // await waitForValueToChange(() => result.current.isLoggedIn);
     })
     await waitFor(() => expect(result.current.isLoggedIn).toBe(true))
   })
@@ -44,7 +43,6 @@ describe('useApi()', () => {
     await act(async () => {
       api.isFake = true
       api.emitter.emit('login')
-      // await waitForValueToChange(() => result.current.isFake);
     })
     await waitFor(() => expect(result.current.isFake).toBe(true))
   })

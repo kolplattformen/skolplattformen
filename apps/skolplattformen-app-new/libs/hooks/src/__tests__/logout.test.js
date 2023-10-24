@@ -43,8 +43,6 @@ describe('logout - cleanup', () => {
   })
 
   it('cleans up on logout', async () => {
-    // await act(async () => {
-
     act(() => {
       api.isLoggedIn = true
       api.isFake = false
@@ -75,5 +73,4 @@ describe('logout - cleanup', () => {
 
     await waitFor(() => expect(result2.current.data).toHaveLength(1))
   })
-  // })
 })

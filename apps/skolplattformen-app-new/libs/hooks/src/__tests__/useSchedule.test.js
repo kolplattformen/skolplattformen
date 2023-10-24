@@ -56,30 +56,22 @@ describe('useSchedule(child, from, to)', () => {
   })
 
   it('calls api', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useSchedule(child, from, to), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(api.getSchedule).toHaveBeenCalled())
-
-    // });
   })
 
   it('only calls api once', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useSchedule(child, from, to), { wrapper })
     renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
     renderHook(() => useSchedule(child, from, to), { wrapper })
-    // await waitForNextUpdate();
+
     renderHook(() => useSchedule(child, from, to), { wrapper })
-    // await waitForNextUpdate();
 
     const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
@@ -89,111 +81,67 @@ describe('useSchedule(child, from, to)', () => {
       expect(api.getSchedule).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // });
   })
 
   it('calls cache', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result, waitForNextUpdate } = renderHook(
       () => useSchedule(child, from, to),
       { wrapper }
     )
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
-
-    // });
   })
 
   it('updates status to loading', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-
-    // });
   })
   it('updates status to loaded', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // });
   })
 
   it('stores in cache if not fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
     renderHook(() => useSchedule(child, from, to), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual(
         '[{"id":1}]'
       )
     )
-
-    // });
   })
   it('does not store in cache if fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    // const {waitForNextUpdate} = renderHook(
-    //   () => useSchedule(child, from, to),
-    //   {wrapper},
-    // );
     renderHook(() => useSchedule(child, from, to), { wrapper })
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
 
     await waitFor(() => {
       expect(storage.cache['123_schedule_10_2021-01-01_2021-01-08']).toEqual(
         '[{"id":2}]'
       )
     })
-    // });
   })
   it('retries if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getSchedule.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useSchedule(child, from, to),
-    //   {wrapper},
-    // );
-
     const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -201,35 +149,21 @@ describe('useSchedule(child, from, to)', () => {
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual([{ id: 1 }])
     })
-    // });
   })
   it('gives up after 3 retries', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getSchedule.mockRejectedValueOnce(error)
     api.getSchedule.mockRejectedValueOnce(error)
     api.getSchedule.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useSchedule(child, from, to),
-    //   {wrapper},
-    // );
-
     const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -237,33 +171,20 @@ describe('useSchedule(child, from, to)', () => {
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
-    // });
   })
   it('reports if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getSchedule.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useSchedule(child, from, to),
-    //   {wrapper},
-    // );
     const { result } = renderHook(() => useSchedule(child, from, to), {
       wrapper,
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -273,6 +194,5 @@ describe('useSchedule(child, from, to)', () => {
         'Error getting SCHEDULE from API'
       )
     })
-    // });
   })
 })

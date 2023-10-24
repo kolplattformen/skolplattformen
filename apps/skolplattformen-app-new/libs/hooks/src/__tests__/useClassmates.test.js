@@ -50,78 +50,51 @@ describe('useClassmates(child)', () => {
     expect(result.current.status).toEqual('pending')
   })
   it('calls api', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useClassmates(child), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(api.getClassmates).toHaveBeenCalled())
-
-    // });
   })
   it('only calls api once', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useClassmates(child), { wrapper })
     renderHook(() => useClassmates(child), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
     renderHook(() => useClassmates(child), { wrapper })
-    // await waitForNextUpdate();
+
     renderHook(() => useClassmates(child), { wrapper })
-    // await waitForNextUpdate();
 
     const { result } = renderHook(() => useClassmates(child), { wrapper })
     await waitFor(() => {
       expect(api.getClassmates).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // });
   })
   it('calls cache', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useClassmates(child), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.data).toEqual([{ id: 2 }]))
-
-    // });
   })
   it('updates status to loading', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useClassmates(child), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-    // expect(result.current.status).toEqual('loading');
-    // });
   })
   it('updates status to loaded', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useClassmates(child), { wrapper })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
     })
-    // });
   })
   it('stores in cache if not fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
@@ -129,18 +102,11 @@ describe('useClassmates(child)', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    //await pause(20);
-
     await waitFor(() => {
       expect(storage.cache['123_classmates_10']).toEqual('[{"id":1}]')
     })
-    // });
   })
   it('does not store in cache if fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
@@ -148,43 +114,29 @@ describe('useClassmates(child)', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    //await pause(20);
-
     await waitFor(() => {
       expect(storage.cache['123_classmates_10']).toEqual('[{"id":2}]')
     })
-    // });
   })
   it('retries if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getClassmates.mockRejectedValueOnce(error)
 
     const { result } = renderHook(() => useClassmates(child), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual([{ id: 1 }])
     })
-    // });
   })
   it('gives up after 3 retries', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getClassmates.mockRejectedValueOnce(error)
@@ -193,38 +145,24 @@ describe('useClassmates(child)', () => {
 
     const { result } = renderHook(() => useClassmates(child), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual([{ id: 2 }])
     })
-    // });
   })
   it('reports if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getClassmates.mockRejectedValueOnce(error)
 
     const { result } = renderHook(() => useClassmates(child), { wrapper })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -234,6 +172,5 @@ describe('useClassmates(child)', () => {
         'Error getting CLASSMATES from API'
       )
     })
-    // });
   })
 })

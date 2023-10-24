@@ -48,10 +48,6 @@ describe('useUser()', () => {
   })
   it('calls api', async () => {
     api.isLoggedIn = true
-    // const { waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
-
-    // await waitForNextUpdate()
-    // await waitForNextUpdate()
 
     await waitFor(() => {
       renderHook(() => useUser(), { wrapper })
@@ -59,107 +55,69 @@ describe('useUser()', () => {
     expect(api.getUser).toHaveBeenCalled()
   })
   it('only calls api once', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useUser(), { wrapper })
-    // const {waitForNextUpdate} = renderHook(() => useUser(), {wrapper});
 
-    // await waitForNextUpdate();
     renderHook(() => useUser(), { wrapper })
-    // await waitForNextUpdate();
     renderHook(() => useUser(), { wrapper })
-    // await waitForNextUpdate();
 
     const { result } = renderHook(() => useUser(), { wrapper })
     await waitFor(() => {
       expect(api.getUser).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-    // });
   })
   it('calls cache', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useUser(), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.data).toEqual({ id: 2 })
     })
-    // });
   })
   it('updates status to loading', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useUser(), {
       wrapper,
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.status).toEqual('loading')
     })
-    // });
   })
   it('updates status to loaded', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useUser(), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
     })
-    // });
   })
   it('stores in cache if not fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
-    // const { waitForNextUpdate } = renderHook(() => useUser(), { wrapper })
     renderHook(() => useUser(), { wrapper })
 
-    // await waitForNextUpdate()
-    // await waitForNextUpdate()
-    // await waitForNextUpdate()
-    // await act(async () => {
-    //   await pause(20);
-    // });
     await waitFor(() => {
       expect(storage.cache['123_user']).toEqual('{"id":1}')
     })
-    // });
   })
   it('does not store in cache if fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    // const {waitForNextUpdate} = renderHook(() => useUser(), {wrapper});
     renderHook(() => useUser(), { wrapper })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
 
     await waitFor(() => {
       expect(storage.cache['123_user']).toEqual('{"id":2}')
     })
-    // });
   })
   it('retries if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getUser.mockRejectedValueOnce(error)
@@ -168,27 +126,17 @@ describe('useUser()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual({ id: 2 })
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual({ id: 1 })
     })
-    // });
   })
   it('gives up after 3 retries', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getUser.mockRejectedValueOnce(error)
@@ -199,27 +147,18 @@ describe('useUser()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual({ id: 2 })
     })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual({ id: 2 })
     })
-    // });
   })
   it('reports if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getUser.mockRejectedValueOnce(error)
@@ -228,9 +167,6 @@ describe('useUser()', () => {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
 
@@ -239,6 +175,5 @@ describe('useUser()', () => {
         'Error getting USER from API'
       )
     })
-    // });
   })
 })

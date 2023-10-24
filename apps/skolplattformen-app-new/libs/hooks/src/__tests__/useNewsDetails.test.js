@@ -57,28 +57,20 @@ describe('useNewsDetails(child, newsItem)', () => {
   })
 
   it('calls api', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(api.getNewsDetails).toHaveBeenCalled())
-
-    // });
   })
 
   it('only calls api once', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
 
-    // await waitForNextUpdate();
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
-    // await waitForNextUpdate();
+
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
-    // await waitForNextUpdate();
 
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
@@ -87,178 +79,109 @@ describe('useNewsDetails(child, newsItem)', () => {
       expect(api.getNewsDetails).toHaveBeenCalledTimes(1)
       expect(result.current.status).toEqual('loaded')
     })
-
-    // });
   })
 
   it('calls cache', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.data).toEqual(cached))
-
-    // });
   })
 
   it('updates status to loading', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loading'))
-
-    // });
   })
 
   it('updates status to loaded', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => expect(result.current.status).toEqual('loaded'))
-
-    // });
   })
 
   it('stores in cache if not fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = false
 
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
     await waitFor(() =>
       expect(storage.cache['123_news_details_1337']).toEqual(
         JSON.stringify(response)
       )
     )
-
-    // });
   })
 
   it('does not store in cache if fake', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     api.isFake = true
 
-    // const {waitForNextUpdate} = renderHook(
-    //   () => useNewsDetails(child, newsItem),
-    //   {wrapper},
-    // );
     renderHook(() => useNewsDetails(child, newsItem), { wrapper })
-
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await pause(20);
 
     expect(storage.cache['123_news_details_1337']).toEqual(
       JSON.stringify(cached)
     )
-    // });
   })
   it('retries if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getNewsDetails.mockRejectedValueOnce(error)
-
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useNewsDetails(child, newsItem),
-    //   {wrapper},
-    // );
 
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual({ ...cached })
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.status).toEqual('loaded')
       expect(result.current.data).toEqual({ ...response })
     })
-    // });
   })
   it('gives up after 3 retries', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getNewsDetails.mockRejectedValueOnce(error)
     api.getNewsDetails.mockRejectedValueOnce(error)
     api.getNewsDetails.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useNewsDetails(child, newsItem),
-    //   {wrapper},
-    // );
-
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual({ ...cached })
     })
 
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
       expect(result.current.status).toEqual('error')
       expect(result.current.data).toEqual({ ...cached })
     })
-    // });
   })
   it('reports if api fails', async () => {
-    // await act(async () => {
     api.isLoggedIn = true
     const error = new Error('fail')
     api.getNewsDetails.mockRejectedValueOnce(error)
 
-    // const {result, waitForNextUpdate} = renderHook(
-    //   () => useNewsDetails(child, newsItem),
-    //   {wrapper},
-    // );
     const { result } = renderHook(() => useNewsDetails(child, newsItem), {
       wrapper,
     })
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
-    // await waitForNextUpdate();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(error)
@@ -268,6 +191,5 @@ describe('useNewsDetails(child, newsItem)', () => {
         'Error getting NEWS_DETAILS from API'
       )
     })
-    // });
   })
 })
