@@ -96,7 +96,6 @@ export const Login = () => {
       console.debug('Running loginHandler')
       try {
         const user = await api.getUser()
-        console.debug(user)
         await AppStorage.clearPersonalData(user)
         showModal(false)
       } catch (error) {
