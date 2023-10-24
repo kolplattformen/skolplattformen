@@ -1,4 +1,4 @@
-import { EtjanstChild, Skola24Child } from '../../../../libs/api/lib'
+import { EtjanstChild, Skola24Child } from '@skolplattformen/api'
 
 export const children = (): EtjanstChild[] => [
   {

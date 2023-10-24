@@ -1,5 +1,4 @@
-// import {Features, FeatureType} from '../../libs/api/lib'';
-import { Features } from '../../libs/api/lib'
+import { Features } from '@skolplattformen/api'
 
 import React from 'react'
 

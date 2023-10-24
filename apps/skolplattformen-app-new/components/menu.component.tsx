@@ -1,4 +1,4 @@
-import { MenuItem } from '../libs/api/lib'
+import { MenuItem } from '@skolplattformen/api'
 import { useMenu } from '../libs/hooks/src'
 import {
   Divider,

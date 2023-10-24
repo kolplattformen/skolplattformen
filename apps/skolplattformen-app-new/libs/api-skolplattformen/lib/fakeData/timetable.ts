@@ -1,4 +1,4 @@
-import { Skola24Child, TimetableEntry } from '../../../../libs/api/lib'
+import { Skola24Child, TimetableEntry } from '@skolplattformen/api'
 
 export const timetable = (child: Skola24Child): TimetableEntry[] => {
   if (!child.personGuid || !child.unitGuid) {

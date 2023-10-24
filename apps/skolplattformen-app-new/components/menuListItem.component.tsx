@@ -1,4 +1,4 @@
-import { MenuItem } from '../libs/api/lib'
+import { MenuItem } from '@skolplattformen/api'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
 import { View } from 'react-native'

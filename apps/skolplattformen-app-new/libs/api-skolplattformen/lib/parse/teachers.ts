@@ -1,5 +1,5 @@
 import { etjanst } from './etjanst'
-import { Teacher } from '../../../../libs/api/lib'
+import { Teacher } from '@skolplattformen/api'
 
 const abbreviate = (firstname?: string, lastname?: string): string =>
   `${firstname?.substr(0, 1)}${lastname?.substr(0, 2)}`.toUpperCase()

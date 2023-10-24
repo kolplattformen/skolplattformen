@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
-import { Child } from '../libs/api/lib'
+import { Child } from '@skolplattformen/api'
 import { useApi, useChildList } from '../libs/hooks/src'
 import {
   Button,

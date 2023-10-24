@@ -1,5 +1,5 @@
 import { etjanst } from './etjanst'
-import { SchoolContact } from '../../../../libs/api/lib'
+import { SchoolContact } from '@skolplattformen/api'
 
 export const schoolContact = ({
   title,

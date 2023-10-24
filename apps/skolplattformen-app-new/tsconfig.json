@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@skolplattformen/api": ["libs/api/lib/index.ts"],
       "@skolplattformen/api-hjarntorget": ["libs/api-hjarntorget/lib/index.ts"],

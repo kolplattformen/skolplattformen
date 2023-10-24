@@ -1,4 +1,4 @@
-import { Child } from '../libs/api/lib'
+import { Child } from '@skolplattformen/api'
 import React, { createContext, useContext } from 'react'
 
 interface ChildProviderProps {

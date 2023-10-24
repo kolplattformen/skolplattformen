@@ -1,4 +1,4 @@
-import { Child, MenuItem } from '../../../../libs/api/lib'
+import { Child, MenuItem } from '@skolplattformen/api'
 import { DateTime } from 'luxon'
 import { children } from './children'
 

@@ -1,5 +1,5 @@
 import { useCalendar } from '../libs/hooks/src'
-import { CalendarItem } from '../libs/api/lib'
+import { CalendarItem } from '@skolplattformen/api'
 import {
   Divider,
   List,

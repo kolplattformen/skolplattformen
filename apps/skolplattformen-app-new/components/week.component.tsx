@@ -1,4 +1,4 @@
-import { Child, MenuItem, TimetableEntry } from '../libs/api/lib'
+import { Child, MenuItem, TimetableEntry } from '@skolplattformen/api'
 import { useMenu, useTimetable } from '../libs/hooks/src'
 import {
   List,

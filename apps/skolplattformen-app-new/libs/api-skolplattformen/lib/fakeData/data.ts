@@ -6,7 +6,7 @@ import {
   Notification,
   ScheduleItem,
   User,
-} from '../../../../libs/api/lib'
+} from '@skolplattformen/api'
 import { oneDayForward, oneWeekForward, twoDaysForward } from './dates'
 
 const data: any = {

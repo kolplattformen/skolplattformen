@@ -1,4 +1,4 @@
-import { Child, Classmate } from '../../../../libs/api/lib'
+import { Child, Classmate } from '@skolplattformen/api'
 import { children } from './children'
 
 export const classmates = (child: Child): Classmate[] =>

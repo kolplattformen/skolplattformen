@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Child } from '../libs/api/lib'
+import { Child } from '@skolplattformen/api'
 import {
   useCalendar,
   useClassmates,

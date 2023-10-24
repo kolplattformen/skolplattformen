@@ -1,6 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Child as ChildType, NewsItem as NewsItemType } from '../libs/api/lib'
+import {
+  Child as ChildType,
+  NewsItem as NewsItemType,
+} from '@skolplattformen/api'
 import { useApi } from '../libs/hooks/src'
 import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'

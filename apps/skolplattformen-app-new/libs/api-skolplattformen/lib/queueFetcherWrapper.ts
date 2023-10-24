@@ -1,5 +1,5 @@
 import QueueFetcher from './queue/queueFetcher'
-import { Fetcher, RequestInit, Response } from '../../../libs/api/lib'
+import { Fetcher, RequestInit, Response } from '@skolplattformen/api'
 
 export default function queueFetcherWrapper(
   fetch: Fetcher,

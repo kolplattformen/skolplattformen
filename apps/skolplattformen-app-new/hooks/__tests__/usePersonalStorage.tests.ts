@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { User } from '../../libs/api/lib'
+import { User } from '@skolplattformen/api'
 import { act, renderHook } from '@testing-library/react'
 import usePersonalStorage from '../usePersonalStorage'
 

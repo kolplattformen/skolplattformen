@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events'
 import { loginStatus } from './routes'
-import { AuthTicket, Fetcher, LoginStatusChecker } from '../../../libs/api/lib'
+import { AuthTicket, Fetcher, LoginStatusChecker } from '@skolplattformen/api'
 
 export class Checker extends EventEmitter implements LoginStatusChecker {
   public token: string

@@ -1,4 +1,4 @@
-import { SchoolContact, Child } from '../../../../libs/api/lib'
+import { SchoolContact, Child } from '@skolplattformen/api'
 import { children } from './children'
 
 export const schoolContacts = (child: Child): SchoolContact[] =>

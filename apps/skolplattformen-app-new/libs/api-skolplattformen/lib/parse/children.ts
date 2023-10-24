@@ -1,4 +1,4 @@
-import { Child } from '../../../api/lib'
+import { Child } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
 
 export const child = ({ id, sdsId, name, status, schoolId }: any): Child => ({

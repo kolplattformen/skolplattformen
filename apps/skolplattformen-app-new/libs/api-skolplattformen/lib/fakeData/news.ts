@@ -1,5 +1,5 @@
 import { children } from './children'
-import { Child, NewsItem } from '../../../../libs/api/lib'
+import { Child, NewsItem } from '@skolplattformen/api'
 import * as dates from './dates'
 
 export const news = (child: Child): NewsItem[] => newsData.get(child.id) ?? []
