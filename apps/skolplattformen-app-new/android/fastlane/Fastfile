@@ -11,11 +11,6 @@ platform :android do
   desc "Submit a new Beta Build to Play Store"
   lane :beta do |options|
 
-    if ENV['ENVFILE'].nil?
-      puts "ENVFILE is not set. Please set ENVFILE to the path of your .env file. If unsure, look at .github/**/*android*yml"
-      exit(1)
-    end
-
     store_password = ENV['SIGNING_STORE_PASSWORD'] || prompt(text: "Signing Store Password: ", secure_text: true)
     key_password = ENV['ALIAS_KEY_PASSWORD'] || prompt(text: "Alias Key Password: ", secure_text: true)
 
