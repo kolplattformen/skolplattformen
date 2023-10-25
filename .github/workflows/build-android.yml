@@ -44,9 +44,9 @@ jobs:
         env:
           MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
       - name: Setup key.json
-        run: echo "${{ secrets.KEY_JSON }}" > ${{ github.workspace }}/apps/skolplattformen-app-new/android/key.json
+        run: echo "${KEY_JSON}" > ${{ github.workspace }}/apps/skolplattformen-app-new/android/key.json
         env:
-          KEY_JSON: ${{ github.workspace }}/apps/skolplattformen-app-new/android/key.json
+          KEY_JSON: ${{ secrets.KEY_JSON }}
       - run: cd apps/skolplattformen-app-new/android && bundle exec fastlane android beta
         # env:
         # ENVFILE: .env
