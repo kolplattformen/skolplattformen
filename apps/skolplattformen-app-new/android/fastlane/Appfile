@@ -1,4 +1,6 @@
 # Filename: android/fastlane/Appfile
 
-json_key_file("key.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+json_key_file("/Users/lee/Downloads/oppna-skolplattformen-new-4c271cae3f68.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
 package_name("com.projectname.app") # EDIT: The bundle identifier of your app
+
+
