@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.app"
+    namespace "com.oppna-skolplattformen-new.app"
     defaultConfig {
-        applicationId "com.app"
+        applicationId "com.oppna-skolplattformen-new.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
