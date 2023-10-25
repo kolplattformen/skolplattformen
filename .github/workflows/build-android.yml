@@ -48,10 +48,10 @@ jobs:
         env:
           KEY_JSON: ${{ secrets.KEY_JSON }}
       - run: cd apps/skolplattformen-app-new/android && bundle exec fastlane android beta
-        env:
-          ENVFILE: .env
-          # SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          # ALIAS_KEY_PASSWORD: ${{ secrets.ALIAS_KEY_PASSWORD }}
+        # env:
+        # ENVFILE: .env
+        # SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        # ALIAS_KEY_PASSWORD: ${{ secrets.ALIAS_KEY_PASSWORD }}
       - name: 'Store artifact native_debug_symbols.zip'
         uses: actions/upload-artifact@v3
         if: ${{ failure() }}
