@@ -1,2 +1,2 @@
-json_key_file("keys.json")
+json_key_file("key.json")
 package_name("com.oppna_skolplattformen_new.app")
