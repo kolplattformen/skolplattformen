@@ -37,7 +37,7 @@ platform :android do
 
 
     # Dir.pwd when running through Fastlane is app/android/fastlane
-    releaseFilePath = File.join(Dir.pwd, '..', 'app', "my-upload-key.keystore")
+    releaseFilePath = File.join(Dir.pwd, '..', 'app', "release.keystore")
     mappingFilePath = File.join(
       Dir.pwd,
       "..",
