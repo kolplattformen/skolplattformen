@@ -89,7 +89,7 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('release.keystore')
+            storeFile file('release.jks')
             storePassword 'leeandseb'
             keyAlias 'my-key-alias'
             keyPassword 'leeandseb'
