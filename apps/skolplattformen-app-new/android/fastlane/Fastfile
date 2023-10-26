@@ -83,6 +83,7 @@ platform :android do
     )
     system("cd #{symbolsFolderPath} && zip -r #{symbolsFilePath} .")
     upload_to_play_store(
+      skip_upload_apk: true,
       track: 'internal',
       release_status: 'draft',
       version_code: ENV['VERSION_CODE'],
