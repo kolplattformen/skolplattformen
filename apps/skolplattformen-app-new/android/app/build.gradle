@@ -91,7 +91,7 @@ android {
         release {
             storeFile file('release.jks')
             storePassword 'leeandseb'
-            keyAlias 'my-key-alias'
+            keyAlias 'upload'
             keyPassword 'leeandseb'
         }
     }
