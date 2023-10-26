@@ -58,7 +58,7 @@ platform :android do
       properties: {
         "android.injected.signing.store.file" => releaseFilePath,
         "android.injected.signing.store.password" => store_password,
-        "android.injected.signing.key.alias" => "my-key-alias",
+        "android.injected.signing.key.alias" => "upload",
         "android.injected.signing.key.password" => key_password,
         "android.injected.version.code" => ENV['VERSION_CODE'],
         "android.injected.version.name" => ENV['VERSION_NAME'],
