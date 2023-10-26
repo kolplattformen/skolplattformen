@@ -1,4 +1,4 @@
-package com.app;
+package com.oppna_skolplattformen_new.app;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
