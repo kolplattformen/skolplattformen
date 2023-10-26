@@ -33,6 +33,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
+release/
 
 # node.js
 #
@@ -67,3 +68,5 @@ yarn-error.log
 
 
 libraries.json
+
+keys.json
