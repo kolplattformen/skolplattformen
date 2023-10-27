@@ -23,6 +23,7 @@ platform :android do
     #    versionNameOverride = "1.9.0"
     if versionNameOverride.nil?
       releaseNameSemVerArr = google_play_track_release_names(track: 'internal').max.split('.')
+      puts "releaseNameSemVerArr: #{releaseNameSemVerArr}"
       releaseNameSemVerArr[2] = (releaseNameSemVerArr.last.to_i + 1).to_s
       ENV['VERSION_NAME'] = releaseNameSemVerArr.join('.')
       ENV['SUPPLY_VERSION_NAME'] = ENV['VERSION_NAME']
