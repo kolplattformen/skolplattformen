@@ -91,7 +91,7 @@ platform :android do
       mapping_paths: [mappingFilePath, symbolsFilePath]
     )
 
-    system('git config user.email "github@example.com"')
+    system('git config user.email "leesheppard2404@gmail.com"')
     system('git config user.name "Github Actions Android Pipeline"')
 
     add_git_tag(
