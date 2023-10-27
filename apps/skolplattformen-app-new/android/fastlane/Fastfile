@@ -93,13 +93,15 @@ platform :android do
 
     system('git config user.email "leesheppard2404@gmail.com"')
     system('git config user.name "Github Actions Android Pipeline"')
-
+    
+    gitTagName = releaseNameSemVerArr.join('.').gsub(/[\s()]/, '')
+    
     add_git_tag(
       grouping: "builds",
       includes_lane: true,
       # prefix: "v#{ENV['VERSION_NAME']}-",
       # build_number: ENV['VERSION_CODE'],
-      tag:"v1.0.1"
+      tag: gitTagName
     )
     push_to_git_remote(
       tags: true
