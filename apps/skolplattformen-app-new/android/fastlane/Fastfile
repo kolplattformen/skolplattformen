@@ -99,7 +99,7 @@ platform :android do
       includes_lane: true,
       # prefix: "v#{ENV['VERSION_NAME']}-",
       # build_number: ENV['VERSION_CODE'],
-      tag:"v#{ENV['VERSION_NAME']}-#{ENV['VERSION_CODE']}"
+      tag:"v1.0.1"
     )
     push_to_git_remote(
       tags: true
