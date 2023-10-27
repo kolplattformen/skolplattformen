@@ -97,8 +97,9 @@ platform :android do
     add_git_tag(
       grouping: "builds",
       includes_lane: true,
-      prefix: "v#{ENV['VERSION_NAME']}-",
-      build_number: ENV['VERSION_CODE'],
+      # prefix: "v#{ENV['VERSION_NAME']}-",
+      # build_number: ENV['VERSION_CODE'],
+      tag:"v#{ENV['VERSION_NAME']}-#{ENV['VERSION_CODE']}"
     )
     push_to_git_remote(
       tags: true
