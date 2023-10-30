@@ -28,7 +28,7 @@ platform :android do
       ENV['GITTAGNAME'] = ENV['VERSION_NAME'].gsub(/\s+/, '').match(/\((.*?)\)/)[1] + '.' + ENV['VERSION_CODE']
       ENV['SUPPLY_VERSION_NAME'] = ENV['VERSION_NAME']
       increment_version_code(
-       gradle_file_path: "../build.gradle",
+       gradle_file_path: "../app/build.gradle",
       )
       versionFile = File.join(Dir.pwd, '..', 'version', 'version.properties').to_s
       commandargs = "-n \"VERSION=#{ENV['VERSION_NAME']}\" > #{versionFile}".to_s
