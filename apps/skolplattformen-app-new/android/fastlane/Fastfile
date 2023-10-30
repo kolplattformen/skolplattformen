@@ -27,9 +27,6 @@ platform :android do
       ENV['VERSION_NAME'] = releaseNameSemVerArr.join('.')
       ENV['GITTAGNAME'] = ENV['VERSION_NAME'].gsub(/\s+/, '').match(/\((.*?)\)/)[1] + '.' + ENV['VERSION_CODE']
       ENV['SUPPLY_VERSION_NAME'] = ENV['VERSION_NAME']
-      increment_version_code(
-       gradle_file_path: File.join(Dir.pwd, '..', 'app', "build.gradle"),
-      )
       versionFile = File.join(Dir.pwd, '..', 'version', 'version.properties').to_s
       commandargs = "-n \"VERSION=#{ENV['VERSION_NAME']}\" > #{versionFile}".to_s
       puts "echo #{commandargs}"
@@ -37,9 +34,6 @@ platform :android do
     else
       ENV['VERSION_NAME'] = versionNameOverride
     end
-    puts "test"
-    puts "Hello there - #{ENV['VERSION_NAME']}"
-    puts "Hello there - #{ENV['VERSION_CODE']}"
     puts "Compiling #{ENV['VERSION_NAME']} (#{ENV['VERSION_CODE']}) "
 
     # Dir.pwd when running through Fastlane is app/android/fastlane
