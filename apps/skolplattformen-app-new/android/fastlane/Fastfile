@@ -25,8 +25,11 @@ platform :android do
       releaseNameSemVerArr = google_play_track_release_names(track: 'internal').max.split('.')
       releaseNameSemVerArr[2] = (releaseNameSemVerArr.last.to_i + 1).to_s
       ENV['VERSION_NAME'] = releaseNameSemVerArr.join('.')
-      ENV['GITTAGNAME'] = ENV['VERSION_NAME'].gsub(/\s+/, '').match(/\((.*?)\)/)[1] + '.' + releaseNameSemVerArr[2]
+      ENV['GITTAGNAME'] = ENV['VERSION_NAME'].gsub(/\s+/, '').match(/\((.*?)\)/)[1] + '.' + ENV['VERSION_CODE']
       ENV['SUPPLY_VERSION_NAME'] = ENV['VERSION_NAME']
+      increment_version_code(
+       gradle_file_path: "../build.gradle",
+      )
       versionFile = File.join(Dir.pwd, '..', 'version', 'version.properties').to_s
       commandargs = "-n \"VERSION=#{ENV['VERSION_NAME']}\" > #{versionFile}".to_s
       puts "echo #{commandargs}"
@@ -34,6 +37,8 @@ platform :android do
     else
       ENV['VERSION_NAME'] = versionNameOverride
     end
+    puts "Hello there - #{ENV['VERSION_NAME']}"
+    puts "Hello there - #{ENV['VERSION_CODE']}"
     puts "Compiling #{ENV['VERSION_NAME']} (#{ENV['VERSION_CODE']}) "
 
     # Dir.pwd when running through Fastlane is app/android/fastlane
@@ -48,7 +53,7 @@ platform :android do
       "release",
       "mapping.txt"
     )
-
+    puts "Hello there - #{ENV['VERSION_CODE']}"
 
     gradle(task: 'clean')
     gradle(
