@@ -94,15 +94,10 @@ export const Login = () => {
   useEffect(() => {
     const loginHandler = async () => {
       console.debug('Running loginHandler')
-      try {
-        const user = await api.getUser()
-        await AppStorage.clearPersonalData(user)
-        showModal(false)
-      } catch (error) {
-        console.log(error)
-      }
+      const user = await api.getUser()
+      await AppStorage.clearPersonalData(user)
+      showModal(false)
     }
-
     api.on('login', loginHandler)
     return () => {
       api.off('login', loginHandler)
@@ -203,7 +198,9 @@ export const Login = () => {
       })
       status.on('OK', () => {
         console.log('BankID ok')
+        showModal(true)
         setLoginStatusText(t('auth.loginSuccessful'))
+        setTimeout(() => showModal(false), 0)
       })
     } else {
       await api.login('201212121212')
