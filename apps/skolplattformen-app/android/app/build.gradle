@@ -78,8 +78,17 @@ android {
         applicationId "com.oppna_skolplattformen_new.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "1.0"
+
+        versionCode 20000
+        versionName "3.0.8"
+    }
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
     }
     signingConfigs {
         debug {
