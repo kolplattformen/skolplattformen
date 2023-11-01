@@ -82,14 +82,6 @@ android {
         versionCode 20000
         versionName "3.0.8"
     }
-    splits {
-        abi {
-            reset()
-            enable enableSeparateBuildPerCPUArchitecture
-            universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
-        }
-    }
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
