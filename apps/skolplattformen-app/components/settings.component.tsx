@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from '@react-navigation/core'
-import { useApi, useUser } from '@skolplattformen/hooks'
+import { useApi, useUser } from '../libs/hooks/src'
 import React, { useCallback } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import AppStorage from '../services/appStorage'
@@ -46,6 +46,7 @@ export const SettingsScreen = () => {
         padding: Sizing.t4,
       }}
     >
+      <Text>Settings</Text>
       <SettingGroup>
         <SettingListItem
           label={translate('settings.appearance')}
@@ -72,6 +73,7 @@ export const SettingsScreen = () => {
           onNavigate={() => navigation.navigate('SettingsLicenses')}
         />
       </SettingGroup>
+
       {api.isLoggedIn && (
         <SettingGroup>
           <SettingListItem

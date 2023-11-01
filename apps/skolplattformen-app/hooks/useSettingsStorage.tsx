@@ -22,7 +22,7 @@ export const settingsState = proxy({
   },
 })
 
-export type Settings = typeof settingsState['settings']
+export type Settings = (typeof settingsState)['settings']
 
 const SETTINGS_STORAGE_KEY = 'SETTINGS'
 

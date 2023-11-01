@@ -1,6 +1,6 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
-import { useUser } from '@skolplattformen/hooks'
+import { useUser } from '../libs/hooks/src'
 import {
   Button,
   CheckBox,
@@ -17,7 +17,7 @@ import { View } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import * as Yup from 'yup'
 import { defaultStackStyling } from '../design/navigationThemes'
-import usePersonalStorage from '../hooks/usePersonalStorage'
+// import usePersonalStorage from '../hooks/usePersonalStorage';
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { studentName } from '../utils/peopleHelpers'

@@ -1,7 +1,9 @@
 import { Text } from '@ui-kitten/components'
 import React from 'react'
 import { Dimensions, Linking, StyleSheet } from 'react-native'
-import MarkdownBase, { RenderRules } from 'react-native-markdown-display'
+import MarkdownBase, {
+  RenderRules,
+} from '@ronradtke/react-native-markdown-display'
 import { Sizing } from '../styles'
 import { Image } from './image.component'
 
@@ -42,7 +44,6 @@ const rules: RenderRules = {
         </Text>
       )
     }
-
     return null
   },
 }

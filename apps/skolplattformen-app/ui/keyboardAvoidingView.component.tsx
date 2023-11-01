@@ -6,7 +6,13 @@ import {
 } from 'react-native'
 import { Layout } from '../styles'
 
-export const KeyboardAvoidingView: React.FC = ({ children }) => {
+type KeyboardAvoidingViewProps = {
+  children: React.ReactNode
+}
+
+export const KeyboardAvoidingView: React.FC<KeyboardAvoidingViewProps> = ({
+  children,
+}) => {
   const styles = useStyleSheet(themedStyles)
 
   return (

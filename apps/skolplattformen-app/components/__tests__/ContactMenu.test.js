@@ -3,6 +3,7 @@ import React from 'react'
 import { Linking } from 'react-native'
 import { render } from '../../utils/testHelpers'
 import { ContactMenu } from '../contactMenu.component'
+import { act } from 'react-test-renderer'
 
 const defaultGuardian = {
   address: 'Testgatan',
@@ -73,8 +74,8 @@ test('hides options to call and text if no phone number', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByTestId('CallMenuItem')).toHaveStyle({ display: 'none' })
-  expect(screen.getByTestId('SMSMenuItem')).toHaveStyle({ display: 'none' })
+  expect(screen.queryByTestId('CallMenuItem')).toBeNull()
+  expect(screen.queryByTestId('SMSMenuItem')).toBeNull()
 })
 
 test('displays option to email guardian', () => {
@@ -102,9 +103,7 @@ test('hides options to email phone number', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByTestId('SendEmailMenuItem')).toHaveStyle({
-    display: 'none',
-  })
+  expect(screen.queryByTestId('SendEmailMenuItem')).toBeNull()
 })
 
 test('displays address of guardian', () => {
@@ -134,7 +133,5 @@ test('hides address if it does not exist', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByTestId('ShowHomeMenuItem')).toHaveStyle({
-    display: 'none',
-  })
+  expect(screen.queryByTestId('ShowHomeMenuItem')).toBeNull()
 })

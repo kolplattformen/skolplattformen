@@ -1,5 +1,5 @@
 import { MenuItem } from '@skolplattformen/api'
-import { useMenu } from '@skolplattformen/hooks'
+import { useMenu } from '../libs/hooks/src'
 import {
   Divider,
   List,
@@ -20,6 +20,8 @@ import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
+
+// const translate = (key: string) => key;
 
 export const Menu = () => {
   const styles = useStyleSheet(themedStyles)

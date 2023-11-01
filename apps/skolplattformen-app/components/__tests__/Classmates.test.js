@@ -1,10 +1,10 @@
-import { useClassmates } from '@skolplattformen/hooks'
+import { useClassmates } from '../../libs/hooks/src'
 import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { ChildProvider } from '../childContext.component'
 import { Classmates } from '../classmates.component'
 
-jest.mock('@skolplattformen/hooks')
+jest.mock('../../libs/hooks/src')
 
 const defaultClassmates = [
   {

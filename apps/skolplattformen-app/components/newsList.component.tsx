@@ -1,4 +1,4 @@
-import { useNews } from '@skolplattformen/hooks'
+import { useNews } from '../libs/hooks/src'
 import { Input, List, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React, { useMemo, useState } from 'react'
 import { TouchableOpacity, View, RefreshControl } from 'react-native'
@@ -12,6 +12,8 @@ import { useChild } from './childContext.component'
 import { CloseOutlineIcon, SearchIcon } from './icon.component'
 import { NewsListItem } from './newsListItem.component'
 
+// const translate = (key: string) => key;
+
 export const NewsList = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()
@@ -23,12 +25,18 @@ export const NewsList = () => {
   const header = useMemo(
     () => (
       <Input
-        accessibilityHint={translate('news.search.placeholder', {
-          defaultValue: 'Sök alla nyheter...',
-        })}
-        placeholder={translate('news.search.placeholder', {
-          defaultValue: 'Sök alla nyheter...',
-        })}
+        accessibilityHint={translate(
+          'news.search.placeholder'
+          // {
+          //   defaultValue: 'Sök alla nyheter...',
+          // }
+        )}
+        placeholder={translate(
+          'news.search.placeholder'
+          // {
+          //   defaultValue: 'Sök alla nyheter...',
+          // }
+        )}
         returnKeyType="search"
         status="basic"
         accessoryLeft={SearchIcon}

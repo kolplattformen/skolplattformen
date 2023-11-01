@@ -1,4 +1,3 @@
-/* eslint-disable react-native-a11y/has-accessibility-hint */
 import { Classmate } from '@skolplattformen/api'
 import {
   Button,
@@ -24,6 +23,8 @@ interface ContactMenuProps {
   setSelected: (value?: number | null) => void
 }
 
+// const translate = (key: string) => key;
+
 export const ContactMenu = ({
   contact,
   selected,
@@ -35,18 +36,20 @@ export const ContactMenu = ({
     <Button
       testID="ShowContactInfoButton"
       accessibilityHint={translate(
-        'contact.a11y_show_contact_info_button_hint',
-        {
-          defaultValue: 'Visar kontaktinformation',
-        }
+        'contact.a11y_show_contact_info_button_hint'
+        // {
+        //   defaultValue: 'Visar kontaktinformation',
+        // },
       )}
       accessibilityLabel={translate(
-        'contact.a11y_show_contact_info_button_label',
-        {
-          defaultValue: 'Visa kontaktinformation',
-        }
+        'contact.a11y_show_contact_info_button_label'
+        // {
+        //   defaultValue: 'Visa kontaktinformation',
+        // },
       )}
-      onPress={() => setVisible(true)}
+      onPress={() => {
+        setVisible(true)
+      }}
       appearance="ghost"
       accessoryLeft={MoreIcon}
     />
