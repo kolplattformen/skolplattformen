@@ -1,0 +1,109 @@
+# Filename: android/fastlane/Fastfile
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Play Store"
+  lane :beta do |options|
+
+    store_password = ENV['SIGNING_STORE_PASSWORD'] || prompt(text: "Signing Store Password: ", secure_text: true)
+    key_password = ENV['ALIAS_KEY_PASSWORD'] || prompt(text: "Alias Key Password: ", secure_text: true)
+
+    # Fetch version_code from play store and bump it. Annoyingly, we always need
+    # to increment it, even if our version name changes.
+    internalVersionCode = google_play_track_version_codes(track: 'internal').max
+    ENV['VERSION_CODE'] = (internalVersionCode + 1).to_s
+
+    versionNameOverride = nil
+    #    versionNameOverride = "1.9.0"
+    if versionNameOverride.nil?
+      releaseNameSemVerArr = google_play_track_release_names(track: 'internal').max.split('.')
+      releaseNameSemVerArr[2] = (releaseNameSemVerArr.last.to_i + 1).to_s
+      ENV['VERSION_NAME'] = releaseNameSemVerArr.join('.')
+      ENV['GITTAGNAME'] = ENV['VERSION_NAME'].gsub(/\s+/, '').match(/\((.*?)\)/)[1] + '.' + ENV['VERSION_CODE']
+      ENV['SUPPLY_VERSION_NAME'] = ENV['VERSION_NAME']
+      versionFile = File.join(Dir.pwd, '..', 'version', 'version.properties').to_s
+      commandargs = "-n \"VERSION=#{ENV['VERSION_NAME']}\" > #{versionFile}".to_s
+      puts "echo #{commandargs}"
+      system("echo", commandargs)
+    else
+      ENV['VERSION_NAME'] = versionNameOverride
+    end
+    puts "Compiling #{ENV['VERSION_NAME']} (#{ENV['VERSION_CODE']}) "
+
+    # Dir.pwd when running through Fastlane is app/android/fastlane
+    releaseFilePath = File.join(Dir.pwd, '..', 'app', "release.jks")
+    mappingFilePath = File.join(
+      Dir.pwd,
+      "..",
+      "app",
+      "build",
+      "outputs",
+      "mapping",
+      "release",
+      "mapping.txt"
+    )
+    puts "Hello there - #{ENV['VERSION_CODE']}"
+
+    gradle(task: 'clean')
+    gradle(
+      task: 'bundle',
+      build_type: 'Release',
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => releaseFilePath,
+        "android.injected.signing.store.password" => store_password,
+        "android.injected.signing.key.alias" => "upload",
+        "android.injected.signing.key.password" => key_password,
+        "android.injected.version.code" => ENV['VERSION_CODE'],
+        "android.injected.version.name" => ENV['VERSION_NAME'],
+      }
+    )
+
+    symbolsFilePath = File.join(
+      Dir.pwd,
+      "..",
+      "native_debug_symbols.zip"
+    )
+    symbolsFolderPath = File.join(
+      Dir.pwd,
+      "..",
+      "app",
+      "build",
+      "intermediates",
+      "merged_native_libs",
+      "release",
+      "out",
+      "lib"
+    )
+    system("cd #{symbolsFolderPath} && zip -r #{symbolsFilePath} .")
+    upload_to_play_store(
+      track: 'internal',
+      release_status: 'draft',
+      version_code: ENV['VERSION_CODE'],
+      version_name: ENV['VERSION_NAME'],
+      version_codes_to_retain: [],
+      mapping_paths: [mappingFilePath, symbolsFilePath]
+    )
+
+    system('git config user.email "leesheppard2404@gmail.com"')
+    system('git config user.name "Github Actions Android Pipeline"')
+    
+    
+    add_git_tag(
+      grouping: "builds",
+      includes_lane: true,
+      # prefix: "v#{ENV['VERSION_NAME']}-",
+      # build_number: ENV['VERSION_CODE'],
+      tag: "v#{ENV['GITTAGNAME']}"
+    )
+    push_to_git_remote(
+      tags: true
+    )
+  end
+end

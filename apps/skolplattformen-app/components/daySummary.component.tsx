@@ -1,8 +1,8 @@
 import { Child } from '@skolplattformen/api'
-import { useTimetable } from '@skolplattformen/hooks'
+import { useTimetable } from '../libs/hooks/src'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment, { Moment } from 'moment'
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { LanguageService } from '../services/languageService'
 import { translate } from '../utils/translation'
@@ -12,7 +12,7 @@ interface DaySummaryProps {
   date?: Moment
 }
 
-const capitalizeFirstLetter = (string) => {
+const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 

@@ -1,5 +1,5 @@
 import { Child, MenuItem, TimetableEntry } from '@skolplattformen/api'
-import { useMenu, useTimetable } from '@skolplattformen/hooks'
+import { useMenu, useTimetable } from '../libs/hooks/src'
 import {
   List,
   ListItem,
@@ -107,6 +107,8 @@ export const Day = ({ weekDay, lunch, lessons }: DayProps) => {
 }
 
 export const Week = ({ child }: WeekProps) => {
+  // const translate = (key: string) => key;
+
   moment.locale(LanguageService.getLocale())
   const days = moment.weekdaysShort().slice(1, 6)
   const displayDate = getMeaningfulStartingDate(moment())

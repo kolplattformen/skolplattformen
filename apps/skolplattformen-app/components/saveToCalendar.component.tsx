@@ -10,6 +10,8 @@ interface SaveToCalendarProps {
   event: CalendarItem
 }
 
+// const translate = (key: string) => key;
+
 export const SaveToCalendar = ({ event }: SaveToCalendarProps) => {
   const [visible, setVisible] = React.useState(false)
 

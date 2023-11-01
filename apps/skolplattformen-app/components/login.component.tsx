@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import { useApi } from '@skolplattformen/hooks'
+import { useApi } from '../libs/hooks/src'
 import {
   Button,
   ButtonGroup,
@@ -17,7 +16,6 @@ import Personnummer from 'personnummer'
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
-  ImageProps,
   Linking,
   Platform,
   TouchableWithoutFeedback,
@@ -78,6 +76,7 @@ export const Login = () => {
   )
 
   const { t } = useTranslation()
+  // const t = (key: string) => key;
 
   const valid = Personnummer.valid(personalIdNumber)
 
@@ -94,10 +93,14 @@ export const Login = () => {
 
   useEffect(() => {
     const loginHandler = async () => {
-      console.debug('Runnning loginHandler')
-      const user = await api.getUser()
-      await AppStorage.clearPersonalData(user)
-      showModal(false)
+      console.debug('Running loginHandler')
+      try {
+        const user = await api.getUser()
+        await AppStorage.clearPersonalData(user)
+        showModal(false)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     api.on('login', loginHandler)
@@ -108,7 +111,9 @@ export const Login = () => {
 
   const LoginProviderImage = () => {
     //if(loginMethodId == 'testuser') return undefined
-    if (loginMethodId === 'freja') return FrejaEid()
+    if (loginMethodId === 'freja') {
+      return FrejaEid()
+    }
     return BankId()
   }
 
@@ -227,8 +232,8 @@ export const Login = () => {
                 accessible={true}
                 onPress={() => setPersonalIdNumber('')}
                 accessibilityHint={t(
-                  'login.a11y_clear_social_security_input_field',
-                  { defaultValue: 'Rensa fältet för personnummer' }
+                  'login.a11y_clear_social_security_input_field'
+                  // {defaultValue: 'Rensa fältet för personnummer'},
                 )}
               >
                 <CloseOutlineIcon {...props} />
@@ -264,9 +269,12 @@ export const Login = () => {
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
-            accessibilityHint={t('login.a11y_select_login_method', {
-              defaultValue: 'Välj inloggningsmetod',
-            })}
+            accessibilityHint={t(
+              'login.a11y_select_login_method'
+              // {
+              //   defaultValue: 'Välj inloggningsmetod',
+              // }
+            )}
           />
         </ButtonGroup>
         <View style={styles.platformPicker}>
@@ -300,7 +308,7 @@ export const Login = () => {
                 : loginMethods.filter((f) => f.id !== 'freja')
             }
             ItemSeparatorComponent={Divider}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <ListItem
                 title={item.title}
                 accessible={true}

@@ -7,11 +7,15 @@ import { LanguageProvider } from '../context/language/languageContext'
 import { translations } from './translation'
 import { lightTheme } from '../design/themes'
 
+type AllTheProvidersProps = {
+  children: React.ReactNode
+}
+
 export const render = (
   ui: ReactElement<any, string>,
   { language = 'sv', ...options } = {}
 ) => {
-  const AllTheProviders: React.FC = ({ children }) => {
+  const AllTheProviders: React.FC<AllTheProvidersProps> = ({ children }) => {
     return (
       <>
         <IconRegistry icons={EvaIconsPack} />

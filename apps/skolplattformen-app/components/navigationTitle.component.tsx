@@ -19,7 +19,11 @@ export const NavigationTitle = ({ title, subtitle }: NavigationTitleProps) => {
           {title}
         </Text>
       )}
-      {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+      {subtitle && (
+        <Text style={styles.subtitle}>
+          {subtitle.substring(0, subtitle.indexOf(' '))}
+        </Text>
+      )}
     </View>
   )
 }
@@ -32,5 +36,5 @@ const styles = StyleSheet.create({
     ...fontSize.sm,
     fontWeight: '500',
   },
-  subtitle: { ...fontSize.xxs },
+  subtitle: { ...fontSize.base },
 })

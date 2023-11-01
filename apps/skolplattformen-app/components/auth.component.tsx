@@ -52,6 +52,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
   const styles = useStyleSheet(themeStyles)
   const colors = useTheme()
   const { t } = useTranslation()
+  // const t = (key: string) => key;
 
   return (
     <SafeAreaView>
@@ -60,12 +61,16 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
           <TouchableOpacity
             style={styles.settingsLink}
             onPress={() => navigation.navigate('Settings')}
-            accessibilityHint={t('auth.a11y_navigate_to_settings', {
-              defaultValue: 'Navigerar till vyn för inställningar',
-            })}
-            accessibilityLabel={t('auth.a11y_settings', {
-              defaultValue: 'Inställningar',
-            })}
+            accessibilityHint={t(
+              'auth.a11y_navigate_to_settings'
+              // defaultValue: 'Navigerar till vyn för inställningar',
+            )}
+            accessibilityLabel={t(
+              'auth.a11y_settings'
+              //   {
+              //   // defaultValue: 'Inställningar',
+              // }
+            )}
           >
             <View style={styles.language}>
               <SettingsIcon
@@ -82,9 +87,12 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
                 <Image
                   source={require('../assets/boys.png')}
                   style={styles.image as ImageStyle}
-                  accessibilityHint={t('login.a11y_image_two_boys', {
-                    defaultValue: 'Bild på två personer som kollar i mobilen',
-                  })}
+                  accessibilityHint={t(
+                    'login.a11y_image_two_boys'
+                    // {
+                    //   defaultValue: 'Bild på två personer som kollar i mobilen',
+                    // }
+                  )}
                   resizeMode="contain"
                   accessibilityIgnoresInvertColors={false}
                 />

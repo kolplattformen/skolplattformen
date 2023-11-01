@@ -6,10 +6,10 @@ import {
   useRoute,
 } from '@react-navigation/native'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
-import { StackNavigationProp } from '@react-navigation/stack'
+// import {StackNavigationProp} from '@react-navigation/stack';
 import { Icon } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
-import { StyleProp, TextProps } from 'react-native'
+// import {StyleProp, TextProps} from 'react-native';
 import { defaultStackStyling } from '../design/navigationThemes'
 import { useFeature } from '../hooks/useFeature'
 import { studentName } from '../utils/peopleHelpers'
@@ -24,7 +24,9 @@ import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 import { TabBarLabel } from './tabBarLabel.component'
 
-type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
+// const translate = (key: string) => key;
+
+// type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>;
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
 
 export type ChildTabParamList = {
@@ -35,10 +37,10 @@ export type ChildTabParamList = {
   Classmates: undefined
 }
 
-interface TabTitleProps {
-  children: string
-  style?: StyleProp<TextProps>
-}
+// interface TabTitleProps {
+//   children: string;
+//   style?: StyleProp<TextProps>;
+// }
 
 const { Navigator, Screen } = createBottomTabNavigator<ChildTabParamList>()
 
@@ -76,16 +78,17 @@ const TabNavigator = ({
         tabBarIcon: ({ focused, color }) => {
           let iconName = 'news'
 
-          if (route.name === 'News')
+          if (route.name === 'News') {
             iconName = focused ? 'book-open' : 'book-open-outline'
-          else if (route.name === 'Notifications')
+          } else if (route.name === 'Notifications') {
             iconName = focused ? 'alert-circle' : 'alert-circle-outline'
-          else if (route.name === 'Calendar')
+          } else if (route.name === 'Calendar') {
             iconName = focused ? 'calendar' : 'calendar-outline'
-          else if (route.name === 'Menu')
+          } else if (route.name === 'Menu') {
             iconName = focused ? 'clipboard' : 'clipboard-outline'
-          else if (route.name === 'Classmates')
+          } else if (route.name === 'Classmates') {
             iconName = focused ? 'people' : 'people-outline'
+          }
           return <Icon name={iconName} fill={color} height={24} width={24} />
         },
       }
@@ -139,7 +142,10 @@ const TabNavigator = ({
 )
 
 const getHeaderTitle = (route: any) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'News'
+  const routeName =
+    getFocusedRouteNameFromRoute(route) ??
+    route.params.initialRouteName ??
+    'News'
   return getRouteTitleFromName(routeName)
 }
 
