@@ -228,8 +228,8 @@ export const Login = () => {
                 accessible={true}
                 onPress={() => setPersonalIdNumber('')}
                 accessibilityHint={t(
-                  'login.a11y_clear_social_security_input_field'
-                  // {defaultValue: 'Rensa fältet för personnummer'},
+                  'login.a11y_clear_social_security_input_field',
+                  { defaultValue: 'Rensa fältet för personnummer' }
                 )}
               >
                 <CloseOutlineIcon {...props} />
@@ -265,12 +265,9 @@ export const Login = () => {
             status="primary"
             accessoryLeft={SelectIcon}
             size="medium"
-            accessibilityHint={t(
-              'login.a11y_select_login_method'
-              // {
-              //   defaultValue: 'Välj inloggningsmetod',
-              // }
-            )}
+            accessibilityHint={t('login.a11y_select_login_method', {
+              defaultValue: 'Välj inloggningsmetod',
+            })}
           />
         </ButtonGroup>
         <View style={styles.platformPicker}>
