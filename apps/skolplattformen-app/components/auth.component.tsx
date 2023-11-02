@@ -52,7 +52,6 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
   const styles = useStyleSheet(themeStyles)
   const colors = useTheme()
   const { t } = useTranslation()
-  // const t = (key: string) => key;
 
   return (
     <SafeAreaView>
@@ -68,7 +67,7 @@ export const Auth: React.FC<AuthProps> = ({ navigation }) => {
             accessibilityLabel={t(
               'auth.a11y_settings'
               //   {
-              //   // defaultValue: 'Inställningar',
+              // defaultValue: 'Inställningar',
               // }
             )}
           >

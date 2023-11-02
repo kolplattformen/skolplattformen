@@ -21,8 +21,6 @@ import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { MenuListItem } from './menuListItem.component'
 
-// const translate = (key: string) => key;
-
 export const Menu = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()

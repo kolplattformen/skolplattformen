@@ -76,7 +76,6 @@ export const Login = () => {
   )
 
   const { t } = useTranslation()
-  // const t = (key: string) => key;
 
   const valid = Personnummer.valid(personalIdNumber)
 
@@ -200,7 +199,7 @@ export const Login = () => {
         console.log('BankID ok')
         showModal(true)
         setLoginStatusText(t('auth.loginSuccessful'))
-        setTimeout(() => showModal(false), 0)
+        setTimeout(() => showModal(false), 0) // Hack to get around the modalview rendering twice, avoids crashing the app in IOS.
       })
     } else {
       await api.login('201212121212')

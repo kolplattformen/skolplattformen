@@ -23,8 +23,6 @@ interface ContactMenuProps {
   setSelected: (value?: number | null) => void
 }
 
-// const translate = (key: string) => key;
-
 export const ContactMenu = ({
   contact,
   selected,

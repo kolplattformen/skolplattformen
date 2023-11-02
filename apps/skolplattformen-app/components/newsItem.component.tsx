@@ -22,8 +22,6 @@ import { Markdown } from './markdown.component'
 import { RootStackParamList } from './navigation.component'
 import { NavigationTitle } from './navigationTitle.component'
 
-// const translate = (key: string) => key;
-
 interface NewsItemProps {
   navigation: StackNavigationProp<RootStackParamList, 'NewsItem'>
   route: RouteProp<RootStackParamList, 'NewsItem'>

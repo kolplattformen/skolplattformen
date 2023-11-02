@@ -12,8 +12,6 @@ import { useChild } from './childContext.component'
 import { CloseOutlineIcon, SearchIcon } from './icon.component'
 import { NewsListItem } from './newsListItem.component'
 
-// const translate = (key: string) => key;
-
 export const NewsList = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()

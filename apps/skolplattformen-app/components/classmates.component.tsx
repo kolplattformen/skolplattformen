@@ -15,8 +15,6 @@ import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
 
-// const translate = (key: string) => key;
-
 // interface ClassmatesProps {
 //   setSelected: (value?: number | null) => void;
 // }

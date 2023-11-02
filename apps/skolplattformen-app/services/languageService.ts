@@ -20,8 +20,6 @@ import 'moment/locale/zh-cn'
 import { I18nManager } from 'react-native'
 import { languages } from '../utils/translation'
 
-// const i18n = new I18n();
-
 const changeListeners: Record<string, any> = {}
 
 let allString: Record<string, any> = {}

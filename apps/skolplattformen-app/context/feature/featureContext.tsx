@@ -6,12 +6,12 @@ export const FeatureFlagsContext = React.createContext<Features>({
   LOGIN_BANK_ID_SAME_DEVICE_WITHOUT_ID: true,
   FOOD_MENU: false,
   CLASS_LIST: true,
-  LOGIN_FREJA_EID: false, //! this has been added
+  LOGIN_FREJA_EID: false, //! this has been added by salt team
 })
 
 interface Props {
   features: Features
-  children: React.ReactNode //! this has been added
+  children: React.ReactNode //! this has been added by salt team
 }
 
 export const FeatureProvider: React.FC<Props> = (props) => {

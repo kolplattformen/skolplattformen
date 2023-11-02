@@ -1,7 +1,5 @@
 import i18n, { TranslateOptions } from 'i18n-js'
 
-// const i18n = new I18n();
-
 interface Language {
   langCode: string
   languageName: string

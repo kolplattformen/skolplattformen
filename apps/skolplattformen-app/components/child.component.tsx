@@ -6,10 +6,10 @@ import {
   useRoute,
 } from '@react-navigation/native'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
-// import {StackNavigationProp} from '@react-navigation/stack';
+import { StackNavigationProp } from '@react-navigation/stack'
 import { Icon } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
-// import {StyleProp, TextProps} from 'react-native';
+import { StyleProp, TextProps } from 'react-native'
 import { defaultStackStyling } from '../design/navigationThemes'
 import { useFeature } from '../hooks/useFeature'
 import { studentName } from '../utils/peopleHelpers'
@@ -24,9 +24,7 @@ import { NewsList } from './newsList.component'
 import { NotificationsList } from './notificationsList.component'
 import { TabBarLabel } from './tabBarLabel.component'
 
-// const translate = (key: string) => key;
-
-// type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>;
+type ChildNavigationProp = StackNavigationProp<RootStackParamList, 'Child'>
 type ChildRouteProps = RouteProp<RootStackParamList, 'Child'>
 
 export type ChildTabParamList = {

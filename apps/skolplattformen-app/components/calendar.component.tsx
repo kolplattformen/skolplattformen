@@ -12,14 +12,11 @@ import moment from 'moment'
 import React from 'react'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
 import { ListRenderItemInfo, RefreshControl, View } from 'react-native'
-
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
 import { SaveToCalendar } from './saveToCalendar.component'
 import { Week } from './week.component'
-
-// const translate = (key: string) => key;
 
 export const Calendar = () => {
   const child = useChild()
