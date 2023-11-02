@@ -23,18 +23,12 @@ export const NewsList = () => {
   const header = useMemo(
     () => (
       <Input
-        accessibilityHint={translate(
-          'news.search.placeholder'
-          // {
-          //   defaultValue: 'Sök alla nyheter...',
-          // }
-        )}
-        placeholder={translate(
-          'news.search.placeholder'
-          // {
-          //   defaultValue: 'Sök alla nyheter...',
-          // }
-        )}
+        accessibilityHint={translate('news.search.placeholder', {
+          defaultValue: 'Sök alla nyheter...',
+        })}
+        placeholder={translate('news.search.placeholder', {
+          defaultValue: 'Sök alla nyheter...',
+        })}
         returnKeyType="search"
         status="basic"
         accessoryLeft={SearchIcon}
