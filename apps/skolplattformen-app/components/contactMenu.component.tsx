@@ -34,16 +34,16 @@ export const ContactMenu = ({
     <Button
       testID="ShowContactInfoButton"
       accessibilityHint={translate(
-        'contact.a11y_show_contact_info_button_hint'
-        // {
-        //   defaultValue: 'Visar kontaktinformation',
-        // },
+        'contact.a11y_show_contact_info_button_hint',
+        {
+          defaultValue: 'Visar kontaktinformation',
+        }
       )}
       accessibilityLabel={translate(
-        'contact.a11y_show_contact_info_button_label'
-        // {
-        //   defaultValue: 'Visa kontaktinformation',
-        // },
+        'contact.a11y_show_contact_info_button_label',
+        {
+          defaultValue: 'Visa kontaktinformation',
+        }
       )}
       onPress={() => {
         setVisible(true)
