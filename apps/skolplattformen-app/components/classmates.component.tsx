@@ -15,10 +15,6 @@ import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
 
-// interface ClassmatesProps {
-//   setSelected: (value?: number | null) => void;
-// }
-
 export const Classmates = () => {
   const child = useChild()
 
