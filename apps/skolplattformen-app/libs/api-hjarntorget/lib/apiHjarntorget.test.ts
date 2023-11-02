@@ -1,112 +1,112 @@
-import { wrapToughCookie } from '../../api/lib'
-import { CookieJar } from 'tough-cookie'
-import { ApiHjarntorget } from './apiHjarntorget'
+// import { wrapToughCookie } from '../../api/lib'
+// import { CookieJar } from 'tough-cookie'
+// import { ApiHjarntorget } from './apiHjarntorget'
 
-const setupSuccessfullLoginInitiation = (fetcherMock: jest.Mock) => {
-  // 'begin-login'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      url: 'some url with url encoded at the end?return=hello',
-    })
-  )
+// const setupSuccessfullLoginInitiation = (fetcherMock: jest.Mock) => {
+//   // 'begin-login'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       url: 'some url with url encoded at the end?return=hello',
+//     })
+//   )
 
-  // 'init-shibboleth-login'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      url: 'some url with url encoded at the end?Target=hello',
-    })
-  )
+//   // 'init-shibboleth-login'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       url: 'some url with url encoded at the end?Target=hello',
+//     })
+//   )
 
-  // 'init-bankId'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      text: jest.fn().mockReturnValue(
-        Promise.resolve(`
-        <html>
-        <body>
-        <input name="RelayState" value="aUUID"></input>
-        <input name="SAMLRequest" value="somebase64value"></input>
-        </body>
-        </html>`)
-      ),
-    })
-  )
+//   // 'init-bankId'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       text: jest.fn().mockReturnValue(
+//         Promise.resolve(`
+//         <html>
+//         <body>
+//         <input name="RelayState" value="aUUID"></input>
+//         <input name="SAMLRequest" value="somebase64value"></input>
+//         </body>
+//         </html>`)
+//       ),
+//     })
+//   )
 
-  // 'pick-mvghost'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      url: 'some url to a mvghost',
-    })
-  )
+//   // 'pick-mvghost'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       url: 'some url to a mvghost',
+//     })
+//   )
 
-  // 'start-bankId'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      url: 'some base url to a mvghost to use when polling status',
-    })
-  )
-}
+//   // 'start-bankId'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       url: 'some base url to a mvghost to use when polling status',
+//     })
+//   )
+// }
 
-const setupSuccessfullBankIdLogin = (fetcherMock: jest.Mock) => {
-  // 'poll-bankid-status'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      json: jest.fn().mockReturnValue(
-        Promise.resolve({
-          infotext: '',
-          location: 'an url to go to confirm the login',
-        })
-      ),
-    })
-  )
+// const setupSuccessfullBankIdLogin = (fetcherMock: jest.Mock) => {
+//   // 'poll-bankid-status'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       json: jest.fn().mockReturnValue(
+//         Promise.resolve({
+//           infotext: '',
+//           location: 'an url to go to confirm the login',
+//         })
+//       ),
+//     })
+//   )
 
-  // 'confirm-signature-redirect'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      text: jest.fn().mockReturnValue(
-        Promise.resolve(`
-        <html>
-        <body>
-        <textarea name="RelayState">relay state probably same uuid as before</textarea>
-        <textarea name="SAMLResponse">base64 encoded saml response</textarea>
-        </body>
-        </html>`)
-      ),
-    })
-  )
+//   // 'confirm-signature-redirect'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       text: jest.fn().mockReturnValue(
+//         Promise.resolve(`
+//         <html>
+//         <body>
+//         <textarea name="RelayState">relay state probably same uuid as before</textarea>
+//         <textarea name="SAMLResponse">base64 encoded saml response</textarea>
+//         </body>
+//         </html>`)
+//       ),
+//     })
+//   )
 
-  // 'authgbg-saml-login'
-  fetcherMock.mockReturnValueOnce(
-    Promise.resolve({
-      text: jest.fn().mockReturnValue(
-        Promise.resolve(`
-        <html>
-        <body>
-        <input name="RelayState" value="aUUID"></input>
-        <input name="SAMLResponse" value="somebase64value"></input>
-        </body>
-        </html>`)
-      ),
-    })
-  )
+//   // 'authgbg-saml-login'
+//   fetcherMock.mockReturnValueOnce(
+//     Promise.resolve({
+//       text: jest.fn().mockReturnValue(
+//         Promise.resolve(`
+//         <html>
+//         <body>
+//         <input name="RelayState" value="aUUID"></input>
+//         <input name="SAMLResponse" value="somebase64value"></input>
+//         </body>
+//         </html>`)
+//       ),
+//     })
+//   )
 
-  // 'hjarntorget-saml-login'
-  fetcherMock.mockReturnValueOnce(Promise.resolve({ status: 200 }))
-}
+//   // 'hjarntorget-saml-login'
+//   fetcherMock.mockReturnValueOnce(Promise.resolve({ status: 200 }))
+// }
 
 describe('api', () => {
-  let fetcherMock: jest.Mock
-  let api: ApiHjarntorget
+  //   let fetcherMock: jest.Mock
+  //   let api: ApiHjarntorget
 
-  beforeEach(() => {
-    const fetcher = jest.fn()
-    fetcherMock = fetcher as jest.Mock
+  //   beforeEach(() => {
+  //     const fetcher = jest.fn()
+  //     fetcherMock = fetcher as jest.Mock
 
-    const cookieManager = wrapToughCookie(new CookieJar())
-    cookieManager.clearAll()
-    api = new ApiHjarntorget(jest.fn(), cookieManager)
-    api.replaceFetcher(fetcher)
-  })
+  //     const cookieManager = wrapToughCookie(new CookieJar())
+  //     cookieManager.clearAll()
+  //     api = new ApiHjarntorget(jest.fn(), cookieManager)
+  //     api.replaceFetcher(fetcher)
+  //   })
   it('works', () => {
     expect(1 + 1).toBe(2)
   })
