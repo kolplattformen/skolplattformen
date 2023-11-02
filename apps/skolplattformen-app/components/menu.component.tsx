@@ -25,7 +25,7 @@ export const Menu = () => {
   const styles = useStyleSheet(themedStyles)
   const child = useChild()
   const { data, status, reload } = useMenu(child)
-  const weekNr = data[0].title.split('Vecka')[1]
+  const weekNr = data[0]?.title.split('Vecka')[1] ?? '-'
 
   return (
     <>
