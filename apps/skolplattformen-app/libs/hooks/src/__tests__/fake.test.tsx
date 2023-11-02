@@ -18,8 +18,6 @@ const { default: init } = jest.requireActual(
   '../../../api-skolplattformen/lib/index.ts'
 )
 
-const wait = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 describe('hooks with fake data', () => {
   let api: any
   let storage: any
