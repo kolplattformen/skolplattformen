@@ -1,4 +1,3 @@
-import 'setImmediate'
 import { useNavigation } from '@react-navigation/core'
 import {
   useApi,
