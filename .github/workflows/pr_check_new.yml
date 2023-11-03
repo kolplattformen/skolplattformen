@@ -23,17 +23,17 @@ jobs:
           timezone: Europe/Stockholm
 
       - name: set npm version
-        run: npm install -g npm@10.2.0
+        run: cd apps/skolplattformen-app && npm install -g npm@10.2.0
 
       - name: install node modules
-        run: cd apps/skolplattformen-app-new && npm ci
+        run: cd apps/skolplattformen-app && npm ci
 
       - name: Run tests
-        run: cd apps/skolplattformen-app-new && npm test
+        run: cd apps/skolplattformen-app && npm test
         env:
           CI: true
 
       - name: Check linting
-        run: cd apps/skolplattformen-app-new && npm run lint
+        run: cd apps/skolplattformen-app && npm run lint
         env:
           CI: true
