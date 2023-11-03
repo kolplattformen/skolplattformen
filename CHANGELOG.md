@@ -1,3 +1,10 @@
+# [2.16.0](https://github.com/kolplattformen/skolplattformen/compare/v2.15.10...v2.16.0) (2023-11-02)
+
+
+### Features
+
+* navigate from "Your Children" to specific tabs ([#660](https://github.com/kolplattformen/skolplattformen/issues/660)) ([34c376a](https://github.com/kolplattformen/skolplattformen/commit/34c376a727ad0bbfbd3f7be01aedb91d1705b34b))
+
 ## [2.15.10](https://github.com/kolplattformen/skolplattformen/compare/v2.15.9...v2.15.10) (2023-10-07)
 
 

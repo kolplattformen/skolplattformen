@@ -232,11 +232,32 @@ export const ChildListItem = ({
           ))}
         </Pressable>
 
-        {scheduleAndCalendarThisWeek.length ||
-        notificationsThisWeek.length ||
-        newsThisWeek.length ? null : (
-          <Text category="p1" style={styles.noNewNewsItemsText}>
-            {t('news.noNewNewsItemsThisWeek')}
+
+      {scheduleAndCalendarThisWeek.length ||
+      notificationsThisWeek.length ||
+      newsThisWeek.length ? null : (
+        <Text category="p1" style={styles.noNewNewsItemsText}>
+          {t('news.noNewNewsItemsThisWeek')}
+        </Text>
+      )}
+      {shouldShowLunchMenu ? (
+        <Pressable
+          style={({ pressed }) => ['' || {}, { opacity: pressed ? 0.5 : 1 }]}
+          onPress={() =>
+            navigation.navigate('Child', {
+              child,
+              color,
+              initialRouteName: 'Menu',
+            })
+          }
+        >
+          <Text category="c2" style={styles.label}>
+            {meaningfulStartingDate.format(
+              '[' + t('schedule.lunch') + '] dddd'
+            )}
+          </Text>
+          <Text>
+            {menu[meaningfulStartingDate.isoWeekday() - 1]?.description}
           </Text>
         )}
 
@@ -262,20 +283,19 @@ export const ChildListItem = ({
           </Pressable>
         ) : null}
 
-        <View style={styles.itemFooter}>
-          <Button
-            accessible
-            accessibilityRole="button"
-            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
-            appearance="ghost"
-            accessoryLeft={AlertIcon}
-            status="primary"
-            style={styles.absenceButton}
-            onPress={() => navigation.navigate('Absence', { child })}
-          >
-            {t('abscense.title')}
-          </Button>
-        </View>
+      <View style={styles.itemFooter}>
+        <Button
+          accessible
+          accessibilityRole="button"
+          accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
+          appearance="ghost"
+          accessoryLeft={AlertIcon}
+          status="primary"
+          style={styles.absenceButton}
+          onPress={() => navigation.navigate('Absence', { child })}
+        >
+          {t('abscense.title')}
+        </Button>
       </View>
     </>
   )

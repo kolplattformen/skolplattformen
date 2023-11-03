@@ -49,7 +49,7 @@ For more information, please visit [CocoaPods Getting Started guide](https://gui
 
 ### Running on a device
 
-The above command will automatically run your app on the iOS Simulator by default. If you want to run the app on an actual physical iOS device, please follow the instructions [here](https://reactnative.dev/docs/running-on-device.
+The above command will automatically run your app on the iOS Simulator by default. If you want to run the app on an actual physical iOS device, please follow the instructions [here](https://reactnative.dev/docs/running-on-device).
 
 ## Running the app 
 
