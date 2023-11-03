@@ -73,8 +73,8 @@
             "fast": "rápida",
             "fun": "divertido"
         },
-        "subtitle": "La alternativa {{word}}",
-        "placeholder_SocialSecurityNumber": "Tu personnummer",
+        "subtitle": "La alternativa de {{word}}",
+        "placeholder_SocialSecurityNumber": "Tu número de identidad personal",
         "loginFailed": "No se pudo iniciar sesión. Vuelva a intentarlo.",
         "chooseLoginMethod": "Elija el método de inicio de sesión",
         "bankid": {
@@ -100,8 +100,8 @@
         "title": "Informar ausencia",
         "startTime": "hora de inicio",
         "selectAbscenseStartTime": "Elige la hora de inicio",
-        "personalNumberMissing": "Falta el personnummer",
-        "invalidPersonalNumber": "El personnumer no es válido",
+        "personalNumberMissing": "Falta el número personal",
+        "invalidPersonalNumber": "Número personal inválido",
         "entireDay": "Día completo",
         "endTime": "hora de finalización",
         "selectAbscenseEndTime": "Elige la hora de finalización",
