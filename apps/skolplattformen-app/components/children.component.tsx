@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { Child } from '@skolplattformen/api'
-import { useApi, useChildList } from '@skolplattformen/hooks'
+import { useApi, useChildList } from '../libs/hooks/src'
 import {
   Button,
   List,
@@ -35,7 +35,7 @@ export const childenRouteOptions =
     return {
       ...defaultStackStyling(darkMode),
       title: translate('children.title'),
-      headerLargeTitle: true,
+      headerLargeTitle: false,
       headerLargeTitleShadowVisible: false,
     }
   }

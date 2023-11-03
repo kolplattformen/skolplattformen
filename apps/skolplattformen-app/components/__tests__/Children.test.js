@@ -1,3 +1,4 @@
+import 'setImmediate'
 import { useNavigation } from '@react-navigation/core'
 import {
   useApi,
@@ -9,14 +10,16 @@ import {
   useNotifications,
   useSchedule,
   useTimetable,
-} from '@skolplattformen/hooks'
+} from '../../libs/hooks/src'
 import React from 'react'
 import * as RNLocalize from 'react-native-localize'
 import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
 import { Children } from '../children.component'
 
-jest.mock('@skolplattformen/hooks')
+jest.mock('../../libs/hooks/src')
+
+const pause = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
 const setup = () => {
   return render(<Children />)
@@ -41,14 +44,13 @@ beforeEach(() => {
   useNavigation.mockReturnValue({ navigate: jest.fn(), setOptions: jest.fn() })
 })
 
-test('renders loading state', () => {
+test('renders loading state', async () => {
   useChildList.mockImplementationOnce(() => ({
     data: [],
     status: 'loading',
   }))
 
   const screen = setup()
-
   expect(screen.getByText(translate('general.loading'))).toBeTruthy()
 })
 
@@ -57,7 +59,6 @@ test('renders empty state message', () => {
     data: [],
     status: 'loaded',
   }))
-
   const screen = setup()
 
   expect(
@@ -177,7 +178,6 @@ test('renders child in class', () => {
     ],
     status: 'loaded',
   }))
-
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
@@ -194,7 +194,6 @@ test('removes any parenthesis from name', () => {
     ],
     status: 'loaded',
   }))
-
   const screen = setup()
 
   expect(screen.getByText('Test Testsson')).toBeTruthy()
@@ -210,7 +209,6 @@ test('handles multiple statuses for a child', () => {
     ],
     status: 'loaded',
   }))
-
   const screen = setup()
 
   var multipleStatusesRendered = `${translate(

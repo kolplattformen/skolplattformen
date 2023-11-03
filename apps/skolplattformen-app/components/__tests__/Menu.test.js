@@ -1,10 +1,10 @@
-import { useMenu } from '@skolplattformen/hooks'
+import { useMenu } from '../../libs/hooks/src'
 import React from 'react'
 import { render } from '../../utils/testHelpers'
 import { translate } from '../../utils/translation'
 import { Menu } from '../menu.component'
 
-jest.mock('@skolplattformen/hooks')
+jest.mock('../../libs/hooks/src')
 
 const defaultItemList = [
   {

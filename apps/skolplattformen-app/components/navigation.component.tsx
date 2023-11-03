@@ -4,7 +4,7 @@ import {
   Child as ChildType,
   NewsItem as NewsItemType,
 } from '@skolplattformen/api'
-import { useApi } from '@skolplattformen/hooks'
+import { useApi } from '../libs/hooks/src'
 import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'
 import React, { useEffect } from 'react'
@@ -43,6 +43,7 @@ import {
 
 export type RootStackParamList = {
   Login: undefined
+  IsLoggedIn: undefined
   Children: undefined
   Settings: { rand?: number } | undefined
   SettingsAppearance: undefined
@@ -110,6 +111,7 @@ export const AppNavigator = () => {
       }
     >
       <StatusBar />
+
       <Navigator
         screenOptions={() => ({
           headerLargeTitle: false,

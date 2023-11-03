@@ -1,7 +1,7 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { useNewsDetails } from '@skolplattformen/hooks'
+import { useNewsDetails } from '../libs/hooks/src'
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import moment from 'moment'
 import 'moment/locale/sv'
@@ -39,6 +39,7 @@ export const newsItemRouteOptions =
   }: {
     route: RouteProp<RootStackParamList, 'NewsItem'>
   }): NativeStackNavigationOptions => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newsItem = route.params.newsItem
     const { child } = route.params
     return {

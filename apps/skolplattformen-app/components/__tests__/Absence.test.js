@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRoute } from '@react-navigation/native'
-import { useUser } from '@skolplattformen/hooks'
+import { useUser } from '../../libs/hooks/src'
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import Mockdate from 'mockdate'
 import React from 'react'
@@ -12,7 +12,7 @@ let sendSMS
 let user = { personalNumber: '201701092395' }
 
 jest.mock('../../utils/SMS')
-jest.mock('@skolplattformen/hooks')
+jest.mock('../../libs/hooks/src')
 
 const setup = (customProps = {}) => {
   sendSMS = jest.fn()

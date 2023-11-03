@@ -1,4 +1,4 @@
-import { useNews } from '@skolplattformen/hooks'
+import { useNews } from '../libs/hooks/src'
 import { Input, List, StyleService, useStyleSheet } from '@ui-kitten/components'
 import React, { useMemo, useState } from 'react'
 import { TouchableOpacity, View, RefreshControl } from 'react-native'
