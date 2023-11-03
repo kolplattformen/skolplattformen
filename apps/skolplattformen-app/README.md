@@ -1,84 +1,59 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Öppna skolplattformen App
 
-# Getting Started
+This is the app for Öppna skolplattformen.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Getting started
 
-## Getting started with Development
+Have a look at the [overall readme](../../) for general instructions on getting started.
 
-### Please use node version 16 or higher
+### Prerequisites
 
-To clone and build the project, you first need to install [git](https://git-scm.com/), [node](https://nodejs.org/en/) and [npm](https://docs.npmjs.com/cli/v8/commands/npm-install).
-
-Clone the repo with
-```bash
-$ git clone https://github.com/Home-Biz-LLS/skolplattformen-react-native
-```
-
-Install dependencies
-```bash
-cd apps/skolplattformen-app-new/ && npm i
-```
+We use `yarn` as our package manager. To install it, run `sudo npm install -g yarn`. All the commands described here should be run from the `packages/app` directory.
 
 ### iOS
 
-If you wanna run the iOS app, you need to setup a couple of things first, we have a guide that will assist you in getting started with the iOS app. A Mac is required to build projects with native code for iOS so we do not have support for Linux / Windows.
+To get started using the iOS simulator start by installing the JavaScript
+dependencies using
 
-* [Mac OS](https://reactnative.dev/docs/environment-setup)
-
-#### Step 1
-Make sure you have **Xcode** installed
-
-
-#### Step 2
-Make sure **CocoaPods** is installed (you can do it easily with homebrew)
-
-* [CocoaPods homebrew](https://formulae.brew.sh/formula/cocoapods)
-* [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
-
-
-#### Step 3
 ```bash
-cd apps/skolplattformen-app-new/ios && pod install
+$ yarn
 ```
 
-If you already setup everything, go into the 
+Next you need to install the [Cocoapods](https://cocoapods.org/) dependencies
+for the iOS project
 
-"skolplattformen-app-new" directory
-
-Start the metro 
-
-```
-npm run start
-```
-
-then
-
-```
-i
-```
-to Start iOS app
-
-OR
-
-Start the iOS app directly
-```
-npm run ios
+```bash
+$ cd ios
+$ pod setup
+$ pod install
 ```
 
+You should now be setup to run the app in the Simulator. Run the `ios` command
+in the root of the app.
 
+```bash
+$ yarn ios
+```
 
 ### Android
 
-If you wanna run the Android app, you need to setup a couple of things first, we have created three different guides depending on your operating system.
+Android development requires that you have [Android Studio](https://developer.android.com/studio) and relevant build tools installed.
 
-* [Mac OS](/docs/android_mac.md)
-* [Windows](/docs/android_windows.md)
-* [Linux](/docs/android_linux.md)
+Start by installing JavaScript dependencies using
 
-If you already setup everything, you just need to run the following command in the project root:
-
-```
-yarn run android
+```bash
+$ yarn
 ```
 
+Before running the app you should start an emulator from Android Studio. Then
+run the following command to start the build
+
+```bash
+$ yarn android
+```
+
+## Running tests
+
+```bash
+$ yarn test
+```

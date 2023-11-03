@@ -22,7 +22,6 @@ The respective README files there contain more detailed descriptions.
 * [Architecture](#architecture)
   * [Apps](#apps)
     * [skolplattformen](#skolplattformen)
-    * [skolplattformen dependency upgrade](#skolplattformen-dependency-upgrade)
     * [website](#website)
   * [Libs](#embedded-api)
     * [api](#api)
@@ -58,9 +57,6 @@ Our main goal with the app is to make it as fast and easy to use as possible. \
 We're starting small, with more features being added over time.
 
 For more information, check out the [source code](apps/skolplattformen-app).
-
-#### skolplattformen dependency upgrade
-A dependency upgrade is currently in the works. To navigate directly to the related readme, click [here](/apps/skolplattformen-app-new/README-NEW.md).
 
 #### website
 
