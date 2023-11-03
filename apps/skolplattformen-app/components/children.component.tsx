@@ -1,3 +1,4 @@
+import 'setImmediate'
 import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { Child } from '@skolplattformen/api'

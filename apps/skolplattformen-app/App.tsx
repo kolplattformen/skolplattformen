@@ -1,3 +1,4 @@
+import 'setImmediate'
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ApiProvider, Reporter } from './libs/hooks/src'
