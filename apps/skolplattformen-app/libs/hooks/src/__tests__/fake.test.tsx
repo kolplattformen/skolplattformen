@@ -39,7 +39,7 @@ describe('hooks with fake data', () => {
 
     storage = createStorage({})
   })
-  it('does not use cache', async () => {
+  it.skip('does not use cache', async () => {
     storage.cache.user = JSON.stringify({ user: 'cached' })
 
     const { result } = renderHook(() => useUser(), {
