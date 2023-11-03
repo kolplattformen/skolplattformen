@@ -4,13 +4,18 @@
         "noNewNewsItemsThisWeek": "No hay noticias nuevas esta semana.",
         "backToChild": "Volver al niño",
         "title": "Noticias de Skolplattformen",
-        "published": "Publicada"
+        "published": "Publicada",
+        "updated": "Actualizado",
+        "search": {
+            "placeholder": "Buscar en las noticias…"
+        }
     },
     "navigation": {
         "notifications": "Notificaciones",
         "news": "Noticias",
         "calender": "Calendario",
-        "menu": "Menú"
+        "menu": "Menú",
+        "classmates": "Compañeros de clase"
     },
     "language": {
         "changeLanguage": "Cambiar idioma",
@@ -25,20 +30,28 @@
         "loading": "Cargando…",
         "confirm": "Confirmar",
         "title": "Öppna skolplattformen",
-        "cancel": "Anular"
+        "cancel": "Anular",
+        "tomorrow": "Mañana",
+        "logoutAndClearPersonalData": "Cierre la sesión y borre sus datos personales",
+        "logoutAndClearAllDataInclSettings": "Cierre la sesión y borre todos sus datos incluyendo sus configuraciones"
     },
     "children": {
         "viewStatus": "Ver estado en skolplattformen.org",
         "tryAgain": "Intentar otra vez",
         "title": "Tus hijos",
-        "noKids_title": "Sin niños"
+        "noKids_title": "Sin niños",
+        "loadingErrorHeading": "¡Ahijoles!",
+        "loadingErrorInformationText": "La página no pudo ser cargada. Intente de nuevo o mire su estado actual en skolplattformen.org.",
+        "noKids_description": "No hay infantes registrados en la ciudad de Estocolmo con su número de identificación personal"
     },
     "calender": {
         "showCalenderActions": "Mostrar acciones de calendario",
         "saveToCalenderSuccess": "✔️ Guardado en el calendario",
         "saveToCalenderError": "Algo salió mal",
         "saveToCalender": "Guardar en calendario",
-        "approveAccessToCalender": "Tienes que aprobar el acceso a tu calendario"
+        "approveAccessToCalender": "Tienes que aprobar el acceso a tu calendario",
+        "emptyText": "No hay algo que mostrar",
+        "emptyHeadline": "El calendario está un poco vacío"
     },
     "auth": {
         "words": {
@@ -72,7 +85,16 @@
         },
         "loginAsTestUser": "Inicie sesión como usuario de pruebas",
         "a11y_change_language": "Elija su idioma",
-        "a11y_image_two_boys": "Fotografia de dos personas mirando su telefono movil"
+        "a11y_image_two_boys": "Fotografia de dos personas mirando su telefono movil",
+        "chooseSchoolPlatform": "Elija la plataforma",
+        "a11y_clear_social_security_input_field": "Borrar el campo del número de identificación personal",
+        "loginSuccessful": "Se ha iniciado la sesión correctamente, cargando…",
+        "freja": {
+            "OpenManually": "Abrir Freja eID+ manualmente",
+            "OpenOnThisDevice": "Abrir Freja eID+ en este dispositivo",
+            "Waiting": "Esperando a Freja eID+…"
+        },
+        "a11y_select_login_method": "Seleccione el metodo para iniciar sesión"
     },
     "abscense": {
         "title": "Informar ausencia",
@@ -82,7 +104,8 @@
         "invalidPersonalNumber": "El personnumer no es válido",
         "entireDay": "Día completo",
         "endTime": "hora de finalización",
-        "selectAbscenseEndTime": "Elige la hora de finalización"
+        "selectAbscenseEndTime": "Elige la hora de finalización",
+        "childsPersonalNumber": "Numero de identificación del infante (personnummer)"
     },
     "abbrevations": {
         "upperSecondarySchool": "Escuela Secundaria Obligatoria",
@@ -92,5 +115,42 @@
     },
     "notifications": {
         "notificationTitle": "Notificación: {{message}} ({{dateCreated}})"
+    },
+    "contact": {
+        "home": "Dirección",
+        "email": "Correo electrónico",
+        "call": "Llamar",
+        "a11y_show_contact_info_button_label": "Mostrar información de contacto",
+        "a11y_show_contact_info_button_hint": "Muestra información de contacto",
+        "sms": "Mensaje de texto"
+    },
+    "settings": {
+        "language": "Idioma",
+        "useSystemTheme": "Use el aspecto claro/oscuro dispositivo",
+        "licenses": "Licencias",
+        "themeAuto": "Automático",
+        "appearance": "Diseño",
+        "theme": "Aspecto",
+        "settings": "Configuraciones"
+    },
+    "themes": {
+        "dark": "Oscuro",
+        "light": "Claro"
+    },
+    "menu": {
+        "emptyText": "No hay nada para esta semana",
+        "emptyHeadline": "El menu del almuerzo se ve algo vacio"
+    },
+    "classmates": {
+        "class": "Clase",
+        "child": "Infante",
+        "contactsForGuardiansFor": "Información de contacto de los tutores de"
+    },
+    "schedule": {
+        "gymBag": "Mochila de gimnasio",
+        "end": "Termina",
+        "start": "Inicia",
+        "lunch": "Almuerzo",
+        "week": "Semana"
     }
 }
