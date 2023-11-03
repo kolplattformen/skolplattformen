@@ -25,7 +25,7 @@ jobs:
           timezone: Europe/Stockholm
 
       - name: Install dependencies
-        run: yarn
+        run: cd apps/skolplattformen-app && npm install
 
       - name: Run tests
         run: cd apps/skolplattformen-app && npm test
