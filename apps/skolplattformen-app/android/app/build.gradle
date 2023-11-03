@@ -80,7 +80,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
 
         versionCode 20000
-        versionName "3.0.8"
+        versionName "3.0.9"
     }
     signingConfigs {
         debug {
