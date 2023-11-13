@@ -79,7 +79,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode 20001
+        versionCode 20002
         versionName "3.0.8"
     }
     signingConfigs {
