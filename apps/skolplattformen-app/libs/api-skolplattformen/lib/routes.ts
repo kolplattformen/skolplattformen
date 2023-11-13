@@ -22,7 +22,7 @@ export const frejaReturnUrl =
 export const frejaLoginCookie =
   'https://login003.stockholm.se/NECSadcfreja/authenticate/SiteMinderAuthADCFREJA?TYPE=33554433&REALMOID=06-89cf916c-9764-45fa-8690-eaf3fe9282bc&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2ffreja%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0LnN0b2NraG9sbS5zZS92YXJkbmFkc2hhdmFyZS9pbmxvZ2dhZDIvT3ZlcnNpa3Q%3d'
 
-const urlLoggedIn = 'https://etjanst.stockholm.se/vardnadshavare/inloggad2'
+const urlLoggedIn = `https://etjanst.stockholm.se/vardnadshavare/inloggad2`
 
 export const children = `${urlLoggedIn}/GetChildren`
 
@@ -86,18 +86,18 @@ export const createItemConfig =
 
 // Skola24
 export const ssoRequestUrl = (targetSystem: string) =>
-  `https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=${targetSystem}`
+  `https://stockholm-sso.skola24.se/nssso/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=${targetSystem}`
 
 export const ssoResponseUrl =
   'https://login001.stockholm.se/affwebservices/public/saml2sso'
 export const samlResponseUrl =
-  'https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/response'
+  'https://stockholm-sso.skola24.se/nssso/saml-2.0/response'
 
 export const timetables =
-  'https://fns.stockholm.se/ng/api/services/skola24/get/personal/timetables'
+  'https://stockholm.skola24.se/ng/api/services/skola24/get/personal/timetables'
 export const renderKey =
-  'https://fns.stockholm.se/ng/api/get/timetable/render/key'
-export const timetable = 'https://fns.stockholm.se/ng/api/render/timetable'
+  'https://stockholm.skola24.se/ng/api/get/timetable/render/key'
+export const timetable = 'https://stockholm.skola24.se/ng/api/render/timetable'
 
 export const topologyConfigUrl =
   'https://fantomenkrypto.vercel.app/api/getConfig'

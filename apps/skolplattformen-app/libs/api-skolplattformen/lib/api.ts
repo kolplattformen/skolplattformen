@@ -592,7 +592,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     await this.ssoAuthorize('TimetableViewer')
     const body = {
       getPersonalTimetablesRequest: {
-        hostName: 'fns.stockholm.se',
+        hostName: 'stockholm.skola24.se',
       },
     }
     const session = this.getRequestInit({
@@ -643,7 +643,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       customerKey: '',
       endDate: null,
       height: 1063,
-      host: 'fns.stockholm.se',
+      host: 'stockholm.skola24.se',
       periodText: '',
       privateFreeTextMode: null,
       privateSelectionMode: true,
