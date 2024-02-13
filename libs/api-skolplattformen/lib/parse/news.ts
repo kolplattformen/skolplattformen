@@ -2,7 +2,7 @@ import { NewsItem, parseDate, toMarkdown } from '@skolplattformen/api'
 import { etjanst } from './etjanst'
 
 const IMAGE_HOST =
-  'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
+  'https://etjanster.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url='
 
 export const newsItem = ({
   newsId,
