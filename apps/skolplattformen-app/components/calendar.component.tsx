@@ -1,4 +1,4 @@
-import { useCalendar } from '@skolplattformen/hooks'
+import { useCalendar } from '../libs/hooks/src'
 import { CalendarItem } from '@skolplattformen/api'
 import {
   Divider,
@@ -10,8 +10,8 @@ import {
 } from '@ui-kitten/components'
 import moment from 'moment'
 import React from 'react'
-import { ListRenderItemInfo, RefreshControl, View } from 'react-native'
 import { Layout as LayoutStyle, Sizing, Typography } from '../styles'
+import { ListRenderItemInfo, RefreshControl, View } from 'react-native'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { CalendarOutlineIcon } from './icon.component'
@@ -35,7 +35,9 @@ export const Calendar = () => {
   }
 
   const sortedData = () => {
-    if (!data) return []
+    if (!data) {
+      return []
+    }
 
     return data.sort((a, b) =>
       a.startDate && b.startDate ? a.startDate.localeCompare(b.startDate) : 0

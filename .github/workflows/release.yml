@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '14.17.6'
+          node-version: '20.6.1'
 
       - name: Setup timezone
         uses: zcong1993/setup-timezone@master
@@ -25,12 +25,15 @@ jobs:
           timezone: Europe/Stockholm
 
       - name: Install dependencies
-        run: yarn
+        run: cd apps/skolplattformen-app && npm install
 
-      - name: Run linting and tests
-        run: |
-          yarn lint
-          yarn test
+      - name: Run tests
+        run: cd apps/skolplattformen-app && npm test
+        env:
+          CI: true
+
+      - name: Check linting
+        run: cd apps/skolplattformen-app && npm run lint
         env:
           CI: true
 

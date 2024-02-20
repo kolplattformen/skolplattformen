@@ -6,7 +6,7 @@ import 'react-native-gesture-handler/jestSetup'
 moment.locale('sv')
 
 // Mock hooks
-jest.mock('@skolplattformen/hooks')
+jest.mock('./libs/hooks/src')
 
 // Silence useNativeDriver error
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')

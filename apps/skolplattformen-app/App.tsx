@@ -1,6 +1,6 @@
 import * as eva from '@eva-design/eva'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ApiProvider, Reporter } from '@skolplattformen/hooks'
+import { ApiProvider, Reporter } from './libs/hooks/src'
 import { ApplicationProvider, IconRegistry, Text } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import React from 'react'
@@ -15,6 +15,7 @@ import { default as customMapping } from './design/mapping.json'
 import { darkTheme, lightTheme } from './design/themes'
 import useSettingsStorage from './hooks/useSettingsStorage'
 import { translations } from './utils/translation'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 const reporter: Reporter | undefined = __DEV__
   ? {
@@ -24,7 +25,6 @@ const reporter: Reporter | undefined = __DEV__
   : undefined
 
 if (__DEV__) {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const DevMenu = require('react-native-dev-menu')
   DevMenu.addItem('Clear AsyncStorage from all contents', () =>
     AsyncStorage.clear().then(() => logAsyncStorage())
@@ -66,12 +66,13 @@ export default () => {
 
   const platform = schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform)
 
-  if (!platform)
+  if (!platform) {
     return (
       <View>
         <Text>ERROR</Text>
       </View>
     )
+  }
 
   return (
     <FeatureProvider features={platform.features}>
@@ -97,7 +98,9 @@ export default () => {
               theme={colorScheme === 'dark' ? darkTheme : lightTheme}
             >
               <LanguageProvider cache={true} data={translations}>
-                <AppNavigator />
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                  <AppNavigator />
+                </GestureHandlerRootView>
               </LanguageProvider>
             </ApplicationProvider>
           </SafeAreaProvider>

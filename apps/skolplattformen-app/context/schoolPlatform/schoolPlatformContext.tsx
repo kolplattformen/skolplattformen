@@ -11,12 +11,18 @@ const defaultState: SchoolPlatformProps = {
     console.log('DEBUG ONLY: changing to', platform),
 }
 
-export const SchoolPlatformProvider: React.FC = ({ children }) => {
+type SchoolPlatformProviderProps = {
+  children: React.ReactNode
+}
+
+export const SchoolPlatformProvider: React.FC<SchoolPlatformProviderProps> = ({
+  children,
+}) => {
   const [currentSchoolPlatform, setCurrentSchoolPlatform] = useSettingsStorage(
     'currentSchoolPlatform'
   )
 
-  const changeSchoolPlatform = (platform) => {
+  const changeSchoolPlatform = (platform: any) => {
     setCurrentSchoolPlatform(platform)
   }
 

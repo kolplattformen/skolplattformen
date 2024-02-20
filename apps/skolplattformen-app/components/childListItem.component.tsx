@@ -1,4 +1,4 @@
-/* eslint-disable react-native-a11y/has-accessibility-hint */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Child } from '@skolplattformen/api'
@@ -9,7 +9,7 @@ import {
   useNews,
   useNotifications,
   useSchedule,
-} from '@skolplattformen/hooks'
+} from '../libs/hooks/src'
 import {
   Button,
   StyleService,

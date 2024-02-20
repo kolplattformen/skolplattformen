@@ -1,0 +1,68 @@
+# If setting a specific version, wrap it with single quotes like '12.0'
+# to pass it as string because GitHub trimmes trailing .0 from numbers
+# due to https://github.com/actions/runner/issues/849
+
+name: build-and-ship-android
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build-and-ship-android:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/apps/skolplattformen-app/Gemfile
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          # changed this from GITHUB_PERSONAL_ACCESS_TOKEN_PATH to GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.13'
+          cache: 'npm'
+          cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app/package-lock.json
+      - name: set npm version
+        run: npm install -g npm@9.6.0 && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} workspace= ${{ github.workspace }} secrets.MAPS_API_KEY=${{secrets.MAPS_API_KEY}}"
+      - run: cd apps/skolplattformen-app/android && bundle install
+      - name: install node modules
+        run: cd apps/skolplattformen-app && npm ci
+      - name: Setup local.properties
+        run: echo "MAPS_API_KEY=${{ env.MAPS_API_KEY }}" > ${{ github.workspace }}/apps/skolplattformen-app/android/local.properties
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+      - name: Setup key.json
+        run: echo "${KEY_JSON}" > ${{ github.workspace }}/apps/skolplattformen-app/android/key.json
+        env:
+          KEY_JSON: ${{ secrets.KEY_JSON }}
+      - run: cd apps/skolplattformen-app/android && bundle exec fastlane android beta
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          ALIAS_KEY_PASSWORD: ${{ secrets.ALIAS_KEY_PASSWORD }}
+      - name: 'Store artifact native_debug_symbols.zip'
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: native_debug_symbols.zip
+          path: ${{ github.workspace }}/apps/skolplattformen-app/android/native_debug_symbols.zip
+          retention-days: 5
+      - name: 'Store build mappings for difficult crashlytics traces'
+        uses: actions/upload-artifact@v3
+        if: ${{ success() }}
+        with:
+          name: mapping.txt
+          path: ${{ github.workspace }}/apps/skolplattformen-app/android/app/build/outputs/mapping/release/mapping.txt
+          retention-days: 500

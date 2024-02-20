@@ -1,10 +1,10 @@
 import CookieManager from '@react-native-cookies/cookies'
 import initHjarntorget, {
   features as featuresHjarntorget,
-} from '@skolplattformen/api-hjarntorget'
+} from '../libs/api-hjarntorget/lib/'
 import initSkolplattformen, {
   features as featuresSkolPlattformen,
-} from '@skolplattformen/api-skolplattformen'
+} from '../libs/api-skolplattformen/lib/'
 
 export const schoolPlatforms = [
   {

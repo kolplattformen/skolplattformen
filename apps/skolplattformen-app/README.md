@@ -8,7 +8,7 @@ Have a look at the [overall readme](../../) for general instructions on getting 
 
 ### Prerequisites
 
-We use `yarn` as our package manager. To install it, run `sudo npm install -g yarn`. All the commands described here should be run from the `packages/app` directory.
+We use `yarn` as our package manager. To install it, run `sudo npm install -g yarn`. All the commands described here should be run from the `apps/skolplattformen-app` directory.
 
 ### iOS
 
@@ -34,6 +34,16 @@ in the root of the app.
 ```bash
 $ yarn ios
 ```
+
+If you receive an error regarding not being able to find the app scheme:
+
+- Open the app in xcode
+- Product -> scheme -> manage scheme
+- App should be ticked with the value of 'app project'
+- Change 'app project' to something else from its drop down and back again
+- Close
+
+Then run yarn ios again
 
 ### Android
 
