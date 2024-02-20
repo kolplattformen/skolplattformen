@@ -1,0 +1,156 @@
+{
+    "abbrevations": {
+        "compulsorySchool": "Grundschule",
+        "leisureTimeCentre": "Hort",
+        "preSchool": "Vorschule",
+        "upperSecondarySchool": "Gymnasium"
+    },
+    "abscense": {
+        "endTime": "Endzeit",
+        "entireDay": "Ganzen Tag",
+        "invalidPersonalNumber": "Personenkennziffer ungültig",
+        "personalNumberMissing": "Personenkennziffer fehlt",
+        "selectAbscenseEndTime": "Endzeit wählen",
+        "selectAbscenseStartTime": "Startzeit wählen",
+        "startTime": "Startzeit",
+        "title": "Abwesenheit anmelden",
+        "childsPersonalNumber": "Personenkennziffer des Kindes"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "BankID manuell öffnen",
+            "OpenOnAnotherDevice": "BankID auf einem anderen Gerät öffnen",
+            "OpenOnThisDevice": "BankID auf diesem Gerät öffnen",
+            "Waiting": "Wartet auf BankID…"
+        },
+        "chooseLoginMethod": "Anmeldemethode auswählen",
+        "loginAsTestUser": "Als Testbenutzer einloggen",
+        "loginFailed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es nochmal.",
+        "placeholder_SocialSecurityNumber": "Deine Personenkennziffer",
+        "subtitle": "Die {{word}} Alternative",
+        "words": {
+            "agile": "agile",
+            "awaited": "erwartete",
+            "better": "bessere",
+            "cheap": "billige",
+            "cooler": "coolere",
+            "enlightened": "erleuchtete",
+            "fantastic": "fantastische",
+            "fast": "schnelle",
+            "first": "erste",
+            "free": "freie",
+            "fun": "lustige",
+            "homemade": "selbstgemachte",
+            "imperfect": "unvollkommene",
+            "open": "offene",
+            "rebellious": "rebellische",
+            "simple": "einfache",
+            "working": "funktionierende"
+        },
+        "a11y_select_login_method": "Wähle die Anmeldemethode",
+        "a11y_clear_social_security_input_field": "Personenkennziffer-Feld löschen",
+        "a11y_image_two_boys": "Bild von zwei Personen, die ihre Mobiltelefon überprüfen",
+        "a11y_change_language": "Wähle deine Sprache",
+        "chooseSchoolPlatform": "Plattform wählen",
+        "freja": {
+            "Waiting": "Wartet auf Freja eID+…",
+            "OpenManually": "Freja eID+ manuell öffnen",
+            "OpenOnThisDevice": "Freja eID+ auf diesem Gerät öffnen"
+        },
+        "loginSuccessful": "Eingeloggt, wird geladen…"
+    },
+    "calender": {
+        "approveAccessToCalender": "Du musst Zugriff auf deinen Kalender erlauben",
+        "saveToCalender": "Im Kalender speichern",
+        "saveToCalenderError": "Ein Fehler ist aufgetreten",
+        "saveToCalenderSuccess": "✔️ Im Kalender gespeichert",
+        "showCalenderActions": "Kalender-Actions zeigen",
+        "emptyHeadline": "Der Kalender sieht leer aus",
+        "emptyText": "Nichts wurde gefunden"
+    },
+    "children": {
+        "loadingErrorHeading": "Hoppla!",
+        "loadingErrorInformationText": "Diese Seite kann nicht geladen werden. Versuche es nochmal oder kontrolliere den aktuellen Status auf skolplattformen.org.",
+        "noKids_description": "Für diese Personenkennziffer gibt es keine in Stockholm registrierten Kinder",
+        "noKids_title": "Keine Kinder",
+        "title": "Deine Kinder",
+        "tryAgain": "Nochmal versuchen",
+        "viewStatus": "Status kontrollieren auf skolplattformen.org"
+    },
+    "general": {
+        "changeLanguage": "Sprache ändern",
+        "confirm": "Bestätigen",
+        "loading": "Wird geladen…",
+        "logout": "Ausloggen",
+        "send": "Senden",
+        "settings": "Einstellungen",
+        "socialSecurityNumber": "Personenkennziffer",
+        "title": "Öppna skolplattformen",
+        "cancel": "Abbrechen",
+        "logoutAndClearPersonalData": "Ausloggen und persönliche Daten löschen",
+        "logoutAndClearAllDataInclSettings": "Ausloggen und alle Daten inkl. Einstellungen löschen",
+        "tomorrow": "Morgen"
+    },
+    "language": {
+        "changeLanguage": "Sprache ändern",
+        "changeLanguageButton": "Speichern"
+    },
+    "menu": {
+        "emptyHeadline": "Die Speisekarte sieht ein bisschen leer aus",
+        "emptyText": "Nichts zu zeigen für diese Woche"
+    },
+    "navigation": {
+        "calender": "Kalender",
+        "menu": "Speisekarte",
+        "news": "Nachrichten",
+        "notifications": "Mitteilungen",
+        "classmates": "Mitschüler"
+    },
+    "news": {
+        "backToChild": "Zurück zum Kind",
+        "noNewNewsItemsThisWeek": "Keine neuen Nachrichten diese Woche.",
+        "notificationTitle": "Nachricht: {{header}} ({{published}})",
+        "published": "Veröffentlicht",
+        "title": "Nachricht von Skolplattformen",
+        "updated": "Aktualisiert",
+        "search": {
+            "placeholder": "Alle Nachrichten durchsuchen …"
+        }
+    },
+    "notifications": {
+        "notificationTitle": "Mitteilung: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "gymBag": "Turnbeutel",
+        "lunch": "Mittagessen",
+        "end": "Ende",
+        "start": "Anfang",
+        "week": "Woche"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Zeigt Kontaktinformation an",
+        "home": "Adresse",
+        "email": "E-Mail",
+        "sms": "SMS",
+        "call": "Anrufen",
+        "a11y_show_contact_info_button_label": "Kontaktinformationen anzeigen"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Kontaktinformationen der Erziehungsberechtigten für",
+        "child": "Kind",
+        "class": "Klasse"
+    },
+    "settings": {
+        "appearance": "Modus",
+        "licenses": "Lizenzen",
+        "language": "Sprache",
+        "themeAuto": "Automatisch",
+        "useSystemTheme": "Systemmodus benutzen",
+        "settings": "Einstellungen",
+        "theme": "Modus"
+    },
+    "themes": {
+        "light": "Hell",
+        "dark": "Dunkel"
+    }
+}

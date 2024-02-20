@@ -1,0 +1,156 @@
+{
+    "abbrevations": {
+        "preSchool": "学前班",
+        "upperSecondarySchool": "高中",
+        "compulsorySchool": "小学/初中",
+        "leisureTimeCentre": "课后托管"
+    },
+    "abscense": {
+        "endTime": "结束时间",
+        "entireDay": "全天",
+        "selectAbscenseEndTime": "选择结束时间",
+        "selectAbscenseStartTime": "选择开始时间",
+        "title": "报告缺席情况",
+        "invalidPersonalNumber": "个人身份号码无效",
+        "personalNumberMissing": "缺少个人身份号码",
+        "startTime": "开始时间",
+        "childsPersonalNumber": "孩子的个人身份号码"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "手动打开 BankID",
+            "OpenOnAnotherDevice": "在另一台设备上打开 BankID",
+            "OpenOnThisDevice": "在本设备上打开 BankID",
+            "Waiting": "正在等待 BankID 响应…"
+        },
+        "loginAsTestUser": "以测试用户身份登录",
+        "loginFailed": "无法登录。请重试。",
+        "placeholder_SocialSecurityNumber": "你的个人身份号码",
+        "words": {
+            "agile": "轻快",
+            "awaited": "久违",
+            "better": "更佳",
+            "cheap": "价廉",
+            "cooler": "酷乐",
+            "enlightened": "开明",
+            "fantastic": "匪夷",
+            "fast": "迅捷",
+            "free": "自由",
+            "fun": "乐趣",
+            "homemade": "手制",
+            "open": "开放",
+            "rebellious": "逆流",
+            "simple": "简单",
+            "imperfect": "有瑕",
+            "first": "一流",
+            "working": "可用"
+        },
+        "subtitle": "{{word}}之选",
+        "a11y_clear_social_security_input_field": "清空个人身份号码栏",
+        "chooseLoginMethod": "选择登录方式",
+        "a11y_change_language": "选择您的语言",
+        "a11y_image_two_boys": "两个人看手机的图片",
+        "a11y_select_login_method": "选择登录方式",
+        "chooseSchoolPlatform": "选择平台",
+        "freja": {
+            "OpenManually": "手动打开 Freja eID+",
+            "OpenOnThisDevice": "在此设备上打开 Freja eID+",
+            "Waiting": "正在等待 Freja eID+ 响应…"
+        },
+        "loginSuccessful": "登录成功，正在加载…"
+    },
+    "calender": {
+        "saveToCalender": "保存到日历中",
+        "saveToCalenderError": "出了点问题",
+        "saveToCalenderSuccess": "✔️ 已保存到日历中",
+        "showCalenderActions": "显示日历操作",
+        "approveAccessToCalender": "您必须允许访问日历",
+        "emptyHeadline": "日历看起来有点空",
+        "emptyText": "找不到任何可以显示的东西"
+    },
+    "children": {
+        "loadingErrorHeading": "啊噢！",
+        "loadingErrorInformationText": "这个页面无法加载。请重试或在 skolplattformen.org 网站上查看当前状态。",
+        "noKids_title": "没有找到孩子",
+        "title": "您的孩子",
+        "tryAgain": "请重试",
+        "viewStatus": "在 skolplattformen.org 网站上查看状态",
+        "noKids_description": "您的个人身份号码下没有注册在斯德哥尔摩市的孩子"
+    },
+    "general": {
+        "cancel": "取消",
+        "changeLanguage": "更改语言",
+        "confirm": "确认",
+        "loading": "正在加载…",
+        "logout": "登出",
+        "logoutAndClearPersonalData": "登出并清除个人数据",
+        "logoutAndClearAllDataInclSettings": "登出并清除包括设置在内的所有数据",
+        "send": "发送",
+        "socialSecurityNumber": "个人身份号码",
+        "title": "开放学校平台",
+        "settings": "设置",
+        "tomorrow": "明天"
+    },
+    "language": {
+        "changeLanguage": "更改语言",
+        "changeLanguageButton": "保存"
+    },
+    "menu": {
+        "emptyHeadline": "午餐菜单看起来有点空",
+        "emptyText": "找不到有关这个星期的任何内容"
+    },
+    "navigation": {
+        "calender": "日历",
+        "menu": "午餐",
+        "news": "新闻",
+        "notifications": "通知",
+        "classmates": "同班同学"
+    },
+    "settings": {
+        "appearance": "外观",
+        "licenses": "许可证",
+        "language": "语言",
+        "themeAuto": "自动",
+        "useSystemTheme": "使用系统亮色/暗色主题",
+        "settings": "设置",
+        "theme": "主题"
+    },
+    "themes": {
+        "light": "亮色",
+        "dark": "暗色"
+    },
+    "news": {
+        "backToChild": "返回到孩子页面",
+        "noNewNewsItemsThisWeek": "这个星期没有新闻。",
+        "notificationTitle": "新闻：{{header}}（{{published}}）",
+        "published": "已发布",
+        "updated": "已更新",
+        "search": {
+            "placeholder": "在新闻中搜索…"
+        },
+        "title": "来自学校平台的新闻"
+    },
+    "notifications": {
+        "notificationTitle": "通知：{{message}}（{{dateCreated}}）"
+    },
+    "schedule": {
+        "start": "开始",
+        "end": "结束",
+        "lunch": "午餐",
+        "gymBag": "健身袋",
+        "week": "星期"
+    },
+    "classmates": {
+        "class": "课堂",
+        "child": "孩子",
+        "contactsForGuardiansFor": "监护人的联系信息"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "显示联系信息",
+        "a11y_show_contact_info_button_label": "显示联系信息",
+        "sms": "短信",
+        "call": "电话",
+        "email": "电子邮箱",
+        "home": "家庭地址"
+    }
+}

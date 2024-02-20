@@ -1,0 +1,102 @@
+{
+    "abbrevations": {
+        "compulsorySchool": "Dugsiga khasabka ah",
+        "leisureTimeCentre": "Waqtiga firaaqada",
+        "preSchool": "Dugsiga barbaarinta",
+        "upperSecondarySchool": "Dugsiga sare"
+    },
+    "abscense": {
+        "endTime": "End time",
+        "entireDay": "Maalintoo dhan",
+        "invalidPersonalNumber": "Personal number invalid",
+        "personalNumberMissing": "Personal number missing",
+        "selectAbscenseEndTime": "Xulo waqtiga dhamaadka",
+        "selectAbscenseStartTime": "Choose start time",
+        "startTime": "Start time",
+        "title": "Maqnaanshaha ka warbixi"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Sugaya BankID ...",
+            "OpenOnAnotherDevice": "Ku fur BankID qalab kale",
+            "OpenOnThisDevice": "Ku fur BankID qalabkan",
+            "Waiting": "Sugaya BankID ..."
+        },
+        "chooseLoginMethod": "Xulo habka galitaanka",
+        "loginAsTestUser": "Soo gal isticmaalaha imtixaanka",
+        "loginFailed": "Soo galitaanku wuu fashilmay, fadlan iskuday markale!",
+        "placeholder_SocialSecurityNumber": "Lambarkaaga gaarka ah",
+        "subtitle": "Beddelka {{word}}",
+        "words": {
+            "agile": "kacsan",
+            "awaited": "sugayay",
+            "better": "fiican",
+            "cheap": "jaban",
+            "cooler": "ccooleroolare",
+            "enlightened": "iftiimiyay",
+            "fantastic": "cajiib ah",
+            "fast": "soon",
+            "first": "marka hore",
+            "free": "bilaash ah",
+            "fun": "madadaalo",
+            "homemade": "macmal ah",
+            "imperfect": "aan dhammaystirnayn",
+            "open": "furid",
+            "rebellious": "caasiyoobay",
+            "simple": "fudud",
+            "working": "shaqeeya"
+        }
+    },
+    "calender": {
+        "approveAccessToCalender": "Waa inaad ansixisaa helitaanka jadwalkaaga",
+        "saveToCalender": "Save to calender",
+        "saveToCalenderError": "Waxbaa qaldamay",
+        "saveToCalenderSuccess": "Ved Lagu keydiyey calender",
+        "showCalenderActions": "Muuji ficilada calender-ka"
+    },
+    "children": {
+        "loadingErrorHeading": "Oops!",
+        "loadingErrorInformationText": "This page cannot be loaded. Try again or view current status on skolplattformen.org.",
+        "noKids_description": "Ma jiraan caruur ka diiwaan gashan lambarkaaga sooshiyal sekuyuuriyada Stockholm",
+        "noKids_title": "Carruur ma leh",
+        "title": "Your kids",
+        "tryAgain": "Try again",
+        "viewStatus": "View status on skolplattformen.org"
+    },
+    "general": {
+        "changeLanguage": "Change language",
+        "confirm": "Confirm",
+        "loading": "Loading...",
+        "logout": "Logout",
+        "send": "Send",
+        "settings": "Settings",
+        "socialSecurityNumber": "Personal identity number",
+        "title": "Öppna skolplattformen",
+        "cancel": "Abort"
+    },
+    "language": {
+        "changeLanguage": "Beddel luqadda",
+        "changeLanguageButton": "Keydso"
+    },
+    "menu": {
+        "emptyHeadline": "The menu looks kinda empty",
+        "emptyText": "Couldn't find anything for this week"
+    },
+    "navigation": {
+        "calender": "Calendar",
+        "menu": "Liiska",
+        "news": "Wararka",
+        "notifications": "Ogeysiisyada"
+    },
+    "news": {
+        "backToChild": "Ku noqo ilmaha",
+        "noNewNewsItemsThisWeek": "Ma jiraan warar cusub toddobaadkan.",
+        "notificationTitle": "Warar: {{header}} ({{published}})",
+        "published": "Published",
+        "title": "Wararka ka imanaya madasha dugsiga",
+        "updated": "Updated"
+    },
+    "notifications": {
+        "notificationTitle": "Ogeysiis: {{message}} ({{dateCreated}})"
+    }
+}

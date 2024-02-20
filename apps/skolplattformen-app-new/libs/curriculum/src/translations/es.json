@@ -1,0 +1,41 @@
+{
+    "specialLanguages": {
+        "SV": "Sueco",
+        "SP": "Español",
+        "SAM": "Sami",
+        "RY": "Ruso",
+        "PO": "Portugués",
+        "KI": "Chino",
+        "JAP": "Japonés",
+        "IT": "Italiano",
+        "FI": "Finlandés",
+        "FR": "Francés",
+        "EN": "Inglés"
+    },
+    "traningsskolaSubjects": {
+        "VAA": "Actividades cotidianas",
+        "KOM": "Comunicación"
+    },
+    "subjects": {
+        "ES": "Estética",
+        "DA": "Estudios preparatorios de baile",
+        "TK": "Tecnología",
+        "TN": "Lenguaje de signos",
+        "SVA": "Sueco como segunda lengua",
+        "SV": "Sueco",
+        "SL": "Artesanía",
+        "SH": "Educación cívica",
+        "RE": "Religión",
+        "HI": "Historia",
+        "GE": "Geografía",
+        "KE": "Química",
+        "FY": "Física",
+        "BI": "Biología",
+        "NO": "Ciencias Naturales",
+        "MU": "Música",
+        "MA": "Matemáticas",
+        "IDH": "Salud y educación física",
+        "HKK": "Estudios sobre el hogar y el consumidor",
+        "EN": "inglés"
+    }
+}

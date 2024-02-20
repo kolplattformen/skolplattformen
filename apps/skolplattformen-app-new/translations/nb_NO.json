@@ -1,0 +1,150 @@
+{
+    "children": {
+        "noKids_description": "Det er ingen barn registrert i Stockholm by med det personnummeret",
+        "viewStatus": "Vis status på skolplattformen.org",
+        "tryAgain": "Prøv igjen",
+        "title": "Dine barn",
+        "noKids_title": "Ingen barn",
+        "loadingErrorInformationText": "Denne siden kan ikke lastes inn. Prøv igjen eller vis nåværende status på skolplattformen.org.",
+        "loadingErrorHeading": "Oida."
+    },
+    "auth": {
+        "bankid": {
+            "Waiting": "Venter på BankID …",
+            "OpenOnThisDevice": "Åpne BankID på denne enheten",
+            "OpenOnAnotherDevice": "Åpne BankID på en annen enhet",
+            "OpenManually": "Åpne BankID manuelt"
+        },
+        "loginAsTestUser": "Logg inn som tekstbruker",
+        "loginFailed": "Kunne ikke logge inn. Prøv igjen.",
+        "words": {
+            "free": "frie",
+            "working": "fungerende",
+            "simple": "enkle",
+            "rebellious": "rebelske",
+            "open": "åpne",
+            "imperfect": "uperfekte",
+            "homemade": "hjemmelagde",
+            "fun": "morsomme",
+            "first": "første",
+            "fast": "raske",
+            "fantastic": "fantastiske",
+            "enlightened": "opplyste",
+            "cooler": "kulere",
+            "cheap": "billige",
+            "better": "bedre",
+            "awaited": "etterlengtede",
+            "agile": "smidige"
+        },
+        "subtitle": "Det {{word}} alternativet",
+        "placeholder_SocialSecurityNumber": "Ditt personnummer",
+        "chooseLoginMethod": "Velg innloggingsmetode",
+        "a11y_select_login_method": "Velg innloggingsmetode",
+        "a11y_clear_social_security_input_field": "Tøm personnummerfeltet",
+        "a11y_image_two_boys": "Bilde av to folk som sjekker mobiltelefonene sine",
+        "a11y_change_language": "Velg språk",
+        "chooseSchoolPlatform": "Velg plattform"
+    },
+    "calender": {
+        "saveToCalender": "Lagre i kalender",
+        "saveToCalenderSuccess": "✔️ Lagret i kalender",
+        "showCalenderActions": "Vis kalenderhandlinger",
+        "saveToCalenderError": "Noe gikk galt",
+        "approveAccessToCalender": "Du må innvilge tilgang til kalenderen din",
+        "emptyHeadline": "Kalenderen ser tom ut",
+        "emptyText": "Ingenting å vise"
+    },
+    "general": {
+        "loading": "Laster inn …",
+        "logout": "Logg ut",
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "Personnummer",
+        "confirm": "Bekreft",
+        "changeLanguage": "Endre språk",
+        "settings": "Innstillinger",
+        "send": "Send",
+        "cancel": "Avbryt",
+        "logoutAndClearPersonalData": "Logg ut og tøm personlig data",
+        "logoutAndClearAllDataInclSettings": "Logg ut og tøm all data, inkludert innstillinger",
+        "tomorrow": "I morgen"
+    },
+    "news": {
+        "updated": "Oppdatert",
+        "notificationTitle": "Nyheter: {{header}} ){{published}})",
+        "backToChild": "Tilbake til barn",
+        "published": "Publisert",
+        "title": "Nyheter fra Skolplattformen",
+        "noNewNewsItemsThisWeek": "Ingen nye nyhetselementer denne uken.",
+        "search": {
+            "placeholder": "Søk i alle nyheter …"
+        }
+    },
+    "abscense": {
+        "title": "Rapporter fravær",
+        "startTime": "Starttid",
+        "selectAbscenseStartTime": "Velg starttid",
+        "selectAbscenseEndTime": "Velg slutt-tid",
+        "personalNumberMissing": "Personnummer mangler",
+        "invalidPersonalNumber": "Ugyldig personnummer",
+        "entireDay": "Hele dagen",
+        "endTime": "Slutt",
+        "childsPersonalNumber": "Barnets personnummer"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Videregående",
+        "preSchool": "Førskole",
+        "leisureTimeCentre": "Skolefritidsordning",
+        "compulsorySchool": "Grunnskole"
+    },
+    "notifications": {
+        "notificationTitle": "Merknad: {{message}} ({{dateCreated}})"
+    },
+    "navigation": {
+        "notifications": "Merknader",
+        "news": "Nyheter",
+        "menu": "Meny",
+        "calender": "Kalender",
+        "classmates": "Klassekamerater"
+    },
+    "menu": {
+        "emptyText": "Fant ikke noe denne uken",
+        "emptyHeadline": "Menyen ser ganske tom ut"
+    },
+    "language": {
+        "changeLanguageButton": "Lagre",
+        "changeLanguage": "Endre språk"
+    },
+    "schedule": {
+        "gymBag": "Gym-bag",
+        "lunch": "Lunsj",
+        "end": "Slutt",
+        "start": "Start",
+        "week": "Uke"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Vis kontaktinfo",
+        "call": "Ring",
+        "a11y_show_contact_info_button_label": "Vis kontaktinfo",
+        "sms": "SMS",
+        "email": "E-post",
+        "home": "Adresse"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Foresattes kontaktinfo for",
+        "class": "Klasse",
+        "child": "Barn"
+    },
+    "settings": {
+        "settings": "Innstillinger",
+        "appearance": "Utseende",
+        "themeAuto": "Auto",
+        "theme": "Drakt",
+        "language": "Språk",
+        "licenses": "Lisenser",
+        "useSystemTheme": "Ifør systemets drakt"
+    },
+    "themes": {
+        "light": "Lys",
+        "dark": "Mørk"
+    }
+}

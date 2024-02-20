@@ -1,0 +1,102 @@
+{
+    "auth": {
+        "placeholder_SocialSecurityNumber": "Henkilötunnuksesi",
+        "bankid": {
+            "Waiting": "Odotetaan BankID:iä…",
+            "OpenOnThisDevice": "Avaa BankID tällä laitteella",
+            "OpenOnAnotherDevice": "Avaa BankID toisessa laitteessa",
+            "OpenManually": "Avaa BankID manuaalisesti"
+        },
+        "words": {
+            "working": "toimiva",
+            "simple": "yksinkertainen",
+            "rebellious": "kapinallinen",
+            "open": "avoin",
+            "imperfect": "epätäydellinen",
+            "homemade": "kotitekoinen",
+            "fun": "hauskaa",
+            "free": "ilmainen",
+            "first": "ensimmäinen",
+            "fast": "nopea",
+            "fantastic": "fantastinen",
+            "enlightened": "valaistunut",
+            "cooler": "viileämpi",
+            "cheap": "halpa",
+            "better": "parempi",
+            "awaited": "odotettu",
+            "agile": "ketterä"
+        },
+        "subtitle": "{{word}} vaihtoehto",
+        "loginFailed": "Sisäänkirjautuminen epäonnistui. Yritä uudelleen.",
+        "loginAsTestUser": "Kirjaudu sisään testikäyttäjänä",
+        "chooseLoginMethod": "Valitse kirjautumistapa"
+    },
+    "notifications": {
+        "notificationTitle": "Ilmoitus: {{message}} ({{dateCreated}})"
+    },
+    "news": {
+        "updated": "Päivitetty",
+        "title": "Uutisia Skolplattformenilta",
+        "published": "Julkaistu",
+        "notificationTitle": "Uutiset: {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Tällä viikolla ei ole uusia uutisia.",
+        "backToChild": "Takaisin lapselle"
+    },
+    "navigation": {
+        "notifications": "Ilmoitukset",
+        "news": "Uutiset",
+        "menu": "Valikko",
+        "calender": "Kalenteri"
+    },
+    "menu": {
+        "emptyText": "Ei löytynyt mitään tälle viikolle",
+        "emptyHeadline": "Valikko näyttää melko tyhjältä"
+    },
+    "language": {
+        "changeLanguageButton": "Tallenna",
+        "changeLanguage": "Vaihda kieltä"
+    },
+    "general": {
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "Henkilötunnus",
+        "settings": "Asetukset",
+        "send": "Lähetä",
+        "logout": "Kirjaudu ulos",
+        "loading": "Ladataan…",
+        "confirm": "Hyväksy",
+        "changeLanguage": "Vaihda kieltä",
+        "cancel": "Keskeytä"
+    },
+    "children": {
+        "viewStatus": "Näytä tila osoitteessa skolplattformen.org",
+        "tryAgain": "Yritä uudelleen",
+        "title": "Lapsesi",
+        "noKids_title": "Ei lapsia",
+        "noKids_description": "Tukholman kaupungilla ei ole rekisteröityjä lapsia henkilötunnuksellesi",
+        "loadingErrorInformationText": "Tätä sivua ei voi ladata. Yritä uudelleen tai katso nykyinen tila osoitteessa skolplattformen.org.",
+        "loadingErrorHeading": "Hups!"
+    },
+    "calender": {
+        "showCalenderActions": "Näytä kalenteritoiminnot",
+        "saveToCalenderSuccess": "✔️ Tallennettu kalenteriin",
+        "saveToCalenderError": "Jokin meni pieleen",
+        "saveToCalender": "Tallenna kalenteriin",
+        "approveAccessToCalender": "Sinun on hyväksyttävä kalenterisi käyttöoikeus"
+    },
+    "abscense": {
+        "title": "Ilmoita poissaolosta",
+        "startTime": "Aloitusaika",
+        "selectAbscenseStartTime": "Valitse aloitusaika",
+        "selectAbscenseEndTime": "Valitse päättymisaika",
+        "personalNumberMissing": "Henkilötunnus puuttuu",
+        "invalidPersonalNumber": "Henkilötunnus on virheellinen",
+        "entireDay": "Kokopäivä",
+        "endTime": "Lopetusaika"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Lukio",
+        "preSchool": "Esikoulu",
+        "leisureTimeCentre": "Vapaa-ajankoti",
+        "compulsorySchool": "Peruskoulu"
+    }
+}

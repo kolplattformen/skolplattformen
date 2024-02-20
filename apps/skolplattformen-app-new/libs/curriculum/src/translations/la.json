@@ -1,0 +1,63 @@
+{
+    "languages": {
+        "AZE": "Lingua atropatenica",
+        "AYM": "Lingua aymara",
+        "AII": "Lingua Assyriae",
+        "HYE": "Lingua armeniaca",
+        "ARA": "Lingua arabica",
+        "AMH": "Lingua amharica",
+        "SQI": "Lingua albanica",
+        "AKA": "Lingua acanica",
+        "AFR": "Lingua batava capitensis",
+        "AAR": "Lingua afarica",
+        "ACH": "Lingua acholica",
+        "ACE": "Lingua acehnesiana"
+    },
+    "specialLanguages": {
+        "TY": "Lingua germanica",
+        "TN": "Lingua gesticulationum",
+        "SVA": "Lingua suecica extranea",
+        "SV": "Lingua suecica",
+        "SP": "Lingua hispanica",
+        "SAM": "Lingua samica",
+        "RY": "Lingua russica",
+        "PO": "Lingua lusitanica",
+        "KI": "Lingua sinica",
+        "JAP": "Lingua iaponica",
+        "IT": "Lingua italica",
+        "FI": "Lingua finnica",
+        "FR": "Lingua francogallica",
+        "EN": "Lingua anglica"
+    },
+    "traningsskolaSubjects": {
+        "VEU": "Perceptio",
+        "VAA": "Actiones vulgares",
+        "MOT": "Coordinatio corporalis",
+        "KOM": "Communicatio"
+    },
+    "subjects": {
+        "ES": "Opera formosa",
+        "JU": "Studia iudaea",
+        "DA": "Studia praeparatoria saltatoria",
+        "TK": "Technologia",
+        "TN": "Lingua gesticulationum",
+        "SVA": "Lingua suecica extranea",
+        "SV": "Lingua suecica",
+        "SL": "Artes practicae",
+        "SH": "Scientia civilis",
+        "RE": "Scientia religiosa",
+        "HI": "Historia",
+        "GE": "Geographia",
+        "SO": "Scientiae rei publicae",
+        "KE": "Chemia",
+        "FY": "Physica",
+        "BI": "Biologia",
+        "HKK": "Scientia domi emptorisque",
+        "NO": "Scientia naturalis",
+        "MU": "Musica",
+        "MA": "Mathematica",
+        "IDH": "Exercitium sanitasque",
+        "EN": "Lingua anglica",
+        "BL": "Ars"
+    }
+}

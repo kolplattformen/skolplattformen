@@ -1,0 +1,98 @@
+{
+    "navigation": {
+        "notifications": "通知",
+        "menu": "メニュー",
+        "calender": "カレンダー",
+        "classmates": "同級生",
+        "news": "ニュース"
+    },
+    "abscense": {
+        "endTime": "終了時間",
+        "personalNumberMissing": "個人識別番号が入力されていない",
+        "invalidPersonalNumber": "個人識別番号が無効",
+        "entireDay": "一日中",
+        "title": "不在を報告する",
+        "selectAbscenseEndTime": "終了時間を選択します",
+        "selectAbscenseStartTime": "開始時間を選択します",
+        "startTime": "開始時間",
+        "childsPersonalNumber": "子供の個人識別番号"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "ギムナジウム",
+        "preSchool": "就学前学級",
+        "leisureTimeCentre": "学童保育",
+        "compulsorySchool": "基礎学校"
+    },
+    "general": {
+        "settings": "設定",
+        "tomorrow": "明日"
+    },
+    "children": {
+        "tryAgain": "やり直してください",
+        "title": "あなたの子供",
+        "noKids_title": "子供のない",
+        "loadingErrorHeading": "おっと！",
+        "loadingErrorInformationText": "このページを読み込むことができません。もう一度してみるか、skolplattformen.orgで現在のステータスを調べてください。",
+        "noKids_description": "ストックホルム市にその個人識別番号で登録された子供はいません"
+    },
+    "auth": {
+        "a11y_image_two_boys": "自分の携帯電話を見ている二人",
+        "a11y_change_language": "あなたの言語を選択して下さい",
+        "words": {
+            "simple": "簡単",
+            "homemade": "自家製",
+            "imperfect": "不完全",
+            "agile": "アジャイル",
+            "open": "オープン",
+            "fun": "楽しい",
+            "free": "自由な",
+            "first": "最初",
+            "fast": "速い",
+            "fantastic": "素晴らしい",
+            "cheap": "安い",
+            "better": "より良い",
+            "working": "いいな機能性",
+            "rebellious": "反抗的な",
+            "enlightened": "エンライテンド",
+            "cooler": "かっこいい",
+            "awaited": "待ち受ける"
+        },
+        "subtitle": "{{word}}の選択肢",
+        "chooseLoginMethod": "ログイン方法を選んでください",
+        "loginAsTestUser": "テスト・ユーザーでログインしてください",
+        "bankid": {
+            "OpenManually": "手動でBankIDを開ける",
+            "OpenOnAnotherDevice": "別のデバイスでBankIDを使用する",
+            "Waiting": "BankIDを待っています…",
+            "OpenOnThisDevice": "このデバイスでBankIDを使用する"
+        },
+        "loginFailed": "ログインできませんでした。再試行してください。",
+        "placeholder_SocialSecurityNumber": "あなたの個人番号",
+        "freja": {
+            "OpenOnThisDevice": "このデバイスで Freja eID+を使用する",
+            "OpenManually": "手動でFreja eID+を開ける",
+            "Waiting": "Freja eID+を待っています…"
+        },
+        "a11y_clear_social_security_input_field": "個人識別番号のフィールドを空にする",
+        "chooseSchoolPlatform": "ログイン方法を選んでください",
+        "loginSuccessful": "ログインは完成した、よみこんでいる。。。",
+        "a11y_select_login_method": "ログインする方法を選ぶ"
+    },
+    "language": {
+        "changeLanguage": "他の言語を選択"
+    },
+    "contact": {
+        "home": "住所"
+    },
+    "calender": {
+        "approveAccessToCalender": "カレンダーのアクセスを許可する必要があります",
+        "saveToCalenderError": "エラーが発生しました",
+        "saveToCalender": "カレンダーに保存する",
+        "saveToCalenderSuccess": "✔️ カレンダーへに保存しました",
+        "emptyHeadline": "カレンダーがなんか空っぽになりそう",
+        "emptyText": "表示するものが見つかりませんでした"
+    },
+    "classmates": {
+        "child": "子供"
+    }
+}
