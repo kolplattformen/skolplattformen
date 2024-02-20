@@ -164,7 +164,7 @@ There are many ways to contribute to the project. \
 If you don't know how to program and want help, you can [file an issue](https://github.com/kolplattformen/skolplattformen/issues/new) to let us know when something isn't working properly. \
 We're super duper happy for both issues and pull requests, and we try to answer all of them as soon as humanly possible.
 
-Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen-app/) into a new language, or to improve existing translations.
+Another way to contribute is by helping translate Öppna skolplattformen [on Hosted Weblate](https://hosted.weblate.org/engage/skolplattformen/) into a new language, or to improve existing translations.
 
 _Working together leverages available skills and experience in improving the project, ultimately creating the best possible experience_.
 
