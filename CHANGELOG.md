@@ -1,3 +1,10 @@
+## [2.16.1](https://github.com/kolplattformen/skolplattformen/compare/v2.16.0...v2.16.1) (2024-04-09)
+
+
+### Bug Fixes
+
+* 🐛 Site moved to new url ([c93e27b](https://github.com/kolplattformen/skolplattformen/commit/c93e27bec05582be2c0b0e63ba5ab47b1688b8d8))
+
 # [2.16.0](https://github.com/kolplattformen/skolplattformen/compare/v2.15.10...v2.16.0) (2023-11-02)
 
 
