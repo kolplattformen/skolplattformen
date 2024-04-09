@@ -72,7 +72,7 @@ describe('news', () => {
       )
       expect(item.imageUrl).toEqual('A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg')
       expect(item.fullImageUrl).toEqual(
-        'https://etjanst.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg'
+        'https://etjanster.stockholm.se/Vardnadshavare/inloggad2/NewsBanner?url=A703552D-DBF3-45B0-8E67-6E062105A0C5.jpeg'
       )
       expect(item.imageAltText).toEqual('Nyhetsbild. Bildtext ej tillgänglig.')
       expect(item.intro).toEqual(
