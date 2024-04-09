@@ -194,7 +194,7 @@ If you're offended by this initiative, rest assured there is no reason to be —
 
 ## License
 
-Öppna skolplattformen is copyright 2020–2023 Not Free Beer AB.
+Öppna skolplattformen is copyright 2020–2024 Not Free Beer AB.
 
 Licensed under the [Apache License, Version 2.0](LICENSE) (the "License"); you may use Öppna skolplattformen in compliance with the License. A copy of the License is included with this repository.
 
