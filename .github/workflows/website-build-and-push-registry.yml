@@ -9,8 +9,6 @@ on:
     tags: [ 'v*.*.*' ]
     paths: 
       - 'apps/website/**'
-    paths-ignore:
-      - 'apps/website/k8s/**'
 
   pull_request:
     branches: [ "main" ]
