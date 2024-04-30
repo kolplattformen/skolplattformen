@@ -1,9 +1,6 @@
 name: Docker
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# Build to docker registry. This will trigger an update event from the Kubernetes cluster
 
 on:
   push:
@@ -12,6 +9,11 @@ on:
     tags: [ 'v*.*.*' ]
     paths: 
       - 'apps/website/**'
+    paths-ignore:
+      - 'apps/website/k8s/**'
+
+  pull_request:
+    branches: [ "main" ]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -33,7 +35,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+      
+      - run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          if [[ $GITHUB_REF == refs/tags/production* ]]; then
+            npm version major
+          elif [[ $GITHUB_REF == refs/tags/staging* ]]; then
+            npm version minor
+          else
+            npm version patch
+          fi
+
+      - name: 📝 Get Current Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
@@ -57,9 +74,10 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
-          context: apps/website
+          context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.package-version.outputs.current-version}},
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
