@@ -3,6 +3,7 @@ import { StyleService, Text, useStyleSheet } from '@ui-kitten/components'
 import React from 'react'
 import { View } from 'react-native'
 import { Sizing, Typography } from '../styles'
+import { translate } from '../utils/translation'
 
 interface MenuListItemProps {
   item: MenuItem
@@ -10,9 +11,10 @@ interface MenuListItemProps {
 
 export const MenuListItem = ({ item }: MenuListItemProps) => {
   const styles = useStyleSheet(themedStyles)
+  const day = item.title.split(' ')[0]
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.title}>{translate(`menu.${day}`)}</Text>
       <Text category="p1">{item.description}</Text>
     </View>
   )

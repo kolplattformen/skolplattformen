@@ -96,6 +96,12 @@
         "changeLanguageButton": "Spara"
     },
     "menu": {
+        "Måndag":"Måndag",
+        "Tisdag": "Tisdag",
+        "Onsdag": "Onsdag",
+        "Torsdag": "Torsdag",
+        "Fredag": "Fredag",
+        "week": "Vecka",
         "emptyHeadline": "Det ser lite tomt ut i matsedeln",
         "emptyText": "Hittade ingenting att visa för den här veckan"
     },
