@@ -1,0 +1,147 @@
+{
+    "general": {
+        "loading": "Chargement…",
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "Numéro d'identité personnel",
+        "settings": "Paramètres",
+        "send": "Envoyer",
+        "logout": "Se déconnecter",
+        "confirm": "Confirmer",
+        "changeLanguage": "Changer de langue",
+        "cancel": "Annuler",
+        "logoutAndClearPersonalData": "Se déconnecter et effacer les données personnelles",
+        "logoutAndClearAllDataInclSettings": "Se déconnecter et effacer toutes les données, y compris les paramètres",
+        "tomorrow": "Demain"
+    },
+    "calender": {
+        "saveToCalenderError": "Un problème est survenu",
+        "saveToCalender": "Enregistrer dans le calendrier",
+        "approveAccessToCalender": "Vous devez approuver l'accès à votre calendrier",
+        "showCalenderActions": "Afficher les actions du calendrier",
+        "saveToCalenderSuccess": "✔️ Enregistré dans le calendrier"
+    },
+    "auth": {
+        "words": {
+            "working": "fonctionnement",
+            "first": "premier",
+            "better": "mieux",
+            "simple": "simple",
+            "rebellious": "rebelle",
+            "open": "ouverte",
+            "imperfect": "imparfaite",
+            "homemade": "maison",
+            "fun": "amusante",
+            "free": "gratuite",
+            "fast": "rapide",
+            "fantastic": "fantastique",
+            "enlightened": "éclairée",
+            "cooler": "plus cool",
+            "cheap": "bon marché",
+            "awaited": "attendue",
+            "agile": "agile"
+        },
+        "placeholder_SocialSecurityNumber": "Votre numéro d'identité personnel",
+        "subtitle": "L'alternative {{word}}",
+        "bankid": {
+            "OpenManually": "Ouvrir BankID manuellement",
+            "OpenOnAnotherDevice": "Ouvrez BankID sur un autre appareil",
+            "Waiting": "En attente de BankID…",
+            "OpenOnThisDevice": "Ouvrez BankID sur cet appareil"
+        },
+        "loginFailed": "La connexion a échoué, veuillez réessayer.",
+        "loginAsTestUser": "Connectez-vous en tant qu'utilisateur test",
+        "chooseLoginMethod": "Choisissez la méthode de connexion",
+        "a11y_select_login_method": "Sélectionnez la méthode de connexion",
+        "a11y_clear_social_security_input_field": "Effacer le champ du numéro national d’identité",
+        "a11y_image_two_boys": "Photo de deux personnes consultant leur téléphone portable",
+        "a11y_change_language": "Sélectionnez votre langue",
+        "chooseSchoolPlatform": "Choisir la plateforme"
+    },
+    "abscense": {
+        "startTime": "Heure de début",
+        "selectAbscenseStartTime": "Choisissez l'heure de début",
+        "personalNumberMissing": "Numéro personnel manquant",
+        "invalidPersonalNumber": "Numéro personnel invalide",
+        "endTime": "Heure de fin",
+        "selectAbscenseEndTime": "Choisissez l'heure de la fin",
+        "entireDay": "Toute la journée",
+        "title": "Signaler une absence",
+        "childsPersonalNumber": "Numéro national d’identité de l'enfant"
+    },
+    "notifications": {
+        "notificationTitle": "Notification : {{message}} ({{dateCreated}})"
+    },
+    "news": {
+        "updated": "Mise à jour",
+        "title": "Nouvelles de Skolplattformen",
+        "published": "Publié",
+        "notificationTitle": "Nouvelles : {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Pas de nouvelles actualités cette semaine.",
+        "backToChild": "Retour à l'enfant",
+        "search": {
+            "placeholder": "Rechercher toutes les nouvelles…"
+        }
+    },
+    "navigation": {
+        "notifications": "Notifications",
+        "news": "Nouvelles",
+        "menu": "Menu",
+        "calender": "Calendrier",
+        "classmates": "Camarades de classe"
+    },
+    "menu": {
+        "emptyText": "Je n'ai rien trouvé pour cette semaine",
+        "emptyHeadline": "Le menu a l'air un peu vide"
+    },
+    "language": {
+        "changeLanguageButton": "Sauvegarder",
+        "changeLanguage": "Changer de langue"
+    },
+    "children": {
+        "viewStatus": "Voir le statut sur skolplattformen.org",
+        "tryAgain": "Réessayer",
+        "title": "Vos enfants",
+        "noKids_title": "Pas d'enfants",
+        "noKids_description": "Il n'y a pas d'enfants enregistrés dans la ville de Stockholm pour votre numéro d'identité personnel",
+        "loadingErrorInformationText": "Cette page ne peut pas être chargée. Réessayez ou consultez l'état actuel sur skolplattformen.org.",
+        "loadingErrorHeading": "Oups !"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "École secondaire supérieure",
+        "preSchool": "Préscolaire",
+        "leisureTimeCentre": "Centre de loisirs",
+        "compulsorySchool": "École obligatoire"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Affiche les informations de contact",
+        "home": "Adresse",
+        "email": "Courriel",
+        "sms": "Texto",
+        "call": "Appeler",
+        "a11y_show_contact_info_button_label": "Afficher les informations de contact"
+    },
+    "schedule": {
+        "gymBag": "Sac de sport",
+        "lunch": "Déjeuner",
+        "end": "Fin",
+        "start": "Début"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Coordonnées des tuteurs pour",
+        "child": "Enfant",
+        "class": "Classe"
+    },
+    "settings": {
+        "settings": "Paramètres",
+        "useSystemTheme": "Utiliser le thème clair/sombre du système",
+        "language": "Langue",
+        "appearance": "Apparence",
+        "theme": "Thème",
+        "licenses": "Licences",
+        "themeAuto": "Automatique"
+    },
+    "themes": {
+        "light": "Clair",
+        "dark": "Sombre"
+    }
+}
