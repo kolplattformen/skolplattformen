@@ -35,7 +35,7 @@ spec:
             requests:
               cpu: 100m
               memory: 100Mi
-          image: skolplattformen/web
+          image: ghcr.io/kolplattformen/skolplattformen
           ports:
             - containerPort: 3000
 

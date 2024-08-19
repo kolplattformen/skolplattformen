@@ -44,12 +44,12 @@ const s24Init = {
   headers: {
     accept: 'application/json, text/javascript, */*; q=0.01',
     referer:
-      'https://fns.stockholm.se/ng/timetable/timetable-viewer/fns.stockholm.se/',
+      'https://websthlm.skola24.se/ng/timetable/timetable-viewer/fns.stockholm.se/',
     'accept-language': 'en-US,en;q=0.9,sv;q=0.8',
     'cache-control': 'no-cache',
     'content-type': 'application/json',
     pragma: 'no-cache',
-    host: 'fns.stockholm.se',
+    host: 'websthlm.skola24.se',
     'x-scope': '8a22163c-8662-4535-9050-bc5e1923df48',
   },
 }
@@ -307,9 +307,9 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
     const url = routes.children
     const session = this.getRequestInit({
       headers: {
-        Accept: 'application/json;odata=verbose',
-        Host: 'etjanst.stockholm.se',
-        Referer: 'https://etjanst.stockholm.se/vardnadshavare/inloggad2/hem',
+        Accept: 'application/json, text/plain, */*',
+        Host: 'etjanster.stockholm.se',
+        Referer: 'https://etjanster.stockholm.se/vardnadshavare/inloggad2/hem',
       },
     })
     const response = await this.fetch('children', url, session)
@@ -586,7 +586,6 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
         getPersonalTimetablesResponse: { childrenTimetables },
       },
     } = await response.json()
-
     return childrenTimetables as Skola24Child[]
   }
 
@@ -633,6 +632,7 @@ export class ApiSkolplattformen extends EventEmitter implements Api {
       week,
       width: 1227,
       year,
+      schoolYear: 'b976f986-4308-4583-b39e-2d3933094eb2',
     }
     const session = this.getRequestInit({
       ...s24Init,

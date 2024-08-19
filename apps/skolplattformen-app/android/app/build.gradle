@@ -78,9 +78,8 @@ android {
         applicationId "com.oppna_skolplattformen_new.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-
-        versionCode 20002
-        versionName "3.0.8"
+        versionCode 20000
+        versionName "3.0.10"
     }
     signingConfigs {
         debug {

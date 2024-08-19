@@ -57,6 +57,11 @@ const Footer = () => {
               </Link.Internal>
             </li>
             <li>
+              <Link.Internal href="/integritetspolicy-elevapp">
+                Integritetspolicy ElevApp
+              </Link.Internal>
+            </li>
+            <li>
               <Link.Internal href="/qa">Frågor och svar</Link.Internal>
             </li>
           </ul>
