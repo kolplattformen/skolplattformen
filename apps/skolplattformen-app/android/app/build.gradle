@@ -89,10 +89,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('release.jks')
-            storePassword 'leeandseb'
-            keyAlias 'upload'
-            keyPassword 'leeandseb'
+            storeFile file('release.keystore')
+            storePassword 'skolplattform'
+            keyAlias 'skolplattform'
+            keyPassword 'skolplattform'
         }
     }
     buildTypes {
