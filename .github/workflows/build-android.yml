@@ -36,7 +36,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ${{ github.workspace }}/apps/skolplattformen-app/package-lock.json
       - name: set npm version
-        run: npm install -g npm@9.6.0 && echo "secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} secrets.GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} workspace= ${{ github.workspace }} secrets.MAPS_API_KEY=${{secrets.MAPS_API_KEY}}"
+        run: npm install -g npm@9.6.0 
       - run: cd apps/skolplattformen-app/android && bundle install
       - name: install node modules
         run: cd apps/skolplattformen-app && npm ci
