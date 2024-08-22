@@ -4,9 +4,11 @@
 
 name: build-and-ship-android
 on:
-  push:
-    branches:
-      - 'main'
+  # push:
+  #   branches:
+  #     - 'main'
+  workflow_dispatch:
+  
 jobs:
   build-and-ship-android:
     runs-on: ubuntu-latest
