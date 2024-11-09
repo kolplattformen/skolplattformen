@@ -1,5 +1,5 @@
 import { Classmate } from '@skolplattformen/api'
-import { useClassmates } from '@skolplattformen/hooks'
+import { useClassmates } from '../libs/hooks/src'
 import {
   Divider,
   Icon,
@@ -14,10 +14,6 @@ import { fullName, guardians, sortByFirstName } from '../utils/peopleHelpers'
 import { translate } from '../utils/translation'
 import { useChild } from './childContext.component'
 import { ContactMenu } from './contactMenu.component'
-
-interface ClassmatesProps {
-  setSelected: (value?: number | null) => void
-}
 
 export const Classmates = () => {
   const child = useChild()

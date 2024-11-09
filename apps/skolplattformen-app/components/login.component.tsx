@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import { useApi } from '@skolplattformen/hooks'
+import { useApi } from '../libs/hooks/src'
 import {
   Button,
   ButtonGroup,
@@ -17,7 +16,6 @@ import Personnummer from 'personnummer'
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
-  ImageProps,
   Linking,
   Platform,
   TouchableWithoutFeedback,
@@ -94,12 +92,11 @@ export const Login = () => {
 
   useEffect(() => {
     const loginHandler = async () => {
-      console.debug('Runnning loginHandler')
+      console.debug('Running loginHandler')
       const user = await api.getUser()
       await AppStorage.clearPersonalData(user)
       showModal(false)
     }
-
     api.on('login', loginHandler)
     return () => {
       api.off('login', loginHandler)
@@ -108,7 +105,9 @@ export const Login = () => {
 
   const LoginProviderImage = () => {
     //if(loginMethodId == 'testuser') return undefined
-    if (loginMethodId === 'freja') return FrejaEid()
+    if (loginMethodId === 'freja') {
+      return FrejaEid()
+    }
     return BankId()
   }
 
@@ -198,7 +197,9 @@ export const Login = () => {
       })
       status.on('OK', () => {
         console.log('BankID ok')
+        showModal(true)
         setLoginStatusText(t('auth.loginSuccessful'))
+        setTimeout(() => showModal(false), 0) // Hack to get around the modalview rendering twice, avoids crashing the app in IOS.
       })
     } else {
       await api.login('201212121212')
@@ -300,7 +301,7 @@ export const Login = () => {
                 : loginMethods.filter((f) => f.id !== 'freja')
             }
             ItemSeparatorComponent={Divider}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <ListItem
                 title={item.title}
                 accessible={true}

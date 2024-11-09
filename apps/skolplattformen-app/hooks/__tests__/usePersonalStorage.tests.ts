@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { User } from '@skolplattformen/api'
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 import usePersonalStorage from '../usePersonalStorage'
 
 beforeEach(async () => {
@@ -12,16 +12,12 @@ const user: User = { personalNumber: '201701012393' }
 const prefix = user.personalNumber + '_'
 
 test('use key prefix on set', async () => {
-  const { result, waitForNextUpdate } = renderHook(() =>
-    usePersonalStorage(user, 'key', '')
-  )
+  const { result } = renderHook(() => usePersonalStorage(user, 'key', ''))
 
-  act(() => {
-    const [, setValue] = result.current
+  const [, setValue] = result.current
+  await act(() => {
     setValue('foo')
   })
-
-  await waitForNextUpdate()
 
   expect(await AsyncStorage.getItem(prefix + 'key')).toEqual(
     JSON.stringify('foo')
@@ -40,14 +36,15 @@ test('return inital value if no set', async () => {
 })
 
 test('update value', async () => {
-  const { result, waitForNextUpdate } = renderHook(() =>
+  const { result } = renderHook(() =>
     usePersonalStorage(user, 'key', 'initialValue')
   )
 
   const [initValue, setValue] = result.current
-  setValue('update')
 
-  await waitForNextUpdate()
+  await act(() => {
+    setValue('update')
+  })
 
   const [updateValue] = result.current
 
@@ -62,11 +59,11 @@ test('update value', async () => {
 test('do nothing if personalId is empty', async () => {
   const emptyUser: User = { personalNumber: '' }
   let hookUser = emptyUser
-  const { result, rerender, waitForNextUpdate } = renderHook(() =>
+  const { result, rerender } = renderHook(() =>
     usePersonalStorage(hookUser, 'key', '')
   )
 
-  act(() => {
+  await act(() => {
     const [, setValue] = result.current
     setValue('foo')
   })
@@ -76,12 +73,10 @@ test('do nothing if personalId is empty', async () => {
   hookUser = user
   rerender()
 
-  act(() => {
+  await act(() => {
     const [, setValue] = result.current
     setValue('foo')
   })
-
-  await waitForNextUpdate()
 
   expect(AsyncStorage.setItem).toHaveBeenCalled()
 })

@@ -4,7 +4,13 @@ import { View, StyleSheet, Platform, StatusBar } from 'react-native'
 /**
  * This view takes in account for the status bar current height on Android
  */
-export const SafeAreaViewContainer: React.FC = ({ children }) => {
+type SafeAreaViewContainerProps = {
+  children: React.ReactNode
+}
+
+export const SafeAreaViewContainer: React.FC<SafeAreaViewContainerProps> = ({
+  children,
+}) => {
   return <View style={styles.wrapper}>{children}</View>
 }
 

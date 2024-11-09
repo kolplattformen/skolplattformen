@@ -10,6 +10,15 @@ const defaultItem = {
   dateModified: '2021-02-15T09:14:28.484Z',
 }
 
+// copied from https://github.com/react-native-webview/react-native-webview/issues/2934#issuecomment-1524101977
+jest.mock('react-native-webview', () => {
+  const { View } = require('react-native')
+  return {
+    WebView: View,
+  }
+})
+//
+
 const setup = (customProps = {}) => {
   const props = {
     item: defaultItem,

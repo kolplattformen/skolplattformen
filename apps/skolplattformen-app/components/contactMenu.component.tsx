@@ -1,4 +1,3 @@
-/* eslint-disable react-native-a11y/has-accessibility-hint */
 import { Classmate } from '@skolplattformen/api'
 import {
   Button,
@@ -46,7 +45,9 @@ export const ContactMenu = ({
           defaultValue: 'Visa kontaktinformation',
         }
       )}
-      onPress={() => setVisible(true)}
+      onPress={() => {
+        setVisible(true)
+      }}
       appearance="ghost"
       accessoryLeft={MoreIcon}
     />

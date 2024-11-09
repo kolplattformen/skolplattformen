@@ -9,7 +9,9 @@ export default function useAsyncStorage<T>(
 
   async function setStoredValue(value: T) {
     try {
-      if (!storageKey) return
+      if (!storageKey) {
+        return
+      }
       await AsyncStorage.setItem(storageKey, JSON.stringify(value))
       setStorageItem(value)
     } catch (e) {
@@ -21,7 +23,9 @@ export default function useAsyncStorage<T>(
     async function getStoredValue() {
       try {
         const data = await AsyncStorage.getItem(storageKey)
-        if (typeof data === 'string') setStorageItem(JSON.parse(data))
+        if (typeof data === 'string') {
+          setStorageItem(JSON.parse(data))
+        }
       } catch (e) {
         // noop
       }

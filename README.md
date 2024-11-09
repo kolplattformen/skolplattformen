@@ -8,10 +8,14 @@ Give us a ⭐ if you appreciate what we do!
 [![Translation status](https://hosted.weblate.org/widgets/skolplattformen/-/svg-badge.svg)](https://hosted.weblate.org/engage/skolplattformen/)
 [![Build Status](https://app.bitrise.io/app/8e56bd02bc602da5/status.svg?token=h8gI2dB_jXLurj9EO_fXWw)](https://app.bitrise.io/app/8e56bd02bc602da5)
 
-We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform. \ We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/). \
+We are parents who got fed up with Skolplattformen, the City of Stockholm's school administration platform.
+
+We reverse-engineered the platform's API to create a simpler, faster, more consistent, and secure experience for parents and guardians. If you're simply looking for information about the app, our website can be found at [https://skolplattformen.org/](https://skolplattformen.org/).
+
 Check out [the changelog](CHANGELOG.md) to see what new features are added, and a list of fixed bugs.
 
-This main repository for the project contains the source code for both the [app](apps/skolplattformen-app) and its [website](https://skolplattformen.org/). \
+This main repository for the project contains the source code for both the [app](apps/skolplattformen-app) and its [website](https://skolplattformen.org/).
+
 The sources for each can be found under [apps](apps) and [libs](libs).
 The respective README files there contain more detailed descriptions.
 
@@ -48,17 +52,17 @@ The project consists of several apps and libraries inside [a NX](https://nx.dev/
 ### Apps
 /apps/ contains the application projects. This is the main entry point for a runnable application.
 
-#### skolplattformen
+#### Skolplattformen
 
 The central part of the project is the app itself. It is written in [TypeScript](https://www.typescriptlang.org/) using [React Native](https://reactnative.dev/) and [React Native Kitten](https://akveo.github.io/react-native-ui-kitten/).
 
-Our main goal with the app is to make it as fast and easy to use as possible. \
+Our main goal with the app is to make it as fast and easy to use as possible. 
 
 We're starting small, with more features being added over time.
 
 For more information, check out the [source code](apps/skolplattformen-app).
 
-#### website
+#### Website
 
 The code for the website at https://skolplattformen.org/. It's built using Next.js.
 
@@ -108,7 +112,7 @@ $ git clone https://github.com/kolplattformen/skolplattformen.git
 
 Install dependencies
 ```bash
-cd skolplattformen && yarn
+cd skolplattformen/apps/skolplattformen-app && yarn
 ```
 
 ### iOS
@@ -117,7 +121,7 @@ If you wanna run the iOS app, you need to setup a couple of things first, we hav
 
 * [Mac OS](/docs/ios_mac.md)
 
-If you already setup everything, you just need to run the following command in the project root:
+If you already setup everything, you just need to run the following command in the **skolplattformen-app** folder:
 
 Start the iOS app
 ```
@@ -132,7 +136,7 @@ If you wanna run the Android app, you need to setup a couple of things first, we
 * [Windows](/docs/android_windows.md)
 * [Linux](/docs/android_linux.md)
 
-If you already setup everything, you just need to run the following command in the project root:
+If you already setup everything, you just need to run the following command in the **skolplattformen-app** folder:
 
 ```
 yarn run android
@@ -146,7 +150,7 @@ Documentation coming soon.
 
 Run all tests
 ```
-yarn run test
+cd skolplattformen/apps/skolplattformen-app && yarn run test
 ```
 
 Run a specific test
@@ -190,6 +194,9 @@ If you're offended by this initiative, rest assured there is no reason to be —
 - [Karin Nygårds (artwork)](https://github.com/grishund)
 - [Jonathan Edenström](https://github.com/edenstrom)
 - [Emil Hellman](https://github.com/archevel)
+- [Lee Sheppard](https://github.com/coolusername244)
+- [Sebastian Palmqvist](https://github.com/palmn72)
+- [Lvan Ni](https://github.com/lvan-ni)
 - You?
 
 ## License

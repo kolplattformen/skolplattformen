@@ -104,7 +104,9 @@ export default class AppStorage {
    * @returns
    */
   static async clearPersonalData(user: User): Promise<void> {
-    if (!user.personalNumber) return
+    if (!user.personalNumber) {
+      return
+    }
 
     const allKeys = await AsyncStorage.getAllKeys()
     const personalDataKeys = allKeys.filter((x) =>

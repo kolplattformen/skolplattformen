@@ -15,7 +15,7 @@ brew install node
 brew install watchman
 ```
 
-If you have already installed Node on your system, make sure it is Node 12 or newer.
+If you have already installed Node on your system, make sure it is Node 18 or newer.
 
 [Watchman](https://facebook.github.io/watchman) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance.
 
@@ -24,10 +24,10 @@ If you have already installed Node on your system, make sure it is Node 12 or ne
 We recommend installing JDK using [Homebrew](http://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
 
 ```shell
-brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
+brew install --cask adoptopenjdk/openjdk/adoptopenjdk11
 ```
 
-If you have already installed JDK on your system, make sure it is JDK 8 or newer.
+If you have already installed JDK on your system, make sure it is JDK 11 or newer.
 
 ### Android development environment
 
@@ -49,7 +49,7 @@ Once setup has finalized and you're presented with the Welcome screen, proceed t
 
 #### 2. Install the Android SDK
 
-Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 10 (Q)` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
+Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 13` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
 
 To do that, open Android Studio, click on "Configure" button and select "SDK Manager".
 
@@ -57,21 +57,18 @@ To do that, open Android Studio, click on "Configure" button and select "SDK Man
 
 > The SDK Manager can also be found within the Android Studio "Preferences" dialog, under **Appearance & Behavior** → **System Settings** → **Android SDK**.
 
-Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 10 (Q)` entry, then make sure the following items are checked:
+Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 13` entry, then make sure the following items are checked:
 
-- `Android SDK Platform 29`
-- `Intel x86 Atom_64 System Image` or `Google APIs Intel x86 Atom System Image`
+- `Android SDK Platform 34`
+- If you have a Mac M-Chip
+  - `ARM x86 Atom_64 System Image` &nbsp; or &nbsp;&nbsp;`Google APIs ARM 64 v8a System Image`
 
-Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the "Android SDK Build-Tools" entry, then make sure that `29.0.2` is selected and check the "Android SDK Command-line Tools (latest)".
+- If you have a Mac Intel-Chip pick either 
+  - `Intel x86 Atom_64 System Image` &nbsp; or &nbsp;&nbsp; `Google APIs Intel x86 Atom System Image`
+
+Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the "Android SDK Build-Tools" entry, then make sure that `34` is selected and check the "Android SDK Command-line Tools (latest)".
 
 Finally, click "Apply" to download and install the Android SDK and related build tools.
-
-You can also run the following command after setting ANDROID_HOME.
-
-```shell
-sdkmanager "platforms;android-29" "system-images;android-29;default;x86_64" "system-images;android-29;google_apis;x86"
-sdkmanager "cmdline-tools;latest" "build-tools;29.0.2"
-```
 
 #### 3. Configure the ANDROID_HOME environment variable
 
@@ -109,13 +106,13 @@ If you use Android Studio to open `./apps/skolplattformen-app/android`, you can 
 
 ![Android Studio AVD Manager](/docs/assets/avd_icon.png)
 
-If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **Q** API Level 29 image.
+If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Device Manager", then pick any Phone from the list and click "Next", then select the API Level 34 image (Release Name - API 34).
 
 Click "Next" then "Finish" to create your AVD. At this point you should be able to click on the green triangle button next to your AVD to launch it, then proceed to the next step.
 
 ## Running the app 
 
-Go to the root of the project and run the following command
+Go to the **skolplattformen-app** folder and run the following command
 
 ```shell
 yarn run start:android
