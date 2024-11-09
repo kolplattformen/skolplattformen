@@ -96,6 +96,12 @@
         "changeLanguageButton": "Save"
     },
     "menu": {
+        "Måndag":"Monday",
+        "Tisdag": "Tuesday",
+        "Onsdag": "Wednesday",
+        "Torsdag": "Thursday",
+        "Fredag": "Friday",
+        "week": "Week",
         "emptyHeadline": "The lunch menu looks kinda empty",
         "emptyText": "Couldn't find anything for this week"
     },
