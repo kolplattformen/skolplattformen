@@ -1,0 +1,156 @@
+{
+    "abbrevations": {
+        "compulsorySchool": "Szkoła podstawowa",
+        "leisureTimeCentre": "Świetlica",
+        "preSchool": "Przedszkole",
+        "upperSecondarySchool": "Liceum"
+    },
+    "abscense": {
+        "endTime": "Czas zakończenia",
+        "entireDay": "Cały dzień",
+        "childsPersonalNumber": "Personnummer dziecka",
+        "invalidPersonalNumber": "Błąd w personnumerze",
+        "personalNumberMissing": "Brak personnumeru",
+        "selectAbscenseEndTime": "Wybierz czas zakończenia",
+        "selectAbscenseStartTime": "Wybierz czas rozpoczęcia",
+        "startTime": "Czas rozpoczęcia",
+        "title": "Zgłoś nieobecność"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Otwórz BankID manualnie",
+            "OpenOnAnotherDevice": "Otwórz BankID na innym urządzeniu",
+            "OpenOnThisDevice": "Otwórz BankID na tym urządzeniu",
+            "Waiting": "Oczekiwanie na BankID…"
+        },
+        "freja": {
+            "OpenManually": "Otwórz Freja eID+ manualnie",
+            "OpenOnThisDevice": "Otwórz Freja eID+ na tym urządzeniu",
+            "Waiting": "Oczekiwanie na Freja eID+…"
+        },
+        "chooseLoginMethod": "Wybierz sposób logowania",
+        "loginAsTestUser": "Zaloguj się jako użytkownik testowy",
+        "loginFailed": "Logowanie nie powiodło się. Spróbuj ponownie.",
+        "placeholder_SocialSecurityNumber": "Twój personnummer",
+        "subtitle": "{{word}} alternatywa",
+        "words": {
+            "agile": "Szybka",
+            "awaited": "Oczekiwana",
+            "better": "Lepsza",
+            "cheap": "Tania",
+            "cooler": "Odlotowa",
+            "enlightened": "Oświecona",
+            "fantastic": "Fantastyczna",
+            "fast": "Szybka",
+            "first": "Pierwsza",
+            "free": "Uwolniona",
+            "fun": "Śmieszna",
+            "homemade": "Domowa",
+            "imperfect": "Niedoskonała",
+            "open": "Otwarta",
+            "rebellious": "Buntownicza",
+            "simple": "Prosta",
+            "working": "Działająca"
+        },
+        "a11y_select_login_method": "Wybierz metodę logowania",
+        "a11y_clear_social_security_input_field": "Wyczyść pole z personnumerem",
+        "a11y_image_two_boys": "Ilustracja: dwie osoby patrzą w telefony komórkowe",
+        "a11y_change_language": "Wybierz język",
+        "chooseSchoolPlatform": "Wybierz platformę",
+        "loginSuccessful": "Logowanie powiodło się. Trwa ładowanie…"
+    },
+    "calender": {
+        "approveAccessToCalender": "Musisz zatwierdzić dostęp do kalendarza",
+        "saveToCalender": "Zapisz w kalendarzu",
+        "saveToCalenderError": "Coś poszło nie tak",
+        "saveToCalenderSuccess": "✔️ Zapisano w kalendarzu",
+        "showCalenderActions": "Pokaż opcje kalendarza",
+        "emptyHeadline": "Kalendarz jest pusty",
+        "emptyText": "Nie znaleziono nic do pokazania"
+    },
+    "children": {
+        "loadingErrorHeading": "Oj!",
+        "loadingErrorInformationText": "Ładowanie strony nie powiodło się. Spróbuj ponownie, albo sprawdź status na skolplattformen.org.",
+        "noKids_description": "Nie znaleziono dzieci zarejestrowanych na Twój personnummer w mieście Sztokholm",
+        "noKids_title": "Nie znaleziono dzieci",
+        "title": "Twoje dzieci",
+        "tryAgain": "Spróbuj ponownie",
+        "viewStatus": "Sprawdź status na skolplattformen.org"
+    },
+    "general": {
+        "changeLanguage": "Zmień język",
+        "confirm": "Potwierdź",
+        "loading": "Ładowanie…",
+        "logout": "Wyloguj",
+        "send": "Wyślij",
+        "settings": "Ustawienia",
+        "socialSecurityNumber": "Personnummer",
+        "title": "Öppna skolplattformen",
+        "cancel": "Anuluj",
+        "logoutAndClearPersonalData": "Wyloguj i skasuj dane osobowe",
+        "logoutAndClearAllDataInclSettings": "Wyloguj i skasuj wszystkie dane łącznie z ustawieniami",
+        "tomorrow": "Jutro"
+    },
+    "language": {
+        "changeLanguage": "Zmień język",
+        "changeLanguageButton": "Zachowaj"
+    },
+    "menu": {
+        "emptyHeadline": "Brak informacji",
+        "emptyText": "Nie znaleziono jadłospisu na ten tydzień"
+    },
+    "navigation": {
+        "calender": "Kalendarz",
+        "menu": "Jadłospis",
+        "news": "Wiadomości",
+        "notifications": "Powiadomienia",
+        "classmates": "Klasa"
+    },
+    "news": {
+        "backToChild": "Z powrotem do dzieci",
+        "noNewNewsItemsThisWeek": "Nie ma nowych wiadomości w tym tygodniu.",
+        "notificationTitle": "Wiadomość: {{header}} ({{published}})",
+        "published": "Opublikowano",
+        "title": "Wiadomość od szkoły",
+        "updated": "Uaktualniono",
+        "search": {
+            "placeholder": "Szukaj w wiadomościach…"
+        }
+    },
+    "notifications": {
+        "notificationTitle": "Wiadomość: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "gymBag": "Ubrania do WF",
+        "lunch": "Lunch",
+        "end": "Kończy",
+        "start": "Zaczyna",
+        "week": "Tydzień"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Pokazuje dane kontaktowe",
+        "home": "Adres",
+        "email": "E-mail",
+        "sms": "SMS",
+        "call": "Zadzwoń",
+        "a11y_show_contact_info_button_label": "Pokaż dane kontaktowe"
+    },
+    "classmates": {
+        "child": "Dziecko",
+        "class": "Klasa",
+        "contactsForGuardiansFor": "Dane kontaktowe do opiekuna"
+    },
+    "themes": {
+        "dark": "Ciemny",
+        "light": "Jasny"
+    },
+    "settings": {
+        "useSystemTheme": "Użyj ustawień systemu",
+        "themeAuto": "Auto",
+        "language": "Język",
+        "licenses": "Licencje",
+        "theme": "Tryb",
+        "appearance": "Wygląd",
+        "settings": "Ustawienia"
+    }
+}

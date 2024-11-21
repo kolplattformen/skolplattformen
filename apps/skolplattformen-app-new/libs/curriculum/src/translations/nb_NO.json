@@ -1,0 +1,76 @@
+{
+    "languages": {
+        "POR": "Portugisisk",
+        "POL": "Polsk",
+        "JPN": "Japansk",
+        "ITA": "Italiensk",
+        "ISL": "Islandsk",
+        "IND": "Indonesisk",
+        "SPK": "Annet språk",
+        "FRA": "Fransk",
+        "DEU": "Tysk"
+    },
+    "traningsskolaSubjects": {
+        "VAA": "Hverdagsaktiviteter",
+        "KOM": "Kommunikasjon",
+        "VEU": "Virkelighetsoppfatning",
+        "MOT": "Motorikk"
+    },
+    "subjects": {
+        "ES": "Estetisk virksomhet",
+        "NO": "Naturfag",
+        "HKK": "Heimkunnskap",
+        "JU": "Jødiske studier",
+        "SO": "Samfunnsfag",
+        "SH": "Samfunnslære",
+        "KE": "Kjemi",
+        "IDH": "Idrett og helse",
+        "SL": "Sløyd",
+        "DA": "Forberedende dansestudie",
+        "TK": "Teknologi",
+        "TN": "Tegnspråk",
+        "SVA": "Svensk som andrespråk",
+        "SV": "Svensk",
+        "RE": "Religion",
+        "HI": "Historie",
+        "GE": "Geografi",
+        "FY": "Fysikk",
+        "BI": "Biologi",
+        "MU": "Musikk",
+        "MA": "Matematikk",
+        "EN": "Engelsk",
+        "BL": "Kunst"
+    },
+    "misc": {
+        "PRANDIUM": "Lunsj",
+        "LUNCH": "Lunsj",
+        "RAST": "Pause",
+        "MTID": "Mentortid"
+    },
+    "categories": {
+        "misc": "Ymse",
+        "unknown": "Ukjent",
+        "modernLanguages": "Moderne språk",
+        "motherTounge": "Morsmålsopplæring",
+        "modernLanguagesAlt": "Alt moderne språk, språkvalg",
+        "modernLanguagesA2": "Språkvalg",
+        "modernLanguagesA1": "Elevens valg",
+        "trainingSchool": "Grunnskole for elever med lærevansker"
+    },
+    "specialLanguages": {
+        "TY": "Tysk",
+        "TN": "Tegnspråk",
+        "SVA": "Svensk som andrespråk",
+        "SV": "Svensk",
+        "SP": "Spansk",
+        "SAM": "Samisk",
+        "RY": "Russisk",
+        "PO": "Portugisisk",
+        "KI": "Kinesisk",
+        "JAP": "Japansk",
+        "IT": "Italiensk",
+        "FI": "Finsk",
+        "FR": "Fransk",
+        "EN": "Engelsk"
+    }
+}

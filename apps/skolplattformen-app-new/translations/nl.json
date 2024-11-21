@@ -1,0 +1,145 @@
+{
+    "general": {
+        "loading": "Bezig met laden…",
+        "settings": "Instellingen",
+        "send": "Sturen",
+        "title": "Öppna skolplattformen",
+        "logout": "Uitloggen",
+        "confirm": "Bevestigen",
+        "changeLanguage": "Taal wijzigen",
+        "socialSecurityNumber": "Burgerservicenummer",
+        "cancel": "Annuleren",
+        "logoutAndClearAllDataInclSettings": "Log uit en wis alle gegevens inclusief instellingen",
+        "logoutAndClearPersonalData": "Uitloggen en persoonlijke gegevens wissen"
+    },
+    "auth": {
+        "placeholder_SocialSecurityNumber": "Jouw burgerservicenummer",
+        "loginFailed": "Inloggen mislukt. Probeer het opnieuw.",
+        "loginAsTestUser": "Inloggen als testgebruiker",
+        "words": {
+            "working": "werkende",
+            "simple": "simpele",
+            "rebellious": "opstandige",
+            "open": "open",
+            "imperfect": "onvolmaakte",
+            "homemade": "zelfgemaakte",
+            "fun": "leuke",
+            "fast": "snellere",
+            "fantastic": "fantastische",
+            "enlightened": "verlichte",
+            "cooler": "koelere",
+            "agile": "flexibele",
+            "cheap": "goedkopere",
+            "better": "betere",
+            "awaited": "verwachte",
+            "free": "gratis",
+            "first": "eerste"
+        },
+        "subtitle": "Het {{word}} alternatief",
+        "bankid": {
+            "OpenOnThisDevice": "Open BankID op dit apparaat",
+            "OpenOnAnotherDevice": "Open BankID op een andere apparaat",
+            "Waiting": "Watchen op BankID…",
+            "OpenManually": "Open BankID handmatig"
+        },
+        "chooseLoginMethod": "Kies inlogmethode",
+        "a11y_select_login_method": "Selecteer de inlogmethode",
+        "a11y_clear_social_security_input_field": "Wis het veld voor het burgerservicenummer",
+        "a11y_image_two_boys": "Foto van twee mensen die naar hun mobiele telefoons kijken",
+        "a11y_change_language": "Selecteer je taal"
+    },
+    "abbrevations": {
+        "preSchool": "Peuterschool",
+        "leisureTimeCentre": "Centrum voor vrijetijdsbesteding",
+        "compulsorySchool": "Basisschool",
+        "upperSecondarySchool": "Middelbare school"
+    },
+    "abscense": {
+        "title": "Afwezigheid melden",
+        "invalidPersonalNumber": "Ongeldig burgerservicenummer",
+        "endTime": "Eindtijd",
+        "startTime": "Starttijd",
+        "personalNumberMissing": "Burgerservicenummer ontbreekt",
+        "selectAbscenseEndTime": "Kies eindtijd",
+        "selectAbscenseStartTime": "Kies starttijd",
+        "entireDay": "Hele dag",
+        "childsPersonalNumber": "Kinds burgerservicenummer"
+    },
+    "children": {
+        "noKids_description": "Er zijn geen kinderen geregistreerd in de stad Stockholm voor jouw burgerservicenummer",
+        "loadingErrorInformationText": "Deze pagina kan niet worden geladen. Probeer het opnieuw of bekijk de status op skolplattformen.org.",
+        "viewStatus": "Bekijk de status op skolplattformen.org",
+        "tryAgain": "Probeer het opnieuw",
+        "noKids_title": "Geen kinderen",
+        "title": "Jouw kinderen",
+        "loadingErrorHeading": "Oeps!"
+    },
+    "menu": {
+        "emptyText": "Vond niets te zien voor deze week",
+        "emptyHeadline": "Het ziet er leeg uit in het menu"
+    },
+    "news": {
+        "backToChild": "Terug naar kind",
+        "notificationTitle": "Nieuws: {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Geen nieuwe nieuwsberichten deze week.",
+        "updated": "Bijgewerkt",
+        "title": "Nieuws van Skolplattformen",
+        "published": "Gepubliceerd",
+        "search": {
+            "placeholder": "Zoek al het nieuws…"
+        }
+    },
+    "language": {
+        "changeLanguage": "Taal wijzigen",
+        "changeLanguageButton": "Opslaan"
+    },
+    "calender": {
+        "showCalenderActions": "Agenda-acties weergeven",
+        "approveAccessToCalender": "Je moet de toegang tot je agenda goedkeuren",
+        "saveToCalenderError": "Er is iets fout gegaan",
+        "saveToCalenderSuccess": "✔️ Opgeslagen in kalender",
+        "saveToCalender": "Opslaan in kalender"
+    },
+    "notifications": {
+        "notificationTitle": "Melding: {{message}} ({{dateCreated}})"
+    },
+    "navigation": {
+        "notifications": "Meldingen",
+        "calender": "Agenda",
+        "menu": "Menu",
+        "news": "Nieuws",
+        "classmates": "Klasgenoten"
+    },
+    "schedule": {
+        "end": "Eind",
+        "gymBag": "Sporttas",
+        "lunch": "Middageten",
+        "start": "Start"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Toon contactgegevens",
+        "email": "E-mail",
+        "home": "Adres",
+        "call": "Telefoongesprek",
+        "sms": "SMS",
+        "a11y_show_contact_info_button_label": "Toon contactgegevens"
+    },
+    "settings": {
+        "useSystemTheme": "Gebruik systeem licht/donker thema",
+        "appearance": "Verschijning",
+        "theme": "Thema",
+        "licenses": "Licenties",
+        "language": "Taal",
+        "themeAuto": "Auto",
+        "settings": "Instellingen"
+    },
+    "classmates": {
+        "class": "Klas",
+        "child": "Kind",
+        "contactsForGuardiansFor": "Contactgegevens voor voogden voor"
+    },
+    "themes": {
+        "light": "Licht",
+        "dark": "Donker"
+    }
+}

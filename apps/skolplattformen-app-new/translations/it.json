@@ -1,0 +1,144 @@
+{
+    "notifications": {
+        "notificationTitle": "Notifica: {{message}} ({{dateCreated}})"
+    },
+    "news": {
+        "notificationTitle": "Novità: {{header}} ({{published}})",
+        "noNewNewsItemsThisWeek": "Nessuna novità questa settimana.",
+        "title": "Novità da skolplattformen",
+        "backToChild": "Ritorna a figlio",
+        "search": {
+            "placeholder": "Cerca tutte le notizie…"
+        },
+        "updated": "Aggiornato",
+        "published": "Pubblicato"
+    },
+    "general": {
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "Personnummer svedese",
+        "settings": "Impostazioni",
+        "send": "Invia",
+        "logout": "Logout",
+        "loading": "Caricamento in corso…",
+        "confirm": "Conferma",
+        "changeLanguage": "Cambia lingua",
+        "cancel": "Interrompere",
+        "logoutAndClearPersonalData": "Esci ed elimina i dati personali",
+        "logoutAndClearAllDataInclSettings": "Esci ed elimina tutti i dati, comprese le impostazioni"
+    },
+    "schedule": {
+        "end": "Finische",
+        "start": "Inizia",
+        "lunch": "Pranzo",
+        "gymBag": "I vestiti di ginnastica"
+    },
+    "navigation": {
+        "notifications": "Notifiche",
+        "news": "Novità",
+        "menu": "Menù pranzo",
+        "calender": "Calendario",
+        "classmates": "Compagni di classe"
+    },
+    "language": {
+        "changeLanguageButton": "Salva",
+        "changeLanguage": "Cambia lingua"
+    },
+    "children": {
+        "loadingErrorHeading": "Ops!",
+        "title": "I tuoi figli",
+        "noKids_title": "Non ci sono figli",
+        "noKids_description": "No ci sono figli registrati a questo personnummer a Stoccolma",
+        "tryAgain": "Riprova",
+        "viewStatus": "Vedi stato su skolplattformen.org",
+        "loadingErrorInformationText": "Questa pagina non può essere caricata. Riprova o visualizza lo stato attuale su skolplattformen.org."
+    },
+    "calender": {
+        "showCalenderActions": "Mostra calendario actions",
+        "saveToCalenderSuccess": "✔️ Salvato in calendario",
+        "saveToCalenderError": "Errore, non salvato",
+        "saveToCalender": "Salva in calendario",
+        "approveAccessToCalender": "Approva l'accesso al calendario"
+    },
+    "auth": {
+        "words": {
+            "working": "funzionante",
+            "simple": "facile",
+            "rebellious": "ribelle",
+            "open": "accessibile",
+            "imperfect": "imperfetta",
+            "homemade": "fatta a mano",
+            "fun": "divertente",
+            "free": "libera",
+            "first": "prima",
+            "fast": "veloce",
+            "fantastic": "fantastica",
+            "enlightened": "illumminata",
+            "cooler": "più cool",
+            "cheap": "economica",
+            "better": "migliore",
+            "awaited": "attesa",
+            "agile": "agile"
+        },
+        "subtitle": "L'alternativa {{word}}",
+        "placeholder_SocialSecurityNumber": "Il tuo personnummer svedese",
+        "loginFailed": "Accesso non riuscito, riprova.",
+        "loginAsTestUser": "Entra come utente test",
+        "chooseLoginMethod": "Scegli metodo di accesso",
+        "bankid": {
+            "Waiting": "Attendere BankID…",
+            "OpenOnThisDevice": "Apri BankID su questa unità",
+            "OpenOnAnotherDevice": "Apri BankID su un'altra unità",
+            "OpenManually": "Apri BankID manualmente"
+        },
+        "a11y_select_login_method": "Seleziona il metodo di accesso",
+        "a11y_clear_social_security_input_field": "Cancella il campo del numero di previdenza sociale",
+        "a11y_image_two_boys": "Immagine di due persone che controllano i loro telefoni cellulari",
+        "a11y_change_language": "Seleziona la tua lingua"
+    },
+    "abscense": {
+        "title": "Registra l'assenza",
+        "entireDay": "Giorno intero",
+        "endTime": "Fine",
+        "selectAbscenseEndTime": "Fine a",
+        "selectAbscenseStartTime": "Inizio da",
+        "startTime": "Inizio",
+        "personalNumberMissing": "Codice Fiscale mancante",
+        "invalidPersonalNumber": "Codice Fiscale non valido"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Scuola superiore",
+        "preSchool": "Scuola materna",
+        "leisureTimeCentre": "Tempo pieno",
+        "compulsorySchool": "Scuola inferiore e media"
+    },
+    "menu": {
+        "emptyHeadline": "Il menù sembra piuttosto vuoto",
+        "emptyText": "Non ho trovato nulla per questa settimana"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Mostra le informazioni di contatto",
+        "call": "Chiama",
+        "sms": "SMS",
+        "email": "E-mail",
+        "home": "Indirizzo",
+        "a11y_show_contact_info_button_label": "Mostra le informazioni di contatto"
+    },
+    "settings": {
+        "settings": "Impostazioni",
+        "theme": "Tema",
+        "themeAuto": "Automatico",
+        "licenses": "Licenze",
+        "language": "Lingua",
+        "appearance": "Aspetto",
+        "useSystemTheme": "Usa il tema chiaro/scuro del sistema"
+    },
+    "themes": {
+        "light": "Chiaro",
+        "dark": "Scuro"
+    },
+    "classmates": {
+        "class": "Classe",
+        "child": "Bambino",
+        "contactsForGuardiansFor": "Informazioni di contatto per i tutori per"
+    }
+}

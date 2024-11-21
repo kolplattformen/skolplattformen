@@ -1,0 +1,155 @@
+{
+    "abbrevations": {
+        "preSchool": "дитячий сад",
+        "upperSecondarySchool": "Старша школа",
+        "compulsorySchool": "Молодша/середня школа",
+        "leisureTimeCentre": "Група продовженого дня (\"Продленка\")"
+    },
+    "abscense": {
+        "entireDay": "Цілий день",
+        "childsPersonalNumber": "Ідентифікаційний номер дитини",
+        "endTime": "час закінчення",
+        "invalidPersonalNumber": "Невірний ідентифікаційний номер",
+        "personalNumberMissing": "Ідентифікаційний код відсутній",
+        "startTime": "Час початку",
+        "title": "Додати відсутність",
+        "selectAbscenseEndTime": "Виберіть кінцевий час",
+        "selectAbscenseStartTime": "Виберіть час початку"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Відкрити BankID власноруч",
+            "OpenOnAnotherDevice": "Відкрити BankID на іншому пристрої",
+            "OpenOnThisDevice": "Відкрити BankID на цьому пристрої",
+            "Waiting": "Очікую на BankID…"
+        },
+        "chooseLoginMethod": "Оберіть як увійти",
+        "chooseSchoolPlatform": "Оберіть платформу",
+        "loginFailed": "Не зміг увійти. Спробуйте ще раз.",
+        "placeholder_SocialSecurityNumber": "Ваш ідентифікаційний номер",
+        "loginAsTestUser": "Увійти як тестовий користувач",
+        "subtitle": "{{word}} альтернатива",
+        "words": {
+            "agile": "Гнучка",
+            "awaited": "Очікувана",
+            "better": "Краща",
+            "cheap": "Дешева",
+            "cooler": "Крутіша",
+            "enlightened": "Освічена",
+            "fantastic": "Фантастична",
+            "fast": "Швидка",
+            "first": "Перша",
+            "free": "Безкоштовна",
+            "fun": "Весела",
+            "homemade": "Домашня",
+            "imperfect": "Недосконала",
+            "open": "Відкрита",
+            "rebellious": "Бунтівна",
+            "simple": "Проста",
+            "working": "Робоча"
+        },
+        "a11y_change_language": "Оберіть вашу мову",
+        "a11y_image_two_boys": "Зображення двох людей, які перевіряють свої телефони",
+        "a11y_clear_social_security_input_field": "Очистити поле вводу ідентифікаційного номера",
+        "a11y_select_login_method": "Оберіть як увійти",
+        "freja": {
+            "Waiting": "Очікую на Freja eID+…",
+            "OpenManually": "Відкрити Freja eID+ власноруч",
+            "OpenOnThisDevice": "Відкрити Freja eID+ на цьому пристрої"
+        }
+    },
+    "calender": {
+        "approveAccessToCalender": "Вам потрібно дозволити доступ до вашого календаря",
+        "saveToCalender": "Зберегти у каледарі",
+        "saveToCalenderError": "Помилка збереження у календарі",
+        "saveToCalenderSuccess": "✔️ Збережено у календарі",
+        "showCalenderActions": "Показати дії у календарі",
+        "emptyHeadline": "У вашому календарі немає записів",
+        "emptyText": "Нічого показати"
+    },
+    "children": {
+        "loadingErrorHeading": "Помилка!",
+        "loadingErrorInformationText": "Неможливо завантажити цю сторінку. Спробуйте ще раз або дізнайтеся статус на skolplattformen.org.",
+        "noKids_description": "На ваш ідентифікаційний номер не зареєстровано жодної дитини в Стокгольмі",
+        "noKids_title": "Немає дітей",
+        "title": "Ваші діти",
+        "tryAgain": "Спробуйте ще",
+        "viewStatus": "Дізнайтеся статус на skolplattformen.org"
+    },
+    "general": {
+        "cancel": "Скасувати",
+        "changeLanguage": "Змінити мову",
+        "confirm": "Підтвердити",
+        "loading": "Завантаження…",
+        "logout": "Вийти",
+        "logoutAndClearPersonalData": "Вийти та очистити персональні дані",
+        "send": "Відправити",
+        "settings": "Налаштування",
+        "socialSecurityNumber": "Ідентифікаційний номер",
+        "title": "Відкрити skolplattformen",
+        "tomorrow": "Завтра",
+        "logoutAndClearAllDataInclSettings": "Вийти та очистити дані, включаючи налаштування"
+    },
+    "language": {
+        "changeLanguage": "Змінити мову",
+        "changeLanguageButton": "Зберегти"
+    },
+    "menu": {
+        "emptyHeadline": "Нічого немає в меню на обід",
+        "emptyText": "На цьому тижні нічого немає"
+    },
+    "navigation": {
+        "calender": "Календар",
+        "menu": "Обід",
+        "news": "Новини",
+        "notifications": "Повідомлення",
+        "classmates": "Однокласники"
+    },
+    "settings": {
+        "settings": "Налаштування",
+        "appearance": "Зовнішній вигляд",
+        "theme": "Тема",
+        "licenses": "Ліцензії",
+        "language": "Мова",
+        "themeAuto": "Автоматично",
+        "useSystemTheme": "Використати системну світлу/темну тему"
+    },
+    "themes": {
+        "light": "Світла",
+        "dark": "Темна"
+    },
+    "news": {
+        "backToChild": "Назад до дитини",
+        "noNewNewsItemsThisWeek": "Цього тижня новин немає.",
+        "notificationTitle": "Новини: {{header}} ({{published}})",
+        "published": "Опубліковано",
+        "title": "Новини від Skolplattformen",
+        "updated": "Оновлено",
+        "search": {
+            "placeholder": "Шукати у новинах…"
+        }
+    },
+    "notifications": {
+        "notificationTitle": "Повідомлення: {{message}} ({{dateCreated}})"
+    },
+    "schedule": {
+        "start": "Початок",
+        "end": "Кінець",
+        "lunch": "Обід",
+        "week": "Тиждень",
+        "gymBag": "Спортивна сумка"
+    },
+    "classmates": {
+        "class": "Клас",
+        "child": "Дитина",
+        "contactsForGuardiansFor": "Контактна інформація для опікунів для"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Показує контактну інформацію",
+        "a11y_show_contact_info_button_label": "Показати контактну інформацію",
+        "call": "Дзвінок",
+        "sms": "СМС",
+        "email": "Е-мейл",
+        "home": "Адреса"
+    }
+}
