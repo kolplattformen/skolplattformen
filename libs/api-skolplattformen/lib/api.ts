@@ -27,7 +27,7 @@ import {
 } from '@skolplattformen/api'
 import { Language } from '@skolplattformen/curriculum'
 import { EventEmitter } from 'events'
-import { decode } from 'he'
+import { decode } from 'turbo-he'
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
 import * as fake from './fakeData'

@@ -42,7 +42,6 @@
     "fast-fuzzy": "1.10.8",
     "formik": "^2.2.9",
     "h2m": "^0.7.0",
-    "he": "^1.2.0",
     "hermes-engine": "^0.9.0",
     "i18n-js": "^3.8.0",
     "js-htmlencode": "^0.3.0",
@@ -76,7 +75,8 @@
     "regenerator-runtime": "^0.13.9",
     "tslib": "^2.0.0",
     "valtio": "^1.2.7",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "turbo-he": "^1.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

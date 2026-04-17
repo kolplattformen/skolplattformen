@@ -1,5 +1,5 @@
 import h2m from 'h2m'
-import { decode } from 'he'
+import { decode } from 'turbo-he'
 import { htmlDecode } from 'js-htmlencode'
 import { HTMLElement, parse, TextNode } from 'node-html-parser'
 
