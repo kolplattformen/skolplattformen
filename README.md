@@ -26,7 +26,6 @@ The respective README files there contain more detailed descriptions.
   * [Libs](#embedded-api)
     * [api](#api)
     * [api-skolplattformen](#api-skolplattformen)
-    * [api-hjarntorget](#api-hjarntorget)
     * [api-vklass](#api-vklass)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
@@ -71,10 +70,6 @@ For more information, check out the [source code](apps/website).
 
 The base for all api implementations
 
-#### api-hjarntorget
-
-The implementation for the school platform in Gothenburg called Hjärntorget.
-
 #### api-vklass
 
 The implementation for the school platform Vklass.
@@ -111,32 +106,50 @@ Install dependencies
 cd skolplattformen && yarn
 ```
 
-### iOS
+### Running the app with Expo
 
-If you wanna run the iOS app, you need to setup a couple of things first, we have a guide that will assist you in getting started with the iOS app. A Mac is required to build projects with native code for iOS so we do not have support for Linux / Windows.
+This project uses Expo for building and running the app. Make sure you have the Expo CLI installed:
 
-* [Mac OS](/docs/ios_mac.md)
-
-If you already setup everything, you just need to run the following command in the project root:
-
-Start the iOS app
-```
-yarn run ios
+```bash
+npm install -g expo-cli
 ```
 
-### Android
+#### iOS
 
-If you wanna run the Android app, you need to setup a couple of things first, we have created three different guides depending on your operating system.
+To run the iOS app, you need a Mac with Xcode installed.
 
-* [Mac OS](/docs/android_mac.md)
-* [Windows](/docs/android_windows.md)
-* [Linux](/docs/android_linux.md)
-
-If you already setup everything, you just need to run the following command in the project root:
-
+Start the iOS app:
+```bash
+yarn ios
 ```
-yarn run android
+
+Or to run in the Expo Go app:
+```bash
+yarn start
 ```
+
+#### Android
+
+To run the Android app, you need Android Studio and an Android emulator or device.
+
+Start the Android app:
+```bash
+yarn android
+```
+
+Or to run in the Expo Go app:
+```bash
+yarn start
+```
+
+### Building for production
+
+To generate native iOS and Android projects:
+```bash
+yarn prebuild
+```
+
+This will create `ios/` and `android/` directories with the native projects.
 
 ### Website
 

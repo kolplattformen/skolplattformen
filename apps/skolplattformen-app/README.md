@@ -1,6 +1,6 @@
 # Öppna skolplattformen App
 
-This is the app for Öppna skolplattformen.
+This is the app for Öppna skolplattformen, built with Expo.
 
 ## Getting started
 
@@ -8,46 +8,44 @@ Have a look at the [overall readme](../../) for general instructions on getting 
 
 ### Prerequisites
 
-We use `yarn` as our package manager. To install it, run `sudo npm install -g yarn`. All the commands described here should be run from the `packages/app` directory.
+We use `yarn` as our package manager. To install it, run `npm install -g yarn`. All the commands described here should be run from the `apps/skolplattformen-app` directory.
+
+You also need the Expo CLI:
+```bash
+npm install -g expo-cli
+```
+
+### Running the app
+
+Start the Expo development server:
+```bash
+$ yarn start
+```
+
+This will open the Expo Dev Tools in your browser. You can then:
+- Press `i` to run in iOS simulator
+- Press `a` to run in Android emulator
+- Scan the QR code with the Expo Go app on your phone
+
+### Building native projects
+
+To generate the native iOS and Android projects:
+```bash
+$ yarn prebuild
+```
+
+This will create `ios/` and `android/` directories. You can then build using Xcode or Android Studio, or use EAS Build.
 
 ### iOS
 
-To get started using the iOS simulator start by installing the JavaScript
-dependencies using
-
-```bash
-$ yarn
-```
-
-Next you need to install the [Cocoapods](https://cocoapods.org/) dependencies
-for the iOS project
-
-```bash
-$ cd ios
-$ pod setup
-$ pod install
-```
-
-You should now be setup to run the app in the Simulator. Run the `ios` command
-in the root of the app.
-
+To run directly on iOS simulator:
 ```bash
 $ yarn ios
 ```
 
 ### Android
 
-Android development requires that you have [Android Studio](https://developer.android.com/studio) and relevant build tools installed.
-
-Start by installing JavaScript dependencies using
-
-```bash
-$ yarn
-```
-
-Before running the app you should start an emulator from Android Studio. Then
-run the following command to start the build
-
+To run directly on Android emulator:
 ```bash
 $ yarn android
 ```

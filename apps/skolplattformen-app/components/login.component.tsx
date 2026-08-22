@@ -23,7 +23,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { schema } from '../app.json'
+const schema = 'oppnaskolplattformen'
 import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
 import { schoolPlatforms } from '../data/schoolPlatforms'
 import { useFeature } from '../hooks/useFeature'

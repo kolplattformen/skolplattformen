@@ -55,7 +55,7 @@ export const ModalWebView = ({
             <TouchableOpacity onPress={closeModal}>
               <BackIcon
                 style={styles.backIcon}
-                fill={styles.backIcon.shadowColor}
+                fill={(styles.backIcon as any).shadowColor}
               />
             </TouchableOpacity>
             <Text category="s1" style={styles.headerText} numberOfLines={1}>
@@ -64,7 +64,7 @@ export const ModalWebView = ({
             <TouchableOpacity onPress={openInApp}>
               <ExternalLinkIcon
                 style={styles.shareIcon}
-                fill={styles.shareIcon.shadowColor}
+                fill={(styles.shareIcon as any).shadowColor}
               />
             </TouchableOpacity>
           </View>
