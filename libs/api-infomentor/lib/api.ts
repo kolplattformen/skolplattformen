@@ -175,15 +175,20 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     const status = checkStatus(this.fetch, ticket)
     status.on('OK', async () => {
+      console.log('BankID OK, retrieving session cookie...')
       await this.retrieveSessionCookie()
+      console.log('Session cookie retrieved, getting user...')
 
       const user = await this.getUser()
       this.personalNumber = user.personalNumber
+      console.log('User retrieved:', user.personalNumber)
 
       this.isLoggedIn = true
       this.emit('login')
+      console.log('Login event emitted')
     })
     status.on('ERROR', () => {
+      console.error('BankID ERROR')
       this.personalNumber = undefined
     })
 
@@ -193,11 +198,12 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private async retrieveSessionCookie(): Promise<void> {
     // Efter BankID OK, följ SAML-flödet för att få Infomentor session
     try {
-      // Gå till hub.infomentor.se för att trigga SAML-redirect och sätta cookies
+      console.log('Fetching hub.infomentor.se to establish session...')
       const hubUrl = 'https://hub.infomentor.se'
-      await this.fetch('hub-init', hubUrl, {
+      const response = await this.fetch('hub-init', hubUrl, {
         redirect: 'follow',
       })
+      console.log('Hub response status:', response.status)
     } catch (error) {
       console.error('Error retrieving session cookie:', error)
       // Fortsätt ändå - vi kan ha cookies redan
@@ -257,9 +263,11 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async getChildren(): Promise<EtjanstChild[]> {
     try {
+      console.log('getChildren called, fetching appData...')
       // Infomentor hub returnerar inte barn separat - vi skapar en "default" child
       // baserat på att användaren är inloggad
       const data = await this.post<any>('/timetable/timetable/appData')
+      console.log('appData response:', JSON.stringify(data).substring(0, 200))
 
       // Om vi kan hämta schema är vi inloggade - skapa en placeholder child
       // Infomentor visar all data direkt utan att välja barn
