@@ -55,8 +55,8 @@
     "moment": "^2.29.1",
     "node-html-parser": "^6.1.0",
     "personnummer": "^3.1.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-native": "0.76.5",
     "react-native-animatable": "^1.4.0",
     "react-native-calendar-events": "^2.2.0",
@@ -141,8 +141,10 @@
     "jest-runtime": "29.7.0",
     "jest-config": "29.7.0",
     "jest-resolve": "29.7.0",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.0",
-    "react-test-renderer": "18.2.0"
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1",
+    "react-test-renderer": "18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   }
 }
