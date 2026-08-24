@@ -251,37 +251,39 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async getChildren(): Promise<EtjanstChild[]> {
     try {
+      // Infomentor hub returnerar inte barn separat - vi skapar en "default" child
+      // baserat på att användaren är inloggad
       const data = await this.post<any>('/timetable/timetable/appData')
 
-      if (data.children && Array.isArray(data.children)) {
-        this.children = data.children.map((child: any) => ({
-          id: child.id || child.pupilId,
-          name: `${child.firstName} ${child.lastName}`,
-          firstName: child.firstName,
-          lastName: child.lastName,
-          schoolId: child.schoolId,
-          className: child.className,
-        }))
+      // Om vi kan hämta schema är vi inloggade - skapa en placeholder child
+      // Infomentor visar all data direkt utan att välja barn
+      const defaultChild: EtjanstChild = {
+        id: 'default',
+        sdsId: 'default',
+        name: 'Mitt barn',
+        schoolId: 'infomentor',
+        status: 'GR',
       }
 
-      return this.children.map((child) => ({
-        id: child.id,
-        sdsId: child.id,
-        name: child.name,
-        schoolId: child.schoolId,
-        status: 'GR',
-      }))
+      return [defaultChild]
     } catch (error) {
       console.error('Error fetching children:', error)
-      return []
+      // Returnera en placeholder även vid fel så att appen inte kraschar
+      const defaultChild: EtjanstChild = {
+        id: 'default',
+        sdsId: 'default',
+        name: 'Mitt barn',
+        schoolId: 'infomentor',
+        status: 'GR',
+      }
+      return [defaultChild]
     }
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
     try {
-      const data = await this.post<any>('/calendarv2/calendarv2/getentries', {
-        pupilId: child.id,
-      })
+      // Infomentor använder inte pupilId - hämta alla entries för inloggad användare
+      const data = await this.post<any>('/calendarv2/calendarv2/getentries', {})
 
       const entries: InfomentorCalendarEntry[] = data.entries || []
 
@@ -306,9 +308,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async getNews(child: EtjanstChild): Promise<NewsItem[]> {
     try {
-      const data = await this.post<any>('/Communication/News/GetNewsList', {
-        pupilId: child.id,
-      })
+      // Infomentor använder inte pupilId - hämta alla nyheter för inloggad användare
+      const data = await this.post<any>('/Communication/News/GetNewsList', {})
 
       const items: InfomentorNewsItem[] = data.newsItems || data || []
 
@@ -340,11 +341,10 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async getNotifications(child: EtjanstChild): Promise<Notification[]> {
     try {
+      // Infomentor använder inte pupilId - hämta alla notiser för inloggad användare
       const data = await this.post<any>(
         '/NotificationApp/NotificationApp/GetNotifications',
-        {
-          pupilId: child.id,
-        }
+        {}
       )
 
       const notifications: InfomentorNotification[] = data.notifications || []
@@ -375,8 +375,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
     to: DateTime
   ): Promise<ScheduleItem[]> {
     try {
+      // Infomentor använder inte pupilId - hämta schema för inloggad användare
       const data = await this.post<any>('/timetable/timetable/appData', {
-        pupilId: child.id,
         startDate: from.toISODate(),
         endDate: to.toISODate(),
       })
