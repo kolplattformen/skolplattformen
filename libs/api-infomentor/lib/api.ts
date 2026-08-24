@@ -191,11 +191,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   private async retrieveSessionCookie(): Promise<void> {
-    // Hämta Infomentor session cookie via SAML response
-    const url = routes.samlResponseUrl
-    await this.fetch('saml-response', url, {
-      redirect: 'manual',
-    })
+    // Efter BankID OK, följ SAML-flödet för att få Infomentor session
+    try {
+      // Gå till hub.infomentor.se för att trigga SAML-redirect och sätta cookies
+      const hubUrl = 'https://hub.infomentor.se'
+      await this.fetch('hub-init', hubUrl, {
+        redirect: 'follow',
+      })
+    } catch (error) {
+      console.error('Error retrieving session cookie:', error)
+      // Fortsätt ändå - vi kan ha cookies redan
+    }
   }
 
   async loginFreja(): Promise<any> {
