@@ -16,6 +16,7 @@
     "types": ["expo", "jest"],
     "paths": {
       "@skolplattformen/api": ["libs/api/lib/index.ts"],
+      "@skolplattformen/api-infomentor": ["libs/api-infomentor/lib/index.ts"],
       "@skolplattformen/api-skolplattformen": [
         "libs/api-skolplattformen/lib/index.ts"
       ],

@@ -74,6 +74,10 @@ The base for all api implementations
 
 The implementation for the school platform Vklass.
 
+#### api-infomentor
+
+The implementation for the school platform Infomentor.
+
 #### api-skolplattformen
 
 By not having to worry about the complex nature of the official API, the app becomes light-weight. \

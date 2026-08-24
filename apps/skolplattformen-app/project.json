@@ -65,6 +65,7 @@
   "tags": [],
   "implicitDependencies": [
     "api-skolplattformen",
+    "api-infomentor",
     "api",
     "hooks",
     "curriculum"

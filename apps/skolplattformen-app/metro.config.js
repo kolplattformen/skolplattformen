@@ -47,6 +47,7 @@ module.exports = {
     extraNodeModules: {
       '@skolplattformen/api': path.resolve(workspaceRoot, 'libs/api'),
       '@skolplattformen/api-skolplattformen': path.resolve(workspaceRoot, 'libs/api-skolplattformen'),
+      '@skolplattformen/api-infomentor': path.resolve(workspaceRoot, 'libs/api-infomentor'),
       '@skolplattformen/curriculum': path.resolve(workspaceRoot, 'libs/curriculum'),
       '@skolplattformen/hooks': path.resolve(workspaceRoot, 'libs/hooks'),
       react: path.resolve(workspaceRoot, 'node_modules/react'),
