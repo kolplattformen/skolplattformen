@@ -13,17 +13,19 @@ export { features } from './features'
 const init = (
   fetchImpl: Fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
-  options?: FetcherOptions
+  options?: FetcherOptions,
+  idp?: string
 ): Api => {
   // prettier-ignore
   const cookieManager = ((cookieManagerImpl as RNCookieManager).get)
     ? wrapReactNativeCookieManager(cookieManagerImpl as RNCookieManager)
     : wrapToughCookie(cookieManagerImpl as ToughCookieJar)
-  
+
   return new ApiInfomentor({
     fetch: fetchImpl as any,
     cookieManager,
     options,
+    idp: idp || 'stockholm_par',
   })
 }
 

@@ -17,14 +17,21 @@ import {
   SchoolContact,
   MenuItem,
   RequestInit,
+  LoginStatusChecker,
+  AuthTicket,
 } from '@skolplattformen/api'
 import { DateTime } from 'luxon'
+import * as html from 'node-html-parser'
+import { decode } from 'he'
+import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
+import * as routes from './routes'
 
 export interface InfomentorConfig {
   fetch: Fetch
   cookieManager: CookieManager
   options?: FetcherOptions
   baseUrl?: string
+  idp?: string // t.ex. 'stockholm_par'
 }
 
 interface InfomentorChild {
@@ -74,6 +81,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private fetch: Fetcher
   private cookieManager: CookieManager
   private baseUrl: string
+  private idp: string
   private personalNumber?: string
   private headers: any
   private children: InfomentorChild[] = []
@@ -86,6 +94,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     this.fetch = wrap(config.fetch, config.options)
     this.cookieManager = config.cookieManager
     this.baseUrl = config.baseUrl || 'https://hub.infomentor.se'
+    this.idp = config.idp || 'stockholm_par'
     this.headers = {}
   }
 
@@ -103,15 +112,90 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
   }
 
-  async login(personalNumber?: string): Promise<any> {
-    this.personalNumber = personalNumber
-    this.isLoggedIn = true
-    this.emit('login')
-    return {
-      // Returnera en enkel status checker
-      on: () => {},
-      cancel: () => {},
+  private addHeader(name: string, value: string): void {
+    this.headers[name] = value
+  }
+
+  async login(personalNumber?: string): Promise<LoginStatusChecker> {
+    if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
+      return this.fakeMode()
+
+    this.isFake = false
+
+    // Starta SAML-flödet via Infomentor SSO
+    const ssoUrl = routes.ssoLogin(this.idp)
+    const ssoResponse = await this.fetch('sso-init', ssoUrl, {
+      redirect: 'manual',
+    })
+
+    if (!ssoResponse.ok && ssoResponse.status !== 302) {
+      throw new Error(
+        `SSO Error [${ssoResponse.status}] [${ssoResponse.statusText}]`
+      )
     }
+
+    // Följ redirect till SAML IdP (login001.stockholm.se)
+    const samlUrl = ssoResponse.headers.get('Location') || ''
+    if (!samlUrl) {
+      throw new Error('No SAML redirect URL found')
+    }
+
+    const samlResponse = await this.fetch('saml-request', samlUrl, {
+      redirect: 'manual',
+    })
+
+    // Extrahera SAMLRequest från HTML-formulär
+    const samlHtml = await samlResponse.text()
+    const doc = html.parse(decode(samlHtml))
+    const samlRequest = doc
+      .querySelector('input[name="SAMLRequest"]')
+      ?.getAttribute('value')
+
+    if (!samlRequest) {
+      throw new Error('Could not parse SAML Request')
+    }
+
+    // Skicka SAMLRequest till IdP och starta BankID
+    const idpUrl = samlResponse.headers.get('Location') || samlUrl
+    const bankIdInitUrl = `${idpUrl}&initialize=bankid${
+      personalNumber ? `&personalNumber=${personalNumber}` : ''
+    }&_=${Date.now()}`
+
+    const ticketResponse = await this.fetch('auth-ticket', bankIdInitUrl)
+
+    if (!ticketResponse.ok) {
+      throw new Error(
+        `BankID Error [${ticketResponse.status}] [${ticketResponse.statusText}]`
+      )
+    }
+
+    const ticket: AuthTicket = await ticketResponse.json()
+
+    this.personalNumber = personalNumber
+
+    const status = checkStatus(this.fetch, ticket)
+    status.on('OK', async () => {
+      await this.retrieveSessionCookie()
+
+      const user = await this.getUser()
+      this.personalNumber = user.personalNumber
+
+      this.isLoggedIn = true
+      this.emit('login')
+    })
+    status.on('ERROR', () => {
+      this.personalNumber = undefined
+    })
+
+    return status
+  }
+
+  private async retrieveSessionCookie(): Promise<void> {
+    // Hämta Infomentor session cookie via SAML response
+    const url = routes.samlResponseUrl
+    await this.fetch('saml-response', url, {
+      redirect: 'manual',
+    })
   }
 
   async loginFreja(): Promise<any> {
@@ -167,11 +251,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async getChildren(): Promise<EtjanstChild[]> {
     try {
-      // Hämta timetable appData för att få barninfo
       const data = await this.post<any>('/timetable/timetable/appData')
 
-      // Parse children från response
-      // Detta är en placeholder - justera baserat på faktisk response-struktur
       if (data.children && Array.isArray(data.children)) {
         this.children = data.children.map((child: any) => ({
           id: child.id || child.pupilId,
@@ -183,13 +264,12 @@ export class ApiInfomentor extends EventEmitter implements Api {
         }))
       }
 
-      // Konvertera till EtjanstChild format
       return this.children.map((child) => ({
         id: child.id,
-        sdsId: child.id, // Använd samma ID
+        sdsId: child.id,
         name: child.name,
         schoolId: child.schoolId,
-        status: 'GR', // Default status
+        status: 'GR',
       }))
     } catch (error) {
       console.error('Error fetching children:', error)
@@ -221,7 +301,6 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   async getClassmates(child: EtjanstChild): Promise<Classmate[]> {
-    // Infomentor har "Kontaktlista" - implementera när vi har API-dokumentation
     return []
   }
 
@@ -252,12 +331,10 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   async getNewsDetails(child: EtjanstChild, item: NewsItem): Promise<any> {
-    // Infomentor returnerar full body i GetNewsList
     return item
   }
 
   async getMenu(child: EtjanstChild): Promise<MenuItem[]> {
-    // Infomentor verkar inte ha matsedel i hub-vyn
     return []
   }
 
@@ -289,7 +366,6 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   async getTeachers(child: EtjanstChild): Promise<Teacher[]> {
-    // Infomentor har "Kontaktlista" - implementera när vi har API-dokumentation
     return []
   }
 
@@ -323,12 +399,10 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   async getSchoolContacts(child: EtjanstChild): Promise<SchoolContact[]> {
-    // Infomentor har "Kontaktlista" - implementera när vi har API-dokumentation
     return []
   }
 
   async getSkola24Children(): Promise<any[]> {
-    // Infomentor använder inte Skola24
     return []
   }
 
@@ -338,8 +412,20 @@ export class ApiInfomentor extends EventEmitter implements Api {
     year: number,
     lang: any
   ): Promise<any[]> {
-    // Infomentor schema hanteras av getSchedule
     return []
+  }
+
+  private async fakeMode(): Promise<LoginStatusChecker> {
+    this.isFake = true
+
+    setTimeout(() => {
+      this.isLoggedIn = true
+      this.emit('login')
+    }, 50)
+
+    const emitter = new DummyStatusChecker()
+    emitter.token = 'fake'
+    return emitter
   }
 
   async logout(): Promise<void> {
