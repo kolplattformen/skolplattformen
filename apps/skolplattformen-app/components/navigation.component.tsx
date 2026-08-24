@@ -9,7 +9,7 @@ import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'
 import React, { useEffect } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
-import { schema } from '../app.json'
+const schema = 'oppnaskolplattformen'
 import {
   darkNavigationTheme,
   lightNavigationTheme,

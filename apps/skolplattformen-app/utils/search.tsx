@@ -37,17 +37,18 @@ function replaceNewLines(string: string): string {
 }
 
 export function renderSearchResultPreview(
-  searchResult: MatchData<string>
+  searchResult: MatchData<NewsItem>
 ): ReactNode {
   const start = searchResult.match.index
   const end = start + searchResult.match.length
+  const original = (searchResult.original as any).body || ''
 
   const beforeMatch = replaceNewLines(
-    searchResult.original.slice(start - NUM_CHARS_AROUND_SEARCH_MATCH, start)
+    original.slice(start - NUM_CHARS_AROUND_SEARCH_MATCH, start)
   )
-  const match = replaceNewLines(searchResult.original.slice(start, end))
+  const match = replaceNewLines(original.slice(start, end))
   const afterMatch = replaceNewLines(
-    searchResult.original.slice(end, end + NUM_CHARS_AROUND_SEARCH_MATCH)
+    original.slice(end, end + NUM_CHARS_AROUND_SEARCH_MATCH)
   )
   return (
     <>

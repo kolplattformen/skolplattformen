@@ -23,7 +23,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { schema } from '../app.json'
+const schema = 'oppnaskolplattformen' // eslint-disable-line @typescript-eslint/no-unused-vars
 import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
 import { schoolPlatforms } from '../data/schoolPlatforms'
 import { useFeature } from '../hooks/useFeature'
@@ -62,16 +62,13 @@ export const Login = () => {
   const [showLoginMethod, setShowLoginMethod] = useState(false)
   const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] =
     useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [loginStatusText, setLoginStatusText] = useState('')
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
   const [loginMethodId, setLoginMethodId] = useSettingsStorage('loginMethodId')
+  const [error, setError] = useState<string | null>(null)
 
-  const loginBankIdSameDeviceWithoutId = useFeature(
-    'LOGIN_BANK_ID_SAME_DEVICE_WITHOUT_ID'
-  )
   const loginWithFrejaEnabled = useFeature('LOGIN_FREJA_EID')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
@@ -79,7 +76,10 @@ export const Login = () => {
 
   const { t } = useTranslation()
 
-  const valid = Personnummer.valid(personalIdNumber)
+  const valid =
+    loginMethodId === 'otherdevice'
+      ? Personnummer.valid(personalIdNumber)
+      : true
 
   const loginMethods = [
     { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
@@ -87,6 +87,11 @@ export const Login = () => {
     { id: 'freja', title: t('auth.freja.OpenOnThisDevice') },
     { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
+
+  // Set default login method to 'thisdevice' if not set
+  if (!loginMethodId) {
+    setLoginMethodId('thisdevice')
+  }
 
   if (loginMethodId === 'freja' && !loginWithFrejaEnabled) {
     setLoginMethodId('thisdevice')
@@ -119,12 +124,7 @@ export const Login = () => {
 
   const openBankId = (token: string) => {
     try {
-      const redirect =
-        loginMethodId === 'thisdevice' ? encodeURIComponent(schema) : ''
-      const bankIdUrl =
-        Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token}&redirect=${redirect}`
-          : `bankid:///?autostarttoken=${token}&redirect=null`
+      const bankIdUrl = `https://app.bankid.com/?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
       setError(t('auth.bankid.OpenManually'))
@@ -143,10 +143,6 @@ export const Login = () => {
       setError(t('auth.freja.OpenManually'))
     }
   }
-
-  const isUsingPersonalIdNumber =
-    loginMethodId === 'otherdevice' ||
-    (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
 
   const startLogin = async (text: string) => {
     if (loginMethodId === 'freja') {
@@ -176,7 +172,7 @@ export const Login = () => {
 
       let ssn
 
-      if (isUsingPersonalIdNumber) {
+      if (loginMethodId === 'otherdevice') {
         ssn = Personnummer.parse(text).format(true)
         setPersonalIdNumber(ssn)
       }
@@ -211,10 +207,15 @@ export const Login = () => {
     loginMethods.find((method) => method.id === loginMethodId) ||
     loginMethods[0]
 
+  // Reset error when switching login method
+  useEffect(() => {
+    setError(null)
+  }, [loginMethodId])
+
   return (
     <>
       <View style={styles.loginForm}>
-        {isUsingPersonalIdNumber && (
+        {loginMethodId === 'otherdevice' && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}
@@ -241,34 +242,95 @@ export const Login = () => {
             placeholder={t('auth.placeholder_SocialSecurityNumber')}
           />
         )}
-        <ButtonGroup style={styles.loginButtonGroup} status="primary">
-          <Button
-            accessible={true}
-            onPress={() => startLogin(personalIdNumber)}
-            style={styles.loginButton}
-            appearance="ghost"
-            disabled={isUsingPersonalIdNumber && !valid}
-            status="primary"
-            accessoryLeft={LoginProviderImage}
-            size="medium"
-          >
-            {currentLoginMethod.title}
-          </Button>
-          <Button
-            accessible={true}
-            onPress={() => {
-              setShowLoginMethod(true)
-            }}
-            style={styles.loginMethodButton}
-            appearance="ghost"
-            status="primary"
-            accessoryLeft={SelectIcon}
-            size="medium"
-            accessibilityHint={t('login.a11y_select_login_method', {
-              defaultValue: 'Välj inloggningsmetod',
-            })}
-          />
-        </ButtonGroup>
+        {loginMethodId === 'thisdevice' && (
+          <View style={styles.bankIdButtons}>
+            <Button
+              accessible={true}
+              onPress={() => startLogin('')}
+              style={styles.loginButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {t('auth.bankid.OpenOnThisDevice')}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+              accessibilityHint={t('login.a11y_select_login_method', {
+                defaultValue: 'Välj inloggningsmetod',
+              })}
+            />
+          </View>
+        )}
+        {loginMethodId === 'otherdevice' && (
+          <ButtonGroup style={styles.loginButtonGroup} status="primary">
+            <Button
+              accessible={true}
+              onPress={() => startLogin(personalIdNumber)}
+              style={styles.loginButton}
+              appearance="ghost"
+              disabled={!valid}
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {currentLoginMethod.title}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+              accessibilityHint={t('login.a11y_select_login_method', {
+                defaultValue: 'Välj inloggningsmetod',
+              })}
+            />
+          </ButtonGroup>
+        )}
+        {(loginMethodId === 'freja' || loginMethodId === 'testuser') && (
+          <ButtonGroup style={styles.loginButtonGroup} status="primary">
+            <Button
+              accessible={true}
+              onPress={() => startLogin(personalIdNumber)}
+              style={styles.loginButton}
+              appearance="ghost"
+              disabled={loginMethodId === 'testuser' ? false : !valid}
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {currentLoginMethod.title}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+              accessibilityHint={t('login.a11y_select_login_method', {
+                defaultValue: 'Välj inloggningsmetod',
+              })}
+            />
+          </ButtonGroup>
+        )}
         <View style={styles.platformPicker}>
           <Button
             appearance="ghost"
@@ -394,6 +456,10 @@ const themedStyles = StyleService.create({
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
+    minHeight: 45,
+  },
+  bankIdButtons: {
+    flexDirection: 'row',
     minHeight: 45,
   },
   loginButton: { ...Layout.flex.full },

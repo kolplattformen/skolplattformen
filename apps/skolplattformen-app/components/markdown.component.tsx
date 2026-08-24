@@ -11,6 +11,7 @@ interface MarkdownProps {
 }
 
 const rules: RenderRules = {
+  // @ts-expect-error React 18 type conflict
   image: (node) => {
     const { src } = node.attributes
     const url = src.startsWith('/')
@@ -28,6 +29,7 @@ const rules: RenderRules = {
       />
     )
   },
+  // @ts-expect-error React 18 type conflict
   link: (node, children, _parent, styles) => {
     if (children) {
       return (
@@ -50,7 +52,7 @@ const rules: RenderRules = {
 export const Markdown = ({ style, children }: MarkdownProps) => {
   return (
     <MarkdownBase rules={rules} style={style}>
-      {children}
+      {children as any}
     </MarkdownBase>
   )
 }

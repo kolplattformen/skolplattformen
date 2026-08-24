@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { ViewProps } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 
@@ -9,11 +9,11 @@ interface TransitionViewPropsType extends ViewProps {
 }
 const transitionDuration = 500
 
-export const TransitionView: FunctionComponent<TransitionViewPropsType> = ({
+export const TransitionView = ({
   index,
   children,
   ...rest
-}) => {
+}: PropsWithChildren<TransitionViewPropsType>) => {
   return (
     <Animatable.View
       animation="fadeIn"
