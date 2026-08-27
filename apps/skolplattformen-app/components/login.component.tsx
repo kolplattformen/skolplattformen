@@ -100,9 +100,17 @@ export const Login = () => {
   useEffect(() => {
     const loginHandler = async () => {
       console.debug('Runnning loginHandler')
-      const user = await api.getUser()
-      await AppStorage.clearPersonalData(user)
-      showModal(false)
+      try {
+        const user = await api.getUser()
+        console.debug('User from api:', user)
+        if (user && user.personalNumber) {
+          await AppStorage.clearPersonalData(user)
+        }
+        showModal(false)
+      } catch (error) {
+        console.error('Error in loginHandler:', error)
+        showModal(false)
+      }
     }
 
     api.on('login', loginHandler)
