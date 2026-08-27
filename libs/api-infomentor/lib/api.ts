@@ -316,15 +316,13 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   async getChildren(): Promise<EtjanstChild[]> {
+    console.log('getChildren called')
     try {
-      console.log('getChildren called, fetching appData...')
-      // Infomentor hub returnerar inte barn separat - vi skapar en "default" child
-      // baserat på att användaren är inloggad
+      console.log('Fetching appData...')
       const data = await this.post<any>('/timetable/timetable/appData')
-      console.log('appData response:', JSON.stringify(data).substring(0, 200))
+      console.log('appData response status: OK')
 
       // Om vi kan hämta schema är vi inloggade - skapa en placeholder child
-      // Infomentor visar all data direkt utan att välja barn
       const defaultChild: EtjanstChild = {
         id: 'default',
         sdsId: 'default',
@@ -332,6 +330,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         schoolId: 'infomentor',
         status: 'GR',
       }
+      console.log('Returning default child:', defaultChild)
 
       return [defaultChild]
     } catch (error) {
@@ -344,6 +343,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         schoolId: 'infomentor',
         status: 'GR',
       }
+      console.log('Returning default child (after error):', defaultChild)
       return [defaultChild]
     }
   }
