@@ -110,3 +110,4 @@ xcshareddata
 xcuserdata
 /.vs
 *.hprof
+node_modules/react-dom removed
