@@ -122,14 +122,48 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     this.isFake = false
 
-    // Använd Stockholms BankID direkt (samma som Skolplattformen)
-    // Infomentor accepterar samma session eftersom båda använder Stockholms IdP
-    const bankIdUrl =
-      'https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid?TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
-    const bankIdInitUrl = `${bankIdUrl}&initialize=bankid${
+    // Steg 1: Starta Infomentor SSO-flöde
+    console.log('Starting Infomentor SSO flow...')
+    const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
+    const ssoResponse = await this.fetch('sso-init', ssoUrl, {
+      redirect: 'manual',
+    })
+
+    if (!ssoResponse.ok && ssoResponse.status !== 302) {
+      throw new Error(
+        `SSO Error [${ssoResponse.status}] [${ssoResponse.statusText}]`
+      )
+    }
+
+    // Steg 2: Följ redirect till Stockholms SAML IdP
+    const samlUrl = ssoResponse.headers.get('Location') || ''
+    if (!samlUrl) {
+      throw new Error('No SAML redirect URL found')
+    }
+    console.log('SAML redirect URL:', samlUrl)
+
+    // Steg 3: Extrahera SAMLRequest från HTML-formulär
+    const samlResponse = await this.fetch('saml-request', samlUrl, {
+      redirect: 'manual',
+    })
+    const samlHtml = await samlResponse.text()
+    const doc = html.parse(decode(samlHtml))
+    const samlRequest = doc
+      .querySelector('input[name="SAMLRequest"]')
+      ?.getAttribute('value')
+
+    if (!samlRequest) {
+      throw new Error('Could not parse SAML Request')
+    }
+    console.log('SAML Request extracted')
+
+    // Steg 4: Skicka SAMLRequest till Stockholms IdP och starta BankID
+    const idpUrl = samlResponse.headers.get('Location') || samlUrl
+    const bankIdInitUrl = `${idpUrl}&initialize=bankid${
       personalNumber ? `&personalNumber=${personalNumber}` : ''
     }&_=${Date.now()}`
 
+    console.log('Starting BankID...')
     const ticketResponse = await this.fetch('auth-ticket', bankIdInitUrl)
 
     if (!ticketResponse.ok) {
@@ -139,14 +173,13 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
 
     const ticket: AuthTicket = await ticketResponse.json()
-
     this.personalNumber = personalNumber
 
     const status = checkStatus(this.fetch, ticket)
     status.on('OK', async () => {
-      console.log('BankID OK, retrieving session cookie...')
-      await this.retrieveSessionCookie()
-      console.log('Session cookie retrieved, getting user...')
+      console.log('BankID OK, completing SAML flow...')
+      await this.completeSamlFlow(samlUrl, ticket)
+      console.log('SAML flow completed, getting user...')
 
       const user = await this.getUser()
       this.personalNumber = user.personalNumber
@@ -162,6 +195,42 @@ export class ApiInfomentor extends EventEmitter implements Api {
     })
 
     return status
+  }
+
+  private async completeSamlFlow(samlUrl: string, ticket: AuthTicket): Promise<void> {
+    // Steg 5: Hämta SAML Response från Stockholms IdP
+    const samlResponseUrl = `${samlUrl}&verifyorder=${ticket.order}&_=${Date.now()}`
+    const samlResponse = await this.fetch('saml-response', samlResponseUrl, {
+      redirect: 'manual',
+    })
+
+    // Steg 6: Extrahera SAMLResponse
+    const samlHtml = await samlResponse.text()
+    const doc = html.parse(decode(samlHtml))
+    const samlResponseValue = doc
+      .querySelector('input[name="SAMLResponse"]')
+      ?.getAttribute('value')
+
+    if (!samlResponseValue) {
+      throw new Error('Could not parse SAML Response')
+    }
+    console.log('SAML Response extracted')
+
+    // Steg 7: Skicka SAML Response till Infomentor
+    const infomentorSamlUrl = 'https://sso.infomentor.se/login.ashx'
+    const formData = new URLSearchParams()
+    formData.append('SAMLResponse', samlResponseValue)
+
+    const infomentorResponse = await this.fetch('infomentor-saml', infomentorSamlUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData.toString(),
+      redirect: 'follow',
+    })
+
+    console.log('Infomentor SAML response status:', infomentorResponse.status)
   }
 
   private async retrieveSessionCookie(): Promise<void> {

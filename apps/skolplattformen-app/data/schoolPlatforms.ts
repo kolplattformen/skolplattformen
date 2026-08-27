@@ -16,7 +16,7 @@ export const schoolPlatforms = [
   {
     id: 'infomentor',
     displayName: 'Infomentor',
-    api: initInfomentor(fetch as any, CookieManager),
+    api: initInfomentor(fetch as any, CookieManager, undefined, 'stockholm_par'),
     features: featuresInfomentor,
   },
 ]
