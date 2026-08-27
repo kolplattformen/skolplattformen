@@ -13,7 +13,10 @@ export class Checker extends EventEmitter implements LoginStatusChecker {
   constructor(fetcher: Fetcher, ticket: AuthTicket) {
     super()
     this.fetcher = fetcher
-    this.url = ticket.order || ''
+    // Bygg status-URL från order-ID
+    const baseUrl = 'https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid'
+    const params = 'TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
+    this.url = `${baseUrl}?${params}&verifyorder=${ticket.order}&_=${Date.now()}`
     this.token = ticket.token
     this.check()
   }
