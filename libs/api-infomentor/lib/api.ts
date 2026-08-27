@@ -167,15 +167,22 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }&_=${Date.now()}`
 
     console.log('Starting BankID...')
+    console.log('BankID URL:', bankIdInitUrl)
+    
     const ticketResponse = await this.fetch('auth-ticket', bankIdInitUrl)
+    console.log('BankID response status:', ticketResponse.status)
+    console.log('BankID response ok:', ticketResponse.ok)
 
     if (!ticketResponse.ok) {
+      const errorText = await ticketResponse.text()
+      console.error('BankID error response:', errorText.substring(0, 500))
       throw new Error(
         `BankID Error [${ticketResponse.status}] [${ticketResponse.statusText}]`
       )
     }
 
     const ticket: AuthTicket = await ticketResponse.json()
+    console.log('BankID ticket received, order:', ticket.order?.substring(0, 20))
     this.personalNumber = personalNumber
 
     const status = checkStatus(this.fetch, ticket)
@@ -192,8 +199,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
       this.emit('login')
       console.log('Login event emitted')
     })
-    status.on('ERROR', () => {
-      console.error('BankID ERROR')
+    status.on('ERROR', (err) => {
+      console.error('BankID ERROR:', err)
       this.personalNumber = undefined
     })
 
