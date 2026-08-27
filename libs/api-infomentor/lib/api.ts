@@ -191,8 +191,13 @@ export class ApiInfomentor extends EventEmitter implements Api {
       await this.retrieveSessionCookie()
       console.log('Session retrieved, getting user...')
 
+      // Sätt personalNumber om det inte redan är satt (t.ex. vid BankID utan personnummer)
+      if (!this.personalNumber) {
+        // Försök hämta från användardata eller sätt ett placeholder
+        this.personalNumber = 'unknown'
+      }
+
       const user = await this.getUser()
-      this.personalNumber = user.personalNumber
       console.log('User retrieved:', user.personalNumber)
 
       this.isLoggedIn = true
