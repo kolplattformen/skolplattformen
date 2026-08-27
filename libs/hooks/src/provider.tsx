@@ -38,13 +38,16 @@ export const ApiProvider = ({
   }
 
   useEffect(() => {
-    const handler = async () => {
-      setIsLoggedIn(api.isLoggedIn)
-      setIsFake(api.isFake)
+    const handler = () => {
+      // Use setTimeout to avoid calling setState during render
+      setTimeout(() => {
+        setIsLoggedIn(api.isLoggedIn)
+        setIsFake(api.isFake)
 
-      if (!api.isLoggedIn) {
-        store.dispatch({ type: 'CLEAR', entity: 'ALL' })
-      }
+        if (!api.isLoggedIn) {
+          store.dispatch({ type: 'CLEAR', entity: 'ALL' })
+        }
+      }, 0)
     }
 
     api.on('login', handler)
