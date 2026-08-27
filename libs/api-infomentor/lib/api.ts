@@ -137,6 +137,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
       
       const location = ssoResponse.headers.get('Location')
       console.log('SSO Location header:', location)
+      
+      // Om ingen redirect, kolla om det är en HTML-sida med kommunväljare
+      if (!location) {
+        const html = await ssoResponse.text()
+        console.log('SSO response HTML (first 500 chars):', html.substring(0, 500))
+        
+        // Kolla om det finns en form eller redirect i HTML
+        if (html.includes('stockholm') || html.includes('Stockholm')) {
+          console.log('HTML contains Stockholm reference')
+        }
+      }
 
       if (!ssoResponse.ok && ssoResponse.status !== 302) {
         throw new Error(
