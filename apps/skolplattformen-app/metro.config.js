@@ -52,7 +52,6 @@ module.exports = {
       '@skolplattformen/hooks': path.resolve(workspaceRoot, 'libs/hooks'),
       react: path.resolve(workspaceRoot, 'node_modules/react'),
       'react-native': path.resolve(workspaceRoot, 'node_modules/react-native'),
-      'react-dom': path.resolve(workspaceRoot, 'node_modules/react-dom'),
       'react-redux': path.resolve(workspaceRoot, 'node_modules/react-redux'),
       'react-native-svg': path.resolve(workspaceRoot, 'node_modules/react-native-svg'),
       'use-sync-external-store': path.resolve(workspaceRoot, 'node_modules/use-sync-external-store'),
