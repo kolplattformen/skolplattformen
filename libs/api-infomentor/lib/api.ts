@@ -160,8 +160,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   private async startBankIdLogin(baseUrl: string, personalNumber?: string): Promise<LoginStatusChecker> {
-    // Starta BankID på Stockholms inloggningssida
-    const bankIdInitUrl = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}initialize=bankid${
+    // Starta BankID på Stockholms egen URL (inte Infomentor SSO)
+    const stockholmBankIdUrl = 'https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid?TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
+    const bankIdInitUrl = `${stockholmBankIdUrl}&initialize=bankid${
       personalNumber ? `&personalNumber=${personalNumber}` : ''
     }&_=${Date.now()}`
 
