@@ -122,68 +122,46 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     this.isFake = false
 
-    // Steg 1: Starta Infomentor SSO-flöde
+    // Steg 1: Starta Infomentor SSO-flöde - följ redirects automatiskt
     console.log('Starting Infomentor SSO flow...')
     const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
     console.log('SSO URL:', ssoUrl)
-    
-    let samlUrl = ''
-    
+
     try {
+      // Följ redirects - SSO redirectar till Stockholms IdP
       const ssoResponse = await this.fetch('sso-init', ssoUrl, {
-        redirect: 'manual',
+        redirect: 'follow',
       })
       console.log('SSO response status:', ssoResponse.status)
-      
-      const location = ssoResponse.headers.get('Location')
-      console.log('SSO Location header:', location)
-      
-      // Om ingen redirect, kolla om det är en HTML-sida med kommunväljare
-      if (!location) {
-        const html = await ssoResponse.text()
-        console.log('SSO response HTML (first 500 chars):', html.substring(0, 500))
-        
-        // Kolla om det finns en form eller redirect i HTML
-        if (html.includes('stockholm') || html.includes('Stockholm')) {
-          console.log('HTML contains Stockholm reference')
+
+      // Nu är vi på Stockholms inloggningssida - extrahera SAMLRequest
+      const samlHtml = await ssoResponse.text()
+      const doc = html.parse(decode(samlHtml))
+      const samlRequest = doc
+        .querySelector('input[name="SAMLRequest"]')
+        ?.getAttribute('value')
+
+      if (!samlRequest) {
+        console.log('No SAMLRequest found in HTML')
+        // Kolla om vi redan är på BankID-sidan genom att kolla HTML
+        if (samlHtml.includes('bankid') || samlHtml.includes('BankID')) {
+          console.log('Already on BankID page, starting BankID...')
+          return this.startBankIdLogin(ssoUrl, personalNumber)
         }
+        throw new Error('Could not find SAMLRequest or BankID page')
       }
 
-      if (!ssoResponse.ok && ssoResponse.status !== 302) {
-        throw new Error(
-          `SSO Error [${ssoResponse.status}] [${ssoResponse.statusText}]`
-        )
-      }
-
-      // Steg 2: Följ redirect till Stockholms SAML IdP
-      samlUrl = location || ''
-      if (!samlUrl) {
-        throw new Error('No SAML redirect URL found')
-      }
-      console.log('SAML redirect URL:', samlUrl)
+      console.log('SAML Request extracted, starting BankID...')
+      return this.startBankIdLogin(ssoUrl, personalNumber)
     } catch (error) {
       console.error('SSO fetch error:', error)
       throw error
     }
+  }
 
-    // Steg 3: Extrahera SAMLRequest från HTML-formulär
-    const samlResponse = await this.fetch('saml-request', samlUrl, {
-      redirect: 'manual',
-    })
-    const samlHtml = await samlResponse.text()
-    const doc = html.parse(decode(samlHtml))
-    const samlRequest = doc
-      .querySelector('input[name="SAMLRequest"]')
-      ?.getAttribute('value')
-
-    if (!samlRequest) {
-      throw new Error('Could not parse SAML Request')
-    }
-    console.log('SAML Request extracted')
-
-    // Steg 4: Skicka SAMLRequest till Stockholms IdP och starta BankID
-    const idpUrl = samlResponse.headers.get('Location') || samlUrl
-    const bankIdInitUrl = `${idpUrl}&initialize=bankid${
+  private async startBankIdLogin(baseUrl: string, personalNumber?: string): Promise<LoginStatusChecker> {
+    // Starta BankID på Stockholms inloggningssida
+    const bankIdInitUrl = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}initialize=bankid${
       personalNumber ? `&personalNumber=${personalNumber}` : ''
     }&_=${Date.now()}`
 
@@ -201,9 +179,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     const status = checkStatus(this.fetch, ticket)
     status.on('OK', async () => {
-      console.log('BankID OK, completing SAML flow...')
-      await this.completeSamlFlow(samlUrl, ticket)
-      console.log('SAML flow completed, getting user...')
+      console.log('BankID OK, retrieving session...')
+      await this.retrieveSessionCookie()
+      console.log('Session retrieved, getting user...')
 
       const user = await this.getUser()
       this.personalNumber = user.personalNumber
