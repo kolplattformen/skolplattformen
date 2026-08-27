@@ -125,22 +125,35 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // Steg 1: Starta Infomentor SSO-flöde
     console.log('Starting Infomentor SSO flow...')
     const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
-    const ssoResponse = await this.fetch('sso-init', ssoUrl, {
-      redirect: 'manual',
-    })
+    console.log('SSO URL:', ssoUrl)
+    
+    let samlUrl = ''
+    
+    try {
+      const ssoResponse = await this.fetch('sso-init', ssoUrl, {
+        redirect: 'manual',
+      })
+      console.log('SSO response status:', ssoResponse.status)
+      
+      const location = ssoResponse.headers.get('Location')
+      console.log('SSO Location header:', location)
 
-    if (!ssoResponse.ok && ssoResponse.status !== 302) {
-      throw new Error(
-        `SSO Error [${ssoResponse.status}] [${ssoResponse.statusText}]`
-      )
-    }
+      if (!ssoResponse.ok && ssoResponse.status !== 302) {
+        throw new Error(
+          `SSO Error [${ssoResponse.status}] [${ssoResponse.statusText}]`
+        )
+      }
 
-    // Steg 2: Följ redirect till Stockholms SAML IdP
-    const samlUrl = ssoResponse.headers.get('Location') || ''
-    if (!samlUrl) {
-      throw new Error('No SAML redirect URL found')
+      // Steg 2: Följ redirect till Stockholms SAML IdP
+      samlUrl = location || ''
+      if (!samlUrl) {
+        throw new Error('No SAML redirect URL found')
+      }
+      console.log('SAML redirect URL:', samlUrl)
+    } catch (error) {
+      console.error('SSO fetch error:', error)
+      throw error
     }
-    console.log('SAML redirect URL:', samlUrl)
 
     // Steg 3: Extrahera SAMLRequest från HTML-formulär
     const samlResponse = await this.fetch('saml-request', samlUrl, {
