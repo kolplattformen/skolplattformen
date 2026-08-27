@@ -122,42 +122,11 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     this.isFake = false
 
-    // Starta SAML-flödet via Infomentor SSO
-    const ssoUrl = routes.ssoLogin(this.idp)
-    const ssoResponse = await this.fetch('sso-init', ssoUrl, {
-      redirect: 'manual',
-    })
-
-    if (!ssoResponse.ok && ssoResponse.status !== 302) {
-      throw new Error(
-        `SSO Error [${ssoResponse.status}] [${ssoResponse.statusText}]`
-      )
-    }
-
-    // Följ redirect till SAML IdP (login001.stockholm.se)
-    const samlUrl = ssoResponse.headers.get('Location') || ''
-    if (!samlUrl) {
-      throw new Error('No SAML redirect URL found')
-    }
-
-    const samlResponse = await this.fetch('saml-request', samlUrl, {
-      redirect: 'manual',
-    })
-
-    // Extrahera SAMLRequest från HTML-formulär
-    const samlHtml = await samlResponse.text()
-    const doc = html.parse(decode(samlHtml))
-    const samlRequest = doc
-      .querySelector('input[name="SAMLRequest"]')
-      ?.getAttribute('value')
-
-    if (!samlRequest) {
-      throw new Error('Could not parse SAML Request')
-    }
-
-    // Skicka SAMLRequest till IdP och starta BankID
-    const idpUrl = samlResponse.headers.get('Location') || samlUrl
-    const bankIdInitUrl = `${idpUrl}&initialize=bankid${
+    // Använd Stockholms BankID direkt (samma som Skolplattformen)
+    // Infomentor accepterar samma session eftersom båda använder Stockholms IdP
+    const bankIdUrl =
+      'https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid?TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
+    const bankIdInitUrl = `${bankIdUrl}&initialize=bankid${
       personalNumber ? `&personalNumber=${personalNumber}` : ''
     }&_=${Date.now()}`
 
@@ -196,14 +165,15 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   private async retrieveSessionCookie(): Promise<void> {
-    // Efter BankID OK, följ SAML-flödet för att få Infomentor session
+    // Efter BankID OK, hämta Stockholms session cookie
     try {
-      console.log('Fetching hub.infomentor.se to establish session...')
-      const hubUrl = 'https://hub.infomentor.se'
-      const response = await this.fetch('hub-init', hubUrl, {
+      console.log('Fetching Stockholm session cookie...')
+      const cookieUrl =
+        'https://login003.stockholm.se/NECSadcmbid/authenticate/SiteMinderAuthADC?TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
+      const response = await this.fetch('session-cookie', cookieUrl, {
         redirect: 'follow',
       })
-      console.log('Hub response status:', response.status)
+      console.log('Session cookie response status:', response.status)
     } catch (error) {
       console.error('Error retrieving session cookie:', error)
       // Fortsätt ändå - vi kan ha cookies redan
