@@ -191,6 +191,16 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     this.isFake = false
 
+    // rensa cookies (gamla SM/Phx-sessioner gör att servern ser fel
+    // kontext - I Node fungerade allt med en färsk jar, dvs samma
+    // första-villkor som ett rent webbläsarfönster)
+    try {
+      await this.cookieManager.clearAll()
+      console.log('Cleared all cookies before login')
+    } catch (error) {
+      console.warn('Could not clear cookies:', (error as Error).message)
+    }
+
     // Steg 1: Starta Infomentor SSO - följer 302-kedjan till Stockholms BankID-sida
     console.log('Starting Infomentor SSO flow...')
     const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
