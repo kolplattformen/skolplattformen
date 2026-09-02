@@ -118,6 +118,73 @@ export class ApiInfomentor extends EventEmitter implements Api {
     this.headers[name] = value
   }
 
+  /**
+   * Fetch med explicit cookie-hantering (samma semantik som Node-harnessen):
+   * - skickar Cookie-header utifrån cookie-jaren
+   * - sparar Set-Cookie från varje svar i jaren
+   * RN:s nativa auto-cookie-hantering räcker inte här - SM-kontexten går
+   * annars förlorad mellan stegen (servern svarar 200 istället för 302).
+   */
+  private async cookieFetch(
+    url: string,
+    init: RequestInit = {}
+  ): Promise<Response> {
+    // Samla inkommande Set-Cookie och lagra i jaren
+    const storeCookies = async (response: any): Promise<void> => {
+      let raw: string[] = []
+      if (typeof response.headers?.getSetCookie === 'function') {
+        raw = response.headers.getSetCookie()
+      } else if (Array.isArray(response.headers?.map?.['set-cookie'])) {
+        raw = response.headers.map['set-cookie']
+      } else {
+        const single = response.headers?.get?.('set-cookie')
+        if (single) raw = [single]
+      }
+      for (const cookie of raw) {
+        try {
+          await this.cookieManager.setCookieString(cookie, url)
+        } catch (error) {
+          console.warn('Could not store cookie:', (error as Error).message)
+        }
+      }
+    }
+
+    const headers: Record<string, string> = { ...((init.headers as any) || {}) }
+    if (!headers.Cookie) {
+      const cookieHeader = await this.cookieManager.getCookieString(url)
+      if (cookieHeader) {
+        headers.Cookie = cookieHeader
+      }
+    }
+
+    const response = await (this.rawFetch as any)(url, {
+      ...init,
+      headers,
+    })
+    await storeCookies(response)
+
+    const sentNames = (headers.Cookie || '')
+      .split(';')
+      .map((c: string) => c.split('=')[0].trim())
+      .filter(Boolean)
+    const gotCookies = (response.headers as any)?.map?.['set-cookie'] || []
+    const gotNames = (Array.isArray(gotCookies) ? gotCookies : [])
+      .map((c: string) => c.split('=')[0].trim())
+    if (sentNames.length || gotNames.length) {
+      console.log(
+        `[cookieFetch] ${new URL(url).host} ${(init.method || 'GET')} → ${
+          response.status
+        } sent:[${sentNames.join(',')}] set-cookie:[${gotNames.join(',')}]`
+      )
+    } else {
+      console.log(
+        `[cookieFetch] ${new URL(url).host} ${init.method || 'GET'} → ${response.status}`
+      )
+    }
+
+    return response as Response
+  }
+
   async login(personalNumber?: string): Promise<LoginStatusChecker> {
     if (personalNumber !== undefined && personalNumber.endsWith('1212121212'))
       return this.fakeMode()
@@ -146,7 +213,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // Steg 2: Initiera BankID på inloggningssidan (samma som webben: initialize=bankid)
     const initUrl = `${loginPageUrl}&initialize=bankid&_=${Date.now()}`
     try {
-      const ticketResponse = await this.rawFetch(initUrl)
+      const ticketResponse = await this.cookieFetch(initUrl)
       console.log('BankID init status:', ticketResponse.status)
       if (!ticketResponse.ok) {
         const errorText = await ticketResponse.text()
@@ -173,7 +240,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     for (let i = 0; i < 8; i++) {
       // RN-fetch följer redirects själv; response.url = slutgiltiga sidan
-      const response = (await this.rawFetch(pageUrl, {
+      const response = (await this.cookieFetch(pageUrl, {
         redirect: 'follow',
       })) as any
       pageUrl = response.url || pageUrl
@@ -214,7 +281,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
           if (name) params.append(name, input.getAttribute('value') || '')
         })
         console.log('POSTing SAMLRequest form...')
-        const postResponse = (await this.rawFetch(action, {
+        const postResponse = (await this.cookieFetch(action, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: params.toString(),
@@ -232,7 +299,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         if (mbidHref) {
           const mbidUrl = new URL(mbidHref, pageUrl).toString()
           console.log('Following mbid link...')
-          const mbidResponse = (await this.rawFetch(mbidUrl, {
+          const mbidResponse = (await this.cookieFetch(mbidUrl, {
             redirect: 'follow',
           })) as any
           pageUrl = mbidResponse.url || mbidUrl
@@ -264,7 +331,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
       while (!cancelled) {
         try {
           const statusUrl = `${loginPageUrl}&verifyorder=${ticket.order}&_=${Date.now()}`
-          const response = await this.rawFetch(statusUrl)
+          const response = await this.cookieFetch(statusUrl)
           const data = await response.json()
           const state = data?.state
 
@@ -302,7 +369,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   private async completeSamlFlow(loginPageUrl: string): Promise<void> {
     // Steg 4: Hämta inloggningssidan igen - nu autentiserad -> SAML auto-POST-formulär
-    const response = (await this.rawFetch(loginPageUrl, {
+    const response = (await this.cookieFetch(loginPageUrl, {
       redirect: 'follow',
     })) as any
     const finalUrl: string = response.url || loginPageUrl
@@ -353,7 +420,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     let postParams: URLSearchParams = params
 
     for (let i = 0; i < 6; i++) {
-      const response = (await this.rawFetch(postAction, {
+      const response = (await this.cookieFetch(postAction, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: postParams.toString(),
