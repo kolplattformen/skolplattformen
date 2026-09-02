@@ -197,13 +197,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
           const name = input.getAttribute('name')
           if (name) params.append(name, input.getAttribute('value') || '')
         })
-        const postResponse = (await this.rawFetch(action, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: params.toString(),
-          redirect: 'follow',
-        })) as any
-        console.log('SAMLResponse POST status:', postResponse.status)
+        await this.followInfomentorLoginChain(action, params)
         return null // ingen BankID behövs
       }
 
@@ -273,19 +267,24 @@ export class ApiInfomentor extends EventEmitter implements Api {
           const response = await this.rawFetch(statusUrl)
           const data = await response.json()
           const state = data?.state
-          if (state) checker.emit(state)
 
           if (state === 'OK') {
+            // Vänta in hela SAML-slutsteget INNAN OK signaleras -
+            // annars börjar appen hämta data innan hub-sessionen finns
             try {
               await this.completeSamlFlow(loginPageUrl)
             } catch (error) {
               console.error('SAML completion error:', error)
+              checker.emit('ERROR')
+              return
             }
             this.isLoggedIn = true
+            checker.emit('OK')
             this.emit('login')
             console.log('Login event emitted')
             return
           }
+          if (state) checker.emit(state)
           if (state === 'ERROR' || state === 'CANCELLED') {
             return
           }
@@ -324,28 +323,74 @@ export class ApiInfomentor extends EventEmitter implements Api {
       throw new Error('No SAMLResponse received')
     }
 
-    // Steg 5: POSTa SAMLResponse till Infomentor för att få sessioncookie
-    const action = new URL(form.getAttribute('action') || '', loginPageUrl).toString()
+    // Steg 5: POSTa SAMLResponse till Infomentor och följ hela kedjan
+    // (hub svarar med ytterligare auto-post-steg innan sessionen är klar)
+    const action = new URL(
+      form.getAttribute('action') || '',
+      loginPageUrl
+    ).toString()
     console.log('Posting SAMLResponse to Infomentor...')
-    await this.rawFetch(action, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        SAMLResponse: samlResponseValue,
-        ...(doc.querySelector('input[name="RelayState"]')
-          ? {
-              RelayState:
-                doc
-                  .querySelector('input[name="RelayState"]')
-                  ?.getAttribute('value') || '',
-            }
-          : {}),
-      }).toString(),
-      redirect: 'follow',
+    const params = new URLSearchParams()
+    doc.querySelectorAll('input').forEach((input) => {
+      const name = input.getAttribute('name')
+      if (name) params.append(name, input.getAttribute('value') || '')
     })
+    await this.followInfomentorLoginChain(action, params)
     console.log('Infomentor session established')
+  }
+
+  /**
+   * Infomentors inloggning är inte klar efter SAML-POST:en - hub svarar med
+   * en "Login in progress"-sida innehållande ännu ett auto-POST-formulär som
+   * måste skickas vidare för att hub-sessioncookien ska sättas. Följ kedjan
+   * tills vi landar på en sida utan interstitial-formulär.
+   */
+  private async followInfomentorLoginChain(
+    action: string,
+    params: URLSearchParams
+  ): Promise<void> {
+    let postAction: string = action
+    let postParams: URLSearchParams = params
+
+    for (let i = 0; i < 6; i++) {
+      const response = (await this.rawFetch(postAction, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: postParams.toString(),
+        redirect: 'follow',
+      })) as any
+      const pageUrl: string = response.url || postAction
+      const bodyText = await response.text()
+      console.log(
+        `Chain POST → ${response.status} @ ${pageUrl.substring(0, 100)}`
+      )
+
+      const doc = html.parse(decode(bodyText))
+      const nextForm = doc.querySelector('form')
+      const isInterstitial =
+        bodyText.includes('Login in progress') ||
+        bodyText.includes('login in progress') ||
+        doc.querySelector('input[name="SAMLResponse"]') ||
+        doc.querySelector('input[name="SAMLRequest"]')
+
+      if (!nextForm || !isInterstitial) {
+        console.log('Login chain complete at:', pageUrl.substring(0, 100))
+        return
+      }
+
+      postAction = new URL(
+        nextForm.getAttribute('action') || pageUrl,
+        pageUrl
+      ).toString()
+      const nextParams = new URLSearchParams()
+      doc.querySelectorAll('input').forEach((input) => {
+        const name = input.getAttribute('name')
+        if (name) nextParams.append(name, input.getAttribute('value') || '')
+      })
+      postParams = nextParams
+      console.log('Following interstitial auto-post form...')
+    }
+    console.warn('Login chain did not complete within 6 steps')
   }
 
   async loginFreja(): Promise<any> {
