@@ -156,31 +156,62 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   private async getBankLoginPageUrl(ssoUrl: string): Promise<string> {
-    // Steg A: följ hela SSO-kedjan till metodväljaren (amedborgare.jsp)
-    const firstResponse = (await this.rawFetch(ssoUrl, {
-      redirect: 'follow',
-    })) as any
-    let pageUrl: string = firstResponse.url || ssoUrl
-    let body = await firstResponse.text()
+    let pageUrl = ssoUrl
 
-    // Steg B: metodväljaren har länk till BankID-vägen (NECSadc/mbid/...)
-    if (body.includes('NECSadc/mbid')) {
+    for (let i = 0; i < 5; i++) {
+      // RN-fetch följer redirects själv; response.url = slutgiltiga sidan
+      const response = (await this.rawFetch(pageUrl, {
+        redirect: 'follow',
+      })) as any
+      pageUrl = response.url || pageUrl
+      const body = await response.text()
       const doc = html.parse(decode(body))
-      const mbidHref = doc
-        .querySelector('a[href*="NECSadc/mbid"]')
-        ?.getAttribute('href')
-      if (mbidHref) {
-        const mbidUrl = new URL(mbidHref, pageUrl).toString()
-        console.log('Following mbid link:', mbidUrl.substring(0, 100))
-        const mbidResponse = (await this.rawFetch(mbidUrl, {
+
+      // Får vi SAML auto-POST-sida? POSTa formuläret vidare
+      const samlRequest = doc
+        .querySelector('input[name="SAMLRequest"]')
+        ?.getAttribute('value')
+      const form = doc.querySelector('form')
+      if (form && samlRequest) {
+        const action = new URL(form.getAttribute('action') || pageUrl, pageUrl)
+          .toString()
+        const params = new URLSearchParams()
+        doc.querySelectorAll('input').forEach((input) => {
+          const name = input.getAttribute('name')
+          if (name) params.append(name, input.getAttribute('value') || '')
+        })
+        console.log('POSTing SAMLRequest form...')
+        const postResponse = (await this.rawFetch(action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
           redirect: 'follow',
         })) as any
-        pageUrl = mbidResponse.url || mbidUrl
-        body = await mbidResponse.text()
+        pageUrl = postResponse.url || action
+        continue
       }
+
+      // Metodväljaren? Följ BankID-länken (NECSadc/mbid)
+      if (body.includes('NECSadc/mbid')) {
+        const mbidHref = doc
+          .querySelector('a[href*="NECSadc/mbid"]')
+          ?.getAttribute('href')
+        if (mbidHref) {
+          const mbidUrl = new URL(mbidHref, pageUrl).toString()
+          console.log('Following mbid link...')
+          const mbidResponse = (await this.rawFetch(mbidUrl, {
+            redirect: 'follow',
+          })) as any
+          pageUrl = mbidResponse.url || mbidUrl
+          break
+        }
+      }
+
+      // Annars: anta att vi är på BankID-sidan (UI3 med initialize=bankid)
+      break
     }
 
-    console.log('BankID page:', pageUrl.substring(0, 120))
+    console.log('BankID page:', pageUrl.substring(0, 130))
     return pageUrl
   }
 
