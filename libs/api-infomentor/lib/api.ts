@@ -233,8 +233,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   private async completeSamlFlow(loginPageUrl: string): Promise<void> {
     // Steg 4: Hämta inloggningssidan igen - nu autentiserad -> SAML auto-POST-formulär
-    const response = await this.rawFetch(loginPageUrl, { redirect: 'follow' })
+    const response = (await this.rawFetch(loginPageUrl, {
+      redirect: 'follow',
+    })) as any
+    const finalUrl: string = response.url || loginPageUrl
+    console.log('SAML re-fetch final URL:', finalUrl.substring(0, 140))
+    console.log('SAML re-fetch status:', response.status)
     const body = await response.text()
+    console.log(
+      'SAML re-fetch body (300):',
+      body.replace(/\s+/g, ' ').substring(0, 300)
+    )
     const doc = html.parse(decode(body))
     const form = doc.querySelector('form')
     const samlResponseValue = doc
