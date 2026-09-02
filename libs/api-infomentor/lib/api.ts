@@ -499,19 +499,23 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
     try {
-      // Infomentor använder inte pupilId - hämta alla entries för inloggad användare
-      const data = await this.post<any>('/calendarv2/calendarv2/getentries', {})
+      // Verifierad struktur: ren array [{ id, title, text, isAllDayEvent, startDateFull, endDateFull, ... }]
+      // Kräver startDate/endDate i payload (annars 500)
+      const data = await this.post<any[]>('/calendarv2/calendarv2/getentries', {
+        startDate: DateTime.now().toISODate(),
+        endDate: DateTime.now().plus({ months: 2 }).toISODate(),
+      })
 
-      const entries: InfomentorCalendarEntry[] = data.entries || []
+      const entries: any[] = Array.isArray(data) ? data : []
 
       return entries.map((entry) => ({
-        id: parseInt(entry.id, 10),
+        id: Number(entry.id),
         title: entry.title,
-        description: entry.description,
-        location: entry.location,
-        startDate: entry.startDate,
-        endDate: entry.endDate,
-        allDay: entry.allDay,
+        description: entry.text || entry.description || '',
+        location: '',
+        startDate: entry.startDateFull || entry.startDate,
+        endDate: entry.endDateFull || entry.endDate,
+        allDay: entry.isAllDayEvent || false,
       }))
     } catch (error) {
       console.error('Error fetching calendar:', error)
@@ -528,19 +532,20 @@ export class ApiInfomentor extends EventEmitter implements Api {
       // Infomentor använder inte pupilId - hämta alla nyheter för inloggad användare
       const data = await this.post<any>('/Communication/News/GetNewsList', {})
 
-      const items: InfomentorNewsItem[] = data.newsItems || data || []
+      // Verifierad struktur: { items: [{ id, title, content, publishedDate, publishedBy, newsImageUrl, ... }] }
+      const items: any[] = data.items || []
 
       return items.map((item) => ({
-        id: item.id,
-        author: item.author,
+        id: String(item.id),
+        author: item.publishedBy,
         header: item.title,
-        intro: item.intro,
-        body: item.body,
+        intro: '',
+        body: item.content,
         published: item.publishedDate,
-        modified: item.modifiedDate,
-        imageUrl: item.imageUrl,
-        fullImageUrl: item.fullImageUrl,
-        imageAltText: item.imageAltText,
+        modified: undefined,
+        imageUrl: item.newsImageUrl || undefined,
+        fullImageUrl: item.newsImageUrl || undefined,
+        imageAltText: undefined,
       }))
     } catch (error) {
       console.error('Error fetching news:', error)
@@ -598,16 +603,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
         endDate: to.toISODate(),
       })
 
-      const items = data.scheduleItems || data.lessons || []
+      // Verifierad struktur: { items: [{ start, end, title, notes: { roomInfo, tutors, timetableNotes }, allDay }] }
+      const items = data.items || []
 
       return items.map((item: any) => ({
-        title: item.title || item.subject,
-        description: item.description || item.comment,
-        location: item.location || item.room,
-        startDate: item.startDate || item.start,
-        endDate: item.endDate || item.end,
-        oneDayEvent: item.oneDayEvent || false,
-        allDayEvent: item.allDayEvent || false,
+        title: item.title,
+        description: item.notes?.timetableNotes || item.notes?.tutors || '',
+        location: item.notes?.roomInfo || item.details || '',
+        startDate: item.start,
+        endDate: item.end,
+        oneDayEvent: false,
+        allDayEvent: item.allDay || false,
       }))
     } catch (error) {
       console.error('Error fetching schedule:', error)

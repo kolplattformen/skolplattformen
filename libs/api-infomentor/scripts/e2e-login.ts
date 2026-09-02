@@ -13,11 +13,21 @@
  */
 import { CookieJar } from 'tough-cookie'
 import { DateTime } from 'luxon'
+import * as fs from 'fs'
 import init from '../lib'
 import { Fetch, RequestInit } from '@skolplattformen/api'
 
-const jar = new CookieJar()
+let jar = new CookieJar()
 const MAX_HOPS = 12
+const JAR_PATH = '/tmp/infomentor-jar.json'
+const REUSE = process.env.REUSE_JAR === '1'
+
+if (REUSE && fs.existsSync(JAR_PATH)) {
+  jar = CookieJar.deserializeSync(
+    JSON.parse(fs.readFileSync(JAR_PATH, 'utf8'))
+  ) as CookieJar
+  console.log(`♻️  Återanvänder sparad session från ${JAR_PATH}`)
+}
 
 const short = (url: string, len = 120) =>
   url.length > len ? `${url.substring(0, len)}…` : url
@@ -114,8 +124,12 @@ const main = async (): Promise<void> => {
   console.log('=== START: Infomentor e2e-login ===\n')
   const api = init(loggedFetch, jar as any, undefined, 'stockholm_par')
 
-  console.log('\n--- STEG 1: login() (SAML-kedja) ---')
-  const checker = await api.login()
+  if (REUSE) {
+    ;(api as any).isLoggedIn = true
+    console.log('Hoppar över login (återanvänd jar)')
+  } else {
+    console.log('\n--- STEG 1: login() (SAML-kedja) ---')
+    const checker = await api.login()
 
   if ((checker as any).token === 'fake') {
     console.log('\n(redan autentiserad – ingen BankID krävdes)')
@@ -177,23 +191,54 @@ const main = async (): Promise<void> => {
     server.close()
   }
 
+    fs.writeFileSync(JAR_PATH, JSON.stringify(jar.serializeSync(), null, 2))
+    console.log(`💾 Session sparad till ${JAR_PATH} (REUSE_JAR=1 för att återanvända)`)
+  }
+
   await dumpCookies()
+
+  // Rå-dumpar: se faktiska JSON-strukturer utan adapter-parsers
+  const rawPost = async (endpoint: string, payload?: any) => {
+    const url = `https://hub.infomentor.se${endpoint}`
+    const cookie = await jar.getCookieString(url)
+    const res = await loggedFetch(url, {
+      method: 'POST',
+      headers: {
+        Cookie: cookie,
+        'Content-Type': 'application/json',
+        Accept: 'application/json, text/javascript, */*; q=0.01',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify(payload || {}),
+    } as any)
+    const text = await res.text()
+    console.log(`\nRAW ${endpoint} [${res.status}] (${text.length} tecken):`)
+    console.log(text.substring(0, 3000))
+    return text
+  }
 
   console.log('\n--- STEG 3: getChildren (appData) ---')
   const children = await api.getChildren()
   console.log('Children:', JSON.stringify(children, null, 2))
 
+  console.log('\n--- STEG 3b: RAW appData ---')
+  await rawPost('/timetable/timetable/appData')
+
   const child = children[0]
   if (child) {
-    console.log('\n--- STEG 4: getNews ---')
+    console.log('\n--- STEG 4: RAW GetNewsList ---')
+    await rawPost('/Communication/News/GetNewsList')
+
+    console.log('\n--- STEG 5: RAW calendar getentries ---')
+    await rawPost('/calendarv2/calendarv2/getentries')
+
+    console.log('\n--- STEG 6: parsers (news/schedule/notifications) ---')
     try {
       const news = await api.getNews(child)
-      console.log(`News: ${news.length} st`, JSON.stringify(news[0] || null, null, 2))
+      console.log(`News: ${news.length} st`, JSON.stringify(news[0] || null, null, 2).substring(0, 400))
     } catch (e) {
       console.error('getNews kastade:', e)
     }
-
-    console.log('\n--- STEG 5: getSchedule ---')
     try {
       const schedule = await api.getSchedule(
         child,
@@ -204,13 +249,17 @@ const main = async (): Promise<void> => {
     } catch (e) {
       console.error('getSchedule kastade:', e)
     }
-
-    console.log('\n--- STEG 6: getNotifications ---')
     try {
       const notifications = await api.getNotifications(child)
       console.log(`Notifications: ${notifications.length} st`)
     } catch (e) {
       console.error('getNotifications kastade:', e)
+    }
+    try {
+      const calendar = await api.getCalendar(child)
+      console.log(`Calendar: ${calendar.length} st`, JSON.stringify(calendar[0] || null))
+    } catch (e) {
+      console.error('getCalendar kastade:', e)
     }
   }
 
