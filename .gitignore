@@ -111,3 +111,6 @@ xcuserdata
 /.vs
 *.hprof
 node_modules/react-dom removed
+
+# Prevent duplicate installs in app
+apps/skolplattformen-app/package-lock.json
