@@ -23,7 +23,7 @@ import {
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
 import { decode } from 'he'
-import { checkStatus, DummyStatusChecker } from './loginStatusChecker'
+import { DummyStatusChecker } from './loginStatusChecker'
 import * as routes from './routes'
 
 export interface InfomentorConfig {
@@ -79,6 +79,7 @@ interface InfomentorNotification {
 
 export class ApiInfomentor extends EventEmitter implements Api {
   private fetch: Fetcher
+  private rawFetch: Fetch
   private cookieManager: CookieManager
   private baseUrl: string
   private idp: string
@@ -92,6 +93,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
   constructor(config: InfomentorConfig) {
     super()
     this.fetch = wrap(config.fetch, config.options)
+    this.rawFetch = config.fetch
     this.cookieManager = config.cookieManager
     this.baseUrl = config.baseUrl || 'https://hub.infomentor.se'
     this.idp = config.idp || 'stockholm_par'
@@ -122,146 +124,166 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     this.isFake = false
 
-    // Steg 1: Starta Infomentor SSO-flöde - följ redirects automatiskt
+    // Steg 1: Starta Infomentor SSO - följer 302-kedjan till Stockholms BankID-sida
     console.log('Starting Infomentor SSO flow...')
     const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
-    console.log('SSO URL:', ssoUrl)
+    const loginPageUrl = await this.getBankLoginPageUrl(ssoUrl)
+    console.log('BankID login page URL:', loginPageUrl.substring(0, 120))
 
-    try {
-      // Följ redirects - SSO redirectar till Stockholms IdP
-      const ssoResponse = await this.fetch('sso-init', ssoUrl, {
-        redirect: 'follow',
-      })
-      console.log('SSO response status:', ssoResponse.status)
-
-      // Nu är vi på Stockholms inloggningssida - extrahera SAMLRequest
-      const samlHtml = await ssoResponse.text()
-      const doc = html.parse(decode(samlHtml))
-      const samlRequest = doc
-        .querySelector('input[name="SAMLRequest"]')
-        ?.getAttribute('value')
-
-      if (!samlRequest) {
-        console.log('No SAMLRequest found in HTML')
-        // Kolla om vi redan är på BankID-sidan genom att kolla HTML
-        if (samlHtml.includes('bankid') || samlHtml.includes('BankID')) {
-          console.log('Already on BankID page, starting BankID...')
-          return this.startBankIdLogin(ssoUrl, personalNumber)
-        }
-        throw new Error('Could not find SAMLRequest or BankID page')
-      }
-
-      console.log('SAML Request extracted, starting BankID...')
-      return this.startBankIdLogin(ssoUrl, personalNumber)
-    } catch (error) {
-      console.error('SSO fetch error:', error)
-      throw error
-    }
-  }
-
-  private async startBankIdLogin(baseUrl: string, personalNumber?: string): Promise<LoginStatusChecker> {
-    // Starta BankID på Stockholms egen URL (inte Infomentor SSO)
-    const stockholmBankIdUrl = 'https://login003.stockholm.se/NECSadcmbid/authenticate/NECSadcmbid?TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
-    const bankIdInitUrl = `${stockholmBankIdUrl}&initialize=bankid${
-      personalNumber ? `&personalNumber=${personalNumber}` : ''
-    }&_=${Date.now()}`
-
-    console.log('Starting BankID...')
-    console.log('BankID URL:', bankIdInitUrl)
-    
-    const ticketResponse = await this.fetch('auth-ticket', bankIdInitUrl)
-    console.log('BankID response status:', ticketResponse.status)
-    console.log('BankID response ok:', ticketResponse.ok)
-
+    // Steg 2: Initiera BankID på inloggningssidan (samma som webben: initialize=bankid)
+    const initUrl = `${loginPageUrl}&initialize=bankid&_=${Date.now()}`
+    const ticketResponse = await this.rawFetch(initUrl)
     if (!ticketResponse.ok) {
-      const errorText = await ticketResponse.text()
-      console.error('BankID error response:', errorText.substring(0, 500))
       throw new Error(
         `BankID Error [${ticketResponse.status}] [${ticketResponse.statusText}]`
       )
     }
-
     const ticket: AuthTicket = await ticketResponse.json()
-    console.log('BankID ticket received, order:', ticket.order?.substring(0, 20))
-    this.personalNumber = personalNumber
+    console.log('BankID ticket received')
 
-    const status = checkStatus(this.fetch, ticket)
-    status.on('OK', async () => {
-      console.log('BankID OK, retrieving session...')
-      await this.retrieveSessionCookie()
-      console.log('Session retrieved, getting user...')
+    this.personalNumber = personalNumber || 'unknown'
 
-      // Sätt personalNumber om det inte redan är satt (t.ex. vid BankID utan personnummer)
-      if (!this.personalNumber) {
-        // Försök hämta från användardata eller sätt ett placeholder
-        this.personalNumber = 'unknown'
-      }
-
-      const user = await this.getUser()
-      console.log('User retrieved:', user.personalNumber)
-
-      this.isLoggedIn = true
-      this.emit('login')
-      console.log('Login event emitted')
-    })
-    status.on('ERROR', (err) => {
-      console.error('BankID ERROR:', err)
-      this.personalNumber = undefined
-    })
-
-    return status
+    // Steg 3: Polla status. Efter OK: hämta SAMLResponse och POSTa till Infomentor
+    return this.createStatusChecker(loginPageUrl, ticket)
   }
 
-  private async completeSamlFlow(samlUrl: string, ticket: AuthTicket): Promise<void> {
-    // Steg 5: Hämta SAML Response från Stockholms IdP
-    const samlResponseUrl = `${samlUrl}&verifyorder=${ticket.order}&_=${Date.now()}`
-    const samlResponse = await this.fetch('saml-response', samlResponseUrl, {
-      redirect: 'manual',
-    })
+  private async getBankLoginPageUrl(ssoUrl: string): Promise<string> {
+    let url = ssoUrl
+    for (let i = 0; i < 10; i++) {
+      const response = await this.rawFetch(url, { redirect: 'manual' })
+      const location = response.headers.get('Location')
+      if (location) {
+        url = new URL(location, url).toString()
+        continue
+      }
+      // Sista steget: auto-POST-formulär? (SAML 2.0 Auto-POST form)
+      const body = await response.text()
+      const doc = html.parse(decode(body))
+      const form = doc.querySelector('form')
+      const samlRequest = doc
+        .querySelector('input[name="SAMLRequest"]')
+        ?.getAttribute('value')
+      if (form && samlRequest) {
+        // POSTa SAMLRequest vidare (fetch följer inte JS-auto-post)
+        const action = new URL(form.getAttribute('action') || '', url).toString()
+        const params = new URLSearchParams()
+        doc.querySelectorAll('input').forEach((input) => {
+          const name = input.getAttribute('name')
+          const value = input.getAttribute('value')
+          if (name) params.append(name, value || '')
+        })
+        const postResponse = await this.rawFetch(action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: params.toString(),
+          redirect: 'manual',
+        })
+        const postLocation = postResponse.headers.get('Location')
+        if (postLocation) {
+          url = new URL(postLocation, action).toString()
+          continue
+        }
+        // Inget mer att följa
+        if (postResponse.status >= 200 && postResponse.status < 300) {
+          return url
+        }
+        throw new Error(`SAML POST failed: ${postResponse.status}`)
+      }
+      // Inget formulär, ingen redirect - vi är på inloggningssidan
+      if (body.includes('bankid') || body.includes('BankID')) {
+        return url
+      }
+      throw new Error('Could not reach BankID login page')
+    }
+    throw new Error('Too many redirects in SSO flow')
+  }
 
-    // Steg 6: Extrahera SAMLResponse
-    const samlHtml = await samlResponse.text()
-    const doc = html.parse(decode(samlHtml))
+  private createStatusChecker(
+    loginPageUrl: string,
+    ticket: AuthTicket
+  ): LoginStatusChecker {
+    const checker = new EventEmitter() as any
+    checker.token = ticket.token
+    let cancelled = false
+
+    checker.cancel = () => {
+      cancelled = true
+    }
+
+    const poll = async () => {
+      while (!cancelled) {
+        try {
+          const statusUrl = `${loginPageUrl}&verifyorder=${ticket.order}&_=${Date.now()}`
+          const response = await this.rawFetch(statusUrl)
+          const data = await response.json()
+          const state = data?.state
+          if (state) checker.emit(state)
+
+          if (state === 'OK') {
+            try {
+              await this.completeSamlFlow(loginPageUrl)
+            } catch (error) {
+              console.error('SAML completion error:', error)
+            }
+            this.isLoggedIn = true
+            this.emit('login')
+            console.log('Login event emitted')
+            return
+          }
+          if (state === 'ERROR' || state === 'CANCELLED') {
+            return
+          }
+        } catch (error) {
+          console.error('Status poll error:', error)
+          checker.emit('ERROR')
+          return
+        }
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+      }
+    }
+    poll()
+    return checker
+  }
+
+  private async completeSamlFlow(loginPageUrl: string): Promise<void> {
+    // Steg 4: Hämta inloggningssidan igen - nu autentiserad -> SAML auto-POST-formulär
+    const response = await this.rawFetch(loginPageUrl, { redirect: 'manual' })
+    if (response.headers.get('Location')) return
+    const body = await response.text()
+    const doc = html.parse(decode(body))
+    const form = doc.querySelector('form')
     const samlResponseValue = doc
       .querySelector('input[name="SAMLResponse"]')
       ?.getAttribute('value')
 
-    if (!samlResponseValue) {
-      throw new Error('Could not parse SAML Response')
+    if (!form || !samlResponseValue) {
+      throw new Error('No SAMLResponse received')
     }
-    console.log('SAML Response extracted')
 
-    // Steg 7: Skicka SAML Response till Infomentor
-    const infomentorSamlUrl = 'https://sso.infomentor.se/login.ashx'
-    const formData = new URLSearchParams()
-    formData.append('SAMLResponse', samlResponseValue)
-
-    const infomentorResponse = await this.fetch('infomentor-saml', infomentorSamlUrl, {
+    // Steg 5: POSTa SAMLResponse till Infomentor för att få sessioncookie
+    const action = new URL(form.getAttribute('action') || '', loginPageUrl).toString()
+    console.log('Posting SAMLResponse to Infomentor...')
+    await this.rawFetch(action, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: formData.toString(),
+      body: new URLSearchParams({
+        SAMLResponse: samlResponseValue,
+        ...(doc.querySelector('input[name="RelayState"]')
+          ? {
+              RelayState:
+                doc
+                  .querySelector('input[name="RelayState"]')
+                  ?.getAttribute('value') || '',
+            }
+          : {}),
+      }).toString(),
       redirect: 'follow',
     })
-
-    console.log('Infomentor SAML response status:', infomentorResponse.status)
-  }
-
-  private async retrieveSessionCookie(): Promise<void> {
-    // Efter BankID OK, hämta Stockholms session cookie
-    try {
-      console.log('Fetching Stockholm session cookie...')
-      const cookieUrl =
-        'https://login003.stockholm.se/NECSadcmbid/authenticate/SiteMinderAuthADC?TYPE=33554433&REALMOID=06-42f40edd-0c5b-4dbc-b714-1be1e907f2de&GUID=1&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&TARGET=-SM-HTTPS%3a%2f%2flogin001%2estockholm%2ese%2fNECSadc%2fmbid%2fb64startpage%2ejsp%3fstartpage%3daHR0cHM6Ly9ldGphbnN0ZXIuc3RvY2tob2xtLnNlL3ZhcmRuYWRzaGF2YXJlL2lubG9nZ2FkMi9oZW0%3d'
-      const response = await this.fetch('session-cookie', cookieUrl, {
-        redirect: 'follow',
-      })
-      console.log('Session cookie response status:', response.status)
-    } catch (error) {
-      console.error('Error retrieving session cookie:', error)
-      // Fortsätt ändå - vi kan ha cookies redan
-    }
+    console.log('Infomentor session established')
   }
 
   async loginFreja(): Promise<any> {
@@ -297,7 +319,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
       init.body = JSON.stringify(body)
     }
 
-    const response = await this.fetch(url, init as any)
+    // OBS: Fetcher-signaturen är (cacheKey, url, init)
+    const response = await this.fetch(endpoint, url, init as any)
 
     if (!response.ok) {
       throw new Error(
