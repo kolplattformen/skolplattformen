@@ -148,56 +148,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   private async getBankLoginPageUrl(ssoUrl: string): Promise<string> {
-    let url = ssoUrl
-    for (let i = 0; i < 10; i++) {
-      const response = await this.rawFetch(url, { redirect: 'manual' })
-      const location = response.headers.get('Location')
-      if (location) {
-        url = new URL(location, url).toString()
-        continue
-      }
-      // Sista steget: auto-POST-formulär? (SAML 2.0 Auto-POST form)
-      const body = await response.text()
-      const doc = html.parse(decode(body))
-      const form = doc.querySelector('form')
-      const samlRequest = doc
-        .querySelector('input[name="SAMLRequest"]')
-        ?.getAttribute('value')
-      if (form && samlRequest) {
-        // POSTa SAMLRequest vidare (fetch följer inte JS-auto-post)
-        const action = new URL(form.getAttribute('action') || '', url).toString()
-        const params = new URLSearchParams()
-        doc.querySelectorAll('input').forEach((input) => {
-          const name = input.getAttribute('name')
-          const value = input.getAttribute('value')
-          if (name) params.append(name, value || '')
-        })
-        const postResponse = await this.rawFetch(action, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: params.toString(),
-          redirect: 'manual',
-        })
-        const postLocation = postResponse.headers.get('Location')
-        if (postLocation) {
-          url = new URL(postLocation, action).toString()
-          continue
-        }
-        // Inget mer att följa
-        if (postResponse.status >= 200 && postResponse.status < 300) {
-          return url
-        }
-        throw new Error(`SAML POST failed: ${postResponse.status}`)
-      }
-      // Inget formulär, ingen redirect - vi är på inloggningssidan
-      if (body.includes('bankid') || body.includes('BankID')) {
-        return url
-      }
-      throw new Error('Could not reach BankID login page')
-    }
-    throw new Error('Too many redirects in SSO flow')
+    // RN-fetch följer redirects själv (redirect:manual stöds inte) -
+    // response.url innehåller den slutliga inloggningssidans URL
+    const response = (await this.rawFetch(ssoUrl, {
+      redirect: 'follow',
+    })) as any
+    const finalUrl: string = response.url || ssoUrl
+    console.log('Final URL after redirects:', finalUrl.substring(0, 150))
+    return finalUrl
   }
 
   private createStatusChecker(
@@ -249,8 +207,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   private async completeSamlFlow(loginPageUrl: string): Promise<void> {
     // Steg 4: Hämta inloggningssidan igen - nu autentiserad -> SAML auto-POST-formulär
-    const response = await this.rawFetch(loginPageUrl, { redirect: 'manual' })
-    if (response.headers.get('Location')) return
+    const response = await this.rawFetch(loginPageUrl, { redirect: 'follow' })
     const body = await response.text()
     const doc = html.parse(decode(body))
     const form = doc.querySelector('form')
