@@ -132,19 +132,27 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     // Steg 2: Initiera BankID på inloggningssidan (samma som webben: initialize=bankid)
     const initUrl = `${loginPageUrl}&initialize=bankid&_=${Date.now()}`
-    const ticketResponse = await this.rawFetch(initUrl)
-    if (!ticketResponse.ok) {
-      throw new Error(
-        `BankID Error [${ticketResponse.status}] [${ticketResponse.statusText}]`
-      )
+    try {
+      const ticketResponse = await this.rawFetch(initUrl)
+      console.log('BankID init status:', ticketResponse.status)
+      if (!ticketResponse.ok) {
+        const errorText = await ticketResponse.text()
+        console.error('BankID init error body:', errorText.substring(0, 300))
+        throw new Error(
+          `BankID Error [${ticketResponse.status}] [${ticketResponse.statusText}]`
+        )
+      }
+      const ticket: AuthTicket = await ticketResponse.json()
+      console.log('BankID ticket received')
+
+      this.personalNumber = personalNumber || 'unknown'
+
+      // Steg 3: Polla status. Efter OK: hämta SAMLResponse och POSTa till Infomentor
+      return this.createStatusChecker(loginPageUrl, ticket)
+    } catch (error) {
+      console.error('BankID init failed:', error)
+      throw error
     }
-    const ticket: AuthTicket = await ticketResponse.json()
-    console.log('BankID ticket received')
-
-    this.personalNumber = personalNumber || 'unknown'
-
-    // Steg 3: Polla status. Efter OK: hämta SAMLResponse och POSTa till Infomentor
-    return this.createStatusChecker(loginPageUrl, ticket)
   }
 
   private async getBankLoginPageUrl(ssoUrl: string): Promise<string> {
