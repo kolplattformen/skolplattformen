@@ -156,14 +156,32 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   private async getBankLoginPageUrl(ssoUrl: string): Promise<string> {
-    // RN-fetch följer redirects själv (redirect:manual stöds inte) -
-    // response.url innehåller den slutliga inloggningssidans URL
-    const response = (await this.rawFetch(ssoUrl, {
+    // Steg A: följ hela SSO-kedjan till metodväljaren (amedborgare.jsp)
+    const firstResponse = (await this.rawFetch(ssoUrl, {
       redirect: 'follow',
     })) as any
-    const finalUrl: string = response.url || ssoUrl
-    console.log('Final URL after redirects:', finalUrl.substring(0, 150))
-    return finalUrl
+    let pageUrl: string = firstResponse.url || ssoUrl
+    let body = await firstResponse.text()
+
+    // Steg B: metodväljaren har länk till BankID-vägen (NECSadc/mbid/...)
+    if (body.includes('NECSadc/mbid')) {
+      const doc = html.parse(decode(body))
+      const mbidHref = doc
+        .querySelector('a[href*="NECSadc/mbid"]')
+        ?.getAttribute('href')
+      if (mbidHref) {
+        const mbidUrl = new URL(mbidHref, pageUrl).toString()
+        console.log('Following mbid link:', mbidUrl.substring(0, 100))
+        const mbidResponse = (await this.rawFetch(mbidUrl, {
+          redirect: 'follow',
+        })) as any
+        pageUrl = mbidResponse.url || mbidUrl
+        body = await mbidResponse.text()
+      }
+    }
+
+    console.log('BankID page:', pageUrl.substring(0, 120))
+    return pageUrl
   }
 
   private createStatusChecker(
