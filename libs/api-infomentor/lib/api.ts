@@ -384,13 +384,32 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // OBS: Fetcher-signaturen är (cacheKey, url, init)
     const response = await this.fetch(endpoint, url, init as any)
 
+    const body = await response.text()
+
     if (!response.ok) {
+      console.error(
+        `Infomentor API ${endpoint} failed: ${response.status} body:`,
+        body.replace(/\s+/g, ' ').substring(0, 200)
+      )
       throw new Error(
         `Infomentor API error: ${response.status} ${response.statusText}`
       )
     }
 
-    return response.json()
+    if (!body) {
+      console.error(`Infomentor API ${endpoint} returned EMPTY body`)
+      throw new Error(`Infomentor API ${endpoint} returned empty body`)
+    }
+
+    try {
+      return JSON.parse(body)
+    } catch (error) {
+      console.error(
+        `Infomentor API ${endpoint} non-JSON:`,
+        body.replace(/\s+/g, ' ').substring(0, 200)
+      )
+      throw error
+    }
   }
 
   async getUser(): Promise<User> {
