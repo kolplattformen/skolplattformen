@@ -128,6 +128,19 @@ export class ApiInfomentor extends EventEmitter implements Api {
     console.log('Starting Infomentor SSO flow...')
     const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
     const loginPageUrl = await this.getBankLoginPageUrl(ssoUrl)
+
+    // Redan autentiserad (levande session) - SAML-redan POSTad av loopen
+    if (loginPageUrl === null) {
+      console.log('Session already valid - skipping BankID')
+      this.personalNumber = personalNumber || 'unknown'
+      this.isLoggedIn = true
+      this.emit('login')
+      const instant = new EventEmitter() as any
+      instant.token = 'fake'
+      instant.cancel = () => {}
+      return instant
+    }
+
     console.log('BankID login page URL:', loginPageUrl.substring(0, 120))
 
     // Steg 2: Initiera BankID på inloggningssidan (samma som webben: initialize=bankid)
@@ -155,10 +168,10 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
   }
 
-  private async getBankLoginPageUrl(ssoUrl: string): Promise<string> {
+  private async getBankLoginPageUrl(ssoUrl: string): Promise<string | null> {
     let pageUrl = ssoUrl
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 8; i++) {
       // RN-fetch följer redirects själv; response.url = slutgiltiga sidan
       const response = (await this.rawFetch(pageUrl, {
         redirect: 'follow',
@@ -166,12 +179,38 @@ export class ApiInfomentor extends EventEmitter implements Api {
       pageUrl = response.url || pageUrl
       const body = await response.text()
       const doc = html.parse(decode(body))
+      const form = doc.querySelector('form')
 
-      // Får vi SAML auto-POST-sida? POSTa formuläret vidare
+      // SAML auto-POST med SAMLResponse = redan autentiserad (t.ex.levande
+      // SM-session) -> POSTa till Infomentor så sätts sessioncookies
+      const samlResponse = doc
+        .querySelector('input[name="SAMLResponse"]')
+        ?.getAttribute('value')
+      if (form && samlResponse) {
+        const action = new URL(
+          form.getAttribute('action') || pageUrl,
+          pageUrl
+        ).toString()
+        console.log('Already authenticated - posting SAMLResponse...')
+        const params = new URLSearchParams()
+        doc.querySelectorAll('input').forEach((input) => {
+          const name = input.getAttribute('name')
+          if (name) params.append(name, input.getAttribute('value') || '')
+        })
+        const postResponse = (await this.rawFetch(action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+          redirect: 'follow',
+        })) as any
+        console.log('SAMLResponse POST status:', postResponse.status)
+        return null // ingen BankID behövs
+      }
+
+      // Får vi SAML auto-POST-sida med SAMLRequest? POSTa formuläret vidare
       const samlRequest = doc
         .querySelector('input[name="SAMLRequest"]')
         ?.getAttribute('value')
-      const form = doc.querySelector('form')
       if (form && samlRequest) {
         const action = new URL(form.getAttribute('action') || pageUrl, pageUrl)
           .toString()
@@ -203,7 +242,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
             redirect: 'follow',
           })) as any
           pageUrl = mbidResponse.url || mbidUrl
-          break
+          continue // evaluera slutsidan på nästa varv
         }
       }
 
