@@ -34,13 +34,15 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   }
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       {inner}
     </Link>
   )
 }
 
-export const ButtonLinkPatreon: React.FC = ({ children }) => {
+export const ButtonLinkPatreon: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <ButtonLink
       href="https://www.patreon.com/oppnaskolplattformen"

@@ -1,17 +1,16 @@
 import classnames from 'classnames'
 import Link from 'next/link'
+import React from 'react'
 
 interface LinkInternalProps {
   href: string
+  children?: React.ReactNode
 }
 
-const Internal: React.FC<LinkInternalProps> = ({
-  href,
-  children,
-}) => {
+const Internal: React.FC<LinkInternalProps> = ({ href, children }) => {
   return (
-    <Link href={href}>
-      <a className="text-indigo-800 dark:text-indigo-400">{children}</a>
+    <Link href={href} className="text-indigo-800 dark:text-indigo-400">
+      {children}
     </Link>
   )
 }
@@ -20,6 +19,7 @@ interface LinkExternalProps {
   className?: string
   href: string
   target?: string
+  children?: React.ReactNode
 }
 
 const External: React.FC<LinkExternalProps> = ({

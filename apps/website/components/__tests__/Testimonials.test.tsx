@@ -10,14 +10,14 @@ const setup = (customProps = {}) => {
   return render(<Testimonials {...props} />)
 }
 
-test.each([testimonials.flatMap((testimonial) => Object.values(testimonial))])(
-  'displays all testimonials',
-  (_image, text, name, title) => {
+test.each(testimonials)(
+  'displays testimonial for $name',
+  ({ text, name, title }) => {
     setup()
 
     expect(screen.getByAltText(name)).toBeInTheDocument()
     expect(screen.getByText(text)).toBeInTheDocument()
     expect(screen.getByText(name)).toBeInTheDocument()
-    expect(screen.getByText(title)).toBeInTheDocument()
+    expect(screen.getAllByText(title)[0]).toBeInTheDocument()
   }
 )
