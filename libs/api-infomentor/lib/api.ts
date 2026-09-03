@@ -518,6 +518,15 @@ export class ApiInfomentor extends EventEmitter implements Api {
       if (name) params.append(name, input.getAttribute('value') || '')
     })
     await this.followInfomentorLoginChain(action, params)
+
+    // Dumpa hub-cookies (användbara för dev-session/-feldebuggning)
+    try {
+      const hubCookie = await this.cookieManager.getCookieString(this.baseUrl)
+      console.log('HUB-COOKIES:', hubCookie.substring(0, 200))
+    } catch {
+      /* loggning enbart */
+    }
+
     console.log('Infomentor session established')
   }
 
