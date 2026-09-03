@@ -1,4 +1,5 @@
-import 'swiper/swiper-bundle.min.css'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import '../styles/global.css'
 
 import Layout from '../components/Layout'

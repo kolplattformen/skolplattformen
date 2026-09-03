@@ -1,5 +1,7 @@
 .next
-
+out
+node_modules
 .vercel
 package-lock.json
 public
+*.tsbuildinfo

@@ -1,5 +1,5 @@
 type Heading = {
-  children: string
+  children: React.ReactNode
 }
 
 export const H1 = ({ children }: Heading) => {
