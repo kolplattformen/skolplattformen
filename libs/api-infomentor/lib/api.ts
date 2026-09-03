@@ -592,6 +592,101 @@ export class ApiInfomentor extends EventEmitter implements Api {
     console.warn('Login chain did not complete within 6 steps')
   }
 
+  /**
+   * QR-login (BankID med QR-kod): animerad QR som användaren skannar med
+   * BankID-appens QR-läsare. Verifierad localStorage-session i harnessen.
+   * Emitern: 'qr' (ny frame), 'USER_SIGN', 'OK', 'ERROR', 'CANCELLED',
+   * därefter api-emitten 'login'.
+   */
+  async startQrLogin(): Promise<LoginStatusChecker> {
+    this.isFake = false
+    try {
+      await this.cookieManager.clearAll()
+    } catch {
+      /* fortsätt om tömning misslyckas */
+    }
+
+    console.log('Starting Infomentor QR login...')
+    const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
+    const loginPageUrl = await this.getBankLoginPageUrl(ssoUrl)
+    if (loginPageUrl === null) {
+      console.log('Session already valid - skipping QR')
+      this.personalNumber = 'unknown'
+      this.isLoggedIn = true
+      this.emit('login')
+      const instant = new EventEmitter() as any
+      instant.token = 'fake'
+      instant.cancel = () => undefined
+      return instant
+    }
+
+    const qrInitResponse = await this.cookieFetch(
+      `${loginPageUrl}&initialize=qr&_=${Date.now()}`
+    )
+    const qrInit = await qrInitResponse.json()
+    console.log('QR init ok, order:', String(qrInit.order).substring(0, 12))
+    this.personalNumber = 'unknown'
+
+    const checker = new EventEmitter() as any
+    checker.token = '' // ingen autostarttoken - QR används istället
+    checker.qrData = qrInit.qrData
+    let cancelled = false
+    checker.cancel = () => {
+      cancelled = true
+    }
+
+    const poll = async () => {
+      let lastQr = qrInit.qrData
+      let consecutiveErrors = 0
+      while (!cancelled) {
+        await new Promise((r) => setTimeout(r, 1000))
+        try {
+          const st = await this.cookieFetch(
+            `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+          )
+          if (st.status !== 200) {
+            consecutiveErrors++
+            if (consecutiveErrors >= 3) {
+              checker.emit('ERROR')
+              return
+            }
+            continue
+          }
+          consecutiveErrors = 0
+          const data = await st.json()
+          if (data.qrData && data.qrData !== lastQr) {
+            lastQr = data.qrData
+            checker.emit('qr', data.qrData)
+          }
+          if (data.state && data.state !== 'PENDING') {
+            checker.emit(data.state)
+          }
+          if (data.state === 'OK') {
+            try {
+              await this.completeSamlFlow(loginPageUrl)
+            } catch (error) {
+              console.error('QR SAML completion error:', error)
+              checker.emit('ERROR')
+              return
+            }
+            this.isLoggedIn = true
+            checker.emit('OK')
+            this.emit('login')
+            console.log('QR login event emitted')
+            return
+          }
+          if (data.state === 'ERROR' || data.state === 'CANCELLED') {
+            return
+          }
+        } catch (error) {
+          console.error('QR poll error:', error)
+        }
+      }
+    }
+    void poll()
+    return checker
+  }
+
   async loginFreja(): Promise<any> {
     throw new Error('Freja login not implemented for Infomentor')
   }

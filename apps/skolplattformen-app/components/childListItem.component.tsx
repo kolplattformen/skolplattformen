@@ -20,6 +20,7 @@ import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { Pressable, useColorScheme, View } from 'react-native'
 import { useTranslation } from '../hooks/useTranslation'
+import { useFeature } from '../hooks/useFeature'
 import { Colors, Layout, Sizing } from '../styles'
 import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 import { studentName } from '../utils/peopleHelpers'
@@ -146,6 +147,7 @@ export const ChildListItem = ({
   const styles = useStyleSheet(themeStyles)
   const isDarkMode = useColorScheme() === 'dark'
   const meaningfulStartingDate = getMeaningfulStartingDate(currentDate)
+  const hasAbsenceReport = useFeature('ABSENCE_REPORT')
 
   // Hide menu if we want to show monday but it is not monday yet.
   // The menu for next week is not available until monday
@@ -259,18 +261,20 @@ export const ChildListItem = ({
       ) : null}
 
       <View style={styles.itemFooter}>
-        <Button
-          accessible
-          accessibilityRole="button"
-          accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
-          appearance="ghost"
-          accessoryLeft={AlertIcon}
-          status="primary"
-          style={styles.absenceButton}
-          onPress={() => navigation.navigate('Absence', { child })}
-        >
-          {t('abscense.title')}
-        </Button>
+        {hasAbsenceReport && (
+          <Button
+            accessible
+            accessibilityRole="button"
+            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
+            appearance="ghost"
+            accessoryLeft={AlertIcon}
+            status="primary"
+            style={styles.absenceButton}
+            onPress={() => navigation.navigate('Absence', { child })}
+          >
+            {t('abscense.title')}
+          </Button>
+        )}
       </View>
     </View>
   )

@@ -28,6 +28,7 @@ import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformC
 import { schoolPlatforms } from '../data/schoolPlatforms'
 import { useFeature } from '../hooks/useFeature'
 import useSettingsStorage from '../hooks/useSettingsStorage'
+import { QrMatrix } from './qrMatrix.component'
 import { useTranslation } from '../hooks/useTranslation'
 import { Layout } from '../styles'
 import {
@@ -63,6 +64,7 @@ export const Login = () => {
   const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] =
     useState(false)
   const [loginStatusText, setLoginStatusText] = useState('')
+  const [qrCode, setQrCode] = useState<string | null>(null)
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
@@ -84,6 +86,9 @@ export const Login = () => {
   const loginMethods = [
     { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
     { id: 'otherdevice', title: t('auth.bankid.OpenOnAnotherDevice') },
+    ...(currentSchoolPlatform === 'infomentor'
+      ? [{ id: 'qrcode', title: 'BankID med QR-kod' }]
+      : []),
     { id: 'freja', title: t('auth.freja.OpenOnThisDevice') },
     { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
@@ -170,6 +175,28 @@ export const Login = () => {
       status.on('APPROVED', () => {
         console.log('Freja eID ok')
         setLoginStatusText(t('auth.loginSuccessful'))
+      })
+    } else if (loginMethodId === 'qrcode') {
+      setLoginStatusText('Visa QR-koden för BankID…')
+      setQrCode(null)
+      showModal(true)
+      const status = await (api as any).startQrLogin()
+      setCancelLoginRequest(() => () => status.cancel())
+      status.on('qr', (frame: string) => setQrCode(frame))
+      status.on('OK', () => {
+        console.log('QR login ok')
+        setLoginStatusText(t('auth.loginSuccessful'))
+        setQrCode(null)
+      })
+      status.on('CANCELLED', () => {
+        console.log('User pressed cancel in QR login')
+        showModal(false)
+        setQrCode(null)
+      })
+      status.on('ERROR', () => {
+        setError(t('auth.loginFailed'))
+        showModal(false)
+        setQrCode(null)
       })
     } else if (
       loginMethodId === 'thisdevice' ||
@@ -403,6 +430,15 @@ export const Login = () => {
       >
         <Card disabled>
           <Text style={styles.bankIdLoading}>{loginStatusText}</Text>
+          {qrCode ? (
+            <View style={{ alignItems: 'center', paddingVertical: 12 }}>
+              <QrMatrix value={qrCode} size={280} />
+              <Text style={{ marginTop: 8, textAlign: 'center' }}>
+                Öppna BankID-appen → QR-ikonen uppe till vänster → sikta mot
+                skärmen
+              </Text>
+            </View>
+          ) : null}
           <Button
             status="primary"
             accessible={true}
