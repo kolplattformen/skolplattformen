@@ -1,20 +1,25 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const withImages = require('next-images')
+const isExport = process.env.OUTPUT_EXPORT === 'true'
 
-module.exports = {
-  ...withImages(),
-  async redirects() {
-    return [
-      {
-        source: '/historia',
-        destination: '/aktuellt',
-        permanent: true,
-      },
-    ]
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: isExport ? 'export' : undefined,
+  basePath: process.env.BASE_PATH || '',
+  images: {
+    unoptimized: isExport,
   },
-  i18n: {
-    localeDetection: false,
-    locales: ['sv', 'en'],
-    defaultLocale: 'sv',
-  },
+  ...(isExport
+    ? {}
+    : {
+        async redirects() {
+          return [
+            {
+              source: '/historia',
+              destination: '/aktuellt',
+              permanent: true,
+            },
+          ]
+        },
+      }),
 }
+
+module.exports = nextConfig
