@@ -32,6 +32,7 @@ export interface InfomentorConfig {
   options?: FetcherOptions
   baseUrl?: string
   idp?: string // t.ex. 'stockholm_par'
+  sessionCookie?: string // DEV: redan etablerad hub-session, hoppar över SAML/BankID
 }
 
 interface InfomentorChild {
@@ -86,6 +87,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private personalNumber?: string
   private headers: any
   private children: InfomentorChild[] = []
+  private sessionCookie?: string
+  private samlTargetUrl?: string
 
   public isLoggedIn = false
   public isFake = false
@@ -97,6 +100,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     this.cookieManager = config.cookieManager
     this.baseUrl = config.baseUrl || 'https://hub.infomentor.se'
     this.idp = config.idp || 'stockholm_par'
+    this.sessionCookie = config.sessionCookie
     this.headers = {}
   }
 
@@ -190,6 +194,27 @@ export class ApiInfomentor extends EventEmitter implements Api {
       return this.fakeMode()
 
     this.isFake = false
+
+    // DEV-session: redan etablerad hub-session, hoppa över SAML/BankID
+    if (this.sessionCookie) {
+      console.log('Using injected dev session cookie')
+      const cookies = await this.cookieManager.getCookieString(this.baseUrl)
+      try {
+        for (const pair of this.sessionCookie.split('; ')) {
+          await this.cookieManager.setCookieString(pair, this.baseUrl)
+        }
+      } catch (error) {
+        console.warn('Dev cookie injection failed:', (error as Error).message)
+      }
+      console.log('Dev cookies:', cookies ? 'had old' : 'none before')
+      this.personalNumber = personalNumber || 'unknown'
+      this.isLoggedIn = true
+      this.emit('login')
+      const instant = new EventEmitter() as any
+      instant.token = 'fake'
+      instant.cancel = () => {}
+      return instant
+    }
 
     // rensa cookies (gamla SM/Phx-sessioner gör att servern ser fel
     // kontext - I Node fungerade allt med en färsk jar, dvs samma
@@ -309,6 +334,21 @@ export class ApiInfomentor extends EventEmitter implements Api {
         if (mbidHref) {
           const mbidUrl = new URL(mbidHref, pageUrl).toString()
           console.log('Following mbid link...')
+          // B64startpage-parametern avkodar SAML-målet (medborgareonly.jsp
+          // ?SAMLRequest=...) - kan behövas direkt vid fallback (servern
+          // bouncar ibland auth-handoffen tillbaka till UI-sidan)
+          try {
+            const startpage = new URL(mbidUrl).searchParams.get('startpage')
+            if (startpage) {
+              this.samlTargetUrl = atob(startpage)
+              console.log(
+                'SAML target saved:',
+                this.samlTargetUrl.substring(0, 90)
+              )
+            }
+          } catch {
+            /* b64-dekodning optional */
+          }
           const mbidResponse = (await this.cookieFetch(mbidUrl, {
             redirect: 'follow',
           })) as any
@@ -390,11 +430,39 @@ export class ApiInfomentor extends EventEmitter implements Api {
       'SAML re-fetch body (300):',
       body.replace(/\s+/g, ' ').substring(0, 300)
     )
-    const doc = html.parse(decode(body))
-    const form = doc.querySelector('form')
-    const samlResponseValue = doc
+    let doc = html.parse(decode(body))
+    let form = doc.querySelector('form')
+    let samlResponseValue = doc
       .querySelector('input[name="SAMLResponse"]')
       ?.getAttribute('value')
+
+    // FALLBACK: servern bouncar ibland auth-handoffen tillbaka till
+    // BankID-UI-sidan (ny GUID) trots OK-signering. Vi har ändå SMSESSION
+    // (.stockholm.se) - hoppa över mellansteget och hämta SAML-målet
+    // (medborgareonly.jsp?SAMLRequest=...) direkt.
+    if ((!form || !samlResponseValue) && this.samlTargetUrl) {
+      console.log(
+        'Re-fetch sans SAMLResponse - försöker SAML-target direkt:',
+        this.samlTargetUrl.substring(0, 90)
+      )
+      const targetResponse = (await this.cookieFetch(this.samlTargetUrl, {
+        redirect: 'follow',
+      })) as any
+      const targetBody = await targetResponse.text()
+      const targetUrl: string = targetResponse.url || this.samlTargetUrl
+      console.log(
+        `SAML target → ${targetResponse.status} @ ${targetUrl.substring(0, 100)}`
+      )
+      console.log(
+        'SAML target body (200):',
+        targetBody.replace(/\s+/g, ' ').substring(0, 200)
+      )
+      doc = html.parse(decode(targetBody))
+      form = doc.querySelector('form')
+      samlResponseValue = doc
+        .querySelector('input[name="SAMLResponse"]')
+        ?.getAttribute('value')
+    }
 
     if (!form || !samlResponseValue) {
       throw new Error('No SAMLResponse received')
@@ -404,7 +472,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // (hub svarar med ytterligare auto-post-steg innan sessionen är klar)
     const action = new URL(
       form.getAttribute('action') || '',
-      loginPageUrl
+      finalUrl
     ).toString()
     console.log('Posting SAMLResponse to Infomentor...')
     const params = new URLSearchParams()

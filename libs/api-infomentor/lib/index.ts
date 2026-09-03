@@ -14,7 +14,8 @@ const init = (
   fetchImpl: Fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions,
-  idp?: string
+  idp?: string,
+  sessionCookie?: string
 ): Api => {
   // prettier-ignore
   const cookieManager = ((cookieManagerImpl as RNCookieManager).get)
@@ -26,6 +27,7 @@ const init = (
     cookieManager,
     options,
     idp: idp || 'stockholm_par',
+    sessionCookie,
   })
 }
 

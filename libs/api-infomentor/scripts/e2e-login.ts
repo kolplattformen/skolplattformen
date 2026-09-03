@@ -193,6 +193,15 @@ const main = async (): Promise<void> => {
 
     fs.writeFileSync(JAR_PATH, JSON.stringify(jar.serializeSync(), null, 2))
     console.log(`💾 Session sparad till ${JAR_PATH} (REUSE_JAR=1 för att återanvända)`)
+
+    // Skriv ut färska hub-cookies som dev-session-sträng för appen
+    const hubCookies = await jar.getCookies('https://hub.infomentor.se/')
+    const devSession = hubCookies
+      .map((c) => `${c.key}=${c.value}`)
+      .join('; ')
+    console.log('\n=== DEV-SESSION FÖR APPEN (klistra in i schoolPlatforms.ts) ===')
+    console.log(devSession)
+    console.log('=== SLUT DEV-SESSION ===')
   }
 
   await dumpCookies()
