@@ -25,49 +25,49 @@ const AppShots = () => {
         <Image
           alt="Inloggning med BankID"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotLogin}
           width={178}
         />
         <Image
           alt="Lista med dina barn i Stockholms Stad"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotChildren}
           width={178}
         />
         <Image
           alt="Barnets nyheter"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotChildNews}
           width={178}
         />
         <Image
           alt="Barnets aviseringar"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotChildNotifications}
           width={178}
         />
         <Image
           alt="Barnets kalender"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotChildCalendar}
           width={178}
         />
         <Image
           alt="Barnets klasskompisar"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotChildClass}
           width={178}
         />
         <Image
           alt="Frånvaroanmälan"
           height={376}
-          layout="responsive"
+          className="w-full h-auto"
           src={screenshotAbsence}
           width={178}
         />

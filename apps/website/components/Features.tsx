@@ -1,10 +1,9 @@
-import SwiperCore, { Autoplay, Pagination, SwiperOptions } from 'swiper'
+import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { SwiperOptions } from 'swiper/types'
 import FeatureCard from './FeatureCard'
 import SectionTitle from './SectionTitle'
 import { FEATURES_DATA } from './featureData'
-
-SwiperCore.use([Pagination, Autoplay])
 
 const Features = () => {
   const swiperParams: SwiperOptions = {
@@ -41,8 +40,8 @@ const Features = () => {
         slidesPerGroup: 2,
       },
       992: {
-        slidesPerGroup: 3,
         slidesPerView: 3,
+        slidesPerGroup: 3,
       },
     },
   }
@@ -55,7 +54,11 @@ const Features = () => {
           text="Vi vill att det ska vara enkelt att få en överblick över vad som händer i skolan. Vi har gjort allt för att ge dig en enkel och snabb översikt över alla dina barn och det som är aktuellt just nu i skolan."
         />
       </div>
-      <Swiper className="feature-carousel" {...swiperParams}>
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        className="feature-carousel"
+        {...swiperParams}
+      >
         {FEATURES_DATA.map(({ title, text, image }) => (
           <SwiperSlide key={title}>
             {({ isActive }: { isActive: boolean }) => (

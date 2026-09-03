@@ -1,10 +1,12 @@
 import Head from 'next/head'
+import { ReactNode } from 'react'
 import favImg from '../assets/img/favicon.png'
 import logo from '../assets/img/logo.png'
 import { GA_TRACKING_ID } from './gtag'
 
 interface LayoutProps {
   pageTitle: string
+  children?: ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -24,9 +26,9 @@ const Layout: React.FC<LayoutProps> = ({
           property="og:description"
           content="Öppna Skolplattformen är en app för iOS och Android som gör det enklare för föräldrar att komma åt uppgifter i Skolplattformen."
         />
-        <meta property="og:image" content={logo} />
+        <meta property="og:image" content={logo.src} />
         <title>{pageTitle}</title>
-        <link rel="shortcut icon" type="image/png" href={favImg} />
+        <link rel="shortcut icon" type="image/png" href={favImg.src} />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"

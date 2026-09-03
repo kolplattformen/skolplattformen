@@ -1,13 +1,12 @@
-import { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Timeline from '../components/Timeline'
 import { H1 } from '../components/Typography'
-import { GoogleSpreadsheet } from 'google-spreadsheet'
 import { ReactNode } from 'react'
 
 interface Event {
   date: string
   description: string
-  link?: string
+  link?: string | null
 }
 
 export interface TimelineEvent {
@@ -21,7 +20,7 @@ interface TimelineProps {
   events: TimelineEvent[]
 }
 
-const CurrentEventsPage: NextPage<TimelineProps> = ({ events }) => {
+const CurrentEventsPage: NextPage<TimelineProps> = ({ events = [] }) => {
   return (
     <section className="mx-5 max-w-2xl md:mx-auto">
       <div className="my-8 md:my-20">
@@ -34,42 +33,48 @@ const CurrentEventsPage: NextPage<TimelineProps> = ({ events }) => {
   )
 }
 
-let cachedEvents: TimelineEvent[]
-type VoidCallback = () => void
+let cachedEvents: TimelineEvent[] = []
 
-const timeout = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms))
+const SPREADSHEET_ID = '151I2PrWkhWKC8OW-GB_sbgtGDtf0Ta-WdVcUOo5sUDI'
+const API_KEY = 'AIzaSyB-ONvFoIE_LUu0sxWLaE8QfHfDSM5uBG8'
 
-const runOrTimeout = (fun: VoidCallback, ms: number) =>
-  Promise.race([
-    fun(),
-    timeout(ms).then(() => Promise.reject(new Error('Timout'))),
-  ])
-
-export const getServerSideProps = async (): Promise<{
-  props: TimelineProps
-}> => {
-  // This info has moved to Google Sheets instead
-  // https://docs.google.com/spreadsheets/d/151I2PrWkhWKC8OW-GB_sbgtGDtf0Ta-WdVcUOo5sUDI/edit?usp=sharing
-  const doc = new GoogleSpreadsheet(
-    '151I2PrWkhWKC8OW-GB_sbgtGDtf0Ta-WdVcUOo5sUDI'
-  )
-  doc.useApiKey('AIzaSyB-ONvFoIE_LUu0sxWLaE8QfHfDSM5uBG8')
+async function fetchTimelineEvents(): Promise<TimelineEvent[]> {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values:batchGet?ranges=months!A:B&ranges=media!A:C&ranges=importantDates!A:C&key=${API_KEY}`
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 5000)
 
   try {
-    await runOrTimeout(() => doc.loadInfo(), 1000)
+    const res = await fetch(url, { signal: controller.signal })
+    if (!res.ok) {
+      throw new Error(`Google Sheets API error: ${res.status} ${res.statusText}`)
+    }
+    const data = await res.json()
+    const [monthsData, mediaData, importantDatesData] = data.valueRanges || []
 
-    const months = (
-      await doc.sheetsByTitle['months'].getRows()
-    ).map(({ date, overview }) => ({ date, overview }))
-    const media = (
-      await doc.sheetsByTitle['media'].getRows()
-    ).map(({ date, description, link = null }) => ({ date, description, link }))
-    const importantDates = (
-      await doc.sheetsByTitle['importantDates'].getRows()
-    ).map(({ date, description, link = null }) => ({ date, description, link }))
+    const months: { date: string; overview: string }[] = (monthsData?.values || [])
+      .slice(1)
+      .map(([date, overview]: [string, string]) => ({
+        date: date || '',
+        overview: overview || '',
+      }))
 
-    const events: TimelineEvent[] = months.map((month) => ({
+    const media: Event[] = (mediaData?.values || [])
+      .slice(1)
+      .map(([date, description, link]: [string, string, string?]) => ({
+        date: date || '',
+        description: description || '',
+        link: link || null,
+      }))
+
+    const importantDates: Event[] = (importantDatesData?.values || [])
+      .slice(1)
+      .map(([date, description, link]: [string, string, string?]) => ({
+        date: date || '',
+        description: description || '',
+        link: link || null,
+      }))
+
+    return months.map((month) => ({
       ...month,
       media: media.filter(({ date }) =>
         date.startsWith(month.date.slice(0, 7))
@@ -78,14 +83,32 @@ export const getServerSideProps = async (): Promise<{
         date.startsWith(month.date.slice(0, 7))
       ),
     }))
+  } finally {
+    clearTimeout(timeoutId)
+  }
+}
 
+export const getStaticProps: GetStaticProps<TimelineProps> = async () => {
+  const isExport = process.env.OUTPUT_EXPORT === 'true'
+  try {
+    const events = await fetchTimelineEvents()
     cachedEvents = events
-
-    return { props: { events } }
+    return {
+      props: { events },
+      ...(isExport ? {} : { revalidate: 3600 }),
+    }
   } catch (err) {
-    console.error(err)
-    if (!cachedEvents) throw err
-    return { props: { events: cachedEvents } } // sometimes we might run into rate limits in google sheets. Just return the old value until we get back again
+    console.error('Failed to load timeline events from Google Sheets:', err)
+    if (cachedEvents.length > 0) {
+      return {
+        props: { events: cachedEvents },
+        ...(isExport ? {} : { revalidate: 3600 }),
+      }
+    }
+    return {
+      props: { events: [] },
+      ...(isExport ? {} : { revalidate: 3600 }),
+    }
   }
 }
 

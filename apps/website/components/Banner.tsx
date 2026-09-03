@@ -25,37 +25,37 @@ const Banner = () => {
             <div className="hidden select-none lg:block">
               <div>
                 <img
-                  src={shape1}
+                  src={shape1.src}
                   alt=""
                   className="absolute left-64 top-8 motion-safe:animate-pulse"
                 />
                 <img
-                  src={shape2}
+                  src={shape2.src}
                   alt=""
                   className="absolute left-9 top-20 motion-safe:animate-pulse"
                 />
                 <img
-                  src={shape3}
+                  src={shape3.src}
                   alt=""
                   className="absolute left-48 top-18 motion-safe:animate-pulse"
                 />
                 <img
-                  src={shape4}
+                  src={shape4.src}
                   alt=""
                   className="absolute top-20 right-20 motion-safe:animate-bounce-slow"
                 />
                 <img
-                  src={shape5}
+                  src={shape5.src}
                   alt=""
                   className="absolute top-1/2 left-1/2 motion-safe:animate-pulse"
                 />
                 <img
-                  src={shape6}
+                  src={shape6.src}
                   alt=""
                   className="absolute left-96 top-32 motion-safe:animate-bounce-slow"
                 />
                 <img
-                  src={shape7}
+                  src={shape7.src}
                   alt=""
                   className="absolute bottom-48 right-8 motion-safe:animate-bounce-slow"
                 />
@@ -79,7 +79,7 @@ const Banner = () => {
               >
                 <img
                   alt="Ladda ner i App Store"
-                  src={appstore}
+                  src={appstore.src}
                   className="w-auto h-12"
                 />
               </Link.External>
@@ -90,7 +90,7 @@ const Banner = () => {
               >
                 <img
                   alt="Ladda ner i Google Play Store"
-                  src={playstore}
+                  src={playstore.src}
                   className="h-12"
                 />
               </Link.External>

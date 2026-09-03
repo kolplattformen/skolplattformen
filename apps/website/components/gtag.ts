@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void
+  }
+}
+
 export const GA_TRACKING_ID = 'G-KX6E6T6FXS'
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
