@@ -324,8 +324,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
           const name = input.getAttribute('name')
           if (name) params.append(name, input.getAttribute('value') || '')
         })
-        await this.followInfomentorLoginChain(action, params)
-        return null // ingen BankID behövs
+        try {
+          await this.followInfomentorLoginChain(action, params)
+          return null // ingen BankID behövs
+        } catch (error) {
+          console.warn(
+            'Pre-auth SAML failed, falling back to BankID:',
+            (error as Error).message
+          )
+          pageUrl = ssoUrl // starta om SSO-kedjan från början
+          continue
+        }
       }
 
       // Får vi SAML auto-POST-sida med SAMLRequest? POSTa formuläret vidare
@@ -540,6 +549,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
       const doc = html.parse(decode(bodyText))
       const nextForm = doc.querySelector('form')
+
+      // Felsidor (t.ex. UserNotAuthenticated) - kedjan har INTE lyckats
+      if (pageUrl.includes('/Error/')) {
+        throw new Error(
+          `Infomentor login chain ended at error page: ${pageUrl}`
+        )
+      }
+
       const isInterstitial =
         bodyText.includes('Login in progress') ||
         bodyText.includes('login in progress') ||
