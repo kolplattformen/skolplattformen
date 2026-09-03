@@ -26,6 +26,31 @@ import { decode } from 'he'
 import { DummyStatusChecker } from './loginStatusChecker'
 import * as routes from './routes'
 
+/**
+ * Base64-dekodering utan Buffer/atob (Hermes-säker).
+ * Hanterar URL-säker b64 (- _) och saknad padding.
+ */
+const decodeBase64 = (value: string): string => {
+  const normalized = value.replace(/-/g, '+').replace(/_/g, '/')
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  const clean = normalized.replace(/=+$/, '')
+  let result = ''
+  let bits = 0
+  let accumulated = 0
+  for (let i = 0; i < clean.length; i++) {
+    const idx = chars.indexOf(clean[i])
+    if (idx === -1) continue
+    accumulated = ((accumulated << 6) | idx) & 0xffffff
+    bits += 6
+    if (bits >= 8) {
+      bits -= 8
+      result += String.fromCharCode((accumulated >> bits) & 0xff)
+    }
+  }
+  return result
+}
+
 export interface InfomentorConfig {
   fetch: Fetch
   cookieManager: CookieManager
@@ -340,14 +365,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
           try {
             const startpage = new URL(mbidUrl).searchParams.get('startpage')
             if (startpage) {
-              this.samlTargetUrl = atob(startpage)
+              this.samlTargetUrl = decodeBase64(startpage)
               console.log(
                 'SAML target saved:',
                 this.samlTargetUrl.substring(0, 90)
               )
             }
-          } catch {
-            /* b64-dekodning optional */
+          } catch (error) {
+            console.warn(
+              'Could not decode SAML target:',
+              (error as Error).message
+            )
           }
           const mbidResponse = (await this.cookieFetch(mbidUrl, {
             redirect: 'follow',
