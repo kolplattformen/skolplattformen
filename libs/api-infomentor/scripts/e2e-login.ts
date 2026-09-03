@@ -128,68 +128,73 @@ const main = async (): Promise<void> => {
     ;(api as any).isLoggedIn = true
     console.log('Hoppar över login (återanvänd jar)')
   } else {
-    console.log('\n--- STEG 1: login() (SAML-kedja) ---')
+    console.log('\n--- STEG 1-2: SSO + BankID via QR ---')
+
     const checker = await api.login()
 
-  if ((checker as any).token === 'fake') {
-    console.log('\n(redan autentiserad – ingen BankID krävdes)')
-  } else {
-    const bankidUrl = `bankid:///?autostarttoken=${
-      (checker as any).token
-    }&redirect=null`
-    console.log('\n--- STEG 2: SIGNERA MED BANKID PÅ TELEFONEN ---')
-
-    // Liten lokal server: telefonen öppnar http://<mac-ip>:4711 -> 302 -> bankid://
-    // (pålitligt, till skillnad från att klistra bankid:// i Safari)
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const http = require('http')
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const os = require('os')
-    const nets = os.networkInterfaces()
-    const macIp =
-      (nets.en0 || []).find((n: any) => n.family === 'IPv4')?.address ||
-      'localhost'
-    const server = http.createServer((req: any, res: any) => {
+    if ((checker as any).token === 'fake') {
+      console.log('(session redan gick igenom – ingen BankID krävdes)')
+    } else {
+      // QR-mode: serverns qrData renderas som QR -> skanna med BankID-appen
+      // (ingen länk-klick-dans, ingen timingpress - skannar när du är redo)
+      const loginPageUrl = (await (api as any).getBankLoginPageUrl(
+        'https://sso.infomentor.se/login.ashx?idp=stockholm_par'
+      )) as string
+      const res = (await loggedFetch(
+        `${loginPageUrl}&initialize=qr&_=${Date.now()}`,
+        { redirect: 'manual' }
+      )) as any
+      const qrInit = JSON.parse(await res.text())
       console.log(
-        `  📶 Request från telefon? UA: ${req.headers['user-agent']}`
+        'QR init ok, order:',
+        String(qrInit.order).substring(0, 12) + '...'
       )
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(
-        `<html><head><meta http-equiv="refresh" content="0;url=${bankidUrl}"></head>` +
-          `<body style="font-family:sans-serif;padding:2em">` +
-          `<a href="${bankidUrl}" style="font-size:2em">Öppna BankID</a></body></html>`
-      )
-    })
-    await new Promise<void>((r) => server.listen(4711, '0.0.0.0', () => r()))
-    console.log(`\n📱 Öppna på telefonen:  http://${macIp}:4711\n`)
+      const code = qrInit.qrData || `bankid.${qrInit.token}`
 
-    try {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const qrcode = require('qrcode-terminal')
-      qrcode.generate(`http://${macIp}:4711`, { small: true })
-    } catch {
-      /* qr-valfritt */
-    }
-    console.log('')
+      qrcode.generate(code, { small: true })
+      console.log('📱 Skanna QR-koden med BankID-appens QR-läsare...')
+      console.log('(BankID-appen -> QR-ikonen uppe till vänster)')
 
-    await new Promise<void>((resolve, reject) => {
-      const states = [
-        'OUTSTANDING_TRANSACTION',
-        'USER_SIGN',
-        'STARTED',
-        'PENDING',
-        'NO_CLIENT',
-      ]
-      states.forEach((s) =>
-        checker.on(s, () => console.log(`  BankID-state: ${s}`))
-      )
-      checker.on('OK', () => resolve())
-      checker.on('ERROR', () => reject(new Error('BankID ERROR')))
-      checker.on('CANCELLED', () => reject(new Error('BankID CANCELLED')))
-      setTimeout(() => reject(new Error('Timeout: 180s')), 180000)
-    })
-    server.close()
-  }
+      let ok = false
+      let consecutiveErrors = 0
+      for (let t = 0; t < 90 && !ok; t++) {
+        await new Promise((r) => setTimeout(r, 2000))
+        try {
+          const st = (await loggedFetch(
+            `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`,
+            { redirect: 'manual' }
+          )) as any
+          if (st.status !== 200) {
+            // ordern kan ha hunnit utgå server-side - avsluta tyst
+            consecutiveErrors++
+            if (consecutiveErrors >= 2) break
+            continue
+          }
+          consecutiveErrors = 0
+          const data = JSON.parse(await st.text())
+          if (data.state && data.state !== 'PENDING') {
+            console.log(`  QR BankID-state: ${data.state}`)
+          }
+          if (data.state === 'OK') {
+            try {
+              await (api as any).completeSamlFlow(loginPageUrl)
+              ok = true
+            } catch (e) {
+              console.error('completeSamlFlow fel:', (e as Error).message)
+              break
+            }
+          }
+          if (data.state === 'ERROR' || data.state === 'CANCELLED') break
+        } catch (e) {
+          console.error('poll error:', (e as Error).message)
+          break
+        }
+      }
+      if (!ok) throw new Error('QR-login misslyckades')
+      ;(api as any).isLoggedIn = true
+    }
 
     fs.writeFileSync(JAR_PATH, JSON.stringify(jar.serializeSync(), null, 2))
     console.log(`💾 Session sparad till ${JAR_PATH} (REUSE_JAR=1 för att återanvända)`)
