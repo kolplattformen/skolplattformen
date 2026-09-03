@@ -627,8 +627,20 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     // OBS: Fetcher-signaturen är (cacheKey, url, init)
     const response = await this.fetch(endpoint, url, init as any)
+    const sentCookie = (init.headers as any)?.Cookie || ''
+    console.log(
+      `[hub] ${endpoint} status=${response.status} cookieNames=[${sentCookie
+        .split(';')
+        .map((c) => c.split('=')[0].trim())
+        .join(',')}]`
+    )
 
     const responseBody = await response.text()
+    console.log(
+      `[hub-body] ${endpoint} len=${responseBody.length} start=${responseBody
+        .replace(/\s+/g, ' ')
+        .substring(0, 80)}`
+    )
 
     if (!response.ok) {
       console.error(
