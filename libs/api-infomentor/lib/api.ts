@@ -169,7 +169,20 @@ export class ApiInfomentor extends EventEmitter implements Api {
         const single = response.headers?.get?.('set-cookie')
         if (single) raw = [single]
       }
-      for (const cookie of raw) {
+      // RN-fetch (whatwg-polyfill) slår ihop flera Set-Cookie-headrar till
+      // EN sträng separerad med ", " - splitta så varje cookie lagras var
+      // för sig (annars förloras t.ex. den nya SMSESSION:en efter BankID-OK)
+      const splitCombined = (entry: string): string[] =>
+        entry.split(/,(?=[^;]+?=)/g).map((c) => c.trim())
+      const cookies = raw.flatMap(splitCombined).filter(Boolean)
+      if (cookies.length) {
+        console.log(
+          `[set-cookie] ${new URL(url).host}: ${cookies
+            .map((c) => c.split('=')[0].trim())
+            .join(',')}`
+        )
+      }
+      for (const cookie of cookies) {
         try {
           await this.cookieManager.setCookieString(cookie, url)
         } catch (error) {
@@ -197,7 +210,13 @@ export class ApiInfomentor extends EventEmitter implements Api {
       .map((c: string) => c.split('=')[0].trim())
       .filter(Boolean)
     const gotCookies = (response.headers as any)?.map?.['set-cookie'] || []
-    const gotNames = (Array.isArray(gotCookies) ? gotCookies : [])
+    const gotNames = (
+      Array.isArray(gotCookies)
+        ? gotCookies
+        : typeof gotCookies === 'string'
+        ? gotCookies.split(/,(?=[^;]+?=)/g)
+        : []
+    )
       .map((c: string) => c.split('=')[0].trim())
     if (sentNames.length || gotNames.length) {
       console.log(
