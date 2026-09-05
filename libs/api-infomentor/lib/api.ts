@@ -982,8 +982,58 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
   }
 
+  /**
+   * 'Efternamn[, Ev. mellannamn], Förnamn' -> { firstname, lastname }
+   * (Infomentors namnkonvention, verifierad: 'Ainasoja Ojeda, Mateo')
+   */
+  private splitName(name: string): { firstname: string; lastname: string } {
+    const parts = (name || '').split(',').map((p) => p.trim()).filter(Boolean)
+    if (parts.length >= 2) {
+      return {
+        firstname: parts.slice(1).join(' '),
+        lastname: parts[0],
+      }
+    }
+    return { firstname: name || '', lastname: '' }
+  }
+
   async getClassmates(child: EtjanstChild): Promise<Classmate[]> {
-    return []
+    try {
+      // Verifierad struktur (classlist/classlist/appData):
+      // { groupConfig: [ { id: -1, title: 'Skolans personal', isStaffGroup: false,
+      //                    items: [{id, name, email, phone, establishmentId}] },
+      //                  { id: 3238366, title: '8C', isStaffGroup: false,
+      //                    items: [{id, name, establishmentId}] } ],
+      //   userConfig: { canSendEmail, canViewPhone, isPupil }, urls: {...} }
+      // OBS: fältet heter title (ej name) och isStaffGroup är otillförlitligt -
+      // skilj grupperna på titeln ('*personal*' = staff)
+      const data = await this.post<any>('/classlist/classlist/appData')
+      const groups: any[] = data.groupConfig || []
+      const classGroup =
+        groups.find(
+          (g: any) =>
+            Array.isArray(g.items) &&
+            g.items.length > 0 &&
+            !String(g.title || '').toLowerCase().includes('personal')
+        ) || null
+
+      if (!classGroup) return []
+
+      const className = String(classGroup.title || '')
+      return (classGroup.items || []).map((pupil: any) => {
+        const names = this.splitName(pupil.name)
+        return {
+          sisId: String(pupil.id ?? ''),
+          className,
+          firstname: names.firstname,
+          lastname: names.lastname,
+          guardians: [],
+        }
+      })
+    } catch (error) {
+      console.error('Error fetching classmates:', error)
+      return []
+    }
   }
 
   async getNews(child: EtjanstChild): Promise<NewsItem[]> {
@@ -1068,7 +1118,30 @@ export class ApiInfomentor extends EventEmitter implements Api {
   }
 
   async getTeachers(child: EtjanstChild): Promise<Teacher[]> {
-    return []
+    try {
+      // 'Skolans personal'-gruppen ur classlist/appData (se getClassmates;
+      // fältet heter title, isStaffGroup kan vara false även för personalen)
+      const data = await this.post<any>('/classlist/classlist/appData')
+      const groups: any[] = data.groupConfig || []
+      const staffGroup = groups.find((g: any) =>
+        String(g.title || '').toLowerCase().includes('personal')
+      )
+
+      return (staffGroup?.items || []).map((staff: any) => {
+        const names = this.splitName(staff.name)
+        return {
+          id: Number(staff.id) || 0,
+          sisId: String(staff.id ?? ''),
+          firstname: names.firstname,
+          lastname: names.lastname,
+          email: staff.email || undefined,
+          phoneWork: staff.phone || undefined,
+        }
+      })
+    } catch (error) {
+      console.error('Error fetching teachers:', error)
+      return []
+    }
   }
 
   async getSchedule(

@@ -141,6 +141,74 @@ describe('ApiInfomentor', () => {
     )
   })
 
+  it('should get classmates (class group, not staff)', async () => {
+    // Verifierad struktur: groupConfig med title-field, staff-grupp först
+    const data = {
+      groupConfig: [
+        {
+          id: -1,
+          title: 'Skolans personal',
+          isStaffGroup: false,
+          items: [
+            { id: '869265', name: 'Abbasi, Ashwagh', email: null, phone: null },
+          ],
+        },
+        {
+          id: 3238366,
+          title: '8C',
+          isStaffGroup: false,
+          items: [
+            { id: '1385205', name: 'Ainasoja Ojeda, Mateo', establishmentId: null },
+          ],
+        },
+      ],
+    }
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => JSON.stringify(data),
+      json: async () => data,
+    })
+
+    api.isLoggedIn = true
+    const classmates = await api.getClassmates({ id: '123' } as any)
+    expect(classmates).toHaveLength(1)
+    expect(classmates[0].className).toBe('8C')
+    expect(classmates[0].firstname).toBe('Mateo')
+    expect(classmates[0].lastname).toBe('Ainasoja Ojeda')
+  })
+
+  it('should get teachers (staff group by title)', async () => {
+    const data = {
+      groupConfig: [
+        {
+          id: -1,
+          title: 'Skolans personal',
+          isStaffGroup: false,
+          items: [
+            {
+              id: '869265',
+              name: 'Abbasi, Ashwagh',
+              email: 'ashwagh@skolan.se',
+              phone: '08-123456',
+            },
+          ],
+        },
+      ],
+    }
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => JSON.stringify(data),
+      json: async () => data,
+    })
+
+    api.isLoggedIn = true
+    const teachers = await api.getTeachers({ id: '123' } as any)
+    expect(teachers).toHaveLength(1)
+    expect(teachers[0].firstname).toBe('Ashwagh')
+    expect(teachers[0].lastname).toBe('Abbasi')
+    expect(teachers[0].email).toBe('ashwagh@skolan.se')
+  })
+
   it('should logout', async () => {
     api.isLoggedIn = true
     await api.logout()
