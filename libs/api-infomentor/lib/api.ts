@@ -608,7 +608,35 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     console.log('Starting Infomentor QR login...')
     const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
-    const loginPageUrl = await this.getBankLoginPageUrl(ssoUrl)
+    let loginPageUrl: string | null = null
+    let qrInit: { order?: string; qrData?: string } | null = null
+    // Serverns ADC dödar ibland ordern direkt (state:ERROR) - gör om hela
+    // SSO-kedjan tills ordern andas (samma logik som e2e-qr-servern)
+    for (let attempt = 0; attempt < 3 && !loginPageUrl; attempt++) {
+      if (attempt > 0) console.log(`QR: omstart ${attempt}/3 av SSO-kedjan`)
+      loginPageUrl = await this.getBankLoginPageUrl(ssoUrl)
+      if (loginPageUrl === null) break
+      try {
+        const initRes = await this.cookieFetch(
+          `${loginPageUrl}&initialize=qr&_=${Date.now()}`
+        )
+        const raw = await initRes.text()
+        qrInit = JSON.parse(raw)
+        const sanity = await this.cookieFetch(
+          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+        )
+        const sanityData = await sanity.json()
+        if (sanityData.state === 'ERROR') {
+          console.log('QR: ordern dödfödd (sanity ERROR) - ny kedja…')
+          loginPageUrl = null
+          qrInit = null
+        }
+      } catch {
+        console.log('QR: init-fel - ny kedja…')
+        loginPageUrl = null
+        qrInit = null
+      }
+    }
     if (loginPageUrl === null) {
       console.log('Session already valid - skipping QR')
       this.personalNumber = 'unknown'
@@ -620,10 +648,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
       return instant
     }
 
-    const qrInitResponse = await this.cookieFetch(
-      `${loginPageUrl}&initialize=qr&_=${Date.now()}`
-    )
-    const qrInit = await qrInitResponse.json()
+    if (!qrInit || !qrInit.order) {
+      throw new Error('Kunde inte initiera BankID QR (flaky server)')
+    }
     console.log('QR init ok, order:', String(qrInit.order).substring(0, 12))
     this.personalNumber = 'unknown'
 
@@ -646,6 +673,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
           )
           if (st.status !== 200) {
             consecutiveErrors++
+            console.log('verifyorder non-200:', st.status, 'error#', consecutiveErrors)
             if (consecutiveErrors >= 3) {
               checker.emit('ERROR')
               return
@@ -656,9 +684,11 @@ export class ApiInfomentor extends EventEmitter implements Api {
           const data = await st.json()
           if (data.qrData && data.qrData !== lastQr) {
             lastQr = data.qrData
+            console.log('QR frame update, state:', data.state)
             checker.emit('qr', data.qrData)
           }
           if (data.state && data.state !== 'PENDING') {
+            console.log('QR state change:', data.state)
             checker.emit(data.state)
           }
           if (data.state === 'OK') {

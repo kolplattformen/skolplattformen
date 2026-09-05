@@ -69,6 +69,7 @@ export const Login = () => {
     'cachedPersonalIdentityNumber'
   )
   const [loginMethodId, setLoginMethodId] = useSettingsStorage('loginMethodId')
+  console.log('DEBUG loginMethodId=', JSON.stringify(loginMethodId))
   const [error, setError] = useState<string | null>(null)
 
   const loginWithFrejaEnabled = useFeature('LOGIN_FREJA_EID')
@@ -182,7 +183,12 @@ export const Login = () => {
       showModal(true)
       const status = await (api as any).startQrLogin()
       setCancelLoginRequest(() => () => status.cancel())
-      status.on('qr', (frame: string) => setQrCode(frame))
+      console.log('QR checker received, initial frame?', !!status.qrData)
+      if (status.qrData) setQrCode(status.qrData)
+      status.on('qr', (frame: string) => {
+        console.log('QR frame event received')
+        setQrCode(frame)
+      })
       status.on('OK', () => {
         console.log('QR login ok')
         setLoginStatusText(t('auth.loginSuccessful'))
@@ -194,8 +200,8 @@ export const Login = () => {
         setQrCode(null)
       })
       status.on('ERROR', () => {
-        setError(t('auth.loginFailed'))
-        showModal(false)
+        console.log('QR login ERROR received')
+        setLoginStatusText('Inloggningen misslyckades - försök igen')
         setQrCode(null)
       })
     } else if (
@@ -247,6 +253,15 @@ export const Login = () => {
     setError(null)
   }, [loginMethodId])
 
+  useEffect(() => {
+    console.log('DEBUG Login MOUNTED')
+    return () => console.log('DEBUG Login UNMOUNTED (fast refresh/navigation!)')
+  }, [])
+
+  useEffect(() => {
+    console.log('DEBUG modal visible =', visible, ' qrCode?', !!qrCode)
+  }, [visible, qrCode])
+
   return (
     <>
       <View style={styles.loginForm}>
@@ -276,6 +291,32 @@ export const Login = () => {
             onChangeText={setPersonalIdNumber}
             placeholder={t('auth.placeholder_SocialSecurityNumber')}
           />
+        )}
+        {loginMethodId === 'qrcode' && (
+          <View style={styles.bankIdButtons}>
+            <Button
+              accessible={true}
+              onPress={() => startLogin('')}
+              style={styles.loginButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {currentLoginMethod.title}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+            />
+          </View>
         )}
         {loginMethodId === 'thisdevice' && (
           <View style={styles.bankIdButtons}>
@@ -425,7 +466,9 @@ export const Login = () => {
       <Modal
         visible={visible}
         style={styles.modal}
-        onBackdropPress={() => showModal(false)}
+        onBackdropPress={() => {
+          if (loginMethodId !== 'qrcode') showModal(false)
+        }}
         backdropStyle={styles.backdrop}
       >
         <Card disabled>

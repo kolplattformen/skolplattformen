@@ -148,16 +148,44 @@ const main = async (): Promise<void> => {
   console.log('=== Infomentor QR-server startar ===')
   const api = init(loggedFetch, jar as any, undefined, 'stockholm_par')
 
-  console.log('\nSSO-kedjan till BankID-sidan…')
-  const loginPageUrl = (await (api as any).getBankLoginPageUrl(
-    'https://sso.infomentor.se/login.ashx?idp=stockholm_par'
-  )) as string
+  let loginPageUrl: string | null = null
+  let qrInit: { order: string; qrData: string } | null = null
+  // Om-startsloop: serverns ADC bouncar ibland ordern direkt (state:ERROR)
+  for (let restart = 0; restart < 5 && !loginPageUrl; restart++) {
+    if (restart > 0) {
+      console.log(`\n=== Omstart ${restart}/5 av SSO-kedjan ===`)
+    }
+    console.log('\nSSO-kedjan till BankID-sidan…')
+    loginPageUrl = (await (api as any).getBankLoginPageUrl(
+      'https://sso.infomentor.se/login.ashx?idp=stockholm_par'
+    )) as string
 
-  const initRes = (await loggedFetch(
-    `${loginPageUrl}&initialize=qr&_=${Date.now()}`,
-    { redirect: 'manual' }
-  )) as any
-  const qrInit = JSON.parse(await initRes.text())
+    try {
+      const initRes = (await loggedFetch(
+        `${loginPageUrl}&initialize=qr&_=${Date.now()}`,
+        { redirect: 'manual' }
+      )) as any
+      const raw = await initRes.text()
+      qrInit = JSON.parse(raw)
+      // Snabb sanity-poll: returnerar ordern ERROR direkt, starta om
+      const sanity = (await loggedFetch(
+        `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`,
+        { redirect: 'manual' }
+      )) as any
+      const sanityData = JSON.parse(await sanity.text())
+      if (sanityData.state === 'ERROR') {
+        console.log('Ordern dödfödd (sanity:ERROR) - provar ny kedja…')
+        loginPageUrl = null
+        qrInit = null
+      }
+    } catch {
+      console.log('Init-fel - provar ny kedja…')
+      loginPageUrl = null
+      qrInit = null
+    }
+  }
+  if (!qrInit) throw new Error('Kunde inte skapa fungerande QR-order')
+
   console.log('QR-order startad:', String(qrInit.order).substring(0, 12) + '…')
 
   state.matrix = renderMatrix(qrInit.qrData)
@@ -226,8 +254,10 @@ const main = async (): Promise<void> => {
         }
       }
       if (data.state === 'ERROR' || data.state === 'CANCELLED') {
-        state.status = `❌ ${data.state}`
-        break
+        console.log(
+          `BankID ${data.state} - startar om hela kedjan (flaky server)...`
+        )
+        break // bryt poll-loopen - yttre omstart-pårymmer
       }
     } catch (e) {
       console.error('poll error:', (e as Error).message)
