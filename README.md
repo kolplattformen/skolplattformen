@@ -32,6 +32,7 @@ The respective README files there contain more detailed descriptions.
 * [Getting started with development](#getting-started-with-development)
     * [iOS](#ios)
     * [Android](#android)
+    * [Infomentor quick start](#infomentor-quick-start)
     * [Website](#website)
     * [Tests](#tests)
 * [Contributions](#contributions)
@@ -145,6 +146,33 @@ Or to run in the Expo Go app:
 ```bash
 yarn start
 ```
+
+### Infomentor quick start
+
+Infomentor (Stockholm) is the default school platform in the app. The app requires native cookie storage (`@react-native-cookies/cookies`), so **Expo Go will not work** — build and run with the embedded [expo-dev-client](https://docs.expo.dev/development/introduction/) instead (`yarn ios` / `yarn android`).
+
+To work with Infomentor you need to log in via BankID. For local development you can shortcut that with a **dev session** (the verification order is auto-approved by Stockholm's BankID gateway for a device already registered with BankID — no scan needed):
+
+```bash
+# 1. Mint a fresh session (prints a DEV-SESSION line, ~40 min TTL)
+cd libs/api-infomentor && npx tsx scripts/e2e-qr-server.ts
+
+# 2. Paste the printed line into apps/skolplattformen-app/.env.local
+#    (gitignored — NEVER commit it):
+#    EXPO_PUBLIC_INFOMENTOR_DEV_SESSION=ASP.NET_SessionId=...; BIGipServer~...=~...; TS0116cbba=...; IMHome=...
+
+# 3. Restart Metro WITH cache clear (EXPO_PUBLIC_* values are inlined into
+#    the bundle at transform time — a plain restart will keep the old value)
+npx expo start -c
+```
+
+With the dev session in place the app logs in automatically on launch (auto-login fires once per app session; logging out keeps you on the login screen).
+
+Sessions expire after **~40 minutes** — when they do, the hub answers `200 OK` with an **empty body** (and expired/wrong cookies cause a `302` to the login page). Re-run the harness and repeat.
+
+Detailed endpoints, quirks and implementation notes: [libs/api-infomentor/README.md](libs/api-infomentor/README.md).
+
+For AI/agent helpers, [AGENTS.md](AGENTS.md) documents repo conventions and the automated verify loop, plus [.claude/skills](.claude/skills) with ready-made workflows.
 
 ### Building for production
 
