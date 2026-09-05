@@ -4,8 +4,6 @@
  * - Saves sessionCoookie to a file and tries to use it again
  */
 
-const { DateTime } = require('luxon')
-const { inspect } = require('util')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')
@@ -18,7 +16,7 @@ const initSkolplattformen = require('@skolplattformen/api-skolplattformen').defa
 // TODO: Re-add when api-hjarntorget is restored
 // const initHjarntorget = require('@skolplattformen/api-hjarntorget').default
 
-const [, , personalNumber, platform] = process.argv
+const [, , personalNumber] = process.argv
 // const isHjarntorget = platform && platform.startsWith('hj')
 // const init = isHjarntorget ? initHjarntorget : initSkolplattformen;
 const init = initSkolplattformen;

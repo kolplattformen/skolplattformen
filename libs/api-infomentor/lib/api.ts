@@ -24,7 +24,6 @@ import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
 import { decode } from 'he'
 import { DummyStatusChecker } from './loginStatusChecker'
-import * as routes from './routes'
 
 /**
  * Base64-dekodering utan Buffer/atob (Hermes-säker).
@@ -69,34 +68,11 @@ interface InfomentorChild {
   className?: string
 }
 
-interface InfomentorCalendarEntry {
-  id: string
-  title: string
-  description?: string
-  location?: string
-  startDate: string
-  endDate: string
-  allDay: boolean
-}
-
-interface InfomentorNewsItem {
-  id: string
-  title: string
-  intro?: string
-  body?: string
-  author?: string
-  publishedDate: string
-  modifiedDate?: string
-  imageUrl?: string
-  fullImageUrl?: string
-  imageAltText?: string
-}
-
 // Verifierad struktur (NotificationApp/NotificationApp/appData + GetNotifications):
 // { id, title, subTitle, subjectsCourses, dateSent, appType ('News'|'CalendarV2'|
 // 'Attendance'|...), state ('Read'|'Seen'|...), type, url (relativ, t.ex.
 // '/#/communication/news/2106074'), pupilIM2Id, pupilSourceId }
-interface InfomentorNotification {
+interface InfomentorNotificationPayload {
   id: string | number
   title: string
   subTitle?: string
@@ -1086,7 +1062,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         {}
       )
 
-      const notifications: InfomentorNotification[] = data.notifications || []
+      const notifications: InfomentorNotificationPayload[] = data.notifications || []
 
       // Mappa till appens Notification: sender = human label för appType,
       // message = title + subTitle, dateCreated = dateSent, category = utelämnas
