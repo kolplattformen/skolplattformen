@@ -54,6 +54,14 @@ export const Children = () => {
 
   const [updatedAt, setUpdated] = useState('')
 
+  // Tom lista trots 'loaded' = cachad pre-login-data - hämta om en gång
+  // (Infomentor returnerar alltid default-barnet efter inloggning)
+  useEffect(() => {
+    if (status === 'loaded' && childList.length === 0) {
+      reload()
+    }
+  }, [status, childList.length, reload])
+
   const logout = useCallback(() => {
     AppStorage.clearTemporaryItems().then(() => api.logout())
   }, [api])

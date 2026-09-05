@@ -927,6 +927,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
       // Verifierad struktur: { items: [{ id, title, content, publishedDate, publishedBy, newsImageUrl, ... }] }
       const items: any[] = data.items || []
 
+      // Nyhetsbilder kommer som relativa URLs
+      // ("/Resources/Resource/Download/15389234?api=IM2&...") - RN:s Image
+      // kräver absoluta URLs: joina origo + relativ väg korrekt
+      const imageUrl = (rel?: string): string | undefined => {
+        if (!rel) return undefined
+        if (rel.startsWith('http')) return rel
+        return new URL(rel, 'https://hub.infomentor.se').toString()
+      }
       return items.map((item) => ({
         id: String(item.id),
         author: item.publishedBy,
@@ -935,8 +943,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
         body: item.content,
         published: item.publishedDate,
         modified: undefined,
-        imageUrl: item.newsImageUrl || undefined,
-        fullImageUrl: item.newsImageUrl || undefined,
+        imageUrl: imageUrl(item.newsImageUrl),
+        fullImageUrl: imageUrl(item.newsImageUrl),
         imageAltText: undefined,
       }))
     } catch (error) {
