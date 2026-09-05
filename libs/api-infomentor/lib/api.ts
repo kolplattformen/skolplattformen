@@ -97,6 +97,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private samlTargetUrl?: string
   private childName?: string
   private sessionRefreshPromise?: Promise<boolean>
+  private sessionRefreshBlockedUntil = 0
 
   public isLoggedIn = false
   public isFake = false
@@ -795,8 +796,10 @@ export class ApiInfomentor extends EventEmitter implements Api {
    * (registrerad enhet ger INTE garanterat auto-godkännande - verifierat
    * 2026-09-05: 75 poll i rad med state PENDING utan interaktion). Vid
    * misslyckan är rätt UX att logga ut (emit('logout')) och låta
-   * användaren skanna QR. Kör därför EJ clearAll() före kedjan - den
-   * skulle i detta läge bara stryka cookies kedjan ändå förnyar själv.
+   * användaren skanna QR - därför hålls fönstret kort (2 kedjor à ~12 s)
+   * så att användaren inte stirrar på en snurr i flera minuter. Kör
+   * därför EJ clearAll() före kedjan - den skulle i detta läge bara stryka
+   * cookies kedjan ändå förnyar själv.
    */
   async silentSessionRefresh(): Promise<boolean> {
     console.log('[session-refresh] attempting silent re-login')
@@ -804,7 +807,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     let loginPageUrl: string | null = null
     let qrInit: { order?: string; qrData?: string } | null = null
 
-    for (let attempt = 0; attempt < 3 && !loginPageUrl; attempt++) {
+    for (let attempt = 0; attempt < 2 && !loginPageUrl; attempt++) {
       if (attempt > 0) {
         console.log('[session-refresh] kedje-omstart', attempt, '/ 3')
       }
@@ -839,7 +842,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
       return false
     }
 
-    for (let i = 0; i < 25; i++) {
+    // ~12 s (inte 25): det är max väntetiden användaren bör stirra på en
+    // snurr innan vi ger upp och visar inloggningsskärmen
+    for (let i = 0; i < 12; i++) {
       await new Promise((r) => setTimeout(r, 1000))
       try {
         const st = await this.cookieFetch(
@@ -944,8 +949,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
     if (!responseBody) {
       // Död session har signaturen 200 + tom body. Begär ny token tyst
-      // (silentSessionRefresh) och försök EN gång till.
-      if (this.isLoggedIn && allowRecovery) {
+      // (silentSessionRefresh) och försök EN gång till. Efter en misslyckad
+      // refresh vilar mekanismen i 5 minuter (annars återstartar varje
+      // endpoint refreshen och användaren stirrar på snurr i över en minut).
+      if (
+        this.isLoggedIn &&
+        allowRecovery &&
+        Date.now() > this.sessionRefreshBlockedUntil
+      ) {
         console.warn(
           `[hub] ${endpoint} tom body - sessionen antas död, tyst refresh…`
         )
@@ -957,6 +968,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
           refreshed = await this.sessionRefreshPromise
         } finally {
           this.sessionRefreshPromise = undefined
+        }
+        if (!refreshed) {
+          this.sessionRefreshBlockedUntil = Date.now() + 5 * 60 * 1000
         }
         if (refreshed) {
           // Rehydratera appens data via login-eventet (hooks lyssnar)
