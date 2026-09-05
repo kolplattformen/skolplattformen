@@ -209,6 +209,64 @@ describe('ApiInfomentor', () => {
     expect(teachers[0].email).toBe('ashwagh@skolan.se')
   })
 
+  it('should refresh session silently on empty body and retry', async () => {
+    // 1) appData -> tom body (död session)  2) retry efter refresh -> data
+    // 3) hub-root HTML (barnnamn)
+    // OBS: wrap() anropar båda metoderna (json/text) på svaret - mocken
+    // måste efterlikna en riktig Fetch-response.
+    const html =
+      "<script>IMHome = { init: { selectedPupilName: 'Landgren, Sixten' } }</script>"
+    mockFetch
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        text: async () => '',
+        json: async () => ({}),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        text: async () => '{"maxDate":"30-07-27"}',
+        json: async () => ({ maxDate: '30-07-27' }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        text: async () => html,
+        json: async () => ({}),
+      })
+
+    api.isLoggedIn = true
+    const refreshSpy = jest
+      .spyOn(api, 'silentSessionRefresh')
+      .mockResolvedValue(true)
+
+    const children = await api.getChildren()
+    expect(refreshSpy).toHaveBeenCalledTimes(1)
+    expect(children[0].name).toBe('Sixten Landgren')
+
+    // Fortfarande tom body i nästa anrop: recovery försöker EN gång per
+    // anrop (ingen loop - retry efter refresh körs utan recovery). Misslyckas
+    // refreshen (t.ex. användaren godkänner ej BankID-pushen) ska API:et
+    // logga ut (isLoggedIn=false + logout-event) så att appen hamnar på
+    // inloggningsskärmen.
+    refreshSpy.mockClear()
+    refreshSpy.mockResolvedValue(false)
+    mockFetch.mockReset()
+    mockFetch.mockResolvedValue({
+      ok: true,
+      status: 200,
+      text: async () => '',
+      json: async () => ({}),
+    })
+    const emitSpy = jest.spyOn(api, 'emit')
+    const afterRefresh = await api.getChildren()
+    expect(refreshSpy).toHaveBeenCalledTimes(1)
+    expect(afterRefresh[0].name).toBe('Mitt barn')
+    expect(api.isLoggedIn).toBe(false)
+    expect(emitSpy).toHaveBeenCalledWith('logout')
+  })
+
   it('should logout', async () => {
     api.isLoggedIn = true
     await api.logout()

@@ -96,6 +96,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private sessionCookie?: string
   private samlTargetUrl?: string
   private childName?: string
+  private sessionRefreshPromise?: Promise<boolean>
 
   public isLoggedIn = false
   public isFake = false
@@ -785,6 +786,98 @@ export class ApiInfomentor extends EventEmitter implements Api {
     return checker
   }
 
+  /**
+   * Tyst session-refresh när sessionen dött (200 + tom body).
+   *
+   * Kör om SSO/BankID-QR-kedjan i bakgrunden: en verifierorder startas
+   * och pollas i ~25 s. Godkänner användaren pushen i BankID-appen inom
+   * fönstret återställs sessionen sömlöst; annars misslyckas refreshen
+   * (registrerad enhet ger INTE garanterat auto-godkännande - verifierat
+   * 2026-09-05: 75 poll i rad med state PENDING utan interaktion). Vid
+   * misslyckan är rätt UX att logga ut (emit('logout')) och låta
+   * användaren skanna QR. Kör därför EJ clearAll() före kedjan - den
+   * skulle i detta läge bara stryka cookies kedjan ändå förnyar själv.
+   */
+  async silentSessionRefresh(): Promise<boolean> {
+    console.log('[session-refresh] attempting silent re-login')
+    const ssoUrl = `https://sso.infomentor.se/login.ashx?idp=${this.idp}`
+    let loginPageUrl: string | null = null
+    let qrInit: { order?: string; qrData?: string } | null = null
+
+    for (let attempt = 0; attempt < 3 && !loginPageUrl; attempt++) {
+      if (attempt > 0) {
+        console.log('[session-refresh] kedje-omstart', attempt, '/ 3')
+      }
+      loginPageUrl = await this.getBankLoginPageUrl(ssoUrl)
+      if (loginPageUrl === null) {
+        console.log('[session-refresh] SSO pre-auth lyckades direkt')
+        return true
+      }
+      try {
+        const initRes = await this.cookieFetch(
+          `${loginPageUrl}&initialize=qr&_=${Date.now()}`
+        )
+        qrInit = JSON.parse(await initRes.text())
+        const sanity = await this.cookieFetch(
+          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+        )
+        const sanityData = await sanity.json()
+        if (sanityData.state === 'ERROR') {
+          console.log('[session-refresh] order dödfödd - ny kedja')
+          loginPageUrl = null
+          qrInit = null
+        }
+      } catch {
+        console.log('[session-refresh] init-fel - ny kedja')
+        loginPageUrl = null
+        qrInit = null
+      }
+    }
+
+    if (!loginPageUrl || !qrInit?.order) {
+      console.warn('[session-refresh] kunde inte initiera QR-order')
+      return false
+    }
+
+    for (let i = 0; i < 25; i++) {
+      await new Promise((r) => setTimeout(r, 1000))
+      try {
+        const st = await this.cookieFetch(
+          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+        )
+        if (st.status !== 200) continue
+        const data = await st.json()
+        console.log('[session-refresh] poll state:', data.state)
+        if (data.state === 'OK') {
+          try {
+            await this.completeSamlFlow(loginPageUrl)
+          } catch (error) {
+            console.log(
+              '[session-refresh] SAML-komplettering misslyckades - pre-auth-kedja:',
+              (error as Error).message
+            )
+            const retryUrl = await this.getBankLoginPageUrl(ssoUrl)
+            if (retryUrl !== null) {
+              console.warn('[session-refresh] pre-auth bounce:ade')
+              return false
+            }
+          }
+          this.isLoggedIn = true
+          console.log('[session-refresh] OK - ny session etablerad')
+          return true
+        }
+        if (data.state === 'ERROR' || data.state === 'CANCELLED') {
+          console.warn('[session-refresh] order ERROR/CANCELLED')
+          return false
+        }
+      } catch (error) {
+        console.warn('[session-refresh] poll error:', (error as Error).message)
+      }
+    }
+    console.warn('[session-refresh] timeout - manuell scan krävs sannolikt')
+    return false
+  }
+
   async loginFreja(): Promise<any> {
     throw new Error('Freja login not implemented for Infomentor')
   }
@@ -805,7 +898,11 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
   }
 
-  private async post<T>(endpoint: string, body?: any): Promise<T> {
+  private async post<T>(
+    endpoint: string,
+    body?: any,
+    allowRecovery = true
+  ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`
     const headers = await this.getSessionHeaders(url)
 
@@ -846,6 +943,34 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
 
     if (!responseBody) {
+      // Död session har signaturen 200 + tom body. Begär ny token tyst
+      // (silentSessionRefresh) och försök EN gång till.
+      if (this.isLoggedIn && allowRecovery) {
+        console.warn(
+          `[hub] ${endpoint} tom body - sessionen antas död, tyst refresh…`
+        )
+        if (!this.sessionRefreshPromise) {
+          this.sessionRefreshPromise = this.silentSessionRefresh()
+        }
+        let refreshed: boolean
+        try {
+          refreshed = await this.sessionRefreshPromise
+        } finally {
+          this.sessionRefreshPromise = undefined
+        }
+        if (refreshed) {
+          // Rehydratera appens data via login-eventet (hooks lyssnar)
+          this.emit('login')
+          return this.post<T>(endpoint, body, false)
+        }
+        // Refresh misslyckades (t.ex. ingen BankID-push-godkännning inom
+        // tidsfönstret) - logga ut i API:et så att appen landar på
+        // inloggningsskärmen och användaren kan skanna QR / öppna BankID.
+        if (this.isLoggedIn) {
+          this.isLoggedIn = false
+          this.emit('logout')
+        }
+      }
       console.error(`Infomentor API ${endpoint} returned EMPTY body`)
       throw new Error(`Infomentor API ${endpoint} returned empty body`)
     }
