@@ -425,7 +425,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
 
     const poll = async () => {
+      // Appen är i BAKGRUND medan BankID-appen körs (öppnad via
+      // app.bankid.com-länken) - iOS fryser då JS-timers och dödar
+      // pågående fetches. Ett misslyckat poll ska därför INTE avbryta
+      // inloggningen: fortsätt tills 10 fel i rad (vid förgrundsåtergång
+      // besvaras nästa poll direkt med OK).
+      let consecutiveErrors = 0
       while (!cancelled) {
+        await new Promise((resolve) => setTimeout(resolve, 2000))
         try {
           const statusUrl = `${loginPageUrl}&verifyorder=${ticket.order}&_=${Date.now()}`
           const response = await this.cookieFetch(statusUrl)
@@ -452,12 +459,18 @@ export class ApiInfomentor extends EventEmitter implements Api {
           if (state === 'ERROR' || state === 'CANCELLED') {
             return
           }
+          consecutiveErrors = 0
         } catch (error) {
-          console.error('Status poll error:', error)
-          checker.emit('ERROR')
-          return
+          consecutiveErrors++
+          console.warn(
+            `Status poll error (fortsätter, ${consecutiveErrors}/10 - appen kan vara i bakgrund):`,
+            (error as Error).message
+          )
+          if (consecutiveErrors >= 10) {
+            checker.emit('ERROR')
+            return
+          }
         }
-        await new Promise((resolve) => setTimeout(resolve, 2000))
       }
     }
     poll()

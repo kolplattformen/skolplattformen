@@ -27,20 +27,38 @@ export class Checker extends EventEmitter implements LoginStatusChecker {
       return
     }
 
-    try {
-      const response = await this.fetcher('login-status', this.url)
-      const status = await response.json()
-      this.emit(status.state)
-      if (
-        !this.cancelled &&
-        status.state !== 'OK' &&
-        status.state !== 'ERROR' &&
-        status.state !== 'CANCELLED'
-      ) {
-        setTimeout(() => this.check(), 1000)
+    // Appen kan vara i bakgrund (BankID-appen öppen) - iOS dödar fetches
+    // och fryser timers. Ett misslyckat poll avbryter INTE: fortsätt till
+    // 10 fel i rad, nästa poll efter förgrundsåtergång besvaras i regel OK.
+    let consecutiveErrors = 0
+    while (!this.cancelled) {
+      try {
+        const response = await this.fetcher(
+          'login-status',
+          `${this.url}&_=${Date.now()}`
+        )
+        const status = await response.json()
+        this.emit(status.state)
+        if (
+          status.state === 'OK' ||
+          status.state === 'ERROR' ||
+          status.state === 'CANCELLED'
+        ) {
+          return
+        }
+        consecutiveErrors = 0
+      } catch (error) {
+        consecutiveErrors++
+        console.warn(
+          `Login status poll error (fortsätter, ${consecutiveErrors}/10):`,
+          (error as Error).message
+        )
+        if (consecutiveErrors >= 10) {
+          this.emit('ERROR')
+          return
+        }
       }
-    } catch (error) {
-      this.emit('ERROR')
+      await new Promise((resolve) => setTimeout(resolve, 1000))
     }
   }
 
