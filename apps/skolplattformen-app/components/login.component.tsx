@@ -14,6 +14,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
+import Constants from 'expo-constants'
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
@@ -97,12 +98,25 @@ export const Login = () => {
     { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
 
-  // Set default login method to 'thisdevice' if not set
+  // Set default login method: fysisk enhet => BankID på samma enhet
+  // (QR används först vid två enheter), simulator/surfplatta utan BankID
+  // => QR (som skannas med telefonen)
+  const isPhysicalDevice = Constants.deviceType === 'device'
   if (!loginMethodId) {
-    setLoginMethodId('thisdevice')
+    setLoginMethodId(
+      isPhysicalDevice || currentSchoolPlatform !== 'infomentor'
+        ? 'thisdevice'
+        : 'qrcode'
+    )
   }
 
   if (loginMethodId === 'freja' && !loginWithFrejaEnabled) {
+    setLoginMethodId('thisdevice')
+  }
+
+  // Persisted 'qrcode' på en fysisk enhet (t.ex. från tidigare auto-login)
+  // normaliseras till BankID på samma enhet
+  if (loginMethodId === 'qrcode' && isPhysicalDevice) {
     setLoginMethodId('thisdevice')
   }
 
@@ -255,15 +269,18 @@ export const Login = () => {
   }, [loginMethodId])
 
   // DEV: auto-login när EXPO_PUBLIC_INFOMENTOR_DEV_SESSION är satt
-  // (ingen knapptryckning behövs - underlättar test i simulatorn)
+  // (ingen knapptryckning behövs - underlättar test i simulatorn/device)
   useEffect(() => {
     if (hasAutoLoggedInThisSession) return
     if (!process.env.EXPO_PUBLIC_INFOMENTOR_DEV_SESSION) return
     if (currentSchoolPlatform !== 'infomentor') return
     hasAutoLoggedInThisSession = true
-    console.log('[dev] auto-login: dev session present, firing qrcode flow')
-    setLoginMethodId('qrcode')
-    startLogin('', 'qrcode')
+    // Metoden väljs per enhet (thisdevice på fysisk telefon - dev-sessionen
+    // kortsluter ändå inloggingen, inget BankID öppnas)
+    const autoMethod = Constants.deviceType === 'device' ? 'thisdevice' : 'qrcode'
+    console.log('[dev] auto-login: dev session present, method:', autoMethod)
+    setLoginMethodId(autoMethod)
+    startLogin('', autoMethod)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
