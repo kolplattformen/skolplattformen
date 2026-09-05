@@ -83,29 +83,35 @@ export const ChildListItem = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updated])
 
-  const notificationsThisWeek = notifications.filter(
-    ({ dateCreated, dateModified }) => {
-      const date = dateModified || dateCreated
-      return date ? moment(date).isSame(moment(), 'week') : false
-    }
-  )
-
-  const newsThisWeek = news.filter(({ modified, published }) => {
-    const newsDate = modified || published
-    return newsDate ? moment(newsDate).isSame(currentDate, 'week') : false
-  })
-
-  const scheduleAndCalendarThisWeek = [
+  // "Kommande" istället för strikt veckofilter - annars blir innehållet
+  // tomt på helger och när nyheter publicerats tidigare på terminen
+  const upcomingScheduleAndCalendar = [
     ...(calendar ?? []),
     ...(schedule ?? []),
-  ].filter(({ startDate }) =>
-    startDate
-      ? moment(startDate).isBetween(
-          moment(currentDate).startOf('day'),
-          moment(currentDate).add(7, 'days')
-        )
-      : false
-  )
+  ]
+    .filter(({ startDate }) =>
+      startDate ? moment(startDate).isSameOrAfter(moment(), 'day') : false
+    )
+    .sort(
+      (a, b) => moment(a.startDate).valueOf() - moment(b.startDate).valueOf()
+    )
+    .slice(0, 3)
+
+  const latestNews = [...news]
+    .sort(
+      (a, b) =>
+        moment(b.modified || b.published || 0).valueOf() -
+        moment(a.modified || a.published || 0).valueOf()
+    )
+    .slice(0, 3)
+
+  const latestNotifications = [...notifications]
+    .sort(
+      (a, b) =>
+        moment(b.dateModified || b.dateCreated || 0).valueOf() -
+        moment(a.dateModified || a.dateCreated || 0).valueOf()
+    )
+    .slice(0, 3)
 
   const displayDate = (inputDate: moment.MomentInput) => {
     return moment(inputDate).fromNow()
@@ -198,7 +204,7 @@ export const ChildListItem = ({
         }
       >
         <DaySummary child={child} date={meaningfulStartingDate} />
-        {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
+        {upcomingScheduleAndCalendar.map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
           </Text>
@@ -218,22 +224,22 @@ export const ChildListItem = ({
         <Text category="c2" style={styles.label}>
           {t('navigation.news')}
         </Text>
-        {notificationsThisWeek.slice(0, 3).map((notification, i) => (
+        {latestNotifications.map((notification, i) => (
           <Text category="p1" key={i}>
             {notification.message}
           </Text>
         ))}
 
-        {newsThisWeek.slice(0, 3).map((newsItem, i) => (
+        {latestNews.map((newsItem, i) => (
           <Text category="p1" key={i}>
             {newsItem.header ?? ''}
           </Text>
         ))}
       </Pressable>
 
-      {scheduleAndCalendarThisWeek.length ||
-      notificationsThisWeek.length ||
-      newsThisWeek.length ? null : (
+      {upcomingScheduleAndCalendar.length ||
+      latestNotifications.length ||
+      latestNews.length ? null : (
         <Text category="p1" style={styles.noNewNewsItemsText}>
           {t('news.noNewNewsItemsThisWeek')}
         </Text>
