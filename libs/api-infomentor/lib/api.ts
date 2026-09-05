@@ -98,6 +98,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private childName?: string
   private sessionRefreshPromise?: Promise<boolean>
   private sessionRefreshBlockedUntil = 0
+  private resumeAttempted = false
 
   public isLoggedIn = false
   public isFake = false
@@ -885,6 +886,45 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
   async loginFreja(): Promise<any> {
     throw new Error('Freja login not implemented for Infomentor')
+  }
+
+  /**
+   * Återupptar sessionen från den NATIVA cookie-store:n vid kallstart.
+   * iOS (NSHTTPCookieStorage) bevarar cookies mellan appstarter - dvs
+   * IMHome (the hub-session) ligger kvar tills den tjänstesidigt
+   * upphör efter ~40 min. Vi kartlägger dock bara isLoggedIn=false ->
+   * login-skärm oavsett, vilket kastar bort en fortfarande giltig session.
+   *
+   * Detektering: GET hub-root - inloggad HTML innehåller IMHome.init med
+   * selectedPupilName; utloggad(!) HTML gör det inte. Vid lyckad resume
+   * emit:as 'login' (hooks laddar direkt). Sessionen död? -> tyst
+   * refresh i ~25 s (BankID-push kan godkännas) annars landar appen på
+   * inloggningsskärmen.
+   * Kallas från initInfomentor (inte från enhetstester - de konstruerar
+   * ApiInfomentor direkt). Idempotent.
+   */
+  async resumeSession(): Promise<boolean> {
+    if (this.resumeAttempted || this.sessionCookie) return false
+    this.resumeAttempted = true
+    try {
+      const response = await this.cookieFetch(this.baseUrl)
+      const body = await response.text()
+      if (body.includes('selectedPupilName')) {
+        await this.getChildName() // ur samma HTML
+        this.isLoggedIn = true
+        console.log(
+          '[session-resume] session finns i native store - återupptagen'
+        )
+        this.emit('login')
+        return true
+      }
+      console.log(
+        '[session-resume] ingen giltig session i store - appen hamnar på login-skärmen'
+      )
+    } catch (error) {
+      console.warn('resumeSession failed:', (error as Error).message)
+    }
+    return false
   }
 
   async setSessionCookie(sessionCookie: string): Promise<void> {
