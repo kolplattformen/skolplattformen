@@ -3,67 +3,48 @@
   "sourceRoot": "apps/skolplattformen-app/src",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nrwl/react-native:bundle",
-      "outputs": ["apps/skolplattformen-app/build"],
-      "options": {
-        "entryFile": "apps/skolplattformen-app/index.js",
-        "platform": "ios",
-        "bundleOutput": "dist/apps/skolplattformen-app/ios/main.jsbundle"
-      }
-    },
     "start": {
-      "executor": "@nrwl/react-native:start",
-      "options": {
-        "port": 8081
-      }
-    },
-    "serve": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "nx start skolplattformen"
+        "command": "expo start",
+        "cwd": "apps/skolplattformen-app"
       }
     },
-    "run-ios": {
-      "executor": "@nrwl/react-native:run-ios",
-      "options": {}
-    },
-    "bundle-ios": {
-      "executor": "@nrwl/react-native:bundle",
-      "outputs": ["apps/skolplattformen-app/build"],
+    "prebuild": {
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "entryFile": "apps/skolplattformen-app/index.js",
-        "platform": "ios",
-        "bundleOutput": "dist/apps/skolplattformen-app/ios/main.jsbundle"
+        "command": "expo prebuild",
+        "cwd": "apps/skolplattformen-app"
       }
     },
-    "run-android": {
-      "executor": "@nrwl/react-native:run-android",
-      "options": {}
-    },
-    "build-android": {
-      "executor": "@nrwl/react-native:build-android",
-      "outputs": [
-        "apps/skolplattformen-app/android/app/build/outputs/bundle",
-        "apps/skolplattformen-app/android/app/build/outputs/apk"
-      ],
-      "options": {}
-    },
-    "bundle-android": {
-      "executor": "@nrwl/react-native:bundle",
+    "prebuild-clean": {
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "entryFile": "apps/skolplattformen-app/index.js",
-        "platform": "android",
-        "bundleOutput": "dist/apps/skolplattformen-app/android/main.jsbundle"
+        "command": "expo prebuild --clean",
+        "cwd": "apps/skolplattformen-app"
       }
     },
-    "sync-deps": {
-      "executor": "@nrwl/react-native:sync-deps",
-      "options": {}
+    "ios": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "expo run:ios",
+        "cwd": "apps/skolplattformen-app"
+      }
     },
-    "ensure-symlink": {
-      "executor": "@nrwl/react-native:ensure-symlink",
-      "options": {}
+    "android": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "expo run:android",
+        "cwd": "apps/skolplattformen-app"
+      }
+    },
+    "build": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["apps/skolplattformen-app/dist"],
+      "options": {
+        "command": "expo export",
+        "cwd": "apps/skolplattformen-app"
+      }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -84,7 +65,7 @@
   "tags": [],
   "implicitDependencies": [
     "api-skolplattformen",
-    "api-hjarntorget",
+    "api-infomentor",
     "api",
     "hooks",
     "curriculum"

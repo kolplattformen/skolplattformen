@@ -1,6 +1,5 @@
 {
   "extends": [
-    "@react-native-community",
     "plugin:react-native-a11y/all",
     "plugin:@nrwl/nx/react",
     "../../.eslintrc.json"
@@ -9,7 +8,10 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "warn"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

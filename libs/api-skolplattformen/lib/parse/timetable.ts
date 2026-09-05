@@ -13,7 +13,7 @@ const calculateDate = (
     .set({
       weekYear: year,
       weekNumber,
-      weekday,
+      weekday: weekday as any,
       hour: parseInt(hours, 10),
       minute: parseInt(minutes, 10),
       second: parseInt(seconds, 10),

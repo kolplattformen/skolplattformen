@@ -54,6 +54,14 @@ export const Children = () => {
 
   const [updatedAt, setUpdated] = useState('')
 
+  // Tom lista trots 'loaded' = cachad pre-login-data - hämta om en gång
+  // (Infomentor returnerar alltid default-barnet efter inloggning)
+  useEffect(() => {
+    if (status === 'loaded' && childList.length === 0) {
+      reload()
+    }
+  }, [status, childList.length, reload])
+
   const logout = useCallback(() => {
     AppStorage.clearTemporaryItems().then(() => api.logout())
   }, [api])
@@ -86,6 +94,7 @@ export const Children = () => {
   return status === 'loaded' ? (
     <List
       contentContainerStyle={styles.childListContainer}
+      contentInsetAdjustmentBehavior="automatic"
       data={childList}
       style={styles.childList}
       ListEmptyComponent={
@@ -193,6 +202,7 @@ const themedStyles = StyleService.create({
   childListContainer: {
     paddingVertical: Sizing.t4,
     paddingHorizontal: Sizing.t3,
+    paddingBottom: Sizing.t8,
   },
   emptyState: {
     ...LayoutStyle.center,

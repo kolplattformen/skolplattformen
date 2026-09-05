@@ -8,14 +8,15 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "strict": true,
+    "strict": false,
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "types": ["expo", "jest"],
     "paths": {
       "@skolplattformen/api": ["libs/api/lib/index.ts"],
-      "@skolplattformen/api-hjarntorget": ["libs/api-hjarntorget/lib/index.ts"],
+      "@skolplattformen/api-infomentor": ["libs/api-infomentor/lib/index.ts"],
       "@skolplattformen/api-skolplattformen": [
         "libs/api-skolplattformen/lib/index.ts"
       ],

@@ -11,13 +11,12 @@ export const settingsState = proxy({
       | 'thisdevice'
       | 'otherdevice'
       | 'testuser'
-      | 'freja',
+      | 'freja'
+      | 'qrcode',
     usingSystemTheme: true,
     theme: 'light',
     cachedPersonalIdentityNumber: '',
-    currentSchoolPlatform: 'stockholm-skolplattformen' as
-      | 'stockholm-skolplattformen'
-      | 'goteborg-hjarntorget',
+    currentSchoolPlatform: 'infomentor' as 'infomentor',
     childPersonalIdentityNumber: {} as ChildPersonalNumbers,
   },
 })

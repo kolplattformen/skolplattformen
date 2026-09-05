@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "api-hjarntorget": "libs/api-hjarntorget",
+    "api-infomentor": "libs/api-infomentor",
     "api-skolplattformen": "libs/api-skolplattformen",
     "api-vklass": "libs/api-vklass",
     "api": "libs/api",
