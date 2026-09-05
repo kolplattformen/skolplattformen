@@ -92,15 +92,20 @@ interface InfomentorNewsItem {
   imageAltText?: string
 }
 
+// Verifierad struktur (NotificationApp/NotificationApp/appData + GetNotifications):
+// { id, title, subTitle, subjectsCourses, dateSent, appType ('News'|'CalendarV2'|
+// 'Attendance'|...), state ('Read'|'Seen'|...), type, url (relativ, t.ex.
+// '/#/communication/news/2106074'), pupilIM2Id, pupilSourceId }
 interface InfomentorNotification {
-  id: string
-  sender: string
-  dateCreated: string
-  dateModified: string
-  message: string
-  url: string
-  category?: string
-  type: string
+  id: string | number
+  title: string
+  subTitle?: string
+  subjectsCourses?: string
+  dateSent?: string
+  appType?: string
+  state?: string
+  url?: string
+  type?: string
 }
 
 export class ApiInfomentor extends EventEmitter implements Api {
@@ -114,6 +119,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
   private children: InfomentorChild[] = []
   private sessionCookie?: string
   private samlTargetUrl?: string
+  private childName?: string
 
   public isLoggedIn = false
   public isFake = false
@@ -242,7 +248,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // DEV-session: redan etablerad hub-session, hoppa över SAML/BankID
     if (this.sessionCookie) {
       console.log('Using injected dev session cookie')
-      const cookies = await this.cookieManager.getCookieString(this.baseUrl)
+      // Rensa FÖRST - gamla cookies från riktiga login-flöden (t.ex.
+      // ASP.NET_SessionId med domain infomentor.se) matchar annars också
+      // hub.infomentor.se och skickas som krockande dubbletter
+      try {
+        await this.cookieManager.clearAll()
+      } catch {
+        /* fortsätt */
+      }
       try {
         for (const pair of this.sessionCookie.split('; ')) {
           await this.cookieManager.setCookieString(pair, this.baseUrl)
@@ -250,7 +263,6 @@ export class ApiInfomentor extends EventEmitter implements Api {
       } catch (error) {
         console.warn('Dev cookie injection failed:', (error as Error).message)
       }
-      console.log('Dev cookies:', cookies ? 'had old' : 'none before')
       this.personalNumber = personalNumber || 'unknown'
       this.isLoggedIn = true
       this.emit('login')
@@ -650,6 +662,11 @@ export class ApiInfomentor extends EventEmitter implements Api {
     if (this.sessionCookie) {
       console.log('QR: using injected dev session cookie')
       try {
+        await this.cookieManager.clearAll()
+      } catch {
+        /* fortsätt */
+      }
+      try {
         for (const pair of this.sessionCookie.split('; ')) {
           await this.cookieManager.setCookieString(pair, this.baseUrl)
         }
@@ -879,18 +896,21 @@ export class ApiInfomentor extends EventEmitter implements Api {
     console.log('getChildren called')
     try {
       console.log('Fetching appData...')
-      const data = await this.post<any>('/timetable/timetable/appData')
-      console.log('appData response status: OK')
+      await this.post<any>('/timetable/timetable/appData')
+
+      // Barnets riktiga namn parsas ur hub-startsidans HTML:
+      // IMHome = { init: { selectedPupilName: 'Landgren, Sixten', ... } }
+      const name = await this.getChildName()
 
       // Om vi kan hämta schema är vi inloggade - skapa en placeholder child
       const defaultChild: EtjanstChild = {
         id: 'default',
         sdsId: 'default',
-        name: 'Mitt barn',
+        name: name || 'Mitt barn',
         schoolId: 'infomentor',
         status: 'GR',
       }
-      console.log('Returning default child:', defaultChild)
+      console.log('Returning child:', defaultChild)
 
       return [defaultChild]
     } catch (error) {
@@ -906,6 +926,34 @@ export class ApiInfomentor extends EventEmitter implements Api {
       console.log('Returning default child (after error):', defaultChild)
       return [defaultChild]
     }
+  }
+
+  /**
+   * Hämtar hub-startsidan (GET) och parsar IMHome.init ur HTML:en -
+   * selectedPupilName är barnets namn ('Efternamn, Förnamn').
+   * Cachas per instans; null om parsning misslyckas.
+   */
+  async getChildName(): Promise<string | null> {
+    if (this.childName) return this.childName
+    try {
+      const response = await (this.fetch as any)('hub-root', this.baseUrl, {
+        method: 'GET',
+        headers: this.headers || {},
+      })
+      const html = await response.text()
+      const match = html.match(/selectedPupilName:\s*'([^']*)'/)
+      if (match && match[1].trim()) {
+        const pupilName = match[1].trim()
+        // 'Efternamn, Förnamn' -> 'Förnamn Efternamn'
+        const parts = pupilName.split(',').map((p) => p.trim()).filter(Boolean)
+        this.childName =
+          parts.length > 1 ? `${parts.slice(1).join(' ')} ${parts[0]}` : pupilName
+        console.log('[child-name] parsed:', this.childName)
+      }
+    } catch (error) {
+      console.warn('getChildName failed:', (error as Error).message)
+    }
+    return this.childName || null
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
@@ -990,14 +1038,27 @@ export class ApiInfomentor extends EventEmitter implements Api {
 
       const notifications: InfomentorNotification[] = data.notifications || []
 
+      // Mappa till appens Notification: sender = human label för appType,
+      // message = title + subTitle, dateCreated = dateSent, category = utelämnas
+      const appTypeLabel: Record<string, string> = {
+        News: 'Nyheter',
+        CalendarV2: 'Kalender',
+        Attendance: 'Frånvaro',
+        IM1Attendance: 'Frånvaro',
+        Messages: 'Meddelanden',
+      }
       return notifications.map((notif) => ({
-        id: notif.id,
-        sender: notif.sender,
-        dateCreated: notif.dateCreated,
-        dateModified: notif.dateModified,
-        message: notif.message,
-        url: notif.url,
-        category: notif.category || null,
+        id: String(notif.id),
+        sender: appTypeLabel[notif.appType || ''] || notif.appType || '',
+        dateCreated: notif.dateSent,
+        dateModified: undefined,
+        message: notif.subTitle
+          ? `${notif.title} — ${notif.subTitle}`
+          : notif.title,
+        url: notif.url
+          ? new URL(notif.url, 'https://hub.infomentor.se').toString()
+          : undefined,
+        category: undefined,
         type: notif.type,
       }))
     } catch (error) {
@@ -1054,7 +1115,45 @@ export class ApiInfomentor extends EventEmitter implements Api {
     year: number,
     lang: any
   ): Promise<any[]> {
-    return []
+    try {
+      // ISO-vecka -> mandag..sondag
+      const from = DateTime.fromObject({
+        weekYear: year,
+        weekNumber: week,
+        weekday: 1,
+      })
+      const to = from.plus({ days: 6 })
+      const data = await this.post<any>('/timetable/timetable/appData', {
+        startDate: from.toISODate(),
+        endDate: to.toISODate(),
+      })
+
+      // Verifierad struktur: { items: [{ start, end, title, startTime,
+      // endTime, notes: { roomInfo, tutors, timetableNotes }, allDay, details }] }
+      const items: any[] = data.items || []
+
+      return items.map((item, index) => ({
+        id: String(item.id ?? index),
+        // week.component visar matsedeln for kod 'LUNCH'
+        code: (item.title || '').toLowerCase().includes('lunch')
+          ? 'LUNCH'
+          : (item.code ?? ''),
+        name: item.title,
+        teacher: item.notes?.tutors?.trim() || '',
+        location: item.notes?.roomInfo || item.details || '',
+        timeStart:
+          item.startTime || DateTime.fromISO(item.start).toFormat('HH:mm'),
+        timeEnd: item.endTime || DateTime.fromISO(item.end).toFormat('HH:mm'),
+        // Luxon: 1 = mandag ... 7 = sondag (samma konvention som week.component)
+        dayOfWeek: DateTime.fromISO(item.start).weekday,
+        blockName: '',
+        dateStart: item.start,
+        dateEnd: item.end,
+      }))
+    } catch (error) {
+      console.error('Error fetching timetable:', error)
+      return []
+    }
   }
 
   private async fakeMode(): Promise<LoginStatusChecker> {

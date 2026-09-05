@@ -34,39 +34,44 @@ describe('ApiInfomentor', () => {
   })
 
   it('should get children', async () => {
-    mockFetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        children: [
-          {
-            id: '123',
-            firstName: 'Test',
-            lastName: 'Testsson',
-          },
-        ],
-      }),
-    })
+    // 1) appData-anrop (bevisar inloggning)  2) hub-root HTML med IMHome.init
+    mockFetch
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        text: async () => '{"maxDate":"30-07-27","minDate":"01-08-26"}',
+        json: async () => ({ maxDate: '30-07-27', minDate: '01-08-26' }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        text: async () =>
+          "<script>IMHome = { init: { firstName: 'Landgren, Christian', selectedPupilName: 'Landgren, Sixten', userRole: 'parent' } }</script>",
+        json: async () => ({}),
+      })
 
     api.isLoggedIn = true
     const children = await api.getChildren()
     expect(children).toHaveLength(1)
-    expect(children[0].name).toBe('Test Testsson')
+    expect(children[0].name).toBe('Sixten Landgren')
   })
 
   it('should get calendar', async () => {
+    // Verifierad struktur: ren array
+    const data = [
+      {
+        id: '1',
+        title: 'Test Event',
+        text: '',
+        isAllDayEvent: false,
+        startDateFull: '2024-01-01T10:00:00',
+        endDateFull: '2024-01-01T11:00:00',
+      },
+    ]
     mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({
-        entries: [
-          {
-            id: '1',
-            title: 'Test Event',
-            startDate: '2024-01-01T10:00:00',
-            endDate: '2024-01-01T11:00:00',
-            allDay: false,
-          },
-        ],
-      }),
+      text: async () => JSON.stringify(data),
+      json: async () => data,
     })
 
     api.isLoggedIn = true
@@ -76,17 +81,22 @@ describe('ApiInfomentor', () => {
   })
 
   it('should get news', async () => {
+    // Verifierad struktur: { items: [...] }
+    const data = {
+      items: [
+        {
+          id: '1',
+          title: 'Test News',
+          content: 'Innehall',
+          publishedDate: '2024-01-01',
+          publishedBy: 'Skolan',
+        },
+      ],
+    }
     mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({
-        newsItems: [
-          {
-            id: '1',
-            title: 'Test News',
-            publishedDate: '2024-01-01',
-          },
-        ],
-      }),
+      text: async () => JSON.stringify(data),
+      json: async () => data,
     })
 
     api.isLoggedIn = true
@@ -96,27 +106,39 @@ describe('ApiInfomentor', () => {
   })
 
   it('should get notifications', async () => {
+    // Verifierad struktur: { notifications: [{ id, title, subTitle, dateSent,
+    // appType, state, url, type }] }
+    const data = {
+      notifications: [
+        {
+          id: 69301346,
+          title: 'Frånvaro registrerad',
+          subTitle: 'Naturorienterande ämnen',
+          subjectsCourses: 'Naturorienterande ämnen',
+          dateSent: '2026-08-31T07:34:05',
+          appType: 'Attendance',
+          state: 'Seen',
+          url: '/#/attendance/tab/pastAttendance/show/243829437',
+          type: 'AbsenceRecorded',
+        },
+      ],
+    }
     mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({
-        notifications: [
-          {
-            id: '1',
-            sender: 'Test Sender',
-            message: 'Test Message',
-            dateCreated: '2024-01-01',
-            dateModified: '2024-01-01',
-            url: 'https://test.com',
-            type: 'info',
-          },
-        ],
-      }),
+      text: async () => JSON.stringify(data),
+      json: async () => data,
     })
 
     api.isLoggedIn = true
     const notifications = await api.getNotifications({ id: '123' } as any)
     expect(notifications).toHaveLength(1)
-    expect(notifications[0].message).toBe('Test Message')
+    expect(notifications[0].message).toBe(
+      'Frånvaro registrerad — Naturorienterande ämnen'
+    )
+    expect(notifications[0].sender).toBe('Frånvaro')
+    expect(notifications[0].url).toBe(
+      'https://hub.infomentor.se/#/attendance/tab/pastAttendance/show/243829437'
+    )
   })
 
   it('should logout', async () => {
