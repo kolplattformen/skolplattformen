@@ -94,6 +94,7 @@ export const Children = () => {
   return status === 'loaded' ? (
     <List
       contentContainerStyle={styles.childListContainer}
+      contentInsetAdjustmentBehavior="automatic"
       data={childList}
       style={styles.childList}
       ListEmptyComponent={

@@ -11,7 +11,8 @@ export const settingsState = proxy({
       | 'thisdevice'
       | 'otherdevice'
       | 'testuser'
-      | 'freja',
+      | 'freja'
+      | 'qrcode',
     usingSystemTheme: true,
     theme: 'light',
     cachedPersonalIdentityNumber: '',

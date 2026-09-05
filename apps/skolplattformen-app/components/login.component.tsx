@@ -39,6 +39,10 @@ import {
 } from './icon.component'
 import AppStorage from '../services/appStorage'
 
+// module-level: auto-login ska bara köras EN gång per app-session - vid
+// utloggning remountar Login-skermen och en ref hade nollställts
+let hasAutoLoggedInThisSession = false
+
 const BankId = () => (
   <Image
     style={themedStyles.icon}
@@ -157,8 +161,9 @@ export const Login = () => {
     }
   }
 
-  const startLogin = async (text: string) => {
-    if (loginMethodId === 'freja') {
+  const startLogin = async (text: string, methodOverride?: string) => {
+    const methodId = (methodOverride ?? loginMethodId) as typeof loginMethodId
+    if (methodId === 'freja') {
       setLoginStatusText(t('auth.freja.Waiting'))
       showModal(true)
       const status = await api.loginFreja()
@@ -176,7 +181,7 @@ export const Login = () => {
         console.log('Freja eID ok')
         setLoginStatusText(t('auth.loginSuccessful'))
       })
-    } else if (loginMethodId === 'qrcode') {
+    } else if (methodId === 'qrcode') {
       setLoginStatusText('Visa QR-koden för BankID…')
       setQrCode(null)
       showModal(true)
@@ -203,23 +208,20 @@ export const Login = () => {
         setLoginStatusText('Inloggningen misslyckades - försök igen')
         setQrCode(null)
       })
-    } else if (
-      loginMethodId === 'thisdevice' ||
-      loginMethodId === 'otherdevice'
-    ) {
+    } else if (methodId === 'thisdevice' || methodId === 'otherdevice') {
       setLoginStatusText(t('auth.bankid.Waiting'))
       showModal(true)
 
       let ssn
 
-      if (loginMethodId === 'otherdevice') {
+      if (methodId === 'otherdevice') {
         ssn = Personnummer.parse(text).format(true)
         setPersonalIdNumber(ssn)
       }
 
       const status = await api.login(ssn)
       setCancelLoginRequest(() => () => status.cancel())
-      if (status.token !== 'fake' && loginMethodId === 'thisdevice') {
+      if (status.token !== 'fake' && methodId === 'thisdevice') {
         openBankId(status.token)
       }
       status.on('PENDING', () => console.log('BankID app not yet opened'))
@@ -251,6 +253,19 @@ export const Login = () => {
   useEffect(() => {
     setError(null)
   }, [loginMethodId])
+
+  // DEV: auto-login när EXPO_PUBLIC_INFOMENTOR_DEV_SESSION är satt
+  // (ingen knapptryckning behövs - underlättar test i simulatorn)
+  useEffect(() => {
+    if (hasAutoLoggedInThisSession) return
+    if (!process.env.EXPO_PUBLIC_INFOMENTOR_DEV_SESSION) return
+    if (currentSchoolPlatform !== 'infomentor') return
+    hasAutoLoggedInThisSession = true
+    console.log('[dev] auto-login: dev session present, firing qrcode flow')
+    setLoginMethodId('qrcode')
+    startLogin('', 'qrcode')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

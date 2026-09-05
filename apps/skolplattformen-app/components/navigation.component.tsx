@@ -1,4 +1,8 @@
-import { NavigationContainer } from '@react-navigation/native'
+import {
+  NavigationContainer,
+  NavigationProp,
+  useNavigation,
+} from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {
   Child as ChildType,
@@ -7,7 +11,7 @@ import {
 import { useApi } from '@skolplattformen/hooks'
 import { useTheme } from '@ui-kitten/components'
 import { Library } from 'libraries.json'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 const schema = 'oppnaskolplattformen'
 import {
@@ -72,6 +76,24 @@ const linking = {
   },
 }
 
+// Vid utloggning (isLoggedIn true -> false): resetta till Login EFTER
+// commit. 'Login' är villkorligt mountad och finns bara i navigatorn när
+// isLoggedIn är false - en reset i samma tick som api.logout() racar mot
+// omrenderingen och kastar "not handled by any navigator". OBS: komponenten
+// måste renderas INUTI NavigationContainer (useNavigation kräver kontext).
+const LogoutReset = () => {
+  const { isLoggedIn } = useApi()
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+  const prevIsLoggedIn = useRef(isLoggedIn)
+  useEffect(() => {
+    if (prevIsLoggedIn.current && !isLoggedIn) {
+      navigation.reset({ routes: [{ name: 'Login' }] })
+    }
+    prevIsLoggedIn.current = isLoggedIn
+  }, [isLoggedIn, navigation])
+  return null
+}
+
 export const AppNavigator = () => {
   const { isLoggedIn, api } = useApi()
 
@@ -110,6 +132,7 @@ export const AppNavigator = () => {
       }
     >
       <StatusBar />
+      <LogoutReset />
       <Navigator
         screenOptions={() => ({
           headerLargeTitle: false,
