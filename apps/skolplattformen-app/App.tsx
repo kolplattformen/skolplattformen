@@ -65,7 +65,9 @@ export default () => {
   const systemTheme = useColorScheme()
   const colorScheme = usingSystemTheme ? systemTheme : theme
 
-  const platform = schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform)
+  const platform =
+    schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform) ||
+    schoolPlatforms[0]
 
   if (!platform)
     return (

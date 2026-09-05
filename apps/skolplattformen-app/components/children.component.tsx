@@ -201,6 +201,7 @@ const themedStyles = StyleService.create({
   childListContainer: {
     paddingVertical: Sizing.t4,
     paddingHorizontal: Sizing.t3,
+    paddingBottom: Sizing.t8,
   },
   emptyState: {
     ...LayoutStyle.center,
