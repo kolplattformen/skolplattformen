@@ -486,7 +486,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         redirect: 'follow',
       })) as any
       const targetBody = await targetResponse.text()
-      const targetUrl: string = targetResponse.url || this.samlTargetUrl
+      let targetUrl: string = targetResponse.url || this.samlTargetUrl
       console.log(
         `SAML target → ${targetResponse.status} @ ${targetUrl.substring(0, 100)}`
       )
@@ -499,6 +499,31 @@ export class ApiInfomentor extends EventEmitter implements Api {
       samlResponseValue = doc
         .querySelector('input[name="SAMLResponse"]')
         ?.getAttribute('value')
+
+      // Servern kan fortfarande tro att vi är oauthade (stale cookie-
+      // ordning i native store) och svara med medborgare.jsp (loginval).
+      // Följda formuläret (tillbaka till auth-endpointen) ett par varv:
+      // ADC:n triggar då SAML AUTO-POST med SAMLResponse för denna session.
+      for (let round = 0; round < 3 && !samlResponseValue && form; round++) {
+        const retryAction = new URL(
+          form.getAttribute('action') || targetUrl,
+          targetUrl
+        ).toString()
+        console.log(`No SAMLResponse yet (runda ${round}) - följer formulär:`, retryAction.substring(0, 90))
+        const retryResponse = (await this.cookieFetch(retryAction, {
+          redirect: 'follow',
+        })) as any
+        const retryBody = await retryResponse.text()
+        console.log(
+          `Retry → ${retryResponse.status} @ ${(retryResponse.url || retryAction).substring(0, 100)}`
+        )
+        doc = html.parse(retryBody)
+        form = doc.querySelector('form')
+        samlResponseValue = doc
+          .querySelector('input[name="SAMLResponse"]')
+          ?.getAttribute('value')
+        targetUrl = retryResponse.url || retryAction
+      }
     }
 
     if (!form || !samlResponseValue) {
@@ -600,6 +625,27 @@ export class ApiInfomentor extends EventEmitter implements Api {
    */
   async startQrLogin(): Promise<LoginStatusChecker> {
     this.isFake = false
+
+    // Dev-session: samma kortslutning som i login() - annars stryker
+    // clearAll() nedan den injicerade sessionen och kedjan startas i onödan
+    if (this.sessionCookie) {
+      console.log('QR: using injected dev session cookie')
+      try {
+        for (const pair of this.sessionCookie.split('; ')) {
+          await this.cookieManager.setCookieString(pair, this.baseUrl)
+        }
+      } catch (error) {
+        console.warn('QR dev cookie injection failed:', (error as Error).message)
+      }
+      this.personalNumber = 'unknown'
+      this.isLoggedIn = true
+      this.emit('login')
+      const instant = new EventEmitter() as any
+      instant.token = 'fake'
+      instant.cancel = () => undefined
+      return instant
+    }
+
     try {
       await this.cookieManager.clearAll()
     } catch {
@@ -695,9 +741,19 @@ export class ApiInfomentor extends EventEmitter implements Api {
             try {
               await this.completeSamlFlow(loginPageUrl)
             } catch (error) {
-              console.error('QR SAML completion error:', error)
-              checker.emit('ERROR')
-              return
+              // Sessionen hos ADC:n är ändå giltig efter signeringen - kör
+              // en färsk SSO-kedja: den pre-auth:ar direkt (SAMLResponse i
+              // svaret) och hamnar i hubben via followInfomentorLoginChain.
+              console.log(
+                'QR SAML completion misslyckades - försöker färsk pre-auth-kedja:',
+                (error as Error).message
+              )
+              const retryUrl = await this.getBankLoginPageUrl(ssoUrl)
+              if (retryUrl !== null) {
+                console.error('QR pre-auth-kedja bounce:ade - ger upp')
+                checker.emit('ERROR')
+                return
+              }
             }
             this.isLoggedIn = true
             checker.emit('OK')

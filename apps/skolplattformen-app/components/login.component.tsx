@@ -69,7 +69,6 @@ export const Login = () => {
     'cachedPersonalIdentityNumber'
   )
   const [loginMethodId, setLoginMethodId] = useSettingsStorage('loginMethodId')
-  console.log('DEBUG loginMethodId=', JSON.stringify(loginMethodId))
   const [error, setError] = useState<string | null>(null)
 
   const loginWithFrejaEnabled = useFeature('LOGIN_FREJA_EID')
@@ -252,15 +251,6 @@ export const Login = () => {
   useEffect(() => {
     setError(null)
   }, [loginMethodId])
-
-  useEffect(() => {
-    console.log('DEBUG Login MOUNTED')
-    return () => console.log('DEBUG Login UNMOUNTED (fast refresh/navigation!)')
-  }, [])
-
-  useEffect(() => {
-    console.log('DEBUG modal visible =', visible, ' qrCode?', !!qrCode)
-  }, [visible, qrCode])
 
   return (
     <>
