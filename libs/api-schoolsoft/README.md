@@ -11,7 +11,8 @@ och testas mot rå-fixtures i `lib/__mocks__/`.
 |---|---|---|---|
 | Startsida (identitet, nyhetsbox, meddelanderäknare) | GET | `{baseUrl}/jsp/student/right_student_startpage.jsp` | HTML (iso-8859-1) |
 | Kalender-inställningar (`userId`!) | GET | `{baseUrl}/rest-api/parent/calendar/settings` | JSON |
-| Lektions-/kalender-agenda | GET | `{baseUrl}/rest-api/parent/calendar/event/agenda?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` | JSON `{lessons: []}` |
+| Lektions-agenda (lektioner + lunch) | GET | `{baseUrl}/rest-api/parent/calendar/lessons/agenda?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` | JSON-bar array `[SsLessonEvent]` |
+| Kalender-händelser (manuella; tom hos parent i inspelningen) | GET | `{baseUrl}/rest-api/parent/calendar/event/agenda?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` | JSON-bar array (samma form; `[]`) |
 | Nyhetslista | GET | `{baseUrl}/jsp/student/right_student_news.jsp?type=1` | HTML |
 | Nyhetsdetalj | GET | `{baseUrl}/jsp/student/right_student_news.jsp?requestid={id}&type=1&action=view` | HTML |
 | Inkorg + personallista | GET | `{baseUrl}/jsp/student/right_student_message.jsp?folder=inbox` | HTML |

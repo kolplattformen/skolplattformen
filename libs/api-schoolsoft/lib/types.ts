@@ -7,7 +7,8 @@
 
 /**
  * En lektion/kalenderhändelse från
- * GET /rest-api/parent/calendar/event/agenda?start_date=..&end_date=..
+ * GET /rest-api/parent/calendar/lessons/agenda?start_date=..&end_date=..
+ * (samma form returneras av .../event/agenda). Svaret är en BAR array.
  */
 export interface SsLessonEvent {
   eventId: number
@@ -27,10 +28,6 @@ export interface SsLessonEvent {
   status: number
   category: string
   roomBooking: boolean
-}
-
-export interface SsAgendaResponse {
-  lessons: SsLessonEvent[]
 }
 
 /** GET /rest-api/parent/calendar/settings */

@@ -27,7 +27,7 @@ import { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
 import { DummyStatusChecker } from './loginStatusChecker'
 import {
-  isSsAgendaResponse,
+  isSsLessonEventList,
   parseAbsenceWeek,
   parseChildIdentity,
   parseMessages,
@@ -79,8 +79,10 @@ type CookieResponse = Omit<Response, 'headers'> & {
 /**
  * Adapter mot Schoolsoft (parent-vyn).
  *
- * Datakällor:
- * - REST:  /rest-api/parent/calendar/settings, /rest-api/parent/calendar/event/agenda
+  * Datakällor:
+  * - REST:  /rest-api/parent/calendar/settings,
+  *          /rest-api/parent/calendar/lessons/agenda (lektioner),
+  *          /rest-api/parent/calendar/event/agenda (manuella händelser)
  * - JSP:   right_student_startpage.jsp (identitet), right_student_news.jsp
  *          (nyheter), right_student_message.jsp (meddelanden + personallista),
  *          right_student_absence.jsp (frånvaro - ännu ej exponerad i Api)
@@ -349,34 +351,44 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     ]
   }
 
+  /**
+   * Kalender-REST:en har två agenda-endpoints: "lessons" (lektioner + lunch)
+   * och "event" (manuella händelser - tom i parent-vyn vi spelat in).
+   * Båda svarar med en BAR array av SsLessonEvent.
+   */
   private async fetchAgenda(
+    kind: 'lessons' | 'event',
     from: DateTime,
     to: DateTime
   ): Promise<SsLessonEvent[]> {
-    const url = `${this.baseUrl}/rest-api/parent/calendar/event/agenda?start_date=${from.toISODate()}&end_date=${to.toISODate()}`
+    const url = `${this.baseUrl}/rest-api/parent/calendar/${kind}/agenda?start_date=${from.toISODate()}&end_date=${to.toISODate()}`
     const json = await this.fetchJson<unknown>(url)
-    if (!isSsAgendaResponse(json)) {
+    if (!isSsLessonEventList(json)) {
       throw new Error('Oväntat svar från Schoolsoft agenda-endpoint')
     }
-    return json.lessons
+    return json
   }
 
   async getCalendar(child: EtjanstChild): Promise<CalendarItem[]> {
     try {
       const now = DateTime.now()
-      const lessons = await this.fetchAgenda(
-        now.startOf('week'),
-        now.endOf('week')
-      )
-      return lessons.map((lesson) => ({
-        id: lesson.eventId,
-        title: lesson.name,
-        description: lesson.description,
-        location: lesson.room || undefined,
-        startDate: lesson.startDate,
-        endDate: lesson.endDate,
-        allDay: lesson.allDay,
-      }))
+      const from = now.startOf('week')
+      const to = now.endOf('week')
+      const [lessons, events] = await Promise.all([
+        this.fetchAgenda('lessons', from, to),
+        this.fetchAgenda('event', from, to),
+      ])
+      return [...lessons, ...events]
+        .sort((a, b) => a.startDate.localeCompare(b.startDate))
+        .map((lesson) => ({
+          id: lesson.eventId,
+          title: lesson.name,
+          description: lesson.description,
+          location: lesson.room || undefined,
+          startDate: lesson.startDate,
+          endDate: lesson.endDate,
+          allDay: lesson.allDay,
+        }))
     } catch (error) {
       console.error('Error fetching calendar:', error)
       return []
@@ -389,7 +401,7 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     to: DateTime
   ): Promise<ScheduleItem[]> {
     try {
-      const lessons = await this.fetchAgenda(from, to)
+      const lessons = await this.fetchAgenda('lessons', from, to)
       return lessons.map((lesson) => ({
         title: `${lesson.name} ${lesson.room}`.trim(),
         description:
@@ -420,7 +432,7 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
         weekday: 1,
       })
       const to = from.plus({ days: 6 })
-      const lessons = await this.fetchAgenda(from, to)
+      const lessons = await this.fetchAgenda('lessons', from, to)
 
       return lessons.map((lesson) => {
         const start = DateTime.fromISO(lesson.startDate)

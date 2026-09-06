@@ -27,8 +27,11 @@ const fakeFetch: Fetch = async (url: string) => {
   if (url.includes('/rest-api/parent/calendar/settings')) {
     return fakeResponse(fixture('json', 'calendar-settings'))
   }
-  if (url.includes('/rest-api/parent/calendar/event/agenda')) {
+  if (url.includes('/rest-api/parent/calendar/lessons/agenda')) {
     return fakeResponse(fixture('json', 'lessons-agenda-w36'))
+  }
+  if (url.includes('/rest-api/parent/calendar/event/agenda')) {
+    return fakeResponse(fixture('json', 'event-agenda-w36'))
   }
   if (url.includes('right_student_news.jsp')) {
     // samma fixture för lista och detalj (detaljen för 54267 ligger inline)
@@ -100,9 +103,9 @@ describe('ApiSchoolsoft', () => {
     const { api } = createApi()
     const timetable = await api.getTimetable({}, 36, 2026, 'sv')
 
-    // Fixturen (inspelad v36) täcker mån-tor: 10 lektioner, 2 luncher
-    expect(timetable.length).toEqual(10)
-    expect(timetable.filter(isLunch).length).toEqual(2)
+    // Fixturen (inspelad v36, mån-fre): 25 händelser varav 5 luncher
+    expect(timetable.length).toEqual(25)
+    expect(timetable.filter(isLunch).length).toEqual(5)
 
     // Måndag: dayOfWeek 1 enligt Skola24/luxon-konventionen
     const soLesson = timetable.find((entry) => entry.code === 'SOISOO0')
@@ -121,7 +124,8 @@ describe('ApiSchoolsoft', () => {
   it('getCalendar mappar samma agenda till CalendarItem[]', async () => {
     const { api } = createApi()
     const calendar = await api.getCalendar({} as EtjanstChild)
-    expect(calendar.length).toEqual(10)
+    // lessons (25) + event (0 i inspelningen) sorterade på startDate
+    expect(calendar.length).toEqual(25)
     expect(calendar[0].id).toEqual(136127)
     expect(calendar[1].location).toEqual('Stanford')
   })
@@ -168,7 +172,7 @@ describe('ApiSchoolsoft', () => {
     const from = DateTime.fromISO('2026-08-31')
     const to = DateTime.fromISO('2026-09-06')
     const schedule = await api.getSchedule({} as EtjanstChild, from, to)
-    expect(schedule.length).toEqual(10)
+    expect(schedule.length).toEqual(25)
     expect(schedule[1].title).toEqual('SOISOO0 Stanford')
     expect(schedule[1].description).toBe(
       'SOISOO0_SA24a · Rebecka Lundvall'

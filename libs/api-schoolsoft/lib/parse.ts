@@ -4,8 +4,8 @@ import { Teacher } from '@skolplattformen/api'
 import {
   SsAbsenceDayState,
   SsAbsenceWeek,
-  SsAgendaResponse,
   SsChildIdentity,
+  SsLessonEvent,
   SsMessage,
   SsNewsDetail,
   SsNewsListItem,
@@ -344,16 +344,17 @@ export const parseAbsenceWeek = (html: string): SsAbsenceWeek => {
   }
 }
 
-/** Typvakt för agenda-svaret från kalender-REST:en. */
-export const isSsAgendaResponse = (
+/**
+ * Typvakt för kalender-REST:ens agenda-svar
+ * (både lessons/agenda och event/agenda är BARa listor av händelser).
+ */
+export const isSsLessonEventList = (
   json: unknown
-): json is SsAgendaResponse =>
-  !!json &&
-  Array.isArray((json as SsAgendaResponse).lessons) &&
-  ((json as SsAgendaResponse).lessons as unknown[]).every(
-    (lesson) =>
-      typeof (lesson as SsAgendaResponse['lessons'][0]).eventId === 'number' &&
-      typeof (lesson as SsAgendaResponse['lessons'][0]).startDate ===
-        'string' &&
-      typeof (lesson as SsAgendaResponse['lessons'][0]).endDate === 'string'
+): json is SsLessonEvent[] =>
+  Array.isArray(json) &&
+  json.every(
+    (event) =>
+      typeof (event as SsLessonEvent).eventId === 'number' &&
+      typeof (event as SsLessonEvent).startDate === 'string' &&
+      typeof (event as SsLessonEvent).endDate === 'string'
   )

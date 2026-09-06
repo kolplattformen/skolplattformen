@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import {
-  isSsAgendaResponse,
+  isSsLessonEventList,
   parseAbsenceWeek,
   parseChildIdentity,
   parseMessages,
@@ -135,16 +135,18 @@ describe('parseAbsenceWeek', () => {
   })
 })
 
-describe('isSsAgendaResponse', () => {
-  it('validerar lessons-fixturen', () => {
+describe('isSsLessonEventList', () => {
+  it('validerar lessons-fixturen (BAR array, som API:et svarar)', () => {
     const json = JSON.parse(
       fs.readFileSync(
         path.join(__dirname, '__mocks__', 'json', 'lessons-agenda-w36.json'),
         'utf-8'
       )
     )
-    expect(isSsAgendaResponse(json)).toBe(true)
-    expect(isSsAgendaResponse({})).toBe(false)
-    expect(isSsAgendaResponse(null)).toBe(false)
+    expect(isSsLessonEventList(json)).toBe(true)
+    // tom array är giltig (event/agenda returnerade [] i inspelningen)
+    expect(isSsLessonEventList([])).toBe(true)
+    expect(isSsLessonEventList({ lessons: json })).toBe(false)
+    expect(isSsLessonEventList(null)).toBe(false)
   })
 })
