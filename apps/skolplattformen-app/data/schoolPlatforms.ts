@@ -2,6 +2,9 @@ import CookieManager from '@react-native-cookies/cookies'
 import initHjarntorget, {
   features as featuresHjarntorget,
 } from '@skolplattformen/api-hjarntorget'
+import initSchoolsoft, {
+  features as featuresSchoolsoft,
+} from '@skolplattformen/api-schoolsoft'
 import initSkolplattformen, {
   features as featuresSkolPlattformen,
 } from '@skolplattformen/api-skolplattformen'
@@ -18,5 +21,11 @@ export const schoolPlatforms = [
     displayName: 'Göteborgs Stad (Hjärntorget)',
     api: initHjarntorget(fetch as any, CookieManager),
     features: featuresHjarntorget,
+  },
+  {
+    id: 'schoolsoft-procivitas',
+    displayName: 'Schoolsoft – ProCivitas (beta)',
+    api: initSchoolsoft(fetch as any, CookieManager),
+    features: featuresSchoolsoft,
   },
 ]
