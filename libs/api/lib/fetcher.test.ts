@@ -1,10 +1,5 @@
 import wrap, { CallInfo, Fetcher, Recorder } from './fetcher'
 import { Fetch, Headers, Response } from './types'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Blob = require('node-blob')
-Blob.prototype.arrayBuffer = async function () {
-  return this.buffer.buffer
-}
 
 describe('fetcher', () => {
   let fetch: jest.Mocked<Fetch>
