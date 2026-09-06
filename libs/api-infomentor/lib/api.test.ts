@@ -87,7 +87,7 @@ describe('ApiInfomentor', () => {
         {
           id: '1',
           title: 'Test News',
-          content: 'Innehall',
+          content: '<div><p>Rubrik</p><b>Text &amp; lite</b></div>',
           publishedDate: '2024-01-01',
           publishedBy: 'Skolan',
         },
@@ -103,6 +103,7 @@ describe('ApiInfomentor', () => {
     const news = await api.getNews({ id: '123' } as any)
     expect(news).toHaveLength(1)
     expect(news[0].header).toBe('Test News')
+    expect(news[0].body).toContain('**Text & lite**')
   })
 
   it('should get notifications', async () => {

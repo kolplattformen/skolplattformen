@@ -19,6 +19,7 @@ import {
   RequestInit,
   LoginStatusChecker,
   AuthTicket,
+  toMarkdown,
 } from '@skolplattformen/api'
 import { DateTime } from 'luxon'
 import * as html from 'node-html-parser'
@@ -1252,7 +1253,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
         author: item.publishedBy,
         header: item.title,
         intro: '',
-        body: item.content,
+        // content är rå HTML - konvertera till markdown annars kraschar
+        // appens Markdown-renderare på NewsItem-vyn (vit sida)
+        body: toMarkdown(item.content),
         published: item.publishedDate,
         modified: undefined,
         imageUrl: imageUrl(item.newsImageUrl),
