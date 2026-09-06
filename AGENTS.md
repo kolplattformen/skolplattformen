@@ -25,13 +25,26 @@ cd libs/api-infomentor && npx tsx scripts/e2e-qr-server.ts  # minta dev-session
 
 Alla anrop går mot `https://hub.infomentor.se` med cookie-session:
 
+- **End-to-end inloggning verifierad på fysisk iPhone 2026-09-05** (BankID på
+  denna enhet -> SAML -> hub). KRITISK detalj: skicka EJ explicit Cookie-header
+  i login-redirect-kedjorna - NSURLSession fryser den över alla hopp och
+  kedjan landar på /Error/UserNotAuthenticated. Alla cookieFetch-anrop i
+  kedjorna sätter `skipAutoCookie: true` (nativa NSHTTPCookieStorage, som
+  Safari). Enkel-hopp-anrop (post()) använder explicit header som vanligt.
+- **Kallstart-session ('alltid igång'):** initInfomentor anropar
+  `resumeSession()` - nativa cookien patriotism; HTML innehåller
+  `selectedPupilName` = inloggad -> emit('login'). Död session -> login-skärm
+  (inget spinn). Mid-use död -> post() detekterar 200+tom -> silentSessionRefresh
+  (12 s fönster för BankID-push-godkännande) -> annars logout-event.
+
 - **Endpoints** (alla POST + JSON + cookies): `/timetable/timetable/appData` (schema), `/Communication/News/GetNewsList`, `/NotificationApp/NotificationApp/GetNotifications`, `/calendarv2/calendarv2/getentries` (`{startDate,endDate}` → ren array). Kalender- och notis-`appData` innehåller typer/färger/URL:er.
 - **Barnets namn** finns i hub-startsidans HTML: `IMHome = { init: { selectedPupilName: 'Efternamn, Förnamn', ... } }` — parsas i `getChildName()`.
 - **IMHome-cookien lever ~40 min.** Utgången session ⇒ servern svarar `200` med **tom body** (inte felkod!). Fel/krockande cookies ⇒ `302` till login (`/Authentication/...`).
 - **F5-affinitet:** `BIGipServer~INFOMENTOR~INFOMENTOR-SE-HTTPS-POOL` måste peka på den backend-nod som sessionen skapades på. Fel nod ⇒ login-redirect trots giltigt sessions-id.
 - **Dubblett-cookienamn** kollapsar i native cookie-store med "last wins" — dubbletter i en dev-session-sträng kan peka fel nod. `clearAll()` körs därför FÖRE dev-session-injektion i både `login()` och `startQrLogin()`.
 - RN-fetch slår ihop flera `Set-Cookie`-headrar till EN sträng — `storeCookies` splittar med `split(/,(?=[^;]+?=)/g)` (annars försvinner `SMSESSION` efter BankID-OK).
-- SSO-kedjan: `sso.infomentor.se/login.ashx?idp=stockholm_par` → stockholm.se → BankID (QR beställs via NECS; ordern kan ibland födas död → omstart av kedjan max 3 ggr, implementerat i `startQrLogin`).
+- SSO-kedjan: `sso.infomentor.se/login.ashx?idp=stockholm_par` → stockholm.se → BankID. QR-ordrar (_initialize=qr_) ger **ingen BankID-push** — de approval:as bara via scan eller knapp (tyst refresh misslyckas därför utan interaktion); SD-flödet (_initialize=bankid_) öppnar BankID-appen via `app.bankid.com/?autostarttoken=...`.
+- Dubblerade cookie-namn kollapsar i native store ("last wins"); dubbletter kan peka fel F5-nod — `clearAll()` före dev-session-injektion.
 
 ## Dev-session-workflow (test utan BankID-scan)
 
