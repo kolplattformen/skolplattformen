@@ -15,7 +15,13 @@ const init = (
   fetchImpl: Fetch,
   cookieManagerImpl: RNCookieManager | ToughCookieJar,
   options?: FetcherOptions,
-  config?: { school?: string; baseUrl?: string; sessionCookie?: string }
+  config?: {
+    school?: string
+    baseUrl?: string
+    sessionCookie?: string
+    pollIntervalMs?: number
+    loginTimeoutMs?: number
+  }
 ): Api => {
   // prettier-ignore
   const cookieManager = ((cookieManagerImpl as RNCookieManager).get)
@@ -29,6 +35,8 @@ const init = (
     school: config?.school,
     baseUrl: config?.baseUrl,
     sessionCookie: config?.sessionCookie,
+    pollIntervalMs: config?.pollIntervalMs,
+    loginTimeoutMs: config?.loginTimeoutMs,
   })
 
   // Schoolsoft saknar native-store-flöde - sessionen finns bara om en
