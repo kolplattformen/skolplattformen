@@ -86,9 +86,10 @@ const collectBody = (step: CollectStep): string => {
 
 const createChainFetch = (state: ChainState) => {
   const postedSamlBodies: string[] = []
+  let lastCollectHeaders: Record<string, string> = {}
   const fetch: Fetch = async (
     url: string,
-    init?: { method?: string; body?: string }
+    init?: { method?: string; body?: string; headers?: Record<string, string> }
   ) => {
     const method = init?.method || 'GET'
     if (url.includes('/samlLogin.jsp')) {
@@ -106,6 +107,7 @@ const createChainFetch = (state: ChainState) => {
     }
     if (url.startsWith(COLLECT_URL)) {
       state.polls += 1
+      lastCollectHeaders = init?.headers || {}
       const plan = state.collectPlan
       const step = plan[Math.min(state.polls - 1, plan.length - 1)]
       return fakeResponse({ body: collectBody(step) })
@@ -141,7 +143,7 @@ const createChainFetch = (state: ChainState) => {
     }
     throw new Error(`createChainFetch: oväntad URL ${method} ${url}`)
   }
-  return { fetch, postedSamlBodies }
+  return { fetch, postedSamlBodies, getCollectHeaders: () => lastCollectHeaders }
 }
 
 const inMemoryCookieManager = (): CookieManager => {
@@ -163,14 +165,14 @@ const inMemoryCookieManager = (): CookieManager => {
 }
 
 const createApi = (state: ChainState) => {
-  const { fetch, postedSamlBodies } = createChainFetch(state)
+  const { fetch, postedSamlBodies, getCollectHeaders } = createChainFetch(state)
   const api = new ApiSchoolsoft({
     fetch,
     cookieManager: inMemoryCookieManager(),
     pollIntervalMs: 1,
     loginTimeoutMs: 600,
   })
-  return { api, state, postedSamlBodies }
+  return { api, state, postedSamlBodies, getCollectHeaders }
 }
 
 /** Samlar checker-events tills OK/ERROR/CANCELLED och returnerar sekvensen. */
@@ -201,7 +203,7 @@ const track = (
 
 describe('Schoolsoft BankID-login (GrandID, liveverifierat protokoll)', () => {
   it('lyckas: token ur status-sidan, PENDING → USER_SIGN → OK, SAML vidare', async () => {
-    const { api } = createApi({
+    const { api, getCollectHeaders } = createApi({
       orderPosted: false,
       cancelCalled: false,
       polls: 0,
@@ -229,6 +231,8 @@ describe('Schoolsoft BankID-login (GrandID, liveverifierat protokoll)', () => {
     await done
 
     expect(events).toEqual(['PENDING', 'USER_SIGN', 'OK'])
+    // collect kräver XHR-headern, annars svarar GrandID med HTML-sidan
+    expect(getCollectHeaders()['X-Requested-With']).toEqual('XMLHttpRequest')
     expect(api.isLoggedIn).toBe(true)
     expect(api.getPersonalNumber()).toEqual('195001011234')
     expect(loginEvents).toEqual(['login'])

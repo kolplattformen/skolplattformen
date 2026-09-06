@@ -246,7 +246,14 @@ export class BankidLoginChecker
       if (this.cancelled) throw new Error('Avbruten')
       if (Date.now() > deadline) throw new Error('Timeout väntade på BankID')
 
-      const response = await this.ctx.cookieFetch(this.session.collectUrl)
+      // GrandID skiljer XHR från vanliga GET: utan denna header returneras
+      // hela status-SIDAN (HTML) istället för collect-JSON:en.
+      const response = await this.ctx.cookieFetch(this.session.collectUrl, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          Accept: 'application/json, text/javascript, */*; q=0.01',
+        },
+      })
       if (isRedirect(response.status) || !response.ok) {
         throw new Error('BankID-sessionen bröts (ollikshanterat svar)')
       }
