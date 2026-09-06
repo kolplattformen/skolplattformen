@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api-skolplattformen": "libs/api-skolplattformen",
+    "api-schoolsoft": "libs/api-schoolsoft",
     "api-vklass": "libs/api-vklass",
     "api": "libs/api",
     "curriculum": "libs/curriculum",

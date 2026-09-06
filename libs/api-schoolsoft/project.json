@@ -1,0 +1,23 @@
+{
+  "root": "libs/api-schoolsoft",
+  "sourceRoot": "libs/api-schoolsoft/lib",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api-schoolsoft/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api-schoolsoft"],
+      "options": {
+        "jestConfig": "libs/api-schoolsoft/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

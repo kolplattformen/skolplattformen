@@ -1,0 +1,781 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><script>const isNyEva = false;</script>
+
+
+  <title>SchoolSoft</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="viewport" content="width=device-width">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#234675">
+
+  <link href="../../style/frameset.css?rev=2.7" rel="styleSheet" type="text/css">
+  
+    <link href="../../style/StyleSheetNew.css?rev=3.10" rel="styleSheet" type="text/css">
+    <link href="../../style/StyleSheetMenu.css?rev=2.5" rel="styleSheet" type="text/css">
+    <link href="../../style/mainSheet.css?rev=6.2" rel="styleSheet" media="all" type="text/css">
+    
+          <meta name="msapplication-TileColor" content="#00897B">
+          <meta name="theme-color" content="#00897B">
+          <link href="../../style/parent_sheet.css?rev=2.6" rel="styleSheet" type="text/css">
+        
+    
+  
+  <script src="https://sprakkraft.org/lingvis-sdk/web/1.4.x"></script><style>:root{
+    --dark-mode-cloze-color: white;
+    --dark-mode-cloze-hover: #07677e;
+    --dark-mode-cloze-panel-main: rgb(4, 38, 107);
+    --dark-mode-cloze-panel-word-text: rgba(255,255,255,0.7);
+    --dark-mode-cloze-panel-header-text: #666;
+    --dark-mode-cloze-panel-header-background: black;
+    --dark-mode-cloze-panel-close-color: white;
+
+    --light-mode-cloze-color: black;
+    --light-mode-cloze-hover: #15b3e1;
+    --light-mode-cloze-panel-main: rgb(56, 126, 245);
+    --light-mode-cloze-panel-word-text: white;
+    --light-mode-cloze-panel-header-text: #666;
+    --light-mode-cloze-panel-header-background: white;
+    --light-mode-cloze-panel-close-color: black;
+
+    --mode-cloze-color: var(--light-mode-cloze-color);
+    --mode-cloze-hover: var(--light-mode-cloze-hover);
+    --mode-cloze-panel-main: var(--light-mode-cloze-panel-main);
+    --mode-cloze-panel-word-text: var(--light-mode-cloze-panel-word-text);
+    --mode-cloze-panel-header-text: var(--light-mode-cloze-panel-header-text);
+    --mode-cloze-panel-header-background: var(--light-mode-cloze-panel-header-background);
+    --mode-cloze-panel-close-color: var(--light-mode-cloze-panel-close-color);
+    
+    --mode-cloze-panel-border: var(--mode-cloze-panel-main);
+    --mode-cloze-panel-src-border: unset;
+    --mode-cloze-panel-drag-src-color: unset;
+    --mode-cloze-panel-drag-src-background: var(--mode-cloze-panel-main);
+}
+
+.polyLingVis-overlay {
+    --mode-cloze-color: var(--dark-mode-cloze-color);
+    --mode-cloze-hover: var(--dark-mode-cloze-hover);
+    --mode-cloze-panel-main: var(--dark-mode-cloze-panel-main);
+    --mode-cloze-panel-word-text: var(--dark-mode-cloze-panel-word-text);
+    --mode-cloze-panel-header-text: var(--dark-mode-cloze-panel-header-text);
+    --mode-cloze-panel-header-background: var(--dark-mode-cloze-panel-header-background);
+    --mode-cloze-panel-close-color: var(--dark-mode-cloze-panel-close-color);
+}
+
+#polyLingVis-cloze-panel {
+    max-width: 365px;
+    border: 1px solid var(--mode-cloze-panel-border);
+    border-radius: 4px;
+    width: calc(100% - 32px);
+    display: none;
+    position: absolute;
+    background-color: var(--mode-cloze-panel-main);
+    overflow: visible !important;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    z-index: 1000;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: unset;
+    cursor: move;
+    background-color: var(--mode-cloze-panel-header-background);
+    position: relative;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-heading h6 {
+    margin: 0;
+    font-size: 0.6875rem;
+    color: #777;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-body {
+    padding: 16px 24px 16px 16px;
+    font-size: 15px;
+    color: var(--mode-cloze-panel-word-text);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-body * {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+#polyLingVis-cloze-panel h6.polyLingVis-panel-title.polyLingVis-cloze-panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: start;
+    color: var(--mode-cloze-panel-header-text);
+    padding-right: 28px;
+}
+
+
+div.polyLingVis-link-line {
+    position: absolute;
+    width: 2px;
+    background-color: var(--polyLingVis-labels-link-line, lightgray);
+    z-index: 4;
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+}
+
+div.polyLingVis-label {
+    position: absolute;
+    display: inline-block;
+    max-width:300px;
+    max-height:30px;
+    overflow: hidden;
+    border: var(--polyLingVis-labels-border, 1px solid lightgrey);
+    background-color: var(--polyLingVis-labels-background-color, lightyellow);
+    color: var(--polyLingVis-labels-color, inherit);
+    font-size: 80%;
+    line-height: 14px;
+    cursor: pointer;
+    padding: 5px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.polyLingVis-overlay div.polyLingVis-link-line {
+    background-color: var(--polyLingVis-labels-overlay-link-line, rgba(255, 255, 255, 0.5));
+}
+
+.polyLingVis-tts.polyLingVis-overlay div.polyLingVis-link-line.polyLingVis-token-active {
+    background-color: cyan;
+}
+
+.polyLingVis-tts div.polyLingVis-link-line.polyLingVis-token-active {
+    background-color: rgb(50, 205, 50);
+}
+
+.polyLingVis-overlay div.polyLingVis-label {
+    padding: 3px;
+    font-size: 1em;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    color: var(--polyLingVis-labels-overlay-color, rgba(255, 255, 255, 0.6));
+    background-color: var(--polyLingVis-labels-overlay-background-color, rgba(0, 0, 0, 0.2));
+}
+
+.polyLingVis-dark div.polyLingVis-label {
+    background-color: var(--dark-mode-cloze-panel-main);
+}
+
+div.polyLingVis-label.label-below {
+    border-top: var(--polyLingVis-labels-border, 1px solid lightgray);
+    border-bottom: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+div.polyLingVis-label.label-above {
+    border-bottom: var(--polyLingVis-labels-border, 1px solid lightgray);
+    border-top: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+.polyLingVis-overlay div.polyLingVis-label.label-below {
+    border-top: var(--polyLingVis-labels-overlay-border, 1px solid rgba(228, 228, 228, 0.5));
+    border-bottom: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+.polyLingVis-overlay div.polyLingVis-label.label-above {
+    border-bottom: var(--polyLingVis-labels-overlay-border, 1px solid rgba(228, 228, 228, 0.5));
+    border-top: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+.polyLingVis-tts div.polyLingVis-label {
+    padding: 0px;
+}
+
+.polyLingVis-tts.polyLingVis-overlay div.polyLingVis-label.polyLingVis-token-active {
+    background-color: rgb(0, 0, 0, 0.2);
+    color: cyan;
+}
+
+.polyLingVis-tts div.polyLingVis-label.polyLingVis-token-active {
+    background-color: rgb(50, 205, 50);
+    color: white;
+}
+
+.polyLingVis-overlay .polyLingVis-link-line {
+    z-index: 999;
+}
+
+
+div.polyLingVis-label.polyLingVis-cloze-hover {
+    background-color: var(--mode-cloze-hover);
+    color: var(--mode-cloze-color);
+}
+
+.polyLingVis-cloze-src {
+    background-color: var(--mode-cloze-panel-main);
+    border-radius: 4px;
+    border: 1px solid var(--mode-cloze-panel-src-border);
+    padding: 4px 12px;
+    user-select: none;
+}
+
+.polyLingVis-cloze-src-dragging {
+    background-color: var(--mode-cloze-panel-drag-src-background);
+    border: 1px solid var(--mode-cloze-panel-drag-src-background);
+    color: var(--mode-cloze-panel-drag-src-color);
+}
+
+#polyLingVis-cloze-close {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 12px 12px;
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--mode-cloze-panel-close-color);
+}</style>
+  <script type="text/javascript" src="../../script/sprakkraft.js"></script>
+<style data-emotion="css-global" data-s=""></style><style data-emotion="css" data-s=""></style><link rel="stylesheet" type="text/css" href="https://sms.schoolsoft.se/procivitas/react/jsp/7246.aca465d42c5ddc9d8632.css"></head>
+<body class="pushmenu-push legacy-teacher-menus">
+
+<script language="JavaScript" src="../../script/javascripts.js?rev=170916" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/boxover.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery-migrate-1.1.0.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery-ui-1.10.0.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery.viewport.mini.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/bootstrap/bootstrap-transition.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/bootstrap/bootstrap-collapse.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/bootstrap/bootstrap-dropdown.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery.PrintThis.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/schoolsoft-jquery.js?rev=1.10" type="text/javascript"></script>
+    
+
+    
+<div id="parentPageWrapper">
+    <div id="parent-sidebar-root"><div class="MuiScopedCssBaseline-root css-vu345x"><div class="MuiBox-root css-1dh2w4i"></div><div top="4" class="MuiDrawer-root MuiDrawer-anchorLeft MuiDrawer-docked css-11ugohi"><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-vjj0uv" style="--Paper-shadow: none;"><div class="MuiBox-root css-1l4w6pd"><a class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary css-11z8lft" tabindex="0" href="#main">Gå direkt till innehållet</a></div><nav class="MuiList-root MuiList-padding css-rj8zmi" aria-label="Huvudmeny"><div class="MuiStack-root css-1821gv5"><div class="MuiStack-root css-75nic3" style="opacity: 1; transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"><div class="MuiBox-root css-1v6bx8g"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1gzac6h" href="https://www.procivitas.se/" target="_blank"><img alt="Logotyp" src="/procivitas/grafics/logo.png" width="100%" height="100%" style="border-radius: 6px;"></a></div><div class="MuiAutocomplete-root MuiAutocomplete-fullWidth css-7s1ac5"><form class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-p7ult1"><div aria-autocomplete="list" aria-expanded="false" autocapitalize="none" spellcheck="false" role="combobox" class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart MuiInputBase-adornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1si7jig"><div class="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1wjd1nn"><span class="notranslate" aria-hidden="true">​</span><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></div><input aria-invalid="false" autocomplete="off" id=":r7:" placeholder="Sök" type="text" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-19zx574" aria-autocomplete="list" aria-expanded="false" autocapitalize="none" spellcheck="false" role="combobox" value=""><div class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-13u04j7"><div class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault css-f0cv3h"><span class="MuiChip-label MuiChip-labelSmall css-4y436t">⌘K</span></div></div><fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-5v2ak0"><legend class="css-w4cd9x"><span class="notranslate" aria-hidden="true">​</span></legend></fieldset></div></form></div></div><hr class="MuiDivider-root MuiDivider-fullWidth css-bvrgh1" aria-hidden="true"><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-19okood" tabindex="0" href="right_student_startpage.jsp" aria-label="Startsida"><div class="MuiListItemIcon-root css-fwf4s3"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1"></path></svg></div><div class="MuiListItemText-root css-1echhzc"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Startsida</p></div><span class="MuiBadge-root css-nd79ke"><span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-bb49ud">0</span></span></a><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren MuiDivider-textAlignLeft css-1trkh3o" role="presentation" aria-hidden="true"><span class="MuiDivider-wrapper css-163llxe"><p class="MuiTypography-root MuiTypography-body2 css-1rupr45" autocapitalize="true">EDWARDS SKOLA</p></span></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-12if7rt" focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.5006 4.65187C12.1969 4.44937 11.8031 4.44937 11.4994 4.65187L7.67719 7.2H4.35C3.60469 7.2 3 7.80469 3 8.55V17.55C3 18.2953 3.60469 18.9 4.35 18.9H19.65C20.3953 18.9 21 18.2953 21 17.55V8.55C21 7.80469 20.3953 7.2 19.65 7.2H16.3228L12.5006 4.65187ZM10.2 16.2C10.2 15.2072 11.0072 14.4 12 14.4C12.9928 14.4 13.8 15.2072 13.8 16.2V18.9H10.2V16.2ZM5.7 9.9H6.6C6.8475 9.9 7.05 10.1025 7.05 10.35V12.15C7.05 12.3975 6.8475 12.6 6.6 12.6H5.7C5.4525 12.6 5.25 12.3975 5.25 12.15V10.35C5.25 10.1025 5.4525 9.9 5.7 9.9ZM16.95 10.35C16.95 10.1025 17.1525 9.9 17.4 9.9H18.3C18.5475 9.9 18.75 10.1025 18.75 10.35V12.15C18.75 12.3975 18.5475 12.6 18.3 12.6H17.4C17.1525 12.6 16.95 12.3975 16.95 12.15V10.35ZM5.7 13.5H6.6C6.8475 13.5 7.05 13.7025 7.05 13.95V15.75C7.05 15.9975 6.8475 16.2 6.6 16.2H5.7C5.4525 16.2 5.25 15.9975 5.25 15.75V13.95C5.25 13.7025 5.4525 13.5 5.7 13.5ZM16.95 13.95C16.95 13.7025 17.1525 13.5 17.4 13.5H18.3C18.5475 13.5 18.75 13.7025 18.75 13.95V15.75C18.75 15.9975 18.5475 16.2 18.3 16.2H17.4C17.1525 16.2 16.95 15.9975 16.95 15.75V13.95ZM9.525 9.45C9.525 8.79359 9.78576 8.16406 10.2499 7.69991C10.7141 7.23576 11.3436 6.975 12 6.975C12.6564 6.975 13.2859 7.23576 13.7501 7.69991C14.2142 8.16406 14.475 8.79359 14.475 9.45C14.475 10.1064 14.2142 10.7359 13.7501 11.2001C13.2859 11.6642 12.6564 11.925 12 11.925C11.3436 11.925 10.7141 11.6642 10.2499 11.2001C9.78576 10.7359 9.525 10.1064 9.525 9.45ZM12 8.1C11.7525 8.1 11.55 8.3025 11.55 8.55V9.45C11.55 9.6975 11.7525 9.9 12 9.9H12.9C13.1475 9.9 13.35 9.6975 13.35 9.45C13.35 9.2025 13.1475 9 12.9 9H12.45V8.55C12.45 8.3025 12.2475 8.1 12 8.1Z" fill="#currentColor"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Skolinfo</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M17 2c-.55 0-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-1V3c0-.55-.45-1-1-1m2 18H5V10h14zm-8-7c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m-4 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m8 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m-4 4c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m-4 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m8 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Schema</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M11.29 8.71 6.7 13.3c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0"></path></svg></div><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-1cbf1l2" style="min-height: 0px;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-15830to"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9vd5ud"><div class="MuiList-root css-m6u8pf"><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/../../react/#/parent/calendar" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Schema &amp; Kalender</p></div></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/right_student_timebooking.jsp" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Bokningar</p></div></a></div></div></div></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M13.71 21.3c.39.39 1.02.39 1.41 0L17 19.41l1.89 1.89c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L18.41 18l1.89-1.89c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0L17 16.59l-1.89-1.89c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41L15.59 18l-1.89 1.89c-.38.38-.38 1.02.01 1.41M14 11c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1h9c.55 0 1-.45 1-1m0-4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1h9c.55 0 1-.45 1-1M3 15c0 .55.45 1 1 1h5c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Frånvaro</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M11.29 8.71 6.7 13.3c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0"></path></svg></div><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-1cbf1l2" style="min-height: 0px;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-15830to"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9vd5ud"><div class="MuiList-root css-m6u8pf"><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/right_student_absence.jsp" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Frånvaroanmälan</p></div></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/right_parent_absence_message.jsp" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Oanmäld frånvaro</p></div></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/right_student_lesson_status.jsp" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Översikt</p></div></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/right_student_absence_student.jsp" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Rapport</p></div></a></div></div></div></div><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren MuiDivider-textAlignLeft css-1trkh3o" role="presentation" aria-hidden="true"><span class="MuiDivider-wrapper css-163llxe"><p class="MuiTypography-root MuiTypography-body2 css-1rupr45" autocapitalize="true">EDWARDS BIBLIOTEK</p></span></div><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-19okood" tabindex="0" href="../student/../../react/#/parent/subjectrooms" aria-label="Ämnen"><div class="MuiListItemIcon-root css-fwf4s3"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="m18.15 1.35-4 4q-.15.15-.15.36v8.17c0 .43.51.66.83.37l4-3.6c.11-.09.17-.23.17-.37V1.71c0-.45-.54-.67-.85-.36m4.32 3.85c-.47-.24-.96-.44-1.47-.61v12.03c-1.14-.41-2.31-.62-3.5-.62-1.9 0-3.78.54-5.5 1.58V5.48C10.38 4.55 8.51 4 6.5 4c-1.79 0-3.48.44-4.97 1.2-.33.16-.53.51-.53.88v12.08c0 .76.81 1.23 1.48.87C3.69 18.4 5.05 18 6.5 18c2.07 0 3.98.82 5.5 2 1.52-1.18 3.43-2 5.5-2 1.45 0 2.81.4 4.02 1.04.67.36 1.48-.11 1.48-.87V6.08c0-.37-.2-.72-.53-.88"></path></svg></div><div class="MuiListItemText-root css-1echhzc"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Ämnen</p></div><span class="MuiBadge-root css-nd79ke"><span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-bb49ud">0</span></span></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-19okood" tabindex="0" href="../student/../../react/#/parent/holistic_assessment" aria-label="Sammantagen bedömning"><div class="MuiListItemIcon-root css-fwf4s3"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 17.27 4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"></path></svg></div><div class="MuiListItemText-root css-1echhzc"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Sammantagen bedömning</p></div><span class="MuiBadge-root css-nd79ke"><span class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-pk4869">9</span></span></a><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6h-8l-1.41-1.41C10.21 4.21 9.7 4 9.17 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-5 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m4 8h-8v-1c0-1.33 2.67-2 4-2s4 .67 4 2z"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Elevdokument</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6h-8l-1.41-1.41C10.21 4.21 9.7 4 9.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-3.06 10.41L15 15.28l-1.94 1.13c-.38.22-.84-.12-.74-.55l.51-2.2-1.69-1.46c-.33-.29-.16-.84.28-.88l2.23-.19.88-2.06c.17-.4.75-.4.92 0l.88 2.06 2.23.19c.44.04.62.59.28.88l-1.69 1.46.51 2.2c.11.43-.35.77-.72.55"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Filer &amp; länkar</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M13.26 3C8.17 2.86 4 6.95 4 12H2.21c-.45 0-.67.54-.35.85l2.79 2.8c.2.2.51.2.71 0l2.79-2.8c.31-.31.09-.85-.36-.85H6c0-3.9 3.18-7.05 7.1-7 3.72.05 6.85 3.18 6.9 6.9.05 3.91-3.1 7.1-7 7.1-1.61 0-3.1-.55-4.28-1.48-.4-.31-.96-.28-1.32.08-.42.42-.39 1.13.08 1.49C9 20.29 10.91 21 13 21c5.05 0 9.14-4.17 9-9.26-.13-4.69-4.05-8.61-8.74-8.74m-.51 5c-.41 0-.75.34-.75.75v3.68c0 .35.19.68.49.86l3.12 1.85c.36.21.82.09 1.03-.26.21-.36.09-.82-.26-1.03l-2.88-1.71v-3.4c0-.4-.34-.74-.75-.74"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Äldre funktioner</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div></div></nav><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation3 MuiBox-root css-n7aff" style="--Paper-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);"><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-6k9nw4" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12c0 5.52 4.48 10 10 10s10-4.48 10-10S17.52 2 12 2 2 6.48 2 12m10-2.79V11h3c.55 0 1 .45 1 1s-.45 1-1 1h-3v1.79c0 .45-.54.67-.85.35l-2.79-2.79c-.2-.2-.2-.51 0-.71l2.79-2.79c.31-.31.85-.09.85.36"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1lxk3ph">Minimera menyn</p></div></div></div></div></div></div><div class="MuiScopedCssBaseline-root css-vu345x"></div></div>
+    <div id="parentContentWrapper">
+        <div id="parent-header-root" style="height: 72px;"><div class="MuiScopedCssBaseline-root css-9c1az3"><div class="MuiBox-root css-0"><header class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorInherit MuiAppBar-positionStatic css-1i7yzoj"><div class="MuiToolbar-root MuiToolbar-regular css-tylvyk"><div class="MuiBox-root css-i9gxme"><div class="MuiStack-root css-1txeit4"><div class="MuiStack-root css-qhewy7"><div class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-19zdr60">S</div><div class="MuiStack-root css-1lxwves"><p class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap css-1kr3dlx">Edward Landgren</p><span class="MuiTypography-root MuiTypography-caption MuiTypography-noWrap css-9cznkf">ProCivitas Karlberg  | SA24a</span></div></div><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical css-o9qltg" role="separator" aria-orientation="vertical" aria-hidden="true"></div></div></div><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical css-o9qltg" role="separator" aria-orientation="vertical" aria-hidden="true"></div><div class="MuiStack-root css-voneje"><div class="MuiStack-root css-1txeit4"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1j7zxmp" tabindex="0" id="messages-link-button" href="right_student_message.jsp" aria-label="8 nya meddelanden"><span class="MuiBadge-root css-1cxr8v4"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1rqjhuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25-6.54 4.09c-.65.41-1.47.41-2.12 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72"></path></svg><span class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-pk4869">8</span></span></a><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1l9bawj" role="separator" aria-orientation="vertical" aria-hidden="true"></div><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-ez2tt" tabindex="0" type="button" id="menu-button" aria-haspopup="true" aria-expanded="false" aria-label="Användarmeny"><div class="MuiStack-root css-1y3ojfh"><div class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-19zdr60"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-97wums" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg></div><p class="MuiTypography-root MuiTypography-body2 css-mzylrk">Christian</p></div><span class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-1g78ho2"><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1hox44e" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="m8.71 11.71 2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71"></path></svg></span></button></div></div></div></header></div></div><div class="MuiScopedCssBaseline-root css-vu345x"></div></div>
+        <div id="content-pos-parent" style="opacity: 0; padding-top: unset;">
+                
+                        
+
+  <script>
+    
+    var hideMenu = sessionStorage.getItem('hideMenu') === '1';
+    if (document.getElementById("content-pos") && !hideMenu) {
+      document.getElementById("content-pos").style.setProperty("opacity", 0);
+    }
+    if (document.getElementById("content-pos-student") && !hideMenu) {
+      document.getElementById("content-pos-student").style.setProperty("opacity", 0);
+    }
+    if (document.getElementById("content-pos-parent") && !hideMenu) {
+      document.getElementById("content-pos-parent").style.setProperty("opacity", 0);
+    }
+  </script>
+
+  <link href="/procivitas/react/jsp/main.370c874f51f7e5516e75.css" rel="stylesheet">
+  <script defer="" src="/procivitas/react/jsp/main.c64b443edff56a5175cc.js"></script>
+
+
+                        <!-- main content begin -->
+
+
+<script language="JavaScript" src="../../script/message.js" type="text/javascript"></script>
+<script type="text/javascript">
+  function mySubmit(myForm) {
+    myForm.button[0].disabled = true;
+    myForm.submit();
+  }
+</script>
+
+<div id="main">
+
+  <div class="content_wrapper" id="content">
+
+<div class="h1">Meddelanden</div><ul class="nav nav-tabs pull-right"><li class="active" id="1"><a href="right_student_message.jsp?folder=inbox">Inkorg</a></li><li class="" id="2"><a href="right_student_message.jsp?folder=sent">Skickade</a></li><li class="" id="3"><a href="right_student_message.jsp?folder=trash">Papperskorg</a></li></ul><div class="page-print"></div><div class="border-bottom"></div>
+<span class="span6left">
+</span>
+<div class="accordion" style="clear:none;" id="accordion"><div id="full_pane" class="formtable collapsibleform spanfull"><div class="formheader accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapseadd"><div id="pane-header" class="accordion text">Skapa nytt meddelande</div><button id="opencloseadd" class="openclose">+</button></a></div><div style="height: 0px; width:100%;" id="collapseadd" class="accordion-body collapse"><div id="accordion-inneradd" class="accordion-inner"><form name="message" id="message" action="right_student_message.jsp" method="post" class="menu_item_selected"><div class=" hidden "><div class=" hidden "><input type="hidden" name="action" class="hidden" id="action" value="insert"></div><label for="" class="hidden"></label></div><div class=" hidden "><div class=" hidden "><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"></div><label for="" class="hidden"></label></div><div class=" hidden "><div class=" hidden "><input type="hidden" name="response" class="hidden" id="response" value="0"></div><label for="" class="hidden"></label></div><div class="control-group" style=""><label for="" class="control-group-label">Till</label><div class="controls"><div class="control-item-holder"><div class="control-item"><p><table cellspacing="1" cellpadding="2" width="100%"><tbody><tr><td>Välj mottagare<br><select name="users" size="15" ondblclick="moveSelectedOptions(this, document.message.allRecipients)" id="users" multiple="multiple">	<option value="-222" id="x-222" disabled="disabled"></option>
+	<option value="3530" id="x3530">Andersson Anna</option>
+	<option value="10660" id="x10660">Asplund Caroline</option>
+	<option value="9620" id="x9620">Belin Samuel</option>
+	<option value="6670" id="x6670">Bohlström Jennifer</option>
+	<option value="10480" id="x10480">Boqvist Vera</option>
+	<option value="7050" id="x7050">Brofors Helene</option>
+	<option value="7330" id="x7330">Dubourg Aude</option>
+	<option value="6680" id="x6680">Eklund Linnea</option>
+	<option value="11110" id="x11110">Eklöf Hanna</option>
+	<option value="7900" id="x7900">Eriksson Jessica</option>
+	<option value="8170" id="x8170">Fredriksson Elisabet</option>
+	<option value="6760" id="x6760">Fredriksson Marie</option>
+	<option value="8390" id="x8390">Frey Sandra</option>
+	<option value="9450" id="x9450">Garpenhag Gabriella</option>
+	<option value="6970" id="x6970">Gartne Jonny</option>
+	<option value="10720" id="x10720">Gréen Michaela</option>
+	<option value="10350" id="x10350">Haglund Valda</option>
+	<option value="5350" id="x5350">Hasselborg Marcus</option>
+	<option value="780" id="x780">Heide Henrik</option>
+	<option value="11370" id="x11370">Hellberg Emma</option>
+	<option value="10400" id="x10400">Imamovic Edina</option>
+	<option value="9790" id="x9790">Isaksson Petrus</option>
+	<option value="6200" id="x6200">Ivinger Pezhman</option>
+	<option value="10650" id="x10650">Johansson Linda</option>
+	<option value="11330" id="x11330">Jonsson Jennifer</option>
+	<option value="10410" id="x10410">Kalhory David</option>
+	<option value="11380" id="x11380">Karlsson Johannah</option>
+	<option value="3880" id="x3880">Lafrenz Maria</option>
+	<option value="10390" id="x10390">Laroussi William</option>
+	<option value="7280" id="x7280">Lidén Einar</option>
+	<option value="7460" id="x7460">Limper Nalmpanti Maria</option>
+	<option value="8690" id="x8690">Lindqvist Karl</option>
+	<option value="8130" id="x8130">Lodin Oskar</option>
+	<option value="10460" id="x10460">Lodmark Maria</option>
+	<option value="7790" id="x7790">Lundvall Rebecka</option>
+	<option value="7310" id="x7310">Lunell Jessica</option>
+	<option value="11100" id="x11100">Markusson Samuel</option>
+	<option value="10110" id="x10110">Millerfelt Emma</option>
+	<option value="10920" id="x10920">Norrman Michaela</option>
+	<option value="11360" id="x11360">Omar Hawar</option>
+	<option value="10910" id="x10910">Pettersson Magnus</option>
+	<option value="11120" id="x11120">Pineda Ortega Eila</option>
+	<option value="6950" id="x6950">Rahm Nicholas</option>
+	<option value="3510" id="x3510">Salling Karlsson Helen</option>
+	<option value="10090" id="x10090">Schroer Anna</option>
+	<option value="8050" id="x8050">Setr��us Mats</option>
+	<option value="8140" id="x8140">Sjövall Moritz</option>
+	<option value="9110" id="x9110">Svedberg Johanna</option>
+	<option value="9600" id="x9600">Swedlund Robert</option>
+	<option value="10470" id="x10470">Sylvan Ludvig</option>
+	<option value="9830" id="x9830">Säfwenberg Joel</option>
+	<option value="9430" id="x9430">Welander Victoria</option>
+	<option value="6030" id="x6030">Westerling Jens</option>
+	<option value="7730" id="x7730">Wikström Erika</option>
+	<option value="9440" id="x9440">Yacoub Isamar</option>
+</select></td><td class="input" nowrap="nowrap"><img src="../../images/icon/arrow-180-medium.png" onclick="moveSelectedOptions(document.message.allRecipients, document.message.users)" title="Ta bort från &quot;Valda mottagare&quot;"><img src="../../images/icon/arrow-000-medium.png" onclick="moveSelectedOptions(document.message.users, document.message.allRecipients)" title="Flytta till &quot;Valda mottagare&quot;"></td><td>Valda mottagare<select name="allRecipients" size="15" ondblclick="moveSelectedOptions(this, document.message.users)" id="allRecipients" multiple="multiple">	<option value="-222" id="x-222" disabled="disabled"></option>
+</select></td></tr></tbody></table></p></div><label for="" class="hidden"></label></div></div></div><div class="control-group" style=""><label for="" class="control-group-label">Rubrik</label><div class="controls"><div class="control-item-holder"><div class="control-item"><input type="text" name="subject" value="" size="" maxlength="100" id="messheader" spellcheck="false"></div><label for="messheader" class="hidden"></label></div></div></div><div class="control-group" style=""><label for="" class="control-group-label">Text</label><div class="controls"><div class="control-item-holder"><div class="control-item"><textarea name="message" cols="100" rows="10" id="messbody" spellcheck="false"></textarea></div><label for="messbody" class="hidden"></label></div></div></div><div class="control-group" style=""><label for="" class="control-group-label">Visa mottagare i meddelandet</label><div class="controls"><div class="control-item-holder"><div class="control-item"><input type="checkbox" name="recipients" value="1" id="messShowRecipients"></div><label for="messShowRecipients" class="hidden"></label></div></div></div><input type="button" name="button" value="Skicka" onclick="if(message.value.length &lt;= 4096){document.message.allRecipients.classname='';selectAll(document.message.allRecipients);if (!valid('Mottagare saknas',document.message.allRecipients)) {return false;} else { if (valid('Rubrik saknas',document.message.subject)) {mySubmit(this.form);}}}else{alert('För många tecken, maximalt antal tillåtna tecken är 4096. Du har skrivit: '+message.value.length+' tecken.');}" id="but_send" class="btn"><input type="submit" name="button" value="Avbryt" id="but_cancel" class="btn"></form></div></div><div class="bottom-divadd"></div></div></div>
+
+
+<form name="search" action="right_student_message.jsp" method="post">
+  <input type="hidden" name="requestid" class="hidden" id="requestid" value="-1">
+  <input type="hidden" name="folder" class="hidden" id="folder" value="inbox">
+
+  <table cellspacing="1" cellpadding="2" width="100%">
+    <tbody><tr>
+      <td class="label" style="font-weight: bold;">Sök i inkorg</td>
+    </tr>
+    <tr>
+      <td colspan="1" class="input">
+        <div style="display: inline-block; vertical-align: middle;">
+          <input type="text" name="search" value="" size="50" maxlength="50" id="search" spellcheck="false">
+        </div>
+        <div style="display: inline-block; vertical-align: middle; padding-bottom: 1px;">
+          <input type="submit" name="button" value="Sök" class="btn">
+        </div>
+      </td>
+    </tr>
+  </tbody></table>
+</form>
+
+<div class="h2_container" id="message_con"><div class="h2_box"><div class="h2_box_icon" style="margin-left:-10px; padding-top:2px;"><img src="../../images/icon/balloon.png" alt="" title=""></div><div class=" h3 " style="margin-top:6px; padding-left:6px;">Inkorg</div></div><div id="message_con_content" class="h2_inner"><div class="accordion" style="" id="accordion"><div id="accordion-group117511" class="accordion-group"><div id="accordion-heading117511" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse117511"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader117511">Ansökan studieresor 26/27</span></div><div class="preview-block">Hej alla, 
+ 
+ Tack till er som deltog...</div></div><div class="statusicon"><img id="statuspic117511" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Jonny Gartne</div><div class="accordion-heading-date">19 maj</div></div></a></div><div style="height: 0px; width:100%;" id="collapse117511" class="accordion-body collapse"><div id="accordion-inner117511" class="accordion-inner"><div class="printicon" id="print-117511"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess117511">Hej alla, <br><br>Tack till er som deltog på det obligatoriska informationsmötet under gårdagen. <br>Här kommer en länk till ett Google Form där ni skriver in er ansökan. Denna ansökan behöver vara inlämnad senast måndag 25 maj. Jag kommer att finnas tillgänglig på studietiden i Columbia nästa måndag för att svara på frågor och funderingar kopplade till ansökan. <br><br>Länken är följande: <a href="https://forms.gle/sxLcvHi8seMzDRAJ9" title="https://forms.gle/sxLcvHi8seMzDRAJ9">https://forms.gle/sxLcvHi8seMzDRAJ9</a><br>Klistra in denna i webbläsaren och svara med utförliga och motiverade svar. Återkom gärna till mig ifall ni har några funderingar eller tankar. <br><br>Tack på förhand, <br>Mvh<br>Jonny Gartne <br>Internationaliseringsansvarig på Procivitas Karlberg </span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="117511"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher117511" class="hidden" id="teacher117511" value="697"><label>Från</label><div><span id="messfrom117511">Jonny Gartne</span></div><label>Skickat</label><div><span id="messdate117511">19 maj 10:54</span></div><input type="button" name="button" value="Besvara" id="reply117511" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div117511"></div></div><div id="accordion-group117261" class="accordion-group"><div id="accordion-heading117261" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse117261"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader117261">Informationsmöte inför studieresor 26/27</span></div><div class="preview-block">Hej elever och vårdnadshavare i årsku...</div></div><div class="statusicon"><img id="statuspic117261" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Jonny Gartne</div><div class="accordion-heading-date">13 maj</div></div></a></div><div style="height: 0px; width:100%;" id="collapse117261" class="accordion-body collapse"><div id="accordion-inner117261" class="accordion-inner"><div class="printicon" id="print-117261"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess117261">Hej elever och vårdnadshavare i årskurs 2 på Procivitas Karlberg!<br><br>Vi arbetar just nu med planeringen av nästa läsårs programresor och internationella utbyten inom ramen för Erasmus+. Vårt mål är att erbjuda meningsfulla och värdefulla resor som främjar lärande, kulturellt utbyte och personlig utveckling - i linje med Erasmusprogrammets syfte att stärka ungas möjligheter till kunskap, interkulturell förståelse och europeisk samhörighet.<br><br>För att ytterligare höja kvaliteten kommer vi från och med nästa läsår att genomföra resorna i mindre elevgrupper, där deltagandet sker genom ett ansökningsförfarande. Du som elev ges möjlighet att ansöka om att delta och behöver då visa att du är i fas med dina studier, har god närvaro och kan motivera varför du vill vara en del av ett internationellt utbyte.<br><br>För de elever som inte reser kommer undervisningen på hemmaplan under samma vecka att ha ett fokus på internationalisering, så att alla får ta del av de perspektiv och kunskaper som Erasmus+ syftar till att främja.<br><br>Ansökningsprocessen ? så här går det till:<br>Om du är intresserad av att ansöka till någon av årets programresor, behöver du göra följande:<br><br>?	Närvara vid den obligatoriska informationsträffen (digital träff)<br>Här presenteras detaljer om ansökningsprocessen och du får möjlighet att ställa frågor. Observera vilken tid som gäller för det program du går:<br><br>Måndag 18 maj <br>EK24a/b: 	kl 16.30-17.15	<br>Videosamtalslänk: <a href="https://meet.google.com/ird-mjfk-grc" title="https://meet.google.com/ird-mjfk-grc">https://meet.google.com/ird-mjfk-grc</a><br><br>SA24a/b: 	kl 15.45-16.30<br>Videosamtalslänk: <a href="https://meet.google.com/ucn-ekwa-gso" title="https://meet.google.com/ucn-ekwa-gso">https://meet.google.com/ucn-ekwa-gso</a><br><br>Onsdag 20 maj<br>NA24:	kl 16:30 -17:15<br>Videosamtalslänk: <a href="https://meet.google.com/wpc-dgzp-eth" title="https://meet.google.com/wpc-dgzp-eth">https://meet.google.com/wpc-dgzp-eth</a><br><br>?	Fyll i ansökan via Google-enkät<br>Länk till enkäten delas ut under informationsträffen. I enkäten kommer du att få frågor som du ska besvara. Ansökan ska vara inlämnad senast måndag 25 maj - finns möjlighet att ställa frågor angående resorna på studietiden måndag den 25e. <br><br>?	Inlämna ett påskrivet dokument från vårdnadshavare/mottagande familj<br>Dokumentet gäller åtagande kring utbyte när du under resan bor i en värdfamilj och därmed också åtar dig att välkomna och vara värd för en student som bor hemma hos dig. Detta lämnas in till skolledningen/internationaliseringsansvarig (brevlåda utanför skolledningens arbetsrum) senast den 3 juni.<br><br>Vi ser fram emot att få ta emot era ansökningar och skapa en minnesvärd och lärorik upplevelse för alla deltagande elever.<br><br>Med vänliga hälsningar,<br>Skolledning, programlag och internationaliseringsansvarig på Procivitas Karlberg<br></span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="117261"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher117261" class="hidden" id="teacher117261" value="697"><label>Från</label><div><span id="messfrom117261">Jonny Gartne</span></div><label>Skickat</label><div><span id="messdate117261">13 maj 17:09</span></div><input type="button" name="button" value="Besvara" id="reply117261" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div117261"></div></div><div id="accordion-group111075" class="accordion-group"><div id="accordion-heading111075" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse111075"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader111075">Romme Alpin v.6</span></div><div class="preview-block">Hej alla! 
+ 
+ Imorgon är det vinterfr...</div></div><div class="statusicon"><img id="statuspic111075" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Jonny Gartne</div><div class="accordion-heading-date">5 feb.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse111075" class="accordion-body collapse"><div id="accordion-inner111075" class="accordion-inner"><div class="printicon" id="print-111075"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess111075">Hej alla! <br><br>Imorgon är det vinterfriluftsdag och många av oss kommer att resa till Romme och här kommer lite nödvändig information. <br><br>Vi kommer att samlas utanför huvudentrén till skolan vid 06:15 - tänk på att skolan är stängd så det går inte att gå in i skolan för att t.ex. gå på toaletten osv. Eftersom det är en tidig morgon rekommenderar vi er att ta med något att äta på resan till Romme men även något att äta på resan hem från Romme. Ni kommer kunna lämna kvar ev. värdesaker/jackor/extraskor osv i bussen under tiden vi åker skidor men däremot kommer vi inte in i bussen under dagtid. Vi har inte möjlighet att vänta in några elever, stanna på vägen eller liknande - missar man avfärden innebär det att du behöver åka till Östermalms IP vid kl. 10:00 för att ta närvaro för dagen. <br><br>Ni kommer att bli tilldelad en matkupong såväl som ett liftkort för dagen. Utöver detta, för er som hyr utrustning, kommer ni också bli tilldelade ett nummer på bussen som är viktigt för er att komma ihåg när vi ska hämta ut utrustningen. När vi kommit till Romme kommer alla elever som ska hyra utrustning ställa sig på led, utifrån den siffra ni får, och sedan gå tillsammans med personalen i Romme till utlämningsstationen. På plats i Romme finns det värmestugor där ni kan lämna eventuella väskor/extrakläder men undvik att ha värdesaker i värmestugorna då allt som lämnas är på hyllor som alla har tillgång till. <br><br>När ni väl fått utrustning, liftkort och matkupong får ni åka så mycket som ni hinner under dagen och lunchen får ni planera självständigt (står på lunchkupongen vart ni kan äta osv.) under dagen. Vi kommer att ha en återsamling vid bussen vid 15:45 och lämnar runt 16:00, då ska allting vara kvarlämnat och ni ska vara redo att bli avprickade för respektive buss innan ni går på. Vi siktar på att vara framme runt 19:00 vid skolan - svårt att säga exakt om vi kommer fram tidigare eller senare då det beror på när bussen går. <br><br>För er som kanske känner er lite osäkra i backen alternativt åker för första gången så kommer Sandra att ha en liten skidintroduktion i början av dagen och ni får gärna säga till Sandra eller någon annan medföljande personal att ni vill ha en introduktion i början så att vi vet om detta. <br><br>Vi vill också påminna om att det är en skolaktivitet och detta innebär att det är samma ordningsregler i skolan som gäller i Romme. Detta innebär att det är nolltolerans gentemot medgav samt intag av alkohol och andra berusningsmedel. Noterar vi att en elev har med sig alkohol till denna skolaktivitet så kommer eleven i fråga inte få följa med på bussen till Romme och vi som skola kommer att kontakta vårdnadshavare samt skolledning. Tänk också på miljön i bussen då vi behöver hålla en god miljö både på väg till Romme och hem från Romme, t.ex. att vi tar med oss eventuellt skräp m.m. <br><br>Vi kommer också ha två stycken nummer till personalen på plats - till Kalle är numret 0761285198 och till Sandra är numret 0764966043. <br><br>Gällande utrustning är det jätteviktigt att ni tänker på att det kommer vara ordentligt kallt i Romme under dagen. Det är viktigt att ni har bra vantar, skidglasögon och bra med kläder på er då det kan bli väldigt kallt i sittliftar osv. Det är också obligatoriskt att ha hjälm i skidbacken och detta ingår i skidhyrningen för er som inte har en egen. <br><br>Vi hoppas på en fin dag i Romme och så ses vi imorgon vid 06:15 utanför skolan. <br>Mvh<br>Personalen på skolan</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="111075"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher111075" class="hidden" id="teacher111075" value="697"><label>Från</label><div><span id="messfrom111075">Jonny Gartne</span></div><label>Skickat</label><div><span id="messdate111075">5 feb. 09:24</span></div><input type="button" name="button" value="Besvara" id="reply111075" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div111075"></div></div><div id="accordion-group110207" class="accordion-group"><div id="accordion-heading110207" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse110207"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader110207">engelska omprov</span></div><div class="preview-block">Hej Edward,
+ 
+ Idag skulle du skriva ...</div></div><div class="statusicon"><img id="statuspic110207" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Maria Limper Nalmpanti</div><div class="accordion-heading-date">28 jan.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse110207" class="accordion-body collapse"><div id="accordion-inner110207" class="accordion-inner"><div class="printicon" id="print-110207"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess110207">Hej Edward,<br><br>Idag skulle du skriva omprov i engelska. Har du glömt det? <br><br>Hälsningar,<br><br>Maria Limper</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="110207"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher110207" class="hidden" id="teacher110207" value="746"><label>Från</label><div><span id="messfrom110207">Maria Limper Nalmpanti</span></div><label>Skickat</label><div><span id="messdate110207">28 jan. 16:27</span></div><input type="button" name="button" value="Besvara" id="reply110207" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div110207"></div></div><div id="accordion-group109510" class="accordion-group"><div id="accordion-heading109510" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse109510"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader109510">engelska-muntlig examination</span></div><div class="preview-block">Hej Edward,
+ 
+ Som jag har berättat t...</div></div><div class="statusicon"><img id="statuspic109510" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Maria Limper Nalmpanti</div><div class="accordion-heading-date">20 jan.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse109510" class="accordion-body collapse"><div id="accordion-inner109510" class="accordion-inner"><div class="printicon" id="print-109510"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess109510">Hej Edward,<br><br>Som jag har berättat tidigare behöver du komplettera för litteraturanalysen. Nästa omprovstillfälle är vecka 5. Ska jag anmäla dig? <br><br>Hälsningar,<br><br>Maria Limper</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="109510"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher109510" class="hidden" id="teacher109510" value="746"><label>Från</label><div><span id="messfrom109510">Maria Limper Nalmpanti</span></div><label>Till</label><div><span id="messto109510">Johan Broman, Edward Landgren, Christian Landgren, Johanna Johansson </span></div><label>Skickat</label><div><span id="messdate109510">20 jan. 09:11</span></div><input type="button" name="button" value="Besvara" id="reply109510" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div109510"></div></div><div id="accordion-group109233" class="accordion-group"><div id="accordion-heading109233" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse109233"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader109233">Re: Re: Edward halsböld</span></div><div class="preview-block">Ja, ni behöver lägga in frånvaro dagl...</div></div><div class="statusicon"><img id="statuspic109233" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Johan Broman</div><div class="accordion-heading-date">15 jan.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse109233" class="accordion-body collapse"><div id="accordion-inner109233" class="accordion-inner"><div class="printicon" id="print-109233"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess109233">Ja, ni behöver lägga in frånvaro dagligen för att det ska fungera. Jag vet tyvärr inte vilket meddelande det är, jag kan inte se vad som skickas till Edward. Om du kopierar det och skickar till mig så kanske jag kan hjälpa till?<br><br>Från: Christian Landgren<br>Skickat: ons 14 jan. 14:42<br>Rubrik: Re: Re: Edward halsböld<br><br>Tack! Jag har ibland missat att skriva in frånvaro direkt i appen och jag såg idag att han fick ett meddelande om engelskan. Vet inte om det har med närvaro att göra eller ej men det vore skönt om Edward fick hjälp att tolka vad det betyder?<br><br>Tack för hjälpen- jag hälsar Edward nedan!<br><br>Från: Johan Broman  <br>Skickat: 2026-01-14T13:15:13.000+00:00 <br>Rubrik: Re: Edward halsböld <br><br></span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="109233"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher109233" class="hidden" id="teacher109233" value="1010"><label>Från</label><div><span id="messfrom109233">Johan Broman</span></div><label>Skickat</label><div><span id="messdate109233">15 jan. 09:47</span></div><input type="button" name="button" value="Besvara" id="reply109233" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div109233"></div></div><div id="accordion-group109197" class="accordion-group"><div id="accordion-heading109197" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse109197"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader109197">Halvkursprov Matte</span></div><div class="preview-block">Hej!
+ 
+ För er som var sjuka idag på ...</div></div><div class="statusicon"><img id="statuspic109197" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Anna Schroer</div><div class="accordion-heading-date">14 jan.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse109197" class="accordion-body collapse"><div id="accordion-inner109197" class="accordion-inner"><div class="printicon" id="print-109197"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess109197">Hej!<br><br>För er som var sjuka idag på halvkursprovet finns en möjlighet att skriva prov nästa vecka - onsdag v. 4 klockan 15.20.<br><br>Därefter är det nästa ordinarie prov som gäller, vilket delvis testar samma kunskaper som detta halvkursprov. <br><br>Vänligen bekräfta om du tänker komma på provtillfället onsdag v.4 så anmäler jag dig till detta. Hör av dig om du har frågor!<br><br>Med vänlig hälsning<br>Anna</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="109197"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher109197" class="hidden" id="teacher109197" value="1009"><label>Från</label><div><span id="messfrom109197">Anna Schroer</span></div><label>Skickat</label><div><span id="messdate109197">14 jan. 15:04</span></div><input type="button" name="button" value="Besvara" id="reply109197" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div109197"></div></div><div id="accordion-group109158" class="accordion-group"><div id="accordion-heading109158" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse109158"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader109158">Re: Edward halsböld</span></div><div class="preview-block">Hej Christian, 
+ 
+ det låter som att ...</div></div><div class="statusicon"><img id="statuspic109158" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Johan Broman</div><div class="accordion-heading-date">14 jan.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse109158" class="accordion-body collapse"><div id="accordion-inner109158" class="accordion-inner"><div class="printicon" id="print-109158"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess109158">Hej Christian, <br><br>det låter som att Edward haft det rejält kämpigt under jullovet, men det låter som att han är på bättringsvägen. Skönt! Vad gäller material så finns det mesta lärarna går igenom publicerat på classroom, så där ska han hålla koll för respektive kurs. Som tur är har det inte gått så många dagar på terminen så jag hoppas att han inte missat så mycket. <br><br>En sak jag vet att han missat är de sista förberedelserna inför kommunikationsredovisningar nästa vecka. Det är ett grupparbete där Edward varit med i arbetet innan jul men missat de två senaste tillfällena. Det finns ingen fler lektion för att förbereda sig, men som tur är redovisar hans grupp på onsdagen. Det innebär att de har en håltimme på tisdag att träffas. Jagh hoppas att han hinner krya på sig tills dess.<br><br>Från: Christian Landgren<br>Skickat: mån 12 jan. 18:11<br>Rubrik: Re: Edward halsböld<br><br>Hej!<br><br>Jag ville bara uppdatera om läget med Edward. Han har haft halsböld under jullovet. Det började med en förkylning innan jullovet började och sen blev det till en rejäl komplikation så han har fått opereras flera gånger i halsen. Nu är han på bättringsvägen och är inne på sin andra antibiotikakur och kan börja plugga hemifrån men inte vara i skolan för att undvika att infektionen bryter ut igen. Jag undrar om det finns någon möjlighet att få lite hjälp att hitta studeringsmaterial för honom medan han fortfarande är hemma. Jag tror att han kommer behöva vara hemma resten av veckan tyvärr men han vill inte komma efter i skolarbetet. <br><br>Tack på förhand <br><br>Christian Landgren </span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="109158"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher109158" class="hidden" id="teacher109158" value="1010"><label>Från</label><div><span id="messfrom109158">Johan Broman</span></div><label>Skickat</label><div><span id="messdate109158">14 jan. 14:15</span></div><input type="button" name="button" value="Besvara" id="reply109158" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div109158"></div></div><div id="accordion-group109132" class="accordion-group"><div id="accordion-heading109132" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse109132"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader109132">Romme Alpin 6 feb</span></div><div class="preview-block">Hej alla, 
+ 
+ Nu har det blivit dags ...</div></div><div class="statusicon"><img id="statuspic109132" src="../../grafics/mail.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Jonny Gartne</div><div class="accordion-heading-date">14 jan.</div></div></a></div><div style="height: 0px; width:100%;" id="collapse109132" class="accordion-body collapse"><div id="accordion-inner109132" class="accordion-inner"><div class="printicon" id="print-109132"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess109132">Hej alla, <br><br>Nu har det blivit dags att anmäla sig till Romme Alpin fredagen den 6 februari. Ni som får detta meddelande har anmält ert intresse för att åka och för att bekräfta er plats till Romme behöver ni göra enligt följande: <br><br>Gå in på <a href="http://www.rommealpin.se" title="http://www.rommealpin.se">http://www.rommealpin.se</a> och klicka på Skola Online.<br>Skriv in lösenord: B5KH och gör sedan din beställning. <br>Du anmäler dig och betalar direkt via webben med kort eller<br>swish. <br><br>På plats kommer ni få ert liftkort samt en lunchkupong. Tänk på att ta med er något att äta på bussen upp till Romme samt hem från Romme. Resan tar ungefär 3 timmar enkel väg. <br><br>Vi kommer att åka buss från skolan och det är samling för samtliga utanför huvudentrén senast 06:15. Bussen kommer inte vänta in eventuella sena elever vilket, vid sen ankomst, resulterar i att man får infinna sig på Östermalms IP under dagen. Har ni inte anmält er på Rommes hemsida innan nästa fredag, 23 januari, så innebär det att bokningen stängt och att ni inte har en plats till Romme. <br><br>Har ni några frågor om resan till Romme Alpin kan ni skriva till mig så svarar jag så fort jag kan. <br>Mvh<br>Jonny </span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="109132"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher109132" class="hidden" id="teacher109132" value="697"><label>Från</label><div><span id="messfrom109132">Jonny Gartne</span></div><label>Skickat</label><div><span id="messdate109132">14 jan. 11:48</span></div><input type="button" name="button" value="Besvara" id="reply109132" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div109132"></div></div><div id="accordion-group106623" class="accordion-group"><div id="accordion-heading106623" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse106623"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader106623">engelska prov-viktigt underlag</span></div><div class="preview-block">Hej,
+ 
+ Jag skriver till dig eftersom...</div></div><div class="statusicon"><img id="statuspic106623" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Maria Limper Nalmpanti</div><div class="accordion-heading-date">20 nov. 2025</div></div></a></div><div style="height: 0px; width:100%;" id="collapse106623" class="accordion-body collapse"><div id="accordion-inner106623" class="accordion-inner"><div class="printicon" id="print-106623"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess106623">Hej,<br><br>Jag skriver till dig eftersom du har missat ett viktigt prov i engelska.<br><br>Provet är en viktig del av kursen och används som underlag för att bedöma dina kunskaper hittills. Ni har fått två lektioner för att skriva det, och du har tyvärr missat en eller båda gångerna. Du får dock en ny chans att göra provet nästa vecka (v. 48), på tisdag. Tyvärr finns det inga fler planerade omprovstillfällen innan jullovet, enligt ledningen.<br><br>Jag hoppas verkligen att du kan komma då. Om provet inte blir gjort kan det bli svårt att få tillräckligt med underlag, vilket i värsta fall kan leda till en F-varning och det vill vi såklart undvika.<br><br>Hör gärna av dig om du undrar över något eller behöver hjälp.<br><br>Hälsningar,<br><br>Maria Limper</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="106623"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher106623" class="hidden" id="teacher106623" value="746"><label>Från</label><div><span id="messfrom106623">Maria Limper Nalmpanti</span></div><label>Skickat</label><div><span id="messdate106623">20 nov. 11:06</span></div><input type="button" name="button" value="Besvara" id="reply106623" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div106623"></div></div><div id="accordion-group105363" class="accordion-group"><div id="accordion-heading105363" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse105363"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader105363">Angående prov i Ma2b Kapitel 1</span></div><div class="preview-block">Hej!
+ 
+ Lite ytterligare återkoppling...</div></div><div class="statusicon"><img id="statuspic105363" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Anna Schroer</div><div class="accordion-heading-date">20 okt. 2025</div></div></a></div><div style="height: 0px; width:100%;" id="collapse105363" class="accordion-body collapse"><div id="accordion-inner105363" class="accordion-inner"><div class="printicon" id="print-105363"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess105363">Hej!<br><br>Lite ytterligare återkoppling på provresultatet Ma2b kap 1.<br>För er som inte sett era kommentarer i schoolsoft - titta där.<br><br>Har ni inte fått det resultat/betyg ni förväntade er så finns alla möjligheter att höja. VI kommer ha halvkursprov i januari och nationella prov i maj där kunskaper på kap 1 testas igen. Detta innebär att omprovet v. 48 för de elever som berörs av detta egentligen inte är obligatoriskt utan för er skull om ni känner att ni vill visa på kunskaper som inte kom fram nu. Men känner man att det blir stressigt i schemat och hellre fokuserar framåt är det ok. Dock bra att vara medveten om att det är viktigt att få med sig alla kunskaper från början - för att få bättre chanser på de större proven.<br><br>Är medveten om att många tyckte att tiden var knapp på detta första prov. På halvkursprov och nationella provet sitter vi gemensamt med andra och då är tiden längre. På dessa småprov har vi oftast bara en lektion på oss - ska dock se om vi kan lösa på ngt sätt till kapitel 2-provet så att ni får längre tid!<br><br>Slutligen, Ma2b är en svårare kurs än Ma1b då Ma1b till stor del är repetition från högstadiet så det är inte ovanligt att man blir förvånad över att det plötsligt känns som ett hopp vad gäller svårighet.<br><br>Hör av er om ni har frågor.<br><br>Med vänlig hälsning<br>Anna<br></span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="105363"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher105363" class="hidden" id="teacher105363" value="1009"><label>Från</label><div><span id="messfrom105363">Anna Schroer</span></div><label>Skickat</label><div><span id="messdate105363">20 okt. 10:21</span></div><input type="button" name="button" value="Besvara" id="reply105363" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div105363"></div></div><div id="accordion-group104743" class="accordion-group"><div id="accordion-heading104743" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse104743"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader104743">Viktig information ang HPV-vaccinatio...</span></div><div class="preview-block">Från den 8 september erbjuds alla kil...</div></div><div class="statusicon"><img id="statuspic104743" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Sandra Frey</div><div class="accordion-heading-date">3 okt. 2025</div></div></a></div><div style="height: 0px; width:100%;" id="collapse104743" class="accordion-body collapse"><div id="accordion-inner104743" class="accordion-inner"><div class="printicon" id="print-104743"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess104743">Från den 8 september erbjuds alla killar födda 2007och 2008 kostnadsfri HPV vaccination enligt Folkhälsomyndighetens rekommendationer. De flesta killar har fått ett erbjudande i Alltid Öppet. Erbjudandet gäller åtminstone året ut. <br>Satsningen finansieras av statliga medel genom Regionalt Cancercentrum Stockholm/Gotland i samarbete med Smittskydd Stockholm.<br><br>För mer information se:<br><br><a href="https://www.1177.se/Stockholm/undersokning-behandling/vaccinationer/vaccination-mot-hpv/" title="https://www.1177.se/Stockholm/undersokning-behandling/vaccinationer/vaccination-mot-hpv/">https://www.1177.se/Stockholm/undersokning-behandling/vaccinationer/vaccination-mot-hpv/</a><br><br>Det går att vaccinera sig på två mottagningar i Stockholm:<br>HPV vaccinationsmottagningen Karolinska sjukhuset och Glömsta-poolen.<br><br>OBS! Denna vaccination ges inte på skolan, utan endast på de mottagningar som går att boka via appen Alltid Öppet.<br><br>Hälsningar<br><br>Sandra Frey, skolsköterska<br><br><br></span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="104743"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher104743" class="hidden" id="teacher104743" value="839"><label>Från</label><div><span id="messfrom104743">Sandra Frey</span></div><label>Skickat</label><div><span id="messdate104743">3 okt. 16:48</span></div><input type="button" name="button" value="Besvara" id="reply104743" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div104743"></div></div><div id="accordion-group98538" class="accordion-group"><div id="accordion-heading98538" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse98538"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader98538">Uppgift idrott</span></div><div class="preview-block">Hej Edward, 
+ 
+ Jag saknar din uppgif...</div></div><div class="statusicon"><img id="statuspic98538" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Gabriella Garpenhag</div><div class="accordion-heading-date">23 apr. 2025</div></div></a></div><div style="height: 0px; width:100%;" id="collapse98538" class="accordion-body collapse"><div id="accordion-inner98538" class="accordion-inner"><div class="printicon" id="print-98538"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess98538">Hej Edward, <br><br>Jag saknar din uppgift "Min individuella hälsa" i idrott och ber att du skickar in den så snart som möjligt så du inte riskerar att halka efter i kursen.<br><br>Hör av dig om du har några frågor.<br><br>Med vänliga hälsningar Gabriella</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="98538"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher98538" class="hidden" id="teacher98538" value="945"><label>Från</label><div><span id="messfrom98538">Gabriella Garpenhag</span></div><label>Skickat</label><div><span id="messdate98538">23 apr. 13:53</span></div><input type="button" name="button" value="Besvara" id="reply98538" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div98538"></div></div><div id="accordion-group95022" class="accordion-group"><div id="accordion-heading95022" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse95022"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader95022">Halvtidsomdöme VT 25</span></div><div class="preview-block">Hej, 
+ 
+ Nu finns halvtidsomdömena pu...</div></div><div class="statusicon"><img id="statuspic95022" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Gabriella Garpenhag</div><div class="accordion-heading-date">8 feb. 2025</div></div></a></div><div style="height: 0px; width:100%;" id="collapse95022" class="accordion-body collapse"><div id="accordion-inner95022" class="accordion-inner"><div class="printicon" id="print-95022"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess95022">Hej, <br><br>Nu finns halvtidsomdömena publicerade på schoolsoft. Du hittar det i den individuella studieplanen och kommentar till omdömet hittar du längst ner i matrisen. Vi kommer fortätta att ha halvtidssamtal nästa vecka om det finns fårgor om omdömet kan vi ta dem under samtalet eller på studietiden. <br><br>Med vänliga hälsningar Gabriella</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="95022"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher95022" class="hidden" id="teacher95022" value="945"><label>Från</label><div><span id="messfrom95022">Gabriella Garpenhag</span></div><label>Skickat</label><div><span id="messdate95022">8 feb. 16:50</span></div><input type="button" name="button" value="Besvara" id="reply95022" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div95022"></div></div><div id="accordion-group94344" class="accordion-group"><div id="accordion-heading94344" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse94344"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader94344">Viktig information och stöd om sorgli...</span></div><div class="preview-block">Hej,
+ 
+ Vi vill informera er om att e...</div></div><div class="statusicon"><img id="statuspic94344" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Maria Lafrenz</div><div class="accordion-heading-date">31 jan. 2025</div></div></a></div><div style="height: 0px; width:100%;" id="collapse94344" class="accordion-body collapse"><div id="accordion-inner94344" class="accordion-inner"><div class="printicon" id="print-94344"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess94344">Hej,<br><br>Vi vill informera er om att en av våra elever har avlidit på sjukhus av medicinska skäl. Våra tankar är hos elevens familj, vänner och klasskompisar.<br><br>Idag har vi delat informationen med eleverna på ett respektfullt sätt. Vi har lyft vikten av att visa omtanke och stödja varandra. För de som har behövt det har vi haft ett öppet klassrum där elever har kunnat skriva i en minnesbok, samtala eller bara få en lugn stund. Elevhälsoteamet har funnits tillgängligt under hela dagen och kommer fortsätta att vara det.<br><br>Även om inte alla kände eleven, kan en sådan här händelse påverka elever på olika sätt. Vi uppmuntrar er att prata med era ungdomar om hur de mår och påminna dem om att det är okej att känna och reagera på olika sätt.<br><br>Om ni har frågor eller märker att er ungdom behöver stöd, är ni alltid välkomna att höra av er till oss i skolledningen eller elevhälsoteamet.<br><br>Med omtanke,<br><br>Maria Lafrenz<br>Rektor<br>Tillsammans med skolans krisgrupp<br></span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="94344"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher94344" class="hidden" id="teacher94344" value="388"><label>Från</label><div><span id="messfrom94344">Maria Lafrenz</span></div><label>Skickat</label><div><span id="messdate94344">31 jan. 12:14</span></div><input type="button" name="button" value="Besvara" id="reply94344" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div94344"></div></div><div id="accordion-group92667" class="accordion-group"><div id="accordion-heading92667" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse92667"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader92667">Information om värdegrundsarbete </span></div><div class="preview-block">Hej!
+ 
+ Vi har uppmärksammat att någr...</div></div><div class="statusicon"><img id="statuspic92667" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Maria Lafrenz</div><div class="accordion-heading-date">20 dec. 2024</div></div></a></div><div style="height: 0px; width:100%;" id="collapse92667" class="accordion-body collapse"><div id="accordion-inner92667" class="accordion-inner"><div class="printicon" id="print-92667"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess92667">Hej!<br><br>Vi har uppmärksammat att några elever/klasser använt digitala verktyg, som Google Forms, för att skapa anonyma enkäter. Tyvärr har innehållet i vissa av dessa varit olämpligt eller kränkande , vilket påverkar tryggheten och klimatet på skolan negativt. Rektor, elevhälsan och klasscoacher hanterar detta genom information och samtal med elever om skolans ordningsregler och nolltolerans mot kränkningar både i skolan och på nätet.<br><br>Prata gärna med era ungdomar om deras ansvar i detta och diskutera att även anonymitet kan bidra till otrygghet. Var gärna uppmärksam om ni hör eller ser exempel på olämpliga enkäter och informera skolledningen direkt. Om någon känner sig kränkt eller obekväm på grund av ovan, hänvisa dem till att prata med någon av sina klasscoacher, elevhälsan eller skolledningen.<br><br>Hälsningar<br>Rektor</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="92667"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher92667" class="hidden" id="teacher92667" value="388"><label>Från</label><div><span id="messfrom92667">Maria Lafrenz</span></div><label>Skickat</label><div><span id="messdate92667">20 dec. 13:44</span></div><input type="button" name="button" value="Besvara" id="reply92667" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div92667"></div></div><div id="accordion-group92364" class="accordion-group"><div id="accordion-heading92364" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse92364"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader92364">Räknestuga</span></div><div class="preview-block">Hej elever och vårdnadshavare i SA24!...</div></div><div class="statusicon"><img id="statuspic92364" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Linnea Eklund</div><div class="accordion-heading-date">17 dec. 2024</div></div></a></div><div style="height: 0px; width:100%;" id="collapse92364" class="accordion-body collapse"><div id="accordion-inner92364" class="accordion-inner"><div class="printicon" id="print-92364"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess92364">Hej elever och vårdnadshavare i SA24!<br><br>Den 7 januari erbjuder vi på skolan en extra studietugan kl 10-14, på plats finns delar ur vårt elevhälsoteam tillsammans med våra duktiga matematikvikarier.&nbsp;Inför halvkursprovet som är v. 3 är det jättebra att gå på räknestugan för extra repetition. Om du vill gå på räknestugan behöver du anmäla dig på följande länk:&nbsp;<br><br><a href="https://forms.gle/pNYXK6LwJVsJJiA36" title="https://forms.gle/pNYXK6LwJVsJJiA36">https://forms.gle/pNYXK6LwJVsJJiA36</a>&nbsp;<br><br>Ha en fin dag!<br>Linnea Eklund</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="92364"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher92364" class="hidden" id="teacher92364" value="668"><label>Från</label><div><span id="messfrom92364">Linnea Eklund</span></div><label>Skickat</label><div><span id="messdate92364">17 dec. 14:17</span></div><input type="button" name="button" value="Besvara" id="reply92364" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div92364"></div></div><div id="accordion-group87353" class="accordion-group"><div id="accordion-heading87353" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse87353"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader87353">Dagens utvecklingssamtal SA24A</span></div><div class="preview-block">Hej och god förmiddag! 
+ 
+ Idag är de...</div></div><div class="statusicon"><img id="statuspic87353" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Rebecka Lundvall</div><div class="accordion-heading-date">24 sep. 2024</div></div></a></div><div style="height: 0px; width:100%;" id="collapse87353" class="accordion-body collapse"><div id="accordion-inner87353" class="accordion-inner"><div class="printicon" id="print-87353"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess87353">Hej och god förmiddag! <br><br>Idag är det dags för utvecklingssamtal. Här hittar ni länken till samtalet: <a href="https://meet.google.com/ebi-yrbp-iti" title="https://meet.google.com/ebi-yrbp-iti">https://meet.google.com/ebi-yrbp-iti</a> <br><br>Ser framemot samtalen!<br><br>Mvh,<br>Rebecka Lundvall<br>Mentor för SA24A</span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="87353"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher87353" class="hidden" id="teacher87353" value="779"><label>Från</label><div><span id="messfrom87353">Rebecka Lundvall</span></div><label>Skickat</label><div><span id="messdate87353">24 sep. 09:36</span></div><input type="button" name="button" value="Besvara" id="reply87353" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div87353"></div></div><div id="accordion-group86274" class="accordion-group"><div id="accordion-heading86274" class="accordion-heading"><a class="accordion-toggle" id="" data-toggle="collapse" data-parent="#accordion" href="#collapse86274"><div class="accordion-heading-left"><div style="float:left; padding-right:10px;"><span id="messheader86274">Matematik 1b</span></div><div class="preview-block">Hej vårdnadshavare för SA24a!
+ 
+ I må...</div></div><div class="statusicon"><img id="statuspic86274" src="../../grafics/mail_open.gif" alt=""></div><div class="accordion-heading-right"><div class="accordion-heading-from">Linnea Eklund</div><div class="accordion-heading-date">30 aug. 2024</div></div></a></div><div style="height: 0px; width:100%;" id="collapse86274" class="accordion-body collapse"><div id="accordion-inner86274" class="accordion-inner"><div class="printicon" id="print-86274"></div><div style="" class="accordion_inner_left"><p class="acc-item-main"><span id="mess86274">Hej vårdnadshavare för SA24a!<br><br>I måndags gjorde klassen en screeningen (förkunskaps-diagnos) i matematik. Det är något vi på skolan gör för att tidigt upptäcka och sätta in en insats för de elever som saknar tillräckliga förkunskaper från grundskolan. De elever som inte klarade screeningen kommer att få obligatoriskt mattestöd under studietiden 15.30-16.45 på måndagar fram till vecka 42. Under mattestödet kommer vi att repetera innehåll från högstadiet för att ge alla elever de bästa förutsättningar för att klara kursen matematik 1b. De elever som har fått obligatoriskt mattestöd är redan informerade och kan redan nu se den obligatoriska studietiden i sina scheman. Hör av er om ni har några frågor. <br><br>Även de elever som inte klarade screeningen är såklart varmt välkomna till studietiden men till min kollega Mats som finns i klassrummet Sorbonne. På onsdagar har vi ytterligare en ( frivillig) studietid i matematik 15.30 i Nanyang, där är ocskå alla elever varmt välkomna. <br><br><br>Ha en fin dag<br>Linnea Eklund<br></span></p></div><div style="" class="accordion_inner_right"><form name="viewmessage" action="right_student_message.jsp" method="post"><input type="hidden" name="action" class="hidden" id="action" value=""><input type="hidden" name="requestid" class="hidden" id="requestid" value="86274"><input type="hidden" name="folder" class="hidden" id="folder" value="inbox"><input type="hidden" name="teacher86274" class="hidden" id="teacher86274" value="668"><label>Från</label><div><span id="messfrom86274">Linnea Eklund</span></div><label>Skickat</label><div><span id="messdate86274">30 aug. 12:29</span></div><input type="button" name="button" value="Besvara" id="reply86274" class="btn"><input type="submit" name="button" value="Ta bort" class="btn"></form></div><div class="accordion_image_mainwrap" style="padding-bottom: 10px;"></div><div style="clear:both;"></div></div></div><div class="bottom-div86274"></div></div></div></div></div>
+
+
+
+</div><!-- ends content -->
+</div><!-- ends main -->
+
+<script type="text/javascript">
+$(".collapse").collapse({
+  toggle: false
+});
+
+$(".accordion-toggle").click(function() {
+  var picId = $(this).attr("href").substr("#collapse".length);
+  if (!isNaN(parseInt(picId))) {
+    var pic = $("#statuspic"+picId).attr("src").substr("../../grafics/".length);
+    if(pic == "mail.gif"){
+      $.ajax({
+        url: "right_student_message.jsp?action=view&ajax=1&requestid="+picId,
+        success: function(data) {
+          $("#statuspic"+picId).attr("src","../../grafics/mail_open.gif");
+        },
+        error: function(XMLHttpRequest) {
+          if (XMLHttpRequest.status === 403) {
+            $(populateLightBox('<div class="alert alert-error"><div class="strong">Varning</div><div><div class="message-text">Du är inte inloggad längre! Du måste logga in för att kunna se denna sida.</div></div></div>'));
+          }
+        },
+        cache:false
+      });
+    }
+  }
+});
+
+$("input[id^='reply']").click(function() {
+  
+  var messageId = $(this).attr("id").substr("reply".length);
+  var messDate = $("#messdate"+messageId).html();
+  var messfrom = $("#messfrom"+messageId).html();
+  var messhead = $("#messheader"+messageId).html();
+  var sendId = $("#teacher"+messageId).val();
+  $("#messheader").val("Re: "+$("#messheader"+messageId).html());
+  $("#messbody").val("\n\r"+"Från:"+ messfrom+"\n"+"Skickat:" +messDate+"\n"+"Rubrik: "+messhead+"\n"+$("#mess"+messageId).html());
+  $("#messbody").val($("#messbody").val().replace(new RegExp('<br>', 'gi'),'\r\n'));
+  
+    
+        moveSelectedOptions(document.message.allRecipients, document.message.users);
+    
+    
+      $("#users > option").each(function(){
+      if($(this).val() == sendId+"0"){
+        $(this).val(sendId+"0").attr("selected", "selected");
+      }
+      var my_options = $("#users option");
+      my_options.sort(function(a,b) {
+          if (a.text > b.text) return 1;
+          else if (a.text < b.text) return -1;
+          else return 0;
+      });
+      $("#users").empty().append( my_options );
+      $("#collapseadd").collapse('show');
+      });
+      $('html, body').animate({
+        scrollTop: $("#content").offset().top
+      }, 300);
+      moveSelectedOptions(document.message.users, document.message.allRecipients);
+    
+  
+  $("#collapseactive").css("height", "auto");
+  $("#allRecipients option").attr("height", "auto");
+});
+
+//+-
+$('#collapseadd').on('hide', function () {
+   $("#opencloseadd").html('+');
+  });
+
+$('#collapseadd').on('show', function () {
+  $("#opencloseadd").html('-');
+ });
+
+$(document).ready(function() {
+  $("#allRecipients option[value=" + -222 + "]").attr('disabled','disabled');
+  $("#users option[value=" + -222 + "]").attr('disabled','disabled');
+  $("#messagepicture").width($(".span6left").width());
+  
+});
+
+
+$(function() {
+  $('#message').attr("class","menu_item_selected");
+});
+</script>
+
+
+      </div> <!-- end content-pos-student -->
+    </div> <!-- end studentContentWrapper -->
+  </div> <!-- end studentPageWrapper -->
+
+<script>
+  $(document).ready(function () {
+    initSize();
+    $('#menu_message').attr("class", "menu_item_selected");
+    try {
+      $('#startmenu').attr("class", "TopMenu-MenuInactive-Bg");
+    } catch (c) {
+    }
+    try {
+      $('#school').attr("class", "TopMenu-MenuInactive-Bg");
+    } catch (c) {
+    }
+    try {
+      $('#profile').attr("class", "TopMenu-MenuInactive-Bg");
+    } catch (c) {
+    }
+    try {
+      $('#startmenu').attr("class", "TopMenu-MenuActive-Bg");
+    } catch (c) {
+    }
+    ;
+  });
+</script>
+
+
+
+
+<div id="top-box" class="dontPrint" style="">
+  <!-- First -->
+  <div id="first-warning">
+    <div id="close_icon_timer" style="display: none"></div>
+    <div class="rubrik">Varning</div>
+    <p>Du har varit inaktiv i: <span id="inactive"></span>minuter.</p>
+    <p>
+      <span id="time"></span>
+      till automatisk utloggning på grund av inaktivitet.
+      </p><div id="closebutton" style="text-align: center;">
+        <input type="button" name="OK" value="OK" onclick=" showContent();" style="float:left" id="okbutton" class="btn">
+
+      </div>
+    <p></p>
+  </div>
+  <!-- Second -->
+  <div id="second-warning">
+    
+    <div class="rubrik">Varning</div>
+    <p>Du har nu loggats ut på grund av inaktivitet.</p>
+    <p>
+      
+      <table cellspacing="1" cellpadding="2"><tbody><tr><td style="border:none;" valign="middle"><a href="https://sms.schoolsoft.se/procivitas/samlLogin.jsp?usertype=parent&amp;ajaxlogin=1" onclick="showContent();" target="_blank">Till inloggningssidan</a></td><td style="border:none;" valign="bottom"><a href="https://sms.schoolsoft.se/procivitas/samlLogin.jsp?usertype=parent&amp;ajaxlogin=1" onclick="showContent();" target="_blank"><img src="../../images/icon/arrow-000-medium.png" alt=""></a></td></tr></tbody></table>
+
+    </p>
+    
+</div>
+</div>
+<script language="JavaScript" type="text/javascript">
+
+    var topRightTimer;
+    var timeBetweenWarnAndLogout;
+    var timeUntilLogout;
+    var timeout;
+    var counter = 0;
+    var failedLogins = 0;
+    var halfMinCorrection = 30000;
+
+    var lastAccessTime = new Date().getTime();
+    var timeLoggedIn = 0;
+    var updateInterval = 1000;
+
+    if(typeof window.localStorage !== "undefined"){
+        localStorage.setItem("lastAccessTime", new Date().getTime());
+    }
+
+    resetTimer();
+
+    //Set top-right logout timer
+    var logoutTimer = timeUntilLogout;
+
+    function setTopRightTimer() {
+        $('#timeUntilLogout').html((logoutTimer/60000).toFixed(0) + " minuter till automatisk utloggning");
+        topRightTimer = setInterval(function () {
+
+            //If browser support localstorage
+            if (typeof window.localStorage !== "undefined") {
+                logoutTimer -= updateInterval;
+                //New lastAccessTime is set in another tab
+                if(lastAccessTime != localStorage.getItem("lastAccessTime") && timeUntilLogout > 0){
+                    $('#top-box').hide(0, onTopBoxHidden);
+                    lastAccessTime = localStorage.getItem("lastAccessTime");
+                    clearTimeout(timeout);
+                    showContent();
+                    resetTimer();
+                }
+
+                timeLoggedIn = new Date().getTime() - lastAccessTime;
+                logoutTimer = 1800000 - timeLoggedIn;
+                $('#timeUntilLogout').html(((logoutTimer + halfMinCorrection) / 60000).toFixed(0) + " minuter till automatisk utloggning");
+
+                if (timeLoggedIn > 1800000){
+                    $('#timeUntilLogout').html("Ej inloggad");
+                    clearInterval(topRightTimer);
+                }
+            } else {
+                logoutTimer -= updateInterval;
+                $('#timeUntilLogout').html(((logoutTimer + halfMinCorrection) / 60000).toFixed(0) + " minuter till automatisk utloggning");
+
+                if (logoutTimer <= 0) {
+                    $('#timeUntilLogout').html("Ej inloggad");
+                    clearInterval(topRightTimer);
+                }
+            }
+        }, updateInterval);
+    }
+    setTopRightTimer();
+
+    function showTopBox(timer){
+        $('#top-box').show(0, onTopBoxShown);
+        $('#top-box').focus();
+        $('#top-box').css('top', $(window).scrollTop());
+        $('#top-box').css('left', ($(window).width()/2) - (parseInt($('#top-box').css('width'))/2));
+        if(timer > 0){
+            toggleBackSpace(false);
+            $('#first-warning').show();
+            $('#second-warning').hide();
+        }else{
+            toggleBackSpace(true);
+            hideContent();
+            $('#content_wrapper').hide();
+            $('#first-warning').hide();
+          
+            $('#second-warning').show();
+            $('#sspassword_ajax').focus();
+          
+        }
+        $('#top-box').animate({height: "230px"}, 400);
+    }
+
+    function onTopBoxHidden() {
+      toggleBackSpace(true);
+    }
+
+    function onTopBoxShown() {
+      toggleBackSpace(false);
+    }
+    function showContent(){
+        toggleBackSpace(true);
+        $('#content_wrapper').show();
+        $('#top-box').hide(0, onTopBoxHidden);
+        
+    }
+
+    function hideContent(){
+        toggleBackSpace(false);
+        $('#content_wrapper').hide();
+        $('#top-box').focus();
+    }
+
+    function autoClick(){
+      toggleBackSpace(true);
+      $('#content_wrapper').show();
+      $('#top-box').hide(0, onTopBoxHidden);
+    }
+
+    function resetTimer() {
+        timeBetweenWarnAndLogout = 300000; // time before timeout to display warning: 5min=300000 1min = 60000
+        timeUntilLogout = 1800000;
+        logoutTimer = timeUntilLogout;
+        if (timeUntilLogout==null) {
+            timeUntilLogout = 1800000; //30 minutes default if not set on server
+        }
+        counter=0;
+        timeout=setTimeout("showTopBox('"+(timeUntilLogout - timeBetweenWarnAndLogout)+"'); timedCount();",timeUntilLogout - timeBetweenWarnAndLogout);
+    }
+
+    function timedCount() {
+        var timeLeft = (((timeBetweenWarnAndLogout))/1000)-counter;
+        if (timeLeft >= 0) {
+            var minutes = Math.floor(timeLeft /60);
+            var seconds = timeLeft - minutes * 60;
+            $('#time').html(((minutes<10)?"0"+minutes:minutes)+':'+((seconds<10)?"0"+seconds:seconds));
+            $('#inactive').html(((timeUntilLogout-timeBetweenWarnAndLogout)/60000).toFixed(0) + " ");
+            counter++;
+            timeout=setTimeout("timedCount()",1000);
+        } else {
+            clearTimeout(timeout);
+            showTopBox(0);
+        }
+    }
+
+    function relogin() {
+        var usertype = $('#usertype_ajax').val();
+        var sspassword = $('#sspassword_ajax').val();
+        var ssusername = $('#ssusername_ajax').val();
+        var orgid = $('#organization_ajax').val();
+        var formData = {usertype:usertype,ssusername:ssusername,sspassword:sspassword,ajaxlogin:1,organization:orgid};
+    $.ajax({
+        url: "../Login.jsp?action=login",
+        cache: false,
+        type: "POST",
+        data: formData,
+        success: function(data) {
+            $('#sspassword_ajax').val('');
+            $('#wrongpasswd').css("display",'none');
+            if (data.replace(/^\s+|\s+$/g, '') == "login ok") { //special since IE can't use trim()
+                $('#wrongpasswd').css("display",'none');
+                $('#wrongpasswddisabled').css("display",'none');
+                showContent();
+                resetTimer();
+                setTopRightTimer();
+                failedLogins = 0;
+                if (typeof window.localStorage !== "undefined") {
+                  localStorage.setItem("lastAccessTime", new Date().getTime());
+                }
+            } else if (data.replace(/^\s+|\s+$/g, '') == "login failed") {
+                failedLogins++;
+                if (failedLogins>1) {
+                    $('#sspassword_ajax').attr('disabled','disabled');
+                    $('#loginbutton').attr('disabled','disabled');
+                    $('#wrongpasswddisabled').css("display",'');
+                } else {
+                    $('#wrongpasswd').css("display", 'block');
+                }
+            }
+        },
+        error : function(data) {
+            //
+        }
+    });
+    }
+
+    function toggleBackSpace(on) {
+        //if on enable backspace
+        if (on) {
+          $(document).unbind('keydown');
+        } else {
+            $(document).bind({
+                keydown: function (event) {
+                    if (event.keyCode == 8 && $(event.target).attr('id') != 'sspassword_ajax') {//8 = backspace
+                        event.stopPropagation();
+                        event.preventDefault();
+                    }
+                }
+            });
+        }
+    }
+
+</script>
+
+
+
+
+
+<div class="DeeHZ cfxMU"><div class="MuiScopedCssBaseline-root css-vu345x"></div></div><div style="position: absolute; visibility: hidden; z-index: 50000;"><div></div><div></div></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div></body></html>
