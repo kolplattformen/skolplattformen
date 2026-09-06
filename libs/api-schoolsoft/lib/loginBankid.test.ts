@@ -136,6 +136,9 @@ const createChainFetch = (state: ChainState) => {
     if (url.includes('right_student_startpage.jsp')) {
       return fakeResponse({ body: startpageFixture })
     }
+    if (url.includes('/rest-api/parent/header/parent')) {
+      return fakeResponse({ body: fixtureJson('parent-header') })
+    }
     if (url.includes('/rest-api/parent/calendar/settings')) {
       return fakeResponse({
         body: '{"userType":"STUDENT","userId":17149,"app":false,"mode":"agenda","categories":[],"showWeekends":false,"agendaRange":"day"}',

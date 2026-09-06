@@ -30,6 +30,39 @@ export interface SsLessonEvent {
   roomBooking: boolean
 }
 
+/** Skolanknytning för ett barn i header-API:t */
+export interface SsParentHeaderSchool {
+  orgId: number
+  className: string
+  schoolName: string
+  parentAllowedAccess: boolean
+  studentActive: boolean
+}
+
+export interface SsParentHeaderChild {
+  id: number
+  firstName: string
+  lastName: string
+  schools: SsParentHeaderSchool[]
+}
+
+/**
+ * GET /rest-api/parent/header/parent - förälderns header-state:
+ * identitet, ALLA barn (multi-barn), aktuellt barn/org, logoutURL.
+ */
+export interface SsParentHeader {
+  firstName: string
+  lastName: string
+  children: SsParentHeaderChild[]
+  /** Relativ JSP-länk, t.ex. "../Login.jsp?action=logout" */
+  logoutURL: string
+  currentChildId: number
+  currentOrgId: number
+}
+
+/** GET /rest-api/parent/header/parent/messages/amount → bar nummer (t.ex. 8) */
+export type SsMessagesAmount = number
+
 /** GET /rest-api/parent/calendar/settings */
 export interface SsCalendarSettings {
   userType: string

@@ -21,6 +21,9 @@ const fakeResponse = (body: string): Response => ({
 
 /** URL → fixture-mappning som speglar adapterns endpoints. */
 const fakeFetch: Fetch = async (url: string) => {
+  if (url.includes('/rest-api/parent/header/parent')) {
+    return fakeResponse(fixture('json', 'parent-header'))
+  }
   if (url.includes('right_student_startpage.jsp')) {
     return fakeResponse(fixture('html', 'startpage'))
   }
@@ -78,7 +81,7 @@ const isLunch = (entry: TimetableEntry): boolean =>
   entry.code?.toUpperCase() === 'LUNCH'
 
 describe('ApiSchoolsoft', () => {
-  it('getChildren returnerar barnet från startsida + settings', async () => {
+  it('getChildren returnerar barnen från header-API:t (aktiv först)', async () => {
     const { api } = createApi()
     const children = await api.getChildren()
     expect(children).toEqual([
@@ -87,16 +90,17 @@ describe('ApiSchoolsoft', () => {
         sdsId: '17149',
         name: 'Edward Landgren',
         status: 'STUDENT',
-        schoolId: 'procivitas',
+        schoolId: '4',
       },
     ])
   })
 
-  it('getUser returnerar vårdnadshavarens namn', async () => {
+  it('getUser returnerar vårdnadshavarens namn från header-API:t', async () => {
     const { api } = createApi()
     const user = await api.getUser()
     expect(user.isAuthenticated).toBe(true)
     expect(user.firstName).toEqual('Christian')
+    expect(user.lastName).toEqual('Landgren')
   })
 
   it('getTimetable mappar vecka 36 till TimetableEntry[]', async () => {

@@ -1,15 +1,25 @@
 # @skolplattformen/api-schoolsoft
 
 Adapter mot **Schoolsoft** (parent-vyn) för Skolplattformen-appen. Byggd mot live-inspelad
-trafik från skol-slug `procivitas` (sms.schoolsoft.se/procivitas) med barnet
-Edward Landgren (id 17149, klass SA24a). Samtliga parsers är rena funktioner
-och testas mot rå-fixtures i `lib/__mocks__/`.
+trafik från skol-slug `procivitas` (sms.schoolsoft.se/procivitas). Samtliga parsers är
+rena funktioner och testas mot rå-fixtures i `lib/__mocks__/`.
+
+**Identitet/barn hämtas via header-REST (`/rest-api/parent/header/parent`)** -
+startpage-JSP:ens `#parent-header-root` är en klientrenderad React-ö och duger
+bara för sessionskollen (`right_student_startpage.jsp` + mount-div-detektion).
+Header-svaret innehåller: förälderns namn, **alla barn** (multi-barn-stöd med
+`currentChildId`/`currentOrgId`; barnbyte via
+`parent/header/parent?childId={id}&orgId={id}` är dokumenterat men ej exponerat än),
+`logoutURL`, samt skolkopplingar (`orgId`, `schoolName`, `className`,
+`parentAllowedAccess`, `studentActive`).
 
 ## Endpoints
 
 | Syfte | Metod | URL | Format |
 |---|---|---|---|
-| Startsida (identitet, nyhetsbox, meddelanderäknare) | GET | `{baseUrl}/jsp/student/right_student_startpage.jsp` | HTML (iso-8859-1) |
+| **Identitet + barnlista (header-API)** | GET | `{baseUrl}/rest-api/parent/header/parent` | JSON (shape i fixture) |
+| Olästa meddelanden (badge) | GET | `{baseUrl}/rest-api/parent/header/parent/messages/amount` | bar nummer |
+| Startsida (sessionskoll, nyhetsbox) | GET | `{baseUrl}/jsp/student/right_student_startpage.jsp` | HTML (iso-8859-1) |
 | Kalender-inställningar (`userId`!) | GET | `{baseUrl}/rest-api/parent/calendar/settings` | JSON |
 | Lektions-agenda (lektioner + lunch) | GET | `{baseUrl}/rest-api/parent/calendar/lessons/agenda?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` | JSON-bar array `[SsLessonEvent]` |
 | Kalender-händelser (manuella; tom hos parent i inspelningen) | GET | `{baseUrl}/rest-api/parent/calendar/event/agenda?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` | JSON-bar array (samma form; `[]`) |

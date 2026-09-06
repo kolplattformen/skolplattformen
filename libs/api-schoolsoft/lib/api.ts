@@ -33,21 +33,14 @@ import { DummyStatusChecker } from './loginStatusChecker'
 import {
   isSsLessonEventList,
   parseAbsenceWeek,
-  parseChildIdentity,
   parseMessages,
   parseNewsDetail,
   parseNewsList,
-  parseParentName,
   parseStaffSelect,
   staffToTeachers,
   svDateToIso,
 } from './parse'
-import {
-  SsAbsenceWeek,
-  SsCalendarSettings,
-  SsChildIdentity,
-  SsLessonEvent,
-} from './types'
+import { SsAbsenceWeek, SsLessonEvent, SsParentHeader } from './types'
 
 export interface SchoolsoftConfig {
   fetch: Fetch
@@ -65,8 +58,11 @@ export interface SchoolsoftConfig {
   loginTimeoutMs?: number
 }
 
-interface SchoolsoftIdentity extends SsChildIdentity {
-  userId: number
+interface SchoolsoftIdentity {
+  childId: number
+  orgId: number
+  className: string
+  schoolName: string
 }
 
 /**
@@ -350,7 +346,7 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     return `${this.baseUrl}/jsp/student/right_student_startpage.jsp`
   }
 
-  /** Kortlivad cache - identitet/user/meddelanderäknare delar samma sida. */
+  /** Kortlivad cache - används bara för session-koll/meddelanderäknare. */
   private async getStartpageHtml(): Promise<string> {
     if (
       this.startpageCache &&
@@ -363,38 +359,71 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     return html
   }
 
+  /**
+   * Header-API:t (React-appens egen källa): förälder + ALLA barn med
+   * skolanknytningar. Svarar som rå-JSON utan browser-DOM - den enda
+   * identity-källa som fungerar i RN (startpage-headern är klientrenderad).
+   */
+  private headerCache?: { data: SsParentHeader; at: number }
+
+  private async getParentHeader(): Promise<SsParentHeader> {
+    if (this.headerCache && Date.now() - this.headerCache.at < 30 * 1000) {
+      return this.headerCache.data
+    }
+    const data = await this.fetchJson<SsParentHeader>(
+      `${this.baseUrl}/rest-api/parent/header/parent`
+    )
+    this.headerCache = { data, at: Date.now() }
+    return data
+  }
+
   async getUser(): Promise<User> {
-    const html = await this.getStartpageHtml()
+    const header = await this.getParentHeader()
     return {
       personalNumber: this.personalNumber,
       isAuthenticated: true,
-      firstName: parseParentName(html) || undefined,
+      firstName: header.firstName || undefined,
+      lastName: header.lastName || undefined,
     }
   }
 
   async getChildren(): Promise<EtjanstChild[]> {
-    const html = await this.getStartpageHtml()
-    const identity = parseChildIdentity(html)
-    if (!identity) {
-      throw new Error('Kunde inte tolka barnets identitet ur startpage')
+    const header = await this.getParentHeader()
+    if (!header.children?.length) {
+      throw new Error('Header-API:t returnerade inga barn')
     }
-    const settings = await this.fetchJson<SsCalendarSettings>(
-      `${this.baseUrl}/rest-api/parent/calendar/settings`
+    const current = header.children.find(
+      (c) => c.id === header.currentChildId
     )
-    const userId = Number(settings.userId)
-    if (!Number.isFinite(userId)) {
-      throw new Error('Schoolsoft settings saknar userId')
+    const school = current?.schools?.find(
+      (s) => s.orgId === header.currentOrgId
+    ) ?? current?.schools?.[0]
+    if (current && school) {
+      this.identity = {
+        childId: current.id,
+        orgId: school.orgId,
+        className: school.className.trim(),
+        schoolName: school.schoolName.trim(),
+      }
     }
-    this.identity = { ...identity, userId }
-    return [
-      {
-        id: String(userId),
-        sdsId: String(userId),
-        name: identity.name,
+    // Aktuellt barn först (serverns state styr vilken kontext övriga API:er
+    // returnerar; barnbyte sker via parent/header/parent?childId=..&orgId=..
+    // men exponeras ännu inte - se README).
+    const ordered = [...header.children].sort((a, b) =>
+      a.id === header.currentChildId ? -1 : b.id === header.currentChildId ? 1 : 0
+    )
+    return ordered.map((child) => {
+      const childSchool =
+        child.schools?.find((s) => s.orgId === header.currentOrgId) ??
+        child.schools?.[0]
+      return {
+        id: String(child.id),
+        sdsId: String(child.id),
+        name: `${child.firstName} ${child.lastName}`.trim(),
         status: 'STUDENT',
-        schoolId: this.school,
-      },
-    ]
+        schoolId: String(childSchool?.orgId ?? ''),
+      }
+    })
   }
 
   /**
