@@ -141,7 +141,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
    */
   private async cookieFetch(
     url: string,
-    init: RequestInit = {}
+    init: RequestInit & { skipAutoCookie?: boolean } = {}
   ): Promise<Response> {
     // Samla inkommande Set-Cookie och lagra i jaren
     const storeCookies = async (response: any): Promise<void> => {
@@ -177,7 +177,17 @@ export class ApiInfomentor extends EventEmitter implements Api {
     }
 
     const headers: Record<string, string> = { ...((init.headers as any) || {}) }
-    if (!headers.Cookie) {
+    if (!headers.Cookie && !init.skipAutoCookie) {
+      // OBS iOS: explicit Cookie-header "fryst" till första-URL:ens domän
+      // skickas MED av NSURLSession på samtliga redirect-hopp (den skriver
+      // inte över en befintlig Cookie-header) - multi-hop login-kedjor
+      // (ssor -> stockholm -> hub) bryts med "UserNotAuthenticated" trots
+      // godkänd BankID. skipAutoCookie (= all login-kedjor) litar istället
+      // på den nativa cookie-storen: NSHTTPCookieStorage applicerar
+      // Set-Cookie från redirect-svar automatiskt per domän - precis som
+      // Safari. cookies skrivs dit av storeCookies()/setCookieString().
+      // (Android saknar motsvarande auto-store-ok - explicit header kvar
+      // där tills vidare.)
       const cookieHeader = await this.cookieManager.getCookieString(url)
       if (cookieHeader) {
         headers.Cookie = cookieHeader
@@ -283,7 +293,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // Steg 2: Initiera BankID på inloggningssidan (samma som webben: initialize=bankid)
     const initUrl = `${loginPageUrl}&initialize=bankid&_=${Date.now()}`
     try {
-      const ticketResponse = await this.cookieFetch(initUrl)
+      const ticketResponse = await this.cookieFetch(initUrl, {
+        skipAutoCookie: true,
+      } as any)
       console.log('BankID init status:', ticketResponse.status)
       if (!ticketResponse.ok) {
         const errorText = await ticketResponse.text()
@@ -312,6 +324,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
       // RN-fetch följer redirects själv; response.url = slutgiltiga sidan
       const response = (await this.cookieFetch(pageUrl, {
         redirect: 'follow',
+        skipAutoCookie: true,
       })) as any
       pageUrl = response.url || pageUrl
       const body = await response.text()
@@ -365,6 +378,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: params.toString(),
           redirect: 'follow',
+          skipAutoCookie: true,
         })) as any
         pageUrl = postResponse.url || action
         continue
@@ -398,6 +412,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
           }
           const mbidResponse = (await this.cookieFetch(mbidUrl, {
             redirect: 'follow',
+            skipAutoCookie: true,
           })) as any
           pageUrl = mbidResponse.url || mbidUrl
           continue // evaluera slutsidan på nästa varv
@@ -435,7 +450,9 @@ export class ApiInfomentor extends EventEmitter implements Api {
         await new Promise((resolve) => setTimeout(resolve, 2000))
         try {
           const statusUrl = `${loginPageUrl}&verifyorder=${ticket.order}&_=${Date.now()}`
-          const response = await this.cookieFetch(statusUrl)
+          const response = await this.cookieFetch(statusUrl, {
+            skipAutoCookie: true,
+          } as any)
           const data = await response.json()
           const state = data?.state
 
@@ -481,6 +498,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
     // Steg 4: Hämta inloggningssidan igen - nu autentiserad -> SAML auto-POST-formulär
     const response = (await this.cookieFetch(loginPageUrl, {
       redirect: 'follow',
+      skipAutoCookie: true,
     })) as any
     const finalUrl: string = response.url || loginPageUrl
     console.log('SAML re-fetch final URL:', finalUrl.substring(0, 140))
@@ -507,6 +525,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
       )
       const targetResponse = (await this.cookieFetch(this.samlTargetUrl, {
         redirect: 'follow',
+        skipAutoCookie: true,
       })) as any
       const targetBody = await targetResponse.text()
       let targetUrl: string = targetResponse.url || this.samlTargetUrl
@@ -535,6 +554,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         console.log(`No SAMLResponse yet (runda ${round}) - följer formulär:`, retryAction.substring(0, 90))
         const retryResponse = (await this.cookieFetch(retryAction, {
           redirect: 'follow',
+          skipAutoCookie: true,
         })) as any
         const retryBody = await retryResponse.text()
         console.log(
@@ -597,6 +617,7 @@ export class ApiInfomentor extends EventEmitter implements Api {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: postParams.toString(),
         redirect: 'follow',
+        skipAutoCookie: true,
       })) as any
       const pageUrl: string = response.url || postAction
       const bodyText = await response.text()
@@ -692,12 +713,14 @@ export class ApiInfomentor extends EventEmitter implements Api {
       if (loginPageUrl === null) break
       try {
         const initRes = await this.cookieFetch(
-          `${loginPageUrl}&initialize=qr&_=${Date.now()}`
+          `${loginPageUrl}&initialize=qr&_=${Date.now()}`,
+          { skipAutoCookie: true } as any
         )
         const raw = await initRes.text()
         qrInit = JSON.parse(raw)
         const sanity = await this.cookieFetch(
-          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`,
+          { skipAutoCookie: true } as any
         )
         const sanityData = await sanity.json()
         if (sanityData.state === 'ERROR') {
@@ -743,7 +766,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
         await new Promise((r) => setTimeout(r, 1000))
         try {
           const st = await this.cookieFetch(
-            `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+            `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`,
+            { skipAutoCookie: true } as any
           )
           if (st.status !== 200) {
             consecutiveErrors++
@@ -832,11 +856,13 @@ export class ApiInfomentor extends EventEmitter implements Api {
       }
       try {
         const initRes = await this.cookieFetch(
-          `${loginPageUrl}&initialize=qr&_=${Date.now()}`
+          `${loginPageUrl}&initialize=qr&_=${Date.now()}`,
+          { skipAutoCookie: true } as any
         )
         qrInit = JSON.parse(await initRes.text())
         const sanity = await this.cookieFetch(
-          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`,
+          { skipAutoCookie: true } as any
         )
         const sanityData = await sanity.json()
         if (sanityData.state === 'ERROR') {
@@ -862,7 +888,8 @@ export class ApiInfomentor extends EventEmitter implements Api {
       await new Promise((r) => setTimeout(r, 1000))
       try {
         const st = await this.cookieFetch(
-          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`
+          `${loginPageUrl}&verifyorder=${qrInit.order}&_=${Date.now()}`,
+          { skipAutoCookie: true } as any
         )
         if (st.status !== 200) continue
         const data = await st.json()
