@@ -139,6 +139,11 @@ export class BankidLoginChecker
     if (orderBody.includes('Unauthorized')) {
       throw new Error('GrandID avvisade personnumret (kontrollera 12 siffror)')
     }
+    if (/kunde inte hittas i AD|inaktiverat/i.test(orderBody)) {
+      throw new Error(
+        'Personnumret hittades inte i skolans AcadeMedia-katalog (eller kontot är inaktiverat)'
+      )
+    }
     if (this.cancelled) return
 
     console.log(

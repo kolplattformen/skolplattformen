@@ -63,6 +63,8 @@ interface ChainState {
   waitBody: string
   /** t.ex. för att simulera utgången grandid-session */
   bankidStartBody?: string
+  /** Svar på pnr-POST (default: WAIT_PAGE_HTML) */
+  postBody?: string
 }
 
 const createChainFetch = (state: ChainState) => {
@@ -84,7 +86,7 @@ const createChainFetch = (state: ChainState) => {
       }
       if (method === 'POST') {
         state.orderPosted = true
-        return fakeResponse({ body: WAIT_PAGE_HTML })
+        return fakeResponse({ body: state.postBody ?? WAIT_PAGE_HTML })
       }
       if (!state.orderPosted) {
         return fakeResponse({ body: PNR_PAGE_HTML })
@@ -249,6 +251,22 @@ describe('Schoolsoft BankID-login (GrandID-kedjan)', () => {
     const { done } = collectEvents(api, '195001011234')
     const events = await done
     expect(events).toEqual(['PENDING', 'USER_SIGN', 'CANCELLED'])
+    expect(api.isLoggedIn).toBe(false)
+  })
+
+  it('emittar ERROR när personnumret saknas i AcadeMedias AD', async () => {
+    const state: ChainState = {
+      orderPosted: false,
+      polls: 0,
+      completeAtPoll: 1,
+      waitBody: WAIT_PAGE_HTML,
+      postBody:
+        '<html><body>Ditt personnummer 195001011234 kunde inte hittas i AD eller så är ditt konto inaktiverat.</body></html>',
+    }
+    const { api } = createApi(state)
+    const { done } = collectEvents(api, '195001011234')
+    const events = await done
+    expect(events).toEqual(['PENDING', 'ERROR'])
     expect(api.isLoggedIn).toBe(false)
   })
 
