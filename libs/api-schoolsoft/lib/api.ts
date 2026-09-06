@@ -25,6 +25,7 @@ import {
 } from '@skolplattformen/api'
 import { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
+import { BankidLoginChecker } from './loginBankid'
 import { DummyStatusChecker } from './loginStatusChecker'
 import {
   isSsLessonEventList,
@@ -53,8 +54,12 @@ export interface SchoolsoftConfig {
   school?: string
   /** Full override, t.ex. proxy eller annan Schoolsoft-version */
   baseUrl?: string
-  /** DEV: redan etablerad session, hoppar över login-stubben */
+  /** DEV: redan etablerad session, hoppar över BankID-flödet */
   sessionCookie?: string
+  /** Poll-intervall i ms under BankID-väntan (default 2500; sätt lågt i tester) */
+  pollIntervalMs?: number
+  /** Timeout i ms för BankID-väntan (default 120000) */
+  loginTimeoutMs?: number
 }
 
 interface SchoolsoftIdentity extends SsChildIdentity {
@@ -111,6 +116,10 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
 
   private resumeAttempted = false
 
+  private pollIntervalMs: number
+
+  private loginTimeoutMs: number
+
   public isLoggedIn = false
 
   public isFake = false
@@ -124,6 +133,8 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     this.baseUrl =
       config.baseUrl || `https://sms.schoolsoft.se/${this.school}`
     this.sessionCookie = config.sessionCookie
+    this.pollIntervalMs = config.pollIntervalMs ?? 2500
+    this.loginTimeoutMs = config.loginTimeoutMs ?? 120 * 1000
   }
 
   getPersonalNumber(): string | undefined {
@@ -226,11 +237,11 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
   }
 
   /**
-   * Inloggning är ännu inte implementerad för Schoolsoft. Med injicerad
-   * sessionCookie återupptas sessionen direkt; annars returneras en
-   * checker som (med en ticks fördröjning, så att appens lyssnare hinner
-   * registreras) emittar ERROR - appen visar då sitt vanliga
-   * felmeddelande istället för att krascha.
+   * BankID-login via AcadeMedias SAML-IdP (GrandID):
+   *   samlLogin.jsp → login.grandid.com → ?bankid=1 → POST pnr →
+   *   poll → SAML-kedja tillbaka → schoolsoft-session.
+   * Se loginBankid.ts för detaljer. Med injicerad sessionCookie (DEV)
+   * kortsluts flödet helt.
    */
   async login(personalNumber?: string): Promise<LoginStatusChecker> {
     this.isFake = false
@@ -257,10 +268,34 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
       return checker
     }
 
-    const checker = new DummyStatusChecker()
-    const message = 'Schoolsoft-inloggning är inte implementerad ännu'
-    console.warn(message)
-    setTimeout(() => checker.emit('ERROR', message), 0)
+    if (!personalNumber || personalNumber.replace(/\D/g, '').length !== 12) {
+      const checker = new DummyStatusChecker()
+      const message =
+        'Schoolsoft kräver personnummer (ÅÅÅÅMMDDNNNN) för BankID-login'
+      console.warn(message)
+      setTimeout(() => checker.emit('ERROR', message), 0)
+      return checker
+    }
+
+    const normalizedPnr = personalNumber.replace(/\D/g, '')
+    const checker = new BankidLoginChecker(
+      {
+        cookieFetch: (url, init) => this.cookieFetch(url, init),
+        baseUrl: this.baseUrl,
+        pollIntervalMs: this.pollIntervalMs,
+        timeoutMs: this.loginTimeoutMs,
+        consoleTag: '[schoolsoft]',
+      },
+      normalizedPnr,
+      () => {
+        this.personalNumber = normalizedPnr
+        this.resumeAttempted = true
+        this.isLoggedIn = true
+        this.startpageCache = undefined
+        this.emit('login')
+      }
+    )
+    checker.start()
     return checker
   }
 

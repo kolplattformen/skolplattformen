@@ -21,6 +21,36 @@ och testas mot rå-fixtures i `lib/__mocks__/`.
 `baseUrl` = `https://sms.schoolsoft.se/{school}` (default-slug `procivitas`).
 **Valfri skola** stöds via `school` eller full `baseUrl`-override i config.
 
+## Inloggning (BankID via GrandID SAML)
+
+`login(personalNumber)` driver följande kedja (rekognoscerad 2026-09-06):
+
+```
+GET  {baseUrl}/samlLogin.jsp
+  → 302 via Shibboleth + saml2.grandid.com SSO
+  → login.grandid.com/?sessionid={SID}&ReturnTo={RT}
+GET  login.grandid.com/?sessionid={SID}&bankid=1   (personnummer-sida)
+POST ?sessionid={SID}&bankid=1   body: pnr={12 siffror}   (= startar order)
+GET  ?sessionid={SID}&bankid=1   (poll var 2,5 s tills 302)
+  → följ kedjan: 3xx-hopp + auto-submit SAML-form (SAMLResponse/RelayState
+    postas till {baseUrl}/Shibboleth.sso/SAML2/POST)
+  → schoolsoft-session etablerad (verifieras via #parent-header-root)
+```
+
+Checker-events: `PENDING` direkt, `USER_SIGN` när ordern startats, `OK` vid
+lyckad kedja, `CANCELLED` vid avbrott/cancel, `ERROR` vid fel eller timeout
+(120 s). `token` är medvetet `'fake'` — GrandID exponerar inget
+autostarttoken i pnr-flödet, så appen ska inte försöka öppna `bankid://`.
+Användaren godkänner i valfri BankID-app kopplad till personnumret.
+
+**DEV-genväg:** `sessionCookie` i config kortsluter hela flödet (som förut).
+
+**Riskkvarstående:** status-sidans exakta HTML efter pnr-POST är inte
+liveinspelad (inloggningen testades i Safari innan fångsten hanns med).
+Pollern är därför generisk: den följer 302-hopp samt varnings-/avbrotts-
+heuristik i sidtexten. Verifiera mot riktig inloggning vid första CLI-/
+apptest-körningen (se "Test").
+
 ### Dokumenterad men ännu inte kopplad
 
 Frånvaroanmälan (`setAbsent` saknas i Api-gränssnittet):
@@ -91,8 +121,8 @@ svars-lärarid i `input[name="teacher{id}"]`. Personal för mottagarval i
 - **Session TTL:** JSP-lagrets egen JS antyder ~30 min inaktivitetstimout;
   vid död session bouncar GET till `Login.jsp`/`samlLogin`. `resumeSession()`
   detekterar både redirect och frånvaron av `#parent-header-root`.
-- **Login är stubbat** (`login()` → DummyStatusChecker som emittar `ERROR`
-  medan `sessionCookie`-läge kortsluter flödet). BankID mot Schoolsoft återstår.
+- **Login-flödet är implementerat men ej livetestat** (se "Inloggning" -
+  status-sidan efter pnr-POST saknar live-fixture).
 - **Freja stöds inte** (`LOGIN_FREJA_EID: false`).
 - **Skola:** multi-school via `school`-slug eller `baseUrl`, inget
   ProCivitas-specifikt i parsers.
