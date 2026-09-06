@@ -95,7 +95,7 @@ const parseDoc = (html: string): HTMLElement => parse(decode(html))
 
 /**
  * Barnets identitet ur sidhuvudet (#parent-header-root):
- *   <p class="...MuiTypography-body2...">Edward Landgren</p>
+ *   <p class="...MuiTypography-body2...">Viggo Ekholm</p>
  *   <span class="...MuiTypography-caption...">ProCivitas Karlberg  | SA24a</span>
  */
 export const parseChildIdentity = (html: string): SsChildIdentity | null => {
@@ -235,7 +235,7 @@ export const svDateToIso = (dateText: string, now: Date = new Date()): string =>
  * Brödtext + avsändare för AKTIV nyhet på nyhetssidan (gruppens accordion-
  * inner är serverrenderad inline):
  *   p.tinymce-p...        -> brödstycken
- *   .inner_right_info     -> <label>Från</label><div>Maria Lafrenz (P)</div>
+ *   .inner_right_info     -> <label>Från</label><div>Mynta Jadelid (P)</div>
  *                            <label>Publicerad</label><div>24 aug.</div>
  */
 export const parseNewsDetail = (html: string): SsNewsDetail | null => {
@@ -316,7 +316,7 @@ export const parseStaffSelect = (html: string): SsStaffOption[] => {
 }
 
 /**
- * "Lundvall Rebecka" -> { lastname: 'Lundvall', firstname: 'Rebecka' }
+ * "Ringmar Tilda" -> { lastname: 'Ringmar', firstname: 'Tilda' }
  * (efternamnet kan i sin tur innehålla mellanslag - splitta på SISTA).
  */
 export const staffToTeachers = (options: SsStaffOption[]): Teacher[] =>

@@ -115,7 +115,7 @@ export interface SsAbsenceDayState {
 
 export interface SsAbsenceWeek {
   days: SsAbsenceDayState[]
-  /** "Rebecka Lundvall (P)" - vem som anmält, om anmälan finns */
+  /** "Tilda Ringmar (P)" - vem som anmält, om anmälan finns */
   reportedBy?: string
 }
 

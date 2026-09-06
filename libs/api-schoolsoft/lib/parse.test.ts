@@ -28,7 +28,7 @@ describe('startpage-parse', () => {
 
   it('parsar barnets identitet ur sidhuvudet', () => {
     expect(parseChildIdentity(startpage)).toEqual({
-      name: 'Edward Landgren',
+      name: 'Viggo Ekholm',
       school: 'ProCivitas Karlberg',
       className: 'SA24a',
     })
@@ -39,7 +39,7 @@ describe('startpage-parse', () => {
   })
 
   it('parsar vårdnadshavarens namn', () => {
-    expect(parseParentName(startpage)).toEqual('Christian')
+    expect(parseParentName(startpage)).toEqual('Peter')
   })
 
   it('parsar olästa meddelanden ur aria-label', () => {
@@ -85,7 +85,7 @@ describe('parseNewsDetail', () => {
   it('parsar aktiv nyhets brödtext och avsändare', () => {
     const detail = parseNewsDetail(html('news'))
     expect(detail).not.toBeNull()
-    expect(detail?.author).toContain('Maria Lafrenz')
+    expect(detail?.author).toContain('Mynta Jadelid')
     expect(detail?.publishedText).toContain('24 aug')
     expect(detail?.bodyText).toContain('Fagersta')
     expect(detail?.bodyText.length).toBeGreaterThanOrEqual(200)
@@ -99,7 +99,7 @@ describe('parseMessages', () => {
     expect(messages.length).toBeGreaterThanOrEqual(15)
     expect(messages[0].id).toEqual('117511')
     expect(messages[0].subject).toEqual('Ansökan studieresor 26/27')
-    expect(messages[0].from).toEqual('Jonny Gartne')
+    expect(messages[0].from).toEqual('Nora Wahlin')
     expect(messages[0].preview.length).toBeGreaterThan(0)
     expect(messages[0].preview).not.toContain('...')
     expect(messages[0].bodyHtml).toContain('Google Form')
@@ -114,8 +114,8 @@ describe('parseStaffSelect / staffToTeachers', () => {
     expect(staff.length).toBeGreaterThanOrEqual(50)
     const rebecka = staff.find((t) => t.id === 7790)
     expect(rebecka).toBeDefined()
-    expect(rebecka?.lastname).toEqual('Lundvall')
-    expect(rebecka?.firstname).toEqual('Rebecka')
+    expect(rebecka?.lastname).toEqual('Ringmar')
+    expect(rebecka?.firstname).toEqual('Tilda')
     expect(rebecka?.active).toBe(true)
   })
 })
@@ -132,7 +132,7 @@ describe('parseAbsenceWeek', () => {
   })
 
   it('parsar vem som anmält', () => {
-    expect(week.reportedBy).toContain('Lundvall')
+    expect(week.reportedBy).toContain('Ringmar')
   })
 })
 

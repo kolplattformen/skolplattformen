@@ -97,7 +97,7 @@ studietid/heldag) eller `ps`, `absence=1` = anmäl, `0` = ångra.
 {"eventId":151951,"name":"SOISOO0","description":"SOISOO0",
  "startDate":"2026-08-31T11:40","endDate":"2026-08-31T12:50","allDay":false,
  "eventColor":"#24b370","editable":false,"room":"Stanford",
- "teachingGroup":"SOISOO0_SA24a","teacher":"Rebecka Lundvall","dayId":0,
+ "teachingGroup":"SOISOO0_SA24a","teacher":"Tilda Ringmar","dayId":0,
  "status":2,"category":"lesson","roomBooking":false}
 ```
 
@@ -113,11 +113,11 @@ studietid/heldag) eller `ps`, `absence=1` = anmäl, `0` = ångra.
 ### Startsidans huvud (`#parent-header-root`)
 
 ```html
-<p class="...MuiTypography-body2...">Edward Landgren</p>
+<p class="...MuiTypography-body2...">Viggo Ekholm</p>
 <span class="...MuiTypography-caption...">ProCivitas Karlberg  | SA24a</span>
 ...
 <a id="messages-link-button" aria-label="8 nya meddelanden">…</a>
-<button id="menu-button">…<p>Christian</p></button>
+<button id="menu-button">…<p>Peter</p></button>
 ```
 
 ### Nyheter

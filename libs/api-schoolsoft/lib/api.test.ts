@@ -88,7 +88,7 @@ describe('ApiSchoolsoft', () => {
       {
         id: '17149',
         sdsId: '17149',
-        name: 'Edward Landgren',
+        name: 'Viggo Ekholm',
         status: 'STUDENT',
         schoolId: '4',
       },
@@ -99,8 +99,8 @@ describe('ApiSchoolsoft', () => {
     const { api } = createApi()
     const user = await api.getUser()
     expect(user.isAuthenticated).toBe(true)
-    expect(user.firstName).toEqual('Christian')
-    expect(user.lastName).toEqual('Landgren')
+    expect(user.firstName).toEqual('Peter')
+    expect(user.lastName).toEqual('Ekholm')
   })
 
   it('getTimetable mappar vecka 36 till TimetableEntry[]', async () => {
@@ -115,7 +115,7 @@ describe('ApiSchoolsoft', () => {
     const soLesson = timetable.find((entry) => entry.code === 'SOISOO0')
     expect(soLesson).toBeDefined()
     expect(soLesson?.dayOfWeek).toEqual(1)
-    expect(soLesson?.teacher).toEqual('Rebecka Lundvall')
+    expect(soLesson?.teacher).toEqual('Tilda Ringmar')
     expect(soLesson?.timeStart).toEqual('11:40')
     expect(soLesson?.timeEnd).toEqual('12:50')
     expect(soLesson?.location).toEqual('Stanford')
@@ -150,7 +150,7 @@ describe('ApiSchoolsoft', () => {
       published: '2026-08-24',
     })
     expect(detail.body).toContain('Fagersta')
-    expect(detail.author).toContain('Maria Lafrenz')
+    expect(detail.author).toContain('Mynta Jadelid')
     expect(detail.published).toEqual('2026-08-24')
   })
 
@@ -159,7 +159,7 @@ describe('ApiSchoolsoft', () => {
     const notifications = await api.getNotifications({} as EtjanstChild)
     expect(notifications.length).toBeGreaterThanOrEqual(15)
     expect(notifications[0].id).toEqual('117511')
-    expect(notifications[0].sender).toEqual('Jonny Gartne')
+    expect(notifications[0].sender).toEqual('Nora Wahlin')
     expect(notifications[0].category).toEqual('Meddelande')
     expect(notifications[0].type).toEqual('message')
   })
@@ -168,7 +168,7 @@ describe('ApiSchoolsoft', () => {
     const { api } = createApi()
     const teachers = await api.getTeachers({} as EtjanstChild)
     expect(teachers.length).toBeGreaterThanOrEqual(50)
-    expect(teachers.some((t) => t.lastname === 'Lundvall')).toBe(true)
+    expect(teachers.some((t) => t.lastname === 'Ringmar')).toBe(true)
   })
 
   it('getSchedule mappar veckoagendan', async () => {
@@ -179,7 +179,7 @@ describe('ApiSchoolsoft', () => {
     expect(schedule.length).toEqual(25)
     expect(schedule[1].title).toEqual('SOISOO0 Stanford')
     expect(schedule[1].description).toBe(
-      'SOISOO0_SA24a · Rebecka Lundvall'
+      'SOISOO0_SA24a · Tilda Ringmar'
     )
     expect(schedule[1].oneDayEvent).toBe(true)
   })
