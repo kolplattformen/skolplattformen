@@ -1,5 +1,6 @@
 import { useApi, useNewsDetails } from '@skolplattformen/hooks'
 import React from 'react'
+import { Image } from 'react-native'
 import { render } from '../../utils/testHelpers'
 import { NewsItem } from '../newsItem.component'
 
@@ -16,7 +17,14 @@ const defaultNewsItem = {
 let navigation
 
 const setup = (customProps = { newsItem: {} }) => {
-  useApi.mockReturnValue({ api: { getSessionCookie: jest.fn() } })
+  useApi.mockReturnValue({
+    api: { getSessionCookie: jest.fn(), getSessionHeaders: jest.fn() },
+  })
+  // Image.getSizeWithHeaders kräver native-modulen ImageLoaderIOS som inte
+  // finns i jest-miljö — stubba den här i stället.
+  Image.getSizeWithHeaders = jest.fn((_url, _headers, success) =>
+    success(800, 600)
+  )
   useNewsDetails.mockReturnValue({
     data: {
       body: 'Nu blir det köttbullar',
