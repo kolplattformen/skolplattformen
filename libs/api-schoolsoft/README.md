@@ -42,6 +42,12 @@ GET  ?sessionid={SID}  → 302-kedja via resume.php + auto-submit SAML-form
                        (SAMLResponse/RelayState → {baseUrl}/Shibboleth.sso/SAML2/POST)
 ```
 
+**VIKTIG UX-detalj:** ingen push sker till BankID-appen. Användaren måste
+antingen (a) skanna QR-koden (roterande; finns som `QRCode` = base64-SVG i
+varje collect-svar och inline på grandid-status-sidan), eller (b) på samma
+enhet klicka/öppna `bankid:///?autostarttoken={T}&redirect=null`.
+`USER_SIGN` (hintCode userSign) betyder att appen öppnats och väntar på sign.
+
 Checker-events: `PENDING` direkt, `USER_SIGN` när användaren öppnat BankID,
 `OK` vid lyckad kedja, `CANCELLED` vid cancel() (som även anropar
 `&cancel-bankid=1`) eller avbrott, `ERROR` vid fel/timeout (120 s).

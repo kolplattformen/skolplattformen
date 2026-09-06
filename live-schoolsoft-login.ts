@@ -25,6 +25,27 @@ const logMeta = (entry: Record<string, unknown>): void => {
 }
 
 let dumpCount = 0
+let qrOpened = false
+
+const QR_PAGE = '/tmp/schoolsoft-qr.html'
+
+const writeQrPage = (svg: string): void => {
+  fs.writeFileSync(
+    QR_PAGE,
+    `<!doctype html><meta charset="utf-8">
+<meta http-equiv="refresh" content="1">
+<title>Skanna med Mobilt BankID</title>
+<body style="text-align:center;font-family:sans-serif">
+<h3>Skanna QR-koden i Mobilt BankID-appen</h3>
+${svg}
+<p style="color:#666">QR-koden roterar — sidan uppdateras automatiskt.</p>`
+  )
+  if (!qrOpened) {
+    qrOpened = true
+    // öppna QR-sidan i standardbrowsern (Safari laddar om filen varje sekund)
+    void import('child_process').then(({ exec }) => exec(`open ${QR_PAGE}`))
+  }
+}
 
 const loggingFetch = (inner: typeof fetch): typeof fetch => {
   return (async (url: string, init2?: RequestInit): Promise<Response> => {
@@ -47,6 +68,22 @@ const loggingFetch = (inner: typeof fetch): typeof fetch => {
         }.html`,
         body
       )
+    }
+    // Fånga collect-JSON och materialisera QR-koden som uppdaterbar lokal sida
+    if (url.includes('&collect=1')) {
+      const clone = res.clone()
+      try {
+        const data = JSON.parse(await clone.text())
+        if (data?.QRCode) {
+          const svg = Buffer.from(data.QRCode, 'base64').toString('utf-8')
+          writeQrPage(svg)
+        }
+        if (data?.hintCode === 'userSign') {
+          console.log('✍️  userSign - skriv under i BankID-appen…')
+        }
+      } catch {
+        /* icke-JSON hanteras av libben */
+      }
     }
     return res
   }) as typeof fetch
@@ -78,7 +115,7 @@ const main = async () => {
   const done = new Promise<string>((resolve) => {
     checker.on('PENDING', () => console.log('… PENDING (kedjan startar)'))
     checker.on('USER_SIGN', () =>
-      console.log('  USER_SIGN - Godkänn i Mobilt BankID på telefonen NU')
+      console.log('👉 USER_SIGN - BankID öppnat, väntar på signering…')
     )
     checker.on('OK', () => resolve('OK'))
     checker.on('ERROR', (msg: string) => resolve('ERROR: ' + msg))
