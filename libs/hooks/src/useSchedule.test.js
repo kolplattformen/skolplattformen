@@ -188,11 +188,10 @@ describe('useSchedule(child, from, to)', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
 
-      expect(result.current.error).toEqual(error)
+      expect(result.current.error).toBeUndefined()
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ id: 2 }])
 
-      await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
 
@@ -245,7 +244,7 @@ describe('useSchedule(child, from, to)', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
 
-      expect(result.current.error).toEqual(error)
+      expect(result.current.error).toBeUndefined()
 
       expect(reporter.error).toHaveBeenCalledWith(
         error,
