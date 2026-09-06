@@ -114,7 +114,6 @@ describe('useChildList()', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
-      await waitForNextUpdate()
 
       expect(result.current.data).toEqual([
         {
@@ -223,7 +222,6 @@ describe('useChildList()', () => {
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual(echildrenCache)
 
-      await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
