@@ -1,6 +1,7 @@
 import { useApi, useUser } from '@skolplattformen/hooks'
 import React, { useCallback } from 'react'
 import { ScrollView } from 'react-native'
+import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import AppStorage from '../services/appStorage'
@@ -21,6 +22,7 @@ export const settingsRouteOptions = (): NativeStackNavigationOptions => ({
 })
 
 export const SettingsScreen = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const [isUsingSystemTheme] = useSettingsStorage('usingSystemTheme')
   const [settingsTheme] = useSettingsStorage('theme')
   const langCode = LanguageService.getLanguageCode()
