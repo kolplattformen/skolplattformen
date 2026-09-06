@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import {
+  decodeWindows1252,
   isSsLessonEventList,
   parseAbsenceWeek,
   parseChildIdentity,
@@ -132,6 +133,19 @@ describe('parseAbsenceWeek', () => {
 
   it('parsar vem som anmält', () => {
     expect(week.reportedBy).toContain('Lundvall')
+  })
+})
+
+describe('decodeWindows1252', () => {
+  it('avkodar svenska tecken och cp1252-specifika glyfer', () => {
+    // 'h','ä','n' i latin1/cp1252: 0x68 0xE4 0x6E ; tankstreck cp1252: 0x96
+    const bytes = new Uint8Array([0x68, 0xe4, 0x6e, 0x64, 0x65, 0x6c, 0x73, 0x65, 0x6e, 0x20, 0x96, 0x20, 0xc3, 0xa5])
+    // OBS: 0xC3 0xA5 är UTF-8-sekvensen för å - ska INTE tolkas om; blir Ã¥
+    expect(decodeWindows1252(bytes.buffer)).toEqual('händelsen – Ã¥')
+  })
+  it('lämnar ASCII orört', () => {
+    const bytes = new Uint8Array([65, 66, 67, 10])
+    expect(decodeWindows1252(bytes.buffer)).toEqual('ABC\n')
   })
 })
 

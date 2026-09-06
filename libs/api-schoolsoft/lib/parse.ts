@@ -19,6 +19,30 @@ import {
  * (&nbsp;, &amp;, ...) innan trädet byggs - samma mönster som api-infomentor.
  */
 
+/**
+ * Windows-1252-avkodning för JSP-sidorna: de DEKLARERAR iso-8859-1 men
+ * skickar i praktiken windows-1252 (endast 0x80-0x9F skiljer). fetch.text()
+ * avkodar UTF-8 och ersätter åäö med U+FFFD - därför läser vi bytes via
+ * arrayBuffer() och mappar själva (RN saknar TextDecoder för latin1).
+ */
+const CP1252_HIGH: { [byte: number]: string } = {
+  0x80: '€', 0x82: '‚', 0x83: 'ƒ', 0x84: '„', 0x85: '…', 0x86: '†',
+  0x87: '‡', 0x88: 'ˆ', 0x89: '‰', 0x8a: 'Š', 0x8b: '‹', 0x8c: 'Œ',
+  0x8e: 'Ž', 0x91: '‘', 0x92: '’', 0x93: '“', 0x94: '”', 0x95: '•',
+  0x96: '–', 0x97: '—', 0x98: '˜', 0x99: '™', 0x9a: 'š', 0x9b: '›',
+  0x9c: 'œ', 0x9e: 'ž', 0x9f: 'Ÿ',
+}
+
+export const decodeWindows1252 = (buffer: ArrayBuffer): string => {
+  const bytes = new Uint8Array(buffer)
+  let out = ''
+  for (let i = 0; i < bytes.length; i++) {
+    const b = bytes[i]
+    out += CP1252_HIGH[b] ?? String.fromCharCode(b)
+  }
+  return out
+}
+
 const ELEMENT_NODE = 1
 
 const asElements = (nodes: HTMLElement['childNodes']): HTMLElement[] =>

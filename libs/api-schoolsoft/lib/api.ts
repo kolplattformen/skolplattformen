@@ -31,6 +31,7 @@ import {
 } from './loginBankid'
 import { DummyStatusChecker } from './loginStatusChecker'
 import {
+  decodeWindows1252,
   isSsLessonEventList,
   parseAbsenceWeek,
   parseMessages,
@@ -205,6 +206,14 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     const response = await this.cookieFetch(url)
     if (!response.ok) {
       throw new Error(`Schoolsoft error: ${response.status} ${response.statusText}`)
+    }
+    // JSP deklarerar iso-8859-1 (i praktiken windows-1252): avkoda bytes
+    // själva när plattformen tillåter, annars fallback (mojibake i RN annars).
+    const withBuffer = response as Response & {
+      arrayBuffer?: () => Promise<ArrayBuffer>
+    }
+    if (typeof withBuffer.arrayBuffer === 'function') {
+      return decodeWindows1252(await withBuffer.arrayBuffer.call(response))
     }
     return response.text()
   }

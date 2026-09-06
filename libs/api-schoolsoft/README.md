@@ -137,10 +137,10 @@ svars-lärarid i `input[name="teacher{id}"]`. Personal för mottagarval i
 
 ## Caveats
 
-- **JSP sidor är iso-8859-1 (deklarerat).** RN:s fetch avkodar som UTF-8 →
-  eventuell mojibake för åäö i appen är en **känd begränsning**. Fixtures är
-  sparade som UTF-8, så parsers är verifierade mot korrekt text; ev.
-  transkodering i nätverkslagret återstår.
+- **JSP-sidor är cp1252 (deklarerar iso-8859-1).** `fetchHtml` avkodar själv
+  via `decodeWindows1252` (arrayBuffer → egen mappning; RN saknar
+  TextDecoder för latin1). Bara restsvaret saknar arrayBuffer-funktion faller
+  den tillbaka på .text() - fixtures i test är UTF-8 och täcker normalvägen.
 - **Session TTL:** JSP-lagrets egen JS antyder ~30 min inaktivitetstimout;
   vid död session bouncar GET till `Login.jsp`/`samlLogin`. `resumeSession()`
   detekterar både redirect och frånvaron av `#parent-header-root`.
