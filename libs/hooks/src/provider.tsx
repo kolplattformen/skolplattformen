@@ -53,6 +53,11 @@ export const ApiProvider = ({
     api.on('login', handler)
     api.on('logout', handler)
 
+    // RACE-FIX: session-återupptagning (t.ex. Infomentor resumeSession()
+    // vid kallstart) kan avfyra 'login' HÖGRE upp i trädet innan vi hann
+    // prenumerera här - synka därför en gång mot api:ets aktuella läge.
+    setTimeout(handler, 0)
+
     return () => {
       api.off('login', handler)
       api.off('logout', handler)
