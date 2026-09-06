@@ -129,10 +129,42 @@ const main = async () => {
     process.exit(1)
   }
 
-  const user = await api.getUser()
-  const children = await api.getChildren()
-  console.log('\nUser:', JSON.stringify(user))
-  console.log('Barn:', JSON.stringify(children))
+  // --- gräv header-API:t (rå-JSON innan libben mappar det) ---
+  const getCookie = (url: string): Promise<string> =>
+    new Promise((res, rej) =>
+      (jar as any).getCookieString(url, (e: Error, c: string) =>
+        e ? rej(e) : res(c || '')
+      )
+    )
+  const rawGet = async (url: string, saveTo: string) => {
+    const cookie = await getCookie(url)
+    const r = await loggingFetch(fetch)(url, {
+      headers: { cookie, Accept: 'application/json' },
+    })
+    const body = await r.text()
+    fs.writeFileSync(saveTo, body)
+    console.log(`${url} → ${r.status} (${body.length} bytes → ${saveTo})`)
+    return body
+  }
+  const base = 'https://sms.schoolsoft.se/procivitas'
+  await rawGet(`${base}/rest-api/parent/header/parent`, '/tmp/schoolsoft-header-parent.json')
+  await rawGet(`${base}/rest-api/parent/header/parent/messages/amount`, '/tmp/schoolsoft-messages-amount.json')
+
+  let user, children
+  try {
+    user = await api.getUser()
+    children = await api.getChildren()
+    console.log('\nUser:', JSON.stringify(user))
+    console.log('Barn:', JSON.stringify(children))
+  } catch (e) {
+    console.log(
+      '\n(getUser/getChildren via startpage-parsning misslyckades - väntat ' +
+        'tills header-API:t är inkopplat: ' +
+        (e as Error).message +
+        ')'
+    )
+    children = [{ id: '17149' }]
+  }
 
   const child = children[0]
   const { DateTime } = await import('luxon')
