@@ -84,7 +84,6 @@
   "tags": [],
   "implicitDependencies": [
     "api-skolplattformen",
-    "api-hjarntorget",
     "api",
     "hooks",
     "curriculum"
