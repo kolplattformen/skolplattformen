@@ -1,0 +1,177 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>AcadeMedia</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.grandid.com/academedia/design/css/main.css?v=1.6">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 class="logo"><a>AcadeMedia</a></h1>
+
+<article class="container">
+        <nav class="container__navigation">
+            <a href="" class="more__link">Hjälp</a>
+        </nav>
+        <div class="more__information">
+            <ol>
+                <li>Starta Mobilt BankID-app i din mobil eller på din surfplatta.</li>
+                <li>Välj <em>Skanna</em> och skanna QR-koden.</li>
+                <li>Skriv in din kod och tryck på <em>Godkänd</em>.</li>
+            </ol>
+        </div>
+        <h1 class="container__title">Mobilt BankID med QR-kod</h1>
+        <form id="pnrform" method="post" class="form">
+            <div id="qr">
+            <center><!-- QR-SVG borttaget i fixturen (roterande token, renderas live) --></center>
+            </div>
+            <div id="message"></div>
+            <div class="form__form-group form__form-group--center">
+         <a class="form__button form__button--small" href="bankid:///?autostarttoken=TOKEN000-0000-4000-8000-000000000000&redirect=null">Starta BankID på denna enhet</a>
+         </div>
+            <div class="form__form-group form__form-group--center">
+                <a class="form__button form__button--small" href="?sessionid=SESSIONIDDEMOSESSIONIDDEMO0001&cancel-bankid=1">Avbryt</a>
+            </div>
+        </form>
+
+</article>
+<script>
+$(function() {
+    var isComplete = false;
+    var collectRunning = false;
+    var TwoFAStarted = false;
+    var sessionUrl = 'https://login.grandid.com/?sessionid=SESSIONIDDEMOSESSIONIDDEMO0001';
+    var collectCount = 0;
+
+    var contentTitle = $('#content > h1');
+    var contentText = $('#content > span.text');
+    var contentError = $('#content > span.error-text');
+    var contentLoader = $('#content > img#TwoFa-loader');
+
+    if (TwoFAStarted == false) {
+//        console.log("Running TwoFAStart();");
+        TwoFAStart();
+    } else {
+//        console.log("Already tried to start once");
+    }
+    
+    function showManualStart() {
+        contentTitle.html('');
+        contentText.html('<a href="idappen:///?authenticate=1&token=SESSIONIDDEMOSESSIONIDDEMO0001&returnurl="><button type="submit">Starta iDappen manuellt</button></a>');
+        contentLoader.hide();
+    }
+    
+    function showError() {
+        contentTitle.html('Inloggning avbröts');
+        contentText.html('Inloggningsförsöket avbryts då ingen lyckad inloggning skett. Vänligen försök på nytt</br>SessionID: SESSIONIDDEMOSESSIONIDDEMO0001');
+        collectRunning = false;
+    }
+    
+    function TwoFACollect() {
+        if (collectRunning == true || isComplete == true) {
+            return;
+        } else {
+            collectRunning = true;
+        }
+        collectCount++;
+        console.log("collectCount: " + collectCount)
+        
+        
+        var collectUrl = sessionUrl + '&collect=1';
+        var jqxhrStatus = $.get( collectUrl, function() {
+            console.log("get() ran");
+        })
+        .done(function(data) {
+            var jsdata = false;
+//            contentTitle.html("collectCount: " + collectCount);
+            try {
+                var jsdata = JSON.parse(data);
+                console.log("JSON parsing OK!");
+            } catch(e) {
+                isComplete = true;
+                contentText.html('Något gick fel och inloggningen kunde inte genomföras.');
+                return;
+            }
+            
+            if (jsdata.response == "outstandingTransaction") {
+                //qr.innerHTML=jsdata.response.QRCode;
+                window.setTimeout(TwoFACollect, 2000);
+                collectRunning = false;
+                if (jsdata.status=="pending" && jsdata.hintCode=="outstandingTransaction") {
+                    var QR = jsdata.QRCode;
+                    console.log(QR);
+                    var QR_decoded = atob(QR);
+                    document.getElementById("qr").innerHTML="<center>"+QR_decoded+"</center>";         
+                }
+                if (jsdata.status=="pending" && jsdata.hintCode=="userSign") {
+                    document.getElementById("qr").innerHTML="";
+                    document.getElementById("message").innerHTML="Skriv under.";
+
+                }                
+           
+
+            }
+       
+            if (jsdata.response == "complete") {
+                //alert("COMPLETE!");
+                collectRunning = false;
+                isComplete = true;
+                //document.getElementById("message").innerHTML="Klar: "+jsdata.username;
+                window.location = sessionUrl;
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            let errorText = jqXHR.responseText;
+//            contentTitle.html("collectCount fail: " + collectCount);
+
+            if (jqXHR.readyState == 0) {
+                collectRunning = false;
+//                window.setTimeout(TwoFACollect, 1000);
+                window.location = sessionUrl;
+                return;
+            }
+            
+            contentTitle.text("Fel inträffade!");
+            contentText.html("Allmänt fel. Fick status: " + textStatus + "</br>jqXHR:" + JSON.stringify(jqXHR) + "</br>errorThrown: " + errorThrown + "SessionID: SESSIONIDDEMOSESSIONIDDEMO0001");
+            contentLoader.hide();
+        })
+        .always(function() {});
+        
+        if (collectCount == 2) {
+            showManualStart();
+        }
+        
+        if (collectCount >= 90) {
+//            console.log("Error: We've been running for 30 collects!");
+            showError();
+            collectRunning = false;
+            isComplete = true;
+        }
+    }
+
+    function TwoFAStart() {
+        contentTitle.text('Startar iDappen..');
+        contentLoader.html('<img style="margin-left: auto;margin-right: auto;display: block;" src="https://cdn.grandid.com/loader.gif" alt="' + "Startar 2FA-appen" + '" /><br/>');
+        contentLoader.show();
+        window.setTimeout(function() {
+            TwoFAStarted = true;
+
+            TwoFACollect();
+        }, 10)
+    }
+    
+    $('body').on('mouseover', function() {
+        if(isComplete == false) {
+            TwoFACollect();
+        }
+    });
+});
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdn.grandid.com/academedia/design/lib/main.js?v=1.2"></script>
+
+</body>
+</html>

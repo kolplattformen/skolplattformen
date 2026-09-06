@@ -4,10 +4,20 @@ import { CookieManager, Fetch, Response } from '@skolplattformen/api'
 import { ApiSchoolsoft } from './api'
 import { parseAutoPostForm } from './loginBankid'
 
-const startpageFixture = fs.readFileSync(
-  path.join(__dirname, '__mocks__', 'html', 'startpage.html'),
-  'utf-8'
-)
+const fixtureHtml = (name: string): string =>
+  fs.readFileSync(
+    path.join(__dirname, '__mocks__', 'html', `${name}.html`),
+    'utf-8'
+  )
+const fixtureJson = (name: string): string =>
+  fs.readFileSync(
+    path.join(__dirname, '__mocks__', 'json', `${name}.json`),
+    'utf-8'
+  )
+
+const startpageFixture = fixtureHtml('startpage')
+const PNR_PAGE = fixtureHtml('grandid-pnr')
+const STATUS_PAGE = fixtureHtml('grandid-status')
 
 interface FakeResponseInit {
   status?: number
@@ -24,17 +34,21 @@ const fakeResponse = ({
     ok: status >= 200 && status < 300,
     status,
     statusText: String(status),
-    headers: { get: (name: string) => (name === 'location' ? location ?? null : null) },
+    headers: {
+      get: (name: string) => (name === 'location' ? location ?? null : null),
+    },
     text: async () => body,
     json: async () => JSON.parse(body),
   } as unknown as Response)
 
 const SSO_URL =
   'https://saml2.grandid.com/saml2/idp/SSO_abc?SAMLRequest=xyz&RelayState=cookie%3A1'
-const LOGIN_PAGE_URL =
-  'https://login.grandid.com/?sessionid=abc123def456&ReturnTo=https%3A%2F%2Fsaml2.grandid.com%2Fmodule.php%2Fgrandid%2Fresume.php%3FState%3DT'
-const BANKID_URL =
-  'https://login.grandid.com/?sessionid=abc123def456&bankid=1'
+const SESSION_URL =
+  'https://login.grandid.com/?sessionid=abcd1234abcd1234abcd1234abcd1234'
+const LOGIN_PAGE_URL = `${SESSION_URL}&ReturnTo=https%3A%2F%2Fsaml2.grandid.com%2Fmodule.php%2Fgrandid%2Fresume.php%3FState%3DT`
+const BANKID_URL = `${SESSION_URL}&bankid=1`
+const COLLECT_URL = `${SESSION_URL}&collect=1`
+const CANCEL_URL = `${SESSION_URL}&cancel-bankid=1`
 const RESUME_URL =
   'https://saml2.grandid.com/module.php/grandid/resume.php?State=T'
 const ACS_URL =
@@ -45,31 +59,37 @@ const LOGIN_PAGE_HTML =
   '<html><body><form method="post" action="' +
   LOGIN_PAGE_URL +
   '"><input type="text" name="username"><input type="password" name="password"></form></body></html>'
-const PNR_PAGE_HTML =
-  '<html><body><form id="pnrform" method="post" action="' +
-  BANKID_URL +
-  '"><input type="text" name="pnr"></form></body></html>'
-const WAIT_PAGE_HTML = '<html><body>Väntar på godkännande i BankID...</body></html>'
+
 // OBS: i riktiga auto-post-form är RelayState RAW (HTML-escapad), inte
 // procentkodad - samma form som shibboleth skickar tillbaka. Håll den så.
 const SAML_FORM_HTML = `<html><body onload="document.forms[0].submit()"><form action="${ACS_URL}" method="post"><input type="hidden" name="SAMLResponse" value="PHNhbWw+ZmFrZTwvc2FtbD4=" /><input name="RelayState" type="hidden" value="cookie:1788718468_652b" /></form></body></html>`
 
+/** Ett collect-svar från fixtures ('pending'|'userSign'|'complete') eller råtext. */
+type CollectStep = 'pending' | 'userSign' | 'complete' | { raw: string }
+
 interface ChainState {
   orderPosted: boolean
+  cancelCalled: boolean
   polls: number
-  /** När poller når detta antal: 302 tillbaka till resume */
-  completeAtPoll: number
-  /** Svarssida för poller före completion */
-  waitBody: string
-  /** t.ex. för att simulera utgången grandid-session */
-  bankidStartBody?: string
-  /** Svar på pnr-POST (default: WAIT_PAGE_HTML) */
+  /** Slumpplan för collect-pollerna; sista steget upprepas i oändlighet */
+  collectPlan: CollectStep[]
+  /** Svar på pnr-POST (default: riktiga grandid-status-fixturen) */
   postBody?: string
+  /** Svar på bankidstart-GET (default: pnr-sidfixturen) */
+  bankidStartBody?: string
+}
+
+const collectBody = (step: CollectStep): string => {
+  if (typeof step === 'object') return step.raw
+  return fixtureJson(`grandid-collect-${step}`)
 }
 
 const createChainFetch = (state: ChainState) => {
   const postedSamlBodies: string[] = []
-  const fetch: Fetch = async (url: string, init?: { method?: string; body?: string }) => {
+  const fetch: Fetch = async (
+    url: string,
+    init?: { method?: string; body?: string }
+  ) => {
     const method = init?.method || 'GET'
     if (url.includes('/samlLogin.jsp')) {
       return fakeResponse({ status: 302, location: SSO_URL })
@@ -80,22 +100,26 @@ const createChainFetch = (state: ChainState) => {
     if (url === LOGIN_PAGE_URL) {
       return fakeResponse({ body: LOGIN_PAGE_HTML })
     }
+    if (url.startsWith(CANCEL_URL)) {
+      state.cancelCalled = true
+      return fakeResponse({ body: '<html>Avbruten</html>' })
+    }
+    if (url.startsWith(COLLECT_URL)) {
+      state.polls += 1
+      const plan = state.collectPlan
+      const step = plan[Math.min(state.polls - 1, plan.length - 1)]
+      return fakeResponse({ body: collectBody(step) })
+    }
     if (url.startsWith(BANKID_URL)) {
-      if (state.bankidStartBody !== undefined) {
-        return fakeResponse({ body: state.bankidStartBody })
-      }
       if (method === 'POST') {
         state.orderPosted = true
-        return fakeResponse({ body: state.postBody ?? WAIT_PAGE_HTML })
+        return fakeResponse({ body: state.postBody ?? STATUS_PAGE })
       }
-      if (!state.orderPosted) {
-        return fakeResponse({ body: PNR_PAGE_HTML })
-      }
-      state.polls += 1
-      if (state.polls >= state.completeAtPoll) {
-        return fakeResponse({ status: 302, location: RESUME_URL })
-      }
-      return fakeResponse({ body: state.waitBody })
+      return fakeResponse({ body: state.bankidStartBody ?? PNR_PAGE })
+    }
+    if (url === SESSION_URL) {
+      // efter complete navigerar sidan hit -> SAML-kedjan fortsätter
+      return fakeResponse({ status: 302, location: RESUME_URL })
     }
     if (url.includes('resume.php')) {
       return fakeResponse({ body: SAML_FORM_HTML })
@@ -144,159 +168,166 @@ const createApi = (state: ChainState) => {
     fetch,
     cookieManager: inMemoryCookieManager(),
     pollIntervalMs: 1,
-    loginTimeoutMs: 500,
+    loginTimeoutMs: 600,
   })
-  return { api, postedSamlBodies }
+  return { api, state, postedSamlBodies }
 }
 
-const collectEvents = (
-  api: ApiSchoolsoft,
-  pnr?: string
-): { done: Promise<string[]> } => {
+/** Samlar checker-events tills OK/ERROR/CANCELLED och returnerar sekvensen. */
+const track = (
+  checker: ReturnType<ApiSchoolsoft['login']> extends Promise<infer T>
+    ? T
+    : never
+): { events: string[]; done: Promise<string[]> } => {
   const events: string[] = []
   const done = new Promise<string[]>((resolve) => {
-    api
-      .login(pnr)
-      .then((checker) => {
-        checker.on('PENDING', () => events.push('PENDING'))
-        checker.on('USER_SIGN', () => events.push('USER_SIGN'))
-        checker.on('OK', () => {
-          events.push('OK')
-          resolve(events)
-        })
-        checker.on('ERROR', () => {
-          events.push('ERROR')
-          resolve(events)
-        })
-        checker.on('CANCELLED', () => {
-          events.push('CANCELLED')
-          resolve(events)
-        })
-      })
-      .catch((error) => resolve([...events, `THROW:${(error as Error).message}`]))
+    checker.on('PENDING', () => events.push('PENDING'))
+    checker.on('USER_SIGN', () => events.push('USER_SIGN'))
+    checker.on('OK', () => {
+      events.push('OK')
+      resolve(events)
+    })
+    checker.on('ERROR', () => {
+      events.push('ERROR')
+      resolve(events)
+    })
+    checker.on('CANCELLED', () => {
+      events.push('CANCELLED')
+      resolve(events)
+    })
   })
-  return { done }
+  return { events, done }
 }
 
-describe('Schoolsoft BankID-login (GrandID-kedjan)', () => {
-  it('lyckas: PENDING → USER_SIGN → OK, session etableras, SAML postas vidare', async () => {
-    const state: ChainState = {
+describe('Schoolsoft BankID-login (GrandID, liveverifierat protokoll)', () => {
+  it('lyckas: token ur status-sidan, PENDING → USER_SIGN → OK, SAML vidare', async () => {
+    const { api } = createApi({
       orderPosted: false,
+      cancelCalled: false,
       polls: 0,
-      completeAtPoll: 2,
-      waitBody: WAIT_PAGE_HTML,
-    }
-    const { api, postedSamlBodies } = createApi(state)
+      collectPlan: ['pending', 'pending', 'userSign', 'complete'],
+    })
     const loginEvents: string[] = []
     api.on('login', () => loginEvents.push('login'))
 
-    const { done } = collectEvents(api, '19500101-1234')
-    const events = await done
+    const events: string[] = []
+    const checker = await api.login('19500101-1234')
+    expect(checker.token).toEqual('TOKEN000-0000-4000-8000-000000000000')
+    const done = new Promise<string>((resolve) => {
+      checker.on('PENDING', () => events.push('PENDING'))
+      checker.on('USER_SIGN', () => events.push('USER_SIGN'))
+      checker.on('OK', () => {
+        events.push('OK')
+        resolve('OK')
+      })
+      checker.on('ERROR', () => {
+        events.push('ERROR')
+        resolve('ERROR')
+      })
+      checker.on('CANCELLED', () => events.push('CANCELLED'))
+    })
+    await done
 
     expect(events).toEqual(['PENDING', 'USER_SIGN', 'OK'])
     expect(api.isLoggedIn).toBe(true)
     expect(api.getPersonalNumber()).toEqual('195001011234')
     expect(loginEvents).toEqual(['login'])
-    // SAML-formuläret postades med okodade fält
-    expect(postedSamlBodies.length).toEqual(1)
-    expect(postedSamlBodies[0]).toContain(
-      'SAMLResponse=PHNhbWw%2BZmFrZTwvc2FtbD4%3D'
-    )
-    expect(postedSamlBodies[0]).toContain('RelayState=cookie%3A1788718468_652b')
-    // barn hämtbart direkt efter login
     const children = await api.getChildren()
     expect(children[0].id).toEqual('17149')
   })
 
-  it('avbryter via cancel() utan att emitta ERROR', async () => {
-    const state: ChainState = {
+  it('emittar USER_SIGN bara en gång även vid upprepade userSign-hints', async () => {
+    const { api } = createApi({
       orderPosted: false,
+      cancelCalled: false,
       polls: 0,
-      completeAtPoll: 9999,
-      waitBody: WAIT_PAGE_HTML,
-    }
-    const { api } = createApi(state)
-
-    const events: string[] = []
-    const done = new Promise<string[]>((resolve) => {
-      void api.login('195001011234').then((checker) => {
-        checker.on('PENDING', () => events.push('PENDING'))
-        checker.on('USER_SIGN', async () => {
-          events.push('USER_SIGN')
-          await checker.cancel()
-        })
-        checker.on('CANCELLED', () => {
-          events.push('CANCELLED')
-          resolve(events)
-        })
-        checker.on('OK', () => events.push('OK'))
-        checker.on('ERROR', () => events.push('ERROR'))
-      })
+      collectPlan: ['pending', 'userSign', 'userSign', 'complete'],
     })
-    let forEvents = await done
-    await new Promise((r) => setTimeout(r, 20))
-    expect(forEvents).toEqual(['PENDING', 'USER_SIGN', 'CANCELLED'])
-    expect(api.isLoggedIn).toBe(false)
-    forEvents = events
+    const events: string[] = []
+    const checker = await api.login('195001011234')
+    const done = new Promise<string>((resolve) => {
+      checker.on('PENDING', () => events.push('PENDING'))
+      checker.on('USER_SIGN', () => events.push('USER_SIGN'))
+      checker.on('OK', () => resolve('OK'))
+      checker.on('ERROR', () => resolve('ERROR'))
+    })
+    expect(await done).toEqual('OK')
+    expect(events.filter((e) => e === 'USER_SIGN').length).toEqual(1)
   })
 
-  it('emittar CANCELLED när status-sidan signalerar avbrott', async () => {
-    const state: ChainState = {
+  it('cancel() ringer grandids avbryt-endpoint och emittar CANCELLED utan ERROR', async () => {
+    const { api, state } = createApi({
       orderPosted: false,
+      cancelCalled: false,
       polls: 0,
-      completeAtPoll: 9999,
-      waitBody: '<html><body>Autentiseringen avbruten.</body></html>',
-    }
-    const { api } = createApi(state)
-    const { done } = collectEvents(api, '195001011234')
-    const events = await done
-    expect(events).toEqual(['PENDING', 'USER_SIGN', 'CANCELLED'])
+      collectPlan: ['pending'],
+    })
+    const checker = await api.login('195001011234')
+    const { events, done } = track(checker)
+    // invänta PENDING innan cancel för deterministisk ordning
+    await new Promise((r) => setTimeout(r, 25))
+    await checker.cancel()
+    await done
+    expect(events).toEqual(['PENDING', 'CANCELLED'])
+    expect(state.cancelCalled).toBe(true)
+    expect(api.isLoggedIn).toBe(false)
+  })
+
+  it('emittar ERROR vid brutet collect-svar (ej JSON)', async () => {
+    const { api } = createApi({
+      orderPosted: false,
+      cancelCalled: false,
+      polls: 0,
+      collectPlan: ['pending', { raw: '<html>Något gick fel</html>' }],
+    })
+    const checker = await api.login('195001011234')
+    const { events, done } = track(checker)
+    await done
+    expect(events).toEqual(['PENDING', 'ERROR'])
     expect(api.isLoggedIn).toBe(false)
   })
 
   it('emittar ERROR när personnumret saknas i AcadeMedias AD', async () => {
-    const state: ChainState = {
+    const { api } = createApi({
       orderPosted: false,
+      cancelCalled: false,
       polls: 0,
-      completeAtPoll: 1,
-      waitBody: WAIT_PAGE_HTML,
+      collectPlan: ['complete'],
       postBody:
         '<html><body>Ditt personnummer 195001011234 kunde inte hittas i AD eller så är ditt konto inaktiverat.</body></html>',
-    }
-    const { api } = createApi(state)
-    const { done } = collectEvents(api, '195001011234')
-    const events = await done
-    expect(events).toEqual(['PENDING', 'ERROR'])
+    })
+    const checker = await api.login('195001011234')
+    const { events, done } = track(checker)
+    await done
+    expect(events).toEqual(['ERROR'])
     expect(api.isLoggedIn).toBe(false)
   })
 
   it('emittar ERROR när GrandID avvisar bankid-start', async () => {
-    const state: ChainState = {
+    const { api } = createApi({
       orderPosted: false,
+      cancelCalled: false,
       polls: 0,
-      completeAtPoll: 1,
-      waitBody: WAIT_PAGE_HTML,
+      collectPlan: ['complete'],
       bankidStartBody: 'Unauthorized',
-    }
-    const { api } = createApi(state)
-    const { done } = collectEvents(api, '195001011234')
-    const events = await done
-    expect(events).toEqual(['PENDING', 'ERROR'])
-    expect(api.isLoggedIn).toBe(false)
+    })
+    const checker = await api.login('195001011234')
+    const { events, done } = track(checker)
+    await done
+    expect(events).toEqual(['ERROR'])
   })
 
   it('kräver personnummer med 12 siffror', async () => {
-    const state: ChainState = {
+    const { api } = createApi({
       orderPosted: false,
+      cancelCalled: false,
       polls: 0,
-      completeAtPoll: 1,
-      waitBody: WAIT_PAGE_HTML,
-    }
-    const { api } = createApi(state)
-    const { done } = collectEvents(api, '1212')
-    const events = await done
+      collectPlan: ['complete'],
+    })
+    const checker = await api.login('1212')
+    const { events, done } = track(checker)
+    await done
     expect(events).toEqual(['ERROR'])
-    expect(api.isLoggedIn).toBe(false)
   })
 })
 

@@ -5,23 +5,35 @@ import { LoginStatusChecker, RequestInit, Response } from '@skolplattformen/api'
 /**
  * BankID-login mot Schoolsoft via AcadeMedias SAML-IdP (GrandID).
  *
- * Kedjan (rekognoscerad 2026-09-06 mot sms.schoolsoft.se/procivitas):
+ * Protokollet är liveverifierat 2026-09-06 mot sms.schoolsoft.se/procivitas:
  *
  *   1. GET {baseUrl}/samlLogin.jsp
- *      → 302-kedja via Shibboleth → saml2.grandid.com SSO
- *      → slutar på login.grandid.com/?sessionid={SID}&ReturnTo={RT}
- *   2. GET login.grandid.com/?sessionid={SID}&bankid=1  → personnummer-sida
- *   3. POST pnr={12 siffror} till samma URL              → BankID-ordern startad
- *      (användaren godkänner i valfri BankID-app kopplad till pnr)
- *   4. GET samma URL, poll tills den svarar 302          → order klar
- *   5. Följ kedjan generiskt: 3xx-hopp + auto-submit-formulär som innehåller
- *      SAMLResponse postas vidare tills schoolsofts inloggade yta nås.
+ *      → 302 via Shibboleth + saml2.grandid.com SSO
+ *      → login.grandid.com/?sessionid={SID}&ReturnTo={RT}
+ *   2. GET  ?sessionid={SID}&bankid=1        → personnummer-sida
+ *   3. POST ?sessionid={SID}&bankid=1   body: pnr={12 siffror}
+ *      → status-sida med:
+ *        - bankid:///?autostarttoken={T}&redirect=null  (same-device-länk)
+ *        - inline QR-SVG (roterande BankID-QR, uppdateras varje collect)
+ *        - JS-pollare: GET ?sessionid={SID}&collect=1
+ *   4. Poll ?sessionid={SID}&collect=1 (JSON):
+ *        {"response":"outstandingTransaction","status":"pending",
+ *         "hintCode":"outstandingTransaction","QRCode":"<b64-svg>"}  → vänta
+ *        {...,"hintCode":"userSign"}                                  → USER_SIGN
+ *        {"response":"complete"}                                      → klart!
+ *        ej JSON / http-fel                                           → session bruten
+ *      Avbryt via GET ?sessionid={SID}&cancel-bankid=1.
+ *   5. Vid complete: GET ?sessionid={SID} → 302-kedja via resume.php
+ *      + auto-submit SAML-form → schoolsoft-session.
  *
- * Event-semantik matchar gamla skolplattform-adaptern:
- *   PENDING direkt, USER_SIGN när ordern startats, OK vid lyckad kedja,
- *   ERROR vid fel/timeout, CANCELLED om användaren avbryter (eller cancel()).
- * Token hålls 'fake' så att appen inte försöker öppna bankid:// med ett
- * autostarttoken vi inte äger (GrandID exponerar inget sådant för pnr-flödet).
+ * AD-validering: GrandID svarar "Ditt personnummer {pnr} kunde inte hittas i
+ * AD eller så är ditt konto inaktiverat." om pnr saknas i AcadeMedias katalog
+ * - mappas till tydligt ERROR direkt.
+ *
+ * Events: PENDING direkt, USER_SIGN när användaren öppnat BankID (hintCode
+ * userSign), OK vid klar kedja, CANCELLED vid cancel()/avbrott, ERROR vid
+ * fel/timeout. `token` = autostarttoken (matchar appens openBankId:
+ * bankid:///?autostarttoken={token}&redirect=null).
  */
 
 export const LOGIN_FAKE_TOKEN = 'fake'
@@ -39,6 +51,18 @@ export interface LoginChainContext {
   pollIntervalMs: number
   timeoutMs: number
   consoleTag: string
+}
+
+/** En etablerad GrandID BankID-session (klar för polling). */
+export interface GrandIdSession {
+  /** https://login.grandid.com/?sessionid={SID} - completion-navigerings-URL */
+  sessionUrl: string
+  /** sessionUrl + '&collect=1' */
+  collectUrl: string
+  /** sessionUrl + '&cancel-bankid=1' */
+  cancelUrl: string
+  /** autostarttoken ur status-sidan (saknas defensivt → 'fake') */
+  autostartToken: string
 }
 
 interface FormPost {
@@ -74,29 +98,109 @@ const toUrlEncoded = (fields: Record<string, string>): string =>
     .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
     .join('&')
 
+const extractAutostartToken = (html: string): string | undefined =>
+  html.match(/autostarttoken=([0-9a-z-]{30,40})/i)?.[1]
+
+/** Följer 3xx-kedjan från samlLogin.jsp till grandid-loginsidan. */
+async function chainToGrandidLogin(
+  ctx: LoginChainContext
+): Promise<string> {
+  let url = `${ctx.baseUrl}/samlLogin.jsp`
+  for (let hop = 0; hop < MAX_REDIRECT_HOPS; hop++) {
+    const response = await ctx.cookieFetch(url)
+    if (isRedirect(response.status)) {
+      const location = response.headers.get('location')
+      if (!location) throw new Error(`Redirect utan Location från ${url}`)
+      url = resolveUrl(url, location)
+      continue
+    }
+    await response.text()
+    return url
+  }
+  throw new Error('För många redirects från samlLogin.jsp')
+}
+
+/**
+ * Steg 1-3: SAML-kedja → grandid → POST pnr. Returnerar en redo GrandIdSession
+ * (order startad) eller kastar ett svenskt felmeddelande för LoginStatusChecker.
+ */
+export async function startGrandIdBankidSession(
+  ctx: LoginChainContext,
+  personalNumber: string
+): Promise<GrandIdSession> {
+  const loginPageUrl = await chainToGrandidLogin(ctx)
+  const sessionId = loginPageUrl.match(/[?&]sessionid=([0-9a-f]+)/i)?.[1]
+  if (!sessionId) {
+    throw new Error(
+      `Kunde inte extrahera grandid-sessionid ur ${loginPageUrl}`
+    )
+  }
+
+  const sessionUrl = `https://login.grandid.com/?sessionid=${sessionId}`
+  const bankidUrl = `${sessionUrl}&bankid=1`
+
+  const startResponse = await ctx.cookieFetch(bankidUrl)
+  const startBody = await startResponse.text()
+  if (!startResponse.ok || startBody.includes('Unauthorized')) {
+    throw new Error('GrandID avvisade bankid-start (utgången session?)')
+  }
+
+  const orderResponse = await ctx.cookieFetch(bankidUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `pnr=${encodeURIComponent(personalNumber)}`,
+  })
+  const orderBody = await orderResponse.text()
+  if (orderBody.includes('Unauthorized')) {
+    throw new Error('GrandID avvisade personnumret (kontrollera 12 siffror)')
+  }
+  if (/kunde inte hittas i AD|inaktiverat/i.test(orderBody)) {
+    throw new Error(
+      'Personnumret hittades inte i skolans AcadeMedia-katalog (eller kontot är inaktiverat)'
+    )
+  }
+
+  return {
+    sessionUrl,
+    collectUrl: `${sessionUrl}&collect=1`,
+    cancelUrl: `${sessionUrl}&cancel-bankid=1`,
+    autostartToken: extractAutostartToken(orderBody) || LOGIN_FAKE_TOKEN,
+  }
+}
+
 export class BankidLoginChecker
   extends EventEmitter
   implements LoginStatusChecker
 {
-  public token = LOGIN_FAKE_TOKEN
+  public token: string
 
   private cancelled = false
 
+  private userSignEmitted = false
+
   constructor(
     private readonly ctx: LoginChainContext,
-    private readonly personalNumber: string,
+    private readonly session: GrandIdSession,
     private readonly onLoggedIn: () => void
   ) {
     super()
+    this.token = session.autostartToken
   }
 
   async cancel(): Promise<void> {
     if (this.cancelled) return
     this.cancelled = true
+    try {
+      await this.ctx.cookieFetch(this.session.cancelUrl, {
+        skipAutoCookie: true,
+      })
+    } catch {
+      /* best-effort */
+    }
     this.emit('CANCELLED')
   }
 
-  /** Startar kedjan i bakgrunden - login() returnerar checkern direkt. */
+  /** Startar polling i bakgrunden - login() returnerar checkern direkt. */
   start(): void {
     setTimeout(() => {
       this.run().catch((error) => {
@@ -111,50 +215,14 @@ export class BankidLoginChecker
 
   private async run(): Promise<void> {
     this.emit('PENDING')
-
-    const loginPageUrl = await this.followRedirects(
-      `${this.ctx.baseUrl}/samlLogin.jsp`
-    )
-    const sessionId = loginPageUrl.match(/[?&]sessionid=([0-9a-f]+)/i)?.[1]
-    if (!sessionId) {
-      throw new Error(
-        `Kunde inte extrahera grandid-sessionid ur ${loginPageUrl}`
-      )
-    }
-
-    const bankidUrl = `https://login.grandid.com/?sessionid=${sessionId}&bankid=1`
-    const startResponse = await this.ctx.cookieFetch(bankidUrl)
-    const startBody = await startResponse.text()
-    if (!startResponse.ok || startBody.includes('Unauthorized')) {
-      throw new Error('GrandID avvisade bankid-start (utgången session?)')
-    }
-
-    const pnrBody = `pnr=${encodeURIComponent(this.personalNumber)}`
-    const orderResponse = await this.ctx.cookieFetch(bankidUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: pnrBody,
-    })
-    const orderBody = await orderResponse.text()
-    if (orderBody.includes('Unauthorized')) {
-      throw new Error('GrandID avvisade personnumret (kontrollera 12 siffror)')
-    }
-    if (/kunde inte hittas i AD|inaktiverat/i.test(orderBody)) {
-      throw new Error(
-        'Personnumret hittades inte i skolans AcadeMedia-katalog (eller kontot är inaktiverat)'
-      )
-    }
-    if (this.cancelled) return
-
     console.log(
       `${this.ctx.consoleTag} BankID-order startad - väntar på godkännande`
     )
-    this.emit('USER_SIGN')
 
-    const completionUrl = await this.pollUntilRedirect(bankidUrl)
+    await this.pollUntilComplete()
     if (this.cancelled) return
 
-    const finalUrl = await this.followSamlChain(completionUrl)
+    const finalUrl = await this.followSamlChain(this.session.sessionUrl)
 
     const check = await this.ctx.cookieFetch(
       `${this.ctx.baseUrl}/jsp/student/right_student_startpage.jsp`
@@ -168,47 +236,42 @@ export class BankidLoginChecker
     this.emit('OK')
   }
 
-  /** Följer 3xx-hopp tills ett icke-redirect-svar, returnerar slut-URL:en. */
-  private async followRedirects(startUrl: string): Promise<string> {
-    let url = startUrl
-    for (let hop = 0; hop < MAX_REDIRECT_HOPS; hop++) {
-      const response = await this.ctx.cookieFetch(url)
-      if (isRedirect(response.status)) {
-        const location = response.headers.get('location')
-        if (!location) throw new Error(`Redirect utan Location från ${url}`)
-        url = resolveUrl(url, location)
-        continue
-      }
-      // Konsumera (och logg-spara) kroppen så cookien lagras konsekvent
-      await response.text()
-      return url
-    }
-    throw new Error(`För många redirects vid start från ${startUrl}`)
-  }
-
   /**
-   * Polla bankid-URL:en tills GrandID svarar med ett redirect-hopp (ordern
-   * klar) eller sidan signalerar avbrott. Kastar vid timeout / CANCELLED.
+   * Pollar ?collect=1 (samma endpoint som grandids egen status-sida):
+   * JSON {response, status, hintCode, QRCode?}. Bryter vid complete.
    */
-  private async pollUntilRedirect(pollUrl: string): Promise<string> {
+  private async pollUntilComplete(): Promise<void> {
     const deadline = Date.now() + this.ctx.timeoutMs
     for (;;) {
       if (this.cancelled) throw new Error('Avbruten')
       if (Date.now() > deadline) throw new Error('Timeout väntade på BankID')
 
-      const response = await this.ctx.cookieFetch(pollUrl)
-      if (isRedirect(response.status)) {
-        const location = response.headers.get('location')
-        if (!location) throw new Error('Redirect utan Location under polling')
-        return resolveUrl(pollUrl, location)
+      const response = await this.ctx.cookieFetch(this.session.collectUrl)
+      if (isRedirect(response.status) || !response.ok) {
+        throw new Error('BankID-sessionen bröts (ollikshanterat svar)')
       }
-      const body = await response.text()
-      if (/avbrut|felaktigt|failed/i.test(body) && !body.includes('pnrform')) {
-        this.cancelled = true
-        this.emit('CANCELLED')
-        throw new Error('Avbruten')
+      const text = await response.text()
+      let data: { response?: string; hintCode?: string }
+      try {
+        data = JSON.parse(text)
+      } catch {
+        throw new Error('BankID-sessionen bröts (oväntat collect-svar)')
       }
-      await new Promise((resolve) => setTimeout(resolve, this.ctx.pollIntervalMs))
+
+      if (data.response === 'complete') return
+      if (data.response === 'outstandingTransaction') {
+        if (data.hintCode === 'userSign' && !this.userSignEmitted) {
+          this.userSignEmitted = true
+          this.emit('USER_SIGN')
+        }
+        await new Promise((resolve) =>
+          setTimeout(resolve, this.ctx.pollIntervalMs)
+        )
+        continue
+      }
+      throw new Error(
+        `BankID-sessionen avbröts (${JSON.stringify(data).slice(0, 80)})`
+      )
     }
   }
 
@@ -241,7 +304,6 @@ export class BankidLoginChecker
           url = location ? resolveUrl(url, location) : url
           continue
         }
-        // Inga fler hopp - klart (ovanlig väg, men hanteras)
         await postResponse.text()
         return url
       }

@@ -25,7 +25,10 @@ import {
 } from '@skolplattformen/api'
 import { Language } from '@skolplattformen/curriculum'
 import { DateTime } from 'luxon'
-import { BankidLoginChecker } from './loginBankid'
+import {
+  BankidLoginChecker,
+  startGrandIdBankidSession,
+} from './loginBankid'
 import { DummyStatusChecker } from './loginStatusChecker'
 import {
   isSsLessonEventList,
@@ -278,23 +281,31 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     }
 
     const normalizedPnr = personalNumber.replace(/\D/g, '')
-    const checker = new BankidLoginChecker(
-      {
-        cookieFetch: (url, init) => this.cookieFetch(url, init),
-        baseUrl: this.baseUrl,
-        pollIntervalMs: this.pollIntervalMs,
-        timeoutMs: this.loginTimeoutMs,
-        consoleTag: '[schoolsoft]',
-      },
-      normalizedPnr,
-      () => {
-        this.personalNumber = normalizedPnr
-        this.resumeAttempted = true
-        this.isLoggedIn = true
-        this.startpageCache = undefined
-        this.emit('login')
-      }
-    )
+    const ctx = {
+      cookieFetch: (url: string, init?: Parameters<typeof this.cookieFetch>[1]) =>
+        this.cookieFetch(url, init),
+      baseUrl: this.baseUrl,
+      pollIntervalMs: this.pollIntervalMs,
+      timeoutMs: this.loginTimeoutMs,
+      consoleTag: '[schoolsoft]',
+    }
+
+    let session
+    try {
+      session = await startGrandIdBankidSession(ctx, normalizedPnr)
+    } catch (error) {
+      const checker = new DummyStatusChecker()
+      setTimeout(() => checker.emit('ERROR', (error as Error).message), 0)
+      return checker
+    }
+
+    const checker = new BankidLoginChecker(ctx, session, () => {
+      this.personalNumber = normalizedPnr
+      this.resumeAttempted = true
+      this.isLoggedIn = true
+      this.startpageCache = undefined
+      this.emit('login')
+    })
     checker.start()
     return checker
   }

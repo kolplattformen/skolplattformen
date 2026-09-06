@@ -1,0 +1,171 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>AcadeMedia</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.grandid.com/academedia/design/css/main.css?v=1.6">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 class="logo"><a>AcadeMedia</a></h1>
+
+<article class="container">
+        <nav class="container__navigation">
+            <a href="" class="more__link">Hjälp</a>
+        </nav>
+        <div class="more__information">
+            <ol>
+                <li>Skriv in ditt personnummer (12 siffror) och klicka på <em>OK</em>.</li>
+                <li>Starta BankID säkerhetsapp i din mobil eller på din surfplatta. Skriv in din kod och tryck på <em>Legitimera</em>.</li>
+            </ol>
+        </div>
+        <h1 class="container__title">Mobilt BankID</h1>
+        <form id="pnrform" method="post" class="form">
+            <div class="form__form-group form__form-group--has-inner-label">
+                <label class="form__label" for="ssn">Personnummer</label>
+                <div class="form__icon-group form__icon-group--right">
+                    <i class="form__icon"><img src="https://cdn.grandid.com/academedia/design/images/bankid.svg"></i>
+                    <input class="form__input-text" type="text" name="pnr" autocomplete="off" id="pnr" placeholder="ÅÅÅÅMMDDNNNN">
+                </div>
+                <p style="display:none;font-weight:450;" id="inputError" class="form__validation form__validation--error">Kontrollera att du fyllt i ditt personnummer med 12 siffror enligt formatet ÅÅÅÅMMDDNNN</p>
+            </div>
+            <div class="form__form-group">
+                <button class="form__button form__button--primary" id="pnrSubmitbutton">OK</button>
+            </div>
+            <div class="form__form-group form__form-group--center">
+                <a class="form__button form__button--small" href="?sessionid=SESSIONIDDEMOSESSIONIDDEMO0001&cancel-bankid=1">Avbryt</a>
+            </div>
+        </form>
+    </article>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript"> 
+
+function isValidSwedishPIN(pin) { 
+
+
+
+if (pin.length != 12) { 
+
+return false; 
+
+} 
+
+
+
+pin = pin.replace(/\D/g, "").split("").reverse().slice(0, 12); 
+
+
+
+
+
+pin = pin.slice(0, 10); 
+
+
+
+var sum = pin 
+
+.map(function(n) { 
+
+return Number(n); 
+
+}) 
+
+.reduce(function(previous, current, index) { 
+
+if (index % 2) current *= 2; 
+
+if (current > 9) current -= 9; 
+
+return previous + current; 
+
+}); 
+
+return 0 === sum % 10; 
+
+}; 
+
+$(function() { 
+
+
+
+
+
+$("#pnr").focus(); 
+
+
+
+$("#pnr").on('input', function() { 
+
+
+
+var pin = $("#pnr").val(); 
+
+pin = pin.replace(/\D/g, ""); 
+
+if ($("#pnr").val() != pin) 
+
+$("#pnr").val(pin); 
+
+
+
+$("#pnricon").attr('class', 'glyphicon glyphicon-pencil'); 
+
+if (isValidSwedishPIN($("#pnr").val())) { 
+
+$("#pnricon").attr('class', 'glyphicon glyphicon-ok'); 
+
+$("#icondiv").attr('class', 'alert alert-success'); 
+
+$("#pnrSubmitbutton").removeClass("disabled"); 
+
+$("#pnrlabel").html("Ditt personnummer &auml;r korrekt"); 
+
+// $("#pnrform").submit(); 
+
+} else { 
+
+$("#pnricon").attr('class', 'glyphicon glyphicon-remove'); 
+
+$("#icondiv").attr('class', 'alert alert-warning'); 
+
+$("#pnrSubmitbutton").addClass("disabled"); 
+
+$("#pnrlabel").html("Ange personnummer (&Aring;&Aring;&Aring;&Aring;MMDDNNNN)"); 
+
+} 
+
+
+
+}); 
+
+
+
+$("#pnrSubmitbutton").click(function() { 
+
+var ret = isValidSwedishPIN($("#pnr").val()); 
+
+if (!ret) 
+
+$("#inputError").show(); 
+
+return ret; 
+
+}); 
+
+
+
+
+
+}); 
+
+</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdn.grandid.com/academedia/design/lib/main.js?v=1.2"></script>
+
+</body>
+</html>

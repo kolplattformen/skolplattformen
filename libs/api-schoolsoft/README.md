@@ -30,26 +30,33 @@ GET  {baseUrl}/samlLogin.jsp
   → 302 via Shibboleth + saml2.grandid.com SSO
   → login.grandid.com/?sessionid={SID}&ReturnTo={RT}
 GET  login.grandid.com/?sessionid={SID}&bankid=1   (personnummer-sida)
-POST ?sessionid={SID}&bankid=1   body: pnr={12 siffror}   (= startar order)
-GET  ?sessionid={SID}&bankid=1   (poll var 2,5 s tills 302)
-  → följ kedjan: 3xx-hopp + auto-submit SAML-form (SAMLResponse/RelayState
-    postas till {baseUrl}/Shibboleth.sso/SAML2/POST)
-  → schoolsoft-session etablerad (verifieras via #parent-header-root)
+POST ?sessionid={SID}&bankid=1   body: pnr={12 siffror}
+  → status-sida (fixture grandid-status.html) med:
+    - bankid:///?autostarttoken={T}&redirect=null  → checker.token = {T}
+    - roterande QR-SVG + JS-pollare:
+GET  ?sessionid={SID}&collect=1  (JSON)
+  {"response":"outstandingTransaction","hintCode":"outstandingTransaction",...} → vänta
+  {"response":"outstandingTransaction","hintCode":"userSign"}                   → USER_SIGN
+  {"response":"complete"}                                                       → klart!
+GET  ?sessionid={SID}  → 302-kedja via resume.php + auto-submit SAML-form
+                       (SAMLResponse/RelayState → {baseUrl}/Shibboleth.sso/SAML2/POST)
 ```
 
-Checker-events: `PENDING` direkt, `USER_SIGN` när ordern startats, `OK` vid
-lyckad kedja, `CANCELLED` vid avbrott/cancel, `ERROR` vid fel eller timeout
-(120 s). `token` är medvetet `'fake'` — GrandID exponerar inget
-autostarttoken i pnr-flödet, så appen ska inte försöka öppna `bankid://`.
-Användaren godkänner i valfri BankID-app kopplad till personnumret.
+Checker-events: `PENDING` direkt, `USER_SIGN` när användaren öppnat BankID,
+`OK` vid lyckad kedja, `CANCELLED` vid cancel() (som även anropar
+`&cancel-bankid=1`) eller avbrott, `ERROR` vid fel/timeout (120 s).
+`token` = riktigt autostarttoken → appens `openBankId` öppnar BankID direkt
+("thisdevice"). QR: token finns som base64-SVG i collect-svaren men renderas
+ännu inte i appen (v1.5); användaren kan öppna BankID-appen manuellt.
+
+GrandID validerar pnr mot AcadeMedia-AD **innan** ordern startas
+("kunde inte hittas i AD") → tydligt `ERROR` direkt.
 
 **DEV-genväg:** `sessionCookie` i config kortsluter hela flödet (som förut).
 
-**Riskkvarstående:** status-sidans exakta HTML efter pnr-POST är inte
-liveinspelad (inloggningen testades i Safari innan fångsten hanns med).
-Pollern är därför generisk: den följer 302-hopp samt varnings-/avbrotts-
-heuristik i sidtexten. Verifiera mot riktig inloggning vid första CLI-/
-apptest-körningen (se "Test").
+Fixtures från live-dumpar: `grandid-pnr.html`, `grandid-status.html`
+(avidentifierade: sessionid/token ersatta, QR-SVG trunkerad),
+`grandid-collect-{pending,usersign,complete}.json`.
 
 ### Dokumenterad men ännu inte kopplad
 
@@ -121,8 +128,8 @@ svars-lärarid i `input[name="teacher{id}"]`. Personal för mottagarval i
 - **Session TTL:** JSP-lagrets egen JS antyder ~30 min inaktivitetstimout;
   vid död session bouncar GET till `Login.jsp`/`samlLogin`. `resumeSession()`
   detekterar både redirect och frånvaron av `#parent-header-root`.
-- **Login-flödet är implementerat men ej livetestat** (se "Inloggning" -
-  status-sidan efter pnr-POST saknar live-fixture).
+- **Login-flödet är protoledes liveverifierat** (kedja + riktiga status-/collect-svar
+  inspelade 2026-09-06). QR-renderingen i appen återstår (token finns i collect-JSON).
 - **Freja stöds inte** (`LOGIN_FREJA_EID: false`).
 - **Skola:** multi-school via `school`-slug eller `baseUrl`, inget
   ProCivitas-specifikt i parsers.
