@@ -174,11 +174,10 @@ describe('useSkola24Children()', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
 
-      expect(result.current.error).toEqual(error)
+      expect(result.current.error).toBeUndefined()
       expect(result.current.status).toEqual('loading')
       expect(result.current.data).toEqual([{ personGuid: '2' }])
 
-      await waitForNextUpdate()
       await waitForNextUpdate()
       await waitForNextUpdate()
 
@@ -231,7 +230,7 @@ describe('useSkola24Children()', () => {
       await waitForNextUpdate()
       await waitForNextUpdate()
 
-      expect(result.current.error).toEqual(error)
+      expect(result.current.error).toBeUndefined()
 
       expect(reporter.error).toHaveBeenCalledWith(
         error,

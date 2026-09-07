@@ -73,8 +73,8 @@ test('hides options to call and text if no phone number', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByTestId('CallMenuItem')).toHaveStyle({ display: 'none' })
-  expect(screen.getByTestId('SMSMenuItem')).toHaveStyle({ display: 'none' })
+  expect(screen.getByTestId('CallMenuItem', { includeHiddenElements: true })).toHaveStyle({ display: 'none' })
+  expect(screen.getByTestId('SMSMenuItem', { includeHiddenElements: true })).toHaveStyle({ display: 'none' })
 })
 
 test('displays option to email guardian', () => {
@@ -102,7 +102,7 @@ test('hides options to email phone number', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByTestId('SendEmailMenuItem')).toHaveStyle({
+  expect(screen.getByTestId('SendEmailMenuItem', { includeHiddenElements: true })).toHaveStyle({
     display: 'none',
   })
 })
@@ -134,7 +134,7 @@ test('hides address if it does not exist', () => {
 
   fireEvent.press(screen.getByTestId('ShowContactInfoButton'))
 
-  expect(screen.getByTestId('ShowHomeMenuItem')).toHaveStyle({
+  expect(screen.getByTestId('ShowHomeMenuItem', { includeHiddenElements: true })).toHaveStyle({
     display: 'none',
   })
 })

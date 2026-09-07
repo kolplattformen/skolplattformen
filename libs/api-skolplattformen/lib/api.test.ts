@@ -125,7 +125,7 @@ describe('api', () => {
   describe('#logout', () => {
     it('clears session', async () => {
       await api.logout()
-      const session = await api.getSession('')
+      const session = await api.getSession('https://etjanst.stockholm.se')
       expect(session).toEqual({
         headers: {
           cookie: '',
