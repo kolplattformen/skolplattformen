@@ -3,6 +3,21 @@ import { useRouter } from 'next/router'
 import { Link as ScrollLink } from 'react-scroll'
 import { pageview } from './gtag'
 import { useIntl } from 'react-intl'
+import React from 'react'
+
+interface ScrollLinkProps {
+  to: string
+  href?: string
+  activeClass?: string
+  spy?: boolean
+  smooth?: boolean
+  offset?: number
+  duration?: number
+  onClick?: () => void
+  children?: React.ReactNode
+}
+
+const Scroll = ScrollLink as unknown as React.ComponentType<ScrollLinkProps>
 
 interface NavLinksProps {
   onClick?: () => void
@@ -11,6 +26,7 @@ interface NavLinksProps {
 interface LinkProps {
   href: string
   to: string
+  children?: React.ReactNode
 }
 
 const NavLinks = ({ onClick }: NavLinksProps) => {
@@ -25,7 +41,7 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
 
   const Link: React.FC<LinkProps> = ({ href, to, children }) =>
     path(href) === pathname ? (
-      <ScrollLink
+      <Scroll
         activeClass="current"
         to={to}
         href={`#${to}`}
@@ -39,10 +55,10 @@ const NavLinks = ({ onClick }: NavLinksProps) => {
         }}
       >
         {children}
-      </ScrollLink>
+      </Scroll>
     ) : (
-      <NavLink href={href}>
-        <a onClick={() => onClick?.()}>{children}</a>
+      <NavLink href={href} onClick={() => onClick?.()}>
+        {children}
       </NavLink>
     )
 
