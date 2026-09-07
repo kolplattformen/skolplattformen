@@ -26,7 +26,6 @@ The respective README files there contain more detailed descriptions.
   * [Libs](#embedded-api)
     * [api](#api)
     * [api-skolplattformen](#api-skolplattformen)
-    * [api-hjarntorget](#api-hjarntorget)
     * [api-vklass](#api-vklass)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
@@ -70,10 +69,6 @@ For more information, check out the [source code](apps/website).
 #### api
 
 The base for all api implementations
-
-#### api-hjarntorget
-
-The implementation for the school platform in Gothenburg called Hjärntorget.
 
 #### api-vklass
 
