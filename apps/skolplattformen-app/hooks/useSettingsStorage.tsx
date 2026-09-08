@@ -16,7 +16,9 @@ export const settingsState = proxy({
     usingSystemTheme: true,
     theme: 'light',
     cachedPersonalIdentityNumber: '',
-    currentSchoolPlatform: 'infomentor' as 'infomentor',
+    currentSchoolPlatform: 'infomentor' as
+      | 'infomentor'
+      | 'stockholm-skolplattformen',
     childPersonalIdentityNumber: {} as ChildPersonalNumbers,
   },
 })

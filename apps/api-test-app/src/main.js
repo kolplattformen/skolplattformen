@@ -12,14 +12,9 @@ const path = require('path')
 const fs = require('fs')
 const HttpProxyAgent = require('https-proxy-agent')
 const agentWrapper = require('./app/agentFetchWrapper')
-const initSkolplattformen = require('@skolplattformen/api-skolplattformen').default
-// TODO: Re-add when api-hjarntorget is restored
-// const initHjarntorget = require('@skolplattformen/api-hjarntorget').default
+const init = require('@skolplattformen/api-skolplattformen').default
 
 const [, , personalNumber] = process.argv
-// const isHjarntorget = platform && platform.startsWith('hj')
-// const init = isHjarntorget ? initHjarntorget : initSkolplattformen;
-const init = initSkolplattformen;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const cookieJar = new CookieJar()
@@ -182,12 +177,9 @@ function ensureDirectoryExistence(filePath) {
 
 
 function getSessionCookieFromCookieJar() {
-  // const cookieUrl = isHjarntorget ? 'https://hjarntorget.goteborg.se' : 'https://etjanst.stockholm.se'
   const cookieUrl = 'https://etjanst.stockholm.se'
   const cookies = cookieJar.getCookiesSync(cookieUrl)
-  // const sessionCookieKey =  isHjarntorget  ? 'JSESSIONID' : 'SMSESSION'
-  const sessionCookieKey = 'SMSESSION'
-  return cookies.find(c => c.key === sessionCookieKey)
+  return cookies.find(c => c.key === 'SMSESSION')
 }
 
 const record = async (info, data) => {
