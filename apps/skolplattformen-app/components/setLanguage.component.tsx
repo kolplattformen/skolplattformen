@@ -9,7 +9,8 @@ import {
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import RNRestart from 'react-native-restart'
+// TODO: Replace with expo-updates or alternative restart solution
+// import RNRestart from 'react-native-restart'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
@@ -44,7 +45,10 @@ export const SetLanguage = () => {
 
     // Checks if rtl mode has changed, then we need to restart the app
     if (shouldRestart()) {
-      RNRestart.Restart()
+      // TODO: Implement app restart for RTL changes
+      // RNRestart.Restart()
+      console.warn('App restart needed for RTL change - please restart manually')
+      goBack()
     } else {
       goBack()
     }

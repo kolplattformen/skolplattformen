@@ -1,7 +1,7 @@
-import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { useApi, useUser } from '@skolplattformen/hooks'
 import React, { useCallback } from 'react'
 import { ScrollView } from 'react-native'
+import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import useSettingsStorage from '../hooks/useSettingsStorage'
 import AppStorage from '../services/appStorage'
@@ -22,9 +22,9 @@ export const settingsRouteOptions = (): NativeStackNavigationOptions => ({
 })
 
 export const SettingsScreen = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const [isUsingSystemTheme] = useSettingsStorage('usingSystemTheme')
   const [settingsTheme] = useSettingsStorage('theme')
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   const langCode = LanguageService.getLanguageCode()
   const language = languages.find((l) => l.langCode === langCode)
   const { api } = useApi()
@@ -34,10 +34,11 @@ export const SettingsScreen = () => {
     await AppStorage.clearTemporaryItems()
     await AppStorage.clearPersonalData(user)
     await api.logout()
-    navigation.reset({
-      routes: [{ name: 'Login' }],
-    })
-  }, [api, navigation, user])
+    // OBS: navigation.reset() här racar mot isLoggedIn-omrenderingen
+    // ('Login' är inte mountad i navigatorn än → "not handled by any
+    // navigator"). navigation.component lyssnar på isLoggedIn-flipet och
+    // gör reset:en efter commit istället.
+  }, [api, user])
 
   return (
     <ScrollView

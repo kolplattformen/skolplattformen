@@ -4,8 +4,6 @@
  * - Saves sessionCoookie to a file and tries to use it again
  */
 
-const { DateTime } = require('luxon')
-const { inspect } = require('util')
 const nodeFetch = require('node-fetch')
 const { CookieJar } = require('tough-cookie')
 const fetchCookie = require('fetch-cookie/node-fetch')

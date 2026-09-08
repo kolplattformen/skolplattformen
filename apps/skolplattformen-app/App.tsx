@@ -23,14 +23,15 @@ const reporter: Reporter | undefined = __DEV__
     }
   : undefined
 
-if (__DEV__) {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const DevMenu = require('react-native-dev-menu')
-  DevMenu.addItem('Clear AsyncStorage from all contents', () =>
-    AsyncStorage.clear().then(() => logAsyncStorage())
-  )
-  DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
-}
+// TODO: Reimplement dev menu with Expo-compatible solution
+// if (__DEV__) {
+//   // eslint-disable-next-line @typescript-eslint/no-var-requires
+//   const DevMenu = require('react-native-dev-menu')
+//   DevMenu.addItem('Clear AsyncStorage from all contents', () =>
+//     AsyncStorage.clear().then(() => logAsyncStorage())
+//   )
+//   DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
+// }
 
 const safeJsonParse = (maybeJson: string) => {
   if (maybeJson) {
@@ -64,7 +65,9 @@ export default () => {
   const systemTheme = useColorScheme()
   const colorScheme = usingSystemTheme ? systemTheme : theme
 
-  const platform = schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform)
+  const platform =
+    schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform) ||
+    schoolPlatforms[0]
 
   if (!platform)
     return (
@@ -81,6 +84,7 @@ export default () => {
           storage={AsyncStorage}
           reporter={reporter}
         >
+          {/* @ts-expect-error React 18 type conflict */}
           <SafeAreaProvider>
             <StatusBar
               backgroundColor={colorScheme === 'dark' ? '#2E3137' : '#FFF'}
@@ -92,8 +96,7 @@ export default () => {
             <IconRegistry icons={EvaIconsPack} />
             <ApplicationProvider
               {...eva}
-              // @ts-expect-error Unknown error
-              customMapping={customMapping}
+              customMapping={customMapping as any}
               theme={colorScheme === 'dark' ? darkTheme : lightTheme}
             >
               <LanguageProvider cache={true} data={translations}>

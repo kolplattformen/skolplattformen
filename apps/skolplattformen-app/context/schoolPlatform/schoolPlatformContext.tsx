@@ -1,5 +1,5 @@
 import useSettingsStorage from '../../hooks/useSettingsStorage'
-import React, { createContext } from 'react'
+import React, { createContext, PropsWithChildren } from 'react'
 
 interface SchoolPlatformProps {
   currentSchoolPlatform?: string
@@ -11,7 +11,9 @@ const defaultState: SchoolPlatformProps = {
     console.log('DEBUG ONLY: changing to', platform),
 }
 
-export const SchoolPlatformProvider: React.FC = ({ children }) => {
+export const SchoolPlatformProvider: React.FC<PropsWithChildren<{}>> = ({
+  children,
+}) => {
   const [currentSchoolPlatform, setCurrentSchoolPlatform] = useSettingsStorage(
     'currentSchoolPlatform'
   )

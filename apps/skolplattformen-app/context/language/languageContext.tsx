@@ -52,7 +52,7 @@ export const LanguageProvider: React.FC<Props> = ({
     }
 
     const { languageTag } =
-      RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
+      RNLocalize.findBestLanguageTag(Object.keys(translations)) ||
       fallBack
 
     const bestStrings = data[languageTag]
@@ -82,7 +82,7 @@ export const LanguageProvider: React.FC<Props> = ({
 
         // Try to find best suited language
         const { languageTag } =
-          RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
+          RNLocalize.findBestLanguageTag(Object.keys(translations)) ||
           fallBack
 
         const currentLanguageCode = cachedLang || languageTag
