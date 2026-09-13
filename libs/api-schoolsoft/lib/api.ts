@@ -141,6 +141,36 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     return this.personalNumber
   }
 
+  private static readonly PNR_COOKIE = 'skf_pnr_v1'
+
+  /**
+   * Sparar personnummer som egen cookie i jaren: samma native-lagring som
+   * session-cookie:n (överlever JS-omladdningar och app-start) och ger
+   * resumeSession() cache-nyckeln (hooks blandar in pnr i alla keys).
+   */
+  private async persistPersonalNumberCookie(): Promise<void> {
+    if (!this.personalNumber) return
+    try {
+      await this.cookieManager.setCookie(
+        { name: ApiSchoolsoft.PNR_COOKIE, value: this.personalNumber },
+        this.baseUrl
+      )
+    } catch {
+      /* cookies är optimering - figsize vid nästa lyckade login */
+    }
+  }
+
+  private async restorePersonalNumberFromCookies(): Promise<void> {
+    if (this.personalNumber) return
+    try {
+      const cookies = await this.cookieManager.getCookies(this.baseUrl)
+      const saved = cookies.find((c) => c.name === ApiSchoolsoft.PNR_COOKIE)
+      if (saved?.value) this.personalNumber = saved.value
+    } catch {
+      /* ingen restore - t.ex. tomt jar */
+    }
+  }
+
   /**
    * Fetch med explicit cookie-hantering (samma semantik som api-infomentor,
    * utan SAML-kedjorna): skickar jarens cookies per request och lagrar alla
@@ -230,6 +260,8 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     for (const pair of sessionCookie.split('; ')) {
       await this.cookieManager.setCookieString(pair, this.baseUrl)
     }
+    if (!this.personalNumber) this.personalNumber = 'unknown'
+    await this.persistPersonalNumberCookie()
     this.isLoggedIn = true
     this.emit('login')
   }
@@ -268,6 +300,7 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
         console.warn('Dev cookie injection failed:', (error as Error).message)
       }
       this.personalNumber = personalNumber || 'unknown'
+      await this.persistPersonalNumberCookie()
       this.isLoggedIn = true
       this.emit('login')
       const checker = new DummyStatusChecker()
@@ -309,6 +342,8 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
       this.resumeAttempted = true
       this.isLoggedIn = true
       this.startpageCache = undefined
+      this.headerCache = undefined
+      void this.persistPersonalNumberCookie()
       this.emit('login')
     })
     checker.start()
@@ -339,7 +374,9 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
       }
       const body = await response.text()
       if (body.includes('parent-header-root')) {
+        await this.restorePersonalNumberFromCookies()
         this.isLoggedIn = true
+        void this.persistPersonalNumberCookie()
         console.log('[schoolsoft] session återupptagen från jaren')
         this.emit('login')
         return true

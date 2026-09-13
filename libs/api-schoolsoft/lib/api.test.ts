@@ -52,8 +52,22 @@ const fakeFetch: Fetch = async (url: string) => {
 const inMemoryCookieManager = (): CookieManager => {
   let store: { [host: string]: string } = {}
   return {
-    setCookie: async () => undefined,
-    getCookies: async () => [],
+    setCookie: async (cookie, url) => {
+      const host = new URL(url).host
+      // splitta ev. existerande värde och ersätt med detta cookie-namn
+      const parts = (store[host] ? store[host].split('; ') : []).filter(
+        (p) => !p.startsWith(`${cookie.name}=`)
+      )
+      parts.push(`${cookie.name}=${cookie.value}`)
+      store[host] = parts.join('; ')
+    },
+    getCookies: async (url) => {
+      const raw = store[new URL(url).host] || ''
+      return raw.split('; ').map((p) => {
+        const i = p.indexOf('=')
+        return { name: p.slice(0, i), value: p.slice(i + 1) }
+      })
+    },
     setCookieString: async (cookieString: string, url: string) => {
       const host = new URL(url).host
       store[host] = store[host]
@@ -216,6 +230,39 @@ describe('ApiSchoolsoft', () => {
     const resumed = await api.resumeSession()
     expect(resumed).toBe(true)
     expect(api.isLoggedIn).toBe(true)
+    expect(events).toEqual(['login'])
+  })
+
+  it('logins sparar pnr-cookie och resumeSession återställer den', async () => {
+    const { api, cookieManager } = createApi()
+    api.login('199001011234')
+    const status = await new Promise<string>((resolve) => {
+      api.on('login', () => resolve('login'))
+      setTimeout(() => resolve('timeout'), 3000)
+    })
+    expect(status).toEqual('login')
+    const pnrCookie = await cookieManager
+      .getCookies('https://sms.schoolsoft.se/procivitas')
+      .then((cs) => cs.find((c2) => c2.name === 'skf_pnr_v1'))
+    expect(pnrCookie?.value).toEqual('199001011234')
+  })
+
+  it('resumeSession återställer personalNumber från pnr-cookien', async () => {
+    const cookieManager = inMemoryCookieManager()
+    await cookieManager.setCookie(
+      { name: 'skf_pnr_v1', value: '191212121212' },
+      'https://sms.schoolsoft.se/procivitas'
+    )
+    const api = new ApiSchoolsoft({
+      fetch: fakeFetch,
+      cookieManager,
+      personalNumber: undefined,
+    } as never)
+    const events: string[] = []
+    api.on('login', () => events.push('login'))
+    const resumed = await api.resumeSession()
+    expect(resumed).toBe(true)
+    expect(api.getPersonalNumber()).toEqual('191212121212')
     expect(events).toEqual(['login'])
   })
 

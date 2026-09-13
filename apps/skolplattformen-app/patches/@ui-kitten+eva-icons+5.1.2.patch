@@ -1,0 +1,20 @@
+diff --git a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js
+index 1111111..2222222 100644
+--- a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js
++++ b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js
+@@ -8,12 +8,15 @@
+     }
+     toReactElement(props) {
+         const Icon = this.content;
+-        const { style, ...svgProps } = props;
++        const { style, onPress, onClick, onLongPress, ...svgProps } = props;
+         // @ts-ignore - UI Kitten components pass here `tintColor`
+         const fillColor = react_native_1.StyleSheet.flatten(style || {}).tintColor;
+-        return (react_1.default.createElement(Icon, Object.assign({ style: props.style, fill: fillColor }, svgProps)));
++        const { fill: _fill, ...rest } = svgProps;
++        return (react_1.default.createElement(Icon, Object.assign({ style: props.style, fill: fillColor, onPress: undefined }, rest)));
+     }
+ }
+ exports.EvaIcon = EvaIcon;
+diff --git a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js.map b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js.map
+deleted file mode 100644

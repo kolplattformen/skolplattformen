@@ -64,11 +64,14 @@ const nextElement = (el: HTMLElement): HTMLElement | null => {
 }
 
 const previousElement = (el: HTMLElement): HTMLElement | null => {
-  let node = el.previousSibling as HTMLElement | null
+  // node-html-parser 2.x saknar previousSibling i sina typer - gå via any
+  let node = (el as unknown as { previousSibling?: HTMLElement | null })
+    .previousSibling
   while (node && node.nodeType !== ELEMENT_NODE) {
-    node = node.previousSibling as HTMLElement | null
+    node = (node as unknown as { previousSibling?: HTMLElement | null })
+      .previousSibling
   }
-  return node
+  return node ?? null
 }
 
 /**

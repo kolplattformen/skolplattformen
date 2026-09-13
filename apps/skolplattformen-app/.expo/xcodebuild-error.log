@@ -1,0 +1,6 @@
+2026-09-12 15:31:06.227 xcodebuild[23849:20798680] Writing error result bundle to /var/folders/63/bg3rhx5j1nb1dcwn_p26ctn80000gn/T/ResultBundle_2026-12-09_15-31-0006.xcresult
+xcodebuild: error: Timed out waiting for all destinations matching the provided destination specifier to become available
+
+
+	Available destinations for the "app" scheme:
+		{ platform:iOS, arch:arm64, id:00008140-001125481A13001C, name:Christians iPhone 16 Pro, error:The developer disk image could not be mounted on this device. }

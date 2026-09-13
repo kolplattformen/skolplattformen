@@ -1,5 +1,26 @@
 {
-  "name": "app",
-  "displayName": "app",
-  "schema": "oppnaskolplattformen://"
+  "name": "Öppna Skolplattformen",
+  "displayName": "Öppna Skolplattformen",
+  "schema": "oppnaskolplattformen://",
+  "ios": {
+    "bundleIdentifier": "org.skolplattformen.app",
+    "infoPlist": {
+      "CFBundleDisplayName": "Öppna Skolplattformen"
+    },
+    "splash": {
+      "storyboardImage": {
+        "image": "assets/icon.png",
+        "ibName": "SplashScreen",
+        "imageWidth": 341
+      }
+    }
+  },
+  "icon": "assets/icon.png",
+  "newArchEnabled": false,
+  "splash": {
+    "image": "assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "version": "9.9.9"
 }

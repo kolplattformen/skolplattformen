@@ -17,7 +17,6 @@ export const settingsState = proxy({
     cachedPersonalIdentityNumber: '',
     currentSchoolPlatform: 'stockholm-skolplattformen' as
       | 'stockholm-skolplattformen'
-      | 'goteborg-hjarntorget'
       | 'schoolsoft-procivitas',
     childPersonalIdentityNumber: {} as ChildPersonalNumbers,
   },

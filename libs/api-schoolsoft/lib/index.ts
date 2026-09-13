@@ -39,11 +39,10 @@ const init = (
     loginTimeoutMs: config?.loginTimeoutMs,
   })
 
-  // Schoolsoft saknar native-store-flöde - sessionen finns bara om en
-  // sessionCookie matats in (dev-harness), då återupptas den direkt.
-  if (config?.sessionCookie) {
-    void api.resumeSession()
-  }
+  // Återuppta session ur native cookie-jar vid varje boot: RN-cookie:n
+  // lever kvar mellan omstart/JS-reload. Ser den döda ut (redirect till
+  // Login.jsp) sker ingen login-event - inloggningsskärmen visas som vanligt.
+  void api.resumeSession()
 
   return api
 }
