@@ -332,6 +332,11 @@ export class ApiSchoolsoft extends EventEmitter implements Api {
     try {
       session = await startGrandIdBankidSession(ctx, normalizedPnr)
     } catch (error) {
+      // diagnos: släpp undantaget i Metro-loggen också (kan följas live)
+      console.warn(
+        '[schoolsoft] startGrandIdBankidSession kastade:',
+        (error as Error)?.stack || (error as Error)?.message || error
+      )
       const checker = new DummyStatusChecker()
       setTimeout(() => checker.emit('ERROR', (error as Error).message), 0)
       return checker

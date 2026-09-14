@@ -108,14 +108,18 @@ async function chainToGrandidLogin(
   let url = `${ctx.baseUrl}/samlLogin.jsp`
   for (let hop = 0; hop < MAX_REDIRECT_HOPS; hop++) {
     const response = await ctx.cookieFetch(url)
-    if (isRedirect(response.status)) {
+    // RN fetch följer redirect-kedjan trots redirect:'manual' (iOS-nativt
+    // skiktet ignorerar manual) - response.url är sista kända adressen.
+    const finalUrl =
+      (response as Response & { url?: string }).url || response.url || url
+    if (isRedirect(response.status) && finalUrl === url) {
       const location = response.headers.get('location')
       if (!location) throw new Error(`Redirect utan Location från ${url}`)
       url = resolveUrl(url, location)
       continue
     }
     await response.text()
-    return url
+    return finalUrl
   }
   throw new Error('För många redirects från samlLogin.jsp')
 }
