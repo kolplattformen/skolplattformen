@@ -1,0 +1,989 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style><script async="" src="//schoolsoft.humany.net/default/embed.js"></script><script>const isNyEva = false;</script>
+
+
+  <title>SchoolSoft</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="viewport" content="width=device-width">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#234675">
+
+  <link href="../../style/frameset.css?rev=2.7" rel="styleSheet" type="text/css">
+  
+    <link href="../../style/StyleSheetNew.css?rev=3.10" rel="styleSheet" type="text/css">
+    <link href="../../style/StyleSheetMenu.css?rev=2.5" rel="styleSheet" type="text/css">
+    <link href="../../style/mainSheet.css?rev=6.2" rel="styleSheet" media="all" type="text/css">
+    
+          <meta name="msapplication-TileColor" content="#00897B">
+          <meta name="theme-color" content="#00897B">
+          <link href="../../style/parent_sheet.css?rev=2.6" rel="styleSheet" type="text/css">
+        
+    
+  
+  <script src="https://sprakkraft.org/lingvis-sdk/web/1.4.x"></script><style>:root{
+    --dark-mode-cloze-color: white;
+    --dark-mode-cloze-hover: #07677e;
+    --dark-mode-cloze-panel-main: rgb(4, 38, 107);
+    --dark-mode-cloze-panel-word-text: rgba(255,255,255,0.7);
+    --dark-mode-cloze-panel-header-text: #666;
+    --dark-mode-cloze-panel-header-background: black;
+    --dark-mode-cloze-panel-close-color: white;
+
+    --light-mode-cloze-color: black;
+    --light-mode-cloze-hover: #15b3e1;
+    --light-mode-cloze-panel-main: rgb(56, 126, 245);
+    --light-mode-cloze-panel-word-text: white;
+    --light-mode-cloze-panel-header-text: #666;
+    --light-mode-cloze-panel-header-background: white;
+    --light-mode-cloze-panel-close-color: black;
+
+    --mode-cloze-color: var(--light-mode-cloze-color);
+    --mode-cloze-hover: var(--light-mode-cloze-hover);
+    --mode-cloze-panel-main: var(--light-mode-cloze-panel-main);
+    --mode-cloze-panel-word-text: var(--light-mode-cloze-panel-word-text);
+    --mode-cloze-panel-header-text: var(--light-mode-cloze-panel-header-text);
+    --mode-cloze-panel-header-background: var(--light-mode-cloze-panel-header-background);
+    --mode-cloze-panel-close-color: var(--light-mode-cloze-panel-close-color);
+    
+    --mode-cloze-panel-border: var(--mode-cloze-panel-main);
+    --mode-cloze-panel-src-border: unset;
+    --mode-cloze-panel-drag-src-color: unset;
+    --mode-cloze-panel-drag-src-background: var(--mode-cloze-panel-main);
+}
+
+.polyLingVis-overlay {
+    --mode-cloze-color: var(--dark-mode-cloze-color);
+    --mode-cloze-hover: var(--dark-mode-cloze-hover);
+    --mode-cloze-panel-main: var(--dark-mode-cloze-panel-main);
+    --mode-cloze-panel-word-text: var(--dark-mode-cloze-panel-word-text);
+    --mode-cloze-panel-header-text: var(--dark-mode-cloze-panel-header-text);
+    --mode-cloze-panel-header-background: var(--dark-mode-cloze-panel-header-background);
+    --mode-cloze-panel-close-color: var(--dark-mode-cloze-panel-close-color);
+}
+
+#polyLingVis-cloze-panel {
+    max-width: 365px;
+    border: 1px solid var(--mode-cloze-panel-border);
+    border-radius: 4px;
+    width: calc(100% - 32px);
+    display: none;
+    position: absolute;
+    background-color: var(--mode-cloze-panel-main);
+    overflow: visible !important;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    z-index: 1000;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: unset;
+    cursor: move;
+    background-color: var(--mode-cloze-panel-header-background);
+    position: relative;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-heading h6 {
+    margin: 0;
+    font-size: 0.6875rem;
+    color: #777;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-body {
+    padding: 16px 24px 16px 16px;
+    font-size: 15px;
+    color: var(--mode-cloze-panel-word-text);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#polyLingVis-cloze-panel .polyLingVis-panel-body * {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+#polyLingVis-cloze-panel h6.polyLingVis-panel-title.polyLingVis-cloze-panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: start;
+    color: var(--mode-cloze-panel-header-text);
+    padding-right: 28px;
+}
+
+
+div.polyLingVis-link-line {
+    position: absolute;
+    width: 2px;
+    background-color: var(--polyLingVis-labels-link-line, lightgray);
+    z-index: 4;
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+}
+
+div.polyLingVis-label {
+    position: absolute;
+    display: inline-block;
+    max-width:300px;
+    max-height:30px;
+    overflow: hidden;
+    border: var(--polyLingVis-labels-border, 1px solid lightgrey);
+    background-color: var(--polyLingVis-labels-background-color, lightyellow);
+    color: var(--polyLingVis-labels-color, inherit);
+    font-size: 80%;
+    line-height: 14px;
+    cursor: pointer;
+    padding: 5px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.polyLingVis-overlay div.polyLingVis-link-line {
+    background-color: var(--polyLingVis-labels-overlay-link-line, rgba(255, 255, 255, 0.5));
+}
+
+.polyLingVis-tts.polyLingVis-overlay div.polyLingVis-link-line.polyLingVis-token-active {
+    background-color: cyan;
+}
+
+.polyLingVis-tts div.polyLingVis-link-line.polyLingVis-token-active {
+    background-color: rgb(50, 205, 50);
+}
+
+.polyLingVis-overlay div.polyLingVis-label {
+    padding: 3px;
+    font-size: 1em;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    color: var(--polyLingVis-labels-overlay-color, rgba(255, 255, 255, 0.6));
+    background-color: var(--polyLingVis-labels-overlay-background-color, rgba(0, 0, 0, 0.2));
+}
+
+.polyLingVis-dark div.polyLingVis-label {
+    background-color: var(--dark-mode-cloze-panel-main);
+}
+
+div.polyLingVis-label.label-below {
+    border-top: var(--polyLingVis-labels-border, 1px solid lightgray);
+    border-bottom: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+div.polyLingVis-label.label-above {
+    border-bottom: var(--polyLingVis-labels-border, 1px solid lightgray);
+    border-top: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+.polyLingVis-overlay div.polyLingVis-label.label-below {
+    border-top: var(--polyLingVis-labels-overlay-border, 1px solid rgba(228, 228, 228, 0.5));
+    border-bottom: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+.polyLingVis-overlay div.polyLingVis-label.label-above {
+    border-bottom: var(--polyLingVis-labels-overlay-border, 1px solid rgba(228, 228, 228, 0.5));
+    border-top: initial;
+    border-left: initial;
+    border-right: initial;
+}
+
+.polyLingVis-tts div.polyLingVis-label {
+    padding: 0px;
+}
+
+.polyLingVis-tts.polyLingVis-overlay div.polyLingVis-label.polyLingVis-token-active {
+    background-color: rgb(0, 0, 0, 0.2);
+    color: cyan;
+}
+
+.polyLingVis-tts div.polyLingVis-label.polyLingVis-token-active {
+    background-color: rgb(50, 205, 50);
+    color: white;
+}
+
+.polyLingVis-overlay .polyLingVis-link-line {
+    z-index: 999;
+}
+
+
+div.polyLingVis-label.polyLingVis-cloze-hover {
+    background-color: var(--mode-cloze-hover);
+    color: var(--mode-cloze-color);
+}
+
+.polyLingVis-cloze-src {
+    background-color: var(--mode-cloze-panel-main);
+    border-radius: 4px;
+    border: 1px solid var(--mode-cloze-panel-src-border);
+    padding: 4px 12px;
+    user-select: none;
+}
+
+.polyLingVis-cloze-src-dragging {
+    background-color: var(--mode-cloze-panel-drag-src-background);
+    border: 1px solid var(--mode-cloze-panel-drag-src-background);
+    color: var(--mode-cloze-panel-drag-src-color);
+}
+
+#polyLingVis-cloze-close {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 12px 12px;
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--mode-cloze-panel-close-color);
+}</style>
+  <script type="text/javascript" src="../../script/sprakkraft.js"></script>
+<script src="//schoolsoft.humany.net/default/widgets.js?v=268435456" type="text/javascript"></script><link href="//schoolsoft.humany.net/default/widgets.css?v=268435456" rel="stylesheet"><link href="//schoolsoft.humany.net/ClientLibraries/Supplementary/font-awesome-4.7.0/css/font-awesome.min.css?v=268435456" rel="stylesheet"><style data-emotion="css-global" data-s=""></style><style data-emotion="css" data-s=""></style><link rel="stylesheet" type="text/css" href="https://sms.schoolsoft.se/procivitas/react/jsp/7246.aca465d42c5ddc9d8632.css"></head>
+<body class="pushmenu-push legacy-teacher-menus">
+
+<script language="JavaScript" src="../../script/javascripts.js?rev=170916" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/boxover.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery-migrate-1.1.0.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery-ui-1.10.0.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery.viewport.mini.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/bootstrap/bootstrap-transition.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/bootstrap/bootstrap-collapse.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/bootstrap/bootstrap-dropdown.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/jquery.PrintThis.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../script/jquery/schoolsoft-jquery.js?rev=1.10" type="text/javascript"></script>
+    
+
+    
+<div id="parentPageWrapper">
+    <div id="parent-sidebar-root"><div class="MuiScopedCssBaseline-root css-vu345x"><div class="MuiBox-root css-1dh2w4i"></div><div top="4" class="MuiDrawer-root MuiDrawer-anchorLeft MuiDrawer-docked css-11ugohi"><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-vjj0uv" style="--Paper-shadow: none;"><div class="MuiBox-root css-1l4w6pd"><a class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary css-11z8lft" tabindex="0" href="#main">Gå direkt till innehållet</a></div><nav class="MuiList-root MuiList-padding css-rj8zmi" aria-label="Huvudmeny"><div class="MuiStack-root css-1821gv5"><div class="MuiStack-root css-75nic3" style="opacity: 1; transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"><div class="MuiBox-root css-1v6bx8g"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1gzac6h" href="https://www.procivitas.se/" target="_blank"><img alt="Logotyp" src="/procivitas/grafics/logo.png" width="100%" height="100%" style="border-radius: 6px;"></a></div><div class="MuiAutocomplete-root MuiAutocomplete-fullWidth css-7s1ac5"><form class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-p7ult1"><div aria-autocomplete="list" aria-expanded="false" autocapitalize="none" spellcheck="false" role="combobox" class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedStart MuiInputBase-adornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1si7jig"><div class="MuiInputAdornment-root MuiInputAdornment-positionStart MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-1wjd1nn"><span class="notranslate" aria-hidden="true">​</span><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></div><input aria-invalid="false" autocomplete="off" id=":rb:" placeholder="Sök" type="text" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-19zx574" aria-autocomplete="list" aria-expanded="false" autocapitalize="none" spellcheck="false" role="combobox" value=""><div class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeSmall css-13u04j7"><div class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault css-f0cv3h"><span class="MuiChip-label MuiChip-labelSmall css-4y436t">⌘K</span></div></div><fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-5v2ak0"><legend class="css-w4cd9x"><span class="notranslate" aria-hidden="true">​</span></legend></fieldset></div></form></div></div><hr class="MuiDivider-root MuiDivider-fullWidth css-bvrgh1" aria-hidden="true"><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters Mui-selected css-19okood" tabindex="0" href="right_student_startpage.jsp" aria-label="Startsida"><div class="MuiListItemIcon-root css-fwf4s3"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1"></path></svg></div><div class="MuiListItemText-root css-1echhzc"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Startsida</p></div><span class="MuiBadge-root css-nd79ke"><span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-bb49ud">0</span></span></a><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren MuiDivider-textAlignLeft css-1trkh3o" role="presentation" aria-hidden="true"><span class="MuiDivider-wrapper css-163llxe"><p class="MuiTypography-root MuiTypography-body2 css-1rupr45" autocapitalize="true">EDWARDS SKOLA</p></span></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-12if7rt" focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.5006 4.65187C12.1969 4.44937 11.8031 4.44937 11.4994 4.65187L7.67719 7.2H4.35C3.60469 7.2 3 7.80469 3 8.55V17.55C3 18.2953 3.60469 18.9 4.35 18.9H19.65C20.3953 18.9 21 18.2953 21 17.55V8.55C21 7.80469 20.3953 7.2 19.65 7.2H16.3228L12.5006 4.65187ZM10.2 16.2C10.2 15.2072 11.0072 14.4 12 14.4C12.9928 14.4 13.8 15.2072 13.8 16.2V18.9H10.2V16.2ZM5.7 9.9H6.6C6.8475 9.9 7.05 10.1025 7.05 10.35V12.15C7.05 12.3975 6.8475 12.6 6.6 12.6H5.7C5.4525 12.6 5.25 12.3975 5.25 12.15V10.35C5.25 10.1025 5.4525 9.9 5.7 9.9ZM16.95 10.35C16.95 10.1025 17.1525 9.9 17.4 9.9H18.3C18.5475 9.9 18.75 10.1025 18.75 10.35V12.15C18.75 12.3975 18.5475 12.6 18.3 12.6H17.4C17.1525 12.6 16.95 12.3975 16.95 12.15V10.35ZM5.7 13.5H6.6C6.8475 13.5 7.05 13.7025 7.05 13.95V15.75C7.05 15.9975 6.8475 16.2 6.6 16.2H5.7C5.4525 16.2 5.25 15.9975 5.25 15.75V13.95C5.25 13.7025 5.4525 13.5 5.7 13.5ZM16.95 13.95C16.95 13.7025 17.1525 13.5 17.4 13.5H18.3C18.5475 13.5 18.75 13.7025 18.75 13.95V15.75C18.75 15.9975 18.5475 16.2 18.3 16.2H17.4C17.1525 16.2 16.95 15.9975 16.95 15.75V13.95ZM9.525 9.45C9.525 8.79359 9.78576 8.16406 10.2499 7.69991C10.7141 7.23576 11.3436 6.975 12 6.975C12.6564 6.975 13.2859 7.23576 13.7501 7.69991C14.2142 8.16406 14.475 8.79359 14.475 9.45C14.475 10.1064 14.2142 10.7359 13.7501 11.2001C13.2859 11.6642 12.6564 11.925 12 11.925C11.3436 11.925 10.7141 11.6642 10.2499 11.2001C9.78576 10.7359 9.525 10.1064 9.525 9.45ZM12 8.1C11.7525 8.1 11.55 8.3025 11.55 8.55V9.45C11.55 9.6975 11.7525 9.9 12 9.9H12.9C13.1475 9.9 13.35 9.6975 13.35 9.45C13.35 9.2025 13.1475 9 12.9 9H12.45V8.55C12.45 8.3025 12.2475 8.1 12 8.1Z" fill="#currentColor"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Skolinfo</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M17 2c-.55 0-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-1V3c0-.55-.45-1-1-1m2 18H5V10h14zm-8-7c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m-4 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m8 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m-4 4c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m-4 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m8 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Schema</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M11.29 8.71 6.7 13.3c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0"></path></svg></div><div class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-1cbf1l2" style="min-height: 0px;"><div class="MuiCollapse-wrapper MuiCollapse-vertical css-15830to"><div class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9vd5ud"><div class="MuiList-root css-m6u8pf"><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/../../react/#/parent/calendar" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Schema &amp; Kalender</p></div></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" href="../student/right_student_timebooking.jsp" target="_self"><div class="MuiListItemText-root MuiListItemText-inset css-qh4lgm"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Bokningar</p></div></a></div></div></div></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M13.71 21.3c.39.39 1.02.39 1.41 0L17 19.41l1.89 1.89c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L18.41 18l1.89-1.89c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0L17 16.59l-1.89-1.89c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41L15.59 18l-1.89 1.89c-.38.38-.38 1.02.01 1.41M14 11c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1h9c.55 0 1-.45 1-1m0-4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1h9c.55 0 1-.45 1-1M3 15c0 .55.45 1 1 1h5c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Frånvaro</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren MuiDivider-textAlignLeft css-1trkh3o" role="presentation" aria-hidden="true"><span class="MuiDivider-wrapper css-163llxe"><p class="MuiTypography-root MuiTypography-body2 css-1rupr45" autocapitalize="true">EDWARDS BIBLIOTEK</p></span></div><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-19okood" tabindex="0" href="../student/../../react/#/parent/subjectrooms" aria-label="Ämnen"><div class="MuiListItemIcon-root css-fwf4s3"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="m18.15 1.35-4 4q-.15.15-.15.36v8.17c0 .43.51.66.83.37l4-3.6c.11-.09.17-.23.17-.37V1.71c0-.45-.54-.67-.85-.36m4.32 3.85c-.47-.24-.96-.44-1.47-.61v12.03c-1.14-.41-2.31-.62-3.5-.62-1.9 0-3.78.54-5.5 1.58V5.48C10.38 4.55 8.51 4 6.5 4c-1.79 0-3.48.44-4.97 1.2-.33.16-.53.51-.53.88v12.08c0 .76.81 1.23 1.48.87C3.69 18.4 5.05 18 6.5 18c2.07 0 3.98.82 5.5 2 1.52-1.18 3.43-2 5.5-2 1.45 0 2.81.4 4.02 1.04.67.36 1.48-.11 1.48-.87V6.08c0-.37-.2-.72-.53-.88"></path></svg></div><div class="MuiListItemText-root css-1echhzc"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Ämnen</p></div><span class="MuiBadge-root css-nd79ke"><span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-bb49ud"></span></span></a><a class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-19okood" tabindex="0" href="../student/../../react/#/parent/holistic_assessment" aria-label="Sammantagen bedömning"><div class="MuiListItemIcon-root css-fwf4s3"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 17.27 4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"></path></svg></div><div class="MuiListItemText-root css-1echhzc"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Sammantagen bedömning</p></div><span class="MuiBadge-root css-nd79ke"><span class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-pk4869">9</span></span></a><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6h-8l-1.41-1.41C10.21 4.21 9.7 4 9.17 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-5 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m4 8h-8v-1c0-1.33 2.67-2 4-2s4 .67 4 2z"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Elevdokument</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6h-8l-1.41-1.41C10.21 4.21 9.7 4 9.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-3.06 10.41L15 15.28l-1.94 1.13c-.38.22-.84-.12-.74-.55l.51-2.2-1.69-1.46c-.33-.29-.16-.84.28-.88l2.23-.19.88-2.06c.17-.4.75-.4.92 0l.88 2.06 2.23.19c.44.04.62.59.28.88l-1.69 1.46.51 2.2c.11.43-.35.77-.72.55"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Filer &amp; länkar</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-pc219b" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M13.26 3C8.17 2.86 4 6.95 4 12H2.21c-.45 0-.67.54-.35.85l2.79 2.8c.2.2.51.2.71 0l2.79-2.8c.31-.31.09-.85-.36-.85H6c0-3.9 3.18-7.05 7.1-7 3.72.05 6.85 3.18 6.9 6.9.05 3.91-3.1 7.1-7 7.1-1.61 0-3.1-.55-4.28-1.48-.4-.31-.96-.28-1.32.08-.42.42-.39 1.13.08 1.49C9 20.29 10.91 21 13 21c5.05 0 9.14-4.17 9-9.26-.13-4.69-4.05-8.61-8.74-8.74m-.51 5c-.41 0-.75.34-.75.75v3.68c0 .35.19.68.49.86l3.12 1.85c.36.21.82.09 1.03-.26.21-.36.09-.82-.26-1.03l-2.88-1.71v-3.4c0-.4-.34-.74-.75-.74"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 css-yzilbb">Äldre funktioner</p></div><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1sne32p" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0"></path></svg></div></div></nav><div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation3 MuiBox-root css-n7aff" style="--Paper-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);"><div class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters css-6k9nw4" tabindex="0" role="button"><div class="MuiListItemIcon-root css-lsc12j"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12c0 5.52 4.48 10 10 10s10-4.48 10-10S17.52 2 12 2 2 6.48 2 12m10-2.79V11h3c.55 0 1 .45 1 1s-.45 1-1 1h-3v1.79c0 .45-.54.67-.85.35l-2.79-2.79c-.2-.2-.2-.51 0-.71l2.79-2.79c.31-.31.85-.09.85.36"></path></svg></div><div class="MuiListItemText-root css-t3p1a1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1lxk3ph">Minimera menyn</p></div></div></div></div></div></div><div class="MuiScopedCssBaseline-root css-vu345x"></div></div>
+    <div id="parentContentWrapper">
+        <div id="parent-header-root" style="height: 72px;"><div class="MuiScopedCssBaseline-root css-9c1az3"><div class="MuiBox-root css-0"><header class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorInherit MuiAppBar-positionStatic css-1i7yzoj"><div class="MuiToolbar-root MuiToolbar-regular css-tylvyk"><div class="MuiBox-root css-i9gxme"><div class="MuiStack-root css-1txeit4"><div class="MuiStack-root css-qhewy7"><div class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-19zdr60">S</div><div class="MuiStack-root css-1lxwves"><p class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap css-1kr3dlx">Viggo Ekholm</p><span class="MuiTypography-root MuiTypography-caption MuiTypography-noWrap css-9cznkf">ProCivitas Karlberg  | SA24a</span></div></div><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical css-o9qltg" role="separator" aria-orientation="vertical" aria-hidden="true"></div></div></div><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical css-o9qltg" role="separator" aria-orientation="vertical" aria-hidden="true"></div><div class="MuiStack-root css-voneje"><div class="MuiStack-root css-1txeit4"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-t367d8" tabindex="0" id="messages-link-button" href="right_student_message.jsp" aria-label="8 nya meddelanden"><span class="MuiBadge-root css-1cxr8v4"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1rqjhuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25-6.54 4.09c-.65.41-1.47.41-2.12 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72"></path></svg><span class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-pk4869">8</span></span></a><div class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1l9bawj" role="separator" aria-orientation="vertical" aria-hidden="true"></div><button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-ez2tt" tabindex="0" type="button" id="menu-button" aria-haspopup="true" aria-expanded="false" aria-label="Användarmeny"><div class="MuiStack-root css-1y3ojfh"><div class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-19zdr60"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-97wums" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg></div><p class="MuiTypography-root MuiTypography-body2 css-mzylrk">Peter</p></div><span class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-1g78ho2"><svg class="MuiSvgIcon-root MuiSvgIcon-colorAction MuiSvgIcon-fontSizeMedium css-1hox44e" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="m8.71 11.71 2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71"></path></svg></span></button></div></div></div></header></div></div><div class="MuiScopedCssBaseline-root css-vu345x"></div></div>
+        <div id="content-pos-parent" style="opacity: 0; padding-top: unset;">
+                
+                        
+
+  <script>
+    
+    var hideMenu = sessionStorage.getItem('hideMenu') === '1';
+    if (document.getElementById("content-pos") && !hideMenu) {
+      document.getElementById("content-pos").style.setProperty("opacity", 0);
+    }
+    if (document.getElementById("content-pos-student") && !hideMenu) {
+      document.getElementById("content-pos-student").style.setProperty("opacity", 0);
+    }
+    if (document.getElementById("content-pos-parent") && !hideMenu) {
+      document.getElementById("content-pos-parent").style.setProperty("opacity", 0);
+    }
+  </script>
+
+  <link href="/procivitas/react/jsp/main.370c874f51f7e5516e75.css" rel="stylesheet">
+  <script defer="" src="/procivitas/react/jsp/main.c64b443edff56a5175cc.js"></script>
+
+
+                        <!-- main content begin -->
+
+<div id="main">
+
+  <div class="content_wrapper" id="content">
+
+<script language="JavaScript" src="../../script/fancybox3/jquery.fancybox.min.js" type="text/javascript"></script>
+<link href="../../script/fancybox3/jquery.fancybox.min.css" rel="stylesheet" media="all" type="text/css">
+<!-- http://kenwheeler.github.io/slick/ 1.8.1 -->
+<link href="../../script/slick/slick.css" rel="stylesheet" media="all" type="text/css" charset="UTF-8">
+<link href="../../script/slick/slick-theme.css" rel="stylesheet" media="all" type="text/css" charset="UTF-8">
+<script language="JavaScript" src="../../script/slick/slick.min.js" type="text/javascript"></script>
+
+
+<script language="JavaScript" src="../../script/stacktrace.min.js?v=1.3.0" type="text/javascript"></script>
+
+<script src="../../script/angular/lib/angular.min.js?v=1.4.0"></script>
+<script src="../../script/angular/lib/ui-grid.min.js"></script>
+<script src="../../script/angular/lib/angular-ui-router.min.js"></script>
+<script src="../../script/angular/lib/angular-animate.min.js"></script>
+<script src="../../script/angular/lib/angular-resource.min.js?v=1.4.0"></script>
+<script src="../../script/angular/lib/ui-bootstrap-tpls-0.13.0.min.js?v=1.002"></script>
+<script src="../../script/angular/lib/angular-sanitize.js?v=1.4.0"></script>
+<script src="../../script/angular/lib/select.min.js"></script>
+
+
+<script src="../../script/angular/lib/angular-filter.js?v=1.4.0"></script>
+<script src="../../script/angular/lib/ng-tags-input.min.js"></script>
+<script src="../../script/angular/lib/angular-bootstrap-checkbox.js"></script>
+<script src="../../script/angular/lib/angular-scrollable-table.min.js"></script>
+<script src="../../script/angular/lib/truncate.js"></script>
+<script src="../../script/angular/lib/pdfmake.min.js?v=0.1.63"></script>
+<script src="../../script/angular/lib/vfs_fonts.js?v=0.1.63"></script>
+<script src="../../script/angular/lib/angular-file-saver.bundle.min.js"></script>
+<script src="../../script/angular/lib/i18n/ui-i18n.js"></script>
+<script src="../../script/angular/lib/i18n/sv.js"></script>
+<script src="../../script/angular/lib/i18n/en.js"></script>
+<script src="../../script/angular/lib/ngDraggable.js"></script>
+
+<script src="../../script/angular/lib/fileupload/load-image.all.min.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload-process.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload-image.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload-audio.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload-video.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload-validate.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.fileupload-angular.js"></script>
+<script src="../../script/angular/lib/fileupload/jquery.iframe-transport.js"></script>
+<script src="../../script/angular/lib/documentEngine.js"></script>
+
+<link href="../../script/angular/lib/colorpicker/angular-colorpicker-dr.css?rev=1.002" rel="stylesheet" type="text/css">
+<script src="../../script/angular/lib/colorpicker/angular-colorpicker-dr.js?rev=1.002"></script>
+
+<link href="../../style/glyphicons_css/glyphicons.css?rev=1001" rel="stylesheet" type="text/css">
+<link href="../../style/glyphicons_css/glyphicons-override.css" rel="stylesheet" type="text/css">
+<link href="../../style/glyphicons_css/glyphicons-bootstrap.css" rel="stylesheet" type="text/css">
+
+<link href="../../script/angular/lib/toaster/toaster.min.css" rel="stylesheet" type="text/css">
+<link href="../../script/angular/lib/toaster/scs-toaster.css" rel="stylesheet" type="text/css">
+<script src="../../script/angular/lib/toaster/toaster.min.js"></script>
+
+<script src="../../script/angular/lib/bootstrap-switch.min.js"></script>
+<script src="../../script/angular/lib/angular-bootstrap-switch.min.js"></script>
+<link href="../../script/angular/lib/style/bootstrap-switch.css" type="text/css" rel="stylesheet" media="screen">
+
+<script src="../../script/angular/app.js?rev=1.066"></script>
+<script src="../../script/angular/directives.js?rev=1.024"></script>
+<script src="../../script/angular/CommonController.js?rev=1.008"></script>
+<script src="../../script/angular/utils/fullScreenGridModalController.js?rev=1.000"></script>
+<script src="../../script/angular/CommonService.js?rev=1.040"></script>
+<script src="../../script/angular/Constants.js?rev=1.022"></script>
+
+<script src="../../script/angular/directives/ssdatefilter/ss-date-filter.js?rev=1.000"></script>
+<script src="../../script/angular/directives/ssdatefilter/modal/datePickerFilterModalCtrl.js?rev=1.000"></script>
+<script src="../../script/angular/directives/ssonedrivepicker/ssonedrivepicker.js?rev=1.000"></script>
+<script src="../../script/angular/utils/collectionHandler.js?rev=1.000"></script>
+<script src="../../script/angular/utils/dateHandler.js?rev=1.002"></script>
+<script src="../../script/angular/teacher/planningtool/confirmLB/confirmLBController.js"></script>
+
+<link href="../../vendor/scsbootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" media="screen">
+<link href="../../vendor/scsbootstrap/css/bootstrap-theme.css" type="text/css" rel="stylesheet" media="screen">
+<link href="../../script/angular/lib/style/ui-grid.min.css?v=1.000" rel="styleSheet" type="text/css" media="screen">
+<link href="../../style/scs-ui-grid.css?rev=1.007" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+
+<script>var lang = 'en';</script>
+
+<script src="../../script/angular/lib/angular-locale_sv-se.js"></script>
+<script>lang = 'sv';</script>
+
+
+
+<script>
+  
+  var localStorageUserKey = '-2_0';
+</script>
+
+<script>
+  function loadLabel(obj, attr, labelJSON) {
+    if (typeof labels[obj] === 'undefined') {
+      labels[obj] = {};
+    }
+    if (typeof labels[obj][attr] === 'undefined') {
+      labels[obj][attr] = {};
+      labels[obj][attr] = labelJSON;
+    }
+  }
+
+  labels = {};
+  texts = {};
+
+  
+  var parameter_dev_env = false;
+  var parameter_beta_env = false;
+</script>
+
+<style media="print">  .humany-floating-trigger {       display: none;  }</style><style>.humany-floating-trigger {       z-index: 999;  }  .humany-copyright {      display: none;  }  .humany-icon > span.fa-stack {      vertical-align: baseline;   }  .humany-floating-trigger .humany-close-icon svg {      top: -6px;      left: 18px;      width: 15px;  }  .humany-floating#humany_gr-admin .humany-head > div {      background-color: #3a75c4;   }  .humany-floating-trigger.humany_gr-admin .humany-icon i.fa-stack-2x {      color: #3a75c4;   }  .humany-floating#humany_gy-admin .humany-head > div {      background-color: #3a75c4;   }  .humany-floating-trigger.humany_gy-admin .humany-icon i.fa-stack-2x {      color: #3a75c4;   }</style><script>(function(n,t,i,r,u,f,e){for(var o,s=/[?&]{1}(humany[^=]*)=([^&#]*)/g;o=s.exec(n.location.search);)i+=(i.indexOf("?")>-1?"&":"?")+o[1]+"="+o[2];
+    f=t.createElement(u);f.async=!0;f.src=i;e=t.getElementsByTagName(u)[0];e.parentNode.insertBefore(f,e);n[r]=n[r]||{_c:[],configure:function(t){n[r]._c.push(t)}}})(window,document,"//schoolsoft.humany.net/default/embed.js","Humany","script");</script>
+
+<script src="../../script/angular/teacher/blogpost/blogPostService.js?rev=1.011"></script>
+<script src="../../script/angular/directives/blogpost/blogPostListItemDisplayVersion3.js?rev=1.014"></script>
+<link href="../../script/angular/teacher/blogpost/directives/create/css/style.css?rev=1.005" rel="stylesheet" type="text/css">
+<script>
+  texts["BUT_Delete"] = {"keyText":"BUT_Delete","text":"Ta bort"};
+  labels['blogpost.name'] = {"object":"blogpost","attribute":"name","text":"Rubrik"};
+  texts['OBJ_BlogPost_Missing_Video'] = {"keyText":"OBJ_BlogPost_Missing_Video","text":"Med hänvisning till Apples ålderskategorisering av appar kan vi inte visa videor från Youtube direkt i appen eftersom appen behöver vara tillgänglig även för elever yngre än 17 år. Videon kan fortfarande visas om du loggar in via en webbläsare."};
+  texts['OBJ_BlogPost_Missing_Video_Header'] = {"keyText":"OBJ_BlogPost_Missing_Video_Header","text":"Borttagen videolänk."};
+  texts["LBL_Student_From"] = {"keyText":"LBL_Student_From","text":"Från"};
+  var PRE = false;
+  isApp = false;
+  isTeacher = false;
+  isNyEva = false;
+</script>
+<div data-ng-app="schoolsoftApp" class="ng-scope">
+<div class="h1">Startsida</div><div class="page-print"><a href="right_parent_printout_print.jsp?week=36"><img class="hand hideforprint printarea" src="../../images/icon/printer.png" alt="" rel="content"></a></div><div class="border-bottom"></div>
+<div id="hidden_container" class="hidden">
+<div id="day_stuff0">
+<div class="h2_container" id="date0"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Måndag 31 aug.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day0-3"><a class="btn" id="day0-0" href="right_student_startpage.jsp?view=day&amp;daymod=-7"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day0-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day0-2" href="right_student_startpage.jsp?view=day&amp;daymod=-5"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date0_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-08-31&amp;mode=day&amp;event=136127" title="header=[Lektion 11:00-11:40 Lunch] body=[Grupp: SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:00-11:40 Lunch </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-08-31&amp;mode=day&amp;event=151951" title="header=[Lektion 11:40-12:50 SOISOO0] body=[Personal: REL
+&lt;br /&gt;Sal: Stanford
+&lt;br /&gt;Grupp: SOISOO0_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:40-12:50 SOISOO0 Stanford </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-08-31&amp;mode=day&amp;event=148401" title="header=[Lektion 13:00-14:10 LEDLED0] body=[Personal: JOG
+&lt;br /&gt;Sal: Chalmers
+&lt;br /&gt;Grupp: LEDLED0_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">13:00-14:10 LEDLED0 Chalmers </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="day_stuff1">
+<div class="h2_container" id="date1"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Tisdag 1 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day1-3"><a class="btn" id="day1-0" href="right_student_startpage.jsp?view=day&amp;daymod=-6"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day1-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day1-2" href="right_student_startpage.jsp?view=day&amp;daymod=-4"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date1_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-01&amp;mode=day&amp;event=145298" title="header=[Lektion 8:25-9:40 RELREL01] body=[Personal: REL
+&lt;br /&gt;Sal: Berkeley
+&lt;br /&gt;Grupp: RELREL01_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">8:25-9:40 RELREL01 Berkeley </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-01&amp;mode=day&amp;event=151522" title="header=[Lektion 9:50-11:05 ENGENG07] body=[Personal: MAP
+&lt;br /&gt;Sal: Sorbonne
+&lt;br /&gt;Grupp: ENGENG07_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">9:50-11:05 ENGENG07 Sorbonne </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-01&amp;mode=day&amp;event=152694" title="header=[Lektion 11:15-12:30 ENGENG07] body=[Personal: MAP
+&lt;br /&gt;Sal: Sorbonne
+&lt;br /&gt;Grupp: ENGENG07_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:15-12:30 ENGENG07 Sorbonne </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-01&amp;mode=day&amp;event=136093" title="header=[Lektion 12:35-13:15 Lunch] body=[Grupp: SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">12:35-13:15 Lunch </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-01&amp;mode=day&amp;event=154772" title="header=[Lektion 13:40-14:50 GYARSA] body=[Personal: HAE
+&lt;br /&gt;Sal: Akvariet
+Yale
+&lt;br /&gt;Grupp: GYARSA_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">13:40-14:50 GYARSA Akvariet, Yale </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-01&amp;mode=day&amp;event=154737" title="header=[Lektion 14:55-16:05 GYARSA] body=[Personal: HAE
+&lt;br /&gt;Sal: Akvariet
+Yale
+&lt;br /&gt;Grupp: GYARSA_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">14:55-16:05 GYARSA Akvariet, Yale </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="day_stuff2">
+<div class="h2_container" id="date2"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Onsdag 2 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day2-3"><a class="btn" id="day2-0" href="right_student_startpage.jsp?view=day&amp;daymod=-5"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day2-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day2-2" href="right_student_startpage.jsp?view=day&amp;daymod=-3"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date2_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-02&amp;mode=day&amp;event=150035" title="header=[Lektion 9:40-10:40 MATMAT03b] body=[Personal: SAM
+&lt;br /&gt;Sal: Columbia
+&lt;br /&gt;Grupp: MATMAT03b_IV24
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">9:40-10:40 MATMAT03b Columbia </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-02&amp;mode=day&amp;event=136057" title="header=[Lektion 11:00-11:40 Lunch] body=[Grupp: SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:00-11:40 Lunch </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-02&amp;mode=day&amp;event=149071" title="header=[Lektion 11:40-13:00 SOISOO0] body=[Personal: REL
+&lt;br /&gt;Sal: Oxford
+&lt;br /&gt;Grupp: SOISOO0_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:40-13:00 SOISOO0 Oxford </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-02&amp;mode=day&amp;event=155219" title="header=[Lektion 13:00-13:30 Klasscoachtid] body=[Personal: REL
+&lt;br /&gt;Sal: Oxford
+&lt;br /&gt;Grupp: SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">13:00-13:30 Klasscoachtid Oxford </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-02&amp;mode=day&amp;event=147938" title="header=[Lektion 13:40-14:50 SVESVE03] body=[Personal: HAE
+&lt;br /&gt;Sal: Yale
+&lt;br /&gt;Grupp: SVESVE03_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">13:40-14:50 SVESVE03 Yale </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="day_stuff3">
+<div class="h2_container" id="date3"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Torsdag 3 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day3-3"><a class="btn" id="day3-0" href="right_student_startpage.jsp?view=day&amp;daymod=-4"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day3-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day3-2" href="right_student_startpage.jsp?view=day&amp;daymod=-2"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date3_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-03&amp;mode=day&amp;event=151486" title="header=[Lektion 8:50-10:05 HUMHUM00S] body=[Personal: EMM
+&lt;br /&gt;Sal: Nanyang
+&lt;br /&gt;Grupp: HUMHUM00S_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">8:50-10:05 HUMHUM00S Nanyang </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-03&amp;mode=day&amp;event=150450" title="header=[Lektion 10:10-11:25 HUMHUM00S] body=[Personal: EMM
+&lt;br /&gt;Sal: Nanyang
+&lt;br /&gt;Grupp: HUMHUM00S_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">10:10-11:25 HUMHUM00S Nanyang </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-03&amp;mode=day&amp;event=136022" title="header=[Lektion 11:25-12:05 Lunch] body=[Grupp: SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:25-12:05 Lunch </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-03&amp;mode=day&amp;event=149794" title="header=[Lektion 12:05-13:25 SVESVE03] body=[Personal: HAE
+&lt;br /&gt;Sal: Sorbonne
+&lt;br /&gt;Grupp: SVESVE03_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">12:05-13:25 SVESVE03 Sorbonne </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-03&amp;mode=day&amp;event=134515" title="header=[Lektion 13:35-14:50 RELREL01] body=[Personal: REL
+&lt;br /&gt;Sal: Stanford
+&lt;br /&gt;Grupp: RELREL01_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">13:35-14:50 RELREL01 Stanford </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-03&amp;mode=day&amp;event=148435" title="header=[Lektion 15:00-16:20 LEDLED0] body=[Personal: JOG
+&lt;br /&gt;Sal: Cambridge
+&lt;br /&gt;Grupp: LEDLED0_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">15:00-16:20 LEDLED0 Cambridge </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="day_stuff4">
+<div class="h2_container" id="date4"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Fredag 4 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day4-3"><a class="btn" id="day4-0" href="right_student_startpage.jsp?view=day&amp;daymod=-3"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day4-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day4-2" href="right_student_startpage.jsp?view=day&amp;daymod=-1"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date4_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-04&amp;mode=day&amp;event=148282" title="header=[Lektion 8:45-9:45 MATMAT03b] body=[Personal: SAM
+&lt;br /&gt;Sal: Duke
+&lt;br /&gt;Grupp: MATMAT03b_IV24
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">8:45-9:45 MATMAT03b Duke </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-04&amp;mode=day&amp;event=146994" title="header=[Lektion 9:55-10:55 MATMAT03b] body=[Personal: SAM
+&lt;br /&gt;Sal: Duke
+&lt;br /&gt;Grupp: MATMAT03b_IV24
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">9:55-10:55 MATMAT03b Duke </div></div></a></div></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-04&amp;mode=day&amp;event=135987" title="header=[Lektion 11:15-11:55 Lunch] body=[Grupp: SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">11:15-11:55 Lunch </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-04&amp;mode=day&amp;event=146861" title="header=[Lektion 12:00-13:15 ENTENR0] body=[Personal: PEI
+&lt;br /&gt;Sal: Cambridge
+&lt;br /&gt;Grupp: ENTENR0_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">12:00-13:15 ENTENR0 Cambridge </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"><div class="cal-lesson"><a href="../../react/#/parent/calendar?date=2026-09-04&amp;mode=day&amp;event=146894" title="header=[Lektion 13:20-14:35 ENTENR0] body=[Personal: PEI
+&lt;br /&gt;Sal: Cambridge
+&lt;br /&gt;Grupp: ENTENR0_SA24a
+&lt;br /&gt;Veckor: 36&lt;br /&gt;]"><div class="dayViewDetailedBox"><img src="../../images/icon/schedule.png" alt="" title=""><div class="dayViewDetailedTextBox">13:20-14:35 ENTENR0 Cambridge </div></div></a></div></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="day_stuff5">
+<div class="h2_container" id="date5"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Lördag 5 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day5-3"><a class="btn" id="day5-0" href="right_student_startpage.jsp?view=day&amp;daymod=-2"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day5-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day5-2" href="right_student_startpage.jsp?view=day&amp;daymod=0"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date5_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="day_stuff6">
+<div class="h2_container" id="date6"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">Idag, söndag 6 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-day6-3"><a class="btn" id="day6-0" href="right_student_startpage.jsp?view=day&amp;daymod=-1"><div class="bold " title="Föregående Dag">&lt;</div></a><a class="btn" id="day6-1" href="right_student_startpage.jsp?view=day">Idag</a><a class="btn" id="day6-2" href="right_student_startpage.jsp?view=day&amp;daymod=1"><div class="bold" title="Nästa Dag">&gt;</div></a></div></div></div></div><div id="date6_content" class="h2_innerno_pad"><table class="dayviewtable"><tbody><tr><td colspan="2"></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">7:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">8:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">9:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">10:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft"><div style="float:right;vertical-align:center;">&nbsp;<img src="../../grafics/week_calendar_timeline_start.png" alt=""></div></td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">11:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">12:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">13:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">14:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">15:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">16:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">17:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td></td></tr><tr><td width="35" class="dayViewTopLeft" valign="top">18:00</td><td class="dayViewTopRight"></td></tr><tr><td width="35" class="dayViewBotLeft">&nbsp;</td><td class="dayViewBotLeftLast"></td></tr></tbody></table></div></div>
+</div>
+<div id="week_stuff">
+<div class="h2_container" id="week"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">v36 2026, 31 aug. - 6 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-date-3"><a class="btn" id="date-0" href="right_student_startpage.jsp?view=week&amp;week=35"><div class="bold" title="Föregående Vecka">&lt;</div></a><a class="btn" id="date-1" href="right_student_startpage.jsp?view=week">Denna vecka</a><a class="btn" id="date-2" href="right_student_startpage.jsp?view=week&amp;week=37"><div class="bold" title="Nästa Vecka">&gt;</div></a></div></div></div></div><div id="week_content" class="h2_innerno_pad"></div></div>
+
+</div>
+</div>
+<div class="span6left" style="display: flex; flex-direction: column;">
+<div id="show_this">
+<div class="h2_container" id="week"><ul class="nav nav-tabs "><li class="" id="monTab"><a href="right_student_startpage.jsp?view=day">Må</a></li><li class="" id="tueTab"><a href="right_student_startpage.jsp?view=day">Ti</a></li><li class="" id="wedTab"><a href="right_student_startpage.jsp?view=day">On</a></li><li class="" id="thuTab"><a href="right_student_startpage.jsp?view=day">To</a></li><li class="" id="friTab"><a href="right_student_startpage.jsp?view=day">Fr</a></li><li class="" id="satTab"><a href="right_student_startpage.jsp?view=day">Lö</a></li><li class="" id="sunTab"><a href="right_student_startpage.jsp?view=day">Sö</a></li><li class="active" id="weekTab"><a href="right_student_startpage.jsp?view=week&amp;week=36">v36</a></li></ul><div class="h2_box"><div class=" h3 " style="margin-top:6px; padding-left:6px;">v36 2026, 31 aug. - 6 sep.</div><div class="selectors"><div class="btn-toolbar"><div class="btn-group" id="btn-group-date-3"><a class="btn" id="date-0" href="right_student_startpage.jsp?view=week&amp;week=35"><div class="bold" title="Föregående Vecka">&lt;</div></a><a class="btn" id="date-1" href="right_student_startpage.jsp?view=week">Denna vecka</a><a class="btn" id="date-2" href="right_student_startpage.jsp?view=week&amp;week=37"><div class="bold" title="Nästa Vecka">&gt;</div></a></div></div></div></div><div id="week_content" class="h2_innerno_pad"></div></div>
+
+</div>
+<div id="assignments-widget-student" data-week="36" data-year="2026" data-is-parent="true" style="margin-bottom: 16px;"><div class="MuiScopedCssBaseline-root css-vu345x"><div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-ll2j2z"><div class="MuiStack-root css-1g4yje1"><div class="MuiCardHeader-root css-1jcrke4"><div class="MuiCardHeader-avatar css-hsept5"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m1 14H8c-.55 0-1-.45-1-1s.45-1 1-1h5c.55 0 1 .45 1 1s-.45 1-1 1m3-4H8c-.55 0-1-.45-1-1s.45-1 1-1h8c.55 0 1 .45 1 1s-.45 1-1 1m0-4H8c-.55 0-1-.45-1-1s.45-1 1-1h8c.55 0 1 .45 1 1s-.45 1-1 1"></path></svg></div><div class="MuiCardHeader-content css-1aan0jy"><h2 class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-85lloa">Uppgifter denna vecka</h2></div></div><hr class="MuiDivider-root MuiDivider-fullWidth css-bvrgh1" aria-hidden="true"><div class="MuiCardContent-root css-w3bqkc"><div class="MuiBox-root css-0"><div class="MuiStack-root css-j7qwjs"><ul class="MuiList-root css-m6u8pf"></ul><div class="MuiStack-root css-zg1vud"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeLarge MuiButton-textSizeLarge MuiButton-colorPrimary css-jxbi5t" tabindex="0" href="../../react/#/parent/subjectrooms/teaching">Visa all undervisning</a></div></div></div></div></div></div></div><div class="MuiScopedCssBaseline-root css-vu345x"></div></div>
+<div id="plannings-widget-student" data-week="36" data-year="2026" data-is-parent="true" style="margin-bottom: 16px;"><div class="MuiScopedCssBaseline-root css-vu345x"><div class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-ll2j2z"><div class="MuiStack-root css-1g4yje1"><div class="MuiCardHeader-root css-1jcrke4"><div class="MuiCardHeader-avatar css-hsept5"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-11vlnux" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 4h-1V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9h14zM7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"></path></svg></div><div class="MuiCardHeader-content css-1aan0jy"><h2 class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-85lloa">Planeringar denna vecka</h2></div></div><hr class="MuiDivider-root MuiDivider-fullWidth css-bvrgh1" aria-hidden="true"><div class="MuiCardContent-root css-w3bqkc"><div class="MuiBox-root css-0"><div class="MuiStack-root css-j7qwjs"><ul class="MuiList-root css-m6u8pf"></ul></div><div class="MuiStack-root css-zg1vud"><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeLarge MuiButton-textSizeLarge MuiButton-colorPrimary css-jxbi5t" tabindex="0" href="../../react/#/parent/subjectrooms/teaching">Visa all undervisning</a></div></div></div></div></div></div><div class="MuiScopedCssBaseline-root css-vu345x"></div></div>
+</div>
+<div class="span6right">
+<div class="h2_container" id="absence_con"><div class="h2_box"><div class="h2_box_icon" style="margin-left:-10px; padding-top:2px;"><img src="../../images/icon/calendar-clock.png" alt="" title=""></div><div class=" h3 " style="margin-top:6px; padding-left:6px;">Närvaro/Frånvaro</div></div><div id="absence_con_content" class="h2_innerno_pad"><script language="JavaScript" src="../../script/boxover.js?rev=1.001" type="text/javascript"></script>
+<table class="table table-striped" id="" cellspacing="0" cellpadding="2" width="100%" style="width: 370px; word-break: break-word; border-right: rgb(204, 204, 204);">
+<tbody><tr class="highlight value" onmouseout="this.className='highlight value'" onmouseover="this.className='list_row_item_highlight'">
+ <td valign="top" style="background-image: none; background-color: rgb(218, 237, 246);"><a href="right_student_lesson_status.jsp?week=36&amp;lesson=151486" class="list"><div class="bold">Tor&nbsp;3 sep.&nbsp;8:50&nbsp;HUMHUM00S</div>Sen ankomst:&nbsp;15&nbsp;minuter&nbsp;</a></td>
+</tr>
+<tr class="highlight value" onmouseout="this.className='highlight value'" onmouseover="this.className='list_row_item_highlight'">
+ <td valign="top" style="background-image: none; background-color: rgba(217, 237, 247, 0.965);"><a href="right_student_lesson_status.jsp?week=36&amp;lesson=150035" class="list"><div class="bold">Ons&nbsp;2 sep.&nbsp;9:40&nbsp;MATMAT03b</div>Frånvarande</a></td>
+</tr>
+<tr class="highlight value" onmouseout="this.className='highlight value'" onmouseover="this.className='list_row_item_highlight'">
+ <td valign="top" style="background-image: none; background-color: rgb(218, 237, 246);"><a href="right_student_lesson_status.jsp?week=36&amp;lesson=145298" class="list"><div class="bold">Tis&nbsp;1 sep.&nbsp;8:25&nbsp;RELREL01</div>Sen ankomst:&nbsp;40&nbsp;minuter&nbsp;</a></td>
+</tr>
+</tbody></table><div class="box_absence_note"><table class="table"><tbody><tr><td valign="top" style="word-wrap: break-word "><a href="right_parent_absence_message.jsp" class="imglink">Ta del av oanmäld frånvaro</a></td></tr></tbody></table></div></div></div>
+<div class="h2_container" id="mess_con"><div class="h2_box"><div class="h2_box_icon" style="margin-left:-10px; padding-top:2px;"><img src="../../images/icon/balloon.png" alt="" title=""></div><div class=" h3 " style="margin-top:6px; padding-left:6px;">Meddelanden</div></div><div id="mess_con_content" class="h2_innerno_pad"><table class="table table-striped table-condensed" style="width: 370px; word-break: break-word; border-right: rgb(204, 204, 204);"><tbody><tr class=" highlight" style="" row-href=""><td style="overflow-wrap: break-word; background-image: none; background-color: rgb(218, 237, 246);" valign="top"><a href="right_student_message.jsp" class="imglink">Du har 8 nya meddelanden</a></td></tr></tbody></table><script> if ($.browser.msie && parseInt($.browser.version, 10) < 9) {    $('.table.table-striped.table-condensed tbody tr:nth-child(odd)').css('background','#FAFAF5');  }</script></div></div>
+<div class="h2_container" id="news_con"><div class="h2_box"><div class="h2_box_icon" style="margin-left:-10px; padding-top:2px;"><img src="../../images/icon/light_bulb.png" alt="" title=""></div><div class=" h3 " style="margin-top:6px; padding-left:6px;">Nyheter</div></div><div id="news_con_content" class="h2_innerno_pad"><div class="h3_bold">Rektorn informerar</div><table class="table table-striped news-private" style="width: 370px; word-break: break-word; border-right: rgb(204, 204, 204);"><tbody><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=54267&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Med anledning av händelsen i Fagersta</div><div> Kära elever och vårdnadshavare,  &nbsp;  Det tragiska v...</div></a></td><td class="news-private-td-right" align="center"></td></tr><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=53096&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Varmt välkomna till ett nytt läsår, åk 2 och 3!</div><div> Vi hoppas att ni har haft en fin sommar och känner er redo f...</div></a></td><td class="news-private-td-right" align="center"></td></tr></tbody></table><div class="h3_bold">Skolan informerar</div><table class="table table-striped news-private" style="width: 370px; word-break: break-word; border-right: rgb(204, 204, 204);"><tbody><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=54958&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Skolföreningar på PCK</div><div> Nytt i elevhandboken: Skolföreningar – starta eller utveck...</div></a></td><td class="news-private-td-right" align="center"></td></tr><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=54368&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Tävling namnge våra nya klassrum</div><div> Delta i vår tävling och var med och skriv PCK-historia!  ...</div></a></td><td class="news-private-td-right" align="center"></td></tr><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=53531&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Verktyg för att stärka ditt skrivande</div><div> Våra svensklärare har skapat lathundar för källh...</div></a></td><td class="news-private-td-right" align="center"></td></tr><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=53457&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Matsedel V.34-42</div><div></div></a></td><td class="news-private-td-right" align="center"></td></tr></tbody></table><div class="h3_bold">SYV informerar</div><table class="table table-striped news-private" style="width: 370px; word-break: break-word; border-right: rgb(204, 204, 204);"><tbody><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=50701&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Dags att söka sommarjobb</div><div> Vill du söka sommarjobb i din kommun? Då kan ansöknin...</div></a></td><td class="news-private-td-right" align="center"></td></tr></tbody></table><div class="h3_bold">Kategori saknas</div><table class="table table-striped news-private" style="width: 370px; word-break: break-word; border-right: rgb(204, 204, 204);"><tbody><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=52812&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Välkommen till gymnasiet!</div><div> Elevhälsan finns till för att stödja elevernas hä...</div></a></td><td class="news-private-td-right" align="center"></td></tr><tr class="news-private"><td class="news-private-td"><a class="toplist-item" href="right_student_news.jsp?requestid=51805&amp;type=1&amp;action=view"><div class="list-top"></div><div class="heading_bold">Lär dig om AI ? Utbildning för vårdnadshavare </div><div> Kära vårdnadshavare,   Artificiell intelligens (AI) blir e...</div></a></td><td class="news-private-td-right" align="center"></td></tr></tbody></table></div></div>
+
+
+
+</div>
+
+
+
+<script type="text/javascript">
+$("img[src^=itemPictureFile]:not([id])").each(function(){
+  var src = $(this).attr("src");
+  src = src.replace('tn=1','tn=0');
+  var id = $(this).closest("[id^=blogpostid]").attr("id").substring("blogpostid-".length);
+  $(this).wrap("<a class=\"blogpicture\" data-fancybox=\"blogpost-"+ id +"\" href=\""+src+"\"></a>");
+});
+$("img[src^=showFileImage]:not([id])").each(function(){
+  var src = $(this).attr("src");
+  src = src.replace('tn=1','tn=0');
+  var id = $(this).closest("div[id^=blogpostid]").attr("id").substring("blogpostid-".length);
+  $(this).wrap("<a class=\"blogpicture\" data-fancybox=\"blogpost-"+ id +"\" href=\""+src+"\"></a>");
+});
+
+//.effect("highlight", {highlight color}, speed)
+$(document).ready(function() {
+
+  $(".slick-container").slick({
+    dots: false,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: true,
+    variableWidth: true,
+    arrows: false
+  });
+
+  $(".table-striped").css("width","370px").css("word-break","break-word").css("border-right","#cccccc");
+  for(var i=0; i<2; i++) {
+    $(".highlight").children("td").effect("highlight", {color: '#d9edf7'}, 800); //weekly stuff
+  }
+  $(".highlight").children("td").effect("highlight", {color: '#d9edf7'}, 86400000); //weekly stuff
+});
+
+//loadmore news
+$("#loadmorenews").click(function(event) {
+  $.ajax({
+  url: "right_student_news_ajax.jsp?action=loadmore",
+  success: function(data) {
+    $("#news_con_content").hide();
+    $("#news_con_content").html(data);
+    $("#news_con_content").slideDown(900);
+  },
+  cache:false
+  });
+});
+
+
+  $("#show_this").html($("#week_stuff").html());
+
+
+//navigating
+function initNav() {
+  $("li[id^=monTab], li[id^=tueTab], li[id^=wedTab], li[id^=thuTab], li[id^=friTab], li[id^=satTab], li[id^=sunTab], #weekTab").click(function(event){
+    $(".highlight").parent().parent().attr("style",""); //daily tabs - reset style at element with class highlight
+    event.preventDefault();
+    event.stopPropagation();
+    var dayId = 0;
+    var id = $(this).attr("id");
+    if ($(this).attr("id").indexOf("tue")>-1){
+      dayId = 1;
+    } else if ($(this).attr("id").indexOf("wed")>-1){
+      dayId = 2;
+    } else if ($(this).attr("id").indexOf("thu")>-1){
+      dayId = 3;
+    } else if ($(this).attr("id").indexOf("fri")>-1){
+      dayId = 4;
+    } else if ($(this).attr("id").indexOf("sat")>-1){
+      dayId = 5;
+    } else if ($(this).attr("id").indexOf("sun")>-1){
+      dayId = 6;
+    } else if ($(this).attr("id").indexOf("week")>-1){
+      dayId = -1;
+    }
+    if (dayId != -1) {
+      $("#show_this").html($("#day_stuff"+dayId).html());
+    } else {
+      $("#show_this").html($("#week_stuff").html());
+    }
+    $("li.active").removeClass("active");
+    $("li[id^="+id+"]").addClass("active");
+
+    //.effect("highlight", {highlight color}, speed)
+    if($(this).attr("id") == "weekTab") {
+      for(var i=0; i<2; i++) {
+        $(".highlight").children("td").effect("highlight", {color: '#d9edf7'}, 800);
+      }
+      $(".highlight").children("td").effect("highlight", {color: '#d9edf7'}, 86400000);
+    }
+    $(initNav);
+  });
+
+
+  $("#show_this a.btn").click(function(event) {
+    if ($("li.active").attr("id") != "weekTab") {
+      event.preventDefault();
+      event.stopPropagation();
+      var day = parseInt($(this).attr("id").substr(3));
+      var dayMod = 0;
+      //if left
+      if($(this).children('div').html() == '&lt;') {
+        if((day-1) > -1) {
+          dayMod = -1;
+          $("#show_this").html($("#day_stuff"+(day-1)).html());
+        } else {
+          window.location = this;
+        }
+      } //if right
+      else if($(this).children('div').html() == '&gt;') {
+        if((day+1) < 7) {
+          dayMod = 1;
+          $("#show_this").html($("#day_stuff"+(day+1)).html());
+        } else {
+          window.location = this;
+        }
+      } else {
+        window.location = this;
+      }
+      var id = "monTab";
+      if (day+dayMod==1) {
+        id = "tueTab";
+      } else if (day+dayMod==2) {
+        id = "wedTab";
+      } else if (day+dayMod==3) {
+        id = "thuTab";
+      } else if (day+dayMod==4) {
+        id = "friTab";
+      } else if (day+dayMod==5) {
+        id = "satTab";
+      } else if (day+dayMod==6) {
+        id = "sunTab";
+      }
+
+      $("li.active").removeClass("active");
+      $("li[id^="+id+"]").addClass("active");
+      $(initNav);
+    }
+  });
+}
+$(initNav);
+$("div[class^=freetext]").css("cursor","pointer");
+$(".freetexthidden").hide();
+
+$(".freetext").click(function(){
+  $(this).hide();
+  $(".freetexthidden").show();
+});
+$(".freetexthidden").click(function(){
+  $(this).hide();
+  $(".freetext").show();
+});
+
+//prints item with printicon
+function reInitPrint() {
+  $(function() {
+    $('.printarea').click(function() {
+      popupWindow($(this).parent().attr("href")); // fetch the href from the parent a element
+      return false;
+    });
+  });
+}
+reInitPrint();
+
+</script>
+
+</div><!-- ends content -->
+</div><!-- ends main -->
+
+</div> <!--schoolsoftapp-->
+
+      </div> <!-- end content-pos-student -->
+    </div> <!-- end studentContentWrapper -->
+  </div> <!-- end studentPageWrapper -->
+
+<script>
+  $(document).ready(function () {
+    initSize();
+    $('#menu_').attr("class", "menu_item_selected");
+    try {
+      $('#startmenu').attr("class", "TopMenu-MenuInactive-Bg");
+    } catch (c) {
+    }
+    try {
+      $('#school').attr("class", "TopMenu-MenuInactive-Bg");
+    } catch (c) {
+    }
+    try {
+      $('#profile').attr("class", "TopMenu-MenuInactive-Bg");
+    } catch (c) {
+    }
+    try {
+      $('#startmenu').attr("class", "TopMenu-MenuActive-Bg");
+    } catch (c) {
+    }
+    ;
+  });
+</script>
+
+
+
+
+<div id="top-box" class="dontPrint" style="">
+  <!-- First -->
+  <div id="first-warning">
+    <div id="close_icon_timer" style="display: none"></div>
+    <div class="rubrik">Varning</div>
+    <p>Du har varit inaktiv i: <span id="inactive"></span>minuter.</p>
+    <p>
+      <span id="time"></span>
+      till automatisk utloggning på grund av inaktivitet.
+      </p><div id="closebutton" style="text-align: center;">
+        <input type="button" name="OK" value="OK" onclick=" showContent();" style="float:left" id="okbutton" class="btn">
+
+      </div>
+    <p></p>
+  </div>
+  <!-- Second -->
+  <div id="second-warning">
+    
+    <div class="rubrik">Varning</div>
+    <p>Du har nu loggats ut på grund av inaktivitet.</p>
+    <p>
+      
+      <table cellspacing="1" cellpadding="2"><tbody><tr><td style="border:none;" valign="middle"><a href="https://sms.schoolsoft.se/procivitas/samlLogin.jsp?usertype=parent&amp;ajaxlogin=1" onclick="showContent();" target="_blank">Till inloggningssidan</a></td><td style="border:none;" valign="bottom"><a href="https://sms.schoolsoft.se/procivitas/samlLogin.jsp?usertype=parent&amp;ajaxlogin=1" onclick="showContent();" target="_blank"><img src="../../images/icon/arrow-000-medium.png" alt=""></a></td></tr></tbody></table>
+
+    </p>
+    
+</div>
+</div>
+<script language="JavaScript" type="text/javascript">
+
+    var topRightTimer;
+    var timeBetweenWarnAndLogout;
+    var timeUntilLogout;
+    var timeout;
+    var counter = 0;
+    var failedLogins = 0;
+    var halfMinCorrection = 30000;
+
+    var lastAccessTime = new Date().getTime();
+    var timeLoggedIn = 0;
+    var updateInterval = 1000;
+
+    if(typeof window.localStorage !== "undefined"){
+        localStorage.setItem("lastAccessTime", new Date().getTime());
+    }
+
+    resetTimer();
+
+    //Set top-right logout timer
+    var logoutTimer = timeUntilLogout;
+
+    function setTopRightTimer() {
+        $('#timeUntilLogout').html((logoutTimer/60000).toFixed(0) + " minuter till automatisk utloggning");
+        topRightTimer = setInterval(function () {
+
+            //If browser support localstorage
+            if (typeof window.localStorage !== "undefined") {
+                logoutTimer -= updateInterval;
+                //New lastAccessTime is set in another tab
+                if(lastAccessTime != localStorage.getItem("lastAccessTime") && timeUntilLogout > 0){
+                    $('#top-box').hide(0, onTopBoxHidden);
+                    lastAccessTime = localStorage.getItem("lastAccessTime");
+                    clearTimeout(timeout);
+                    showContent();
+                    resetTimer();
+                }
+
+                timeLoggedIn = new Date().getTime() - lastAccessTime;
+                logoutTimer = 1800000 - timeLoggedIn;
+                $('#timeUntilLogout').html(((logoutTimer + halfMinCorrection) / 60000).toFixed(0) + " minuter till automatisk utloggning");
+
+                if (timeLoggedIn > 1800000){
+                    $('#timeUntilLogout').html("Ej inloggad");
+                    clearInterval(topRightTimer);
+                }
+            } else {
+                logoutTimer -= updateInterval;
+                $('#timeUntilLogout').html(((logoutTimer + halfMinCorrection) / 60000).toFixed(0) + " minuter till automatisk utloggning");
+
+                if (logoutTimer <= 0) {
+                    $('#timeUntilLogout').html("Ej inloggad");
+                    clearInterval(topRightTimer);
+                }
+            }
+        }, updateInterval);
+    }
+    setTopRightTimer();
+
+    function showTopBox(timer){
+        $('#top-box').show(0, onTopBoxShown);
+        $('#top-box').focus();
+        $('#top-box').css('top', $(window).scrollTop());
+        $('#top-box').css('left', ($(window).width()/2) - (parseInt($('#top-box').css('width'))/2));
+        if(timer > 0){
+            toggleBackSpace(false);
+            $('#first-warning').show();
+            $('#second-warning').hide();
+        }else{
+            toggleBackSpace(true);
+            hideContent();
+            $('#content_wrapper').hide();
+            $('#first-warning').hide();
+          
+            $('#second-warning').show();
+            $('#sspassword_ajax').focus();
+          
+        }
+        $('#top-box').animate({height: "230px"}, 400);
+    }
+
+    function onTopBoxHidden() {
+      toggleBackSpace(true);
+    }
+
+    function onTopBoxShown() {
+      toggleBackSpace(false);
+    }
+    function showContent(){
+        toggleBackSpace(true);
+        $('#content_wrapper').show();
+        $('#top-box').hide(0, onTopBoxHidden);
+        
+    }
+
+    function hideContent(){
+        toggleBackSpace(false);
+        $('#content_wrapper').hide();
+        $('#top-box').focus();
+    }
+
+    function autoClick(){
+      toggleBackSpace(true);
+      $('#content_wrapper').show();
+      $('#top-box').hide(0, onTopBoxHidden);
+    }
+
+    function resetTimer() {
+        timeBetweenWarnAndLogout = 300000; // time before timeout to display warning: 5min=300000 1min = 60000
+        timeUntilLogout = 1800000;
+        logoutTimer = timeUntilLogout;
+        if (timeUntilLogout==null) {
+            timeUntilLogout = 1800000; //30 minutes default if not set on server
+        }
+        counter=0;
+        timeout=setTimeout("showTopBox('"+(timeUntilLogout - timeBetweenWarnAndLogout)+"'); timedCount();",timeUntilLogout - timeBetweenWarnAndLogout);
+    }
+
+    function timedCount() {
+        var timeLeft = (((timeBetweenWarnAndLogout))/1000)-counter;
+        if (timeLeft >= 0) {
+            var minutes = Math.floor(timeLeft /60);
+            var seconds = timeLeft - minutes * 60;
+            $('#time').html(((minutes<10)?"0"+minutes:minutes)+':'+((seconds<10)?"0"+seconds:seconds));
+            $('#inactive').html(((timeUntilLogout-timeBetweenWarnAndLogout)/60000).toFixed(0) + " ");
+            counter++;
+            timeout=setTimeout("timedCount()",1000);
+        } else {
+            clearTimeout(timeout);
+            showTopBox(0);
+        }
+    }
+
+    function relogin() {
+        var usertype = $('#usertype_ajax').val();
+        var sspassword = $('#sspassword_ajax').val();
+        var ssusername = $('#ssusername_ajax').val();
+        var orgid = $('#organization_ajax').val();
+        var formData = {usertype:usertype,ssusername:ssusername,sspassword:sspassword,ajaxlogin:1,organization:orgid};
+    $.ajax({
+        url: "../Login.jsp?action=login",
+        cache: false,
+        type: "POST",
+        data: formData,
+        success: function(data) {
+            $('#sspassword_ajax').val('');
+            $('#wrongpasswd').css("display",'none');
+            if (data.replace(/^\s+|\s+$/g, '') == "login ok") { //special since IE can't use trim()
+                $('#wrongpasswd').css("display",'none');
+                $('#wrongpasswddisabled').css("display",'none');
+                showContent();
+                resetTimer();
+                setTopRightTimer();
+                failedLogins = 0;
+                if (typeof window.localStorage !== "undefined") {
+                  localStorage.setItem("lastAccessTime", new Date().getTime());
+                }
+            } else if (data.replace(/^\s+|\s+$/g, '') == "login failed") {
+                failedLogins++;
+                if (failedLogins>1) {
+                    $('#sspassword_ajax').attr('disabled','disabled');
+                    $('#loginbutton').attr('disabled','disabled');
+                    $('#wrongpasswddisabled').css("display",'');
+                } else {
+                    $('#wrongpasswd').css("display", 'block');
+                }
+            }
+        },
+        error : function(data) {
+            //
+        }
+    });
+    }
+
+    function toggleBackSpace(on) {
+        //if on enable backspace
+        if (on) {
+          $(document).unbind('keydown');
+        } else {
+            $(document).bind({
+                keydown: function (event) {
+                    if (event.keyCode == 8 && $(event.target).attr('id') != 'sspassword_ajax') {//8 = backspace
+                        event.stopPropagation();
+                        event.preventDefault();
+                    }
+                }
+            });
+        }
+    }
+
+</script>
+
+
+
+
+
+<div class="DeeHZ cfxMU"><div class="MuiScopedCssBaseline-root css-vu345x"></div></div><div style="position: absolute; visibility: hidden; z-index: 50000;"><div></div><div></div></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div><div id="humany_elev---vardnadshavare" class="humany-widget humany-initializing humany-floating humany-elev---vardnadshavare"></div><div><div data-reactroot="" class="humany-floating-trigger humany_elev---vardnadshavare humany-has-icon humany-loaded"><a href="#"><b class="humany-icon"><span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-question-circle fa-stack-1x humany-open-icon"></i></span><b class="humany-icon-svg humany-close-icon"><svg viewBox="0 0 30 30"><path class="humany-stroke" d="M3.973,3.255L29.745,29.027a1.188,1.188,0,0,1,.529,1.248,1.188,1.188,0,0,1-1.248-.529L3.255,3.973a1.188,1.188,0,0,1-.53-1.248A1.188,1.188,0,0,1,3.973,3.255Z"></path><path class="humany-stroke" d="M3.255,29.027L29.027,3.255a1.188,1.188,0,0,1,1.248-.53,1.188,1.188,0,0,1-.529,1.248L3.973,29.745a1.188,1.188,0,0,1-1.248.529A1.188,1.188,0,0,1,3.255,29.027Z"></path></svg></b></b><span></span></a></div></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div><div class="MuiScopedCssBaseline-root css-vu345x" id="mui-portal-root"></div></body></html>

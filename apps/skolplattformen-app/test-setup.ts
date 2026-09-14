@@ -1,3 +1,20 @@
+// jest-expo@52 + node-env: expo-winter-runtime kräver FormData (jest-environment-node exponerar den inte)
+if (typeof (global as any).FormData === 'undefined') {
+  ;(global as any).FormData = class FormData {
+    append() {}
+    delete() {}
+    get() { return null }
+    getAll() { return [] }
+    has() { return false }
+    set() {}
+    entries() { return [][Symbol.iterator]() }
+    keys() { return [][Symbol.iterator]() }
+    values() { return [][Symbol.iterator]() }
+    [Symbol.iterator]() { return [][Symbol.iterator]() }
+    forEach(_cb: (v: unknown, k: string) => void) {}
+  } as unknown as FormDataConstructor
+}
+
 import '@testing-library/jest-native/extend-expect'
 import moment from 'moment'
 import 'moment/locale/sv'
@@ -14,8 +31,11 @@ jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 jest.mock('@react-navigation/native')
 jest.mock('@react-navigation/core')
 jest.mock('react-native-localize')
-jest.mock('react-native/Libraries/Linking/Linking', () => ({
+jest.mock('expo-linking', () => ({
   openURL: jest.fn(() => Promise.resolve('mockResolve')),
+  createURL: jest.fn((path) => `exp://localhost:8081/${path}`),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
 }))
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')

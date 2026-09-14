@@ -1,0 +1,10 @@
+{
+  "overview": {"isActionPlan": false, "actionPlanTitle": "", "actionPlanText": ""},
+  "rows": [
+    {"title":"Engelska 5","subTitle":"Ingen bedömning publicerad","color":"#1ebd7e","subjectWarning":false,"updatedAt":"-","friendlyUpdatedAt":"-","publishedAt":"-","friendlyPublishedAt":"-","holisticAssessmentId":-1,"published":false,"read":false},
+    {"title":"Engelska 6","subTitle":"Ingen bedömning gjord","color":"#7673bf","subjectWarning":false,"updatedAt":"2026-01-07T12:46","friendlyUpdatedAt":"7 jan. 12:46","publishedAt":"2026-01-07T12:46","friendlyPublishedAt":"7 jan. 12:46","holisticAssessmentId":4989,"published":true,"read":false},
+    {"title":"Matematik 2b","subTitle":"Godtagbara kunskaper","color":"#c23e1a","subjectWarning":false,"updatedAt":"2026-05-06T08:28:22","friendlyUpdatedAt":"6 maj 08:28","publishedAt":"2026-05-06T08:28:22","friendlyPublishedAt":"6 maj 08:28","holisticAssessmentId":744,"published":true,"read":false},
+    {"title":"Psykologi 2a","subTitle":"Är i behov av stödinsatser för att nå godtagbara kunskaper","color":"#07615e","subjectWarning":false,"updatedAt":"2026-03-30T16:00","friendlyUpdatedAt":"30 mars 16:00","publishedAt":"2026-03-30T16:00","friendlyPublishedAt":"30 mars 16:00","holisticAssessmentId":25845,"published":true,"read":false},
+    {"title":"Svenska 2","subTitle":"Mer än godtagbara kunskaper","color":"#5bc696","subjectWarning":false,"updatedAt":"2026-02-04T09:15:48","friendlyUpdatedAt":"4 feb. 09:15","publishedAt":"2026-02-04T09:15:48","friendlyPublishedAt":"4 feb. 09:15","holisticAssessmentId":18595,"published":true,"read":false}
+  ]
+}

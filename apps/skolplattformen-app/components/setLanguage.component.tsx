@@ -7,9 +7,8 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { DevSettings, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import RNRestart from 'react-native-restart'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLanguage } from '../hooks/useLanguage'
 import { isRTL, LanguageService } from '../services/languageService'
@@ -44,7 +43,7 @@ export const SetLanguage = () => {
 
     // Checks if rtl mode has changed, then we need to restart the app
     if (shouldRestart()) {
-      RNRestart.Restart()
+      DevSettings.reload()
     } else {
       goBack()
     }

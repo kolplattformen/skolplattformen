@@ -1,15 +1,30 @@
-# fastlane specific
-fastlane/report.xml
+# OSX
+#
+.DS_Store
 
-# deliver temporary files
-fastlane/Preview.html
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+.xcode.env.local
 
-# snapshot generated screenshots
-fastlane/screenshots
+# Bundle artifacts
+*.jsbundle
 
-# scan temporary files
-fastlane/test_output
-
-# fastlane builds
-builds/*
-*.xcarchive
+# CocoaPods
+/Pods/

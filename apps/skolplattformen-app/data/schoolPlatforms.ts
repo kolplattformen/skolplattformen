@@ -1,7 +1,18 @@
 import CookieManager from '@react-native-cookies/cookies'
-import initHjarntorget, {
-  features as featuresHjarntorget,
-} from '@skolplattformen/api-hjarntorget'
+// DEV-session (valfri): sätt EXPO_PUBLIC_INFOMENTOR_DEV_SESSION i
+// apps/skolplattformen-app/.env.local (gitignored) - t.ex. kopiera
+// DEV-SESSION-raden som e2e-qr-server.ts skriver ut efter en lyckad
+// QR-inloggning. Starta om Metro efter ändring. Utan variabel körs
+// riktig BankID-login (QR-metoden).
+const INFOMENTOR_DEV_SESSION =
+  process.env.EXPO_PUBLIC_INFOMENTOR_DEV_SESSION || ''
+
+import initInfomentor, {
+  features as featuresInfomentor,
+} from '@skolplattformen/api-infomentor'
+import initSchoolsoft, {
+  features as featuresSchoolsoft,
+} from '@skolplattformen/api-schoolsoft'
 import initSkolplattformen, {
   features as featuresSkolPlattformen,
 } from '@skolplattformen/api-skolplattformen'
@@ -14,9 +25,23 @@ export const schoolPlatforms = [
     features: featuresSkolPlattformen,
   },
   {
-    id: 'goteborg-hjarntorget',
-    displayName: 'Göteborgs Stad (Hjärntorget)',
-    api: initHjarntorget(fetch as any, CookieManager),
-    features: featuresHjarntorget,
+    id: 'infomentor',
+    displayName: 'Infomentor',
+    api: initInfomentor(
+      fetch as any,
+      CookieManager,
+      undefined,
+      'stockholm_par',
+      INFOMENTOR_DEV_SESSION
+    ),
+    features: featuresInfomentor,
+  },
+  {
+    id: 'schoolsoft-procivitas',
+    displayName: 'Schoolsoft – ProCivitas (beta)',
+    api: initSchoolsoft(fetch as any, CookieManager, undefined, {
+      loginTimeoutMs: 5 * 60 * 1000,
+    }),
+    features: featuresSchoolsoft,
   },
 ]

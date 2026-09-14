@@ -25,11 +25,11 @@ const reporter: Reporter | undefined = __DEV__
 
 if (__DEV__) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const DevMenu = require('react-native-dev-menu')
-  DevMenu.addItem('Clear AsyncStorage from all contents', () =>
+  const { DevSettings } = require('react-native')
+  DevSettings.addMenuItem('Clear AsyncStorage from all contents', () =>
     AsyncStorage.clear().then(() => logAsyncStorage())
   )
-  DevMenu.addItem('Log AsyncStorage contents', () => logAsyncStorage())
+  DevSettings.addMenuItem('Log AsyncStorage contents', () => logAsyncStorage())
 }
 
 const safeJsonParse = (maybeJson: string) => {
@@ -58,13 +58,39 @@ const logAsyncStorage = async () => {
 }
 
 export default () => {
+  // RELEASE-diagnostik: ohanterade JS-fel visas som text direkt på skärmen
+  // (release har ingen röd ruta)
+  const [fatalError, setFatalError] = React.useState<string | null>(null)
+  React.useEffect(() => {
+    if (__DEV__) return
+    const handler = ErrorUtils.getGlobalHandler()
+    ErrorUtils.setGlobalHandler((error, isFatal) => {
+      const stack = typeof (error as any)?.stack === 'string' ? (error as any).stack : ''
+      setFatalError(String(error) + '\n\n' + stack.slice(0, 2000))
+    })
+    return () => {
+      ErrorUtils.setGlobalHandler(handler)
+    }
+  }, [])
+
   const [usingSystemTheme] = useSettingsStorage('usingSystemTheme')
   const [currentSchoolPlatform] = useSettingsStorage('currentSchoolPlatform')
   const [theme] = useSettingsStorage('theme')
   const systemTheme = useColorScheme()
   const colorScheme = usingSystemTheme ? systemTheme : theme
 
-  const platform = schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform)
+  if (fatalError)
+    return (
+      <View style={{ padding: 24, paddingTop: 60 }}>
+        <Text>{fatalError}</Text>
+      </View>
+    )
+
+  // Okänt sparat id (t.ex. borttagen plattform) => fall tillbaka på första
+  // plattformen istället för att krascha hela appen vid boot.
+  const platform =
+    schoolPlatforms.find((pf) => pf.id === currentSchoolPlatform) ??
+    schoolPlatforms[0]
 
   if (!platform)
     return (

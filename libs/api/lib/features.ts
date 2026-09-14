@@ -3,7 +3,8 @@ export interface Features {
   LOGIN_FREJA_EID: boolean,
   FOOD_MENU: boolean,
   CLASS_LIST: boolean,
-  
+  ABSENCE_REPORT: boolean,
+
 }
 
 export type FeatureType = keyof Features

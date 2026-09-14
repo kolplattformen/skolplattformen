@@ -1,0 +1,1 @@
+{"firstName":"Peter","lastName":"Ekholm","children":[{"id":17149,"firstName":"Viggo","lastName":"Ekholm","schools":[{"orgId":4,"className":"SA24a","schoolName":"ProCivitas Karlberg ","parentAllowedAccess":true,"studentActive":true}]}],"logoutURL":"../Login.jsp?action=logout","currentChildId":17149,"currentOrgId":4}

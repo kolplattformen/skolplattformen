@@ -1,3 +1,14 @@
+## [2.17.1](https://github.com/kolplattformen/skolplattformen/compare/v2.17.0...v2.17.1) (2026-09-07)
+
+
+### Bug Fixes
+
+* include www ([e33a53b](https://github.com/kolplattformen/skolplattformen/commit/e33a53bbb7c4efb5eeead693b6db9ab078d11f97))
+* move skolplattformen to new cluster ([4e4798d](https://github.com/kolplattformen/skolplattformen/commit/4e4798deba4f1fc841bab95a9afe5473787330c3))
+* new namespace ([dc016d1](https://github.com/kolplattformen/skolplattformen/commit/dc016d1714002ee1c3d3dcdf66af32426a3f1d51))
+* remove dangling references to deleted api-hjarntorget ([#683](https://github.com/kolplattformen/skolplattformen/issues/683)) ([125dcbb](https://github.com/kolplattformen/skolplattformen/commit/125dcbbb24625e62246e1cb52f0864110d246ba2))
+* remove www for now - ([52f3fc3](https://github.com/kolplattformen/skolplattformen/commit/52f3fc369f19c51a87bd0b36bd575e43d89663ad))
+
 # [2.17.0](https://github.com/kolplattformen/skolplattformen/compare/v2.16.1...v2.17.0) (2024-04-29)
 
 

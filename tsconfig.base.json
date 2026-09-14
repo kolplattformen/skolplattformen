@@ -8,19 +8,37 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "strict": true,
-    "lib": ["es2017", "dom"],
+    "strict": false,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "types": [
+      "expo",
+      "jest"
+    ],
     "paths": {
-      "@skolplattformen/api": ["libs/api/lib/index.ts"],
-      "@skolplattformen/api-hjarntorget": ["libs/api-hjarntorget/lib/index.ts"],
+      "@skolplattformen/api": [
+        "libs/api/lib/index.ts"
+      ],
+      "@skolplattformen/api-infomentor": [
+        "libs/api-infomentor/lib/index.ts"
+      ],
       "@skolplattformen/api-skolplattformen": [
         "libs/api-skolplattformen/lib/index.ts"
       ],
-      "@skolplattformen/curriculum": ["libs/curriculum/src/index.ts"],
-      "@skolplattformen/hooks": ["libs/hooks/src/index.ts"]
+      "@skolplattformen/curriculum": [
+        "libs/curriculum/src/index.ts"
+      ],
+      "@skolplattformen/hooks": [
+        "libs/hooks/src/index.ts"
+      ],
+      "@skolplattformen/api-schoolsoft": [
+        "libs/api-schoolsoft/lib/index.ts"
+      ]
     }
   }
 }

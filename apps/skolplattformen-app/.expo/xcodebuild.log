@@ -1,0 +1,3 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -workspace /Users/cln/src/skolplattformen/skolplattformen/apps/skolplattformen-app/ios/app.xcworkspace -configuration Release -scheme app -destination id=00008140-001125481A13001C
+

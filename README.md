@@ -26,13 +26,13 @@ The respective README files there contain more detailed descriptions.
   * [Libs](#embedded-api)
     * [api](#api)
     * [api-skolplattformen](#api-skolplattformen)
-    * [api-hjarntorget](#api-hjarntorget)
     * [api-vklass](#api-vklass)
     * [curriculum](#curriculum)
     * [hooks](#hooks)
 * [Getting started with development](#getting-started-with-development)
     * [iOS](#ios)
     * [Android](#android)
+    * [Infomentor quick start](#infomentor-quick-start)
     * [Website](#website)
     * [Tests](#tests)
 * [Contributions](#contributions)
@@ -71,13 +71,13 @@ For more information, check out the [source code](apps/website).
 
 The base for all api implementations
 
-#### api-hjarntorget
-
-The implementation for the school platform in Gothenburg called Hjärntorget.
-
 #### api-vklass
 
 The implementation for the school platform Vklass.
+
+#### api-infomentor
+
+The implementation for the school platform Infomentor.
 
 #### api-skolplattformen
 
@@ -111,32 +111,77 @@ Install dependencies
 cd skolplattformen && yarn
 ```
 
-### iOS
+### Running the app with Expo
 
-If you wanna run the iOS app, you need to setup a couple of things first, we have a guide that will assist you in getting started with the iOS app. A Mac is required to build projects with native code for iOS so we do not have support for Linux / Windows.
+This project uses Expo for building and running the app. Make sure you have the Expo CLI installed:
 
-* [Mac OS](/docs/ios_mac.md)
-
-If you already setup everything, you just need to run the following command in the project root:
-
-Start the iOS app
-```
-yarn run ios
+```bash
+npm install -g expo-cli
 ```
 
-### Android
+#### iOS
 
-If you wanna run the Android app, you need to setup a couple of things first, we have created three different guides depending on your operating system.
+To run the iOS app, you need a Mac with Xcode installed.
 
-* [Mac OS](/docs/android_mac.md)
-* [Windows](/docs/android_windows.md)
-* [Linux](/docs/android_linux.md)
-
-If you already setup everything, you just need to run the following command in the project root:
-
+Start the iOS app:
+```bash
+yarn ios
 ```
-yarn run android
+
+Or to run in the Expo Go app:
+```bash
+yarn start
 ```
+
+#### Android
+
+To run the Android app, you need Android Studio and an Android emulator or device.
+
+Start the Android app:
+```bash
+yarn android
+```
+
+Or to run in the Expo Go app:
+```bash
+yarn start
+```
+
+### Infomentor quick start
+
+Infomentor (Stockholm) is the default school platform in the app. The app requires native cookie storage (`@react-native-cookies/cookies`), so **Expo Go will not work** — build and run with the embedded [expo-dev-client](https://docs.expo.dev/development/introduction/) instead (`yarn ios` / `yarn android`).
+
+To work with Infomentor you need to log in via BankID. For local development you can shortcut that with a **dev session** (the verification order is auto-approved by Stockholm's BankID gateway for a device already registered with BankID — no scan needed):
+
+```bash
+# 1. Mint a fresh session (prints a DEV-SESSION line, ~40 min TTL)
+cd libs/api-infomentor && npx tsx scripts/e2e-qr-server.ts
+
+# 2. Paste the printed line into apps/skolplattformen-app/.env.local
+#    (gitignored — NEVER commit it):
+#    EXPO_PUBLIC_INFOMENTOR_DEV_SESSION=ASP.NET_SessionId=...; BIGipServer~...=~...; TS0116cbba=...; IMHome=...
+
+# 3. Restart Metro WITH cache clear (EXPO_PUBLIC_* values are inlined into
+#    the bundle at transform time — a plain restart will keep the old value)
+npx expo start -c
+```
+
+With the dev session in place the app logs in automatically on launch (auto-login fires once per app session; logging out keeps you on the login screen).
+
+Sessions expire after **~40 minutes** — when they do, the hub answers `200 OK` with an **empty body** (and expired/wrong cookies cause a `302` to the login page). Re-run the harness and repeat.
+
+Detailed endpoints, quirks and implementation notes: [libs/api-infomentor/README.md](libs/api-infomentor/README.md).
+
+For AI/agent helpers, [AGENTS.md](AGENTS.md) documents repo conventions and the automated verify loop, plus [.claude/skills](.claude/skills) with ready-made workflows.
+
+### Building for production
+
+To generate native iOS and Android projects:
+```bash
+yarn prebuild
+```
+
+This will create `ios/` and `android/` directories with the native projects.
 
 ### Website
 

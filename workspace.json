@@ -1,12 +1,14 @@
 {
   "version": 2,
   "projects": {
+    "api-infomentor": "libs/api-infomentor",
     "api-skolplattformen": "libs/api-skolplattformen",
     "api-vklass": "libs/api-vklass",
     "api": "libs/api",
     "curriculum": "libs/curriculum",
     "hooks": "libs/hooks",
     "api-test-app": "apps/api-test-app",
-    "skolplattformen-app": "apps/skolplattformen-app"
+    "skolplattformen-app": "apps/skolplattformen-app",
+    "api-schoolsoft": "libs/api-schoolsoft"
   }
 }
