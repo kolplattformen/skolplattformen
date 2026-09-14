@@ -1,12 +1,14 @@
 import { StyleService, useStyleSheet } from '@ui-kitten/components'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import {
   KeyboardAvoidingView as RNKeyboardAvoidingView,
   Platform,
 } from 'react-native'
 import { Layout } from '../styles'
 
-export const KeyboardAvoidingView: React.FC = ({ children }) => {
+export const KeyboardAvoidingView: React.FC<PropsWithChildren<{}>> = ({
+  children,
+}) => {
   const styles = useStyleSheet(themedStyles)
 
   return (

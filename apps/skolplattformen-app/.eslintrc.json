@@ -1,6 +1,5 @@
 {
   "extends": [
-    "@react-native-community",
     "plugin:react-native-a11y/all",
     "plugin:@nrwl/nx/react",
     "../../.eslintrc.json"
@@ -9,7 +8,16 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {"no-console":"warn"}
+      "rules": {
+        "no-console": "warn",
+        "import/first": "off",
+        "no-useless-concat": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/prefer-as-const": "off",
+        "react-native-a11y/has-valid-accessibility-descriptors": "warn"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

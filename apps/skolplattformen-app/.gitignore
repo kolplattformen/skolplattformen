@@ -53,7 +53,25 @@ buck-out/
 # Bundle artifact
 *.jsbundle
 
+# Expo
+ios/
+android/
+.expo/
+dist/
+web-build/
+
+# Expo generated files
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
 # CocoaPods
-/ios/Pods/
+Pods/
 
 libraries.json

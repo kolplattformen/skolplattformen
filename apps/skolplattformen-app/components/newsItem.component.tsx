@@ -80,7 +80,7 @@ export const NewsItem = ({ route }: NewsItemProps) => {
         </Text>
       )}
       <View style={styles.body}>
-        <Markdown style={stylesMarkdown}>{data.body}</Markdown>
+        {data?.body ? <Markdown style={stylesMarkdown}>{data.body}</Markdown> : null}
         {newsItem.fullImageUrl && (
           <Image
             accessibilityIgnoresInvertColors={false}

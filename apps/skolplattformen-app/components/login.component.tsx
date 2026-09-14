@@ -14,6 +14,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components'
 import Personnummer from 'personnummer'
+import Constants from 'expo-constants'
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image,
@@ -23,11 +24,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { schema } from '../app.json'
+const schema = 'oppnaskolplattformen' // eslint-disable-line @typescript-eslint/no-unused-vars
 import { SchoolPlatformContext } from '../context/schoolPlatform/schoolPlatformContext'
 import { schoolPlatforms } from '../data/schoolPlatforms'
 import { useFeature } from '../hooks/useFeature'
 import useSettingsStorage from '../hooks/useSettingsStorage'
+import { QrMatrix } from './qrMatrix.component'
 import { useTranslation } from '../hooks/useTranslation'
 import { Layout } from '../styles'
 import {
@@ -37,6 +39,10 @@ import {
   SelectIcon,
 } from './icon.component'
 import AppStorage from '../services/appStorage'
+
+// module-level: auto-login ska bara köras EN gång per app-session - vid
+// utloggning remountar Login-skermen och en ref hade nollställts
+let hasAutoLoggedInThisSession = false
 
 const BankId = () => (
   <Image
@@ -62,16 +68,14 @@ export const Login = () => {
   const [showLoginMethod, setShowLoginMethod] = useState(false)
   const [showSchoolPlatformPicker, setShowSchoolPlatformPicker] =
     useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [loginStatusText, setLoginStatusText] = useState('')
+  const [qrCode, setQrCode] = useState<string | null>(null)
   const [personalIdNumber, setPersonalIdNumber] = useSettingsStorage(
     'cachedPersonalIdentityNumber'
   )
   const [loginMethodId, setLoginMethodId] = useSettingsStorage('loginMethodId')
+  const [error, setError] = useState<string | null>(null)
 
-  const loginBankIdSameDeviceWithoutId = useFeature(
-    'LOGIN_BANK_ID_SAME_DEVICE_WITHOUT_ID'
-  )
   const loginWithFrejaEnabled = useFeature('LOGIN_FREJA_EID')
   const { currentSchoolPlatform, changeSchoolPlatform } = useContext(
     SchoolPlatformContext
@@ -79,25 +83,57 @@ export const Login = () => {
 
   const { t } = useTranslation()
 
-  const valid = Personnummer.valid(personalIdNumber)
+  const valid =
+    loginMethodId === 'otherdevice'
+      ? Personnummer.valid(personalIdNumber)
+      : true
 
   const loginMethods = [
     { id: 'thisdevice', title: t('auth.bankid.OpenOnThisDevice') },
     { id: 'otherdevice', title: t('auth.bankid.OpenOnAnotherDevice') },
+    ...(currentSchoolPlatform === 'infomentor'
+      ? [{ id: 'qrcode', title: 'BankID med QR-kod' }]
+      : []),
     { id: 'freja', title: t('auth.freja.OpenOnThisDevice') },
     { id: 'testuser', title: t('auth.loginAsTestUser') },
   ] as const
 
+  // Set default login method: fysisk enhet => BankID på samma enhet
+  // (QR används först vid två enheter), simulator/surfplatta utan BankID
+  // => QR (som skannas med telefonen)
+  const isPhysicalDevice = Constants.deviceType === 'device'
+  if (!loginMethodId) {
+    setLoginMethodId(
+      isPhysicalDevice || currentSchoolPlatform !== 'infomentor'
+        ? 'thisdevice'
+        : 'qrcode'
+    )
+  }
+
   if (loginMethodId === 'freja' && !loginWithFrejaEnabled) {
+    setLoginMethodId('thisdevice')
+  }
+
+  // Persisted 'qrcode' på en fysisk enhet (t.ex. från tidigare auto-login)
+  // normaliseras till BankID på samma enhet
+  if (loginMethodId === 'qrcode' && isPhysicalDevice) {
     setLoginMethodId('thisdevice')
   }
 
   useEffect(() => {
     const loginHandler = async () => {
       console.debug('Runnning loginHandler')
-      const user = await api.getUser()
-      await AppStorage.clearPersonalData(user)
-      showModal(false)
+      try {
+        const user = await api.getUser()
+        console.debug('User from api:', user)
+        if (user && user.personalNumber) {
+          await AppStorage.clearPersonalData(user)
+        }
+        showModal(false)
+      } catch (error) {
+        console.error('Error in loginHandler:', error)
+        showModal(false)
+      }
     }
 
     api.on('login', loginHandler)
@@ -119,12 +155,7 @@ export const Login = () => {
 
   const openBankId = (token: string) => {
     try {
-      const redirect =
-        loginMethodId === 'thisdevice' ? encodeURIComponent(schema) : ''
-      const bankIdUrl =
-        Platform.OS === 'ios'
-          ? `https://app.bankid.com/?autostarttoken=${token}&redirect=${redirect}`
-          : `bankid:///?autostarttoken=${token}&redirect=null`
+      const bankIdUrl = `https://app.bankid.com/?autostarttoken=${token}&redirect=null`
       Linking.openURL(bankIdUrl)
     } catch (err) {
       setError(t('auth.bankid.OpenManually'))
@@ -144,12 +175,9 @@ export const Login = () => {
     }
   }
 
-  const isUsingPersonalIdNumber =
-    loginMethodId === 'otherdevice' ||
-    (loginMethodId === 'thisdevice' && !loginBankIdSameDeviceWithoutId)
-
-  const startLogin = async (text: string) => {
-    if (loginMethodId === 'freja') {
+  const startLogin = async (text: string, methodOverride?: string) => {
+    const methodId = (methodOverride ?? loginMethodId) as typeof loginMethodId
+    if (methodId === 'freja') {
       setLoginStatusText(t('auth.freja.Waiting'))
       showModal(true)
       const status = await api.loginFreja()
@@ -167,23 +195,47 @@ export const Login = () => {
         console.log('Freja eID ok')
         setLoginStatusText(t('auth.loginSuccessful'))
       })
-    } else if (
-      loginMethodId === 'thisdevice' ||
-      loginMethodId === 'otherdevice'
-    ) {
+    } else if (methodId === 'qrcode') {
+      setLoginStatusText('Visa QR-koden för BankID…')
+      setQrCode(null)
+      showModal(true)
+      const status = await (api as any).startQrLogin()
+      setCancelLoginRequest(() => () => status.cancel())
+      console.log('QR checker received, initial frame?', !!status.qrData)
+      if (status.qrData) setQrCode(status.qrData)
+      status.on('qr', (frame: string) => {
+        console.log('QR frame event received')
+        setQrCode(frame)
+      })
+      status.on('OK', () => {
+        console.log('QR login ok')
+        setLoginStatusText(t('auth.loginSuccessful'))
+        setQrCode(null)
+      })
+      status.on('CANCELLED', () => {
+        console.log('User pressed cancel in QR login')
+        showModal(false)
+        setQrCode(null)
+      })
+      status.on('ERROR', () => {
+        console.log('QR login ERROR received')
+        setLoginStatusText('Inloggningen misslyckades - försök igen')
+        setQrCode(null)
+      })
+    } else if (methodId === 'thisdevice' || methodId === 'otherdevice') {
       setLoginStatusText(t('auth.bankid.Waiting'))
       showModal(true)
 
       let ssn
 
-      if (isUsingPersonalIdNumber) {
+      if (methodId === 'otherdevice') {
         ssn = Personnummer.parse(text).format(true)
         setPersonalIdNumber(ssn)
       }
 
       const status = await api.login(ssn)
       setCancelLoginRequest(() => () => status.cancel())
-      if (status.token !== 'fake' && loginMethodId === 'thisdevice') {
+      if (status.token !== 'fake' && methodId === 'thisdevice') {
         openBankId(status.token)
       }
       status.on('PENDING', () => console.log('BankID app not yet opened'))
@@ -211,10 +263,31 @@ export const Login = () => {
     loginMethods.find((method) => method.id === loginMethodId) ||
     loginMethods[0]
 
+  // Reset error when switching login method
+  useEffect(() => {
+    setError(null)
+  }, [loginMethodId])
+
+  // DEV: auto-login när EXPO_PUBLIC_INFOMENTOR_DEV_SESSION är satt
+  // (ingen knapptryckning behövs - underlättar test i simulatorn/device)
+  useEffect(() => {
+    if (hasAutoLoggedInThisSession) return
+    if (!process.env.EXPO_PUBLIC_INFOMENTOR_DEV_SESSION) return
+    if (currentSchoolPlatform !== 'infomentor') return
+    hasAutoLoggedInThisSession = true
+    // Metoden väljs per enhet (thisdevice på fysisk telefon - dev-sessionen
+    // kortsluter ändå inloggingen, inget BankID öppnas)
+    const autoMethod = Constants.deviceType === 'device' ? 'thisdevice' : 'qrcode'
+    console.log('[dev] auto-login: dev session present, method:', autoMethod)
+    setLoginMethodId(autoMethod)
+    startLogin('', autoMethod)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <>
       <View style={styles.loginForm}>
-        {isUsingPersonalIdNumber && (
+        {loginMethodId === 'otherdevice' && (
           <Input
             accessible={true}
             label={t('general.socialSecurityNumber')}
@@ -241,34 +314,121 @@ export const Login = () => {
             placeholder={t('auth.placeholder_SocialSecurityNumber')}
           />
         )}
-        <ButtonGroup style={styles.loginButtonGroup} status="primary">
-          <Button
-            accessible={true}
-            onPress={() => startLogin(personalIdNumber)}
-            style={styles.loginButton}
-            appearance="ghost"
-            disabled={isUsingPersonalIdNumber && !valid}
-            status="primary"
-            accessoryLeft={LoginProviderImage}
-            size="medium"
-          >
-            {currentLoginMethod.title}
-          </Button>
-          <Button
-            accessible={true}
-            onPress={() => {
-              setShowLoginMethod(true)
-            }}
-            style={styles.loginMethodButton}
-            appearance="ghost"
-            status="primary"
-            accessoryLeft={SelectIcon}
-            size="medium"
-            accessibilityHint={t('login.a11y_select_login_method', {
-              defaultValue: 'Välj inloggningsmetod',
-            })}
-          />
-        </ButtonGroup>
+        {loginMethodId === 'qrcode' && (
+          <View style={styles.bankIdButtons}>
+            <Button
+              accessible={true}
+              onPress={() => startLogin('')}
+              style={styles.loginButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {currentLoginMethod.title}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+            />
+          </View>
+        )}
+        {loginMethodId === 'thisdevice' && (
+          <View style={styles.bankIdButtons}>
+            <Button
+              accessible={true}
+              onPress={() => startLogin('')}
+              style={styles.loginButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {t('auth.bankid.OpenOnThisDevice')}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+              accessibilityHint={t('login.a11y_select_login_method', {
+                defaultValue: 'Välj inloggningsmetod',
+              })}
+            />
+          </View>
+        )}
+        {loginMethodId === 'otherdevice' && (
+          <ButtonGroup style={styles.loginButtonGroup} status="primary">
+            <Button
+              accessible={true}
+              onPress={() => startLogin(personalIdNumber)}
+              style={styles.loginButton}
+              appearance="ghost"
+              disabled={!valid}
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {currentLoginMethod.title}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+              accessibilityHint={t('login.a11y_select_login_method', {
+                defaultValue: 'Välj inloggningsmetod',
+              })}
+            />
+          </ButtonGroup>
+        )}
+        {(loginMethodId === 'freja' || loginMethodId === 'testuser') && (
+          <ButtonGroup style={styles.loginButtonGroup} status="primary">
+            <Button
+              accessible={true}
+              onPress={() => startLogin(personalIdNumber)}
+              style={styles.loginButton}
+              appearance="ghost"
+              disabled={loginMethodId === 'testuser' ? false : !valid}
+              status="primary"
+              accessoryLeft={LoginProviderImage}
+              size="medium"
+            >
+              {currentLoginMethod.title}
+            </Button>
+            <Button
+              accessible={true}
+              onPress={() => {
+                setShowLoginMethod(true)
+              }}
+              style={styles.loginMethodButton}
+              appearance="ghost"
+              status="primary"
+              accessoryLeft={SelectIcon}
+              size="medium"
+              accessibilityHint={t('login.a11y_select_login_method', {
+                defaultValue: 'Välj inloggningsmetod',
+              })}
+            />
+          </ButtonGroup>
+        )}
         <View style={styles.platformPicker}>
           <Button
             appearance="ghost"
@@ -328,11 +488,22 @@ export const Login = () => {
       <Modal
         visible={visible}
         style={styles.modal}
-        onBackdropPress={() => showModal(false)}
+        onBackdropPress={() => {
+          if (loginMethodId !== 'qrcode') showModal(false)
+        }}
         backdropStyle={styles.backdrop}
       >
         <Card disabled>
           <Text style={styles.bankIdLoading}>{loginStatusText}</Text>
+          {qrCode ? (
+            <View style={{ alignItems: 'center', paddingVertical: 12 }}>
+              <QrMatrix value={qrCode} size={280} />
+              <Text style={{ marginTop: 8, textAlign: 'center' }}>
+                Öppna BankID-appen → QR-ikonen uppe till vänster → sikta mot
+                skärmen
+              </Text>
+            </View>
+          ) : null}
           <Button
             status="primary"
             accessible={true}
@@ -394,6 +565,10 @@ const themedStyles = StyleService.create({
   },
   pnrInput: { minHeight: 70 },
   loginButtonGroup: {
+    minHeight: 45,
+  },
+  bankIdButtons: {
+    flexDirection: 'row',
     minHeight: 45,
   },
   loginButton: { ...Layout.flex.full },

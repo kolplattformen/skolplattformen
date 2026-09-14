@@ -5,4 +5,5 @@ export const features: Features = {
   LOGIN_FREJA_EID: true,
   FOOD_MENU: true,
   CLASS_LIST: true,
+  ABSENCE_REPORT: true,
 }

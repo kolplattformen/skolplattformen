@@ -20,6 +20,7 @@ import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { Pressable, useColorScheme, View } from 'react-native'
 import { useTranslation } from '../hooks/useTranslation'
+import { useFeature } from '../hooks/useFeature'
 import { Colors, Layout, Sizing } from '../styles'
 import { getMeaningfulStartingDate } from '../utils/calendarHelpers'
 import { studentName } from '../utils/peopleHelpers'
@@ -82,29 +83,35 @@ export const ChildListItem = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updated])
 
-  const notificationsThisWeek = notifications.filter(
-    ({ dateCreated, dateModified }) => {
-      const date = dateModified || dateCreated
-      return date ? moment(date).isSame(moment(), 'week') : false
-    }
-  )
-
-  const newsThisWeek = news.filter(({ modified, published }) => {
-    const newsDate = modified || published
-    return newsDate ? moment(newsDate).isSame(currentDate, 'week') : false
-  })
-
-  const scheduleAndCalendarThisWeek = [
+  // "Kommande" istället för strikt veckofilter - annars blir innehållet
+  // tomt på helger och när nyheter publicerats tidigare på terminen
+  const upcomingScheduleAndCalendar = [
     ...(calendar ?? []),
     ...(schedule ?? []),
-  ].filter(({ startDate }) =>
-    startDate
-      ? moment(startDate).isBetween(
-          moment(currentDate).startOf('day'),
-          moment(currentDate).add(7, 'days')
-        )
-      : false
-  )
+  ]
+    .filter(({ startDate }) =>
+      startDate ? moment(startDate).isSameOrAfter(moment(), 'day') : false
+    )
+    .sort(
+      (a, b) => moment(a.startDate).valueOf() - moment(b.startDate).valueOf()
+    )
+    .slice(0, 3)
+
+  const latestNews = [...news]
+    .sort(
+      (a, b) =>
+        moment(b.modified || b.published || 0).valueOf() -
+        moment(a.modified || a.published || 0).valueOf()
+    )
+    .slice(0, 3)
+
+  const latestNotifications = [...notifications]
+    .sort(
+      (a, b) =>
+        moment(b.dateModified || b.dateCreated || 0).valueOf() -
+        moment(a.dateModified || a.dateCreated || 0).valueOf()
+    )
+    .slice(0, 3)
 
   const displayDate = (inputDate: moment.MomentInput) => {
     return moment(inputDate).fromNow()
@@ -146,6 +153,7 @@ export const ChildListItem = ({
   const styles = useStyleSheet(themeStyles)
   const isDarkMode = useColorScheme() === 'dark'
   const meaningfulStartingDate = getMeaningfulStartingDate(currentDate)
+  const hasAbsenceReport = useFeature('ABSENCE_REPORT')
 
   // Hide menu if we want to show monday but it is not monday yet.
   // The menu for next week is not available until monday
@@ -196,7 +204,7 @@ export const ChildListItem = ({
         }
       >
         <DaySummary child={child} date={meaningfulStartingDate} />
-        {scheduleAndCalendarThisWeek.slice(0, 3).map((calendarItem, i) => (
+        {upcomingScheduleAndCalendar.map((calendarItem, i) => (
           <Text category="p1" key={i}>
             {`${calendarItem.title} (${displayDate(calendarItem.startDate)})`}
           </Text>
@@ -216,22 +224,22 @@ export const ChildListItem = ({
         <Text category="c2" style={styles.label}>
           {t('navigation.news')}
         </Text>
-        {notificationsThisWeek.slice(0, 3).map((notification, i) => (
+        {latestNotifications.map((notification, i) => (
           <Text category="p1" key={i}>
             {notification.message}
           </Text>
         ))}
 
-        {newsThisWeek.slice(0, 3).map((newsItem, i) => (
+        {latestNews.map((newsItem, i) => (
           <Text category="p1" key={i}>
             {newsItem.header ?? ''}
           </Text>
         ))}
       </Pressable>
 
-      {scheduleAndCalendarThisWeek.length ||
-      notificationsThisWeek.length ||
-      newsThisWeek.length ? null : (
+      {upcomingScheduleAndCalendar.length ||
+      latestNotifications.length ||
+      latestNews.length ? null : (
         <Text category="p1" style={styles.noNewNewsItemsText}>
           {t('news.noNewNewsItemsThisWeek')}
         </Text>
@@ -259,18 +267,20 @@ export const ChildListItem = ({
       ) : null}
 
       <View style={styles.itemFooter}>
-        <Button
-          accessible
-          accessibilityRole="button"
-          accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
-          appearance="ghost"
-          accessoryLeft={AlertIcon}
-          status="primary"
-          style={styles.absenceButton}
-          onPress={() => navigation.navigate('Absence', { child })}
-        >
-          {t('abscense.title')}
-        </Button>
+        {hasAbsenceReport && (
+          <Button
+            accessible
+            accessibilityRole="button"
+            accessibilityLabel={`${child.name}, ${t('abscense.title')}`}
+            appearance="ghost"
+            accessoryLeft={AlertIcon}
+            status="primary"
+            style={styles.absenceButton}
+            onPress={() => navigation.navigate('Absence', { child })}
+          >
+            {t('abscense.title')}
+          </Button>
+        )}
       </View>
     </View>
   )

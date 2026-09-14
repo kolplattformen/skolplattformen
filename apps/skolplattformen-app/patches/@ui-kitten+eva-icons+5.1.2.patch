@@ -1,20 +1,107 @@
+diff --git a/node_modules/@ui-kitten/eva-icons/createIconsMap.js b/node_modules/@ui-kitten/eva-icons/createIconsMap.js
+index 68749da..a56a18b 100644
+--- a/node_modules/@ui-kitten/eva-icons/createIconsMap.js
++++ b/node_modules/@ui-kitten/eva-icons/createIconsMap.js
+@@ -1,14 +1,12 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
+-exports.createIconsMap = void 0;
+ const icons_1 = require("react-native-eva-icons/icons");
+ const evaIcon_component_1 = require("./evaIcon.component");
+-const createIconsMap = () => {
++exports.createIconsMap = () => {
+     return new Proxy({}, {
+         get(target, name) {
+-            return new evaIcon_component_1.EvaIcon((0, icons_1.findIconByName)(name));
++            return new evaIcon_component_1.EvaIcon(icons_1.findIconByName(name));
+         },
+     });
+ };
+-exports.createIconsMap = createIconsMap;
+ //# sourceMappingURL=createIconsMap.js.map
+\ No newline at end of file
+diff --git a/node_modules/@ui-kitten/eva-icons/createIconsMap.js.map b/node_modules/@ui-kitten/eva-icons/createIconsMap.js.map
+index 9e5e20c..6a90857 100644
+--- a/node_modules/@ui-kitten/eva-icons/createIconsMap.js.map
++++ b/node_modules/@ui-kitten/eva-icons/createIconsMap.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"createIconsMap.js","sourceRoot":"","sources":["../../../src/eva-icons/createIconsMap.ts"],"names":[],"mappings":";;;AAEA,wDAA8D;AAC9D,2DAA8C;AAEvC,MAAM,cAAc,GAAG,GAA8C,EAAE;IAC5E,OAAO,IAAI,KAAK,CAAC,EAAE,EAAE;QACnB,GAAG,CAAC,MAAM,EAAE,IAAY;YACtB,OAAO,IAAI,2BAAO,CAAC,IAAA,sBAAc,EAAC,IAAI,CAAC,CAAC,CAAC;QAC3C,CAAC;KACF,CAAC,CAAC;AACL,CAAC,CAAC;AANW,QAAA,cAAc,kBAMzB"}
+\ No newline at end of file
++{"version":3,"file":"createIconsMap.js","sourceRoot":"","sources":["../../../src/eva-icons/createIconsMap.ts"],"names":[],"mappings":";;AAEA,wDAA8D;AAC9D,2DAA8C;AAEjC,QAAA,cAAc,GAAG,GAA8C,EAAE;IAC5E,OAAO,IAAI,KAAK,CAAC,EAAE,EAAE;QACnB,GAAG,CAAC,MAAU,EAAE,IAAY;YAC1B,OAAO,IAAI,2BAAO,CAAC,sBAAc,CAAC,IAAI,CAAC,CAAC,CAAC;QAC3C,CAAC;KACF,CAAC,CAAC;AACL,CAAC,CAAC"}
+\ No newline at end of file
+diff --git a/node_modules/@ui-kitten/eva-icons/evaIcon.component.d.ts b/node_modules/@ui-kitten/eva-icons/evaIcon.component.d.ts
+index 22ad47e..9d5704b 100644
+--- a/node_modules/@ui-kitten/eva-icons/evaIcon.component.d.ts
++++ b/node_modules/@ui-kitten/eva-icons/evaIcon.component.d.ts
+@@ -1,8 +1,8 @@
+ import React from 'react';
+ import { SvgProps } from 'react-native-svg';
+ import { IconProvider } from '@ui-kitten/components';
+-type IconElement = React.ReactElement<SvgProps>;
+-type IconComponent = React.ComponentType<SvgProps>;
++declare type IconElement = React.ReactElement<SvgProps>;
++declare type IconComponent = React.ComponentType<SvgProps>;
+ export declare class EvaIcon implements IconProvider<SvgProps> {
+     private content;
+     constructor(content: IconComponent);
 diff --git a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js
-index 1111111..2222222 100644
+index b382042..6938d29 100644
 --- a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js
 +++ b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js
-@@ -8,12 +8,15 @@
+@@ -3,20 +3,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
+     return (mod && mod.__esModule) ? mod : { "default": mod };
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+-exports.EvaIcon = void 0;
+ const react_1 = __importDefault(require("react"));
+ const react_native_1 = require("react-native");
+ class EvaIcon {
+-    content;
+     constructor(content) {
+         this.content = content;
      }
      toReactElement(props) {
          const Icon = this.content;
 -        const { style, ...svgProps } = props;
-+        const { style, onPress, onClick, onLongPress, ...svgProps } = props;
++        const { style, onPress: _onPress, onClick: _onClick, onLongPress: _onLongPress, accessibilityRole: _accessibilityRole, ...svgProps } = props;
          // @ts-ignore - UI Kitten components pass here `tintColor`
          const fillColor = react_native_1.StyleSheet.flatten(style || {}).tintColor;
--        return (react_1.default.createElement(Icon, Object.assign({ style: props.style, fill: fillColor }, svgProps)));
-+        const { fill: _fill, ...rest } = svgProps;
-+        return (react_1.default.createElement(Icon, Object.assign({ style: props.style, fill: fillColor, onPress: undefined }, rest)));
+-        return (<Icon style={props.style} fill={fillColor} {...svgProps}/>);
++        return (react_1.default.createElement(Icon, Object.assign({ style: props.style, fill: fillColor }, svgProps)));
      }
  }
  exports.EvaIcon = EvaIcon;
 diff --git a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js.map b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js.map
-deleted file mode 100644
+index 1fa1003..bd15a16 100644
+--- a/node_modules/@ui-kitten/eva-icons/evaIcon.component.js.map
++++ b/node_modules/@ui-kitten/eva-icons/evaIcon.component.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"evaIcon.component.js","sourceRoot":"","sources":["../../../src/eva-icons/evaIcon.component.tsx"],"names":[],"mappings":";;;;;;AAAA,kDAA0B;AAG1B,+CAA0C;AAK1C,MAAa,OAAO;IAEE;IAApB,YAAoB,OAAsB;QAAtB,YAAO,GAAP,OAAO,CAAe;IAC1C,CAAC;IAEM,cAAc,CAAC,KAAe;QACnC,MAAM,IAAI,GAAkB,IAAI,CAAC,OAAO,CAAC;QAEzC,MAAM,EAAE,KAAK,EAAE,GAAG,QAAQ,EAAE,GAAG,KAAK,CAAC;QACrC,0DAA0D;QAC1D,MAAM,SAAS,GAAW,yBAAU,CAAC,OAAO,CAAC,KAAK,IAAI,EAAE,CAAC,CAAC,SAAS,CAAC;QAEpE,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,KAAK,CAAC,KAAK,CAAC,CACnB,IAAI,CAAC,CAAC,SAAS,CAAC,CAChB,IAAI,QAAQ,CAAC,EACb,CACH,CAAC;IACJ,CAAC;CACF;AApBD,0BAoBC"}
+\ No newline at end of file
++{"version":3,"file":"evaIcon.component.js","sourceRoot":"","sources":["../../../src/eva-icons/evaIcon.component.tsx"],"names":[],"mappings":";;;;;AAAA,kDAA0B;AAG1B,+CAA0C;AAK1C,MAAa,OAAO;IAElB,YAAoB,OAAsB;QAAtB,YAAO,GAAP,OAAO,CAAe;IAC1C,CAAC;IAEM,cAAc,CAAC,KAAe;QACnC,MAAM,IAAI,GAAkB,IAAI,CAAC,OAAO,CAAC;QAEzC,MAAM,EAAE,KAAK,EAAE,GAAG,QAAQ,EAAE,GAAG,KAAK,CAAC;QACrC,0DAA0D;QAC1D,MAAM,SAAS,GAAW,yBAAU,CAAC,OAAO,CAAC,KAAK,IAAI,EAAE,CAAC,CAAC,SAAS,CAAC;QAEpE,OAAO,CACL,8BAAC,IAAI,kBACH,KAAK,EAAE,KAAK,CAAC,KAAK,EAClB,IAAI,EAAE,SAAS,IACX,QAAQ,EACZ,CACH,CAAC;IACJ,CAAC;CACF;AApBD,0BAoBC"}
+\ No newline at end of file
+diff --git a/node_modules/@ui-kitten/eva-icons/index.js b/node_modules/@ui-kitten/eva-icons/index.js
+index 78dd935..d4086c3 100644
+--- a/node_modules/@ui-kitten/eva-icons/index.js
++++ b/node_modules/@ui-kitten/eva-icons/index.js
+@@ -1,9 +1,8 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
+-exports.EvaIconsPack = void 0;
+ const createIconsMap_1 = require("./createIconsMap");
+ exports.EvaIconsPack = {
+     name: 'eva',
+-    icons: (0, createIconsMap_1.createIconsMap)(),
++    icons: createIconsMap_1.createIconsMap(),
+ };
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/@ui-kitten/eva-icons/index.js.map b/node_modules/@ui-kitten/eva-icons/index.js.map
+index 9d99bde..39339e7 100644
+--- a/node_modules/@ui-kitten/eva-icons/index.js.map
++++ b/node_modules/@ui-kitten/eva-icons/index.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/eva-icons/index.ts"],"names":[],"mappings":";;;AAEA,qDAAkD;AAErC,QAAA,YAAY,GAAuB;IAC9C,IAAI,EAAE,KAAK;IACX,KAAK,EAAE,IAAA,+BAAc,GAAE;CACxB,CAAC"}
+\ No newline at end of file
++{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/eva-icons/index.ts"],"names":[],"mappings":";;AAEA,qDAAkD;AAErC,QAAA,YAAY,GAAuB;IAC9C,IAAI,EAAE,KAAK;IACX,KAAK,EAAE,+BAAc,EAAE;CACxB,CAAC"}
+\ No newline at end of file
