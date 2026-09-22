@@ -1,0 +1,51 @@
+{
+    "misc": {
+        "PRANDIUM": "Pranzo",
+        "LUNCH": "Pranzo"
+    },
+    "categories": {
+        "unknown": "Sconosciuta",
+        "motherTounge": "Madre lingua"
+    },
+    "languages": {
+        "ITA": "Italiano",
+        "FRA": "Francese",
+        "TUR": "Turco",
+        "SPA": "Spagnolo",
+        "RUS": "Russo",
+        "POR": "Portogese",
+        "NOR": "Norvegese",
+        "KOR": "Coreano",
+        "ZHO": "Cinese",
+        "JPN": "Giapponese",
+        "ENG": "Inglese",
+        "DAN": "Danese",
+        "FIN": "Finlandese"
+    },
+    "specialLanguages": {
+        "SVA": "Svedese come secondo lingua",
+        "SV": "Svedese",
+        "SP": "Spangnolo",
+        "IT": "Italiano",
+        "FR": "Francese",
+        "EN": "Inglese"
+    },
+    "subjects": {
+        "TK": "Tecnologia",
+        "SVA": "Svedese come seconda lingua",
+        "SV": "Svedese",
+        "RE": "Religione",
+        "HI": "Storia",
+        "GE": "Geografia",
+        "KE": "Chimica",
+        "FY": "Fisica",
+        "BI": "Biologia",
+        "NO": "Scienze",
+        "MU": "Musica",
+        "MA": "Matematica",
+        "IDH": "Ed. fisica",
+        "HKK": "Cuchina",
+        "EN": "Inglese",
+        "BL": "Artistica"
+    }
+}

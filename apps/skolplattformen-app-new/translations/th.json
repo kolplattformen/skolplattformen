@@ -1,0 +1,116 @@
+{
+    "abscense": {
+        "entireDay": "ทั้งวัน",
+        "childsPersonalNumber": "เลขบัตรประจำตัวประชาชนของลูก",
+        "invalidPersonalNumber": "เลขบัตรประจำตัวประชาชนผิด",
+        "personalNumberMissing": "เลขบัตรประจำตัวประชาชนหายไป"
+    },
+    "abbrevations": {
+        "preSchool": "อนุบาล",
+        "upperSecondarySchool": "มัธยมปลาย",
+        "compulsorySchool": "ประถม/มัธยมต้น"
+    },
+    "auth": {
+        "bankid": {
+            "OpenOnAnotherDevice": "เปิด BankID ในเครื่องอื่น",
+            "OpenOnThisDevice": "เปิด BankID ในเครื่องนี้",
+            "Waiting": "กำลังรอ BankID…"
+        },
+        "words": {
+            "cooler": "เจ๋งขึ้น",
+            "fast": "เร็ว",
+            "first": "แรก",
+            "free": "ฟรี",
+            "fun": "สนุก",
+            "imperfect": "ไม่สมบูรณ์",
+            "open": "เปิด",
+            "better": "ดีกว่า",
+            "cheap": "ถูก",
+            "simple": "ง่าย",
+            "fantastic": "ดีเยี่ยม",
+            "agile": "เปรียว",
+            "working": "ใช้งานได้"
+        },
+        "loginFailed": "เข้าสู่ระบบไม่ได้ กรุณาลองใหม่อีกครั้ง",
+        "subtitle": "ทางเลือกที่{{word}}",
+        "placeholder_SocialSecurityNumber": "เลขบัตรประจำตัวประชาชนของคุณ",
+        "a11y_change_language": "เลือกภาษา",
+        "a11y_select_login_method": "เลือกวิธีการเข้าสู่ระบบ",
+        "freja": {
+            "Waiting": "กำลังรอ Freja eID+…"
+        }
+    },
+    "language": {
+        "changeLanguageButton": "บันทึก",
+        "changeLanguage": "เปลี่ยนภาษา"
+    },
+    "navigation": {
+        "calender": "ปฏิทิน",
+        "news": "ข่าวใหม่",
+        "notifications": "การแจ้งเตือน",
+        "classmates": "เพื่อนร่วมชั้น",
+        "menu": "อาหารเที่ยง"
+    },
+    "general": {
+        "send": "ส่ง",
+        "cancel": "ยกเลิก",
+        "loading": "กำลังโหลด…",
+        "settings": "การตั้งค่า",
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "เลขบัตรประจำตัวประชาชน",
+        "tomorrow": "พรุ่งนี้",
+        "confirm": "ยืนยัน",
+        "changeLanguage": "เปลี่ยนภาษา",
+        "logout": "ออกจากระบบ"
+    },
+    "children": {
+        "title": "ลูกของคุณ",
+        "tryAgain": "ลองอีกครั้ง",
+        "noKids_title": "ไม่มีลูก",
+        "viewStatus": "ดูสถานะบน skolplattformen.org"
+    },
+    "settings": {
+        "settings": "การตั้งค่า",
+        "language": "ภาษา",
+        "themeAuto": "อัตโนมัติ",
+        "licenses": "ได้รับอนุญาต"
+    },
+    "contact": {
+        "email": "อีเมล",
+        "call": "โทร",
+        "sms": "ข้อความ",
+        "home": "ที่อยู่",
+        "a11y_show_contact_info_button_hint": "แสดงข้อมูลการติดต่อ",
+        "a11y_show_contact_info_button_label": "แสดงข้อมูลการติดต่อ"
+    },
+    "themes": {
+        "dark": "มืด",
+        "light": "แสงสว่าง"
+    },
+    "news": {
+        "noNewNewsItemsThisWeek": "อาทิตย์นี้ไม่มีข่าว",
+        "notificationTitle": "ข่าว: {{header}} ({{published}})",
+        "title": "ข่าวจาก Skolplattformen",
+        "search": {
+            "placeholder": "ค้นหาข่าวต่างๆๆ…"
+        },
+        "backToChild": "กลับไปหน้าหลักของลูก",
+        "published": "สิ่งที่ตีพิมพ์"
+    },
+    "schedule": {
+        "week": "อาทิตย์",
+        "lunch": "อาหารเที่ยง",
+        "start": "เริ่มต้น",
+        "end": "สิ้นสุด"
+    },
+    "classmates": {
+        "child": "ลูก",
+        "class": "ชั้นเรียน"
+    },
+    "notifications": {
+        "notificationTitle": "การแจ้งเตือน: {{message}} ({{dateCreated}})"
+    },
+    "calender": {
+        "saveToCalender": "บันทึกไว้ในปฏิทิน"
+    }
+}

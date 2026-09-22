@@ -1,0 +1,156 @@
+{
+    "auth": {
+        "placeholder_SocialSecurityNumber": "Numerus personalis tuus",
+        "loginFailed": "Nomen dare non possibilis erat. Denuo conare.",
+        "chooseLoginMethod": "Methodum nomen dare legere",
+        "bankid": {
+            "Waiting": "BankID exspectans…",
+            "OpenOnThisDevice": "In hac machina BankID aperire",
+            "OpenOnAnotherDevice": "In machina differenti BankID aperire",
+            "OpenManually": "Manualiter BankID aperire"
+        },
+        "words": {
+            "awaited": "exspectata",
+            "agile": "agilis",
+            "better": "melior",
+            "cheap": "vilis",
+            "cooler": "amatior",
+            "working": "operans",
+            "simple": "simplex",
+            "rebellious": "rebellis",
+            "open": "aperta",
+            "imperfect": "imperfecta",
+            "fun": "oblectans",
+            "free": "libera",
+            "fast": "celeris",
+            "fantastic": "mirifica",
+            "enlightened": "illuminata",
+            "first": "prima",
+            "homemade": "domi facta"
+        },
+        "subtitle": "Optio {{word}}",
+        "loginAsTestUser": "In parte investigatoris nomen dare",
+        "a11y_select_login_method": "Methodum nomen dare legere",
+        "a11y_change_language": "Linguam legere",
+        "a11y_image_two_boys": "Pictura duobus hominibus telephona sua specientibus",
+        "a11y_clear_social_security_input_field": "Cellam numeri personalis vacuare",
+        "chooseSchoolPlatform": "Rostra legere",
+        "loginSuccessful": "Nomen tuum datum est, carricans…",
+        "freja": {
+            "OpenManually": "Manualiter Freja eID+ aperire",
+            "Waiting": "Freja eID+ exspectans…",
+            "OpenOnThisDevice": "In hac machina Freja eID+ aperire"
+        }
+    },
+    "abscense": {
+        "title": "Absentiam referre",
+        "selectAbscenseStartTime": "Horam exordii legere",
+        "selectAbscenseEndTime": "Horam terminalem legere",
+        "startTime": "Hora exordii",
+        "personalNumberMissing": "Numerus personalis absens est",
+        "invalidPersonalNumber": "Numerus personalis irritus est",
+        "entireDay": "Totus dies",
+        "endTime": "Hora terminalis",
+        "childsPersonalNumber": "Numerus personalis filii"
+    },
+    "abbrevations": {
+        "upperSecondarySchool": "Lyceum superius",
+        "preSchool": "Praeschola",
+        "leisureTimeCentre": "Centrum otii",
+        "compulsorySchool": "Schola fundamentalis"
+    },
+    "children": {
+        "loadingErrorHeading": "Eheu!",
+        "loadingErrorInformationText": "Haec pagina non carricari potest. Aut denuo conare, aut statum actualem in skolplattformen.org vide.",
+        "viewStatus": "Statum in skolplattformen.org videre",
+        "tryAgain": "Denuo conare",
+        "title": "Filii tui",
+        "noKids_title": "Nulli filii",
+        "noKids_description": "Nulli filii pro numero personali tuo in Urbe Holmiense censi sunt"
+    },
+    "calender": {
+        "showCalenderActions": "Actiones calendarii exhibere",
+        "saveToCalenderSuccess": "✔️ In calendarium servatus",
+        "saveToCalender": "In calendarium servare",
+        "approveAccessToCalender": "Aditum in calendarium approbare debes",
+        "saveToCalenderError": "Aliquis deerat",
+        "emptyHeadline": "Calendarium vacuum videtur",
+        "emptyText": "Nihil invenitur ostendere"
+    },
+    "menu": {
+        "emptyText": "Hac septimana nihil invenire poterat",
+        "emptyHeadline": "Charta vacua videtur"
+    },
+    "news": {
+        "noNewNewsItemsThisWeek": "Hac septimana nulli novi nuncii.",
+        "updated": "Ad diurnum missus",
+        "title": "Nuntii ex Skolplattformen",
+        "published": "Divulgatus",
+        "notificationTitle": "Nuntii: {{header}} ({{published}})",
+        "backToChild": "Ad filium revertere",
+        "search": {
+            "placeholder": "Omnibus nuntiis quaerere…"
+        }
+    },
+    "notifications": {
+        "notificationTitle": "Nuntius: {{message}} ({{dateCreated}})"
+    },
+    "navigation": {
+        "notifications": "Eventa",
+        "news": "Nuntii",
+        "menu": "Charta",
+        "calender": "Calendarium",
+        "classmates": "Discipuli"
+    },
+    "language": {
+        "changeLanguageButton": "Servare",
+        "changeLanguage": "Linguam permutare"
+    },
+    "general": {
+        "title": "Öppna skolplattformen",
+        "socialSecurityNumber": "Numerus personalis",
+        "settings": "Configurationes",
+        "send": "Mittere",
+        "logout": "Secedere",
+        "loading": "Carricans…",
+        "confirm": "Confirmare",
+        "changeLanguage": "Linguam permutare",
+        "cancel": "Rescindere",
+        "tomorrow": "Cras",
+        "logoutAndClearPersonalData": "Secedere et informationes personales purgare",
+        "logoutAndClearAllDataInclSettings": "Secedere et omnes informationes configurationesque purgare"
+    },
+    "schedule": {
+        "start": "Exordium",
+        "gymBag": "Saccus gymnasticus",
+        "lunch": "Prandium",
+        "end": "Finis",
+        "week": "Septimana"
+    },
+    "contact": {
+        "a11y_show_contact_info_button_hint": "Notationes contactus exhibet",
+        "home": "Domus",
+        "email": "Nuntiare electrice",
+        "sms": "SMS",
+        "call": "Vocare",
+        "a11y_show_contact_info_button_label": "Notationes contactus exhibere"
+    },
+    "classmates": {
+        "contactsForGuardiansFor": "Notationes contactus custodum",
+        "child": "Filius",
+        "class": "Classis"
+    },
+    "settings": {
+        "licenses": "Licentiae",
+        "appearance": "Species",
+        "language": "Lingua",
+        "themeAuto": "Automato",
+        "useSystemTheme": "Themate lucido/obscuro systemae uti",
+        "settings": "Configurationes",
+        "theme": "Thema"
+    },
+    "themes": {
+        "light": "Lucidus",
+        "dark": "Obscurus"
+    }
+}

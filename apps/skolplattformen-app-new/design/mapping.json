@@ -1,0 +1,33 @@
+{
+  "strict": {
+    "text-font-family": "Poppins-Regular",
+    "border-radius": 10
+  },
+  "components": {
+    "Button": {
+      "meta": {},
+      "appearances": {
+        "ghost": {
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "textColor": "$color-button-ghost-text",
+                "iconTintColor": "$color-button-ghost-text"
+              }
+            }
+          }
+        },
+        "filled": {
+          "mapping": {},
+          "variantGroups": {
+            "status": {
+              "basic": {
+                "textColor": "$color-basic-text"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,150 @@
+{
+    "abscense": {
+        "entireDay": "O dia inteiro",
+        "selectAbscenseStartTime": "Indique a hora de início",
+        "startTime": "Hora de início",
+        "title": "Reportar ausência",
+        "selectAbscenseEndTime": "Indique a hora de fim",
+        "endTime": "Hora de fim",
+        "invalidPersonalNumber": "Número de identidade pessoal inválido",
+        "personalNumberMissing": "Falta o número de identidade pessoal",
+        "childsPersonalNumber": "Número de identidade pessoal da criança"
+    },
+    "auth": {
+        "bankid": {
+            "OpenManually": "Abrir BankID manualmente",
+            "OpenOnAnotherDevice": "Abrir BankID noutro dispositivo",
+            "Waiting": "A aguardar pelo BankID…",
+            "OpenOnThisDevice": "Abrir BankID neste dispositivo"
+        },
+        "loginAsTestUser": "Autenticar como utilizador em teste",
+        "loginFailed": "Não foi possível autenticar. Por favor tente novamente.",
+        "placeholder_SocialSecurityNumber": "O seu número de identidade pessoal",
+        "words": {
+            "agile": "ágil",
+            "better": "melhor",
+            "awaited": "esperada",
+            "free": "livre",
+            "cooler": "interessante",
+            "enlightened": "mais clara",
+            "fantastic": "fantástica",
+            "first": "inicial",
+            "homemade": "caseira",
+            "imperfect": "imperfeita",
+            "open": "aberta",
+            "simple": "fácil",
+            "working": "funcional",
+            "cheap": "barata",
+            "fun": "divertida",
+            "fast": "rápida",
+            "rebellious": "rebelde"
+        },
+        "subtitle": "A alternativa {{word}}",
+        "a11y_change_language": "Selecione o seu idioma",
+        "a11y_image_two_boys": "Fotografia de duas pessoas a verem os seus telemóveis",
+        "a11y_clear_social_security_input_field": "Limpar o campo do número de identificação pessoal",
+        "chooseLoginMethod": "Escolha o método de autenticação",
+        "a11y_select_login_method": "Selecione o método de autenticação",
+        "chooseSchoolPlatform": "Escolha a plataforma"
+    },
+    "abbrevations": {
+        "compulsorySchool": "Escola primária / secundária inferior",
+        "leisureTimeCentre": "Cuidados pós-escolares",
+        "upperSecondarySchool": "Escola secundária superior",
+        "preSchool": "Pré-escola"
+    },
+    "calender": {
+        "showCalenderActions": "Mostrar ações do calendário",
+        "saveToCalenderError": "Algo correu mal",
+        "saveToCalenderSuccess": "✔️ Guardado no calendário",
+        "approveAccessToCalender": "Tem de autorizar o acesso ao seu calendário",
+        "saveToCalender": "Guardar no calendário",
+        "emptyHeadline": "O calendário parece um pouco vazio",
+        "emptyText": "Não encontrei nada para mostrar"
+    },
+    "children": {
+        "loadingErrorHeading": "Ups!",
+        "loadingErrorInformationText": "Esta página não pode ser carregada. Tente novamente ou veja o estado atual em skolplattformen.org",
+        "noKids_description": "Não existem crianças registadas na cidade de Estocolmo para o seu número de identificação pessoal",
+        "noKids_title": "Sem crianças",
+        "tryAgain": "Tentar novamente",
+        "title": "Os seus filhos",
+        "viewStatus": "Ver estado em skolplattformen.org"
+    },
+    "general": {
+        "changeLanguage": "Alterar idioma",
+        "confirm": "Confirmar",
+        "loading": "A carregar…",
+        "logout": "Sair",
+        "logoutAndClearAllDataInclSettings": "Sair e limpar todos os dados, incluindo as configurações",
+        "send": "Enviar",
+        "socialSecurityNumber": "Número de identidade pessoal",
+        "title": "Öppna skolplattformen",
+        "logoutAndClearPersonalData": "Sair e limpar dados pessoais",
+        "cancel": "Cancelar",
+        "settings": "Configurações",
+        "tomorrow": "Amanhã"
+    },
+    "language": {
+        "changeLanguage": "Alterar idioma",
+        "changeLanguageButton": "Guardar"
+    },
+    "menu": {
+        "emptyHeadline": "O menu do almoço parece um pouco vazio",
+        "emptyText": "Não consegui encontrar nada para esta semana"
+    },
+    "navigation": {
+        "calender": "Calendário",
+        "menu": "Almoço",
+        "news": "Notícias",
+        "notifications": "Notificações",
+        "classmates": "Colegas de turma"
+    },
+    "settings": {
+        "settings": "Configurações",
+        "useSystemTheme": "Usar o tema claro / escuro do sistema",
+        "appearance": "Aparência",
+        "theme": "Tema",
+        "licenses": "Licenças",
+        "language": "Idioma",
+        "themeAuto": "Automático"
+    },
+    "themes": {
+        "light": "Claro",
+        "dark": "Escuro"
+    },
+    "news": {
+        "backToChild": "Voltar à criança",
+        "noNewNewsItemsThisWeek": "Não há novidades esta semana.",
+        "notificationTitle": "Notícia: {{header}} ({{published}})",
+        "published": "Publicada",
+        "updated": "Atualizada",
+        "title": "Notícias de Skolplattformen",
+        "search": {
+            "placeholder": "Procurar nas notícias…"
+        }
+    },
+    "schedule": {
+        "start": "Início",
+        "end": "Fim",
+        "lunch": "Almoço",
+        "gymBag": "Saco de ginástica",
+        "week": "Semana"
+    },
+    "classmates": {
+        "class": "Turma",
+        "child": "Criança",
+        "contactsForGuardiansFor": "Informações de contacto dos tutores para"
+    },
+    "contact": {
+        "call": "Ligar",
+        "email": "E-mail",
+        "home": "Morada",
+        "a11y_show_contact_info_button_hint": "Mostra informações de contacto",
+        "a11y_show_contact_info_button_label": "Mostrar informações de contacto",
+        "sms": "SMS"
+    },
+    "notifications": {
+        "notificationTitle": "Notificação: {{message}} ({{dateCreated}})"
+    }
+}

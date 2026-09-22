@@ -1,0 +1,29 @@
+{
+    "subjects": {
+        "TN": "Zei­chen­spra­che",
+        "SVA": "Schwedisch als Fremdsprache",
+        "SV": "Schwedisch",
+        "SL": "Werken",
+        "SH": "Staats­bür­ger­kun­de",
+        "RE": "Re­li­gi­on",
+        "HI": "Geschichte",
+        "GE": "Geografie",
+        "NO": "Naturwissenschaften",
+        "SO": "Gesellschaftslehre",
+        "KE": "Chemie",
+        "FY": "Physik",
+        "BI": "Biologie",
+        "MU": "Musik",
+        "MA": "Mathematik",
+        "IDH": "Sport und Gesundheit",
+        "HKK": "Hauswirtschaft",
+        "EN": "Englisch",
+        "BL": "Kunst",
+        "TK": "Technik"
+    },
+    "misc": {
+        "PRANDIUM": "Mittagspause",
+        "LUNCH": "Mittagspause",
+        "RAST": "Pause"
+    }
+}
