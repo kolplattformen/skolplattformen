@@ -8,15 +8,15 @@ jest.mock('@skolplattformen/hooks')
 
 const defaultItemList = [
   {
-    title: 'Måndag vecka 10',
+    title: 'Måndag',
     description: 'Krämiga köttbullar',
   },
   {
-    title: 'Tisdag vecka 10',
+    title: 'Tisdag',
     description: 'Kryddig falukorv',
   },
   {
-    title: 'Onsdag vecka 10',
+    title: 'Onsdag',
     description: 'Sushi',
   },
 ]
@@ -32,15 +32,15 @@ const setup = (itemList = defaultItemList) => {
 test('renders multiple days', () => {
   const screen = setup()
 
-  expect(screen.getByText('Måndag vecka 10')).toBeTruthy()
-  expect(screen.getByText('Tisdag vecka 10')).toBeTruthy()
-  expect(screen.getByText('Onsdag vecka 10')).toBeTruthy()
+  expect(screen.getByText('Måndag')).toBeTruthy()
+  expect(screen.getByText('Tisdag')).toBeTruthy()
+  expect(screen.getByText('Onsdag')).toBeTruthy()
 })
 
 test('renders title and description', () => {
   const screen = setup()
 
-  expect(screen.getByText('Måndag vecka 10')).toBeTruthy()
+  expect(screen.getByText('Måndag')).toBeTruthy()
   expect(screen.getByText('Krämiga köttbullar')).toBeTruthy()
 })
 
